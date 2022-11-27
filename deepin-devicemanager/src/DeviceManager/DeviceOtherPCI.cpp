@@ -7,22 +7,35 @@
 
 DeviceOtherPCI::DeviceOtherPCI()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Model("")
-    , m_Version("")
     , m_BusInfo("")
     , m_Width("")
     , m_Clock("")
     , m_Capabilities("")
-    , m_Description("")
     , m_Irq("")
     , m_Memory("")
-    , m_Driver("")
     , m_Latency("")
     , m_InputOutput("")
 {
 
+}
+
+TomlFixMethod DeviceOtherPCI::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+   // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Input/Output", m_InputOutput);
+    ret = setTomlAttribute(mapInfo, "Memory", m_Memory);
+    ret = setTomlAttribute(mapInfo, "IRQ", m_Irq);
+    ret = setTomlAttribute(mapInfo, "Latency", m_Latency);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Version);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 const QString &DeviceOtherPCI::name()const

@@ -8,13 +8,9 @@
 
 DeviceOthers::DeviceOthers()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Model("")
-    , m_Version("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Driver("")
     , m_MaximumPower("")
     , m_Speed("")
     , m_LogicalName("")
@@ -46,6 +42,22 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     }
 }
 
+TomlFixMethod DeviceOthers::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+    // 添加基本信息      
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);    
+    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);    
+    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
+    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
+////Others
+    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialID);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
+}
+
 void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     // 设置设备基本属性
@@ -58,9 +70,13 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Serial ID", m_SerialID);
     setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
-/* 禁用时提示获取序列号失败*/
+    /* 禁用时提示获取序列号失败*/
     setAttribute(mapInfo, "Unique ID", m_SerialID);
     m_UniqueID = m_SerialID;
+
+    setAttribute(mapInfo, "Module Alias", m_Modalias);
+    setAttribute(mapInfo, "VID_PID", m_VID_PID);
+    m_PhysID = m_VID_PID;
 
     if (mapInfo["Hardware Class"] != "fingerprint") {
         m_HardwareClass = "others";

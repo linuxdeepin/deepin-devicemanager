@@ -19,6 +19,13 @@ class DevicePower : public DeviceBaseInfo
 public:
     DevicePower();
 
+  /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+   
     /**
      * @brief setInfoFromUpower:设置从upower获取的电池信息
      * @param mapInfo:由upower --dump获取的信息map
@@ -91,8 +98,6 @@ protected:
     void loadTableData() override;
 
 private:
-    QString             m_Name;                     //<! 【名称】
-    QString             m_Vendor;                   //<! 【制造商】
     QString             m_Model;                    //<! 【设备类型】
     QString             m_Type;                     //<! 【设备类型，电池还是电源】
     QString             m_SerialNumber;             //<! 【序列号】
@@ -111,7 +116,7 @@ private:
     QString             m_SBDSSerialNumber;         //<! 【SBDS序列号】
     QString             m_SBDSVersion;              //<! 【SBDS版本】
     QString             m_Temp;                     //<! 【温度】
-    QString             m_Driver;
+
 };
 
 #endif // DEVICEPOWER_H

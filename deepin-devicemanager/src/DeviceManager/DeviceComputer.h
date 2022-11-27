@@ -18,6 +18,13 @@ class DeviceComputer : public DeviceBaseInfo
 public:
     DeviceComputer();
 
+/**
+ * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+ * @param mapInfo:由toml获取的信息map
+ * @return枚举值
+ */
+TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+
     /**
      * @brief name:获取名称属性值
      * @return QString:名称属性值
@@ -118,10 +125,7 @@ private:
     QString            m_HomeUrl;
     QString            m_OsDescription;
     QString            m_OS;
-    QString            m_Vendor;
-    QString            m_Name;
     QString            m_Type;
-    QString            m_Driver;
 };
 
 #endif // DEVICECOMPUTER_H

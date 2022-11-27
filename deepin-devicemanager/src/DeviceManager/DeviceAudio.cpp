@@ -12,19 +12,14 @@
 #include <QDebug>
 DeviceAudio::DeviceAudio()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Model("")
-    , m_Version("")
     , m_BusInfo("")
     , m_Irq("")
     , m_Memory("")
     , m_Width("")
     , m_Clock("")
     , m_Capabilities("")
-    , m_Description("")
     , m_Chip("")
-    , m_Driver("")
     , m_DriverModules("")
 {
     // 初始化可显示属性
@@ -49,22 +44,25 @@ bool DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         return false;
     }
     //1. 获取设备的基本信息
-    setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
+
     setAttribute(mapInfo, "Model", m_Model);
-//    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
     setAttribute(mapInfo, "IRQ", m_Irq);
     setAttribute(mapInfo, "Memory Range", m_Memory);
+    setAttribute(mapInfo, "Driver Modules", m_DriverModules); // 驱动模块
+
     setAttribute(mapInfo, "Hardware Class", m_Description);
     setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "Driver Modules", m_DriverModules); // 驱动模块
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Module Alias", m_UniqueID);
-    setAttribute(mapInfo, "SysFS ID", m_BusInfo);  //debufjeff
-    setAttribute(mapInfo, "SysFS ID", m_BusInfo);  //debufjeff
-    setAttribute(mapInfo, "VID_PID", m_VID_PID);  //debufjeff
-    setAttribute(mapInfo, "VID", m_VID);  //debufjeff
-    setAttribute(mapInfo, "PID", m_PID);  //debufjeff
+    setAttribute(mapInfo, "SysFS ID", m_BusInfo);  
+
+    setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Module Alias", m_Modalias);
+    setAttribute(mapInfo, "VID_PID", m_VID_PID);
+
+    m_PhysID = m_VID_PID;
+
 //    m_BusInfo = m_VID_PID +
     //
 
@@ -75,11 +73,11 @@ bool DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     //2. 获取设备的唯一标识
     setHwinfoLshwKey(mapInfo);
-    // 获取设备的唯一标识
-    setsysFStoHwinfoKey(mapInfo);
-
     //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
+
+    // 获取设备的唯一标识
+    setPhysIDMapKey(mapInfo);
     return true;
 }
 
@@ -113,7 +111,7 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "clock", m_Clock);
     setAttribute(mapInfo, "capabilities", m_Capabilities);
     setAttribute(mapInfo, "description", m_Description);
-    setAttribute(mapInfo, "SysFS ID", m_BusInfo);  //debufjeff
+    setAttribute(mapInfo, "SysFS ID", m_BusInfo);
 
     //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
@@ -121,19 +119,22 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
-// /sys/class/sound$ tree
-// ├── card0 -> ../../devices/pci0000:00/0000:00:1f.3/sound/card0
-// ├── hwC0D0 -> ../../devices/pci0000:00/0000:00:1f.3/sound/card0/hwC0D0
-// ├── card1 -> ../../devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1
-// ├── hwC1D0 -> ../../devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/hwC1D0
-
-//    deep@nuc8:/sys/class/sound/card0$ cat device/vendor
-//    0x8086
-//    deep@nuc8:/sys/class/sound/card0$ cat device/device
-//    0x9dc8
-//    deep@nuc8:/sys/class/sound/card0$ cat hwC0D0/vendor_id
-//    0x10ec0235
-
+TomlFixMethod DeviceAudio::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+//  must cover the  loadOtherDeviceInfo
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "SysFs_PATH", m_SysPath);
+    ret = setTomlAttribute(mapInfo, "KernelModeDriver", m_Driver);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Chip", m_Chip);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);   // 1050需求 内存改为内存地址
+    ret = setTomlAttribute(mapInfo, "IRQ", m_Irq);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
+}
 bool DeviceAudio::setInfoFrom_sysFS(QMap<QString, QString> &mapInfo, int ii)
 {
     //4. get from cat /sys/class/sound
@@ -310,25 +311,19 @@ void DeviceAudio::initFilterKey()
     addFilterKey(tr("Device Name"));
     addFilterKey(QObject::tr("SubVendor"));
     addFilterKey(QObject::tr("SubDevice"));
-    addFilterKey(QObject::tr("Driver"));
     addFilterKey(QObject::tr("Driver Status"));
     addFilterKey(QObject::tr("Driver Activation Cmd"));
     addFilterKey(QObject::tr("Config Status"));
-
-    addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("latency"));
-
     addFilterKey(QObject::tr("Phys"));
     addFilterKey(QObject::tr("Sysfs"));
     addFilterKey(QObject::tr("Handlers"));
     addFilterKey(QObject::tr("PROP"));
     addFilterKey(QObject::tr("EV"));
     addFilterKey(QObject::tr("KEY"));
-
-//    addFilterKey(QObject::tr("Model"));
-//    addFilterKey(QObject::tr("Vendor"));
-    addFilterKey(QObject::tr("Version"));
     addFilterKey(QObject::tr("Bus"));
+    addFilterKey(QObject::tr("Version"));
+    addFilterKey(QObject::tr("Driver"));
 }
 
 void DeviceAudio::loadBaseDeviceInfo()
@@ -336,21 +331,23 @@ void DeviceAudio::loadBaseDeviceInfo()
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(tr("Module Alias"), m_Modalias);
+    addBaseDeviceInfo(tr("Physical ID"), m_PhysID);
+    addBaseDeviceInfo(tr("SysFs_PATH"), m_SysPath);
+    addBaseDeviceInfo(tr("Description"), m_Description);
+    addBaseDeviceInfo(tr("Revision"), m_Version);
+    addBaseDeviceInfo(tr("KernelModeDriver"), m_Driver);
 }
 
 void DeviceAudio::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
+    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     addOtherDeviceInfo(tr("Chip"), m_Chip);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-//    addOtherDeviceInfo(tr("Clock"), m_Clock);
-//    addOtherDeviceInfo(tr("Width"), m_Width);
     addOtherDeviceInfo(tr("Memory Address"), m_Memory);   // 1050需求 内存改为内存地址
     addOtherDeviceInfo(tr("IRQ"), m_Irq);
-
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
@@ -378,3 +375,17 @@ void DeviceAudio::loadTableData()
     m_TableData.append(tName);
     m_TableData.append(m_Vendor);
 }
+
+
+// /sys/class/sound$ tree
+// ├── card0 -> ../../devices/pci0000:00/0000:00:1f.3/sound/card0
+// ├── hwC0D0 -> ../../devices/pci0000:00/0000:00:1f.3/sound/card0/hwC0D0
+// ├── card1 -> ../../devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1
+// ├── hwC1D0 -> ../../devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/hwC1D0
+
+//    deep@nuc8:/sys/class/sound/card0$ cat device/vendor
+//    0x8086
+//    deep@nuc8:/sys/class/sound/card0$ cat device/device
+//    0x9dc8
+//    deep@nuc8:/sys/class/sound/card0$ cat hwC0D0/vendor_id
+//    0x10ec0235

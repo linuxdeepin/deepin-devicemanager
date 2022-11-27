@@ -31,6 +31,13 @@ public:
        */
     bool setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
+   /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+
     /**
        * @brief setInfoFromCatDevices:设置从cat /proc/bus/input/devices里面获取的信息
        * @param mapInfo:由cat /proc/bus/input/devices获取的信息map
@@ -44,7 +51,7 @@ public:
        * @param ii: /sys/class/sound /card0  card1 ...n ,i-=1~n
        * @return 布尔值，true:获取设备信息成功；false:获取设备信息失败
        */
-    bool setInfoFrom_sysFS( QMap<QString, QString> &mapInfo,int ii);
+    bool setInfoFrom_sysFS(QMap<QString, QString> &mapInfo, int ii);
 
     /**
        * @brief setInfoFromCatAudio:设置从cat /proc/asound/card0/codec#0里面获取的信息 , KLU专用
@@ -143,19 +150,15 @@ protected:
 
 
 private:
-    QString             m_Name;                         //<! 【名称】
-    QString             m_Vendor;                       //<! 【制造商】
+
     QString             m_Model;                        //<! 【型号】
-    QString             m_Version;                      //<! 【版本】
     QString             m_BusInfo;                      //<! 【总线信息】
     QString             m_Irq;                          //<! 【中断】
     QString             m_Memory;                       //<! 【内存地址】
     QString             m_Width;                        //<! 【位宽】
     QString             m_Clock;                        //<! 【时钟频率】
     QString             m_Capabilities;                 //<! 【功能】
-    QString             m_Description;                  //<! 【描述】
     QString             m_Chip;                         //<! 【芯片型号】
-    QString             m_Driver;                       //<! 【驱动】
     QString             m_DriverModules;                //<!  driver modules
     bool                m_IsCatDevice;                  //<!  标识该设备是从cat /input/devices里面获取的
 };

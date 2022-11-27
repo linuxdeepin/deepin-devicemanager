@@ -8,6 +8,7 @@
 
 #include "document.h"
 #include "xlsxdocument.h"
+#include "GenerateDevicePool.h"
 
 #include <QList>
 #include <QMap>
@@ -36,6 +37,17 @@ class DeviceComputer;
 class DeviceCdrom;
 class DeviceInput;
 class DeviceBaseInfo;
+
+/**
+ * @brief The TomlFixMethod enum
+ * 用来标识对toml信息处理的的结果(包括不操作、部份覆盖显示、删除不显示,全覆盖显示四种情况)
+ */
+enum TomlFixMethod {
+    TOML_None,
+    TOML_Cover, // 覆掉关键词的值
+    TOML_nouse,  //对应TOML的nouse ，清掉关键词的值
+    TOML_Del   //去掉该设备
+};
 
 /**
  * @brief The DeviceManager class
@@ -77,6 +89,38 @@ public:
      */
     bool getDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst);
 
+//    /**
+//     * @brief getDeviceList : 获取设备列表
+//     * @param name : 该设备的类型
+//     * @return ：返回设备列表
+//     */
+//    bool convertDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst);
+
+    /**
+     * @brief getDeviceList : 获取设备列表
+     * @param name : 该设备的类型
+     * @return ：返回设备列表
+     */
+    QList<DeviceBaseInfo *> *convertDeviceListAddr(DeviceType deviceType);
+    QList<DeviceBaseInfo *>  convertDeviceList(DeviceType deviceType);
+    QString  convertDeviceTomlClassName(DeviceType deviceType);
+    TomlFixMethod tomlDeviceSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo);
+    void tomlDeviceDel(DeviceType deviceType, DeviceBaseInfo *const device);
+    void tomlDeviceAdd(DeviceType deviceType, DeviceBaseInfo *const device);
+
+    DeviceBaseInfo *createDevice(DeviceType deviceType);
+
+    /**
+     * @brief getAudioDevice 获取设备
+     * @param name  见 添加设备类型与设备指针列表的映射关系 void DeviceManager::setDeviceListClass()
+     * @param  KeyID  "Module Alias"  "VID_PID"
+     * @return
+     */
+    DeviceBaseInfo *findByModalias(DeviceType deviceType, const QString &modalias);
+    DeviceBaseInfo *findByVIDPID(DeviceType deviceType, const QString &vid, const QString &pid);
+    DeviceBaseInfo *findByVendorName(DeviceType deviceType, const QString &vendor, const QString &name);
+
+
     /**
      * @brief getBluetoothAtIndex 根据索引获取device
      * @param index
@@ -97,7 +141,7 @@ public:
      * @param unique_id
      * @return
      */
-    DeviceBaseInfo* getMouseDevice(const QString& unique_id);
+    DeviceBaseInfo *getMouseDevice(const QString &unique_id);
 
     /**
      * @brief addMouseInfoFromLshw:添加从lshw获取的鼠标信息
@@ -258,7 +302,7 @@ public:
      * @param unique_id
      * @return
      */
-    DeviceBaseInfo* getBluetoothDevice(const QString& unique_id);
+    DeviceBaseInfo *getBluetoothDevice(const QString &unique_id);
 
     // 音频设备相关
     /**
@@ -266,6 +310,13 @@ public:
      * @param device:被添加的声卡
      */
     void addAudioDevice(DeviceAudio *const device);
+
+    // 音频设备相关
+    /**
+     * @brief delAudioDevice: del声卡
+     * @param device:被del的声卡
+     */
+    void delAudioDevice(DeviceAudio *const device);
 
     /**
      * @brief addAudioDevice:去除列表中重复的已禁声卡
@@ -278,13 +329,19 @@ public:
      * @param path
      * @return
      */
-    DeviceBaseInfo* getAudioDevice(const QString& path);
+    DeviceBaseInfo *getAudioDevice(const QString &path);
 
     /**
      * @brief setAudioInfoFromLshw:设置由lshw获取的声卡信息
      * @param mapInfo:由lshw获取的声卡信息map
      */
     void setAudioInfoFromLshw(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief setAudioInfoFromLshw:设置由lshw获取的声卡信息
+     * @param mapInfo:由lshw获取的声卡信息map
+     */
+    void setAudioInfoFromToml(const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief setAudioInfoFrom_sysFS:设置由sysFS获取的声卡信息
@@ -296,7 +353,7 @@ public:
     //  * @brief setAudioChipFromDmesg:从Dmesg获取的信息设置声卡芯片型号
     //  * @param info:声卡芯片型号
     //  */
-     void setAudioChipFromDmesg(const QString &info);
+    void setAudioChipFromDmesg(const QString &info);
 
     // 网络设备相关
     /**
@@ -316,7 +373,7 @@ public:
      * @param busInfo
      * @return
      */
-    DeviceBaseInfo * getNetworkDevice(const QString& unique_id);
+    DeviceBaseInfo *getNetworkDevice(const QString &unique_id);
 
     /**
      * @brief correctNetworkLinkStatus:校正网络连接状态
@@ -348,7 +405,7 @@ public:
      * @param unique_id
      * @return
      */
-    DeviceBaseInfo* getImageDevice(const QString& unique_id);
+    DeviceBaseInfo *getImageDevice(const QString &unique_id);
 
     /**
      * @brief setCameraInfoFromLshw:设置由lshw获取的图像设备信息
@@ -381,7 +438,7 @@ public:
      * @param unique_id
      * @return
      */
-    DeviceBaseInfo* getOthersDevice(const QString& unique_id);
+    DeviceBaseInfo *getOthersDevice(const QString &unique_id);
 
     /**
      * @brief addOthersDeviceFromHwinfo:添加由hwinfo获取的其他设备信息

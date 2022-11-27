@@ -86,6 +86,13 @@ public:
      */
     void setFrequencyIsCur(const bool &flag);
 
+    /**
+        * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+        * @param mapInfo:由toml获取的信息map
+        * @return枚举值
+        */
+    TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+
 protected:
 
     /**
@@ -136,8 +143,7 @@ private:
     void setRefreshInfoFromLscpu(const QMap<QString, QString> &mapInfo);
 
 private:
-    QString           m_Vendor;             //<! 制造商
-    QString           m_Name;               //<! 名称
+
     QString           m_PhysicalID;         //<! 处理器ID
     QString           m_CoreID;             //<! 核心ID
     QString           m_ThreadNum;          //<! 线程数
@@ -160,7 +166,6 @@ private:
     // 这个是cpu的逻辑处理器个数，而不是core的逻辑处理器个数
     int               m_LogicalCPUNum;      //<! 逻辑处理器个数
     int               m_CPUCoreNum;         //<! cpu核数
-    QString           m_Driver;
     bool              m_FrequencyIsRange;   //<! 频率显示的是范围还是最大值
     bool              m_FrequencyIsCur;     //<! 频率显示是当前还是最大值
 

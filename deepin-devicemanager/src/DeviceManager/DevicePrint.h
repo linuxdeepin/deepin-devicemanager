@@ -19,6 +19,13 @@ class DevicePrint : public DeviceBaseInfo
 public:
     DevicePrint();
 
+  /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+   
     /**
      * @brief setInfo:设置打印机信息
      * @param info:由cups第三方库获取的打印机信息map
@@ -115,15 +122,12 @@ protected:
     void loadTableData() override;
 
 private:
-    QString             m_Name;                         //<! 【名称】
-    QString             m_Vendor;                       //<! 【制造商】
     QString             m_Model;                        //<! 【型号】
     QString             m_SerialNumber;                 //<! 【序列号】
     QString             m_InterfaceType;                //<! 【接口类型】
     QString             m_URI;                          //<! 【URI】
     QString             m_Status;                       //<! 【状态】
     QString             m_Shared;                       //<! 【共享】
-    QString             m_Driver;                       //<! 【驱动】
     QString             m_MakeAndModel;                 //<! 【制造商和型号】
 };
 

@@ -23,6 +23,13 @@ public:
      * @param mapInfo:由lshw获取的信息map
      */
     void setLshwInfo(const QMap<QString, QString> &mapInfo);
+    
+  /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief setHwinfoInfo:设置由hwinfo --display命令获取的设备信息
@@ -102,10 +109,7 @@ protected:
     void loadTableData() override;
 
 private:
-    QString            m_Name;                    //<! 【名称】
-    QString            m_Vendor;                  //<! 【制造商】
-    QString            m_Model;                   //<! 【型号】
-    QString            m_Version;                 //<! 【版本】
+    QString            m_Model;                   //<! 【型号】  
     QString            m_GraphicsMemory;          //<! 【显存】
     QString            m_Width;                   //<! 【位宽】
     QString            m_DisplayPort;             //<! 【DisplayPort】
@@ -118,8 +122,6 @@ private:
     QString            m_eDP;
     QString            m_DVI;
     QString            m_Digital;                 // bug-105482添加新接口类型
-    QString            m_Description;             //<! 【描述】
-    QString            m_Driver;                  //<! 【驱动】
     QString            m_CurrentResolution;       //<! 【当前分辨率】
     QString            m_MinimumResolution;       //<! 【最小分辨率】
     QString            m_MaximumResolution;       //<! 【最大分辨率】

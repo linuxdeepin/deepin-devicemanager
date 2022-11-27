@@ -9,6 +9,7 @@
 #include "document.h"
 #include "xlsxdocument.h"
 #include "table.h"
+#include "DeviceManager.h"
 
 #include <QString>
 #include <QMap>
@@ -90,6 +91,30 @@ public:
      * @return 设备制造商
      */
     virtual const QString &vendor() const = 0;
+
+    /**
+     * @brief vendor:获取设备VID
+     * @return 设备VID
+     */
+
+    virtual const QString &getVID() const;
+    /**
+     * @brief vendor:获取设备PID
+     * @return 设备PID
+     */
+    virtual const QString &getPID() const;
+
+    /**
+     * @brief vendor:获取设备VID_PID
+     * @return 设备VID_PID
+     */
+    virtual const QString &getVIDAndPID() const;
+
+    /**
+     * @brief vendor:获取设备Modalias
+     * @return 设备Modalias
+     */
+    virtual const QString &getModalias() const;
 
     /**
      * @brief driver:获取设备驱动
@@ -325,6 +350,13 @@ public:
      */
     void setOtherDeviceInfo(const QString &key, const QString &value);
 
+    /**
+       * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+       * @param mapInfo:由toml获取的信息map
+       * @return枚举值
+       */
+    TomlFixMethod setInfoFromTomlBase(const QMap<QString, QString> &mapInfo);
+
 protected:
     /**
      * @brief:初始化过滤信息
@@ -386,6 +418,18 @@ protected:
      */
     void setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite = true);
 
+
+    /**@brief:将属性设置到成员变量*/
+    /**
+     * @brief setTomlAttribute:将属性设置到成员变量
+     * @param mapInfo:设备信息map
+     * @param key:属性名称
+     * @param variable:设备类成员变量
+     * @param overwrite:是否覆盖
+     */
+    TomlFixMethod setTomlAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite = true);
+
+
     /**
      * @brief mapInfoToList:QMap转换为QList
      */
@@ -405,20 +449,22 @@ protected:
     bool matchToLshw(const QMap<QString, QString> &mapInfo);
 
     /**
-     * @brief setsysFStoHwinfoKey
+     * @brief setPhysIDMapKey
      * @param mapInfo
      * @return
      */
-    void setsysFStoHwinfoKey(const QMap<QString, QString> &mapInfo);
+    void setPhysIDMapKey(const QMap<QString, QString> &mapInfo);
 
     /**
-     * @brief sysFSmatchToHwinfo  PID VID
+     * @brief PhysIDMapInfo  PID VID
      * @param mapInfo
      * @return
      */
-    bool sysFSmatchToHwinfo(const QMap<QString, QString> &mapInfo);
+    bool PhysIDMapInfo(const QMap<QString, QString> &mapInfo);
 
 protected:
+    QString             m_Name;                     //<! 【名称】
+    QString             m_Vendor;                   //<! 【制造商
     QString                        m_UniqueID;      //<! 设备的唯一值
     QString                        m_SerialID;      //<! 序列号id
     QString                        m_SysPath;       //<! 用启用的sys path
@@ -435,10 +481,15 @@ protected:
     bool                           m_Available;     //<! 是否可用
     bool                           m_forcedDisplay; //<! 强制显示
     int                            m_Index;         //<! 同名设备的索引
-    QString                        m_sysFSToHwinfo;  //<! 匹配hwinfo和lshw的key
+    QString                        m_PhysIDMap;         //<! 匹配 XXX和XXX的key
     QString                        m_VID_PID;      //<! 设备hw的唯一值 m_VID_PID = m_VID + m_PID.remove("0x")
     QString                        m_VID;           //<! 设备hw的唯一值
     QString                        m_PID;           //<! 设备hw的唯一值
+    QString                        m_Modalias;           //<! 设备hw的唯一值
+    QString            m_PhysID;                  //<! 【物理ID】
+    QString            m_Driver;                  //<! 【驱动】
+    QString            m_Version;                      //<! 【版本】
+    QString            m_Description;                  //<! 【描述】
 
 private:
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息

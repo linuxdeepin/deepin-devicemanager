@@ -11,15 +11,12 @@
 
 DeviceBluetooth::DeviceBluetooth()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
-    , m_Version("")
     , m_Model("")
     , m_MAC("")
     , m_LogicalName("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Driver("btusb")
+      //, m_Driver(""), m_Driver("btusb")
     , m_DriverVersion("")
     , m_MaximumPower("")
     , m_Speed("")
@@ -70,6 +67,10 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     m_UniqueID = m_SerialID;
     m_HardwareClass = "bluetooth";
 
+    setAttribute(mapInfo, "Module Alias", m_Modalias);
+    setAttribute(mapInfo, "VID_PID", m_VID_PID);
+    m_PhysID = m_VID_PID;
+
     // 判断是否核内驱动
     if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
@@ -104,6 +105,24 @@ bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     }
 
     return true;
+}
+
+TomlFixMethod DeviceBluetooth::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
+    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
+    ret = setTomlAttribute(mapInfo, "Driver Version", m_DriverVersion);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    ret = setTomlAttribute(mapInfo, "Logical Name", m_LogicalName);
+    ret = setTomlAttribute(mapInfo, "MAC Address", m_MAC);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 bool DeviceBluetooth::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
@@ -218,6 +237,8 @@ void DeviceBluetooth::loadBaseDeviceInfo()
 void DeviceBluetooth::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
+    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addOtherDeviceInfo(tr("Driver Version"), m_DriverVersion);

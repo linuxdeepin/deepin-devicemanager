@@ -10,21 +10,37 @@
 
 DeviceStorage::DeviceStorage()
     : DeviceBaseInfo()
-    , m_Model("")
-    , m_Vendor("")
+   , m_Model("")
+//    , m_Vendor("")
     , m_MediaType("")
     , m_Size("")
     , m_RotationRate("")
     , m_Interface("")
     , m_SerialNumber("")
-    , m_Version("")
     , m_Capabilities("")
-    , m_Description("")
     , m_KeyToLshw("")
     , m_KeyFromStorage("")
 {
     // 初始化可显示属性
     initFilterKey();
+}
+
+TomlFixMethod DeviceStorage::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Media Type", m_MediaType);
+    ret = setTomlAttribute(mapInfo, "Size", m_Size);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Firmware Version", m_FirmwareVersion);
+    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
+    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    ret = setTomlAttribute(mapInfo, "Interface", m_Interface);
+    ret = setTomlAttribute(mapInfo, "Rotation Rate", m_RotationRate);
+  //3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
@@ -34,11 +50,11 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("SysFS BusID") == mapInfo.end())
         return false;
 
-    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Model", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
 
     // 希捷硬盘为ATA硬盘，无法直接获取厂商信息,只能特殊处理
-    if (m_Model.startsWith("ST") && m_Vendor.isEmpty())
+    if (m_Name.startsWith("ST") && m_Vendor.isEmpty())
         m_Vendor = "ST";
 
     setAttribute(mapInfo, "Driver", m_Driver); // 驱动
@@ -78,6 +94,10 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Device File", m_DeviceFile);
     if (m_KeyToLshw.contains("nvme", Qt::CaseInsensitive))
         setAttribute(mapInfo, "SysFS Device Link", m_NvmeKey);
+
+    setAttribute(mapInfo, "Module Alias", m_Modalias);
+    setAttribute(mapInfo, "VID_PID", m_VID_PID);
+    m_PhysID = m_VID_PID;
 
     getOtherMapInfo(mapInfo);
     return true;
@@ -133,7 +153,7 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("SysFS BusID") == mapInfo.end())
         return false;
 
-    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Model", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Driver", m_Driver); // 驱动
 
@@ -281,7 +301,7 @@ void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
 
     QStringList itemList = deviceFiles.split(",");
 
-    QString modelName = m_Model;
+    QString modelName = m_Name;
     modelName.replace(" ", "_");
 
     foreach (auto item, itemList) {
@@ -397,8 +417,8 @@ void DeviceStorage::checkDiskSize()
         double num = reg.cap(0).toDouble();
         double num1 = num - int(num);
         QString type = m_Size.right(m_Size.length() - reg.cap(0).size()).trimmed();
-        if(!qFuzzyCompare(num1,0.0) && type == "GB"){
-            m_Size = QString::number(int(num)+1)+type;
+        if (!qFuzzyCompare(num1, 0.0) && type == "GB") {
+            m_Size = QString::number(int(num) + 1) + type;
         }
     }
 }
@@ -434,7 +454,7 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
 
 const QString &DeviceStorage::name() const
 {
-    return m_Model;
+    return m_Name;
 }
 
 const QString &DeviceStorage::vendor() const
@@ -454,12 +474,12 @@ const QString &DeviceStorage::keyFromStorage()const
 
 QString DeviceStorage::subTitle()
 {
-    return m_Model;
+    return m_Name;
 }
 
 const QString DeviceStorage::getOverviewInfo()
 {
-    return QString("%1 (%2)").arg(m_Model).arg(m_Size);;
+    return QString("%1 (%2)").arg(m_Name).arg(m_Size);;
 }
 
 void DeviceStorage::initFilterKey()
@@ -477,12 +497,13 @@ void DeviceStorage::initFilterKey()
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("Device Number"));
     addFilterKey(QObject::tr("Geometry (Logical)"));
+
 }
 
 void DeviceStorage::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Media Type"), m_MediaType);
     addBaseDeviceInfo(tr("Size"), m_Size);
@@ -493,12 +514,16 @@ void DeviceStorage::loadBaseDeviceInfo()
 void DeviceStorage::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
+    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     addOtherDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Description"), m_Description);
     addOtherDeviceInfo(tr("Serial Number"), m_SerialNumber);
     addOtherDeviceInfo(tr("Interface"), m_Interface);
     addOtherDeviceInfo(tr("Rotation Rate"), m_RotationRate);
+    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
 
     if (m_RotationRate == QString("Solid State Device")) {
         m_MediaType = QObject::tr("SSD");
@@ -511,7 +536,7 @@ void DeviceStorage::loadOtherDeviceInfo()
 void DeviceStorage::loadTableHeader()
 {
     // 加载表头信息
-    m_TableHeader.append(tr("Model"));
+    m_TableHeader.append(tr("Name"));
     m_TableHeader.append(tr("Vendor"));
     m_TableHeader.append(tr("Media Type"));
     m_TableHeader.append(tr("Size"));
@@ -520,9 +545,9 @@ void DeviceStorage::loadTableHeader()
 void DeviceStorage::loadTableData()
 {
     // 加载表格数据
-    QString model = m_Model;
+    QString model = m_Name;
     if (!available()) {
-        model = "(" + tr("Unavailable") + ") " + m_Model;
+        model = "(" + tr("Unavailable") + ") " + m_Name;
     }
     m_TableData.append(model);
     m_TableData.append(m_Vendor);
@@ -536,7 +561,7 @@ void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capabilities", m_Capabilities);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "serial", m_SerialNumber, false);
-    setAttribute(mapInfo, "product", m_Model);
+    setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "description", m_Description);
     setAttribute(mapInfo, "size", m_Size);
     // 223GiB (240GB)
@@ -585,10 +610,10 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     // 因为hwinfo获取的是主控的型号，而硬盘厂商由于还不能自己生产主控，只能采购别人的主控
     //SATA
     if (mapInfo.find("Device Model") != mapInfo.end())
-        m_Model = mapInfo["Device Model"];
+        m_Name = mapInfo["Device Model"];
     //NVME
     if (mapInfo.find("Model Number") != mapInfo.end())
-        m_Model = mapInfo["Model Number"];
+        m_Name = mapInfo["Model Number"];
 
     setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
 }

@@ -21,8 +21,6 @@ DWIDGET_USE_NAMESPACE
 
 DeviceMonitor::DeviceMonitor()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Model("")
     , m_DisplayInput("")
     , m_VGA("Disable")
@@ -35,7 +33,6 @@ DeviceMonitor::DeviceMonitor()
     , m_CurrentResolution("")
     , m_SerialNumber("")
     , m_ProductionWeek("")
-    , m_Driver("")
     , m_Width(0)
     , m_Height(0)
 {
@@ -123,6 +120,26 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     // 加载其他属性
     getOtherMapInfo(mapInfo);
+}
+
+TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+        // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Type", m_Model);
+    ret = setTomlAttribute(mapInfo, "Display Input", m_DisplayInput);
+    ret = setTomlAttribute(mapInfo, "Interface Type", m_Interface);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Support Resolution", m_SupportResolution);
+    ret = setTomlAttribute(mapInfo, "Current Resolution", m_CurrentResolution);
+    ret = setTomlAttribute(mapInfo, "Display Ratio", m_AspectRatio);
+    ret = setTomlAttribute(mapInfo, "Primary Monitor", m_MainScreen);
+    ret = setTomlAttribute(mapInfo, "Size", m_ScreenSize);
+    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    ret = setTomlAttribute(mapInfo, "Product Date", m_ProductionWeek);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 void DeviceMonitor::setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo)
@@ -275,16 +292,15 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
     // 设置当前分辨率
     QRegExp reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
     if (reScreenSize.exactMatch(info)) {
-        if (!rate.isEmpty()){
+        if (!rate.isEmpty()) {
             QString curRate = rate;
             QRegExp rateStart("[a-zA-Z]");
             int pos = curRate.indexOf(rateStart);
-            if(pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()){
-                curRate = QString::number(ceil( curRate.left(pos).toDouble()))+curRate.right(curRate.size() - pos);
+            if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
+                curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
             }
             m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate);
-        }
-        else
+        } else
             m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
     }
 
