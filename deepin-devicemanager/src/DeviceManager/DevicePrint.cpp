@@ -11,8 +11,6 @@
 
 DevicePrint::DevicePrint()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Model("")
     , m_SerialNumber("")
     , m_InterfaceType("")
@@ -27,6 +25,23 @@ DevicePrint::DevicePrint()
     // 设备可禁用
     m_CanEnable = true;
     m_CanUninstall = false;
+}
+
+TomlFixMethod DevicePrint::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Shared", m_Shared);
+    ret = setTomlAttribute(mapInfo, "URI", m_URI);
+    ret = setTomlAttribute(mapInfo, "Status", m_Status);
+    ret = setTomlAttribute(mapInfo, "Interface Type", m_InterfaceType);
+    ret = setTomlAttribute(mapInfo, "printer-make-and-model", m_MakeAndModel);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 void DevicePrint::setInfo(const QMap<QString, QString> &info)

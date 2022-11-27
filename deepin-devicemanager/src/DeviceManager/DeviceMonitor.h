@@ -25,6 +25,13 @@ public:
      */
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
+  /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+   
     /**
      * @brief setInfoFromXradr:设置从xrandr中获取的信息
      * @param main:主显示器信息
@@ -173,8 +180,6 @@ private:
 
 
 private:
-    QString         m_Name;              //<! 【名称】
-    QString         m_Vendor;            //<! 【制造商】
     QString         m_Model;             //<! 【型号】
     QString         m_DisplayInput;      //<! 【显示输入】
     QString         m_VGA;               //<! 【VGA】
@@ -188,7 +193,6 @@ private:
     QString         m_SerialNumber;      //<! 【流水号】
     QString         m_ProductionWeek;    //<! 【生产年月】
     QString         m_SupportResolution; //<!  支持的屏幕分辨率
-    QString         m_Driver;
 
     int             m_Width;             //<!  屏幕的宽度
     int             m_Height;            //<!  屏幕的高度

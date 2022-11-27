@@ -11,22 +11,28 @@
 
 #include <QDebug>
 #include <QProcess>
+#include <QMap>
 
 DWIDGET_USE_NAMESPACE
 
 DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     : QObject(parent)
+    , m_Name("")
+    , m_Vendor("")
     , m_UniqueID("")
     , m_SerialID("")
     , m_SysPath("")
     , m_HardwareClass("")
     , m_HwinfoToLshw("")
+    , m_VID_PID("")
+    , m_Modalias("")
     , m_Enable(true)
     , m_CanEnable(false)
     , m_CanUninstall(false)
     , m_Available(true)
     , m_Index(0)
     , m_forcedDisplay(false)
+    , m_Driver("")
 {
 }
 
@@ -417,6 +423,42 @@ void DeviceBaseInfo::setOtherDeviceInfo(const QString &key, const QString &value
     m_MapOtherInfo[key] = value;
 }
 
+TomlFixMethod DeviceBaseInfo::setInfoFromTomlBase(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+    TomlFixMethod ret1 = TOML_None;
+    TomlFixMethod ret2 = TOML_None;
+
+    if (TOML_nouse == setTomlAttribute(mapInfo, "Modalias", m_Modalias)) {
+        qInfo() << "toml del the device by modalias";
+        return TOML_Del;
+    }
+    ret1 = setTomlAttribute(mapInfo,  "Vendor_ID", m_VID);
+    ret2 = setTomlAttribute(mapInfo, "Product_ID", m_PID);
+    if ((TOML_nouse == ret1) && (TOML_nouse == ret2)) {
+        qInfo() << "toml del the device by vid and pid";
+        return TOML_Del;
+    }
+    ret1 = setTomlAttribute(mapInfo,  "Vendor", m_Vendor);
+    ret2 = setTomlAttribute(mapInfo, "Name", m_Name);
+    if ((TOML_nouse == ret1) && (TOML_nouse == ret2)) {
+        qInfo() << "toml del the device by vendor and name";
+        return TOML_Del;
+    }
+
+    // (setTomlAttribute(mapInfo, "SysFs_PATH", m_SysPath) == TOML_Cover) ? (ret = TOML_Cover) : ret;
+    // (setTomlAttribute(mapInfo, "KernelModeDriver", m_Driver) == TOML_Cover) ? (ret = TOML_Cover) : ret;
+
+    ret2 = setTomlAttribute(mapInfo, "Revision", m_Version);
+    ret2 = setTomlAttribute(mapInfo,"Description", m_Description);
+    m_VID = m_VID.toLower();
+    m_PID = m_PID.toLower();
+    m_VID_PID = m_VID + m_PID.remove("0x");
+    m_PhysID = m_VID_PID;
+    m_forcedDisplay = true;
+    return ret;
+}
+
 EnableDeviceStatus DeviceBaseInfo::setEnable(bool)
 {
     return EDS_Success;
@@ -559,6 +601,26 @@ const QString DeviceBaseInfo::getOverviewInfo()
     return QString("");
 }
 
+const QString &DeviceBaseInfo::getVID() const
+{
+    return m_VID;
+}
+
+const QString &DeviceBaseInfo::getPID() const
+{
+    return m_PID;
+}
+
+const QString &DeviceBaseInfo::getVIDAndPID() const
+{
+    return m_VID_PID;
+}
+
+const QString &DeviceBaseInfo::getModalias() const
+{
+    return m_Modalias;
+}
+
 void DeviceBaseInfo::loadTableHeader()
 {
     // 添加表头信息
@@ -581,8 +643,12 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
         QString k = DApplication::translate("QObject", it.key().trimmed().toStdString().data());
 
         // 可显示设备属性中存在该属性
-        if (m_FilterKey.find(k) != m_FilterKey.end())
-            m_MapOtherInfo.insert(k, it.value().trimmed());
+        if (m_FilterKey.find(k) != m_FilterKey.end()){
+            if(it.value().contains("nouse"))
+                m_MapOtherInfo.remove(k);
+            else
+                m_MapOtherInfo.insert(k, it.value().trimmed());
+        }
     }
 }
 
@@ -621,6 +687,31 @@ void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const Q
 
         if (variable.contains("Unknown", Qt::CaseInsensitive))
             variable = mapInfo[key].trimmed();
+    }
+}
+
+TomlFixMethod DeviceBaseInfo::setTomlAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite)
+{
+    // map中存在该属性
+    if (mapInfo.find(key) == mapInfo.end())
+        return TOML_None;
+
+    // 属性值不能为空
+    if (mapInfo[key] == "")
+        return TOML_None;
+    //如果有 关键字nouse 为直接接去掉清除
+    if (mapInfo[key].toLower().contains("nouse")) {
+        variable.clear();
+        return TOML_nouse;
+    }
+
+    // overwrite 为true直接覆盖
+    if (overwrite) {
+        setAttribute(mapInfo,key,variable,true);
+        return TOML_Cover;
+    } else {
+        setAttribute(mapInfo,key,variable,false);
+        return TOML_Cover;
     }
 }
 
@@ -705,22 +796,34 @@ bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
     return false;
 }
 
-void DeviceBaseInfo::setsysFStoHwinfoKey(const QMap<QString, QString> &mapInfo)
+void DeviceBaseInfo::setPhysIDMapKey(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.find("VID_PID") != mapInfo.end()) {
-        m_sysFSToHwinfo = mapInfo["VID_PID"];
+        m_PhysIDMap = mapInfo["VID_PID"];
         return;
     }
 }
 
-bool DeviceBaseInfo::sysFSmatchToHwinfo(const QMap<QString, QString> &mapInfo)
+bool DeviceBaseInfo::PhysIDMapInfo(const QMap<QString, QString> &mapInfo)
 {
-    // VID_PID 匹配上
-    if (mapInfo.find("VID_PID") != mapInfo.end()) {
-        if (m_sysFSToHwinfo == mapInfo["VID_PID"]) {
+    // Modalias 或 "Module Alias" 匹配上  ，硬件 IDS 参考内核 Module Alias 规则标准
+    if (mapInfo.find("Module Alias") != mapInfo.end()) {
+        if (m_PhysIDMap == mapInfo["Module Alias"]) {
             return true;
         }
     }
+    // VID_PID 匹配上
+    if (mapInfo.find("VID_PID") != mapInfo.end()) {
+        if (m_PhysIDMap == mapInfo["VID_PID"]) {
+            return true;
+        }
+    }
+    //to  do  “设备分类名称 + : + Vendor + Name”作为硬件 IDS
+    /*  toml 方案内容定义：
+    - 硬件 IDS 参考内核 Module Alias 规则标准，示例 Module Alias: "pci:v00008086d0000A3C8sv00001849sd0000A3C8bc06sc01i00"
+    - 若有的设备读不到Module Alias，请以格式“设备分类名+ : + v0000 + Vendor_ID + d0000 + Product_ID + sv0000+SubVendor_ID+sd0000+SubProduct_ID” 作为硬件IDS，若  SubVendor_ID 和 SubProduct_ID 无，则填默认为0000，格式尽量跟 Module Alias 一样
+    - 若有的设备读不到 Vendor_ID+Product_ID，请以格式“设备分类名称 + : + Vendor + Name”作为硬件 IDS ，所有字母全转化为小写，并去掉不可显示字符和空格
+    */
     return false;
 }
 

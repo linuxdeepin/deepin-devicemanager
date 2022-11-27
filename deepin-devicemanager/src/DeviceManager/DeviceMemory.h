@@ -25,6 +25,13 @@ public:
      */
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
+  /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+   
     /**
      * @brief setInfoFromDmidecode:设置从 sudo dmideocde -t memory 获取的内存信息
      * @param mapInfo:由dmideocde获取的信息map
@@ -96,8 +103,7 @@ protected:
     void loadTableData() override;
 
 private:
-    QString           m_Name;                   //<! 【名称】
-    QString           m_Vendor;                 //<! 【制造商】
+
     QString           m_Model;                  //<! 【型号】
     QString           m_Size;                   //<! 【大小】
     QString           m_Type;                   //<! 【类型】
@@ -110,7 +116,6 @@ private:
     QString           m_MinimumVoltage;         //<! 【最小电压】
     QString           m_MaximumVoltage;         //<! 【最大电压】
     QString           m_ConfiguredVoltage;      //<! 【配置电压】
-    QString           m_Driver;
     bool              m_MatchedFromDmi;         //<! 标识是否已经从dmidecode匹配过
 };
 

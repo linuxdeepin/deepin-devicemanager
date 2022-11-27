@@ -286,6 +286,332 @@ bool DeviceManager::getDeviceList(const QString &name, QList<DeviceBaseInfo *> &
     return true;
 }
 
+QString DeviceManager::convertDeviceTomlClassName(DeviceType deviceType)
+{
+    if (deviceType == DT_Null)      {return "";}
+    if (deviceType == DT_Computer)  {return "tomlComputer";}
+    if (deviceType == DT_Cpu)       {return "tomlCPU";}
+    if (deviceType == DT_Bios)      {return "tomlMotherboard";}
+    if (deviceType == DT_Memory)    {return "tomlMemory";}
+    if (deviceType == DT_Gpu)       {return "tomlDisplayGPU";}
+    if (deviceType == DT_Audio)     {return "tomlSoundAudio";}
+    if (deviceType == DT_Storage)   {return "tomlStorage";}
+    if (deviceType == DT_OtherPCI)  {return "tomlOtherPCI";}
+    if (deviceType == DT_Power)     {return "tomlPower";}
+    if (deviceType == DT_Bluetoorh) {return "tomlBluetooth";}
+    if (deviceType == DT_Network)   {return "tomlNetWork";}
+    if (deviceType == DT_Mouse)     {return "tomlMouse";}
+    if (deviceType == DT_Keyboard)  {return "tomlKeyboard";}
+    if (deviceType == DT_Monitor)   {return "tomlMonitor";}
+    if (deviceType == DT_Cdrom)     {return "tomlCDROM";}
+    if (deviceType == DT_Print)     {return "tomlPrinter";}
+    if (deviceType == DT_Image)     {return "tomlCamera";}
+    if (deviceType == DT_Others)    {return "tomlOtherDevices";}
+    return "";
+}
+
+QList<DeviceBaseInfo *> *DeviceManager::convertDeviceListAddr(DeviceType deviceType)
+{
+//    if (deviceType == DT_Null)      {return &m_ListDeviceOthers;}
+    if (deviceType == DT_Computer)  {return &m_ListDeviceComputer;}
+    if (deviceType == DT_Cpu)       {return &m_ListDeviceCPU;}
+    if (deviceType == DT_Bios)      {return &m_ListDeviceBios;}
+    if (deviceType == DT_Memory)    {return &m_ListDeviceMemory;}
+    if (deviceType == DT_Gpu)       {return &m_ListDeviceGPU;}
+    if (deviceType == DT_Audio)     {return &m_ListDeviceAudio;}
+    if (deviceType == DT_Storage)   {return &m_ListDeviceStorage;}
+    if (deviceType == DT_OtherPCI)  {return &m_ListDeviceOtherPCI;}
+    if (deviceType == DT_Power)     {return &m_ListDevicePower;}
+    if (deviceType == DT_Bluetoorh) {return &m_ListDeviceBluetooth;}
+    if (deviceType == DT_Network)   {return &m_ListDeviceNetwork;}
+    if (deviceType == DT_Mouse)     {return &m_ListDeviceMouse;}
+    if (deviceType == DT_Keyboard)  {return &m_ListDeviceKeyboard;}
+    if (deviceType == DT_Monitor)   {return &m_ListDeviceMonitor;}
+    if (deviceType == DT_Cdrom)     {return &m_ListDeviceCdrom;}
+    if (deviceType == DT_Print)     {return &m_ListDevicePrint;}
+    if (deviceType == DT_Image)     {return &m_ListDeviceImage;}
+    if (deviceType == DT_Others)    {return &m_ListDeviceOthers;}
+    return &m_ListDeviceOthers;
+}
+QList<DeviceBaseInfo *> DeviceManager::convertDeviceList(DeviceType deviceType)
+{
+//    if (deviceType == DT_Null)      {return m_ListDeviceOthers;}
+    if (deviceType == DT_Computer)  {return m_ListDeviceComputer;}
+    if (deviceType == DT_Cpu)       {return m_ListDeviceCPU;}
+    if (deviceType == DT_Bios)      {return m_ListDeviceBios;}
+    if (deviceType == DT_Memory)    {return m_ListDeviceMemory;}
+    if (deviceType == DT_Gpu)       {return m_ListDeviceGPU;}
+    if (deviceType == DT_Audio)     {return m_ListDeviceAudio;}
+    if (deviceType == DT_Storage)   {return m_ListDeviceStorage;}
+    if (deviceType == DT_OtherPCI)  {return m_ListDeviceOtherPCI;}
+    if (deviceType == DT_Power)     {return m_ListDevicePower;}
+    if (deviceType == DT_Bluetoorh) {return m_ListDeviceBluetooth;}
+    if (deviceType == DT_Network)   {return m_ListDeviceNetwork;}
+    if (deviceType == DT_Mouse)     {return m_ListDeviceMouse;}
+    if (deviceType == DT_Keyboard)  {return m_ListDeviceKeyboard;}
+    if (deviceType == DT_Monitor)   {return m_ListDeviceMonitor;}
+    if (deviceType == DT_Cdrom)     {return m_ListDeviceCdrom;}
+    if (deviceType == DT_Print)     {return m_ListDevicePrint;}
+    if (deviceType == DT_Image)     {return m_ListDeviceImage;}
+    if (deviceType == DT_Others)    {return m_ListDeviceOthers;}
+}
+
+DeviceBaseInfo *DeviceManager::createDevice(DeviceType deviceType)
+{
+    DeviceBaseInfo *vTemp;
+    if (deviceType == DT_Computer)  {vTemp = new DeviceComputer();  return vTemp;}
+    if (deviceType == DT_Cpu)       {vTemp = new DeviceCpu();  return vTemp;}
+    if (deviceType == DT_Bios)      {vTemp = new DeviceBios();  return vTemp;}
+    if (deviceType == DT_Memory)    {vTemp =  new DeviceMemory();  return vTemp;}
+    if (deviceType == DT_Gpu)       {vTemp = new DeviceGpu();  return vTemp;}
+    if (deviceType == DT_Audio)     {vTemp = new DeviceAudio();  return vTemp;}
+    if (deviceType == DT_Storage)   {vTemp =  new DeviceStorage();  return vTemp;}
+    if (deviceType == DT_OtherPCI)  {vTemp = new DeviceOtherPCI();  return vTemp;}
+    if (deviceType == DT_Power)     {vTemp = new DevicePower();  return vTemp;}
+    if (deviceType == DT_Bluetoorh) {vTemp = new DeviceBluetooth();  return vTemp;}
+    if (deviceType == DT_Network)   {vTemp =  new DeviceNetwork();  return vTemp;}
+    if (deviceType == DT_Mouse)     {vTemp = new DeviceInput();  return vTemp;}
+    if (deviceType == DT_Keyboard)  {vTemp =  new DeviceInput();  return vTemp;}
+    if (deviceType == DT_Monitor)   {vTemp = new DeviceMonitor();  return vTemp;}
+    if (deviceType == DT_Cdrom)     {vTemp = new DeviceCdrom();  return vTemp;}
+    if (deviceType == DT_Print)     {vTemp = new DevicePrint();  return vTemp;}
+    if (deviceType == DT_Image)     {vTemp = new DeviceImage();  return vTemp;}
+    if (deviceType == DT_Others)    {vTemp = new DeviceOthers();  return vTemp;}
+    return vTemp;
+}
+
+TomlFixMethod DeviceManager::tomlDeviceSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo)
+{
+    if (!device) {
+        return TOML_None;
+    }
+    TomlFixMethod ret = TOML_None;
+    switch (deviceType) {
+    case DT_Null:
+        break;
+    case DT_Computer:{
+        DeviceComputer *tomldevice = dynamic_cast<DeviceComputer *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+    } break;
+    case DT_Cpu: {
+        DeviceCpu *tomldevice = dynamic_cast<DeviceCpu *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Bios: {
+        DeviceBios *tomldevice = dynamic_cast<DeviceBios *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Memory: {
+        DeviceMemory *tomldevice = dynamic_cast<DeviceMemory *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Storage: {
+        DeviceStorage *tomldevice = dynamic_cast<DeviceStorage *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Gpu: {
+        DeviceGpu *tomldevice = dynamic_cast<DeviceGpu *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Monitor: {
+        DeviceMonitor *tomldevice = dynamic_cast<DeviceMonitor *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Network: {
+        DeviceNetwork *tomldevice = dynamic_cast<DeviceNetwork *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Audio: {
+        DeviceAudio *tomldevice = dynamic_cast<DeviceAudio *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Bluetoorh: {
+        DeviceBluetooth *tomldevice = dynamic_cast<DeviceBluetooth *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Keyboard: {
+        DeviceInput *tomldevice = dynamic_cast<DeviceInput *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Mouse: {
+        DeviceInput *tomldevice = dynamic_cast<DeviceInput *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Print: {
+        DevicePrint *tomldevice = dynamic_cast<DevicePrint *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Image: {
+        DeviceImage *tomldevice = dynamic_cast<DeviceImage *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Cdrom: {
+        DeviceCdrom *tomldevice = dynamic_cast<DeviceCdrom *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Others: {
+        DeviceOthers *tomldevice = dynamic_cast<DeviceOthers *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_OtherPCI: {
+        DeviceOtherPCI *tomldevice = dynamic_cast<DeviceOtherPCI *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    case DT_Power: {
+        DevicePower *tomldevice = dynamic_cast<DevicePower *>(device);
+        (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
+        // tomldevice->deleteLater();
+    } break;
+    default: {
+    } break;
+    }
+    return ret;
+}
+
+void DeviceManager::tomlDeviceDel(DeviceType deviceType, DeviceBaseInfo *const device)
+{
+    if (!device) {
+        return;
+    }
+    QList<DeviceBaseInfo *> *lst = convertDeviceListAddr(deviceType);
+    lst->append(device);
+}
+
+void DeviceManager::tomlDeviceAdd(DeviceType deviceType, DeviceBaseInfo *const device)
+{
+    if (!device) {
+        return;
+    }
+    QList<DeviceBaseInfo *> *lst = convertDeviceListAddr(deviceType);
+    lst->append(device);
+}
+
+DeviceBaseInfo *DeviceManager::findByModalias(DeviceType deviceType, const QString &modalias)
+{
+    if (modalias.isEmpty())
+        return nullptr;
+
+    QList<DeviceBaseInfo *> lst = convertDeviceList(deviceType);
+    for (QList<DeviceBaseInfo *>::iterator it = lst.begin(); it != lst.end(); ++it) {
+        DeviceBaseInfo *device = dynamic_cast<DeviceBaseInfo *>(*it);
+
+        if (!device)
+            return nullptr;
+
+        QString tmp_Modalias =  device->getModalias();
+        if ((0 == modalias.compare(tmp_Modalias, Qt::CaseInsensitive))) {
+            return *it;
+        }
+
+        QString tmp_VIDAndPID =  device->getVIDAndPID().toLower();
+        if (!modalias.startsWith("pci") && !modalias.startsWith("usb") && !tmp_VIDAndPID.isEmpty()) {
+            QString tmp_vidpid = tmp_VIDAndPID.remove("0x");
+            QString tmp_vid  = tmp_vidpid.mid(0, 4);
+            QString tmp_pid  = tmp_vidpid.mid(4, 4);
+
+            if ((modalias.contains(tmp_vid, Qt::CaseInsensitive)) && (modalias.contains(tmp_pid, Qt::CaseInsensitive))) {
+                return *it;
+            }
+        }
+    }
+    return nullptr;
+}
+
+DeviceBaseInfo *DeviceManager::findByVIDPID(DeviceType deviceType, const QString &vid, const QString &pid)
+{
+    if(vid.isEmpty() ||  pid.isEmpty())
+        return nullptr;
+
+    QList<DeviceBaseInfo *> lst = convertDeviceList(deviceType);
+    for (QList<DeviceBaseInfo *>::iterator it = lst.begin(); it != lst.end(); ++it) {
+        DeviceBaseInfo *device = dynamic_cast<DeviceBaseInfo *>(*it);
+
+        if (!device)
+            return nullptr;
+
+        QString tmp_refvid = vid.toLower();
+        if (tmp_refvid.contains("0x"))
+            tmp_refvid.remove("0x");
+        QString tmp_refpid = pid.toLower();
+        if (tmp_refpid.contains("0x"))
+            tmp_refpid.remove("0x");
+
+        QString tmp_vid =  device->getVID().toLower();
+        QString tmp_pid =  device->getPID().toLower();
+        if (tmp_vid.contains("0x"))
+            tmp_vid.remove("0x");
+        if (tmp_pid.contains("0x"))
+            tmp_pid.remove("0x");
+
+        if (tmp_vid.isEmpty() || tmp_pid.isEmpty()) {
+            QString tmp_VIDAndPID =  device->getVIDAndPID().toLower();  //getVIDAndPID
+            if (tmp_VIDAndPID.contains(tmp_refvid) && tmp_VIDAndPID.contains(tmp_refpid))
+                return *it;
+        } else {
+            if ((0 == tmp_refvid.compare(tmp_vid, Qt::CaseInsensitive)) && (0 == tmp_refpid.compare(tmp_pid, Qt::CaseInsensitive))) {
+                return *it;
+            }
+        }
+    }
+}
+
+DeviceBaseInfo *DeviceManager::findByVendorName(DeviceType deviceType, const QString &vendor, const QString &name)
+{
+    if(deviceType == DT_Computer)
+        qDebug("Toml11 name11 find 1");
+
+    if( name.isEmpty())
+        return nullptr;
+    if(vendor.isEmpty())
+        if((deviceType != DT_Bios) && (deviceType != DT_Computer))
+            return nullptr;
+
+    if(deviceType == DT_Computer)
+        qDebug("Toml name find 5");
+
+    QList<DeviceBaseInfo *> lst = convertDeviceList(deviceType);
+    for (QList<DeviceBaseInfo *>::iterator it = lst.begin(); it != lst.end(); ++it) {
+        DeviceBaseInfo *device = dynamic_cast<DeviceBaseInfo *>(*it);
+
+        if (!device)
+            return nullptr;
+
+        QString tmp_vendor  =  device->vendor();
+        QString tmp_name    =  device->name();
+        if ((0 == vendor.compare(tmp_vendor, Qt::CaseInsensitive)) && (0 == name.compare(tmp_name, Qt::CaseInsensitive)))
+            return *it;
+
+        if(deviceType == DT_Bios){
+
+            if (0 == name.compare(tmp_name, Qt::CaseInsensitive))
+                return *it;
+        }
+        if(deviceType == DT_Computer){
+            qInfo() << " computer Name" <<  tmp_name << "toml:" << name;
+            return *it;
+        }
+
+    }
+
+}
+
+
 DeviceBaseInfo *DeviceManager::getBluetoothAtIndex(int index)
 {
     if (m_ListDeviceBluetooth.size() <= index)
@@ -612,6 +938,11 @@ void DeviceManager::addAudioDevice(DeviceAudio *const device)
     m_ListDeviceAudio.append(device);
 }
 
+void DeviceManager::delAudioDevice(DeviceAudio *const device)
+{
+    m_ListDeviceAudio.removeOne(device);
+}
+
 void DeviceManager::deleteDisableDuplicate_AudioDevice(void)
 {
     if (m_ListDeviceAudio.size() > 0) {
@@ -641,10 +972,20 @@ DeviceBaseInfo *DeviceManager::getAudioDevice(const QString &path)
         if (audio && path == tpath.replace(QRegExp("[1-9]$"), "0")) {
             return *it;
         }
-         QString syspath = audio->sysPath();   //remove dumplicate syspath
-         if (audio && path == syspath) {
-             return *it;
-         }
+        QString syspath = audio->sysPath();   //remove dumplicate syspath
+        if (audio && path == syspath) {
+            return *it;
+        }
+        //remove dumplicate by toml Modalias
+        QString Modalias =  audio->getModalias();
+        if (audio && path == Modalias) {
+            return *it;
+        }
+        QString vidpid =  audio->getVIDAndPID();
+        if (audio && path == vidpid) {
+            return *it;
+        }
+
     }
     return nullptr;
 }

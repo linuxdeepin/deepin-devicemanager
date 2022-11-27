@@ -6,6 +6,8 @@
 #ifndef DEVICEGENERATOR_H
 #define DEVICEGENERATOR_H
 
+#include "DeviceManager/DeviceInfo.h"
+
 #include <DApplication>
 #include <DSysInfo>
 
@@ -128,6 +130,13 @@ public:
      * @return QString 系统产品名称
      */
     static const QString getProductName();
+
+//    void setInfoFromTomlOneByOne(DeviceType deviceType, DeviceBaseInfo *device);
+
+    /**
+     * @brief InfoFromToml:从toml获取信息
+     */
+    void generatorInfoFromToml(DeviceType deviceType);
 
 protected:
 
@@ -328,6 +337,13 @@ protected:
      * @return
      */
     QString uniqueID(const QMap<QString, QString> &mapInfo);
+
+    /**
+     * @brief PhysID
+     * @param mapInfo
+     * @return
+     */
+    QString PhysID(const QMap<QString, QString> &mapInfo, const QString &key);
 
 protected:
     QStringList m_ListBusID;

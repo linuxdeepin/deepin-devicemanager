@@ -9,13 +9,9 @@
 
 DeviceImage::DeviceImage()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Model("")
-    , m_Version("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Driver("")
     , m_MaximumPower("")
     , m_Speed("")
 {
@@ -39,6 +35,23 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
+}
+
+TomlFixMethod DeviceImage::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
+    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialID);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
@@ -69,6 +82,9 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver, true);//
     setAttribute(mapInfo, "Driver Modules", m_Driver, true);
     setAttribute(mapInfo, "Speed", m_Speed);
+    setAttribute(mapInfo, "Module Alias", m_Modalias);
+    setAttribute(mapInfo, "VID_PID", m_VID_PID);
+    m_PhysID = m_VID_PID;
     if (driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
@@ -148,6 +164,8 @@ void DeviceImage::loadBaseDeviceInfo()
 void DeviceImage::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
+    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addOtherDeviceInfo(tr("Driver"), m_Driver);

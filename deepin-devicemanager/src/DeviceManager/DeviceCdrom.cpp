@@ -7,13 +7,9 @@
 
 DeviceCdrom::DeviceCdrom()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Type("")
-    , m_Version("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Driver("")
     , m_MaxPower("")
     , m_Speed("")
 {
@@ -43,6 +39,19 @@ bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+TomlFixMethod DeviceCdrom::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+    ret = setTomlAttribute(mapInfo, "Model", m_Type);
+    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaxPower);
+    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
+}
+
 void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     // 获取设备的基本信息
@@ -55,6 +64,10 @@ void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "", m_MaxPower);
     setAttribute(mapInfo, "Speed", m_Speed);
+
+    setAttribute(mapInfo, "Module Alias", m_Modalias);
+    setAttribute(mapInfo, "VID_PID", m_VID_PID);
+    m_PhysID = m_VID_PID;
 
     // 获取映射到 lshw设备信息的 关键字
     setHwinfoLshwKey(mapInfo);
@@ -97,7 +110,7 @@ void DeviceCdrom::initFilterKey()
     addFilterKey(QObject::tr("Device File"));
     addFilterKey(QObject::tr("Device Files"));
     addFilterKey(QObject::tr("Device Number"));
-    addFilterKey(QObject::tr("Module Alias"));
+    // addFilterKey(QObject::tr("Module Alias"));
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("Application"));
     addFilterKey(QObject::tr("physical id"));
@@ -106,6 +119,7 @@ void DeviceCdrom::initFilterKey()
     addFilterKey(QObject::tr("logical name"));
 //    addFilterKey(QObject::tr("bus info"));
     addFilterKey(QObject::tr("ansiversion"));
+
 }
 
 void DeviceCdrom::loadBaseDeviceInfo()
@@ -124,6 +138,8 @@ void DeviceCdrom::loadBaseDeviceInfo()
 
 void DeviceCdrom::loadOtherDeviceInfo()
 {
+    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }

@@ -15,8 +15,6 @@ DWIDGET_USE_NAMESPACE
 
 DevicePower::DevicePower()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Model("")
     , m_Type("")
     , m_SerialNumber("")
@@ -41,13 +39,36 @@ DevicePower::DevicePower()
     initFilterKey();
 }
 
+TomlFixMethod DevicePower::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+    // 添加基本信息    
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);    
+    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    ret = setTomlAttribute(mapInfo, "Type", m_Type);
+    ret = setTomlAttribute(mapInfo, "Status", m_Status);
+    ret = setTomlAttribute(mapInfo, "Capacity", m_Capacity);
+    ret = setTomlAttribute(mapInfo, "Voltage", m_Voltage);
+    ret = setTomlAttribute(mapInfo, "Slot", m_Slot);
+    ret = setTomlAttribute(mapInfo, "Design Capacity", m_DesignCapacity);
+    ret = setTomlAttribute(mapInfo, "Design Voltage", m_DesignVoltage);
+    ret = setTomlAttribute(mapInfo, "SBDS Version", m_SBDSVersion);
+    ret = setTomlAttribute(mapInfo, "SBDS Serial Number", m_SBDSSerialNumber);
+    ret = setTomlAttribute(mapInfo, "SBDS Manufacture Date", m_SBDSManufactureDate);
+    ret = setTomlAttribute(mapInfo, "SBDS Chemistry", m_SBDSChemistry);
+    ret = setTomlAttribute(mapInfo, "Temperature", m_Temp);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
+}
+
 bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 {
     // 设置upower中获取的信息
     if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
         return false;
     }
-    m_Name = QObject::tr("battery");
+    // m_Name = QObject::tr("battery");  //??
 
     setAttribute(mapInfo, "", m_Vendor);
     setAttribute(mapInfo, "", m_Model);

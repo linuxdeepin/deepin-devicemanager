@@ -9,8 +9,6 @@
 
 DeviceCpu::DeviceCpu()
     : DeviceBaseInfo()
-    , m_Vendor("")
-    , m_Name("")
     , m_PhysicalID("")
     , m_CoreID("")
     , m_ThreadNum("")
@@ -30,7 +28,6 @@ DeviceCpu::DeviceCpu()
     , m_HardwareVirtual("")
     , m_LogicalCPUNum(0)
     , m_CPUCoreNum(0)
-    , m_Driver("")
     , m_FrequencyIsRange(false)
     , m_FrequencyIsCur(true)
 {
@@ -71,10 +68,10 @@ void DeviceCpu::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("CPU ID"), m_PhysicalID);
     addBaseDeviceInfo(tr("Core ID"), m_CoreID);
     addBaseDeviceInfo(tr("Threads"), m_ThreadNum);
-    if(m_FrequencyIsCur)
+    if (m_FrequencyIsCur)
         addBaseDeviceInfo(tr("Current Speed"), m_CurFrequency);
     else
-        addBaseDeviceInfo(tr("Max Speed"),m_MaxFrequency);
+        addBaseDeviceInfo(tr("Max Speed"), m_MaxFrequency);
     addBaseDeviceInfo(tr("BogoMIPS"), m_BogoMIPS);
     addBaseDeviceInfo(tr("Architecture"), m_Architecture);
     addBaseDeviceInfo(tr("CPU Family"), m_Familly);
@@ -160,16 +157,13 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         m_FrequencyIsRange = true;
 
         // 如果最大最小频率相等则不显示范围
-        if (fabs(minHz - maxHz) < 0.001)
-        {
+        if (fabs(minHz - maxHz) < 0.001) {
             m_FrequencyIsRange = false;
             m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(maxHz) : QString("%1 MHz").arg(maxHz * 1000);
-        }
-        else {
+        } else {
             m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         }
-    }
-    else if(mapInfo.find("CPU MHz") != mapInfo.end()) {
+    } else if (mapInfo.find("CPU MHz") != mapInfo.end()) {
         QString maxS = mapInfo["CPU MHz"];
         m_Frequency = maxS.indexOf("MHz") > -1 ? maxS : maxS + " MHz";
     }
@@ -206,7 +200,7 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
         // bug-108166 lshw 中 product 包含NULL信息，version 信息正确
         // bug-112403 lshw 中 product 包含ARMv信息，version 信息正确
-        if (m_Name.contains("null", Qt::CaseInsensitive) || m_Name.contains("ARMv", Qt::CaseInsensitive) ){
+        if (m_Name.contains("null", Qt::CaseInsensitive) || m_Name.contains("ARMv", Qt::CaseInsensitive)) {
             setAttribute(mapInfo, "version", m_Name);
         }
     }
@@ -216,6 +210,33 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
     // 获取设备其他信息
     getOtherMapInfo(mapInfo);
+}
+
+TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "CPU ID", m_PhysicalID);
+    ret = setTomlAttribute(mapInfo, "Core ID", m_CoreID);
+    ret = setTomlAttribute(mapInfo, "Threads", m_ThreadNum);
+    ret = setTomlAttribute(mapInfo, "Current Speed", m_CurFrequency);
+    ret = setTomlAttribute(mapInfo, "Max Speed", m_MaxFrequency);
+    ret = setTomlAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
+    ret = setTomlAttribute(mapInfo, "Architecture", m_Architecture);
+    ret = setTomlAttribute(mapInfo, "CPU Family", m_Familly);
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
+    ret = setTomlAttribute(mapInfo, "Flags", m_Flags);
+    ret = setTomlAttribute(mapInfo, "Extensions", m_Extensions);
+    ret = setTomlAttribute(mapInfo, "L3 Cache", m_CacheL3);
+    ret = setTomlAttribute(mapInfo, "L2 Cache", m_CacheL2);
+    ret = setTomlAttribute(mapInfo, "L1i Cache", m_CacheL1Order);
+    ret = setTomlAttribute(mapInfo, "L1d Cache", m_CacheL1Data);
+    ret = setTomlAttribute(mapInfo, "Stepping", m_Step);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
@@ -231,7 +252,7 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     // 获取设备基本信息
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Max Speed", m_Frequency, false);
-    setAttribute(mapInfo,"Max Speed",m_MaxFrequency,false);
+    setAttribute(mapInfo, "Max Speed", m_MaxFrequency, false);
     // 飞腾架构由于无法通过lscpu获取当前频率，因此需要通过dmidecode获取
     setAttribute(mapInfo, "Current Speed", m_CurFrequency, false);
     setAttribute(mapInfo, "Family", m_Familly, false);

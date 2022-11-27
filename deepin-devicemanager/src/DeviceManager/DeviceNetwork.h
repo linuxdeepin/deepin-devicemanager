@@ -25,6 +25,13 @@ public:
      */
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
+  /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+   
     /**
      * @brief setInfoFromHwinfo:设置由hwinfo --network命令获取的设备信息
      * @param mapInfo:由hwinfo获取的信息map
@@ -134,10 +141,8 @@ protected:
     void loadTableData() override;
 
 private:
-    QString             m_Name;                         //<! 【名称】
-    QString             m_Vendor;                       //<! 【制造商】
+
     QString             m_Model;                        //<! 【型号】
-    QString             m_Version;                      //<! 【版本】
     QString             m_BusInfo;                      //<! 【总线信息】
     QString             m_LogicalName;                  //<! 【逻辑名称】
     QString             m_MACAddress;                   //<! 【物理地址】
@@ -148,7 +153,6 @@ private:
     QString             m_Capabilities;                 //<! 【功能】
     QString             m_Autonegotiation;              //<! 【自动协商】
     QString             m_Broadcast;                    //<! 【广播】
-    QString             m_Driver;                       //<! 【驱动】
     QString             m_DriverModules;                //<!  driver modules
     QString             m_DriverVersion;                //<! 【驱动】
     QString             m_Duplex;                       //<! 【双工】

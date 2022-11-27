@@ -14,15 +14,10 @@
 
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
     , m_Model("")
-    , m_Version("")
     , m_Interface("")
     , m_BusInfo("")
     , m_Capabilities("")
-    , m_Description("")
-    , m_Driver("")
     , m_MaximumPower("")
     , m_Speed("")
     , m_KeyToLshw("")
@@ -66,6 +61,23 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     return true;
 }
 
+TomlFixMethod DeviceInput::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+        // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    ret = setTomlAttribute(mapInfo, "Interface", m_Interface);
+    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
+    ret = setTomlAttribute(mapInfo, "Maximum Current", m_MaximumPower);   // 将最大功率改为最大电流
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
+}
+
 void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     //取触摸板的状态
@@ -86,6 +98,10 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Unique ID", m_WakeupID);
     setAttribute(mapInfo, "Unique ID", m_SerialID);
+    setAttribute(mapInfo, "Module Alias", m_Modalias);
+    setAttribute(mapInfo, "VID_PID", m_VID_PID);
+    m_PhysID = m_VID_PID;
+
     m_UniqueID = m_SerialID;
 
 
@@ -299,7 +315,7 @@ bool DeviceInput::available()
     if ("PS/2" == m_Interface || "Bluetooth" == m_Interface) {
         m_Available = true;
     }
-    return m_Available;
+    return m_forcedDisplay ? m_forcedDisplay : m_Available;
 }
 
 QString DeviceInput::subTitle()
@@ -363,8 +379,11 @@ bool DeviceInput::canWakeupMachine()
 {
     if (m_WakeupID.isEmpty())
         return false;
-
-    return DBusWakeupInterface::getInstance()->canInputWakeupMachine(wakeupPath());
+    QFile file(wakeupPath());
+    if (!file.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+    return true;
 }
 
 bool DeviceInput::isWakeupMachine()
@@ -373,8 +392,10 @@ bool DeviceInput::isWakeupMachine()
     if (!file.open(QIODevice::ReadOnly)) {
         return false;
     }
-
-    return DBusWakeupInterface::getInstance()->isInputWakeupMachine(wakeupPath());
+    QString info = file.readAll();
+    if (info.contains("disabled"))
+        return false;
+    return true;
 }
 
 QString DeviceInput::wakeupPath()
@@ -408,6 +429,7 @@ void DeviceInput::initFilterKey()
     addFilterKey(QObject::tr("Hardware Class"));
 
     addFilterKey(QObject::tr("physical id"));
+
 }
 
 void DeviceInput::loadBaseDeviceInfo()
@@ -423,6 +445,8 @@ void DeviceInput::loadBaseDeviceInfo()
 void DeviceInput::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
+    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Maximum Current"), m_MaximumPower);   // 1050需求将最大功率改为最大电流
     addOtherDeviceInfo(tr("Driver"), m_Driver);

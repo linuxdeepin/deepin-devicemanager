@@ -6,18 +6,32 @@
 #include "DeviceComputer.h"
 
 // Qt库文件
+#include <QMap>
 #include <QDebug>
 
 DeviceComputer::DeviceComputer()
     : m_HomeUrl("")
     , m_OsDescription("")
     , m_OS("")
-    , m_Vendor("")
-    , m_Name("")
     , m_Type("")
-    , m_Driver("")
+    //, m_Driver("")
 {
 
+}
+
+TomlFixMethod DeviceComputer::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+        TomlFixMethod ret = TOML_None;
+//  must cover the  loadOtherDeviceInfo
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "HOME_URL", m_HomeUrl);
+    ret = setTomlAttribute(mapInfo, "Type", m_Type);
+    ret = setTomlAttribute(mapInfo, "vendor", m_Vendor);
+    ret = setTomlAttribute(mapInfo, "OS", m_OS);
+    ret = setTomlAttribute(mapInfo, "OsDescription", m_OsDescription);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 const QString &DeviceComputer::name() const

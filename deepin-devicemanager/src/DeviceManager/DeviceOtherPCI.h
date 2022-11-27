@@ -19,6 +19,13 @@ class DeviceOtherPCI : public DeviceBaseInfo
 public:
     DeviceOtherPCI();
 
+  /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+   
     /**
      * @brief name:获取名称属性值
      * @return QString 名称属性值
@@ -72,18 +79,13 @@ protected:
     void loadTableData() override;
 
 private:
-    QString             m_Name;                         //<! 【名称】
-    QString             m_Vendor;                       //<! 【制造商】
     QString             m_Model;                        //<! 【型号】
-    QString             m_Version;                      //<! 【版本】
     QString             m_BusInfo;                      //<! 【总线信息】
     QString             m_Width;                        //<! 【位宽】
     QString             m_Clock;                        //<! 【时钟频率】
     QString             m_Capabilities;                 //<! 【功能】
-    QString             m_Description;                  //<! 【描述】
     QString             m_Irq;                          //<! 【中断】
     QString             m_Memory;                       //<! 【内存地址】
-    QString             m_Driver;                       //<! 【驱动】
     QString             m_Latency;                      //<! 【延迟】
     QString             m_InputOutput;                  //<! 【输入输出】
 };

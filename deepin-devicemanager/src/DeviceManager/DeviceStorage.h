@@ -19,6 +19,13 @@ class DeviceStorage: public DeviceBaseInfo
 public:
     DeviceStorage();
 
+  /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+   
     /**
        * @brief setHwinfoInfo:设置由hwinfo --disk命令获取的设备信息
        * @param mapInfo:由hwinfo获取的信息map
@@ -187,18 +194,16 @@ private:
 
 private:
     QString               m_Model;              //<! 【型号】1
-    QString               m_Vendor;             //<! 【制造商】2
+    // QString               m_Vendor;             //<! 【制造商】2
     QString               m_MediaType;          //<! 【介质类型】3
     QString               m_Size;               //<! 【大小】4
     QString               m_RotationRate;       //<! 【转速】
     QString               m_Interface;          //<! 【接口】6
     QString               m_SerialNumber;       //<! 【序列号】7
-    QString               m_Version;            //<! 【版本】
     QString               m_Capabilities;       //<! 【功能】
-    QString               m_Description;        //<! 【描述】
     QString               m_FirmwareVersion;    //<! 【固件版本】8
     QString               m_Speed;              //<! 【速度】5
-    QString               m_Driver;
+
 
     QString               m_DeviceFile;         //<
     QString               m_KeyToLshw;          //<!  用于表示存储文件

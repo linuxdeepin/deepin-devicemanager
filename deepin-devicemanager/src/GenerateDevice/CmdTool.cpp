@@ -4,7 +4,7 @@
 
 // 项目自身文件
 #include "CmdTool.h"
-
+#include <QDir>
 #include <cmath>
 
 // Qt库文件
@@ -23,8 +23,9 @@
 
 CmdTool::CmdTool()
 {
-
 }
+
+static bool m_tomlSet = false;
 
 void CmdTool::addMapInfo(const QString &key, const QMap<QString, QString> &mapInfo)
 {
@@ -509,6 +510,10 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
             continue;
         QMap<QString, QString> mapInfo;
         getMapInfoFromDmidecode(item, mapInfo);
+        if ("dmidecode1" == key){
+            loadOemTomlInfo(mapInfo);
+        }
+
         // 过滤空cpu卡槽信息
         if ("dmidecode4" == key && mapInfo.find("ID") == mapInfo.end())
             continue;
@@ -1342,6 +1347,131 @@ bool CmdTool::getCatDeviceInfo(QString &deviceInfo, const QString &debugFile)
 
     deviceInfo = inputDeviceFile.readAll();
     inputDeviceFile.close();
-
     return true;
 }
+/*
+使用 sudo dmidecode -t 1 命令查询结果下的关键字：Manufacturer、Product Name、Version、Serial Number，取其值，
+文件取名以`oeminfo_`开头，取名格式为《oeminfo_manufacturer_productname_version_serialnumber.toml，
+后文简称为：《oeminfo_system.toml》文件名字母全转化为小写，并去掉不可显示特殊字符和空格。并基于此进行匹配。
+文件路径存放在/etc/deepin/hardware
+
+$ sudo dmidecode -t 1
+请输入密码:
+验证成功
+# dmidecode 3.2
+Getting SMBIOS data from sysfs.
+SMBIOS 3.3.0 present.
+# SMBIOS implementations newer than version 3.2.0 are not
+# fully supported by this version of dmidecode.
+
+Handle 0x0001, DMI type 1, 27 bytes
+System Information
+        Manufacturer: LENOVO
+        Product Name: 82GM
+        Version: Lenovo XiaoXinAir 15ITL 2021
+        Serial Number: PF3A3CLR
+        UUID: bc091b18-88ff-2021-1230-035644000000
+        Wake-up Type: Power Switch
+        SKU Number: LENOVO_MT_82GM_BU_idea_FM_XiaoXinAir 15ITL 2021
+        Family: XiaoXinAir 15ITL 2021
+
+ oeminfo_LENOVO_82GM_Lenovo XiaoXinAir 15ITL 2021_PF3A3CLR.toml
+*/
+
+void CmdTool::loadOemTomlInfo(const QMap<QString, QString> &mapInfo)
+{
+    m_tomlSet = false;
+    if(mapInfo.size()<=0)
+        return;
+    QString tomlFileName;
+    QString info = "";
+    bool tomlFileRead = false;
+    //《oeminfo_manufacturer_productname_version_serialnumber.toml，
+    if(mapInfo.contains("Manufacturer")
+            && mapInfo.contains("Manufacturer")
+            && mapInfo.contains("Product Name")
+            && mapInfo.contains("Version")
+            && mapInfo.contains("Serial Number")){
+        QString Manufacturer = mapInfo["Manufacturer"];
+        QString productname = mapInfo["Product Name"];
+        QString versio = mapInfo["Version"];
+        QString serialnumber = mapInfo["Serial Number"];
+        if(Manufacturer.isEmpty() || productname.isEmpty() || versio.isEmpty() || serialnumber.isEmpty())
+             return;
+        else
+              tomlFileName = "oeminfo_"+Manufacturer+"_"+productname+"_"+versio+"_"+serialnumber;
+          tomlFileName = tomlFileName.toLower().remove(" ") + ".toml";
+    }
+   QString curPathFile =  "/etc/deepin/hareware/"+tomlFileName;
+    if (QFile::exists(curPathFile)) {
+        QFile file(curPathFile);
+        if (file.open(QIODevice::ReadOnly)){
+            info = file.readAll().data();
+            tomlFileRead =true;
+        }
+    }else {
+        curPathFile = "/home/deep/Documents/oeminfodefault.toml";  //debug only;
+        QFile file(curPathFile);
+        if (file.open(QIODevice::ReadOnly)){
+            info = file.readAll().data();
+            tomlFileRead =true;
+        }
+    }
+
+    if(!tomlFileRead)
+        return;
+    qInfo() << "TomlPathFile: " << curPathFile;
+    QStringList lines = info.split("\n");
+//    QRegExp regClass("\\s*(\\[)(.*)(\\])\\s*#*.*");//正则表达式提取“[XXX]”,XXX为任意字符串。
+    QRegExp regClass("\\s*(\\[)([.\\w\\s]*)(\\])\\s*#*.*");//正则表达式提取“[XXX]”,XXX为任意字符串。  并去掉[[xxxx]]
+//    QRegExp regKeyValue("\\s*([a-zA-Z0-9_-]+)=\"(.*)\".*");       //裸键只能存在字母、数字、下划线和破折号（a-zA-Z0-9_-）
+//    QRegExp regValue("\\s*\"(.*)\".*");
+    QString classkey;
+    QStringList deviceClassesList;
+    QStringList ValueKeyList;
+    QStringList wordlst;
+    QMap<QString, QString> itemMap;
+    foreach (const QString &line, lines) {
+        if (line.trimmed().startsWith("#"))  // # 开头为注释  不取
+            continue;
+        else if (regClass.exactMatch(line)) {  //[xxx]
+            if (itemMap.count() > 0){
+                addMapInfo("toml" + classkey, itemMap);
+                m_tomlSet = true;
+            }
+
+            classkey = regClass.cap(2).split('.').first();
+            itemMap.clear();
+            ValueKeyList.clear();
+            deviceClassesList.append(regClass.cap(2));
+//        } else if (regKeyValue.exactMatch(line)) {  //键值对=
+          } else if (line.contains("=")){
+             wordlst = line.split("=");
+            if (2 == wordlst.size()) {
+
+                QString key = wordlst[0].remove('\"').trimmed();
+                QString valuetmp = wordlst[1];
+                QStringList valuelst;
+                QString value;
+                if(valuetmp.contains("#"))         {
+                    valuelst = valuetmp.split("#");
+                    value = valuelst[0].remove('\"').trimmed();
+                }
+                else
+                    value = valuetmp.remove('\"').trimmed();
+
+                itemMap.insert(key, value);
+                ValueKeyList.append(key);
+            }
+//            if(classkey == "SoundAudio")
+//                qInfo()<<"value: " <<line << "    ;  " << key << "::" <<value;
+        }
+    } // end for
+    return;
+}
+
+
+ bool CmdTool::isOemTomlFileSucess()
+ {
+    return m_tomlSet;
+ }

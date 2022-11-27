@@ -22,6 +22,13 @@ public:
     /**@brief:设置从lshw获取的信息*/
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
+      /**
+      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+      * @param mapInfo:由toml获取的信息map
+      * @return枚举值
+      */
+   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+   
     /**@brief:设置从hwinfo获取的信息*/
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
@@ -103,13 +110,10 @@ protected:
     void loadTableData() override;
 
 private:
-    QString             m_Name;                         //<! 【名称】
-    QString             m_Vendor;                       //<! 【制造商】
+
     QString             m_Model;                        //<! 【型号】
-    QString             m_Version;                      //<! 【版本】
     QString             m_BusInfo;                      //<! 【总线信息】
     QString             m_Capabilities;                 //<! 【功能】
-    QString             m_Driver;                       //<! 【驱动】
     QString             m_MaximumPower;                 //<! 【最大功耗】
     QString             m_Speed;                        //<! 【速度】
     QString             m_BusID;                        //<! 【总线ID】

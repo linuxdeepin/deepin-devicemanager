@@ -10,16 +10,27 @@
 
 DeviceBios::DeviceBios()
     : DeviceBaseInfo()
-    , m_Name("")
     , m_ProductName("")
-    , m_Vendor("")
-    , m_Version("")
     , m_ChipsetFamily("")
-    , m_Driver("")
     , m_IsBoard(false)
 {
     // 初始化可显示属性
     initFilterKey();
+}
+
+TomlFixMethod DeviceBios::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+
+    ret = setTomlAttribute(mapInfo, "Version", m_Version,true);
+    ret = setTomlAttribute(mapInfo, "Product Name", m_ProductName,true);
+    ret = setTomlAttribute(mapInfo, "chipset", m_ChipsetFamily,true);
+    // ret = setTomlAttribute(mapInfo, "Vendor", m_Vendor,true);
+    // m_IsBoard = true;
+
+    //3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
 }
 
 bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
@@ -49,12 +60,12 @@ bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
         return false;
 
     // 获取主板信息
-    m_Name = QObject::tr("Base Board Information");
-    setAttribute(mapInfo, "Manufacturer", m_Vendor);
-    setAttribute(mapInfo, "Version", m_Version);
-    setAttribute(mapInfo, "Product Name", m_ProductName);
-    setAttribute(mapInfo, "Board name", m_ProductName, false);
-    setAttribute(mapInfo, "chipset", m_ChipsetFamily);
+   m_Name = QObject::tr("Base Board Information");
+   setAttribute(mapInfo, "Manufacturer", m_Vendor);
+   setAttribute(mapInfo, "Version", m_Version);
+   setAttribute(mapInfo, "Product Name", m_ProductName);
+   setAttribute(mapInfo, "Board name", m_ProductName, false);
+   setAttribute(mapInfo, "chipset", m_ChipsetFamily);
 
     // 该信息为主板信息
     m_IsBoard = true;
@@ -150,6 +161,7 @@ const QString DeviceBios::getOverviewInfo()
 
 void DeviceBios::initFilterKey()
 {
+
     // 添加可显示属性
     addFilterKey(QObject::tr("Release Date"));
     addFilterKey(QObject::tr("Address"));
@@ -212,6 +224,7 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("Language Description Format"));
     addFilterKey(QObject::tr("Installable Languages"));
     addFilterKey(QObject::tr("Currently Installed Language"));
+    
 }
 
 void DeviceBios::loadBaseDeviceInfo()

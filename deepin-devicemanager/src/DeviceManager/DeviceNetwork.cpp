@@ -12,9 +12,7 @@
 
 DeviceNetwork::DeviceNetwork()
     : DeviceBaseInfo()
-    , m_Name("")
-    , m_Vendor("")
-    , m_Model(""), m_Version("")
+    , m_Model("")//, m_Version("")
     , m_BusInfo("")
     , m_LogicalName("")
     , m_MACAddress("")
@@ -25,7 +23,6 @@ DeviceNetwork::DeviceNetwork()
     , m_Capabilities("")
     , m_Autonegotiation("")
     , m_Broadcast("")
-    , m_Driver("")
     , m_DriverModules("")
     , m_DriverVersion("")
     , m_Duplex("")
@@ -108,6 +105,37 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 }
 
+TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
+{
+    TomlFixMethod ret = TOML_None;
+        // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Type", m_Model);    
+    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);    
+    ret = setTomlAttribute(mapInfo, "Driver Version", m_DriverVersion);
+    // 添加其他信息,成员变量
+    ret = setTomlAttribute(mapInfo, "Maximum Rate", m_Capacity);        //  容量改为最大速率
+    ret = setTomlAttribute(mapInfo, "Negotiation Rate", m_Speed);       //  速度改为协商速率
+    ret = setTomlAttribute(mapInfo, "Port", m_Port);
+    ret = setTomlAttribute(mapInfo, "Multicast", m_Multicast);
+    ret = setTomlAttribute(mapInfo, "Link", m_Link);
+    ret = setTomlAttribute(mapInfo, "Latency", m_Latency);
+    ret = setTomlAttribute(mapInfo, "IP", m_Ip);
+    ret = setTomlAttribute(mapInfo, "Firmware", m_Firmware);
+    ret = setTomlAttribute(mapInfo, "Duplex", m_Duplex);
+    ret = setTomlAttribute(mapInfo, "Broadcast", m_Broadcast);
+    ret = setTomlAttribute(mapInfo, "Auto Negotiation", m_Autonegotiation);
+//    ret = setTomlAttribute(mapInfo, "Clock", m_Clock);
+//    ret = setTomlAttribute(mapInfo, "Width", m_Width);
+    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);        //  内存改为内存地址
+    ret = setTomlAttribute(mapInfo, "IRQ", m_Irq);
+    ret = setTomlAttribute(mapInfo, "MAC Address", m_MACAddress);
+    ret = setTomlAttribute(mapInfo, "Logical Name", m_LogicalName);
+//3. 获取设备的其它信息
+    getOtherMapInfo(mapInfo);
+    return ret;
+}
+
 bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.find("path") != mapInfo.end()) {
@@ -126,6 +154,9 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Driver Modules", m_DriverModules);
+    setAttribute(mapInfo, "Module Alias", m_Modalias);
+    setAttribute(mapInfo, "VID_PID", m_VID_PID);
+    m_PhysID = m_VID_PID;
 
     if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
@@ -237,6 +268,7 @@ void DeviceNetwork::initFilterKey()
     addFilterKey(QObject::tr("ioport"));
     addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("network"));
+
 }
 
 void DeviceNetwork::loadBaseDeviceInfo()
@@ -255,6 +287,8 @@ void DeviceNetwork::loadBaseDeviceInfo()
 void DeviceNetwork::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
+    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
     addOtherDeviceInfo(tr("Maximum Rate"), m_Capacity);        // 1050需求 容量改为最大速率
     addOtherDeviceInfo(tr("Negotiation Rate"), m_Speed);       // 1050需求 速度改为协商速率
     addOtherDeviceInfo(tr("Port"), m_Port);
