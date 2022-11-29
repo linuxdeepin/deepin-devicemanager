@@ -85,7 +85,7 @@ const QString &DeviceCpu::vendor() const
 
 const QString &DeviceCpu::name() const
 {
-    return m_Name;
+    return m_Name ;
 }
 
 const QString &DeviceCpu::driver() const
@@ -219,6 +219,7 @@ TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     ret = setTomlAttribute(mapInfo, "CPU ID", m_PhysicalID);
     ret = setTomlAttribute(mapInfo, "Core ID", m_CoreID);
     ret = setTomlAttribute(mapInfo, "Threads", m_ThreadNum);
+    ret = setTomlAttribute(mapInfo, "Frequency", m_Frequency);
     ret = setTomlAttribute(mapInfo, "Current Speed", m_CurFrequency);
     ret = setTomlAttribute(mapInfo, "Max Speed", m_MaxFrequency);
     ret = setTomlAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);

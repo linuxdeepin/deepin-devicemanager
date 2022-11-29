@@ -232,8 +232,8 @@ void ThreadPool::initCmd()
     cmdLsMod.canNotReplace = true;
     m_ListCmd.append(cmdLsMod);
 
-    Cmd cmdHwinfo;
-    cmdHwinfo.cmd = QString("%1 %2%3").arg("hwinfo --sound --network --keyboard --cdrom --disk --display --mouse --usb --fingerprint > ").arg(PATH).arg("hwinfo.txt");
+    Cmd cmdHwinfo;     //同步"hwinfo --network"改为 "hwinfo --netcard"获取网卡信息
+    cmdHwinfo.cmd = QString("%1 %2%3").arg("hwinfo --sound --netcard --keyboard --cdrom --disk --display --mouse --usb --fingerprint > ").arg(PATH).arg("hwinfo.txt");
     cmdHwinfo.file = "hwinfo.txt";
     cmdHwinfo.canNotReplace = false;
     m_ListCmd.append(cmdHwinfo);

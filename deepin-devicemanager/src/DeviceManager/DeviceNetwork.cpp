@@ -114,8 +114,8 @@ TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString
     ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);    
     ret = setTomlAttribute(mapInfo, "Driver Version", m_DriverVersion);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Maximum Rate", m_Capacity);        //  容量改为最大速率
-    ret = setTomlAttribute(mapInfo, "Negotiation Rate", m_Speed);       //  速度改为协商速率
+    ret = setTomlAttribute(mapInfo, "Maximum Rate", m_Capacity);        
+    ret = setTomlAttribute(mapInfo, "Negotiation Rate", m_Speed);       
     ret = setTomlAttribute(mapInfo, "Port", m_Port);
     ret = setTomlAttribute(mapInfo, "Multicast", m_Multicast);
     ret = setTomlAttribute(mapInfo, "Link", m_Link);
@@ -127,7 +127,7 @@ TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString
     ret = setTomlAttribute(mapInfo, "Auto Negotiation", m_Autonegotiation);
 //    ret = setTomlAttribute(mapInfo, "Clock", m_Clock);
 //    ret = setTomlAttribute(mapInfo, "Width", m_Width);
-    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);        //  内存改为内存地址
+    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);        
     ret = setTomlAttribute(mapInfo, "IRQ", m_Irq);
     ret = setTomlAttribute(mapInfo, "MAC Address", m_MACAddress);
     ret = setTomlAttribute(mapInfo, "Logical Name", m_LogicalName);
@@ -266,9 +266,7 @@ void DeviceNetwork::initFilterKey()
 {
     // 初始化可显示属性
     addFilterKey(QObject::tr("ioport"));
-    addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("network"));
-
 }
 
 void DeviceNetwork::loadBaseDeviceInfo()

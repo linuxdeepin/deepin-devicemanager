@@ -113,7 +113,7 @@ void DeviceCdrom::initFilterKey()
     // addFilterKey(QObject::tr("Module Alias"));
     addFilterKey(QObject::tr("Config Status"));
     addFilterKey(QObject::tr("Application"));
-    addFilterKey(QObject::tr("physical id"));
+    // addFilterKey(QObject::tr("physical id"));
 
     addFilterKey(QObject::tr("status"));
     addFilterKey(QObject::tr("logical name"));

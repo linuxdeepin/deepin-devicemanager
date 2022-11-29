@@ -32,54 +32,71 @@ void GenerateTask::run()
     switch (m_Type) {
     case DT_Computer:
         generator->generatorComputerDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Cpu:
         generator->generatorCpuDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Bios:
         generator->generatorBiosDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Memory:
         generator->generatorMemoryDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Storage:
         generator->generatorDiskDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Gpu:
         generator->generatorGpuDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Monitor:
         generator->generatorMonitorDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Network:
         generator->generatorNetworkDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Audio:
         generator->generatorAudioDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Bluetoorh:
         generator->generatorBluetoothDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Keyboard:
         generator->generatorKeyboardDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Mouse:
         generator->generatorMouseDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Print:
         generator->generatorPrinterDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Image:
         generator->generatorCameraDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Cdrom:
         generator->generatorCdromDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Others:
         generator->generatorOthersDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     case DT_Power:
         generator->generatorPowerDevice();
+        generator->generatorInfoFromToml(m_Type);
         break;
     default:
         break;
@@ -117,6 +134,7 @@ void GenerateDevicePool::generateDevice()
         if (m_FinishedGenerator == m_TypeList.size()  || curMSecond - beginMSecond > 4000) {
             DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
             generator->generatorOthersDevice();
+            generator->generatorInfoFromToml(DT_Others);
 
             // 指针使用结束释放
             delete generator;

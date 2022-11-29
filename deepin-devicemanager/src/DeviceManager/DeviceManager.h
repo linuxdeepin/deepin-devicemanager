@@ -89,24 +89,37 @@ public:
      */
     bool getDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst);
 
-//    /**
-//     * @brief getDeviceList : 获取设备列表
-//     * @param name : 该设备的类型
-//     * @return ：返回设备列表
-//     */
-//    bool convertDeviceList(const QString &name, QList<DeviceBaseInfo *> &lst);
+   /**
+    * @brief convertDeviceListAddr : 获取设备列表地址
+    * @param name : 该设备的类型地址
+    * @return ：返回设备列表地址
+    */
+   QList<DeviceBaseInfo *> *convertDeviceListAddr(DeviceType deviceType);
 
     /**
-     * @brief getDeviceList : 获取设备列表
+     * @brief convertDeviceList : 获取设备列表
      * @param name : 该设备的类型
      * @return ：返回设备列表
      */
-    QList<DeviceBaseInfo *> *convertDeviceListAddr(DeviceType deviceType);
     QList<DeviceBaseInfo *>  convertDeviceList(DeviceType deviceType);
     QString  convertDeviceTomlClassName(DeviceType deviceType);
     TomlFixMethod tomlDeviceSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo);
+    void tomlDeviceSet(DeviceType deviceType);
     void tomlDeviceDel(DeviceType deviceType, DeviceBaseInfo *const device);
     void tomlDeviceAdd(DeviceType deviceType, DeviceBaseInfo *const device);
+    /**
+     * @brief 
+     *   toml 方案内容定义：
+     * 硬件 IDS 参考内核 Module Alias 规则标准，示例 Module Alias: "pci:v00008086d0000A3C8sv00001849sd0000A3C8bc06sc01i00"
+     *  若有的设备读不到Module Alias，请以格式“设备分类名+ : + v0000 + Vendor_ID + d0000 + Product_ID + sv0000+SubVendor_ID+sd0000+SubProduct_ID” 作为硬件IDS，若  SubVendor_ID 和 SubProduct_ID 无，则填默认为0000，格式尽量跟 Module Alias 一样
+     *  若有的设备读不到 Vendor_ID+Product_ID，请以格式“设备分类名称 + : + Vendor + Name”作为硬件 IDS ，所有字母全转化为小写，并去掉不可显示字符和空格
+     
+     *
+     * @brief PhysID
+     * @param mapInfo
+     * @return QString
+     */
+    QString PhysID(const QMap<QString, QString> &mapInfo, const QString &key);
 
     DeviceBaseInfo *createDevice(DeviceType deviceType);
 
@@ -119,7 +132,10 @@ public:
     DeviceBaseInfo *findByModalias(DeviceType deviceType, const QString &modalias);
     DeviceBaseInfo *findByVIDPID(DeviceType deviceType, const QString &vid, const QString &pid);
     DeviceBaseInfo *findByVendorName(DeviceType deviceType, const QString &vendor, const QString &name);
-
+    
+    bool findByModalias(DeviceType deviceType, DeviceBaseInfo *device, const QString &modalias);
+    bool findByVIDPID(DeviceType deviceType, DeviceBaseInfo *device, const QString &vid, const QString &pid);
+    bool findByVendorName(DeviceType deviceType, DeviceBaseInfo *device, const QString &vendor, const QString &name);
 
     /**
      * @brief getBluetoothAtIndex 根据索引获取device

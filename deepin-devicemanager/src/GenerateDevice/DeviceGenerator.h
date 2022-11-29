@@ -131,8 +131,6 @@ public:
      */
     static const QString getProductName();
 
-//    void setInfoFromTomlOneByOne(DeviceType deviceType, DeviceBaseInfo *device);
-
     /**
      * @brief InfoFromToml:从toml获取信息
      */
@@ -337,13 +335,6 @@ protected:
      * @return
      */
     QString uniqueID(const QMap<QString, QString> &mapInfo);
-
-    /**
-     * @brief PhysID
-     * @param mapInfo
-     * @return
-     */
-    QString PhysID(const QMap<QString, QString> &mapInfo, const QString &key);
 
 protected:
     QStringList m_ListBusID;

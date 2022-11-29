@@ -68,7 +68,7 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
         return false;
     }
-    // m_Name = QObject::tr("battery");  //??
+    // m_Name = QObject::tr("battery");  
 
     setAttribute(mapInfo, "", m_Vendor);
     setAttribute(mapInfo, "", m_Model);

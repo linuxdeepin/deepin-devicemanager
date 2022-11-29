@@ -22,9 +22,9 @@ TomlFixMethod DeviceBios::setInfoFromTomlOneByOne(const QMap<QString, QString> &
 {
     TomlFixMethod ret = TOML_None;
 
-    ret = setTomlAttribute(mapInfo, "Version", m_Version,true);
-    ret = setTomlAttribute(mapInfo, "Product Name", m_ProductName,true);
-    ret = setTomlAttribute(mapInfo, "chipset", m_ChipsetFamily,true);
+    ret = setTomlAttribute(mapInfo, "Version", m_Version, true);
+    ret = setTomlAttribute(mapInfo, "Product Name", m_ProductName, true);
+    ret = setTomlAttribute(mapInfo, "Chipset", m_ChipsetFamily, true);
     // ret = setTomlAttribute(mapInfo, "Vendor", m_Vendor,true);
     // m_IsBoard = true;
 
@@ -40,6 +40,7 @@ bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
 
     // 获取BIOS信息
     m_Name = QObject::tr("BIOS Information");
+    m_tomlName = ("BIOS Information");
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
 
@@ -60,12 +61,13 @@ bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
         return false;
 
     // 获取主板信息
-   m_Name = QObject::tr("Base Board Information");
-   setAttribute(mapInfo, "Manufacturer", m_Vendor);
-   setAttribute(mapInfo, "Version", m_Version);
-   setAttribute(mapInfo, "Product Name", m_ProductName);
-   setAttribute(mapInfo, "Board name", m_ProductName, false);
-   setAttribute(mapInfo, "chipset", m_ChipsetFamily);
+    m_Name = QObject::tr("Base Board Information");
+    m_tomlName = ("Base Board Information");
+    setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "Version", m_Version);
+    setAttribute(mapInfo, "Product Name", m_ProductName);
+    setAttribute(mapInfo, "Board name", m_ProductName, false);
+    setAttribute(mapInfo, "chipset", m_ChipsetFamily);
 
     // 该信息为主板信息
     m_IsBoard = true;
@@ -82,6 +84,7 @@ bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
 
     // 获取系统信息
     m_Name = QObject::tr("System Information");
+    m_tomlName = ("System Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
 
@@ -97,6 +100,7 @@ bool DeviceBios::setChassisInfo(const QMap<QString, QString> &mapInfo)
 
     // 获取机箱信息
     m_Name = QObject::tr("Chassis Information");
+    m_tomlName = ("Chassis Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
 
@@ -112,6 +116,7 @@ bool DeviceBios::setMemoryInfo(const QMap<QString, QString> &mapInfo)
 
     // 获取内存插槽信息
     m_Name = QObject::tr("Physical Memory Array");
+    m_tomlName = ("Physical Memory Array");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
 
@@ -123,6 +128,11 @@ bool DeviceBios::setMemoryInfo(const QMap<QString, QString> &mapInfo)
 const QString &DeviceBios::name()const
 {
     return m_Name;
+}
+
+const QString &DeviceBios::tomlname()
+{
+    return m_tomlName;
 }
 
 const QString &DeviceBios::driver() const
@@ -224,7 +234,7 @@ void DeviceBios::initFilterKey()
     addFilterKey(QObject::tr("Language Description Format"));
     addFilterKey(QObject::tr("Installable Languages"));
     addFilterKey(QObject::tr("Currently Installed Language"));
-    
+
 }
 
 void DeviceBios::loadBaseDeviceInfo()
