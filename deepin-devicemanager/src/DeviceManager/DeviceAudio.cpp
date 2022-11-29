@@ -54,7 +54,7 @@ bool DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Module Alias", m_UniqueID);
-    setAttribute(mapInfo, "SysFS ID", m_BusInfo);  
+    setAttribute(mapInfo, "SysFS ID", m_BusInfo);
 
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -62,9 +62,6 @@ bool DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
 
     m_PhysID = m_VID_PID;
-
-//    m_BusInfo = m_VID_PID +
-    //
 
     // 此处不能用 && 因为 m_DriverModules 可能为空
     if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
@@ -124,12 +121,12 @@ TomlFixMethod DeviceAudio::setInfoFromTomlOneByOne(const QMap<QString, QString> 
     TomlFixMethod ret = TOML_None;
 //  must cover the  loadOtherDeviceInfo
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "SysFs_PATH", m_SysPath);
+    ret = setTomlAttribute(mapInfo, "SysFS_Path", m_SysPath);
     ret = setTomlAttribute(mapInfo, "KernelModeDriver", m_Driver);
     // 添加其他信息,成员变量
     ret = setTomlAttribute(mapInfo, "Chip", m_Chip);
     ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
-    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);   // 1050需求 内存改为内存地址
+    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);
     ret = setTomlAttribute(mapInfo, "IRQ", m_Irq);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
@@ -333,7 +330,7 @@ void DeviceAudio::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Module Alias"), m_Modalias);
     addBaseDeviceInfo(tr("Physical ID"), m_PhysID);
-    addBaseDeviceInfo(tr("SysFs_PATH"), m_SysPath);
+    addBaseDeviceInfo(tr("SysFS_Path"), m_SysPath);
     addBaseDeviceInfo(tr("Description"), m_Description);
     addBaseDeviceInfo(tr("Revision"), m_Version);
     addBaseDeviceInfo(tr("KernelModeDriver"), m_Driver);
@@ -376,13 +373,12 @@ void DeviceAudio::loadTableData()
     m_TableData.append(m_Vendor);
 }
 
-
-// /sys/class/sound$ tree
+// sysfs sound 数据获取说明如下：
+// /sys/class/sound$ tree         
 // ├── card0 -> ../../devices/pci0000:00/0000:00:1f.3/sound/card0
 // ├── hwC0D0 -> ../../devices/pci0000:00/0000:00:1f.3/sound/card0/hwC0D0
 // ├── card1 -> ../../devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1
 // ├── hwC1D0 -> ../../devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/hwC1D0
-
 //    deep@nuc8:/sys/class/sound/card0$ cat device/vendor
 //    0x8086
 //    deep@nuc8:/sys/class/sound/card0$ cat device/device

@@ -463,8 +463,16 @@ protected:
     bool PhysIDMapInfo(const QMap<QString, QString> &mapInfo);
 
 protected:
-    QString             m_Name;                     //<! 【名称】
-    QString             m_Vendor;                   //<! 【制造商
+    QString            m_Name;         //<! 【名称】
+    QString            m_Vendor;       //<! 【制造商
+    QString            m_PhysID;       //<! 【物理ID】
+    QString            m_VID_PID;      //<! 设备hw的唯一值 m_VID_PID = m_VID + m_PID.remove("0x")
+    QString            m_VID;          //<! 设备hw的唯一值
+    QString            m_PID;          //<! 设备hw的唯一值
+    QString            m_Modalias;     //<! 设备hw的唯一值
+    QString            m_Version;      //<! 【版本】
+    QString            m_Description;  //<! 【描述】
+    //----------以上为每个设备必有属性--------
     QString                        m_UniqueID;      //<! 设备的唯一值
     QString                        m_SerialID;      //<! 序列号id
     QString                        m_SysPath;       //<! 用启用的sys path
@@ -482,14 +490,7 @@ protected:
     bool                           m_forcedDisplay; //<! 强制显示
     int                            m_Index;         //<! 同名设备的索引
     QString                        m_PhysIDMap;         //<! 匹配 XXX和XXX的key
-    QString                        m_VID_PID;      //<! 设备hw的唯一值 m_VID_PID = m_VID + m_PID.remove("0x")
-    QString                        m_VID;           //<! 设备hw的唯一值
-    QString                        m_PID;           //<! 设备hw的唯一值
-    QString                        m_Modalias;           //<! 设备hw的唯一值
-    QString            m_PhysID;                  //<! 【物理ID】
     QString            m_Driver;                  //<! 【驱动】
-    QString            m_Version;                      //<! 【版本】
-    QString            m_Description;                  //<! 【描述】
 
 private:
     QMap<QString, QString>  m_MapOtherInfo;         //<! 其它信息

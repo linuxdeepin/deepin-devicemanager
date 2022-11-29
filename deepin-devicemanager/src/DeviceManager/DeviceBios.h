@@ -18,13 +18,13 @@ class DeviceBios : public DeviceBaseInfo
 public:
     DeviceBios();
 
-  /**
-      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
-      * @param mapInfo:由toml获取的信息map
-      * @return枚举值
-      */
-   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
-   
+    /**
+        * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+        * @param mapInfo:由toml获取的信息map
+        * @return枚举值
+        */
+    TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+
     /**
        * @brief setBiosInfo:设置bios信息
        * @param mapInfo:bios信息map
@@ -73,6 +73,13 @@ public:
        * @return QString:名称属性值
        */
     const QString &name()const override;
+
+    /**
+     * @brief name:获取名称属性值
+     * @param 无
+     * @return QString:名称属性值
+     */
+    const QString &tomlname();
 
     /**
      * @brief driver 返回驱动，重写纯虚函数(主板没有驱动)
@@ -143,9 +150,10 @@ protected:
 
 private:
 
-    QString         m_ProductName;              
+    QString         m_ProductName;
     QString         m_ChipsetFamily;          //<! 【芯片组】
     bool            m_IsBoard;
+    QString         m_tomlName; //
 };
 
 #endif // DEVICEBIOS_H

@@ -43,6 +43,8 @@ DeviceGenerator::~DeviceGenerator()
 
 }
 
+
+
 void DeviceGenerator::generatorComputerDevice()
 {
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
@@ -82,7 +84,6 @@ void DeviceGenerator::generatorComputerDevice()
         device->setOS(info);
     }
     DeviceManager::instance()->addComputerDevice(device);
-    generatorInfoFromToml(DT_Computer);
 }
 
 void mergeSortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QString, QString> > &tmpLst, int begin, int end)
@@ -186,18 +187,16 @@ void DeviceGenerator::generatorCpuDevice()
         device->setCpuInfo(*it, lshw, dmidecode, coreNum, logicalNum);
         DeviceManager::instance()->addCpuDevice(device);
     }
-    generatorInfoFromToml(DT_Cpu);
 }
 
 void DeviceGenerator::generatorBiosDevice()
 {
     // 生成BIOS
-   getBiosInfo();
-   getSystemInfo();
+    getBiosInfo();
+    getSystemInfo();
     getBaseBoardInfo();
-   getChassisInfo();
-   getBiosMemoryInfo();
-    generatorInfoFromToml(DT_Bios);
+    getChassisInfo();
+    getBiosMemoryInfo();
 }
 
 void DeviceGenerator::generatorMemoryDevice()
@@ -205,7 +204,6 @@ void DeviceGenerator::generatorMemoryDevice()
     // 生成内存
     getMemoryInfoFromLshw();
     getMemoryInfoFromDmidecode();
-    generatorInfoFromToml(DT_Memory);
 }
 
 void DeviceGenerator::generatorDiskDevice()
@@ -219,7 +217,6 @@ void DeviceGenerator::generatorDiskDevice()
     getDiskInfoFromLsblk();
     getDiskInfoFromSmartCtl();
     DeviceManager::instance()->mergeDisk();
-    generatorInfoFromToml(DT_Storage);
 }
 
 void DeviceGenerator::generatorGpuDevice()
@@ -228,14 +225,12 @@ void DeviceGenerator::generatorGpuDevice()
     getGpuInfoFromHwinfo();
     getGpuInfoFromLshw();
     getGpuSizeFromDmesg();
-     generatorInfoFromToml(DT_Gpu);
 }
 
 void DeviceGenerator::generatorMonitorDevice()
 {
     // 生成显示设备
     getMonitorInfoFromHwinfo();
-    generatorInfoFromToml(DT_Monitor);
 }
 
 void DeviceGenerator::generatorNetworkDevice()
@@ -244,9 +239,9 @@ void DeviceGenerator::generatorNetworkDevice()
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
         // Hardware Class 类型为 network interface
-       if ("network" == (*it)["Hardware Class"]) {
-           continue;
-       }
+//        if ("network" == (*it)["Hardware Class"]) {  //去掉， 并与service端同步"hwinfo --network"改为 "hwinfo --netcard"获取网卡信息
+//            continue;
+//        }
 
         // 先判断是否是有效网卡信息
         // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
@@ -290,7 +285,6 @@ void DeviceGenerator::generatorNetworkDevice()
     foreach (DeviceNetwork *device, lstDevice) {
         DeviceManager::instance()->addNetworkDevice(device);
     }
-     generatorInfoFromToml(DT_Network);
 }
 
 void DeviceGenerator::generatorAudioDevice()
@@ -300,7 +294,6 @@ void DeviceGenerator::generatorAudioDevice()
     // getAudioChipInfoFromDmesg();  //将两个设备芯片显示为一个，该功能代码逻辑错误  被 getAudioInfoFrom_sysFS 取代
     getAudioInfoFromLshw();
     getAudioInfoFrom_sysFS();
-   generatorInfoFromToml(DT_Audio);
 }
 
 void DeviceGenerator::generatorBluetoothDevice()
@@ -309,7 +302,6 @@ void DeviceGenerator::generatorBluetoothDevice()
     getBlueToothInfoFromHwinfo();
     getBluetoothInfoFromLshw();
     getBluetoothInfoFromHciconfig();
-    generatorInfoFromToml(DT_Bluetoorh);
 }
 
 void DeviceGenerator::generatorKeyboardDevice()
@@ -317,7 +309,6 @@ void DeviceGenerator::generatorKeyboardDevice()
     // 生成键盘
     getKeyboardInfoFromHwinfo();
     getKeyboardInfoFromLshw();
-    generatorInfoFromToml(DT_Keyboard);
 }
 
 void DeviceGenerator::generatorMouseDevice()
@@ -325,7 +316,6 @@ void DeviceGenerator::generatorMouseDevice()
     // 生成鼠标
     getMouseInfoFromHwinfo();
     getMouseInfoFromLshw();
-    generatorInfoFromToml(DT_Mouse);
 }
 
 void DeviceGenerator::generatorPrinterDevice()
@@ -342,7 +332,6 @@ void DeviceGenerator::generatorPrinterDevice()
         device->setHardwareClass("printer");
         DeviceManager::instance()->addPrintDevice(device);
     }
-    generatorInfoFromToml(DT_Print);
 }
 
 void DeviceGenerator::generatorCameraDevice()
@@ -350,7 +339,6 @@ void DeviceGenerator::generatorCameraDevice()
     // 生成图像设备
     getImageInfoFromHwinfo();
     getImageInfoFromLshw();
-    generatorInfoFromToml(DT_Image);
 }
 
 void DeviceGenerator::generatorCdromDevice()
@@ -358,7 +346,6 @@ void DeviceGenerator::generatorCdromDevice()
     // 生成光盘
     getCdromInfoFromHwinfo();
     getCdromInfoFromLshw();
-    generatorInfoFromToml(DT_Cdrom);
 }
 
 void DeviceGenerator::generatorOthersDevice()
@@ -366,7 +353,6 @@ void DeviceGenerator::generatorOthersDevice()
     // 生成其他设备
     getOthersInfoFromHwinfo();
     getOthersInfoFromLshw();
-  //  generatorInfoFromToml(DT_Others);
 }
 
 void DeviceGenerator::generatorPowerDevice()
@@ -395,7 +381,6 @@ void DeviceGenerator::generatorPowerDevice()
 
         DeviceManager::instance()->addPowerDevice(device);
     }
-    generatorInfoFromToml(DT_Power);
 }
 
 void DeviceGenerator::getBiosInfo()
@@ -1175,72 +1160,8 @@ QString DeviceGenerator::uniqueID(const QMap<QString, QString> &mapInfo)
     return "";
 }
 
-/*  toml 方案内容定义：
-- 硬件 IDS 参考内核 Module Alias 规则标准，示例 Module Alias: "pci:v00008086d0000A3C8sv00001849sd0000A3C8bc06sc01i00"
-- 若有的设备读不到Module Alias，请以格式“设备分类名+ : + v0000 + Vendor_ID + d0000 + Product_ID + sv0000+SubVendor_ID+sd0000+SubProduct_ID” 作为硬件IDS，若  SubVendor_ID 和 SubProduct_ID 无，则填默认为0000，格式尽量跟 Module Alias 一样
-- 若有的设备读不到 Vendor_ID+Product_ID，请以格式“设备分类名称 + : + Vendor + Name”作为硬件 IDS ，所有字母全转化为小写，并去掉不可显示字符和空格
-*/
-
-QString DeviceGenerator::PhysID(const QMap<QString, QString> &mapInfo, const QString &key)
-{
-    if (mapInfo.contains(key)) {  //toml key
-        QString value = mapInfo[key].trimmed();
-        if (!value.isEmpty()) {
-            value = value.toLower().remove("_nouse");
-            return value;
-        }
-    }
-    return "";
-}
-
-
 void DeviceGenerator::generatorInfoFromToml(DeviceType deviceType)
 {
-    if(!CmdTool::isOemTomlFileSucess)
-        return;
-    // 加载从toml中获取的信息
-    QString deviceTypeName = DeviceManager::instance()->convertDeviceTomlClassName(deviceType);
-    const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo(deviceTypeName);
-    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
-//    if(deviceType == DT_Bios)
-//        qDebug("generatorInfoFromToml DT_Bios");
-    for (; it != lstMap.end(); it++) {
-//        DeviceBaseInfo *device = nullptr;
-
-        QString modalias = PhysID(*it, "Modalias");
-//        if(! modalias.isEmpty())
-            DeviceBaseInfo *device = DeviceManager::instance()->findByModalias(deviceType, modalias);
-        if (!device) {
-            QString vid = PhysID(*it, "Vendor_ID");
-            QString pid = PhysID(*it, "Product_ID");
-            device = DeviceManager::instance()->findByVIDPID(deviceType, vid, pid);
-        }else{
-            if(deviceType == DT_Bios)
-                qInfo() << "modalias" <<   "toml:" ;
-        }
-        if (!device) {
-            QString vendor = PhysID(*it, "Vendor");
-            QString name = PhysID(*it, "Name");
-            if(deviceType == DT_Computer)
-                qDebug("Toml lst numerber must 5");
-            device = DeviceManager::instance()->findByVendorName(deviceType, vendor, name);
-        }else{
-            if(deviceType == DT_Bios)
-                qInfo() << "findByVIDPID" <<   "toml:" ;
-        }
-        if (device) {   //存在 就合并信息 setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
-            if(deviceType == DT_Computer)
-                qInfo() << "device" <<  "DT_Computer:" ;
-            if (TOML_Del == DeviceManager::instance()->tomlDeviceSet(deviceType, device, *it)) {
-                DeviceManager::instance()->tomlDeviceDel(deviceType, device); //toml 去掉该设备
-                delete (device);
-            }
-
-        } else if((deviceType != DT_Bios) && (deviceType != DT_Computer)){
-            DeviceBaseInfo *device = DeviceManager::instance()->createDevice(deviceType);
-            DeviceManager::instance()->tomlDeviceSet(deviceType, device, *it);
-            DeviceManager::instance()->tomlDeviceAdd(deviceType, device); //不存在 就加
-        }
-    }
+    DeviceManager::instance()->tomlDeviceSet(deviceType);
 }
 

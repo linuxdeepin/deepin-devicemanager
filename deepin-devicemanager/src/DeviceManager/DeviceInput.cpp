@@ -428,7 +428,7 @@ void DeviceInput::initFilterKey()
     addFilterKey(QObject::tr("Device File"));
     addFilterKey(QObject::tr("Hardware Class"));
 
-    addFilterKey(QObject::tr("physical id"));
+    // addFilterKey(QObject::tr("physical id"));
 
 }
 

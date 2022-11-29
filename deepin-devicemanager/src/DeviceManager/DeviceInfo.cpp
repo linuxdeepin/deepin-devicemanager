@@ -446,11 +446,8 @@ TomlFixMethod DeviceBaseInfo::setInfoFromTomlBase(const QMap<QString, QString> &
         return TOML_Del;
     }
 
-    // (setTomlAttribute(mapInfo, "SysFs_PATH", m_SysPath) == TOML_Cover) ? (ret = TOML_Cover) : ret;
-    // (setTomlAttribute(mapInfo, "KernelModeDriver", m_Driver) == TOML_Cover) ? (ret = TOML_Cover) : ret;
-
     ret2 = setTomlAttribute(mapInfo, "Revision", m_Version);
-    ret2 = setTomlAttribute(mapInfo,"Description", m_Description);
+    ret2 = setTomlAttribute(mapInfo, "Description", m_Description);
     m_VID = m_VID.toLower();
     m_PID = m_PID.toLower();
     m_VID_PID = m_VID + m_PID.remove("0x");
@@ -643,8 +640,8 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
         QString k = DApplication::translate("QObject", it.key().trimmed().toStdString().data());
 
         // 可显示设备属性中存在该属性
-        if (m_FilterKey.find(k) != m_FilterKey.end()){
-            if(it.value().contains("nouse"))
+        if (m_FilterKey.find(k) != m_FilterKey.end()) {
+            if (it.value().toLower().contains("nouse"))
                 m_MapOtherInfo.remove(k);
             else
                 m_MapOtherInfo.insert(k, it.value().trimmed());
@@ -707,10 +704,10 @@ TomlFixMethod DeviceBaseInfo::setTomlAttribute(const QMap<QString, QString> &map
 
     // overwrite 为true直接覆盖
     if (overwrite) {
-        setAttribute(mapInfo,key,variable,true);
+        setAttribute(mapInfo, key, variable, true);
         return TOML_Cover;
     } else {
-        setAttribute(mapInfo,key,variable,false);
+        setAttribute(mapInfo, key, variable, false);
         return TOML_Cover;
     }
 }

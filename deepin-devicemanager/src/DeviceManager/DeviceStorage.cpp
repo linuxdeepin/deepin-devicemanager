@@ -391,7 +391,7 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
             QStringList keyList;
             keyList.append(QObject::tr("bus info"));
             keyList.append(QObject::tr("Device File"));
-            keyList.append(QObject::tr("physical id"));
+            // keyList.append(QObject::tr("physical id"));
             keyList.append(QObject::tr("Device Number"));
             keyList.append(QObject::tr("logical name"));
             for (QString keyStr : keyList) {
@@ -491,7 +491,7 @@ void DeviceStorage::initFilterKey()
     addFilterKey(QObject::tr("bus info"));
     addFilterKey(QObject::tr("logical name"));
     addFilterKey(QObject::tr("logicalsectorsize"));
-    addFilterKey(QObject::tr("physical id"));
+    // addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("sectorsize"));
     addFilterKey(QObject::tr("guid"));
     addFilterKey(QObject::tr("Config Status"));

@@ -129,7 +129,7 @@ private:
     QString            m_BusInfo;                 //<! 【总线信息】
     QString            m_IOPort;                  //<! 【ioport】
     QString            m_MemAddress;              //<! 【内存地址】
-    QString            m_PhysID;                  //<! 【物理ID】
+    // QString            m_PhysID;                  //<! 【物理ID】
 };
 
 #endif // DEVICEGPU_H

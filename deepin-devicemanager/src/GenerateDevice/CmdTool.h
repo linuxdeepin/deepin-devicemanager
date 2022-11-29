@@ -53,20 +53,15 @@ public:
     QMap<QString, QList<QMap<QString, QString> > > &cmdInfo();
 
 
-        /**
-     * @brief parseTomlFileName: 解析对应的适配文件名信息
-     */
-    QString parseTomlFileName();
-
     /**
-     * @brief loadOemTomlInfo: 加载厂商适配信息
+     * @brief loadOemTomlFileName: 加载厂商适配信息
      */
-    void loadOemTomlInfo(const QMap<QString, QString> &mapInfo);
+    QString loadOemTomlFileName(const QMap<QString, QString> &mapInfo);
 
         /**
-     * @brief loadOemTomlInfo: 加载厂商适配信息
+     * @brief parseOemTomlInfo: 解析并加载厂商适配信息
      */
-    static bool isOemTomlFileSucess();
+    bool parseOemTomlInfo(const QString filename);
 
 private:
 

@@ -288,6 +288,7 @@ bool DeviceManager::getDeviceList(const QString &name, QList<DeviceBaseInfo *> &
 
 QString DeviceManager::convertDeviceTomlClassName(DeviceType deviceType)
 {
+    //与oeminfoxxx.toml文件中的[hardclassname.submember] 保持一致，即 “toml+hardclassname”
     if (deviceType == DT_Null)      {return "";}
     if (deviceType == DT_Computer)  {return "tomlComputer";}
     if (deviceType == DT_Cpu)       {return "tomlCPU";}
@@ -389,99 +390,134 @@ TomlFixMethod DeviceManager::tomlDeviceSet(DeviceType deviceType,  DeviceBaseInf
     switch (deviceType) {
     case DT_Null:
         break;
-    case DT_Computer:{
+    // setInfoFromTomlBase 判断基本信息，若结果为删除该设备，即返回删除，不再调用setInfoFromTomlOneByOne设置其它信息
+    case DT_Computer: {
         DeviceComputer *tomldevice = dynamic_cast<DeviceComputer *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
     } break;
     case DT_Cpu: {
         DeviceCpu *tomldevice = dynamic_cast<DeviceCpu *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Bios: {
         DeviceBios *tomldevice = dynamic_cast<DeviceBios *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Memory: {
         DeviceMemory *tomldevice = dynamic_cast<DeviceMemory *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Storage: {
         DeviceStorage *tomldevice = dynamic_cast<DeviceStorage *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Gpu: {
         DeviceGpu *tomldevice = dynamic_cast<DeviceGpu *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Monitor: {
         DeviceMonitor *tomldevice = dynamic_cast<DeviceMonitor *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Network: {
         DeviceNetwork *tomldevice = dynamic_cast<DeviceNetwork *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Audio: {
         DeviceAudio *tomldevice = dynamic_cast<DeviceAudio *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Bluetoorh: {
         DeviceBluetooth *tomldevice = dynamic_cast<DeviceBluetooth *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Keyboard: {
         DeviceInput *tomldevice = dynamic_cast<DeviceInput *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Mouse: {
         DeviceInput *tomldevice = dynamic_cast<DeviceInput *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Print: {
         DevicePrint *tomldevice = dynamic_cast<DevicePrint *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Image: {
         DeviceImage *tomldevice = dynamic_cast<DeviceImage *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Cdrom: {
         DeviceCdrom *tomldevice = dynamic_cast<DeviceCdrom *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Others: {
         DeviceOthers *tomldevice = dynamic_cast<DeviceOthers *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_OtherPCI: {
         DeviceOtherPCI *tomldevice = dynamic_cast<DeviceOtherPCI *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
     case DT_Power: {
         DevicePower *tomldevice = dynamic_cast<DevicePower *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
-        // tomldevice->deleteLater();
     } break;
-    default: {
-    } break;
+    default: {    } break;
     }
     return ret;
+}
+
+void DeviceManager::tomlDeviceSet(DeviceType deviceType)
+{
+
+    QString deviceTypeName = convertDeviceTomlClassName(deviceType);
+    const QList<QMap<QString, QString>> &tomlMapLst = cmdInfo(deviceTypeName);
+    for (int j = 0; j < tomlMapLst.size(); j++) { // 加载从toml中获取的信息
+        bool fixSameOne = false;                  //初始值设为该项信息没有用过
+        bool isSameOne = false;
+        QList<DeviceBaseInfo *> lst = convertDeviceList(deviceType);
+        for (int i = 0; i < lst.size(); i++) {   // toml中获取的信息 与 原设备信息遍历，相比较作处理
+            DeviceBaseInfo *device = lst[i];
+            QString modalias = PhysID(tomlMapLst[j], "Modalias");
+            QString vid = PhysID(tomlMapLst[j], "Vendor_ID");
+            QString pid = PhysID(tomlMapLst[j], "Product_ID");
+            QString vendor = PhysID(tomlMapLst[j], "Vendor");
+            QString name = PhysID(tomlMapLst[j], "Name");
+            //取出toml中获取的关键字信息设备唯一标识硬件IDS "Modalias"， "Vendor_ID"， "Vendor"，"Name"；作比较处理
+            isSameOne = findByModalias(deviceType, device, modalias);
+            if (!isSameOne) {
+                isSameOne = findByVIDPID(deviceType, device, vid, pid);
+            }
+            if (!isSameOne) {
+                isSameOne = findByVendorName(deviceType, device, vendor, name);
+            }
+            if (isSameOne) {   //存在 就合并信息 setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+                fixSameOne = true;   //标记为该项信息有用过 ，
+                if (TOML_Del == tomlDeviceSet(deviceType, device, tomlMapLst[j])) {
+                    tomlDeviceDel(deviceType, device); //toml 去掉该设备
+                    delete (device);
+                }
+
+            } else if ((deviceType != DT_Bios) && (deviceType != DT_Computer) && !fixSameOne) {
+                fixSameOne = true;  //标记为该项信息有用过 ，则不再增加了
+                DeviceBaseInfo *device = createDevice(deviceType);
+                tomlDeviceSet(deviceType, device, tomlMapLst[j]);
+                tomlDeviceAdd(deviceType, device); //不存在 就加
+            }
+        } //end of for (int j = 0;...
+    }
+}
+QString DeviceManager::PhysID(const QMap<QString, QString> &mapInfo, const QString &key)
+{
+    if (mapInfo.contains(key)) {  //toml key
+        QString value = mapInfo[key].trimmed();
+        if (!value.isEmpty()) {
+            value = value.toLower().remove("_nouse"); //"_nouse" 为toml方案中约定的去除该信息项的关键字
+            return value;
+        }
+    }
+    return "";
 }
 
 void DeviceManager::tomlDeviceDel(DeviceType deviceType, DeviceBaseInfo *const device)
@@ -490,7 +526,7 @@ void DeviceManager::tomlDeviceDel(DeviceType deviceType, DeviceBaseInfo *const d
         return;
     }
     QList<DeviceBaseInfo *> *lst = convertDeviceListAddr(deviceType);
-    lst->append(device);
+    lst->removeOne(device);
 }
 
 void DeviceManager::tomlDeviceAdd(DeviceType deviceType, DeviceBaseInfo *const device)
@@ -502,48 +538,41 @@ void DeviceManager::tomlDeviceAdd(DeviceType deviceType, DeviceBaseInfo *const d
     lst->append(device);
 }
 
-DeviceBaseInfo *DeviceManager::findByModalias(DeviceType deviceType, const QString &modalias)
+bool DeviceManager::findByModalias(DeviceType deviceType, DeviceBaseInfo *device, const QString &modalias)
 {
     if (modalias.isEmpty())
-        return nullptr;
-
-    QList<DeviceBaseInfo *> lst = convertDeviceList(deviceType);
-    for (QList<DeviceBaseInfo *>::iterator it = lst.begin(); it != lst.end(); ++it) {
-        DeviceBaseInfo *device = dynamic_cast<DeviceBaseInfo *>(*it);
-
+        return false;
+    {
         if (!device)
-            return nullptr;
+            return false;
 
         QString tmp_Modalias =  device->getModalias();
-        if ((0 == modalias.compare(tmp_Modalias, Qt::CaseInsensitive))) {
-            return *it;
+        if ((0 == modalias.compare(tmp_Modalias, Qt::CaseInsensitive))) { //modalias相同即认为是同一设备
+            return true;
         }
 
         QString tmp_VIDAndPID =  device->getVIDAndPID().toLower();
+        //如果是非系统产生的标准modalias， 而是自己构建的，则判断 VIDAndPID与之相同即认为是同一设备
         if (!modalias.startsWith("pci") && !modalias.startsWith("usb") && !tmp_VIDAndPID.isEmpty()) {
             QString tmp_vidpid = tmp_VIDAndPID.remove("0x");
             QString tmp_vid  = tmp_vidpid.mid(0, 4);
             QString tmp_pid  = tmp_vidpid.mid(4, 4);
 
             if ((modalias.contains(tmp_vid, Qt::CaseInsensitive)) && (modalias.contains(tmp_pid, Qt::CaseInsensitive))) {
-                return *it;
+                return true;
             }
         }
     }
-    return nullptr;
+    return false;
 }
 
-DeviceBaseInfo *DeviceManager::findByVIDPID(DeviceType deviceType, const QString &vid, const QString &pid)
+bool DeviceManager::findByVIDPID(DeviceType deviceType, DeviceBaseInfo *device, const QString &vid, const QString &pid)
 {
-    if(vid.isEmpty() ||  pid.isEmpty())
-        return nullptr;
-
-    QList<DeviceBaseInfo *> lst = convertDeviceList(deviceType);
-    for (QList<DeviceBaseInfo *>::iterator it = lst.begin(); it != lst.end(); ++it) {
-        DeviceBaseInfo *device = dynamic_cast<DeviceBaseInfo *>(*it);
-
+    if (vid.isEmpty() ||  pid.isEmpty())
+        return false;
+    {
         if (!device)
-            return nullptr;
+            return false;
 
         QString tmp_refvid = vid.toLower();
         if (tmp_refvid.contains("0x"))
@@ -560,57 +589,50 @@ DeviceBaseInfo *DeviceManager::findByVIDPID(DeviceType deviceType, const QString
             tmp_pid.remove("0x");
 
         if (tmp_vid.isEmpty() || tmp_pid.isEmpty()) {
-            QString tmp_VIDAndPID =  device->getVIDAndPID().toLower();  //getVIDAndPID
+            QString tmp_VIDAndPID =  device->getVIDAndPID().toLower();  ////VID和PID相同即认为是同一设备
             if (tmp_VIDAndPID.contains(tmp_refvid) && tmp_VIDAndPID.contains(tmp_refpid))
-                return *it;
+                return true;
         } else {
             if ((0 == tmp_refvid.compare(tmp_vid, Qt::CaseInsensitive)) && (0 == tmp_refpid.compare(tmp_pid, Qt::CaseInsensitive))) {
-                return *it;
+                return true;
             }
         }
     }
+    return false;
 }
 
-DeviceBaseInfo *DeviceManager::findByVendorName(DeviceType deviceType, const QString &vendor, const QString &name)
+bool DeviceManager::findByVendorName(DeviceType deviceType, DeviceBaseInfo *device, const QString &vendor, const QString &name)
 {
-    if(deviceType == DT_Computer)
-        qDebug("Toml11 name11 find 1");
 
-    if( name.isEmpty())
-        return nullptr;
-    if(vendor.isEmpty())
-        if((deviceType != DT_Bios) && (deviceType != DT_Computer))
-            return nullptr;
-
-    if(deviceType == DT_Computer)
-        qDebug("Toml name find 5");
-
-    QList<DeviceBaseInfo *> lst = convertDeviceList(deviceType);
-    for (QList<DeviceBaseInfo *>::iterator it = lst.begin(); it != lst.end(); ++it) {
-        DeviceBaseInfo *device = dynamic_cast<DeviceBaseInfo *>(*it);
-
-        if (!device)
-            return nullptr;
-
-        QString tmp_vendor  =  device->vendor();
-        QString tmp_name    =  device->name();
+    if (name.isEmpty())
+        return false;
+    if (vendor.isEmpty())
+        if ((deviceType != DT_Bios) && (deviceType != DT_Computer))
+            return false;
+    if (!device)
+        return false;
+    QString tmp_vendor;
+    QString tmp_name;
+    if (deviceType == DT_Bios) {     //因BIOS有5个被定名的信息，故作特殊处理
+        DeviceBios *devicebios = dynamic_cast<DeviceBios *>(device);
+        tmp_name    =  devicebios->tomlname();
+        if (0 == name.compare(tmp_name, Qt::CaseInsensitive))
+            return true;
+    } else {
+        //vendor 和name相同即认为是同一设备
+        tmp_vendor  =  device->vendor();
+        tmp_name    =  device->name();
         if ((0 == vendor.compare(tmp_vendor, Qt::CaseInsensitive)) && (0 == name.compare(tmp_name, Qt::CaseInsensitive)))
-            return *it;
+            return true;
 
-        if(deviceType == DT_Bios){
 
-            if (0 == name.compare(tmp_name, Qt::CaseInsensitive))
-                return *it;
-        }
-        if(deviceType == DT_Computer){
+        if (deviceType == DT_Computer) {  // //因Computer信息只有一条list，且不允增加list，只能替换信息，故作特殊处理
             qInfo() << " computer Name" <<  tmp_name << "toml:" << name;
-            return *it;
+            return true;
         }
-
     }
-
+    return false;
 }
-
 
 DeviceBaseInfo *DeviceManager::getBluetoothAtIndex(int index)
 {

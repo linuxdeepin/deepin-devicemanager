@@ -215,7 +215,7 @@ void DeviceBluetooth::initFilterKey()
 
     addFilterKey(QObject::tr("product"));
     addFilterKey(QObject::tr("description"));
-    addFilterKey(QObject::tr("physical id"));
+    // addFilterKey(QObject::tr("physical id"));
     addFilterKey(QObject::tr("Class"));
     addFilterKey(QObject::tr("Powered"));
     addFilterKey(QObject::tr("Discoverable"));
