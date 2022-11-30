@@ -356,7 +356,7 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
     }
     QProcess process;
     process.start("bluetoothctl show " + mapInfo["BD Address"]);
-    process.waitForFinished(10000);
+    process.waitForFinished(2000);
     QString deviceInfo = process.readAllStandardOutput();
 
     // 读取文件信息
