@@ -70,7 +70,8 @@ void SingleDeviceManager::startDeviceManager(QString pageDescription)
         QMetaObject::invokeMethod(m_qspMainWnd.get(), "slotSetPage", Qt::QueuedConnection, Q_ARG(QString, pageDescription));
     } else {
         if (m_qspMainWnd.get()) {                   //先判断当前是否已经存在一个进程。
-            m_qspMainWnd.get()->activateWindow();   //特效模式下激活窗口            m_qspMainWnd.get()->showNormal();       //无特效激活窗口
+            m_qspMainWnd.get()->setWindowState((m_qspMainWnd.get()->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+//            m_qspMainWnd.get()->activateWindow();   //特效模式下激活窗口            m_qspMainWnd.get()->showNormal();       //无特效激活窗口
         }
     }
 }
