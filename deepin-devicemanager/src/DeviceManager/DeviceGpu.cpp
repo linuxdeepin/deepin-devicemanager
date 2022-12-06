@@ -98,7 +98,7 @@ TomlFixMethod DeviceGpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
 {
     TomlFixMethod ret = TOML_None;
     setTomlAttribute(mapInfo, "Model", m_Model);
-    setTomlAttribute(mapInfo, "Graphics Memory", m_GraphicsMemory);   
+    setTomlAttribute(mapInfo, "Graphics Memory", m_GraphicsMemory);
     setTomlAttribute(mapInfo, "Memory Address", m_MemAddress);
     setTomlAttribute(mapInfo, "IO Port", m_IOPort);
     setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
@@ -112,7 +112,7 @@ TomlFixMethod DeviceGpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     setTomlAttribute(mapInfo, "HDMI", m_HDMI);
     setTomlAttribute(mapInfo, "VGA", m_VGA);
     setTomlAttribute(mapInfo, "DVI", m_DVI);
-    setTomlAttribute(mapInfo, "DigitalOutput", m_Digital);  
+    setTomlAttribute(mapInfo, "DigitalOutput", m_Digital);
     setTomlAttribute(mapInfo, "Display Output", m_DisplayOutput);
     setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
     setTomlAttribute(mapInfo, "IRQ", m_IRQ);
@@ -149,6 +149,35 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     QRegExp reUniqueId = QRegExp("[a-zA-Z0-9_+-]{4}\\.(.*)");
     if (reUniqueId.exactMatch(mapInfo["Unique ID"])) {
         m_UniqueID = reUniqueId.cap(1);
+    }
+    // read gpu-info file
+    if (!m_SysPath.isEmpty()) {
+        QString pathStr = "/sys" + m_SysPath + "/gpu-info";
+        QFile file(pathStr);
+        if (file.open(QIODevice::ReadOnly)) {
+            QString allStr(file.readAll());
+            QStringList items = allStr.split("\n\n");
+            foreach (const QString &item, items) {
+                if (item.isEmpty())
+                    continue;
+                QStringList items = allStr.split(":", QString::SkipEmptyParts);
+                if (items.size() != 2)
+                    continue;
+                if (items.first().trimmed() == "VRAM total size") {
+                    bool ok;
+                    quint64 vramSize = items.last().trimmed().toULong(&ok, 16);
+                    if (ok && vramSize >= 1048576) {
+                        vramSize /= 1048576;
+                        auto curSize = vramSize / 1024.0;
+                        if (curSize > 1) {
+                            m_GraphicsMemory = QString::number(curSize) + "GB";
+                        } else {
+                            m_GraphicsMemory = QString::number(vramSize) + "MB";
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // // 获取 匹配到lshw的Key
