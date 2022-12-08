@@ -10,7 +10,7 @@
 
 DeviceStorage::DeviceStorage()
     : DeviceBaseInfo()
-   , m_Model("")
+    , m_Model("")
 //    , m_Vendor("")
     , m_MediaType("")
     , m_Size("")
@@ -38,7 +38,7 @@ TomlFixMethod DeviceStorage::setInfoFromTomlOneByOne(const QMap<QString, QString
     ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
     ret = setTomlAttribute(mapInfo, "Interface", m_Interface);
     ret = setTomlAttribute(mapInfo, "Rotation Rate", m_RotationRate);
-  //3. 获取设备的其它信息
+    //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
 }
@@ -430,20 +430,13 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
         return size1 + size2;
 
     // 将字符串转为数字大小进行比较
-    QRegExp reg("[0-9]*");
-    int index = reg.indexIn(size1);
     int num1 = 0;
     int num2 = 0;
-
-    // index>0时，对于"32GB"（数字开头的字符串,index=0）无法获取正确的数据32
-    // 所以要改为index >= 0
-    if (index >= 0)
-        num1 = reg.cap(0).toInt();
-
-    index = reg.indexIn(size2);
-
-    if (index >= 0)
-        num2 = reg.cap(0).toInt();
+    QRegExp reg(".*\\[(\\d*).*\\]$");
+    if (reg.exactMatch(size1))
+        num1 = reg.cap(1).toInt();
+    if (reg.exactMatch(size2))
+        num2 = reg.cap(1).toInt();
 
     // 返回较大值
     if (num1 > num2)
@@ -604,7 +597,7 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     }
 
     // 修正数值
-    m_Size.replace(QRegExp(".0[1-9]"), ".00");
+    m_Size.replace(QRegExp("\\.0[1-9]"), ".00");
 
     // 通过不断适配，当厂商有在固件中提供时，硬盘型号从smartctl中获取更加合理
     // 因为hwinfo获取的是主控的型号，而硬盘厂商由于还不能自己生产主控，只能采购别人的主控
