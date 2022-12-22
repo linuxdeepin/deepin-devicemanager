@@ -324,6 +324,15 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
             addMapInfo("lshw_cdrom", mapInfo);
         }
     }
+    if (!m_cmdInfo.contains("lshw_memory")) {     // 内存信息
+        foreach (const QString &item, items) {
+            if (item.startsWith("memory")) {
+                QMap<QString, QString> mapInfo;
+                getMapInfoFromLshw(item, mapInfo);
+                addMapInfo("lshw_memory", mapInfo);
+            }
+        }
+    }
 }
 
 void CmdTool::loadLsblkInfo(const QString &debugfile)
