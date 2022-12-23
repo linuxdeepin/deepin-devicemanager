@@ -144,7 +144,7 @@ install(FILES ${APP_AUTHENTICATION} DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-
 install(FILES ${APP_SERVICE} DESTINATION ${CMAKE_INSTALL_DATADIR}/dbus-1/services)
 
 # Test--------deepin-devicemanager
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")
    add_subdirectory(./tests)
 endif()
 

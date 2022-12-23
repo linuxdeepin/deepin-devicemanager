@@ -84,6 +84,6 @@ install(FILES ${SYSTEMD_SERVER} DESTINATION /lib/systemd/system)
 install(FILES ${DBUS_CONFIG} DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/dbus-1/system.d)
 
 #TEST--------------------------------------------------
-if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")
    add_subdirectory(./tests)
 endif()
