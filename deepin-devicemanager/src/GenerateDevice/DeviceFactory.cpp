@@ -41,6 +41,8 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
                 generator = new KLVGenerator();
             else if (type == "PGUV")
                 generator = new PanguVGenerator();
+            else if (type == "KLVU")
+                generator = new KLUGenerator();
             else
                 generator = new HWGenerator();
         } else
