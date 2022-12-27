@@ -68,9 +68,7 @@ void DeviceCpu::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("CPU ID"), m_PhysicalID);
     addBaseDeviceInfo(tr("Core ID"), m_CoreID);
     addBaseDeviceInfo(tr("Threads"), m_ThreadNum);
-    if (m_FrequencyIsCur)
-        addBaseDeviceInfo(tr("Current Speed"), m_CurFrequency);
-    else
+    if (!m_FrequencyIsCur)
         addBaseDeviceInfo(tr("Max Speed"), m_MaxFrequency);
     addBaseDeviceInfo(tr("BogoMIPS"), m_BogoMIPS);
     addBaseDeviceInfo(tr("Architecture"), m_Architecture);
