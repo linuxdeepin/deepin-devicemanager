@@ -144,8 +144,8 @@ void KLVGenerator::getDiskInfoFromLshw()
         if (tempMap["product"] == modelStr) {
             // 应HW的要求，将描述固定为   Universal Flash Storage
             tempMap["description"] = "Universal Flash Storage";
-            // 应HW的要求，添加interface   UFS 3.0
-            tempMap["interface"] = "UFS 3.0";
+            // 应HW的要求，添加interface   UFS 3.1
+            tempMap["interface"] = "UFS 3.1";
         }
 
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
