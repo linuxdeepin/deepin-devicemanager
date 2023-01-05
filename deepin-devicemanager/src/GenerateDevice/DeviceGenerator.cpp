@@ -795,6 +795,23 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
             device->setInfoFromHwinfo(*it);
             DeviceManager::instance()->addBluetoothDevice(device);
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
+        } else if (!it->contains("Driver") && it->contains("Driver Status") && (*it)["Driver Status"].contains("is")) {
+            QStringList driverStatus = (*it)["Driver Status"].split("is");
+            if (!driverStatus.isEmpty() && driverStatus.first().contains("btusb")) {
+                // 判断重复设备数据
+                QString unique_id = uniqueID(*it);
+                DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(DeviceManager::instance()->getBluetoothDevice(unique_id));
+                if (device) {
+                    device->setEnableValue(false);
+                    device->setInfoFromHwinfo(*it);
+                    continue;
+                }
+
+                device = new DeviceBluetooth();
+                device->setInfoFromHwinfo(*it);
+                DeviceManager::instance()->addBluetoothDevice(device);
+                addBusIDFromHwinfo((*it)["SysFS BusID"]);
+            }
         }
     }
 }
