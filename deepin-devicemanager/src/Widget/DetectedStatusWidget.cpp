@@ -33,9 +33,9 @@
 #define SPACE_9            9
 #define SPACE_5            5
 
-const QString SERVICE_NAME = "com.deepin.dde.shutdownFront";
-const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/shutdownFront";
-const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.shutdownFront";
+const QString SERVICE_NAME = "org.deepin.dde.ShutdownFront1";
+const QString DEVICE_SERVICE_PATH = "/org/deepin/dde/ShutdownFront1";
+const QString DEVICE_SERVICE_INTERFACE = "org.deepin.dde.ShutdownFront1";
 
 DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
     : DFrame(parent)

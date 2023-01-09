@@ -23,9 +23,9 @@
 
 DWIDGET_USE_NAMESPACE
 
-const QString SERVICE_NAME = "com.deepin.dde.Notification";
-const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/Notification";
-const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
+const QString SERVICE_NAME = "org.deepin.dde.Notification1";
+const QString DEVICE_SERVICE_PATH = "/org/deepin/dde/Notification1";
+const QString DEVICE_SERVICE_INTERFACE = "org.deepin.dde.Notification1";
 
 void notify(int argc, char *argv[]);
 
