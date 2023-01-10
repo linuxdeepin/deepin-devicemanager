@@ -73,13 +73,13 @@ QString Common::checkBoardVendorFlag()
     if (info.isEmpty()) {
         getDeviceInfo(info, "dmidecode_spn.txt");
     }
-    if (info.contains("KLVV")) {
+    if (info.contains("KLVV", Qt::CaseInsensitive) || info.contains("L540", Qt::CaseInsensitive)) {
         boardVendorKey = "KLVV";
-    } else if (info.contains("KLVU")) {
+    } else if (info.contains("KLVU", Qt::CaseInsensitive)) {
         boardVendorKey = "KLVU";
-    } else if (info.contains("PGUV")) {
+    } else if (info.contains("PGUV", Qt::CaseInsensitive)) {
         boardVendorKey = "PGUV";
-    } else if (info.contains("PGUW")) {
+    } else if (info.contains("PGUW", Qt::CaseInsensitive)) {
         boardVendorKey = "PGUW";
     }
     process.close();
