@@ -64,7 +64,7 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 TomlFixMethod DeviceInput::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
     TomlFixMethod ret = TOML_None;
-        // 添加基本信息
+    // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Model", m_Model);
     ret = setTomlAttribute(mapInfo, "Interface", m_Interface);
     ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
@@ -97,12 +97,13 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Unique ID", m_WakeupID);
-    setAttribute(mapInfo, "Unique ID", m_SerialID);
+    setAttribute(mapInfo, "Unique ID", m_UniqueID);
     setAttribute(mapInfo, "Module Alias", m_Modalias);
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
     m_PhysID = m_VID_PID;
-
-    m_UniqueID = m_SerialID;
+    // 防止Serial ID为空
+    if (m_SerialID.isEmpty())
+        m_SerialID = m_UniqueID;
 
 
     // 获取键盘的接口类型

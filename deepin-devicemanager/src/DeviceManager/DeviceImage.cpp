@@ -71,8 +71,10 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_Enable = false;
     }
     setAttribute(mapInfo, "Serial ID", m_SerialID);
-    setAttribute(mapInfo, "Unique ID", m_SerialID);
-    m_UniqueID = m_SerialID;
+    setAttribute(mapInfo, "Unique ID", m_UniqueID);
+    // 防止Serial ID为空
+    if (m_SerialID.isEmpty())
+        m_SerialID = m_UniqueID;
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -170,7 +172,8 @@ void DeviceImage::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
     addOtherDeviceInfo(tr("Driver"), m_Driver);
     addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
+    if (m_SerialID != m_UniqueID)
+        addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();

@@ -63,8 +63,11 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Speed", m_Speed);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "Unique ID", m_SerialID);
-    m_UniqueID = m_SerialID;
+    setAttribute(mapInfo, "Unique ID", m_UniqueID);
+    // 防止Serial ID为空
+    if (m_SerialID.isEmpty())
+        m_SerialID = m_UniqueID;
+
     m_HardwareClass = "bluetooth";
 
     setAttribute(mapInfo, "Module Alias", m_Modalias);
