@@ -585,7 +585,7 @@ Version="replace value"
   Maximum Power="replace value"  
   Speed="replace value"  
   Serial Number="replace value"  
-
+[End]
 
 #1. 书写规则定义与说明：
 #1-1. #号开关的为注释，文件格式按toml中表和键值对的格式书写，一个表头和下面的键值对代表一个设备信息；若信息不作替换处理，可不写上键值对。
