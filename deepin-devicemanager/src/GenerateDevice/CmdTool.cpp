@@ -268,6 +268,11 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
             }
         }
     }
+
+    if(!classkey.isEmpty() &&  itemMap.count()){
+        addMapInfo("toml" + classkey, itemMap);
+    }
+
     return tomlPars;
 }
 
