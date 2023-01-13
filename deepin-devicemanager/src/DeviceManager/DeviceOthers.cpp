@@ -45,10 +45,10 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 TomlFixMethod DeviceOthers::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
     TomlFixMethod ret = TOML_None;
-    // 添加基本信息      
-    ret = setTomlAttribute(mapInfo, "Model", m_Model);    
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Model", m_Model);
     ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);    
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
     ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
     ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
 ////Others
@@ -68,11 +68,12 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver);
     setAttribute(mapInfo, "Speed", m_Speed);
     setAttribute(mapInfo, "Serial ID", m_SerialID);
-    setAttribute(mapInfo, "Serial ID", m_UniqueID);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     /* 禁用时提示获取序列号失败*/
-    setAttribute(mapInfo, "Unique ID", m_SerialID);
-    m_UniqueID = m_SerialID;
+    setAttribute(mapInfo, "Unique ID", m_UniqueID);
+    // 防止Serial ID为空
+    if (m_SerialID.isEmpty())
+        m_SerialID = m_UniqueID;
 
     setAttribute(mapInfo, "Module Alias", m_Modalias);
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
@@ -183,7 +184,8 @@ void DeviceOthers::loadBaseDeviceInfo()
 
 void DeviceOthers::loadOtherDeviceInfo()
 {
-    addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
+    if (m_SerialID != m_UniqueID)
+        addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
     mapInfoToList();
 }
 
