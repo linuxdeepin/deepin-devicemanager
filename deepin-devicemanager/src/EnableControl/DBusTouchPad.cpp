@@ -9,11 +9,11 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDebug>
-const QString Service = "org.deepin.dde.InputDevices1";
+const QString Service = "com.deepin.daemon.InputDevices";
 DBusTouchPad *DBusTouchPad::sInstance = nullptr;
 DBusTouchPad::DBusTouchPad()
-    :QObject(nullptr)
-, m_dbusTouchPad(new TouchPad(Service, "/org/deepin/dde/InputDevice1/TouchPad", QDBusConnection::sessionBus(), this))
+    : QObject(nullptr)
+    , m_dbusTouchPad(new TouchPad(Service, "/com/deepin/daemon/InputDevice/TouchPad", QDBusConnection::sessionBus(), this))
 {
 }
 
