@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.5) unstable; urgency=medium
+
+  * update version.
+
+ -- liuzheng <liuzheng@uniontech.com>  Mon, 16 Jan 2023 17:46:54 +0800
+
 deepin-devicemanager (6.0.4) unstable; urgency=medium
 
   * New version 6.0.4
