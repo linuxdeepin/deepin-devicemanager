@@ -286,6 +286,7 @@ void HWGenerator::getBluetoothInfoFromHciconfig()
         }
         DeviceBluetooth *device = new DeviceBluetooth();
         device->setCanEnale(false);
+        device->setForcedDisplay(true);
         device->setInfoFromHciconfig(*it);
         DeviceManager::instance()->addBluetoothDevice(device);
     }
