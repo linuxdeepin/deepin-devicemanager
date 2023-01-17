@@ -565,9 +565,6 @@ void DeviceGenerator::getDiskInfoFromSmartCtl()
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("smart");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 5)
-            continue;
-
         DeviceManager::instance()->setStorageInfoFromSmartctl((*it)["ln"], *it);
     }
 }
