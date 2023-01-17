@@ -565,6 +565,12 @@ void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
 void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
 {
+    if (mapInfo.size() < 5) {
+        if (!mapInfo.isEmpty() && m_Interface.contains("USB", Qt::CaseInsensitive)) {
+            m_MediaType = QObject::tr("SSD");
+        }
+        return;
+    }
     // 固件版本
     m_FirmwareVersion = mapInfo["Firmware Version"];
 
