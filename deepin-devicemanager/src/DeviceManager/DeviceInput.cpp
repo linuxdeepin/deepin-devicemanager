@@ -132,6 +132,9 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // ps2键盘的接口 将Device Files作为syspath解析
     if ("PS/2" == m_Interface) {
         getPS2Syspath(mapInfo["Device Files"]);
+        if (m_Model.contains("Mouse", Qt::CaseInsensitive)) {
+            m_CanEnable = false;
+        }
     }
 
     // 获取映射到 lshw设备信息的 关键字
