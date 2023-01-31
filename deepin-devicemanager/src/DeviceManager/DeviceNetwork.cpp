@@ -108,14 +108,14 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
     TomlFixMethod ret = TOML_None;
-        // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Type", m_Model);    
+    // 添加基本信息
+    ret = setTomlAttribute(mapInfo, "Type", m_Model);
     ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);    
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
     ret = setTomlAttribute(mapInfo, "Driver Version", m_DriverVersion);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Maximum Rate", m_Capacity);        
-    ret = setTomlAttribute(mapInfo, "Negotiation Rate", m_Speed);       
+    ret = setTomlAttribute(mapInfo, "Maximum Rate", m_Capacity);
+    ret = setTomlAttribute(mapInfo, "Negotiation Rate", m_Speed);
     ret = setTomlAttribute(mapInfo, "Port", m_Port);
     ret = setTomlAttribute(mapInfo, "Multicast", m_Multicast);
     ret = setTomlAttribute(mapInfo, "Link", m_Link);
@@ -127,7 +127,7 @@ TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString
     ret = setTomlAttribute(mapInfo, "Auto Negotiation", m_Autonegotiation);
 //    ret = setTomlAttribute(mapInfo, "Clock", m_Clock);
 //    ret = setTomlAttribute(mapInfo, "Width", m_Width);
-    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);        
+    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);
     ret = setTomlAttribute(mapInfo, "IRQ", m_Irq);
     ret = setTomlAttribute(mapInfo, "MAC Address", m_MACAddress);
     ret = setTomlAttribute(mapInfo, "Logical Name", m_LogicalName);
@@ -162,6 +162,11 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_CanUninstall = false;
     }
 
+    // 获取设备路径
+    if (m_SysPath.isEmpty() && !mapInfo.contains("SysFS Device Link")
+            && mapInfo["SysFS ID"].startsWith("/devices")) {
+        m_SysPath = mapInfo["SysFS ID"];
+    }
     // 判断是否是无线网卡
     setIsWireless(mapInfo["SysFS ID"]);
 
