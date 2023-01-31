@@ -62,7 +62,6 @@ find_package(PolkitQt5-1 REQUIRED)
 find_package(Qt5Test REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
-find_package(DFrameworkdbus REQUIRED)
 
 
 #add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager/tests/)
@@ -119,7 +118,6 @@ target_link_libraries(${PROJECT_NAME_TEST}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
     ${DtkGUI_LIBRARIES}
-    ${DFrameworkdbus_LIBRARIES}
     ${GTEST_LIBRARIES}
     ${GTEST_MAIN_LIBRARIES}
     PolkitQt5-1::Agent

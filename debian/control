@@ -2,7 +2,7 @@ Source: deepin-devicemanager
 Section: devel
 Priority: optional
 Maintainer: Packages <packages@deepin.com>
-Build-Depends: debhelper (>= 11), pkg-config, cmake, qtbase5-dev, libzmq3-dev, libdtkwidget-dev, libdtkgui-dev, qtbase5-private-dev, libdframeworkdbus-dev, libcups2-dev, libdtkcore-dev (>= 5.2.2.2),libgtest-dev,libkmod-dev,libqapt-dev,libqapt3-runtime,libpolkit-qt5-1-dev,qttools5-dev,qttools5-dev-tools,deepin-desktop-base
+Build-Depends: debhelper (>= 11), pkg-config, cmake, qtbase5-dev, libzmq3-dev, libdtkwidget-dev, libdtkgui-dev, qtbase5-private-dev, libcups2-dev, libdtkcore-dev (>= 5.2.2.2),libgtest-dev,libkmod-dev,libqapt-dev,libqapt3-runtime,libpolkit-qt5-1-dev,qttools5-dev,qttools5-dev-tools,deepin-desktop-base
 Standards-Version: 4.1.3
 
 Package: deepin-devicemanager

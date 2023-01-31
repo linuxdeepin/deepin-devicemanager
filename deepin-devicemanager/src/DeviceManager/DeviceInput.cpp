@@ -11,6 +11,7 @@
 
 // Qt库文件
 #include <QDebug>
+#include <QProcess>
 
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()

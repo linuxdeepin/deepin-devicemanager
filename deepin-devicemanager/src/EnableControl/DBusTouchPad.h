@@ -6,15 +6,9 @@
 #ifndef DBUSTOUCHPAD_H
 #define DBUSTOUCHPAD_H
 
-#include <com_deepin_daemon_inputdevice_mouse.h>
-#include <com_deepin_daemon_inputdevice_touchpad.h>
-#include <com_deepin_daemon_inputdevices.h>
 #include <QObject>
 
-using Mouse = com::deepin::daemon::inputdevice::Mouse;
-using TouchPad = com::deepin::daemon::inputdevice::TouchPad;
-using InputDevices = com::deepin::daemon::InputDevices;
-
+class QDBusInterface;
 class DBusTouchPad : public QObject
 {
     Q_OBJECT
@@ -46,7 +40,7 @@ protected:
     ~DBusTouchPad();
 private:
     static DBusTouchPad    *sInstance;
-    TouchPad     *m_dbusTouchPad;   //mouse dbus对象
+    QDBusInterface     *m_dbusTouchPad;   //mouse dbus对象
 };
 
 #endif // DBUSTOUCHPAD_H
