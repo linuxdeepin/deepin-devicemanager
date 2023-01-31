@@ -48,7 +48,6 @@ find_package(DtkWidget REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
-find_package(DFrameworkdbus REQUIRED)
 find_package(QApt REQUIRED)
 
 #PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
@@ -89,7 +88,6 @@ target_link_libraries(${PROJECT_NAME_TEST}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
     ${DtkGUI_LIBRARIES}
-    ${DFrameworkdbus_LIBRARIES}
     ${GTEST_LIBRARIES}
     ${GTEST_MAIN_LIBRARIES}
     PolkitQt5-1::Agent

@@ -109,7 +109,6 @@ find_package(QApt REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
-find_package(DFrameworkdbus REQUIRED)
 
 
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
@@ -121,7 +120,6 @@ target_include_directories(${APP_BIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OB
 target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
-    ${DFrameworkdbus_LIBRARIES}
 
     Qt5::Core
     Qt5::Gui

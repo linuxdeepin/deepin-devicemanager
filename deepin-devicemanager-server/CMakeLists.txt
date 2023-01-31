@@ -19,7 +19,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-protector-strong -D_FORTITY_SOUR
 FIND_PACKAGE(PkgConfig REQUIRED)
 FIND_PACKAGE(QApt REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
-find_package(DFrameworkdbus REQUIRED)
 
 PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 
@@ -75,7 +74,6 @@ add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H})
 
 target_link_libraries(${APP_BIN_NAME}
     ${DtkCore_LIBRARIES}
-    ${DFrameworkdbus_LIBRARIES}
     Qt5::Core Qt5::DBus Qt5::Sql Qt5::Network PolkitQt5-1::Agent kmod QApt)
 
 # Install files
