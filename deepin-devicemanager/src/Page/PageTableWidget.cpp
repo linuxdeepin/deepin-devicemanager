@@ -81,7 +81,11 @@ void PageTableWidget::setRowHeight(int row, int height)
 void PageTableWidget::setItemDelegateForRow(int row, RichTextDelegate *itemDelegate)
 {
     // 设置单元格代理
-    mp_Table->setItemDelegateForRow(row, itemDelegate);
+    if (itemDelegate == nullptr) {
+        mp_Table->setItemDelegateForRow(row, mp_Table->itemDelegate());
+    } else {
+        mp_Table->setItemDelegateForRow(row, itemDelegate);
+    }
 }
 
 bool PageTableWidget::isCurDeviceEnable()
