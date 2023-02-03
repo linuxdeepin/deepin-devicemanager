@@ -136,6 +136,8 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
         QStringList lstStr = lst[i].second.split("\n");
         if (lstStr.size() > 1) {
             mp_Content->setItemDelegateForRow(i, m_ItemDelegate);
+        } else {
+            mp_Content->setItemDelegateForRow(i, nullptr);
         }
 
         // 第一列
