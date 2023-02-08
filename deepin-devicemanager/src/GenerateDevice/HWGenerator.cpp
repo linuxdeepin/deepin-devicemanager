@@ -111,8 +111,14 @@ void HWGenerator::generatorGpuDevice()
     QStringList items = deviceInfo.split("\n");
 
     QMap<QString, QString> mapInfo;
-    if (items.size() > 0) {
-        mapInfo.insert("Name", items[0].trimmed());
+    for (QString itemStr : items) {
+        if (itemStr.contains(":"))
+            continue;
+        QString curItemStr = itemStr.trimmed();
+        if (!curItemStr.isEmpty()) {
+            mapInfo.insert("Name", curItemStr);
+            break;
+        }
     }
 
     for (int i = 1; i < items.size(); ++i) {
