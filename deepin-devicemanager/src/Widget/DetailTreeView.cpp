@@ -120,6 +120,8 @@ void DetailTreeView::setItem(int row, int column, QTableWidgetItem *item)
 
 void DetailTreeView::clear()
 {
+    mp_OldItem = nullptr;
+    mp_CurItem = nullptr;
     // 清空表格内容
     DTableWidget::clear();
 
