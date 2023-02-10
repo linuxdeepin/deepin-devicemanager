@@ -525,6 +525,19 @@ void DetailTreeView::resizeEvent(QResizeEvent *event)
     mp_CurItem = itemAt(pt);
 }
 
+void DetailTreeView::mousePressEvent(QMouseEvent *event)
+{
+    // 鼠标右键事件
+    if (event->button() == Qt::RightButton) {
+        if (mp_ToolTips) {
+            // 隐藏toopTips
+            mp_CurItem = nullptr;
+            mp_ToolTips->hide();
+        }
+    }
+    DTableWidget::mousePressEvent(event);
+}
+
 void DetailTreeView::mouseMoveEvent(QMouseEvent *event)
 {
     // 鼠标移动获取位置

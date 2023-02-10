@@ -162,6 +162,12 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
     /**
+     * @brief mousePressEvent
+     * @param event
+     */
+    void mousePressEvent(QMouseEvent *event) override;
+
+    /**
      * @brief mouseMoveEvent
      * @param event
      */
