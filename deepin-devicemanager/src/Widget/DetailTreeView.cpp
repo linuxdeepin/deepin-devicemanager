@@ -535,7 +535,7 @@ void DetailTreeView::mousePressEvent(QMouseEvent *event)
             mp_ToolTips->hide();
         }
     }
-    DTableWidget::mouseMoveEvent(event);
+    DTableWidget::mousePressEvent(event);
 }
 
 void DetailTreeView::mouseMoveEvent(QMouseEvent *event)
