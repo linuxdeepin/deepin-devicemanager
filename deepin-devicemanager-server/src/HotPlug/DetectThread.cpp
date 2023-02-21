@@ -30,6 +30,14 @@ void DetectThread::run()
     }
 }
 
+void DetectThread::setWorkingFlag(bool flag)
+{
+    mp_MonitorUsb->setWorkingFlag(flag);
+    if (flag && !isRunning()) {
+        start();
+    }
+}
+
 void DetectThread::slotUsbChanged()
 {
     // 当监听到新的usb时，内核需要加载usb信息，而上层应用需要在内核处理之后获取信息

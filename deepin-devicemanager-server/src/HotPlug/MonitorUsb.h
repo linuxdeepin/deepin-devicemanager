@@ -22,6 +22,10 @@ public:
      * @brief monitor
      */
     void monitor();
+    /**
+     * @brief setWorkingFlag 设置工作状态
+     */
+    void setWorkingFlag(bool flag);
 
 signals:
     /**
@@ -36,6 +40,7 @@ private slots:
     void slotTimeout();
 
 private:
+    bool                              m_workingFlag;        //<! 工作状态
     struct udev                       *m_Udev;              //<! udev Environment
     struct udev_monitor               *mon;                 //<! object of mon
     int                               fd;                   //<! fd

@@ -26,6 +26,11 @@ public:
      */
     void run() override;
 
+    /**
+     * @brief setWorkingFlag 设置工作状态
+     */
+    void setWorkingFlag(bool flag);
+
 signals:
     /**
      * @brief usbChanged
@@ -49,13 +54,13 @@ private:
      * @brief updateMemUsbInfo 更新
      * @param usbInfo
      */
-    void updateMemUsbInfo(const QMap<QString,QMap<QString,QString>>& usbInfo);
+    void updateMemUsbInfo(const QMap<QString, QMap<QString, QString>> &usbInfo);
 
     /**
      * @brief curHwinfoUsbInfo 获取当前的usb信息
      * @param usbInfo
      */
-    void curHwinfoUsbInfo(QMap<QString,QMap<QString,QString>>& usbInfo);
+    void curHwinfoUsbInfo(QMap<QString, QMap<QString, QString>> &usbInfo);
 
     /**
      * @brief getMapInfo 解析usb信息
@@ -63,11 +68,11 @@ private:
      * @param mapInfo
      * @return
      */
-    bool getMapInfo(const QString& item,QMap<QString,QString>& mapInfo);
+    bool getMapInfo(const QString &item, QMap<QString, QString> &mapInfo);
 
 private:
     MonitorUsb *mp_MonitorUsb; //<! udev检测任务
-    QMap<QString,QMap<QString,QString>> m_MapUsbInfo; //<! usb信息
+    QMap<QString, QMap<QString, QString>> m_MapUsbInfo; //<! usb信息
 };
 
 #endif // DETECTTHREAD_H

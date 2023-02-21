@@ -33,6 +33,12 @@ public slots:
      * @return
      */
     Q_SCRIPTABLE void refreshInfo();
+
+    /**
+     * @brief setMonitorDeviceFlag
+     * @return
+     */
+    Q_SCRIPTABLE void setMonitorDeviceFlag(bool flag);
 };
 
 #endif // DBUSINTERFACE_H

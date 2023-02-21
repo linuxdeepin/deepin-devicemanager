@@ -38,7 +38,8 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     }
 
     // 设置基础设备信息
-    setAttribute(mapInfo, "vendor", m_Vendor);
+    if (m_Vendor.isEmpty() || m_Vendor.contains("0x"))
+        setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "", m_Interface);
@@ -133,7 +134,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // ps2键盘的接口 将Device Files作为syspath解析
     if ("PS/2" == m_Interface) {
         getPS2Syspath(mapInfo["Device Files"]);
-        if(m_Model.contains("Mouse", Qt::CaseInsensitive)){
+        if (m_Model.contains("Mouse", Qt::CaseInsensitive)) {
             m_CanEnable = false;
         }
     }

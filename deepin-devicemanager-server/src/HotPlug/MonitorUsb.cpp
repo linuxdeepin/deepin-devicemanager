@@ -17,6 +17,7 @@ MonitorUsb::MonitorUsb()
     , mp_Timer(new QTimer(this))
     , m_UsbChangeTime()
     , m_UsbChanged(false)
+    , m_workingFlag(true)
 {
     m_Udev = udev_new();
     if (!m_Udev) {
@@ -43,6 +44,8 @@ void MonitorUsb::monitor()
     fd_set fds;
     struct timeval tv;
     while (true) {
+        if (!m_workingFlag)
+            break;
         FD_ZERO(&fds);
         FD_SET(fd, &fds);
         tv.tv_sec = 0;
@@ -61,7 +64,7 @@ void MonitorUsb::monitor()
             continue;
 
         // 监测蓝牙设备
-        if (0 == strcmp(udev_device_get_devtype(dev), "link")) {
+        if (0 == strcmp(udev_device_get_devtype(dev), "link") && m_workingFlag) {
             emit usbChanged();
             continue;
         }
@@ -75,12 +78,12 @@ void MonitorUsb::monitor()
 
         // 只有add和remove事件才会更新缓存信息
         strcpy(buf, udev_device_get_action(dev));
-        if (0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) {
+        if ((0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) && m_workingFlag) {
             QProcess process;
             process.start("hwinfo --usb");
             process.waitForFinished(-1);
             QString info = process.readAllStandardOutput();
-            if(0 == strcmp("add", buf)){
+            if (0 == strcmp("add", buf)) {
                 EnableUtils::disableOutDevice(info);
             }
             WakeupUtils::updateWakeupDeviceInfo(info);
@@ -92,11 +95,16 @@ void MonitorUsb::monitor()
     }
 }
 
+void MonitorUsb::setWorkingFlag(bool flag)
+{
+    m_workingFlag = flag;
+}
+
 void MonitorUsb::slotTimeout()
 {
-    if(!m_UsbChanged)
+    if (!m_UsbChanged || !m_workingFlag)
         return;
-    if(QDateTime::currentMSecsSinceEpoch() - m_UsbChangeTime < 1000)
+    if (QDateTime::currentMSecsSinceEpoch() - m_UsbChangeTime < 1000)
         return;
     m_UsbChanged = false;
     emit usbChanged();
