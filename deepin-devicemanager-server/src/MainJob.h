@@ -57,6 +57,11 @@ public:
      */
     static bool clientIsRunning();
 
+    /**
+     * @brief setWorkingFlag 设置工作状态
+     */
+    void setWorkingFlag(bool flag);
+
 private slots:
     /**
      * @brief slotUsbChanged
