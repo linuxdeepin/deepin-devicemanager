@@ -37,7 +37,8 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
     }
 
     // 设置基础设备信息
-    setAttribute(mapInfo, "vendor", m_Vendor);
+    if (m_Vendor.isEmpty() || m_Vendor.contains("0x"))
+        setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "", m_Interface);

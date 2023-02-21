@@ -73,7 +73,7 @@ void MainJob::working()
 
     // 启动线程监听USB是否有新的设备
     mp_DetectThread = new DetectThread(this);
-    mp_DetectThread->start();
+    mp_DetectThread->setWorkingFlag(EnableSqlManager::getInstance()->monitorWorkingFlag());
     connect(mp_DetectThread, &DetectThread::usbChanged, this, &MainJob::slotUsbChanged, Qt::ConnectionType::QueuedConnection);
 
     // 在驱动管理延迟加载1000ms
@@ -148,6 +148,12 @@ bool MainJob::serverIsRunning()
 bool MainJob::clientIsRunning()
 {
     return s_ClientIsUpdating;
+}
+
+void MainJob::setWorkingFlag(bool flag)
+{
+    mp_DetectThread->setWorkingFlag(flag);
+    EnableSqlManager::getInstance()->setMonitorWorkingFlag(flag);
 }
 
 void MainJob::slotUsbChanged()

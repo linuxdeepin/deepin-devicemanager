@@ -42,37 +42,37 @@ public:
      * @param hclass 类型
      * @param name 名称
      */
-    void insertDataToRemoveTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, const QString strDriver="");
+    void insertDataToRemoveTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, const QString strDriver = "");
 
     /**
      * @brief removeDateFromRemoveTable 从数据库里面删除数据
      * @param path
      */
-    void removeDateFromRemoveTable(const QString& path);
+    void removeDateFromRemoveTable(const QString &path);
 
     /**
      * @brief insertDataToAuthorizedTable 将数据插入remove表格
      * @param key
      */
-    void insertDataToAuthorizedTable(const QString& hclass, const QString& name, const QString& path, const QString& unique_id, bool exist, const QString strDriver="");
+    void insertDataToAuthorizedTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool exist, const QString strDriver = "");
 
     /**
      * @brief removeDataFromAuthorizedTable 从数据库里面删除数据
      * @param key
      */
-    void removeDataFromAuthorizedTable(const QString& key);
+    void removeDataFromAuthorizedTable(const QString &key);
 
     /**
      * @brief updateDataToAuthorizedTable
      */
-    void updateDataToAuthorizedTable(const QString& unique_id, const QString& path);
+    void updateDataToAuthorizedTable(const QString &unique_id, const QString &path);
 
     /**
      * @brief updateDataToAuthorizedTable
      * @param unique_id
      * @param enable
      */
-    void updateDataToAuthorizedTable(const QString& unique_id, bool enable);
+    void updateDataToAuthorizedTable(const QString &unique_id, bool enable);
 
     /**
      * @brief clearEnableFromAuthorizedTable 清空数据库里面 enable = 1 数据
@@ -85,34 +85,34 @@ public:
      * @param name 名称
      * @param path 路径
      */
-    void insertDataToPrinterTable(const QString& hclass, const QString& name, const QString& path);
+    void insertDataToPrinterTable(const QString &hclass, const QString &name, const QString &path);
 
     /**
      * @brief removeDataFromPrinterTable
      * @param name
      */
-    void removeDataFromPrinterTable(const QString& name);
+    void removeDataFromPrinterTable(const QString &name);
 
     /**
      * @brief uniqueIDExisted 判断数据库中可否查到数据
      * @param key
      * @return
      */
-    bool uniqueIDExisted(const QString& key);
+    bool uniqueIDExisted(const QString &key);
 
     /**
      * @brief uniqueIDExistedForEnable
      * @param key
      * @return
      */
-    bool uniqueIDExistedEX(const QString& key);
+    bool uniqueIDExistedEX(const QString &key);
 
     /**
      * @brief isUniqueIdEnabled 判断设备是否被禁用了
      * @param key
      * @return
      */
-    bool isUniqueIdEnabled(const QString& key);
+    bool isUniqueIdEnabled(const QString &key);
 
     /**
      * @brief removeInfo 返回数据库里面的所有信息
@@ -130,25 +130,25 @@ public:
      * @brief authorizedPath
      * @return
      */
-    QString authorizedPath(const QString& unique_id);
+    QString authorizedPath(const QString &unique_id);
 
     /**
      * @brief authorizedPathUniqueIDList 获取path 和 unique_id两个字段
      * @param lstPair
      */
-    void authorizedPathUniqueIDList(QList<QPair<QString, QString> >& lstPair);
+    void authorizedPathUniqueIDList(QList<QPair<QString, QString> > &lstPair);
 
     /**
      * @brief removePathList 获取所有被remove的数据
      * @param lsPath
      */
-    void removePathList(QStringList& lsPath);
+    void removePathList(QStringList &lsPath);
 
     /**
      * @brief removePathUniqueIDList 获取path 和 unique_id两个字段
      * @param lstPair
      */
-    void removePathUniqueIDList(QList<QPair<QString, QString> >& lstPair);
+    void removePathUniqueIDList(QList<QPair<QString, QString> > &lstPair);
 
     /**
      * @brief insertWakeupData
@@ -156,14 +156,14 @@ public:
      * @param path
      * @param wakeup
      */
-    void insertWakeupData(const QString& unique_id, const QString& path, bool wakeup);
+    void insertWakeupData(const QString &unique_id, const QString &path, bool wakeup);
 
     /**
      * @brief isWakeupUniqueIdExisted
      * @param unique_id
      * @return
      */
-    bool isWakeupUniqueIdExisted(const QString& unique_id);
+    bool isWakeupUniqueIdExisted(const QString &unique_id);
 
     /**
      * @brief updateWakeData
@@ -171,33 +171,45 @@ public:
      * @param path
      * @return
      */
-    void updateWakeData(const QString& unique_id, const QString& path, bool wakeup);
+    void updateWakeData(const QString &unique_id, const QString &path, bool wakeup);
 
     /**
      * @brief wakeupPath
      * @param unique_id
      * @return
      */
-    QString wakeupPath(const QString& unique_id);
+    QString wakeupPath(const QString &unique_id);
 
     /**
      * @brief isWakeup
      * @param unique_id
      * @return
      */
-    bool isWakeup(const QString& unique_id);
+    bool isWakeup(const QString &unique_id);
 
     /**
      * @brief insertNetworkWakeup
      */
-    void insertNetworkWakeup(const QString& logical_name, bool wake);
+    void insertNetworkWakeup(const QString &logical_name, bool wake);
 
     /**
      * @brief isNetworkWakeup 判断当前是否可以唤醒
      * @param logical_name 逻辑名称
      * @return
      */
-    bool isNetworkWakeup(const QString& logical_name);
+    bool isNetworkWakeup(const QString &logical_name);
+
+    /**
+     * @brief monitorWorkingFlag 判断设备是否监控
+     * @return 设备是否监控
+     */
+    bool monitorWorkingFlag();
+
+    /**
+     * @brief setMonitorWorkingFlag 设置设备是否监控
+     * @param flag 设备是否监控
+     */
+    void setMonitorWorkingFlag(const bool &flag);
 
 protected:
     explicit EnableSqlManager(QObject *parent = nullptr);

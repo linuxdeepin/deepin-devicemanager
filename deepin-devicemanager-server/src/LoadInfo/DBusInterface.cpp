@@ -19,10 +19,10 @@ DBusInterface::DBusInterface(QObject *parent)
 QString DBusInterface::getInfo(const QString &key)
 {
     // 不能返回用常引用
-    if("is_server_running" != key){
+    if ("is_server_running" != key) {
         return DeviceInfoManager::getInstance()->getInfo(key);
     }
-    if(MainJob::serverIsRunning()){
+    if (MainJob::serverIsRunning()) {
         return "1";
     }
     return "0";
@@ -31,4 +31,12 @@ QString DBusInterface::getInfo(const QString &key)
 void DBusInterface::refreshInfo()
 {
     emit update();
+}
+
+void DBusInterface::setMonitorDeviceFlag(bool flag)
+{
+    MainJob *parentMainJob = dynamic_cast<MainJob *>(parent());
+    if (parentMainJob != nullptr) {
+        parentMainJob->setWorkingFlag(flag);
+    }
 }
