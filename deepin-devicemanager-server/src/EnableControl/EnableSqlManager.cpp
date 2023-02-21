@@ -16,6 +16,7 @@
 #define DB_TABLE_PRINTER "printer"
 #define DB_TABLE_WAKEUP "wake"
 #define DB_TABLE_NETWORK_WAKEUP "net_wake"
+#define DB_TABLE_MONITOR_DEV "monitor_dev"
 
 std::atomic<EnableSqlManager *> EnableSqlManager::s_Instance;
 std::mutex EnableSqlManager::m_mutex;
@@ -284,6 +285,31 @@ bool EnableSqlManager::isNetworkWakeup(const QString &logical_name)
     return false;
 }
 
+bool EnableSqlManager::monitorWorkingFlag()
+{
+    QString sql = QString("SELECT working_flag FROM %1 WHERE monitor_name='usb';").arg(DB_TABLE_MONITOR_DEV);
+    if (m_sqlQuery.exec(sql) && m_sqlQuery.next())
+        return m_sqlQuery.value(0).toBool();
+    return true;
+}
+
+void EnableSqlManager::setMonitorWorkingFlag(const bool &flag)
+{
+    // 先判断是否已经存在
+    QString sqlAdd;
+    QString sqlExist = QString("SELECT working_flag FROM %1 WHERE monitor_name='usb';").arg(DB_TABLE_MONITOR_DEV);
+    if (m_sqlQuery.exec(sqlExist) && m_sqlQuery.next()) {
+        sqlAdd = QString("UPDATE %1 SET working_flag='%2' WHERE monitor_name='usb';").arg(DB_TABLE_MONITOR_DEV).arg(flag);
+    } else {
+        sqlAdd = QString("INSERT INTO %1 (monitor_name, working_flag) VALUES ('usb', '%2');").arg(DB_TABLE_MONITOR_DEV).arg(flag);
+    }
+
+
+    if (!m_sqlQuery.exec(sqlAdd)) {
+        qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
+    }
+}
+
 EnableSqlManager::EnableSqlManager(QObject *parent)
     : QObject(parent)
 {
@@ -340,6 +366,13 @@ void EnableSqlManager::initDB()
     }
     if (!tableStrList.contains(DB_TABLE_NETWORK_WAKEUP)) {
         QString sql = QString("CREATE TABLE %1 (logical_name text, wakeup boolean)").arg(DB_TABLE_NETWORK_WAKEUP);
+        bool res = m_sqlQuery.exec(sql);
+        if (!res) {
+            qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
+        }
+    }
+    if (!tableStrList.contains(DB_TABLE_MONITOR_DEV)) {
+        QString sql = QString("CREATE TABLE %1 (monitor_name text, working_flag boolean)").arg(DB_TABLE_MONITOR_DEV);
         bool res = m_sqlQuery.exec(sql);
         if (!res) {
             qInfo() << Q_FUNC_INFO << m_sqlQuery.lastError();
