@@ -143,9 +143,9 @@ void HWGenerator::generatorNetworkDevice()
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
         // Hardware Class 类型为 network interface
-        if ("network" == (*it)["Hardware Class"]) {
-            continue;
-        }
+//        if ("network" == (*it)["Hardware Class"]) {
+//            continue;
+//        }
 
         // 先判断是否是有效网卡信息
         // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
