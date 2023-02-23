@@ -54,7 +54,7 @@ void LoadInfoThread::run()
             // 为了保证上面那个线程池完全结束
             long long begin = QDateTime::currentMSecsSinceEpoch();
             while (true) {
-                readDataFlag = !DeviceManager::instance()->cmdInfo("dmidecode0").isEmpty();
+                readDataFlag = !DeviceManager::instance()->cmdInfo("dmidecode4").isEmpty();
                 if (readDataFlag && m_FinishedReadFilePool)
                     break;
                 long long end = QDateTime::currentMSecsSinceEpoch();
