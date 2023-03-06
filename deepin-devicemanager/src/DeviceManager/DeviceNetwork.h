@@ -25,13 +25,13 @@ public:
      */
     void setInfoFromLshw(const QMap<QString, QString> &mapInfo);
 
-  /**
-      * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
-      * @param mapInfo:由toml获取的信息map
-      * @return枚举值
-      */
-   TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
-   
+    /**
+    * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
+    * @param mapInfo:由toml获取的信息map
+    * @return枚举值
+    */
+    TomlFixMethod setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+
     /**
      * @brief setInfoFromHwinfo:设置由hwinfo --network命令获取的设备信息
      * @param mapInfo:由hwinfo获取的信息map
@@ -112,6 +112,12 @@ public:
      * @return
      */
     bool isWireless();
+
+    /**
+     * @brief hwAddress: 获取HW地址
+     * @return HW地址
+     */
+    QString hwAddress();
 
 protected:
 
