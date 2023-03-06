@@ -150,6 +150,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         return true;
     }
 
+    setAttribute(mapInfo, "HW Address", m_MACAddress);
     setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
     setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
     setAttribute(mapInfo, "Driver", m_Driver);
@@ -265,6 +266,11 @@ QString DeviceNetwork::logicalName()
 bool DeviceNetwork::isWireless()
 {
     return m_IsWireless;
+}
+
+QString DeviceNetwork::hwAddress()
+{
+    return m_MACAddress;
 }
 
 void DeviceNetwork::initFilterKey()
