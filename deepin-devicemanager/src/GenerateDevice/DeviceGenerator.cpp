@@ -275,7 +275,7 @@ void DeviceGenerator::generatorNetworkDevice()
             continue;
         const QString &serialNumber = (*it)["serial"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
-            if (!serialNumber.isEmpty() && (*itDevice)->uniqueID() == serialNumber) {
+            if (!serialNumber.isEmpty() && ((*itDevice)->uniqueID() == serialNumber || (*itDevice)->hwAddress() == serialNumber)) {
                 (*itDevice)->setInfoFromLshw(*it);
                 break;
             }
