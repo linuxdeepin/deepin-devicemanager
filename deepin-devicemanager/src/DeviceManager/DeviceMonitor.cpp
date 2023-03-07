@@ -258,7 +258,7 @@ void DeviceMonitor::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Primary Monitor"), m_MainScreen);
     addOtherDeviceInfo(tr("Size"), m_ScreenSize);
     addOtherDeviceInfo(tr("Serial Number"), m_SerialNumber);
-    addOtherDeviceInfo(tr("Product Date"), m_ProductionWeek);
+//    addOtherDeviceInfo(tr("Product Date"), m_ProductionWeek);
 
     mapInfoToList();
 }

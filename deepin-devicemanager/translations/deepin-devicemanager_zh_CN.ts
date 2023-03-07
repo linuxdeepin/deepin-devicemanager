@@ -1318,7 +1318,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="184"/>
         <source>Capacity</source>
-        <translation>容量</translation>
+        <translation>最大容量</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="185"/>
