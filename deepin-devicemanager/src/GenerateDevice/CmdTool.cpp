@@ -532,7 +532,8 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
     // 显示屏信息从前台直接获取
     QString deviceInfo;
     if ("hwinfo_monitor" == key) {
-        getDeviceInfoFromCmd(deviceInfo, "hwinfo --monitor");
+//        getDeviceInfoFromCmd(deviceInfo, "hwinfo --monitor");
+        getDeviceInfo(deviceInfo, debugfile);
         QStringList items = deviceInfo.split("\n\n");
         foreach (const QString &item, items) {
             if (item.isEmpty())
