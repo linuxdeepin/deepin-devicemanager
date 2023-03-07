@@ -125,7 +125,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
     TomlFixMethod ret = TOML_None;
-        // 添加基本信息
+    // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Type", m_Model);
     ret = setTomlAttribute(mapInfo, "Display Input", m_DisplayInput);
     ret = setTomlAttribute(mapInfo, "Interface Type", m_Interface);
@@ -382,8 +382,9 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
         return false;
 
     // 比对从hwinfo和xrandr里面获取日期，不一致返回
-    if (m_ProductionWeek != edidParse.releaseDate())
+    if (!m_ProductionWeek.isEmpty() && m_ProductionWeek != edidParse.releaseDate())
         return false;
+    m_ProductionWeek = edidParse.releaseDate();
 
     // 如果从hwinfo和edid里面获取的信息差距很小则使用hwinfo里面的
     // 如果从hwinfo和edid里面获取的信息差距很大则使用edid里面的
