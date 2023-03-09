@@ -238,4 +238,11 @@ void ThreadPool::initCmd()
     cmdHwinfo.canNotReplace = false;
     m_ListCmd.append(cmdHwinfo);
     m_ListUpdate.append(cmdHwinfo);
+
+    Cmd cmdHwinfoMonitor;     //hwinfo --framebuffer --monitor
+    cmdHwinfoMonitor.cmd = QString("%1 %2%3").arg("hwinfo --framebuffer --monitor > ").arg(PATH).arg("hwinfo_monitor.txt");
+    cmdHwinfoMonitor.file = "hwinfo_monitor.txt";
+    cmdHwinfoMonitor.canNotReplace = false;
+    m_ListCmd.append(cmdHwinfoMonitor);
+    m_ListUpdate.append(cmdHwinfoMonitor);
 }
