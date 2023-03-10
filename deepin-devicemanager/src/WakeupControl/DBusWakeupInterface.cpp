@@ -15,9 +15,9 @@
 std::atomic<DBusWakeupInterface *> DBusWakeupInterface::s_Instance;
 std::mutex DBusWakeupInterface::m_mutex;
 
-const QString SERVICE_NAME = "com.deepin.devicemanager";
-const QString WAKEUP_SERVICE_PATH = "/com/deepin/wakeupmanager";
-const QString WAKEUP_INTERFACE = "com.deepin.wakeupmanager";
+const QString SERVICE_NAME = "org.deepin.DeviceControl";
+const QString WAKEUP_SERVICE_PATH = "/org/deepin/DeviceControl";
+const QString WAKEUP_INTERFACE = "org.deepin.DeviceControl";
 const QString INPUT_SERVICE_NAME = "com.deepin.system.InputDevices";
 const QString INPUT_WAKEUP_SERVICE_PATH = "/com/deepin/system/InputDevices";
 const QString INPUT_WAKEUP_INTERFACE = "com.deepin.system.InputDevices";

@@ -13,9 +13,9 @@
 std::atomic<DBusEnableInterface *> DBusEnableInterface::s_Instance;
 std::mutex DBusEnableInterface::m_mutex;
 
-const QString SERVICE_NAME = "com.deepin.devicemanager";
-const QString ENABLE_SERVICE_PATH = "/com/deepin/enablemanager";
-const QString ENABLE_SERVICE_INTER = "com.deepin.enablemanager";
+const QString SERVICE_NAME = "org.deepin.DeviceControl";
+const QString ENABLE_SERVICE_PATH = "/org/deepin/DeviceControl";
+const QString ENABLE_SERVICE_INTER = "org.deepin.DeviceControl";
 
 DBusEnableInterface::DBusEnableInterface()
     : mp_Iface(nullptr)
