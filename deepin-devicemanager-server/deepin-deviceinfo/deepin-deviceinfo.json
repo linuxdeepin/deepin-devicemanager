@@ -1,0 +1,7 @@
+{
+    "name": "org.deepin.DeviceInfo",
+    "libPath": "deepin-deviceinfo.so",
+    "group": "app",
+    "policyStartType": "Resident",
+    "pluginType": "qt"
+}

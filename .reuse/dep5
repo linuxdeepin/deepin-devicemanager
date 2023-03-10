@@ -34,7 +34,7 @@ Copyright: UnionTech Software Technology Co., Ltd.
 License: CC-BY-4.0
 
 # deepin-devicemanager-server
-Files: deepin-devicemanager-server/deepin-devicemanager-server.service
+Files: deepin-devicemanager-server/deepin-devicecontrol/org.deepin.DeviceControl.service
 Copyright: UnionTech Software Technology Co., Ltd.
 License: CC-BY-4.0
 
@@ -49,7 +49,7 @@ Copyright: UnionTech Software Technology Co., Ltd.
 License: LGPL-3.0-or-later
 
 # src
-Files: deepin-devicemanager/src/* deepin-devicemanager-server/src/*
+Files: deepin-devicemanager/src/* deepin-devicemanager-server/deepin-devicecontrol/src/* deepin-devicemanager-server/deepin-deviceinfo/src/*
 Copyright: UnionTech Software Technology Co., Ltd.
 License: GPL-3.0-or-later
 

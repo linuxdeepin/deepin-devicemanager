@@ -1,14 +1,14 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "../ut_Head.h"
 #include <gtest/gtest.h>
 #include "../stub.h"
-#include "ThreadPoolTask.h"
+#include "threadpooltask.h"
 #include <QThreadPool>
-#include "cpu/CpuInfo.h"
-#include "DeviceInfoManager.h"
+#include "cpu/cpuinfo.h"
+#include "deviceinfomanager.h"
 
 class ThreadPoolTask_UT : public UT_HEAD
 {
