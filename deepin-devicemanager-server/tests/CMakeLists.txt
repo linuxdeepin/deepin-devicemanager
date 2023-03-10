@@ -31,10 +31,17 @@ macro(SUBDIRLIST result curdir)
     endforeach()
     set(${result} ${dirlist})
 endmacro()
-
-# 引用ZeroMQ的库 begin ****************************************************************
-link_libraries("zmq")
-# 引用ZeroMQ的库 end  *****************************************************************
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../deepin-deviceinfo/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../deepin-devicecontrol/src)
+SUBDIRLIST(deviceinfo_dirs ${CMAKE_CURRENT_SOURCE_DIR}/../deepin-deviceinfo/src)
+SUBDIRLIST(devicecontrol_dirs ${CMAKE_CURRENT_SOURCE_DIR}/../deepin-devicecontrol/src)
+foreach(subdir ${deviceinfo_dirs})
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../deepin-deviceinfo/src/${subdir})
+endforeach()
+foreach(subdir ${devicecontrol_dirs})
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../deepin-devicecontrol/src/${subdir})
+endforeach()
+# 设置包含头文件的时候不用包含路径 end ****************************************************************************************
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
@@ -50,33 +57,38 @@ find_package(DtkCore REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
 find_package(QApt REQUIRED)
 
-#PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 
 set(PROJECT_NAME_TEST
     ${PROJECT_NAME}-test)
 
 ADD_COMPILE_OPTIONS(-fno-access-control)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src)
-foreach(subdir ${all_src})
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../src/${subdir})
-endforeach()
-
 #src
-file(GLOB_RECURSE APP_SRCS
-     ${CMAKE_CURRENT_LIST_DIR}/../src/*.cpp
+file(GLOB_RECURSE INFO_SRCS
+     ${CMAKE_CURRENT_LIST_DIR}/../deepin-deviceinfo/src/*.cpp
+    )
+file(GLOB_RECURSE CONTROL_SRCS
+     ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/*.cpp
     )
 # remove src main.cpp or will multi define
-list(REMOVE_ITEM APP_SRCS ${CMAKE_CURRENT_LIST_DIR}/../src/main.cpp)
+list(REMOVE_ITEM INFO_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-deviceinfo/src/plugin.cpp)
+list(REMOVE_ITEM CONTROL_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/main.cpp)
 
 #test src
 file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE TEST_SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 
-add_executable(${PROJECT_NAME_TEST} ${APP_SRCS} ${TEST_SRC_CPP} ${TEST_SRC_H})
+link_libraries("udev")
 
-target_include_directories(${PROJECT_NAME_TEST}
-    PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
+add_executable(${PROJECT_NAME_TEST} ${INFO_SRCS} ${CONTROL_SRCS} ${TEST_SRC_CPP} ${TEST_SRC_H})
+
+include_directories("/usr/include/cups/")
+
+target_include_directories(${PROJECT_NAME_TEST} PUBLIC 
+    ${DtkWidget_INCLUDE_DIRS}
+    ${OBJECT_BINARY_DIR}
+    )
 
 target_link_libraries(${PROJECT_NAME_TEST}
     Qt5::Core
@@ -94,15 +106,8 @@ target_link_libraries(${PROJECT_NAME_TEST}
     pthread
     kmod
     QApt
+    cups
     )
-
-add_custom_target(test-server
-    COMMAND echo " =================== TEST BEGIN ==================== "
-    COMMAND ${CMAKE_BINARY_DIR}/deepin-devicemanager-server/tests/${PROJECT_NAME_TEST}
-    COMMAND echo " =================== TEST END ==================== "
-)
-#'make test'命令依赖与我们的测试程序
-add_dependencies(test ${PROJECT_NAME_TEST})
 
 # 设置添加gocv相关信息的输出
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fprofile-arcs -ftest-coverage -fstack-protector-strong -D_FORTITY_SOURCE=1 -z noexecstack -pie -fPIC -z lazy")

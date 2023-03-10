@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -8,7 +7,7 @@
 #define private public // hack complier
 #define protected public
 
-#include "../src/DebugTimeManager.h"
+#include "debugtimemanager.h"
 
 #undef private
 #undef protected
