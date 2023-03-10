@@ -10,9 +10,9 @@
 std::atomic<DBusDriverInterface *> DBusDriverInterface::s_Instance;
 std::mutex DBusDriverInterface::m_mutex;
 
-const QString SERVICE_NAME = "com.deepin.devicemanager";
-const QString DRIVER_SERVICE_PATH = "/com/deepin/drivermanager";
-const QString DRIVER_INTERFACE = "com.deepin.drivermanager";
+const QString SERVICE_NAME = "org.deepin.DeviceControl";
+const QString DRIVER_SERVICE_PATH = "/org/deepin/DeviceControl";
+const QString DRIVER_INTERFACE = "org.deepin.DeviceControl";
 
 void DBusDriverInterface::uninstallDriver(const QString &driver)
 {

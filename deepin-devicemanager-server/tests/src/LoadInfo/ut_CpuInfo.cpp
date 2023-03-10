@@ -1,13 +1,13 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "../ut_Head.h"
 #include <gtest/gtest.h>
 #include "../stub.h"
-#include "cpu/CpuInfo.h"
+#include "cpu/cpuinfo.h"
 #include <sys/utsname.h>
-#include "DeviceInfoManager.h"
+#include "deviceinfomanager.h"
 #include <cstring>
 
 class CpuInfo_UT : public UT_HEAD
