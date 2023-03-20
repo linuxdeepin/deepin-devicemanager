@@ -97,7 +97,6 @@ link_libraries("cups")
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
 
-
 # Find the library
 find_package(PkgConfig REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -105,12 +104,10 @@ find_package(Qt5 COMPONENTS DBus REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
-find_package(QApt REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(DFrameworkdbus REQUIRED)
-
 
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
@@ -122,7 +119,6 @@ target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
     ${DFrameworkdbus_LIBRARIES}
-
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets

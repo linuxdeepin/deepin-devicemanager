@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "DriverDBusInterface.h"
 #include "DriverManager.h"
 #include "ModCore.h"
@@ -154,3 +156,4 @@ bool DriverDBusInterface::unInstallPrinter(const QString &vendor, const QString 
     }
     return mp_drivermanager->uninstallPrinter(vendor, model);
 }
+#endif

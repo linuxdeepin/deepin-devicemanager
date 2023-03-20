@@ -3,6 +3,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "DebInstaller.h"
 #include "Utils.h"
 
@@ -38,7 +40,7 @@ bool DebInstaller::isArchMatched(const QString &path)
         return false;
 
     bool architectures = m_backend->architectures().contains(deb.architecture());
-    if(!architectures)
+    if (!architectures)
         return false;
     return true;
 }
@@ -144,4 +146,4 @@ void DebInstaller::uninstallPackage(const QString &packagename)
     }
     doOperate(packagename, false);
 }
-
+#endif

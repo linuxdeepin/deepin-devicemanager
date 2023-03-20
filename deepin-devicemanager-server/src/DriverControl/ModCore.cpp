@@ -3,6 +3,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "ModCore.h"
 
 #include <QFile>
@@ -81,7 +83,7 @@ QStringList ModCore::checkModuleInUsed(const QString &modName)
  * @param modName 模块名sample: hid or hid.ko
  * @return 删除结果 true:成功 false: 失败
  */
-bool ModCore::rmModForce(const QString &modName, QString& errMsg)
+bool ModCore::rmModForce(const QString &modName, QString &errMsg)
 {
     bool bsuccess = true;
     struct kmod_ctx *ctx = nullptr;
@@ -120,7 +122,7 @@ bool ModCore::rmModForce(const QString &modName, QString& errMsg)
  * @param flags 安装属性，属性值参照kmod_probe解释
  * @return 反回错误类型枚举值
  */
-bool ModCore::modInstall(const QString &modName, QString& errMsg, unsigned int flags)
+bool ModCore::modInstall(const QString &modName, QString &errMsg, unsigned int flags)
 {
     bool success = true;
     struct kmod_ctx *ctx = nullptr;
@@ -658,4 +660,4 @@ bool ModCore::setModLoadedOnBoot(const QString &modName)
 
     return  true;
 }
-
+#endif // DISABLE_DRIVER

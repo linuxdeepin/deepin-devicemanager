@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "MainJob.h"
-#include "DriverManager.h"
 
 #include <QCoreApplication>
 
