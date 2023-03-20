@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "DriverInstaller.h"
 #include "Utils.h"
 #include "commonfunction.h"
@@ -21,7 +23,7 @@
 const int MAX_DPKGRUNING_TEST = 20;
 const int TEST_TIME_INTERVAL = 2000;
 
-DriverInstaller::DriverInstaller(QObject* parent)
+DriverInstaller::DriverInstaller(QObject *parent)
     : QObject(parent)
     , mp_Backend(nullptr)
     , mp_Trans(nullptr)
@@ -33,13 +35,13 @@ DriverInstaller::DriverInstaller(QObject* parent)
 
 bool DriverInstaller::initBackend()
 {
-    if(nullptr == mp_Backend)
+    if (nullptr == mp_Backend)
         mp_Backend = new QApt::Backend;
     aptClean();
     return mp_Backend->init();
 }
 
-void DriverInstaller::installPackage(const QString& package, const QString& version)
+void DriverInstaller::installPackage(const QString &package, const QString &version)
 {
     //检查dpkg是否正在运行，如果正在运行等待2s重试,最多尝试20次
     if (Utils::isDpkgLocked()) {
@@ -62,7 +64,7 @@ void DriverInstaller::installPackage(const QString& package, const QString& vers
 
 void DriverInstaller::undoInstallDriver()
 {
-    if(nullptr != mp_Trans){
+    if (nullptr != mp_Trans) {
         mp_Trans->setProperty("isCancellable", true);
         mp_Trans->setProperty("isCancelled", true);
         mp_Trans->cancel();
@@ -92,55 +94,52 @@ bool DriverInstaller::isNetworkOnline(uint usec)
     infile.open("netlog.bat");
     std::string s;
     std::vector<std::string> v;
-    while(infile)
-    {
-        getline(infile,s);
-        if(infile.fail())
+    while (infile) {
+        getline(infile, s);
+        if (infile.fail())
             break;
         v.push_back(s);
     }
     infile.close();
 
     //读取倒数第二行 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-    if (v.size() > 1)
-    {
-        std::string data = v[v.size()-2];
+    if (v.size() > 1) {
+        std::string data = v[v.size() - 2];
         int iPos = data.find("received,");
-        if (iPos != -1 )
-        {
-            data = data.substr(iPos+10,3);//截取字符串返回packet loss
+        if (iPos != -1) {
+            data = data.substr(iPos + 10, 3); //截取字符串返回packet loss
             int  n = atoi(data.c_str());
-            if(n == 0)
-             return 1;
+            if (n == 0)
+                return 1;
             else
-            return 0 ;
-        }else{
+                return 0 ;
+        } else {
             return 0;
         }
 
-    }else{
+    } else {
         return 0;
     }
 }
 
 void DriverInstaller::doOperate(const QString &package, const QString &version)
 {
-    if (!initBackend()){
+    if (!initBackend()) {
         emit errorOccurred(EC_NULL);
         qInfo() << "DRIVER_LOG : ************************** 初始化backend失败";
         return;
     }
 
-    QApt::Package* p = mp_Backend->package(package);
+    QApt::Package *p = mp_Backend->package(package);
     // 判断包是否存在
-    if(nullptr == p){
+    if (nullptr == p) {
         emit errorOccurred(EC_NOTFOUND);
         qInfo() << "DRIVER_LOG : ************************** 安装包不存在";
         return;
     }
 
     // 版本不存在
-    if(!p->setVersion(version)){
+    if (!p->setVersion(version)) {
         qInfo() << "DRIVER_LOG : ************************** 安装包版本不存在";
         emit errorOccurred(EC_NOTFOUND);
         delete p;
@@ -152,31 +151,31 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
     lst.append(p);
 
     mp_Trans = mp_Backend->installPackages(lst);
-    if(nullptr == mp_Trans){
+    if (nullptr == mp_Trans) {
         emit errorOccurred(EC_NULL);
         qInfo() << "DRIVER_LOG : ************************** installPackages";
         return;
     }
 
     qRegisterMetaType<QApt::ExitStatus>("QApt::ExitStatus");
-    connect(mp_Trans, &QApt::Transaction::finished, this, [this, package](QApt::ExitStatus status){
+    connect(mp_Trans, &QApt::Transaction::finished, this, [this, package](QApt::ExitStatus status) {
         QApt::ErrorCode code = mp_Trans->error();
 
-        if (QApt::ExitSuccess == status){ // 退出状态成功时
-            if (QApt::Success == code){
+        if (QApt::ExitSuccess == status) { // 退出状态成功时
+            if (QApt::Success == code) {
                 emit installProgressFinished(true);
             }
-        }else if (QApt::ExitFailed == status){ // 退出状态失败时
+        } else if (QApt::ExitFailed == status) { // 退出状态失败时
             // 英伟达驱动 + CommitError == 成功
-            if (package.contains("nvidia-driver") && QApt::CommitError == code){
+            if (package.contains("nvidia-driver") && QApt::CommitError == code) {
                 emit installProgressFinished(true);
             }
 
             // FetchError == 网络异常
-            if (QApt::FetchError == code || (QApt::CommitError == code && !isNetworkOnline())){
+            if (QApt::FetchError == code || (QApt::CommitError == code && !isNetworkOnline())) {
                 emit errorOccurred(EC_NETWORK);
             }
-        }else if (QApt::ExitCancelled == status) { // 退出状态取消时
+        } else if (QApt::ExitCancelled == status) { // 退出状态取消时
             emit errorOccurred(EC_CANCEL);
         }
 
@@ -188,9 +187,9 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
         mp_Trans = nullptr;
     });
 
-    connect(mp_Trans, &QApt::Transaction::downloadProgressChanged, this, [this](QApt::DownloadProgress dp){
+    connect(mp_Trans, &QApt::Transaction::downloadProgressChanged, this, [this](QApt::DownloadProgress dp) {
         qInfo() << "DRIVER_LOG : ************************** 下载进度 " << dp.progress();
-        if(m_Cancel){
+        if (m_Cancel) {
             mp_Trans->setProperty("isCancellable", true);
             mp_Trans->setProperty("isCancelled", true);
             mp_Trans->cancel();
@@ -198,17 +197,18 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
         }
     });
 
-    connect(mp_Trans, &QApt::Transaction::progressChanged, this, [this](int progress){
-        if(m_Cancel){
+    connect(mp_Trans, &QApt::Transaction::progressChanged, this, [this](int progress) {
+        if (m_Cancel) {
             mp_Trans->setProperty("isCancellable", true);
             mp_Trans->setProperty("isCancelled", true);
             mp_Trans->cancel();
             qInfo() << "DRIVER_LOG *************progressChanged*************** 取消操作";
         }
-        if(false == m_Cancel)
+        if (false == m_Cancel)
             emit installProgressChanged(progress);
         qInfo() << "DRIVER_LOG : ************************** 总进度 " << progress << "  下载状态 " << mp_Trans->downloadProgress().uri();
     });
 
     mp_Trans->run();
 }
+#endif // DISABLE_DRIVER

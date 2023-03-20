@@ -5,6 +5,11 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
    set(CMAKE_INSTALL_PREFIX /usr)
 endif()
 
+set(DISABLE_DRIVER false CACHE BOOL "disable driver")
+if (DISABLE_DRIVER)
+    add_definitions(-DDISABLE_DRIVER)
+endif()
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager)
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager-server)
 
