@@ -105,7 +105,6 @@ find_package(Qt5 COMPONENTS DBus REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
-find_package(QApt REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
@@ -122,7 +121,6 @@ target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
     ${DFrameworkdbus_LIBRARIES}
-
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets

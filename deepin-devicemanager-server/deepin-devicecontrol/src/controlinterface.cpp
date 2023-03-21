@@ -3,8 +3,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "controlinterface.h"
+#ifndef DISABLE_DRIVER
 #include "drivermanager.h"
-#include "modcore.h"
+#endif
 #include "utils.h"
 #include "debinstaller.h"
 #include "enablesqlmanager.h"
@@ -80,15 +81,18 @@ bool ControlInterface::getUserAuthorPasswd()
 
 ControlInterface::ControlInterface(QObject *parent)
     : QDBusService(parent)
-    , mp_drivermanager(new DriverManager(this))
-    , pcore(new ModCore(this))
+    , mp_drivermanager(nullptr)
 {
+#ifndef DISABLE_DRIVER
+    mp_drivermanager = new DriverManager(this);
+#endif
     initPolicy(QDBusConnection::SystemBus, QString(SERVICE_CONFIG_DIR) + "other/deepin-devicecontrol.json");
     initConnects();
 }
 
 void ControlInterface::initConnects()
 {
+#ifndef DISABLE_DRIVER
     connect(mp_drivermanager, &DriverManager::sigProgressDetail, this, &ControlInterface::sigProgressDetail);
     connect(mp_drivermanager, &DriverManager::sigDownloadProgressChanged, this, &ControlInterface::sigDownloadProgressChanged);
     connect(mp_drivermanager, &DriverManager::sigDownloadFinished, this, &ControlInterface::sigDownloadFinished);
@@ -101,6 +105,7 @@ void ControlInterface::initConnects()
         lockTimer(false);
         emit sigInstallProgressFinished(bsuccess, err);
     });
+#endif
 }
 
 QString ControlInterface::getRemoveInfo()
@@ -234,71 +239,107 @@ bool ControlInterface::monitorWorkingDBFlag()
 
 bool ControlInterface::unInstallDriver(const QString &modulename)
 {
+#ifndef DISABLE_DRIVER
     if (!getUserAuthorPasswd())
         return false;
     lockTimer(false);
     return  mp_drivermanager->unInstallDriver(modulename);
+#else
+    return false;
+#endif
 }
 
 bool ControlInterface::installDriver(const QString &filepath)
 {
+#ifndef DISABLE_DRIVER
     if (!getUserAuthorPasswd())
         return false;
     lockTimer(true);
     return  mp_drivermanager->installDriver(filepath);
+#else
+    return false;
+#endif
 }
 
 void ControlInterface::installDriver(const QString &modulename, const QString &version)
 {
+#ifndef DISABLE_DRIVER
     if (!getUserAuthorPasswd()) {
         emit mp_drivermanager->sigInstallProgressFinished(false, EC_CANCEL);
         return;
     }
     lockTimer(true);
     return  mp_drivermanager->installDriver(modulename, version);
+#endif
 }
 
 void ControlInterface::undoInstallDriver()
 {
+#ifndef DISABLE_DRIVER
     lockTimer(false);
     return mp_drivermanager->undoInstallDriver();
+#endif
 }
 
 QStringList ControlInterface::checkModuleInUsed(const QString &modulename)
 {
+#ifndef DISABLE_DRIVER
     return mp_drivermanager->checkModuleInUsed(modulename);
+#else
+    return QStringList();
+#endif
 }
 
 bool ControlInterface::isDriverPackage(const QString &filepath)
 {
+#ifndef DISABLE_DRIVER
     if (!getUserAuthorPasswd())
         return false;
     else
         return  mp_drivermanager->isDriverPackage(filepath);
+#else
+    return false;
+#endif
 }
 
 bool ControlInterface::isBlackListed(const QString &modName)
 {
+#ifndef DISABLE_DRIVER
     return mp_drivermanager->isBlackListed(modName);
+#else
+    return false;
+#endif
 }
 
 bool ControlInterface::isArchMatched(const QString &filePath)
 {
+#ifndef DISABLE_DRIVER
     return mp_drivermanager->isArchMatched(filePath);
+#else
+    return false;
+#endif
 }
 
 bool ControlInterface::isDebValid(const QString &filePath)
 {
+#ifndef DISABLE_DRIVER
     return mp_drivermanager->isDebValid(filePath);
+#else
+    return false;
+#endif
 }
 
 bool ControlInterface::unInstallPrinter(const QString &vendor, const QString &model)
 {
+#ifndef DISABLE_DRIVER
     if (!getUserAuthorPasswd()) {
         emit mp_drivermanager->sigFinished(false, "Cancel");
         return false;
     }
     return mp_drivermanager->uninstallPrinter(vendor, model);
+#else
+    return false;
+#endif
 }
 
 bool ControlInterface::authorizedEnable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool enable_device, const QString strDriver)

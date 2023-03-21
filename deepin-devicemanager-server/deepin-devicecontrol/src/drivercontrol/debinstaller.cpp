@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "debinstaller.h"
 #include "utils.h"
 
@@ -143,4 +145,4 @@ void DebInstaller::uninstallPackage(const QString &packagename)
     }
     doOperate(packagename, false);
 }
-
+#endif // DISABLE_DRIVER

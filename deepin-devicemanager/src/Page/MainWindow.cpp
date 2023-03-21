@@ -348,6 +348,9 @@ void MainWindow::initWindowTitle()
     // 特殊处理
     if (!Common::boardVendorType().isEmpty())
         mp_ButtonBox->hide();
+#ifdef DISABLE_DRIVER
+    mp_ButtonBox->hide();
+#endif
 }
 
 void MainWindow::initWidgets()

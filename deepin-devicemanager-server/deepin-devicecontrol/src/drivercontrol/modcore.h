@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #ifndef MODCORE_H
 #define MODCORE_H
 
@@ -92,3 +94,4 @@ private:
 };
 
 #endif // MODCORE_H
+#endif // DISABLE_DRIVER
