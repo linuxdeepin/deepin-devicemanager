@@ -50,7 +50,6 @@ target_link_libraries(${BIN_NAME} PRIVATE
   Qt5::DBus
 )
 
-    install(TARGETS ${BIN_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/deepin-service-manager/)
-    install(FILES ${BIN_NAME}.json DESTINATION share/deepin-service-manager/system/)
-
+install(TARGETS ${BIN_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/deepin-service-manager/)
+install(FILES ${BIN_NAME}.json DESTINATION share/deepin-service-manager/system/)
 install(FILES org.deepin.deviceinfo.conf DESTINATION share/dbus-1/system.d/ )

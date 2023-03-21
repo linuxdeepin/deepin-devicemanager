@@ -4,7 +4,6 @@
 
 #include "DBusDriverInterface.h"
 #include <unistd.h>
-#include <QApt/Backend>
 
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<DBusDriverInterface *> DBusDriverInterface::s_Instance;

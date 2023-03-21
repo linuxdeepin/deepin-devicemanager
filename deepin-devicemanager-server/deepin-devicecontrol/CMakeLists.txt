@@ -35,10 +35,12 @@ find_package(PkgConfig REQUIRED)
 find_package(Qt5 COMPONENTS Core DBus Network Sql REQUIRED)
 find_package(DtkCore REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
-find_package(QApt REQUIRED)
 find_package(deepin-qdbus-service REQUIRED)
 
-PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+if(NOT DISABLE_DRIVER)
+    find_package(QApt REQUIRED)
+    PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+endif()
 
 add_executable(${BIN_NAME}
     ${SRC_CPP}
@@ -57,17 +59,14 @@ target_include_directories(${BIN_NAME} PUBLIC
   ${deepin-qdbus-service_INCLUDE_DIR}
 )
 
+set(LINK_LIBS Qt5::Core Qt5::DBus Qt5::Core Qt5::Network Qt5::Sql ${DtkCore_LIBRARIES} ${deepin-qdbus-service_LIBRARIES} PolkitQt5-1::Agent cups)
+if(NOT DISABLE_DRIVER)
+    LIST(APPEND LINK_LIBS QApt)
+    LIST(APPEND LINK_LIBS kmod)
+endif()
+
 target_link_libraries(${BIN_NAME} PRIVATE
-  Qt5::Core
-  Qt5::DBus
-  Qt5::Network
-  Qt5::Sql
-  PolkitQt5-1::Agent
-  ${DtkCore_LIBRARIES}
-  ${deepin-qdbus-service_LIBRARIES}
-  kmod
-  QApt
-  cups
+  ${LINK_LIBS}
 )
 
 install(TARGETS ${BIN_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})

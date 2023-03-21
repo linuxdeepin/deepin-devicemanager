@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #ifndef DRIVERMANAGER_H
 #define DRIVERMANAGER_H
 
@@ -99,3 +101,4 @@ private:
 };
 
 #endif // DRIVERMANAGER_H
+#endif // DISABLE_DRIVER

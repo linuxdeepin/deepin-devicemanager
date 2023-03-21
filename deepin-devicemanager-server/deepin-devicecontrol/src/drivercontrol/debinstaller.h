@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #ifndef DEBINSTALLER_H
 #define DEBINSTALLER_H
 #include <QObject>
@@ -55,3 +57,4 @@ private:
 };
 
 #endif // DEBINSTALLER_H
+#endif // DISABLE_DRIVER

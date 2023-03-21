@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "drivermanager.h"
 #include "utils.h"
 #include "modcore.h"
@@ -624,3 +626,4 @@ bool DriverManager::unInstallPrinter(const QString &packageName)
 
     return !printerHasInstalled(packageName);
 }
+#endif // DISABLE_DRIVER

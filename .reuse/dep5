@@ -18,8 +18,8 @@ Files:  *.toml *.json *conf *.yaml *.sh
 Copyright: UnionTech Software Technology Co., Ltd.
 License: CC0-1.0
 
-# debian
-Files: debian/*
+# debian rpm
+Files: debian/* rpm/*
 Copyright: UnionTech Software Technology Co., Ltd.
 License: CC0-1.0
 

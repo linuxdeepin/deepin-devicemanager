@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "modcore.h"
 
 #include <QFile>
@@ -657,4 +659,4 @@ bool ModCore::setModLoadedOnBoot(const QString &modName)
 
     return  true;
 }
-
+#endif // DISABLE_DRIVER

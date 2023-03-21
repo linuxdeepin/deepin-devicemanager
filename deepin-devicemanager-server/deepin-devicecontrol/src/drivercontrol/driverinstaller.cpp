@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "driverinstaller.h"
 #include "utils.h"
 #include "commonfunction.h"
@@ -209,3 +211,4 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
 
     mp_Trans->run();
 }
+#endif // DISABLE_DRIVER
