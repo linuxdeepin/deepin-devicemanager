@@ -17,10 +17,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-protector-strong -D_FORTITY_SOUR
 
 # Find the library
 FIND_PACKAGE(PkgConfig REQUIRED)
-FIND_PACKAGE(QApt REQUIRED)
 find_package(PolkitQt5-1 REQUIRED)
 
-PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+if(NOT DISABLE_DRIVER)
+    FIND_PACKAGE(QApt REQUIRED)
+    PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+endif()
 
 # 设置包含头文件的时候不用包含路径 begin ****************************************************************************************
 MACRO(SUBDIRLIST result curdir)
@@ -72,9 +74,12 @@ file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H})
 
-target_link_libraries(${APP_BIN_NAME}
-    ${DtkCore_LIBRARIES}
-    Qt5::Core Qt5::DBus Qt5::Sql Qt5::Network PolkitQt5-1::Agent kmod QApt)
+set(LINK_LIBS ${DtkCore_LIBRARIES} Qt5::Core Qt5::DBus Qt5::Sql Qt5::Network PolkitQt5-1::Agent)
+if(NOT DISABLE_DRIVER)
+    LIST(APPEND LINK_LIBS QApt)
+    LIST(APPEND LINK_LIBS kmod)
+endif()
+target_link_libraries(${APP_BIN_NAME} ${LINK_LIBS})
 
 # Install files
 install(TARGETS ${APP_BIN_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})

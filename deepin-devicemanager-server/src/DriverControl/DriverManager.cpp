@@ -3,6 +3,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #include "DriverManager.h"
 #include "Utils.h"
 #include "ModCore.h"
@@ -128,7 +130,7 @@ void DriverManager::initConnections()
     });
 
     connect(mp_driverInstaller, &DriverInstaller::errorOccurred, [this](int err) {
-        if (EC_NETWORK != err){
+        if (EC_NETWORK != err) {
             qInfo() << "Driver installation failed , reason : " << err;
             sigInstallProgressFinished(false, err);
             return;
@@ -142,18 +144,18 @@ void DriverManager::initConnections()
         // 60s等待操作
         m_IsNetworkOnline = false;
         qint64 seconds = QDateTime::currentSecsSinceEpoch();
-        while (QDateTime::currentSecsSinceEpoch() - seconds < 30){
+        while (QDateTime::currentSecsSinceEpoch() - seconds < 30) {
 
-            if(m_StopQueryNetwork){
+            if (m_StopQueryNetwork) {
                 sigInstallProgressFinished(false, EC_CANCEL);
                 m_StopQueryNetwork = false;
                 return ;
             }
 
-            if(isNetworkOnline()){
+            if (isNetworkOnline()) {
                 sigInstallProgressFinished(false, EC_REINSTALL);
                 return ;
-            }else{
+            } else {
                 sleep(1);
             }
         }
@@ -314,9 +316,9 @@ void DriverManager::installDriver(const QString &pkgName, const QString &version
 
 void DriverManager::undoInstallDriver()
 {
-    if(m_IsNetworkOnline){
+    if (m_IsNetworkOnline) {
         mp_driverInstaller->undoInstallDriver();
-    }else{
+    } else {
         m_StopQueryNetwork = true;
     }
 }
@@ -447,7 +449,7 @@ bool DriverManager::checkPrinterInfo()
     //打印机
     QMap<QString, QString> mapInfo;
     loadPrinterInfo(mapInfo);
-    if(mapInfo.size() < 1){
+    if (mapInfo.size() < 1) {
         return false;
     }
     //qInfo() << mapInfo;//"printer-make-and-model" //
@@ -538,7 +540,7 @@ bool DriverManager::isNetworkOnline()
     /*
        -c 2（代表ping次数，ping 2次后结束ping操作） -w 2（代表超时时间，2秒后结束ping操作）
     */
- // system("ping www.google.com -c 2 -w 2 >netlog.bat");
+// system("ping www.google.com -c 2 -w 2 >netlog.bat");
     system("ping www.baidu.com -c 2 -w 2 >netlog.bat");
     sleep(2);
 
@@ -547,33 +549,30 @@ bool DriverManager::isNetworkOnline()
     infile.open("netlog.bat");
     std::string s;
     std::vector<std::string> v;
-    while(infile)
-    {
-        getline(infile,s);
-        if(infile.fail())
+    while (infile) {
+        getline(infile, s);
+        if (infile.fail())
             break;
         v.push_back(s);
     }
     infile.close();
 
     //读取倒数第二行 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-    if (v.size() > 1)
-    {
-        std::string data = v[v.size()-2];
+    if (v.size() > 1) {
+        std::string data = v[v.size() - 2];
         int iPos = data.find("received,");
-        if (iPos != -1 )
-        {
-            data = data.substr(iPos+10,3);//截取字符串返回packet loss
+        if (iPos != -1) {
+            data = data.substr(iPos + 10, 3); //截取字符串返回packet loss
             int  n = atoi(data.c_str());
-            if(n == 0)
-             return 1;
+            if (n == 0)
+                return 1;
             else
-            return 0 ;
-        }else{
+                return 0 ;
+        } else {
             return 0;
         }
 
-    }else{
+    } else {
         return 0;
     }
 }
@@ -582,7 +581,7 @@ bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QStr
 {
     QString strVendor, strDevice;
     bool flag = false;//是否需要查sysfs
-    if(mapInfo.find("Vendor") != mapInfo.end()){
+    if (mapInfo.find("Vendor") != mapInfo.end()) {
         QStringList strListVendor = mapInfo["Vendor"].split(" ");
         foreach (QString strSub, strListVendor) {
             if (strSub.contains("0x")) {
@@ -590,24 +589,23 @@ bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QStr
                 break;
             }
         }
-        if(strVendor.isEmpty()){
+        if (strVendor.isEmpty()) {
             flag = true;
         }
         QStringList strListDevice = mapInfo["Device"].split(" ");
-        foreach(QString strSub, strListDevice){
-            if(strSub.contains("0x")){
+        foreach (QString strSub, strListDevice) {
+            if (strSub.contains("0x")) {
                 strDevice = strSub;
                 break;
             }
         }
-        if(strDevice.isEmpty()){
+        if (strDevice.isEmpty()) {
             flag = true;
         }
-    }
-    else {
+    } else {
         flag = true;
     }
-    if(flag) {
+    if (flag) {
         //
         QString strSysFSLink;
         if (mapInfo.find("SysFS ID") != mapInfo.end() && mapInfo["SysFS ID"].contains("/devices/")) {
@@ -619,7 +617,7 @@ bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QStr
         }
         QString strVendorFile = "/vendor";
         QString strDeviceFile = "/device";
-        if(strSysFSLink.contains("usb")){
+        if (strSysFSLink.contains("usb")) {
             strVendorFile = "/idVendor";
             strDeviceFile = "/idProduct";
         }
@@ -629,30 +627,30 @@ bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QStr
         if (!QFile::exists("/sys" + strSysFSLink)) {
             return false;
         }
-        if(strSysFSLink.contains("usb")){
+        if (strSysFSLink.contains("usb")) {
             if (!QFile::exists("/sys" + strSysFSLink + strVendorFile)) {
                 strSysFSLink = strSysFSLink.mid(0, strSysFSLink.lastIndexOf('/'));
             }
         }
         QFile file("/sys" + strSysFSLink + strVendorFile);
-        if(!file.open(QIODevice::ReadOnly)){
+        if (!file.open(QIODevice::ReadOnly)) {
             return false;
         }
         strVendor = file.readAll();
         file.close();
         QFile fileDevice("/sys" + strSysFSLink + strDeviceFile);
-        if(!fileDevice.open(QIODevice::ReadOnly)){
+        if (!fileDevice.open(QIODevice::ReadOnly)) {
             return false;
         }
         strDevice = fileDevice.readAll();
         fileDevice.close();
-        if(strSysFSLink.contains("usb")){
+        if (strSysFSLink.contains("usb")) {
             strVendor = "0x" + strVendor;
             strDevice = "0x" + strDevice;
         }
     }
 
-    if(strVendor.isEmpty() && strDevice.isEmpty()){
+    if (strVendor.isEmpty() && strDevice.isEmpty()) {
         return false;
     }
     DriverInfo di;
@@ -662,9 +660,9 @@ bool DriverManager::checkBoardCardInfo(const DriverType type, QMap<QString, QStr
 
     di.driverName = mapInfo["Driver"];//如果没有，后续会处理，无影响
     di.version = getDriverVersion(mapInfo["Driver"]);
-    if(di.version.isEmpty()){
+    if (di.version.isEmpty()) {
         di.version = getDriverVersion(mapInfo["Driver Modules"]);
-        if(!di.version.isEmpty()){
+        if (!di.version.isEmpty()) {
             di.driverName = mapInfo["Driver Modules"];//如果没有，后续会处理，无影响
         }
     }
@@ -741,7 +739,7 @@ bool DriverManager::checkCameraInfo(QMap<QString, QString> &mapInfo)
             strDevice = strSub;
         }
     }
-    if(strVendor.isEmpty() && strDevice.isEmpty()){
+    if (strVendor.isEmpty() && strDevice.isEmpty()) {
         return false;
     }
     DriverInfo di;
@@ -763,8 +761,8 @@ QString DriverManager::getDriverVersion(QString strDriver)
     process.waitForFinished(-1);
 
     QStringList str = QString(process.readAll()).split("\n\n");
-    foreach(QString temp, str){
-        if(temp.startsWith("version") && temp.contains(":") && temp.split(':').size() > 1){
+    foreach (QString temp, str) {
+        if (temp.startsWith("version") && temp.contains(":") && temp.split(':').size() > 1) {
             return temp.split(':')[2];
         }
     }
@@ -927,3 +925,4 @@ bool DriverManager::unInstallPrinter(const QString &packageName)
 
     return !printerHasInstalled(packageName);
 }
+#endif // DISABLE_DRIVER

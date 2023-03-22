@@ -3,6 +3,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #ifndef DRIVERDBUSINTERFACE_H
 #define DRIVERDBUSINTERFACE_H
 
@@ -51,3 +53,4 @@ private:
 };
 
 #endif // DRIVERDBUSINTERFACE_H
+#endif // DISABLE_DRIVER
