@@ -3,9 +3,10 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#ifndef DISABLE_DRIVER
+
 #ifndef DRIVERINSTALLER_H
 #define DRIVERINSTALLER_H
-
 
 //class PackageInstaller
 //{
@@ -33,7 +34,7 @@ public slots:
      * @param package 包名
      * @param version 包版本
      */
-    void installPackage(const QString& package, const QString& version);
+    void installPackage(const QString &package, const QString &version);
 
     /**
      * @brief undoInstallDriver 停止任务
@@ -77,3 +78,4 @@ private:
 };
 
 #endif // DRIVERINSTALLER_H
+#endif // DISABLE_DRIVER

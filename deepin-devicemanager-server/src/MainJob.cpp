@@ -7,7 +7,9 @@
 #include "DetectThread.h"
 #include "DebugTimeManager.h"
 #include "DBusInterface.h"
+#ifndef DISABLE_DRIVER
 #include "DriverDBusInterface.h"
+#endif
 #include "DBusEnableInterface.h"
 #include "DBusWakeupInterface.h"
 #include "DeviceInfoManager.h"
@@ -47,6 +49,7 @@ MainJob::MainJob(QObject *parent)
     , mp_Pool(new ThreadPool)
     , mp_DetectThread(nullptr)
     , mp_IFace(new DBusInterface(this))
+    , mp_DriverOperateIFace(nullptr)
     , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息
@@ -86,7 +89,9 @@ void MainJob::working()
         EnableUtils::disableInDevice();
         WakeupUtils::updateWakeupDeviceInfo(info);
 
+#ifndef DISABLE_DRIVER
         mp_DriverOperateIFace = (new DriverDBusInterface(this));
+#endif
         mp_Enable = (new DBusEnableInterface(this));
         mp_Wakeup = (new DBusWakeupInterface(this));
         if (!initDriverDbus()) {
@@ -95,7 +100,9 @@ void MainJob::working()
 
         connect(mp_Enable, &DBusEnableInterface::update, this, &MainJob::slotUsbChanged);
         connect(mp_IFace, &DBusInterface::update, this, &MainJob::slotUsbChanged);
+#ifndef DISABLE_DRIVER
         connect(mp_DriverOperateIFace, &DriverDBusInterface::sigFinished, this, &MainJob::slotDriverControl);
+#endif
     });
 
     //todo: 先不删除，后续测试完再删除。
@@ -220,11 +227,12 @@ bool MainJob::initDriverDbus()
     if (!systemBus.registerService(SERVICE_NAME)) {
         return false;
     }
-
+#ifndef DISABLE_DRIVER
     if (!systemBus.registerObject(DRIVER_SERVICE_PATH, mp_DriverOperateIFace, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals))  {
         qInfo() << QDBusConnection::systemBus().lastError();
         return false;
     }
+#endif
     if (!systemBus.registerObject(ENABLE_SERVICE_PATH, mp_Enable, QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals)) {
         qInfo() << QDBusConnection::systemBus().lastError();
         return false;
