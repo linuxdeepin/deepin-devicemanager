@@ -28,6 +28,10 @@ QString DeviceInterface::getInfo(const QString &key)
     if (MainJob::serverIsRunning()) {
         return "1";
     }
+    if (MainJob::firstUpdate()) {
+        emit sigUpdate();
+        return "1";
+    }
     return "0";
 }
 

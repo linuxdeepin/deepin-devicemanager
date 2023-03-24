@@ -30,6 +30,12 @@ public:
     static bool clientIsRunning();
 
     /**
+     * @brief firstUpdate
+     * @return
+     */
+    static bool firstUpdate();
+
+    /**
      * @brief setWorkingFlag 设置工作状态
      */
     void setWorkingFlag(bool flag);
@@ -63,7 +69,6 @@ private:
 
 private:
     ThreadPool            *m_pool = nullptr;                  //<! 生成文件的线程池
-    bool                   m_firstUpdate;                      //<! 是否是第一次更新
     DeviceInterface       *m_deviceInterface = nullptr;        //<! 设备信息
     DetectThread          *mp_DetectThread = nullptr;         //<! 检测usb的线程
 };
