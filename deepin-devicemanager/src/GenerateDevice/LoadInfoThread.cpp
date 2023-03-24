@@ -14,7 +14,7 @@
 
 #include<malloc.h>
 
-static bool firstLoadFlag = true;
+//static bool firstLoadFlag = true;
 LoadInfoThread::LoadInfoThread()
     : mp_ReadFilePool()
     , mp_GenerateDevicePool()
@@ -39,6 +39,18 @@ void LoadInfoThread::run()
     DBusInterface::getInstance()->getInfo("is_server_running", info);
     // 请求后台更新信息
     m_Running = true;
+    // 为了保证上面那个线程池完全结束
+    long long begin = QDateTime::currentMSecsSinceEpoch();
+    while (true) {
+        DBusInterface::getInstance()->getInfo("is_server_running", info);
+        bool runningFlag = !info.toInt();
+        if (runningFlag)
+            break;
+        long long end = QDateTime::currentMSecsSinceEpoch();
+        if (end - begin > 20000)
+            break;
+        usleep(100);
+    }
     if (!info.toInt()) {
         m_Start = false;
         mp_ReadFilePool.getAllInfo();
@@ -52,7 +64,7 @@ void LoadInfoThread::run()
                 mp_ReadFilePool.waitForDone(-1);
             }
             // 为了保证上面那个线程池完全结束
-            long long begin = QDateTime::currentMSecsSinceEpoch();
+            begin = QDateTime::currentMSecsSinceEpoch();
             while (true) {
                 readDataFlag = !DeviceManager::instance()->cmdInfo("dmidecode4").isEmpty();
                 if (readDataFlag && m_FinishedReadFilePool)
@@ -93,13 +105,13 @@ void LoadInfoThread::slotFinishedReadFilePool(const QString &)
 {
     m_FinishedReadFilePool = true;
     // 首次加载刷新
-    if (firstLoadFlag) {
-        firstLoadFlag = false;
-        DBusInterface::getInstance()->refreshInfo();
-        QTimer::singleShot(500, this, [ = ]() {
-            start();
-        });
-    }
+//    if (firstLoadFlag) {
+//        firstLoadFlag = false;
+//        DBusInterface::getInstance()->refreshInfo();
+//        QTimer::singleShot(500, this, [ = ]() {
+//            start();
+//        });
+//    }
 }
 
 void LoadInfoThread::setFramework(const QString &arch)

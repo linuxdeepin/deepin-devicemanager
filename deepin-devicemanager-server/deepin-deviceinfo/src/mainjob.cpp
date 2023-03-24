@@ -18,17 +18,17 @@
 static QMutex mainJobMutex;
 static bool s_ServerIsUpdating = false;
 static bool s_ClientIsUpdating = false;
+static bool s_firstUpdate = true;                      //<! 是否是第一次更新
 const QString DEVICE_REPO_PATH = "/etc/apt/sources.list.d/devicemanager.list";
 const QString DRIVER_REPO_PATH = "/etc/apt/sources.list.d/driver.list";
 
 MainJob::MainJob(const char *name, QObject *parent)
     : QObject(parent)
     , m_pool(new ThreadPool)
-    , m_firstUpdate(true)
 {
     m_deviceInterface = new DeviceInterface(name, this);
     // 守护进程启动的时候加载所有信息
-    updateAllDevice();
+//    updateAllDevice();
 
     // 启动线程监听USB是否有新的设备
     mp_DetectThread = new DetectThread(this);
@@ -66,6 +66,11 @@ bool MainJob::serverIsRunning()
 bool MainJob::clientIsRunning()
 {
     return s_ClientIsUpdating;
+}
+
+bool MainJob::firstUpdate()
+{
+    return s_firstUpdate;
 }
 
 void MainJob::setWorkingFlag(bool flag)
@@ -121,13 +126,13 @@ void MainJob::initDriverRepoSource()
 void MainJob::updateAllDevice()
 {
     PERF_PRINT_BEGIN("POINT-01", "MainJob::updateAllDevice()");
-    if (m_firstUpdate)
+    if (s_firstUpdate)
         m_pool->loadDeviceInfo();
     else
         m_pool->updateDeviceInfo();
     m_pool->waitForDone(-1);
     PERF_PRINT_END("POINT-01");
-    m_firstUpdate = false;
+    s_firstUpdate = false;
 }
 
 void MainJob::executeClientInstruction(const QString &instructions)
@@ -140,7 +145,7 @@ void MainJob::executeClientInstruction(const QString &instructions)
         // 跟新缓存信息
         updateAllDevice();
     } else if (instructions.startsWith("START")) {
-        if (m_firstUpdate) {
+        if (s_firstUpdate) {
             updateAllDevice();
         }
     }
