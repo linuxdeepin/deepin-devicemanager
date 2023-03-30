@@ -45,6 +45,7 @@ MainJob::MainJob(QObject *parent)
     , mp_Pool(new ThreadPool)
     , mp_DetectThread(nullptr)
     , mp_IFace(new DBusInterface(this))
+    , mp_DriverOperateIFace(nullptr)
     , m_FirstUpdate(true)
 {
     // 守护进程启动的时候加载所有信息

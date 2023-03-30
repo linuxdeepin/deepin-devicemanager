@@ -540,7 +540,8 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
                 continue;
             QMap<QString, QString> mapInfo;
             getMapInfoFromHwinfo(item, mapInfo);
-            addMapInfo(key, mapInfo);
+            if ("monitor" == mapInfo["Hardware Class"])
+                addMapInfo(key, mapInfo);
         }
     } else { // 处理其它信息 mouse sound keyboard usb display cdrom disk
         getDeviceInfo(deviceInfo, debugfile);
