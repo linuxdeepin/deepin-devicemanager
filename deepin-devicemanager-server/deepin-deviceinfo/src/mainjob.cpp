@@ -37,7 +37,9 @@ MainJob::MainJob(const char *name, QObject *parent)
 
     // 在驱动管理延迟加载1000ms
     QTimer::singleShot(1000, this, [ = ]() {
+#ifndef DISABLE_DRIVER
         initDriverRepoSource();
+#endif
 
         // 后台加载后先禁用设备
         QProcess process;
