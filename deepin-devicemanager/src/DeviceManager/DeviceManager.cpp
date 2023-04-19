@@ -498,15 +498,15 @@ void DeviceManager::tomlDeviceSet(DeviceType deviceType)
                     tomlDeviceDel(deviceType, device); //toml 去掉该设备
                     delete (device);
                 }
-
-            } else if ((deviceType != DT_Bios) && (deviceType != DT_Computer) && !fixSameOne) {
+            }
+        }  //与原设备信息遍历相比完再作添加设备
+        if ((deviceType != DT_Bios) && (deviceType != DT_Computer) && !fixSameOne) {
                 fixSameOne = true;  //标记为该项信息有用过 ，则不再增加了
                 DeviceBaseInfo *device = createDevice(deviceType);
                 tomlDeviceSet(deviceType, device, tomlMapLst[j]);
                 tomlDeviceAdd(deviceType, device); //不存在 就加
-            }
-        } //end of for (int j = 0;...
-    }
+        }
+    } //end of for (int j = 0;...
 }
 QString DeviceManager::PhysID(const QMap<QString, QString> &mapInfo, const QString &key)
 {
