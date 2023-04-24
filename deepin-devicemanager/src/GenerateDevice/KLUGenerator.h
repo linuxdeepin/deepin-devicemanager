@@ -17,15 +17,15 @@ class KLUGenerator : public HWGenerator
 public:
     KLUGenerator();
 
-    /**@brief:generator network info*/
-    virtual void generatorNetworkDevice() override;
-
 protected:
 
     /**
      * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
      */
     virtual void getDiskInfoFromLshw() override;
+
+    /**@brief:generator network info*/
+    virtual void generatorNetworkDevice() override;
 
     /**@brief:generator network info*/
     virtual void getNetworkInfoFromCatWifiInfo();
