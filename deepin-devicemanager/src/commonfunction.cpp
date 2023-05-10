@@ -92,7 +92,7 @@ QString Common::checkBoardVendorFlag()
         boardVendorKey = "KLVV";
     } else if (info.contains("KLVU", Qt::CaseInsensitive)) {
         boardVendorKey = "KLVU";
-    } else if (info.contains("PGUV", Qt::CaseInsensitive)) {
+    } else if (info.contains("PGUV", Qt::CaseInsensitive) || info.contains("W585", Qt::CaseInsensitive)) {
         boardVendorKey = "PGUV";
     } else if (info.contains("PGUW", Qt::CaseInsensitive)) {
         boardVendorKey = "PGUW";
