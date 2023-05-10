@@ -23,6 +23,11 @@ public:
      * @brief generatorMonitorDevice:生成显示设备信息
      */
     virtual void generatorMonitorDevice() override;
+protected:
+    /**@brief:generator network info*/
+    virtual void generatorNetworkDevice() override;
+    /**@brief:generator network info*/
+    virtual QStringList getNetworkInfoFromifconfig();    
 };
 
 #endif // PANGUVGENERATOR_H

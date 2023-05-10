@@ -12,6 +12,7 @@
 #include <QMap>
 #include <QProcess>
 #include <QFile>
+#include <QDebug>
 
 #include <sys/utsname.h>
 
@@ -64,6 +65,20 @@ static bool getDeviceInfo(QString &deviceInfo, const QString &debugFile)
     return true;
 }
 
+static bool isModeM900(void)
+{
+    QFile file("/proc/cpuinfo");   // Hardware        : PANGU M900
+    if (file.open(QIODevice::ReadOnly)){
+        QString cpuInfo = file.readAll();
+        file.close();
+        if(cpuInfo.contains("Hardware") && cpuInfo.contains("PANGU M900")){
+            qInfo() << "PANGU M900";
+            return true;
+        }
+    }
+    return false;
+}
+
 QString Common::checkBoardVendorFlag()
 {
     QProcess process;
@@ -77,12 +92,16 @@ QString Common::checkBoardVendorFlag()
         boardVendorKey = "KLVV";
     } else if (info.contains("KLVU", Qt::CaseInsensitive)) {
         boardVendorKey = "KLVU";
-    } else if (info.contains("PGUV", Qt::CaseInsensitive)) {
+    } else if (info.contains("PGUV", Qt::CaseInsensitive)|| info.contains("W585", Qt::CaseInsensitive)) {
         boardVendorKey = "PGUV";
     } else if (info.contains("PGUW", Qt::CaseInsensitive)) {
         boardVendorKey = "PGUW";
     }
     process.close();
+
+    if(boardVendorKey.isEmpty() && isModeM900()){
+        boardVendorKey = "PGUW";
+    }
 
     initBoardVendorFlag = true;
     return boardVendorKey;
