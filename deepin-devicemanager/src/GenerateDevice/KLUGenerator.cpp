@@ -81,8 +81,6 @@ void KLUGenerator::getDiskInfoFromLshw()
     }
 }
 
-
-
 void KLUGenerator::generatorNetworkDevice()
 {
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
