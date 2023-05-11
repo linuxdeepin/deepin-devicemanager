@@ -216,6 +216,10 @@ void HWGenerator::getAudioInfoFromCatAudio()
             tempMap["Model"] = "Hi6405";
         }
 
+        if (tempMap.contains("Vendor")) {
+            tempMap["Vendor"]= "HUAWEI";
+        }
+
         DeviceAudio *device = new DeviceAudio();
         device->setCanEnale(false);
         device->setCanUninstall(false);
