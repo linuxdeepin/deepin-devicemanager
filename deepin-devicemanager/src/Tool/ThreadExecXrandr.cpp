@@ -16,6 +16,7 @@
 
 #include <DeviceManager.h>
 
+#ifdef OS_BUILD_V23
 const QString DISPLAY_SERVICE_NAME = "org.deepin.dde.Display1";
 const QString DISPLAY_SERVICE_PATH = "/org/deepin/dde/Display1";
 const QString DISPLAY_INTERFACE = "org.deepin.dde.Display1";
@@ -25,6 +26,17 @@ const QString DISPLAY_DAEMON_SERVICE_PATH = "/org/deepin/dde/Display1";
 const QString DISPLAY_DAEMON_INTERFACE = "org.deepin.dde.Display1";
 const QString DISPLAY_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
 const QString DISPLAY_MONITOR_INTERFACE = "org.deepin.dde.Display1.Monitor";
+#else
+const QString DISPLAY_SERVICE_NAME = "com.deepin.system.Display";
+const QString DISPLAY_SERVICE_PATH = "/com/deepin/system/Display";
+const QString DISPLAY_INTERFACE = "com.deepin.system.Display";
+
+const QString DISPLAY_DAEMON_SERVICE_NAME = "com.deepin.daemon.Display";
+const QString DISPLAY_DAEMON_SERVICE_PATH = "/com/deepin/daemon/Display";
+const QString DISPLAY_DAEMON_INTERFACE = "com.deepin.daemon.Display";
+const QString DISPLAY_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
+const QString DISPLAY_MONITOR_INTERFACE = "com.deepin.daemon.Display.Monitor";
+#endif
 
 ThreadExecXrandr::ThreadExecXrandr(bool gpu, bool isDXcbPlatform)
     : m_Gpu(gpu), m_isDXcbPlatform(isDXcbPlatform)

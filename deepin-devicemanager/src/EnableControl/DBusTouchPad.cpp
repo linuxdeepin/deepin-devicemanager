@@ -11,11 +11,20 @@
 #include <QDebug>
 #include <QDBusInterface>
 
+#ifdef OS_BUILD_V23
 const QString Service = "org.deepin.dde.InputDevices1";
+const QString Path = "/org/deepin/dde/InputDevice1/TouchPad";
+const QString Interface = "org.deepin.dde.InputDevice1.TouchPad";
+#else
+const QString Service = "com.deepin.daemon.InputDevices";
+const QString Path = "/com/deepin/daemon/InputDevice/TouchPad";
+const QString Interface = "com.deepin.daemon.InputDevice.TouchPad";
+#endif
+
 DBusTouchPad *DBusTouchPad::sInstance = nullptr;
 DBusTouchPad::DBusTouchPad()
     : QObject(nullptr)
-    , m_dbusTouchPad(new QDBusInterface(Service, "/org/deepin/dde/InputDevice1/TouchPad", "org.deepin.dde.InputDevice1.TouchPad", QDBusConnection::sessionBus(), this))
+    , m_dbusTouchPad(new QDBusInterface(Service, Path, Interface, QDBusConnection::sessionBus(), this))
 {
 }
 
