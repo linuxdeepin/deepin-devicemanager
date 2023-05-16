@@ -72,7 +72,6 @@ static bool isModeM900(void)
         QString cpuInfo = file.readAll();
         file.close();
         if(cpuInfo.contains("Hardware") && cpuInfo.contains("PANGU M900")){
-            qInfo() << "PANGU M900";
             return true;
         }
     }
@@ -102,6 +101,7 @@ QString Common::checkBoardVendorFlag()
     if(boardVendorKey.isEmpty() && isModeM900()){
         boardVendorKey = "PGUW";
     }
+    qInfo() << "boardVendorKey:" <<  boardVendorKey;
 
     initBoardVendorFlag = true;
     return boardVendorKey;
