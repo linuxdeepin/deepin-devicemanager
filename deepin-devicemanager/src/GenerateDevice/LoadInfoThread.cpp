@@ -27,6 +27,14 @@ LoadInfoThread::LoadInfoThread()
 
 LoadInfoThread::~LoadInfoThread()
 {
+    long long begin = QDateTime::currentMSecsSinceEpoch();
+    while (m_Running)
+    {
+        long long end = QDateTime::currentMSecsSinceEpoch();
+        if (end - begin > 100000)
+            exit();
+        usleep(100);
+    }
     mp_ReadFilePool.deleteLater();
     mp_GenerateDevicePool.deleteLater();
 }
