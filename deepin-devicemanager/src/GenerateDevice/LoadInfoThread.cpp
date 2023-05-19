@@ -12,7 +12,8 @@
 #include <QDateTime>
 #include <QTimer>
 
-#include<malloc.h>
+#include <malloc.h>
+#include <unistd.h>
 
 static bool firstLoadFlag = true;
 LoadInfoThread::LoadInfoThread()
@@ -31,8 +32,8 @@ LoadInfoThread::~LoadInfoThread()
     while (m_Running)
     {
         long long end = QDateTime::currentMSecsSinceEpoch();
-        if (end - begin > 100000)
-            exit();
+        if (end - begin > 1000)
+            _exit(0);
         usleep(100);
     }
     mp_ReadFilePool.deleteLater();
