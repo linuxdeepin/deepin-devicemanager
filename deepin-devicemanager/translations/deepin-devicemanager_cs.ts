@@ -21,17 +21,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation type="unfinished"/>
+        <translation>EC_NOTIFY_NETWORK</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>EC_REINSTALL</source>
-        <translation type="unfinished"/>
+        <translation>EC_REINSTALL</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
         <source>EC_6</source>
-        <translation type="unfinished"/>
+        <translation>EC_6</translation>
     </message>
 </context>
 <context>
@@ -1598,12 +1598,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Hardware</source>
-        <translation type="unfinished"/>
+        <translation>Vybavení</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="261"/>
         <source>Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Ovladače</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="363"/>
@@ -3500,7 +3500,7 @@
     <message>
         <location filename="../src/main.cpp" line="123"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"/>
+        <translation>Jsou dostupné nové ovladače! Nainstalujte nebo aktualizujte je nyní.</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="10"/>
@@ -3522,7 +3522,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="328"/>
         <source>Version Available</source>
-        <translation type="unfinished"/>
+        <translation>Dostupná verze</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="329"/>
@@ -3540,244 +3540,244 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="331"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="343"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Činnost</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="340"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>Nová verze</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="351"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Nynější verze</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="670"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Chybějící ovladače (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="671"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Zastaralé ovladače (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="672"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Aktuální ovladače (%1)</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="64"/>
         <source>%1 driver updates available</source>
-        <translation type="unfinished"/>
+        <translation>%1 dostupné aktualizace ovladače</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="67"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="332"/>
         <source>Time checked: %1</source>
-        <translation type="unfinished"/>
+        <translation>Kontrolovaný čas: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="115"/>
         <source>Downloading drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Stahují se ovladače pro %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="117"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"/>
+        <translation>Rychlost stahování %1 Staženo %2 z %3</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="163"/>
         <source>Installing drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Instalují se ovladače pro %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="205"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 ovladačů nainstalováná, %2 selhalo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="207"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"/>
+        <translation>%1 ovladačů nainstalováno</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="247"/>
         <source>Failed to install drivers</source>
-        <translation type="unfinished"/>
+        <translation>Instalace ovladačů selhala</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="287"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>Chyba připojení. Opětovné připojování...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="289"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>Rychlost stahování: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="329"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"/>
+        <translation>Všechny ovladače jsou aktuální</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="521"/>
         <source>reboot</source>
-        <translation type="unfinished"/>
+        <translation>restart</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="522"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"/>
+        <translation>Vydržte %1, aby se nainstalované ovladače projevily</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="525"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="259"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>odeslat zpětnou vazbu</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="526"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Zkuste to prosím znovu nebo %1 nám</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="529"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>Nainstalovat vše</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="534"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="263"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>Prohledat znovu</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="539"/>
         <source>Cancel</source>
-        <translation>Storno</translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="52"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Kontrola ovladačů hardwarových zařízení, počkejte prosím...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="60"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="310"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>Prohledává se %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="115"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Prohledání se nezdařilo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="173"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Síť není dostupná</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="177"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>Zkontrolujte, prosím, své síťové připojení</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="260"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Prohledejte znovu nebo %1 nám</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="478"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Probíhá instalace ovladače, která se po ukončení přeruší.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="479"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Opravdu chcete odejít?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="481"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Ukončit</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="482"/>
         <source>Cancel</source>
         <comment>button</comment>
-        <translation>Storno</translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="28"/>
         <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
+        <translation>Bluetooth adaptér</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="29"/>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation>Zobrazovací zařízení</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="30"/>
         <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <translation>Zobrazovací adaptér</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="32"/>
         <source>Sound card</source>
-        <translation type="unfinished"/>
+        <translation>Zvuková karta</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Síťový adaptér</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="38"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Wi-Fi adaptér</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Installation successful</source>
-        <translation type="unfinished"/>
+        <translation>Instalace proběhla úspešně</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation>Instalace se nezdařila</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Downloading</source>
-        <translation type="unfinished"/>
+        <translation>Stahuje se</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="55"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Probíhá instalace</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="56"/>
         <source>Not installed</source>
-        <translation type="unfinished"/>
+        <translation>Není nainstalováno</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="57"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <translation>Zastaralé</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="58"/>
         <source>Waiting</source>
-        <translation type="unfinished"/>
+        <translation>Čekání</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="62"/>
@@ -3787,17 +3787,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="63"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation>Chyba připojení</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation>Zrušeno</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"/>
+        <translation>Nepodařilo se získat soubory ovladače</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
@@ -3807,7 +3807,7 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>Instalovat</translation>
     </message>
 </context>
 <context>

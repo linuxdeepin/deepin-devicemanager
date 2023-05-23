@@ -354,7 +354,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
         <source>Threads</source>
-        <translation>Wątki</translation>
+        <translation>Wątków</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
@@ -386,7 +386,7 @@
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="103"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="116"/>
         <source>Processor</source>
-        <translation>Wątków</translation>
+        <translation>Procesor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="114"/>
@@ -431,7 +431,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="239"/>
         <source>Stepping</source>
-        <translation>Wkraczanie</translation>
+        <translation>Rewizja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="250"/>
@@ -499,12 +499,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="215"/>
         <source>Minimum Resolution</source>
-        <translation>Minimalna rozdzielczość</translation>
+        <translation>Rozdzielczość minimalna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="216"/>
         <source>Current Resolution</source>
-        <translation>Aktualna rozdzielczość</translation>
+        <translation>Rozdzielczość aktualna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="217"/>
@@ -841,7 +841,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1076"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1107"/>
         <source>OS</source>
-        <translation>OS</translation>
+        <translation>System</translation>
     </message>
 </context>
 <context>
@@ -879,7 +879,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="115"/>
         <source>Total Width</source>
-        <translation>Całkowita szerokość</translation>
+        <translation>Szerokość całkowita</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="116"/>
@@ -894,22 +894,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="124"/>
         <source>Configured Voltage</source>
-        <translation>Skonfigurowane napięcie</translation>
+        <translation>Napięcie skonfigurowane</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="125"/>
         <source>Maximum Voltage</source>
-        <translation>Maksymalne napięcie</translation>
+        <translation>Napięcie maksymalne</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="126"/>
         <source>Minimum Voltage</source>
-        <translation>Minimalne napięcie</translation>
+        <translation>Napięcie minimalne</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="127"/>
         <source>Configured Speed</source>
-        <translation>Skonfigurowana prędkość</translation>
+        <translation>Prędkość skonfigurowana</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="128"/>
@@ -952,7 +952,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="232"/>
         <source>Current Resolution</source>
-        <translation>Aktualna rozdzielczość</translation>
+        <translation>Rozdzielczość aktualna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="233"/>
@@ -1050,7 +1050,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="222"/>
         <source>Latency</source>
-        <translation>Czas oczekiwania</translation>
+        <translation>Opóźnienie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="223"/>
@@ -1060,17 +1060,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="224"/>
         <source>Firmware</source>
-        <translation>Oprogramowanie układowe</translation>
+        <translation>Firmware</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="225"/>
         <source>Duplex</source>
-        <translation>Dwustronny</translation>
+        <translation>Dupleks</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="226"/>
         <source>Broadcast</source>
-        <translation>Nadawanie</translation>
+        <translation>Broadcast</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="227"/>
@@ -1357,7 +1357,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="140"/>
         <source>Shared</source>
-        <translation>Udostępniony</translation>
+        <translation>Udostępniona</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="141"/>
@@ -1398,7 +1398,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="379"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="408"/>
         <source>Media Type</source>
-        <translation>Typ mediów</translation>
+        <translation>Typ nośnika</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="380"/>
@@ -1463,7 +1463,7 @@
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="118"/>
         <source>No drivers found in this folder</source>
-        <translation>Nie znaleziono sterowników w tym katalogu</translation>
+        <translation>Nie znaleziono sterowników w tym folderze</translation>
     </message>
 </context>
 <context>
@@ -1684,7 +1684,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="142"/>
         <source>Uninstalling</source>
-        <translation>Odinstalowywanie</translation>
+        <translation>Odinstalowuję</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="168"/>
@@ -1721,13 +1721,13 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="216"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation>Zaznaczony katalog nie istnieje, spróbuj ponownie</translation>
+        <translation>Zaznaczony folder nie istnieje, spróbuj wybrać inny</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="221"/>
         <source>Update</source>
         <comment>button</comment>
-        <translation>Zaktualizuj</translation>
+        <translation>Aktualizuj</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="222"/>
@@ -1820,7 +1820,7 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="174"/>
         <source>Update Drivers</source>
-        <translation>Zaktualizuj sterowniki</translation>
+        <translation>Aktualizuj sterowniki</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="192"/>
@@ -1877,7 +1877,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="37"/>
         <source>Update drivers</source>
-        <translation>Zaktualizuj sterowniki</translation>
+        <translation>Aktualizuj sterowniki</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="38"/>
@@ -1887,7 +1887,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="39"/>
         <source>Allow it to wake the computer</source>
-        <translation>Zezwól urządzeniu na obudzenie komputera</translation>
+        <translation>Zezwól urządzeniu na wybudzenie komputera</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="179"/>
@@ -1913,7 +1913,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="297"/>
         <source>Update Drivers</source>
-        <translation>Zaktualizuj sterowniki</translation>
+        <translation>Aktualizuj sterowniki</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="314"/>
@@ -1927,7 +1927,7 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="207"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>SubVendor</source>
-        <translation>Podwykonawca</translation>
+        <translation>Podproducent</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="208"/>
@@ -1966,7 +1966,7 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="197"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="366"/>
         <source>physical id</source>
-        <translation>identyfikator fizyczny</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="215"/>
@@ -1987,7 +1987,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="219"/>
         <source>Handlers</source>
-        <translation>Rączki</translation>
+        <translation>Uchwyty</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="220"/>
@@ -2071,7 +2071,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="152"/>
         <source>Runtime Size</source>
-        <translation>Rozmiar środowiska wykonawczego</translation>
+        <translation>Rozmiar Runtime</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="153"/>
@@ -2086,12 +2086,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="155"/>
         <source>BIOS Revision</source>
-        <translation>Wersja systemu BIOS</translation>
+        <translation>Rewizja BIOS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="156"/>
         <source>Firmware Revision</source>
-        <translation>Wersja Firmware</translation>
+        <translation>Rewizja firmware</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="158"/>
@@ -2127,7 +2127,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="163"/>
         <source>Chassis Handle</source>
-        <translation>Rączka obudowy</translation>
+        <translation>Uchwyt obudowy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="164"/>
@@ -2138,7 +2138,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="165"/>
         <source>Contained Object Handles</source>
-        <translation>Zaznaczony przedmiot zajmuje się</translation>
+        <translation>Uchwyty zajętych obiektów</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="169"/>
@@ -2149,7 +2149,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="170"/>
         <source>Wake-up Type</source>
-        <translation>Typ budzenia</translation>
+        <translation>Typ wybudzania</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="171"/>
@@ -2420,13 +2420,13 @@
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="102"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="364"/>
         <source>logical name</source>
-        <translation>nazwa logiczna</translation>
+        <translation>Nazwa logiczna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="104"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="362"/>
         <source>ansiversion</source>
-        <translation>Wersja ansi</translation>
+        <translation>Wersja ANSI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
@@ -2451,7 +2451,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>CPU revision</source>
-        <translation>Wersja CPU</translation>
+        <translation>Rewizja CPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="266"/>
@@ -2796,7 +2796,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GPU vendor</source>
-        <translation>Dostawca GPU</translation>
+        <translation>Producent GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
@@ -3130,12 +3130,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="85"/>
         <source>Array Handle</source>
-        <translation>Szyk rączek</translation>
+        <translation>Uchwyt tablicy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="87"/>
         <source>Form Factor</source>
-        <translation>Współczynnik kształtu</translation>
+        <translation>Specyfikacja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="88"/>
@@ -3145,12 +3145,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="89"/>
         <source>Bank Locator</source>
-        <translation>Lokalizator banków</translation>
+        <translation>Położenie banku</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="90"/>
         <source>Type Detail</source>
-        <translation>Wpisz szczegół</translation>
+        <translation>Szczegóły typu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="92"/>
@@ -3170,7 +3170,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="95"/>
         <source>Memory Operating Mode Capability</source>
-        <translation>Możliwość trybu pracy pamięci</translation>
+        <translation>Możliwości trybu pracy pamięci</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="96"/>
@@ -3185,7 +3185,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="98"/>
         <source>Module Product ID</source>
-        <translation>ID produktu modułu</translation>
+        <translation>ID modułu produktu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="99"/>
@@ -3195,17 +3195,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="100"/>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation>ID kontrolera pamięci subsystemu</translation>
+        <translation>ID kontrolera pamięci podsystemu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="101"/>
         <source>Non-Volatile Size</source>
-        <translation>Rozmiar Zmiennej nie-ulotnej</translation>
+        <translation>Rozmiar pamięci nieulotnej</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="102"/>
         <source>Volatile Size</source>
-        <translation>Rozmiar zmiennej ulotnej</translation>
+        <translation>Rozmiar pamięci ulotnej</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="103"/>
@@ -3234,7 +3234,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="196"/>
         <source>ioport</source>
-        <translation>portio</translation>
+        <translation>Port we/wy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="198"/>
@@ -3410,7 +3410,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="118"/>
         <source>printer-is-shared</source>
-        <translation>drukarka-jest-udostępniona</translation>
+        <translation>drukarka-jest-współdzielona</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="119"/>
@@ -3479,7 +3479,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="368"/>
         <source>guid</source>
-        <translation>guid</translation>
+        <translation>GUID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="371"/>
@@ -3560,12 +3560,12 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="671"/>
         <source>Outdated drivers (%1)</source>
-        <translation>Nieaktualne sterowniki (%1)</translation>
+        <translation>Sterowniki nieaktualne (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="672"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation>Aktualne sterowniki (%1)</translation>
+        <translation>Sterowniki aktualne (%1)</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="64"/>
@@ -3705,7 +3705,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="481"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation>Wyjście</translation>
+        <translation>Wyjdź</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="482"/>
@@ -3722,7 +3722,7 @@
         <location filename="../src/Tool/commontools.cpp" line="29"/>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Imaging device</source>
-        <translation>Urządzenie przechwytywania</translation>
+        <translation>Urządzenie przechwytujące</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="30"/>
@@ -3802,7 +3802,7 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
         <source>Update</source>
-        <translation>Zaktualizuj</translation>
+        <translation>Aktualizuj</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="249"/>
@@ -3831,7 +3831,7 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="33"/>
         <source>Update drivers</source>
-        <translation>Zaktualizuj sterowniki</translation>
+        <translation>Aktualizuj sterowniki</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="34"/>
@@ -3841,7 +3841,7 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="35"/>
         <source>Allow it to wake the computer</source>
-        <translation>Zezwól urządzeniu na obudzenia komputera</translation>
+        <translation>Zezwól urządzeniu na wybudzenie komputera</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="208"/>
@@ -3883,7 +3883,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="97"/>
         <source>Select a local folder please</source>
-        <translation>Wybierz katalog lokalny</translation>
+        <translation>Wybierz folder lokalny</translation>
     </message>
 </context>
 <context>

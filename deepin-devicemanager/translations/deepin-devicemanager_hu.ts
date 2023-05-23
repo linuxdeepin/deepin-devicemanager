@@ -114,7 +114,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="243"/>
         <source>Chip</source>
-        <translation>Lapka</translation>
+        <translation>Chip</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="244"/>
