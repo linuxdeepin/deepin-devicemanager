@@ -162,3 +162,18 @@ void KLUGenerator::getNetworkInfoFromCatWifiInfo()
         DeviceManager::instance()->setNetworkInfoFromWifiInfo(tempMap);
     }
 }
+
+void KLUGenerator::generatorMonitorDevice()
+{
+    QMap<QString, QString> mapInfo;
+    mapInfo.insert("Name", "LCD");
+//    mapInfo.insert("Vendor", "HUAWEI");
+    mapInfo.insert("CurResolution", "2160x1440@60Hz");
+    mapInfo.insert("SupportResolution", "2160x1440@60Hz");
+    mapInfo.insert("Size", "14 Inch");
+//    mapInfo.insert("Date", "2019年7月");
+
+    DeviceMonitor *monitor = new  DeviceMonitor();
+    monitor->setInfoFromSelfDefine(mapInfo);
+    DeviceManager::instance()->addMonitor(monitor);
+}
