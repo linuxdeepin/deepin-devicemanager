@@ -24,7 +24,7 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     if (!matchToLshw(mapInfo))
         return;
-
+    QString            tmp_Name = m_Name;
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor, false);
     setAttribute(mapInfo, "product", m_Model, false);
@@ -35,6 +35,13 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
     setAttribute(mapInfo, "logical name", m_LogicalName);
+
+    if(m_Driver.isEmpty() && !m_Avail.compare("yes", Qt::CaseInsensitive)){
+        setForcedDisplay(true);
+        setCanEnale(false);
+        if(!(tmp_Name.contains("fingerprint", Qt::CaseInsensitive) || tmp_Name. contains("MOH", Qt::CaseInsensitive)))
+            setCanUninstall(false);
+    }
 
     // 核内驱动不显示卸载菜单
     if (driverIsKernelIn(m_Driver)) {
@@ -87,6 +94,7 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_CanEnable = false;
         m_CanUninstall = false;
     }
+    setAttribute(mapInfo, "cfg_avail", m_Avail);
 
     getOtherMapInfo(mapInfo);
     // 核内驱动不显示卸载菜单
