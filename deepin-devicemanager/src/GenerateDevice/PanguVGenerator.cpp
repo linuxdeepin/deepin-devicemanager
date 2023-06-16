@@ -17,38 +17,8 @@ PanguVGenerator::PanguVGenerator()
 
 }
 
-void PanguVGenerator::generatorMonitorDevice()
+void parseEDID(QStringList allEDIDS,QString input)
 {
-    // 生成显示设备信息
-//    const QList<QMap<QString, QString>> lstMapHDMI = DeviceManager::instance()->cmdInfo("EDID_HDMI");
-//    QList<QMap<QString, QString> >::const_iterator itHDMI = lstMapHDMI.begin();
-//    for (; itHDMI != lstMapHDMI.end(); ++itHDMI) {
-//        if ((*itHDMI).size() < 1)
-//            continue;
-
-//        //HDMI interface EDID information
-//        DeviceMonitor *device = new  DeviceMonitor();
-//        device->setInfoFromEdid(*itHDMI);
-//        DeviceManager::instance()->addMonitor(device);
-//    }
-
-//    const QList<QMap<QString, QString>> lstMapVGA = DeviceManager::instance()->cmdInfo("EDID_VGA");
-//    QList<QMap<QString, QString> >::const_iterator it = lstMapVGA.begin();
-//    for (; it != lstMapVGA.end(); ++it) {
-//        if ((*it).size() < 1)
-//            continue;
-
-//        //VGA interface EDID information
-//        DeviceMonitor *device = new DeviceMonitor();
-//        device->setInfoFromEdid(*it);
-//        DeviceManager::instance()->addMonitor(device);
-//    }
-
-    QStringList allEDIDS;
-    allEDIDS.append("/sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid");
-    allEDIDS.append("/sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid");
-    allEDIDS.append("/sys/devices/platform/hldrm/drm/card0/card0-HDMI-A-1/edid");
-    allEDIDS.append("/sys/devices/platform/hldrm/drm/card0/card0-VGA-1/edid");
     for (auto edid:allEDIDS) {
         QProcess process;
         process.start(QString("hexdump %1").arg(edid));
@@ -81,13 +51,26 @@ void PanguVGenerator::generatorMonitorDevice()
             mapInfo.insert("Vendor",edidParser.vendor());
             mapInfo.insert("Date",edidParser.releaseDate());
             mapInfo.insert("Size",edidParser.screenSize());
+            mapInfo.insert("Display Input",input);
 
             DeviceMonitor *device = new DeviceMonitor();
             device->setInfoFromEdid(mapInfo);
             DeviceManager::instance()->addMonitor(device);
         }
     }
+}
 
+void PanguVGenerator::generatorMonitorDevice()
+{
+    QStringList allEDIDS1;
+    allEDIDS1.append("/sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid");
+    allEDIDS1.append("/sys/devices/platform/hldrm/drm/card0/card0-HDMI-A-1/edid");
+    parseEDID(allEDIDS1,"HDMI-A-1");
+
+    QStringList allEDIDS2;
+    allEDIDS2.append("/sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid");
+    allEDIDS2.append("/sys/devices/platform/hldrm/drm/card0/card0-VGA-1/edid");
+    parseEDID(allEDIDS2,"VGA-1");
 }
 
 void PanguVGenerator::generatorNetworkDevice()
