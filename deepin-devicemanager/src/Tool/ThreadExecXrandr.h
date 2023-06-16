@@ -53,6 +53,12 @@ private:
     void getResolutionFromDBus(QMap<QString, QString> &lstMap);
 
     /**
+     * @brief getResolutionRateFromDBus:通过dbus获取分辨率和刷新率
+     * @param lstMap
+     */
+    void getResolutionRateFromDBus(QList<QMap<QString, QString> > &lstMap);
+
+    /**
      * @brief getMonitorInfoFromXrandrVerbose:从xrandr --verbose获取显示设备信息
      */
     void getMonitorInfoFromXrandrVerbose();

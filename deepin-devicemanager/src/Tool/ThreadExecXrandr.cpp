@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "ThreadExecXrandr.h"
+#include "commonfunction.h"
 
 #include <QProcess>
 #include <QDebug>
@@ -48,8 +49,12 @@ void ThreadExecXrandr::run()
 {
     if (m_Gpu) {
         getGpuInfoFromXrandr();
-    } else {
-        getMonitorInfoFromXrandrVerbose();
+    } else {           
+       if(Common::boardVendorType() == "PGUV") {
+           QList<QMap<QString, QString>> lstMap;
+           getResolutionRateFromDBus(lstMap);
+       }else 
+            getMonitorInfoFromXrandrVerbose();
     }
 }
 
@@ -349,5 +354,71 @@ void ThreadExecXrandr::getGpuInfoFromXrandr()
             continue;
 
         DeviceManager::instance()->setGpuInfoFromXrandr(*it);
+    }
+}
+
+void ThreadExecXrandr::getResolutionRateFromDBus(QList<QMap<QString, QString> > &lstMap)
+{
+    QDBusInterface displayInterface(DISPLAY_DAEMON_SERVICE_NAME, DISPLAY_DAEMON_SERVICE_PATH, DISPLAY_DAEMON_INTERFACE, QDBusConnection::sessionBus());
+    if (!displayInterface.isValid())
+        return;
+
+    QVariant monitors = displayInterface.property("Monitors");
+
+    if (!monitors.isValid())
+        return;
+
+    QList<QDBusObjectPath> monitorList = monitors.value<QList<QDBusObjectPath> >();
+    for (auto monitor : monitorList) {
+        if (monitor.path().isEmpty())
+            continue;
+
+        QDBusInterface monitorEnabledInterface(DISPLAY_DAEMON_SERVICE_NAME, monitor.path(), DISPLAY_MONITOR_INTERFACE, QDBusConnection::sessionBus());
+        if (!monitorEnabledInterface.isValid())
+            continue;
+
+        QVariant enbaled = monitorEnabledInterface.property("Enabled");
+        if (!enbaled.isValid() || !enbaled.toBool())
+            continue;
+        QVariant tconnected = monitorEnabledInterface.property("Connected");
+        QVariant tmanufacture = monitorEnabledInterface.property("Manufacturer");
+        QVariant tname = monitorEnabledInterface.property("Name");
+
+        // QVariant rep_currentRes = monitorEnabledInterface.property("CurrentMode");
+
+        QDBusInterface monitorInterface(DISPLAY_DAEMON_SERVICE_NAME, monitor.path(), DISPLAY_PROPERTIES_INTERFACE, QDBusConnection::sessionBus());
+        if (!monitorInterface.isValid())
+            continue;
+
+        QDBusMessage replay = monitorInterface.call("Get", DISPLAY_MONITOR_INTERFACE, "CurrentMode");   // "com.deepin.daemon.Display.Monitor","CurrentMode"
+        QVariant v =  replay.arguments().first();
+        qDebug() << v.value<QDBusVariant>().variant();
+        QDBusArgument arg = v.value<QDBusVariant>().variant().value<QDBusArgument>();
+
+        int curResolutionWidth = -1, curResolutionHeight = -1;
+        double resRate = 0;
+        {
+           MonitorResolution resolution;
+           arg >> resolution;
+
+            curResolutionWidth = resolution.width;
+            curResolutionHeight = resolution.height;
+            resRate = resolution.refreshRate;
+            QMap<QString,QString>infoMap;
+            QString tmpS = QString("%1 x %2 @").arg(curResolutionWidth).arg(curResolutionHeight)  + QString::number(resRate, 'f', 2);
+            infoMap.insert("CurResolution", tmpS + "Hz");
+            infoMap.insert("Name", tname.toString());
+            infoMap.insert("Display Input", tname.toString());
+            infoMap.insert("Manufacture", tmanufacture.toString());
+            lstMap.append(infoMap);
+        }  //end of while
+    }  //end of for
+
+    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
+    for (; it != lstMap.end(); ++it) {
+        if ((*it).size() < 1)
+            continue;
+
+        DeviceManager::instance()->setMonitorInfoFromDbus(*it);
     }
 }

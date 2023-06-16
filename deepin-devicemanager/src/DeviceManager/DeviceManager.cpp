@@ -878,6 +878,20 @@ void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString 
     }
 }
 
+void DeviceManager::setMonitorInfoFromDbus(const QMap<QString, QString> &mapInfo)
+{
+    // 从 dbus 中添加显示设备信息
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceMonitor.begin();
+    for (; it != m_ListDeviceMonitor.end(); ++it) {
+        DeviceMonitor *device = dynamic_cast<DeviceMonitor *>(*it);
+        if (!device)
+            continue;
+
+        device->setInfoFromDbus(mapInfo);
+
+    }
+}
+
 void DeviceManager::addBiosDevice(DeviceBios *const device)
 {
     // 添加主板信息
