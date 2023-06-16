@@ -47,6 +47,12 @@ private:
     void getRefreshRateFromDBus(QList<QMap<QString, QString>> &lstMap);
 
     /**
+     * @brief getResolutionRateFromDBus:通过dbus获取分辨率和刷新率
+     * @param lstMap
+     */
+    void getResolutionRateFromDBus(QList<QMap<QString, QString> > &lstMap);
+
+    /**
      * @brief getResolutionFromDBus:通过dbus获取分辨率
      * @param lstMap
      */
