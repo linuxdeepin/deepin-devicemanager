@@ -160,7 +160,16 @@ void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Date", m_ProductionWeek);
+    setAttribute(mapInfo, "Display Input", m_DisplayInput);
     getOtherMapInfo(mapInfo);
+}
+
+void DeviceMonitor::setInfoFromDbus(const QMap<QString, QString> &mapInfo)
+{
+    if(mapInfo["Name"].toLower().contains(m_DisplayInput.toLower(),Qt::CaseInsensitive))
+    {
+        setAttribute(mapInfo, "CurResolution", m_CurrentResolution);
+    }
 }
 
 QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
