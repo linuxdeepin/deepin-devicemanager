@@ -78,6 +78,20 @@ static bool isModeM900(void)
     return false;
 }
 
+/*   dmidecode | grep -i “String 4”中的值来区分主板类型,PWC30表示PanguW（也就是W525）*/
+static bool isModeW525(void)
+{
+    bool ret = false;
+    QProcess process;
+    process.start("bash", QStringList() << "-c" << "dmidecode | grep -i \"String 4\"");
+    process.waitForStarted();
+    process.waitForFinished();
+    QString result = process.readAll();
+    ret = result.contains("PWC30", Qt::CaseInsensitive);    //w525
+    process.close();
+    return ret;
+}
+
 QString Common::checkBoardVendorFlag()
 {
     QProcess process;
@@ -98,7 +112,7 @@ QString Common::checkBoardVendorFlag()
     }
     process.close();
 
-    if(boardVendorKey.isEmpty() && isModeM900()){
+    if(boardVendorKey.isEmpty() && (isModeM900() || isModeW525())){
         boardVendorKey = "PGUW";
     }
     qInfo() << "boardVendorKey:" <<  boardVendorKey;
