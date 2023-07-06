@@ -26,6 +26,9 @@
 #include <DTitlebar>
 #include <DDialog>
 #include <QShortcut>
+#ifdef DTKCORE_CLASS_DConfigFile
+#include <DConfig>
+#endif
 
 // Qt库文件
 #include <QResizeEvent>
@@ -345,6 +348,15 @@ void MainWindow::initWindowTitle()
         }
     });
     titlebar()->addWidget(mp_ButtonBox);
+#ifdef DTKCORE_CLASS_DConfigFile
+    //需要查询是否支持特殊机型静音恢复，例如hw机型
+    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
+    //需要判断Dconfig文件是否合法
+    if(dconfig && dconfig->isValid() && dconfig->keyList().contains("specialComType")){
+        Common::specialComType = dconfig->value("specialComType").toInt();
+    }
+    qInfo() << "Common::specialComType value is:" << Common::specialComType;
+#endif
     // 特殊处理
     if (!Common::boardVendorType().isEmpty())
         mp_ButtonBox->hide();
