@@ -166,8 +166,7 @@ void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
 
 void DeviceMonitor::setInfoFromDbus(const QMap<QString, QString> &mapInfo)
 {
-    if(mapInfo["Name"].toLower().contains(m_DisplayInput.toLower(),Qt::CaseInsensitive))
-    {
+    if (mapInfo["Name"].toLower().contains(m_DisplayInput.toLower(), Qt::CaseInsensitive)) {
         setAttribute(mapInfo, "CurResolution", m_CurrentResolution);
     }
 }
@@ -184,8 +183,25 @@ QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
 bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, const QString &rate)
 {
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
-    if (!m_Interface.isEmpty())
+    if (!m_Interface.isEmpty()) {
+        // 设置当前分辨率
+        if (m_CurrentResolution.isEmpty()) {
+            QRegExp reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
+            if (reScreenSize.exactMatch(main)) {
+                if (!rate.isEmpty()) {
+                    QString curRate = rate;
+                    QRegExp rateStart("[a-zA-Z]");
+                    int pos = curRate.indexOf(rateStart);
+                    if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
+                        curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
+                    }
+                    m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate);
+                } else
+                    m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+            }
+        }
         return false;
+    }
 
     if (main.contains("disconnected"))
         return false;
