@@ -27,6 +27,7 @@ static QMap<QString, QString> mapArch = {   {"aarch64", "arm64"}
 
 static bool initBoardVendorFlag = false;
 static QString boardVendorKey = "";
+int Common::specialComType = -1;
 
 QString Common::getArch()
 {
@@ -93,29 +94,52 @@ static bool isModeW525(void)
 
 QString Common::checkBoardVendorFlag()
 {
-    QProcess process;
-    process.start("dmidecode", QStringList() << "-s" << "system-product-name");
-    process.waitForFinished(-1);
-    QString info = process.readAllStandardOutput();
-    if (info.isEmpty()) {
-        getDeviceInfo(info, "dmidecode_spn.txt");
-    }
-    if (info.contains("KLVV", Qt::CaseInsensitive) || info.contains("L540", Qt::CaseInsensitive)) {
-        boardVendorKey = "KLVV";
-    } else if (info.contains("KLVU", Qt::CaseInsensitive)) {
-        boardVendorKey = "KLVU";
-    } else if (info.contains("PGUV", Qt::CaseInsensitive)|| info.contains("W585", Qt::CaseInsensitive)) {
-        boardVendorKey = "PGUV";
-    } else if (info.contains("PGUW", Qt::CaseInsensitive)) {
-        boardVendorKey = "PGUW";
-    }
-    process.close();
+    if(specialComType != -1){
+        switch (specialComType) {
+        case NormalCom:
+            boardVendorKey = "";
+            break;
+        case PGUW:
+            boardVendorKey = "PGUW";
+            break;
+        case KLVV:
+            boardVendorKey = "KLVV";
+            break;
+        case KLVU:
+            boardVendorKey = "KLVU";
+            break;
+        case PGUV:
+            boardVendorKey = "PGUV";
+            break;
+        default:
+            boardVendorKey = "PGUW";
+            break;
+        }
+    }else{
+        QProcess process;
+        process.start("dmidecode", QStringList() << "-s" << "system-product-name");
+        process.waitForFinished(-1);
+        QString info = process.readAllStandardOutput();
+        if (info.isEmpty()) {
+            getDeviceInfo(info, "dmidecode_spn.txt");
+        }
+        if (info.contains("KLVV", Qt::CaseInsensitive) || info.contains("L540", Qt::CaseInsensitive)) {
+            boardVendorKey = "KLVV";
+        } else if (info.contains("KLVU", Qt::CaseInsensitive)) {
+            boardVendorKey = "KLVU";
+        } else if (info.contains("PGUV", Qt::CaseInsensitive) || info.contains("W585", Qt::CaseInsensitive)) {
+            boardVendorKey = "PGUV";
+        } else if (info.contains("PGUW", Qt::CaseInsensitive)) {
+            boardVendorKey = "PGUW";
+        }
+        process.close();
 
-    if(boardVendorKey.isEmpty() && (isModeM900() || isModeW525())){
-        boardVendorKey = "PGUW";
+        if(boardVendorKey.isEmpty() && (isModeM900() || isModeW525())){
+            boardVendorKey = "PGUW";
+        }
+        qInfo() << "boardVendorKey:" <<  boardVendorKey;
     }
-    qInfo() << "boardVendorKey:" <<  boardVendorKey;
-
+    qInfo() << "Current special computer type is " << boardVendorKey;
     initBoardVendorFlag = true;
     return boardVendorKey;
 }

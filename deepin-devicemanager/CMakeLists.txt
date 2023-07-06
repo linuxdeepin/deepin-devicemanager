@@ -150,6 +150,14 @@ install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION ${CMAKE_INSTAL
 install(FILES ${APP_AUTHENTICATION} DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions)
 install(FILES ${APP_SERVICE} DESTINATION ${CMAKE_INSTALL_DATADIR}/dbus-1/services)
 
+#hw机型增加DConfig配置
+set(APPID org.deepin.devicemanager)
+set(configFile ${PROJECT_SOURCE_DIR}/assets/org.deepin.devicemanager.json)
+if (DEFINED DSG_DATA_DIR)
+    message("-- DConfig is supported by DTK")
+    dconfig_meta_files(APPID ${APPID} FILES ${configFile})
+endif()
+
 # Test--------deepin-devicemanager
 if (CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")
    add_subdirectory(./tests)
