@@ -84,6 +84,9 @@ QString Common::checkBoardVendorFlag()
 {
     if(specialComType != -1){
         switch (specialComType) {
+        case NormalCom:
+            boardVendorKey = "";
+            break;
         case PGUW:
             boardVendorKey = "PGUW";
             break;
