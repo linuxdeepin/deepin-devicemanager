@@ -88,7 +88,8 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (m_SerialNumber.isEmpty()) {
         setAttribute(mapInfo, "Serial ID", m_SerialNumber);
     }
-
+    if (m_SerialNumber.compare("0",Qt::CaseInsensitive) == 0)
+        m_SerialNumber = "";
 
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
@@ -561,6 +562,9 @@ void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
     QRegExp re(".*\\((.*)\\)$");
     if (re.exactMatch(m_Size))
         m_Size = re.cap(1);
+
+    if (m_SerialNumber.compare("0",Qt::CaseInsensitive) == 0)
+        m_SerialNumber = "";
 }
 
 void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
