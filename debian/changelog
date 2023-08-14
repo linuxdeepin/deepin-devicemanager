@@ -1,3 +1,10 @@
+deepin-devicemanager (5.9.19) unstable; urgency=medium
+
+  * New version 5.9.19
+  * 修复某些型号U盘不认识
+
+ -- shuaijie <shuaijie@uniontech.com>  Mon, 14 Aug 2023 15:05:32 +0800
+
 deepin-devicemanager (5.9.12) unstable; urgency=medium
 
   * New version 5.9.12
