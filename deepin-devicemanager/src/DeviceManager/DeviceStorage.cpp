@@ -322,6 +322,9 @@ void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
 
 QString DeviceStorage::getDiskSerialID()
 {
+    if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
+        return m_SerialNumber + m_KeyToLshw;
+    }
     return m_SerialNumber;
 }
 
