@@ -164,10 +164,19 @@ void EDIDParser::parseReleaseDate()
 void EDIDParser::parseScreenSize()
 {
     // edid中的  15H和16H就是屏幕大小
-    m_Width = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt();
-    m_Height = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt();
-    double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54));
-    m_ScreenSize = QString("%1 %2(%3cm X %4cm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+    if(m_LittleEndianMode){
+        QString tmpw = getBytes(4,2);
+        QString tmph = getBytes(4,3);
+        QString tmpshl = getBytes(4,4);
+        m_Width = hexToDec(tmpshl.mid(0,1) + tmpw).toInt();
+        m_Height = hexToDec(tmpshl.mid(1,1) + tmph).toInt();
+    }else {
+        m_Width = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt()*10;
+        m_Height = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt()*10;
+    }
+
+    double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;
+    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
 }
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
