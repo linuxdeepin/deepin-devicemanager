@@ -387,7 +387,7 @@ void DeviceMonitor::caculateScreenSize()
         m_Height = re.cap(2).toInt();
 
         double inch = std::sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54)) / 10.0;
-        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
     }
 }
 
@@ -416,7 +416,7 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
     if (fabs(width * 10 - m_Width) < 10 && fabs(height * 10 - m_Height) < 10)
         return true;
 
-    double inch = std::sqrt(height * height + width * width) / 2.54;
-    m_ScreenSize = QString("%1 %2(%3cm X %4cm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
+    double inch = std::sqrt(height * height + width * width) / 2.54 / 10;
+    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
     return true;
 }
