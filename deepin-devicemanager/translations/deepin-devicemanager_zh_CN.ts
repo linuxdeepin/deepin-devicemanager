@@ -388,7 +388,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
         <source>BogoMIPS</source>
-        <translation>BogoMIPS</translation>
+        <translation>运行速度（Bogomips）</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
