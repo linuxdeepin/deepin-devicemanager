@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.12) unstable; urgency=medium
+
+  * Community Edition removal devicemanager.list.
+
+ -- LiChengGang <lichenggang@uniontech.com>  Tue, 29 Aug 2023 17:11:02 +0800
+
 deepin-devicemanager (6.0.11) unstable; urgency=medium
 
   * new version 6.0.11

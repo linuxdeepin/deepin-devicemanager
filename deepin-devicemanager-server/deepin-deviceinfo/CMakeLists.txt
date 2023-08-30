@@ -34,6 +34,8 @@ file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 link_libraries("udev")
 
 find_package(Qt5 COMPONENTS Core DBus REQUIRED)
+find_package(DtkCore REQUIRED)
+
 
 add_library(${BIN_NAME} MODULE
     ${SRC_CPP}
@@ -48,6 +50,7 @@ target_include_directories(${BIN_NAME} PUBLIC
 target_link_libraries(${BIN_NAME} PRIVATE
   Qt5::Core
   Qt5::DBus
+  ${DtkCore_LIBRARIES}
 )
 
     install(TARGETS ${BIN_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/deepin-service-manager/)

@@ -15,6 +15,8 @@
 #include <QDebug>
 #include <QTimer>
 
+#include <DSysInfo>
+
 static QMutex mainJobMutex;
 static bool s_ServerIsUpdating = false;
 static bool s_ClientIsUpdating = false;
@@ -37,7 +39,12 @@ MainJob::MainJob(const char *name, QObject *parent)
 
     // 在驱动管理延迟加载1000ms
     QTimer::singleShot(1000, this, [ = ]() {
+        
+    DTK_CORE_NAMESPACE::DSysInfo::UosEdition type = DTK_CORE_NAMESPACE::DSysInfo::uosEditionType();
+    if (DTK_CORE_NAMESPACE::DSysInfo::UosCommunity != type ) {
         initDriverRepoSource();
+    }
+
 
         // 后台加载后先禁用设备
         QProcess process;
