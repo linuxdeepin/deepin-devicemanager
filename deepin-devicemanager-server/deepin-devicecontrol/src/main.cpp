@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
+
     ControlInterface controlInterface;
     QDBusConnection connection = controlInterface.qDbusConnection();
     if (!connection.registerObject("/org/deepin/DeviceControl", &controlInterface,
@@ -29,6 +30,5 @@ int main(int argc, char *argv[])
     if (!connection.registerService("org.deepin.DeviceControl")) {
         qWarning() << "failed to register dbus object" << connection.lastError().message();
     }
-
     return a.exec();
 }
