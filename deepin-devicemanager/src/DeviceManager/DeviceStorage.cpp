@@ -358,7 +358,7 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
         QString type2;
         if (index >= 0) {
             num2 = reg.cap(0).toDouble();
-            type2 = m_Size.right(size.length() - reg.cap(0).size()).trimmed();
+            type2 = size.right(size.length() - reg.cap(0).size()).trimmed();
         }
         // 匹配大小
         if (type1 != type2) {
