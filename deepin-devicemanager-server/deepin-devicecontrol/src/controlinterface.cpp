@@ -80,8 +80,10 @@ bool ControlInterface::getUserAuthorPasswd()
 
 ControlInterface::ControlInterface(QObject *parent)
     : QDBusService(parent)
+#ifndef DISABLE_DRIVER
     , mp_drivermanager(new DriverManager(this))
     , pcore(new ModCore(this))
+#endif
 {
     initPolicy(QDBusConnection::SystemBus, QString(SERVICE_CONFIG_DIR) + "other/deepin-devicecontrol.json");
     initConnects();
@@ -89,6 +91,7 @@ ControlInterface::ControlInterface(QObject *parent)
 
 void ControlInterface::initConnects()
 {
+#ifndef DISABLE_DRIVER
     connect(mp_drivermanager, &DriverManager::sigProgressDetail, this, &ControlInterface::sigProgressDetail);
     connect(mp_drivermanager, &DriverManager::sigDownloadProgressChanged, this, &ControlInterface::sigDownloadProgressChanged);
     connect(mp_drivermanager, &DriverManager::sigDownloadFinished, this, &ControlInterface::sigDownloadFinished);
@@ -101,6 +104,7 @@ void ControlInterface::initConnects()
         lockTimer(false);
         emit sigInstallProgressFinished(bsuccess, err);
     });
+#endif
 }
 
 QString ControlInterface::getRemoveInfo()
@@ -232,6 +236,7 @@ bool ControlInterface::monitorWorkingDBFlag()
     return EnableSqlManager::getInstance()->monitorWorkingFlag();
 }
 
+#ifndef DISABLE_DRIVER
 bool ControlInterface::unInstallDriver(const QString &modulename)
 {
     if (!getUserAuthorPasswd())
@@ -300,7 +305,7 @@ bool ControlInterface::unInstallPrinter(const QString &vendor, const QString &mo
     }
     return mp_drivermanager->uninstallPrinter(vendor, model);
 }
-
+#endif
 bool ControlInterface::authorizedEnable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool enable_device, const QString strDriver)
 {
     // 通过authorized文件启用禁用设备
