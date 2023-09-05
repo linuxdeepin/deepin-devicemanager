@@ -6,11 +6,14 @@
 #define PAGEDRIVERMANAGER_H
 
 #include "MacroDefinition.h"
+#include "driveritem.h"
+#include "DriverBackupThread.h"
 
 #include <DWidget>
 #include <DFrame>
 #include <DLabel>
 #include <DStackedWidget>
+#include <DDialog>
 
 #include <QObject>
 #include <QThread>
@@ -21,6 +24,10 @@ class DriverScanWidget;
 class QHBoxLayout;
 class DriverScanner;
 class DriverWidget;
+class PageListView;
+class PageDriverBackupInfo;
+class PageDriverRestoreInfo;
+class PageDriverInstallInfo;
 
 //class DFrame;
 
@@ -52,10 +59,26 @@ public:
     bool isInstalling();
 
     /**
+     * @brief isBackingup：是否正在备份
+     */
+    bool isBackingup();
+
+    /**
+     * @brief isRestoring：是否正在还原
+     */
+    bool isRestoring();
+
+    /**
      * @brief isScanning：判断当前是否扫描
      * @return
      */
     bool isScanning();
+
+    /**
+     * @brief updateListView:更新ListView
+     * @param lst:
+     */
+    void updateListView(const QList<QPair<QString, QString> > &lst);
 
 public slots:
 
@@ -68,7 +91,7 @@ private slots:
     /**
      * @brief slotDriverOperationClicked 处理点击信号安装更新操作处理
      */
-    void slotDriverOperationClicked(int index);
+    void slotDriverOperationClicked(int index, int itemIndex, DriverOperationItem::Mode mode);
 
     /**
      * @brief slotItemCheckedClicked 处理选中按钮
@@ -76,6 +99,13 @@ private slots:
      * @param checked
      */
     void slotItemCheckedClicked(int index, bool checked);
+
+    /**
+     * @brief slotBackupItemCheckedClicked 处理选中按钮
+     * @param index
+     * @param checked
+     */
+    void slotBackupItemCheckedClicked(int index, bool checked);
 
     /**
      * @brief slotDownloadProgressChanged 驱动下载时回调，返回驱动下载进度、速度、已下载大小信息
@@ -103,9 +133,9 @@ private slots:
     void slotInstallAllDrivers();
 
     /**
-     * @brief slotScanInfo 时时更新扫描信息
+     * @brief slotBackupAllDrivers 安装所有驱动
      */
-    void slotScanInfo(const QString &info, int progress);
+    void slotBackupAllDrivers();
 
     /**
      * @brief slotScanFinished 扫描结束
@@ -117,9 +147,43 @@ private slots:
      */
     void slotUndoInstall();
 
+    /**
+     * @brief slotUndoBackup 取消备份
+     */
+    void slotUndoBackup();
+
+    /**
+     * @brief slotListViewWidgetItemClicked:ListView item点击槽函数
+     * @param itemStr:item显示字符串
+     */
+    void slotListViewWidgetItemClicked(const QString &itemStr);
+
+    /**
+     * @brief slotBackupFinished 备份结束
+     */
+    void slotBackupProgressChanged(int progress);
+
+    /**
+     * @brief slotBackupFinished 备份结束
+     */
+    void slotBackupFinished(bool bsuccess);
+
+    /**
+     * @brief slotRestoreProgress 还原进度刷新
+     */
+    void slotRestoreProgress(int progress, QString strDeatils);
+
+    /**
+     * @brief slotRestoreFinished 还原结束
+     */
+    void slotRestoreFinished(bool success, QString msg);
+
 signals:
     void startScanning();
-    void scanFinished();
+    void itemClicked(const QString &itemStr);
+    void scanInfo(const QString &info, int progress);
+    void scanFinished(ScanResult sr);
+    void sigBackupFinished(bool bsuccess);
 
 private:
     /**
@@ -128,48 +192,23 @@ private:
     void initWidget();
 
     /**
-     * @brief initTable 初始化表格信息
-     */
-    void initTable();
-
-    /**
-     * @brief initMainFrame
-     */
-    void initMainFrame(DFrame *mainFrame);
-
-    /**
-     * @brief initHeadWidget 初始化表头编辑
-     * @param hLayout
-     */
-    void initHeadWidget(QHBoxLayout *hLayout);
-
-    /**
-     * @brief initScrollArea 在frame中添加scrollarea
-     * @param frame
-     */
-    void initScrollArea(DScrollArea *area);
-
-    /**
-     * @brief addDriverInfo 添加可以安装和可以更新的驱动
-     * @param info 驱动信息
-     */
-    void addDriverInfoToTableView(DriverInfo *info, int index);
-
-    /**
-     * @brief addCurDriverInfo 当驱动为最新时，不更新
-     * @param info
-     */
-    void addCurDriverInfo(DriverInfo *info);
-
-    /**
      * @brief installNextDriver
      */
     void installNextDriver();
 
     /**
+     * @brief backupNextDriver 备份下个驱动
+     */
+    void backupNextDriver();
+
+    /**
      * @brief scanDevices 从硬件信息中扫描信息
      */
     void scanDevices();
+
+    /**
+     * @brief testScanDevices 测试用
+     */
     void testScanDevices();
 
     /**
@@ -177,11 +216,6 @@ private:
      * @param deviceType 设备类型
      */
     void scanDevicesInfo(const QString &deviceType, DriverType driverType);
-
-    /**
-     * @brief showTables 决定显示哪些列表，可安装，可更新，无需安装
-     */
-    void showTables();
 
     /**
      * @brief clearAllData 清理数据
@@ -195,10 +229,22 @@ private:
     void addToDriverIndex(int index);
 
     /**
+     * @brief addToBackupIndex 添加到备份列表
+     * @param index
+     */
+    void addToBackupIndex(int index);
+
+    /**
      * @brief removeFromDriverIndex
      * @param index
      */
     void removeFromDriverIndex(int index);
+
+    /**
+     * @brief removeFromBackupIndex 从备份列表移除
+     * @param index
+     */
+    void removeFromBackupIndex(int index);
 
     /**
      * @brief failAllIndex
@@ -219,30 +265,43 @@ private:
      */
     void getDownloadInfo(int porgress, qint64 total, QString &speed, QString &size);
 
-private:
-    DStackedWidget       *mp_StackWidget;
-    PageDriverTableView  *mp_ViewNotInstall; //没有安装驱动的列表
-    PageDriverTableView  *mp_ViewCanUpdate;  //可以更新的驱动列表
-    PageDriverTableView  *mp_AllDriverIsNew; //当所有驱动为最新时，显示此page
-    DetectedStatusWidget *mp_HeadWidget;
-    DriverScanWidget     *mp_ScanWidget;
-    DLabel               *mp_InstallLabel;
-    DLabel               *mp_UpdateLabel;
-    DLabel               *mp_LabelIsNew;
-    DWidget              *mp_InstallWidget;
-    DWidget              *mp_UpdateWidget;
-    QList<DriverInfo *>   m_ListDriverInfo;  // 保存所有驱动信息
-    DriverInfo          *mp_CurDriverInfo;
-    int                  m_CurIndex;
-    int                  m_CancelIndex;
-    QList<int>           m_ListDriverIndex;
-    QList<int>           m_ListInstallIndex;
-    QList<int>           m_ListUpdateIndex;
-    QList<int>           m_ListNewIndex;
-    DriverScanner       *mp_scanner;     // 扫描驱动线程
-    bool                m_IsFirstScan = true;
-    bool                m_Scanning = false;
+    void testDevices();
 
+    /**
+     * @brief getDebBackupInfo 获取备份信息
+     */
+    void getDebBackupInfo(DriverInfo *info);
+
+private:
+    DStackedWidget        *mp_StackWidget;
+    PageListView          *mp_ListView;          // 左边的list
+    QList<DriverInfo *>   m_ListDriverInfo;  // 保存所有驱动信息
+    DriverInfo            *mp_CurDriverInfo;    //当前正在安装的驱动
+    DriverInfo            *mp_CurBackupDriverInfo;    //当前正在备份的驱动
+    DriverInfo            *mp_CurRestoreDriverInfo;    //当前正在还原的驱动
+    int                   m_CurIndex;
+    int                   m_CurBackupIndex;
+    int                   m_CancelIndex;
+    QList<int>            m_ListDriverIndex;    //已勾选驱动需要安装驱动
+    QList<int>            m_ListInstallIndex;
+    QList<int>            m_ListUpdateIndex;
+    QList<int>            m_ListNewIndex;
+    QList<int>            m_ListBackupIndex;    //已勾选需要备份驱动
+    DriverScanner         *mp_scanner;     // 扫描驱动线程
+    bool                  m_IsFirstScan = true;
+    bool                  m_Scanning = false;
+    QString               m_CurItemStr;          //<! 当前Item内容
+
+    PageDriverInstallInfo *mp_DriverInstallInfoPage;
+    PageDriverBackupInfo  *mp_DriverBackupInfoPage;
+    PageDriverRestoreInfo *mp_DriverRestoreInfoPage;
+
+    QList<int>            m_ListBackableIndex;    // 可备份列表
+    QList<int>            m_ListBackedupeIndex;   // 已备份列表
+
+    DDialog               *mp_FailedDialog;     //还原失败弹窗
+
+    DriverBackupThread    *mp_BackupThread;    //备份线程
 };
 
 #endif // PAGEDRIVERMANAGER_H

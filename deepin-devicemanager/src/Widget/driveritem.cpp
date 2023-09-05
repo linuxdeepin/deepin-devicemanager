@@ -168,7 +168,7 @@ DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
 
 void DriverStatusItem::setStatus(Status st)
 {
-    showSpinner(ST_DOWNLOADING == st || ST_INSTALL == st);
+    showSpinner(ST_DOWNLOADING == st || ST_INSTALL == st || ST_DRIVER_BACKING_UP == st || ST_DRIVER_RESTORING == st);
     mp_Icon->setPixmap(QIcon(CommonTools::getStatusPixmap(st)).pixmap(16, 16));
 
     // bug132075 安装成功状态此button无法点击
@@ -202,7 +202,7 @@ void DriverStatusItem::showSpinner(bool spin)
     mp_Status->setVisible(true);
 }
 
-DriverOperationItem::DriverOperationItem(DWidget *parent, bool install)
+DriverOperationItem::DriverOperationItem(DWidget *parent, Mode mode)
     : DWidget(parent)
     , mp_Btn(new DToolButton(this))
 {
@@ -211,11 +211,9 @@ DriverOperationItem::DriverOperationItem(DWidget *parent, bool install)
     hLayout->addWidget(mp_Btn);
     mp_Btn->setFixedSize(36, 36);
     mp_Btn->setIconSize(QSize(36, 36));
-    m_IsInstall = install;
+    m_mode = mode;
     setBtnIcon();
     this->setLayout(hLayout);
-    // bug134379 驱动更新/安装按钮，悬浮框提示
-    mp_Btn->setToolTip(install ? QObject::tr("Install") : QObject::tr("Update"));
     // 处理信号逻辑
     connect(mp_Btn, &DIconButton::clicked, this, &DriverOperationItem::clicked);
 }
@@ -227,10 +225,25 @@ void DriverOperationItem::setBtnEnable(bool enable)
 
 void DriverOperationItem::setBtnIcon()
 {
-    if (m_IsInstall) {
+    switch (m_mode) {
+    case Mode::INSTALL:
         mp_Btn->setIcon(QIcon::fromTheme("install"));
-    } else {
+        mp_Btn->setToolTip(QObject::tr("Install"));
+        break;
+    case Mode::UPDATE:
         mp_Btn->setIcon(QIcon::fromTheme("update-btn"));
+        mp_Btn->setToolTip(QObject::tr("Update"));
+        break;
+    case Mode::BACKUP:
+        mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/light/backup.svg"));
+        mp_Btn->setIconSize(QSize(16, 16));
+        mp_Btn->setToolTip(QObject::tr("Backup"));
+        break;
+    case Mode::RESTORE:
+        mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/light/restore.svg"));
+        mp_Btn->setIconSize(QSize(16, 16));
+        mp_Btn->setToolTip(QObject::tr("Restore"));
+        break;
     }
 }
 

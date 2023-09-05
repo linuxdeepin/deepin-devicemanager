@@ -86,6 +86,11 @@ void PageListView::clear()
     mp_ListView->clearItem();
 }
 
+void PageListView::setCurType(QString type)
+{
+    m_CurType = type;
+}
+
 void PageListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色
@@ -101,6 +106,9 @@ void PageListView::slotShowMenu(const QPoint &point)
 {
     // 右键菜单
     mp_Menu->clear();
+
+    if (m_CurType == tr("Driver Install") || m_CurType == tr("Driver Backup") || m_CurType == tr("Driver Restore"))
+        return;
 
     // 导出/刷新
     if (mp_ListView->indexAt(point).isValid()) {

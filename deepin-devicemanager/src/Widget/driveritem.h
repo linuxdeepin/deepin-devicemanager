@@ -162,19 +162,31 @@ class DriverOperationItem : public DWidget
 {
     Q_OBJECT
 public:
-    explicit DriverOperationItem(DWidget *parent = nullptr, bool install = true);
+    enum Mode {
+        INSTALL = 0,
+        UPDATE,
+        BACKUP,
+        RESTORE
+    };
+
+    explicit DriverOperationItem(DWidget *parent = nullptr, Mode m_mode = INSTALL);
     void setBtnEnable(bool enable);
 
     // 设置Btn  Icon
     void setBtnIcon();
+
+    Mode mode() {return m_mode;}
+
 protected:
     void enterEvent(QEvent *event) override;
     void leaveEvent(QEvent *event) override;
+
 signals:
     void clicked(bool checked = false);
+
 private:
     DToolButton  *mp_Btn;
-    bool          m_IsInstall;   // 是否是安装
+    Mode          m_mode;
 };
 
 #endif // DRIVERITEM_H

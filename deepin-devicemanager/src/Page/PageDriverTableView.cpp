@@ -86,6 +86,16 @@ void PageDriverTableView::clear()
     mp_View->clear();
 }
 
+void PageDriverTableView::setItemOperationEnable(int index, bool enable)
+{
+    mp_View->setItemOperationEnable(index, enable);
+}
+
+void PageDriverTableView::removeItemAndWidget(int row, int column)
+{
+    mp_View->removeItemAndWidget(row, column);
+}
+
 void PageDriverTableView::paintEvent(QPaintEvent *e)
 {
     DWidget::paintEvent(e);

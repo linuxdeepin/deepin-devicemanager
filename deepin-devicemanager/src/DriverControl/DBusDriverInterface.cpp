@@ -78,6 +78,20 @@ bool DBusDriverInterface::isDebValid(const QString &path)
     return false;
 }
 
+bool DBusDriverInterface::backupDeb(const QString &debpath)
+{
+    QDBusReply<bool> reply = mp_Iface->call("backupDeb", debpath);
+
+    return reply.value();
+}
+
+bool DBusDriverInterface::delDeb(const QString &debname)
+{
+    QDBusReply<bool> reply = mp_Iface->call("delDeb",debname);
+
+    return reply.value();
+}
+
 DBusDriverInterface::DBusDriverInterface(QObject *parent)
     : QObject(parent)
     , mp_Iface(nullptr)
@@ -150,5 +164,7 @@ void DBusDriverInterface::init()
         connect(mp_Iface, SIGNAL(sigDownloadFinished()), this, SLOT(slotDownloadFinished()));
         connect(mp_Iface, SIGNAL(sigInstallProgressChanged(qint32)), this, SLOT(slotInstallProgressChanged(qint32)));
         connect(mp_Iface, SIGNAL(sigInstallProgressFinished(bool, int)), this, SLOT(slotInstallProgressFinished(bool, int)));
+        connect(mp_Iface, SIGNAL(sigFinished(bool, QString)), this, SLOT(installFinished(bool, QString)));
+        connect(mp_Iface, SIGNAL(sigProgressDetail(int, QString)), this, SLOT(installProgressDetail(int, QString)));
     }
 }

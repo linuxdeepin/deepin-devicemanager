@@ -96,5 +96,18 @@
         <file>icons/deepin/builtin/texts/install_16px.svg</file>
         <file>icons/deepin/builtin/texts/retest_16px.svg</file>
         <file>icons/deepin/builtin/texts/update-btn_16px.svg</file>
+        <file>icons/deepin/builtin/icons/restore_128.svg</file>
+        <file>icons/deepin/builtin/icons/restore_96.svg</file>
+        <file>icons/deepin/builtin/icons/backup_96.svg</file>
+        <file>icons/deepin/builtin/light/restore.svg</file>
+        <file>icons/deepin/builtin/light/backup.svg</file>
+        <file>icons/deepin/builtin/light/texts/com_20px.svg</file>
+        <file>icons/deepin/builtin/light/texts/driverbackup_20px.svg</file>
+        <file>icons/deepin/builtin/light/texts/driverinstall_20px.svg</file>
+        <file>icons/deepin/builtin/light/texts/driverrestore_20px.svg</file>
+        <file>icons/deepin/builtin/light/texts/handle_20px.svg</file>
+        <file>icons/deepin/builtin/light/texts/microphone_20px.svg</file>
+        <file>icons/deepin/builtin/light/texts/scanner_20px.svg</file>
+        <file>icons/deepin/builtin/light/texts/touchPad_20px.svg</file>
     </qresource>
 </RCC>
