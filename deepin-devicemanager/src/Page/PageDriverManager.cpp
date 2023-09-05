@@ -15,10 +15,15 @@
 #include "DevicePrint.h"
 #include "DeviceNetwork.h"
 #include "commontools.h"
+#include "PageListView.h"
+#include "PageDriverInstallInfo.h"
+#include "PageDriverBackupInfo.h"
+#include "PageDriverRestoreInfo.h"
 
 #include <DScrollArea>
 #include <DApplicationHelper>
 #include <DApplication>
+#include <DDialog>
 
 #include <QBoxLayout>
 #include <QMetaType>
@@ -27,6 +32,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QDir>
+#include <QProcess>
 
 #include <unistd.h>
 
@@ -35,43 +41,66 @@
 PageDriverManager::PageDriverManager(DWidget *parent)
     : DWidget(parent)
     , mp_StackWidget(new DStackedWidget(this))
-    , mp_ViewNotInstall(new PageDriverTableView(this))
-    , mp_ViewCanUpdate(new PageDriverTableView(this))
-    , mp_AllDriverIsNew(new PageDriverTableView(this))
-    , mp_HeadWidget(new DetectedStatusWidget(this))
-    , mp_ScanWidget(new DriverScanWidget(this))
-    , mp_InstallLabel(new DLabel(this))
-    , mp_UpdateLabel(new DLabel(this))
-    , mp_LabelIsNew(new DLabel(this))
-    , mp_InstallWidget(new DWidget(this))
-    , mp_UpdateWidget(new DWidget(this))
+    , mp_ListView(new PageListView(this))
     , mp_CurDriverInfo(nullptr)
+    , mp_CurBackupDriverInfo(nullptr)
+    , mp_CurRestoreDriverInfo(nullptr)
     , m_CurIndex(-1)
+    , m_CurBackupIndex(-1)
     , m_CancelIndex(-1)
     , mp_scanner(new DriverScanner(this))
+    , mp_DriverInstallInfoPage(new PageDriverInstallInfo(this))
+    , mp_DriverBackupInfoPage(new PageDriverBackupInfo(this))
+    , mp_DriverRestoreInfoPage(new PageDriverRestoreInfo(this))
+    , mp_BackupThread(new DriverBackupThread(this))
 {
+    mp_ListView->setCurType(tr("Driver Install"));
+
     // 初始化界面
     initWidget();
     qRegisterMetaType<QList<DriverInfo *>>("QList<DriverInfo*>");
     qRegisterMetaType<ScanResult>("ScanResult");
 
     // 连接dbus处理信号
-    connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::downloadProgressChanged, this, &PageDriverManager::slotDownloadProgressChanged);
+    connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::downloadProgressChanged, this, &PageDriverManager::slotDownloadProgressChanged);//安装
     connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::downloadFinished, this, &PageDriverManager::slotDownloadFinished);
     connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::installProgressChanged, this, &PageDriverManager::slotInstallProgressChanged);
     connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::installProgressFinished, this, &PageDriverManager::slotInstallProgressFinished);
-    connect(mp_ViewNotInstall, &PageDriverTableView::operatorClicked, this, &PageDriverManager::slotDriverOperationClicked);
-    connect(mp_ViewCanUpdate, &PageDriverTableView::operatorClicked, this, &PageDriverManager::slotDriverOperationClicked);
-    connect(mp_ViewNotInstall, &PageDriverTableView::itemChecked, this, &PageDriverManager::slotItemCheckedClicked);
-    connect(mp_ViewCanUpdate, &PageDriverTableView::itemChecked, this, &PageDriverManager::slotItemCheckedClicked);
-    connect(mp_HeadWidget, &DetectedStatusWidget::installAll, this, &PageDriverManager::slotInstallAllDrivers);
-    connect(mp_HeadWidget, &DetectedStatusWidget::undoInstall, this, &PageDriverManager::slotUndoInstall);
-    connect(mp_HeadWidget, &DetectedStatusWidget::redetected, this, &PageDriverManager::startScanning);
-    connect(mp_ScanWidget, &DriverScanWidget::redetected, this, &PageDriverManager::startScanning);
+    connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::installProgressDetail, this, &PageDriverManager::slotRestoreProgress);//还原
+    connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::installFinished, this, &PageDriverManager::slotRestoreFinished);
+
+    connect(mp_DriverInstallInfoPage, &PageDriverInstallInfo::operatorClicked, this, &PageDriverManager::slotDriverOperationClicked);
+    connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::operatorClicked, this, &PageDriverManager::slotDriverOperationClicked);
+    connect(mp_DriverRestoreInfoPage, &PageDriverRestoreInfo::operatorClicked, this, &PageDriverManager::slotDriverOperationClicked);
+
+    connect(mp_DriverInstallInfoPage, &PageDriverInstallInfo::itemChecked, this, &PageDriverManager::slotItemCheckedClicked);
+    connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::itemChecked, this, &PageDriverManager::slotBackupItemCheckedClicked);
+
+    connect(mp_DriverInstallInfoPage, &PageDriverInstallInfo::installAll, this, &PageDriverManager::slotInstallAllDrivers);
+    connect(mp_DriverInstallInfoPage, &PageDriverInstallInfo::undoInstall, this, &PageDriverManager::slotUndoInstall);
+    connect(mp_DriverInstallInfoPage, &PageDriverInstallInfo::redetected, this, &PageDriverManager::startScanning);
+
+    connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::backupAll, this, &PageDriverManager::slotBackupAllDrivers);
+    connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::redetected, this, &PageDriverManager::startScanning);
+    connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::undoBackup, this, &PageDriverManager::slotUndoBackup);
+
+    connect(mp_DriverRestoreInfoPage, &PageDriverRestoreInfo::redetected, this, &PageDriverManager::startScanning);
+
+    connect(mp_ListView, &PageListView::itemClicked, this, &PageDriverManager::slotListViewWidgetItemClicked);
 
     // 将扫描动作放到线程里面
-    connect(mp_scanner, &DriverScanner::scanInfo, this, &PageDriverManager::slotScanInfo);
+    connect(mp_scanner, &DriverScanner::scanInfo, this, &PageDriverManager::scanInfo);
     connect(mp_scanner, &DriverScanner::scanFinished, this, &PageDriverManager::slotScanFinished);
+
+    connect(mp_BackupThread, &DriverBackupThread::backupProgressChanged, this, &PageDriverManager::slotBackupProgressChanged);
+    connect(mp_BackupThread, &DriverBackupThread::backupProgressFinished, this, &PageDriverManager::slotBackupFinished);
+
+    // 左侧list，内容固定
+    QList<QPair<QString, QString> > list;
+    list.append(QPair<QString, QString>(tr("Driver Install"), "driverinstall##Overview"));
+    list.append(QPair<QString, QString>(tr("Driver Backup"), "driverbackup##Overview"));
+    list.append(QPair<QString, QString>(tr("Driver Restore"), "driverrestore##Overview"));
+    updateListView(list);
 }
 
 PageDriverManager::~PageDriverManager()
@@ -81,17 +110,17 @@ PageDriverManager::~PageDriverManager()
         mp_scanner->terminate();
         mp_scanner->wait();
     }
-    DELETE_PTR(mp_ViewNotInstall);
-    DELETE_PTR(mp_ViewCanUpdate);
-    DELETE_PTR(mp_AllDriverIsNew);
-    DELETE_PTR(mp_HeadWidget);
 
-    DELETE_PTR(mp_ScanWidget);
-    DELETE_PTR(mp_InstallLabel);
-    DELETE_PTR(mp_UpdateLabel);
-    DELETE_PTR(mp_LabelIsNew);
+    if (mp_BackupThread->isRunning()) {
+        mp_BackupThread->terminate();
+        mp_BackupThread->wait();
+    }
 
+    DELETE_PTR(mp_ListView);
     DELETE_PTR(mp_StackWidget);
+    DELETE_PTR(mp_CurDriverInfo);
+    DELETE_PTR(mp_CurBackupDriverInfo);
+    DELETE_PTR(mp_CurRestoreDriverInfo);
 }
 
 void PageDriverManager::addDriverInfo(DriverInfo *info)
@@ -113,9 +142,26 @@ bool PageDriverManager::isInstalling()
     return mp_CurDriverInfo != nullptr;
 }
 
+bool PageDriverManager::isBackingup()
+{
+    return mp_CurBackupDriverInfo != nullptr;
+
+}
+bool PageDriverManager::isRestoring()
+{
+    return mp_CurRestoreDriverInfo != nullptr;
+}
+
 bool PageDriverManager::isScanning()
 {
     return m_Scanning;
+}
+
+void PageDriverManager::updateListView(const QList<QPair<QString, QString> > &lst)
+{
+    // 更新左边的列表
+    if (mp_ListView)
+        mp_ListView->updateListItems(lst);
 }
 
 void PageDriverManager::scanDriverInfo()
@@ -124,8 +170,8 @@ void PageDriverManager::scanDriverInfo()
         return;
     m_IsFirstScan = false;
     m_Scanning = true;
-    // 如果在安装过程中则不扫描
-    if (mp_CurDriverInfo) {
+    // 如果在安装、备份、还原过程中则不扫描
+    if (mp_CurDriverInfo || mp_CurBackupDriverInfo || mp_CurRestoreDriverInfo) {
         return;
     }
 
@@ -139,19 +185,40 @@ void PageDriverManager::scanDriverInfo()
     // 扫描驱动信息线程
     mp_scanner->setDriverList(m_ListDriverInfo);
     mp_scanner->start();
-
-    // 切换到到扫描的界面
-    mp_StackWidget->setCurrentIndex(0);
-    mp_ScanWidget->setScanningUI("", 0);
 }
 
-void PageDriverManager::slotDriverOperationClicked(int index)
+void PageDriverManager::slotDriverOperationClicked(int index, int itemIndex, DriverOperationItem::Mode mode)
 {
-    // 如果已经在安装过程中，则直接添加到list
-    // 如果不在安装过程中则需要安装
-    addToDriverIndex(index);
-    if (! mp_CurDriverInfo) {
-        installNextDriver();
+    switch (mode) {
+    case DriverOperationItem::INSTALL:
+    case DriverOperationItem::UPDATE:
+        // 如果已经在安装过程中，则直接添加到list
+        // 如果不在安装过程中则需要安装
+        addToDriverIndex(index);
+        if (! mp_CurDriverInfo) {
+            installNextDriver();
+        }
+        break;
+
+    case DriverOperationItem::BACKUP:
+        ///驱动备份
+        addToBackupIndex(index);
+        if (!mp_CurBackupDriverInfo) {
+            backupNextDriver();
+        }
+        break;
+
+    case DriverOperationItem::RESTORE:
+        ///驱动还原
+        mp_CurRestoreDriverInfo = m_ListDriverInfo[index];
+        DBusDriverInterface::getInstance()->installDriver(mp_CurRestoreDriverInfo->backupFileName());
+        //将其它项置灰
+        for (int backedupeIndex : m_ListBackedupeIndex) {
+            mp_DriverRestoreInfoPage->setItemOperationEnable(backedupeIndex, false);
+        }
+
+        mp_DriverRestoreInfoPage->headWidget()->setRestoringUI(0, mp_CurRestoreDriverInfo->name());
+        break;
     }
 }
 
@@ -165,8 +232,22 @@ void PageDriverManager::slotItemCheckedClicked(int index, bool checked)
         // 如果在安装过程中：1. 添加到list  2. 将item置灰
         addToDriverIndex(index);
         if (mp_CurDriverInfo) {
-            mp_ViewCanUpdate->setCheckedCBDisnable();
-            mp_ViewCanUpdate->setCheckedCBDisnable();
+            mp_DriverInstallInfoPage->setCheckedCBDisnable();
+        }
+    }
+}
+
+void PageDriverManager::slotBackupItemCheckedClicked(int index, bool checked)
+{
+    if (!checked) {
+        // 取消选中则从list中删除
+        removeFromBackupIndex(index);
+    } else {
+        // 如果不在安装过程中则直接添加到list
+        // 如果在备份过程中：1. 添加到list  2. 将item置灰
+        addToBackupIndex(index);
+        if (mp_CurBackupDriverInfo) {
+            mp_DriverBackupInfoPage->setCheckedCBDisnable();
         }
     }
 }
@@ -176,8 +257,7 @@ void PageDriverManager::slotDownloadProgressChanged(QStringList msg)
     if (! mp_CurDriverInfo)
         return;
     // 将下载过程时时更新到表格上方的状态里面 qInfo() << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
-    mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), msg[2], msg[1], mp_CurDriverInfo->size(), msg[0].toInt());
-
+    mp_DriverInstallInfoPage->headWidget()->setDownloadUI(mp_CurDriverInfo->type(), msg[2], msg[1], mp_CurDriverInfo->size(), msg[0].toInt());
     // 设置表格下载中的状态
 }
 
@@ -186,8 +266,7 @@ void PageDriverManager::slotDownloadFinished()
     if (! mp_CurDriverInfo)
         return;
 
-    mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
-    mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
+    mp_DriverInstallInfoPage->slotDownloadFinished(m_CurIndex, mp_CurDriverInfo->status());
 }
 
 void PageDriverManager::slotInstallProgressChanged(int progress)
@@ -201,16 +280,15 @@ void PageDriverManager::slotInstallProgressChanged(int progress)
         QString speed = "";
         QString size = "";
         getDownloadInfo(progress * 2, mp_CurDriverInfo->m_Byte, speed, size);
-        mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), speed, size, mp_CurDriverInfo->size(), progress * 2);
+        mp_DriverInstallInfoPage->headWidget()->setDownloadUI(mp_CurDriverInfo->type(), speed, size, mp_CurDriverInfo->size(), progress * 2);
     } else {
         mp_CurDriverInfo->m_Status = ST_INSTALL;
         // 设置表头状态
-        mp_HeadWidget->setInstallUI(mp_CurDriverInfo->type(), mp_CurDriverInfo->name(), (progress - 50) * 2);
+        mp_DriverInstallInfoPage->headWidget()->setInstallUI(mp_CurDriverInfo->type(), mp_CurDriverInfo->name(), (progress - 50) * 2);
     }
 
     // 设置表格安装中的状态
-    mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
-    mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
+    mp_DriverInstallInfoPage->updateItemStatus(m_CurIndex, mp_CurDriverInfo->status());
 }
 
 void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
@@ -226,7 +304,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
     } else { // 失败
         // 通知网络错误
         if (err == EC_NOTIFY_NETWORK) {
-            mp_HeadWidget->setNetworkErrorUI("0.00MB/s", 0);
+            mp_DriverInstallInfoPage->headWidget()->setNetworkErrorUI("0.00MB/s", 0);
             return;
         }
 
@@ -248,12 +326,9 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 
     // 安装结束后，对应的表格需要设置相应的状态
     mp_CurDriverInfo->m_Status = bsuccess ? ST_SUCESS : ST_FAILED;
-    mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
-    mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
 
     QString errS = DApplication::translate("QObject", CommonTools::getErrorString(err).toStdString().data());
-    mp_ViewCanUpdate->setErrorMsg(m_CurIndex, errS);
-    mp_ViewNotInstall->setErrorMsg(m_CurIndex, errS);
+    mp_DriverInstallInfoPage->updateItemStatus(m_CurIndex, mp_CurDriverInfo->status(), errS);
 
 
     // 当前驱动安装结束，如果没有其它驱动需要安装，则显示安装结果
@@ -264,9 +339,9 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
     } else {
         // 设置头部显示效果
         if (successNum > 0) {
-            mp_HeadWidget->setInstallSuccessUI(QString::number(successNum), QString::number(failedNum));
+            mp_DriverInstallInfoPage->headWidget()->setInstallSuccessUI(QString::number(successNum), QString::number(failedNum));
         } else {
-            mp_HeadWidget->setInstallFailedUI();
+            mp_DriverInstallInfoPage->headWidget()->setInstallFailedUI();
         }
 
         mp_CurDriverInfo = nullptr;
@@ -279,54 +354,68 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 
 void PageDriverManager::slotInstallAllDrivers()
 {
-    // 安装过程中，所有已经选中的勾选框置灰
-    mp_ViewNotInstall->setCheckedCBDisnable();
-    mp_ViewCanUpdate->setCheckedCBDisnable();
-
     // 开始安装驱动
     installNextDriver();
 }
 
-void PageDriverManager::slotScanInfo(const QString &info, int progress)
+void PageDriverManager::slotBackupAllDrivers()
 {
-    mp_StackWidget->setCurrentIndex(0);
-    mp_ScanWidget->refreshProgress(info, progress);
+    backupNextDriver();
+    // 更新头部内容
+    mp_DriverBackupInfoPage->headWidget()->setBackingUpDriverUI(mp_CurBackupDriverInfo->name(),
+                                                                m_ListBackupIndex.size() + 1, 1);
 }
 
 void PageDriverManager::slotScanFinished(ScanResult sr)
 {
-    if (SR_Failed == sr) {
-        mp_ScanWidget->setScanFailedUI();
-    } else if (SR_SUCESS == sr) {
-        mp_ScanWidget->setProgressFinish();
-        // 扫描成功，则将数据显示到表格中
+   // testDevices();
+
+    if (SR_SUCESS == sr) {
         foreach (DriverInfo *info, m_ListDriverInfo) {
-            addDriverInfoToTableView(info, m_ListDriverInfo.indexOf(info));
+            getDebBackupInfo(info);
+
+            mp_DriverInstallInfoPage->addDriverInfoToTableView(info, m_ListDriverInfo.indexOf(info));
+
+            if (!info->debVersion().isEmpty() && info->status() != ST_NOT_INSTALL) {
+                //debVersion不为空且debBackupVersion为空，非未安装，表示可备份
+                mp_DriverBackupInfoPage->addDriverInfoToTableView(info, m_ListDriverInfo.indexOf(info));
+            }
+
+            if (!info->debBackupVersion().isEmpty())
+                mp_DriverRestoreInfoPage->addDriverInfoToTableView(info, m_ListDriverInfo.indexOf(info));
+
             if (ST_NOT_INSTALL == info->status()) {
-                m_ListInstallIndex.append(m_ListDriverInfo.size() - 1);
+                m_ListInstallIndex.append(m_ListDriverInfo.indexOf(info));
             } else if (ST_CAN_UPDATE == info->status()) {
-                m_ListUpdateIndex.append(m_ListDriverInfo.size() - 1);
+                m_ListUpdateIndex.append(m_ListDriverInfo.indexOf(info));
             } else if (ST_DRIVER_IS_NEW == info->status()) {
-                m_ListNewIndex.append(m_ListDriverInfo.size() - 1);
+                m_ListNewIndex.append(m_ListDriverInfo.indexOf(info));
+            }
+
+            if (!info->debVersion().isEmpty() && info->debBackupVersion().isEmpty()) {
+                m_ListBackableIndex.append(m_ListDriverInfo.indexOf(info));
+            } else if (!info->debBackupVersion().isEmpty()) {
+                m_ListBackedupeIndex.append(m_ListDriverInfo.indexOf(info));
             }
         }
 
         // 决定显示哪些列表，可安装，可更新，无需安装
-        showTables();
+        mp_DriverInstallInfoPage->showTables(m_ListInstallIndex.size(), m_ListUpdateIndex.size(), m_ListNewIndex.size());
+        mp_DriverBackupInfoPage->showTables(m_ListBackableIndex.size(), m_ListBackedupeIndex.size());
+        mp_DriverRestoreInfoPage->showTables(m_ListBackedupeIndex.size());
 
         // 获取已经勾选的驱动index
         m_ListDriverIndex.clear();
-        mp_ViewNotInstall->getCheckedDriverIndex(m_ListDriverIndex);
-        mp_ViewCanUpdate->getCheckedDriverIndex(m_ListDriverIndex);
-
+        mp_DriverInstallInfoPage->getCheckedDriverIndex(m_ListDriverIndex);
+        m_ListBackupIndex.clear();
+        mp_DriverBackupInfoPage->getCheckedDriverIndex(m_ListBackupIndex);
     } else if (SR_NETWORD_ERR == sr) {
-        mp_ScanWidget->setNetworkErr();
         mp_scanner->quit();
     }
 
     // 扫描结束，可以继续扫描
     m_Scanning = false;
-    emit scanFinished();
+    emit scanFinished(sr);
 }
 
 void PageDriverManager::slotUndoInstall()
@@ -337,209 +426,178 @@ void PageDriverManager::slotUndoInstall()
     }
 }
 
+void PageDriverManager::slotUndoBackup()
+{
+    mp_BackupThread->undoBackup();
+}
+
+void PageDriverManager::slotListViewWidgetItemClicked(const QString &itemStr)
+{
+    m_CurItemStr = itemStr;
+    if (tr("Driver Install") == itemStr) {
+        mp_StackWidget->setCurrentIndex(0);
+    } else if (tr("Driver Backup") == itemStr) {
+        mp_StackWidget->setCurrentIndex(1);
+    } else if (tr("Driver Restore") == itemStr) {
+        mp_StackWidget->setCurrentIndex(2);
+    }
+}
+
+void PageDriverManager::slotBackupProgressChanged(int progress)
+{
+
+}
+
+void PageDriverManager::slotBackupFinished(bool bsuccess)
+{
+    static int successNum = 0;
+    static int failedNum = 0;
+    if (! mp_CurBackupDriverInfo)
+        return;
+
+    // 成功
+    if (bsuccess) {
+        successNum += 1;
+    } else { // 失败
+        failedNum += 1;
+    }
+
+    // 安装结束后，对应的表格需要设置相应的状态
+    mp_CurBackupDriverInfo->m_Status = bsuccess ? ST_DRIVER_BACKUP_SUCCESS : ST_DRIVER_BACKUP_FAILED;
+    mp_DriverBackupInfoPage->updateItemStatus(m_CurBackupIndex, mp_CurBackupDriverInfo->status());
+
+    if (!m_ListBackupIndex.isEmpty()) {
+        sleep(1);
+        backupNextDriver();
+        // 更新头部内容
+        mp_DriverBackupInfoPage->headWidget()->setBackingUpDriverUI(mp_CurBackupDriverInfo->name(),
+                                                                    m_ListBackupIndex.size() + successNum + failedNum + 1,
+                                                                    successNum + failedNum + 1);
+    } else {
+        mp_DriverBackupInfoPage->headWidget()->setBackableDriverUI(m_ListBackableIndex.size(), m_ListBackedupeIndex.size());
+        mp_CurBackupDriverInfo = nullptr;
+        m_CurBackupIndex = -1;
+        successNum = 0;
+        failedNum = 0;
+    }
+}
+
+void PageDriverManager::slotRestoreProgress(int progress, QString strDeatils)
+{
+    if (progress >= 100) {
+        mp_DriverRestoreInfoPage->headWidget()->setRestoreDriverUI(m_ListBackedupeIndex.size());
+    } else {
+        mp_DriverRestoreInfoPage->headWidget()->setRestoringUI(progress, mp_CurRestoreDriverInfo->name());
+    }
+}
+
+void PageDriverManager::slotRestoreFinished(bool success, QString msg)
+{
+    int index = -1;
+    if (mp_CurRestoreDriverInfo) {
+        index = m_ListDriverInfo.indexOf(mp_CurRestoreDriverInfo);
+        for (int i = 0; i < m_ListBackedupeIndex.size(); i++) {
+            if (index == m_ListBackedupeIndex[i]) {
+                if (success) {
+                    //移除已还原项
+                    m_ListBackedupeIndex.removeAt(i);
+                    mp_DriverRestoreInfoPage->headWidget()->setRestoreDriverUI(m_ListBackedupeIndex.size());
+                } else {
+                    //还原失败，弹出提示窗口
+                    int clickedButtonIndex = mp_FailedDialog->exec();
+                    if (1 == clickedButtonIndex) {
+                        //反馈
+                        qDebug() << __func__ << "fedback....";
+                    }
+                }
+
+                //恢复其它置灰项
+                for (int backedupeIndex : m_ListBackedupeIndex) {
+                    if (backedupeIndex != i)
+                        mp_DriverRestoreInfoPage->setItemOperationEnable(backedupeIndex, true);
+                }
+                break;
+            }
+        }
+    }
+
+    mp_CurRestoreDriverInfo = nullptr;
+
+    //刷新表格内容
+    mp_DriverRestoreInfoPage->clearAllData();
+    for (int backedupeIndex : m_ListBackedupeIndex) {
+        mp_DriverRestoreInfoPage->addDriverInfoToTableView(m_ListDriverInfo[backedupeIndex], backedupeIndex);
+    }
+    mp_DriverRestoreInfoPage->showTables(m_ListBackedupeIndex.size());
+}
+
 void PageDriverManager::initWidget()
 {
-    initTable();
-
     QHBoxLayout *mainLayout = new QHBoxLayout();
-    mainLayout->setContentsMargins(10, 10, 10, 10);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
+    mainLayout->setSpacing(0);
+    mainLayout->addWidget(mp_ListView);
     mainLayout->addWidget(mp_StackWidget);
     this->setLayout(mainLayout);
 
-    DFrame *mainFrame = new DFrame(this);
-    mainFrame->setLineWidth(0);
-    initMainFrame(mainFrame);
-    mp_StackWidget->addWidget(mp_ScanWidget);
-    mp_StackWidget->addWidget(mainFrame);
-}
+    mp_StackWidget->setContentsMargins(10, 10, 10, 10);
+    mp_StackWidget->addWidget(mp_DriverInstallInfoPage);
+    mp_StackWidget->addWidget(mp_DriverBackupInfoPage);
+    mp_StackWidget->addWidget(mp_DriverRestoreInfoPage);
 
-void PageDriverManager::initTable()
-{
-    // 设置列宽
-    mp_ViewNotInstall->initHeaderView(QStringList() << ""
-                                      << QObject::tr("Device Name")
-                                      << QObject::tr("Version Available")
-                                      << QObject::tr("Size")
-                                      << QObject::tr("Status")
-                                      << QObject::tr("Action"), true);
-    mp_ViewNotInstall->setColumnWidth(0, 41);
-    mp_ViewNotInstall->setColumnWidth(1, 324);
-    mp_ViewNotInstall->setColumnWidth(2, 186);
-    mp_ViewNotInstall->setColumnWidth(3, 120);
-    mp_ViewNotInstall->setColumnWidth(4, 150);
+    mp_FailedDialog = new DDialog(this);
+    DWidget *contentFrame = new DWidget(this);
 
-    mp_ViewCanUpdate->initHeaderView(QStringList() << ""
-                                     << QObject::tr("Device Name")
-                                     << QObject::tr("New Version")
-                                     << QObject::tr("Size")
-                                     << QObject::tr("Status")
-                                     << QObject::tr("Action"), true);
-    mp_ViewCanUpdate->setHeaderCbStatus(false);
-    mp_ViewCanUpdate->setColumnWidth(0, 41);
-    mp_ViewCanUpdate->setColumnWidth(1, 324);
-    mp_ViewCanUpdate->setColumnWidth(2, 186);
-    mp_ViewCanUpdate->setColumnWidth(3, 120);
-    mp_ViewCanUpdate->setColumnWidth(4, 150);
+    DLabel *failedLabel = new DLabel(this);
+    DLabel *retryLabel = new DLabel(this);
+    QVBoxLayout *vLayout = new QVBoxLayout(this);
+    failedLabel->setElideMode(Qt::ElideMiddle);
+    failedLabel->setText(QObject::tr("Driver restore failed!"));
+    retryLabel->setElideMode(Qt::ElideMiddle);
+    retryLabel->setText(QObject::tr("Please try again or give us feedback"));
+    vLayout->setSpacing(5);
+    vLayout->addWidget(failedLabel, 0, Qt::AlignHCenter);
+    vLayout->addWidget(retryLabel, 0, Qt::AlignHCenter);
 
-    mp_AllDriverIsNew->initHeaderView(QStringList() << QObject::tr("Device Name") << QObject::tr("Current Version"));
-    mp_AllDriverIsNew->setColumnWidth(0, 508);
-}
+    contentFrame->setLayout(vLayout);
 
-void PageDriverManager::initMainFrame(DFrame *mainFrame)
-{
-    QVBoxLayout *vLaout = new QVBoxLayout();
-    vLaout->setContentsMargins(20, 20, 20, 0);
-    vLaout->setSpacing(0);
-
-    // 上方的表头
-    QHBoxLayout *headerLayout = new QHBoxLayout();
-    initHeadWidget(headerLayout);
-    vLaout->addLayout(headerLayout);
-    vLaout->addSpacing(16);
-
-    // 下方的可滑动区域
-    DScrollArea *area = new DScrollArea(this);
-    initScrollArea(area);
-    vLaout->addWidget(area);
-
-    mainFrame->setLayout(vLaout);
-}
-
-void PageDriverManager::initHeadWidget(QHBoxLayout *hLayout)
-{
-    hLayout->setSpacing(0);
-    hLayout->addWidget(mp_HeadWidget);
-}
-
-void PageDriverManager::initScrollArea(DScrollArea *area)
-{
-    area->setMinimumHeight(10);
-    area->setFrameShape(QFrame::NoFrame);
-    area->setWidgetResizable(true);
-    DWidget *frame = new DWidget(this);
-    frame->setContentsMargins(0, 0, 0, 0);
-    QVBoxLayout *frameLayout = new QVBoxLayout();
-//    frameLayout->setSpacing(8);
-    frameLayout->setContentsMargins(0, 0, 0, 0);
-
-    // 将Label，tabel spacing都放在widget中作为一个整体进行展示
-    QVBoxLayout *installLayout = new QVBoxLayout();
-    installLayout->setContentsMargins(0, 0, 0, 0);
-    installLayout->addWidget(mp_InstallLabel);
-    installLayout->addWidget(mp_ViewNotInstall);
-    installLayout->addSpacing(7);
-    mp_InstallWidget->setLayout(installLayout);
-    frameLayout->addWidget(mp_InstallWidget);
-
-    QVBoxLayout *updateLayout = new QVBoxLayout();
-    updateLayout->setContentsMargins(0, 0, 0, 0);
-    updateLayout->addWidget(mp_UpdateLabel);
-    updateLayout->addWidget(mp_ViewCanUpdate);
-    updateLayout->addSpacing(7);
-    mp_UpdateWidget->setLayout(updateLayout);
-    frameLayout->addWidget(mp_UpdateWidget);
-
-
-    frameLayout->addWidget(mp_LabelIsNew);
-    frameLayout->addWidget(mp_AllDriverIsNew);
-
-    frameLayout->addSpacing(17);
-    frameLayout->addStretch();
-
-    frame->setLayout(frameLayout);
-    area->setWidget(frame);
-}
-
-void PageDriverManager::addDriverInfoToTableView(DriverInfo *info, int index)
-{
-    PageDriverTableView *view = nullptr;
-    if (ST_NOT_INSTALL == info->status()) {
-        view = mp_ViewNotInstall;
-        view->appendRowItems(6);
-    } else if (ST_CAN_UPDATE == info->status()) {
-        view = mp_ViewCanUpdate;
-        view->appendRowItems(6);
-    } else if (ST_DRIVER_IS_NEW == info->status()) {
-        view = mp_AllDriverIsNew;
-        view->appendRowItems(2);
-    } else {
-        return;
-    }
-
-    int row = view->model()->rowCount() - 1;
-
-    if (view != mp_AllDriverIsNew) {
-
-        // 设置CheckBtn
-        DriverCheckItem *cbItem = new DriverCheckItem(this);
-        connect(cbItem, &DriverCheckItem::sigChecked, view, [index, view](bool checked) {
-            Q_UNUSED(index)
-            view->setHeaderCbStatus(checked);
-        });
-        cbItem->setChecked(ST_NOT_INSTALL == info->status());
-        view->setWidget(row, 0, cbItem);
-
-        // 设置设备信息
-        DriverNameItem *nameItem = new DriverNameItem(this, info->type());
-        nameItem->setName(info->name());
-        nameItem->setIndex(index);
-        view->setWidget(row, 1, nameItem);
-
-        // 设置版本
-        DriverLabelItem *versionItem = new DriverLabelItem(this, info->debVersion());
-        view->setWidget(row, 2, versionItem);
-
-        // 设置大小
-        DriverLabelItem *sizeItem = new DriverLabelItem(this, info->size());
-        view->setWidget(row, 3, sizeItem);
-
-        // 设置状态
-        DriverStatusItem *statusItem = new DriverStatusItem(this, info->status());
-        view->setWidget(row, 4, statusItem);
-
-        // 添加操作按钮
-        DriverOperationItem *operateItem = new DriverOperationItem(this, ST_NOT_INSTALL == info->status() ? true : false);
-        view->setWidget(row, 5, operateItem);
-    } else {
-        // 设置设备信息
-        DriverNameItem *nameItem = new DriverNameItem(this, info->type());
-        nameItem->setName(info->name());
-        nameItem->setIndex(index);
-        view->setWidget(row, 0, nameItem);
-
-        // 设置版本
-        DriverLabelItem *versionItem = new DriverLabelItem(this, info->version());
-        view->setWidget(row, 1, versionItem);
-    }
-}
-
-void PageDriverManager::addCurDriverInfo(DriverInfo *info)
-{
-    mp_AllDriverIsNew->appendRowItems(2);
-
-    DriverNameItem *nameItem = new DriverNameItem(this, info->type());
-    int row = mp_AllDriverIsNew->model()->rowCount() - 1;
-
-    nameItem->setName(info->name());
-    mp_AllDriverIsNew->setWidget(row, 0, nameItem);
-
-    DriverLabelItem *versionItem = new DriverLabelItem(this, info->version());
-    mp_AllDriverIsNew->setWidget(row, 1, versionItem);
+    mp_FailedDialog->setIcon(QIcon::fromTheme(":/icons/deepin/builtin/icons/restore_96.svg"));
+    mp_FailedDialog->addContent(contentFrame);
+    mp_FailedDialog->addButton(tr("OK"), false, DDialog::ButtonNormal);
+    mp_FailedDialog->addButton(tr("Feedback"), false, DDialog::ButtonNormal);
 }
 
 void PageDriverManager::installNextDriver()
 {
-    if (m_ListDriverIndex.size() > 0) {
+    if (!m_ListDriverIndex.isEmpty()) {
         m_CurIndex = m_ListDriverIndex[0];
         m_ListDriverIndex.removeAt(0);
         DriverInfo *info = m_ListDriverInfo[m_CurIndex];
         if (info) {
             mp_CurDriverInfo = info;
             mp_CurDriverInfo->m_Status = ST_DOWNLOADING;
-            mp_ViewCanUpdate->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
-            mp_ViewNotInstall->setItemStatus(m_CurIndex, mp_CurDriverInfo->status());
-            mp_HeadWidget->setDownloadUI(mp_CurDriverInfo->type(), "0MB/s", "0MB", mp_CurDriverInfo->size(), 0);
+            mp_DriverInstallInfoPage->updateItemStatus(m_CurIndex, mp_CurDriverInfo->status());
+            mp_DriverInstallInfoPage->headWidget()->setDownloadUI(mp_CurDriverInfo->type(), "0MB/s", "0MB", mp_CurDriverInfo->size(), 0);
             DBusDriverInterface::getInstance()->installDriver(info->packages(), info->debVersion());
+        }
+    }
+}
+
+void PageDriverManager::backupNextDriver()
+{
+    if (!m_ListBackupIndex.isEmpty()) {
+        m_CurBackupIndex = m_ListBackupIndex[0];
+        m_ListBackupIndex.removeAt(0);
+        DriverInfo *info = m_ListDriverInfo[m_CurBackupIndex];
+        if (info) {
+            mp_CurBackupDriverInfo = info;
+            mp_CurBackupDriverInfo->m_Status = ST_DRIVER_BACKING_UP;
+            mp_DriverBackupInfoPage->updateItemStatus(m_CurBackupIndex, mp_CurBackupDriverInfo->status());
+
+            if (!mp_BackupThread->isRunning()) {
+                mp_BackupThread->setBackupDriverInfo(info);
+                mp_BackupThread->start();
+            }
         }
     }
 }
@@ -709,62 +767,31 @@ void PageDriverManager::scanDevicesInfo(const QString &deviceType, DriverType dr
     }
 }
 
-void PageDriverManager::showTables()
-{
-    int installLength = m_ListInstallIndex.size();
-    int updateLength = m_ListUpdateIndex.size();
-    int newLength = m_ListNewIndex.size();
-
-    // Label显示
-    mp_InstallLabel->setText(QObject::tr("Missing drivers (%1)").arg(m_ListInstallIndex.size()));
-    mp_UpdateLabel->setText(QObject::tr("Outdated drivers (%1)").arg(m_ListUpdateIndex.size()));
-    mp_LabelIsNew->setText(QObject::tr("Up-to-date drivers (%1)").arg(m_ListNewIndex.size()));
-
-    // 无需更新驱动列表是否显示
-    mp_LabelIsNew->setVisible(newLength != 0);
-    mp_AllDriverIsNew->setVisible(newLength != 0);
-
-    // 可安装和可更新表格分别与Label作为整体进行隐藏
-    mp_InstallWidget->setVisible(installLength != 0);
-    mp_UpdateWidget->setVisible(updateLength != 0);
-
-    // 显示表头显示的内容
-    const QMap<QString, QString> &overviewMap = DeviceManager::instance()->getDeviceOverview();
-    if (installLength == 0 && updateLength == 0) {
-        mp_HeadWidget->setNoUpdateDriverUI(overviewMap["Overview"]);
-    } else {
-        mp_HeadWidget->setDetectFinishUI(QString::number(installLength + updateLength), overviewMap["Overview"], installLength != 0);
-    }
-
-    // 显示驱动列表界面
-    mp_StackWidget->setCurrentIndex(1);
-}
-
-
 void PageDriverManager::clearAllData()
 {
     m_ListNewIndex.clear();
     m_ListDriverIndex.clear();
     m_ListUpdateIndex.clear();
     m_ListInstallIndex.clear();
+    m_ListBackupIndex.clear();
+    m_ListBackableIndex.clear();
+    m_ListBackedupeIndex.clear();
 
     foreach (DriverInfo *info, m_ListDriverInfo) {
         delete info;
     }
     m_ListDriverInfo.clear();
 
-    mp_ViewCanUpdate->clear();
-    mp_ViewNotInstall->clear();
-    mp_AllDriverIsNew->clear();
-
-    initTable();
+    mp_DriverInstallInfoPage->clearAllData();
+    mp_DriverBackupInfoPage->clearAllData();
+    mp_DriverRestoreInfoPage->clearAllData();
 }
 
 void PageDriverManager::addToDriverIndex(int index)
 {
     // 如果第一次添加到index，一键安装按钮置灰
     if (m_ListDriverIndex.size() <= 0) {
-        mp_HeadWidget->setInstallBtnEnable(true);
+        mp_DriverInstallInfoPage->headWidget()->setInstallBtnEnable(true);
     }
 
     bool add = true;
@@ -780,30 +807,43 @@ void PageDriverManager::addToDriverIndex(int index)
     }
 }
 
-void PageDriverManager::removeFromDriverIndex(int index)
+void PageDriverManager::addToBackupIndex(int index)
 {
-    for (int i = 0; i < m_ListDriverIndex.size(); i++) {
-        if (index == m_ListDriverIndex[i]) {
-            m_ListDriverIndex.removeAt(i);
-            break;
-        }
+    if (m_ListBackupIndex.isEmpty()) {
+        mp_DriverBackupInfoPage->headWidget()->setBackupBtnEnable(true);
     }
 
+    int ret = m_ListBackupIndex.indexOf(index);
+
+    if (ret < 0) {
+        m_ListBackupIndex.append(index);
+    }
+}
+
+void PageDriverManager::removeFromDriverIndex(int index)
+{
+    m_ListDriverIndex.removeAt(m_ListDriverIndex.indexOf(index));
+
     // 移除时 如果一个都没有 则一键安装按钮置灰
-    if (m_ListDriverIndex.size() <= 0) {
-        mp_HeadWidget->setInstallBtnEnable(false);
+    if (m_ListDriverIndex.isEmpty()) {
+        mp_DriverInstallInfoPage->headWidget()->setInstallBtnEnable(false);
+    }
+}
+
+void PageDriverManager::removeFromBackupIndex(int index)
+{
+    m_ListBackupIndex.removeAt(m_ListBackupIndex.indexOf(index));
+
+    if (m_ListBackupIndex.isEmpty()) {
+        mp_DriverBackupInfoPage->headWidget()->setBackupBtnEnable(false);
     }
 }
 
 void PageDriverManager::failAllIndex()
 {
     foreach (int index, m_ListDriverIndex) {
-        mp_ViewCanUpdate->setItemStatus(index, ST_FAILED);
-        mp_ViewNotInstall->setItemStatus(index, ST_FAILED);
-
         QString errS = DApplication::translate("QObject", CommonTools::getErrorString(EC_NETWORK).toStdString().data());
-        mp_ViewCanUpdate->setErrorMsg(index, errS);
-        mp_ViewNotInstall->setErrorMsg(index, errS);
+        mp_DriverInstallInfoPage->updateItemStatus(index, ST_FAILED, errS);
     }
 }
 
@@ -848,4 +888,61 @@ void PageDriverManager::getDownloadInfo(int progress, qint64 total, QString &spe
         speed = QString::number(speed_s / 1024 / 1024 / 1024, 'f', 2) + "GB";
     }
     msec = QDateTime::currentMSecsSinceEpoch();
+}
+
+void PageDriverManager::testDevices()
+{
+    DriverInfo *info = new DriverInfo();
+    info->m_Name = "Sharp MX-C2622R PS, 1.1";
+    info->m_DebVersion = "1.0.0";
+    info->m_Type = DR_Tablet;
+    info->m_Packages = "com.sharp.griffin2light";
+    info->m_Status = ST_CAN_UPDATE;
+    m_ListDriverInfo.append(info);
+
+    DriverInfo *info1 = new DriverInfo();
+    info1->m_Name = "Deli DL-888F";
+    info1->m_DebVersion = "1.1";
+    info1->m_Type = DR_Mouse;
+    info1->m_Packages = "deli-printer";
+    info1->m_Status = ST_CAN_UPDATE;
+    m_ListDriverInfo.append(info1);
+
+    DriverInfo *info2 = new DriverInfo();
+    info2->m_Name = "DONNA LQ Foomatic/DONNA (recommended)";
+    info2->m_DebVersion = "1.0.0.1";
+    info2->m_Type = DR_Printer;
+    info2->m_Packages = "com.cn.donna.printer-lq-drv";
+    info2->m_Status = ST_CAN_UPDATE;
+    m_ListDriverInfo.append(info2);
+
+    DriverInfo *info3 = new DriverInfo();
+    info3->m_Name = "Aurora AD229MNA Series";
+    info3->m_DebVersion = "1.0.0";
+    info3->m_Type = DR_WiFi;
+    info3->m_Packages = "aurora.a4-adxxx";
+    info3->m_Status = ST_CAN_UPDATE;
+    m_ListDriverInfo.append(info3);
+}
+
+void PageDriverManager::getDebBackupInfo(DriverInfo *info)
+{
+    QString debname = info->packages();
+    QString backupPath =  QString("%1/driver/%2").arg(CommonTools::getBackupPath()).arg(debname);
+    QDir destdir(backupPath);
+    if (destdir.exists()) {
+        //获取当前路径下的所有文件名
+        QFileInfoList fileInfoList = destdir.entryInfoList();
+        foreach (QFileInfo fileInfo, fileInfoList) {
+            if (fileInfo.fileName() == "." || fileInfo.fileName() == "..")
+                continue;
+            if (fileInfo.isFile() && fileInfo.fileName().contains(".deb") && fileInfo.fileName().contains(debname)) {
+                QString tmps = fileInfo.fileName().remove(debname).remove(".deb");
+                QStringList  tmpsl = tmps.split('_', QString::SkipEmptyParts);
+                info->m_DebBackupVersion = tmpsl.first();
+                info->m_BackupFileName = fileInfo.absoluteFilePath();
+            }
+        }
+    }
+
 }

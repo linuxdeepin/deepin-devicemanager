@@ -73,6 +73,11 @@ public:
      */
     static QString getUrl();
 
+    /**
+     * @brief getBackupPath 备份路径
+     */
+    static QString getBackupPath();
+
 signals:
 
 public slots:

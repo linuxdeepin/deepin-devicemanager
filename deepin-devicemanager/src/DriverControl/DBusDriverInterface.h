@@ -85,6 +85,17 @@ public:
      */
     bool isDebValid(const QString &path);
 
+    /**
+         * @brief backupDeb 备份驱动，通过dbus调用 com.deepin.devicemanager /com/deepin/drivermanager 里面的 backupDeb 接口
+         * @param debpath 需要备份驱动包名目录  比如 /tmp/debname/debname_version.deb    debpath= "/tmp/debname/"
+         */
+    bool backupDeb(const QString &debpath);
+    /**
+         * @brief delDeb del驱动，通过dbus调用 com.deepin.devicemanager /com/deepin/drivermanager 里面的 delDeb 接口
+         * @param debname 需要del驱动包名  比如 /tmp/debname/debname_version.deb    debname= debname
+         */
+    bool delDeb(const QString &debname);
+
 signals:
     void processChange(qint32 value, QString details);
     void processEnd(bool sucess, QString msg);
@@ -92,6 +103,8 @@ signals:
     void downloadFinished();
     void installProgressChanged(int progress);
     void installProgressFinished(bool bsuccess, int err);
+    void installFinished(bool, QString);
+    void installProgressDetail(int, QString);
 
 protected:
     explicit DBusDriverInterface(QObject *parent = nullptr);

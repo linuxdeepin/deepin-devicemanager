@@ -104,11 +104,20 @@ public:
      * @param enable
      */
     void setInstallBtnEnable(bool enable);
+    void setBackupBtnEnable(bool enable);
+
+    void setNoBackupDriverUI(int backableSize, int backedupSize);
+    void setBackableDriverUI(int backableSize, int backedupSize);
+    void setBackingUpDriverUI(const QString &driverDescription, int totalValue, int progressValue);
+    void setBackupSuccessUI(const QString &success, const QString &failed);
+    void setRestoreDriverUI(int restorableSize);
+    void setRestoringUI(int progressValue = 0, QString driverDescription = "");
 
 signals:
     void redetected();
     void installAll();
-    void undoInstall();
+    void backupAll();
+    void cancelClicked();
 
 public slots:
     /**
@@ -122,9 +131,19 @@ public slots:
     void slotFeedBack();
 
     /**
+     * @brief slotBackupPath: 打开备份路径
+     */
+    void slotBackupPath();
+
+    /**
      * @brief slotInstall: 一键安装槽函数
      */
     void slotInstall();
+
+    /**
+     * @brief slotInstall: 一键备份槽函数
+     */
+    void slotBackup();
 
     /**
      * @brief slotReDetectSlot: 重新检测槽函数
@@ -169,8 +188,10 @@ private:
     TipsLabel      *mp_ModelLabel;            // 第三行 联想 Lenovo Product 台式机  或 下载速度 Label
     DLabel         *mp_RebootLabel;           // 重启Label
     DLabel         *mp_FeedBackLabel;         // 反馈Label
+    DLabel         *mp_BackupPathLabel;       // 备份路径Label
     DSuggestButton *mp_InstallButton;         // 一键安装 Button
     DSuggestButton *mp_ReDetectedSgButton;    // 重新检测 Suggest Button
+    DSuggestButton *mp_BackupSgButton;        // 一键备份 Suggest Button
     DPushButton    *mp_CancelButton;          // 取消 Button
     DIconButton    *mp_ReDetectedIconButton;  // 重新检测  Icon Button
     DProgressBar   *mp_Progress;              // 下载进度  安装进度
@@ -178,6 +199,7 @@ private:
     QHBoxLayout    *mp_HLayoutTotal;         // 整体横向布局
     QHBoxLayout    *mp_HLayoutButton;        // Button 横向布局
     QVBoxLayout    *mp_VLayoutLabel;         // label 纵向布局
+    QHBoxLayout    *mp_HLayoutLabel;         // label 横向布局
 
 };
 

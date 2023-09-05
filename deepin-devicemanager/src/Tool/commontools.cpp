@@ -52,6 +52,11 @@ QMap<Status, QString> CommonTools::m_MapStatusIcon = {
     , {ST_NOT_INSTALL, QString(":/icons/deepin/builtin/icons/alert.svg")}
     , {ST_CAN_UPDATE, QString(":/icons/deepin/builtin/icons/alert.svg")}
     , {ST_WAITING, QString(":/icons/deepin/builtin/icons/waiting.svg")}
+    , {ST_DRIVER_NOT_BACKUP, QString(":/icons/deepin/builtin/icons/alert.svg")}
+    , {ST_DRIVER_BACKING_UP, QString("")}
+    , {ST_DRIVER_BACKUP_FAILED, QString(":/icons/deepin/builtin/icons/warning.svg")}
+    , {ST_DRIVER_BACKUP_SUCCESS, QString(":/icons/deepin/builtin/icons/ok.svg")}
+    , {ST_DRIVER_RESTORING, QString("")}
 };
 
 QMap<Status, QString> CommonTools::m_MapStatusType = {
@@ -62,6 +67,11 @@ QMap<Status, QString> CommonTools::m_MapStatusType = {
     , {ST_NOT_INSTALL, QObject::tr("Not installed")}
     , {ST_CAN_UPDATE, QObject::tr("Out-of-date")}
     , {ST_WAITING, QObject::tr("Waiting")}
+    , {ST_DRIVER_NOT_BACKUP, QObject::tr("Not backed up")}
+    , {ST_DRIVER_BACKING_UP, QObject::tr("Backing up")}
+    , {ST_DRIVER_BACKUP_FAILED, QObject::tr("Backup failed")}
+    , {ST_DRIVER_BACKUP_SUCCESS, QObject::tr("Backup successful")}
+    , {ST_DRIVER_RESTORING, QObject::tr("Restoring")}
 };
 
 QMap<int, QString> CommonTools::m_MapErrorString = {
@@ -143,4 +153,9 @@ QString CommonTools::getUrl()
     }else{
         return "https://drive-pre.uniontech.com/api/v1/drive/search";
     }
+}
+
+QString CommonTools::getBackupPath()
+{
+    return "/usr/share/deepin-devicemanager/";
 }

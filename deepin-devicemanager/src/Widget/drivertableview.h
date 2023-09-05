@@ -7,6 +7,7 @@
 #define DRIVERTABLEVIEW_H
 
 #include "MacroDefinition.h"
+#include "driveritem.h"
 
 #include <DObject>
 #include <DTreeView>
@@ -120,6 +121,8 @@ public:
      */
     void setCheckedCBDisable();
 
+    void setItemOperationEnable(int index, bool enable);
+
     /**
      * @brief getCheckedDriverIndex 获取选中的index
      * @param lstIndex
@@ -177,7 +180,7 @@ signals:
      * @brief operatorClicked 点击安装或更新的信号
      * @param index
      */
-    void operatorClicked(int index);
+    void operatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode);
 
     /**
      * @brief itemChecked 选中的信号

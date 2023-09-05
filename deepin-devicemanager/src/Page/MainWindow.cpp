@@ -17,6 +17,7 @@
 #include "LoadCpuInfoThread.h"
 #include "CmdTool.h"
 #include "commonfunction.h"
+#include "DriverScanWidget.h"
 
 // Dtk头文件
 #include <DFileDialog>
@@ -69,6 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_MainStackWidget(new DStackedWidget(this))
     , mp_WaitingWidget(new WaitingWidget(this))
     , mp_DeviceWidget(new DeviceWidget(this))
+    , mp_DriverScanWidget(new DriverScanWidget(this))
     , mp_DriverManager(new PageDriverManager(this))
     , mp_WorkingThread(new LoadInfoThread)
     , mp_ButtonBox(new DButtonBox(this))
@@ -99,9 +101,23 @@ MainWindow::MainWindow(QWidget *parent)
         refreshDataBase();
         startScanningFlag = true;
     });
-    connect(mp_DriverManager, &PageDriverManager::scanFinished, this, [ = ]() {
+    connect(mp_DriverManager, &PageDriverManager::scanFinished, this, [ = ](ScanResult sr) {
         mp_ButtonBox->setEnabled(true);
+
+        if (SR_Failed == sr) {
+            mp_DriverScanWidget->setScanFailedUI();
+        } else if (SR_SUCESS == sr) {
+            mp_DriverScanWidget->setProgressFinish();
+            mp_MainStackWidget->setCurrentIndex(3);
+        } else if (SR_NETWORD_ERR == sr) {
+            mp_DriverScanWidget->setNetworkErr();
+        }
     });
+    connect(mp_DriverManager, &PageDriverManager::scanInfo, this, [ = ](const QString &info, int progress) {
+        mp_DriverScanWidget->refreshProgress(info, progress);
+    });
+    connect(mp_DriverScanWidget, &DriverScanWidget::redetected, mp_DriverManager, &PageDriverManager::startScanning);
+
 }
 
 MainWindow::~MainWindow()
@@ -149,7 +165,6 @@ void MainWindow::refresh()
 
     // 加载设备信息
     refreshDataBase();
-
 }
 
 bool MainWindow::exportTo()
@@ -340,10 +355,13 @@ void MainWindow::initWindowTitle()
             else
                 mp_MainStackWidget->setCurrentIndex(1);
         } else {
-            mp_MainStackWidget->setCurrentIndex(2);
             if (mp_DriverManager->isFirstScan()) {
                 mp_ButtonBox->setEnabled(false);
                 mp_DriverManager->scanDriverInfo();
+                mp_MainStackWidget->setCurrentIndex(2);
+                mp_DriverScanWidget->setScanningUI("", 0);
+            } else {
+                mp_MainStackWidget->setCurrentIndex(3);
             }
         }
     });
@@ -377,6 +395,8 @@ void MainWindow::initWidgets()
 
     // 添加信息显示界面
     mp_MainStackWidget->addWidget(mp_DeviceWidget);
+
+    mp_MainStackWidget->addWidget(mp_DriverScanWidget);
 
     // 初始化驱动相关界面
     mp_MainStackWidget->addWidget(mp_DriverManager);
@@ -457,8 +477,9 @@ void MainWindow::slotLoadingFinish(const QString &message)
         }
     }
     if (startScanningFlag) {
-        mp_MainStackWidget->setCurrentWidget(mp_DriverManager);
+        mp_MainStackWidget->setCurrentIndex(2);
         mp_DriverManager->scanDriverInfo();
+        mp_DriverScanWidget->setScanningUI("", 0);
         startScanningFlag = false;
     }
 }
@@ -580,6 +601,33 @@ void MainWindow::closeEvent(QCloseEvent *event)
         // bug134487
         DDialog dialog(QObject::tr("You are installing a driver, which will be interrupted if you exit.")
                        , QObject::tr("Are you sure you want to exit?"));
+
+        dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
+        dialog.addButton(QObject::tr("Exit", "button"), false, DDialog::ButtonWarning);
+        dialog.addButton(QObject::tr("Cancel", "button"));
+        int ret = dialog.exec();
+        if (0 == ret) {
+            return DMainWindow::closeEvent(event);
+        } else {
+            event->ignore();
+        }
+    } else if (mp_DriverManager->isBackingup()) {
+        DDialog dialog(QObject::tr("You are backing up drivers, which will be interrupted if you exit.")
+                       , QObject::tr("Are you sure you want to exit?"));
+
+        dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
+        dialog.addButton(QObject::tr("Exit", "button"), false, DDialog::ButtonWarning);
+        dialog.addButton(QObject::tr("Cancel", "button"));
+        int ret = dialog.exec();
+        if (0 == ret) {
+            return DMainWindow::closeEvent(event);
+        } else {
+            event->ignore();
+        }
+    } else if (mp_DriverManager->isRestoring()) {
+        DDialog dialog(QObject::tr("You are restoring drivers, which will be interrupted if you exit.")
+                       , QObject::tr("Are you sure you want to exit?"));
+
         dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
         dialog.addButton(QObject::tr("Exit", "button"), false, DDialog::ButtonWarning);
         dialog.addButton(QObject::tr("Cancel", "button"));

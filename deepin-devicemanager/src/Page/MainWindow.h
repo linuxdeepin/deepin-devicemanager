@@ -19,6 +19,7 @@ class WaitingWidget;
 class DeviceWidget;
 class LoadInfoThread;
 class PageDriverManager;
+class DriverScanWidget;
 
 using namespace Dtk::Widget;
 
@@ -162,6 +163,7 @@ private:
     DStackedWidget        *mp_MainStackWidget;
     WaitingWidget         *mp_WaitingWidget;           //加载界面
     DeviceWidget          *mp_DeviceWidget;            //设备显示界面
+    DriverScanWidget      *mp_DriverScanWidget;        //驱动管理扫描界面
     PageDriverManager     *mp_DriverManager;           //驱动管理主界面
     LoadInfoThread        *mp_WorkingThread;           //信息加载线程
     DButtonBox            *mp_ButtonBox;               // titlebar上添加Buttonbox
