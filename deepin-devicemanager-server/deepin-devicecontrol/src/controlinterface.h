@@ -135,6 +135,9 @@ public slots:
     Q_SCRIPTABLE bool isArchMatched(const QString &filePath);
     Q_SCRIPTABLE bool isDebValid(const QString &filePath);
     Q_SCRIPTABLE bool unInstallPrinter(const QString &vendor, const QString &model);
+    Q_SCRIPTABLE bool backupDeb(const QString &debpath); //debpath格式须是： “/tmp/xx/debname
+    Q_SCRIPTABLE bool delDeb(const QString &debname);
+
 #endif
 
 private:
