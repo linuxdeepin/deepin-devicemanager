@@ -67,6 +67,9 @@ static int getPidByName(const QString &taskName)
 
 bool ControlInterface::getUserAuthorPasswd()
 {
+#ifdef DISABLE_POLKIT
+    return true;
+#endif
     int pid = getPidByName("deepin-devicemanager");
     if (pid >= 0) {
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
@@ -305,6 +308,23 @@ bool ControlInterface::unInstallPrinter(const QString &vendor, const QString &mo
     }
     return mp_drivermanager->uninstallPrinter(vendor, model);
 }
+
+bool ControlInterface::backupDeb(const QString &debpath)
+{
+    if (!getUserAuthorPasswd()) {
+        return false;
+    }
+    return  mp_drivermanager->backupDeb(debpath);
+}
+
+bool ControlInterface::delDeb(const QString &debname)
+{
+        if (!getUserAuthorPasswd()) {
+            return false;
+        }
+    return  mp_drivermanager->delDeb(debname);
+}
+
 #endif
 bool ControlInterface::authorizedEnable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool enable_device, const QString strDriver)
 {

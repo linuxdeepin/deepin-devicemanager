@@ -10,6 +10,11 @@ if (DISABLE_DRIVER)
     add_definitions(-DDISABLE_DRIVER)
 endif()
 
+set(DISABLE_POLKIT false CACHE BOOL "disable polkit debug")
+if(CMAKE_BUILD_TYPE  STREQUAL "Debug")
+    add_definitions(-DDISABLE_POLKIT)
+endif()
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager)
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager-server)
 

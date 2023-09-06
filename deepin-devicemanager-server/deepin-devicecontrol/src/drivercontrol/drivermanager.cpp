@@ -32,12 +32,15 @@
 #include <QThread>
 #include <QDBusInterface>
 #include <QNetworkConfigurationManager>
+#include <QDir>
+#include <QFileInfoList>
+#include <QDebug>
 
 #include <fstream>
 #include <string>
 #include <vector>
 
-
+#define DB_PATH "/usr/share/deepin-devicemanager"  //driver deb backup path
 #define SD_KEY_excat    "excat"
 #define SD_KEY_ver      "version"
 #define SD_KEY_code     "client_code"
@@ -625,4 +628,122 @@ bool DriverManager::unInstallPrinter(const QString &packageName)
 
     return !printerHasInstalled(packageName);
 }
+
+static bool qdelDirectory(QString toDir)
+{
+    QDir toDir_(toDir);
+
+    //如果目的文件夹不存
+    if (!toDir_.exists()) {
+        return true;
+    }
+    //获取当前路径下的所有文件名
+    QFileInfoList fileInfoList = toDir_.entryInfoList();
+    foreach(QFileInfo fileInfo, fileInfoList) {
+        if(fileInfo.fileName() == "." || fileInfo.fileName() == "..")
+            continue;
+
+        //拷贝子目录
+        if (fileInfo.isDir())  {
+            qInfo() << "del isDir";
+            //递归调用拷贝
+            if (!qdelDirectory(toDir_.filePath(fileInfo.fileName())))
+                return false;
+        } else {
+            toDir_.remove(fileInfo.fileName());
+            qInfo() << "del remove";
+        }
+    }
+    return true;
+}
+/*********************************************************************/
+/*功能：拷贝文件夹
+  qCopyDirectory -- 拷贝目录
+  fromDir : 源目录
+  toDir   : 目标目录
+  bCoverIfFileExists : ture:同名时覆盖  false:同名时返回false,终止拷贝
+  返回: ture拷贝成功 false:拷贝未完成*/
+/***********************************************************************/
+static bool qCopyDirectory(QString fromDir, QString toDir, bool bCoverIfFileExists)
+{
+    QDir formDir_(fromDir);
+    QDir toDir_(toDir);
+
+    //如果目的文件夹不存在则创建
+    if (!toDir_.exists()) {
+        if (!toDir_.mkpath(toDir))
+            return false;
+    }
+
+    //获取当前路径下的所有文件名
+    QStringList nameFiltes;
+    nameFiltes << "*.deb" ;
+    QFileInfoList fileInfoList = formDir_.entryInfoList(nameFiltes, QDir::Dirs | QDir::Files | QDir::NoSymLinks | QDir::NoDotAndDotDot);
+    foreach (const QFileInfo &fileInfo, fileInfoList) {
+        //拷贝子目录
+        if (fileInfo.isDir()) {
+            //递归调用拷贝
+            if (!qCopyDirectory(fileInfo.filePath(), toDir_.filePath(fileInfo.fileName()), true))
+                return false;
+        }
+        //拷贝子文件
+        else {
+            if (bCoverIfFileExists && toDir_.exists(fileInfo.fileName())) {
+                toDir_.remove(fileInfo.fileName());
+            }
+            if (!QFile::copy(fileInfo.filePath(), toDir_.filePath(fileInfo.fileName()))) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool DriverManager::delDeb(const QString &debname)
+{
+    QString backupPath =  QString("%1/driver/%2").arg(DB_PATH).arg(debname);
+    QDir destdir(backupPath);
+    if (destdir.exists()) {
+        qInfo() << "delDeb" << backupPath << destdir.absolutePath();
+        qdelDirectory(backupPath);
+        destdir.rmdir(destdir.absolutePath());
+    }
+    return (!destdir.exists());
+}
+
+/**
+ * @brief DriverManager::backupDeb backup 驱动
+ * @param modulename 驱动deb模块名
+ * @return  true:成功 false:失败
+ */
+
+bool DriverManager::backupDeb(const QString &debpath)
+{
+    QDir formDir_(debpath);
+    if (!formDir_.exists()) { //检查传入路径是否存在
+        qInfo() << "no bank up file";
+        return false;
+    }
+
+    QString fromPath =  debpath;
+    int cnt = debpath.length();
+    int i   = debpath.lastIndexOf("/");
+    if ((1 > cnt) || (1 > i)) {   //检查传入路径是否合规 /tmp/xx/debname
+        return false;
+    }
+    QString debname = debpath.right(cnt - i - 1);
+
+    QString backupPath =  QString("%1/driver/%2").arg(DB_PATH).arg(debname);
+    QDir destdir(backupPath);
+
+    if (destdir.exists()) { //检查备份路径是否存在
+        if (qdelDirectory(backupPath)) {  // delete first
+            if (!destdir.mkpath(destdir.absolutePath())) // mkdir
+                return false;
+        }
+    }
+    qInfo() << "copy  file" << fromPath << backupPath << debname;
+    return qCopyDirectory(fromPath, backupPath, true);
+}
+
 #endif // DISABLE_DRIVER

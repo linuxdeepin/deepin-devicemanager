@@ -51,6 +51,8 @@ public:
     bool isArchMatched(const QString &path);
     //判断包是否有效
     bool isDebValid(const QString &filePath);
+    bool backupDeb(const QString &debpath);
+    bool delDeb(const QString &debname);
 
 private:
     void initConnections();
