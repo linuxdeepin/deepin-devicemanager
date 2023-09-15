@@ -118,6 +118,7 @@ private:
     QString             m_Speed;                        //<! 【速度】
     QString             m_BusID;                        //<! 【总线ID】
     QString             m_LogicalName;
+    QString             m_Avail;                        //<! 【Config Status:avail=yes】
 };
 
 #endif // DEVICEOTHERS_H
