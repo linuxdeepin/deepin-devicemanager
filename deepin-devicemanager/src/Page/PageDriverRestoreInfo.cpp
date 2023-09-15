@@ -99,7 +99,7 @@ void PageDriverRestoreInfo::initUI()
     noRestoreMainLayout->addStretch();
     noRestoreMainLayout->addWidget(picLabel);
     noRestoreMainLayout->addSpacing(10);
-    noRestoreMainLayout->addWidget(tipLabel);
+    noRestoreMainLayout->addWidget(tipLabel, 0, Qt::AlignHCenter);
     noRestoreMainLayout->addSpacing(35);
     noRestoreMainLayout->addWidget(mp_ReDetectedSgButton, 0, Qt::AlignHCenter);
     noRestoreMainLayout->addSpacing(25);

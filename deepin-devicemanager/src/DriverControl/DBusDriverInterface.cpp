@@ -164,7 +164,7 @@ void DBusDriverInterface::init()
         connect(mp_Iface, SIGNAL(sigDownloadFinished()), this, SLOT(slotDownloadFinished()));
         connect(mp_Iface, SIGNAL(sigInstallProgressChanged(qint32)), this, SLOT(slotInstallProgressChanged(qint32)));
         connect(mp_Iface, SIGNAL(sigInstallProgressFinished(bool, int)), this, SLOT(slotInstallProgressFinished(bool, int)));
-        connect(mp_Iface, SIGNAL(sigFinished(bool, QString)), this, SLOT(installFinished(bool, QString)));
-        connect(mp_Iface, SIGNAL(sigProgressDetail(int, QString)), this, SLOT(installProgressDetail(int, QString)));
+        connect(mp_Iface, SIGNAL(sigFinished(bool, QString)), this, SIGNAL(installFinished(bool, QString)));
+        connect(mp_Iface, SIGNAL(sigProgressDetail(int, QString)), this, SIGNAL(installProgressDetail(int, QString)));
     }
 }
