@@ -35,6 +35,7 @@ DeviceMonitor::DeviceMonitor()
     , m_ProductionWeek("")
     , m_Width(0)
     , m_Height(0)
+    , m_IsTomlSet(false)
 {
     // 初始化可显示属性
     initFilterKey();
@@ -124,6 +125,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
 TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    m_IsTomlSet = true;
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Type", m_Model);
@@ -182,6 +184,8 @@ QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
 
 bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, const QString &rate)
 {
+    if(m_IsTomlSet)
+        return false;
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
     if (!m_Interface.isEmpty()) {
         // 设置当前分辨率
