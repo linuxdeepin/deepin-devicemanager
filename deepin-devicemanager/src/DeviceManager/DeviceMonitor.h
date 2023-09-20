@@ -203,6 +203,7 @@ private:
 
     int             m_Width;             //<!  屏幕的宽度
     int             m_Height;            //<!  屏幕的高度
+    bool            m_IsTomlSet;
 };
 
 #endif // DEVICEMONITOR_H
