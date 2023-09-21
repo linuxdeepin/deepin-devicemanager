@@ -98,6 +98,12 @@ bool WakeupUtils::writeWakeupFile(const QString &path, bool wakeup)
     return true;
 }
 
+#define UNPARSE_WOLOPTS(x) ((x & WAKE_PHY) || (x & WAKE_UCAST) || (x & WAKE_MCAST) || (x & WAKE_BCAST) || (x & WAKE_ARP) || (x & WAKE_MAGIC) || (x & WAKE_MAGICSECURE) || (x & WAKE_FILTER))
+/* refer spec : ethtool.c
+    https://lwn.net/Articles/931289/
+    https://linuxconfig.org/introduction-to-wake-on-lan
+    https://wiki.archlinux.org/title/Wake-on-LAN
+*/
 WakeupUtils::EthStatus WakeupUtils::wakeOnLanIsOpen(const QString &logicalName)
 {
     int fd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -114,18 +120,19 @@ WakeupUtils::EthStatus WakeupUtils::wakeOnLanIsOpen(const QString &logicalName)
     if (0 != ioctl(fd, SIOCETHTOOL, &ifr)) {
         return ES_IOCTL_ERROR;
     }
+    qInfo() << "wakeOnLan supported:" << wolinfo.supported << "wolopts:" << wolinfo.wolopts;
 
-    if (47 != wolinfo.supported) {
+    if (wolinfo.supported && UNPARSE_WOLOPTS(wolinfo.supported)) {
+        if (wolinfo.wolopts && UNPARSE_WOLOPTS(wolinfo.wolopts)) {
+            return ES_WAKE_ON_OPEN;
+        }
+        else
+            return ES_WAKE_ON_CLOSE;
+    }
+    else
         return ES_NOT_SUPPORT_WAKE_ON;
-    }
 
-    if (0 == wolinfo.wolopts) {
-        return ES_WAKE_ON_CLOSE;
-    } else if (32 == wolinfo.wolopts) {
-        return ES_WAKE_ON_OPEN;
-    } else {
-        return ES_WAKE_ON_UNKNOW;
-    }
+    return ES_WAKE_ON_UNKNOW;
 }
 
 bool WakeupUtils::setWakeOnLan(const QString &logicalName, bool open)
