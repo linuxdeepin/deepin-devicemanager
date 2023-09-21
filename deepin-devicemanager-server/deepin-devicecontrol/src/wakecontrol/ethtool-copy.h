@@ -1315,6 +1315,7 @@ enum ethtool_sfeatures_retval_bits {
 #define WAKE_ARP        (1 << 4)
 #define WAKE_MAGIC      (1 << 5)
 #define WAKE_MAGICSECURE    (1 << 6) /* only meaningful if WAKE_MAGIC */
+#define WAKE_FILTER		(1 << 7)
 
 /* L2-L4 network traffic flow types */
 #define TCP_V4_FLOW 0x01    /* hash or spec (tcp_ip4_spec) */
