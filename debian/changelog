@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.13) unstable; urgency=medium
+
+  * new version 6.0.13
+
+ -- shuaijie <shuaijie@uniontech.com>  Mon, 16 Oct 2023 13:40:01 +0800
+
 deepin-devicemanager (6.0.12) unstable; urgency=medium
 
   * Community Edition removal devicemanager.list.
