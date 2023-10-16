@@ -112,6 +112,7 @@ public:
     void setBackupSuccessUI(const QString &success, const QString &failed);
     void setRestoreDriverUI(int restorableSize);
     void setRestoringUI(int progressValue = 0, QString driverDescription = "");
+    void setReDetectEnable(bool enable);
 
 signals:
     void redetected();

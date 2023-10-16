@@ -488,16 +488,24 @@ void DetectedStatusWidget::setBackableDriverUI(int backableSize, int backedupSiz
     mp_PicLabel->setPixmap(pic);
 
     int total = backableSize + backedupSize;
-    mp_UpdateLabel->setText(QObject::tr("You have %1 drivers that can be backed up").arg(backableSize));
-    mp_ModelLabel->setText(QObject::tr("A total of %1 drivers, of which %2 have been backed up").arg(total).arg(backedupSize));
+    if (backedupSize <= 0) {
+        mp_UpdateLabel->setText(QObject::tr("You have %1 drivers that can be backed up, it is recommended to do so immediately").arg(backableSize));
+        mp_ModelLabel->setText("");
+    } else {
+        mp_UpdateLabel->setText(QObject::tr("You have %1 drivers that can be backed up").arg(backableSize));
+        mp_ModelLabel->setText(QObject::tr("A total of %1 drivers, of which %2 have been backed up").arg(total).arg(backedupSize));
+    }
+
     mp_HLayoutTotal->addWidget(mp_PicLabel);
     mp_HLayoutTotal->addSpacing(SPACE_15);
     mp_VLayoutLabel->addStretch();
     mp_VLayoutLabel->addWidget(mp_UpdateLabel);
     mp_VLayoutLabel->addSpacing(SPACE_5);
     mp_HLayoutLabel->addWidget(mp_ModelLabel);
-    mp_HLayoutLabel->addSpacing(SPACE_5);
-    mp_HLayoutLabel->addWidget(mp_BackupPathLabel);
+    if (backedupSize > 0) {
+        mp_HLayoutLabel->addSpacing(SPACE_5);
+        mp_HLayoutLabel->addWidget(mp_BackupPathLabel);
+    }
     mp_VLayoutLabel->addLayout(mp_HLayoutLabel);
     mp_VLayoutLabel->addStretch();
     mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
@@ -515,7 +523,9 @@ void DetectedStatusWidget::setBackableDriverUI(int backableSize, int backedupSiz
     mp_ModelLabel->show();
     mp_ReDetectedIconButton->show();
     mp_BackupSgButton->show();
-    mp_BackupPathLabel->show();
+    if (backedupSize > 0) {
+        mp_BackupPathLabel->show();
+    }
     this->setLayout(mp_HLayoutTotal);
 }
 
@@ -667,6 +677,14 @@ void DetectedStatusWidget::setRestoringUI(int progressValue, QString driverDescr
     this->setLayout(mp_HLayoutTotal);
 }
 
+void DetectedStatusWidget::setReDetectEnable(bool enable)
+{
+    if (mp_ReDetectedSgButton)
+        mp_ReDetectedSgButton->setEnabled(enable);
+    if (mp_ReDetectedIconButton)
+        mp_ReDetectedIconButton->setEnabled(enable);
+}
+
 void DetectedStatusWidget::slotReboot()
 {
     // 调用DBus接口重启
@@ -676,7 +694,6 @@ void DetectedStatusWidget::slotReboot()
                 "/teval `dbus-launch --auto-syntax`/n");
     }
 
-    //
     QDBusInterface *iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::sessionBus());
     iface->call("Restart");
 }
@@ -767,6 +784,7 @@ void DetectedStatusWidget::initUI()
     QFont font = mp_UpdateLabel->font();
     font.setWeight(FONT_WEIGHT);
     mp_UpdateLabel->setFont(font);
+    mp_UpdateLabel->setWordWrap(true);
     DFontSizeManager::instance()->bind(mp_UpdateLabel, DFontSizeManager::T5);
 
     // 检测时间

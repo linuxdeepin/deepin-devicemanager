@@ -298,6 +298,10 @@ private:
 
     QList<int>            m_ListBackableIndex;    // 可备份列表
     QList<int>            m_ListBackedupeIndex;   // 已备份列表
+    QList<int>            m_ListRestorableIndex;  // 可还原列表
+
+    int                   m_backupSuccessNum = 0;
+    int                   m_backupFailedNum = 0;
 
     DDialog               *mp_FailedDialog;     //还原失败弹窗
 

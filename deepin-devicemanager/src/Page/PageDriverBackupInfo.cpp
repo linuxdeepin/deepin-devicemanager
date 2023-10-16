@@ -104,17 +104,11 @@ void PageDriverBackupInfo::initTable()
 void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
 {
     PageDriverTableView *view = nullptr;
-    if (info->debBackupVersion().isEmpty()) {
+    if (info->debBackupVersion() != info->debVersion()) {
         view = mp_ViewBackable;
         view->appendRowItems(6);
-    }  else {
-        view = mp_ViewBackedUp;
-        view->appendRowItems(2);
-    }
 
-    int row = view->model()->rowCount() - 1;
-
-    if (view != mp_ViewBackedUp) {
+        int row = view->model()->rowCount() - 1;
 
         // 设置CheckBtn
         DriverCheckItem *cbItem = new DriverCheckItem(this);
@@ -146,7 +140,14 @@ void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
         // 添加操作按钮
         DriverOperationItem *operateItem = new DriverOperationItem(this,  DriverOperationItem::BACKUP);
         view->setWidget(row, 5, operateItem);
-    } else {
+    }
+
+    if (!info->debBackupVersion().isEmpty()) {
+        view = mp_ViewBackedUp;
+        view->appendRowItems(2);
+
+        int row = view->model()->rowCount() - 1;
+
         // 设置设备信息
         DriverNameItem *nameItem = new DriverNameItem(this, info->type());
         nameItem->setName(info->name());
@@ -195,6 +196,8 @@ void PageDriverBackupInfo::clearAllData()
 void PageDriverBackupInfo::updateItemStatus(int index, Status status)
 {
     mp_ViewBackable->setItemStatus(index, status);
+    if (status == ST_DRIVER_BACKUP_FAILED)
+        mp_ViewBackable->setErrorMsg(index, QString("Backup Failed"));
 }
 
 void PageDriverBackupInfo::setCheckedCBDisnable()

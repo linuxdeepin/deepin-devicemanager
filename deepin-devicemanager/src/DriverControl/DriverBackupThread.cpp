@@ -36,6 +36,11 @@ void DriverBackupThread::run()
                 qInfo() << "mkpath backupDeb unsucess  :" << backupPath;
         }
 
+        if (m_isStop) {
+            emit backupProgressFinished(false);
+            return;
+        }
+
         QStringList options;
         options << "-c" << "apt download " + debname + "=" + debversion;
         QProcess process;
@@ -51,6 +56,11 @@ void DriverBackupThread::run()
                 }
             }
         });
+
+        if (m_isStop) {
+            emit backupProgressFinished(false);
+            return;
+        }
         process.start("/bin/bash", options);
         process.waitForFinished(-1);
 
@@ -59,14 +69,18 @@ void DriverBackupThread::run()
             return;
         }
 
-        //emit backupProgressChanged(50);
-
         if (destdir.exists()) {
             //获取当前路径下的所有文件名
             QFileInfoList fileInfoList = destdir.entryInfoList();
             foreach (QFileInfo fileInfo, fileInfoList) {
+                if (m_isStop) {
+                    emit backupProgressFinished(false);
+                    return;
+                }
+
                 if (fileInfo.fileName() == "." || fileInfo.fileName() == "..")
                     continue;
+
                 if (fileInfo.isFile() && fileInfo.fileName().contains(".deb") && fileInfo.fileName().contains(debname)) {
                     bool ret = DBusDriverInterface::getInstance()->backupDeb(backupPath);
                     qInfo() << "backupDeb: "  << ret << backupPath << fileInfo.fileName();
@@ -75,6 +89,7 @@ void DriverBackupThread::run()
                 }
             }
         }
+        emit backupProgressFinished(false);
     }
 }
 

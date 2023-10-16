@@ -3,6 +3,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "BtnLabel.h"
+#include "commontools.h"
+
+#include <QBoxLayout>
 
 #include <DDialog>
 #include <DFontSizeManager>
@@ -18,11 +21,39 @@ BtnLabel::BtnLabel(DWidget *parent)
     connect(this, &QLabel::linkActivated, this, [this]() {
         if (m_Desc.isEmpty())
             return;
-        DDialog dialog;
-        dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
-        dialog.setTitle(m_Desc);
-        dialog.addButton(tr("OK", "button"));
-        dialog.exec();
+
+        if (m_Desc == QString("Backup Failed")) {
+            DDialog dialog;
+
+            DWidget *contentFrame = new DWidget(this);
+
+            DLabel *retryLabel = new DLabel(this);
+            QVBoxLayout *vLayout = new QVBoxLayout(this);
+            retryLabel->setElideMode(Qt::ElideMiddle);
+            retryLabel->setText(QObject::tr("Please try again or give us feedback"));
+            vLayout->addWidget(retryLabel, 0, Qt::AlignHCenter);
+
+            contentFrame->setLayout(vLayout);
+
+            dialog.setIcon(QIcon::fromTheme("cautious"));
+            dialog.setTitle(QObject::tr("Driver backup failed!"));
+            dialog.addContent(contentFrame);
+            dialog.addButton(tr("OK"), false, DDialog::ButtonNormal);
+            dialog.addButton(tr("Feedback"), false, DDialog::ButtonNormal);
+
+            int clickedButtonIndex = dialog.exec();
+            if (1 == clickedButtonIndex) {
+                //反馈
+                qDebug() << __func__ << "fedback....";
+                CommonTools::feedback();
+            }
+        } else {
+            DDialog dialog;
+            dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
+            dialog.setTitle(m_Desc);
+            dialog.addButton(tr("OK", "button"));
+            dialog.exec();
+        }
     });
 }
 

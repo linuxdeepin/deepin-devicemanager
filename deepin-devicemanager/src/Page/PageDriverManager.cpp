@@ -36,8 +36,6 @@
 
 #include <unistd.h>
 
-
-
 PageDriverManager::PageDriverManager(DWidget *parent)
     : DWidget(parent)
     , mp_StackWidget(new DStackedWidget(this))
@@ -81,8 +79,8 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     connect(mp_DriverInstallInfoPage, &PageDriverInstallInfo::redetected, this, &PageDriverManager::startScanning);
 
     connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::backupAll, this, &PageDriverManager::slotBackupAllDrivers);
-    connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::redetected, this, &PageDriverManager::startScanning);
     connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::undoBackup, this, &PageDriverManager::slotUndoBackup);
+    connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::redetected, this, &PageDriverManager::startScanning);
 
     connect(mp_DriverRestoreInfoPage, &PageDriverRestoreInfo::redetected, this, &PageDriverManager::startScanning);
 
@@ -147,6 +145,7 @@ bool PageDriverManager::isBackingup()
     return mp_CurBackupDriverInfo != nullptr;
 
 }
+
 bool PageDriverManager::isRestoring()
 {
     return mp_CurRestoreDriverInfo != nullptr;
@@ -189,6 +188,10 @@ void PageDriverManager::scanDriverInfo()
 
 void PageDriverManager::slotDriverOperationClicked(int index, int itemIndex, DriverOperationItem::Mode mode)
 {
+    mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(false);
+    mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(false);
+    mp_DriverRestoreInfoPage->setReDetectEnable(false);
+
     switch (mode) {
     case DriverOperationItem::INSTALL:
     case DriverOperationItem::UPDATE:
@@ -213,8 +216,8 @@ void PageDriverManager::slotDriverOperationClicked(int index, int itemIndex, Dri
         mp_CurRestoreDriverInfo = m_ListDriverInfo[index];
         DBusDriverInterface::getInstance()->installDriver(mp_CurRestoreDriverInfo->backupFileName());
         //将其它项置灰
-        for (int backedupeIndex : m_ListBackedupeIndex) {
-            mp_DriverRestoreInfoPage->setItemOperationEnable(backedupeIndex, false);
+        for (int restorableIndex : m_ListRestorableIndex) {
+            mp_DriverRestoreInfoPage->setItemOperationEnable(restorableIndex, false);
         }
 
         mp_DriverRestoreInfoPage->headWidget()->setRestoringUI(0, mp_CurRestoreDriverInfo->name());
@@ -344,6 +347,10 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
             mp_DriverInstallInfoPage->headWidget()->setInstallFailedUI();
         }
 
+        mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(true);
+        mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(true);
+        mp_DriverRestoreInfoPage->setReDetectEnable(true);
+
         mp_CurDriverInfo = nullptr;
         m_CurIndex = -1;
         m_CancelIndex = -1;
@@ -354,21 +361,24 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 
 void PageDriverManager::slotInstallAllDrivers()
 {
+    mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(false);
+    mp_DriverRestoreInfoPage->setReDetectEnable(false);
+
     // 开始安装驱动
     installNextDriver();
 }
 
 void PageDriverManager::slotBackupAllDrivers()
 {
+    mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(false);
+    mp_DriverRestoreInfoPage->setReDetectEnable(false);
+
     backupNextDriver();
-    // 更新头部内容
-    mp_DriverBackupInfoPage->headWidget()->setBackingUpDriverUI(mp_CurBackupDriverInfo->name(),
-                                                                m_ListBackupIndex.size() + 1, 1);
 }
 
 void PageDriverManager::slotScanFinished(ScanResult sr)
 {
-   // testDevices();
+    //testDevices();
 
     if (SR_SUCESS == sr) {
         foreach (DriverInfo *info, m_ListDriverInfo) {
@@ -392,17 +402,21 @@ void PageDriverManager::slotScanFinished(ScanResult sr)
                 m_ListNewIndex.append(m_ListDriverInfo.indexOf(info));
             }
 
-            if (!info->debVersion().isEmpty() && info->debBackupVersion().isEmpty()) {
+            if (!info->debVersion().isEmpty() && info->debBackupVersion() != info->debVersion()) {
                 m_ListBackableIndex.append(m_ListDriverInfo.indexOf(info));
-            } else if (!info->debBackupVersion().isEmpty()) {
+            }
+            if (!info->debBackupVersion().isEmpty()) {
                 m_ListBackedupeIndex.append(m_ListDriverInfo.indexOf(info));
+            }
+            if (!info->debBackupVersion().isEmpty() && info->debBackupVersion() != info->debVersion()) {
+                m_ListRestorableIndex.append(m_ListDriverInfo.indexOf(info));
             }
         }
 
         // 决定显示哪些列表，可安装，可更新，无需安装
         mp_DriverInstallInfoPage->showTables(m_ListInstallIndex.size(), m_ListUpdateIndex.size(), m_ListNewIndex.size());
         mp_DriverBackupInfoPage->showTables(m_ListBackableIndex.size(), m_ListBackedupeIndex.size());
-        mp_DriverRestoreInfoPage->showTables(m_ListBackedupeIndex.size());
+        mp_DriverRestoreInfoPage->showTables(m_ListRestorableIndex.size());
 
         // 获取已经勾选的驱动index
         m_ListDriverIndex.clear();
@@ -450,16 +464,14 @@ void PageDriverManager::slotBackupProgressChanged(int progress)
 
 void PageDriverManager::slotBackupFinished(bool bsuccess)
 {
-    static int successNum = 0;
-    static int failedNum = 0;
     if (! mp_CurBackupDriverInfo)
         return;
 
     // 成功
     if (bsuccess) {
-        successNum += 1;
+        m_backupSuccessNum += 1;
     } else { // 失败
-        failedNum += 1;
+        m_backupFailedNum += 1;
     }
 
     // 安装结束后，对应的表格需要设置相应的状态
@@ -469,23 +481,24 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
     if (!m_ListBackupIndex.isEmpty()) {
         sleep(1);
         backupNextDriver();
-        // 更新头部内容
-        mp_DriverBackupInfoPage->headWidget()->setBackingUpDriverUI(mp_CurBackupDriverInfo->name(),
-                                                                    m_ListBackupIndex.size() + successNum + failedNum + 1,
-                                                                    successNum + failedNum + 1);
     } else {
-        mp_DriverBackupInfoPage->headWidget()->setBackableDriverUI(m_ListBackableIndex.size(), m_ListBackedupeIndex.size());
+        mp_DriverBackupInfoPage->headWidget()->setBackableDriverUI(m_ListBackableIndex.size(), m_ListRestorableIndex.size());
+
+        mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(true);
+        mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(true);
+        mp_DriverRestoreInfoPage->setReDetectEnable(true);
+
         mp_CurBackupDriverInfo = nullptr;
         m_CurBackupIndex = -1;
-        successNum = 0;
-        failedNum = 0;
+        m_backupSuccessNum = 0;
+        m_backupFailedNum = 0;
     }
 }
 
 void PageDriverManager::slotRestoreProgress(int progress, QString strDeatils)
 {
     if (progress >= 100) {
-        mp_DriverRestoreInfoPage->headWidget()->setRestoreDriverUI(m_ListBackedupeIndex.size());
+        mp_DriverRestoreInfoPage->headWidget()->setRestoreDriverUI(m_ListRestorableIndex.size());
     } else {
         mp_DriverRestoreInfoPage->headWidget()->setRestoringUI(progress, mp_CurRestoreDriverInfo->name());
     }
@@ -496,23 +509,24 @@ void PageDriverManager::slotRestoreFinished(bool success, QString msg)
     int index = -1;
     if (mp_CurRestoreDriverInfo) {
         index = m_ListDriverInfo.indexOf(mp_CurRestoreDriverInfo);
-        for (int i = 0; i < m_ListBackedupeIndex.size(); i++) {
-            if (index == m_ListBackedupeIndex[i]) {
+        for (int i = 0; i < m_ListRestorableIndex.size(); i++) {
+            if (index == m_ListRestorableIndex[i]) {
                 if (success) {
                     //移除已还原项
-                    m_ListBackedupeIndex.removeAt(i);
-                    mp_DriverRestoreInfoPage->headWidget()->setRestoreDriverUI(m_ListBackedupeIndex.size());
+                    m_ListRestorableIndex.removeAt(i);
+                    mp_DriverRestoreInfoPage->headWidget()->setRestoreDriverUI(m_ListRestorableIndex.size());
                 } else {
                     //还原失败，弹出提示窗口
                     int clickedButtonIndex = mp_FailedDialog->exec();
                     if (1 == clickedButtonIndex) {
                         //反馈
                         qDebug() << __func__ << "fedback....";
+                        CommonTools::feedback();
                     }
                 }
 
                 //恢复其它置灰项
-                for (int backedupeIndex : m_ListBackedupeIndex) {
+                for (int backedupeIndex : m_ListRestorableIndex) {
                     if (backedupeIndex != i)
                         mp_DriverRestoreInfoPage->setItemOperationEnable(backedupeIndex, true);
                 }
@@ -521,14 +535,18 @@ void PageDriverManager::slotRestoreFinished(bool success, QString msg)
         }
     }
 
+    mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(true);
+    mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(true);
+    mp_DriverRestoreInfoPage->setReDetectEnable(true);
+
     mp_CurRestoreDriverInfo = nullptr;
 
     //刷新表格内容
     mp_DriverRestoreInfoPage->clearAllData();
-    for (int backedupeIndex : m_ListBackedupeIndex) {
+    for (int backedupeIndex : m_ListRestorableIndex) {
         mp_DriverRestoreInfoPage->addDriverInfoToTableView(m_ListDriverInfo[backedupeIndex], backedupeIndex);
     }
-    mp_DriverRestoreInfoPage->showTables(m_ListBackedupeIndex.size());
+    mp_DriverRestoreInfoPage->showTables(m_ListRestorableIndex.size());
 }
 
 void PageDriverManager::initWidget()
@@ -548,20 +566,14 @@ void PageDriverManager::initWidget()
     mp_FailedDialog = new DDialog(this);
     DWidget *contentFrame = new DWidget(this);
 
-    DLabel *failedLabel = new DLabel(this);
     DLabel *retryLabel = new DLabel(this);
     QVBoxLayout *vLayout = new QVBoxLayout(this);
-    failedLabel->setElideMode(Qt::ElideMiddle);
-    failedLabel->setText(QObject::tr("Driver restore failed!"));
     retryLabel->setElideMode(Qt::ElideMiddle);
     retryLabel->setText(QObject::tr("Please try again or give us feedback"));
-    vLayout->setSpacing(5);
-    vLayout->addWidget(failedLabel, 0, Qt::AlignHCenter);
     vLayout->addWidget(retryLabel, 0, Qt::AlignHCenter);
-
     contentFrame->setLayout(vLayout);
-
-    mp_FailedDialog->setIcon(QIcon::fromTheme(":/icons/deepin/builtin/icons/restore_96.svg"));
+    mp_FailedDialog->setIcon(QIcon::fromTheme("cautious"));
+    mp_FailedDialog->setTitle(QObject::tr("Driver restore failed!"));
     mp_FailedDialog->addContent(contentFrame);
     mp_FailedDialog->addButton(tr("OK"), false, DDialog::ButtonNormal);
     mp_FailedDialog->addButton(tr("Feedback"), false, DDialog::ButtonNormal);
@@ -593,7 +605,9 @@ void PageDriverManager::backupNextDriver()
             mp_CurBackupDriverInfo = info;
             mp_CurBackupDriverInfo->m_Status = ST_DRIVER_BACKING_UP;
             mp_DriverBackupInfoPage->updateItemStatus(m_CurBackupIndex, mp_CurBackupDriverInfo->status());
-
+            mp_DriverBackupInfoPage->headWidget()->setBackingUpDriverUI(mp_CurBackupDriverInfo->name(),
+                                                                        m_ListBackupIndex.size() + m_backupSuccessNum + m_backupFailedNum + 1,
+                                                                        m_backupSuccessNum + m_backupFailedNum + 1);
             if (!mp_BackupThread->isRunning()) {
                 mp_BackupThread->setBackupDriverInfo(info);
                 mp_BackupThread->start();
@@ -776,6 +790,7 @@ void PageDriverManager::clearAllData()
     m_ListBackupIndex.clear();
     m_ListBackableIndex.clear();
     m_ListBackedupeIndex.clear();
+    m_ListRestorableIndex.clear();
 
     foreach (DriverInfo *info, m_ListDriverInfo) {
         delete info;

@@ -187,7 +187,7 @@ void PageDriverInstallInfo::addDriverInfoToTableView(DriverInfo *info, int index
         view->setWidget(row, 0, nameItem);
 
         // 设置版本
-        DriverLabelItem *versionItem = new DriverLabelItem(this, info->debVersion());
+        DriverLabelItem *versionItem = new DriverLabelItem(this, info->version());
         view->setWidget(row, 1, versionItem);
     }
 }
