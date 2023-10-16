@@ -4,7 +4,17 @@
 <context>
     <name>BtnLabel</name>
     <message>
-        <location filename="../src/Widget/BtnLabel.cpp" line="24"/>
+        <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
+        <source>OK</source>
+        <translation type="unfinished">D&apos;acord</translation>
+    </message>
+    <message>
+        <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
+        <source>Feedback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Widget/BtnLabel.cpp" line="54"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>D&apos;acord</translation>
@@ -1218,62 +1228,62 @@
 <context>
     <name>DeviceOthers</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="174"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="182"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="175"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="183"/>
         <source>Vendor</source>
         <translation>Proveïdor</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="176"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="184"/>
         <source>Model</source>
         <translation>Model</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="177"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="185"/>
         <source>Version</source>
         <translation>Versió</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="178"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="186"/>
         <source>Bus Info</source>
         <translation>Informació de Bus</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="179"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="187"/>
         <source>Capabilities</source>
         <translation>Capacitats</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="180"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="188"/>
         <source>Driver</source>
         <translation>Controlador</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="181"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="189"/>
         <source>Maximum Power</source>
         <translation>Energia màxima</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="182"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="190"/>
         <source>Speed</source>
         <translation>Velocitat</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="188"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="196"/>
         <source>Serial Number</source>
         <translation>Número de sèrie</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="197"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="205"/>
         <source>Unavailable</source>
         <translation>No disponible</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="200"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="208"/>
         <source>Disable</source>
         <translation>Inhabilita</translation>
     </message>
@@ -1592,88 +1602,88 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="187"/>
+        <location filename="../src/Page/MainWindow.cpp" line="186"/>
         <source>Device Info</source>
         <comment>export file&apos;s name</comment>
         <translation>Informació del dispositiu</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="258"/>
+        <location filename="../src/Page/MainWindow.cpp" line="257"/>
         <source>Display shortcuts</source>
         <translation>Dreceres de pantalla</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="259"/>
+        <location filename="../src/Page/MainWindow.cpp" line="258"/>
         <source>Close</source>
         <translation>Tanca</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="260"/>
+        <location filename="../src/Page/MainWindow.cpp" line="259"/>
         <source>Help</source>
         <translation>Ajuda</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="261"/>
+        <location filename="../src/Page/MainWindow.cpp" line="260"/>
         <source>Copy</source>
         <translation>Copia</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="265"/>
+        <location filename="../src/Page/MainWindow.cpp" line="264"/>
         <source>System</source>
         <translation>Sistema</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="272"/>
+        <location filename="../src/Page/MainWindow.cpp" line="271"/>
         <source>Export</source>
         <translation>Exporta</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="273"/>
+        <location filename="../src/Page/MainWindow.cpp" line="272"/>
         <source>Refresh</source>
         <translation>Refresca</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="277"/>
+        <location filename="../src/Page/MainWindow.cpp" line="276"/>
         <source>Device Manager</source>
         <translation>Gestor de dispositius</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="346"/>
+        <location filename="../src/Page/MainWindow.cpp" line="345"/>
         <source>Hardware</source>
         <translation>Maquinari</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="346"/>
+        <location filename="../src/Page/MainWindow.cpp" line="345"/>
         <source>Drivers</source>
         <translation>Controladors</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="493"/>
+        <location filename="../src/Page/MainWindow.cpp" line="489"/>
         <source>Monitor</source>
         <translation>Monitor</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="493"/>
+        <location filename="../src/Page/MainWindow.cpp" line="489"/>
         <source>Overview</source>
         <translation>Resum</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="497"/>
+        <location filename="../src/Page/MainWindow.cpp" line="493"/>
         <source>Display Adapter</source>
         <translation>Adaptador de pantalla</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="501"/>
+        <location filename="../src/Page/MainWindow.cpp" line="497"/>
         <source>CPU</source>
         <translation>CPU</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="505"/>
+        <location filename="../src/Page/MainWindow.cpp" line="501"/>
         <source>Network Adapter</source>
         <translation>Adaptador de xarxa</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="511"/>
+        <location filename="../src/Page/MainWindow.cpp" line="507"/>
         <source>Battery</source>
         <translation>Bateria</translation>
     </message>
@@ -1716,12 +1726,12 @@
         <translation type="unfinished">Acció</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="165"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="166"/>
         <source>Backupable Drivers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="166"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="167"/>
         <source>Backed up Drivers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1925,31 +1935,31 @@
 <context>
     <name>PageDriverManager</name>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="56"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="97"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="421"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="55"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="98"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="451"/>
         <source>Driver Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="98"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="423"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="99"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="453"/>
         <source>Driver Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="99"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="425"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="100"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="455"/>
         <source>Driver Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="544"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="578"/>
         <source>OK</source>
         <translation type="unfinished">D&apos;acord</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="545"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
         <source>Feedback</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2592,7 +2602,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="397"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="486"/>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="167"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="175"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="434"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="110"/>
         <source>Device File</source>
@@ -3047,7 +3057,7 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="485"/>
-        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="168"/>
+        <location filename="../src/DeviceManager/DeviceOthers.cpp" line="176"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="435"/>
         <source>Hardware Class</source>
         <translation>Classe del maquinari</translation>
@@ -3117,17 +3127,23 @@
         <translation>No s&apos;ha trobat cap disc.</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="533"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="576"/>
         <source>Driver restore failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="535"/>
+        <location filename="../src/Widget/BtnLabel.cpp" line="33"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="572"/>
         <source>Please try again or give us feedback</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
+        <location filename="../src/Widget/BtnLabel.cpp" line="39"/>
+        <source>Driver backup failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1342"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1370"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1398"/>
@@ -3160,7 +3176,7 @@
         <translation>No s&apos;ha trobat cap monitor.</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="591"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="631"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1344"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1372"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1400"/>
@@ -3177,7 +3193,7 @@
         <translation>No s&apos;ha trobat cap adaptador de xarxa.</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="585"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1345"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1373"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1401"/>
@@ -3194,7 +3210,7 @@
         <translation>No s&apos;ha trobat cap dispositiu d&apos;àudio.</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="588"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1346"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1374"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1402"/>
@@ -3278,7 +3294,7 @@
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="41"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="597"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="637"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1351"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1379"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1407"/>
@@ -3736,166 +3752,171 @@
         <translation>Cerca controladors en aquest camí</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="93"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="92"/>
         <source>%1 driver updates available</source>
         <translation>%1 actualitzacions de controladors disponibles</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="99"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="367"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="98"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="366"/>
         <source>Time checked: %1</source>
         <translation>Hora de la comprovació: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="149"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="148"/>
         <source>Downloading drivers for %1...</source>
         <translation>Es baixen els controladors per a %1...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="151"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="150"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
         <translation>Velocitat de baixada: %1 Baixat: %2 / %3</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="197"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="196"/>
         <source>Installing drivers for %1...</source>
         <translation>S&apos;instal·len els controladors per a %1...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="239"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="238"/>
         <source>%1 drivers installed, %2 drivers failed</source>
         <translation>%1 controladors instal·lats, %2 controladors han fallat</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="241"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="240"/>
         <source>%1 drivers installed</source>
         <translation>%1 controladors instal·lats</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="281"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="280"/>
         <source>Failed to install drivers</source>
         <translation>Ha fallat instal·lar els controladors.</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="321"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="320"/>
         <source>Network error. Reconnecting...</source>
         <translation>Error de xarxa. Es torna a connectar...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="323"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="322"/>
         <source>Download speed: %1</source>
         <translation>Velocitat de baixada: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="364"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="363"/>
         <source>Your drivers are up to date</source>
         <translation>Els controladors estan actualitzats.</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="453"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="452"/>
         <source>All drivers have been backed up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="455"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="493"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="454"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
+        <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>You have %1 drivers that can be backed up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="531"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="540"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="532"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="541"/>
         <source>Backing up: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="570"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="579"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="572"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="581"/>
         <source>Failed to backup drivers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="574"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="583"/>
         <source>%1 drivers backed up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="613"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="622"/>
         <source>You have %1 drivers that can be restored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="614"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="623"/>
         <source>Please select a driver to restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="653"/>
         <source>Driver is restoring...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="645"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="654"/>
         <source>Restoring: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="780"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="797"/>
         <source>reboot</source>
         <translation>reinicieu</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="781"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="798"/>
         <source>Please %1 for the installed drivers to take effect</source>
         <translation>Si us plau, %1 perquè els controladors instal·lats tinguin efecte.</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="789"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="806"/>
         <source>View backup path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="802"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Backup All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="283"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="784"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="801"/>
         <source>submit feedback</source>
         <translation>envieu comentaris</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="785"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="802"/>
         <source>Please try again or %1 to us</source>
         <translation>Si us plau, torneu-ho a provar o %1.</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="792"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="809"/>
         <source>Install All</source>
         <translation>Instal·la-ho tot</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="797"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="814"/>
         <source>Scan Again</source>
         <translation>Torna a escanejar</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="807"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="824"/>
         <source>Cancel</source>
         <translation>Cancel·la</translation>
     </message>
@@ -3931,40 +3952,40 @@
         <translation>Si us plau, torneu a escanejar o %1.</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="605"/>
+        <location filename="../src/Page/MainWindow.cpp" line="601"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
         <translation>S&apos;instal·la un controlador, i s&apos;interromprà si en sortiu.</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="606"/>
-        <location filename="../src/Page/MainWindow.cpp" line="619"/>
-        <location filename="../src/Page/MainWindow.cpp" line="632"/>
+        <location filename="../src/Page/MainWindow.cpp" line="602"/>
+        <location filename="../src/Page/MainWindow.cpp" line="615"/>
+        <location filename="../src/Page/MainWindow.cpp" line="628"/>
         <source>Are you sure you want to exit?</source>
         <translation>Segur que en voleu sortir?</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="609"/>
-        <location filename="../src/Page/MainWindow.cpp" line="622"/>
-        <location filename="../src/Page/MainWindow.cpp" line="635"/>
+        <location filename="../src/Page/MainWindow.cpp" line="605"/>
+        <location filename="../src/Page/MainWindow.cpp" line="618"/>
+        <location filename="../src/Page/MainWindow.cpp" line="631"/>
         <source>Exit</source>
         <comment>button</comment>
         <translation>Surt</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="610"/>
-        <location filename="../src/Page/MainWindow.cpp" line="623"/>
-        <location filename="../src/Page/MainWindow.cpp" line="636"/>
+        <location filename="../src/Page/MainWindow.cpp" line="606"/>
+        <location filename="../src/Page/MainWindow.cpp" line="619"/>
+        <location filename="../src/Page/MainWindow.cpp" line="632"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Cancel·la</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="618"/>
+        <location filename="../src/Page/MainWindow.cpp" line="614"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="631"/>
+        <location filename="../src/Page/MainWindow.cpp" line="627"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
         <translation type="unfinished"></translation>
     </message>

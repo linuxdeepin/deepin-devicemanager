@@ -185,6 +185,12 @@ void PageDriverRestoreInfo::setItemOperationEnable(int index, bool enable)
     mp_ViewBackable->setItemOperationEnable(index, enable);
 }
 
+void PageDriverRestoreInfo::setReDetectEnable(bool enable)
+{
+    if (mp_ReDetectedSgButton)
+        mp_ReDetectedSgButton->setEnabled(enable);
+}
+
 void PageDriverRestoreInfo::slotOperatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode)
 {
     PageDriverTableView *view = mp_ViewBackable;

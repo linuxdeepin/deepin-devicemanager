@@ -46,6 +46,7 @@ public:
      * @brief setItemOperationEnable
      */
     void setItemOperationEnable(int index, bool enable);
+    void setReDetectEnable(bool enable);
 
 private slots:
     /**
