@@ -17,7 +17,7 @@ PageDriverRestoreInfo::PageDriverRestoreInfo(QWidget *parent)
     , mp_StackWidget(new DStackedWidget(this))
     , mp_HeadWidget(new DetectedStatusWidget(this))
     , mp_NotBackupWidget(new DWidget(this))
-    , mp_ViewBackable(new PageDriverTableView(this))
+    , mp_ViewBackable(new PageDriverTableView(this, RESTORE))
     , mp_BackableDriverLabel(new DLabel(this))
     , mp_NoRestoreDriverFrame(new DFrame(this))
     , mp_ReDetectedSgButton(new DSuggestButton(this))
@@ -147,7 +147,7 @@ void PageDriverRestoreInfo::addDriverInfoToTableView(DriverInfo *info, int index
         view->setWidget(row, 0, nameItem);
 
         // 设置当前版本
-        DriverLabelItem *versionItem = new DriverLabelItem(this, info->debVersion());
+        DriverLabelItem *versionItem = new DriverLabelItem(this, info->version());
         view->setWidget(row, 1, versionItem);
 
         // 设置备份版本

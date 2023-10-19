@@ -72,7 +72,7 @@ class DriverTableView : public DTreeView
 {
     Q_OBJECT
 public:
-    explicit DriverTableView(DWidget *parent = nullptr);
+    explicit DriverTableView(DWidget *parent = nullptr, OperationType type = INSTALL);
 
     /**
      * @brief initHeaderView 设置表头内容
@@ -167,6 +167,8 @@ public:
     */
    void resizeColumn(int column);
 
+   OperationType operationType() {return m_operatType;}
+
 protected:
     /**
      * @brief 重写 paintEvent showEvent drawRow
@@ -217,6 +219,7 @@ private:
     DriverHeaderView*   mp_HeadView;
     QStandardItemModel* mp_Model;
     DriverCheckItem *   mp_HeaderCb;
+    OperationType       m_operatType;
 };
 
 #endif // DRIVERTABLEVIEW_H

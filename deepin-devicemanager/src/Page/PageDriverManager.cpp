@@ -378,7 +378,7 @@ void PageDriverManager::slotBackupAllDrivers()
 
 void PageDriverManager::slotScanFinished(ScanResult sr)
 {
-    //testDevices();
+    // testDevices();
 
     if (SR_SUCESS == sr) {
         foreach (DriverInfo *info, m_ListDriverInfo) {
@@ -408,7 +408,7 @@ void PageDriverManager::slotScanFinished(ScanResult sr)
             if (!info->debBackupVersion().isEmpty()) {
                 m_ListBackedupeIndex.append(m_ListDriverInfo.indexOf(info));
             }
-            if (!info->debBackupVersion().isEmpty() && info->debBackupVersion() != info->debVersion()) {
+            if (!info->debBackupVersion().isEmpty() && info->debBackupVersion() != info->version()) {
                 m_ListRestorableIndex.append(m_ListDriverInfo.indexOf(info));
             }
         }
@@ -909,7 +909,9 @@ void PageDriverManager::testDevices()
 {
     DriverInfo *info = new DriverInfo();
     info->m_Name = "Sharp MX-C2622R PS, 1.1";
+    info->m_Version = "0.0.1";
     info->m_DebVersion = "1.0.0";
+    info->m_Size = "23.2";
     info->m_Type = DR_Tablet;
     info->m_Packages = "com.sharp.griffin2light";
     info->m_Status = ST_CAN_UPDATE;
@@ -917,7 +919,9 @@ void PageDriverManager::testDevices()
 
     DriverInfo *info1 = new DriverInfo();
     info1->m_Name = "Deli DL-888F";
+    info1->m_Version = "1.0";
     info1->m_DebVersion = "1.1";
+    info1->m_Size = "102.45";
     info1->m_Type = DR_Mouse;
     info1->m_Packages = "deli-printer";
     info1->m_Status = ST_CAN_UPDATE;

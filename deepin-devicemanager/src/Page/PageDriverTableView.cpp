@@ -13,9 +13,9 @@
 #include <QHBoxLayout>
 #include <QPainterPath>
 
-PageDriverTableView::PageDriverTableView(DWidget *parent)
+PageDriverTableView::PageDriverTableView(DWidget *parent, OperationType type)
     : DWidget(parent)
-    , mp_View(new DriverTableView(this))
+    , mp_View(new DriverTableView(this, type))
     , m_PreWidth(width())
 {
     initWidgets();
