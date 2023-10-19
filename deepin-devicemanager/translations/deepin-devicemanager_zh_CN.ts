@@ -1700,13 +1700,13 @@
     <name>PageDriverBackupInfo</name>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="89"/>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="100"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Name</source>
         <translation>名称</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="100"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Current Version</source>
         <translation>当前版本</translation>
     </message>
@@ -1714,6 +1714,11 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <source>Size</source>
         <translation>大小</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
+        <source>Driver Platform Version</source>
+        <translation>驱动平台版本</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
@@ -1726,12 +1731,12 @@
         <translation>操作</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="166"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="171"/>
         <source>Backupable Drivers</source>
         <translation>可备份驱动</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="167"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="172"/>
         <source>Backed up Drivers</source>
         <translation>已备份驱动</translation>
     </message>
@@ -3140,7 +3145,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="39"/>
         <source>Driver backup failed!</source>
-        <translation>备份失败！</translation>
+        <translation>驱动备份失败！</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="622"/>

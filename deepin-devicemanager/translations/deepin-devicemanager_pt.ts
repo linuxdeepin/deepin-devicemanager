@@ -1700,13 +1700,13 @@
     <name>PageDriverBackupInfo</name>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="89"/>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="100"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Name</source>
         <translation type="unfinished">Nome</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="100"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Current Version</source>
         <translation type="unfinished">Versão atual</translation>
     </message>
@@ -1714,6 +1714,11 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <source>Size</source>
         <translation type="unfinished">Tamanho</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
+        <source>Driver Platform Version</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
@@ -1726,12 +1731,12 @@
         <translation type="unfinished">Ação</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="166"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="171"/>
         <source>Backupable Drivers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="167"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="172"/>
         <source>Backed up Drivers</source>
         <translation type="unfinished"></translation>
     </message>

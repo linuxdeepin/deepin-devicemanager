@@ -7,6 +7,7 @@
 #include "HttpDriverInterface.h"
 
 #include <QDebug>
+#include <QProcess>
 
 #include <unistd.h>
 
@@ -28,6 +29,22 @@ void DriverScanner::run()
     foreach (DriverInfo *info, m_ListDriverInfo) {
         if (!m_IsStop) {
             hdi->getRequest(info);
+
+            // 检测本地安装版本
+            if (!info->packages().isEmpty()) {
+                QProcess process;
+                process.start("bash", QStringList() << "-c" << "apt policy " + info->packages());
+                process.waitForFinished(-1);
+
+                QString output = process.readAllStandardOutput();
+                QStringList lines = output.split("\n");
+                QRegExp rxlen("(\\d+\\S*)");
+                int pos = rxlen.indexIn(lines[1]);
+                if (pos > -1 && info->version().isEmpty()) {
+                    info->m_Version = rxlen.cap(1);
+                }
+            }
+
             emit scanInfo(info->name(), 100 / m_ListDriverInfo.size());
             sleep(1);
         } else {

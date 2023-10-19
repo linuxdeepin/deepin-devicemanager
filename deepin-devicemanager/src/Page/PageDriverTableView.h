@@ -21,7 +21,7 @@ class PageDriverTableView : public DWidget
 {
     Q_OBJECT
 public:
-    explicit PageDriverTableView(DWidget *parent = nullptr);
+    explicit PageDriverTableView(DWidget *parent = nullptr, OperationType type = INSTALL);
 
     /**
      * @brief setColumnWidth

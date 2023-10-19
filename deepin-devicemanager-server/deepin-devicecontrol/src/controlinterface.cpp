@@ -250,8 +250,10 @@ bool ControlInterface::unInstallDriver(const QString &modulename)
 
 bool ControlInterface::installDriver(const QString &filepath)
 {
-    if (!getUserAuthorPasswd())
+    if (!getUserAuthorPasswd()) {
+        emit sigFinished(false, "Cancel");
         return false;
+    }
     lockTimer(true);
     return  mp_drivermanager->installDriver(filepath);
 }

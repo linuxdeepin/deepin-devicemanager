@@ -350,6 +350,12 @@ struct DriverInfo {
     QString    backupFileName() { return m_BackupFileName; }
 };
 
+enum OperationType {
+    INSTALL = 0,
+    UPDATE,
+    BACKUP,
+    RESTORE
+};
 
 #define EC_NULL 0
 #define EC_NETWORK 1

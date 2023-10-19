@@ -117,7 +117,6 @@ MainWindow::MainWindow(QWidget *parent)
         mp_DriverScanWidget->refreshProgress(info, progress);
     });
     connect(mp_DriverScanWidget, &DriverScanWidget::redetected, mp_DriverManager, &PageDriverManager::startScanning);
-
 }
 
 MainWindow::~MainWindow()

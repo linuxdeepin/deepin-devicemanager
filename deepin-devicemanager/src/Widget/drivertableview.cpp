@@ -276,12 +276,13 @@ int DriverHeaderView::sectionSizeHint(int logicalIndex) const
 // DriverTableView *********************************************************************************
 
 
-DriverTableView::DriverTableView(DWidget *parent)
+DriverTableView::DriverTableView(DWidget *parent, OperationType type)
     : DTreeView(parent)
     , mp_Delegate(new DriverItemDelegate(this))
     , mp_HeadView(new DriverHeaderView(Qt::Horizontal, this))
     , mp_Model(new QStandardItemModel(this))
     , mp_HeaderCb(nullptr)
+    , m_operatType(type)
 {
     setModel(mp_Model);
     setHeader(mp_HeadView);
@@ -379,17 +380,23 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
             int rowCount = mp_Model->rowCount();
             for (int i = 0; i < rowCount; i++) {
                 if (DriverOperationItem::RESTORE == orItem->mode()) {
-                    DriverOperationItem *curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 3)));
                     DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 0)));
+                    DriverOperationItem *curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 3)));
                     if (curItem  && name && curItem == orItem) {
                         emit operatorClicked(name->index(), i, orItem->mode());
                     }
                 } else {
-                    DriverOperationItem *curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
                     DriverCheckItem *cb = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
                     DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 1)));
-                    DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
-
+                    DriverStatusItem *status = nullptr;
+                    DriverOperationItem *curItem = nullptr;
+                    if (DriverOperationItem::BACKUP == orItem->mode()) {
+                        status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 5)));
+                        curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 6)));
+                    } else {
+                        status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
+                        curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
+                    }
                     if (curItem && cb && name && status) {
                         if (curItem == orItem) {
                             // 当前行按钮置灰
@@ -408,9 +415,8 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
                             }
                         }
                     }
+
                 }
-
-
             }
         });
     }
@@ -477,14 +483,22 @@ void DriverTableView::setCheckedCBDisable()
             // 设置不能选中
             item->setCbEnable(false);
 
+            DriverStatusItem *status = nullptr;
+            DriverOperationItem *opera = nullptr;
+            if (OperationType::BACKUP == m_operatType) {
+                status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 5)));
+                opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 6)));
+            } else {
+                status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
+                opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
+            }
+
             // 设置不可操作
-            DriverOperationItem *opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
             if (opera) {
                 opera->setBtnEnable(false);
             }
 
             // 设置状态为等待
-            DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
             if (status && status->getStatus() != ST_DOWNLOADING && status->getStatus() != ST_INSTALL) {
                 status->setStatus(ST_WAITING);
             }
@@ -523,8 +537,14 @@ void DriverTableView::setItemStatus(int index, Status s)
 {
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
-        DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
         DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 1)));
+        DriverStatusItem *status = nullptr;
+        if (OperationType::BACKUP == m_operatType) {
+            status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 5)));
+        } else {
+            status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
+        }
+
         if (name && status && name->index() == index) {
             status->setStatus(s);
 
@@ -535,7 +555,12 @@ void DriverTableView::setItemStatus(int index, Status s)
                     cb->setCbEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s ? true : false);
                     cb->setChecked(false);
                 }
-                DriverOperationItem *opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
+                DriverOperationItem *opera = nullptr;
+                if (OperationType::BACKUP == m_operatType) {
+                    opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 6)));
+                } else {
+                    opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
+                }
                 if (opera) {
                     opera->setBtnEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s ? true : false);
                 }
@@ -549,8 +574,15 @@ void DriverTableView::setErrorMsg(int index, const QString &msg)
 {
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
-        DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
         DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 1)));
+        DriverStatusItem *status = nullptr;
+
+        if (OperationType::BACKUP == m_operatType) {
+            status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 5)));
+        } else {
+            status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
+        }
+
         if (name && status && name->index() == index) {
             status->setErrorMsg(msg);
             break;
