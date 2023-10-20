@@ -82,7 +82,10 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::undoBackup, this, &PageDriverManager::slotUndoBackup);
     connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::redetected, this, &PageDriverManager::startScanning);
 
-    connect(mp_DriverRestoreInfoPage, &PageDriverRestoreInfo::redetected, this, &PageDriverManager::startScanning);
+    connect(mp_DriverRestoreInfoPage, &PageDriverRestoreInfo::gotoBackup, this, [=](){
+        mp_ListView->setCurType(tr("Driver Backup"));
+        mp_ListView->itemClicked(tr("Driver Backup"));
+    });
 
     connect(mp_ListView, &PageListView::itemClicked, this, &PageDriverManager::slotListViewWidgetItemClicked);
 
@@ -391,7 +394,7 @@ void PageDriverManager::slotScanFinished(ScanResult sr)
                 mp_DriverBackupInfoPage->addDriverInfoToTableView(info, m_ListDriverInfo.indexOf(info));
             }
 
-            if (!info->debBackupVersion().isEmpty())
+            if (!info->debBackupVersion().isEmpty() && info->debBackupVersion() != info->version())
                 mp_DriverRestoreInfoPage->addDriverInfoToTableView(info, m_ListDriverInfo.indexOf(info));
 
             if (ST_NOT_INSTALL == info->status()) {

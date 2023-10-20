@@ -15,10 +15,10 @@ PageDriverBackupInfo::PageDriverBackupInfo(QWidget *parent)
     : DFrame(parent)
     , mp_HeadWidget(new DetectedStatusWidget(this))
     , mp_NotBackupWidget(new DWidget(this))
-    , mp_ViewBackable(new PageDriverTableView(this, BACKUP))
+    , mp_ViewBackable(new PageDriverTableView(this))
     , mp_BackableDriverLabel(new DLabel(this))
     , mp_BackedUpWidget(new DWidget(this))
-    , mp_ViewBackedUp(new PageDriverTableView(this, BACKUP))
+    , mp_ViewBackedUp(new PageDriverTableView(this))
     , mp_BackedUpDriverLabel(new DLabel(this))
 {
     initUI();
@@ -87,19 +87,20 @@ void PageDriverBackupInfo::initUI()
 void PageDriverBackupInfo::initTable()
 {
     mp_ViewBackable->initHeaderView(QStringList() << "" << tr("Name")
-                                    << tr("Current Version") << tr("Driver Platform Version") << tr("Size")
+                                    << tr("Current Version") << tr("Driver Platform Version")
                                     << tr("Status") << tr("Action"), true);
     mp_ViewBackable->setHeaderCbStatus(false);
     mp_ViewBackable->setColumnWidth(0, 41);
-    mp_ViewBackable->setColumnWidth(1, 230);
+    mp_ViewBackable->setColumnWidth(1, 290);
     mp_ViewBackable->setColumnWidth(2, 120);
     mp_ViewBackable->setColumnWidth(3, 120);
-    mp_ViewBackable->setColumnWidth(4, 80);
-    mp_ViewBackable->setColumnWidth(5, 120);
-    mp_ViewBackable->setColumnWidth(6, 60);
+//    mp_ViewBackable->setColumnWidth(4, 80);
+    mp_ViewBackable->setColumnWidth(4, 120);
+    mp_ViewBackable->setColumnWidth(5, 80);
 
-    mp_ViewBackedUp->initHeaderView(QStringList() << tr("Name") << tr("Current Version"));
+    mp_ViewBackedUp->initHeaderView(QStringList() << tr("Name") << tr("Current Version") << tr("Driver Platform Version"));
     mp_ViewBackedUp->setColumnWidth(0, 418);
+    mp_ViewBackedUp->setColumnWidth(1, 185);
 }
 
 void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
@@ -107,7 +108,7 @@ void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
     PageDriverTableView *view = nullptr;
     if (info->debBackupVersion() != info->debVersion()) {
         view = mp_ViewBackable;
-        view->appendRowItems(7);
+        view->appendRowItems(6);
 
         int row = view->model()->rowCount() - 1;
 
@@ -134,22 +135,22 @@ void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
         DriverLabelItem *debVersionItem = new DriverLabelItem(this, info->debVersion());
         view->setWidget(row, 3, debVersionItem);
 
-        // 设置大小
-        DriverLabelItem *sizeItem = new DriverLabelItem(this, info->size());
-        view->setWidget(row, 4, sizeItem);
+//        // 设置大小
+//        DriverLabelItem *sizeItem = new DriverLabelItem(this, info->size());
+//        view->setWidget(row, 4, sizeItem);
 
         // 设置状态
         DriverStatusItem *statusItem = new DriverStatusItem(this, Status::ST_DRIVER_NOT_BACKUP);
-        view->setWidget(row, 5, statusItem);
+        view->setWidget(row, 4, statusItem);
 
         // 添加操作按钮
         DriverOperationItem *operateItem = new DriverOperationItem(this,  DriverOperationItem::BACKUP);
-        view->setWidget(row, 6, operateItem);
+        view->setWidget(row, 5, operateItem);
     }
 
     if (!info->debBackupVersion().isEmpty()) {
         view = mp_ViewBackedUp;
-        view->appendRowItems(2);
+        view->appendRowItems(3);
 
         int row = view->model()->rowCount() - 1;
 
@@ -160,8 +161,12 @@ void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
         view->setWidget(row, 0, nameItem);
 
         // 设置版本
-        DriverLabelItem *versionItem = new DriverLabelItem(this, info->debBackupVersion());
+        DriverLabelItem *versionItem = new DriverLabelItem(this, info->version());
         view->setWidget(row, 1, versionItem);
+
+        // 设置版本
+        DriverLabelItem *debVersionItem = new DriverLabelItem(this, info->debVersion());
+        view->setWidget(row, 2, debVersionItem);
     }
 }
 

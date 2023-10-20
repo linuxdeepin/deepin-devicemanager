@@ -17,7 +17,7 @@ PageDriverRestoreInfo::PageDriverRestoreInfo(QWidget *parent)
     , mp_StackWidget(new DStackedWidget(this))
     , mp_HeadWidget(new DetectedStatusWidget(this))
     , mp_NotBackupWidget(new DWidget(this))
-    , mp_ViewBackable(new PageDriverTableView(this, RESTORE))
+    , mp_ViewBackable(new PageDriverTableView(this))
     , mp_BackableDriverLabel(new DLabel(this))
     , mp_NoRestoreDriverFrame(new DFrame(this))
     , mp_ReDetectedSgButton(new DSuggestButton(this))
@@ -26,7 +26,7 @@ PageDriverRestoreInfo::PageDriverRestoreInfo(QWidget *parent)
 
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverRestoreInfo::operatorClicked);
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverRestoreInfo::slotOperatorClicked);
-    connect(mp_ReDetectedSgButton, &DSuggestButton::clicked, this, &PageDriverRestoreInfo::redetected);
+    connect(mp_ReDetectedSgButton, &DSuggestButton::clicked, this, &PageDriverRestoreInfo::gotoBackup);
 }
 void PageDriverRestoreInfo::initUI()
 {
@@ -92,7 +92,7 @@ void PageDriverRestoreInfo::initUI()
     tipLabel->setText(tr("You do not have any drivers to restore, please backup first"));
     //tipLabel->setFrameShape(QFrame::Box);
 
-    mp_ReDetectedSgButton->setText(tr("Scan Again"));
+    mp_ReDetectedSgButton->setText(tr("Go to Backup Driver"));
     mp_ReDetectedSgButton->setFixedWidth(310);
     mp_ReDetectedSgButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 

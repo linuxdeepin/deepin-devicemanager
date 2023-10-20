@@ -1712,11 +1712,7 @@
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
-        <source>Size</source>
-        <translation type="unfinished">크기</translation>
-    </message>
-    <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Driver Platform Version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1731,12 +1727,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="171"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
         <source>Backupable Drivers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="172"/>
+        <location filename="../src/Page/PageDriverBackupInfo.cpp" line="177"/>
         <source>Backed up Drivers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1941,30 +1937,32 @@
     <name>PageDriverManager</name>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="55"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="98"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="451"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="101"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="454"/>
         <source>Driver Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="99"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="453"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="86"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="87"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="456"/>
         <source>Driver Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="100"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="455"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="458"/>
         <source>Driver Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="578"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
         <source>Feedback</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1978,7 +1976,7 @@
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="95"/>
-        <source>Scan Again</source>
+        <source>Go to Backup Driver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2025,17 +2023,17 @@
         <translation>개요</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="110"/>
+        <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="110"/>
+        <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Backup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="110"/>
+        <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Restore</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3132,13 +3130,13 @@
         <translation>디스크를 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="576"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
         <source>Driver restore failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="33"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="572"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="575"/>
         <source>Please try again or give us feedback</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3148,7 +3146,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1342"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1370"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1398"/>
@@ -3181,7 +3179,7 @@
         <translation>모니터를 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="631"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="634"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1344"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1372"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1400"/>
@@ -3198,7 +3196,7 @@
         <translation>네트워크 어댑터를 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1345"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1373"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1401"/>
@@ -3215,7 +3213,7 @@
         <translation>오디오 장치를 찾을 수 없음</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="631"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1346"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1374"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1402"/>
@@ -3410,7 +3408,7 @@
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="41"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="637"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="640"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1351"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1379"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1407"/>
