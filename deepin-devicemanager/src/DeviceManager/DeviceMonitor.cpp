@@ -160,7 +160,15 @@ void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Date", m_ProductionWeek);
+    setAttribute(mapInfo, "Display Input", m_DisplayInput);
     getOtherMapInfo(mapInfo);
+}
+
+void DeviceMonitor::setInfoFromDbus(const QMap<QString, QString> &mapInfo)
+{
+    if (mapInfo["Name"].toLower().contains(m_DisplayInput.toLower(), Qt::CaseInsensitive)) {
+        setAttribute(mapInfo, "CurResolution", m_CurrentResolution);
+    }
 }
 
 QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
@@ -175,8 +183,25 @@ QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
 bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, const QString &rate)
 {
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
-    if (!m_Interface.isEmpty())
+    if (!m_Interface.isEmpty()) {
+        // 设置当前分辨率
+        if (m_CurrentResolution.isEmpty()) {
+            QRegExp reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
+            if (reScreenSize.exactMatch(main)) {
+                if (!rate.isEmpty()) {
+                    QString curRate = rate;
+                    QRegExp rateStart("[a-zA-Z]");
+                    int pos = curRate.indexOf(rateStart);
+                    if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
+                        curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
+                    }
+                    m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate);
+                } else
+                    m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+            }
+        }
         return false;
+    }
 
     if (main.contains("disconnected"))
         return false;
@@ -362,7 +387,7 @@ void DeviceMonitor::caculateScreenSize()
         m_Height = re.cap(2).toInt();
 
         double inch = std::sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54)) / 10.0;
-        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, 'f', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
     }
 }
 
@@ -391,7 +416,7 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
     if (fabs(width * 10 - m_Width) < 10 && fabs(height * 10 - m_Height) < 10)
         return true;
 
-    double inch = std::sqrt(height * height + width * width) / 2.54;
-    m_ScreenSize = QString("%1 %2(%3cm X %4cm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
+    double inch = std::sqrt(height * height + width * width) / 2.54 / 10;
+    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
     return true;
 }

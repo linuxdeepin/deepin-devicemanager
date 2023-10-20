@@ -1210,6 +1210,11 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
                     mapInfo[words[0].trimmed()] = words[1].trimmed();
             }
         }
+        if ((*it).contains("Config Status")) {
+            //qInfo() << "  Config Status"<< words[0]<<words[1];
+            if(words[1].contains("avail=yes"))
+                mapInfo["cfg_avail"] = "yes";
+        }
     }
 
     if (mapInfo.contains("VID_PID") && !mapInfo["VID_PID"].isEmpty() && (mapInfo.contains("SysFS ID") || mapInfo.contains("SysFS Device Link"))) {

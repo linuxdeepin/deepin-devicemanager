@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+
+
 #ifndef CONTROLINTERFACE_H
 #define CONTROLINTERFACE_H
 
@@ -26,12 +28,14 @@ private:
 
 signals:
     Q_SCRIPTABLE void sigUpdate();
+#ifndef DISABLE_DRIVER
     Q_SCRIPTABLE void sigProgressDetail(int progress, const QString &strDeatils);
     Q_SCRIPTABLE void sigFinished(bool bsuccess, QString msg);
     Q_SCRIPTABLE void sigDownloadProgressChanged(QStringList msg);//驱动下载进度、速度、已下载大小
     Q_SCRIPTABLE void sigDownloadFinished();//下载完成
     Q_SCRIPTABLE void sigInstallProgressChanged(int progress);//安装进度
     Q_SCRIPTABLE void sigInstallProgressFinished(bool bsuccess, int err);
+#endif
 
 public slots:
     /**
@@ -120,6 +124,7 @@ public slots:
      */
     Q_SCRIPTABLE bool monitorWorkingDBFlag();
 
+#ifndef DISABLE_DRIVER
     Q_SCRIPTABLE bool unInstallDriver(const QString &modulename);
     Q_SCRIPTABLE bool installDriver(const QString &filepath);
     Q_SCRIPTABLE void installDriver(const QString &modulename, const QString &version);
@@ -130,6 +135,10 @@ public slots:
     Q_SCRIPTABLE bool isArchMatched(const QString &filePath);
     Q_SCRIPTABLE bool isDebValid(const QString &filePath);
     Q_SCRIPTABLE bool unInstallPrinter(const QString &vendor, const QString &model);
+    Q_SCRIPTABLE bool backupDeb(const QString &debpath); //debpath格式须是： “/tmp/xx/debname
+    Q_SCRIPTABLE bool delDeb(const QString &debname);
+
+#endif
 
 private:
     /**
@@ -189,8 +198,10 @@ private:
     void saveWakeupInfo(const QString &unique_id, const QString &path, bool wakeup);
 
 private:
+#ifndef DISABLE_DRIVER
     DriverManager *mp_drivermanager;
     ModCore *pcore = nullptr; //临时测试使用
+#endif
 };
 
 #endif // CONTROLINTERFACE_H

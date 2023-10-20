@@ -267,15 +267,22 @@ struct RepoDriverInfo {
  * @brief The Status enum 驱动状态
  */
 enum Status {
-    ST_SUCESS      = 0,   // 成功了
-    ST_FAILED      = 1,   // 失败了
-    ST_DOWNLOADING = 2,   // 下载中
-    ST_INSTALL     = 3,   // 安装中
-    ST_NOT_INSTALL = 4,   // 驱动未安装
-    ST_CAN_UPDATE  = 5,   // 驱动可更新
-    ST_WAITING     = 6,   // 等待中
-    ST_NetWorkErr = 7,    // 网络异常
-    ST_DRIVER_IS_NEW = 8, // 此驱动不需要更新
+    ST_SUCESS      = 0,       // 成功了
+    ST_FAILED      = 1,       // 失败了
+    ST_DOWNLOADING = 2,       // 下载中
+    ST_INSTALL     = 3,       // 安装中
+    ST_NOT_INSTALL = 4,       // 驱动未安装
+    ST_CAN_UPDATE  = 5,       // 驱动可更新
+    ST_WAITING     = 6,       // 等待中
+    ST_NetWorkErr = 7,        // 网络异常
+    ST_DRIVER_IS_NEW = 8,     // 此驱动不需要更新
+    ST_DRIVER_NOT_BACKUP ,    //未备份
+    ST_DRIVER_BACKING_UP,     //正在备份
+    ST_DRIVER_BACKED_UP,      //已备份
+    ST_DRIVER_BACKUP_FAILED,  //备份失败
+    ST_DRIVER_BACKUP_SUCCESS, //备份成功
+    ST_DRIVER_CAN_RESTORE,    //可以还原
+    ST_DRIVER_RESTORING       //正在还原
 };
 
 /**
@@ -323,6 +330,8 @@ struct DriverInfo {
     QString    m_DebVersion;   //包版本 返回值
     QString    m_Packages;     //包名  返回值
     qint64     m_Byte;
+    QString    m_DebBackupVersion;   //备份的包版本 返回值
+    QString    m_BackupFileName;    //备份文件名
 
     DriverType type() { return m_Type; }
     QString    name() { return m_Name; }
@@ -337,6 +346,8 @@ struct DriverInfo {
     bool       checked() { return m_Checked; }
     QString    debVersion() { return m_DebVersion; }
     QString    packages() {return m_Packages; }
+    QString    debBackupVersion() { return m_DebBackupVersion; }
+    QString    backupFileName() { return m_BackupFileName; }
 };
 
 

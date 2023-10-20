@@ -11,6 +11,7 @@
 #include <QAbstractItemModel>
 
 #include "MacroDefinition.h"
+#include "driveritem.h"
 
 class DriverTableView;
 
@@ -99,8 +100,12 @@ public:
      */
     void clear();
 
+    void setItemOperationEnable(int index, bool enable);
+
+    void removeItemAndWidget(int row, int column);
+
 signals:
-    void operatorClicked(int index);
+    void operatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode);
     /**
      * @brief itemChecked 选中的信号
      * @param index

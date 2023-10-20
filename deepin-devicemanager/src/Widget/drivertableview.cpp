@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "drivertableview.h"
-#include "driveritem.h"
 #include "MacroDefinition.h"
 
 #include <DApplication>
@@ -379,28 +378,39 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
             Q_UNUSED(checked)
             int rowCount = mp_Model->rowCount();
             for (int i = 0; i < rowCount; i++) {
-                DriverOperationItem *curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
-                DriverCheckItem *cb = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
-                DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 1)));
-                DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
-                if (curItem && cb && name && status) {
-                    if (curItem == orItem) {
-                        // 当前行按钮置灰
-                        curItem->setBtnEnable(false);
-                        // 当前行的勾选框置灰
-                        cb->setCbEnable(false);
-                        cb->setChecked(true);
-                        // 状态修改为等待中
-                        status->setStatus(ST_WAITING);
-                        // 发送信号出去
-                        emit operatorClicked(name->index());
-                    } else {
-                        // 此时如果选中，则取消选中
-                        if (cb->checked() && (status->getStatus() == ST_NOT_INSTALL || status->getStatus() == ST_CAN_UPDATE)) {
-                            cb->setChecked(false);
+                if (DriverOperationItem::RESTORE == orItem->mode()) {
+                    DriverOperationItem *curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 3)));
+                    DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 0)));
+                    if (curItem  && name && curItem == orItem) {
+                        emit operatorClicked(name->index(), i, orItem->mode());
+                    }
+                } else {
+                    DriverOperationItem *curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
+                    DriverCheckItem *cb = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
+                    DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 1)));
+                    DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
+
+                    if (curItem && cb && name && status) {
+                        if (curItem == orItem) {
+                            // 当前行按钮置灰
+                            curItem->setBtnEnable(false);
+                            // 当前行的勾选框置灰
+                            cb->setCbEnable(false);
+                            cb->setChecked(true);
+                            // 状态修改为等待中
+                            status->setStatus(ST_WAITING);
+                            // 发送信号出去
+                            emit operatorClicked(name->index(), i, orItem->mode());
+                        } else {
+                            // 此时如果选中，则取消选中
+                            if (cb->checked() && (status->getStatus() == ST_NOT_INSTALL || status->getStatus() == ST_CAN_UPDATE)) {
+                                cb->setChecked(false);
+                            }
                         }
                     }
                 }
+
+
             }
         });
     }
@@ -482,6 +492,21 @@ void DriverTableView::setCheckedCBDisable()
     }
 }
 
+void DriverTableView::setItemOperationEnable(int index, bool enable)
+{
+    int rowCount = mp_Model->rowCount();
+    for (int i = 0; i < rowCount; i++) {
+        DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 0)));
+        if (name && name->index() == index) {
+            DriverOperationItem *opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 3)));
+
+            if (opera) {
+                opera->setBtnEnable(enable);
+            }
+        }
+    }
+}
+
 void DriverTableView::getCheckedDriverIndex(QList<int> &lstIndex)
 {
     int rowCount = mp_Model->rowCount();
@@ -504,15 +529,15 @@ void DriverTableView::setItemStatus(int index, Status s)
             status->setStatus(s);
 
             // 如果是安装成功则取消选中且不可选
-            if (ST_SUCESS == s || ST_FAILED == s) {
+            if (ST_SUCESS == s || ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s || ST_DRIVER_BACKUP_SUCCESS == s) {
                 DriverCheckItem *cb = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
                 if (cb) {
-                    cb->setCbEnable(ST_FAILED == s ? true : false);
+                    cb->setCbEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s ? true : false);
                     cb->setChecked(false);
                 }
                 DriverOperationItem *opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
                 if (opera) {
-                    opera->setBtnEnable(ST_FAILED == s ? true : false);
+                    opera->setBtnEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s ? true : false);
                 }
             }
             break;

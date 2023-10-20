@@ -39,6 +39,8 @@ void DriverScanner::run()
         // 扫描结束
         usleep(10000);
         emit scanFinished(SR_SUCESS);
+    } else {
+        emit scanFinished(SR_NETWORD_ERR);
     }
 
 // 测试代码

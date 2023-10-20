@@ -190,7 +190,7 @@ TEST_F(UT_DeviceAudio, UT_DeviceAudio_getOverviewInfo)
 TEST_F(UT_DeviceAudio, UT_DeviceAudio_initFilterKey)
 {
     m_deviceAudio->initFilterKey();
-    EXPECT_EQ(19, m_deviceAudio->m_FilterKey.size());
+    EXPECT_EQ(16, m_deviceAudio->m_FilterKey.size());
 }
 
 TEST_F(UT_DeviceAudio, UT_DeviceAudio_loadBaseDeviceInfo)

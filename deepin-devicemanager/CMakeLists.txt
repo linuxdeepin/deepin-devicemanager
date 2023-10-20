@@ -51,7 +51,6 @@ if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "sw_64")
 endif ()
 
 # 判断系统环境
-#file(STRINGS "/etc/os-version" MAJOR_STR REGEX "MajorVersion")
 execute_process(COMMAND cat /etc/os-version OUTPUT_VARIABLE OS_INFO_STR)
 string(REGEX MATCHALL "MajorVersion=[0-9]+" MAJOR_STR "${OS_INFO_STR}")
 string(REGEX MATCH "[0-9]+" MAJOR_VERSION "${MAJOR_STR}")
@@ -76,7 +75,6 @@ else()
 endif()
 
 #Generate the qm file
-#message(${CMAKE_CURRENT_SOURCE_DIR})
 execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 configure_file(src/environments.h.in environments.h @ONLY)
 configure_file(src/config.h.in config.h @ONLY)
@@ -107,7 +105,6 @@ link_libraries("cups")
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
 
-
 # Find the library
 find_package(PkgConfig REQUIRED)
 find_package(Qt5Widgets REQUIRED)
@@ -119,7 +116,6 @@ find_package(PolkitQt5-1 REQUIRED)
 find_package(DtkWidget REQUIRED)
 find_package(DtkCore REQUIRED)
 
-
 include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 
 # Tell CMake to create the executable
@@ -129,7 +125,6 @@ target_include_directories(${APP_BIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OB
 target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
-
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets
@@ -149,6 +144,14 @@ install(FILES ${APP_ICON_FILE} DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolo
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION ${CMAKE_INSTALL_DATADIR}/deepin-manual/manual-assets/application/)
 install(FILES ${APP_AUTHENTICATION} DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions)
 install(FILES ${APP_SERVICE} DESTINATION ${CMAKE_INSTALL_DATADIR}/dbus-1/services)
+
+#hw机型增加DConfig配置
+set(APPID org.deepin.devicemanager)
+set(configFile ${PROJECT_SOURCE_DIR}/assets/org.deepin.devicemanager.json)
+if (DEFINED DSG_DATA_DIR)
+    message("-- DConfig is supported by DTK")
+    dconfig_meta_files(APPID ${APPID} FILES ${configFile})
+endif()
 
 # Test--------deepin-devicemanager
 if (CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")

@@ -46,6 +46,8 @@ public:
      */
     void clear();
 
+    void setCurType(QString type);
+
 protected:
     /**@brief:事件重写*/
     void paintEvent(QPaintEvent *event) override;

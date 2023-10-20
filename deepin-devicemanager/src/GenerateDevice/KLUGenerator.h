@@ -29,6 +29,8 @@ protected:
 
     /**@brief:generator network info*/
     virtual void getNetworkInfoFromCatWifiInfo();
+    /**@brief:generatorMonitorDevice:生成显示设备*/
+    virtual void generatorMonitorDevice();
 };
 
 #endif // KLUGENERATOR_H

@@ -273,6 +273,12 @@ public:
      */
     void setMonitorInfoFromXrandr(const QString &main, const QString &edid, const QString &rate = "");
 
+    /**
+     * @brief setMonitorInfoFromDbus:设置由 dbus 获取的显示设备信息
+     * @param mapInfo:被添加的信息map
+     */
+    void setMonitorInfoFromDbus(const QMap<QString, QString> &mapInfo);
+
     // Bios设备相关 ************************************************************************************
     /**
      * @brief addBiosDevice:添加BIOS设备

@@ -88,7 +88,8 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (m_SerialNumber.isEmpty()) {
         setAttribute(mapInfo, "Serial ID", m_SerialNumber);
     }
-
+    if (m_SerialNumber.compare("0",Qt::CaseInsensitive) == 0)
+        m_SerialNumber = "";
 
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
@@ -321,6 +322,9 @@ void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
 
 QString DeviceStorage::getDiskSerialID()
 {
+    if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
+        return m_SerialNumber + m_KeyToLshw;
+    }
     return m_SerialNumber;
 }
 
@@ -354,7 +358,7 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
         QString type2;
         if (index >= 0) {
             num2 = reg.cap(0).toDouble();
-            type2 = m_Size.right(size.length() - reg.cap(0).size()).trimmed();
+            type2 = size.right(size.length() - reg.cap(0).size()).trimmed();
         }
         // 匹配大小
         if (type1 != type2) {
@@ -561,6 +565,9 @@ void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
     QRegExp re(".*\\((.*)\\)$");
     if (re.exactMatch(m_Size))
         m_Size = re.cap(1);
+
+    if (m_SerialNumber.compare("0",Qt::CaseInsensitive) == 0)
+        m_SerialNumber = "";
 }
 
 void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)

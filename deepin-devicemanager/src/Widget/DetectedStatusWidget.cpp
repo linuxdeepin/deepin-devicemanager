@@ -11,6 +11,7 @@
 #include <DFontSizeManager>
 #include <DApplicationHelper>
 #include <DApplication>
+#include <DDesktopServices>
 
 #include <QString>
 #include <QProcess>
@@ -51,14 +52,17 @@ DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
     , mp_ModelLabel(new TipsLabel(this))
     , mp_RebootLabel(new DLabel(this))
     , mp_FeedBackLabel(new DLabel(this))
+    , mp_BackupPathLabel(new DLabel(this))
     , mp_InstallButton(new DSuggestButton(this))
     , mp_ReDetectedSgButton(new DSuggestButton(this))
+    , mp_BackupSgButton(new DSuggestButton(this))
     , mp_CancelButton(new DPushButton(this))
     , mp_ReDetectedIconButton(new DIconButton(this))
     , mp_Progress(new DProgressBar(this))
     , mp_HLayoutTotal(nullptr)
     , mp_HLayoutButton(nullptr)
     , mp_VLayoutLabel(nullptr)
+    , mp_HLayoutLabel(nullptr)
 {
     initUI();
     initConnect();
@@ -69,6 +73,11 @@ DetectedStatusWidget::~DetectedStatusWidget()
     DELETE_PTR(mp_HLayoutButton);
     DELETE_PTR(mp_VLayoutLabel);
     DELETE_PTR(mp_HLayoutTotal);
+
+    if (mp_HLayoutLabel) {
+        mp_HLayoutLabel->deleteLater();
+        mp_HLayoutLabel = nullptr;
+    }
 }
 
 void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString &model, bool hasInstall)
@@ -424,6 +433,258 @@ void DetectedStatusWidget::setInstallBtnEnable(bool enable)
     }
 }
 
+void DetectedStatusWidget::setBackupBtnEnable(bool enable)
+{
+    if (mp_BackupSgButton) {
+        mp_BackupSgButton->setEnabled(enable);
+    }
+}
+
+void DetectedStatusWidget::setNoBackupDriverUI(int backableSize, int backedupSize)
+{
+    hideAll();
+    // Icon Label
+    QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/latest.svg"));
+    QPixmap pic = icon.pixmap(ICON_LABEL_SIZE, ICON_LABEL_SIZE);
+    mp_PicLabel->setPixmap(pic);
+
+    int total = backableSize + backedupSize;
+    QString updateStr = QObject::tr("All drivers have been backed up");
+    mp_UpdateLabel->setText(updateStr);
+    mp_ModelLabel->setText(QObject::tr("A total of %1 drivers, of which %2 have been backed up").arg(total).arg(backedupSize));
+
+    mp_HLayoutTotal->addWidget(mp_PicLabel);
+    mp_HLayoutTotal->addSpacing(SPACE_15);
+    mp_VLayoutLabel->addStretch();
+    mp_VLayoutLabel->addWidget(mp_UpdateLabel);
+    mp_VLayoutLabel->addSpacing(SPACE_5);
+    mp_HLayoutLabel->addWidget(mp_ModelLabel);
+    mp_HLayoutLabel->addSpacing(SPACE_5);
+    mp_HLayoutLabel->addWidget(mp_BackupPathLabel);
+    mp_VLayoutLabel->addLayout(mp_HLayoutLabel);
+    mp_VLayoutLabel->addStretch();
+    mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
+
+    // 重新检测
+    mp_HLayoutButton->addStretch();
+    mp_HLayoutButton->addWidget(mp_ReDetectedSgButton);
+    mp_HLayoutTotal->addLayout(mp_HLayoutButton);
+
+    // 显示控件
+    mp_PicLabel->show();
+    mp_UpdateLabel->show();
+    mp_ModelLabel->show();
+    mp_ReDetectedSgButton->show();
+    mp_BackupPathLabel->show();
+    this->setLayout(mp_HLayoutTotal);
+}
+
+void DetectedStatusWidget::setBackableDriverUI(int backableSize, int backedupSize)
+{
+    hideAll();
+
+    QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/backup_96.svg"));
+    QPixmap pic = icon.pixmap(ICON_LABEL_SIZE, ICON_LABEL_SIZE);
+    mp_PicLabel->setPixmap(pic);
+
+    int total = backableSize + backedupSize;
+    if (backedupSize <= 0) {
+        mp_UpdateLabel->setText(QObject::tr("You have %1 drivers that can be backed up, it is recommended to do so immediately").arg(backableSize));
+        mp_ModelLabel->setText("");
+    } else {
+        mp_UpdateLabel->setText(QObject::tr("You have %1 drivers that can be backed up").arg(backableSize));
+        mp_ModelLabel->setText(QObject::tr("A total of %1 drivers, of which %2 have been backed up").arg(total).arg(backedupSize));
+    }
+
+    mp_HLayoutTotal->addWidget(mp_PicLabel);
+    mp_HLayoutTotal->addSpacing(SPACE_15);
+    mp_VLayoutLabel->addStretch();
+    mp_VLayoutLabel->addWidget(mp_UpdateLabel);
+    mp_VLayoutLabel->addSpacing(SPACE_5);
+    mp_HLayoutLabel->addWidget(mp_ModelLabel);
+    if (backedupSize > 0) {
+        mp_HLayoutLabel->addSpacing(SPACE_5);
+        mp_HLayoutLabel->addWidget(mp_BackupPathLabel);
+    }
+    mp_VLayoutLabel->addLayout(mp_HLayoutLabel);
+    mp_VLayoutLabel->addStretch();
+    mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
+
+    mp_HLayoutButton->addStretch();
+    mp_HLayoutButton->addWidget(mp_ReDetectedIconButton);
+    mp_HLayoutButton->addSpacing(SPACE_10);
+    mp_HLayoutButton->addWidget(mp_BackupSgButton);
+    mp_HLayoutTotal->addLayout(mp_HLayoutButton);
+
+    mp_BackupSgButton->setEnabled(false);
+
+    mp_PicLabel->show();
+    mp_UpdateLabel->show();
+    mp_ModelLabel->show();
+    mp_ReDetectedIconButton->show();
+    mp_BackupSgButton->show();
+    if (backedupSize > 0) {
+        mp_BackupPathLabel->show();
+    }
+    this->setLayout(mp_HLayoutTotal);
+}
+
+void DetectedStatusWidget::setBackingUpDriverUI(const QString &driverDescription, int totalValue, int progressValue)
+{
+    hideAll();
+
+    QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/backup_96.svg"));
+    QPixmap pic = icon.pixmap(ICON_LABEL_SIZE, ICON_LABEL_SIZE);
+    mp_PicLabel->setPixmap(pic);
+
+    mp_UpdateLabel->setText(QObject::tr("Backing up the %1 driver, a total of %2 drivers").arg(progressValue).arg(totalValue));
+    mp_ModelLabel->setText(QObject::tr("Backing up: %1").arg(driverDescription));
+    mp_Progress->setValue(progressValue * 10);
+
+    mp_HLayoutTotal->addWidget(mp_PicLabel);
+    mp_HLayoutTotal->addSpacing(SPACE_15);
+    mp_VLayoutLabel->addStretch();
+    mp_VLayoutLabel->addWidget(mp_UpdateLabel);
+    mp_VLayoutLabel->addSpacing(SPACE_5);
+    mp_VLayoutLabel->addWidget(mp_Progress);
+    mp_VLayoutLabel->addSpacing(SPACE_5);
+    mp_VLayoutLabel->addWidget(mp_ModelLabel);
+    mp_VLayoutLabel->addStretch();
+
+    mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
+
+    // 取消
+    mp_HLayoutButton->addStretch();
+    mp_HLayoutButton->addWidget(mp_CancelButton);
+    mp_HLayoutTotal->addLayout(mp_HLayoutButton);
+
+    mp_PicLabel->show();
+    mp_UpdateLabel->show();
+    mp_ModelLabel->show();
+    mp_Progress->show();
+    mp_CancelButton->show();
+    this->setLayout(mp_HLayoutTotal);
+}
+
+void DetectedStatusWidget::setBackupSuccessUI(const QString &success, const QString &failed)
+{
+    hideAll();
+    // Icon Label
+    QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/backup_96.svg"));
+    QPixmap pic = icon.pixmap(ICON_LABEL_SIZE, ICON_LABEL_SIZE);
+    mp_PicLabel->setPixmap(pic);
+
+    QString successStr;
+    if (failed.toInt() > 0) {
+        successStr = QObject::tr("%1 drivers backed up, %2 drivers failed").arg(success).arg(failed);
+    } else if (success <= 0) {
+        successStr = QObject::tr("Failed to backup drivers");
+    } else {
+        successStr = QObject::tr("%1 drivers backed up").arg(success);
+    }
+
+    mp_UpdateLabel->setText(successStr);
+
+    mp_HLayoutTotal->addWidget(mp_PicLabel);
+    mp_HLayoutTotal->addSpacing(11);
+    mp_VLayoutLabel->addStretch();
+    mp_VLayoutLabel->addWidget(mp_UpdateLabel);
+//    mp_VLayoutLabel->addSpacing(SPACE_9);
+//    mp_VLayoutLabel->addWidget(mp_RebootLabel);
+    mp_VLayoutLabel->addStretch();
+    mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
+
+
+//    mp_BackupSgButton->setEnabled(false);
+    mp_HLayoutButton->addStretch();
+    mp_HLayoutButton->addWidget(mp_ReDetectedIconButton);
+    mp_HLayoutButton->addSpacing(SPACE_10);
+    mp_HLayoutButton->addWidget(mp_BackupSgButton);
+    mp_HLayoutTotal->addLayout(mp_HLayoutButton);
+
+    // 显示控件
+    mp_PicLabel->show();
+    mp_UpdateLabel->show();
+//    mp_RebootLabel->show();
+    mp_ReDetectedIconButton->show();
+    mp_BackupSgButton->show();
+    this->setLayout(mp_HLayoutTotal);
+}
+
+void DetectedStatusWidget::setRestoreDriverUI(int restorableSize)
+{
+    hideAll();
+
+    QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/restore_96.svg"));
+    QPixmap pic = icon.pixmap(ICON_LABEL_SIZE, ICON_LABEL_SIZE);
+    mp_PicLabel->setPixmap(pic);
+
+    mp_UpdateLabel->setText(QObject::tr("You have %1 drivers that can be restored").arg(restorableSize));
+    mp_ModelLabel->setText(QObject::tr("Please select a driver to restore"));
+
+    mp_HLayoutTotal->addWidget(mp_PicLabel);
+    mp_HLayoutTotal->addSpacing(SPACE_15);
+    mp_VLayoutLabel->addStretch();
+    mp_VLayoutLabel->addWidget(mp_UpdateLabel);
+    mp_VLayoutLabel->addSpacing(SPACE_5);
+    mp_VLayoutLabel->addWidget(mp_ModelLabel);
+    mp_VLayoutLabel->addStretch();
+    mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
+
+    mp_HLayoutButton->addStretch();
+    mp_HLayoutButton->addWidget(mp_ReDetectedSgButton);
+    mp_HLayoutTotal->addLayout(mp_HLayoutButton);
+
+    mp_PicLabel->show();
+    mp_UpdateLabel->show();
+    mp_ModelLabel->show();
+    mp_ReDetectedSgButton->hide();
+    this->setLayout(mp_HLayoutTotal);
+}
+
+void DetectedStatusWidget::setRestoringUI(int progressValue, QString driverDescription)
+{
+    hideAll();
+
+    QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/restore_96.svg"));
+    QPixmap pic = icon.pixmap(ICON_LABEL_SIZE, ICON_LABEL_SIZE);
+    mp_PicLabel->setPixmap(pic);
+
+    mp_UpdateLabel->setText(QObject::tr("Driver is restoring..."));
+    mp_ModelLabel->setText(QObject::tr("Restoring: %1").arg(driverDescription));
+    mp_Progress->setValue(progressValue);
+
+    mp_HLayoutTotal->addWidget(mp_PicLabel);
+    mp_HLayoutTotal->addSpacing(SPACE_15);
+    mp_VLayoutLabel->addStretch();
+    mp_VLayoutLabel->addWidget(mp_UpdateLabel);
+    mp_VLayoutLabel->addSpacing(SPACE_5);
+    mp_VLayoutLabel->addWidget(mp_Progress);
+    mp_VLayoutLabel->addSpacing(SPACE_5);
+    mp_VLayoutLabel->addWidget(mp_ModelLabel);
+    mp_VLayoutLabel->addStretch();
+    mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
+
+    mp_HLayoutButton->addStretch();
+    mp_HLayoutButton->addWidget(mp_ReDetectedSgButton);
+    mp_HLayoutTotal->addLayout(mp_HLayoutButton);
+
+    mp_PicLabel->show();
+    mp_UpdateLabel->show();
+    mp_ModelLabel->show();
+    mp_Progress->show();
+    mp_ReDetectedSgButton->hide();
+    this->setLayout(mp_HLayoutTotal);
+}
+
+void DetectedStatusWidget::setReDetectEnable(bool enable)
+{
+    if (mp_ReDetectedSgButton)
+        mp_ReDetectedSgButton->setEnabled(enable);
+    if (mp_ReDetectedIconButton)
+        mp_ReDetectedIconButton->setEnabled(enable);
+}
+
 void DetectedStatusWidget::slotReboot()
 {
     // 调用DBus接口重启
@@ -433,7 +694,6 @@ void DetectedStatusWidget::slotReboot()
                 "/teval `dbus-launch --auto-syntax`/n");
     }
 
-    //
     QDBusInterface *iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::sessionBus());
     iface->call("Restart");
 }
@@ -443,9 +703,20 @@ void DetectedStatusWidget::slotFeedBack()
     CommonTools::feedback();
 }
 
+void DetectedStatusWidget::slotBackupPath()
+{
+    Dtk::Widget::DDesktopServices::showFolder(CommonTools::getBackupPath() + "driver");
+}
+
+
 void DetectedStatusWidget::slotInstall()
 {
     emit installAll();
+}
+
+void DetectedStatusWidget::slotBackup()
+{
+    emit backupAll();
 }
 
 void DetectedStatusWidget::slotReDetectSlot()
@@ -455,7 +726,7 @@ void DetectedStatusWidget::slotReDetectSlot()
 
 void DetectedStatusWidget::slotCancel()
 {
-    emit undoInstall();
+    emit cancelClicked();
 }
 
 void DetectedStatusWidget::onUpdateTheme()
@@ -513,6 +784,7 @@ void DetectedStatusWidget::initUI()
     QFont font = mp_UpdateLabel->font();
     font.setWeight(FONT_WEIGHT);
     mp_UpdateLabel->setFont(font);
+    mp_UpdateLabel->setWordWrap(true);
     DFontSizeManager::instance()->bind(mp_UpdateLabel, DFontSizeManager::T5);
 
     // 检测时间
@@ -529,6 +801,10 @@ void DetectedStatusWidget::initUI()
     QString feedbackStr = QString("<a style=\"text-decoration:none\" href=\"submit feedback\">") + QObject::tr("submit feedback") + "</a>";
     mp_FeedBackLabel->setText(QObject::tr("Please try again or %1 to us").arg(feedbackStr));
 
+    // 备份路径
+    DFontSizeManager::instance()->bind(mp_BackupPathLabel, DFontSizeManager::T9);
+    mp_BackupPathLabel->setText(QString("<a style=\"text-decoration:none\" href=\"backup-path\">") + QObject::tr("View backup path") + "</a>");
+
     // 一键安装
     mp_InstallButton->setText(QObject::tr("Install All"));
     mp_InstallButton->setFixedWidth(BUTTON_WIDTH);
@@ -538,6 +814,11 @@ void DetectedStatusWidget::initUI()
     mp_ReDetectedSgButton->setText(QObject::tr("Scan Again"));
     mp_ReDetectedSgButton->setFixedWidth(BUTTON_WIDTH);
     mp_ReDetectedSgButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    // 一键备份
+    mp_BackupSgButton->setText(QObject::tr("Backup All"));
+    mp_BackupSgButton->setFixedWidth(BUTTON_WIDTH);
+    mp_BackupSgButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     // 取消
     mp_CancelButton->setText(QObject::tr("Cancel"));
@@ -561,8 +842,14 @@ void DetectedStatusWidget::initConnect()
     // 反馈
     connect(mp_FeedBackLabel, &QLabel::linkActivated, this, &DetectedStatusWidget::slotFeedBack);
 
+    // 备份路径
+    connect(mp_BackupPathLabel, &QLabel::linkActivated, this, &DetectedStatusWidget::slotBackupPath);
+
     // 一键安装
     connect(mp_InstallButton, &DSuggestButton::clicked, this, &DetectedStatusWidget::slotInstall);
+
+    // 一键备份
+    connect(mp_BackupSgButton, &DSuggestButton::clicked, this, &DetectedStatusWidget::slotBackup);
 
     // redetected button
     connect(mp_ReDetectedIconButton, &DIconButton::clicked, this, &DetectedStatusWidget::slotReDetectSlot);
@@ -583,7 +870,9 @@ void DetectedStatusWidget::hideAll()
     mp_ModelLabel->hide();
     mp_RebootLabel->hide();
     mp_FeedBackLabel->hide();
+    mp_BackupPathLabel->hide();
     mp_InstallButton->hide();
+    mp_BackupSgButton->hide();
     mp_ReDetectedSgButton->hide();
     mp_CancelButton->hide();
     mp_ReDetectedIconButton->hide();
@@ -593,8 +882,10 @@ void DetectedStatusWidget::hideAll()
     mp_HLayoutTotal = new QHBoxLayout();
     mp_HLayoutButton = new QHBoxLayout();
     mp_VLayoutLabel = new QVBoxLayout();
+    mp_HLayoutLabel = new QHBoxLayout();
     mp_HLayoutTotal->setContentsMargins(MARGIN_LR, MARGIN_TB, MARGIN_LR, MARGIN_TB);
     mp_HLayoutTotal->setSpacing(0);
     mp_HLayoutButton->setSpacing(0);
     mp_VLayoutLabel->setSpacing(0);
+    mp_HLayoutLabel->setSpacing(0);
 }
