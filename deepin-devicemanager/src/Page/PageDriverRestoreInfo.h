@@ -57,6 +57,7 @@ private slots:
 signals:
     void operatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode);
     void redetected();
+    void gotoBackup();
 
 private:
     /**

@@ -89,6 +89,7 @@ void PageListView::clear()
 void PageListView::setCurType(QString type)
 {
     m_CurType = type;
+    mp_ListView->setCurItem(m_CurType);
 }
 
 void PageListView::paintEvent(QPaintEvent *event)
