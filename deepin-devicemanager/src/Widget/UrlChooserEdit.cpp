@@ -16,7 +16,7 @@
 #include <QDir>
 #include <QStorageInfo>
 #include <QFontMetrics>
-
+#include <QDebug>
 
 UrlChooserEdit::UrlChooserEdit(QWidget *parent) : DWidget(parent)
   ,mp_urlEdit(new DLineEdit)
