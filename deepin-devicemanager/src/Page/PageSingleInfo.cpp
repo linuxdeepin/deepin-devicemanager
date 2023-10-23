@@ -27,6 +27,7 @@
 #include <QVBoxLayout>
 #include <QClipboard>
 #include <QProcess>
+#include <QDebug>
 
 #define WAKEUP_OPEN 3
 #define WAKEUP_CLOSE 4
