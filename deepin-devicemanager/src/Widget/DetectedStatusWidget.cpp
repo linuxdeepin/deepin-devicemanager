@@ -19,6 +19,8 @@
 #include <QThread>
 #include <QSizePolicy>
 #include <QPainterPath>
+#include <QDebug>
+
 #define MARGIN_LR          20
 #define MARGIN_TB          12
 #define ICON_BT_SIZE       36
