@@ -638,6 +638,8 @@ void PageDriverManager::scanDevices()
 
     // 打印机
     scanDevicesInfo(QObject::tr("Printer"), DR_Printer);
+
+    scanDevicesInfo(QObject::tr("Other Devices"), DR_OtherDevice);
 }
 
 void PageDriverManager::testScanDevices()

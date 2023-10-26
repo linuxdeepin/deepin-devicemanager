@@ -26,6 +26,9 @@ PageDriverBackupInfo::PageDriverBackupInfo(QWidget *parent)
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverBackupInfo::operatorClicked);
     connect(mp_ViewBackable, &PageDriverTableView::itemChecked, this, &PageDriverBackupInfo::itemChecked);
     connect(mp_HeadWidget, &DetectedStatusWidget::backupAll, this, &PageDriverBackupInfo::backupAll);
+    connect(mp_HeadWidget, &DetectedStatusWidget::backupAll, this, [=](){
+        mp_ViewBackable->setCheckedCBDisnable();
+    });
     connect(mp_HeadWidget, &DetectedStatusWidget::cancelClicked, this, &PageDriverBackupInfo::undoBackup);
     connect(mp_HeadWidget, &DetectedStatusWidget::redetected, this, &PageDriverBackupInfo::redetected);
 }
