@@ -228,7 +228,8 @@ enum DriverType {
     DR_Printer = 8,
     DR_Scaner = 9,
     DR_Tablet = 10,
-    DR_WiFi = 11
+    DR_WiFi = 11,
+    DR_OtherDevice = 12
 };
 
 /**

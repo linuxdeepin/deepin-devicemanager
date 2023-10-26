@@ -69,8 +69,10 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
     case DR_Sound:
     case DR_Gpu:
     case DR_Network:
+    case DR_OtherDevice:
     case DR_WiFi:
-        strJson = getRequestBoard(driverInfo->vendorId(), driverInfo->modelId()); break;
+        strJson = getRequestBoard(driverInfo->vendorId(), driverInfo->modelId());
+        break;
     default:
         break;
     }
@@ -92,8 +94,14 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
     QString arch = Common::getArchStore();
     QString strUrl = CommonTools::getUrl() + "?arch=" + arch;
     QString build = getOsBuild();
-    if (! build.isEmpty())
-        strUrl += "&system=" + build;
+    if (!build.isEmpty()) {
+        QString system = build;
+
+        if (build[1] == "1") //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
+            system = QString("%1-%2").arg(build[1]).arg(build[3]);
+
+        strUrl += "&system=" + system;
+    }
 
     if (!strManufacturer.isEmpty()) {
         strUrl += "&deb_manufacturer=" + strManufacturer;

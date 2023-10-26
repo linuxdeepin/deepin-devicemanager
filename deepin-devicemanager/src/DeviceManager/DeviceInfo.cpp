@@ -578,15 +578,15 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
 const QString DeviceBaseInfo::getDriverVersion()
 {
     QProcess process;
-    process.start("modinfo " + driver()  + "| grep version");
+    process.start("bash", QStringList() << "-c" << "modinfo " + driver()  + "| grep version");
     process.waitForFinished(-1);
 
     QString output = process.readAllStandardOutput();
 
     foreach (QString out, output.split("\n")) {
-        QStringList item = out.split(":");
-        if ("version" == item[0].trimmed()) {
-            return item[1];
+        QStringList item = out.split(":", QString::SkipEmptyParts);
+        if (!item.isEmpty() && "version" == item[0].trimmed()) {
+            return item[1].trimmed();
         }
     }
 

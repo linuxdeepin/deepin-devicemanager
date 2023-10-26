@@ -28,6 +28,7 @@ QMap<DriverType, QString> CommonTools::m_MapDriverIcon = {
     , {DR_Scaner, QString(":/icons/deepin/builtin/icons/scaner.svg")}
     , {DR_Tablet, QString(":/icons/deepin/builtin/icons/tablet.svg")}
     , {DR_WiFi, QString(":/icons/deepin/builtin/icons/Wi-Fi.svg")}
+    , {DR_OtherDevice, QString(":/icons/deepin/builtin/icons/scaner.svg")}
 };
 
 QMap<DriverType, QString> CommonTools::m_MapDriverType = {
@@ -42,6 +43,7 @@ QMap<DriverType, QString> CommonTools::m_MapDriverType = {
     , {DR_Scaner, QObject::tr("Imaging device")}
     , {DR_Tablet, QObject::tr("Other Devices")}
     , {DR_WiFi, QObject::tr("Wireless network adapter")}
+    , {DR_OtherDevice, QObject::tr("Other Devices")}
 };
 
 QMap<Status, QString> CommonTools::m_MapStatusIcon = {
