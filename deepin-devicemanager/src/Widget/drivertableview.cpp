@@ -484,7 +484,7 @@ void DriverTableView::setCheckedCBDisable()
             }
 
             // 设置状态为等待
-            if (status && status->getStatus() != ST_DOWNLOADING && status->getStatus() != ST_INSTALL) {
+            if (status && status->getStatus() != ST_DOWNLOADING && status->getStatus() != ST_INSTALL && status->getStatus() != ST_DRIVER_BACKING_UP) {
                 status->setStatus(ST_WAITING);
             }
         }
