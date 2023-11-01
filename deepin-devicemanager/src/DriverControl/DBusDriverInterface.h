@@ -105,6 +105,7 @@ signals:
     void installProgressFinished(bool bsuccess, int err);
     void installFinished(bool, QString);
     void installProgressDetail(int, QString);
+    void backupProgressFinished(bool);
 
 protected:
     explicit DBusDriverInterface(QObject *parent = nullptr);

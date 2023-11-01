@@ -166,5 +166,6 @@ void DBusDriverInterface::init()
         connect(mp_Iface, SIGNAL(sigInstallProgressFinished(bool, int)), this, SLOT(slotInstallProgressFinished(bool, int)));
         connect(mp_Iface, SIGNAL(sigFinished(bool, QString)), this, SIGNAL(installFinished(bool, QString)));
         connect(mp_Iface, SIGNAL(sigProgressDetail(int, QString)), this, SIGNAL(installProgressDetail(int, QString)));
+        connect(mp_Iface, SIGNAL(sigBackupProgressFinished(bool)), this, SIGNAL(backupProgressFinished(bool)));
     }
 }

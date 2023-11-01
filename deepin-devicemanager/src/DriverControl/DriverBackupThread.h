@@ -14,6 +14,12 @@ class DriverBackupThread : public QThread
 {
     Q_OBJECT
 public:
+    enum BackupStatus {
+        Waiting = 0,
+        Failed,
+        Success
+    };
+
     explicit DriverBackupThread(QObject *parent = nullptr);
 
     void run();
@@ -27,6 +33,10 @@ public:
      * @brief undoBackup 取消备份
      */
     void undoBackup();
+    void setStatus(BackupStatus status){
+        m_status = status;
+    }
+
 
 signals:
     void backupProgressChanged(int progress);
@@ -37,6 +47,7 @@ public slots:
 private:
     DriverInfo *mp_driverInfo;
     bool m_isStop = true;
+    BackupStatus m_status = Waiting;
 };
 
 #endif // DRIVERBACKUPTHREAD_H

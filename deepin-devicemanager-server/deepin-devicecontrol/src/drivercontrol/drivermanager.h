@@ -70,6 +70,7 @@ signals:
     void sigDownloadFinished();//下载完成
     void sigInstallProgressChanged(int progress);//安装进度
     void sigInstallProgressFinished(bool bsuccess, int err);
+    void sigBackupProgressFinished(bool bsuccess);
 
 private:
     ModCore *mp_modcore = nullptr;
