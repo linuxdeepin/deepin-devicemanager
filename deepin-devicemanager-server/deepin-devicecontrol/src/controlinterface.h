@@ -35,6 +35,7 @@ signals:
     Q_SCRIPTABLE void sigDownloadFinished();//下载完成
     Q_SCRIPTABLE void sigInstallProgressChanged(int progress);//安装进度
     Q_SCRIPTABLE void sigInstallProgressFinished(bool bsuccess, int err);
+    Q_SCRIPTABLE void sigBackupProgressFinished(bool bsuccess);
 #endif
 
 public slots:

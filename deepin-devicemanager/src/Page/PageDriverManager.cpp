@@ -66,6 +66,13 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::installProgressFinished, this, &PageDriverManager::slotInstallProgressFinished);
     connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::installProgressDetail, this, &PageDriverManager::slotRestoreProgress);//还原
     connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::installFinished, this, &PageDriverManager::slotRestoreFinished);
+    connect(DBusDriverInterface::getInstance(), &DBusDriverInterface::backupProgressFinished, this, [=](bool success){
+        if (success) {
+            mp_BackupThread->setStatus(DriverBackupThread::Success);
+        } else {
+            mp_BackupThread->setStatus(DriverBackupThread::Failed);
+        }
+    });
 
     connect(mp_DriverInstallInfoPage, &PageDriverInstallInfo::operatorClicked, this, &PageDriverManager::slotDriverOperationClicked);
     connect(mp_DriverBackupInfoPage, &PageDriverBackupInfo::operatorClicked, this, &PageDriverManager::slotDriverOperationClicked);

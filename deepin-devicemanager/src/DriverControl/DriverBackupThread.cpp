@@ -69,6 +69,7 @@ void DriverBackupThread::run()
             return;
         }
 
+        bool flag = 0;
         if (destdir.exists()) {
             //获取当前路径下的所有文件名
             QFileInfoList fileInfoList = destdir.entryInfoList();
@@ -82,14 +83,29 @@ void DriverBackupThread::run()
                     continue;
 
                 if (fileInfo.isFile() && fileInfo.fileName().contains(".deb") && fileInfo.fileName().contains(debname)) {
-                    bool ret = DBusDriverInterface::getInstance()->backupDeb(backupPath);
-                    qInfo() << "backupDeb: "  << ret << backupPath << fileInfo.fileName();
+                    DBusDriverInterface::getInstance()->backupDeb(backupPath);
+
+                    while (m_status == Waiting) {
+                        sleep(10);
+                    }
+
                     destdir.remove(fileInfo.fileName());
-                    emit backupProgressFinished(ret);
+                    if (m_status == Success) {
+                        emit backupProgressFinished(true);
+                        return;
+                    } else if (m_status == Failed) {
+                        emit backupProgressFinished(false);
+                        return;
+                    }
+
+                    flag = 1;
                 }
             }
         }
-        emit backupProgressFinished(false);
+        if (!flag) {
+            emit backupProgressFinished(false);
+            qDebug() << __LINE__ << " backup failed.";
+        }
     }
 }
 
@@ -97,6 +113,7 @@ void DriverBackupThread::setBackupDriverInfo(DriverInfo *info)
 {
     m_isStop = false;
     mp_driverInfo = info;
+    m_status = Waiting;
 }
 
 void DriverBackupThread::undoBackup()

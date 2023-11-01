@@ -314,9 +314,12 @@ bool ControlInterface::unInstallPrinter(const QString &vendor, const QString &mo
 bool ControlInterface::backupDeb(const QString &debpath)
 {
     if (!getUserAuthorPasswd()) {
+        emit sigBackupProgressFinished(false);
         return false;
     }
-    return  mp_drivermanager->backupDeb(debpath);
+    bool ret = mp_drivermanager->backupDeb(debpath);
+    emit sigBackupProgressFinished(ret);
+    return  ret;
 }
 
 bool ControlInterface::delDeb(const QString &debname)
