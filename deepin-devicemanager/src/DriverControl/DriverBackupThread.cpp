@@ -86,7 +86,7 @@ void DriverBackupThread::run()
                     DBusDriverInterface::getInstance()->backupDeb(backupPath);
 
                     while (m_status == Waiting) {
-                        sleep(10);
+                        msleep(500);
                     }
 
                     destdir.remove(fileInfo.fileName());
@@ -119,4 +119,8 @@ void DriverBackupThread::setBackupDriverInfo(DriverInfo *info)
 void DriverBackupThread::undoBackup()
 {
     m_isStop = true;
+}
+
+void DriverBackupThread::setStatus(BackupStatus status){
+    m_status = status;
 }

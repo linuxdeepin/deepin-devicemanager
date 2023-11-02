@@ -453,6 +453,12 @@ void PageDriverManager::slotUndoInstall()
 void PageDriverManager::slotUndoBackup()
 {
     mp_BackupThread->undoBackup();
+
+    // 直接清空列表，不再备份剩余的驱动
+    for (int index : m_ListBackupIndex) {
+        mp_DriverBackupInfoPage->updateItemStatus(index, ST_DRIVER_NOT_BACKUP);
+    }
+    m_ListBackupIndex.clear();
 }
 
 void PageDriverManager::slotListViewWidgetItemClicked(const QString &itemStr)
@@ -480,6 +486,8 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
     // 成功
     if (bsuccess) {
         m_backupSuccessNum += 1;
+        m_ListRestorableIndex.append(m_ListBackableIndex[0]);
+        m_ListBackableIndex.removeAt(0);
     } else { // 失败
         m_backupFailedNum += 1;
     }
