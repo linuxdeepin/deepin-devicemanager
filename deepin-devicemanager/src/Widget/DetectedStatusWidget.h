@@ -109,7 +109,7 @@ public:
     void setNoBackupDriverUI(int backableSize, int backedupSize);
     void setBackableDriverUI(int backableSize, int backedupSize);
     void setBackingUpDriverUI(const QString &driverDescription, int totalValue, int progressValue);
-    void setBackupSuccessUI(const QString &success, const QString &failed);
+    void setBackupSuccessUI(int success, int failed);
     void setRestoreDriverUI(int restorableSize);
     void setRestoringUI(int progressValue = 0, QString driverDescription = "");
     void setReDetectEnable(bool enable);

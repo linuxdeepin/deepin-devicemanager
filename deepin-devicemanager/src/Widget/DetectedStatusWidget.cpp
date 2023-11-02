@@ -377,7 +377,6 @@ void DetectedStatusWidget::setNoUpdateDriverUI(const QString &model)
     mp_HLayoutTotal->addLayout(mp_VLayoutLabel);
 
     // 重新检测
-
     mp_HLayoutButton->addStretch();
     mp_HLayoutButton->addWidget(mp_ReDetectedSgButton);
     mp_HLayoutTotal->addLayout(mp_HLayoutButton);
@@ -566,7 +565,7 @@ void DetectedStatusWidget::setBackingUpDriverUI(const QString &driverDescription
     this->setLayout(mp_HLayoutTotal);
 }
 
-void DetectedStatusWidget::setBackupSuccessUI(const QString &success, const QString &failed)
+void DetectedStatusWidget::setBackupSuccessUI(int success, int failed)
 {
     hideAll();
     // Icon Label
@@ -575,7 +574,7 @@ void DetectedStatusWidget::setBackupSuccessUI(const QString &success, const QStr
     mp_PicLabel->setPixmap(pic);
 
     QString successStr;
-    if (failed.toInt() > 0) {
+    if (failed > 0) {
         successStr = QObject::tr("%1 drivers backed up, %2 drivers failed").arg(success).arg(failed);
     } else if (success <= 0) {
         successStr = QObject::tr("Failed to backup drivers");
@@ -638,7 +637,7 @@ void DetectedStatusWidget::setRestoreDriverUI(int restorableSize)
     mp_PicLabel->show();
     mp_UpdateLabel->show();
     mp_ModelLabel->show();
-    mp_ReDetectedSgButton->hide();
+    mp_ReDetectedSgButton->show();
     this->setLayout(mp_HLayoutTotal);
 }
 

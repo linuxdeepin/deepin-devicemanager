@@ -103,6 +103,7 @@ public:
     void setItemOperationEnable(int index, bool enable);
 
     void removeItemAndWidget(int row, int column);
+    void setHeaderCbEnable(bool enable);
 
 signals:
     void operatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode);

@@ -56,6 +56,11 @@ public:
      */
     void setCheckedCBDisnable();
 
+    /**
+     * @brief setHeaderCbEnable 设置表头checkbox状态
+     */
+    void setHeaderCbEnable(bool enable);
+
 signals:
     void operatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode);
     void itemChecked(int index, bool checked);

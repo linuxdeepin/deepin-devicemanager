@@ -217,3 +217,8 @@ void PageDriverBackupInfo::setCheckedCBDisnable()
 {
     mp_ViewBackable->setCheckedCBDisnable();
 }
+
+void PageDriverBackupInfo::setHeaderCbEnable(bool enable)
+{
+    mp_ViewBackable->setHeaderCbEnable(enable);
+}
