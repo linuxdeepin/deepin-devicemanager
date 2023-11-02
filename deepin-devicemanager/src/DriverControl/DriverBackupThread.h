@@ -33,10 +33,7 @@ public:
      * @brief undoBackup 取消备份
      */
     void undoBackup();
-    void setStatus(BackupStatus status){
-        m_status = status;
-    }
-
+    void setStatus(BackupStatus status);
 
 signals:
     void backupProgressChanged(int progress);
