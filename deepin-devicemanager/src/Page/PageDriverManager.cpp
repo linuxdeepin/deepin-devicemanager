@@ -93,6 +93,7 @@ PageDriverManager::PageDriverManager(DWidget *parent)
         mp_ListView->setCurType(tr("Driver Backup"));
         mp_ListView->itemClicked(tr("Driver Backup"));
     });
+    connect(mp_DriverRestoreInfoPage, &PageDriverRestoreInfo::redetected, this, &PageDriverManager::startScanning);
 
     connect(mp_ListView, &PageListView::itemClicked, this, &PageDriverManager::slotListViewWidgetItemClicked);
 
@@ -200,7 +201,7 @@ void PageDriverManager::slotDriverOperationClicked(int index, int itemIndex, Dri
 {
     mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(false);
     mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(false);
-    mp_DriverRestoreInfoPage->setReDetectEnable(false);
+    mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(false);
 
     switch (mode) {
     case DriverOperationItem::INSTALL:
@@ -359,7 +360,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 
         mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(true);
         mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(true);
-        mp_DriverRestoreInfoPage->setReDetectEnable(true);
+        mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(true);
 
         mp_CurDriverInfo = nullptr;
         m_CurIndex = -1;
@@ -372,7 +373,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 void PageDriverManager::slotInstallAllDrivers()
 {
     mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(false);
-    mp_DriverRestoreInfoPage->setReDetectEnable(false);
+    mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(false);
 
     // 开始安装驱动
     installNextDriver();
@@ -381,7 +382,7 @@ void PageDriverManager::slotInstallAllDrivers()
 void PageDriverManager::slotBackupAllDrivers()
 {
     mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(false);
-    mp_DriverRestoreInfoPage->setReDetectEnable(false);
+    mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(false);
 
     backupNextDriver();
 }
@@ -483,12 +484,18 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
     if (! mp_CurBackupDriverInfo)
         return;
 
-    // 成功
     if (bsuccess) {
         m_backupSuccessNum += 1;
-        m_ListRestorableIndex.append(m_ListBackableIndex[0]);
+        // 备份成功, 直接添加到可还原列表,并在可备份列表中移除该项
+        m_ListBackedupeIndex.append(m_CurBackupIndex);
+        getDebBackupInfo(m_ListDriverInfo[m_CurBackupIndex]);
+        if (m_ListDriverInfo[m_CurBackupIndex]->debBackupVersion() != m_ListDriverInfo[m_CurBackupIndex]->version()) {
+            m_ListRestorableIndex.append(m_CurBackupIndex);
+            mp_DriverRestoreInfoPage->addDriverInfoToTableView(m_ListDriverInfo[m_CurBackupIndex], m_CurBackupIndex);
+        }
+        mp_DriverRestoreInfoPage->showTables(m_ListRestorableIndex.size());
         m_ListBackableIndex.removeAt(0);
-    } else { // 失败
+    } else {
         m_backupFailedNum += 1;
     }
 
@@ -500,11 +507,18 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
         sleep(1);
         backupNextDriver();
     } else {
-        mp_DriverBackupInfoPage->headWidget()->setBackableDriverUI(m_ListBackableIndex.size(), m_ListRestorableIndex.size());
+        if (!m_ListBackableIndex.isEmpty()) {
+            mp_DriverBackupInfoPage->headWidget()->setBackableDriverUI(m_ListBackableIndex.size(), m_ListBackedupeIndex.size());
+            mp_DriverBackupInfoPage->setHeaderCbEnable(true);
+        } else {
+            mp_DriverBackupInfoPage->headWidget()->setNoBackupDriverUI(m_ListBackableIndex.size(), m_ListBackedupeIndex.size());
+            mp_DriverBackupInfoPage->setHeaderCbEnable(false);
+        }
+
 
         mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(true);
         mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(true);
-        mp_DriverRestoreInfoPage->setReDetectEnable(true);
+        mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(true);
 
         mp_CurBackupDriverInfo = nullptr;
         m_CurBackupIndex = -1;
@@ -555,7 +569,7 @@ void PageDriverManager::slotRestoreFinished(bool success, QString msg)
 
     mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(true);
     mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(true);
-    mp_DriverRestoreInfoPage->setReDetectEnable(true);
+    mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(true);
 
     mp_CurRestoreDriverInfo = nullptr;
 
@@ -621,6 +635,7 @@ void PageDriverManager::backupNextDriver()
         DriverInfo *info = m_ListDriverInfo[m_CurBackupIndex];
         if (info) {
             mp_CurBackupDriverInfo = info;
+            qDebug() << __func__ << "backup driver: " << mp_CurBackupDriverInfo->name();
             mp_CurBackupDriverInfo->m_Status = ST_DRIVER_BACKING_UP;
             mp_DriverBackupInfoPage->updateItemStatus(m_CurBackupIndex, mp_CurBackupDriverInfo->status());
             mp_DriverBackupInfoPage->headWidget()->setBackingUpDriverUI(mp_CurBackupDriverInfo->name(),
@@ -947,13 +962,13 @@ void PageDriverManager::testDevices()
     info1->m_Status = ST_CAN_UPDATE;
     m_ListDriverInfo.append(info1);
 
-    DriverInfo *info2 = new DriverInfo();
-    info2->m_Name = "DONNA LQ Foomatic/DONNA (recommended)";
-    info2->m_DebVersion = "1.0.0.1";
-    info2->m_Type = DR_Printer;
-    info2->m_Packages = "com.cn.donna.printer-lq-drv";
-    info2->m_Status = ST_CAN_UPDATE;
-    m_ListDriverInfo.append(info2);
+//    DriverInfo *info2 = new DriverInfo();
+//    info2->m_Name = "DONNA LQ Foomatic/DONNA (recommended)";
+//    info2->m_DebVersion = "1.0.0.1";
+//    info2->m_Type = DR_Printer;
+//    info2->m_Packages = "com.cn.donna.printer-lq-drv";
+//    info2->m_Status = ST_CAN_UPDATE;
+//    m_ListDriverInfo.append(info2);
 
     DriverInfo *info3 = new DriverInfo();
     info3->m_Name = "Aurora AD229MNA Series";

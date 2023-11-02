@@ -46,7 +46,6 @@ public:
      * @brief setItemOperationEnable
      */
     void setItemOperationEnable(int index, bool enable);
-    void setReDetectEnable(bool enable);
 
 private slots:
     /**
@@ -79,7 +78,7 @@ private:
 
     // 无备份驱动时显示
     DFrame                  *mp_NoRestoreDriverFrame;
-    DSuggestButton          *mp_ReDetectedSgButton;
+    DSuggestButton          *mp_GotoBackupSgButton;
 };
 
 #endif // PAGEDRIVERRESTOREINFO_H

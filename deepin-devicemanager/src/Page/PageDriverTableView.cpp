@@ -96,6 +96,11 @@ void PageDriverTableView::removeItemAndWidget(int row, int column)
     mp_View->removeItemAndWidget(row, column);
 }
 
+void PageDriverTableView::setHeaderCbEnable(bool enable)
+{
+    mp_View->setHeaderCbEnable(enable);
+}
+
 void PageDriverTableView::paintEvent(QPaintEvent *e)
 {
     DWidget::paintEvent(e);

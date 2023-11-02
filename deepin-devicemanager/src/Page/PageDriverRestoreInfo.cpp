@@ -20,13 +20,14 @@ PageDriverRestoreInfo::PageDriverRestoreInfo(QWidget *parent)
     , mp_ViewBackable(new PageDriverTableView(this))
     , mp_BackableDriverLabel(new DLabel(this))
     , mp_NoRestoreDriverFrame(new DFrame(this))
-    , mp_ReDetectedSgButton(new DSuggestButton(this))
+    , mp_GotoBackupSgButton(new DSuggestButton(this))
 {
     initUI();
 
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverRestoreInfo::operatorClicked);
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverRestoreInfo::slotOperatorClicked);
-    connect(mp_ReDetectedSgButton, &DSuggestButton::clicked, this, &PageDriverRestoreInfo::gotoBackup);
+    connect(mp_GotoBackupSgButton, &DSuggestButton::clicked, this, &PageDriverRestoreInfo::gotoBackup);
+    connect(mp_HeadWidget, &DetectedStatusWidget::redetected, this, &PageDriverRestoreInfo::redetected);
 }
 void PageDriverRestoreInfo::initUI()
 {
@@ -92,16 +93,16 @@ void PageDriverRestoreInfo::initUI()
     tipLabel->setText(tr("You do not have any drivers to restore, please backup first"));
     //tipLabel->setFrameShape(QFrame::Box);
 
-    mp_ReDetectedSgButton->setText(tr("Go to Backup Driver"));
-    mp_ReDetectedSgButton->setFixedWidth(310);
-    mp_ReDetectedSgButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    mp_GotoBackupSgButton->setText(tr("Go to Backup Driver"));
+    mp_GotoBackupSgButton->setFixedWidth(310);
+    mp_GotoBackupSgButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     noRestoreMainLayout->addStretch();
     noRestoreMainLayout->addWidget(picLabel);
     noRestoreMainLayout->addSpacing(10);
     noRestoreMainLayout->addWidget(tipLabel, 0, Qt::AlignHCenter);
     noRestoreMainLayout->addSpacing(35);
-    noRestoreMainLayout->addWidget(mp_ReDetectedSgButton, 0, Qt::AlignHCenter);
+    noRestoreMainLayout->addWidget(mp_GotoBackupSgButton, 0, Qt::AlignHCenter);
     noRestoreMainLayout->addSpacing(25);
     noRestoreMainLayout->addStretch();
     mp_NoRestoreDriverFrame->setLayout(noRestoreMainLayout);
@@ -183,12 +184,6 @@ void PageDriverRestoreInfo::clearAllData()
 void PageDriverRestoreInfo::setItemOperationEnable(int index, bool enable)
 {
     mp_ViewBackable->setItemOperationEnable(index, enable);
-}
-
-void PageDriverRestoreInfo::setReDetectEnable(bool enable)
-{
-    if (mp_ReDetectedSgButton)
-        mp_ReDetectedSgButton->setEnabled(enable);
 }
 
 void PageDriverRestoreInfo::slotOperatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode)
