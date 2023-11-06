@@ -315,6 +315,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
     // 成功
     if (bsuccess) {
         successNum += 1;
+        m_ListUpdateIndex.removeAt(m_ListUpdateIndex.indexOf(m_CurIndex));
     } else { // 失败
         // 通知网络错误
         if (err == EC_NOTIFY_NETWORK) {
@@ -358,6 +359,11 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
             mp_DriverInstallInfoPage->headWidget()->setInstallFailedUI();
         }
 
+        if (m_ListUpdateIndex.isEmpty()) {
+            mp_DriverInstallInfoPage->setHeaderCbEnable(false);
+        } else {
+            mp_DriverInstallInfoPage->setHeaderCbEnable(true);
+        }
         mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(true);
         mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(true);
         mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(true);
@@ -389,7 +395,7 @@ void PageDriverManager::slotBackupAllDrivers()
 
 void PageDriverManager::slotScanFinished(ScanResult sr)
 {
-    // testDevices();
+//     testDevices();
 
     if (SR_SUCESS == sr) {
         foreach (DriverInfo *info, m_ListDriverInfo) {

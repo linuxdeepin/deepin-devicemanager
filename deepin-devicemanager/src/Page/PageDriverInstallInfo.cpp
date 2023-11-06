@@ -260,6 +260,11 @@ void PageDriverInstallInfo::setCheckedCBDisnable()
     mp_ViewCanUpdate->setCheckedCBDisnable();
 }
 
+void PageDriverInstallInfo::setHeaderCbEnable(bool enable)
+{
+    mp_ViewNotInstall->setHeaderCbEnable(enable);
+    mp_ViewCanUpdate->setHeaderCbEnable(enable);
+}
 void PageDriverInstallInfo::slotDownloadProgressChanged(DriverType type, QString size, QStringList msg)
 {
     // 将下载过程时时更新到表格上方的状态里面 qInfo() << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
