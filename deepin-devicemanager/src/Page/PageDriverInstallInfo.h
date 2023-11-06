@@ -62,6 +62,11 @@ public:
      */
     void setCheckedCBDisnable();
 
+    /**
+     * @brief setHeaderCbEnable 设置表头checkbox状态
+     */
+    void setHeaderCbEnable(bool enable);
+
 public slots:
     /**
      * @brief slotDownloadProgressChanged 下载进度刷新

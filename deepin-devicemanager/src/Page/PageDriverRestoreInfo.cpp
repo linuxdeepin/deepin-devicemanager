@@ -96,6 +96,7 @@ void PageDriverRestoreInfo::initUI()
     mp_GotoBackupSgButton->setText(tr("Go to Backup Driver"));
     mp_GotoBackupSgButton->setFixedWidth(310);
     mp_GotoBackupSgButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    mp_GotoBackupSgButton->setFocusPolicy(Qt::NoFocus);
 
     noRestoreMainLayout->addStretch();
     noRestoreMainLayout->addWidget(picLabel);
@@ -170,7 +171,6 @@ void PageDriverRestoreInfo::showTables(int backedLength)
         mp_StackWidget->setCurrentIndex(0);
     } else {
         mp_StackWidget->setCurrentIndex(1);
-
     }
 }
 
