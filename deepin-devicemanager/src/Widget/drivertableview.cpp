@@ -530,15 +530,15 @@ void DriverTableView::setItemStatus(int index, Status s)
 
             // 如果是安装成功则取消选中且不可选
             if (ST_SUCESS == s || ST_FAILED == s|| ST_DRIVER_BACKUP_FAILED == s || ST_DRIVER_BACKUP_SUCCESS == s
-                    || ST_DRIVER_NOT_BACKUP == s) {
+                    || ST_DRIVER_NOT_BACKUP == s || ST_CAN_UPDATE == s || ST_NOT_INSTALL == s) {
                 DriverCheckItem *cb = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
                 if (cb) {
-                    cb->setCbEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s || ST_DRIVER_NOT_BACKUP == s ? true : false);
+                    cb->setCbEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s || ST_DRIVER_NOT_BACKUP == s  || ST_CAN_UPDATE == s || ST_NOT_INSTALL == s ? true : false);
                     cb->setChecked(false);
                 }
                 DriverOperationItem *opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
                 if (opera) {
-                    opera->setBtnEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s || ST_DRIVER_NOT_BACKUP == s? true : false);
+                    opera->setBtnEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s || ST_DRIVER_NOT_BACKUP == s  || ST_CAN_UPDATE == s || ST_NOT_INSTALL == s ? true : false);
                 }
             }
             break;

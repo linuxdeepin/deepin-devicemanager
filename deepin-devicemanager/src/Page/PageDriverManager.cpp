@@ -449,6 +449,11 @@ void PageDriverManager::slotUndoInstall()
         m_CancelIndex = m_CurIndex;
         DBusDriverInterface::getInstance()->undoInstallDriver();
     }
+
+    for (int index : m_ListDriverIndex) {
+        mp_DriverInstallInfoPage->updateItemStatus(index, m_ListDriverInfo[index]->status());
+    }
+    m_ListDriverIndex.clear();
 }
 
 void PageDriverManager::slotUndoBackup()
@@ -494,7 +499,7 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
             mp_DriverRestoreInfoPage->addDriverInfoToTableView(m_ListDriverInfo[m_CurBackupIndex], m_CurBackupIndex);
         }
         mp_DriverRestoreInfoPage->showTables(m_ListRestorableIndex.size());
-        m_ListBackableIndex.removeAt(0);
+        m_ListBackableIndex.removeAt(m_ListBackableIndex.indexOf(m_CurBackupIndex));
     } else {
         m_backupFailedNum += 1;
     }
@@ -514,7 +519,6 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
             mp_DriverBackupInfoPage->headWidget()->setNoBackupDriverUI(m_ListBackableIndex.size(), m_ListBackedupeIndex.size());
             mp_DriverBackupInfoPage->setHeaderCbEnable(false);
         }
-
 
         mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(true);
         mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(true);
