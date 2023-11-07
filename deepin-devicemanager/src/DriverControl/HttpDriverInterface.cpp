@@ -186,6 +186,12 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
                 index = i;
             }
         }
+        if (index == 0) {
+            int res = packageInstall(lstDriverInfo[index].strPackages, lstDriverInfo[index].strDebVersion);
+            if (res > 0) {
+                res_out = res;
+            }
+        }
     }
 
     // 找到最优选择后，设置状态，最新、可安装、可更新
@@ -225,7 +231,19 @@ int HttpDriverInterface::packageInstall(const QString &package_name, const QStri
         return 0;
     if (infoList[1].contains(version))
         return 2;
-    return 1;
+    //return 1;
+
+    QRegExp rxlen("(\\d+\\S*)");
+    int pos = rxlen.indexIn(infoList[1]);
+    QString curVersion;
+    if (pos > -1) {
+        curVersion = rxlen.cap(1);
+    }
+    // 若当前已安装版本高于推荐版本，不再更新
+    if (curVersion >= version)
+        return 2;
+    else
+        return 1;
 }
 
 QString HttpDriverInterface::getOsBuild()
