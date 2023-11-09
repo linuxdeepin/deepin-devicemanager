@@ -40,7 +40,7 @@ public:
      * @param wakeup 可唤醒 不可唤醒
      * @return
      */
-    bool setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup);
+    bool setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup, const QString &name);
 
     /**
      * @brief canWakeupMachine 获取input是否支持唤醒
@@ -54,7 +54,7 @@ public:
      * @param path 设备节点路径
      * @return
      */
-    bool isInputWakeupMachine(const QString &path);
+    bool isInputWakeupMachine(const QString &path, const QString &name);
 
     /**
      * @brief isNetworkWakeup 获取网卡是否支持远程唤醒
