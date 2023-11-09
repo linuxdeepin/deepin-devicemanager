@@ -399,8 +399,21 @@ bool DeviceInput::isWakeupMachine()
         return false;
     }
     QString info = file.readAll();
-    if (info.contains("disabled"))
-        return false;
+
+    if (m_Name.contains("PS/2")) {
+//        QStringList lines = info.split("\n");
+//        for (QString line : lines) {
+//            if (line.startsWith("PS2M" && line.contains("disabled"))) {
+//                return false;
+//            }
+        // /proc/acpi/wakeup文件中状态未刷新，ps2设备通过dbus获取状态
+        return DBusWakeupInterface::getInstance()->isInputWakeupMachine(m_SysPath, m_Name);
+
+    } else {
+        if (info.contains("disabled"))
+            return false;
+    }
+
     return true;
 }
 
@@ -410,7 +423,12 @@ QString DeviceInput::wakeupPath()
     if (index < 1) {
         return "";
     }
-    return QString("/sys") + m_SysPath.left(index) + QString("/power/wakeup");
+
+    if (m_Name.contains("PS/2")) {
+        return "/proc/acpi/wakeup";
+    } else {
+        return QString("/sys") + m_SysPath.left(index) + QString("/power/wakeup");
+    }
 }
 
 const QString &DeviceInput::wakeupID()

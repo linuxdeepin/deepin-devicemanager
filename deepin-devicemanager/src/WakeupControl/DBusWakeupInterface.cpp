@@ -29,23 +29,46 @@ DBusWakeupInterface::DBusWakeupInterface()
     init();
 }
 
-bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup)
+bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup, const QString &name)
 {
     if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
         QStringList pathList = path.split("/", QString::SkipEmptyParts);
         if (pathList.size() < 3)
             return false;
 
-        auto metaObject = mp_InputIface->metaObject();
-        for (int i = 0 ; i < metaObject->methodCount(); ++i) {
-            if (metaObject->method(i).name() == "SetWakeupDevices") {
-                QString curPath = pathList[pathList.size() - 2];
-                QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
-                mp_InputIface->call("SetWakeupDevices", busPath, wakeup ? "enabled" : "disabled");
-                return true;
+        if (name.contains("PS/2")) {
+            // ps2设备无法通过/sys/devices/platform/i8042/serio1/power/wakeup控制，只能通过acpi的接口进行控制
+            QDBusInterface interface(INPUT_SERVICE_NAME, INPUT_WAKEUP_SERVICE_PATH, INPUT_WAKEUP_PROPERTIES_INTERFACE, QDBusConnection::systemBus());
+            if (interface.isValid()) {
+                QDBusMessage replay = interface.call("Get", INPUT_WAKEUP_INTERFACE, "SupportWakeupDevices");
+                QVariant v =  replay.arguments().first();
+                if (v.isValid()) {
+                    QDBusArgument arg = v.value<QDBusVariant>().variant().value<QDBusArgument>();
+                    QMap<QString, QString> allSupportWakeupDevices;
+                    arg >> allSupportWakeupDevices;
+                    QStringList pathList = allSupportWakeupDevices.keys();
+
+                    for (QString path : pathList) {
+                        if (path.contains("PS2")) {
+                            mp_InputIface->call("SetWakeupDevices", path, wakeup ? "enabled" : "disabled");
+                            return true;
+                        }
+                    }
+                }
+            }
+        } else {
+            auto metaObject = mp_InputIface->metaObject();
+            for (int i = 0 ; i < metaObject->methodCount(); ++i) {
+                if (metaObject->method(i).name() == "SetWakeupDevices") {
+                    QString curPath = pathList[pathList.size() - 2];
+                    QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
+                    mp_InputIface->call("SetWakeupDevices", busPath, wakeup ? "enabled" : "disabled");
+                    return true;
+                }
             }
         }
     }
+
     QDBusReply<bool> reply = mp_Iface->call("setWakeupMachine", unique_id, path, wakeup);
     if (reply.isValid()) {
         return reply.value();
@@ -81,7 +104,7 @@ bool DBusWakeupInterface::canInputWakeupMachine(const QString &path)
     return file.open(QIODevice::ReadOnly);
 }
 
-bool DBusWakeupInterface::isInputWakeupMachine(const QString &path)
+bool DBusWakeupInterface::isInputWakeupMachine(const QString &path, const QString &name)
 {
     if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
         QDBusInterface interface(INPUT_SERVICE_NAME, INPUT_WAKEUP_SERVICE_PATH, INPUT_WAKEUP_PROPERTIES_INTERFACE, QDBusConnection::systemBus());
@@ -93,13 +116,21 @@ bool DBusWakeupInterface::isInputWakeupMachine(const QString &path)
                 QMap<QString, QString> allSupportWakeupDevices;
                 arg >> allSupportWakeupDevices;
 
-                QString curPath = path.left(path.size() - 13);
-                int index = curPath.lastIndexOf('/');
-                if (index < 1)
-                    return false;
-                curPath = curPath.right(curPath.size() - index - 1);
-                QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
-                return (allSupportWakeupDevices.contains(busPath) && allSupportWakeupDevices[busPath] == "enabled");
+                if (name.contains("PS/2")) {
+                    for(QString path : allSupportWakeupDevices.keys()) {
+                        if (path.contains("PS2")) {
+                            return allSupportWakeupDevices[path] == "enabled";
+                        }
+                    }
+                } else {
+                    QString curPath = path.left(path.size() - 13);
+                    int index = curPath.lastIndexOf('/');
+                    if (index < 1)
+                        return false;
+                    curPath = curPath.right(curPath.size() - index - 1);
+                    QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
+                    return (allSupportWakeupDevices.contains(busPath) && allSupportWakeupDevices[busPath] == "enabled");
+                }
             }
         }
     }
