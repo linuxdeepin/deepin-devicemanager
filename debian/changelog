@@ -1,3 +1,15 @@
+deepin-devicemanager (6.0.14) unstable; urgency=medium
+
+  * feat: drivers backup and restore
+
+ --  fengli<fengli@uniontech.com>  Thu, 09 Nov 2023 13:13:41 +0800
+
+deepin-devicemanager (6.0.13) unstable; urgency=medium
+
+  * new version 6.0.13
+
+ -- fengli<fengli@uniontech.com>  Thu, 09 Nov 2023 13:08:31 +0800
+
 deepin-devicemanager (6.0.12) unstable; urgency=medium
 
   * Community Edition removal devicemanager.list.
