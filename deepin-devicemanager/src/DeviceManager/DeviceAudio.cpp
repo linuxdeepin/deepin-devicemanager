@@ -328,8 +328,6 @@ void DeviceAudio::loadBaseDeviceInfo()
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Module Alias"), m_Modalias);
-    addBaseDeviceInfo(tr("Physical ID"), m_PhysID);
     addBaseDeviceInfo(tr("SysFS_Path"), m_SysPath);
     addBaseDeviceInfo(tr("Description"), m_Description);
     addBaseDeviceInfo(tr("Revision"), m_Version);
