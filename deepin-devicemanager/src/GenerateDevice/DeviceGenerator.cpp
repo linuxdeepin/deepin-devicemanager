@@ -273,9 +273,10 @@ void DeviceGenerator::generatorNetworkDevice()
     for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it) {
         if ((*it).find("serial") == (*it).end())
             continue;
-        const QString &serialNumber = (*it)["serial"];
+        const QString &serialNumber = ((*it).find("logical name") != (*it).end()) ? (*it)["serial"] + (*it)["logical name"]  :  (*it)["serial"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
-            if (!serialNumber.isEmpty() && ((*itDevice)->uniqueID() == serialNumber || (*itDevice)->hwAddress() == serialNumber)) {
+            const QString &ser2Number =  (*itDevice)->logicalName().isEmpty() ? (*itDevice)->hwAddress() : (*itDevice)->hwAddress() + (*itDevice)->logicalName();
+            if (!serialNumber.isEmpty() && ((*itDevice)->uniqueID() == serialNumber ||  ser2Number == serialNumber)) {
                 (*itDevice)->setInfoFromLshw(*it);
                 break;
             }
