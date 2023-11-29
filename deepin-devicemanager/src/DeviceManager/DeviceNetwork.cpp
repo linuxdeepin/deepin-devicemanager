@@ -151,7 +151,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_CanUninstall = !driverIsKernelIn(m_Driver);
         return true;
     }
-
+    setAttribute(mapInfo, "Device File", m_LogicalName);
     setAttribute(mapInfo, "HW Address", m_MACAddress);
     setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
     setAttribute(mapInfo, "SysFS Device Link", m_SysPath);

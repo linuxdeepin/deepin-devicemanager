@@ -726,9 +726,9 @@ void DeviceBaseInfo::mapInfoToList()
 
 void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
 {
-    // 网卡使用物理地址作为匹配值
+    // 网卡使用物理地址+逻辑设备名作为匹配值
     if (mapInfo.find("HW Address") != mapInfo.end()) {
-        m_HwinfoToLshw = mapInfo["HW Address"];
+        m_HwinfoToLshw = (mapInfo.find("Device File") != mapInfo.end()) ? mapInfo["HW Address"] + mapInfo["Device File"] : mapInfo["HW Address"];
         return;
     }
 
@@ -773,9 +773,11 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
 
 bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
 {
-    // 网卡设备与序列号匹配上
+    // 网卡设备与序列号匹配上 或者加上逻辑设备名
     if (mapInfo.find("logical name") != mapInfo.end() && mapInfo.find("serial") != mapInfo.end()) {
-        if (m_HwinfoToLshw == mapInfo["serial"]) {
+        if (m_HwinfoToLshw == mapInfo["serial"] + mapInfo["logical name"]) {
+            return true;
+        } else if (m_HwinfoToLshw == mapInfo["serial"]) {
             return true;
         }
     }
