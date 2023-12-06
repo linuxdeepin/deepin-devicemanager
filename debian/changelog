@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.15) unstable; urgency=medium
+
+  * new version 6.0.15
+
+ -- shuaijie <shuaijie@uniontech.com>  Wed, 6 Dec 2023 13:26:01 +0800
+
 deepin-devicemanager (6.0.14) unstable; urgency=medium
 
   * feat: drivers backup and restore
