@@ -34,7 +34,7 @@ Copyright: UnionTech Software Technology Co., Ltd.
 License: CC-BY-4.0
 
 # deepin-devicemanager-server
-Files: deepin-devicemanager-server/deepin-devicecontrol/org.deepin.DeviceControl.service
+Files: deepin-devicemanager-server/deepin-devicecontrol/*.service
 Copyright: UnionTech Software Technology Co., Ltd.
 License: CC-BY-4.0
 
