@@ -1,4 +1,4 @@
 [D-BUS Service]
 Name=org.deepin.DeviceControl
-Exec=/usr/bin/deepin-devicecontrol
-User=root
+Exec=/usr/bin/false
+SystemdService=deepin-devicecontrol.service
