@@ -262,6 +262,15 @@ void HWGenerator::getDiskInfoFromLshw()
 
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
     }
+    // lshw -C storage
+    const QList<QMap<QString, QString>> &lstStorage = DeviceManager::instance()->cmdInfo("lshw_storage");
+    QList<QMap<QString, QString> >::const_iterator sIt = lstStorage.begin();
+    for (; sIt != lstStorage.end(); ++sIt) {
+        if ((*sIt).size() < 2)
+            continue;
+
+        DeviceManager::instance()->addLshwinfoIntoNVMEStorageDevice(*sIt);
+    }
 }
 
 void HWGenerator::getDiskInfoFromSmartCtl()
