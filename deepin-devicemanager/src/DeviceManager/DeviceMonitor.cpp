@@ -163,6 +163,8 @@ void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Date", m_ProductionWeek);
     setAttribute(mapInfo, "Display Input", m_DisplayInput);
+    setAttribute(mapInfo, "Model", m_Model);
+    if(m_Model.isEmpty())  m_Model = m_Name ;
     getOtherMapInfo(mapInfo);
 }
 
