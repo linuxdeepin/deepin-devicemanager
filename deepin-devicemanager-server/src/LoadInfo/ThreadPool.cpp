@@ -96,6 +96,13 @@ void ThreadPool::initCmd()
     cmdDmiSPN.canNotReplace = true;
     m_ListCmd.append(cmdDmiSPN);
 
+    // 添加dmidecode -t process命令
+    Cmd cmdDmiPRO;
+    cmdDmiPRO.cmd = QString("%1 %2%3").arg("dmidecode -t processor > ").arg(PATH).arg("dmidecode_pro.txt");
+    cmdDmiPRO.file = "dmidecode_pro.txt";
+    cmdDmiPRO.canNotReplace = true;
+    m_ListCmd.append(cmdDmiPRO);
+
     // 添加dmidecode -t 0命令
     Cmd cmdDmi0;
     cmdDmi0.cmd = QString("%1 %2%3").arg("dmidecode -t 0 > ").arg(PATH).arg("dmidecode_0.txt");
@@ -130,6 +137,13 @@ void ThreadPool::initCmd()
     cmdDmi4.file = "dmidecode_4.txt";
     cmdDmi4.canNotReplace = true;
     m_ListCmd.append(cmdDmi4);
+
+    // 添加dmidecode -t 11命令
+    Cmd cmdDmi11;
+    cmdDmi11.cmd = QString("%1 %2%3").arg("dmidecode -t 11 > ").arg(PATH).arg("dmidecode_11.txt");
+    cmdDmi11.file = "dmidecode_11.txt";
+    cmdDmi11.canNotReplace = true;
+    m_ListCmd.append(cmdDmi11);
 
     // 添加dmidecode -t 13命令
     Cmd cmdDmi13;

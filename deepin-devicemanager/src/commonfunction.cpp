@@ -93,6 +93,26 @@ static bool isModeW525(void)
     return ret;
 }
 
+/*
+sudo dmidecode -t 11 | grep -i "String 4"
+//PANGUM900 == empty
+~/$ sudo dmidecode -t processor | grep -i "Version:"  | cut -d ":" -f 2 | tr -d " "
+PANGUM900
+*/
+static bool isModePANGUM900(void)
+{
+    bool ret = false;
+    QString result1;
+    QString key1 = "dmidecode_pro";
+    QString result2;
+    QString key2 = "dmidecode_11";
+
+    if (DBusInterface::getInstance()->getInfo(key1, result1) && DBusInterface::getInstance()->getInfo(key2, result2)) {
+        ret = result1.contains("PANGU", Qt::CaseInsensitive) && result1.contains("M900", Qt::CaseInsensitive) && !result2.contains("String 4", Qt::CaseInsensitive);
+    }
+    return ret;;
+}
+
 QString Common::checkBoardVendorFlag()
 {
     if(specialComType != -1){
@@ -138,6 +158,10 @@ QString Common::checkBoardVendorFlag()
         if(boardVendorKey.isEmpty() && (isModeM900() || isModeW525())){
             boardVendorKey = "PGUW";
         }
+
+        if(isModePANGUM900())
+            boardVendorKey = "PANGUM900";
+
         qInfo() << "boardVendorKey:" <<  boardVendorKey;
     }
     qInfo() << "Current special computer type is " << boardVendorKey;

@@ -22,6 +22,7 @@
 #include "DeviceManager/DeviceBluetooth.h"
 #include "DeviceManager/DeviceNetwork.h"
 #include "DeviceManager/DeviceMemory.h"
+#include "commonfunction.h"
 
 HWGenerator::HWGenerator()
 {
@@ -111,7 +112,9 @@ void HWGenerator::generatorGpuDevice()
     QStringList items = deviceInfo.split("\n");
 
     QMap<QString, QString> mapInfo;
-    for (QString itemStr : items) {
+    if(Common::boardVendorType() == "PANGUM900")
+        mapInfo.insert("Name", "PANGU M900");
+    else for (QString itemStr : items) {
         if (itemStr.contains(":"))
             continue;
         QString curItemStr = itemStr.trimmed();

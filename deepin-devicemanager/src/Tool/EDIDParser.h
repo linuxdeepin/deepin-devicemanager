@@ -35,6 +35,12 @@ public:
     const QString &vendor()const;
 
     /**
+     * @brief model：获取厂商信息
+     * @return 厂商信息
+     */
+    const QString &model()const;
+
+    /**
      * @brief releaseDate:获取生产日期
      * @return 生产日期
      */
@@ -131,6 +137,7 @@ private:
 private:
     /**@brief:机器的存储模式不同，会导致计算结果不同，所以在解析的时候需要考虑大小端模式*/
     QString                m_Vendor;                           // 显示屏的厂商信息
+    QString                m_Model;                           // 显示屏的型号信息 
     QString                m_ReleaseDate;                      // 显示屏的生产日期
     QString                m_ScreenSize;                       // 屏幕大小
     bool                   m_LittleEndianMode;                 // 小端模式

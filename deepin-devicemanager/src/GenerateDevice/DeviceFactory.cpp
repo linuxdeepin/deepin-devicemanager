@@ -10,6 +10,7 @@
 #include "KLUGenerator.h"
 #include "PanguGenerator.h"
 #include "PanguVGenerator.h"
+#include "M900Generator.h"
 #include "HWGenerator.h"
 #include "KLVGenerator.h"
 #include "commonfunction.h"
@@ -41,6 +42,8 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
                 generator = new KLVGenerator();
             else if (type == "PGUV" || type == "PGUW")
                 generator = new PanguVGenerator();
+            else if (type == "PANGUM900")
+                generator = new M900Generator();
             else if (type == "KLVU")
                 generator = new KLUGenerator();
             else
