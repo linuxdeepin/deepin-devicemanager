@@ -487,6 +487,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     // xrandr would be execed later
     if (tr("Monitor") == itemStr || tr("Overview") == itemStr) { //点击显示设备，执行线程加载信息
+        DBusInterface::getInstance()->refreshInfo();
         ThreadExecXrandr tx(false, !checkWaylandMode());
         tx.start();
         tx.wait();
