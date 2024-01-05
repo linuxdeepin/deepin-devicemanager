@@ -383,7 +383,7 @@ bool DeviceInput::enable()
 
 bool DeviceInput::canWakeupMachine()
 {
-    if (m_WakeupID.isEmpty())
+    if (m_WakeupID.isEmpty() || (m_HardwareClass == "keyboard" && "PS/2" == m_Interface))
         return false;
     QFile file(wakeupPath());
     if (!file.open(QIODevice::ReadOnly)) {
