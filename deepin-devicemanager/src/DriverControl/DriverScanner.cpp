@@ -38,10 +38,12 @@ void DriverScanner::run()
 
                 QString output = process.readAllStandardOutput();
                 QStringList lines = output.split("\n");
-                QRegExp rxlen("(\\d+\\S*)");
-                int pos = rxlen.indexIn(lines[1]);
-                if (pos > -1 && info->version().isEmpty()) {
-                    info->m_Version = rxlen.cap(1);
+                if(lines.size()>=2) {
+                    QRegExp rxlen("(\\d+\\S*)");
+                    int pos = rxlen.indexIn(lines[1]);
+                    if (pos > -1 && info->version().isEmpty()) {
+                        info->m_Version = rxlen.cap(1);
+                    }
                 }
             }
 
