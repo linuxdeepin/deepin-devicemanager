@@ -515,6 +515,17 @@ void DeviceStorage::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
     addOtherDeviceInfo(tr("Speed"), m_Speed);
     addOtherDeviceInfo(tr("Description"), m_Description);
+
+    for(int i = 0 ; i < m_SerialNumber.count(); i++) {
+        QChar cha = m_SerialNumber.at(i);
+        ushort uni = cha.unicode();
+        if(uni < 33 || uni > 126) {
+            qWarning()<<"smartctl Serial number is not LetterOrNumber "<< m_SerialNumber;
+            m_SerialNumber.clear();
+            break;
+        }
+    }
+
     addOtherDeviceInfo(tr("Serial Number"), m_SerialNumber);
     addOtherDeviceInfo(tr("Interface"), m_Interface);
     addOtherDeviceInfo(tr("Rotation Rate"), m_RotationRate);
@@ -617,7 +628,11 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("Model Number") != mapInfo.end())
         m_Name = mapInfo["Model Number"];
 
-    setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
+    if (mapInfo.find("Serial Number") != mapInfo.end())
+        setAttribute(mapInfo, "Serial Number", m_SerialNumber, true);
+    else if (mapInfo.find("Serial number") != mapInfo.end()) {
+        setAttribute(mapInfo, "Serial number", m_SerialNumber, true);
+    }
 
     // 修正数值
     if(Common::boardVendorType() != "KLVV" && Common::boardVendorType() != "KLVU" \
