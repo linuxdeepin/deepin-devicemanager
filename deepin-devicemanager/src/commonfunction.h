@@ -20,7 +20,8 @@ public:
         PGUW,
         KLVV,
         KLVU,
-        PGUV
+        PGUV,
+        PGUX
     };
     static QString getArch();
 

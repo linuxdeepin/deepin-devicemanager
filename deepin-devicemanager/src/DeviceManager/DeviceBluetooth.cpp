@@ -115,6 +115,10 @@ TomlFixMethod DeviceBluetooth::setInfoFromTomlOneByOne(const QMap<QString, QStri
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    ret = setTomlAttribute(mapInfo, "Name", m_Name);
+    ret = setTomlAttribute(mapInfo, "Vendor", m_Vendor);
+    ret = setTomlAttribute(mapInfo, "Version", m_Version);
+
     // 添加其他信息,成员变量
     ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
     ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);

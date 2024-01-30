@@ -13,6 +13,7 @@
 #include "HWGenerator.h"
 #include "KLVGenerator.h"
 #include "commonfunction.h"
+#include "PanguxGenerator.h"
 
 // Qt库文件
 #include <QProcess>
@@ -43,6 +44,8 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
                 generator = new PanguVGenerator();
             else if (type == "KLVU")
                 generator = new KLUGenerator();
+            else if (type == "PGUX")
+                generator = new PanguXGenerator();
             else
                 generator = new HWGenerator();
         } else
