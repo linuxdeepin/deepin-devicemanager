@@ -111,6 +111,9 @@ QString Common::checkBoardVendorFlag()
         case PGUV:
             boardVendorKey = "PGUV";
             break;
+        case PGUX:
+            boardVendorKey = "PGUX";
+            break;
         default:
             boardVendorKey = "PGUW";
             break;
@@ -131,6 +134,8 @@ QString Common::checkBoardVendorFlag()
             boardVendorKey = "PGUV";
         } else if (info.contains("PGUW", Qt::CaseInsensitive)) {
             boardVendorKey = "PGUW";
+        } else if (info.contains("PGUX", Qt::CaseInsensitive)) { // /HUAWEI QingYun WXXX PGUX-L5651
+            boardVendorKey = "PGUX";
         }
         process.close();
 
