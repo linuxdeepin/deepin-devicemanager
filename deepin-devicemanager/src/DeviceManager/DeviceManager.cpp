@@ -125,6 +125,7 @@ void DeviceManager::clear()
     m_ListDeviceGPU.clear();
     m_ListDeviceMemory.clear();
     m_ListDeviceCPU.clear();
+    m_DeviceClassMap.clear();
 }
 
 const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
