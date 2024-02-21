@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.21) unstable; urgency=medium
+
+  * fix some bugs.
+
+ -- fengli <fengli@uniontech.com>  Wed, 21 Feb 2024 16:57:16 +0800
+
 deepin-devicemanager (6.0.20) unstable; urgency=medium
 
   * new version 6.0.20
