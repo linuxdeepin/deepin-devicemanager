@@ -9,7 +9,7 @@
 
 #include "../DeviceManager/DeviceAudio.h"
 #include "../DeviceManager/DeviceBluetooth.h"
-
+#include "DeviceManager/DeviceManager.h"
 
 PanguXGenerator::PanguXGenerator()
 {
@@ -61,5 +61,42 @@ void PanguXGenerator::generatorBluetoothDevice()
 
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
+    }
+}
+void PanguXGenerator::generatorCpuDevice()
+{
+    HWGenerator::generatorCpuDevice();
+
+    QFile file("/proc/cpuinfo");
+    if (!file.open(QIODevice::ReadOnly))
+        return;
+
+    QMap<QString, QString> mapInfo;
+    QString cpuInfo = file.readAll();
+    QStringList infos = cpuInfo.split("\n\n");
+    foreach (const QString &info, infos) {
+        if (info.isEmpty())
+            continue;
+
+        QStringList lines = info.split("\n");
+        foreach (const QString &line, lines) {
+            if (line.isEmpty())
+                continue;
+            QStringList words = line.split(QRegExp("[\\s]*:[\\s]*"));
+            if (words.size() != 2)
+                continue;
+            if ("Hardware" == words[0]) {
+                mapInfo.insert("Name", words[1]);
+            }
+        }
+    }
+    file.close();
+    if (mapInfo.find("Name") == mapInfo.end())
+        return;
+
+    QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Cpu);
+    for (int i = 0; i < lst.size(); i++) {
+        DeviceBaseInfo *device = lst[i];
+        DeviceManager::instance()->tomlDeviceSet(DT_Cpu, device,mapInfo);
     }
 }

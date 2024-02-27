@@ -27,6 +27,10 @@ protected:
      * @brief generatorBluetoothDevice:生成蓝牙设备
      */
     virtual void generatorBluetoothDevice() override;
+    /**
+     * @brief generatorCpuDevice:生成CPU设备
+     */
+    virtual void generatorCpuDevice() override;
 };
 
 #endif // PANGUXGENERATOR_H
