@@ -711,6 +711,22 @@ bool DriverManager::delDeb(const QString &debname)
     return (!destdir.exists());
 }
 
+bool DriverManager::aptUpdate()
+{
+    QProcess process;
+    /* connect(&process, &QProcess::readyReadStandardOutput, this, [&](){
+        QByteArray outArry = process.readAllStandardOutput();
+        QList<QString> lines = QString(outArry).split('\n', QString::SkipEmptyParts);
+        for (const QString &line : qAsConst(lines)) {
+            // qDebug() << line;
+            // error handling...
+        }
+    }); */
+    process.start("apt update");
+    process.waitForFinished(-1);
+    return true;
+}
+
 /**
  * @brief DriverManager::backupDeb backup 驱动
  * @param modulename 驱动deb模块名

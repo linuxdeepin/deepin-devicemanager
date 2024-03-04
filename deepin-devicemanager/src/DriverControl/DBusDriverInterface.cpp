@@ -92,6 +92,13 @@ bool DBusDriverInterface::delDeb(const QString &debname)
     return reply.value();
 }
 
+bool DBusDriverInterface::aptUpdate()
+{
+    QDBusReply<bool> reply = mp_Iface->call("aptUpdate");
+
+    return reply.value();
+}
+
 DBusDriverInterface::DBusDriverInterface(QObject *parent)
     : QObject(parent)
     , mp_Iface(nullptr)

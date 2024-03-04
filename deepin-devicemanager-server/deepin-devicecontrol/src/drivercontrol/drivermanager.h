@@ -53,6 +53,7 @@ public:
     bool isDebValid(const QString &filePath);
     bool backupDeb(const QString &debpath);
     bool delDeb(const QString &debname);
+    bool aptUpdate();
 
 private:
     void initConnections();

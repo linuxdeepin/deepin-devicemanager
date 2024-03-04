@@ -12,6 +12,8 @@
 // 备份临时路径
 #define DB_PATH_TMP "/tmp/deepin-devicemanager"
 
+static bool updateFlag = false;
+
 DriverBackupThread::DriverBackupThread(QObject *parent)
     : QThread(parent)
     , mp_driverInfo(nullptr)
@@ -39,6 +41,16 @@ void DriverBackupThread::run()
         if (m_isStop) {
             emit backupProgressFinished(false);
             return;
+        }
+
+        if(!updateFlag) {
+            bool ret = DBusDriverInterface::getInstance()->aptUpdate();
+            updateFlag = true;
+            if (!ret) {
+                emit backupProgressFinished(false);
+                qInfo() << "apt update failed.";
+                return;
+            }
         }
 
         QStringList options;
