@@ -324,10 +324,18 @@ bool ControlInterface::backupDeb(const QString &debpath)
 
 bool ControlInterface::delDeb(const QString &debname)
 {
-        if (!getUserAuthorPasswd()) {
-            return false;
-        }
+    if (!getUserAuthorPasswd()) {
+        return false;
+    }
     return  mp_drivermanager->delDeb(debname);
+}
+
+bool ControlInterface::aptUpdate()
+{
+    if (!getUserAuthorPasswd()) {
+        return false;
+    }
+    return  mp_drivermanager->aptUpdate();
 }
 
 #endif

@@ -96,6 +96,12 @@ public:
          */
     bool delDeb(const QString &debname);
 
+    /**
+     * @brief aptUpdate apt update
+     * @return
+     */
+    bool aptUpdate();
+
 signals:
     void processChange(qint32 value, QString details);
     void processEnd(bool sucess, QString msg);
