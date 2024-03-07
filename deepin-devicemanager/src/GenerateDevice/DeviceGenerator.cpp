@@ -476,7 +476,9 @@ void DeviceGenerator::getMemoryInfoFromLshw()
     QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
 
     for (; it != lstMemory.end(); ++it) {
-
+        if ((*it)["description"].contains("System Memory") && (*it).find("vendor") == (*it).end()) {
+            continue;
+        }
         // bug47194 size属性包含MiB
         // 目前处理内存信息时，bank下一定要显示内存信息，否则无法生成内存
         if (!(*it)["size"].contains("GiB") && !(*it)["size"].contains("MiB"))
