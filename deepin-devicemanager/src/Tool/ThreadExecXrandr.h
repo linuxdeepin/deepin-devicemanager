@@ -17,6 +17,10 @@ public:
      * @brief run
      */
     virtual void run() override;
+    /**
+     * @brief getMonitorNumber
+     */
+    int getMonitorNumber() { return m_monitorLst.size(); }
 
 private:
     /**
@@ -72,6 +76,7 @@ private:
 private:
     bool m_Gpu;                //<!  判断是否是gpu
     bool m_isDXcbPlatform;     //<!  判断是否是DXcbPlatform
+    QStringList m_monitorLst;
 };
 
 #endif // THREADEXECXRANDR_H

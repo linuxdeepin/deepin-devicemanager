@@ -16,7 +16,7 @@
 #include <DApplication>
 
 #include <DeviceManager.h>
-
+#include<QDateTime>
 #ifdef OS_BUILD_V23
 const QString DISPLAY_SERVICE_NAME = "org.deepin.dde.Display1";
 const QString DISPLAY_SERVICE_PATH = "/org/deepin/dde/Display1";
@@ -267,13 +267,14 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
 
     if (!monitors.isValid())
         return;
-
+    m_monitorLst.clear();
     QList<QDBusObjectPath> monitorList = monitors.value<QList<QDBusObjectPath> >();
     int maxResolutionWidth = -1, maxResolutionHeight = -1, minResolutionWidth = -1, minResolutionHeight = -1;
     for (auto monitor : monitorList) {
         if (monitor.path().isEmpty())
             continue;
 
+        m_monitorLst << monitor.path();
         QDBusInterface monitorEnabledInterface(DISPLAY_DAEMON_SERVICE_NAME, monitor.path(), DISPLAY_MONITOR_INTERFACE, QDBusConnection::sessionBus());
         if (!monitorEnabledInterface.isValid())
             continue;
