@@ -52,7 +52,7 @@ DWIDGET_USE_NAMESPACE
 #define MIN_HEIGHT 300      // 窗口的最小高度
 
 static bool startScanningFlag = false;
-
+static int monitorNumber = 1;
 static bool checkWaylandMode()
 {
     auto e = QProcessEnvironment::systemEnvironment();
@@ -117,6 +117,11 @@ MainWindow::MainWindow(QWidget *parent)
         mp_DriverScanWidget->refreshProgress(info, progress);
     });
     connect(mp_DriverScanWidget, &DriverScanWidget::redetected, mp_DriverManager, &PageDriverManager::startScanning);
+    //get monitorNumber
+    ThreadExecXrandr txgpu(true, !checkWaylandMode());
+    txgpu.start();
+    txgpu.wait();
+    monitorNumber = txgpu.getMonitorNumber();
 }
 
 MainWindow::~MainWindow()
@@ -487,7 +492,6 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 {
     // xrandr would be execed later
     if (tr("Monitor") == itemStr || tr("Overview") == itemStr) { //点击显示设备，执行线程加载信息
-        DBusInterface::getInstance()->refreshInfo();
         ThreadExecXrandr tx(false, !checkWaylandMode());
         tx.start();
         tx.wait();
@@ -509,6 +513,25 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         CmdTool tool;
         DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());
     }
+
+        ThreadExecXrandr txgpu(true, !checkWaylandMode());
+        txgpu.start();
+        txgpu.wait();
+        if(monitorNumber != txgpu.getMonitorNumber()) {
+
+            QString info;
+            DBusInterface::getInstance()->getInfo("is_server_running", info);
+            //请求后台更新信息
+            if (!info.toInt()) {
+                DBusInterface::getInstance()->refreshInfo();
+                QTimer::singleShot(2000, this, [ = ]() {
+                    // 加载设备信息
+                    refreshDataBase();
+                });
+            }
+            qDebug()<< "Monitor refreshInfo" << __LINE__  << QDateTime::currentDateTime().toString("hh:mm:ss") << info << monitorNumber;
+            monitorNumber = txgpu.getMonitorNumber();
+        }
 
     // 数据刷新时不处理界面刷新
     if (m_refreshing || mp_WorkingThread->isRunning()) return;

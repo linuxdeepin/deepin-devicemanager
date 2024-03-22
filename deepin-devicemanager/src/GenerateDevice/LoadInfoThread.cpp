@@ -8,6 +8,8 @@
 #include "DBusInterface.h"
 #include "DeviceManager.h"
 
+#include <DApplication>
+
 #include <QDebug>
 #include <QDateTime>
 #include <QTimer>
@@ -15,6 +17,7 @@
 #include<malloc.h>
 #include <unistd.h>
 
+DWIDGET_USE_NAMESPACE
 static bool firstLoadFlag = true;
 LoadInfoThread::LoadInfoThread()
     : mp_ReadFilePool()
@@ -105,7 +108,8 @@ void LoadInfoThread::slotFinishedReadFilePool(const QString &)
     if (firstLoadFlag) {
         firstLoadFlag = false;
         DBusInterface::getInstance()->refreshInfo();
-        QTimer::singleShot(500, this, [ = ]() {
+        QTimer::singleShot(2000, this, [ = ]() {  //test the x86 the fast desktop PC need 2s
+            DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
             start();
         });
     }
