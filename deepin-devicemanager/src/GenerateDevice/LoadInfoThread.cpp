@@ -99,6 +99,8 @@ void LoadInfoThread::run()
 
     emit finished("finish");
     m_Running = false;
+    // 一定要有否则指针一直显示圆圈与setOverrideCursor成对使用
+    DApplication::restoreOverrideCursor();
 }
 
 void LoadInfoThread::slotFinishedReadFilePool(const QString &)
