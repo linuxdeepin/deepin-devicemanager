@@ -75,6 +75,9 @@ bool HttpDriverInterface::checkDriverInfo(DriverInfo &driverInfo)
 
 QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString strProducts, int iClassP, int iClass)
 {
+    if(strManufacturer.isEmpty() || strProducts.isEmpty()) {
+        return QString();
+    }
     QString arch = Common::getArchStore();
     QString strUrl = Utils::getUrl() + "?arch=" + arch;
     int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();

@@ -30,7 +30,6 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
 {
     strJsonDriverInfo = "";
     const QUrl newUrl = QUrl::fromUserInput(strUrl);
-    qInfo() << "strUrl : " << newUrl;
 
     QNetworkRequest request(newUrl);
     QNetworkAccessManager qnam;
@@ -51,8 +50,10 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
     reply->reset();
     reply->deleteLater();
     if (error != QNetworkReply::NoError) {
+        qInfo() << "strUrl : " << strUrl << "network error";
         return "network error";
     }
+    qInfo() << "strUrl : " << strUrl << strJsonDriverInfo;
     return strJsonDriverInfo;
 }
 
@@ -76,13 +77,11 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
     default:
         break;
     }
-
+    qInfo() << "device name :" << driverInfo->m_Name  << "VendorId:" << driverInfo->m_VendorId << "ModelId:" << driverInfo->m_ModelId;
     if (strJson.contains("network error")) {
         emit sigRequestFinished(false, "network error");
     } else {
         checkDriverInfo(strJson, driverInfo);
-        qInfo() << "m_VendorId:" << driverInfo->m_VendorId;
-        qInfo() << "m_ModelId:" << driverInfo->m_ModelId;
         qInfo() << "m_Packages:" << driverInfo->m_Packages;
         qInfo() << "m_DebVersion:" << driverInfo->m_DebVersion;
         qInfo() << "m_Status:" << driverInfo->m_Status;
@@ -91,6 +90,9 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
 
 QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString strModels, int iClassP, int iClass)
 {
+    if(strManufacturer.isEmpty() || strModels.isEmpty()) {
+        return QString();
+    }
     QString arch = Common::getArchStore();
     QString strUrl = CommonTools::getUrl() + "?arch=" + arch;
     QString build = getOsBuild();
