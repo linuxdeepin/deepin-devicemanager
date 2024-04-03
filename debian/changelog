@@ -1,14 +1,20 @@
+deepin-devicemanager (6.0.25) unstable; urgency=medium
+
+  * new version 6.0.25.
+
+ -- shuaijie <shuaijie@uniontech.com>  Sun, 07 Apr 2024 10:19:06 +0800
+
 deepin-devicemanager (6.0.24) unstable; urgency=medium
 
   * Update tag to 6.0.24.
 
- -- lvwujun <lvwujun@uniontech.com>  Thur, 28 Mar 2024 17:03:34 +0800
+ -- lvwujun <lvwujun@uniontech.com>  Thu, 28 Mar 2024 17:03:34 +0800
 
 deepin-devicemanager (6.0.23) unstable; urgency=medium
 
   * new version 6.0.23
 
- -- shuaijie <shuaijie@uniontech.com>  Thu, 13 Mar 2024 14:50:06 +0800
+ -- shuaijie <shuaijie@uniontech.com>  Wed, 13 Mar 2024 14:50:06 +0800
 
 deepin-devicemanager (6.0.22) unstable; urgency=medium
 
