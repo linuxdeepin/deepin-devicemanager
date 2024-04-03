@@ -92,6 +92,17 @@ static bool isModeW525(void)
     return ret;
 }
 
+static QString readDmidecode11_String4(void)
+{
+    QProcess process;
+    process.start("bash", QStringList() << "-c" << "dmidecode -t 11 | grep -i \"String 4\"");
+    process.waitForStarted();
+    process.waitForFinished();
+    QString ret = process.readAll();
+    process.close();
+    return ret;
+}
+
 QString Common::checkBoardVendorFlag()
 {
     if(specialComType != -1){
@@ -134,7 +145,7 @@ QString Common::checkBoardVendorFlag()
             boardVendorKey = "PGUV";
         } else if (info.contains("PGUW", Qt::CaseInsensitive)) {
             boardVendorKey = "PGUW";
-        } else if (info.contains("PGUX", Qt::CaseInsensitive)) { // /HUAWEI QingYun WXXX PGUX-L5651
+        } else if (readDmidecode11_String4().contains("PGUX", Qt::CaseInsensitive)) {
             boardVendorKey = "PGUX";
         }
         process.close();
