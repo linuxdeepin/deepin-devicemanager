@@ -26,6 +26,7 @@ public:
 
 signals:
     void finished(const QString &message);
+    void finishedReadFilePool();
 
 protected:
     void run() override;

@@ -117,7 +117,10 @@ private:
      * @brief refreshDataBase:刷新设备信息
      */
     void refreshDataBase();
-
+    /**
+     * @brief refreshDataBaseLater:刷新设备信息
+     */
+    void refreshDataBaseLater();
 private slots:
     /**
      * @brief slotSetPage
@@ -170,6 +173,7 @@ private:
     bool                  m_refreshing = false;        // 判断界面是否正在刷新
     bool                  m_IsFirstRefresh = true;
     bool                  m_ShowDriverPage = false;
+    bool                  m_statusCursorIsWait = false;
 };
 
 #endif // MAINWINDOW_H
