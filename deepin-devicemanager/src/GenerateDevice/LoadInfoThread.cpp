@@ -19,6 +19,7 @@
 
 DWIDGET_USE_NAMESPACE
 static bool firstLoadFlag = true;
+
 LoadInfoThread::LoadInfoThread()
     : mp_ReadFilePool()
     , mp_GenerateDevicePool()
@@ -99,8 +100,6 @@ void LoadInfoThread::run()
 
     emit finished("finish");
     m_Running = false;
-    // 一定要有否则指针一直显示圆圈与setOverrideCursor成对使用
-    DApplication::restoreOverrideCursor();
 }
 
 void LoadInfoThread::slotFinishedReadFilePool(const QString &)
@@ -109,11 +108,7 @@ void LoadInfoThread::slotFinishedReadFilePool(const QString &)
     // 首次加载刷新
     if (firstLoadFlag) {
         firstLoadFlag = false;
-        DBusInterface::getInstance()->refreshInfo();
-        QTimer::singleShot(2000, this, [ = ]() {  //test the x86 the fast desktop PC need 2s
-            DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-            start();
-        });
+        emit finishedReadFilePool();
     }
 }
 

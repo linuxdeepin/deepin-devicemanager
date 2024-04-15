@@ -122,6 +122,17 @@ MainWindow::MainWindow(QWidget *parent)
     txgpu.start();
     txgpu.wait();
     monitorNumber = txgpu.getMonitorNumber();
+    connect(mp_WorkingThread, &LoadInfoThread::finishedReadFilePool, this, [ = ]() {
+        refreshDataBaseLater();
+    });
+}
+void MainWindow::refreshDataBaseLater()
+{
+    DBusInterface::getInstance()->refreshInfo();
+    QTimer::singleShot(2000, this, [ = ]() {  //test the x86 the fast desktop PC need 2s
+        // 加载设备信息
+        refreshDataBase();
+    });
 }
 
 MainWindow::~MainWindow()
@@ -408,11 +419,14 @@ void MainWindow::initWidgets()
 
 void MainWindow::refreshDataBase()
 {
-    // 设置应用程序强制光标为cursor
-    DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-
-    if (mp_WorkingThread)
+    if (mp_WorkingThread) {
+        /* 一定要与 restoreOverrideCursor 成对使用*/
+        if(!m_statusCursorIsWait) {
+            DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+            m_statusCursorIsWait = true;
+        }
         mp_WorkingThread->start();
+    }
 }
 
 void MainWindow::slotSetPage(QString page)
@@ -437,8 +451,11 @@ void MainWindow::slotLoadingFinish(const QString &message)
     if (message == "finish") {
         begin = true;
 
-        // 一定要有否则指针一直显示圆圈与setOverrideCursor成对使用
+    /* 一定要有与 setOverrideCursor 成对使用 否则指针一直显示圆圈*/
+    if( m_statusCursorIsWait) {
+        m_statusCursorIsWait = false;
         DApplication::restoreOverrideCursor();
+    }
 
         // 信息显示界面
         // 获取设备类型列表
@@ -523,11 +540,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
             DBusInterface::getInstance()->getInfo("is_server_running", info);
             //请求后台更新信息
             if (!info.toInt()) {
-                DBusInterface::getInstance()->refreshInfo();
-                QTimer::singleShot(2000, this, [ = ]() {
-                    // 加载设备信息
-                    refreshDataBase();
-                });
+                refreshDataBaseLater();
             }
             qDebug()<< "Monitor refreshInfo" << __LINE__  << QDateTime::currentDateTime().toString("hh:mm:ss") << info << monitorNumber;
             monitorNumber = txgpu.getMonitorNumber();
