@@ -7,7 +7,7 @@
 #include <QTime>
 #include <QProcess>
 #include <QFile>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QDir>
 #include <unistd.h>
 

@@ -33,6 +33,7 @@
 #include "xlsxformat_p.h"
 #include "xlsxmediafile_p.h"
 #include "xlsxutility_p.h"
+#include "DDLog.h"
 
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
@@ -40,6 +41,7 @@
 #include <QBuffer>
 #include <QDir>
 
+using namespace DDLog;
 QT_BEGIN_NAMESPACE_XLSX
 
 WorkbookPrivate::WorkbookPrivate(Workbook *q, Workbook::CreateFlag flag) :
@@ -216,7 +218,7 @@ AbstractSheet *Workbook::addSheet(const QString &name, int sheetId, AbstractShee
     } else if (type == AbstractSheet::ST_ChartSheet) {
         sheet = new Chartsheet(name, sheetId, this, F_LoadFromExists);
     } else {
-        qWarning("unsupported sheet type.");
+        qCWarning(appLog)<<"unsupported sheet type.";
         Q_ASSERT(false);
     }
     d->sheets.append(QSharedPointer<AbstractSheet>(sheet));
@@ -244,7 +246,7 @@ AbstractSheet *Workbook::insertSheet(int index, const QString &name, AbstractShe
                 sheetName = QStringLiteral("Chart%1").arg(d->last_chartsheet_index);
             } while (d->sheetNames.contains(sheetName));
         } else {
-            qWarning("unsupported sheet type.");
+            qCWarning(appLog)<<"unsupported sheet type.";
             return 0;
         }
     }
@@ -581,7 +583,7 @@ bool Workbook::loadFromXmlFile(QIODevice *device)
                  else if (relationship.type.endsWith(QLatin1String("/xlMacrosheet")))
                      type = AbstractSheet::ST_MacroSheet;
                  else
-                     qWarning("unknown sheet type");
+                     qCWarning(appLog)<<"unknown sheet type";
 
                  AbstractSheet *sheet = addSheet(name, sheetId, type);
                  sheet->setSheetState(state);

@@ -7,7 +7,7 @@
 #include "commonfunction.h"
 
 #include <QObject>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QNetworkAccessManager>
 #include <QUrl>
 

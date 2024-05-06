@@ -11,7 +11,7 @@
 #include <DSysInfo>
 
 // Qt库文件
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QAbstractTextDocumentLayout>
 #include <QDomDocument>
 

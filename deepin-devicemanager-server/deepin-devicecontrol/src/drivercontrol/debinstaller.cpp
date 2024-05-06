@@ -6,13 +6,16 @@
 
 #include "debinstaller.h"
 #include "utils.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QTimer>
 
 #include <QApt/Backend>
 #include <QApt/DebFile>
 #include <QApt/Transaction>
+
+using namespace DDLog;
 
 const int MAX_DPKGRUNING_TEST = 20;
 const int TEST_TIME_INTERVAL = 2000;
@@ -55,7 +58,7 @@ void DebInstaller::initBackend()
     m_backend = new QApt::Backend;
     m_bValid = m_backend->init();
     if (!m_bValid) {
-        qInfo() << m_backend->initErrorMessage();
+        qCInfo(appLog) << m_backend->initErrorMessage();
     }
 }
 
@@ -63,7 +66,7 @@ void DebInstaller::reset()
 {
     m_bValid = m_backend->reloadCache();
     if (!m_bValid) {
-        qInfo() << m_backend->initErrorMessage();
+        qCInfo(appLog) << m_backend->initErrorMessage();
     }
     m_iRuningTestCount = 0;
     m_pTrans = nullptr;

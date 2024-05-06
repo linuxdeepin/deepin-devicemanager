@@ -7,7 +7,7 @@
 #include "commonfunction.h"
 
 // Qt库文件
-#include<QDebug>
+#include<QLoggingCategory>
 
 DeviceGpu::DeviceGpu()
     : DeviceBaseInfo()

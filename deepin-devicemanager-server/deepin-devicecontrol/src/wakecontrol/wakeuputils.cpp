@@ -4,14 +4,17 @@
 
 #include "wakeuputils.h"
 #include "enablesqlmanager.h"
+#include "DDLog.h"
 
 #include <QStringList>
 #include <QMap>
 #include <QFile>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QCryptographicHash>
 
 #define LEAST_NUM 10
+
+using namespace DDLog;
 
 WakeupUtils::WakeupUtils()
 {
@@ -120,7 +123,7 @@ WakeupUtils::EthStatus WakeupUtils::wakeOnLanIsOpen(const QString &logicalName)
     if (0 != ioctl(fd, SIOCETHTOOL, &ifr)) {
         return ES_IOCTL_ERROR;
     }
-    qInfo() << "wakeOnLan supported:" << wolinfo.supported << "wolopts:" << wolinfo.wolopts;
+    qCInfo(appLog) << "wakeOnLan supported:" << wolinfo.supported << "wolopts:" << wolinfo.wolopts;
 
     if (wolinfo.supported && UNPARSE_WOLOPTS(wolinfo.supported)) {
         if (wolinfo.wolopts && UNPARSE_WOLOPTS(wolinfo.wolopts)) {

@@ -10,8 +10,11 @@
 #include "../oxml/oxmlshape.h"
 #include "../package.h"
 #include "imagepart.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 namespace Docx
 {
@@ -70,7 +73,7 @@ Table *DocumentPart::addTable(int rows, int cols, const QString &style)
 }
 void DocumentPart::afterUnmarshal()
 {
-    qInfo() << "afetrUnmarshal";
+    qCInfo(appLog) << "afetrUnmarshal";
 }
 
 QDomDocument *DocumentPart::element() const

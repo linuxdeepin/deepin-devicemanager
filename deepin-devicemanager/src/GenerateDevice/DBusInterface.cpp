@@ -4,11 +4,14 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "DBusInterface.h"
+#include "DDLog.h"
 
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<DBusInterface *> DBusInterface::s_Instance;
@@ -33,7 +36,7 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
         info = reply.value();
         return true;
     } else {
-        qInfo() << "Error in getting info from getInfo .......................................";
+        qCInfo(appLog) << "Error in getting info from getInfo .......................................";
         return false;
     }
 }

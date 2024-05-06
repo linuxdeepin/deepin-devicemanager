@@ -12,6 +12,7 @@
 #include "DevicePrint.h"
 #include "DeviceInput.h"
 #include "DeviceNetwork.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -23,10 +24,12 @@
 #include <QVBoxLayout>
 #include <QAction>
 #include <QIcon>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 
 DWIDGET_USE_NAMESPACE
+
+using namespace DDLog;
 
 #define LEAST_PAGE_HEIGHT 315  // PageMultiInfo最小高度 当小于这个高度时，上方的表格就要变小
 
@@ -177,7 +180,7 @@ void PageMultiInfo::slotActionUpdateDriver(int row)
     //打印设备卸载驱动时，通过dde-printer来操作
     if (nullptr != device && device->hardwareClass() == "printer") {
         if (!QProcess::startDetached("dde-printer"))
-            qInfo() << "dde-printer startDetached error";
+            qCInfo(appLog) << "dde-printer startDetached error";
         return;
     }
 

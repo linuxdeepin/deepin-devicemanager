@@ -8,10 +8,12 @@
 #include "package.h"
 #include "text.h"
 #include "table.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QFile>
 
+using namespace DDLog;
 using namespace Docx;
 
 Document::Document()
@@ -27,7 +29,7 @@ Document::Document()
 
 Document::Document(const QString &name)
 {
-    qInfo() << "construct docx document from " << name;
+    qCInfo(appLog) << "construct docx document from " << name;
 
     Q_ASSERT_X(QFile::exists(name), "filed", "can not find the path!");
 
@@ -121,13 +123,13 @@ QList<Table *> Document::tables()
 
 Document::~Document()
 {
-    qInfo() << "delete Docx::Document.";
+    qCInfo(appLog) << "delete Docx::Document.";
     delete m_docPart;
     delete m_package;
 }
 
 void Document::save(const QString &path)
 {
-    qInfo() << "save docx file: " << path;
+    qCInfo(appLog) << "save docx file: " << path;
     m_package->save(path);
 }

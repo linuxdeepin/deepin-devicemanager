@@ -8,14 +8,17 @@
 #include "threadpool.h"
 #include "detectthread.h"
 #include "controlinterface.h"
+#include "DDLog.h"
 
 #include <QMutex>
 #include <QProcess>
 #include <QFile>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QTimer>
 
 #include <DSysInfo>
+
+using namespace DDLog;
 
 static QMutex mainJobMutex;
 static bool s_ServerIsUpdating = false;
@@ -114,7 +117,7 @@ void MainJob::initDriverRepoSource()
         return;
     }
     if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qInfo() << file.errorString();
+        qCInfo(appLog) << file.errorString();
         return;
     }
 

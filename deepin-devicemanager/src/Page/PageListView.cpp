@@ -12,7 +12,7 @@
 
 // Qt库文件
 #include <QHBoxLayout>
-#include <QDebug>
+#include <QLoggingCategory>
 
 PageListView::PageListView(DWidget *parent)
     : DWidget(parent)

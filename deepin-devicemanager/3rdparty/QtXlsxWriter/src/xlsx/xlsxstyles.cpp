@@ -31,9 +31,10 @@
 #include <QFile>
 #include <QMap>
 #include <QDataStream>
-#include <QDebug>
+#include <QLoggingCategory>
+#include "DDLog.h"
 #include <QBuffer>
-
+using namespace DDLog;
 namespace QXlsx {
 
 /*
@@ -728,10 +729,10 @@ bool Styles::readNumFmts(QXmlStreamReader &reader)
     }
 
     if (reader.hasError())
-        qWarning()<<reader.errorString();
+        qCWarning(appLog)<<reader.errorString();
 
     if (hasCount && (count != m_customNumFmtIdMap.size()))
-        qWarning("error read custom numFmts");
+        qCWarning(appLog)<<"error read custom numFmts";
 
     return true;
 }
@@ -757,10 +758,10 @@ bool Styles::readFonts(QXmlStreamReader &reader)
         }
     }
     if (reader.hasError())
-        qWarning()<<reader.errorString();
+        qCWarning(appLog)<<reader.errorString();
 
     if (hasCount && (count != m_fontsList.size()))
-        qWarning("error read fonts");
+        qCWarning(appLog)<<"error read fonts";
     return true;
 }
 
@@ -845,10 +846,10 @@ bool Styles::readFills(QXmlStreamReader &reader)
         }
     }
     if (reader.hasError())
-        qWarning()<<reader.errorString();
+        qCWarning(appLog)<<reader.errorString();
 
     if (hasCount && (count != m_fillsList.size()))
-        qWarning("error read fills");
+        qCWarning(appLog)<<"error read fonts";
     return true;
 }
 
@@ -940,10 +941,10 @@ bool Styles::readBorders(QXmlStreamReader &reader)
     }
 
     if (reader.hasError())
-        qWarning()<<reader.errorString();
+        qCWarning(appLog)<<reader.errorString();
 
     if (hasCount && (count != m_bordersList.size()))
-        qWarning("error read borders");
+        qCWarning(appLog)<<"error read borders";
 
     return true;
 }
@@ -1059,9 +1060,9 @@ bool Styles::readCellXfs(QXmlStreamReader &reader)
                 Format format;
                 QXmlStreamAttributes xfAttrs = reader.attributes();
 
-                //        qInfo()<<reader.name()<<reader.tokenString()<<" .........";
+                //        qCInfo(appLog)<<reader.name()<<reader.tokenString()<<" .........";
                 //        for (int i=0; i<xfAttrs.size(); ++i)
-                //            qInfo()<<"... "<<i<<" "<<xfAttrs[i].name()<<xfAttrs[i].value();
+                //            qCInfo(appLog)<<"... "<<i<<" "<<xfAttrs[i].name()<<xfAttrs[i].value();
 
                 if (xfAttrs.hasAttribute(QLatin1String("numFmtId"))) {
                     int numFmtIndex = xfAttrs.value(QLatin1String("numFmtId")).toString().toInt();
@@ -1077,7 +1078,7 @@ bool Styles::readCellXfs(QXmlStreamReader &reader)
                 if (xfAttrs.hasAttribute(QLatin1String("fontId"))) {
                     int fontIndex = xfAttrs.value(QLatin1String("fontId")).toString().toInt();
                     if (fontIndex >= m_fontsList.size()) {
-                        qDebug("Error read styles.xml, cellXfs fontId");
+                        qCDebug(appLog)<<"Error read styles.xml, cellXfs fontId";
                     } else {
                         bool apply = parseXsdBoolean(xfAttrs.value(QLatin1String("applyFont")).toString());
                         if(apply) {
@@ -1093,7 +1094,7 @@ bool Styles::readCellXfs(QXmlStreamReader &reader)
                 if (xfAttrs.hasAttribute(QLatin1String("fillId"))) {
                     int id = xfAttrs.value(QLatin1String("fillId")).toString().toInt();
                     if (id >= m_fillsList.size()) {
-                        qDebug("Error read styles.xml, cellXfs fillId");
+                        qCDebug(appLog)<<"Error read styles.xml, cellXfs fillId";
                     } else {
                         bool apply = parseXsdBoolean(xfAttrs.value(QLatin1String("applyFill")).toString());
                         if(apply) {
@@ -1109,7 +1110,7 @@ bool Styles::readCellXfs(QXmlStreamReader &reader)
                 if (xfAttrs.hasAttribute(QLatin1String("borderId"))) {
                     int id = xfAttrs.value(QLatin1String("borderId")).toString().toInt();
                     if (id >= m_bordersList.size()) {
-                        qDebug("Error read styles.xml, cellXfs borderId");
+                        qCDebug(appLog)<<"Error read styles.xml, cellXfs borderId";
                     } else {
                         bool apply = parseXsdBoolean(xfAttrs.value(QLatin1String("applyBorder")).toString());
                         if(apply) {
@@ -1181,10 +1182,10 @@ bool Styles::readCellXfs(QXmlStreamReader &reader)
     }
 
     if (reader.hasError())
-        qWarning()<<reader.errorString();
+        qCWarning(appLog)<<reader.errorString();
 
     if (hasCount && (count != m_xf_formatsList.size()))
-        qWarning("error read CellXfs");
+        qCWarning(appLog)<<"error read CellXfs";
 
     return true;
 }
@@ -1204,10 +1205,10 @@ bool Styles::readDxfs(QXmlStreamReader &reader)
         }
     }
     if (reader.hasError())
-        qWarning()<<reader.errorString();
+        qCWarning(appLog)<<reader.errorString();
 
     if (hasCount && (count != m_dxf_formatsList.size()))
-        qWarning("error read dxfs");
+        qCWarning(appLog)<<"error read dxfs";
 
     return true;
 }
@@ -1299,7 +1300,7 @@ bool Styles::loadFromXmlFile(QIODevice *device)
         }
 
         if (reader.hasError()) {
-            qInfo()<<"Error when read style file: "<<reader.errorString();
+            qCInfo(appLog)<<"Error when read style file: "<<reader.errorString();
         }
     }
     return true;

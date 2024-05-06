@@ -6,9 +6,10 @@
 #include "CmdTool.h"
 #include <QDir>
 #include <cmath>
+#include "DDLog.h"
 
 // Qt库文件
-#include<QDebug>
+#include<QLoggingCategory>
 #include<QDateTime>
 #include<QMutex>
 #include <QCryptographicHash>
@@ -20,6 +21,8 @@
 #include "DBusInterface.h"
 #include "DBusEnableInterface.h"
 #include "MacroDefinition.h"
+
+using namespace DDLog;
 
 CmdTool::CmdTool()
 {
@@ -198,10 +201,10 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
     QString info = QString();
 
     if (filename.isEmpty()) {
-        qInfo() << "Toml File name  is null " ;
+        qCInfo(appLog) << "Toml File name  is null " ;
         return tomlFileRead;
     }
-    qInfo() << "Toml File name  is: /etc/deepin/hardware/" << filename;
+    qCInfo(appLog) << "Toml File name  is: /etc/deepin/hardware/" << filename;
 
     QString curPathFile =  "/etc/deepin/hardware/" + filename;
     if (QFile::exists(curPathFile)) {
@@ -1225,7 +1228,7 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
             }
         }
         if ((*it).contains("Config Status")) {
-            //qInfo() << "  Config Status"<< words[0]<<words[1];
+            //qCInfo(appLog) << "  Config Status"<< words[0]<<words[1];
             if(words[1].contains("avail=yes"))
                 mapInfo["cfg_avail"] = "yes";
         }

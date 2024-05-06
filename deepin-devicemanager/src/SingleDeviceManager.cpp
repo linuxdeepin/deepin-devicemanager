@@ -5,10 +5,13 @@
 #include "SingleDeviceManager.h"
 #include "MainWindow.h"
 #include "eventlogutils.h"
+#include "DDLog.h"
 
 #include <DWidgetUtil>
 #include <DGuiApplicationHelper>
 #include <QJsonObject>
+
+using namespace DDLog;
 
 SingleDeviceManager::SingleDeviceManager(int &argc, char **argv)
     : DApplication(argc, argv)
@@ -18,7 +21,7 @@ SingleDeviceManager::SingleDeviceManager(int &argc, char **argv)
 
 void SingleDeviceManager::activateWindow()
 {
-    qInfo() << "SingleDeviceManager::activateWindow()";
+    qCInfo(appLog) << "SingleDeviceManager::activateWindow()";
     if (nullptr == m_qspMainWnd.get()) {
         m_qspMainWnd.reset(new MainWindow());
         Dtk::Widget::moveToCenter(m_qspMainWnd.get());
@@ -41,7 +44,7 @@ void SingleDeviceManager::activateWindow()
 
 bool SingleDeviceManager::parseCmdLine()
 {
-    qInfo() << "SingleDeviceManager::parseCmdLine()";
+    qCInfo(appLog) << "SingleDeviceManager::parseCmdLine()";
     QCommandLineParser parser;
     parser.setApplicationDescription("Deepin Device Manager.");
     parser.addHelpOption();
@@ -65,7 +68,7 @@ bool SingleDeviceManager::parseCmdLine()
 
 void SingleDeviceManager::startDeviceManager(QString pageDescription)
 {
-    qInfo() << "SingleDeviceManager::startDeviceManager" << pageDescription;
+    qCInfo(appLog) << "SingleDeviceManager::startDeviceManager" << pageDescription;
     if (!pageDescription.isEmpty()) {
         QMetaObject::invokeMethod(m_qspMainWnd.get(), "slotSetPage", Qt::QueuedConnection, Q_ARG(QString, pageDescription));
     } else {

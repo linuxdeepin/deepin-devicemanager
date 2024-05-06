@@ -7,7 +7,7 @@
 #include "EDIDParser.h"
 
 // Qt库文件
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 #include <QFile>
 #include <QDir>
@@ -255,7 +255,7 @@ void HWGenerator::getDiskInfoFromLshw()
             tempMap.insert(key, (*dIt)[key]);
         }
 
-//        qInfo() << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"] == modelStr);
+//        qCInfo(appLog) << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"] == modelStr);
         // HW写死
         if (tempMap["product"] == modelStr) {
             // 应HW的要求，将描述固定为   Universal Flash Storage

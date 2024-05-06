@@ -9,7 +9,11 @@
 
 // Qt库文件
 #include <QDir>
-#include<QDebug>
+#include "DDLog.h"
+// Qt库文件
+#include<QLoggingCategory>
+
+using namespace DDLog;
 
 #define DISK_SCALE_1024 1024
 #define DISK_SCALE_1000 1000
@@ -605,7 +609,7 @@ void DeviceStorage::loadOtherDeviceInfo()
         QChar cha = m_SerialNumber.at(i);
         ushort uni = cha.unicode();
         if(uni < 33 || uni > 126) {
-            qWarning()<<"smartctl Serial number is not LetterOrNumber "<< m_SerialNumber;
+            qCWarning(appLog)<<"smartctl Serial number is not LetterOrNumber "<< m_SerialNumber;
             m_SerialNumber.clear();
             break;
         }

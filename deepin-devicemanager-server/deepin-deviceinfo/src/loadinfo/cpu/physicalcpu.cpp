@@ -5,8 +5,11 @@
 #include "physicalcpu.h"
 #include "corecpu.h"
 #include "logicalcpu.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 PhysicalCpu::PhysicalCpu()
     : m_PhysicalCpu(-1)
@@ -91,9 +94,9 @@ int PhysicalCpu::logicalNum()
 }
 void PhysicalCpu::diagPrintInfo()
 {
-    qInfo() << "PhysicalCpu m_PhysicalCpu: ***************** " << m_PhysicalCpu;
+    qCInfo(appLog) << "PhysicalCpu m_PhysicalCpu: ***************** " << m_PhysicalCpu;
     foreach (int id, m_MapCoreCpu.keys()) {
-        qInfo() << "CoreCpu id: ***************** " << id;
+        qCInfo(appLog) << "CoreCpu id: ***************** " << id;
         CoreCpu &cc = m_MapCoreCpu[id];
         cc.diagPrintInfo();
     }

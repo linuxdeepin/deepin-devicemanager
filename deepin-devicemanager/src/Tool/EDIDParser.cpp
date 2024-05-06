@@ -6,7 +6,7 @@
 #include "EDIDParser.h"
 
 // Qt库文件
-#include<QDebug>
+#include<QLoggingCategory>
 #include<QDate>
 
 // 其它头文件
@@ -223,7 +223,7 @@ QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
     while (bContinue) {
         nYushu = nDec % 2;
         nShang = nDec / 2;
-        strBin = QString::number(nYushu) + strBin; //qInfo()<<strBin;
+        strBin = QString::number(nYushu) + strBin; //qCInfo(appLog)<<strBin;
         strTemp = strBin;
         //strBin.Format("%s%s", buf, strTemp);
         nDec = nShang;

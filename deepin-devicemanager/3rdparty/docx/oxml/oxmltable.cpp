@@ -4,9 +4,12 @@
 
 #include "oxmltable.h"
 #include "../table.h"
+#include "DDLog.h"
 
 #include <QDomElement>
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 namespace Docx {
 
@@ -586,7 +589,7 @@ void CT_Tc::moveContentTo(CT_Tc *top_tc)
     int i = 0;
     QDomNodeList nodes = m_ele.childNodes();
     int count = nodes.count() - 1;
-    qInfo() << "nodes count : " << count;
+    qCInfo(appLog) << "nodes count : " << count;
     QDomNode firstN = m_ele.firstChild();
     if (firstN.nodeName() == QStringLiteral("w:tcPr"))
         i = 1;

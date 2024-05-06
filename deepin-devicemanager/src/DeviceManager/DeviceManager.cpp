@@ -4,9 +4,10 @@
 
 // 项目自身文件
 #include "DeviceManager.h"
+#include "DDLog.h"
 
 // Qt库文件
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QFile>
 #include <QMutexLocker>
 
@@ -29,6 +30,8 @@
 #include "DeviceCdrom.h"
 #include "DeviceInput.h"
 #include "MacroDefinition.h"
+
+using namespace DDLog;
 
 DeviceManager    *DeviceManager::sInstance = nullptr;
 int DeviceManager::m_CurrentXlsRow = 1;
@@ -628,7 +631,7 @@ bool DeviceManager::findByVendorName(DeviceType deviceType, DeviceBaseInfo *devi
 
 
         if (deviceType == DT_Computer) {  // //因Computer信息只有一条list，且不允增加list，只能替换信息，故作特殊处理
-            qInfo() << " computer Name" <<  tmp_name << "toml:" << name;
+            qCInfo(appLog) << " computer Name" <<  tmp_name << "toml:" << name;
             return true;
         }
     }
