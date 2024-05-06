@@ -5,14 +5,16 @@
 
 #include <gtest/gtest.h>
 #include <QApplication>
-
 #if defined(CMAKE_SAFETYTEST_ARG_ON)
 #include <sanitizer/asan_interface.h>
 #endif
 
+DCORE_USE_NAMESPACE
+
 //  gtest的入口函数
 int main(int argc, char **argv)
 {
+
     qputenv("QT_QPA_PLATFORM", "offscreen");
     QApplication a(argc, argv);
     ::testing::InitGoogleTest(&argc, argv);

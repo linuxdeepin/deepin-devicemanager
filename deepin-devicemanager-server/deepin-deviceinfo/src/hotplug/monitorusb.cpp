@@ -6,7 +6,7 @@
 #include "controlinterface.h"
 #include "mainjob.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 #include <QFile>
 #include <QDateTime>

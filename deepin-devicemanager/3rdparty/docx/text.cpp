@@ -9,7 +9,7 @@
 #include "./shape.h"
 
 #include <QDomDocument>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <math.h>
 
 namespace Docx {

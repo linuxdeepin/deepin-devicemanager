@@ -7,7 +7,7 @@
 
 // Qt库文件
 #include <QPainter>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QPainterPath>
 
 // Dtk头文件

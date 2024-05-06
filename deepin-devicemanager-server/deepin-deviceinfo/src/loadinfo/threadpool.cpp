@@ -10,7 +10,7 @@
 #include <QProcess>
 #include <QDir>
 #include <QDateTime>
-#include <QDebug>
+#include <QLoggingCategory>
 
 ThreadPool::ThreadPool(QObject *parent)
     : QThreadPool(parent)

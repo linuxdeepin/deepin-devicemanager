@@ -4,6 +4,7 @@
 
 #include "BtnLabel.h"
 #include "commontools.h"
+#include "DDLog.h"
 
 #include <QBoxLayout>
 
@@ -11,7 +12,8 @@
 #include <DFontSizeManager>
 #include <DApplicationHelper>
 #include <DApplication>
-
+#include <QLoggingCategory>
+using namespace DDLog;
 BtnLabel::BtnLabel(DWidget *parent)
     : DLabel(parent)
     , m_Desc("")
@@ -44,7 +46,7 @@ BtnLabel::BtnLabel(DWidget *parent)
             int clickedButtonIndex = dialog.exec();
             if (1 == clickedButtonIndex) {
                 //反馈
-                qDebug() << __func__ << "fedback....";
+                qCDebug(appLog) << __func__ << "fedback....";
                 CommonTools::feedback();
             }
         } else {

@@ -5,9 +5,11 @@
 // 项目自身文件
 #include "DeviceStorage.h"
 #include "commonfunction.h"
-
+#include "DDLog.h"
 // Qt库文件
-#include<QDebug>
+#include<QLoggingCategory>
+
+using namespace DDLog;
 
 DeviceStorage::DeviceStorage()
     : DeviceBaseInfo()
@@ -520,7 +522,7 @@ void DeviceStorage::loadOtherDeviceInfo()
         QChar cha = m_SerialNumber.at(i);
         ushort uni = cha.unicode();
         if(uni < 33 || uni > 126) {
-            qWarning()<<"smartctl Serial number is not LetterOrNumber "<< m_SerialNumber;
+            qCWarning(appLog)<<"smartctl Serial number is not LetterOrNumber "<< m_SerialNumber;
             m_SerialNumber.clear();
             break;
         }

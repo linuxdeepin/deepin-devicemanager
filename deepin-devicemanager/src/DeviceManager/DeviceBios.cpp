@@ -6,7 +6,7 @@
 #include "DeviceBios.h"
 
 // Qt库文件
-#include <QDebug>
+#include <QLoggingCategory>
 
 DeviceBios::DeviceBios()
     : DeviceBaseInfo()

@@ -13,7 +13,7 @@
 
 // Qt库文件
 #include <QHBoxLayout>
-#include <QDebug>
+#include <QLoggingCategory>
 
 
 DeviceWidget::DeviceWidget(QWidget *parent)

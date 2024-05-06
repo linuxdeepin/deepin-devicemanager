@@ -13,7 +13,7 @@
 // Qt库文件
 #include <QPainter>
 #include <QStyleOptionFrame>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QPainterPath>
 #include <QProcess>
 

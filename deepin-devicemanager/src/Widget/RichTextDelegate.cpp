@@ -15,7 +15,7 @@
 #include <QPainter>
 #include <QTextDocument>
 #include <QAbstractTextDocumentLayout>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <DFontSizeManager>
 #include <QPainterPath>
 

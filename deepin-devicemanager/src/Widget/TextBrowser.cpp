@@ -21,7 +21,7 @@
 #include <QContextMenuEvent>
 #include <QScrollBar>
 #include <QAction>
-#include <QDebug>
+#include <QLoggingCategory>
 
 TextBrowser::TextBrowser(QWidget *parent)
     : DTextBrowser(parent)

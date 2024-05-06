@@ -9,7 +9,7 @@
 #include <QDir>
 #include <QFileInfo>
 // 其它头文件
-#include <QDebug>
+#include <QLoggingCategory>
 DeviceAudio::DeviceAudio()
     : DeviceBaseInfo()
     , m_Model("")

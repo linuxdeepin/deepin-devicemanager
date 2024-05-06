@@ -7,11 +7,12 @@
 #include "driverinstaller.h"
 #include "utils.h"
 #include "commonfunction.h"
+#include "DDLog.h"
 
 #include <QApt/Backend>
 #include <QApt/DebFile>
 #include <QApt/Transaction>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 #include <QTimer>
 
@@ -20,6 +21,7 @@
 #include <string>
 #include <vector>
 
+using namespace DDLog;
 const int MAX_DPKGRUNING_TEST = 20;
 const int TEST_TIME_INTERVAL = 2000;
 
@@ -69,7 +71,7 @@ void DriverInstaller::undoInstallDriver()
         mp_Trans->setProperty("isCancelled", true);
         mp_Trans->cancel();
         m_Cancel = true;
-        qInfo() << "DRIVER_LOG **************************** 取消操作";
+        qCInfo(appLog) << "DRIVER_LOG **************************** 取消操作";
     }
 
 }
@@ -126,7 +128,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
 {
     if (!initBackend()) {
         emit errorOccurred(EC_NULL);
-        qInfo() << "DRIVER_LOG : ************************** 初始化backend失败";
+        qCInfo(appLog) << "DRIVER_LOG : ************************** 初始化backend失败";
         return;
     }
 
@@ -134,13 +136,13 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
     // 判断包是否存在
     if (nullptr == p) {
         emit errorOccurred(EC_NOTFOUND);
-        qInfo() << "DRIVER_LOG : ************************** 安装包不存在";
+        qCInfo(appLog) << "DRIVER_LOG : ************************** 安装包不存在";
         return;
     }
 
     // 版本不存在
     if (!p->setVersion(version)) {
-        qInfo() << "DRIVER_LOG : ************************** 安装包版本不存在";
+        qCInfo(appLog) << "DRIVER_LOG : ************************** 安装包版本不存在";
         emit errorOccurred(EC_NOTFOUND);
         delete p;
         p = nullptr;
@@ -153,7 +155,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
     mp_Trans = mp_Backend->installPackages(lst);
     if (nullptr == mp_Trans) {
         emit errorOccurred(EC_NULL);
-        qInfo() << "DRIVER_LOG : ************************** installPackages";
+        qCInfo(appLog) << "DRIVER_LOG : ************************** installPackages";
         return;
     }
 
@@ -179,8 +181,8 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
             emit errorOccurred(EC_CANCEL);
         }
 
-        qInfo() << "DRIVER_LOG : ************************** 安装结束 结束状态码" << status;
-        qInfo() << "DRIVER_LOG : ************************** 安装结束 结束错误码" << code;
+        qCInfo(appLog) << "DRIVER_LOG : ************************** 安装结束 结束状态码" << status;
+        qCInfo(appLog) << "DRIVER_LOG : ************************** 安装结束 结束错误码" << code;
 
         mp_Trans->disconnect();
         mp_Trans->deleteLater();
@@ -188,12 +190,12 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
     });
 
     connect(mp_Trans, &QApt::Transaction::downloadProgressChanged, this, [this](QApt::DownloadProgress dp) {
-        qInfo() << "DRIVER_LOG : ************************** 下载进度 " << dp.progress();
+        qCInfo(appLog) << "DRIVER_LOG : ************************** 下载进度 " << dp.progress();
         if (m_Cancel) {
             mp_Trans->setProperty("isCancellable", true);
             mp_Trans->setProperty("isCancelled", true);
             mp_Trans->cancel();
-            qInfo() << "DRIVER_LOG *************downloadProgressChanged*************** 取消操作";
+            qCInfo(appLog) << "DRIVER_LOG *************downloadProgressChanged*************** 取消操作";
         }
     });
 
@@ -202,11 +204,11 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
             mp_Trans->setProperty("isCancellable", true);
             mp_Trans->setProperty("isCancelled", true);
             mp_Trans->cancel();
-            qInfo() << "DRIVER_LOG *************progressChanged*************** 取消操作";
+            qCInfo(appLog) << "DRIVER_LOG *************progressChanged*************** 取消操作";
         }
         if (false == m_Cancel)
             emit installProgressChanged(progress);
-        qInfo() << "DRIVER_LOG : ************************** 总进度 " << progress << "  下载状态 " << mp_Trans->downloadProgress().uri();
+        qCInfo(appLog) << "DRIVER_LOG : ************************** 总进度 " << progress << "  下载状态 " << mp_Trans->downloadProgress().uri();
     });
 
     mp_Trans->run();

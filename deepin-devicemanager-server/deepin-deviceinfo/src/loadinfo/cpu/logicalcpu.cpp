@@ -3,8 +3,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "logicalcpu.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 LogicalCpu::LogicalCpu()
     : d_ptr(new LogicalCpuPrivate(this))
@@ -197,24 +200,24 @@ const QString &LogicalCpu::arch()
 void LogicalCpu::diagPrintInfo()
 {
     Q_D(LogicalCpu);
-    qInfo() << "LogicalCpu ***************** ";
-    qInfo() << "logicalID  : " << d->logicalID;
-    qInfo() << "coreID     : " << d->coreID;
-    qInfo() << "physicalID : " << d->physicalID;
-    qInfo() << "l1d_cache  : " << d->l1d_cache;
-    qInfo() << "l1i_cache  : " << d->l1i_cache;
-    qInfo() << "l2_cache   : " << d->l2_cache;
-    qInfo() << "l3_cache   : " << d->l3_cache;
-    qInfo() << "max_freq   : " << d->max_freq;
-    qInfo() << "min_freq   : " << d->min_freq;
-    qInfo() << "cur_freq   : " << d->cur_freq;
-    qInfo() << "model      : " << d->model;
-    qInfo() << "modelName  : " << d->modelName;
-    qInfo() << "setpping   : " << d->setpping;
-    qInfo() << "vendor     : " << d->vendor;
-    qInfo() << "cpuFamily  : " << d->cpuFamily;
-    qInfo() << "flags      : " << d->flags;
-    qInfo() << "bogoMips   : " << d->bogoMips;
-    qInfo() << "arch       : " << d->arch;
+    qCInfo(appLog) << "LogicalCpu ***************** ";
+    qCInfo(appLog) << "logicalID  : " << d->logicalID;
+    qCInfo(appLog) << "coreID     : " << d->coreID;
+    qCInfo(appLog) << "physicalID : " << d->physicalID;
+    qCInfo(appLog) << "l1d_cache  : " << d->l1d_cache;
+    qCInfo(appLog) << "l1i_cache  : " << d->l1i_cache;
+    qCInfo(appLog) << "l2_cache   : " << d->l2_cache;
+    qCInfo(appLog) << "l3_cache   : " << d->l3_cache;
+    qCInfo(appLog) << "max_freq   : " << d->max_freq;
+    qCInfo(appLog) << "min_freq   : " << d->min_freq;
+    qCInfo(appLog) << "cur_freq   : " << d->cur_freq;
+    qCInfo(appLog) << "model      : " << d->model;
+    qCInfo(appLog) << "modelName  : " << d->modelName;
+    qCInfo(appLog) << "setpping   : " << d->setpping;
+    qCInfo(appLog) << "vendor     : " << d->vendor;
+    qCInfo(appLog) << "cpuFamily  : " << d->cpuFamily;
+    qCInfo(appLog) << "flags      : " << d->flags;
+    qCInfo(appLog) << "bogoMips   : " << d->bogoMips;
+    qCInfo(appLog) << "arch       : " << d->arch;
     return;
 }

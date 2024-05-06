@@ -10,7 +10,7 @@
 #include <DApplication>
 
 // Qt库文件
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QDate>
 #include <QSize>
 

@@ -9,7 +9,7 @@
 #include <DApplicationHelper>
 #include <DStyledItemDelegate>
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>

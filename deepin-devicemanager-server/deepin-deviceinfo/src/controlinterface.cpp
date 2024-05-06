@@ -7,7 +7,7 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
-#include <QDebug>
+#include <QLoggingCategory>
 
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<ControlInterface *> ControlInterface::s_instance;

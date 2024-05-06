@@ -27,13 +27,16 @@
 #include "xlsxworksheet.h"
 #include "xlsxcellrange.h"
 #include "xlsxutility_p.h"
+#include "DDLog.h"
 
 #include <QIODevice>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-#include <QDebug>
-
+#include <QLoggingCategory>
+#include "DDLog.h"
 QT_BEGIN_NAMESPACE_XLSX
+
+using namespace DDLog;
 
 ChartPrivate::ChartPrivate(Chart *q, Chart::CreateFlag flag)
     : AbstractOOXmlFilePrivate(q, flag)
@@ -270,7 +273,7 @@ bool ChartPrivate::loadXmlXxxChart(QXmlStreamReader &reader)
     else if (name == QLatin1String("areaChart")) chartType = Chart::CT_Area;
     else if (name == QLatin1String("area3DChart")) chartType = Chart::CT_Area3D;
     else if (name == QLatin1String("doughnutChart")) chartType = Chart::CT_Doughnut;
-    else qInfo() << "Cann't load chart: " << name;
+    else qCInfo(appLog) << "Cann't load chart: " << name;
 
     while (!reader.atEnd()) {
         reader.readNextStartElement();

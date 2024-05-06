@@ -4,12 +4,15 @@
 
 #include "detectthread.h"
 #include "monitorusb.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 #include <QCryptographicHash>
 
 #define LEAST_NUM 10
+
+using namespace DDLog;
 
 DetectThread::DetectThread(QObject *parent)
     : QThread(parent)
@@ -50,7 +53,7 @@ void DetectThread::slotUsbChanged()
         sleep(1);
         end = QDateTime::currentMSecsSinceEpoch();
     }
-    qInfo() << " 此次判断插拔是否完成的时间为 ************ " << QDateTime::currentMSecsSinceEpoch() - begin;
+    qCInfo(appLog) << " 此次判断插拔是否完成的时间为 ************ " << QDateTime::currentMSecsSinceEpoch() - begin;
     emit usbChanged();
 }
 

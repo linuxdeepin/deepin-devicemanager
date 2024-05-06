@@ -4,7 +4,7 @@
 
 #include "mainjob.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 
 static MainJob *mainJob = nullptr;
 

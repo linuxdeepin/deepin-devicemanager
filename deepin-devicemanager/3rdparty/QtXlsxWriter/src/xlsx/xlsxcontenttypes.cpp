@@ -28,7 +28,10 @@
 #include <QFile>
 #include <QMapIterator>
 #include <QBuffer>
-#include <QDebug>
+#include <QLoggingCategory>
+#include "DDLog.h"
+
+using namespace DDLog;
 
 namespace QXlsx {
 
@@ -196,7 +199,7 @@ bool ContentTypes::loadFromXmlFile(QIODevice *device)
         }
 
         if (reader.hasError()) {
-            qInfo()<<reader.errorString();
+            qCInfo(appLog)<<reader.errorString();
         }
     }
     return true;

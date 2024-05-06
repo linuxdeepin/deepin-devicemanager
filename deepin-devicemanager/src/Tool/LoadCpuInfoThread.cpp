@@ -6,7 +6,7 @@
 #include "LoadCpuInfoThread.h"
 
 #include <QProcess>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include "DeviceManager.h"
 #include "DeviceCpu.h"

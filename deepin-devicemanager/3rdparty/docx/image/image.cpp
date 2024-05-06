@@ -8,7 +8,7 @@
 #include <QMimeType>
 #include <QBuffer>
 #include <QImageReader>
-#include <QDebug>
+#include <QLoggingCategory>
 
 namespace Docx {
 

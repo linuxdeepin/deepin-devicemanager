@@ -5,6 +5,7 @@
 #include "DetectedStatusWidget.h"
 #include "commontools.h"
 #include "BtnLabel.h"
+#include "DDLog.h"
 
 #include <DStyle>
 #include <DCommandLinkButton>
@@ -20,7 +21,7 @@
 #include <QThread>
 #include <QSizePolicy>
 #include <QPainterPath>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #define MARGIN_LR          20
 #define MARGIN_TB          12
@@ -45,6 +46,8 @@ const QString SERVICE_NAME = "com.deepin.dde.shutdownFront";
 const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/shutdownFront";
 const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.shutdownFront";
 #endif
+
+using namespace DDLog;
 
 DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
     : DFrame(parent)
@@ -394,7 +397,7 @@ void DetectedStatusWidget::setNoUpdateDriverUI(const QString &model)
 
 void DetectedStatusWidget::refreshUI(Status pageType)
 {
-    qInfo() << pageType;
+    qCInfo(appLog) << pageType;
     switch (pageType) {
     case ST_NOT_INSTALL: {
         this->setDetectFinishUI("5", "fffffff", true);

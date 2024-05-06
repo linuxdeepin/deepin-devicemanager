@@ -267,7 +267,7 @@ void PageDriverInstallInfo::setHeaderCbEnable(bool enable)
 }
 void PageDriverInstallInfo::slotDownloadProgressChanged(DriverType type, QString size, QStringList msg)
 {
-    // 将下载过程时时更新到表格上方的状态里面 qInfo() << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
+    // 将下载过程时时更新到表格上方的状态里面 qCInfo(appLog) << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
     mp_HeadWidget->setDownloadUI(type, msg[2], msg[1], size, msg[0].toInt());
 }
 

@@ -8,7 +8,7 @@
 #include <DPalette>
 #include <DStyleHelper>
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QPainterPath>
