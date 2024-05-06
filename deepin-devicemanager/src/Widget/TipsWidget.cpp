@@ -10,7 +10,7 @@
 #include <DFontSizeManager>
 
 #include <QPainter>
-#include <QDebug>
+#include <QLoggingCategory>
 
 TipsWidget::TipsWidget(QWidget *parent) : DWidget(parent)
 {

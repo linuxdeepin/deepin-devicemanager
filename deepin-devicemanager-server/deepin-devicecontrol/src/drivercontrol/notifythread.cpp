@@ -3,10 +3,13 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "notifythread.h"
+#include "DDLog.h"
 
 #include <QTimer>
 #include <QtDebug>
 #include <QProcess>
+
+using namespace DDLog;
 
 NotifyThread::NotifyThread(QObject *parent) : QThread(parent)
 {
@@ -29,7 +32,7 @@ void NotifyThread::run()
         process.start("sh", QStringList() << "-c" << "who");
         process.waitForFinished(-1);
         strUsername = process.readAll().split(' ')[0];
-        qInfo() << strUsername;
+        qCInfo(appLog) << strUsername;
         if (strUsername.isEmpty()) {
             sleep(2);
             continue;

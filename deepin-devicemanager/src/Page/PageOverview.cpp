@@ -24,7 +24,7 @@
 #include <QVBoxLayout>
 #include <QTableWidgetItem>
 #include <QAction>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QClipboard>
 
 #define ENTER_ONE 60    // 换行的位置 1

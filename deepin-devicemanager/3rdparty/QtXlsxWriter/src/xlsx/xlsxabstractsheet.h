@@ -24,7 +24,6 @@
 ****************************************************************************/
 #ifndef XLSXABSTRACTSHEET_H
 #define XLSXABSTRACTSHEET_H
-
 #include "xlsxabstractooxmlfile.h"
 #include <QStringList>
 #include <QSharedPointer>

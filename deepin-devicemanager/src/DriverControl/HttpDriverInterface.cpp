@@ -5,6 +5,7 @@
 #include "HttpDriverInterface.h"
 #include "commonfunction.h"
 #include "commontools.h"
+#include "DDLog.h"
 
 #include <QJsonDocument>
 #include <QtNetwork>
@@ -12,6 +13,8 @@
 #include <QNetworkRequest>
 
 #include <DSysInfo>
+
+using namespace DDLog;
 
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<HttpDriverInterface *> HttpDriverInterface::s_Instance;
@@ -50,10 +53,10 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
     reply->reset();
     reply->deleteLater();
     if (error != QNetworkReply::NoError) {
-        qInfo() << "strUrl : " << strUrl << "network error";
+        qCInfo(appLog) << "strUrl : " << strUrl << "network error";
         return "network error";
     }
-    qInfo() << "strUrl : " << strUrl << strJsonDriverInfo;
+    qCInfo(appLog) << "strUrl : " << strUrl << strJsonDriverInfo;
     return strJsonDriverInfo;
 }
 
@@ -77,14 +80,14 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
     default:
         break;
     }
-    qInfo() << "device name :" << driverInfo->m_Name  << "VendorId:" << driverInfo->m_VendorId << "ModelId:" << driverInfo->m_ModelId;
+    qCInfo(appLog) << "device name :" << driverInfo->m_Name  << "VendorId:" << driverInfo->m_VendorId << "ModelId:" << driverInfo->m_ModelId;
     if (strJson.contains("network error")) {
         emit sigRequestFinished(false, "network error");
     } else {
         checkDriverInfo(strJson, driverInfo);
-        qInfo() << "m_Packages:" << driverInfo->m_Packages;
-        qInfo() << "m_DebVersion:" << driverInfo->m_DebVersion;
-        qInfo() << "m_Status:" << driverInfo->m_Status;
+        qCInfo(appLog) << "m_Packages:" << driverInfo->m_Packages;
+        qCInfo(appLog) << "m_DebVersion:" << driverInfo->m_DebVersion;
+        qCInfo(appLog) << "m_Status:" << driverInfo->m_Status;
     }
 }
 

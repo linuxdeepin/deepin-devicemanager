@@ -5,7 +5,7 @@
 #include "GenerateDevicePool.h"
 
 #include <QDateTime>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include "DeviceGenerator.h"
 #include "DeviceFactory.h"

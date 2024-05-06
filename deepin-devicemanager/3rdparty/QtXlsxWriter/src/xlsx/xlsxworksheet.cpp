@@ -41,6 +41,7 @@
 #include "xlsxchart.h"
 #include "xlsxcellformula.h"
 #include "xlsxcellformula_p.h"
+#include "DDLog.h"
 
 #include <QVariant>
 #include <QDateTime>
@@ -48,7 +49,8 @@
 #include <QFile>
 #include <QUrl>
 #include <QRegularExpression>
-#include <QDebug>
+#include <QLoggingCategory>
+#include "DDLog.h"
 #include <QBuffer>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
@@ -58,6 +60,7 @@
 #include <math.h>
 
 QT_BEGIN_NAMESPACE_XLSX
+using namespace DDLog;
 
 WorksheetPrivate::WorksheetPrivate(Worksheet *p, Worksheet::CreateFlag flag)
     : AbstractSheetPrivate(p, flag)
@@ -1955,7 +1958,7 @@ void WorksheetPrivate::loadXmlSheetData(QXmlStreamReader &reader)
                     format = workbook->styles()->xfFormat(idx);
                     ////Empty format exists in styles xf table of real .xlsx files, see issue #65.
                     //if (!format.isValid())
-                    //    qInfo()<<QStringLiteral("<c s=\"%1\">Invalid style index: ").arg(idx)<<idx;
+                    //    qCInfo(appLog)<<QStringLiteral("<c s=\"%1\">Invalid style index: ").arg(idx)<<idx;
                 }
 
                 Cell::CellType cellType = Cell::NumberType;
@@ -2088,7 +2091,7 @@ void WorksheetPrivate::loadXmlMergeCells(QXmlStreamReader &reader)
     }
 
     if (merges.size() != count)
-        qDebug("read merge cells error");
+        qCDebug(appLog)<<"read merge cells error";
 }
 
 void WorksheetPrivate::loadXmlDataValidations(QXmlStreamReader &reader)
@@ -2107,7 +2110,7 @@ void WorksheetPrivate::loadXmlDataValidations(QXmlStreamReader &reader)
     }
 
     if (dataValidationsList.size() != count)
-        qDebug("read data validation error");
+        qCDebug(appLog)<<"read data validation error";
 }
 
 void WorksheetPrivate::loadXmlSheetViews(QXmlStreamReader &reader)

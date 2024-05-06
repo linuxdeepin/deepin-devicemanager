@@ -17,7 +17,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPainter>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QHeaderView>
 
 PageTableWidget::PageTableWidget(DWidget *parent)

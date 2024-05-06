@@ -9,7 +9,7 @@
 #include "environments.h"
 #include "DebugTimeManager.h"
 #include "SingleDeviceManager.h"
-
+#include "DDLog.h"
 #include <DApplication>
 #include <DWidgetUtil>
 #include <DLog>
@@ -20,6 +20,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <DLog>
+
+using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
 
@@ -33,6 +36,8 @@ const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/Notification";
 const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
 #endif
 
+DCORE_USE_NAMESPACE
+
 void notify(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
@@ -42,6 +47,15 @@ int main(int argc, char *argv[])
         notify(argc, argv);
         return -1;
     }
+
+    #if (DTK_VERSION >= DTK_VERSION_CHECK(5, 6, 8, 0))
+        Dtk::Core::DLogManager::registerJournalAppender();
+    #else
+        Dtk::Core::DLogManager::registerFileAppender();
+    #endif
+    #ifdef QT_DEBUG
+        Dtk::Core::DLogManager::registerConsoleAppender();
+    #endif
 
     if (!QString(qgetenv("XDG_CURRENT_DESKTOP")).toLower().startsWith("deepin")) {
         setenv("XDG_CURRENT_DESKTOP", "Deepin", 1);
@@ -91,7 +105,7 @@ int main(int argc, char *argv[])
             if (parser.positionalArguments().size() > 0) {
                 var = parser.positionalArguments().at(0);
             }
-            qInfo() << var;
+            qCInfo(appLog) << var;
             QDBusInterface notification("com.deepin.DeviceManagerNotify", "/com/deepin/DeviceManagerNotify", "com.deepin.DeviceManagerNotify", QDBusConnection::sessionBus());
             QDBusMessage msg = notification.call(QDBus::AutoDetect, "startDeviceManager", var);
             return 0;

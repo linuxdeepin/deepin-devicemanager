@@ -29,9 +29,11 @@
 #include <QDir>
 #include <QFile>
 #include <QDateTime>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QBuffer>
+#include "DDLog.h"
 
+using namespace DDLog;
 namespace QXlsx {
 
 DocPropsCore::DocPropsCore(CreateFlag flag)
@@ -158,7 +160,7 @@ bool DocPropsCore::loadFromXmlFile(QIODevice *device)
          }
 
          if (reader.hasError()) {
-             qInfo()<<"Error when read doc props core file."<<reader.errorString();
+             qCInfo(appLog)<<"Error when read doc props core file."<<reader.errorString();
 
          }
     }

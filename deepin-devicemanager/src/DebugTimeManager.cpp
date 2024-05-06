@@ -4,7 +4,10 @@
 
 #include "DebugTimeManager.h"
 #include <QDateTime>
-#include <QDebug>
+#include <QLoggingCategory>
+#include "DDLog.h"
+
+using namespace DDLog;
 
 #include <sys/time.h>
 
@@ -42,6 +45,6 @@ void DebugTimeManager::endPointLinux(const QString &point, const QString &sub)
             m_MapPoint[point].time = m_MapPoint[point].time - m_MapPoint[sub].time;
         }
 
-        qInfo() << QString("[GRABPOINT] %1 %2 time=%3ms").arg(point).arg(m_MapPoint[point].desc).arg(m_MapPoint[point].time);
+        qCInfo(appLog) << QString("[GRABPOINT] %1 %2 time=%3ms").arg(point).arg(m_MapPoint[point].desc).arg(m_MapPoint[point].time);
     }
 }

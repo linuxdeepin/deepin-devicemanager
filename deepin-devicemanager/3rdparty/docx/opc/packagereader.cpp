@@ -8,7 +8,7 @@
 #include "serializedrelationships.h"
 #include "packuri.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 
 
 namespace Docx {

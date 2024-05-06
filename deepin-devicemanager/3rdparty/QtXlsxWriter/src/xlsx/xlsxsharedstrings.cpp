@@ -31,8 +31,11 @@
 #include <QXmlStreamReader>
 #include <QDir>
 #include <QFile>
-#include <QDebug>
+#include <QLoggingCategory>
+#include "DDLog.h"
 #include <QBuffer>
+
+using namespace DDLog;
 
 namespace QXlsx {
 
@@ -84,7 +87,7 @@ int SharedStrings::addSharedString(const RichString &string)
 void SharedStrings::incRefByStringIndex(int idx)
 {
     if (idx <0 || idx >= m_stringList.size()) {
-        qDebug("SharedStrings: invlid index");
+        qCDebug(appLog)<<"SharedStrings: invlid index";
         return;
     }
 
@@ -385,12 +388,12 @@ bool SharedStrings::loadFromXmlFile(QIODevice *device)
     }
 
     if (hasUniqueCountAttr && m_stringList.size() != count) {
-        qDebug("Error: Shared string count");
+        qCDebug(appLog)<<"Error: Shared string count";
         return false;
     }
 
     if (m_stringList.size() != m_stringTable.size()) {
-        //qDebug("Warning: Duplicated items exist in shared string table.");
+        //qCDebug(appLog)<<"Warning: Duplicated items exist in shared string table.";
         //Nothing we can do here, as indices of the strings will be used when loading sheets.
     }
 

@@ -30,7 +30,7 @@
 #include <DSysInfo>
 
 // Qt库文件
-#include <QDebug>
+#include <QLoggingCategory>
 
 DeviceGenerator::DeviceGenerator(QObject *parent)
     : QObject(parent)

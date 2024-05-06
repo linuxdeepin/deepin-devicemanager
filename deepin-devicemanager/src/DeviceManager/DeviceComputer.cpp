@@ -7,7 +7,7 @@
 
 // Qt库文件
 #include <QMap>
-#include <QDebug>
+#include <QLoggingCategory>
 
 DeviceComputer::DeviceComputer()
     : m_HomeUrl("")

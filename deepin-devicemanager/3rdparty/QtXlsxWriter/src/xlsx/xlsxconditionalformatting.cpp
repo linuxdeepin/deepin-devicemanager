@@ -31,8 +31,8 @@
 
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
-#include <QDebug>
-
+#include <QLoggingCategory>
+#include "DDLog.h"
 QT_BEGIN_NAMESPACE_XLSX
 
 ConditionalFormattingPrivate::ConditionalFormattingPrivate()

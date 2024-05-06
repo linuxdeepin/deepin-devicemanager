@@ -18,6 +18,7 @@
 #include "CmdTool.h"
 #include "commonfunction.h"
 #include "DriverScanWidget.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DFileDialog>
@@ -34,7 +35,7 @@
 // Qt库文件
 #include <QResizeEvent>
 #include <QDateTime>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -44,7 +45,7 @@
 #include <QTimer>
 
 DWIDGET_USE_NAMESPACE
-
+using namespace DDLog;
 // 主界面需要的一些宏定义
 #define INIT_WIDTH  1000    // 窗口的初始化宽度
 #define INIT_HEIGHT 720     // 窗口的初始化高度
@@ -425,7 +426,7 @@ void MainWindow::initWindowTitle()
     if(dconfig && dconfig->isValid() && dconfig->keyList().contains("specialComType")){
         Common::specialComType = dconfig->value("specialComType").toInt();
     }
-    qInfo() << "Common::specialComType value is:" << Common::specialComType;
+    qCInfo(appLog) << "Common::specialComType value is:" << Common::specialComType;
 #endif
     // 特殊处理
     if (!Common::boardVendorType().isEmpty())
@@ -579,7 +580,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
             if (!info.toInt()) {
                 refreshDataBaseLater();
             }
-            qDebug()<< "Monitor refreshInfo" << __LINE__  << QDateTime::currentDateTime().toString("hh:mm:ss") << info << monitorNumber;
+            qCDebug(appLog)<< "Monitor refreshInfo" << __LINE__  << QDateTime::currentDateTime().toString("hh:mm:ss") << info << monitorNumber;
             monitorNumber = txgpu.getMonitorNumber();
         }
 

@@ -19,6 +19,7 @@
 #include "PageDriverInstallInfo.h"
 #include "PageDriverBackupInfo.h"
 #include "PageDriverRestoreInfo.h"
+#include "DDLog.h"
 
 #include <DScrollArea>
 #include <DApplicationHelper>
@@ -35,7 +36,8 @@
 #include <QProcess>
 
 #include <unistd.h>
-
+#include <QLoggingCategory>
+using namespace DDLog;
 PageDriverManager::PageDriverManager(DWidget *parent)
     : DWidget(parent)
     , mp_StackWidget(new DStackedWidget(this))
@@ -270,7 +272,7 @@ void PageDriverManager::slotDownloadProgressChanged(QStringList msg)
 {
     if (! mp_CurDriverInfo)
         return;
-    // 将下载过程时时更新到表格上方的状态里面 qInfo() << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
+    // 将下载过程时时更新到表格上方的状态里面 qCInfo(appLog) << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
     mp_DriverInstallInfoPage->headWidget()->setDownloadUI(mp_CurDriverInfo->type(), msg[2], msg[1], mp_CurDriverInfo->size(), msg[0].toInt());
     // 设置表格下载中的状态
 }
@@ -562,7 +564,7 @@ void PageDriverManager::slotRestoreFinished(bool success, QString msg)
                     int clickedButtonIndex = mp_FailedDialog->exec();
                     if (1 == clickedButtonIndex) {
                         //反馈
-                        qDebug() << __func__ << "fedback....";
+                        qCDebug(appLog) << __func__ << "fedback....";
                         CommonTools::feedback();
                     }
                 }
@@ -645,7 +647,7 @@ void PageDriverManager::backupNextDriver()
         DriverInfo *info = m_ListDriverInfo[m_CurBackupIndex];
         if (info) {
             mp_CurBackupDriverInfo = info;
-            qDebug() << __func__ << "backup driver: " << mp_CurBackupDriverInfo->name();
+            qCDebug(appLog) << __func__ << "backup driver: " << mp_CurBackupDriverInfo->name();
             mp_CurBackupDriverInfo->m_Status = ST_DRIVER_BACKING_UP;
             mp_DriverBackupInfoPage->updateItemStatus(m_CurBackupIndex, mp_CurBackupDriverInfo->status());
             mp_DriverBackupInfoPage->headWidget()->setBackingUpDriverUI(mp_CurBackupDriverInfo->name(),
@@ -801,11 +803,11 @@ void PageDriverManager::scanDevicesInfo(const QString &deviceType, DriverType dr
             info->m_DriverName = device->driver();                 // 驱动名称
             info->m_Version = device->getDriverVersion();          // 驱动版本
 
-            qInfo() << "m_Name" << info->m_Name;
-            qInfo() << "m_VendorId" << info->m_VendorId;
-            qInfo() << "m_ModelId" << info->m_ModelId;
-            qInfo() << "m_Status" << info->m_Status;
-            qInfo() << "m_Type" << info->m_Type;
+            qCInfo(appLog) << "m_Name" << info->m_Name;
+            qCInfo(appLog) << "m_VendorId" << info->m_VendorId;
+            qCInfo(appLog) << "m_ModelId" << info->m_ModelId;
+            qCInfo(appLog) << "m_Status" << info->m_Status;
+            qCInfo(appLog) << "m_Type" << info->m_Type;
 
             DevicePrint *print = dynamic_cast<DevicePrint *>(device);
             if (print != nullptr) {

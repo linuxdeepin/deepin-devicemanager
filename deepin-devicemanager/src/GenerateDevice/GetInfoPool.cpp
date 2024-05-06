@@ -5,7 +5,7 @@
 #include "GetInfoPool.h"
 
 #include <QObjectCleanupHandler>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include "CmdTool.h"
 #include "DeviceManager.h"

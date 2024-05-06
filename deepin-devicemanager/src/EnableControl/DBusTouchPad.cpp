@@ -8,7 +8,7 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QDBusInterface>
 
 #ifdef OS_BUILD_V23

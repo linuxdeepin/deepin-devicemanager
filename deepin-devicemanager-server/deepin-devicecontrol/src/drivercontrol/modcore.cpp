@@ -5,13 +5,16 @@
 #ifndef DISABLE_DRIVER
 
 #include "modcore.h"
+#include "DDLog.h"
 
 #include <QFile>
 #include <QDir>
 #include <QFileInfo>
 #include <QTextStream>
 #include <QProcess>
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 const QString  BLACKLISTT_PROBE_DIR_ETC = "/etc/modprobe.d";   //黑名单配置路径
 const QString  BLACKLISTT_PROBE_DIR_USR_LIB = "/usr/lib/modprobe.d";  //黑名单配置路径
@@ -38,28 +41,28 @@ QStringList ModCore::checkModuleInUsed(const QString &modName)
 
     ctx = kmod_new(nullptr, null_config);
     if (!ctx) {
-        qInfo() << "kmod_new() failed!";
+        qCInfo(appLog) << "kmod_new() failed!";
     } else {
         int err = 0;
         struct kmod_module *mod = nullptr;
         err = modNew(ctx, modName, mod);
 
         if (err < 0) {
-            qInfo() << "modulename=" << modName << "modNew failed errcode=" << err;
+            qCInfo(appLog) << "modulename=" << modName << "modNew failed errcode=" << err;
         } else {
             struct kmod_list *holders = nullptr;
             int state = 0;
             state = kmod_module_get_initstate(mod);
 
             if (state == KMOD_MODULE_BUILTIN) {
-                qInfo() << QString("Module %1 is builtin.").arg(kmod_module_get_name(mod)) << " errcode=" << -ENOENT;
+                qCInfo(appLog) << QString("Module %1 is builtin.").arg(kmod_module_get_name(mod)) << " errcode=" << -ENOENT;
             } else if (state < 0) {
-                qInfo() << QString("Module %1 is not currently loaded").arg(kmod_module_get_name(mod)) << " errcode=" << -ENOENT;
+                qCInfo(appLog) << QString("Module %1 is not currently loaded").arg(kmod_module_get_name(mod)) << " errcode=" << -ENOENT;
             } else {
                 holders = kmod_module_get_holders(mod);
                 if (holders != nullptr) {
                     struct kmod_list *itr;
-                    qInfo() << QString("Module %1 is in use by:").arg(kmod_module_get_name(mod));
+                    qCInfo(appLog) << QString("Module %1 is in use by:").arg(kmod_module_get_name(mod));
                     kmod_list_foreach(itr, holders) {
                         struct kmod_module *hm = kmod_module_get_module(itr);
                         modList.append(QString("%1").arg(kmod_module_get_name(hm)));
@@ -91,7 +94,7 @@ bool ModCore::rmModForce(const QString &modName, QString &errMsg)
     ctx = kmod_new(nullptr, null_config);
     if (!ctx) {
         bsuccess = false;
-        qInfo() << __func__ << "kmod_new() failed!";
+        qCInfo(appLog) << __func__ << "kmod_new() failed!";
     } else {
         int err = 0;
         struct kmod_module *mod = nullptr;
@@ -99,14 +102,14 @@ bool ModCore::rmModForce(const QString &modName, QString &errMsg)
 
         if (err < 0) {
             bsuccess = false;
-            qInfo() << __func__ << "modulename=" << modName << "modNew failed errcode=" << err;
+            qCInfo(appLog) << __func__ << "modulename=" << modName << "modNew failed errcode=" << err;
             errMsg = QString("%1").arg(abs(err));
         } else {
             err = kmod_module_remove_module(mod, KMOD_REMOVE_NOWAIT);
             if (err < 0) {
                 errMsg = QString("%1").arg(abs(err));
                 bsuccess = false;
-                qInfo() << __func__ << QString("could not remove module %1: %1\n").arg(modName).arg(err);
+                qCInfo(appLog) << __func__ << QString("could not remove module %1: %1\n").arg(modName).arg(err);
             }
             kmod_module_unref(mod);
         }
@@ -130,7 +133,7 @@ bool ModCore::modInstall(const QString &modName, QString &errMsg, unsigned int f
     ctx = kmod_new(nullptr, null_config);
     if (!ctx) {
         success = false;
-        qInfo() << __func__ << "kmod_new() failed!";
+        qCInfo(appLog) << __func__ << "kmod_new() failed!";
     } else {
         int err = 0;
         struct kmod_list *modlist = nullptr;
@@ -143,14 +146,14 @@ bool ModCore::modInstall(const QString &modName, QString &errMsg, unsigned int f
                 if (err < 0) {
                     errMsg = QString("%1").arg(abs(err));
                     success = false;
-                    qInfo() << __func__ << QString("could not insert module %1: %1\n").arg(modName).arg(err);
+                    qCInfo(appLog) << __func__ << QString("could not insert module %1: %1\n").arg(modName).arg(err);
                 }
                 kmod_module_unref(mod);
                 break; //出错一次直接错误返回
             }
             kmod_module_unref_list(modlist);
         } else {
-            qInfo() << __func__ << QString("Mod %1 not found in directory %2").arg(modName).arg(kmod_get_dirname(ctx));
+            qCInfo(appLog) << __func__ << QString("Mod %1 not found in directory %2").arg(modName).arg(kmod_get_dirname(ctx));
             success = false;
         }
 
@@ -172,14 +175,14 @@ QString ModCore::modGetPath(const QString &modName)
 
     ctx = kmod_new(nullptr, null_config);
     if (!ctx) {
-        qInfo() << __func__ << "kmod_new() failed!";
+        qCInfo(appLog) << __func__ << "kmod_new() failed!";
     } else {
         int err = 0;
         struct kmod_module *mod = nullptr;
         err = modNew(ctx, modName, mod);
 
         if (err < 0) {
-            qInfo() << __func__ << "modulename=" << modName << "modNew failed errcode=" << err;
+            qCInfo(appLog) << __func__ << "modulename=" << modName << "modNew failed errcode=" << err;
         } else {
             path.append(kmod_module_get_path(mod));
             kmod_module_unref(mod);
@@ -202,14 +205,14 @@ QString ModCore::modGetName(const QString &modPath)
 
     ctx = kmod_new(nullptr, null_config);
     if (!ctx) {
-        qInfo() << __func__ << "kmod_new() failed!";
+        qCInfo(appLog) << __func__ << "kmod_new() failed!";
     } else {
         int err = 0;
         struct kmod_module *mod = nullptr;
         err = modNew(ctx, modPath, mod);
 
         if (err < 0) {
-            qInfo() << __func__ << "modulepath=" << modPath << "modNew failed errcode=" << err;
+            qCInfo(appLog) << __func__ << "modulepath=" << modPath << "modNew failed errcode=" << err;
         } else {
             modname.append(kmod_module_get_name(mod));
             kmod_module_unref(mod);
@@ -233,7 +236,7 @@ QString ModCore::modGetInfo(const QString &modName, ModCore::ModInfoType infotyp
 
     ctx = kmod_new(nullptr, null_config);
     if (!ctx) {
-        qInfo() << __func__ << "kmod_new() failed!";
+        qCInfo(appLog) << __func__ << "kmod_new() failed!";
         return QString();
     } else {
         int err = 0;
@@ -241,13 +244,13 @@ QString ModCore::modGetInfo(const QString &modName, ModCore::ModInfoType infotyp
         err = modNew(ctx, modName, mod);
 
         if (err < 0) {
-            qInfo() << __func__ << "modName=" << modName << "modNew failed errcode=" << err;
+            qCInfo(appLog) << __func__ << "modName=" << modName << "modNew failed errcode=" << err;
             return QString();
         } else {
             struct kmod_list *modlist = nullptr;
             err = kmod_module_get_info(mod, &modlist);
             if (err < 0) {
-                qInfo() << __func__ << QString("could not get mod info from %1, errno=%2")
+                qCInfo(appLog) << __func__ << QString("could not get mod info from %1, errno=%2")
                         .arg(kmod_module_get_name(mod)).arg(err);
                 return QString();
             }
@@ -260,7 +263,7 @@ QString ModCore::modGetInfo(const QString &modName, ModCore::ModInfoType infotyp
                     modinfo = QString(value);
                     break;//找到直接结束查找
                 }
-                qInfo() << key << value;
+                qCInfo(appLog) << key << value;
             }
 
             kmod_module_info_free_list(modlist);
@@ -569,7 +572,7 @@ bool ModCore::isModFile(const QString &filePath)
         }
         kmod_unref(ctx);
     }
-    qInfo() << "" << bmodfile;
+    qCInfo(appLog) << "" << bmodfile;
     return bmodfile;
 }
 

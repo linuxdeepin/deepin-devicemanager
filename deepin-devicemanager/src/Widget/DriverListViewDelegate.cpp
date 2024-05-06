@@ -14,7 +14,7 @@
 #include <DFontSizeManager>
 
 // Qt
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QModelIndex>
 #include <QPainter>
 #include <QStyleOptionViewItem>

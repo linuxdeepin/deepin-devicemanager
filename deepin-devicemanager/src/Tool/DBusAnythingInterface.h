@@ -10,7 +10,7 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include <mutex>
 

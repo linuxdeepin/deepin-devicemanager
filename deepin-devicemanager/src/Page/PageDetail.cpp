@@ -20,7 +20,7 @@
 #include <QHBoxLayout>
 #include <QPainter>
 #include <QPalette>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QScrollBar>
 #include <QAction>
 #include <QClipboard>

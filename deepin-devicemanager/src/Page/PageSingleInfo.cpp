@@ -13,6 +13,7 @@
 #include "DeviceNetwork.h"
 #include "DBusWakeupInterface.h"
 #include "RichTextDelegate.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -27,10 +28,12 @@
 #include <QVBoxLayout>
 #include <QClipboard>
 #include <QProcess>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #define WAKEUP_OPEN 3
 #define WAKEUP_CLOSE 4
+
+using namespace DDLog;
 
 PageSingleInfo::PageSingleInfo(QWidget *parent)
     : PageInfo(parent)
@@ -315,7 +318,7 @@ void PageSingleInfo::slotActionUpdateDriver()
     //打印设备更新驱动时，通过dde-printer来操作
     if (mp_Device->hardwareClass() == "printer") {
         if (!QProcess::startDetached("dde-printer"))
-            qInfo() << "dde-printer startDetached error";
+            qCInfo(appLog) << "dde-printer startDetached error";
         return;
     }
     PageDriverControl *installDriver = new PageDriverControl(this, tr("Update Drivers"), true, mp_Device->name(), "");

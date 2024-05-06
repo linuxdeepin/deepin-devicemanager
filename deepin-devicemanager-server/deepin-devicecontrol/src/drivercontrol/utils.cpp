@@ -3,16 +3,19 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "utils.h"
+#include "DDLog.h"
 
 #include <QProcess>
 #include <QDir>
 #include <QUuid>
 #include <QFile>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include <sys/utsname.h>
 #include <unistd.h>
 #include <fcntl.h>
+
+using namespace DDLog;
 
 const QString BLACKLIST_CONF = "/etc/modprobe.d/blacklist-devicemanager.conf";
 
@@ -67,7 +70,7 @@ QString Utils::machineArch()
     struct utsname name;
     uname(&name);
     QString strArch(name.machine);
-    qInfo() << name.machine << name.sysname << name.domainname << name.nodename << name.release;
+    qCInfo(appLog) << name.machine << name.sysname << name.domainname << name.nodename << name.release;
 
     return  strArch;
 }
@@ -117,7 +120,7 @@ bool Utils::isDriverPackage(const QString &filepath)
             if (process.waitForFinished()) {
                 //获取查找结果，有结果不为空
                 QString strKeyContent = process.readAllStandardOutput();
-                qInfo() << strKeyContent;
+                qCInfo(appLog) << strKeyContent;
                 if (!strKeyContent.isEmpty()) {
                     bsuccess = true;
                 }
@@ -171,7 +174,7 @@ bool Utils::isFileLocked(const QString &filepath, bool bread)
 
     if (-1 == fcntl(fd, F_SETLK, &fl)) {
         //设置失败，文件已被锁住
-        qInfo() << __func__ << "file already locked";
+        qCInfo(appLog) << __func__ << "file already locked";
         return true;
     }
     //file not locked,set lock success

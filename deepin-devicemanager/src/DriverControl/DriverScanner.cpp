@@ -6,7 +6,7 @@
 #include "DeviceManager.h"
 #include "HttpDriverInterface.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 
 #include <unistd.h>

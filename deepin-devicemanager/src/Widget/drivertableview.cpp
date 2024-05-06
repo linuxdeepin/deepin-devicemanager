@@ -12,7 +12,7 @@
 
 #include <QApplication>
 #include <QMouseEvent>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QPainter>
 #include <QHeaderView>
 #include <QPainterPath>

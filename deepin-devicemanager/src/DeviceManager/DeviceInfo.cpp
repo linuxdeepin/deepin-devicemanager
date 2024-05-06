@@ -6,12 +6,15 @@
 #include "DeviceInfo.h"
 #include "commondefine.h"
 #include"DeviceManager.h"
+#include "DDLog.h"
 
 #include <DApplication>
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 #include <QMap>
+
+using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
 
@@ -430,19 +433,19 @@ TomlFixMethod DeviceBaseInfo::setInfoFromTomlBase(const QMap<QString, QString> &
     TomlFixMethod ret2 = TOML_None;
 
     if (TOML_nouse == setTomlAttribute(mapInfo, "Modalias", m_Modalias)) {
-        qInfo() << "toml del the device by modalias";
+        qCInfo(appLog) << "toml del the device by modalias";
         return TOML_Del;
     }
     ret1 = setTomlAttribute(mapInfo,  "Vendor_ID", m_VID);
     ret2 = setTomlAttribute(mapInfo, "Product_ID", m_PID);
     if ((TOML_nouse == ret1) && (TOML_nouse == ret2)) {
-        qInfo() << "toml del the device by vid and pid";
+        qCInfo(appLog) << "toml del the device by vid and pid";
         return TOML_Del;
     }
     ret1 = setTomlAttribute(mapInfo,  "Vendor", m_Vendor);
     ret2 = setTomlAttribute(mapInfo, "Name", m_Name);
     if ((TOML_nouse == ret1) && (TOML_nouse == ret2)) {
-        qInfo() << "toml del the device by vendor and name";
+        qCInfo(appLog) << "toml del the device by vendor and name";
         return TOML_Del;
     }
 

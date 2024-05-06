@@ -4,8 +4,11 @@
 
 #include "corecpu.h"
 #include "logicalcpu.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 CoreCpu::CoreCpu()
     : m_CoreId(-1)
@@ -102,9 +105,9 @@ int CoreCpu::logicalNum()
 }
 void CoreCpu::diagPrintInfo()
 {
-    qInfo() << "CoreCpu m_CoreId: ***************** " << m_CoreId;
+    qCInfo(appLog) << "CoreCpu m_CoreId: ***************** " << m_CoreId;
     foreach (int id, m_MapLogicalCpu.keys()) {
-        qInfo() << "m_MapPhysicalCpu id: ***************** " << id;
+        qCInfo(appLog) << "m_MapPhysicalCpu id: ***************** " << id;
         LogicalCpu &lc = m_MapLogicalCpu[id];
         lc.diagPrintInfo();
     }

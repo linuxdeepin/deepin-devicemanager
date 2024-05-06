@@ -7,7 +7,7 @@
 #include "DBusEnableInterface.h"
 
 // Qt库文件
-#include <QDebug>
+#include <QLoggingCategory>
 
 DevicePrint::DevicePrint()
     : DeviceBaseInfo()
