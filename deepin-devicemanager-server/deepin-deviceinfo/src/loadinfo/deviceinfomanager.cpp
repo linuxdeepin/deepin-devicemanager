@@ -5,7 +5,7 @@
 #include "deviceinfomanager.h"
 
 #include <QMutex>
-#include <QDebug>
+#include <QLoggingCategory>
 
 QMutex mutex;
 std::atomic<DeviceInfoManager *> DeviceInfoManager::s_Instance;

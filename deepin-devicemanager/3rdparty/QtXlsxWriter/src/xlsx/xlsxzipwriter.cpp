@@ -23,7 +23,8 @@
 **
 ****************************************************************************/
 #include "xlsxzipwriter_p.h"
-#include <QDebug>
+#include <QLoggingCategory>
+#include "DDLog.h"
 #include <private/qzipwriter_p.h>
 
 namespace QXlsx {

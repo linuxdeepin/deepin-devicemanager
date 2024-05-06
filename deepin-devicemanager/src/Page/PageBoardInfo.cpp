@@ -19,7 +19,7 @@
 
 // Qt库文件
 #include <QTableWidgetItem>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include <unistd.h>
 
@@ -116,7 +116,7 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 //        int height = 0;
 //        QStringList strList = pairs[i - lst.size()].second.split("\n");
 //        int fontHeight = fm.boundingRect(pairs[i - lst.size()].second).height()/* + 2*/;
-//        //qInfo() << strList;
+//        //qCInfo(appLog) << strList;
 //        // 根据行数增加行高
 //        foreach (const QString &str, strList) {
 //            QStringList lst = str.split(":");

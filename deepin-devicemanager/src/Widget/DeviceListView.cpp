@@ -12,7 +12,7 @@
 // Qt库文件
 #include <qdrawutil.h>
 #include <QPainter>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QKeyEvent>
 #include <QPainterPath>
 

@@ -3,12 +3,15 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "cpuinfo.h"
+#include "DDLog.h"
 
 #include <QFile>
 #include <QDir>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include <sys/utsname.h>
+
+using namespace DDLog;
 
 CpuInfo::CpuInfo()
     : m_Arch("unknow")
@@ -409,7 +412,7 @@ void CpuInfo::readCpuFreq(const QString &path, LogicalCpu &lcpu)
 void CpuInfo::diagPrintInfo()
 {
     foreach (int id, m_MapPhysicalCpu.keys()) {
-        qInfo() << "m_MapPhysicalCpu id: ***************** " << id;
+        qCInfo(appLog) << "m_MapPhysicalCpu id: ***************** " << id;
         PhysicalCpu &pc = m_MapPhysicalCpu[id];
         pc.diagPrintInfo();
     }

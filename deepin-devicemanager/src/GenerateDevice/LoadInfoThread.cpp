@@ -10,7 +10,7 @@
 
 #include <DApplication>
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QDateTime>
 #include <QTimer>
 

@@ -5,10 +5,12 @@
 #include "table.h"
 #include "text.h"
 #include "./parts/documentpart.h"
+#include "DDLog.h"
 
 #include <QVector>
-#include <QDebug>
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 namespace Docx {
 
@@ -39,7 +41,7 @@ void Table::loadExistRowElement()
                 continue;
             Row *row = new Row(rowEle, this);
             m_rows.append(row);
-            qInfo() << m_rows.count();
+            qCInfo(appLog) << m_rows.count();
         }
     }
 }
@@ -197,7 +199,7 @@ void Row::loadExistElement()
             }
 
     }
-    //qInfo() << "Current row's cell count" << m_cells.count();
+    //qCInfo(appLog) << "Current row's cell count" << m_cells.count();
 }
 
 void Row::addTc()

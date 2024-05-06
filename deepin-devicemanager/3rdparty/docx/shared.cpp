@@ -3,11 +3,14 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "shared.h"
+#include "DDLog.h"
 
 #include <QCryptographicHash>
 #include <QBuffer>
 #include <QFile>
-#include <QDebug>
+#include <QLoggingCategory>
+
+using namespace DDLog;
 
 namespace Docx{
 
@@ -99,12 +102,12 @@ QByteArray byteHash(const QByteArray &bytes)
 InvalidSpanError::InvalidSpanError(const QString &errorStr)
     : m_error(errorStr)
 {
-    qInfo() << m_error;
+    qCInfo(appLog) << m_error;
 }
 
 void InvalidSpanError::raise() const
 {
-    qInfo() << m_error;
+    qCInfo(appLog) << m_error;
     throw *this;
 }
 

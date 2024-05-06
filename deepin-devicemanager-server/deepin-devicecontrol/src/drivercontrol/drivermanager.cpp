@@ -11,6 +11,7 @@
 #include "driverinstaller.h"
 //#include "DeviceInfoManager.h"
 #include "httpdriverinterface.h"
+#include "DDLog.h"
 
 #include <QThread>
 #include <QFile>
@@ -18,7 +19,7 @@
 #include <QMimeType>
 #include <QDir>
 #include <QFileInfo>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QPair>
 #include <QJsonObject>
 #include <QNetworkAccessManager>
@@ -34,7 +35,7 @@
 #include <QNetworkConfigurationManager>
 #include <QDir>
 #include <QFileInfoList>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include <fstream>
 #include <string>
@@ -63,6 +64,7 @@
         sigFinished(flag, errmsg);\
         return flag; \
     }
+using namespace DDLog;
 
 DriverManager::DriverManager(QObject *parent)
     : QObject(parent)
@@ -105,7 +107,7 @@ void DriverManager::initConnections()
         sigProgressDetail(m_installprocess, errmsg);
     });
     connect(mp_debinstaller, &DebInstaller::errorOccurred, [&](QString errmsg) {
-        qInfo() << "signal_installFailedReason:" << errmsg;
+        qCInfo(appLog) << "signal_installFailedReason:" << errmsg;
         sigFinished(false, errmsg);
         this->errmsg = errmsg;
     });
@@ -115,15 +117,15 @@ void DriverManager::initConnections()
     connect(mp_driverInstaller, &DriverInstaller::installProgressFinished, [&](bool bsuccess) {
         if (bsuccess) {
             sigInstallProgressFinished(bsuccess, EC_NULL);
-            qInfo() << "Driver installed successfully";
+            qCInfo(appLog) << "Driver installed successfully";
         } else {
-            qInfo() << "Driver installation failed , reason : unknow";
+            qCInfo(appLog) << "Driver installation failed , reason : unknow";
         }
     });
 
     connect(mp_driverInstaller, &DriverInstaller::errorOccurred, [this](int err) {
         if (EC_NETWORK != err) {
-            qInfo() << "Driver installation failed , reason : " << err;
+            qCInfo(appLog) << "Driver installation failed , reason : " << err;
             sigInstallProgressFinished(false, err);
             return;
         }
@@ -131,7 +133,7 @@ void DriverManager::initConnections()
         // 如果错误是网络异常，则需要尝试60s
         // 先通知前台网络异常
         sigInstallProgressFinished(false, EC_NOTIFY_NETWORK);
-        qInfo() << "Network error : We are listening to the network";
+        qCInfo(appLog) << "Network error : We are listening to the network";
 
         // 60s等待操作
         m_IsNetworkOnline = false;
@@ -157,7 +159,7 @@ void DriverManager::initConnections()
 
     connect(mp_driverInstaller, &DriverInstaller::installProgressChanged, [&](int progress) {
         sigInstallProgressChanged(progress);
-        qInfo() << "Installing driver ,  installation progress : " << progress;
+        qCInfo(appLog) << "Installing driver ,  installation progress : " << progress;
     });
 }
 
@@ -239,7 +241,7 @@ bool DriverManager::installDriver(const QString &filepath)
     QMimeDatabase typedb;
     QMimeType filetype = typedb.mimeTypeForFile(fileinfo);
     if (filetype.filterString().contains("deb")) {
-        qInfo() << __func__ << "deb install start";
+        qCInfo(appLog) << __func__ << "deb install start";
         sigProgressDetail(15, "");
         emit sigDebInstall(filepath);
         sigProgressDetail(20, "");
@@ -645,13 +647,13 @@ static bool qdelDirectory(QString toDir)
 
         //拷贝子目录
         if (fileInfo.isDir())  {
-            qInfo() << "del isDir";
+            qCInfo(appLog) << "del isDir";
             //递归调用拷贝
             if (!qdelDirectory(toDir_.filePath(fileInfo.fileName())))
                 return false;
         } else {
             toDir_.remove(fileInfo.fileName());
-            qInfo() << "del remove";
+            qCInfo(appLog) << "del remove";
         }
     }
     return true;
@@ -704,7 +706,7 @@ bool DriverManager::delDeb(const QString &debname)
     QString backupPath =  QString("%1/driver/%2").arg(DB_PATH).arg(debname);
     QDir destdir(backupPath);
     if (destdir.exists()) {
-        qInfo() << "delDeb" << backupPath << destdir.absolutePath();
+        qCInfo(appLog) << "delDeb" << backupPath << destdir.absolutePath();
         qdelDirectory(backupPath);
         destdir.rmdir(destdir.absolutePath());
     }
@@ -718,7 +720,7 @@ bool DriverManager::aptUpdate()
         QByteArray outArry = process.readAllStandardOutput();
         QList<QString> lines = QString(outArry).split('\n', QString::SkipEmptyParts);
         for (const QString &line : qAsConst(lines)) {
-            // qDebug() << line;
+            // qCDebug() << line;
             // error handling...
         }
     }); */
@@ -737,7 +739,7 @@ bool DriverManager::backupDeb(const QString &debpath)
 {
     QDir formDir_(debpath);
     if (!formDir_.exists()) { //检查传入路径是否存在
-        qInfo() << "no bank up file";
+        qCInfo(appLog) << "no bank up file";
         return false;
     }
 
@@ -758,7 +760,7 @@ bool DriverManager::backupDeb(const QString &debpath)
                 return false;
         }
     }
-    qInfo() << "copy  file" << fromPath << backupPath << debname;
+    qCInfo(appLog) << "copy  file" << fromPath << backupPath << debname;
     return qCopyDirectory(fromPath, backupPath, true);
 }
 

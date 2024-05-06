@@ -102,6 +102,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/Qt
 include_directories("/usr/include/cups/")
 link_libraries("cups")
 
+include_directories(${CMAKE_CURRENT_LIST_DIR}/src/DDLog/)
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
 
@@ -136,7 +137,6 @@ target_link_libraries(${APP_BIN_NAME}
 
 # Install files
 install(TARGETS deepin-devicemanager DESTINATION ${CMAKE_INSTALL_BINDIR})
-
 file(GLOB APP_QM_FILES "translations/*.qm")
 install(FILES ${APP_QM_FILES} DESTINATION ${CMAKE_INSTALL_DATADIR}/deepin-devicemanager/translations)
 install(FILES ${APP_DESKTOP} DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
@@ -144,7 +144,7 @@ install(FILES ${APP_ICON_FILE} DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolo
 install(DIRECTORY ${APP_RES_DIR}/deepin-devicemanager DESTINATION ${CMAKE_INSTALL_DATADIR}/deepin-manual/manual-assets/application/)
 install(FILES ${APP_AUTHENTICATION} DESTINATION ${CMAKE_INSTALL_DATADIR}/polkit-1/actions)
 install(FILES ${APP_SERVICE} DESTINATION ${CMAKE_INSTALL_DATADIR}/dbus-1/services)
-
+install(FILES ${CMAKE_SOURCE_DIR}/deepin-devicemanager/assets/deepin-devicemanager.json DESTINATION /usr/share/deepin-log-viewer/deepin-log.conf.d/)
 #hw机型增加DConfig配置
 set(APPID org.deepin.devicemanager)
 set(configFile ${PROJECT_SOURCE_DIR}/assets/org.deepin.devicemanager.json)

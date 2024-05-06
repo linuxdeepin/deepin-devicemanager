@@ -4,9 +4,10 @@
 
 #include "ThreadExecXrandr.h"
 #include "commonfunction.h"
+#include "DDLog.h"
 
 #include <QProcess>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QJsonDocument>
@@ -38,7 +39,7 @@ const QString DISPLAY_DAEMON_INTERFACE = "com.deepin.daemon.Display";
 const QString DISPLAY_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
 const QString DISPLAY_MONITOR_INTERFACE = "com.deepin.daemon.Display.Monitor";
 #endif
-
+using namespace DDLog;
 ThreadExecXrandr::ThreadExecXrandr(bool gpu, bool isDXcbPlatform)
     : m_Gpu(gpu), m_isDXcbPlatform(isDXcbPlatform)
 {
@@ -289,7 +290,7 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
 
         QDBusMessage replay = monitorInterface.call("Get", DISPLAY_MONITOR_INTERFACE, "Modes");
         QVariant v =  replay.arguments().first();
-        qDebug() << v.value<QDBusVariant>().variant();
+        qCDebug(appLog) << v.value<QDBusVariant>().variant();
         QDBusArgument arg = v.value<QDBusVariant>().variant().value<QDBusArgument>();
         arg.beginArray();
         int curMaxResolutionWidth = -1, curMaxResolutionHeight = -1;
@@ -393,7 +394,7 @@ void ThreadExecXrandr::getResolutionRateFromDBus(QList<QMap<QString, QString> > 
 
         QDBusMessage replay = monitorInterface.call("Get", DISPLAY_MONITOR_INTERFACE, "CurrentMode");   // "com.deepin.daemon.Display.Monitor","CurrentMode"
         QVariant v =  replay.arguments().first();
-        qDebug() << v.value<QDBusVariant>().variant();
+        qCDebug(appLog) << v.value<QDBusVariant>().variant();
         QDBusArgument arg = v.value<QDBusVariant>().variant().value<QDBusArgument>();
 
         int curResolutionWidth = -1, curResolutionHeight = -1;

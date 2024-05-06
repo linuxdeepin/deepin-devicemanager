@@ -8,7 +8,10 @@
 #include "cpu/cpuinfo.h"
 #include <sys/utsname.h>
 #include "deviceinfomanager.h"
+#include "DDLog.h"
 #include <cstring>
+
+using namespace DDLog;
 
 class CpuInfo_UT : public UT_HEAD
 {
@@ -39,7 +42,7 @@ TEST_F(CpuInfo_UT, ThreadPoolTask_UT_lscpu)
     CpuInfo cpu;
     if (cpu.loadCpuInfo()) {
 
-        qInfo() << cpu.arch();
+        qCInfo(appLog) << cpu.arch();
         EXPECT_TRUE(!cpu.arch().isEmpty());
 
         QString info;

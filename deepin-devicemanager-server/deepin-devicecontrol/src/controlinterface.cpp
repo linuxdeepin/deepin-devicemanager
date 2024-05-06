@@ -10,8 +10,9 @@
 #include "enablesqlmanager.h"
 #include "enableutils.h"
 #include "wakeuputils.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 #include <QDir>
 #include <QDBusConnection>
@@ -25,7 +26,7 @@
 #include <string>
 
 using namespace PolkitQt1;
-
+using namespace DDLog;
 static int getPidByName(const QString &taskName)
 {
     DIR *dir = opendir("/proc");
@@ -418,7 +419,7 @@ bool ControlInterface::removeEnable(const QString &hclass, const QString &name, 
         // 1. 直接remove写入
         // 通过remove文件禁用
         // 1:表示禁用 ，0:表示启用
-        qInfo() << "" << "/sys" + path + QString("/remove");
+        qCInfo(appLog) << "" << "/sys" + path + QString("/remove");
 //        return false;
         QFile file("/sys" + path + QString("/remove"));
         if (!file.open(QIODevice::WriteOnly)) {

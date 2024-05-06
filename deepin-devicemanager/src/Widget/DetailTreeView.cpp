@@ -10,7 +10,7 @@
 #include <QPainter>
 #include <QKeyEvent>
 #include <QHBoxLayout>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QThread>
 #include <QToolTip>
 #include <QDateTime>

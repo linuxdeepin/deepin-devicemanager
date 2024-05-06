@@ -31,6 +31,10 @@
 #include <QDateTime>
 #include <QVariant>
 #include <QBuffer>
+#include <QLoggingCategory>
+#include "DDLog.h"
+
+using namespace DDLog;
 
 namespace QXlsx {
 
@@ -148,7 +152,7 @@ bool DocPropsApp::loadFromXmlFile(QIODevice *device)
          }
 
          if (reader.hasError()) {
-             qDebug("Error when read doc props app file.");
+            qCDebug(appLog)<<"Error when read doc props app file.";
          }
     }
     return true;

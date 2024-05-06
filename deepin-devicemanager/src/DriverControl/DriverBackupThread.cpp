@@ -4,15 +4,18 @@
 
 #include "DriverBackupThread.h"
 #include "DBusDriverInterface.h"
+#include "DDLog.h"
 
 #include <QDir>
 #include <QProcess>
-#include <QDebug>
+#include <QLoggingCategory>
 
 // 备份临时路径
 #define DB_PATH_TMP "/tmp/deepin-devicemanager"
 
 static bool updateFlag = false;
+
+using namespace DDLog;
 
 DriverBackupThread::DriverBackupThread(QObject *parent)
     : QThread(parent)
@@ -35,7 +38,7 @@ void DriverBackupThread::run()
         QDir destdir(backupPath);
         if (!destdir.exists()) {
             if (!destdir.mkpath(destdir.absolutePath()))
-                qInfo() << "mkpath backupDeb unsucess  :" << backupPath;
+                qCInfo(appLog) << "mkpath backupDeb unsucess  :" << backupPath;
         }
 
         if (m_isStop) {
@@ -48,7 +51,7 @@ void DriverBackupThread::run()
             updateFlag = true;
             if (!ret) {
                 emit backupProgressFinished(false);
-                qInfo() << "apt update failed.";
+                qCInfo(appLog) << "apt update failed.";
                 return;
             }
         }
@@ -62,7 +65,7 @@ void DriverBackupThread::run()
             QList<QString> lines = QString(outArry).split('\n', QString::SkipEmptyParts);
             for (const QString &line : qAsConst(lines)) {
                 if (line.contains("无法解析域名")) {
-                    qInfo () << "network error: " << line;
+                    qCInfo (appLog) << "network error: " << line;
                     m_isStop = true;
                     emit backupProgressFinished(false);
                 }
@@ -116,7 +119,7 @@ void DriverBackupThread::run()
         }
         if (!flag) {
             emit backupProgressFinished(false);
-            qDebug() << __LINE__ << " backup failed.";
+            qCDebug(appLog) << __LINE__ << " backup failed.";
         }
     }
 }

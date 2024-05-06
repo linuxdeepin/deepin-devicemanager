@@ -5,6 +5,7 @@
 #include "httpdriverinterface.h"
 #include "commonfunction.h"
 #include "utils.h"
+#include "DDLog.h"
 
 #include <QJsonDocument>
 #include <QtNetwork>
@@ -13,6 +14,7 @@
 
 #include <DSysInfo>
 
+using namespace DDLog;
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<HttpDriverInterface *> HttpDriverInterface::s_Instance;
 std::mutex HttpDriverInterface::m_mutex;
@@ -96,7 +98,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
     if (0 < iClass) {
         strUrl += "&class=" + QString(iClass);
     }
-    qInfo() << strUrl;
+    qCInfo(appLog) << strUrl;
     return getRequestJson(strUrl);
 }
 
@@ -168,15 +170,15 @@ bool HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo &driverInf
                 }
             }
         }
-        qInfo() << "packages: "   << driverInfo.packages;
-        qInfo() << "debVersion: " << driverInfo.debVersion;
-        qInfo() << "driverName: " << driverInfo.driverName;
-        qInfo() << "version: "    << driverInfo.version;
+        qCInfo(appLog) << "packages: "   << driverInfo.packages;
+        qCInfo(appLog) << "debVersion: " << driverInfo.debVersion;
+        qCInfo(appLog) << "driverName: " << driverInfo.driverName;
+        qCInfo(appLog) << "version: "    << driverInfo.version;
 
-        qInfo() << lstDriverInfo.size();
+        qCInfo(appLog) << lstDriverInfo.size();
         foreach (const RepoDriverInfo &di, lstDriverInfo) {
-            qInfo() << "strPackages: " << di.strPackages;
-            qInfo() << "strDebVersion: " << di.strDebVersion;
+            qCInfo(appLog) << "strPackages: " << di.strPackages;
+            qCInfo(appLog) << "strDebVersion: " << di.strDebVersion;
         }
         return true;
     }

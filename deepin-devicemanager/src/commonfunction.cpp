@@ -6,15 +6,18 @@
 #include "commonfunction.h"
 #include "commondefine.h"
 #include "DBusInterface.h"
+#include "DDLog.h"
 
 // 其它头文件
 #include <QString>
 #include <QMap>
 #include <QProcess>
 #include <QFile>
-#include <QDebug>
+#include <QLoggingCategory>
 
 #include <sys/utsname.h>
+
+using namespace DDLog;
 
 static QMap<QString, QString> mapArch = {   {"aarch64", "arm64"}
     , {"x86_64", "amd64"}
@@ -153,9 +156,9 @@ QString Common::checkBoardVendorFlag()
         if(boardVendorKey.isEmpty() && (isModeM900() || isModeW525())){
             boardVendorKey = "PGUW";
         }
-        qInfo() << "boardVendorKey:" <<  boardVendorKey;
+        qCInfo(appLog) << "boardVendorKey:" <<  boardVendorKey;
     }
-    qInfo() << "Current special computer type is " << boardVendorKey;
+    qCInfo(appLog) << "Current special computer type is " << boardVendorKey;
     initBoardVendorFlag = true;
     return boardVendorKey;
 }

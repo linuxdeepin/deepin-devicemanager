@@ -20,7 +20,7 @@
 
 // Qt库文件
 #include <QPainter>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QHBoxLayout>
 #include <QPainterPath>
 

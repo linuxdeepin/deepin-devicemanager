@@ -9,7 +9,7 @@
 #include "shared.h"
 
 #include <QBuffer>
-#include <QDebug>
+#include <QLoggingCategory>
 
 namespace Docx {
 Package::Package()

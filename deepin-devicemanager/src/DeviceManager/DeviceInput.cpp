@@ -10,7 +10,7 @@
 #include "DBusWakeupInterface.h"
 
 // Qt库文件
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QProcess>
 
 DeviceInput::DeviceInput()

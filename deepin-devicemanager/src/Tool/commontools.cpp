@@ -3,8 +3,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "commontools.h"
+#include "DDLog.h"
 
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QDateTime>
 #include <QDBusInterface>
 #include <QDBusReply>
@@ -12,7 +13,7 @@
 #include <QDir>
 
 DWIDGET_USE_NAMESPACE
-
+using namespace DDLog;
 #define ICON_SIZE_WIDTH 36
 #define ICON_SIZE_HEIGHT 36
 
@@ -137,9 +138,9 @@ void CommonTools::feedback()
      uint8_t supporttype = 1;
      QDBusReply<void> reply = interface.call("ServiceSession", supporttype);
      if (reply.isValid()) {
-         qDebug() << "call com.deepin.dde.ServiceAndSupport success";
+         qCDebug(appLog) << "call com.deepin.dde.ServiceAndSupport success";
      } else {
-         qDebug() << "call com.deepin.dde.ServiceAndSupport failed";
+         qCDebug(appLog) << "call com.deepin.dde.ServiceAndSupport failed";
      }
 }
 
