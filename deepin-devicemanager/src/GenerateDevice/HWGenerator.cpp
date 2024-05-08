@@ -269,7 +269,8 @@ void HWGenerator::getDiskInfoFromSmartCtl()
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("smart");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 5)
+        // 剔除未识别的磁盘
+        if (!(*it).contains("ln"))
             continue;
 
         // KLU的问题特殊处理
