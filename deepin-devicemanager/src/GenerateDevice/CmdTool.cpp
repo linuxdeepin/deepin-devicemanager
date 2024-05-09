@@ -1034,8 +1034,10 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
 
         // && words[0].contains("configuration") == false && words[0].contains("resources") == false
         // 将configuration的内容进行拆分
-        if (true == words[0].contains("configuration")) {
-            QStringList keyValues = words[1].split(" ");
+        QString keyStr = words[0].trimmed();
+        QString valueStr = words[1].trimmed();
+        if (keyStr.contains("configuration")) {
+            QStringList keyValues = valueStr.split(" ");
 
             for (QStringList::iterator itKV = keyValues.begin(); itKV != keyValues.end(); ++itKV) {
                 QStringList attr = (*itKV).split("=");
@@ -1044,8 +1046,8 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
 
                 mapInfo.insert(attr[0].trimmed(), attr[1].trimmed());
             }
-        } else if (true == words[0].contains("resources")) {
-            QStringList keyValues = words[1].split(" ");
+        } else if (keyStr.contains("resources")) {
+            QStringList keyValues = valueStr.split(" ");
 
             for (QStringList::iterator itKV = keyValues.begin(); itKV != keyValues.end(); ++itKV) {
                 QStringList attr = (*itKV).split(":");
@@ -1058,7 +1060,19 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
                 mapInfo[attr[0].trimmed()] += attr[1].trimmed();
             }
         } else {
-            mapInfo.insert(words[0].trimmed(), words[1].trimmed());
+            // 过滤重复网卡逻辑名称数据
+            if (info.startsWith("network")) {
+                if (mapInfo.contains(keyStr) && keyStr == "logical name") {
+                    if (!valueStr.startsWith("/dev") && mapInfo["logical name"].startsWith("/dev")){
+                        mapInfo.remove(keyStr);
+                        mapInfo.insert(keyStr, valueStr);
+                    }
+                } else {
+                    mapInfo.insert(keyStr, valueStr);
+                }
+            } else {
+                mapInfo.insert(keyStr, valueStr);
+            }
         }
     }
 }
