@@ -743,7 +743,7 @@ void DeviceManager::mergeDisk()
         if (serialIDs.size() < 2)
             continue;
         DeviceStorage *fDevice = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[serialIDs[0] ]);
-        for (int i = 1; i < serialIDs.size(); ++i) {
+        for (int i = serialIDs.size() - 1; i > 0; --i) {
             DeviceStorage *curDevice = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[serialIDs[i] ]);
             fDevice->appendDisk(curDevice);
             m_ListDeviceStorage.removeAt(serialIDs[i]);
