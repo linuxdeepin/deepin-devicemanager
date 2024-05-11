@@ -44,6 +44,32 @@ TomlFixMethod DeviceStorage::setInfoFromTomlOneByOne(const QMap<QString, QString
     return ret;
 }
 
+static QString decimalkilos(quint64 value)
+{
+    const QString prefixes("KMGTPEZY");
+    int i = 0;
+    quint64 curValue = value;
+    while ((i < prefixes.size()) && ((curValue > 1000) || (curValue % 1000 == 0)))
+    {
+        value = curValue;
+        curValue = curValue / 1000;
+        i++;
+    }
+
+    if (i < 4) {
+        quint64 diffValue = value - curValue * 1000;
+        double calValue = diffValue / 1000.0 + 0.1;
+        curValue += static_cast<quint64>(calValue);;
+    }
+
+    QString valueStr = QString::number(curValue) + " ";
+    if ((i > 0) && (i <= prefixes.size())) {
+        valueStr += prefixes[i - 1];
+    }
+    valueStr += "B";
+    return valueStr;
+}
+
 bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 {
     // 龙芯机器中 hwinfo --disk会列出所有的分区信息
@@ -76,7 +102,18 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Capacity", m_Size);
 
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
-    m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+    QRegExp reSize(".*\\((.*)bytes\\).*");
+    if (reSize.exactMatch(m_Size)) {
+        bool ok = false;
+        quint64 bytesSize = reSize.cap(1).trimmed().toULongLong(&ok);
+        if (ok) {
+            m_Size = decimalkilos(bytesSize);
+        } else {
+            m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+        }
+    } else {
+        m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+    }
 
     // 如果既没有capacity也没有序列号则认为该磁盘无效,否则都属于有效磁盘
     if ((m_Size.startsWith("0") || m_Size == "") && m_SerialNumber == "")
@@ -172,7 +209,18 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Capacity", m_Size);
 
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
-    m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+    QRegExp reSize(".*\\((.*)bytes\\).*");
+    if (reSize.exactMatch(m_Size)) {
+        bool ok = false;
+        quint64 bytesSize = reSize.cap(1).trimmed().toULongLong(&ok);
+        if (ok) {
+            m_Size = decimalkilos(bytesSize);
+        } else {
+            m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+        }
+    } else {
+        m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+    }
     if (m_Size.startsWith("0") || m_Size == "")
         return false;
 
@@ -423,7 +471,7 @@ void DeviceStorage::checkDiskSize()
         double num1 = num - int(num);
         QString type = m_Size.right(m_Size.length() - reg.cap(0).size()).trimmed();
         if (!qFuzzyCompare(num1, 0.0) && type == "GB") {
-            m_Size = QString::number(int(num) + 1) + type;
+            m_Size = QString::number(int(num) + 1) + " " + type;
         }
     }
 }
@@ -570,7 +618,7 @@ void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "serial", m_SerialNumber, false);
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "description", m_Description);
-    setAttribute(mapInfo, "size", m_Size);
+    setAttribute(mapInfo, "size", m_Size, false);
     // 223GiB (240GB)
     QRegExp re(".*\\((.*)\\)$");
     if (re.exactMatch(m_Size))
