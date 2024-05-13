@@ -184,8 +184,10 @@ private:
     QString             m_KeyToLshw;                    //<!
     QString             m_WakeupID;                     //<!  wakeup id
     bool                m_BluetoothIsConnected;         //<!  记录蓝牙的连接状态
+    bool                m_wakeupChanged = true;                //<!   记录鼠标的唤醒状态
 
     QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
+    
 };
 
 #endif // DEVICEINPUT_H

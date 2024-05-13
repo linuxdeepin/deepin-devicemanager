@@ -349,6 +349,7 @@ const QString DeviceInput::getOverviewInfo()
  *
  * 修改：修改触摸板禁用方法，改为调用daemon提供的接口
  */
+
 EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
     if (m_Name.contains("Touchpad", Qt::CaseInsensitive)) {
@@ -362,6 +363,15 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
 
         if (m_UniqueID.isEmpty() || m_SysPath.isEmpty()) {
             return EDS_Faild;
+        }
+        if(e){
+            if(isWakeupMachine()){
+                DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), false, name());
+                m_wakeupChanged = true;
+            }
+        } else if (m_wakeupChanged) {
+            m_wakeupChanged = false;
+            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), true, name());
         }
         bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e, m_Driver);
         if (res) {
