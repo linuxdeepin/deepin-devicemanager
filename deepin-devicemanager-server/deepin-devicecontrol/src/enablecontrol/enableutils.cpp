@@ -152,8 +152,8 @@ bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, boo
     if (fd < 0)
         return false;
     struct ifreq ifr;
-    strncpy(ifr.ifr_name, logicalName.toStdString().c_str(),strlen(ifr.ifr_name));
-
+    strncpy(ifr.ifr_name, logicalName.toStdString().c_str(),IFNAMSIZ);
+    ifr.ifr_name[IFNAMSIZ - 1] = '\0';
     short flag;
     if (enable) {
         flag = IFF_UP | IFF_PROMISC;
