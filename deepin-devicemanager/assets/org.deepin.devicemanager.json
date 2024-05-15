@@ -2,6 +2,19 @@
     "magic": "dsg.config.meta",
     "version": "1.0",
     "contents": {
+        "rules": {
+            "value": "*.debug=false;*.info=false;*.warning=true",
+            "serial": 0,
+            "flags": [
+              "global"
+            ],
+            "name": "rules",
+            "name[zh_CN]": "日志规则",
+            "description": "log rules",
+            "description[zh_CN]": "日志规则",
+            "permissions": "readwrite",
+            "visibility": "public"
+          },      
 	"specialComType": {
             "value": -1,
             "serial": 0,
