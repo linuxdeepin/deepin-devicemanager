@@ -4,10 +4,10 @@
   "submodules": [
     {
       "name": "deepin-devicemanager",
-      "filter": "org.deepin.devicemanager.appLog",
+      "filter": "",
       "exec": "/usr/bin/deepin-devicemanager",
       "logType": "journal",
-      "logPath": "~/.cache/deepin/deepin-devicemanager/deepin-devicemanager.log"
+      "logPath": ""
     }
   ],
   "visible": true,

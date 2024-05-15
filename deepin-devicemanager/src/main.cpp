@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <DLog>
-
+#include "LogConfigread.h"
 using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
@@ -42,12 +42,13 @@ void notify(int argc, char *argv[]);
 
 int main(int argc, char *argv[])
 {
+    MLogger();
+
     // /usr/bin/devicemanager notify
     if (argc > 2 && QString(argv[1]).contains("notify")) {
         notify(argc, argv);
         return -1;
     }
-
     #if (DTK_VERSION >= DTK_VERSION_CHECK(5, 6, 8, 0))
         Dtk::Core::DLogManager::registerJournalAppender();
     #else
