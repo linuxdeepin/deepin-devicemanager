@@ -365,13 +365,13 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
             return EDS_Faild;
         }
         if(e){
-            if(isWakeupMachine()){
-                DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), false, name());
-                m_wakeupChanged = true;
-            }
-        } else if (m_wakeupChanged) {
-            m_wakeupChanged = false;
+            //鼠标启用时，唤醒能力打开
             DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), true, name());
+            m_wakeupChanged = true;
+
+        } else if (m_wakeupChanged) { //鼠标禁用时，唤醒能力关闭
+            m_wakeupChanged = false;
+            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), false, name());
         }
         bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e, m_Driver);
         if (res) {
