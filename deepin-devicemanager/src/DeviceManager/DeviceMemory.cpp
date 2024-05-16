@@ -151,7 +151,7 @@ void DeviceMemory::loadOtherDeviceInfo()
         addOtherDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
         addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
     } else {
-        addOtherDeviceInfo(DeviceCpu::tr("Configured Speed"), m_ConfiguredSpeed);
+        addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
     }
     addOtherDeviceInfo(tr("Data Width"), m_DataBandwidth);
 
