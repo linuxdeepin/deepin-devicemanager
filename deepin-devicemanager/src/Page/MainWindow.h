@@ -12,6 +12,9 @@
 #include <DMainWindow>
 #include <DStackedWidget>
 #include <DButtonBox>
+#include <qdbusconnection.h>
+#include <QDBusInterface>
+#include <QDBusReply>
 
 #include <QObject>
 
@@ -39,6 +42,11 @@ public:
      * @brief refresh:界面刷新
      */
     void refresh();
+
+    /**
+     * @brief refreshBatteryStatus:刷新电池状态
+     */
+    void refreshBatteryStatus();
 
     /**
      * @brief exportTo:导出设备信息
