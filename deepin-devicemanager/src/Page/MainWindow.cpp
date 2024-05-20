@@ -162,6 +162,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::refresh()
 {
+    //电池状态刷新
+    refreshBatteryStatus();
+
     // 正在刷新,避免重复操作
     if (m_refreshing || startScanningFlag || mp_DriverManager->isScanning() || mp_WorkingThread->isRunning())
         return;
@@ -180,6 +183,28 @@ void MainWindow::refresh()
 
     // 加载设备信息
     refreshDataBase();
+}
+
+void MainWindow::refreshBatteryStatus()
+{
+   QDBusConnection bus = QDBusConnection::systemBus();
+
+   //创建Dbus接口
+   QDBusInterface interfaceService("org.freedesktop.UPower", "/org/freedesktop/UPower", "org.freedesktop.UPower", bus);
+   if(interfaceService.isValid()) {
+       QDBusReply<QString> interfacePath = interfaceService.call("EnumerateDevices");
+       if(interfacePath.value().contains("/org/freedesktop/UPower/devices/battery_BAT1")) {
+           QDBusInterface interfaceBattery("org.freedesktop.UPower", "/org/freedesktop/UPower/devices/battery_BAT1", "org.freedesktop.UPower.Device", bus);
+           if(interfaceBattery.isValid()) {
+               QDBusMessage reply = interfaceBattery.call("Refresh");
+
+               if(reply.type() != QDBusMessage::ReplyMessage)
+                   qWarning() << "call Refresh failure:" << reply.errorMessage();
+           }
+       }
+   } else {
+      qDebug() << "interface UPower invalid";
+   }
 }
 
 bool MainWindow::exportTo()
