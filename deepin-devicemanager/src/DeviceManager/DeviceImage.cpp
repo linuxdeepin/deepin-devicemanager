@@ -6,6 +6,7 @@
 #include "DeviceImage.h"
 #include "DeviceManager.h"
 #include "DBusEnableInterface.h"
+#include "DBusInterface.h"
 
 DeviceImage::DeviceImage()
     : DeviceBaseInfo()
@@ -137,6 +138,8 @@ EnableDeviceStatus DeviceImage::setEnable(bool e)
     bool res  = DBusEnableInterface::getInstance()->enable("camera", m_Name, m_SysPath, m_UniqueID, e, m_Driver);
     if (res) {
         m_Enable = e;
+        if(e)
+            DBusInterface::getInstance()->refreshInfo();
     }
     // 设置设备状态
     return res ? EDS_Success : EDS_Faild;
