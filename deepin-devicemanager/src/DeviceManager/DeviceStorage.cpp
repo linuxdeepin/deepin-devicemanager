@@ -131,6 +131,20 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
+
+    // 专有文件
+    QString Path = "/sys/block" + m_DeviceFile.replace("/dev", "") + "/device/spec_version";
+    QFile file(Path);
+    if (file.open(QIODevice::ReadOnly)) {
+        QString output2 = file.readAll();
+        if (output2.contains("310", Qt::CaseInsensitive)) {
+            m_Interface = "UFS 3.1";
+        } else if (output2.contains("300", Qt::CaseInsensitive)) {
+            m_Interface = "UFS 3.0";
+        }
+        file.close();
+    }
+
     if (m_KeyToLshw.contains("nvme", Qt::CaseInsensitive))
         setAttribute(mapInfo, "SysFS Device Link", m_NvmeKey);
 
