@@ -7,6 +7,7 @@
 #include "commonfunction.h"
 
 // Qt库文件
+#include <QDir>
 #include<QDebug>
 
 DeviceStorage::DeviceStorage()
@@ -133,7 +134,18 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Device File", m_DeviceFile);
 
     // 专有文件
-    QString Path = "/sys/block" + m_DeviceFile.replace("/dev", "") + "/device/spec_version";
+    QString logicalName = ((QString)mapInfo["SysFS ID"]).replace("/class/block", "");
+
+    QDir blockDir("/sys/block/");
+    QStringList blockfs = blockDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
+    foreach (QString fsname, blockfs) {
+        if (m_DeviceFile.contains(fsname, Qt::CaseInsensitive)) {
+            logicalName = fsname;
+            break;
+        }
+    }
+
+    QString Path = "/sys/block/" + logicalName + "/device/spec_version";
     QFile file(Path);
     if (file.open(QIODevice::ReadOnly)) {
         QString output2 = file.readAll();
