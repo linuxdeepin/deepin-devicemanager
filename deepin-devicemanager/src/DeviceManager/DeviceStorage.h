@@ -19,6 +19,11 @@ class DeviceStorage: public DeviceBaseInfo
 public:
     DeviceStorage();
 
+    /**
+        * @brief callDecimakilos:调用函数decimakilos将m_Size的byte单位转换为合理单位：GB、TB之类
+        */
+    void callDecimakilos();
+
   /**
       * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
       * @param mapInfo:由toml获取的信息map
