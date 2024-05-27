@@ -5,10 +5,14 @@
 // 项目自身文件
 #include "DeviceStorage.h"
 #include "commonfunction.h"
+#include <cmath>
 
 // Qt库文件
 #include <QDir>
 #include<QDebug>
+
+#define DISK_SCALE_1024 1024
+#define DISK_SCALE_1000 1000
 
 DeviceStorage::DeviceStorage()
     : DeviceBaseInfo()
@@ -16,6 +20,7 @@ DeviceStorage::DeviceStorage()
 //    , m_Vendor("")
     , m_MediaType("")
     , m_Size("")
+    , m_SizeBytes(0)
     , m_RotationRate("")
     , m_Interface("")
     , m_SerialNumber("")
@@ -71,6 +76,48 @@ static QString decimalkilos(quint64 value)
     return valueStr;
 }
 
+static quint64 convertToBytes(const QString& size, double scale)
+{
+    /*convert "KB MB GB TB PB EB ZB YB " to bytes */
+    const QString prefixes("KMGTPEZY");
+    quint64 diskBytesSize = 0;
+    double multiplier = 1;
+    double diskSizeFloat = 0;
+
+    QRegExp reg("([0-9]*\\.?[0-9]*)([A-Za-z]*)");
+    if(reg.indexIn(size) == -1)
+        return diskBytesSize;
+    QString sizeValue1 = reg.cap(1);
+    if(sizeValue1.isEmpty())
+        return diskBytesSize;
+    QString diskUnits = size.right(size.length() - sizeValue1.size()).trimmed().toUpper();
+    if(diskUnits.isEmpty())
+        return diskBytesSize;
+    diskUnits.replace("B","").replace("I","");
+    QChar lastChar = diskUnits.at(diskUnits.length() - 1);
+
+    if (prefixes.contains(diskUnits)) {
+        diskSizeFloat = sizeValue1.toDouble();
+
+        int i = 0;
+        while (i < prefixes.size()) {
+            QChar iChar = prefixes.at(i++);
+            if(iChar == lastChar) {
+                multiplier = std::pow(scale,i);
+                break;
+            }
+        }
+    }
+    diskBytesSize = static_cast<quint64>(diskSizeFloat * multiplier);
+    return diskBytesSize;
+}
+
+void DeviceStorage::unitConvertByDecimal()
+{
+    if(m_SizeBytes > 0)
+        m_Size = decimalkilos(m_SizeBytes);
+}
+
 bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 {
     // 龙芯机器中 hwinfo --disk会列出所有的分区信息
@@ -109,11 +156,14 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         quint64 bytesSize = reSize.cap(1).trimmed().toULongLong(&ok);
         if (ok) {
             m_Size = decimalkilos(bytesSize);
+            m_SizeBytes = bytesSize;
         } else {
             m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+            m_SizeBytes = convertToBytes(m_Size,DISK_SCALE_1024);
         }
     } else {
         m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+        m_SizeBytes = convertToBytes(m_Size,DISK_SCALE_1024);
     }
 
     // 如果既没有capacity也没有序列号则认为该磁盘无效,否则都属于有效磁盘
@@ -363,7 +413,7 @@ bool DeviceStorage::setKLUMediaType(const QString &name, const QString &value)
 bool DeviceStorage::isValid()
 {
     // 若是m_Size为空则 该设备无效
-    if (m_Size.isEmpty())
+    if (m_Size.isEmpty() && m_SizeBytes == 0)
         return false;
 
     return true;
@@ -410,79 +460,40 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
     for (int i = 0; i < allAttribs.size(); ++i) {
         allAttribMaps.insert(allAttribs[i].first, allAttribs[i].second);
     }
-    QString size = allAttribMaps[tr("Size")];
 
-    if (size.isEmpty()) return;
-    // 直接设置大小
-    if (m_Size.isEmpty())
-        m_Size = size;
-    else {
-        QRegExp reg("[0-9]*.?[0-9]*");
-        int index = reg.indexIn(m_Size);
-        double num1 = 0;
-        QString type1;
-        // index>0时，对于"32GB"（数字开头的字符串,index=0）无法获取正确的数据32
-        // 所以要改为index >= 0
-        if (index >= 0) {
-            num1 = reg.cap(0).toDouble();
-            type1 = m_Size.right(m_Size.length() - reg.cap(0).size()).trimmed();
+    quint64 size2 = device->getDiskSizeByte();
+    if(m_SizeBytes == 0)
+        m_SizeBytes = size2;
+    else if (size2 > 0) {
+        m_SizeBytes += size2;
+
+        QList<QPair<QString, QString> > allOtherAttribs = device->getOtherAttribs();
+        QMap<QString, QString> allOtherAttribMaps;
+        for (int i = 0; i < allOtherAttribs.size(); ++i) {
+            allAttribMaps.insert(allOtherAttribs[i].first, allOtherAttribs[i].second);
         }
 
-        index = reg.indexIn(size);
-        double num2 = 0;
-        QString type2;
-        if (index >= 0) {
-            num2 = reg.cap(0).toDouble();
-            type2 = size.right(size.length() - reg.cap(0).size()).trimmed();
-        }
-        // 匹配大小
-        if (type1 != type2) {
-            if (type1 == "TB" && type2 != "TB") {
-                num2 /= 1000.0;
-                type2 = "TB";
-            } else if (type1 != "TB" && type2 == "TB") {
-                num1 /= 1000.0;
-                type1 = "TB";
-            }
+        loadOtherDeviceInfo();
+        //合并
+        QMap<QString, QString> curAllOtherAttribMaps;
+        for (int i = 0; i < m_LstOtherInfo.size(); ++i) {
+            curAllOtherAttribMaps.insert(m_LstOtherInfo[i].first, m_LstOtherInfo[i].second);
         }
 
-        if (type1 == type2) {
-            num1 = num1 + num2;
-            if (num1 > int(num1))
-                m_Size = QString("%1 %2").arg(QString::number(num1, 'f', 2)).arg(type1);
-            else {
-                m_Size = QString("%1 %2").arg(num1).arg(type1);
+        QStringList keyList;
+        keyList.append(QObject::tr("bus info"));
+        keyList.append(QObject::tr("Device File"));
+        // keyList.append(QObject::tr("physical id"));
+        keyList.append(QObject::tr("Device Number"));
+        keyList.append(QObject::tr("logical name"));
+        for (QString keyStr : keyList) {
+            QString curBusInfo = curAllOtherAttribMaps[keyStr];
+            QString busInfo = allAttribMaps[keyStr];
+            if (!curBusInfo.isEmpty() && !busInfo.isEmpty() && curBusInfo != busInfo) {
+                setOtherDeviceInfo(keyStr, curBusInfo + "," + busInfo);
             }
-
-            QList<QPair<QString, QString> > allOtherAttribs = device->getOtherAttribs();
-            QMap<QString, QString> allOtherAttribMaps;
-            for (int i = 0; i < allOtherAttribs.size(); ++i) {
-                allAttribMaps.insert(allOtherAttribs[i].first, allOtherAttribs[i].second);
-            }
-
-            loadOtherDeviceInfo();
-            //合并
-            QMap<QString, QString> curAllOtherAttribMaps;
-            for (int i = 0; i < m_LstOtherInfo.size(); ++i) {
-                curAllOtherAttribMaps.insert(m_LstOtherInfo[i].first, m_LstOtherInfo[i].second);
-            }
-
-            QStringList keyList;
-            keyList.append(QObject::tr("bus info"));
-            keyList.append(QObject::tr("Device File"));
-            // keyList.append(QObject::tr("physical id"));
-            keyList.append(QObject::tr("Device Number"));
-            keyList.append(QObject::tr("logical name"));
-            for (QString keyStr : keyList) {
-                QString curBusInfo = curAllOtherAttribMaps[keyStr];
-                QString busInfo = allAttribMaps[keyStr];
-                if (!curBusInfo.isEmpty() && !busInfo.isEmpty() && curBusInfo != busInfo) {
-                    setOtherDeviceInfo(keyStr, curBusInfo + "," + busInfo);
-                }
-            }
-
-            loadOtherDeviceInfo();
         }
+        loadOtherDeviceInfo();
     }
 }
 
@@ -644,11 +655,21 @@ void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "serial", m_SerialNumber, false);
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "description", m_Description);
-    setAttribute(mapInfo, "size", m_Size, false);
-    // 223GiB (240GB)
+    QString sizeFromlshw = QString();
+    quint64 sizeByte = 0;
+    setAttribute(mapInfo, "size", sizeFromlshw, true);
+    // 样式数据 223GiB (240GB) size: 57GiB (61GB)  size: 931GiB (1TB)
     QRegExp re(".*\\((.*)\\)$");
-    if (re.exactMatch(m_Size))
-        m_Size = re.cap(1);
+    if (re.exactMatch(sizeFromlshw)) {
+        sizeFromlshw = re.cap(1);
+        sizeByte = convertToBytes(sizeFromlshw,DISK_SCALE_1000);
+    }
+    if(m_SizeBytes == 0)
+        m_SizeBytes = sizeByte;
+
+    if(m_Size.isEmpty() )
+        m_Size = sizeFromlshw;
+
 
     if (m_SerialNumber.compare("0",Qt::CaseInsensitive) == 0)
         m_SerialNumber = "";
@@ -691,6 +712,17 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
         QRegExp reg(".*\\[(.*)\\]$");
         if (reg.exactMatch(capacity))
             m_Size = reg.cap(1);
+
+        capacity.replace(",","").replace(" ","");
+        QRegExp re("(\\d+)bytes*");     //取值格式如： User Capacity:    1,000,204,886,016 bytes [1.00 TB]     Total NVM Capacity:   256,060,514,304 [256 GB]
+        int pos = re.indexIn(capacity);
+        if (pos != -1) {
+            QString byteSize = re.cap(1);
+            bool isValue = false;
+            quint64 value = byteSize.trimmed().toULongLong(&isValue);
+            if(value > 0 && isValue)
+                m_SizeBytes = value;
+        }
     }
 
     // 通过不断适配，当厂商有在固件中提供时，硬盘型号从smartctl中获取更加合理

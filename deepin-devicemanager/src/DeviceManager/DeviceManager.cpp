@@ -750,6 +750,10 @@ void DeviceManager::mergeDisk()
             delete curDevice;
         }
     }
+    for (int i = 0; i < m_ListDeviceStorage.size(); ++i) {
+        DeviceStorage *device = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[i]);
+        device->unitConvertByDecimal();
+    }
 }
 
 void DeviceManager::checkDiskSize()
