@@ -187,24 +187,36 @@ void MainWindow::refresh()
 
 void MainWindow::refreshBatteryStatus()
 {
-   QDBusConnection bus = QDBusConnection::systemBus();
+    QDBusConnection bus = QDBusConnection::systemBus();
 
-   //创建Dbus接口
-   QDBusInterface interfaceService("org.freedesktop.UPower", "/org/freedesktop/UPower", "org.freedesktop.UPower", bus);
-   if(interfaceService.isValid()) {
-       QDBusReply<QString> interfacePath = interfaceService.call("EnumerateDevices");
-       if(interfacePath.value().contains("/org/freedesktop/UPower/devices/battery_BAT1")) {
-           QDBusInterface interfaceBattery("org.freedesktop.UPower", "/org/freedesktop/UPower/devices/battery_BAT1", "org.freedesktop.UPower.Device", bus);
-           if(interfaceBattery.isValid()) {
-               QDBusMessage reply = interfaceBattery.call("Refresh");
+    //创建Dbus接口
+    QDBusInterface interfaceService("org.freedesktop.UPower", "/org/freedesktop/UPower", "org.freedesktop.UPower", bus);
+    if (interfaceService.isValid()) {
+         QProcess process;
+         QString command = "gdbus call --system --dest org.freedesktop.UPower --object-path /org/freedesktop/UPower --method org.freedesktop.UPower.EnumerateDevices";
+         process.start(command);
+         process.waitForFinished();
 
-               if(reply.type() != QDBusMessage::ReplyMessage)
-                   qWarning() << "call Refresh failure:" << reply.errorMessage();
-           }
-       }
-   } else {
-      qDebug() << "interface UPower invalid";
-   }
+         QByteArray output = process.readAllStandardOutput();
+         QString outputStr = QString::fromLocal8Bit(output);
+         QStringList outputList = outputStr.split(",");
+
+         foreach (const QString& str, outputList) {
+             if (str.contains("BAT")) {
+                 QStringList pathStr = str.split("'");
+                 if (pathStr.size() >= 2) {
+                     QDBusInterface interfaceBattery("org.freedesktop.UPower", pathStr.at(1), "org.freedesktop.UPower.Device", bus);
+                     if (interfaceBattery.isValid()) {
+                         QDBusMessage reply = interfaceBattery.call("Refresh");
+                         if (reply.type() != QDBusMessage::ReplyMessage)
+                             qWarning() << "call Refresh failure:" << reply.errorMessage();
+                     }
+                 }
+             }
+         }
+    } else {
+       qDebug() << "interface UPower invalid";
+    }
 }
 
 bool MainWindow::exportTo()
