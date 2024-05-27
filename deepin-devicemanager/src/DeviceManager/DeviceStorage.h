@@ -19,6 +19,11 @@ class DeviceStorage: public DeviceBaseInfo
 public:
     DeviceStorage();
 
+    /**
+       * @brief unitConvertByDecimal:将m_Size的byte单位转换为合理单位：GB、TB之类
+       */
+    void unitConvertByDecimal();
+
   /**
       * @brief setInfoFromTomlOneByOne:设置从toml里面获取的信息
       * @param mapInfo:由toml获取的信息map
@@ -115,6 +120,11 @@ public:
     void appendDisk(DeviceStorage *device);
 
     /**
+     * @brief getDiskSizeByte:读取磁盘大小，单位Byte
+     */
+    virtual quint64 getDiskSizeByte() { return m_SizeBytes; }
+
+    /**
      * @brief checkDiskSize:规范磁盘大小
      */
     virtual void checkDiskSize();
@@ -197,6 +207,7 @@ private:
     // QString               m_Vendor;             //<! 【制造商】2
     QString               m_MediaType;          //<! 【介质类型】3
     QString               m_Size;               //<! 【大小】4
+    quint64               m_SizeBytes;               //<! 【大小单位byte】4  //对于有合并的时候 用此代替m_Size进行合并更准确。
     QString               m_RotationRate;       //<! 【转速】
     QString               m_Interface;          //<! 【接口】6
     QString               m_SerialNumber;       //<! 【序列号】7
