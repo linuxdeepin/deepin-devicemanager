@@ -88,6 +88,11 @@ const QString &EDIDParser::vendor()const
     return m_Vendor;
 }
 
+const QString &EDIDParser::model()const
+{
+    return m_Model;
+}
+
 const QString &EDIDParser::releaseDate()const
 {
     return m_ReleaseDate;
@@ -133,6 +138,11 @@ void EDIDParser::parserVendor()
     name[3] = 0;
 
     m_Vendor = QString(name);
+
+    QString h0a = getBytes(0, 10);
+    QString h0b = getBytes(0, 11);
+
+    m_Model = h0a + h0b;
 
 //    // 将16进制的厂商信息转换成二进制的厂商信息
 //    QString binStr = hexToBin(vendorStr);

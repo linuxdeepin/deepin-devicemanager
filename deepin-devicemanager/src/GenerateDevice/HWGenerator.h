@@ -92,6 +92,11 @@ protected:
      * @brief getMemoryInfoFromLshw:从lshw获取内存信息
      */
     virtual void getMemoryInfoFromLshw() override;
+
+    /**
+     * @brief generatorMonitorDevice:生成显示设备信息
+     */
+    virtual void generatorMonitorDevice() override;
 };
 
 #endif // PANGUVGENERATOR_H

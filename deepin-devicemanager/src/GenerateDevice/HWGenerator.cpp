@@ -4,10 +4,14 @@
 
 // 项目自身文件
 #include "HWGenerator.h"
+#include "EDIDParser.h"
 
 // Qt库文件
 #include <QDebug>
 #include <QProcess>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
 
 // 其它头文件
 #include "DeviceManager/DeviceManager.h"
@@ -412,5 +416,71 @@ void HWGenerator::getMemoryInfoFromLshw()
         DeviceMemory *device = new DeviceMemory();
         device->setInfoFromLshw(tempMap);
         DeviceManager::instance()->addMemoryDevice(device);
+    }
+}
+
+static void parseEDID(QStringList allEDIDS,QString input)
+{
+    for (auto edid:allEDIDS) {
+        QProcess process;
+        process.start(QString("hexdump %1").arg(edid));
+        process.waitForFinished(-1);
+
+        QString deviceInfo = process.readAllStandardOutput();
+        if(deviceInfo.isEmpty())
+            continue;
+
+        QString edidStr;
+        QStringList lines = deviceInfo.split("\n");
+        for (auto line:lines) {
+            QStringList words = line.trimmed().split(" ");
+            if(words.size() != 9)
+                continue;
+
+            words.removeAt(0);
+            QString l = words.join("");
+            l.append("\n");
+            edidStr.append(l);
+        }
+
+        lines = edidStr.split("\n");
+        if(lines.size() > 3){
+            EDIDParser edidParser;
+            QString errorMsg;
+            edidParser.setEdid(edidStr,errorMsg,"\n", false);
+
+            QMap<QString, QString> mapInfo;
+            mapInfo.insert("Vendor",edidParser.vendor());
+            mapInfo.insert("Model",edidParser.model());
+            mapInfo.insert("Date",edidParser.releaseDate());
+            mapInfo.insert("Size",edidParser.screenSize());
+            mapInfo.insert("Display Input",input);
+
+            DeviceMonitor *device = new DeviceMonitor();
+            device->setInfoFromEdid(mapInfo);
+            DeviceManager::instance()->addMonitor(device);
+        }
+    }
+}
+
+void HWGenerator::generatorMonitorDevice()
+{
+    QString toDir = "/sys/class/drm";
+    QDir toDir_(toDir);
+
+    if (!toDir_.exists())
+        return;
+
+    QFileInfoList fileInfoList = toDir_.entryInfoList();
+    foreach(QFileInfo fileInfo, fileInfoList) {
+        if(fileInfo.fileName() == "." || fileInfo.fileName() == ".." || !fileInfo.fileName().startsWith("card"))
+            continue;
+
+        if(QFile::exists(fileInfo.filePath() + "/" + "edid")) {
+            QStringList allEDIDS_all;
+            allEDIDS_all.append(fileInfo.filePath() + "/" + "edid");
+            QString interface = fileInfo.fileName().remove("card0-").remove("card1-").remove("card2-");
+            parseEDID(allEDIDS_all,interface);
+         }
     }
 }
