@@ -679,9 +679,9 @@ void PageDriverManager::scanDevices()
 //    scanDevicesInfo(QObject::tr("Camera"), DR_Camera);
 
     // 打印机
-    scanDevicesInfo(QObject::tr("Printer"), DR_Printer);
+//    scanDevicesInfo(QObject::tr("Printer"), DR_Printer); //由于task 353401 要求
 
-    scanDevicesInfo(QObject::tr("Other Devices"), DR_OtherDevice);
+//    scanDevicesInfo(QObject::tr("Other Devices"), DR_OtherDevice); //由于task 353401 要求
 }
 
 void PageDriverManager::testScanDevices()
