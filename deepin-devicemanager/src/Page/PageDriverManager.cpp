@@ -541,6 +541,8 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
 
 void PageDriverManager::slotRestoreProgress(int progress, QString strDeatils)
 {
+    if(mp_CurRestoreDriverInfo == nullptr)
+        return;
     if (progress >= 100) {
         mp_DriverRestoreInfoPage->headWidget()->setRestoreDriverUI(m_ListRestorableIndex.size());
     } else {
