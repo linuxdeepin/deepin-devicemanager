@@ -39,6 +39,8 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     , mp_Table(new PageTableHeader(this))
     , mp_Detail(new PageDetail(this))
 {
+    m_deviceList.clear();
+    m_menuControlList.clear();
     // 初始化界面布局
     initWidgets();
 
@@ -67,6 +69,8 @@ PageMultiInfo::~PageMultiInfo()
         delete mp_Detail;
         mp_Detail = nullptr;
     }
+    m_deviceList.clear();
+    m_menuControlList.clear();
 }
 
 void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
@@ -76,14 +80,14 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     if (lst.size() < 1)
         return;
+    m_deviceList.clear();
+    m_menuControlList.clear();
 
     //  获取多个设备界面表格信息
-    QList<QStringList> deviceList;
-    QList<QStringList> menuControlList;
-    getTableListInfo(lst, deviceList, menuControlList);
+    getTableListInfo(lst, m_deviceList, m_menuControlList);
 
     // 更新表格
-    mp_Table->updateTable(deviceList, menuControlList);
+    mp_Table->updateTable(m_deviceList, m_menuControlList);
 
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);
@@ -116,15 +120,12 @@ void PageMultiInfo::resizeEvent(QResizeEvent *e)
 
     // 先获取当前窗口大小
     int curHeight = this->height();
-    QList<QStringList> deviceList;
-    QList<QStringList> menuControlList;
-    getTableListInfo(m_lstDevice, deviceList, menuControlList);
     if (curHeight < LEAST_PAGE_HEIGHT) {
         //  获取多个设备界面表格信息
-        mp_Table->updateTable(deviceList, menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
+        mp_Table->updateTable(m_deviceList, m_menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
     } else {
         //  获取多个设备界面表格信息
-        mp_Table->updateTable(deviceList, menuControlList, true, 0);
+        mp_Table->updateTable(m_deviceList, m_menuControlList, true, 0);
     }
 
     return PageInfo::resizeEvent(e);
@@ -245,8 +246,10 @@ void PageMultiInfo::initWidgets()
 void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<QStringList> &deviceList, QList<QStringList> &menuControlList)
 {
     //  获取多个设备界面表格信息
+     if(lst[0] == nullptr) return;
     deviceList.append(lst[0]->getTableHeader());
     foreach (DeviceBaseInfo *info, lst) {
+        if(info == nullptr) continue;
         QStringList lstDeviceInfo = info->getTableData();
         deviceList.append(lstDeviceInfo);
 

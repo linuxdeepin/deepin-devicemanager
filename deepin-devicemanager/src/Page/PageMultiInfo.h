@@ -127,6 +127,8 @@ private:
     PageTableHeader           *mp_Table;       //<! 上面的表格
     PageDetail                *mp_Detail;      //<! 下面的详细内容
     QList<DeviceBaseInfo *>   m_lstDevice;     //<! 保存设备列表
+    QList<QStringList>        m_deviceList;    //<! 设备界面表格信息
+    QList<QStringList>        m_menuControlList; //<! 设备界面菜单信息
 };
 
 #endif // DEVICEPAGE_H
