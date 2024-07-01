@@ -186,15 +186,14 @@ bool DeviceAudio::setInfoFrom_sysFS(QMap<QString, QString> &mapInfo, int ii)
     mapInfo.insert("VID_PID", m_VID_PID);
     mapInfo.insert("SysFS ID", m_SysPath);
     mapInfo.insert("chip", m_Chip);
-    return true;
-    //----------------
+
     //2. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
 
     // 设置不可禁用
     m_CanEnable = false;
     m_CanUninstall = false;
-
+    return true;
 }
 
 bool DeviceAudio::setInfoFromCatDevices(const QMap<QString, QString> &mapInfo)
