@@ -95,6 +95,8 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_CanUninstall = false;
     }
     setAttribute(mapInfo, "cfg_avail", m_Avail);
+    if(!m_Avail.compare("yes", Qt::CaseInsensitive))
+        setForcedDisplay(true);
 
     getOtherMapInfo(mapInfo);
     // 核内驱动不显示卸载菜单
