@@ -41,7 +41,7 @@ public:
      * @param hclass 类型
      * @param name 名称
      */
-    void insertDataToRemoveTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, const QString strDriver = "");
+    void insertDataToRemoveTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, const QString &strDriver = "");
 
     /**
      * @brief removeDateFromRemoveTable 从数据库里面删除数据
@@ -53,7 +53,7 @@ public:
      * @brief insertDataToAuthorizedTable 将数据插入remove表格
      * @param key
      */
-    void insertDataToAuthorizedTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool exist, const QString strDriver = "");
+    void insertDataToAuthorizedTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool exist, const QString &strDriver = "");
 
     /**
      * @brief removeDataFromAuthorizedTable 从数据库里面删除数据
@@ -65,13 +65,6 @@ public:
      * @brief updateDataToAuthorizedTable
      */
     void updateDataToAuthorizedTable(const QString &unique_id, const QString &path);
-
-    /**
-     * @brief updateDataToAuthorizedTable
-     * @param unique_id
-     * @param enable
-     */
-    void updateDataToAuthorizedTable(const QString &unique_id, bool enable);
 
     /**
      * @brief clearEnableFromAuthorizedTable 清空数据库里面 enable = 1 数据
