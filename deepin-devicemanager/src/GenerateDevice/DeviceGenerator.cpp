@@ -162,7 +162,7 @@ void DeviceGenerator::generatorCpuDevice()
 
 
     //  获取逻辑数和core数  获取cpu个数 获取logical个数
-    int coreNum = 0, logicalNum = 0;
+    int coreNum = 0, coreNum_dmi = 0, logicalNum = 0, logicalNum_dmi = 0;
     const QList<QMap<QString, QString> >  &lsCpu_num = DeviceManager::instance()->cmdInfo("lscpu_num");
     if (lsCpu_num.size() <= 0)
         return;
@@ -177,7 +177,16 @@ void DeviceGenerator::generatorCpuDevice()
     for (auto dd4 : dmidecode4) {
         if (dd4.contains("Socket Designation"))
             allCPUS.insert(dd4["Socket Designation"]);
+        if (dd4.contains("Core Count"))
+            coreNum_dmi += dd4["Core Count"].toInt();
+        if (dd4.contains("Thread Count"))
+            logicalNum_dmi += dd4["Thread Count"].toInt();
     }
+    if(logicalNum_dmi > logicalNum && logicalNum_dmi < 1024)  //due to offline policy
+        logicalNum = logicalNum_dmi;
+    if(coreNum_dmi > coreNum && coreNum_dmi <= 512) //due to offline policy
+        coreNum = coreNum_dmi;
+
     DeviceManager::instance()->setCpuNum(allCPUS.isEmpty() ? dmidecode4.size() : allCPUS.size());
 
     // set cpu info
