@@ -135,6 +135,9 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     // 希捷硬盘为ATA硬盘，无法直接获取厂商信息,只能特殊处理
     if (m_Name.startsWith("ST") && m_Vendor.isEmpty())
         m_Vendor = "ST";
+    //根据产品PN中的固定前两位 RS来匹配厂商 为Longsys 如产品PN ：RSYE3836N-480G    RSYE3836N-960G    RSYE3836N-1920     RSYE3836N-3840
+    if (m_Name.startsWith("RS") && m_Vendor.isEmpty())
+        m_Vendor = "Longsys";
 
     setAttribute(mapInfo, "Driver", m_Driver); // 驱动
     QRegExp exp("pci 0x[0-9a-zA-Z]*");
@@ -748,4 +751,7 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     if(Common::boardVendorType() != "KLVV" && Common::boardVendorType() != "KLVU" \
         && Common::boardVendorType() != "PGUW" && Common::boardVendorType() != "PGUV")
             m_Size.replace(QRegExp("\\.0[1-9]"), ".00");
+    //根据产品PN中的固定前两位 RS来匹配厂商 为Longsys 如产品PN ：RSYE3836N-480G    RSYE3836N-960G    RSYE3836N-1920     RSYE3836N-3840
+    if (m_Name.startsWith("RS") && m_Vendor.isEmpty())
+        m_Vendor = "Longsys";
 }
