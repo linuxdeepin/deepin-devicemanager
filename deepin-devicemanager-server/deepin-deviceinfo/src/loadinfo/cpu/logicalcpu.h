@@ -56,6 +56,12 @@ public:
     void setL3Cache(const QString &value);
 
     /**
+     * @brief setL4Cache : set l4 cache
+     * @param value cache
+     */
+    void setL4Cache(const QString &value);
+
+    /**
      * @brief setMinFreq : set min freq
      * @param value : freq
      */
@@ -169,6 +175,12 @@ public:
     const QString &l3Cache();
 
     /**
+     * @brief l4Cache
+     * @return : value
+     */
+    const QString &l4Cache();
+
+    /**
      * @brief minFreq
      * @return : value
      */
@@ -253,6 +265,7 @@ public:
         , l1i_cache("")
         , l2_cache("")
         , l3_cache("")
+        , l4_cache("")
         , max_freq("")
         , min_freq("")
         , cur_freq("")
@@ -275,6 +288,7 @@ public:
     QString     l1i_cache;             // l1i cache
     QString     l2_cache;              // l2 cache
     QString     l3_cache;              // l3 cache
+    QString     l4_cache;              // l4 cache
     QString     max_freq;              // max freq
     QString     min_freq;              // min freq
     QString     cur_freq;              // cur freq

@@ -49,6 +49,11 @@ void LogicalCpu::setL3Cache(const QString &value)
     Q_D(LogicalCpu);
     d->l3_cache = value;
 }
+void LogicalCpu::setL4Cache(const QString &value)
+{
+    Q_D(LogicalCpu);
+    d->l4_cache = value;
+}
 void LogicalCpu::setMinFreq(const QString &value)
 {
     Q_D(LogicalCpu);
@@ -141,6 +146,11 @@ const QString &LogicalCpu::l3Cache()
     Q_D(LogicalCpu);
     return d->l3_cache;
 }
+const QString &LogicalCpu::l4Cache()
+{
+    Q_D(LogicalCpu);
+    return d->l4_cache;
+}
 const QString &LogicalCpu::minFreq()
 {
     Q_D(LogicalCpu);
@@ -208,6 +218,7 @@ void LogicalCpu::diagPrintInfo()
     qCInfo(appLog) << "l1i_cache  : " << d->l1i_cache;
     qCInfo(appLog) << "l2_cache   : " << d->l2_cache;
     qCInfo(appLog) << "l3_cache   : " << d->l3_cache;
+    qCInfo(appLog) << "l4_cache   : " << d->l4_cache;
     qCInfo(appLog) << "max_freq   : " << d->max_freq;
     qCInfo(appLog) << "min_freq   : " << d->min_freq;
     qCInfo(appLog) << "cur_freq   : " << d->cur_freq;

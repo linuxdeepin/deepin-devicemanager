@@ -368,6 +368,8 @@ void CpuInfo::readCpuCacheIndex(const QString &path, LogicalCpu &lcpu)
         lcpu.setL2Cache(value);
     } else if (level == 3) {
         lcpu.setL3Cache(value);
+    } else if (level == 4) {
+        lcpu.setL4Cache(value);
     } else if (level == 1) {
         if (type.contains("Data", Qt::CaseInsensitive))
             lcpu.setL1dCache(value);
