@@ -62,6 +62,7 @@ void CoreCpu::getInfo(QString &info)
         appendKeyValue(info, "L1i cache", logical.l1iCache());
         appendKeyValue(info, "L2 cache", logical.l2Cache());
         appendKeyValue(info, "L3 cache", logical.l3Cache());
+        appendKeyValue(info, "L4 cache", logical.l4Cache());
         appendKeyValue(info, "CPU MHz", logical.curFreq());
         appendKeyValue(info, "CPU max MHz", logical.maxFreq());
         appendKeyValue(info, "CPU min MHz", logical.minFreq());

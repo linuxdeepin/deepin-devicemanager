@@ -448,6 +448,11 @@
         <translation>L3缓存</translation>
     </message>
     <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="275"/>
+        <source>L4 Cache</source>
+        <translation>L4缓存</translation>
+    </message>
+    <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
         <source>L2 Cache</source>
         <translation>L2缓存</translation>

@@ -159,6 +159,7 @@ private:
     QString           m_CacheL1Order;       //<! L1缓存（指令）
     QString           m_CacheL2;            //<! L2缓存
     QString           m_CacheL3;            //<! L3缓存
+    QString           m_CacheL4;            //<! L4缓存
     QString           m_Extensions;         //<! 扩展指令集
     QString           m_Flags;              //<! 特性
     QString           m_HardwareVirtual;    //<! 硬件虚拟化

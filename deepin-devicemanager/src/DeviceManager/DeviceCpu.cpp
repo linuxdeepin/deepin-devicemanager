@@ -23,6 +23,7 @@ DeviceCpu::DeviceCpu()
     , m_CacheL1Order("")
     , m_CacheL2("")
     , m_CacheL3("")
+    , m_CacheL4("")
     , m_Extensions("")
     , m_Flags("")
     , m_HardwareVirtual("")
@@ -137,6 +138,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "L1i cache", m_CacheL1Order);
     setAttribute(mapInfo, "L2 cache", m_CacheL2);
     setAttribute(mapInfo, "L3 cache", m_CacheL3);
+    setAttribute(mapInfo, "L4 cache", m_CacheL4);
     setAttribute(mapInfo, "flags", m_Flags);
     setAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
 
@@ -228,6 +230,7 @@ TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     ret = setTomlAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
     ret = setTomlAttribute(mapInfo, "Flags", m_Flags);
     ret = setTomlAttribute(mapInfo, "Extensions", m_Extensions);
+    ret = setTomlAttribute(mapInfo, "L4 Cache", m_CacheL4);
     ret = setTomlAttribute(mapInfo, "L3 Cache", m_CacheL3);
     ret = setTomlAttribute(mapInfo, "L2 Cache", m_CacheL2);
     ret = setTomlAttribute(mapInfo, "L1i Cache", m_CacheL1Order);
@@ -272,6 +275,7 @@ void DeviceCpu::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("L1i Cache"), m_CacheL1Order);
     addOtherDeviceInfo(tr("L1d Cache"), m_CacheL1Data);
     addOtherDeviceInfo(tr("Stepping"), m_Step);
+    addOtherDeviceInfo(tr("L4 Cache"), m_CacheL4);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
