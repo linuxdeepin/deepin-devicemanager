@@ -270,12 +270,12 @@ void DeviceCpu::loadOtherDeviceInfo()
     addOtherDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
     addOtherDeviceInfo(tr("Flags"), m_Flags);
     addOtherDeviceInfo(tr("Extensions"), m_Extensions);
+    addOtherDeviceInfo(tr("L4 Cache"), m_CacheL4);
     addOtherDeviceInfo(tr("L3 Cache"), m_CacheL3);
     addOtherDeviceInfo(tr("L2 Cache"), m_CacheL2);
     addOtherDeviceInfo(tr("L1i Cache"), m_CacheL1Order);
     addOtherDeviceInfo(tr("L1d Cache"), m_CacheL1Data);
     addOtherDeviceInfo(tr("Stepping"), m_Step);
-    addOtherDeviceInfo(tr("L4 Cache"), m_CacheL4);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
