@@ -59,6 +59,7 @@ static QString decimalkilos(quint64 value)
     const QString prefixes("KMGTPEZY");
     int i = 0;
     quint64 curValue = value;
+    QString valueStr = QString();
     while ((i < prefixes.size()) && ((curValue > 1000) || (curValue % 1000 == 0)))
     {
         value = curValue;
@@ -69,12 +70,15 @@ static QString decimalkilos(quint64 value)
     if (i < 4) {
         quint64 diffValue = value - curValue * 1000;
         double calValue = diffValue / 1000.0 + 0.1;
-        curValue += static_cast<quint64>(calValue);;
-    }
-
-    QString valueStr = QString::number(curValue) + " ";
-    if ((i > 0) && (i <= prefixes.size())) {
-        valueStr += prefixes[i - 1];
+        curValue += static_cast<quint64>(calValue);
+        valueStr = QString::number(curValue) + " ";
+        if (i > 0)
+            valueStr += prefixes[i - 1];
+    } else if (i <= prefixes.size()) { // 单位T以上处理
+        if (value % 1000 >= 1)
+            valueStr = QString::number(value) + " " + prefixes[i - 2]; //保留小数部分 如1920GB 10001GB
+        else
+            valueStr = QString::number(curValue) + " " + prefixes[i - 1]; //无小数部分入整 如1TB
     }
     valueStr += "B";
     return valueStr;
