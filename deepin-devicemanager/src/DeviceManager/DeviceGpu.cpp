@@ -163,6 +163,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         if (file.open(QIODevice::ReadOnly)) {
             QString allStr(file.readAll());
             QStringList items = allStr.split("\n\n");
+            file.close();
             foreach (const QString &item, items) {
                 if (item.isEmpty())
                     continue;
@@ -181,6 +182,26 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
                             m_GraphicsMemory = QString::number(vramSize) + "MB";
                         }
                     }
+                }
+            }
+        }
+    }
+    QString jjwFile = "/proc/gpuinfo_0";
+    if (m_VID_PID.contains("0731") && QFile::exists(jjwFile)) {
+        QFile file(jjwFile);
+        if (file.open(QIODevice::ReadOnly)) {
+            QString allStr(file.readAll());
+            QStringList infos = allStr.split("\n");
+            file.close();
+            foreach (const QString &item, infos) {
+                if (item.isEmpty())
+                    continue;
+                QStringList items = item.split(":", QString::SkipEmptyParts);
+                if (items.size() != 2)
+                    continue;
+                if (items.first().trimmed() == "Memory Size") {
+                    m_GraphicsMemory = items.last().trimmed();
+                    break;
                 }
             }
         }
