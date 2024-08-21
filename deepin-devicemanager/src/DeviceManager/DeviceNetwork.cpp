@@ -102,6 +102,12 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
         m_CanUninstall = false;
     }
+    if (m_Vendor.isEmpty() && !m_Name.isEmpty()) {
+        if (m_Name.contains("ARM", Qt::CaseInsensitive))
+            m_Vendor = "ARM Ltd";
+         else
+            m_Vendor = m_Name;
+    }
 
     // 加载其他信息
     getOtherMapInfo(mapInfo);
@@ -151,6 +157,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_CanUninstall = !driverIsKernelIn(m_Driver);
         return true;
     }
+    setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Device File", m_LogicalName);
     setAttribute(mapInfo, "HW Address", m_MACAddress);
     setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
