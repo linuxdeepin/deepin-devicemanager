@@ -109,19 +109,29 @@ bool Utils::isDriverPackage(const QString &filepath)
     if (tmpDir.mkdir(tmpPath)) {
         tmpDir.cd(tmpPath);
         QString strExtract = tmpDir.absolutePath();
-        QProcess process;
-        process.start("sh", QStringList() << "-c" << QString("dpkg-deb -x '%1' %2").arg(filepath).arg(strExtract));
-        if (process.waitForFinished()) {
+        QStringList arguments;
+        arguments <<  QString("-x") << filepath << strExtract;
+        QString program = QString("dpkg-deb");
+        QString outInfo;
+        bool ret = runCmdSafeWithArgs(outInfo, program, arguments);
+        if (ret) {
             // 2021-12-24 liujuna@uniontech.com 修改过滤规则
             // 关键字查找 insmod modprobe和 路径 /lib/module 会在设备管理器本身(后台服务)和libhd等安装包中返回true，因此暂不可使用
             // 英伟达驱动中找不到 .ko 和 .ppd 等信息 ， 但是可以找到 nvidia*.ko 字段，因此添加 nvidia*.ko 过滤字段
             // 不能直接通过包名判断 比如 "deepin-devicemanager_1.0.deb" 判断是否包含 "deepin-devicemanager" 此时同样会过滤 "/home/uos/deepin-devicemanager/driver.deb"
-            process.start("sh", QStringList() << "-c" << QString("grep -irHE 'nvidia*.ko' %1 || find %1 -name '*.ko' -o -name '*.ppd'").arg(strExtract));
-            if (process.waitForFinished()) {
-                //获取查找结果，有结果不为空
-                QString strKeyContent = process.readAllStandardOutput();
-                qCInfo(appLog) << strKeyContent;
-                if (!strKeyContent.isEmpty()) {
+            QStringList arguments1;
+            arguments1 << QString("-irHE") << QString("nvidia*.ko") << strExtract;
+            QString outInfo1;
+            bool ret1 = runCmdSafeWithArgs(outInfo1, "grep", arguments1);
+            if (ret1 && !outInfo1.isEmpty()) {
+                    bsuccess = true;
+            }
+            if(!bsuccess) {
+                QStringList arguments2;
+                arguments2 << strExtract << QString("-name") << QString("*.ko") << QString("-o") << QString("-name") << QString("*.ppd");
+                QString outInfo2;
+                bool ret2 = runCmdSafeWithArgs(outInfo2, "find", arguments2);
+                if (ret2 && !outInfo2.isEmpty()) {
                     bsuccess = true;
                 }
             }
@@ -213,4 +223,17 @@ QString Utils::getUrl()
     }
 }
 
+bool Utils::runCmdSafeWithArgs(QString &outInfo, const QString &program, const QStringList &arguments, int msecsWaiting)
+{
+    QProcess process;
+    process.start(program, arguments);
+    if (!process.waitForFinished(msecsWaiting)) {
+        qCInfo(appLog) << program << arguments << "run null";
+        return false;
+    }
+
+    outInfo = process.readAllStandardOutput();
+    qCInfo(appLog) << program << arguments << outInfo;
+    return true;
+}
 

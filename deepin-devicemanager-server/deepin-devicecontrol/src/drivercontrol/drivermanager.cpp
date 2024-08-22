@@ -373,25 +373,23 @@ bool DriverManager::isSigned(const QString &filepath)
         return true;
     }
 
-    QProcess process;
-    QStringList options;
-    QString strSignTool;
+    QStringList arguments;
+    QString program;
     QString strSignCheckString;
 
     if (filepath.contains("deb")) {
-        strSignTool = "deepin-deb-verify ";
+        program = "deepin-deb-verify";
+        arguments << filepath;
         strSignCheckString = "signature verified";
     } else {
-        strSignTool = "deepin-elf-sign -f ";
+        program = "deepin-elf-sign";
+        arguments << "-f" << filepath;
         strSignCheckString = "Verified successfully";
     }
-    options << "-c" << strSignTool + filepath;
 
-    process.start("/bin/bash", options);
-    process.waitForFinished(-1);
-
-    QString str = process.readAll();
-    return str.contains(strSignCheckString);
+    QString outInfo;
+    bool ret = Utils::runCmdSafeWithArgs(outInfo, program, arguments, -1);
+    return (ret && outInfo.contains(strSignCheckString));
 }
 bool DriverManager::isArchMatched(const QString &path)
 {
