@@ -600,6 +600,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 
 void MainWindow::slotRefreshInfo()
 {
+    refreshDataBaseLater();
     // 界面刷新
     refresh();
 }
