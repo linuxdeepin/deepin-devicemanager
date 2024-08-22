@@ -27,6 +27,7 @@ public:
     static bool isDpkgLocked();
     //获取url
     static QString getUrl();
+    static bool runCmdSafeWithArgs(QString &outInfo, const QString &program, const QStringList &arguments, int msecsWaiting = 30000);
 };
 
 #endif // UTILS_H
