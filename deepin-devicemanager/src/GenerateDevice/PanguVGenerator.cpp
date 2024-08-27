@@ -11,6 +11,8 @@
 #include "EDIDParser.h"
 #include "DeviceManager/DeviceNetwork.h"
 #include <QProcess>
+#include <QDir>
+#include <QFileInfoList>
 
 PanguVGenerator::PanguVGenerator()
 {
@@ -49,6 +51,7 @@ void parseEDID(QStringList allEDIDS,QString input)
 
             QMap<QString, QString> mapInfo;
             mapInfo.insert("Vendor",edidParser.vendor());
+            mapInfo.insert("Model",edidParser.model());
             mapInfo.insert("Date",edidParser.releaseDate());
             mapInfo.insert("Size",edidParser.screenSize());
             mapInfo.insert("Display Input",input);
@@ -62,15 +65,24 @@ void parseEDID(QStringList allEDIDS,QString input)
 
 void PanguVGenerator::generatorMonitorDevice()
 {
-    QStringList allEDIDS1;
-    allEDIDS1.append("/sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid");
-    allEDIDS1.append("/sys/devices/platform/hldrm/drm/card0/card0-HDMI-A-1/edid");
-    parseEDID(allEDIDS1,"HDMI-A-1");
+    QString toDir = "/sys/class/drm";
+    QDir toDir_(toDir);
 
-    QStringList allEDIDS2;
-    allEDIDS2.append("/sys/devices/platform/hisi-drm/drm/card0/card0-VGA-1/edid");
-    allEDIDS2.append("/sys/devices/platform/hldrm/drm/card0/card0-VGA-1/edid");
-    parseEDID(allEDIDS2,"VGA-1");
+    if (!toDir_.exists())
+        return;
+
+    QFileInfoList fileInfoList = toDir_.entryInfoList();
+    foreach(QFileInfo fileInfo, fileInfoList) {
+        if(fileInfo.fileName() == "." || fileInfo.fileName() == ".." || !fileInfo.fileName().startsWith("card"))
+            continue;
+
+        if(QFile::exists(fileInfo.filePath() + "/" + "edid")) {
+            QStringList allEDIDS_all;
+            allEDIDS_all.append(fileInfo.filePath() + "/" + "edid");
+            QString interface = fileInfo.fileName().remove("card0-").remove("card1-").remove("card2-");
+            parseEDID(allEDIDS_all,interface);
+         }
+    }
 }
 
 void PanguVGenerator::generatorNetworkDevice()

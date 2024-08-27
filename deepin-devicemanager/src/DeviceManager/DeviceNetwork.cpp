@@ -48,7 +48,8 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     if (!matchToLshw(mapInfo)
         && Common::boardVendorType() != "KLVV" && Common::boardVendorType() != "KLVU"
-        && Common::boardVendorType() != "PGUW" && Common::boardVendorType() != "PGUV") {
+        && Common::boardVendorType() != "PGUW" && Common::boardVendorType() != "PGUV"
+        && Common::boardVendorType() != "M009") {
         return;
     }
     // 设置由lshw获取的信息
