@@ -226,12 +226,12 @@ bool Utils::runCmdSafeWithArgs(QString &outInfo, const QString &program, const Q
     QProcess process;
     process.start(program, arguments);
     if (!process.waitForFinished(msecsWaiting)) {
-        qCInfo(appLog) << program << arguments << "run null";
+        qInfo() << program << arguments << "run null";
         return false;
     }
 
     outInfo = process.readAllStandardOutput();
-    qCInfo(appLog) << program << arguments << outInfo;
+    qInfo() << program << arguments << outInfo;
     return true;
 }
 
