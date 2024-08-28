@@ -26,6 +26,7 @@
 #include "DeviceManager/DeviceBluetooth.h"
 #include "DeviceManager/DeviceNetwork.h"
 #include "DeviceManager/DeviceMemory.h"
+#include "commonfunction.h"
 
 HWGenerator::HWGenerator()
 {
@@ -115,7 +116,9 @@ void HWGenerator::generatorGpuDevice()
     QStringList items = deviceInfo.split("\n");
 
     QMap<QString, QString> mapInfo;
-    for (QString itemStr : items) {
+    if(Common::boardVendorType() == "M009")
+        mapInfo.insert("Name", "PANGU M900");
+    else for (QString itemStr : items) {
         if (itemStr.contains(":"))
             continue;
         QString curItemStr = itemStr.trimmed();
@@ -265,6 +268,17 @@ void HWGenerator::getDiskInfoFromLshw()
         }
 
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
+    }
+    // lshw -C storage
+    if(Common::boardVendorType() != "M009")
+	return;
+    const QList<QMap<QString, QString>> &lstStorage = DeviceManager::instance()->cmdInfo("lshw_storage");
+    QList<QMap<QString, QString> >::const_iterator sIt = lstStorage.begin();
+    for (; sIt != lstStorage.end(); ++sIt) {
+        if ((*sIt).size() < 2)
+            continue;
+
+        DeviceManager::instance()->addLshwinfoIntoNVMEStorageDevice(*sIt);
     }
 }
 

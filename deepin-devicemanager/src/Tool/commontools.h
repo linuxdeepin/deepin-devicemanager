@@ -78,6 +78,20 @@ public:
      */
     static QString getBackupPath();
 
+    /**
+     * @brief mergeSortCpuInfoByLogicalID: 获取状态类型类型对应的图标
+     * @param lsCpu CPU信息
+     * @return
+     */
+    static void mergeSortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QString, QString> > &tmpLst, int begin, int end);
+    /**
+     * @brief sortCpuInfoByLogicalID: 依CPU ID排序
+     * @param lsCpu CPU信息
+     * @return
+     */
+    static void sortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QString, QString> > &tmpLst, int begin, int end);
+
+
 signals:
 
 public slots:

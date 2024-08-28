@@ -21,7 +21,8 @@ public:
         KLVV,
         KLVU,
         PGUV,
-        PGUX
+        PGUX,
+        M009
     };
     static QString getArch();
 
@@ -33,7 +34,7 @@ public:
 
     /**
      * @brief specialComType
-     * special computer type:PGUW(value:1),KLVV/L540(value:2),KLVU(value:3),PGUV/W585(value:4)
+     * special computer type:PGUW(value:1),KLVV/L540(value:2),KLVU(value:3),PGUV/W585(value:4),PGUX(value:5),M009(value:6)
      */
     static int specialComType;
 };
