@@ -147,43 +147,32 @@ QMap<QString, QList<QMap<QString, QString> > > &CmdTool::cmdInfo()
 {
     return m_cmdInfo;
 }
-/*
-使用 sudo dmidecode -t 1 命令查询结果下的关键字：Manufacturer、Product Name、Version、Serial Number，取其值，
-文件取名以`oeminfo_`开头，取名格式为《oeminfo_manufacturer_productname_version_serialnumber.toml，
-后文简称为：《oeminfo_system.toml》文件名字母全转化为小写，并去掉不可显示特殊字符和空格。并基于此进行匹配。
-文件路径存放在/etc/deepin/hardware
-*/
+
 QString CmdTool::loadOemTomlFileName(const QMap<QString, QString> &mapInfo)
 {
-    bool tomlFileRead = false;
     if (mapInfo.size() <= 0)
         return QString();
 
     QString tomlFileName;
-    //获取文件名字《oeminfo_manufacturer_productname_version_serialnumber.toml，
+    //获取文件名字oeminfo_manufacturer_productname_version.toml，
     if (mapInfo.contains("Manufacturer")
-            && mapInfo.contains("Manufacturer")
             && mapInfo.contains("Product Name")
-            && mapInfo.contains("Version")
-            && mapInfo.contains("Serial Number")) {
+            && mapInfo.contains("Version")) {
         QString Manufacturer = mapInfo["Manufacturer"];
         QString productname = mapInfo["Product Name"];
         QString version = mapInfo["Version"];
-        QString serialnumber = mapInfo["Serial Number"];
 
         if (Manufacturer.contains("N/A"))  Manufacturer = "";
         if (productname.contains("N/A"))  productname = "";
         if (version.contains("N/A"))  version = "";
-        if (serialnumber.contains("N/A"))  serialnumber = "";
 
         QRegExp regExp("[-/'~!@#$%^&*(){}:;,.\"\\|~`]");
         QString replace = "";         // 这里是将特殊字符换为空字符串,""代表直接去掉
         Manufacturer = Manufacturer.replace(regExp, replace);
         productname = productname.replace(regExp, replace);
         version = version.replace(regExp, replace);
-        serialnumber = serialnumber.replace(regExp, replace);
 
-        tomlFileName = "oeminfo_" + Manufacturer + "_" + productname + "_" + version + "_" + serialnumber;
+        tomlFileName = "oeminfo_" + Manufacturer + "_" + productname + "_" + version;
         tomlFileName = tomlFileName.trimmed().toLower();
         tomlFileName = tomlFileName.remove(" ") + ".toml";
         return tomlFileName;
