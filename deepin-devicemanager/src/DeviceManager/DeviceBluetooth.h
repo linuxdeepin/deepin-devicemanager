@@ -126,6 +126,7 @@ private:
     QString         m_DriverVersion;          //<! 【驱动版本】
     QString         m_MaximumPower;           //<! 【最大功耗】
     QString         m_Speed;                  //<! 【速度】
+    QString         m_Alias;                  //<! 【别名】
 };
 
 #endif // DEVICEBLUETOOTH_H
