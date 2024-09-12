@@ -33,6 +33,7 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
     // 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "HCI Version", m_Version, true);
 
     // 获取设备其他信息
     getOtherMapInfo(mapInfo);

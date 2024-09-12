@@ -120,6 +120,7 @@ TomlFixMethod DeviceGpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
     setTomlAttribute(mapInfo, "IRQ", m_IRQ);
     setTomlAttribute(mapInfo, "Width", m_Width);
+    setAttribute(mapInfo, "Version", m_Version);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
