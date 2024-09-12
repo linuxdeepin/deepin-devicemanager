@@ -82,7 +82,6 @@ int main(int argc, char *argv[])
         const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
         app.setApplicationAcknowledgementPage(acknowledgementLink);
         DApplicationSettings settinAgs;
-        Dtk::Core::DLogManager::registerConsoleAppender();
         Dtk::Core::DLogManager::registerFileAppender();
 
         QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");

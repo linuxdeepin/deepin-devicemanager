@@ -46,6 +46,14 @@ private:
     void runCmd(const QString &cmd, QString &info);
 
     /**
+     * @brief runAsteriskCmd
+     * @param cmd
+     * @param arg
+     * @return info
+     */
+    QString runAsteriskCmd(const QString &cmd, const QString &arg);
+
+    /**
      * @brief runCmdToCache
      * @param cmd
      */

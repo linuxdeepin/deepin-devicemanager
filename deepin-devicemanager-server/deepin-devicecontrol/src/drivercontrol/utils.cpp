@@ -109,31 +109,19 @@ bool Utils::isDriverPackage(const QString &filepath)
     if (tmpDir.mkdir(tmpPath)) {
         tmpDir.cd(tmpPath);
         QString strExtract = tmpDir.absolutePath();
-        QStringList arguments;
-        arguments <<  QString("-x") << filepath << strExtract;
-        QString program = QString("dpkg-deb");
-        QString outInfo;
-        bool ret = runCmdSafeWithArgs(outInfo, program, arguments);
-        if (ret) {
-            // 2021-12-24 liujuna@uniontech.com 修改过滤规则
-            // 关键字查找 insmod modprobe和 路径 /lib/module 会在设备管理器本身(后台服务)和libhd等安装包中返回true，因此暂不可使用
-            // 英伟达驱动中找不到 .ko 和 .ppd 等信息 ， 但是可以找到 nvidia*.ko 字段，因此添加 nvidia*.ko 过滤字段
-            // 不能直接通过包名判断 比如 "deepin-devicemanager_1.0.deb" 判断是否包含 "deepin-devicemanager" 此时同样会过滤 "/home/uos/deepin-devicemanager/driver.deb"
-            QStringList arguments1;
-            arguments1 << QString("-irHE") << QString("nvidia*.ko") << strExtract;
-            QString outInfo1;
-            bool ret1 = runCmdSafeWithArgs(outInfo1, "grep", arguments1);
-            if (ret1 && !outInfo1.isEmpty()) {
-                    bsuccess = true;
-            }
-            if(!bsuccess) {
-                QStringList arguments2;
-                arguments2 << strExtract << QString("-name") << QString("*.ko") << QString("-o") << QString("-name") << QString("*.ppd");
-                QString outInfo2;
-                bool ret2 = runCmdSafeWithArgs(outInfo2, "find", arguments2);
-                if (ret2 && !outInfo2.isEmpty()) {
-                    bsuccess = true;
-                }
+        executeCmd("dpkg-deb", QStringList() << QString("-x") << filepath << strExtract);
+        // 2021-12-24 liujuna@uniontech.com 修改过滤规则
+        // 关键字查找 insmod modprobe和 路径 /lib/module 会在设备管理器本身(后台服务)和libhd等安装包中返回true，因此暂不可使用
+        // 英伟达驱动中找不到 .ko 和 .ppd 等信息 ， 但是可以找到 nvidia*.ko 字段，因此添加 nvidia*.ko 过滤字段
+        // 不能直接通过包名判断 比如 "deepin-devicemanager_1.0.deb" 判断是否包含 "deepin-devicemanager" 此时同样会过滤 "/home/uos/deepin-devicemanager/driver.deb"
+        QString outInfo1 = executeCmd("grep", QStringList() << QString("-irHE") << QString("nvidia*.ko") << strExtract);
+        if (!outInfo1.isEmpty()) {
+            bsuccess = true;
+        }
+        if(!bsuccess) {
+            QString outInfo2 = executeCmd("find", QStringList() << strExtract << QString("-name") << QString("*.ko") << QString("-o") << QString("-name") << QString("*.ppd"));
+            if (!outInfo2.isEmpty()) {
+                bsuccess = true;
             }
         }
         //此处主动调用删除临时文件，临时文件在/tmp目录每次重启会自动清除，所以不对删除结果做处理
@@ -197,15 +185,21 @@ bool Utils::isFileLocked(const QString &filepath, bool bread)
 bool Utils::isDpkgLocked()
 {
     QProcess proc;
-    proc.setProgram("bash");
-    proc.setArguments(QStringList() << "-c"
-                      << "ps -e -o comm | grep dpkg");
+    proc.setProgram("ps");
+    proc.setArguments(QStringList() << "-e" << "-o" << "comm");
     proc.start();
     proc.waitForFinished();
     QString info = proc.readAllStandardOutput();
-    info = info.trimmed();
-    if (info.isEmpty() || info == "dpkg-query")
+    if (!info.contains("dpkg"))
         return false;
+
+    // Split the output  search for the 'grep dpkg ' pattern
+      foreach (QString out, info.split("\n")) {
+          if (out.contains("dpkg")) {
+            if(out.trimmed() == "dpkg-query")
+                return false;
+          }
+      }
     return true;
 }
 
@@ -223,17 +217,24 @@ QString Utils::getUrl()
     }
 }
 
-bool Utils::runCmdSafeWithArgs(QString &outInfo, const QString &program, const QStringList &arguments, int msecsWaiting)
+QByteArray Utils::executeCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/)
 {
     QProcess process;
-    process.start(program, arguments);
-    if (!process.waitForFinished(msecsWaiting)) {
-        qCInfo(appLog) << program << arguments << "run null";
-        return false;
+    if (!workPath.isEmpty())
+        process.setWorkingDirectory(workPath);
+
+    process.setProgram(cmd);
+    process.setArguments(args);
+    process.setEnvironment({"LANG=en_US.UTF-8", "LANGUAGE=en_US"});
+    process.start();
+    // Wait for process to finish without timeout.
+    process.waitForFinished(msecsWaiting);
+    QByteArray outPut = process.readAllStandardOutput();
+    int nExitCode = process.exitCode();
+    bool bRet = (process.exitStatus() == QProcess::NormalExit && nExitCode == 0);
+    if (!bRet) {
+        qCWarning(appLog) << "run cmd error, caused by:" << process.errorString() << "output:" << outPut;
+        return QByteArray();
     }
-
-    outInfo = process.readAllStandardOutput();
-    qCInfo(appLog) << program << arguments << outInfo;
-    return true;
+    return outPut;
 }
-

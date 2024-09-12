@@ -188,13 +188,8 @@ bool HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo &driverInf
 bool HttpDriverInterface::isPkgInstalled(QString strPkgName, QString strVersion)
 {
     //调用apt命令查看包是否安装。
-    QStringList arguments;
-    QString program;
-    arguments << "policy" << strPkgName;
-    program = "apt";
-    QString outInfo;
-    bool ret = Utils::runCmdSafeWithArgs(outInfo, program, arguments, -1);
-    if(!ret)
+    QString outInfo = Utils::executeCmd("apt", QStringList() << "policy" << strPkgName, QString(), -1);
+    if(outInfo.isEmpty())
         return false;
     QStringList infoList = outInfo.split("\n");
 
