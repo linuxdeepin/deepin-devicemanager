@@ -4,6 +4,7 @@
 
 #include "notifythread.h"
 #include "DDLog.h"
+#include "utils.h"
 
 #include <QTimer>
 #include <QtDebug>
@@ -22,14 +23,22 @@ void NotifyThread::run()
     QProcess process;
     forever {
         //查看dde-desktop进程是否启动
-        process.start("sh", QStringList() << "-c" << " ps aux | grep desktop |grep -v grep");
-        process.waitForFinished(-1);
-        if (process.readAll().isEmpty()) {
+        QString outInfo = Utils::executeCmd("ps", QStringList() << "aux", QString(), -1);
+
+        // Split the output  search for the 'grep desktop | grep -v grep' pattern
+        QStringList retLst;
+        foreach (QString out, outInfo.split("\n")) {
+            if (out.contains("desktop") && !out.contains("grep")) {
+                retLst << out;
+            }
+        }
+        bool bDeskboot = true;
+        if (retLst.size() < 1) {
             sleep(2);
             continue;
         }
         //查看用户名
-        process.start("sh", QStringList() << "-c" << "who");
+        process.start("who");
         process.waitForFinished(-1);
         strUsername = process.readAll().split(' ')[0];
         qCInfo(appLog) << strUsername;
@@ -40,9 +49,9 @@ void NotifyThread::run()
 
         QString name = QLocale::system().name();
 
-        //通知前端
-        QString strCmd = "runuser -l " + strUsername + " -c \"XDG_RUNTIME_DIR=\"/run/user/$(id -u " + strUsername + " )\" /usr/bin/deepin-devicemanager notify " + name + "\"";
-        process.start("sh", QStringList() << "-c" << strCmd);
+        //通知前端 example: runuser -l Username -c "XDG_RUNTIME_DIR=\"/run/user/\$(id -u $Username)\" /usr/bin/deepin-devicemanager notify zh_CN"
+        QString strCmd=QString("XDG_RUNTIME_DIR=\"/run/user/\$(id -u %1)\" /usr/bin/deepin-devicemanager notify %2").arg(strUsername).arg(name);
+        process.start("runuser", QStringList() << "-l"  << strUsername << "-c" << strCmd);
         process.waitForFinished(-1);
         break;
     }

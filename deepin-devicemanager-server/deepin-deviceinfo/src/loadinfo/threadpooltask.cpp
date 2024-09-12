@@ -3,6 +3,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "threadpooltask.h"
+#include "DDLog.h"
+using namespace DDLog;
 
 #include <QTime>
 #include <QProcess>
@@ -40,25 +42,82 @@ void ThreadPoolTask::run()
 
 void ThreadPoolTask::runCmd(const QString &cmd)
 {
+    QString outPath = cmd.split('>').last().trimmed();
+    QString cmdExec = cmd.left(cmd.indexOf('>')).trimmed();
+    QString cmdStr = cmd.split(' ').first().trimmed();
+    QString cmdArg = cmdExec.mid(cmdStr.count() + 1).trimmed();
+    QStringList args;
+    if (!cmdArg.isEmpty())
+        args = cmdArg.split(' ');
+
+    if (cmdStr.isEmpty())
+        return;
+
     QProcess process;
-    QStringList options;
-    options << "-c" << cmd;
-    process.start("/bin/bash", options);
-    process.waitForFinished(m_Waiting);
+    if (!outPath.isEmpty())
+        process.setStandardOutputFile(outPath, QIODevice::WriteOnly);
+    process.start(cmdStr, args);
+    process.waitForFinished(-1);
 }
 
 void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
 {
+    QString cmdExec = cmd.left(cmd.indexOf('>')).trimmed();
+    QString cmdStr = cmdExec.split(' ').first().trimmed();
+    QString cmdArg = cmdExec.mid(cmdStr.count() + 1).trimmed();
+    QStringList args;
+    if (!cmdArg.isEmpty())
+        args = cmdArg.split(' ');
+    if (cmdStr.isEmpty())
+        return;
+
+    // 处理包含*的命令参数
+    if (cmd.startsWith("ls /dev/sg*")) {
+        info = runAsteriskCmd(cmdStr, args.first().trimmed());
+        return;
+    }
+
     QProcess process;
-    QString cmdT = cmd;
-//    process.start(cmdT.replace(QString(" >  ") + PATH + m_File, ""));
-
-    QStringList options;
-    options << "-c" << cmdT.replace(QString(" >  ") + PATH + m_File, "");
-    process.start("/bin/bash", options);
-
+    process.start(cmdStr, args);
     process.waitForFinished(m_Waiting);
     info = process.readAllStandardOutput();
+
+    //qCInfo(deviceInfoLog) << "runcmdExec:" << cmdExec << "args:" << args << "outPut:" << info;
+}
+
+QString ThreadPoolTask::runAsteriskCmd(const QString &cmd, const QString &arg)
+{
+    QString info = "";
+    if (cmd.isEmpty())
+        return info;
+
+    QStringList args;
+    QString path;
+    QString startWord;
+    if (arg == "/dev/sg*") {
+        path = arg.left(arg.lastIndexOf('/'));
+        args << path;
+        startWord = arg.split('/').last().replace('*', "");
+    }
+
+    QProcess process;
+    process.start(cmd, args);
+    process.waitForFinished(-1);
+
+    QString outPut = process.readAllStandardOutput();
+    QStringList outPutLines = outPut.trimmed().split('\n');
+    QStringList filterLines;
+    for (auto line : outPutLines) {
+        if (line.startsWith(startWord))
+            filterLines.push_back(path + "/" +line +"\n");
+    }
+
+    if (!filterLines.isEmpty())
+        info = filterLines.join(' ');
+
+    //qCInfo(deviceInfoLog) << "runAsteriskCmd:" << cmd << "arg:" << arg << "info:" << info;
+
+    return info;
 }
 
 void ThreadPoolTask::runCmdToCache(const QString &cmd)

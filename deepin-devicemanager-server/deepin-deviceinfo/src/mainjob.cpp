@@ -52,8 +52,8 @@ MainJob::MainJob(const char *name, QObject *parent)
         // 后台加载后先禁用设备
         QProcess process;
         QStringList options;
-        options << "-c" << "hwinfo --netcard --keyboard --mouse --usb";
-        process.start("/bin/bash", options);
+        options << "--netcard" << "--keyboard"  << "--mouse" <<  "--usb";
+        process.start("hwinfo", options);
         process.waitForFinished(-1);
         QString info = process.readAllStandardOutput();
         process.close();
