@@ -38,18 +38,18 @@ static int getPidByName(const QString &taskName)
     while ((ptr = readdir(dir)) != nullptr) {
         if ((strcmp(ptr->d_name, ".") == 0) || (strcmp(ptr->d_name, "..") == 0) || DT_DIR != ptr->d_type)
             continue;
-        char filepath[1024] = {0};
+        char filepath[1024] = { 0 };
         sprintf(filepath, "/proc/%s/cmdline", ptr->d_name);
         FILE *fp = fopen(filepath, "r");
         if (nullptr == fp)
             continue;
 
-        char buf[1024] = {0};
+        char buf[1024] = { 0 };
         if (fgets(buf, 1023, fp) == nullptr) {
             fclose(fp);
             continue;
         }
-        char cur_task_name[1024] = {0};
+        char cur_task_name[1024] = { 0 };
         sscanf(buf, "%s", cur_task_name);
         fclose(fp);
         if (QString(cur_task_name).endsWith(taskName)) {
@@ -66,6 +66,7 @@ static int getPidByName(const QString &taskName)
     return pid;
 }
 
+
 bool ControlInterface::getUserAuthorPasswd()
 {
 #ifdef DISABLE_POLKIT
@@ -77,16 +78,16 @@ bool ControlInterface::getUserAuthorPasswd()
                                                                                  UnixProcessSubject(pid),
                                                                                  Authority::AllowUserInteraction);
         return result == Authority::Yes;
-    } else {
-        return false;
     }
-}
 
+    return false;
+}
 ControlInterface::ControlInterface(QObject *parent)
     : QDBusService(parent)
 #ifndef DISABLE_DRIVER
-    , mp_drivermanager(new DriverManager(this))
-    , pcore(new ModCore(this))
+      ,
+      mp_drivermanager(new DriverManager(this)),
+      pcore(new ModCore(this))
 #endif
 {
     initPolicy(QDBusConnection::SystemBus, QString(SERVICE_CONFIG_DIR) + "other/deepin-devicecontrol.json");
@@ -100,11 +101,11 @@ void ControlInterface::initConnects()
     connect(mp_drivermanager, &DriverManager::sigDownloadProgressChanged, this, &ControlInterface::sigDownloadProgressChanged);
     connect(mp_drivermanager, &DriverManager::sigDownloadFinished, this, &ControlInterface::sigDownloadFinished);
     connect(mp_drivermanager, &DriverManager::sigInstallProgressChanged, this, &ControlInterface::sigInstallProgressChanged);
-    connect(mp_drivermanager, &DriverManager::sigFinished, this, [ = ](bool bsuccess, QString msg) {
+    connect(mp_drivermanager, &DriverManager::sigFinished, this, [=](bool bsuccess, QString msg) {
         lockTimer(false);
         emit sigFinished(bsuccess, msg);
     });
-    connect(mp_drivermanager, &DriverManager::sigInstallProgressFinished, this, [ = ](bool bsuccess, int err) {
+    connect(mp_drivermanager, &DriverManager::sigInstallProgressFinished, this, [=](bool bsuccess, int err) {
         lockTimer(false);
         emit sigInstallProgressFinished(bsuccess, err);
     });
@@ -123,6 +124,8 @@ QString ControlInterface::getAuthorizedInfo()
 
 bool ControlInterface::enable(const QString &hclass, const QString &name, const QString &path, const QString &value, bool enable_device, const QString strDriver)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     // 网卡通过ioctl禁用
     // 先判断是否是网卡
     QRegExp reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
@@ -150,6 +153,8 @@ bool ControlInterface::enable(const QString &hclass, const QString &name, const 
 
 bool ControlInterface::enablePrinter(const QString &hclass, const QString &name, const QString &path, bool enable_device)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     ipp_op_t op = enable_device ? IPP_OP_RESUME_PRINTER : IPP_OP_PAUSE_PRINTER;
     char uri[HTTP_MAX_URI];
     ipp_t *request = nullptr;
@@ -183,11 +188,15 @@ bool ControlInterface::enablePrinter(const QString &hclass, const QString &name,
 
 void ControlInterface::disableInDevice()
 {
+    if (!getUserAuthorPasswd())
+        return;
     EnableUtils::disableInDevice();
 }
 
 void ControlInterface::disableOutDevice(const QString &devInfo)
 {
+    if (!getUserAuthorPasswd())
+        return;
     EnableUtils::disableOutDevice(devInfo);
 }
 
@@ -198,6 +207,8 @@ bool ControlInterface::isDeviceEnabled(const QString &unique_id)
 
 bool ControlInterface::setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     // 读写wake文件
     QString tpath;
     if (!WakeupUtils::wakeupPath(path, tpath))
@@ -212,6 +223,8 @@ bool ControlInterface::setWakeupMachine(const QString &unique_id, const QString 
 
 bool ControlInterface::setNetworkWake(const QString &logicalName, bool wakeup)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     bool res = WakeupUtils::setWakeOnLan(logicalName, wakeup);
     if (res) {
         // 将数据保存到数据库
@@ -222,6 +235,8 @@ bool ControlInterface::setNetworkWake(const QString &logicalName, bool wakeup)
 
 void ControlInterface::updateWakeup(const QString &devInfo)
 {
+    if (!getUserAuthorPasswd())
+        return;
     WakeupUtils::updateWakeupDeviceInfo(devInfo);
 }
 
@@ -232,6 +247,8 @@ int ControlInterface::isNetworkWakeup(const QString &logicalName)
 
 void ControlInterface::setMonitorWorkingDBFlag(bool flag)
 {
+    if (!getUserAuthorPasswd())
+        return;
     EnableSqlManager::getInstance()->setMonitorWorkingFlag(flag);
 }
 
@@ -246,7 +263,7 @@ bool ControlInterface::unInstallDriver(const QString &modulename)
     if (!getUserAuthorPasswd())
         return false;
     lockTimer(false);
-    return  mp_drivermanager->unInstallDriver(modulename);
+    return mp_drivermanager->unInstallDriver(modulename);
 }
 
 bool ControlInterface::installDriver(const QString &filepath)
@@ -256,7 +273,7 @@ bool ControlInterface::installDriver(const QString &filepath)
         return false;
     }
     lockTimer(true);
-    return  mp_drivermanager->installDriver(filepath);
+    return mp_drivermanager->installDriver(filepath);
 }
 
 void ControlInterface::installDriver(const QString &modulename, const QString &version)
@@ -266,11 +283,13 @@ void ControlInterface::installDriver(const QString &modulename, const QString &v
         return;
     }
     lockTimer(true);
-    return  mp_drivermanager->installDriver(modulename, version);
+    return mp_drivermanager->installDriver(modulename, version);
 }
 
 void ControlInterface::undoInstallDriver()
 {
+    if (!getUserAuthorPasswd())
+        return;
     lockTimer(false);
     return mp_drivermanager->undoInstallDriver();
 }
@@ -285,7 +304,7 @@ bool ControlInterface::isDriverPackage(const QString &filepath)
     if (!getUserAuthorPasswd())
         return false;
     else
-        return  mp_drivermanager->isDriverPackage(filepath);
+        return mp_drivermanager->isDriverPackage(filepath);
 }
 
 bool ControlInterface::isBlackListed(const QString &modName)
@@ -320,7 +339,7 @@ bool ControlInterface::backupDeb(const QString &debpath)
     }
     bool ret = mp_drivermanager->backupDeb(debpath);
     emit sigBackupProgressFinished(ret);
-    return  ret;
+    return ret;
 }
 
 bool ControlInterface::delDeb(const QString &debname)
@@ -328,7 +347,7 @@ bool ControlInterface::delDeb(const QString &debname)
     if (!getUserAuthorPasswd()) {
         return false;
     }
-    return  mp_drivermanager->delDeb(debname);
+    return mp_drivermanager->delDeb(debname);
 }
 
 bool ControlInterface::aptUpdate()
@@ -336,7 +355,7 @@ bool ControlInterface::aptUpdate()
     if (!getUserAuthorPasswd()) {
         return false;
     }
-    return  mp_drivermanager->aptUpdate();
+    return mp_drivermanager->aptUpdate();
 }
 
 #endif
@@ -419,8 +438,9 @@ bool ControlInterface::removeEnable(const QString &hclass, const QString &name, 
         // 1. 直接remove写入
         // 通过remove文件禁用
         // 1:表示禁用 ，0:表示启用
-        qCInfo(appLog) << "" << "/sys" + path + QString("/remove");
-//        return false;
+        qCInfo(appLog) << ""
+                       << "/sys" + path + QString("/remove");
+        //        return false;
         QFile file("/sys" + path + QString("/remove"));
         if (!file.open(QIODevice::WriteOnly)) {
             return false;
