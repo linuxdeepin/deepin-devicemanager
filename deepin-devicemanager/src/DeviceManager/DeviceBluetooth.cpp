@@ -32,6 +32,7 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 {
     // 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
+    setAttribute(mapInfo, "Alias", m_Alias);
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "HCI Version", m_Version, true);
 
@@ -236,6 +237,7 @@ void DeviceBluetooth::initFilterKey()
 void DeviceBluetooth::loadBaseDeviceInfo()
 {
     // 添加基本信息
+    addBaseDeviceInfo(tr("Alias"), m_Alias);
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
     addBaseDeviceInfo(tr("Version"), m_Version);
