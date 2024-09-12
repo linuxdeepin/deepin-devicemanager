@@ -57,7 +57,7 @@ void DriverBackupThread::run()
         }
 
         QStringList options;
-        options << "-c" << "apt download " + debname + "=" + debversion;
+        options << "download" << debname + "=" + debversion;
         QProcess process;
         process.setWorkingDirectory(backupPath);
         connect(&process, &QProcess::readyReadStandardOutput, this, [&](){
@@ -76,7 +76,7 @@ void DriverBackupThread::run()
             emit backupProgressFinished(false);
             return;
         }
-        process.start("/bin/bash", options);
+        process.start("apt", options);
         process.waitForFinished(-1);
 
         if (m_isStop) {

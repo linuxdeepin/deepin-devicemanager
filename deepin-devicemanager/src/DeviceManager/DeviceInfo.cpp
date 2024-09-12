@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DeviceInfo.h"
+#include "commonfunction.h"
 #include "commondefine.h"
 #include"DeviceManager.h"
 #include "DDLog.h"
@@ -492,14 +493,9 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
         return false;
     }
 
-    QString info = "";
-    QProcess process;
-
     // 判断lsmod是否能查询
-    process.start("sh", QStringList() << "-c" << QString("modinfo %1 | grep 'filename:'").arg(driver));
-    process.waitForFinished(-1);
-    info = process.readAllStandardOutput();
-    return info.isEmpty();
+    QString outInfo = Common::executeCmd("modinfo", QStringList() << driver, QString(), -1);
+    return !outInfo.contains("filename:");
 }
 
 void DeviceBaseInfo::setCanEnale(bool can)
@@ -580,20 +576,18 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
 
 const QString DeviceBaseInfo::getDriverVersion()
 {
-    QProcess process;
-    process.start("bash", QStringList() << "-c" << "modinfo " + driver()  + "| grep version");
-    process.waitForFinished(-1);
+    QString outInfo = Common::executeCmd("modinfo", QStringList() << driver(), QString(), -1);
+    if(outInfo.isEmpty())
+        return  QString("");
 
-    QString output = process.readAllStandardOutput();
-
-    foreach (QString out, output.split("\n")) {
+    foreach (QString out, outInfo.split("\n")) {
         QStringList item = out.split(":", QString::SkipEmptyParts);
         if (!item.isEmpty() && "version" == item[0].trimmed()) {
             return item[1].trimmed();
         }
     }
 
-    return "";
+    return QString("");
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()
