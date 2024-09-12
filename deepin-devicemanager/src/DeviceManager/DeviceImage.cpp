@@ -44,6 +44,7 @@ TomlFixMethod DeviceImage::setInfoFromTomlOneByOne(const QMap<QString, QString> 
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Model", m_Model);
     ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    ret = setTomlAttribute(mapInfo, "Version", m_Version);
     // 添加其他信息,成员变量
     ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
     ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
