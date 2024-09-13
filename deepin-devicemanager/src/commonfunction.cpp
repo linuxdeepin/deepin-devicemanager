@@ -13,6 +13,7 @@
 #include <QProcess>
 #include <QFile>
 #include <QDebug>
+#include <QRegularExpression>
 
 #include <sys/utsname.h>
 
@@ -82,15 +83,18 @@ static bool isModeM900(void)
 /*   dmidecode | grep -i “String 4”中的值来区分主板类型,PWC30表示PanguW（也就是W525）*/
 static bool isModeW525(void)
 {
-    bool ret = false;
-    QProcess process;
-    process.start("bash", QStringList() << "-c" << "dmidecode | grep -i \"String 4\"");
-    process.waitForStarted();
-    process.waitForFinished();
-    QString result = process.readAll();
-    ret = result.contains("PWC30", Qt::CaseInsensitive);    //w525
-    process.close();
-    return ret;
+    QString outInfo = Common::executeCmd("dmidecode");
+    if(outInfo.isEmpty())
+        return false;
+
+    // 使用正则表达式进行匹配
+    QRegularExpression regex("String 4: (.*)");
+    QRegularExpressionMatch match = regex.match(outInfo);
+    if (match.hasMatch()) {
+        return match.captured(1).contains("PWC30", Qt::CaseInsensitive);  // 返回匹配的内容
+    } else {
+        return false; // 返回空字符串，表示没有找到
+    }
 }
 
 /*
@@ -172,4 +176,26 @@ QString Common::checkBoardVendorFlag()
 QString Common::boardVendorType()
 {
     return initBoardVendorFlag ? boardVendorKey : checkBoardVendorFlag();
+}
+
+QByteArray Common::executeCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/)
+{
+    QProcess process;
+    if (!workPath.isEmpty())
+        process.setWorkingDirectory(workPath);
+
+    process.setProgram(cmd);
+    process.setArguments(args);
+    process.setEnvironment({"LANG=en_US.UTF-8", "LANGUAGE=en_US"});
+    process.start();
+    // Wait for process to finish without timeout.
+    process.waitForFinished(msecsWaiting);
+    QByteArray outPut = process.readAllStandardOutput();
+    int nExitCode = process.exitCode();
+    bool bRet = (process.exitStatus() == QProcess::NormalExit && nExitCode == 0);
+    if (!bRet) {
+        qWarning() << "run cmd error, caused by:" << process.errorString() << "output:" << outPut;
+        return QByteArray();
+    }
+    return outPut;
 }

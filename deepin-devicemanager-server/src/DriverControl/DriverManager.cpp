@@ -393,9 +393,8 @@ bool DriverManager::isSigned(const QString &filepath)
         strSignCheckString = "Verified successfully";
     }
 
-    QString outInfo;
-    bool ret = Utils::runCmdSafeWithArgs(outInfo, program, arguments, -1);
-    return (ret && outInfo.contains(strSignCheckString));
+    QString outInfo = Utils::executeCmd(program, arguments, QString(), -1);
+    return outInfo.contains(strSignCheckString);
 }
 bool DriverManager::isArchMatched(const QString &path)
 {
@@ -538,8 +537,15 @@ bool DriverManager::isNetworkOnline()
     /*
        -c 2（代表ping次数，ping 2次后结束ping操作） -w 2（代表超时时间，2秒后结束ping操作）
     */
-// system("ping www.google.com -c 2 -w 2 >netlog.bat");
-    system("ping www.baidu.com -c 2 -w 2 >netlog.bat");
+    // example: ping www.baidu.com -c 2 -w 2 >netlog.bat
+    QProcess process;
+    process.setStandardOutputFile("netlog.bat", QIODevice::WriteOnly);
+    process.start("ping", QStringList() << "www.baidu.com" << "-c" << "2" << "-w" << "2");
+    process.waitForFinished(-1);
+    bool bRet = (process.exitStatus() == QProcess::NormalExit && process.exitCode() == 0);
+    if (!bRet) {
+        return false;
+    }
     sleep(2);
 
     //把文件一行一行读取放入vector
@@ -751,14 +757,11 @@ bool DriverManager::checkCameraInfo(QMap<QString, QString> &mapInfo)
 
 QString DriverManager::getDriverVersion(QString strDriver)
 {
-    QProcess process;
-    QStringList options;
-    options << "-c" << "modinfo " + strDriver + " | grep version";
+    QString outInfo = Utils::executeCmd("modinfo", QStringList() << strDriver, QString(), -1);
+    if(outInfo.isEmpty())
+        return  QString("");
 
-    process.start("/bin/bash", options);
-    process.waitForFinished(-1);
-
-    QStringList str = QString(process.readAll()).split("\n\n");
+    QStringList str = outInfo.split("\n\n");
     foreach (QString temp, str) {
         if (temp.startsWith("version") && temp.contains(":") && temp.split(':').size() > 1) {
             return temp.split(':')[2];
