@@ -16,6 +16,9 @@ class DBusEnableInterface : public QObject, protected QDBusContext
 public:
     explicit DBusEnableInterface(QObject *parent = nullptr);
 
+private:
+    bool getUserAuthorPasswd(void);
+
 public slots:
     /**
      * @brief getRemoveInfo

@@ -22,6 +22,8 @@ class DriverDBusInterface : public QObject, protected QDBusContext
 public:
     explicit DriverDBusInterface(QObject *parent = nullptr);
 
+    static bool authority();
+
 private:
     void initConnects();
     bool getUserAuthorPasswd(void);
