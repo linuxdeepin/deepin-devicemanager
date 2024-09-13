@@ -86,7 +86,15 @@ bool DriverInstaller::isNetworkOnline(uint usec)
     /*
        -c 2（代表ping次数，ping 2次后结束ping操作） -w 2（代表超时时间，2秒后结束ping操作）
     */
-    system("ping www.baidu.com -c 2 -w 2 >netlog.bat");
+    // example: ping www.baidu.com -c 2 -w 2 >netlog.bat
+    QProcess process;
+    process.setStandardOutputFile("netlog.bat", QIODevice::WriteOnly);
+    process.start("ping", QStringList() << "www.baidu.com" << "-c" << "2" << "-w" << "2");
+    process.waitForFinished(-1);
+    bool bRet = (process.exitStatus() == QProcess::NormalExit && process.exitCode() == 0);
+    if (!bRet) {
+        return false;
+    }
     usleep(usec);
 
     //把文件一行一行读取放入vector

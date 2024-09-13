@@ -69,11 +69,17 @@ void ThreadPool::runCmdToCache(const Cmd &cmd)
 
     // 2. 执行命令获取设备信息
     QString info;
+    QString cmdExec = cmd.cmd.left(cmd.cmd.indexOf('>')).trimmed();
+    QString cmdStr = cmdExec.split(' ').first().trimmed();
+    QString cmdArg = cmdExec.mid(cmdStr.count() + 1).trimmed();
+    QStringList args;
+    if (!cmdArg.isEmpty())
+        args = cmdArg.split(' ');
+    if (cmdStr.isEmpty())
+        return;
+
     QProcess process;
-    QString cmdT = cmd.cmd;
-    QStringList options;
-    options << "-c" << cmdT.replace(QString(" >  ") + PATH + cmd.file, "");
-    process.start("/bin/bash", options);
+    process.start(cmdStr, args);
     process.waitForFinished(-1);
     info = process.readAllStandardOutput();
     DeviceInfoManager::getInstance()->addInfo(key, info);
