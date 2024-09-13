@@ -3,6 +3,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "threadpooltask.h"
+#include "deviceinfomanager.h"
+#include "cpu/cpuinfo.h"
 #include "DDLog.h"
 using namespace DDLog;
 
@@ -12,9 +14,6 @@ using namespace DDLog;
 #include <QLoggingCategory>
 #include <QDir>
 #include <unistd.h>
-
-#include "deviceinfomanager.h"
-#include "cpu/cpuinfo.h"
 
 ThreadPoolTask::ThreadPoolTask(QString cmd, QString file, bool replace, int waiting, QObject *parent)
     : QObject(parent),
@@ -75,6 +74,37 @@ void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
     if (cmd.startsWith("ls /dev/sg*")) {
         info = runAsteriskCmd(cmdStr, args.first().trimmed());
         return;
+    } else if (cmdExec.startsWith("cat /boot/config*")) {
+        QString filter = cmdExec.split('|').last().split(' ').last().replace('\'', "");
+        if (filter.isEmpty())
+            return;
+        QString outPut = runAsteriskCmd("ls", "/boot/config*");
+        if (outPut.isEmpty())
+            return;
+        QStringList paths = outPut.split('\n');
+        QStringList results;
+        for (auto path : paths) {
+            if (path.isEmpty())
+                continue;
+            QProcess proc;
+            proc.start("cat", QStringList() << path);
+            proc.waitForFinished();
+            QString info1;
+            if (proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0)
+                info1 = proc.readAllStandardOutput();
+            if (info1.isEmpty())
+                continue;
+            QStringList lines = info1.split('\n');
+            for (auto line : lines) {
+                if (line.contains(filter))
+                    results.push_back(line);
+            }
+        }
+
+        if (!results.isEmpty())
+            info = results.join('\n');
+        //qCInfo(deviceInfoLog) << "runcmdExec:" << cmdExec << "args:" << args << "outPut:" << info;
+        return;
     }
 
     QProcess process;
@@ -94,10 +124,12 @@ QString ThreadPoolTask::runAsteriskCmd(const QString &cmd, const QString &arg)
     QStringList args;
     QString path;
     QString startWord;
-    if (arg == "/dev/sg*") {
+    if (arg == "/dev/sg*" || arg == "/boot/config*") {
         path = arg.left(arg.lastIndexOf('/'));
         args << path;
         startWord = arg.split('/').last().replace('*', "");
+    } else {
+        return info;
     }
 
     QProcess process;

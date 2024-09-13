@@ -14,6 +14,7 @@
 #include <QProcess>
 #include <QFile>
 #include <QLoggingCategory>
+#include <QRegularExpression>
 
 #include <sys/utsname.h>
 
