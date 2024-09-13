@@ -81,6 +81,19 @@ DriverDBusInterface::DriverDBusInterface(QObject *parent)
     initConnects();
 }
 
+bool DriverDBusInterface::authority()
+{
+    int pid = getPidByName("deepin-devicemanager");
+    if (pid >= 0) {
+        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                                                 UnixProcessSubject(pid),
+                                                                                 Authority::AllowUserInteraction);
+        return result == Authority::Yes;
+    } else {
+        return false;
+    }
+}
+
 void DriverDBusInterface::initConnects()
 {
     connect(mp_drivermanager, &DriverManager::sigProgressDetail, this, &DriverDBusInterface::sigProgressDetail);

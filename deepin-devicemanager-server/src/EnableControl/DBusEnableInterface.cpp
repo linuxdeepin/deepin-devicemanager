@@ -7,6 +7,7 @@
 #include "DeviceInfoManager.h"
 #include "MainJob.h"
 #include "EnableUtils.h"
+#include "DriverDBusInterface.h"
 
 #include <QFile>
 #include <QDir>
@@ -37,6 +38,9 @@ QString DBusEnableInterface::getAuthorizedInfo()
 
 bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString strDriver)
 {
+    if (!DriverDBusInterface::authority())
+        return false;
+
     // 网卡通过ioctl禁用
     // 先判断是否是网卡
     QRegExp reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
@@ -64,6 +68,9 @@ bool DBusEnableInterface::enable(const QString& hclass, const QString& name, con
 
 Q_SCRIPTABLE bool DBusEnableInterface::enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device)
 {
+    if (!DriverDBusInterface::authority())
+        return false;
+
     ipp_op_t op = enable_device ? IPP_OP_RESUME_PRINTER : IPP_OP_PAUSE_PRINTER;
     char uri[HTTP_MAX_URI];
     ipp_t *request = nullptr;
