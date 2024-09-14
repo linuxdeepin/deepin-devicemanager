@@ -36,6 +36,7 @@ link_libraries("udev")
 
 find_package(Qt5 COMPONENTS Core DBus REQUIRED)
 find_package(DtkCore REQUIRED)
+find_package(PolkitQt5-1 REQUIRED)
 
 
 add_library(${BIN_NAME} MODULE
@@ -51,10 +52,10 @@ target_include_directories(${BIN_NAME} PUBLIC
 target_link_libraries(${BIN_NAME} PRIVATE
   Qt5::Core
   Qt5::DBus
+  PolkitQt5-1::Agent
   ${DtkCore_LIBRARIES}
 )
 
-    install(TARGETS ${BIN_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/deepin-service-manager/)
-    install(FILES ${BIN_NAME}.json DESTINATION share/deepin-service-manager/system/)
-
+install(TARGETS ${BIN_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/deepin-service-manager/)
+install(FILES ${BIN_NAME}.json DESTINATION share/deepin-service-manager/system/)
 install(FILES org.deepin.deviceinfo.conf DESTINATION share/dbus-1/system.d/ )

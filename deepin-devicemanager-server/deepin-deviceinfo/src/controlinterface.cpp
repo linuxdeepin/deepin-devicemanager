@@ -79,7 +79,6 @@ void ControlInterface::init()
 
     // 2. create interface
     m_iface = new QDBusInterface(SERVICE_NAME, ENABLE_SERVICE_PATH, ENABLE_SERVICE_INTER, QDBusConnection::systemBus());
-
 //    QDBusConnection::systemBus().connect(SERVICE_NAME, ENABLE_SERVICE_PATH, ENABLE_SERVICE_INTER, "sigFinished", this, SIGNAL(sigFinished(bool, QString)));
 //    QDBusConnection::systemBus().connect(SERVICE_NAME, ENABLE_SERVICE_PATH, ENABLE_SERVICE_INTER, "sigUpdate", this, SIGNAL(sigUpdate()));
 }
