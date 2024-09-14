@@ -22,6 +22,9 @@
 #include <signal.h>
 #include <DLog>
 #include "LogConfigread.h"
+
+#include <polkit-qt5-1/PolkitQt1/Authority>
+
 using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
@@ -37,6 +40,7 @@ const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
 #endif
 
 DCORE_USE_NAMESPACE
+using namespace PolkitQt1;
 
 void notify(int argc, char *argv[]);
 
@@ -67,6 +71,13 @@ int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     SingleDeviceManager app(argc, argv);
     app.setAutoActivateWindows(true);
+    DBusDriverInterface::getInstance();
+
+    Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                                             UnixProcessSubject(getpid()),
+                                                                             Authority::AllowUserInteraction);
+    if (result != Authority::Yes)
+        return 0;
 
     // 保证进程唯一性
     qputenv("DTK_USE_SEMAPHORE_SINGLEINSTANCE", "1");
