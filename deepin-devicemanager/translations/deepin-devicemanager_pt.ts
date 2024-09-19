@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pt">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pt">
 <context>
     <name>BtnLabel</name>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>OK</source>
-        <translation type="unfinished">Aceitar</translation>
+        <translation>Aceitar</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="54"/>
@@ -33,12 +31,12 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="82"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation type="unfinished"></translation>
+        <translation>EC_NOTIFY_NETWORK</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="83"/>
         <source>EC_REINSTALL</source>
-        <translation type="unfinished"></translation>
+        <translation>EC_REINSTALL</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="84"/>
@@ -122,33 +120,33 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="331"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="342"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Módulo Alias</translation>
+        <translation>Módulo Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="332"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="343"/>
         <source>Physical ID</source>
-        <translation type="unfinished">ID Física</translation>
+        <translation>ID Física</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="333"/>
         <source>SysFS_Path</source>
-        <translation type="unfinished"></translation>
+        <translation>SysFS_Path</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="334"/>
         <source>Description</source>
-        <translation type="unfinished">Descrição</translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="335"/>
         <source>Revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Revisão</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="336"/>
         <source>KernelModeDriver</source>
-        <translation type="unfinished"></translation>
+        <translation>KernelModeDriver</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="346"/>
@@ -232,12 +230,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="243"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Módulo Alias</translation>
+        <translation>Módulo Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
         <source>Physical ID</source>
-        <translation type="unfinished">ID Física</translation>
+        <translation>ID Física</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="245"/>
@@ -340,12 +338,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Módulo Alias</translation>
+        <translation>Módulo Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="142"/>
         <source>Physical ID</source>
-        <translation type="unfinished">ID Física</translation>
+        <translation>ID Física</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="153"/>
@@ -510,7 +508,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="296"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Módulo Alias</translation>
+        <translation>Módulo Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="297"/>
@@ -638,12 +636,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="169"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Módulo Alias</translation>
+        <translation>Módulo Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="170"/>
         <source>Physical ID</source>
-        <translation type="unfinished">ID Física</translation>
+        <translation>ID Física</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="171"/>
@@ -711,12 +709,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="454"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Módulo Alias</translation>
+        <translation>Módulo Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="455"/>
         <source>Physical ID</source>
-        <translation type="unfinished">ID Física</translation>
+        <translation>ID Física</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="456"/>
@@ -1074,12 +1072,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="300"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Módulo Alias</translation>
+        <translation>Módulo Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="301"/>
         <source>Physical ID</source>
-        <translation type="unfinished">ID Física</translation>
+        <translation>ID Física</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="302"/>
@@ -1444,7 +1442,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="503"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="536"/>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="507"/>
@@ -1460,13 +1458,13 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="514"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="522"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Módulo Alias</translation>
+        <translation>Módulo Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="515"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="523"/>
         <source>Physical ID</source>
-        <translation type="unfinished">ID Física</translation>
+        <translation>ID Física</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="516"/>
@@ -1604,7 +1602,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="186"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Info dispositivo</translation>
     </message>
     <message>
@@ -1650,7 +1648,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="345"/>
         <source>Hardware</source>
-        <translation>Equipamento</translation>
+        <translation>Hardware</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="345"/>
@@ -1702,39 +1700,39 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="89"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Current Version</source>
-        <translation type="unfinished">Versão atual</translation>
+        <translation>Versão atual</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Status</source>
-        <translation type="unfinished">Estado</translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Action</source>
-        <translation type="unfinished">Ação</translation>
+        <translation>Ação</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="177"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1882,55 +1880,55 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="115"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Device Name</source>
-        <translation type="unfinished">Nome do dispositivo</translation>
+        <translation>Nome do dispositivo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="103"/>
         <source>Version Available</source>
-        <translation type="unfinished">Versão disponível</translation>
+        <translation>Versão disponível</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="104"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="117"/>
         <source>Size</source>
-        <translation type="unfinished">Tamanho</translation>
+        <translation>Tamanho</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="105"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="118"/>
         <source>Status</source>
-        <translation type="unfinished">Estado</translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="106"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
         <source>Action</source>
-        <translation type="unfinished">Ação</translation>
+        <translation>Ação</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
         <source>New Version</source>
-        <translation type="unfinished">Nova versão</translation>
+        <translation>Nova versão</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Current Version</source>
-        <translation type="unfinished">Versão atual</translation>
+        <translation>Versão atual</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="212"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished">Controladores em falta (%1)</translation>
+        <translation>Controladores em falta (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="213"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished">Controladores desatualizados (%1)</translation>
+        <translation>Controladores desatualizados (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="214"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished">Controladores atualizados (%1)</translation>
+        <translation>Controladores atualizados (%1)</translation>
     </message>
 </context>
 <context>
@@ -1940,7 +1938,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="101"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="454"/>
         <source>Driver Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="86"/>
@@ -1948,23 +1946,23 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="456"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="103"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="458"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
         <source>OK</source>
-        <translation type="unfinished">Aceitar</translation>
+        <translation>Aceitar</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1972,37 +1970,37 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="92"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="95"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="120"/>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="121"/>
         <source>Current Version</source>
-        <translation type="unfinished">Versão atual</translation>
+        <translation>Versão atual</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
         <source>Backup Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
         <source>Action</source>
-        <translation type="unfinished">Ação</translation>
+        <translation>Ação</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="165"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2025,17 +2023,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3132,18 +3130,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="33"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="575"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="39"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
@@ -3235,7 +3233,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1403"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1439"/>
         <source>Other PCI Devices</source>
-        <translation>Outros Dispositivos PCI</translation>
+        <translation>Outros dispositivos PCI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1347"/>
@@ -3737,12 +3735,12 @@
     <message>
         <location filename="../src/main.cpp" line="112"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Novos controladores disponíveis! Instale-os ou atualize-os agora.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="113"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="14"/>
@@ -3773,7 +3771,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="150"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidade de transferência: %1 Transferido %2/%3</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="196"/>
@@ -3783,12 +3781,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="238"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 controladores instalados, %2 controladores com falhas</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="240"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 controladores instalados</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="280"/>
@@ -3798,114 +3796,114 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="320"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de rede. A restabelecer a ligação...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="322"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidade de transferência: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="363"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Os controladores estão atualizados</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="452"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="454"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="540"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="541"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="579"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="581"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="583"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="622"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="623"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="653"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="654"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="797"/>
         <source>reboot</source>
-        <translation>reiniciar</translation>
+        <translation>reinicie</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="798"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor %1 para que os condutores instalados tenham efeito</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="806"/>
         <source>View backup path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Backup All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="283"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="801"/>
         <source>submit feedback</source>
-        <translation type="unfinished"></translation>
+        <translation>envie-nos o feedback</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="802"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"></translation>
+        <translation>Tente novamente ou %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="809"/>
@@ -3916,7 +3914,7 @@
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="814"/>
         <source>Scan Again</source>
-        <translation>Verificar novamente</translation>
+        <translation>Analisar novamente</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="824"/>
@@ -3926,7 +3924,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="66"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>A analisar controladores de dispositivos de hardware, aguarde...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="74"/>
@@ -3937,34 +3935,34 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="130"/>
         <source>Scan failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao analisar</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="188"/>
         <source>Network unavailable</source>
-        <translation>Ligação não disponível</translation>
+        <translation>Rede não disponível</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="192"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Verifique a sua ligação à Internet</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="284"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"></translation>
+        <translation>Analise novamente ou %1</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="601"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Está a instalar um controlador, que será interrompido se sair.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="602"/>
         <location filename="../src/Page/MainWindow.cpp" line="615"/>
         <location filename="../src/Page/MainWindow.cpp" line="628"/>
         <source>Are you sure you want to exit?</source>
-        <translation>Sair?</translation>
+        <translation>Pretende sair?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="605"/>
@@ -3985,12 +3983,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="614"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="627"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
@@ -4001,7 +3999,7 @@
         <location filename="../src/Tool/commontools.cpp" line="35"/>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Imaging device</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo de imagem</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
@@ -4021,67 +4019,67 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="44"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"></translation>
+        <translation>Adaptador de rede sem fios</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="63"/>
         <source>Installation successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalação bem sucedida</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>Installation failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha na instalação</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>Downloading</source>
-        <translation type="unfinished"></translation>
+        <translation>A transferir</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>Installing</source>
-        <translation type="unfinished"></translation>
+        <translation>A instalar</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Não instalado</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Desatualizado</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="69"/>
         <source>Waiting</source>
-        <translation type="unfinished"></translation>
+        <translation>Aguardar</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Backing up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Backup failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Backup successful</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Restoring</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="78"/>
@@ -4091,17 +4089,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="79"/>
         <source>Network error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de rede</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="80"/>
         <source>Canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelado</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao obter ficheiros dos controladores</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="235"/>
@@ -4111,17 +4109,17 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar</translation>
     </message>
 </context>
 <context>
