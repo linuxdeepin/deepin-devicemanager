@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru">
 <context>
     <name>BtnLabel</name>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="54"/>
@@ -33,17 +31,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="82"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="83"/>
         <source>EC_REINSTALL</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="84"/>
         <source>EC_6</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -122,33 +120,33 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="331"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="342"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Псевдоним модуля</translation>
+        <translation>Псевдоним модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="332"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="343"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Физическая идентификация</translation>
+        <translation>Физическая идентификация</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="333"/>
         <source>SysFS_Path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="334"/>
         <source>Description</source>
-        <translation type="unfinished">Описание</translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="335"/>
         <source>Revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="336"/>
         <source>KernelModeDriver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="346"/>
@@ -232,12 +230,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="243"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Псевдоним модуля</translation>
+        <translation>Псевдоним модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Физическая идентификация</translation>
+        <translation>Физическая идентификация</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="245"/>
@@ -340,12 +338,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Псевдоним модуля</translation>
+        <translation>Псевдоним модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="142"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Физическая идентификация</translation>
+        <translation>Физическая идентификация</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="153"/>
@@ -510,7 +508,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="296"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Псевдоним модуля</translation>
+        <translation>Псевдоним модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="297"/>
@@ -585,7 +583,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="314"/>
         <source>DigitalOutput</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="315"/>
@@ -638,12 +636,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="169"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Псевдоним модуля</translation>
+        <translation>Псевдоним модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="170"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Физическая идентификация</translation>
+        <translation>Физическая идентификация</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="171"/>
@@ -711,12 +709,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="454"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Псевдоним модуля</translation>
+        <translation>Псевдоним модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="455"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Физическая идентификация</translation>
+        <translation>Физическая идентификация</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="456"/>
@@ -935,7 +933,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="140"/>
         <source>Locator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="141"/>
@@ -988,7 +986,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="271"/>
         <source>Display Input</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="272"/>
@@ -1008,7 +1006,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="281"/>
         <source>Display Ratio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="283"/>
@@ -1074,22 +1072,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="300"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Псевдоним модуля</translation>
+        <translation>Псевдоним модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="301"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Физическая идентификация</translation>
+        <translation>Физическая идентификация</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="302"/>
         <source>Maximum Rate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="303"/>
         <source>Negotiation Rate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="304"/>
@@ -1104,7 +1102,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="306"/>
         <source>Link</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="307"/>
@@ -1338,32 +1336,32 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="187"/>
         <source>Design Capacity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="188"/>
         <source>Design Voltage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="189"/>
         <source>SBDS Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="190"/>
         <source>SBDS Serial Number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="191"/>
         <source>SBDS Manufacture Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="192"/>
         <source>SBDS Chemistry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="193"/>
@@ -1396,12 +1394,12 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="159"/>
         <source>Shared</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="160"/>
         <source>URI</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="161"/>
@@ -1444,7 +1442,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="503"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="536"/>
         <source>Name</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="507"/>
@@ -1460,13 +1458,13 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="514"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="522"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Псевдоним модуля</translation>
+        <translation>Псевдоним модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="515"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="523"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Физическая идентификация</translation>
+        <translation>Физическая идентификация</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="516"/>
@@ -1510,12 +1508,12 @@
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="52"/>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="129"/>
         <source>Select a driver for update</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="123"/>
         <source>No drivers found in this folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1604,7 +1602,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="186"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Информация об устройстве</translation>
     </message>
     <message>
@@ -1702,39 +1700,39 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="89"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Name</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Current Version</source>
-        <translation type="unfinished">Текущая версия</translation>
+        <translation>Текущая версия</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Status</source>
-        <translation type="unfinished">Состояние</translation>
+        <translation>Состояние</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Action</source>
-        <translation type="unfinished">Действие</translation>
+        <translation>Действие</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="177"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1756,7 +1754,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="101"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="119"/>
@@ -1766,7 +1764,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="119"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="123"/>
@@ -1809,12 +1807,12 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="180"/>
         <source>Next</source>
         <comment>button</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="201"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="206"/>
@@ -1826,7 +1824,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
         <source>Previous</source>
         <comment>button</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="240"/>
@@ -1842,7 +1840,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="249"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
         <source>The selected file does not exist, please select again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
@@ -1882,55 +1880,55 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="115"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Device Name</source>
-        <translation type="unfinished">Имя Устройства</translation>
+        <translation>Имя Устройства</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="103"/>
         <source>Version Available</source>
-        <translation type="unfinished">Доступная версия</translation>
+        <translation>Доступная версия</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="104"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="117"/>
         <source>Size</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="105"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="118"/>
         <source>Status</source>
-        <translation type="unfinished">Состояние</translation>
+        <translation>Состояние</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="106"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
         <source>Action</source>
-        <translation type="unfinished">Действие</translation>
+        <translation>Действие</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
         <source>New Version</source>
-        <translation type="unfinished">Новая версия</translation>
+        <translation>Новая версия</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Current Version</source>
-        <translation type="unfinished">Текущая версия</translation>
+        <translation>Текущая версия</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="212"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished">Отсутствующие драйверы (%1)</translation>
+        <translation>Отсутствующие драйверы (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="213"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished">Устаревшие драйверы (%1)</translation>
+        <translation>Устаревшие драйверы (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="214"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished">Обновленные драйверы (%1)</translation>
+        <translation>Обновленные драйверы (%1)</translation>
     </message>
 </context>
 <context>
@@ -1940,7 +1938,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="101"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="454"/>
         <source>Driver Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="86"/>
@@ -1948,23 +1946,23 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="456"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="103"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="458"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1972,37 +1970,37 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="92"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="95"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="120"/>
         <source>Name</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="121"/>
         <source>Current Version</source>
-        <translation type="unfinished">Текущая версия</translation>
+        <translation>Текущая версия</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
         <source>Backup Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
         <source>Action</source>
-        <translation type="unfinished">Действие</translation>
+        <translation>Действие</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="165"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2025,17 +2023,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2053,7 +2051,7 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="162"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="184"/>
@@ -2136,7 +2134,7 @@
         <location filename="../src/Page/PageSingleInfo.cpp" line="284"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="301"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="288"/>
@@ -2165,13 +2163,13 @@
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="309"/>
         <source>SubVendor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="310"/>
         <source>SubDevice</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="323"/>
@@ -2186,7 +2184,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="312"/>
         <source>Driver Activation Cmd</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="494"/>
@@ -2194,7 +2192,7 @@
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="114"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="313"/>
         <source>Config Status</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
@@ -2205,7 +2203,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="315"/>
         <source>Phys</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="316"/>
@@ -2215,25 +2213,25 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="317"/>
         <source>Handlers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="430"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="318"/>
         <source>PROP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="431"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="319"/>
         <source>EV</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="432"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="320"/>
         <source>KEY</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="322"/>
@@ -2275,7 +2273,7 @@
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="118"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="230"/>
         <source>Physical Memory Array</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="176"/>
@@ -2341,12 +2339,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="188"/>
         <source>Location In Chassis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="189"/>
         <source>Chassis Handle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="190"/>
@@ -2357,7 +2355,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="191"/>
         <source>Contained Object Handles</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="226"/>
@@ -2385,22 +2383,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="202"/>
         <source>Lock</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="205"/>
         <source>Boot-up State</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="206"/>
         <source>Power Supply State</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="207"/>
         <source>Thermal State</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="208"/>
@@ -2425,7 +2423,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="212"/>
         <source>Contained Elements</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="215"/>
@@ -2446,7 +2444,7 @@
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="110"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="218"/>
         <source>Error Information Handle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="219"/>
@@ -2456,7 +2454,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="221"/>
         <source>BIOS ROMSIZE</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="222"/>
@@ -2491,17 +2489,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="202"/>
         <source>BD Address</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="203"/>
         <source>ACL MTU</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="204"/>
         <source>SCO MTU</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="206"/>
@@ -2511,12 +2509,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="207"/>
         <source>Link policy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="208"/>
         <source>Link mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="209"/>
@@ -2527,7 +2525,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="210"/>
         <source>Service Classes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="211"/>
@@ -2547,7 +2545,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="214"/>
         <source>Subversion</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="39"/>
@@ -2649,7 +2647,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>CPU implementer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
@@ -2869,7 +2867,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="347"/>
         <source>Seventy-eight</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="349"/>
@@ -2884,17 +2882,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="351"/>
         <source>Eighty-four</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="352"/>
         <source>Eighty-six</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="353"/>
         <source>Eighty-eight</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="355"/>
@@ -2904,17 +2902,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="356"/>
         <source>Ninety-two</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="357"/>
         <source>Ninety-four</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="358"/>
         <source>Ninety-six</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="359"/>
@@ -3009,17 +3007,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
         <source>GDDR capacity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GPU vendor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
         <source>GPU type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
@@ -3029,7 +3027,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
         <source>EGL client APIs</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
@@ -3051,19 +3049,19 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="429"/>
         <source>Uniq</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="433"/>
         <source>MSC</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="485"/>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="176"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="435"/>
         <source>Hardware Class</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1338"/>
@@ -3132,18 +3130,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="33"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="575"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="39"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
@@ -3176,7 +3174,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1399"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1435"/>
         <source>No monitor found</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="634"/>
@@ -3365,7 +3363,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="109"/>
         <source>Array Handle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="111"/>
@@ -3375,17 +3373,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="112"/>
         <source>Set</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="113"/>
         <source>Bank Locator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="114"/>
         <source>Type Detail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="116"/>
@@ -3395,7 +3393,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="117"/>
         <source>Rank</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="118"/>
@@ -3405,7 +3403,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="119"/>
         <source>Memory Operating Mode Capability</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="120"/>
@@ -3415,32 +3413,32 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="121"/>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="122"/>
         <source>Module Product ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="123"/>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="124"/>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="125"/>
         <source>Non-Volatile Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="126"/>
         <source>Volatile Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="127"/>
@@ -3464,7 +3462,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="262"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="280"/>
@@ -3474,7 +3472,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="281"/>
         <source>network</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="111"/>
@@ -3489,7 +3487,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="150"/>
         <source>power supply</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="151"/>
@@ -3499,72 +3497,72 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="152"/>
         <source>has history</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="153"/>
         <source>has statistics</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="154"/>
         <source>rechargeable</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="155"/>
         <source>state</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="156"/>
         <source>warning-level</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="157"/>
         <source>energy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="158"/>
         <source>energy-empty</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="159"/>
         <source>energy-full</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="160"/>
         <source>energy-full-design</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="161"/>
         <source>energy-rate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="162"/>
         <source>voltage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="163"/>
         <source>percentage</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="165"/>
         <source>technology</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="166"/>
         <source>icon-name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="167"/>
@@ -3574,112 +3572,112 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="168"/>
         <source>daemon-version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="169"/>
         <source>on-battery</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="170"/>
         <source>lid-is-closed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="171"/>
         <source>lid-is-present</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="172"/>
         <source>critical-action</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="128"/>
         <source>copies</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="129"/>
         <source>job-cancel-after</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="130"/>
         <source>job-hold-until</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="131"/>
         <source>job-priority</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="132"/>
         <source>marker-change-time</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="133"/>
         <source>number-up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="134"/>
         <source>orientation-requested</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="135"/>
         <source>print-color-mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="136"/>
         <source>printer-is-accepting-jobs</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="137"/>
         <source>printer-is-shared</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="138"/>
         <source>printer-is-temporary</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="163"/>
         <source>printer-make-and-model</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="140"/>
         <source>printer-state-change-time</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="141"/>
         <source>printer-state-reasons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="142"/>
         <source>printer-type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="143"/>
         <source>printer-uri-supported</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="144"/>
         <source>sides</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="261"/>
@@ -3742,7 +3740,7 @@
     <message>
         <location filename="../src/main.cpp" line="113"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="14"/>
@@ -3752,7 +3750,7 @@
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="55"/>
         <source>Search for drivers in this path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="92"/>
@@ -3783,7 +3781,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="238"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="240"/>
@@ -3798,7 +3796,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="320"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="322"/>
@@ -3813,68 +3811,68 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="452"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="454"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="540"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="541"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="579"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="581"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="583"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="622"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="623"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="653"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="654"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="797"/>
@@ -3889,23 +3887,23 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="806"/>
         <source>View backup path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Backup All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="283"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="801"/>
         <source>submit feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="802"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="809"/>
@@ -3926,18 +3924,18 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="66"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="74"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="354"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="130"/>
         <source>Scan failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="188"/>
@@ -3947,24 +3945,24 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="192"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="284"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="601"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="602"/>
         <location filename="../src/Page/MainWindow.cpp" line="615"/>
         <location filename="../src/Page/MainWindow.cpp" line="628"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="605"/>
@@ -3985,12 +3983,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="614"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="627"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
@@ -4001,7 +3999,7 @@
         <location filename="../src/Tool/commontools.cpp" line="35"/>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Imaging device</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
@@ -4061,27 +4059,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Backing up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Backup failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Backup successful</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Restoring</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="78"/>
@@ -4101,7 +4099,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="235"/>
@@ -4111,12 +4109,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
