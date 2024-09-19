@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="pl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="pl">
 <context>
     <name>BtnLabel</name>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation>Opinia użytkownika</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="54"/>
@@ -122,33 +120,33 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="331"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="342"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Alias modułu</translation>
+        <translation>Alias modułu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="332"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="343"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Identyfikator fizyczny</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="333"/>
         <source>SysFS_Path</source>
-        <translation type="unfinished"></translation>
+        <translation>SysFS_Path</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="334"/>
         <source>Description</source>
-        <translation type="unfinished">Opis</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="335"/>
         <source>Revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Rewizja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="336"/>
         <source>KernelModeDriver</source>
-        <translation type="unfinished"></translation>
+        <translation>KernelModeDriver</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="346"/>
@@ -232,12 +230,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="243"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Alias modułu</translation>
+        <translation>Alias modułu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Identyfikator fizyczny</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="245"/>
@@ -340,12 +338,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Alias modułu</translation>
+        <translation>Alias modułu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="142"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Identyfikator fizyczny</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="153"/>
@@ -393,7 +391,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>Threads</source>
-        <translation>Wątki</translation>
+        <translation>Wątków</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
@@ -420,7 +418,7 @@
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="106"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="119"/>
         <source>Processor</source>
-        <translation>Wątków</translation>
+        <translation>Procesor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="117"/>
@@ -465,7 +463,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
         <source>Stepping</source>
-        <translation>Wkraczanie</translation>
+        <translation>Rewizja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
@@ -510,7 +508,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="296"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Alias modułu</translation>
+        <translation>Alias modułu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="297"/>
@@ -540,12 +538,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="303"/>
         <source>Minimum Resolution</source>
-        <translation>Minimalna rozdzielczość</translation>
+        <translation>Rozdzielczość minimalna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="305"/>
         <source>Current Resolution</source>
-        <translation>Aktualna rozdzielczość</translation>
+        <translation>Rozdzielczość aktualna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="306"/>
@@ -638,12 +636,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="169"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Alias modułu</translation>
+        <translation>Alias modułu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="170"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Identyfikator fizyczny</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="171"/>
@@ -711,12 +709,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="454"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Alias modułu</translation>
+        <translation>Alias modułu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="455"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Identyfikator fizyczny</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="456"/>
@@ -841,7 +839,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="217"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Mouse</source>
-        <translation>Myszka</translation>
+        <translation>Mysz</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="222"/>
@@ -892,7 +890,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1538"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1569"/>
         <source>OS</source>
-        <translation>OS</translation>
+        <translation>System</translation>
     </message>
 </context>
 <context>
@@ -930,7 +928,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="139"/>
         <source>Total Width</source>
-        <translation>Całkowita szerokość</translation>
+        <translation>Szerokość całkowita</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="140"/>
@@ -945,22 +943,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="149"/>
         <source>Configured Voltage</source>
-        <translation>Skonfigurowane napięcie</translation>
+        <translation>Napięcie skonfigurowane</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="150"/>
         <source>Maximum Voltage</source>
-        <translation>Maksymalne napięcie</translation>
+        <translation>Napięcie maksymalne</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="151"/>
         <source>Minimum Voltage</source>
-        <translation>Minimalne napięcie</translation>
+        <translation>Napięcie minimalne</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="152"/>
         <source>Configured Speed</source>
-        <translation>Skonfigurowana prędkość</translation>
+        <translation>Prędkość skonfigurowana</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="156"/>
@@ -1003,7 +1001,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="280"/>
         <source>Current Resolution</source>
-        <translation>Aktualna rozdzielczość</translation>
+        <translation>Rozdzielczość aktualna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="281"/>
@@ -1074,12 +1072,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="300"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Alias modułu</translation>
+        <translation>Alias modułu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="301"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Identyfikator fizyczny</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="302"/>
@@ -1109,7 +1107,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="307"/>
         <source>Latency</source>
-        <translation>Czas oczekiwania</translation>
+        <translation>Opóźnienie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="308"/>
@@ -1119,17 +1117,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="309"/>
         <source>Firmware</source>
-        <translation>Oprogramowanie układowe</translation>
+        <translation>Firmware</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="310"/>
         <source>Duplex</source>
-        <translation>Dwustronny</translation>
+        <translation>Dupleks</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="311"/>
         <source>Broadcast</source>
-        <translation>Nadawanie</translation>
+        <translation>Broadcast</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="312"/>
@@ -1396,7 +1394,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="159"/>
         <source>Shared</source>
-        <translation>Udostępniony</translation>
+        <translation>Udostępniona</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="160"/>
@@ -1431,7 +1429,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="505"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="538"/>
         <source>Media Type</source>
-        <translation>Typ mediów</translation>
+        <translation>Typ nośnika</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="338"/>
@@ -1444,7 +1442,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="503"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="536"/>
         <source>Name</source>
-        <translation type="unfinished">Nazwa</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="507"/>
@@ -1460,13 +1458,13 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="514"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="522"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Alias modułu</translation>
+        <translation>Alias modułu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="515"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="523"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Identyfikator fizyczny</translation>
+        <translation>Identyfikator fizyczny</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="516"/>
@@ -1515,7 +1513,7 @@
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="123"/>
         <source>No drivers found in this folder</source>
-        <translation>Nie znaleziono sterowników w tym katalogu</translation>
+        <translation>Nie znaleziono sterowników w tym folderze</translation>
     </message>
 </context>
 <context>
@@ -1604,7 +1602,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="186"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Informacje o urządzeniu</translation>
     </message>
     <message>
@@ -1702,39 +1700,39 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="89"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Name</source>
-        <translation type="unfinished">Nazwa</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Current Version</source>
-        <translation type="unfinished">Bieżąca wersja</translation>
+        <translation>Bieżąca wersja</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja sterownika platformy</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Action</source>
-        <translation type="unfinished">Działanie</translation>
+        <translation>Działanie</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Sterowniki do backupu</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="177"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Sterowniki z backupem</translation>
     </message>
 </context>
 <context>
@@ -1777,7 +1775,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="127"/>
         <source>Uninstalling</source>
-        <translation>Odinstalowywanie</translation>
+        <translation>Odinstalowuję</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="153"/>
@@ -1814,13 +1812,13 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="201"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation>Zaznaczony katalog nie istnieje, spróbuj ponownie</translation>
+        <translation>Zaznaczony folder nie istnieje, spróbuj wybrać inny</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="206"/>
         <source>Update</source>
         <comment>button</comment>
-        <translation>Zaktualizuj</translation>
+        <translation>Aktualizuj</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
@@ -1882,55 +1880,55 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="115"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Device Name</source>
-        <translation type="unfinished">Nazwa urządzenia</translation>
+        <translation>Nazwa urządzenia</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="103"/>
         <source>Version Available</source>
-        <translation type="unfinished">Wersja dostępna</translation>
+        <translation>Wersja dostępna</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="104"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="117"/>
         <source>Size</source>
-        <translation type="unfinished">Rozmiar</translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="105"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="118"/>
         <source>Status</source>
-        <translation type="unfinished">Status</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="106"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
         <source>Action</source>
-        <translation type="unfinished">Działanie</translation>
+        <translation>Działanie</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
         <source>New Version</source>
-        <translation type="unfinished">Nowa wersja</translation>
+        <translation>Nowa wersja</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Current Version</source>
-        <translation type="unfinished">Bieżąca wersja</translation>
+        <translation>Bieżąca wersja</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="212"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished">Brakujące sterowniki (%1)</translation>
+        <translation>Brakujące sterowniki (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="213"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished">Nieaktualne sterowniki (%1)</translation>
+        <translation>Sterowniki nieaktualne (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="214"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished">Aktualne sterowniki (%1)</translation>
+        <translation>Sterowniki aktualne (%1)</translation>
     </message>
 </context>
 <context>
@@ -1940,7 +1938,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="101"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="454"/>
         <source>Driver Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalacja sterownika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="86"/>
@@ -1948,23 +1946,23 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="456"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup sterownika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="103"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="458"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywracanie sterownika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation>Opinia użytkownika</translation>
     </message>
 </context>
 <context>
@@ -1972,37 +1970,37 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="92"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak sterowników do przywrócenia, najpierw utwórz backup</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="95"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"></translation>
+        <translation>Przejdź do Backupu sterownika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="120"/>
         <source>Name</source>
-        <translation type="unfinished">Nazwa</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="121"/>
         <source>Current Version</source>
-        <translation type="unfinished">Bieżąca wersja</translation>
+        <translation>Bieżąca wersja</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
         <source>Backup Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Wersja backupu</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
         <source>Action</source>
-        <translation type="unfinished">Działanie</translation>
+        <translation>Działanie</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="165"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Sterowniki do przywrócenia</translation>
     </message>
 </context>
 <context>
@@ -2025,17 +2023,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalacja sterownika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup sterownika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywracanie sterownika</translation>
     </message>
 </context>
 <context>
@@ -2058,7 +2056,7 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="184"/>
         <source>Update Drivers</source>
-        <translation>Zaktualizuj sterowniki</translation>
+        <translation>Aktualizuj sterowniki</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="202"/>
@@ -2115,7 +2113,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="42"/>
         <source>Update drivers</source>
-        <translation>Zaktualizuj sterowniki</translation>
+        <translation>Aktualizuj sterowniki</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="43"/>
@@ -2125,7 +2123,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="44"/>
         <source>Allow it to wake the computer</source>
-        <translation>Zezwól urządzeniu na obudzenie komputera</translation>
+        <translation>Zezwól urządzeniu na wybudzenie komputera</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="202"/>
@@ -2151,7 +2149,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="320"/>
         <source>Update Drivers</source>
-        <translation>Zaktualizuj sterowniki</translation>
+        <translation>Aktualizuj sterowniki</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="337"/>
@@ -2165,7 +2163,7 @@
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="309"/>
         <source>SubVendor</source>
-        <translation>Podwykonawca</translation>
+        <translation>Podproducent</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
@@ -2215,7 +2213,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="317"/>
         <source>Handlers</source>
-        <translation>Rączki</translation>
+        <translation>Uchwyty</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="430"/>
@@ -2290,7 +2288,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="178"/>
         <source>Runtime Size</source>
-        <translation>Rozmiar środowiska wykonawczego</translation>
+        <translation>Rozmiar Runtime</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="179"/>
@@ -2305,12 +2303,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="181"/>
         <source>BIOS Revision</source>
-        <translation>Wersja systemu BIOS</translation>
+        <translation>Rewizja BIOS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="182"/>
         <source>Firmware Revision</source>
-        <translation>Wersja Firmware</translation>
+        <translation>Rewizja firmware</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="184"/>
@@ -2346,7 +2344,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="189"/>
         <source>Chassis Handle</source>
-        <translation>Rączka obudowy</translation>
+        <translation>Uchwyt obudowy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="190"/>
@@ -2357,7 +2355,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="191"/>
         <source>Contained Object Handles</source>
-        <translation>Zaznaczony przedmiot zajmuje się</translation>
+        <translation>Uchwyty zawartych obiektów</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="226"/>
@@ -2368,7 +2366,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="196"/>
         <source>Wake-up Type</source>
-        <translation>Typ budzenia</translation>
+        <translation>Typ wybudzania</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="197"/>
@@ -2511,12 +2509,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="207"/>
         <source>Link policy</source>
-        <translation>Polityka linków</translation>
+        <translation>Polityka połączenia</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="208"/>
         <source>Link mode</source>
-        <translation>Tryb łącza</translation>
+        <translation>Tryb połączenia</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="209"/>
@@ -2638,13 +2636,13 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="489"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="119"/>
         <source>logical name</source>
-        <translation>nazwa logiczna</translation>
+        <translation>Nazwa logiczna</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="487"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="121"/>
         <source>ansiversion</source>
-        <translation>Wersja ansi</translation>
+        <translation>Wersja ANSI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
@@ -2669,7 +2667,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
         <source>CPU revision</source>
-        <translation>Wersja CPU</translation>
+        <translation>Rewizja CPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
@@ -3014,7 +3012,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GPU vendor</source>
-        <translation>Dostawca GPU</translation>
+        <translation>Producent GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
@@ -3132,18 +3130,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd przywracania sterownika!</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="33"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="575"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"></translation>
+        <translation>Spróbuj ponownie lub przekaż nam opinię</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="39"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd backupu sterownika!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
@@ -3285,7 +3283,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1406"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1442"/>
         <source>Mouse</source>
-        <translation>Myszka</translation>
+        <translation>Mysz</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1350"/>
@@ -3365,12 +3363,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="109"/>
         <source>Array Handle</source>
-        <translation>Szyk rączek</translation>
+        <translation>Uchwyt tablicy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="111"/>
         <source>Form Factor</source>
-        <translation>Współczynnik kształtu</translation>
+        <translation>Specyfikacja</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="112"/>
@@ -3380,12 +3378,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="113"/>
         <source>Bank Locator</source>
-        <translation>Lokalizator banków</translation>
+        <translation>Położenie banku</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="114"/>
         <source>Type Detail</source>
-        <translation>Wpisz szczegół</translation>
+        <translation>Szczegóły typu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="116"/>
@@ -3405,7 +3403,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="119"/>
         <source>Memory Operating Mode Capability</source>
-        <translation>Możliwość trybu pracy pamięci</translation>
+        <translation>Możliwości trybu pracy pamięci</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="120"/>
@@ -3420,7 +3418,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="122"/>
         <source>Module Product ID</source>
-        <translation>ID produktu modułu</translation>
+        <translation>ID modułu produktu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="123"/>
@@ -3430,17 +3428,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="124"/>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation>ID kontrolera pamięci subsystemu</translation>
+        <translation>ID kontrolera pamięci podsystemu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="125"/>
         <source>Non-Volatile Size</source>
-        <translation>Rozmiar Zmiennej nie-ulotnej</translation>
+        <translation>Rozmiar pamięci nieulotnej</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="126"/>
         <source>Volatile Size</source>
-        <translation>Rozmiar zmiennej ulotnej</translation>
+        <translation>Rozmiar pamięci ulotnej</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="127"/>
@@ -3469,7 +3467,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="280"/>
         <source>ioport</source>
-        <translation>portio</translation>
+        <translation>Port we/wy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="281"/>
@@ -3644,7 +3642,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="137"/>
         <source>printer-is-shared</source>
-        <translation>drukarka-jest-udostępniona</translation>
+        <translation>drukarka-jest-współdzielona</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="138"/>
@@ -3716,7 +3714,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="493"/>
         <source>guid</source>
-        <translation>guid</translation>
+        <translation>GUID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="496"/>
@@ -3742,7 +3740,7 @@
     <message>
         <location filename="../src/main.cpp" line="113"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetl</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="14"/>
@@ -3813,68 +3811,68 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="452"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"></translation>
+        <translation>Utworzono backup wszystkich sterowników</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="454"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"></translation>
+        <translation>Łącznie %1 sterowników, z których %2 utworzono backup</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"></translation>
+        <translation>Posiadasz %1 sterowników, którym można utworzyć backup, zaleca się zrobić to natychmiast</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"></translation>
+        <translation>Posiadasz %1 sterowników, którym można utworzyć backup</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="540"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie backupu sterownika %1, łącznie %2</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="541"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie backupu: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="579"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Utworzono backup %1 sterowników, %2 napotkało błąd</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="581"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udało się utworzyć backupu sterowników</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="583"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"></translation>
+        <translation>Utworzono backup %1 sterowników</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="622"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"></translation>
+        <translation>Posiadasz %1 sterowników, które można przywrócić</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="623"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz sterownik do przywrócenia</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="653"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywracanie sterownika...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="654"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywracanie: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="797"/>
@@ -3889,12 +3887,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="806"/>
         <source>View backup path</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyświetl ścieżkę backupu</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Backup All</source>
-        <translation type="unfinished"></translation>
+        <translation>Backupuj wszystko</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="283"/>
@@ -3972,7 +3970,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="631"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation>Wyjście</translation>
+        <translation>Wyjdź</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="606"/>
@@ -3985,12 +3983,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="614"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjście przerwie proces tworzenia backupu sterowników.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="627"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjście przerwie proces przywracania sterowników.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
@@ -4001,7 +3999,7 @@
         <location filename="../src/Tool/commontools.cpp" line="35"/>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Imaging device</source>
-        <translation>Urządzenie przechwytywania</translation>
+        <translation>Urządzenie przechwytujące</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
@@ -4061,27 +4059,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not backed up</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez backupu</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Backing up</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie backupu</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Backup failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Błąd backupu</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Backup successful</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup zakończony pomyślnie</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Restoring</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywracanie</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="78"/>
@@ -4106,17 +4104,17 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="235"/>
         <source>Update</source>
-        <translation>Zaktualizuj</translation>
+        <translation>Aktualizuj</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywracanie</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
@@ -4145,7 +4143,7 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="37"/>
         <source>Update drivers</source>
-        <translation>Zaktualizuj sterowniki</translation>
+        <translation>Aktualizuj sterowniki</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="38"/>
@@ -4155,7 +4153,7 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="39"/>
         <source>Allow it to wake the computer</source>
-        <translation>Zezwól urządzeniu na obudzenia komputera</translation>
+        <translation>Zezwól urządzeniu na wybudzenie komputera</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="212"/>
@@ -4197,7 +4195,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="86"/>
         <source>Select a local folder please</source>
-        <translation>Wybierz katalog lokalny</translation>
+        <translation>Wybierz folder lokalny</translation>
     </message>
 </context>
 <context>
