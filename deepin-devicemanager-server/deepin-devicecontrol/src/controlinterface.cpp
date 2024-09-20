@@ -17,6 +17,7 @@
 #include <QDir>
 #include <QDBusConnection>
 #include <QFile>
+#include <QDBusConnectionInterface>
 
 #include <polkit-qt5-1/PolkitQt1/Authority>
 
@@ -72,6 +73,10 @@ bool ControlInterface::getUserAuthorPasswd()
 #ifdef DISABLE_POLKIT
     return true;
 #endif
+    if (connection().interface()->serviceUid(message().service()).value() == 0) {
+        return true;
+    }
+
     int pid = getPidByName("deepin-devicemanager");
     if (pid >= 0) {
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
