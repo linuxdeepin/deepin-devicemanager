@@ -13,6 +13,8 @@
 #include <QDir>
 #include <QDebug>
 #include <QDateTime>
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
 
 // 系统库文件
 #include <cups.h>
@@ -38,7 +40,7 @@ QString DBusEnableInterface::getAuthorizedInfo()
 
 bool DBusEnableInterface::enable(const QString& hclass, const QString& name, const QString& path, const QString& value, bool enable_device, const QString strDriver)
 {
-    if (!DriverDBusInterface::authority())
+    if (!isRootCaller() && !DriverDBusInterface::authority())
         return false;
 
     // 网卡通过ioctl禁用
@@ -68,7 +70,7 @@ bool DBusEnableInterface::enable(const QString& hclass, const QString& name, con
 
 Q_SCRIPTABLE bool DBusEnableInterface::enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device)
 {
-    if (!DriverDBusInterface::authority())
+    if (!isRootCaller() && !DriverDBusInterface::authority())
         return false;
 
     ipp_op_t op = enable_device ? IPP_OP_RESUME_PRINTER : IPP_OP_PAUSE_PRINTER;
@@ -258,4 +260,11 @@ void DBusEnableInterface::construct_uri(char *buffer, size_t buflen, const char 
 void DBusEnableInterface::modifyPath(QString& path)
 {
     path.replace(QRegExp("[1-9]$"),"0");
+}
+
+bool DBusEnableInterface::isRootCaller()
+{
+    if (connection().interface()->serviceUid(message().service()).value() == 0)
+        return true;
+    return false;
 }
