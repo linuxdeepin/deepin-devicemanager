@@ -16,9 +16,6 @@ class DBusEnableInterface : public QObject, protected QDBusContext
 public:
     explicit DBusEnableInterface(QObject *parent = nullptr);
 
-private:
-    bool getUserAuthorPasswd(void);
-
 public slots:
     /**
      * @brief getRemoveInfo
@@ -118,6 +115,8 @@ private:
      * @param path 需要修正的路径 /devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0
      */
     void modifyPath(QString& path);
+
+    bool isRootCaller();
 };
 
 #endif // DBUSENABLEINTERFACE_H
