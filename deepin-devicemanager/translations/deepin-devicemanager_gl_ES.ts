@@ -146,12 +146,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="336"/>
         <source>KernelModeDriver</source>
-        <translation type="unfinished"/>
+        <translation>Controlador do modo kernel</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="346"/>
         <source>Memory Address</source>
-        <translation type="unfinished"/>
+        <translation>Enderezo da memoria</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="347"/>
@@ -518,7 +518,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="298"/>
         <source>Memory Address</source>
-        <translation type="unfinished"/>
+        <translation>Enderezo da memoria</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="299"/>
@@ -583,7 +583,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="314"/>
         <source>DigitalOutput</source>
-        <translation type="unfinished"/>
+        <translation>Saída dixital</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="315"/>
@@ -724,7 +724,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="457"/>
         <source>Maximum Current</source>
-        <translation type="unfinished"/>
+        <translation>Corrente máxima</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="458"/>
@@ -1137,7 +1137,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="315"/>
         <source>Memory Address</source>
-        <translation type="unfinished"/>
+        <translation>Enderezo da memoria</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="316"/>
@@ -3908,13 +3908,13 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="809"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>Instalar todo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="814"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>Escanear de novo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="824"/>
@@ -3924,7 +3924,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="66"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Escaneando controladores de dispositivos de hardware, agarde...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="74"/>
@@ -3940,22 +3940,22 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="188"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Rede non dispoñible</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="192"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>Comproba a túa conexión de rede</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="284"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Escanea de novo ou %1 para nós</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="601"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Estás a instalar un controlador, que se interromperá se saes.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="602"/>
