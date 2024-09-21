@@ -3962,7 +3962,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="615"/>
         <location filename="../src/Page/MainWindow.cpp" line="628"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Estás seguro de que queres saír?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="605"/>
@@ -3983,7 +3983,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="614"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Estás facendo unha copia de seguranza dos controladores, que se interromperán se saes.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="627"/>
@@ -4019,7 +4019,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="44"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adaptador de rede sen fíos</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="63"/>
@@ -4044,12 +4044,12 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>Not installed</source>
-        <translation type="unfinished"/>
+        <translation>Non instalado</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <translation>Desactualizado</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="69"/>
@@ -4059,22 +4059,22 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not backed up</source>
-        <translation type="unfinished"/>
+        <translation>Non se fixo copia de seguranza</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Backing up</source>
-        <translation type="unfinished"/>
+        <translation>Fancendo copia de seguranza</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>Produciuse un erro na copia de seguranza</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Backup successful</source>
-        <translation type="unfinished"/>
+        <translation>Copia de seguranza exitosa</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
