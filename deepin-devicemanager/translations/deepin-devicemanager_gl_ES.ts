@@ -1508,12 +1508,12 @@
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="52"/>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="129"/>
         <source>Select a driver for update</source>
-        <translation type="unfinished"/>
+        <translation>Seleccione un controlador para actualizar</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="123"/>
         <source>No drivers found in this folder</source>
-        <translation type="unfinished"/>
+        <translation>Non se atoparon controladores neste cartafol</translation>
     </message>
 </context>
 <context>
@@ -1648,12 +1648,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="345"/>
         <source>Hardware</source>
-        <translation type="unfinished"/>
+        <translation>Hardware</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="345"/>
         <source>Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="489"/>
@@ -1712,7 +1712,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>Versión de plataforma de controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
@@ -1727,12 +1727,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Controladores con copia de seguridade</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="177"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Copia de seguranza de controladores</translation>
     </message>
 </context>
 <context>
@@ -1759,12 +1759,12 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="119"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>Aviso</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="119"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>O dispositivo non estará dispoñíbel despois da desinstalación do controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="123"/>
@@ -1780,22 +1780,22 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="153"/>
         <source>Update successful</source>
-        <translation type="unfinished"/>
+        <translation>Instalación exitosa</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="153"/>
         <source>Uninstallation successful</source>
-        <translation type="unfinished"/>
+        <translation>Desinstalación exitosa</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="154"/>
         <source>Update failed</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao actualizar</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="154"/>
         <source>Uninstallation failed</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao desinstalar</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="161"/>
@@ -1812,7 +1812,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="201"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>O cartafol seleccionado non existe, selecciónao de novo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="206"/>
@@ -1824,33 +1824,33 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
         <source>Previous</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Anterior</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="240"/>
         <source>Broken package</source>
-        <translation type="unfinished"/>
+        <translation>Paquete roto</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
         <source>Unmatched package architecture</source>
-        <translation type="unfinished"/>
+        <translation>Arquitectura de paquetes incomparable</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="249"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
         <source>The selected file does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>O ficheiro seleccionado non existe, selecciónelo de novo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
         <source>It is not a driver</source>
-        <translation type="unfinished"/>
+        <translation>Non é un controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
         <source>Unable to install - no digital signature</source>
-        <translation type="unfinished"/>
+        <translation>Non se puido instalar - sen sinatura dixital</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="328"/>
@@ -1860,17 +1860,17 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="329"/>
         <source>The driver module was not found</source>
-        <translation type="unfinished"/>
+        <translation>Non se atopou o módulo controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="330"/>
         <source>Invalid module format</source>
-        <translation type="unfinished"/>
+        <translation>O formato do módulo non é válido</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="331"/>
         <source>The driver module has dependencies</source>
-        <translation type="unfinished"/>
+        <translation>O módulo controlador ten dependencias</translation>
     </message>
 </context>
 <context>
@@ -1885,7 +1885,7 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="103"/>
         <source>Version Available</source>
-        <translation type="unfinished"/>
+        <translation>Versión dispoñíbel</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="104"/>
@@ -1908,7 +1908,7 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>Nova versión</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
@@ -3930,12 +3930,12 @@
         <location filename="../src/Widget/DriverScanWidget.cpp" line="74"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="354"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>Escaneando %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="130"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao escanear</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="188"/>
@@ -3970,7 +3970,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="631"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Saír</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="606"/>
@@ -4024,12 +4024,12 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="63"/>
         <source>Installation successful</source>
-        <translation type="unfinished"/>
+        <translation>Instalación exitosa</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="64"/>
         <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation>Erro ao instalar</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="65"/>
