@@ -4,7 +4,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
@@ -15,7 +15,7 @@
         <location filename="../src/Widget/BtnLabel.cpp" line="54"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -84,7 +84,7 @@
     <message>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="232"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
 </context>
 <context>
@@ -141,7 +141,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="335"/>
         <source>Revision</source>
-        <translation type="unfinished"/>
+        <translation>Revisión</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="336"/>
@@ -161,7 +161,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="365"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="369"/>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="264"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="268"/>
@@ -348,7 +348,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="153"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="157"/>
@@ -603,7 +603,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="329"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
 </context>
 <context>
@@ -671,7 +671,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="188"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="192"/>
@@ -744,7 +744,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="472"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="476"/>
@@ -1157,7 +1157,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="337"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="341"/>
@@ -1278,7 +1278,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="205"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="208"/>
@@ -1499,7 +1499,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="547"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
 </context>
 <context>
@@ -1581,7 +1581,7 @@
     <message>
         <location filename="../src/Widget/logtreeview.cpp" line="100"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
 </context>
 <context>
@@ -1594,7 +1594,7 @@
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="110"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
 </context>
 <context>
@@ -1706,7 +1706,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Versión actual</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
@@ -1722,7 +1722,7 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Acción</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
@@ -1741,7 +1741,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="95"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="228"/>
         <source>Updating</source>
-        <translation type="unfinished"/>
+        <translation>Actualizando</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="100"/>
@@ -1754,7 +1754,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="101"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Seguinte</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="119"/>
@@ -1770,12 +1770,12 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="123"/>
         <source>Uninstall</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Desinstalar</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="127"/>
         <source>Uninstalling</source>
-        <translation type="unfinished"/>
+        <translation>Desinstalando</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="153"/>
@@ -1801,13 +1801,13 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="161"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="180"/>
         <source>Next</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Seguinte</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="201"/>
@@ -1818,7 +1818,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="206"/>
         <source>Update</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
@@ -1903,7 +1903,7 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="106"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Acción</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
@@ -1913,7 +1913,7 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Versión actual</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="212"/>
@@ -1957,7 +1957,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
@@ -1985,7 +1985,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="121"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Versión actual</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
@@ -1995,7 +1995,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Acción</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="165"/>
@@ -4104,7 +4104,7 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="235"/>
         <source>Update</source>
-        <translation type="unfinished"/>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
@@ -4187,7 +4187,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="243"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Non dispoñible</translation>
     </message>
 </context>
 <context>
