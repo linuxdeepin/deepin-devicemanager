@@ -1855,7 +1855,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="328"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Erro descoñecido</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="329"/>
@@ -1938,7 +1938,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="101"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="454"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Instalación de controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="86"/>
@@ -1946,13 +1946,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="456"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Copia de seguridade do controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="103"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="458"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Restauración de controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
@@ -1975,7 +1975,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="95"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Vaia ao controlador de copia de seguranza</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="120"/>
@@ -1990,7 +1990,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>Versión de copia de seguranza</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
@@ -2000,7 +2000,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="165"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Controladores restaurables</translation>
     </message>
 </context>
 <context>
@@ -2023,17 +2023,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Instalación de controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Copia de seguridade do controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Restauración de controladores</translation>
     </message>
 </context>
 <context>
@@ -2051,17 +2051,17 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="162"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Produciuse un erro ao desactivalo: non se puido obter o SN do dispositivo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="184"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Actualizar controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="202"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Desinstalar controladores</translation>
     </message>
 </context>
 <context>
@@ -2113,17 +2113,17 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="42"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>Actualizar controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="43"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>Desinstalar controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="44"/>
         <source>Allow it to wake the computer</source>
-        <translation type="unfinished"/>
+        <translation>Permíteo espertar o ordenador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="202"/>
@@ -2134,7 +2134,7 @@
         <location filename="../src/Page/PageSingleInfo.cpp" line="284"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="301"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Produciuse un erro ao desactivalo: non se puido obter o SN do dispositivo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="288"/>
@@ -2149,12 +2149,12 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="320"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Actualizar controladores</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="337"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Desinstalar controladores</translation>
     </message>
 </context>
 <context>
@@ -3988,33 +3988,33 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="627"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Estás restaurando controladores, que se interromperán se saes.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
         <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adaptador Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="35"/>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation>Dispositivo de imaxe</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adaptador de pantalla</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="38"/>
         <source>Sound card</source>
-        <translation type="unfinished"/>
+        <translation>Tarxeta de son</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="40"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adaptador de rede</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="44"/>
@@ -4034,12 +4034,12 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="65"/>
         <source>Downloading</source>
-        <translation type="unfinished"/>
+        <translation>Descargando</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Instalando</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
@@ -4054,7 +4054,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="69"/>
         <source>Waiting</source>
-        <translation type="unfinished"/>
+        <translation>Esperando</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
@@ -4079,27 +4079,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Restoring</source>
-        <translation type="unfinished"/>
+        <translation>Restaurando</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="78"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Erro descoñecido</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="79"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation>Erro de rede</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="80"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation>Cancelado</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"/>
+        <translation>Produciuse un erro ao obter os ficheiros do controlador</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="235"/>
@@ -4109,17 +4109,17 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Copia de seguranza</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Restaurar</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>Instalar</translation>
     </message>
 </context>
 <context>
@@ -4143,17 +4143,17 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="37"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>Actualizar controladores</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="38"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>Desinstalar controladores</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="39"/>
         <source>Allow it to wake the computer</source>
-        <translation type="unfinished"/>
+        <translation>Permíteo espertar o ordenador</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="212"/>
@@ -4195,7 +4195,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="86"/>
         <source>Select a local folder please</source>
-        <translation type="unfinished"/>
+        <translation>Seleccione un cartafol local, por favor</translation>
     </message>
 </context>
 <context>
