@@ -44,7 +44,10 @@ private slots:
      * @param usbchanged
      */
     void slotDriverControl(bool success);
-
+    /**
+     * @brief slotRebootInit
+     */
+    void slotRebootInit(bool);
 private:
     /**
      * @brief initDriverRepoSource : 初始化驱动仓库

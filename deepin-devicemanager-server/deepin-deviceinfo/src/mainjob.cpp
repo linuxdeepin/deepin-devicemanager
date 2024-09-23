@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QLoggingCategory>
 #include <QTimer>
+#include <QDBusConnection>
 
 #include <DSysInfo>
 
@@ -49,25 +50,35 @@ MainJob::MainJob(const char *name, QObject *parent)
         }
 #endif
 
-        // 后台加载后先禁用设备
-        QProcess process;
-        QStringList options;
-        options << "--netcard" << "--keyboard"  << "--mouse" <<  "--usb";
-        process.start("hwinfo", options);
-        process.waitForFinished(-1);
-        QString info = process.readAllStandardOutput();
-        process.close();
-
-        ControlInterface::getInstance()->disableOutDevice(info);
-        ControlInterface::getInstance()->disableInDevice();
-        ControlInterface::getInstance()->updateWakeup(info);
-
+        slotRebootInit(false);
         connect(m_deviceInterface, &DeviceInterface::sigUpdate, this, &MainJob::slotUsbChanged);
         connect(ControlInterface::getInstance(), &ControlInterface::sigUpdate, this, &MainJob::slotUsbChanged);
 #ifndef DISABLE_DRIVER
         connect(ControlInterface::getInstance(), &ControlInterface::sigFinished, this, &MainJob::slotDriverControl);
 #endif
     });
+    //"System has woken up from sleep (S3)";
+    QDBusConnection::systemBus().connect("org.freedesktop.login1", "/org/freedesktop/login1", "org.freedesktop.login1.Manager", "PrepareForSleep", // Signal
+        this, SLOT(slotRebootInit(bool))
+    );
+}
+void MainJob::slotRebootInit(bool isSleep)
+{
+    if (isSleep)
+        return;
+
+    // 后台加载后先禁用设备
+    QProcess process;
+    QStringList options;
+    options << "--netcard" << "--keyboard"  << "--mouse" <<  "--usb";
+    process.start("hwinfo", options);
+    process.waitForFinished(-1);
+    QString info = process.readAllStandardOutput();
+    process.close();
+    // init from sql db
+    ControlInterface::getInstance()->disableOutDevice(info);
+    ControlInterface::getInstance()->disableInDevice();
+    ControlInterface::getInstance()->updateWakeup(info);
 }
 
 bool MainJob::serverIsRunning()
