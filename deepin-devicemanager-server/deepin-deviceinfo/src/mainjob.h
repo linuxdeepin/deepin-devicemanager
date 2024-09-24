@@ -45,10 +45,14 @@ private slots:
      */
     void slotDriverControl(bool success);
     /**
-     * @brief slotRebootInit
+     * @brief slotWakeupHandle
      */
-    void slotRebootInit(bool);
+    void slotWakeupHandle(bool);
 private:
+    /**
+     * @brief sqlCopytoKernel
+     */
+    void sqlCopytoKernel();
     /**
      * @brief initDriverRepoSource : 初始化驱动仓库
      * @return : 无
