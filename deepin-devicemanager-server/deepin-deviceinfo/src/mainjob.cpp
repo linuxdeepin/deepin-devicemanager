@@ -50,24 +50,24 @@ MainJob::MainJob(const char *name, QObject *parent)
         }
 #endif
 
-        slotRebootInit(false);
+        sqlCopytoKernel();
+
         connect(m_deviceInterface, &DeviceInterface::sigUpdate, this, &MainJob::slotUsbChanged);
         connect(ControlInterface::getInstance(), &ControlInterface::sigUpdate, this, &MainJob::slotUsbChanged);
 #ifndef DISABLE_DRIVER
         connect(ControlInterface::getInstance(), &ControlInterface::sigFinished, this, &MainJob::slotDriverControl);
 #endif
     });
-    //"System has woken up from sleep (S3)";
-    QDBusConnection::systemBus().connect("org.freedesktop.login1", "/org/freedesktop/login1", "org.freedesktop.login1.Manager", "PrepareForSleep", // Signal
-        this, SLOT(slotRebootInit(bool))
+
+    QDBusConnection::systemBus().connect("org.freedesktop.login1", "/org/freedesktop/login1", "org.freedesktop.login1.Manager", "PrepareForSleep", //"System has woken up from sleep (S3)" Signal
+        this, SLOT(slotWakeupHandle(bool))
     );
 }
-void MainJob::slotRebootInit(bool isSleep)
-{
-    if (isSleep)
-        return;
 
-    // 后台加载后先禁用设备
+void MainJob::sqlCopytoKernel()
+{
+    ControlInterface::getInstance()->disableInDevice();
+    // 后台加载后先禁用设备 内核参数持久化
     QProcess process;
     QStringList options;
     options << "--netcard" << "--keyboard"  << "--mouse" <<  "--usb";
@@ -77,8 +77,26 @@ void MainJob::slotRebootInit(bool isSleep)
     process.close();
     // init from sql db
     ControlInterface::getInstance()->disableOutDevice(info);
-    ControlInterface::getInstance()->disableInDevice();
     ControlInterface::getInstance()->updateWakeup(info);
+}
+
+void MainJob::slotWakeupHandle(bool isSleep)
+{
+    QTimer::singleShot(1500, this, [ = ]() {
+        qCInfo(appLog) << "Signal: login1.Manager.PrepareForSleep:" << isSleep;
+        if (isSleep)
+            return;
+
+        QProcess process; //先唤醒DBUS
+        QString command = "gdbus call --system --dest org.deepin.DeviceControl --object-path /org/deepin/DeviceControl --method org.deepin.DeviceControl.disableInDevice";
+        process.start(command);
+        process.waitForFinished(1000);
+
+        //有的硬件唤醒起来也需要延时
+        QTimer::singleShot(2000, this, [ = ]() {
+            sqlCopytoKernel();
+        });
+    });
 }
 
 bool MainJob::serverIsRunning()
