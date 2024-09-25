@@ -3,7 +3,7 @@
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation>Për të lexuar të dhëna hardware, lypset mirëfilltësim</translation>
+        <translation>Për të lexuar të hollësi hardware-i, lypset mirëfilltësim</translation>
     </message>
     <message>
         <source>Cancel</source>
