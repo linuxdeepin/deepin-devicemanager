@@ -71,13 +71,6 @@ int main(int argc, char *argv[])
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     SingleDeviceManager app(argc, argv);
     app.setAutoActivateWindows(true);
-    DBusDriverInterface::getInstance();
-
-    Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                                             UnixProcessSubject(getpid()),
-                                                                             Authority::AllowUserInteraction);
-    if (result != Authority::Yes)
-        return 0;
 
     // 保证进程唯一性
     qputenv("DTK_USE_SEMAPHORE_SINGLEINSTANCE", "1");
@@ -92,6 +85,16 @@ int main(int argc, char *argv[])
         app.setApplicationDescription(QObject::tr("Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
         const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
         app.setApplicationAcknowledgementPage(acknowledgementLink);
+
+        if (!DGuiApplicationHelper::instance()->setSingleInstance(app.applicationName(), DGuiApplicationHelper::UserScope)) {
+            exit(0);
+        }
+        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                                                UnixProcessSubject(getpid()),
+                                                                                Authority::AllowUserInteraction);
+        if (result != Authority::Yes)
+            return 0;
+
         DApplicationSettings settinAgs;
         Dtk::Core::DLogManager::registerFileAppender();
 
