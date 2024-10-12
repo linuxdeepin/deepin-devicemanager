@@ -124,6 +124,17 @@ void DeviceStorage::unitConvertByDecimal()
 {
     if(m_SizeBytes > 0)
         m_Size = decimalkilos(m_SizeBytes);
+
+    quint64 gbyte =  1000000000;
+    if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
+        if(m_SizeBytes > 255*gbyte && m_SizeBytes < 257*gbyte) {
+            m_Size = "256 GB";
+        } else if(m_SizeBytes > 511*gbyte && m_SizeBytes < 513*gbyte) {
+                m_Size = "512 GB";
+        } else if(m_SizeBytes > 999*gbyte && m_SizeBytes < 1001*gbyte) {
+            m_Size = "1 TB";
+        }
+    }
 }
 
 bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
