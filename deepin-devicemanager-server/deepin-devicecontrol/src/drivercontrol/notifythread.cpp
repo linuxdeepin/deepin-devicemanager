@@ -23,7 +23,7 @@ void NotifyThread::run()
     QProcess process;
     forever {
         //查看dde-desktop进程是否启动
-        QString outInfo = Utils::executeCmd("ps", QStringList() << "aux", QString(), -1);
+        QString outInfo = Utils::executeServerCmd("ps", QStringList() << "aux", QString(), -1);
 
         // Split the output  search for the 'grep desktop | grep -v grep' pattern
         QStringList retLst;

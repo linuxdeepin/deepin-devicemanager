@@ -225,7 +225,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
 int HttpDriverInterface::packageInstall(const QString &package_name, const QString &version)
 {
     // 0:没有包 1:版本不一致 2:版本一致
-    QString outInfo = Common::executeCmd("apt", QStringList() << "policy" << package_name, QString(), -1);
+    QString outInfo = Common::executeClientCmd("apt", QStringList() << "policy" << package_name, QString(), -1);
     if (outInfo.isEmpty())
         return 0;
     QStringList infoList = outInfo.split("\n");

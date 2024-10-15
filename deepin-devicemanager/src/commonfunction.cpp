@@ -85,7 +85,7 @@ static bool isModeM900(void)
 /*   dmidecode | grep -i “String 4”中的值来区分主板类型,PWC30表示PanguW（也就是W525）*/
 static bool isModeW525(void)
 {
-    QString outInfo = Common::executeCmd("dmidecode");
+    QString outInfo = Common::executeClientCmd("dmidecode");
     if(outInfo.isEmpty())
         return false;
 
@@ -101,7 +101,7 @@ static bool isModeW525(void)
 
 static QString readDmidecode11_String4(void)
 {
-    QString outInfo = Common::executeCmd("dmidecode", QStringList() << "-t" << "11");
+    QString outInfo = Common::executeClientCmd("dmidecode", QStringList() << "-t" << "11");
     if(outInfo.isEmpty())
         return QString("");
 
@@ -177,7 +177,7 @@ QString Common::boardVendorType()
     return initBoardVendorFlag ? boardVendorKey : checkBoardVendorFlag();
 }
 
-QByteArray Common::executeCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/)
+QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/)
 {
     QProcess process;
     if (!workPath.isEmpty())
