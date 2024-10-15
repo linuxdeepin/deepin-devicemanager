@@ -27,7 +27,7 @@ public:
     static bool isDpkgLocked();
     //获取url
     static QString getUrl();
-    static QByteArray executeCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
+    static QByteArray executeServerCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
 };
 
 #endif // UTILS_H

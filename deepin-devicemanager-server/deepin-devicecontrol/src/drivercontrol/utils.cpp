@@ -109,17 +109,17 @@ bool Utils::isDriverPackage(const QString &filepath)
     if (tmpDir.mkdir(tmpPath)) {
         tmpDir.cd(tmpPath);
         QString strExtract = tmpDir.absolutePath();
-        executeCmd("dpkg-deb", QStringList() << QString("-x") << filepath << strExtract);
+        executeServerCmd("dpkg-deb", QStringList() << QString("-x") << filepath << strExtract);
         // 2021-12-24 liujuna@uniontech.com 修改过滤规则
         // 关键字查找 insmod modprobe和 路径 /lib/module 会在设备管理器本身(后台服务)和libhd等安装包中返回true，因此暂不可使用
         // 英伟达驱动中找不到 .ko 和 .ppd 等信息 ， 但是可以找到 nvidia*.ko 字段，因此添加 nvidia*.ko 过滤字段
         // 不能直接通过包名判断 比如 "deepin-devicemanager_1.0.deb" 判断是否包含 "deepin-devicemanager" 此时同样会过滤 "/home/uos/deepin-devicemanager/driver.deb"
-        QString outInfo1 = executeCmd("grep", QStringList() << QString("-irHE") << QString("nvidia*.ko") << strExtract);
+        QString outInfo1 = executeServerCmd("grep", QStringList() << QString("-irHE") << QString("nvidia*.ko") << strExtract);
         if (!outInfo1.isEmpty()) {
             bsuccess = true;
         }
         if(!bsuccess) {
-            QString outInfo2 = executeCmd("find", QStringList() << strExtract << QString("-name") << QString("*.ko") << QString("-o") << QString("-name") << QString("*.ppd"));
+            QString outInfo2 = executeServerCmd("find", QStringList() << strExtract << QString("-name") << QString("*.ko") << QString("-o") << QString("-name") << QString("*.ppd"));
             if (!outInfo2.isEmpty()) {
                 bsuccess = true;
             }
@@ -217,7 +217,9 @@ QString Utils::getUrl()
     }
 }
 
-QByteArray Utils::executeCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/)
+
+
+QByteArray Utils::executeServerCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/)
 {
     QProcess process;
     if (!workPath.isEmpty())

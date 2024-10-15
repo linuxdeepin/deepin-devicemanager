@@ -494,7 +494,7 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
     }
 
     // 判断lsmod是否能查询
-    QString outInfo = Common::executeCmd("modinfo", QStringList() << driver, QString(), -1);
+    QString outInfo = Common::executeClientCmd("modinfo", QStringList() << driver, QString(), -1);
     return !outInfo.contains("filename:");
 }
 
@@ -576,7 +576,7 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
 
 const QString DeviceBaseInfo::getDriverVersion()
 {
-    QString outInfo = Common::executeCmd("modinfo", QStringList() << driver(), QString(), -1);
+    QString outInfo = Common::executeClientCmd("modinfo", QStringList() << driver(), QString(), -1);
     if(outInfo.isEmpty())
         return  QString("");
 
