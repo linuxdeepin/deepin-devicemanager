@@ -38,6 +38,6 @@ public:
      */
     static int specialComType;
 
-    static QByteArray executeCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
+    static QByteArray executeClientCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
 };
 #endif // COMMONFUNCTION_H

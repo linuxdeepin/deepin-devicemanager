@@ -198,6 +198,13 @@ bool DriverManager::unInstallDriver(const QString &modulename)
     return  bsuccess;
 }
 
+static void depmod_a()
+{
+    QProcess process;
+    process.start("depmod -a");
+    process.waitForFinished(-1);
+}
+
 bool DriverManager::installDriver(const QString &filepath)
 {
     /*1.检查模块是否已存在 存在报错返回，不报错返回
@@ -285,9 +292,7 @@ bool DriverManager::installDriver(const QString &filepath)
                     QFile::remove(installpath);
 
                     //删除后执行depmod更新
-                    QProcess process;
-                    process.start("depmod -a");
-                    process.waitForFinished(-1);
+                    depmod_a();
 
                     sigFinished(false, errmsg);
                     return  false;
@@ -387,7 +392,7 @@ bool DriverManager::isSigned(const QString &filepath)
         strSignCheckString = "Verified successfully";
     }
 
-    QString outInfo = Utils::executeCmd(program, arguments, QString(), -1);
+    QString outInfo = Utils::executeServerCmd(program, arguments, QString(), -1);
     return outInfo.contains(strSignCheckString);
 }
 bool DriverManager::isArchMatched(const QString &path)
@@ -717,20 +722,15 @@ bool DriverManager::delDeb(const QString &debname)
     }
     return (!destdir.exists());
 }
-
-bool DriverManager::aptUpdate()
+static void cmdAptUpdate()
 {
     QProcess process;
-    /* connect(&process, &QProcess::readyReadStandardOutput, this, [&](){
-        QByteArray outArry = process.readAllStandardOutput();
-        QList<QString> lines = QString(outArry).split('\n', QString::SkipEmptyParts);
-        for (const QString &line : qAsConst(lines)) {
-            // qCDebug() << line;
-            // error handling...
-        }
-    }); */
     process.start("apt update");
     process.waitForFinished(-1);
+}
+bool DriverManager::aptUpdate()
+{
+    cmdAptUpdate();
     return true;
 }
 

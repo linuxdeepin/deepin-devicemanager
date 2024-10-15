@@ -18,10 +18,6 @@ public:
      */
     static void disableOutDevice(const QString &info);
 
-    /**
-     * @brief disableDevice 禁用外设
-     */
-    static void disableOutDevice();
 
     /**
      * @brief disableInDevice 禁用非外设
