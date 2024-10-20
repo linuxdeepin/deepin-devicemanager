@@ -3877,7 +3877,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="797"/>
         <source>reboot</source>
-        <translation>Reiniciar</translation>
+        <translation>reiniciar</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="798"/>
