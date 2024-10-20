@@ -1469,7 +1469,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="516"/>
         <source>Firmware Version</source>
-        <translation>Versão do Firmware</translation>
+        <translation>Versão do firmware</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="517"/>
@@ -1908,7 +1908,7 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
         <source>New Version</source>
-        <translation>Nova Versão</translation>
+        <translation>Nova versão</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
