@@ -270,7 +270,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="251"/>
         <source>Logical Name</source>
-        <translation>Nome Lógico</translation>
+        <translation>Nome lógico</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="252"/>
@@ -475,7 +475,7 @@
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>Max Speed</source>
-        <translation>Velocidade Máxima</translation>
+        <translation>Velocidade máxima</translation>
     </message>
 </context>
 <context>
