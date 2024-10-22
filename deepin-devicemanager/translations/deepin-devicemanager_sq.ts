@@ -2737,12 +2737,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
         <source>Twenty-six</source>
-        <translation>Njëzet e gjashtë</translation>
+        <translation>Njëzetegjashtë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="317"/>
         <source>Twenty-eight</source>
-        <translation>Njëzet e tetë</translation>
+        <translation>Njëzetetetë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="319"/>
@@ -2757,17 +2757,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
         <source>Thirty-four</source>
-        <translation>Tridhjetë e katër</translation>
+        <translation>Tridhjetekatër</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
         <source>Thirty-six</source>
-        <translation>Tridhjetë e gjashtë</translation>
+        <translation>Tridhjetegjashtë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
         <source>Thirty-eight</source>
-        <translation>Tridhjetë e tetë</translation>
+        <translation>Tridhjetetetë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
@@ -2782,17 +2782,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
         <source>Forty-four</source>
-        <translation>Dyzetë e katër</translation>
+        <translation>Dyzetekatër</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="328"/>
         <source>Forty-six</source>
-        <translation>Dyzetë e gjashtë</translation>
+        <translation>Dyzetegjashtë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="329"/>
         <source>Forty-eight</source>
-        <translation>Dyzet e tetë</translation>
+        <translation>Dyzetetetë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
@@ -2802,22 +2802,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="332"/>
         <source>Fifty-two</source>
-        <translation>Pesëdhjetë e dy</translation>
+        <translation>Pesëdhjetedy </translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="333"/>
         <source>Fifty-four</source>
-        <translation>Pesëdhjetë e katër</translation>
+        <translation>Pesëdhjetekatër</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="334"/>
         <source>Fifty-six</source>
-        <translation>Pesëdhjetë e gjashtë</translation>
+        <translation>Pesëdhjetegjashtë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="335"/>
         <source>Fifty-eight</source>
-        <translation>Pesëdhjetë e tetë</translation>
+        <translation>Pesëdhjetetetë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="337"/>
@@ -2827,22 +2827,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="338"/>
         <source>Sixty-two</source>
-        <translation>Gjashtëdhjetë e dy</translation>
+        <translation>Gjashtëdhjetedy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
         <source>Sixty-four</source>
-        <translation>Gjashtëdhjetë e katër</translation>
+        <translation>Gjashtëdhjetekatër</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="340"/>
         <source>Sixty-six</source>
-        <translation>Gjashtëdhjetë e gjashtë</translation>
+        <translation>Gjashtëdhjetegjashtë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="341"/>
         <source>Sixty-eight</source>
-        <translation>Gjashtëdhjetë e tetë</translation>
+        <translation>Gjashtëdhjetetetë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="343"/>
@@ -2857,17 +2857,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="345"/>
         <source>Seventy-four</source>
-        <translation>Shtatëdhjetë e katër</translation>
+        <translation>Shtatëdhjetekatër</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="346"/>
         <source>Seventy-six</source>
-        <translation>Shtatëdhjetë e gjashtë</translation>
+        <translation>Shtatëdhjetegjashtë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="347"/>
         <source>Seventy-eight</source>
-        <translation>Shtatëdhjetë e tetë</translation>
+        <translation>Shtatëdhjetetetë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="349"/>
@@ -2882,17 +2882,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="351"/>
         <source>Eighty-four</source>
-        <translation>Tetëdhjetë e katër</translation>
+        <translation>Tetëdhjetëekatër</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="352"/>
         <source>Eighty-six</source>
-        <translation>Tetëdhjetë e gjashtë</translation>
+        <translation>Tetëdhjetegjashtë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="353"/>
         <source>Eighty-eight</source>
-        <translation>Tetëdhjetë e të</translation>
+        <translation>Tetëdhjetetetë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="355"/>
@@ -2902,22 +2902,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="356"/>
         <source>Ninety-two</source>
-        <translation>Nëntëdhjetë e dy</translation>
+        <translation>Nëntëdhjetedy </translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="357"/>
         <source>Ninety-four</source>
-        <translation>Nëntëdhjetë e katër</translation>
+        <translation>Nëntëdhjetekatër</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="358"/>
         <source>Ninety-six</source>
-        <translation>Nëntëdhjetë e gjashtë</translation>
+        <translation>Nëntëdhjetegjashtë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="359"/>
         <source>Ninety-eight</source>
-        <translation>Nëntëdhjetë e tetë</translation>
+        <translation>Nëntëdhjetetetë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="361"/>
@@ -3002,7 +3002,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="379"/>
         <source>Two hundred and fifty-six</source>
-        <translation>Dyqindepesëdhjetëegjashtë </translation>
+        <translation>Dyqindepesëdhjetegjashtë </translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="47"/>
