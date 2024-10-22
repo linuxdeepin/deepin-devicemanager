@@ -391,7 +391,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>Threads</source>
-        <translation>Rrjedha</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
@@ -1764,7 +1764,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="119"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation>Pajisja s’do të jetë e përdorshme, pas çinstalimit të përudhësit</translation>
+        <translation>Pas çinstalimit të përudhësit, pajisja s’do të jetë e përdorshme</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="123"/>
@@ -2163,13 +2163,13 @@
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="309"/>
         <source>SubVendor</source>
-        <translation>NënShitës</translation>
+        <translation>Nënprodhues</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="310"/>
         <source>SubDevice</source>
-        <translation>NënPajisje</translation>
+        <translation>Nënpajisje</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="323"/>
@@ -2344,7 +2344,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="189"/>
         <source>Chassis Handle</source>
-        <translation>Dorezë Shasie</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="190"/>
@@ -2408,7 +2408,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="209"/>
         <source>OEM Information</source>
-        <translation>Të dhëna OEM</translation>
+        <translation>Hollësi OEM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="210"/>
