@@ -2249,25 +2249,25 @@
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="42"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="226"/>
         <source>BIOS Information</source>
-        <translation>Të dhëna BIOS-i</translation>
+        <translation>Hollësi BIOS-i</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="64"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="227"/>
         <source>Base Board Information</source>
-        <translation>Të dhëna Skede Bazë</translation>
+        <translation>Hollësi Skede Bazë</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="86"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="228"/>
         <source>System Information</source>
-        <translation>Të dhëna Mbi Sistemin</translation>
+        <translation>Hollësi Mbi Sistemin</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="102"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="229"/>
         <source>Chassis Information</source>
-        <translation>Të dhëna Shasie</translation>
+        <translation>Hollësi Shasie</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="118"/>
@@ -2727,12 +2727,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
         <source>Twenty-two</source>
-        <translation>Njëzet e dy </translation>
+        <translation>Njëzetedy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
         <source>Twenty-four</source>
-        <translation>Njëzet e katër</translation>
+        <translation>Njëzetekatër</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="316"/>
@@ -2752,7 +2752,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
         <source>Thirty-two</source>
-        <translation>Tridhjetë e dy</translation>
+        <translation>Tridhjetedy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
@@ -2777,7 +2777,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
         <source>Forty-two</source>
-        <translation>Dyzetë e dy</translation>
+        <translation>Dyzetedy </translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
@@ -2852,7 +2852,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="344"/>
         <source>Seventy-two</source>
-        <translation>Shtatëdhjetë e dy</translation>
+        <translation>Shtatëdhjetedy </translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="345"/>
