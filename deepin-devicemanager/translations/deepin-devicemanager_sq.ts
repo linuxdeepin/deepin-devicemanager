@@ -1962,7 +1962,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
         <source>Feedback</source>
-        <translation>Përshtypje</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
