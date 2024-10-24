@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_CN">
 <context>
     <name>BtnLabel</name>
     <message>
@@ -11,7 +9,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
         <source>Feedback</source>
-        <translation>反馈</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="54"/>
@@ -133,7 +131,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="333"/>
         <source>SysFS_Path</source>
-        <translation></translation>
+        <translation>SysFS_Path</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="334"/>
@@ -143,12 +141,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="335"/>
         <source>Revision</source>
-        <translation></translation>
+        <translation>修订版本</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="336"/>
         <source>KernelModeDriver</source>
-        <translation></translation>
+        <translation>KernelModeDriver</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="346"/>
@@ -398,7 +396,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
         <source>BogoMIPS</source>
-        <translation>运行速度（Bogomips）</translation>
+        <translation>BogoMIPS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
@@ -448,11 +446,6 @@
         <translation>L3缓存</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="275"/>
-        <source>L4 Cache</source>
-        <translation>L4缓存</translation>
-    </message>
-    <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
         <source>L2 Cache</source>
         <translation>L2缓存</translation>
@@ -475,7 +468,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="154"/>
@@ -726,7 +719,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="456"/>
         <source>Speed</source>
-        <translation>频率</translation>
+        <translation>速度</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="457"/>
@@ -1328,7 +1321,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="184"/>
         <source>Capacity</source>
-        <translation>最大容量</translation>
+        <translation>容量</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="185"/>
@@ -1609,7 +1602,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="186"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>设备信息</translation>
     </message>
     <message>
@@ -1719,7 +1712,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Driver Platform Version</source>
-        <translation>驱动平台版本</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
@@ -1734,12 +1727,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
         <source>Backupable Drivers</source>
-        <translation>可备份驱动</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="177"/>
         <source>Backed up Drivers</source>
-        <translation>已备份驱动</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1945,7 +1938,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="101"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="454"/>
         <source>Driver Install</source>
-        <translation>驱动安装</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="86"/>
@@ -1953,13 +1946,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="456"/>
         <source>Driver Backup</source>
-        <translation>驱动备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="103"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="458"/>
         <source>Driver Restore</source>
-        <translation>驱动还原</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
@@ -1969,7 +1962,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
         <source>Feedback</source>
-        <translation>反馈</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1977,12 +1970,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="92"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation>您没有驱动可以还原，请先备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="95"/>
         <source>Go to Backup Driver</source>
-        <translation>前往备份驱动</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="120"/>
@@ -1997,7 +1990,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
         <source>Backup Version</source>
-        <translation>备份版本</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
@@ -2007,7 +2000,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="165"/>
         <source>Restorable Drivers</source>
-        <translation>可还原驱动</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2030,17 +2023,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Install</source>
-        <translation>驱动安装</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Backup</source>
-        <translation>驱动备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Restore</source>
-        <translation>驱动还原</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3137,18 +3130,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
         <source>Driver restore failed!</source>
-        <translation>驱动还原失败！</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="33"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="575"/>
         <source>Please try again or give us feedback</source>
-        <translation>请重试，或反馈给我们</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="39"/>
         <source>Driver backup failed!</source>
-        <translation>驱动备份失败！</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
@@ -3818,68 +3811,68 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="452"/>
         <source>All drivers have been backed up</source>
-        <translation>驱动已全部备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="454"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation>总计%1个驱动，其中%2个已备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation>您有%1个驱动可以备份，建议立即备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation>您有%1个驱动可以备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="540"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation>正在备份第%1个驱动，共%2个</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="541"/>
         <source>Backing up: %1</source>
-        <translation>正在备份：%1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="579"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation>驱动备份成功%1个，失败%2个</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="581"/>
         <source>Failed to backup drivers</source>
-        <translation>备份失败</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="583"/>
         <source>%1 drivers backed up</source>
-        <translation>%1个驱动已备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="622"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation>您有%1个驱动可以还原</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="623"/>
         <source>Please select a driver to restore</source>
-        <translation>请选择驱动还原</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="653"/>
         <source>Driver is restoring...</source>
-        <translation>驱动还原中…</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="654"/>
         <source>Restoring: %1</source>
-        <translation>正在还原：%1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="797"/>
@@ -3894,12 +3887,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="806"/>
         <source>View backup path</source>
-        <translation>查看备份路径</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Backup All</source>
-        <translation>一键备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="283"/>
@@ -3990,12 +3983,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="614"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation>当前正在备份驱动，退出应用后任务将会中断</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="627"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation>当前正在还原驱动，退出应用后任务将会中断</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
@@ -4066,27 +4059,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not backed up</source>
-        <translation>驱动未备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Backing up</source>
-        <translation>正在备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Backup failed</source>
-        <translation>备份失败</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Backup successful</source>
-        <translation>备份成功</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Restoring</source>
-        <translation>还原中</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="78"/>
@@ -4116,12 +4109,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation>备份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation>还原</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>

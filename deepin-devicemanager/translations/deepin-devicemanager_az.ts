@@ -1,17 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="az">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="az">
 <context>
     <name>BtnLabel</name>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>OK</source>
-        <translation type="unfinished">OLDU</translation>
+        <translation>OLDU</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="54"/>
@@ -122,33 +120,33 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="331"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="342"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Modulun alternativ adı</translation>
+        <translation>Modulun alternativ adı</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="332"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="343"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Fiziki İD</translation>
+        <translation>Fiziki İD</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="333"/>
         <source>SysFS_Path</source>
-        <translation type="unfinished"></translation>
+        <translation>SysFS_Path</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="334"/>
         <source>Description</source>
-        <translation type="unfinished">Təsviri</translation>
+        <translation>Təsviri</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="335"/>
         <source>Revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Buraxılış</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="336"/>
         <source>KernelModeDriver</source>
-        <translation type="unfinished"></translation>
+        <translation>KernelModeDriver</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="346"/>
@@ -176,7 +174,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="624"/>
         <source>Name</source>
-        <translation>Adı</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="625"/>
@@ -186,7 +184,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="626"/>
         <source>Model</source>
-        <translation>Modeli</translation>
+        <translation>Model</translation>
     </message>
 </context>
 <context>
@@ -232,12 +230,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="243"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Modulun alternativ adı</translation>
+        <translation>Modulun alternativ adı</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Fiziki İD</translation>
+        <translation>Fiziki İD</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="245"/>
@@ -247,7 +245,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="246"/>
         <source>Maximum Power</source>
-        <translation>Maksimum güc</translation>
+        <translation>Maksimum Güc</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="247"/>
@@ -305,7 +303,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="130"/>
         <source>Model</source>
-        <translation>Modeli</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="131"/>
@@ -340,12 +338,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Modulun alternativ adı</translation>
+        <translation>Modulun alternativ adı</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="142"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Fiziki İD</translation>
+        <translation>Fiziki İD</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="153"/>
@@ -510,7 +508,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="296"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Modulun alternativ adı</translation>
+        <translation>Modulun alternativ adı</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="297"/>
@@ -638,12 +636,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="169"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Modulun alternativ adı</translation>
+        <translation>Modulun alternativ adı</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="170"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Fiziki İD</translation>
+        <translation>Fiziki İD</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="171"/>
@@ -653,7 +651,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="172"/>
         <source>Maximum Power</source>
-        <translation>Maksimum güc</translation>
+        <translation>Maksimum Güc</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="173"/>
@@ -686,7 +684,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="444"/>
         <source>Name</source>
-        <translation>Adı</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="445"/>
@@ -711,12 +709,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="454"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Modulun alternativ adı</translation>
+        <translation>Modulun alternativ adı</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="455"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Fiziki İD</translation>
+        <translation>Fiziki İD</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="456"/>
@@ -775,7 +773,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="257"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1660"/>
         <source>CPU</source>
-        <translation>Mərkəzi prosessor</translation>
+        <translation>Mərkəzi Prosessor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="149"/>
@@ -878,7 +876,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="273"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Digər qurğular</translation>
+        <translation>Digər cihazlar</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1470"/>
@@ -940,7 +938,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="141"/>
         <source>Serial Number</source>
-        <translation>Seriya Nömrəsi</translation>
+        <translation>Seriya nömrəsi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="149"/>
@@ -973,7 +971,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="268"/>
         <source>Name</source>
-        <translation>Adı</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="269"/>
@@ -1032,7 +1030,7 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="287"/>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="326"/>
         <source>Name</source>
-        <translation>Adı</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="288"/>
@@ -1074,12 +1072,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="300"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Modulun alternativ adı</translation>
+        <translation>Modulun alternativ adı</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="301"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Fiziki İD</translation>
+        <translation>Fiziki İD</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="302"/>
@@ -1172,7 +1170,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="74"/>
         <source>Name</source>
-        <translation>Adı</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="75"/>
@@ -1182,12 +1180,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="76"/>
         <source>Model</source>
-        <translation>Modeli</translation>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="77"/>
         <source>Bus Info</source>
-        <translation>Kanal haqqında məlumat</translation>
+        <translation>Kanal haqqında məlumatlar</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="78"/>
@@ -1265,7 +1263,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="189"/>
         <source>Maximum Power</source>
-        <translation>Maksimum güc</translation>
+        <translation>Maksimum Güc</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="190"/>
@@ -1293,7 +1291,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="178"/>
         <source>Name</source>
-        <translation>Adı</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="179"/>
@@ -1318,7 +1316,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="183"/>
         <source>Status</source>
-        <translation>Vəziyyət</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="184"/>
@@ -1391,7 +1389,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="153"/>
         <source>Serial Number</source>
-        <translation>Seriya Nömrəsi</translation>
+        <translation>Seriya nömrəsi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="159"/>
@@ -1444,7 +1442,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="503"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="536"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="507"/>
@@ -1454,19 +1452,19 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="508"/>
         <source>Capabilities</source>
-        <translation>Bacarıqlar</translation>
+        <translation>İmkanlar</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="514"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="522"/>
         <source>Module Alias</source>
-        <translation type="unfinished">Modulun alternativ adı</translation>
+        <translation>Modulun alternativ adı</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="515"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="523"/>
         <source>Physical ID</source>
-        <translation type="unfinished">Fiziki İD</translation>
+        <translation>Fiziki İD</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="516"/>
@@ -1604,7 +1602,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="186"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Cihaz məlumatı</translation>
     </message>
     <message>
@@ -1702,39 +1700,39 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="89"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Current Version</source>
-        <translation type="unfinished">Cari versiya</translation>
+        <translation>Cari versiya</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
         <source>Action</source>
-        <translation type="unfinished">Əməl</translation>
+        <translation>Əməl</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="177"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1882,55 +1880,55 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="115"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Device Name</source>
-        <translation type="unfinished">Cihazın adı</translation>
+        <translation>Cihazın adı</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="103"/>
         <source>Version Available</source>
-        <translation type="unfinished">Əlçatan versiya</translation>
+        <translation>Əlçatan versiya</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="104"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="117"/>
         <source>Size</source>
-        <translation type="unfinished">Ölçü</translation>
+        <translation>Ölçü</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="105"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="118"/>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="106"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
         <source>Action</source>
-        <translation type="unfinished">Əməl</translation>
+        <translation>Əməl</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
         <source>New Version</source>
-        <translation type="unfinished">Yeni versiya</translation>
+        <translation>Yeni versiya</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Current Version</source>
-        <translation type="unfinished">Cari versiya</translation>
+        <translation>Cari versiya</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="212"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished">Sürücülər çatışmır (%1)</translation>
+        <translation>Sürücülər çatışmır (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="213"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished">Köhnəlmiş sürücülər (%1)</translation>
+        <translation>Köhnəlmiş sürücülər (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="214"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished">Yenilənmiş sürücülər (%1)</translation>
+        <translation>Yenilənmiş sürücülər (%1)</translation>
     </message>
 </context>
 <context>
@@ -1940,7 +1938,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="101"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="454"/>
         <source>Driver Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="86"/>
@@ -1948,23 +1946,23 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="456"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="103"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="458"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
         <source>OK</source>
-        <translation type="unfinished">OLDU</translation>
+        <translation>OLDU</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1972,37 +1970,37 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="92"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="95"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="120"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="121"/>
         <source>Current Version</source>
-        <translation type="unfinished">Cari versiya</translation>
+        <translation>Cari versiya</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
         <source>Backup Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
         <source>Action</source>
-        <translation type="unfinished">Əməl</translation>
+        <translation>Əməl</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="165"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2025,17 +2023,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3132,18 +3130,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="33"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="575"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="39"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
@@ -3742,7 +3740,7 @@
     <message>
         <location filename="../src/main.cpp" line="113"/>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Baxış</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="14"/>
@@ -3813,68 +3811,68 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="452"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="454"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="496"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="492"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="495"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="540"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="541"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="579"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="581"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="583"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="622"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="623"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="653"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="654"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="797"/>
@@ -3889,12 +3887,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="806"/>
         <source>View backup path</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Backup All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="283"/>
@@ -3985,12 +3983,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="614"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="627"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
@@ -4061,27 +4059,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not backed up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Backing up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Backup failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Backup successful</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Restoring</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="78"/>
@@ -4111,12 +4109,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
