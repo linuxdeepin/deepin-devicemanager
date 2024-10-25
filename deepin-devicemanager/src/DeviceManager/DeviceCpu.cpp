@@ -307,7 +307,7 @@ void DeviceCpu::getTrNumber()
     m_trNumber.insert(4, QObject::tr("Four"));
     m_trNumber.insert(6, QObject::tr("Six"));
     m_trNumber.insert(8, QObject::tr("Eight"));
-
+    m_trNumber.insert(9, QObject::tr("Nine"));
     m_trNumber.insert(10, QObject::tr("Ten"));
     m_trNumber.insert(12, QObject::tr("Twelve"));
     m_trNumber.insert(14, QObject::tr("Fourteen"));
