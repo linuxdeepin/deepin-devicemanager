@@ -2702,6 +2702,11 @@
         <translation>八</translation>
     </message>
     <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="306"/>
+        <source>Nine</source>
+        <translation>九</translation>
+    </message>
+    <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
         <source>Ten</source>
         <translation>十</translation>
