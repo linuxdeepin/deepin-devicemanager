@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Geri bildirim</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="54"/>
@@ -1712,7 +1712,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="90"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü Platformu Sürümü</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="91"/>
@@ -1727,12 +1727,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="176"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Yedeklenebilir Sürücüler</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="177"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Yedeklenen Sürücüler</translation>
     </message>
 </context>
 <context>
@@ -1938,7 +1938,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="101"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="454"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü Kurulumu</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="86"/>
@@ -1946,13 +1946,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="456"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü Yedekleme</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="103"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="458"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü Geri Yükleme</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="581"/>
@@ -1962,7 +1962,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="582"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Geri bildirim</translation>
     </message>
 </context>
 <context>
@@ -1970,12 +1970,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="92"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>Geri yüklenecek herhangi bir sürücünüz yok, lütfen önce yedekleyin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="95"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Yedekleme Sürücüsüne Git</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="120"/>
@@ -1990,7 +1990,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>Yedekleme Sürümü</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
@@ -2000,7 +2000,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="165"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Geri Yüklenebilir Sürücüler</translation>
     </message>
 </context>
 <context>
@@ -2023,17 +2023,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü Kurulumu</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü Yedekleme</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="111"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü Geri Yükleme</translation>
     </message>
 </context>
 <context>
@@ -3130,18 +3130,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="579"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü geri yükleme başarısız oldu!</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="33"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="575"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Lütfen tekrar deneyin veya bize geri bildirimde bulunun</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="39"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü yedeklemesi başarısız oldu!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="625"/>
@@ -3811,7 +3811,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="452"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Tüm sürücüler yedeklendi</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="454"/>
