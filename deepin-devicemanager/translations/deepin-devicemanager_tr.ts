@@ -4109,12 +4109,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Yedekle</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Geri yükle</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
