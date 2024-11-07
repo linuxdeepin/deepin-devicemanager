@@ -131,7 +131,7 @@ void DeviceStorage::unitConvertByDecimal()
             m_Size = "256 GB";
         } else if(m_SizeBytes > 511*gbyte && m_SizeBytes < 513*gbyte) {
                 m_Size = "512 GB";
-        } else if(m_SizeBytes > 999*gbyte && m_SizeBytes < 1001*gbyte) {
+        } else if(m_SizeBytes > 1023*gbyte && m_SizeBytes < 1025*gbyte) {
             m_Size = "1 TB";
         }
     }
