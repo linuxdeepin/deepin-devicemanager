@@ -33,6 +33,8 @@ void KLVGenerator::generatorMonitorDevice()
     DeviceMonitor *monitor = new  DeviceMonitor();
     monitor->setInfoFromSelfDefine(mapInfo);
     DeviceManager::instance()->addMonitor(monitor);
+
+    HWGenerator::generatorMonitorDevice();
 }
 
 void KLVGenerator::generatorNetworkDevice()
