@@ -1,3 +1,29 @@
+deepin-devicemanager (6.0.29) unstable; urgency=medium
+
+  * fix: toml filename del serialnumber(Bug: 272885)
+  * fix: bluetooth add alias proper(Bug: 269257)
+  * fix: [cmd] Remove bash calls and system script calls(Task: 362323)
+  * fix: [cmd] Add handling of the 'cat/boot/config*' command(Task: 362323)
+  * fix:  adpator V23 dde for PS2 mouse wakeup(Bug: 271823)
+  * chore: [security] add polkit support (#355)
+    Thanks to nullptr
+  * feat: [translation]add transifex config(Task: 361363)
+  * fix: add polkit support for root app(Bug: 273929)
+  * fix: add S3 wakeup detect support(Bug: 273929)
+  * fix: after S3 wakeup init hardware must delay(Bug: 273929)
+  * chore: [security] add polkit with setSingleInstance(Task: 364005)
+  * fix:rounded ufs disk capacity(Bug: 276121)
+  * fix: the screen size unbelive(Bug: 277559)
+  * chore: [security] strong the dbus interface(Task: 365257)
+  * fix: display of the number of a logical processor (Bug: 278565)
+  * chore: Solve the problem that the plug-in service fails to start
+    due to security reinforcement.
+  * fix: support ext plugin monitor(Bug: 283735)
+  * fix: Resolve the issue of empty device information display(Bug: 281813)
+  * fix: fixed the issue that deb verify failed
+
+ -- renbin <renbin@uniontech.com>  Fri, 22 Nov 2024 17:33:20 +0800
+
 deepin-devicemanager (6.0.28) unstable; urgency=medium
 
   * new version 6.0.28.
