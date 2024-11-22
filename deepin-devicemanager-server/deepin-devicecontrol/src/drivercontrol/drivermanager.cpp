@@ -369,6 +369,11 @@ bool DriverManager::isDriverPackage(const QString &filepath)
  */
 bool DriverManager::isSigned(const QString &filepath)
 {
+    // If hierarchical verification is enabled, we assume that all packages are signed.
+    if (Utils::HierarchicalVerifyAvailable == Utils::hierarchicalEnabled()) {
+        return true;
+    }
+
     //如果是开发者模式，直接返回true
     QDBusInterface *dbusInterFace = new QDBusInterface("com.deepin.sync.Helper", "/com/deepin/sync/Helper",
                                                        "com.deepin.sync.Helper", QDBusConnection::systemBus());
@@ -392,7 +397,7 @@ bool DriverManager::isSigned(const QString &filepath)
         strSignCheckString = "Verified successfully";
     }
 
-    QString outInfo = Utils::executeServerCmd(program, arguments, QString(), -1);
+    QString outInfo = Utils::executeServerCmd(program, arguments, QString(), -1, true);
     return outInfo.contains(strSignCheckString);
 }
 bool DriverManager::isArchMatched(const QString &path)
