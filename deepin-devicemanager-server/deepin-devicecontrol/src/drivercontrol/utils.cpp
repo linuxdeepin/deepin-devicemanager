@@ -7,6 +7,8 @@
 
 #include <QProcess>
 #include <QDir>
+#include <QDBusInterface>
+#include <QDBusReply>
 #include <QUuid>
 #include <QFile>
 #include <QLoggingCategory>
@@ -217,9 +219,11 @@ QString Utils::getUrl()
     }
 }
 
-
-
-QByteArray Utils::executeServerCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/)
+QByteArray Utils::executeServerCmd(const QString &cmd, 
+                                   const QStringList &args,
+                                   const QString &workPath,
+                                   int msecsWaiting/* = 30000*/,
+                                   bool readAll/* = false*/)
 {
     QProcess process;
     if (!workPath.isEmpty())
@@ -227,7 +231,14 @@ QByteArray Utils::executeServerCmd(const QString &cmd, const QStringList &args, 
 
     process.setProgram(cmd);
     process.setArguments(args);
-    process.setEnvironment({"LANG=en_US.UTF-8", "LANGUAGE=en_US"});
+    auto env = QProcess::systemEnvironment();
+    env.append("LANG=en_US.UTF-8");
+    env.append("LANGUAGE=en_US");
+    process.setEnvironment(env);
+    if (readAll) {
+        process.setProcessChannelMode(QProcess::MergedChannels);
+    }
+
     process.start();
     // Wait for process to finish without timeout.
     process.waitForFinished(msecsWaiting);
@@ -239,4 +250,38 @@ QByteArray Utils::executeServerCmd(const QString &cmd, const QStringList &args, 
         return QByteArray();
     }
     return outPut;
+}
+
+Utils::HierarchicalVerifyStatus Utils::hierarchicalEnabled()
+{
+    static const QString kHierService = "com.deepin.daemon.ACL";
+    static const QString kHierPath = "/org/deepin/security/hierarchical/Control";
+    static const QString kHierInterface = "org.deepin.security.hierarchical.Control";
+    static const QString kHierMethod = "Availabled";
+
+    QDBusInterface interface(kHierService, kHierPath, kHierInterface, QDBusConnection::systemBus());
+
+    if (interface.isValid()) {
+        QDBusMessage message = interface.call(kHierMethod);
+        QDBusError error = interface.lastError();
+        if (QDBusError::NoError != error.type()) {
+            qCWarning(appLog) << QString("[Hierarchical] DBus %1 read property %2 error: type(%2) [%3] %4")
+                                     .arg(kHierService)
+                                     .arg(kHierMethod)
+                                     .arg(error.type())
+                                     .arg(error.name())
+                                     .arg(error.message());
+        } else {
+            QDBusReply<bool> reply(message);
+            bool availabled = reply.value();
+            qCWarning(appLog) << QString("[Hierarchical] Get %1 property %2 value: %3")
+                           .arg(kHierService)
+                           .arg(kHierMethod)
+                           .arg(availabled);
+
+            return availabled ? HierarchicalVerifyAvailable : HierarchicalVerifyUnavailable;
+        }
+    }
+
+    return HierarchicalVerifyNotReady;
 }
