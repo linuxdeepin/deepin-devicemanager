@@ -682,14 +682,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network")) {
             qCDebug(appLog) << "Found network device.";
-            //if (mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/platform"))
-            bool hasAddress = mapInfo.find("HW Address") != mapInfo.end() || mapInfo.find("Permanent HW Address") != mapInfo.end();
-            bool hasPath = mapInfo.find("path") != mapInfo.end();
-            if (hasPath || hasAddress) {
-                addMapInfo("hwinfo_network", mapInfo);
-            } else {
-                qCDebug(appLog) << "Skipping network device without path or address.";
-            }
+            addMapInfo("hwinfo_network", mapInfo);
         } else if ("keyboard" == mapInfo["Hardware Class"]) {
             qCDebug(appLog) << "Found keyboard device.";
             addMouseKeyboardInfoMapInfo("hwinfo_keyboard", mapInfo);

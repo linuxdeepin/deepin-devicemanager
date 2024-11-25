@@ -211,6 +211,26 @@ QString Common::boardVendorType()
     return initBoardVendorFlag ? boardVendorKey : checkBoardVendorFlag();
 }
 
+QString Common::specialVendorType()
+{
+    QString type = Common::boardVendorType();
+    if (type == "KLVV" || type == "KLVU" || type == "PGUV" || type == "PGUW")
+        return specialHString();
+    return QString("normalmagical");
+}
+
+QString Common::specialHString()
+{
+    int asciiValues[] = {72, 85, 65, 87, 69, 73}; // ASCII values for 'H' .... 'I'
+    QString result;
+
+    // Convert ASCII values to characters and append to QString
+    for (int ascii : asciiValues) {
+        result.append(QChar(ascii)); // Convert ASCII to QChar and append to QString
+    }
+    return result;
+}
+
 QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/, bool useEnv/* = true*/)
 {
     qCDebug(appLog) << "Executing command:" << cmd << "args:" << args;

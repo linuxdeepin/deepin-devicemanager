@@ -258,19 +258,6 @@ TEST_F(UT_DeviceManager, UT_DeviceManager_setStorageDeviceMediaType)
     delete device;
 }
 
-TEST_F(UT_DeviceManager, UT_DeviceManager_setKLUStorageDeviceMediaType)
-{
-    DeviceStorage *device = new DeviceStorage;
-    device->m_DeviceFile = "/dev/sda";
-    DeviceManager::instance()->m_ListDeviceStorage.append(device);
-
-    DeviceManager::instance()->setKLUStorageDeviceMediaType("sda", "1");
-    EXPECT_STREQ("HDD", device->m_MediaType.toStdString().c_str());
-
-    DeviceManager::instance()->m_ListDeviceStorage.clear();
-    delete device;
-}
-
 TEST_F(UT_DeviceManager, UT_DeviceManager_addGpuDevice)
 {
     DeviceGpu *gpu = new DeviceGpu;

@@ -225,7 +225,7 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         connect(txtBrowser, &TextBrowser::refreshInfo, this, &PageDetail::refreshInfo);
         connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::exportInfo);
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
-        addWidgets(txtBrowser, device->enable() && device->available() && !device->getOtherAttribs().isEmpty());
+        addWidgets(txtBrowser, device->enable() && device->available() && !device->getOtherTranslationAttribs().isEmpty());
         // 当添加到最后一个设备详细信息时，隐藏分隔符
         if (device == lstInfo.last()) {
             // qCDebug(appLog) << "PageDetail::showDeviceInfo is last device, hide seperator";

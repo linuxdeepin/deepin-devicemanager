@@ -7,11 +7,9 @@
 #include "X86Generator.h"
 #include "MipsGenerator.h"
 #include "ArmGenerator.h"
-#include "KLUGenerator.h"
 #include "PanguGenerator.h"
 #include "PanguVGenerator.h"
 #include "HWGenerator.h"
-#include "KLVGenerator.h"
 #include "commonfunction.h"
 #include "PanguxGenerator.h"
 #include "DDLog.h"
@@ -47,13 +45,13 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
         if (!type.isEmpty()) {
             if (type == "KLVV") {
                 qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create KLVGenerator";
-                generator = new KLVGenerator();
+                generator = new HWGenerator();
             } else if (type == "PGUV" || type == "PGUW") {
                 qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create PanguVGenerator";
                 generator = new PanguVGenerator();
             } else if (type == "KLVU") {
                 qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create KLUGenerator";
-                generator = new KLUGenerator();
+                generator = new HWGenerator();
             } else if (type == "PGUX") {
                 qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create PanguXGenerator";
                 generator = new PanguXGenerator();

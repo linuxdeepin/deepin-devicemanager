@@ -128,20 +128,20 @@ void DeviceCdrom::initFilterKey()
 {
     qCDebug(appLog) << "DeviceCdrom::initFilterKey called.";
     // 添加可显示的属性
-    addFilterKey(QObject::tr("Serial ID"));
-    addFilterKey(QObject::tr("Driver Modules"));
-    addFilterKey(QObject::tr("Device File"));
-    addFilterKey(QObject::tr("Device Files"));
-    addFilterKey(QObject::tr("Device Number"));
-    // addFilterKey(QObject::tr("Module Alias"));
-    addFilterKey(QObject::tr("Config Status"));
-    addFilterKey(QObject::tr("Application"));
-    // addFilterKey(QObject::tr("physical id"));
+    addFilterKey("Serial ID");
+    addFilterKey("Driver Modules");
+    addFilterKey("Device File");
+    addFilterKey("Device Files");
+    addFilterKey("Device Number");
+    // addFilterKey("Module Alias");
+    addFilterKey("Config Status");
+    addFilterKey("Application");
+    // addFilterKey("physical id");
 
-    addFilterKey(QObject::tr("status"));
-    addFilterKey(QObject::tr("logical name"));
-//    addFilterKey(QObject::tr("bus info"));
-    addFilterKey(QObject::tr("ansiversion"));
+    addFilterKey("status");
+    addFilterKey("logical name");
+//    addFilterKey("bus info");
+    addFilterKey("ansiversion");
     qCDebug(appLog) << "Filter keys initialized.";
 }
 
@@ -149,23 +149,23 @@ void DeviceCdrom::loadBaseDeviceInfo()
 {
     qCDebug(appLog) << "DeviceCdrom::loadBaseDeviceInfo called.";
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Model"), m_Type);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Maximum Power"), m_MaxPower);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
+    addBaseDeviceInfo("Name", m_Name);
+    addBaseDeviceInfo("Vendor", m_Vendor);
+    addBaseDeviceInfo("Model", m_Type);
+    addBaseDeviceInfo("Version", m_Version);
+    addBaseDeviceInfo("Bus Info", m_BusInfo);
+    addBaseDeviceInfo("Capabilities", m_Capabilities);
+    addBaseDeviceInfo("Driver", m_Driver);
+    addBaseDeviceInfo("Maximum Power", m_MaxPower);
+    addBaseDeviceInfo("Speed", m_Speed);
     qCDebug(appLog) << "Base device info loaded.";
 }
 
 void DeviceCdrom::loadOtherDeviceInfo()
 {
     qCDebug(appLog) << "DeviceCdrom::loadOtherDeviceInfo called.";
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
+    addOtherDeviceInfo("Module Alias", m_Modalias);
+    addOtherDeviceInfo("Physical ID", m_PhysID);
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
     qCDebug(appLog) << "Other device info loaded.";

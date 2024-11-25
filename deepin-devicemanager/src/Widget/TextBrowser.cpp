@@ -70,7 +70,7 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
 
     // 添加一个表格
     if (mp_Info->enable() && mp_Info->available()) {
-        const QList<QPair<QString, QString>> &baseInfo = info->getBaseAttribs();
+        const QList<QPair<QString, QString>> &baseInfo = info->getBaseTranslationAttribs();
         domTableInfo(doc, baseInfo);
     }
 
@@ -98,11 +98,11 @@ void TextBrowser::updateInfo()
 
     // 添加一个表格
     if (mp_Info->enable() && mp_Info->available()) {
-        const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
+        const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseTranslationAttribs();
         domTableInfo(doc, baseInfo);
         if (m_ShowOtherInfo) {
             qCDebug(appLog) << "Showing other info";
-            const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
+            const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherTranslationAttribs();
             domTableInfo(doc, otherInfo);
         }
     }

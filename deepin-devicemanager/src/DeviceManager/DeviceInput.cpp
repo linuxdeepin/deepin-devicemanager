@@ -182,55 +182,6 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     qCDebug(appLog) << "Exiting setInfoFromHwinfo.";
 }
 
-void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
-{
-    qCDebug(appLog) << "setKLUInfoFromHwinfo";
-
-    // 设置设备基本属性
-    setAttribute(mapInfo, "Device", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "Revision", m_Version);
-    if (mapInfo.find("Hotplug") != mapInfo.end()) {
-        qCDebug(appLog) << "Found 'Hotplug' in mapInfo, setting interface.";
-        setAttribute(mapInfo, "Hotplug", m_Interface);
-    } else {
-        qCDebug(appLog) << "'Hotplug' not found, setting interface to PS/2.";
-        m_Interface = "PS/2";
-    }
-
-    // 上面的方法不适合蓝牙键盘的获取方法
-    if (mapInfo.find("Model")->contains("Bluetooth", Qt::CaseInsensitive) || mapInfo.find("Device")->contains("Bluetooth", Qt::CaseInsensitive)) {
-        qCDebug(appLog) << "Model or Device contains Bluetooth, setting interface to Bluetooth.";
-        m_Interface = "Bluetooth";
-    }
-
-    setAttribute(mapInfo, "SysFS BusID", m_BusInfo);
-    setAttribute(mapInfo, "Hardware Class", m_Description);
-    setAttribute(mapInfo, "Driver", m_Driver);
-    setAttribute(mapInfo, "Speed", m_Speed);
-
-    // 获取映射到 lshw设备信息的 关键字
-    //1-2:1.0
-    QStringList words = mapInfo["SysFS BusID"].split(":");
-    if (words.size() == 2) {
-        qCDebug(appLog) << "SysFS BusID split into 2 words.";
-        QStringList chs = words[0].split("-");
-        if (chs.size() == 2) {
-            qCDebug(appLog) << "First word split into 2 parts, setting m_KeyToLshw.";
-            m_KeyToLshw = QString("usb@%1:%2").arg(chs[0]).arg(chs[1]);
-        }
-    }
-
-    // 由bluetoothctl paired-devices设置设备接口
-    setInfoFromBluetoothctl();
-    qCDebug(appLog) << "Info set from Bluetoothctl.";
-
-    // 获取其他设备信息
-    getOtherMapInfo(mapInfo);
-    qCDebug(appLog) << "Exiting setKLUInfoFromHwinfo.";
-}
-
 void DeviceInput::setInfoFromBluetoothctl()
 {
     qCDebug(appLog) << "Entering setInfoFromBluetoothctl.";
@@ -605,16 +556,15 @@ bool DeviceInput::bluetoothIsConnected()
 void DeviceInput::initFilterKey()
 {
     // 添加可显示的设备信息
-    qCDebug(appLog) << "initFilterKey";
-    addFilterKey(QObject::tr("Uniq"));
-    addFilterKey(QObject::tr("PROP"));
-    addFilterKey(QObject::tr("EV"));
-    addFilterKey(QObject::tr("KEY"));
-    addFilterKey(QObject::tr("MSC"));
-    addFilterKey(QObject::tr("Device File"));
-    addFilterKey(QObject::tr("Hardware Class"));
+    addFilterKey("Uniq");
+    addFilterKey("PROP");
+    addFilterKey("EV");
+    addFilterKey("KEY");
+    addFilterKey("MSC");
+    addFilterKey("Device File");
+    addFilterKey("Hardware Class");
 
-    // addFilterKey(QObject::tr("physical id"));
+    // addFilterKey("physical id");
     qCDebug(appLog) << "initFilterKey end";
 }
 
@@ -622,11 +572,11 @@ void DeviceInput::loadBaseDeviceInfo()
 {
     qCDebug(appLog) << "loadBaseDeviceInfo";
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Interface"), m_Interface);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo("Name", m_Name);
+    addBaseDeviceInfo("Vendor", m_Vendor);
+    addBaseDeviceInfo("Model", m_Model);
+    addBaseDeviceInfo("Interface", m_Interface);
+    addBaseDeviceInfo("Bus Info", m_BusInfo);
     qCDebug(appLog) << "loadBaseDeviceInfo end";
 }
 
@@ -634,13 +584,13 @@ void DeviceInput::loadOtherDeviceInfo()
 {
     qCDebug(appLog) << "loadOtherDeviceInfo";
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
-    addOtherDeviceInfo(tr("Speed"), m_Speed);
-    addOtherDeviceInfo(tr("Maximum Current"), m_MaximumPower);   // 1050需求将最大功率改为最大电流
-    addOtherDeviceInfo(tr("Driver"), m_Driver);
-    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("Version"), m_Version);
+    addOtherDeviceInfo("Module Alias", m_Modalias);
+    addOtherDeviceInfo("Physical ID", m_PhysID);
+    addOtherDeviceInfo("Speed", m_Speed);
+    addOtherDeviceInfo("Maximum Current", m_MaximumPower);   // 1050需求将最大功率改为最大电流
+    addOtherDeviceInfo("Driver", m_Driver);
+    addOtherDeviceInfo("Capabilities", m_Capabilities);
+    addOtherDeviceInfo("Version", m_Version);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();

@@ -51,7 +51,7 @@ public:
     void setDmesgInfo(const QMap<QString, QString> &mapInfo);
 
     /**
-       * @brief setGpuInfo:设置从gpuinfo命令中获取的信息，华为KLU笔记本和PanGuV机器专用
+       * @brief setGpuInfo:设置从gpuinfo命令中获取的信息
        * @param mapInfo:由gpuinfo获取的信息map
        */
     void setGpuInfo(const QMap<QString, QString> &mapInfo);

@@ -123,7 +123,7 @@ void PanguXGenerator::generatorCpuDevice()
     for (int i = 0; i < lst.size(); i++) {
         // qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice set cpu info";
         DeviceBaseInfo *device = lst[i];
-        DeviceManager::instance()->tomlDeviceSet(DT_Cpu, device,mapInfo);
+        DeviceManager::instance()->tomlDeviceMapSet(DT_Cpu, device,mapInfo);
     }
     qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice end";
 }

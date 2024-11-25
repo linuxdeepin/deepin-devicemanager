@@ -6,6 +6,11 @@
 #pragma once
 
 #include <QString>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QRegularExpression>
+#else
+#include <QRegExp>
+#endif
 
 const QString commonFontFamily_ = "Noto Sans CJK TC";
 const int leftDeviceListViewMinWidth_ = 177;
@@ -19,3 +24,27 @@ const int contextMenuWidth_ = 150;
 
 #define GenerateTsItem 0
 const QString DEVICEINFO_PATH = "/tmp/device-info";
+
+// QString::SkipEmptyParts was moved to Qt::SkipEmptyParts in Qt6
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+#define QT_SKIP_EMPTY_PARTS QString::SkipEmptyParts
+#elif QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#define QT_SKIP_EMPTY_PARTS Qt::SplitBehaviorFlags(Qt::SkipEmptyParts)
+#else
+#define QT_SKIP_EMPTY_PARTS Qt::SkipEmptyParts
+#endif
+
+// Regular expression compatibility macros for Qt5/Qt6
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+// Qt5 uses QRegExp
+#define QT_REGEXP QRegExp
+#define QT_REGEXP_MATCH(pattern, string) pattern.exactMatch(string)
+#define QT_REGEXP_CAPTURE(pattern, index) pattern.cap(index)
+#define QT_REGEXP_INDEX_IN(pattern, string) pattern.indexIn(string)
+#else
+// Qt6 uses QRegularExpression
+#define QT_REGEXP QRegularExpression
+#define QT_REGEXP_MATCH(pattern, string) pattern.match(string).hasMatch()
+#define QT_REGEXP_CAPTURE(pattern, index, string) pattern.match(string).captured(index)
+#define QT_REGEXP_INDEX_IN(pattern, string) pattern.match(string).hasMatch() ? 0 : -1
+#endif

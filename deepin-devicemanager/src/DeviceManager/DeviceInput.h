@@ -41,12 +41,6 @@ public:
     void setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
-     * @brief setKLUInfoFromHwinfo:特殊处理KLU设备,设置由hwinfo --keyboard 命令获取的设备信息
-     * @param mapInfo由hwinfo获取的信息map
-     */
-    void setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
-
-    /**
      * @brief name:获取名称属性值
      * @return QString 名称属性值
      */

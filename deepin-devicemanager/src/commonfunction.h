@@ -31,7 +31,8 @@ public:
     static QString checkBoardVendorFlag();
 
     static QString boardVendorType();
-
+    static QString specialVendorType();
+    static QString specialHString();
     /**
      * @brief specialComType
      * special computer type:PGUW(value:1),KLVV/L540(value:2),KLVU(value:3),PGUV/W585(value:4)

@@ -424,7 +424,7 @@ DeviceBaseInfo *DeviceManager::createDevice(DeviceType deviceType)
     return vTemp;
 }
 
-TomlFixMethod DeviceManager::tomlDeviceSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo)
+TomlFixMethod DeviceManager::tomlDeviceMapSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "Setting TOML device for deviceType:" << deviceType;
     if (!device) {
@@ -512,6 +512,93 @@ TomlFixMethod DeviceManager::tomlDeviceSet(DeviceType deviceType,  DeviceBaseInf
     return ret;
 }
 
+QString DeviceManager::tomlDeviceReadKeyValue(DeviceType deviceType, DeviceBaseInfo *device, const QString &key)
+{
+    if (!device)
+        return QString("");
+
+    TomlFixMethod ret = TOML_None;
+    switch (deviceType) {
+    case DT_Null:
+        break;
+    case DT_Computer: {
+        DeviceComputer *tomldevice = dynamic_cast<DeviceComputer *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Cpu: {
+        DeviceCpu *tomldevice = dynamic_cast<DeviceCpu *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Bios: {
+        DeviceBios *tomldevice = dynamic_cast<DeviceBios *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Memory: {
+        DeviceMemory *tomldevice = dynamic_cast<DeviceMemory *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Storage: {
+        DeviceStorage *tomldevice = dynamic_cast<DeviceStorage *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Gpu: {
+        DeviceGpu *tomldevice = dynamic_cast<DeviceGpu *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Monitor: {
+        DeviceMonitor *tomldevice = dynamic_cast<DeviceMonitor *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Network: {
+        DeviceNetwork *tomldevice = dynamic_cast<DeviceNetwork *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Audio: {
+        DeviceAudio *tomldevice = dynamic_cast<DeviceAudio *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Bluetoorh: {
+        DeviceBluetooth *tomldevice = dynamic_cast<DeviceBluetooth *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Keyboard: {
+        DeviceInput *tomldevice = dynamic_cast<DeviceInput *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Mouse: {
+        DeviceInput *tomldevice = dynamic_cast<DeviceInput *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Print: {
+        DevicePrint *tomldevice = dynamic_cast<DevicePrint *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Image: {
+        DeviceImage *tomldevice = dynamic_cast<DeviceImage *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Cdrom: {
+        DeviceCdrom *tomldevice = dynamic_cast<DeviceCdrom *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Others: {
+        DeviceOthers *tomldevice = dynamic_cast<DeviceOthers *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_OtherPCI: {
+        DeviceOtherPCI *tomldevice = dynamic_cast<DeviceOtherPCI *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    case DT_Power: {
+        DevicePower *tomldevice = dynamic_cast<DevicePower *>(device);
+        return tomldevice->readDeviceInfoKeyValue(key);
+    } break;
+    default: {    } break;
+    }
+    return QString("");
+}
+
+
 void DeviceManager::tomlDeviceSet(DeviceType deviceType)
 {
     qCDebug(appLog) << "Setting TOML device for deviceType:" << deviceType;
@@ -538,7 +625,7 @@ void DeviceManager::tomlDeviceSet(DeviceType deviceType)
             }
             if (isSameOne) {   //存在 就合并信息 setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
                 fixSameOne = true;   //标记为该项信息有用过 ，
-                if (TOML_Del == tomlDeviceSet(deviceType, device, tomlMapLst[j])) {
+                if (TOML_Del == tomlDeviceMapSet(deviceType, device, tomlMapLst[j])) {
                     tomlDeviceDel(deviceType, device); //toml 去掉该设备
                     delete (device);
                 }
@@ -547,7 +634,7 @@ void DeviceManager::tomlDeviceSet(DeviceType deviceType)
         if ((deviceType != DT_Bios) && (deviceType != DT_Computer) && !fixSameOne) {
                 fixSameOne = true;  //标记为该项信息有用过 ，则不再增加了
                 DeviceBaseInfo *device = createDevice(deviceType);
-                tomlDeviceSet(deviceType, device, tomlMapLst[j]);
+                tomlDeviceMapSet(deviceType, device, tomlMapLst[j]);
                 tomlDeviceAdd(deviceType, device); //不存在 就加
         }
     } //end of for (int j = 0;...
@@ -885,24 +972,6 @@ bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString
             return true;
     }
 
-    return  false;
-}
-
-bool DeviceManager::setKLUStorageDeviceMediaType(const QString &name, const QString &value)
-{
-    qCDebug(appLog) << "Setting KLU storage device media type";
-    // 设置KLU机器存储设备介质类型
-    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();
-    for (; it != m_ListDeviceStorage.end(); ++it) {
-        DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
-
-        if (!device)
-            continue;
-
-        // 设置KLU介质类型
-        if (device->setKLUMediaType(name, value))
-            return true;
-    }
     return  false;
 }
 

@@ -148,8 +148,10 @@ void DeviceStorage::unitConvertByDecimal()
             m_Size = "256 GB";
         } else if(m_SizeBytes > 511*gbyte && m_SizeBytes < 513*gbyte) {
                 m_Size = "512 GB";
-        } else if(m_SizeBytes > 999*gbyte && m_SizeBytes < 1001*gbyte) {
+        } else if(m_SizeBytes > 999*gbyte && m_SizeBytes < 1025*gbyte) {
             m_Size = "1 TB";
+        } else if(m_SizeBytes > 1999*gbyte && m_SizeBytes < 2049*gbyte) {
+            m_Size = "2 TB";
         }
     }
 }
@@ -338,68 +340,6 @@ QString DeviceStorage::getSerialID(QString &strDeviceLink)
     return strSerialNumber;
 }
 
-bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
-{
-    qCDebug(appLog) << "DeviceStorage::setKLUHwinfoInfo";
-    // 龙芯机器中 hwinfo --disk会列出所有的分区信息
-    // 存储设备不应包含分区，根据SysFS BusID 来确定是否是分区信息
-    if (mapInfo.find("SysFS BusID") == mapInfo.end())
-        return false;
-
-    setAttribute(mapInfo, "Model", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Driver", m_Driver); // 驱动
-
-    setAttribute(mapInfo, "Attached to", m_Interface);
-    QRegularExpression re(".*\\((.*)\\).*");
-    QRegularExpressionMatch match = re.match(m_Interface);
-    if (match.hasMatch()) {
-        qCDebug(appLog) << "DeviceStorage::setKLUHwinfoInfo, interface has match";
-        m_Interface = match.captured(1);
-        m_Interface.replace("Controller", "");
-        m_Interface.replace("controller", "");
-    }
-
-    setAttribute(mapInfo, "Revision", m_Version);
-    setAttribute(mapInfo, "Hardware Class", m_Description);
-    setAttribute(mapInfo, "Capacity", m_Size);
-
-    // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
-    QRegularExpression reSize(".*\\((.*)bytes\\).*");
-    match = reSize.match(m_Size);
-    if (match.hasMatch()) {
-        qCDebug(appLog) << "DeviceStorage::setKLUHwinfoInfo, size has match";
-        bool ok = false;
-        quint64 bytesSize = match.captured(1).trimmed().toULongLong(&ok);
-        if (ok) {
-            qCDebug(appLog) << "DeviceStorage::setKLUHwinfoInfo, size convert to ullong success";
-            m_Size = decimalkilos(bytesSize);
-        } else {
-            qCDebug(appLog) << "DeviceStorage::setKLUHwinfoInfo, size convert to ullong failed";
-            m_Size.replace(QRegularExpression("\\(.*\\)"), "").replace(" ", "");
-        }
-    } else {
-        qCDebug(appLog) << "DeviceStorage::setKLUHwinfoInfo, size has no match";
-        m_Size.replace(QRegularExpression("\\(.*\\)"), "").replace(" ", "");
-    }
-    if (m_Size.startsWith("0") || m_Size == "")
-        return false;
-
-    setAttribute(mapInfo, "Serial ID", m_SerialNumber);
-    // setDiskSerialID(mapInfo["Device Files"]);
-    setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
-    setAttribute(mapInfo, "Device File", m_DeviceFile);
-
-    // KLU里面的介质类型的处理方式比较特殊
-    if (mapInfo["Driver"].contains("usb-storage")) {
-        qCDebug(appLog) << "DeviceStorage::setKLUHwinfoInfo, driver contains usb-storage";
-        m_MediaType = "USB";
-    }
-
-    getOtherMapInfo(mapInfo);
-    return true;
-}
-
 bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "Add lshw info for storage device";
@@ -489,33 +429,6 @@ bool DeviceStorage::setMediaType(const QString &name, const QString &value)
         m_MediaType = QObject::tr("HDD");
     } else {
         qCDebug(appLog) << "DeviceStorage::setMediaType, media type is Unknown";
-        m_MediaType = QObject::tr("Unknown");
-    }
-
-    return true;
-}
-
-bool DeviceStorage::setKLUMediaType(const QString &name, const QString &value)
-{
-    qCDebug(appLog) << "DeviceStorage::setKLUMediaType";
-    if (!m_DeviceFile.contains(name)) {
-        qCDebug(appLog) << "DeviceStorage::setKLUMediaType, device file does not contain name";
-        return false;
-    }
-
-    if (m_MediaType == "USB") {
-        qCDebug(appLog) << "DeviceStorage::setKLUMediaType, media type is USB";
-        return true;
-    }
-
-    if (QString("0") == value) {
-        qCDebug(appLog) << "DeviceStorage::setKLUMediaType, media type is SSD";
-        m_MediaType = QObject::tr("SSD");
-    } else if (QString("1") == value) {
-        qCDebug(appLog) << "DeviceStorage::setKLUMediaType, media type is HDD";
-        m_MediaType = QObject::tr("HDD");
-    } else {
-        qCDebug(appLog) << "DeviceStorage::setKLUMediaType, media type is Unknown";
         m_MediaType = QObject::tr("Unknown");
     }
 
@@ -716,18 +629,18 @@ void DeviceStorage::initFilterKey()
 {
     qCDebug(appLog) << "DeviceStorage::initFilterKey";
     // hwinfo --disk
-    addFilterKey(QObject::tr("Hardware Class"));
-    addFilterKey(QObject::tr("Device File"));
-    addFilterKey(QObject::tr("ansiversion"));
-    addFilterKey(QObject::tr("bus info"));
-    addFilterKey(QObject::tr("logical name"));
-    addFilterKey(QObject::tr("logicalsectorsize"));
-    // addFilterKey(QObject::tr("physical id"));
-    addFilterKey(QObject::tr("sectorsize"));
-    addFilterKey(QObject::tr("guid"));
-    addFilterKey(QObject::tr("Config Status"));
-    addFilterKey(QObject::tr("Device Number"));
-    addFilterKey(QObject::tr("Geometry (Logical)"));
+    addFilterKey("Hardware Class");
+    addFilterKey("Device File");
+    addFilterKey("ansiversion");
+    addFilterKey("bus info");
+    addFilterKey("logical name");
+    addFilterKey("logicalsectorsize");
+    // addFilterKey("physical id"));
+    addFilterKey("sectorsize");
+    addFilterKey("guid");
+    addFilterKey("Config Status");
+    addFilterKey("Device Number");
+    addFilterKey("Geometry (Logical)");
 
 }
 
@@ -735,21 +648,21 @@ void DeviceStorage::loadBaseDeviceInfo()
 {
     qCDebug(appLog) << "DeviceStorage::loadBaseDeviceInfo";
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Media Type"), m_MediaType);
-    addBaseDeviceInfo(tr("Size"), m_Size);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo("Name", m_Name);
+    addBaseDeviceInfo("Vendor", m_Vendor);
+    addBaseDeviceInfo("Media Type", m_MediaType);
+    addBaseDeviceInfo("Size", m_Size);
+    addBaseDeviceInfo("Version", m_Version);
+    addBaseDeviceInfo("Capabilities", m_Capabilities);
 }
 
 void DeviceStorage::loadOtherDeviceInfo()
 {
     qCDebug(appLog) << "DeviceStorage::loadOtherDeviceInfo";
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Firmware Version"), m_FirmwareVersion);
-    addOtherDeviceInfo(tr("Speed"), m_Speed);
-    addOtherDeviceInfo(tr("Description"), m_Description);
+    addOtherDeviceInfo("Firmware Version", m_FirmwareVersion);
+    addOtherDeviceInfo("Speed", m_Speed);
+    addOtherDeviceInfo("Description", m_Description);
 
     for(int i = 0 ; i < m_SerialNumber.count(); i++) {
         QChar cha = m_SerialNumber.at(i);
@@ -761,11 +674,11 @@ void DeviceStorage::loadOtherDeviceInfo()
         }
     }
 
-    addOtherDeviceInfo(tr("Serial Number"), m_SerialNumber);
-    addOtherDeviceInfo(tr("Interface"), m_Interface);
-    addOtherDeviceInfo(tr("Rotation Rate"), m_RotationRate);
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
+    addOtherDeviceInfo("Serial Number", m_SerialNumber);
+    addOtherDeviceInfo("Interface", m_Interface);
+    addOtherDeviceInfo("Rotation Rate", m_RotationRate);
+    addOtherDeviceInfo("Module Alias", m_Modalias);
+    addOtherDeviceInfo("Physical ID", m_PhysID);
 
     if (m_RotationRate == QString("Solid State Device")) {
         qCDebug(appLog) << "DeviceStorage::loadOtherDeviceInfo, rotation rate is Solid State Device";
@@ -780,10 +693,10 @@ void DeviceStorage::loadTableHeader()
 {
     qCDebug(appLog) << "DeviceStorage::loadTableHeader";
     // 加载表头信息
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
-    m_TableHeader.append(tr("Media Type"));
-    m_TableHeader.append(tr("Size"));
+    m_TableHeader.append("Name");
+    m_TableHeader.append("Vendor");
+    m_TableHeader.append("Media Type");
+    m_TableHeader.append("Size");
 }
 
 void DeviceStorage::loadTableData()
@@ -793,7 +706,7 @@ void DeviceStorage::loadTableData()
     QString model = m_Name;
     if (!available()) {
         qCDebug(appLog) << "DeviceStorage::loadTableData, not available";
-        model = "(" + tr("Unavailable") + ") " + m_Name;
+        model = "(Unavailable) " + m_Name;
     }
     m_TableData.append(model);
     m_TableData.append(m_Vendor);

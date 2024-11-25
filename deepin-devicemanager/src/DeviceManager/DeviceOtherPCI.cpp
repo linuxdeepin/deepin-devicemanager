@@ -81,25 +81,25 @@ void DeviceOtherPCI::loadBaseDeviceInfo()
 {
     qCDebug(appLog) << "DeviceOtherPCI::loadBaseDeviceInfo";
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name.isEmpty() ? m_Vendor + m_Model : m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Version"), m_Version);
+    addBaseDeviceInfo("Name", m_Name.isEmpty() ? m_Vendor + m_Model : m_Name);
+    addBaseDeviceInfo("Vendor", m_Vendor);
+    addBaseDeviceInfo("Model", m_Model);
+    addBaseDeviceInfo("Bus Info", m_BusInfo);
+    addBaseDeviceInfo("Version", m_Version);
 }
 
 void DeviceOtherPCI::loadOtherDeviceInfo()
 {
     qCDebug(appLog) << "DeviceOtherPCI::loadOtherDeviceInfo";
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Input/Output"), m_InputOutput);
-    addOtherDeviceInfo(tr("Memory"), m_Memory);
-    addOtherDeviceInfo(tr("IRQ"), m_Irq);
-    addOtherDeviceInfo(tr("Latency"), m_Latency);
-//    addOtherDeviceInfo(tr("Clock"), m_Clock);
-//    addOtherDeviceInfo(tr("Width"), m_Width);
-    addOtherDeviceInfo(tr("Driver"), m_Driver);
-    addOtherDeviceInfo(tr("Capabilities"), m_Version);
+    addOtherDeviceInfo("Input/Output", m_InputOutput);
+    addOtherDeviceInfo("Memory", m_Memory);
+    addOtherDeviceInfo("IRQ", m_Irq);
+    addOtherDeviceInfo("Latency", m_Latency);
+//    addOtherDeviceInfo("Clock", m_Clock);
+//    addOtherDeviceInfo("Width", m_Width);
+    addOtherDeviceInfo("Driver", m_Driver);
+    addOtherDeviceInfo("Capabilities", m_Version);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();

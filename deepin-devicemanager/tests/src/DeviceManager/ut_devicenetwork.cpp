@@ -57,7 +57,7 @@ void ut_network_setlshwinfo(QMap<QString, QString> &mapinfo)
     mapinfo.insert("ip", "ip");
     mapinfo.insert("size", "size");
     mapinfo.insert("capacity", "capacity");
-    mapinfo.insert("latency", "latency");
+    mapinfo.insert("Latency", "Latency");
     mapinfo.insert("multicast", "multicast");
 }
 
@@ -113,7 +113,7 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromLshw)
     EXPECT_STREQ("ip", m_deviceNetwork->m_Ip.toStdString().c_str());
     EXPECT_STREQ("size", m_deviceNetwork->m_Speed.toStdString().c_str());
     EXPECT_STREQ("capacity", m_deviceNetwork->m_Capacity.toStdString().c_str());
-    EXPECT_STREQ("latency", m_deviceNetwork->m_Latency.toStdString().c_str());
+    EXPECT_STREQ("Latency", m_deviceNetwork->m_Latency.toStdString().c_str());
     EXPECT_STREQ("multicast", m_deviceNetwork->m_Multicast.toStdString().c_str());
 }
 
