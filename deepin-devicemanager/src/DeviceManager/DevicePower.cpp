@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DevicePower.h"
+#include "commonfunction.h"
 
 // Qt库文件
 #include<QFileInfo>
@@ -82,8 +83,6 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "capacity", m_Capacity);
     setAttribute(mapInfo, "voltage", m_Voltage);
     setAttribute(mapInfo, "", m_Slot);
-//    setAttribute(mapInfo, "capacity", m_DesignCapacity);
-//    setAttribute(mapInfo, "voltage", m_DesignVoltage);
     setAttribute(mapInfo, "", m_SBDSChemistry);
     setAttribute(mapInfo, "", m_SBDSManufactureDate);
     setAttribute(mapInfo, "", m_SBDSSerialNumber);
@@ -146,51 +145,55 @@ const QString DevicePower::getOverviewInfo()
 void DevicePower::initFilterKey()
 {
     // 初始化可显示属性
-    addFilterKey(QObject::tr("native-path"));
-    addFilterKey(QObject::tr("power supply"));
-    addFilterKey(QObject::tr("updated"));
-    addFilterKey(QObject::tr("has history"));
-    addFilterKey(QObject::tr("has statistics"));
-    addFilterKey(QObject::tr("rechargeable"));
-    addFilterKey(QObject::tr("state"));
-    addFilterKey(QObject::tr("warning-level"));
-    addFilterKey(QObject::tr("energy"));
-    addFilterKey(QObject::tr("energy-empty"));
-    addFilterKey(QObject::tr("energy-full"));
-    addFilterKey(QObject::tr("energy-full-design"));
-    addFilterKey(QObject::tr("energy-rate"));
-    addFilterKey(QObject::tr("voltage"));
-    addFilterKey(QObject::tr("percentage"));
-//    addFilterKey(QObject::tr("temperature"));    // 温度已经常规显示
-    addFilterKey(QObject::tr("technology"));
-    addFilterKey(QObject::tr("icon-name"));
-    addFilterKey(QObject::tr("online"));
-    addFilterKey(QObject::tr("daemon-version"));
-    addFilterKey(QObject::tr("on-battery"));
-    addFilterKey(QObject::tr("lid-is-closed"));
-    addFilterKey(QObject::tr("lid-is-present"));
-    addFilterKey(QObject::tr("critical-action"));
+    addFilterKey("native-path");
+    addFilterKey("power supply");
+    addFilterKey("updated");
+    addFilterKey("has history");
+    addFilterKey("has statistics");
+    addFilterKey("rechargeable");
+    addFilterKey("state");
+    addFilterKey("warning-level");
+    addFilterKey("energy");
+    addFilterKey("energy-empty");
+
+    QString type = Common::specialVendorType();
+    if (type != Common::specialHString()) {
+        addFilterKey("energy-full");
+        addFilterKey("energy-full-design");
+    }
+    addFilterKey("energy-rate");
+    // addFilterKey("voltage");
+    addFilterKey("percentage");
+//    addFilterKey("temperature"));    // 温度已经常规显示-2
+    addFilterKey("technology");
+    addFilterKey("icon-name");
+    addFilterKey("online");
+    addFilterKey("daemon-version");
+    addFilterKey("on-battery");
+    addFilterKey("lid-is-closed");
+    addFilterKey("lid-is-present");
+    addFilterKey("critical-action");
 }
 
 void DevicePower::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
-    addBaseDeviceInfo(tr("Type"), m_Type);
-    addBaseDeviceInfo(tr("Status"), m_Status);
-    addBaseDeviceInfo(tr("Capacity"), m_Capacity);
-    addBaseDeviceInfo(tr("Voltage"), m_Voltage);
-    addBaseDeviceInfo(tr("Slot"), m_Slot);
-    addBaseDeviceInfo(tr("Design Capacity"), m_DesignCapacity);
-    addBaseDeviceInfo(tr("Design Voltage"), m_DesignVoltage);
-    addBaseDeviceInfo(tr("SBDS Version"), m_SBDSVersion);
-    addBaseDeviceInfo(tr("SBDS Serial Number"), m_SBDSSerialNumber);
-    addBaseDeviceInfo(tr("SBDS Manufacture Date"), m_SBDSManufactureDate);
-    addBaseDeviceInfo(tr("SBDS Chemistry"), m_SBDSChemistry);
-    addBaseDeviceInfo(tr("Temperature"), m_Temp);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Model"), m_Model);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("Serial Number"), m_SerialNumber);
+    addBaseDeviceInfo(("Type"), m_Type);
+    addBaseDeviceInfo(("Status"), m_Status);
+    addBaseDeviceInfo(("Capacity"), m_Capacity);
+    addBaseDeviceInfo(("Voltage"), m_Voltage);
+    addBaseDeviceInfo(("Slot"), m_Slot);
+    addBaseDeviceInfo(("Design Capacity"), m_DesignCapacity);
+    addBaseDeviceInfo(("Design Voltage"), m_DesignVoltage);
+    addBaseDeviceInfo(("SBDS Version"), m_SBDSVersion);
+    addBaseDeviceInfo(("SBDS Serial Number"), m_SBDSSerialNumber);
+    addBaseDeviceInfo(("SBDS Manufacture Date"), m_SBDSManufactureDate);
+    addBaseDeviceInfo(("SBDS Chemistry"), m_SBDSChemistry);
+    addBaseDeviceInfo(("Temperature"), m_Temp);
 }
 
 void DevicePower::loadOtherDeviceInfo()

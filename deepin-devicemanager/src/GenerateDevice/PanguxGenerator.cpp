@@ -97,6 +97,6 @@ void PanguXGenerator::generatorCpuDevice()
     QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Cpu);
     for (int i = 0; i < lst.size(); i++) {
         DeviceBaseInfo *device = lst[i];
-        DeviceManager::instance()->tomlDeviceSet(DT_Cpu, device,mapInfo);
+        DeviceManager::instance()->tomlDeviceMapSet(DT_Cpu, device,mapInfo);
     }
 }

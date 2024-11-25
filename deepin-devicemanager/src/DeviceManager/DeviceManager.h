@@ -103,10 +103,12 @@ public:
      */
     QList<DeviceBaseInfo *>  convertDeviceList(DeviceType deviceType);
     QString  convertDeviceTomlClassName(DeviceType deviceType);
-    TomlFixMethod tomlDeviceSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo);
+    TomlFixMethod tomlDeviceMapSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo);
     void tomlDeviceSet(DeviceType deviceType);
     void tomlDeviceDel(DeviceType deviceType, DeviceBaseInfo *const device);
     void tomlDeviceAdd(DeviceType deviceType, DeviceBaseInfo *const device);
+    QString tomlDeviceReadKeyValue(DeviceType deviceType,  DeviceBaseInfo *device, const QString &key);
+
     /**
      * @brief 
      *   toml 方案内容定义：
@@ -195,14 +197,6 @@ public:
      * @return 布尔值:true-设置成功；false-设置失败
      */
     bool setStorageDeviceMediaType(const QString &name, const QString &value);
-
-    /**
-     * @brief setKLUStorageDeviceMediaType:KLU机器设置存储设备介质类型
-     * @param name:逻辑名称
-     * @param value:存储设备介质类型信息
-     * @return 布尔值:true-设置成功；false-设置失败
-     */
-    bool setKLUStorageDeviceMediaType(const QString &name, const QString &value);
 
     /**
      * @brief setStorageInfoFromSmartctl:设置由smartctl获取的存储设备信息

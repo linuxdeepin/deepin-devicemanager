@@ -43,8 +43,8 @@
     foreach (auto device, deviceLst) {                                              \
         out << "\n";                                                                \
         \
-        device->getBaseAttribs();                                                   \
-        device->getOtherAttribs();                                                  \
+        device->getBaseTranslationAttribs();                                                   \
+        device->getOtherTranslationAttribs();                                                  \
         /**设备数目大于1，添加子标题**/                                                 \
         if (deviceLst.size() > 1) {                                                 \
             out << device->subTitle();                                              \
@@ -86,8 +86,8 @@
     \
     /**添加每个设备的信息**/                                                           \
     foreach (auto device, deviceLst) {                                              \
-        device->getBaseAttribs();                                                   \
-        device->getOtherAttribs();                                                  \
+        device->getBaseTranslationAttribs();                                                   \
+        device->getOtherTranslationAttribs();                                                  \
         \
         /**设备数目大于1，添加子标题**/                                                 \
         if (deviceLst.size() > 1) {                                                 \
@@ -132,8 +132,8 @@
     /**添加每个设备的信息**/                                                           \
     foreach (auto device, deviceLst) {                                              \
         \
-        device->getBaseAttribs();                                                   \
-        device->getOtherAttribs();                                                  \
+        device->getBaseTranslationAttribs();                                                   \
+        device->getOtherTranslationAttribs();                                                  \
         /**设备数目大于1，添加子标题**/                                                 \
         if (deviceLst.size() > 1) {                                                 \
             doc.addParagraph(device->subTitle());                                   \
@@ -177,8 +177,8 @@
     foreach (auto device, deviceLst) {                                              \
         QDomDocument doc;                                                           \
         \
-        device->getBaseAttribs();                                                   \
-        device->getOtherAttribs();                                                  \
+        device->getBaseTranslationAttribs();                                                   \
+        device->getOtherTranslationAttribs();                                                  \
         /**设备数目大于1，添加子标题**/                                                 \
         if (deviceLst.size() > 1) {                                                     \
             device->subTitleToHTML(doc);                                            \

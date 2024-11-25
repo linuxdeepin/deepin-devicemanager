@@ -98,21 +98,6 @@ void ut_monitor_setselfmap(QMap<QString, QString> &mapinfo)
     mapinfo.insert("Date", "Date");
 }
 
-TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromSelfDefine)
-{
-    QMap<QString, QString> mapinfo;
-    ut_monitor_setselfmap(mapinfo);
-
-    m_deviceMonitor->setInfoFromSelfDefine(mapinfo);
-    EXPECT_STREQ("Name", m_deviceMonitor->m_Name.toStdString().c_str());
-    EXPECT_STREQ("Vendor", m_deviceMonitor->m_Vendor.toStdString().c_str());
-    EXPECT_STREQ("CurResolution", m_deviceMonitor->m_CurrentResolution.toStdString().c_str());
-    EXPECT_STREQ("SupportResolution", m_deviceMonitor->m_SupportResolution.toStdString().c_str());
-    EXPECT_STREQ("Size", m_deviceMonitor->m_ScreenSize.toStdString().c_str());
-    EXPECT_STREQ("Date", m_deviceMonitor->m_ProductionWeek.toStdString().c_str());
-
-}
-
 void ut_monitor_setedidmap(QMap<QString, QString> &mapinfo)
 {
     mapinfo.insert("Vendor", "Vendor");

@@ -2199,8 +2199,8 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="314"/>
-        <source>latency</source>
-        <translation>latency</translation>
+        <source>Latency</source>
+        <translation>Latency</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="315"/>
