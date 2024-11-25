@@ -304,44 +304,44 @@ const QString DeviceAudio::getOverviewInfo()
 void DeviceAudio::initFilterKey()
 {
     // 添加可显示的属性
-    addFilterKey(tr("Device Name"));
-    addFilterKey(QObject::tr("SubVendor"));
-    addFilterKey(QObject::tr("SubDevice"));
-    addFilterKey(QObject::tr("Driver Status"));
-    addFilterKey(QObject::tr("Driver Activation Cmd"));
-    addFilterKey(QObject::tr("Config Status"));
-    addFilterKey(QObject::tr("latency"));
-    addFilterKey(QObject::tr("Phys"));
-    addFilterKey(QObject::tr("Sysfs"));
-    addFilterKey(QObject::tr("Handlers"));
-    addFilterKey(QObject::tr("PROP"));
-    addFilterKey(QObject::tr("EV"));
-    addFilterKey(QObject::tr("KEY"));
-    addFilterKey(QObject::tr("Bus"));
-    addFilterKey(QObject::tr("Version"));
-    addFilterKey(QObject::tr("Driver"));
+    addFilterKey("Device Name");
+    addFilterKey("SubVendor");
+    addFilterKey("SubDevice");
+    addFilterKey("Driver Status");
+    addFilterKey("Driver Activation Cmd");
+    addFilterKey("Config Status");
+    addFilterKey("latency");
+    addFilterKey("Phys");
+    addFilterKey("Sysfs");
+    addFilterKey("Handlers");
+    addFilterKey("PROP");
+    addFilterKey("EV");
+    addFilterKey("KEY");
+    addFilterKey("Bus");
+    addFilterKey("Version");
+    addFilterKey("Driver");
 }
 
 void DeviceAudio::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("SysFS_Path"), m_SysPath);
-    addBaseDeviceInfo(tr("Description"), m_Description);
-    addBaseDeviceInfo(tr("Revision"), m_Version);
-    addBaseDeviceInfo(tr("KernelModeDriver"), m_Driver);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("SysFS_Path"), m_SysPath);
+    addBaseDeviceInfo(("Description"), m_Description);
+    addBaseDeviceInfo(("Revision"), m_Version);
+    addBaseDeviceInfo(("KernelModeDriver"), m_Driver);
 }
 
 void DeviceAudio::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
-    addOtherDeviceInfo(tr("Chip"), m_Chip);
-    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("Memory Address"), m_Memory);   // 1050需求 内存改为内存地址
-    addOtherDeviceInfo(tr("IRQ"), m_Irq);
+    addOtherDeviceInfo(("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(("Physical ID"), m_PhysID);
+    addOtherDeviceInfo(("Chip"), m_Chip);
+    addOtherDeviceInfo(("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(("Memory Address"), m_Memory);   // 1050需求 内存改为内存地址
+    addOtherDeviceInfo(("IRQ"), m_Irq);
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
@@ -349,8 +349,8 @@ void DeviceAudio::loadOtherDeviceInfo()
 void DeviceAudio::loadTableHeader()
 {
     // 表头信息
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
+    m_TableHeader.append("Name");
+    m_TableHeader.append("Vendor");
 }
 
 void DeviceAudio::loadTableData()

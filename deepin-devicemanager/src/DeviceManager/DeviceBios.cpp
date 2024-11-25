@@ -39,7 +39,7 @@ bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
         return false;
 
     // 获取BIOS信息
-    m_Name = QObject::tr("BIOS Information");
+    m_Name = ("BIOS Information");
     m_tomlName = ("BIOS Information");
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
@@ -61,7 +61,7 @@ bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
         return false;
 
     // 获取主板信息
-    m_Name = QObject::tr("Base Board Information");
+    m_Name = ("Base Board Information");
     m_tomlName = ("Base Board Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
@@ -83,7 +83,7 @@ bool DeviceBios::setSystemInfo(const QMap<QString, QString> &mapInfo)
         return false;
 
     // 获取系统信息
-    m_Name = QObject::tr("System Information");
+    m_Name = ("System Information");
     m_tomlName = ("System Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
@@ -99,7 +99,7 @@ bool DeviceBios::setChassisInfo(const QMap<QString, QString> &mapInfo)
         return false;
 
     // 获取机箱信息
-    m_Name = QObject::tr("Chassis Information");
+    m_Name = ("Chassis Information");
     m_tomlName = ("Chassis Information");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
@@ -115,7 +115,7 @@ bool DeviceBios::setMemoryInfo(const QMap<QString, QString> &mapInfo)
         return false;
 
     // 获取内存插槽信息
-    m_Name = QObject::tr("Physical Memory Array");
+    m_Name = ("Physical Memory Array");
     m_tomlName = ("Physical Memory Array");
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Version", m_Version);
@@ -157,7 +157,7 @@ bool DeviceBios::isBoard()const
 
 QString DeviceBios::subTitle()
 {
-    return m_Name;
+    return QObject::tr(m_Name.toLatin1());
 }
 
 const QString DeviceBios::getOverviewInfo()
@@ -173,76 +173,76 @@ void DeviceBios::initFilterKey()
 {
 
     // 添加可显示属性
-    addFilterKey(QObject::tr("Release Date"));
-    addFilterKey(QObject::tr("Address"));
-    addFilterKey(QObject::tr("Runtime Size"));
-    addFilterKey(QObject::tr("ROM Size"));
-    addFilterKey(QObject::tr("Characteristics"));
-    addFilterKey(QObject::tr("BIOS Revision"));
-    addFilterKey(QObject::tr("Firmware Revision"));
+    addFilterKey("Release Date");
+    addFilterKey("Address");
+    addFilterKey("Runtime Size");
+    addFilterKey("ROM Size");
+    addFilterKey("Characteristics");
+    addFilterKey("BIOS Revision");
+    addFilterKey("Firmware Revision");
 
-    addFilterKey(QObject::tr("Product Name"));
-    addFilterKey(QObject::tr("Serial Number"));
-    addFilterKey(QObject::tr("Asset Tag"));
-    addFilterKey(QObject::tr("Features"));
-    addFilterKey(QObject::tr("Location In Chassis"));
-    addFilterKey(QObject::tr("Chassis Handle"));
-    addFilterKey(QObject::tr("Type"));
-    addFilterKey(QObject::tr("Contained Object Handles"));
+    addFilterKey("Product Name");
+    addFilterKey("Serial Number");
+    addFilterKey("Asset Tag");
+    addFilterKey("Features");
+    addFilterKey("Location In Chassis");
+    addFilterKey("Chassis Handle");
+    addFilterKey("Type");
+    addFilterKey("Contained Object Handles");
 
-    addFilterKey(QObject::tr("Product Name"));
-    addFilterKey(QObject::tr("Serial Number"));
-    addFilterKey(QObject::tr("UUID"));
-    addFilterKey(QObject::tr("Wake-up Type"));
-    addFilterKey(QObject::tr("SKU Number"));
-    addFilterKey(QObject::tr("Family"));
+    addFilterKey("Product Name");
+    addFilterKey("Serial Number");
+    addFilterKey("UUID");
+    addFilterKey("Wake-up Type");
+    addFilterKey("SKU Number");
+    addFilterKey("Family");
 
 
-    addFilterKey(QObject::tr("Type"));
-    addFilterKey(QObject::tr("Lock"));
-    addFilterKey(QObject::tr("Serial Number"));
-    addFilterKey(QObject::tr("Asset Tag"));
-    addFilterKey(QObject::tr("Boot-up State"));
-    addFilterKey(QObject::tr("Power Supply State"));
-    addFilterKey(QObject::tr("Thermal State"));
-    addFilterKey(QObject::tr("Security Status"));
-    addFilterKey(QObject::tr("OEM Information"));
-    addFilterKey(QObject::tr("Height"));
-    addFilterKey(QObject::tr("Number Of Power Cords"));
-    addFilterKey(QObject::tr("Contained Elements"));
-    addFilterKey(QObject::tr("SKU Number"));
+    addFilterKey("Type");
+    addFilterKey("Lock");
+    addFilterKey("Serial Number");
+    addFilterKey("Asset Tag");
+    addFilterKey("Boot-up State");
+    addFilterKey("Power Supply State");
+    addFilterKey("Thermal State");
+    addFilterKey("Security Status");
+    addFilterKey("OEM Information");
+    addFilterKey("Height");
+    addFilterKey("Number Of Power Cords");
+    addFilterKey("Contained Elements");
+    addFilterKey("SKU Number");
 
-    addFilterKey(QObject::tr("Location"));
-    addFilterKey(QObject::tr("Error Correction Type"));
-    addFilterKey(QObject::tr("Maximum Capacity"));
-    addFilterKey(QObject::tr("Error Information Handle"));
-    addFilterKey(QObject::tr("Number Of Devices"));
+    addFilterKey("Location");
+    addFilterKey("Error Correction Type");
+    addFilterKey("Maximum Capacity");
+    addFilterKey("Error Information Handle");
+    addFilterKey("Number Of Devices");
 
-    addFilterKey(QObject::tr("BIOS ROMSIZE"));
-    addFilterKey(QObject::tr("Release date"));
-    addFilterKey(QObject::tr("Board name"));
-    addFilterKey(QObject::tr("Family"));
+    addFilterKey("BIOS ROMSIZE");
+    addFilterKey("Release date");
+    addFilterKey("Board name");
+    addFilterKey("Family");
 
-    addFilterKey(QObject::tr("BIOS Information"));
-    addFilterKey(QObject::tr("Base Board Information"));
-    addFilterKey(QObject::tr("System Information"));
-    addFilterKey(QObject::tr("Chassis Information"));
-    addFilterKey(QObject::tr("Physical Memory Array"));
+    addFilterKey("BIOS Information");
+    addFilterKey("Base Board Information");
+    addFilterKey("System Information");
+    addFilterKey("Chassis Information");
+    addFilterKey("Physical Memory Array");
 
-    addFilterKey(QObject::tr("SMBIOS Version"));
+    addFilterKey("SMBIOS Version");
 
-    addFilterKey(QObject::tr("Language Description Format"));
-    addFilterKey(QObject::tr("Installable Languages"));
-    addFilterKey(QObject::tr("Currently Installed Language"));
+    addFilterKey("Language Description Format");
+    addFilterKey("Installable Languages");
+    addFilterKey("Currently Installed Language");
 
 }
 
 void DeviceBios::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Chipset"), m_ChipsetFamily);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("Version"), m_Version);
+    addBaseDeviceInfo(("Chipset"), m_ChipsetFamily);
 }
 
 void DeviceBios::loadOtherDeviceInfo()

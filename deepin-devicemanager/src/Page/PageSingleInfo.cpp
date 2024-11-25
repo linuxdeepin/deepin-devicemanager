@@ -102,8 +102,8 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     clearContent();
 
     //获取设备信息
-    QList<QPair<QString, QString>> baseInfoMap = lst[0]->getBaseAttribs();
-    QList<QPair<QString, QString>> otherInfoMap = lst[0]->getOtherAttribs();
+    QList<QPair<QString, QString>> baseInfoMap = lst[0]->getBaseTranslationAttribs();
+    QList<QPair<QString, QString>> otherInfoMap = lst[0]->getOtherTranslationAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
 
     // 加载设备信息

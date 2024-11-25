@@ -55,8 +55,8 @@ void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
         return;
 
     // 获取主板信息并加载
-    QList<QPair<QString, QString>> baseInfoMap = board->getBaseAttribs();
-    QList<QPair<QString, QString>> otherInfoMap = board->getOtherAttribs();
+    QList<QPair<QString, QString>> baseInfoMap = board->getBaseTranslationAttribs();
+    QList<QPair<QString, QString>> otherInfoMap = board->getOtherTranslationAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
     loadDeviceInfo(lstOther, baseInfoMap);
 }
@@ -157,7 +157,7 @@ void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<Q
         if (!bios)
             continue;
         QPair<QString, QString> pair;
-        pair.first = bios->name();
+        pair.first = bios->nameTr();
         getValueInfo(bios, pair);
         lstPair.append(pair);
     }
@@ -166,8 +166,8 @@ void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<Q
 void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString> &pair)
 {
     // 获取信息并保存为pair
-    QList<QPair<QString, QString>> baseInfoMap = device->getBaseAttribs();
-    QList<QPair<QString, QString>> otherInfoMap = device->getOtherAttribs();
+    QList<QPair<QString, QString>> baseInfoMap = device->getBaseTranslationAttribs();
+    QList<QPair<QString, QString>> otherInfoMap = device->getOtherTranslationAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
     QList<QPair<QString, QString>>::iterator it = baseInfoMap.begin();
     for (; it != baseInfoMap.end(); ++it) {

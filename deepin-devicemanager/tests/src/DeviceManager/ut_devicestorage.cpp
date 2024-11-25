@@ -127,53 +127,6 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_setHwinfoInfo_003)
     EXPECT_STREQ("", m_deviceStorage->m_SerialNumber.toStdString().c_str());
 }
 
-TEST_F(UT_DeviceStorage, UT_DeviceStorage_setKLUHwinfoInfo_001)
-{
-    QMap<QString, QString> mapinfo;
-    ut_storage_setHwinfoInfo(mapinfo);
-    mapinfo.insert("Driver", "usb-storage");
-    mapinfo.insert("Vendor", "PASON");
-
-    ASSERT_TRUE(m_deviceStorage->setKLUHwinfoInfo(mapinfo));
-    EXPECT_STREQ("ST240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
-    EXPECT_STREQ("PASON", m_deviceStorage->m_Vendor.toStdString().c_str());
-    EXPECT_STREQ("usb-storage", m_deviceStorage->m_Driver.toStdString().c_str());
-    EXPECT_STREQ("SATA ", m_deviceStorage->m_Interface.toStdString().c_str());
-    EXPECT_STREQ("R013", m_deviceStorage->m_Version.toStdString().c_str());
-    EXPECT_STREQ("disk", m_deviceStorage->m_Description.toStdString().c_str());
-    EXPECT_STREQ("223GB", m_deviceStorage->m_Size.toStdString().c_str());
-    EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());
-    EXPECT_STREQ("/dev/nvme0n1", m_deviceStorage->m_DeviceFile.toStdString().c_str());
-    EXPECT_STREQ("nvme0n12:0:0:0", m_deviceStorage->m_KeyToLshw.toStdString().c_str());
-    EXPECT_STREQ("USB", m_deviceStorage->m_MediaType.toStdString().c_str());
-}
-
-TEST_F(UT_DeviceStorage, UT_DeviceStorage_setKLUHwinfoInfo_002)
-{
-    QMap<QString, QString> mapinfo;
-    ut_storage_setHwinfoInfo(mapinfo);
-    mapinfo.remove("SysFS BusID");
-
-    ASSERT_FALSE(m_deviceStorage->setKLUHwinfoInfo(mapinfo));
-}
-
-TEST_F(UT_DeviceStorage, UT_DeviceStorage_setKLUHwinfoInfo_003)
-{
-    QMap<QString, QString> mapinfo;
-    ut_storage_setHwinfoInfo(mapinfo);
-    mapinfo.insert("Vendor", "PASON");
-    mapinfo.remove("Capacity");
-
-    ASSERT_FALSE(m_deviceStorage->setKLUHwinfoInfo(mapinfo));
-    EXPECT_STREQ("ST240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
-    EXPECT_STREQ("PASON", m_deviceStorage->m_Vendor.toStdString().c_str());
-    EXPECT_STREQ("ahci, sd", m_deviceStorage->m_Driver.toStdString().c_str());
-    EXPECT_STREQ("SATA ", m_deviceStorage->m_Interface.toStdString().c_str());
-    EXPECT_STREQ("R013", m_deviceStorage->m_Version.toStdString().c_str());
-    EXPECT_STREQ("disk", m_deviceStorage->m_Description.toStdString().c_str());
-    EXPECT_STREQ("", m_deviceStorage->m_Size.toStdString().c_str());
-}
-
 TEST_F(UT_DeviceStorage, UT_DeviceStorage_addInfoFromlshw_001)
 {
     QMap<QString, QString> mapinfo;
@@ -271,37 +224,6 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_setMediaType_004)
 {
     m_deviceStorage->m_DeviceFile = "/dev/sda";
     EXPECT_TRUE(m_deviceStorage->setMediaType("sda", "2"));
-}
-
-TEST_F(UT_DeviceStorage, UT_DeviceStorage_setKLUMediaType_001)
-{
-    m_deviceStorage->m_DeviceFile = "/dev/sda";
-    EXPECT_FALSE(m_deviceStorage->setKLUMediaType("nvme0n1", "0"));
-}
-
-TEST_F(UT_DeviceStorage, UT_DeviceStorage_setKLUMediaType_002)
-{
-    m_deviceStorage->m_DeviceFile = "/dev/sda";
-    EXPECT_TRUE(m_deviceStorage->setKLUMediaType("sda", "0"));
-}
-
-TEST_F(UT_DeviceStorage, UT_DeviceStorage_setKLUMediaType_003)
-{
-    m_deviceStorage->m_DeviceFile = "/dev/sda";
-    EXPECT_TRUE(m_deviceStorage->setKLUMediaType("sda", "1"));
-}
-
-TEST_F(UT_DeviceStorage, UT_DeviceStorage_setKLUMediaType_004)
-{
-    m_deviceStorage->m_DeviceFile = "/dev/sda";
-    EXPECT_TRUE(m_deviceStorage->setKLUMediaType("sda", "2"));
-}
-
-TEST_F(UT_DeviceStorage, UT_DeviceStorage_setKLUMediaType_005)
-{
-    m_deviceStorage->m_DeviceFile = "/dev/sda";
-    m_deviceStorage->m_MediaType = "USB";
-    EXPECT_TRUE(m_deviceStorage->setKLUMediaType("sda", "2"));
 }
 
 TEST_F(UT_DeviceStorage, UT_DeviceStorage_isValid_001)

@@ -568,12 +568,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             // mapInfo["Device"].contains("USB Audio") 是为了处理未识别的USB声卡 Bug-118773
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network")) {
-            //if (mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/platform"))
-            bool hasAddress = mapInfo.find("HW Address") != mapInfo.end() || mapInfo.find("Permanent HW Address") != mapInfo.end();
-            bool hasPath = mapInfo.find("path") != mapInfo.end();
-            if (hasPath || hasAddress) {
-                addMapInfo("hwinfo_network", mapInfo);
-            }
+            addMapInfo("hwinfo_network", mapInfo);
         } else if ("keyboard" == mapInfo["Hardware Class"]) {
             addMouseKeyboardInfoMapInfo("hwinfo_keyboard", mapInfo);
         } else if ("mouse" == mapInfo["Hardware Class"]) {
