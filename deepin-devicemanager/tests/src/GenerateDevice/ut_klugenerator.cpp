@@ -3,11 +3,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "KLUGenerator.h"
 #include "DeviceManager.h"
 #include "ut_Head.h"
 #include "stub.h"
-
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>

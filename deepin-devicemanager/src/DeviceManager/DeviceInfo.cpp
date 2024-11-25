@@ -46,6 +46,16 @@ DeviceBaseInfo::~DeviceBaseInfo()
     qCDebug(appLog) << "DeviceBaseInfo destructor called.";
 }
 
+const QString DeviceBaseInfo::translateStr(const QString &inStr)
+{
+    return tr(inStr.toLatin1());
+}
+
+const QString DeviceBaseInfo::nameTr()
+{
+    return translateStr(m_Name);
+}
+
 const QList<QPair<QString, QString>> &DeviceBaseInfo::getOtherAttribs()
 {
     qCDebug(appLog) << "DeviceBaseInfo::getOtherAttribs called.";
@@ -66,8 +76,37 @@ const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseAttribs()
     return m_LstBaseInfo;
 }
 
+const QList<QPair<QString, QString> > &DeviceBaseInfo::getOtherTranslationAttribs()
+{
+    m_LstOtherInfoTr.clear();
+    getOtherAttribs();
+    for (const auto &pair : m_LstOtherInfo) {
+        QString trKey =translateStr(pair.first);
+        if (trKey.isEmpty())
+            m_LstOtherInfoTr.append(qMakePair(pair.first, pair.second)); // 添加到目标列表
+        else
+            m_LstOtherInfoTr.append(qMakePair(trKey, pair.second));
+    }
+    return m_LstOtherInfoTr;
+}
+
+const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseTranslationAttribs()
+{
+    m_LstBaseInfoTr.clear();
+    getBaseAttribs();
+    for (const auto &pair : m_LstBaseInfo) {
+        QString trKey = translateStr(pair.first);
+        if (trKey.isEmpty())
+            m_LstBaseInfoTr.append(qMakePair(pair.first, pair.second)); // 添加到目标列表
+        else
+            m_LstBaseInfoTr.append(qMakePair(trKey, pair.second));
+    }
+    return m_LstBaseInfoTr;
+}
+
 const QStringList &DeviceBaseInfo::getTableHeader()
 {
+    m_TableHeaderTr.clear();
     qCDebug(appLog) << "DeviceBaseInfo::getTableHeader called.";
     // 获取表头
     if (m_TableHeader.size() == 0) {
@@ -75,8 +114,17 @@ const QStringList &DeviceBaseInfo::getTableHeader()
         loadTableHeader();
         m_TableHeader.append(m_CanEnable ? "yes" : "no");
     }
+
+    for (const auto &item : m_TableHeader) {
+        QString trKey = tr(item.toLatin1());
+        if (trKey.isEmpty())
+            m_TableHeaderTr.append(item);
+        else
+            m_TableHeaderTr.append(trKey);
+    }
+
     qCDebug(appLog) << "Table header: " << m_TableHeader;
-    return m_TableHeader;
+    return m_TableHeaderTr;
 }
 
 const QStringList &DeviceBaseInfo::getTableData()
@@ -85,8 +133,16 @@ const QStringList &DeviceBaseInfo::getTableData()
     // 获取表格数据
     m_TableData.clear();
     loadTableData();
+    m_TableDataTr.clear();
+    for (const auto &item : m_TableData) {
+        QString trKey = translateStr(item);
+        if(trKey.isEmpty())
+            m_TableDataTr.append(item);
+        else
+            m_TableDataTr.append(trKey);
+    }
     qCDebug(appLog) << "Table data loaded. Count: " << m_TableData.count();
-    return m_TableData;
+    return m_TableDataTr;
 }
 
 QString DeviceBaseInfo::subTitle()
@@ -188,8 +244,8 @@ void DeviceBaseInfo::toHtmlString(QDomDocument &doc)
 {
     qCDebug(appLog) << "DeviceBaseInfo::toHtmlString called.";
     // 设备信息转为Html
-    baseInfoToHTML(doc, m_LstBaseInfo);
-    baseInfoToHTML(doc, m_LstOtherInfo);
+    baseInfoToHTML(doc, m_LstBaseInfoTr);
+    baseInfoToHTML(doc, m_LstOtherInfoTr);
     qCDebug(appLog) << "HTML string conversion finished.";
 }
 
@@ -255,8 +311,8 @@ void DeviceBaseInfo::toDocString(Docx::Document &doc)
 {
     qCDebug(appLog) << "DeviceBaseInfo::toDocString called.";
     // 设备信息转为doc
-    baseInfoToDoc(doc, m_LstBaseInfo);
-    baseInfoToDoc(doc, m_LstOtherInfo);
+    baseInfoToDoc(doc, m_LstBaseInfoTr);
+    baseInfoToDoc(doc, m_LstOtherInfoTr);
     qCDebug(appLog) << "Doc string conversion finished.";
 }
 
@@ -285,8 +341,8 @@ void DeviceBaseInfo::toXlsxString(QXlsx::Document &xlsx, QXlsx::Format &boldFont
 {
     qCDebug(appLog) << "DeviceBaseInfo::toXlsxString called.";
     // 设备信息转为xlxs表格
-    baseInfoToXlsx(xlsx, boldFont, m_LstBaseInfo);
-    baseInfoToXlsx(xlsx, boldFont, m_LstOtherInfo);
+    baseInfoToXlsx(xlsx, boldFont, m_LstBaseInfoTr);
+    baseInfoToXlsx(xlsx, boldFont, m_LstOtherInfoTr);
     qCDebug(appLog) << "Xlsx string conversion finished.";
 }
 
@@ -320,8 +376,8 @@ void DeviceBaseInfo::toTxtString(QTextStream &out)
 {
     qCDebug(appLog) << "DeviceBaseInfo::toTxtString called.";
     // 设备信息转为txt
-    baseInfoToTxt(out, m_LstBaseInfo);
-    baseInfoToTxt(out, m_LstOtherInfo);
+    baseInfoToTxt(out, m_LstBaseInfoTr);
+    baseInfoToTxt(out, m_LstOtherInfoTr);
     qCDebug(appLog) << "Txt string conversion finished.";
 }
 
@@ -356,18 +412,18 @@ void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
     getTableData();
 
     // 判断是否有表格内容
-    if (m_TableData.size() < 1) {
+    if (m_TableDataTr.size() < 1) {
         qCDebug(appLog) << "Table data is empty, skipping Txt conversion.";
         return;
     }
 
     // 设置占位宽度
-    QString text = m_TableData[0];
+    QString text = m_TableDataTr[0];
     out.setFieldWidth(int(text.size() * 1.5));
     out.setFieldAlignment(QTextStream::FieldAlignment::AlignRight);
     qCDebug(appLog) << "Txt field width set for table info.";
 
-    foreach (auto item, m_TableData) {
+    foreach (auto item, m_TableDataTr) {
         out.setFieldWidth(28);
         out << item;
         // qCDebug(appLog) << "Written table item to Txt: " << item;
@@ -385,22 +441,22 @@ void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
     getTableHeader();
 
     // 判断是否有表头
-    if (m_TableHeader.size() < 1) {
+    if (m_TableHeaderTr.size() < 1) {
         qCDebug(appLog) << "Table header is empty, skipping Txt conversion.";
         return;
     }
 
     // 设置占位宽度
-    QString text = m_TableHeader[0];
+    QString text = m_TableHeaderTr[0];
     out.setFieldWidth(int(text.size() * 1.5));
     out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
     qCDebug(appLog) << "Txt field width set for table header.";
 
     out << "\n";
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
+    for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col) {
         out.setFieldWidth(30);
-        out << m_TableHeader[col];
-        // qCDebug(appLog) << "Written table header item to Txt: " << m_TableHeader[col];
+        out << m_TableHeaderTr[col];
+        // qCDebug(appLog) << "Written table header item to Txt: " << m_TableHeaderTr[col];
     }
     out.setFieldWidth(0);
     out << "\n";
@@ -436,7 +492,7 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
     getTableHeader();
 
     // 判断是否有表头
-    if (m_TableHeader.size() < 1) {
+    if (m_TableHeaderTr.size() < 1) {
         qCDebug(appLog) << "Table header is empty, skipping HTML table header conversion.";
         return;
     }
@@ -445,9 +501,9 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
     qCDebug(appLog) << "Written HTML table header start tags.";
 
     // 写表头内容
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
-        html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + m_TableHeader[col] + "</th>").toUtf8().data());
-        // qCDebug(appLog) << "Written table header item to HTML: " << m_TableHeader[col];
+    for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col) {
+        html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + m_TableHeaderTr[col] + "</th>").toUtf8().data());
+        // qCDebug(appLog) << "Written table header item to HTML: " << m_TableHeaderTr[col];
     }
 
     html.write("</tr></thead>\n");
@@ -466,16 +522,16 @@ void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
     // 获取表格数据
     getTableData();
 
-    if (m_TableData.size() < 1) {
+    if (m_TableDataTr.size() < 1) {
         qCDebug(appLog) << "Table data is empty, skipping Doc table info conversion.";
         return;
     }
 
     // 添加doc表格
-    for (int col = 0; col < m_TableData.size(); ++col) {
+    for (int col = 0; col < m_TableDataTr.size(); ++col) {
         auto cel = tab->cell(row, col);
-        cel->addText(m_TableData[col]);
-        // qCDebug(appLog) << "Added table info to Doc cell (" << row << ", " << col << "): " << m_TableData[col];
+        cel->addText(m_TableDataTr[col]);
+        // qCDebug(appLog) << "Added table info to Doc cell (" << row << ", " << col << "): " << m_TableDataTr[col];
     }
     qCDebug(appLog) << "Finished adding table info to Doc.";
 }
@@ -486,17 +542,17 @@ void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
     // 表头保存为doc
     getTableHeader();
 
-    if (m_TableHeader.size() < 1) {
+    if (m_TableHeaderTr.size() < 1) {
         qCDebug(appLog) << "Table header is empty, skipping Doc table header conversion.";
         return;
     }
 
     // 添加表头信息
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col)  {
+    for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col)  {
         tab->addColumn();
         auto cel = tab->cell(0, col);
-        cel->addText(m_TableHeader[col]);
-        // qCDebug(appLog) << "Added table header to Doc cell (0, " << col << "): " << m_TableHeader[col];
+        cel->addText(m_TableHeaderTr[col]);
+        // qCDebug(appLog) << "Added table header to Doc cell (0, " << col << "): " << m_TableHeaderTr[col];
     }
     qCDebug(appLog) << "Finished adding table header to Doc.";
 }
@@ -507,16 +563,16 @@ void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
     // 获取表格信息
     getTableData();
 
-    if (m_TableData.size() < 1) {
+    if (m_TableDataTr.size() < 1) {
         qCDebug(appLog) << "Table data is empty, skipping Xlsx table info conversion.";
         return;
     }
 
     // 添加表格信息
     int curRow = DeviceManager::instance()->currentXlsRow();
-    for (int col = 0; col < m_TableData.size(); ++col) {
-        xlsx.write(curRow, col + 1, m_TableData[col]);
-        // qCDebug(appLog) << "Written table info to Xlsx at row " << curRow << ", col " << col + 1 << ": " << m_TableData[col];
+    for (int col = 0; col < m_TableDataTr.size(); ++col) {
+        xlsx.write(curRow, col + 1, m_TableDataTr[col]);
+        // qCDebug(appLog) << "Written table info to Xlsx at row " << curRow << ", col " << col + 1 << ": " << m_TableDataTr[col];
     }
     qCDebug(appLog) << "Finished writing table info to Xlsx.";
 }
@@ -527,19 +583,19 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
     // 获取表头
     getTableHeader();
 
-    if (m_TableHeader.size() < 1) {
+    if (m_TableHeaderTr.size() < 1) {
         qCDebug(appLog) << "Table header is empty, skipping Xlsx table header conversion.";
         return;
     }
 
     // 添加表头信息
     int curRow = DeviceManager::instance()->currentXlsRow();
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
+    for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col) {
         QXlsx::Format boldFont;
         boldFont.setFontSize(10);
         boldFont.setFontBold(true);
-        xlsx.write(curRow, col + 1, m_TableHeader[col], boldFont);
-        // qCDebug(appLog) << "Written table header to Xlsx at row " << curRow << ", col " << col + 1 << ": " << m_TableHeader[col];
+        xlsx.write(curRow, col + 1, m_TableHeaderTr[col], boldFont);
+        // qCDebug(appLog) << "Written table header to Xlsx at row " << curRow << ", col " << col + 1 << ": " << m_TableHeaderTr[col];
     }
     qCDebug(appLog) << "Finished writing table header to Xlsx.";
 }
@@ -787,9 +843,9 @@ void DeviceBaseInfo::loadTableHeader()
 {
     qCDebug(appLog) << "DeviceBaseInfo::loadTableHeader called. Adding default table headers.";
     // 添加表头信息
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
-    m_TableHeader.append(tr("Model"));
+    m_TableHeader.append("Name");
+    m_TableHeader.append("Vendor");
+    m_TableHeader.append("Model");
 }
 
 void DeviceBaseInfo::addFilterKey(const QString &key)
@@ -805,7 +861,7 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
     // 获取其他设备信息
     QMap<QString, QString>::const_iterator it = mapInfo.begin();
     for (; it != mapInfo.end(); ++it) {
-        QString k = DApplication::translate("QObject", it.key().trimmed().toStdString().data());
+        QString k = it.key();
 
         // 可显示设备属性中存在该属性
         if (m_FilterKey.find(k) != m_FilterKey.end()) {
@@ -838,6 +894,45 @@ void DeviceBaseInfo::addOtherDeviceInfo(const QString &key, const QString &value
         qCDebug(appLog) << "DeviceBaseInfo::addOtherDeviceInfo insert key: " << key;
         m_LstOtherInfo.insert(0, QPair<QString, QString>(key, value));
     }
+}
+
+const QString DeviceBaseInfo::readDeviceInfoKeyValue(const QString &key)
+{
+    if (key.isEmpty())
+        return QString("");
+    // qCInfo(appLog) << __FILE__ << __LINE__  << key << "after translation:"<< kk;
+    QList<QPair<QString, QString> > allBaseAttribs = getBaseAttribs();
+    for (const QPair<QString, QString>& pair : allBaseAttribs) {
+        if (key == pair.first)
+            return pair.second;
+    }
+    QList<QPair<QString, QString> > allOtherAttribs = getOtherAttribs();
+    for (const QPair<QString, QString>& pair : allOtherAttribs) {
+        if (key == key)
+            return pair.second;
+    }
+    return QString("");
+}
+
+bool DeviceBaseInfo::setDeviceInfoKeyValue(const QString &key, const QString &value)
+{
+    if (key.isEmpty() ||value.isEmpty())
+        return false;
+
+    for (QPair<QString, QString> pair : getBaseAttribs()) {
+        if (key == pair.first) {
+            pair.second = value;
+            return true;
+        }
+    }
+
+    for (QPair<QString, QString> pair : getOtherAttribs()) {
+        if (key == pair.first) {
+            pair.second = value;
+            return true;
+        }
+    }
+    return false;
 }
 
 void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite)

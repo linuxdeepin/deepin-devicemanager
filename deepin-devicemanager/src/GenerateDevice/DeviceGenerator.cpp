@@ -33,6 +33,7 @@
 // Qt库文件
 #include <QLoggingCategory>
 #include <QRegularExpression>
+#include <QDir>
 
 using namespace DDLog;
 
@@ -47,8 +48,6 @@ DeviceGenerator::~DeviceGenerator()
     qCDebug(appLog) << "DeviceGenerator destructor";
 
 }
-
-
 
 void DeviceGenerator::generatorComputerDevice()
 {
@@ -298,12 +297,59 @@ void DeviceGenerator::generatorMonitorDevice()
 void DeviceGenerator::generatorNetworkDevice()
 {
     QList<DeviceNetwork *> lstDevice;
+
+    QDir dir("/sys/class/net");
+    // 获取所有的子目录
+    QStringList subDirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+
+    foreach (const QString &subDir, subDirs) {
+        if (subDir.contains("lo", Qt::CaseInsensitive) || subDir.contains("p2p", Qt::CaseInsensitive))
+            continue;
+
+        QString addressFilePath = dir.filePath(subDir + "/address");
+        QFile addressFile(addressFilePath);
+
+        // 尝试打开文件
+        if (addressFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream in(&addressFile);
+            QString address = in.readLine(); // 读取内容
+            qDebug() << "Interface:" << subDir << "Address:" << address;
+            if (address.length() == 17
+                    && !address.contains("00:00:00:00", Qt::CaseInsensitive)
+                    && !address.contains("ff:ff:ff:ff", Qt::CaseInsensitive)) {
+
+                DeviceNetwork *device = new DeviceNetwork();
+                QMap<QString, QString> tempMap;
+                tempMap["Logical Name"] = subDir;
+                tempMap["MAC Address"] = address;
+                DeviceManager::instance()->tomlDeviceMapSet(DT_Network, device,tempMap);
+                lstDevice.append(device);
+            }
+            addressFile.close();
+        } else {
+            qDebug() << "Failed to open file:" << addressFilePath;
+        }
+    }
+
+    // 设置从lshw中获取的信息
+    const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
+    for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it) {
+        if ((*it).find("serial") == (*it).end() && (*it).find("logical name") == (*it).end())
+            continue;
+
+        const QString &serialNumberLshw =  (*it)["serial"];
+        const QString &logicalNameLshw =  (*it)["logical name"];
+        for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
+            const QString &serialNumberLst =  (*itDevice)->hwAddress();
+            const QString &logicalNameLst =  (*itDevice)->logicalName();
+            if (serialNumberLshw == serialNumberLst || logicalNameLshw == logicalNameLst) {
+                (*itDevice)->setInfoFromLshw(*it);
+            }
+        }
+    }
+
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
-        // Hardware Class 类型为 network interface
-//        if ("network" == (*it)["Hardware Class"]) {  //去掉， 并与service端同步"hwinfo --network"改为 "hwinfo --netcard"获取网卡信息
-//            continue;
-//        }
 
         // 先判断是否是有效网卡信息
         // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
@@ -311,36 +357,14 @@ void DeviceGenerator::generatorNetworkDevice()
             continue;
         }
 
-        // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
-        if ((*it).find("unique_id") == (*it).end()) {
-            DeviceNetwork *device = new DeviceNetwork();
-            device->setInfoFromHwinfo(*it);
-            lstDevice.append(device);
-        } else {
-            DeviceNetwork *device = nullptr;
-            const QString &unique_id = (*it)["unique_id"];
-            for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
-                if (!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id) {
-                    device = (*itNet);
-                }
-            }
-            if (device) {
-                device->setEnableValue(false);
-            }
-        }
-    }
-
-    // 设置从lshw中获取的信息
-    const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
-    for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it) {
-        if ((*it).find("serial") == (*it).end())
-            continue;
-        const QString &serialNumber = ((*it).find("logical name") != (*it).end()) ? (*it)["serial"] + (*it)["logical name"]  :  (*it)["serial"];
+        const QString &serialNumberLshw =  (*it)["HW Address"];
+        const QString &logicalNameLshw =  (*it)["Device File"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
-            const QString &ser2Number =  (*itDevice)->logicalName().isEmpty() ? (*itDevice)->hwAddress() : (*itDevice)->hwAddress() + (*itDevice)->logicalName();
-            if (!serialNumber.isEmpty() && ((*itDevice)->uniqueID() == serialNumber ||  ser2Number == serialNumber)) {
-                (*itDevice)->setInfoFromLshw(*it);
-                break;
+            const QString &serialNumberLst =  (*itDevice)->hwAddress();
+            const QString &logicalNameLst =  (*itDevice)->logicalName();
+            if (serialNumberLshw == serialNumberLst || logicalNameLshw == logicalNameLst) {
+                // (*itDevice)->setEnableValue(false);
+                (*itDevice)->setInfoFromHwinfo(*it);
             }
         }
     }

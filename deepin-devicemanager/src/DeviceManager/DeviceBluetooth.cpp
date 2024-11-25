@@ -248,34 +248,34 @@ void DeviceBluetooth::initFilterKey()
 {
     qCDebug(appLog) << "DeviceBluetooth::initFilterKey called.";
     // 添加可显示的属性
-    addFilterKey(QObject::tr("Bus"));
-    addFilterKey(QObject::tr("BD Address"));
-    addFilterKey(QObject::tr("ACL MTU"));
-    addFilterKey(QObject::tr("SCO MTU"));
-    addFilterKey(QObject::tr("Features"));
-    addFilterKey(QObject::tr("Packet type"));
-    addFilterKey(QObject::tr("Link policy"));
-    addFilterKey(QObject::tr("Link mode"));
-    addFilterKey(QObject::tr("Class"));
-    addFilterKey(QObject::tr("Service Classes"));
-    addFilterKey(QObject::tr("Device Class"));
-    addFilterKey(QObject::tr("HCI Version"));
-    addFilterKey(QObject::tr("LMP Version"));
-    addFilterKey(QObject::tr("Subversion"));
+    addFilterKey("Bus");
+    addFilterKey("BD Address");
+    addFilterKey("ACL MTU");
+    addFilterKey("SCO MTU");
+    addFilterKey("Features");
+    addFilterKey("Packet type");
+    addFilterKey("Link policy");
+    addFilterKey("Link mode");
+    addFilterKey("Class");
+    addFilterKey("Service Classes");
+    addFilterKey("Device Class");
+    addFilterKey("HCI Version");
+    addFilterKey("LMP Version");
+    addFilterKey("Subversion");
 
-    addFilterKey(QObject::tr("Device"));
-    addFilterKey(QObject::tr("Serial ID"));
+    addFilterKey("Device");
+    addFilterKey("Serial ID");
 
-    addFilterKey(QObject::tr("product"));
-    addFilterKey(QObject::tr("description"));
-    // addFilterKey(QObject::tr("physical id"));
-    addFilterKey(QObject::tr("Class"));
-    addFilterKey(QObject::tr("Powered"));
-    addFilterKey(QObject::tr("Discoverable"));
-    addFilterKey(QObject::tr("Pairable"));
-    addFilterKey(QObject::tr("UUID"));
-    addFilterKey(QObject::tr("Modalias"));
-    addFilterKey(QObject::tr("Discovering"));
+    addFilterKey("product");
+    addFilterKey("description");
+    // addFilterKey("physical id");
+    addFilterKey("Class");
+    addFilterKey("Powered");
+    addFilterKey("Discoverable");
+    addFilterKey("Pairable");
+    addFilterKey("UUID");
+    addFilterKey("Modalias");
+    addFilterKey("Discovering");
     qCDebug(appLog) << "Filter keys initialized.";
 }
 
@@ -283,27 +283,27 @@ void DeviceBluetooth::loadBaseDeviceInfo()
 {
     qCDebug(appLog) << "DeviceBluetooth::loadBaseDeviceInfo called.";
     // 添加基本信息
-    addBaseDeviceInfo(tr("Alias"), m_Alias);
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo("Alias", m_Alias);
+    addBaseDeviceInfo("Name", m_Name);
+    addBaseDeviceInfo("Vendor", m_Vendor);
+    addBaseDeviceInfo("Version", m_Version);
+    addBaseDeviceInfo("Model", m_Model);
 }
 
 void DeviceBluetooth::loadOtherDeviceInfo()
 {
     qCDebug(appLog) << "DeviceBluetooth::loadOtherDeviceInfo called.";
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
-    addOtherDeviceInfo(tr("Speed"), m_Speed);
-    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addOtherDeviceInfo(tr("Driver Version"), m_DriverVersion);
-    addOtherDeviceInfo(tr("Driver"), m_Driver);
-    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
-    addOtherDeviceInfo(tr("MAC Address"), m_MAC);
+    addOtherDeviceInfo("Module Alias", m_Modalias);
+    addOtherDeviceInfo("Physical ID", m_PhysID);
+    addOtherDeviceInfo("Speed", m_Speed);
+    addOtherDeviceInfo("Maximum Power", m_MaximumPower);
+    addOtherDeviceInfo("Driver Version", m_DriverVersion);
+    addOtherDeviceInfo("Driver", m_Driver);
+    addOtherDeviceInfo("Capabilities", m_Capabilities);
+    addOtherDeviceInfo("Bus Info", m_BusInfo);
+    addOtherDeviceInfo("Logical Name", m_LogicalName);
+    addOtherDeviceInfo("MAC Address", m_MAC);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();

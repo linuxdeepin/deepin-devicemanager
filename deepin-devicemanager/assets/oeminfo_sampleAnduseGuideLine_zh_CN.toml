@@ -245,7 +245,7 @@ GPU vendor                 ="toml_GPU vendor"                       #29  : GPU�
 GPU type                   ="toml_GPU type"                         #30  : GPU类型
 SubVendor                  ="toml_SubVendor"                        #31  : 子制造商
 SubDevice                  ="toml_SubDevice"                        #32  : 子设备
-latency                    ="toml_latency"                          #33  : 延迟
+Latency                    ="toml_latency"                          #33  : 延迟
 Device                     ="toml_Device"                           #34  : 设备
 Config Status              ="toml_Config Status"                    #35  : 配置状态
 Driver Modules             ="toml_Driver Modules"                   #36  : 驱动模块
@@ -263,6 +263,7 @@ Display Ratio               ="toml_Display Ratio"                    #9  : 显�
 Current Resolution          ="toml_Current Resolution"               #10  : 当前分辨率
 Support Resolution          ="toml_Support Resolution"               #11  : 支持分辨率
 Date                        ="toml_Date"                             #12  : 日期
+Refresh Rate                ="toml_Refresh Rate"                    #13  : 支持的屏幕刷新率
 
 [NetWork.flagLabel]  #(网络适配器)
 Name                ="toml_Name"                #1  : 名称
@@ -311,7 +312,7 @@ Sysfs               ="toml_Sysfs"               #16 : Sysfs
 Handlers            ="toml_Handlers"            #17 : 处理程序
 SubVendor           ="toml_SubVendor"           #18 : 子制造商
 SubDevice           ="toml_SubDevice"           #19 : 子设备
-latency             ="toml_latency"             #20 : 延迟
+Latency             ="toml_latency"             #20 : 延迟
 Bus                 ="toml_Bus"                 #21 : 总线
 Version             ="toml_Version"             #22 : 版本
 Config Status       ="toml_Config Status"       #23 : 配置状态

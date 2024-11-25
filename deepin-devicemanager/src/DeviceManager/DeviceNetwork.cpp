@@ -105,7 +105,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "ip", m_Ip);
     setAttribute(mapInfo, "size", m_Speed);
     setAttribute(mapInfo, "capacity", m_Capacity);
-    setAttribute(mapInfo, "latency", m_Latency);
+    setAttribute(mapInfo, "Latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
     if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
         qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, driver is kernel in";
@@ -208,7 +208,7 @@ bool DeviceNetwork::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "DeviceNetwork::setInfoFromWifiInfo";
     // 机器自身蓝牙
-    if (m_Name.contains("Huawei", Qt::CaseInsensitive)) {
+    if (m_Name.contains(Common::specialHString(), Qt::CaseInsensitive)) {
         qCDebug(appLog) << "DeviceNetwork::setInfoFromWifiInfo, name contains Huawei";
         setAttribute(mapInfo, "Chip Type", m_Name);
         setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -326,47 +326,47 @@ void DeviceNetwork::initFilterKey()
 {
     qCDebug(appLog) << "DeviceNetwork::initFilterKey";
     // 初始化可显示属性
-    addFilterKey(QObject::tr("ioport"));
-    addFilterKey(QObject::tr("network"));
+    addFilterKey("ioport");
+    addFilterKey("network");
 }
 
 void DeviceNetwork::loadBaseDeviceInfo()
 {
     qCDebug(appLog) << "DeviceNetwork::loadBaseDeviceInfo";
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Type"), m_Model);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Driver Version"), m_DriverVersion);
+    addBaseDeviceInfo("Name", m_Name);
+    addBaseDeviceInfo("Vendor", m_Vendor);
+    addBaseDeviceInfo("Type", m_Model);
+    addBaseDeviceInfo("Version", m_Version);
+    addBaseDeviceInfo("Bus Info", m_BusInfo);
+    addBaseDeviceInfo("Capabilities", m_Capabilities);
+    addBaseDeviceInfo("Driver", m_Driver);
+    addBaseDeviceInfo("Driver Version", m_DriverVersion);
 }
 
 void DeviceNetwork::loadOtherDeviceInfo()
 {
     qCDebug(appLog) << "DeviceNetwork::loadOtherDeviceInfo";
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
-    addOtherDeviceInfo(tr("Maximum Rate"), m_Capacity);        // 1050需求 容量改为最大速率
-    addOtherDeviceInfo(tr("Negotiation Rate"), m_Speed);       // 1050需求 速度改为协商速率
-    addOtherDeviceInfo(tr("Port"), m_Port);
-    addOtherDeviceInfo(tr("Multicast"), m_Multicast);
-    addOtherDeviceInfo(tr("Link"), m_Link);
-    addOtherDeviceInfo(tr("Latency"), m_Latency);
-    addOtherDeviceInfo(tr("IP"), m_Ip);
-    addOtherDeviceInfo(tr("Firmware"), m_Firmware);
-    addOtherDeviceInfo(tr("Duplex"), m_Duplex);
-    addOtherDeviceInfo(tr("Broadcast"), m_Broadcast);
-    addOtherDeviceInfo(tr("Auto Negotiation"), m_Autonegotiation);
-//    addOtherDeviceInfo(tr("Clock"), m_Clock);
-//    addOtherDeviceInfo(tr("Width"), m_Width);
-    addOtherDeviceInfo(tr("Memory Address"), m_Memory);        // 1050需求 内存改为内存地址
-    addOtherDeviceInfo(tr("IRQ"), m_Irq);
-    addOtherDeviceInfo(tr("MAC Address"), m_MACAddress);
-    addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
+    addOtherDeviceInfo("Module Alias", m_Modalias);
+    addOtherDeviceInfo("Physical ID", m_PhysID);
+    addOtherDeviceInfo("Maximum Rate", m_Capacity);        // 1050需求 容量改为最大速率
+    addOtherDeviceInfo("Negotiation Rate", m_Speed);       // 1050需求 速度改为协商速率
+    addOtherDeviceInfo("Port", m_Port);
+    addOtherDeviceInfo("Multicast", m_Multicast);
+    addOtherDeviceInfo("Link", m_Link);
+    addOtherDeviceInfo("Latency", m_Latency);
+    addOtherDeviceInfo("IP", m_Ip);
+    addOtherDeviceInfo("Firmware", m_Firmware);
+    addOtherDeviceInfo("Duplex", m_Duplex);
+    addOtherDeviceInfo("Broadcast", m_Broadcast);
+    addOtherDeviceInfo("Auto Negotiation", m_Autonegotiation);
+//    addOtherDeviceInfo("Clock", m_Clock);
+//    addOtherDeviceInfo("Width", m_Width);
+    addOtherDeviceInfo("Memory Address", m_Memory);        // 1050需求 内存改为内存地址
+    addOtherDeviceInfo("IRQ", m_Irq);
+    addOtherDeviceInfo("MAC Address", m_MACAddress);
+    addOtherDeviceInfo("Logical Name", m_LogicalName);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
@@ -375,9 +375,9 @@ void DeviceNetwork::loadOtherDeviceInfo()
 void DeviceNetwork::loadTableHeader()
 {
     qCDebug(appLog) << "DeviceNetwork::loadTableHeader";
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
-    m_TableHeader.append(tr("Type"));
+    m_TableHeader.append("Name");
+    m_TableHeader.append("Vendor");
+    m_TableHeader.append("Type");
 }
 
 void DeviceNetwork::loadTableData()
