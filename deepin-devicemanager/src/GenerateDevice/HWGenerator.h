@@ -54,16 +54,41 @@ public:
      */
     virtual void generatorDiskDevice() override;
 
+    /**
+     * @brief generatorMonitorDevice:生成显示设备信息
+     */
+    virtual void generatorMonitorDevice() override;
+
+    /**
+     * @brief generatorPowerDevice:生成电池设备
+     */
+    virtual void generatorPowerDevice() override;
+
+    /**
+     * @brief generatorKeyboardDevice:生成键盘设备
+     */
+    virtual void generatorKeyboardDevice() override;
+
+    /**
+     * @brief generatorMemoryDevice:生成内存设备
+     */
+    virtual void generatorMemoryDevice() override;
+
+    /**
+     * @brief generatorCameraDevice:生成图像设备
+     */
+    virtual void generatorCameraDevice() override;
+
 protected:
     /**
      * @brief getAudioInfoFromCatInput:从cat /proc/bus/input/devices获取音频设备信息
      */
     virtual void getAudioInfoFromCatAudio() ;
 
-    /**
-     * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
-     */
-    virtual void getDiskInfoFromLshw() override;
+    // /**
+    //  * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
+    //  */
+    // virtual void getDiskInfoFromLshw() override;
 
     /**
      * @brief getDiskInfoFromSmartCtl:从smartctl获取存储设备信息
@@ -93,10 +118,9 @@ protected:
      */
     virtual void getMemoryInfoFromLshw() override;
 
-    /**
-     * @brief generatorMonitorDevice:生成显示设备信息
-     */
-    virtual void generatorMonitorDevice() override;
+    /**@brief:generator network info*/
+    virtual void getNetworkInfoFromCatWifiInfo();
+
 };
 
 #endif // PANGUVGENERATOR_H

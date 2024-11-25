@@ -160,24 +160,24 @@ void DeviceImage::initFilterKey()
 void DeviceImage::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("Version"), m_Version);
+    addBaseDeviceInfo(("Model"), m_Model);
+    addBaseDeviceInfo(("Bus Info"), m_BusInfo);
 }
 
 void DeviceImage::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
-    addOtherDeviceInfo(tr("Speed"), m_Speed);
-    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addOtherDeviceInfo(tr("Driver"), m_Driver);
-    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(("Physical ID"), m_PhysID);
+    addOtherDeviceInfo(("Speed"), m_Speed);
+    addOtherDeviceInfo(("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(("Driver"), m_Driver);
+    addOtherDeviceInfo(("Capabilities"), m_Capabilities);
     if (m_SerialID != m_UniqueID)
-        addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
+        addOtherDeviceInfo(("Serial Number"), m_SerialID);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();

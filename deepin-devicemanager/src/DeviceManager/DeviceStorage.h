@@ -39,27 +39,12 @@ public:
     bool setHwinfoInfo(const QMap<QString, QString> &mapInfo);
 
     /**
-       * @brief setKLUHwinfoInfo:设置由hwinfo --disk命令获取的设备信息，KLU专用
-       * @param mapInfo:由hwinfo获取的信息map
-       * @return 尔值，true:信息设置成功；false:信息设置失败
-       */
-    bool setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo);
-
-    /**
      * @brief setMediaType:设置存储设备的介质类型
      * @param name:存储设备逻辑名称
      * @param value:类型值0/1
      * @return 布尔值:true-设置成功；false--设置失败
      */
     bool setMediaType(const QString &name, const QString &value);
-
-    /**
-     * @brief setKLUMediaType:设置存储设备的介质类型,KLU专用
-     * @param name:存储设备逻辑名称
-     * @param value:类型值0/1
-     * @return 布尔值:true-设置成功；false--设置失败
-     */
-    bool setKLUMediaType(const QString &name, const QString &value);
 
     /**
      * @brief addInfoFromlshw:将lshw获取的信息与存储设备进行匹配

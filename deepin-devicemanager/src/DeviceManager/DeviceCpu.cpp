@@ -54,27 +54,27 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
 void DeviceCpu::initFilterKey()
 {
     // 添加可显示的属性
-    addFilterKey(QObject::tr("CPU implementer"));
-    addFilterKey(QObject::tr("CPU architecture"));
-    addFilterKey(QObject::tr("CPU variant"));
-    addFilterKey(QObject::tr("CPU part"));
-    addFilterKey(QObject::tr("CPU revision"));
+    addFilterKey("CPU implementer");
+    addFilterKey("CPU architecture");
+    addFilterKey("CPU variant");
+    addFilterKey("CPU part");
+    addFilterKey("CPU revision");
 }
 
 void DeviceCpu::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("CPU ID"), m_PhysicalID);
-    addBaseDeviceInfo(tr("Core ID"), m_CoreID);
-    addBaseDeviceInfo(tr("Threads"), m_ThreadNum);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("CPU ID"), m_PhysicalID);
+    addBaseDeviceInfo(("Core ID"), m_CoreID);
+    addBaseDeviceInfo(("Threads"), m_ThreadNum);
     if (!m_FrequencyIsCur)
-        addBaseDeviceInfo(tr("Max Speed"), m_MaxFrequency);
-    addBaseDeviceInfo(tr("BogoMIPS"), m_BogoMIPS);
-    addBaseDeviceInfo(tr("Architecture"), m_Architecture);
-    addBaseDeviceInfo(tr("CPU Family"), m_Familly);
-    addBaseDeviceInfo(tr("Model"), m_Model);
+        addBaseDeviceInfo(("Max Frequency"), m_MaxFrequency);
+    addBaseDeviceInfo(("BogoMIPS"), m_BogoMIPS);
+    addBaseDeviceInfo(("Architecture"), m_Architecture);
+    addBaseDeviceInfo(("CPU Family"), m_Familly);
+    addBaseDeviceInfo(("Model"), m_Model);
 }
 
 const QString &DeviceCpu::vendor() const
@@ -104,7 +104,7 @@ bool DeviceCpu::frequencyIsRange()const
 
 QString DeviceCpu::subTitle()
 {
-    return QString("%1 %2").arg(tr("Processor")).arg(m_PhysicalID);
+    return QString("%1 %2").arg(QObject::tr("Processor")).arg(m_PhysicalID);
 }
 
 const QString DeviceCpu::getOverviewInfo()
@@ -115,9 +115,9 @@ const QString DeviceCpu::getOverviewInfo()
     QString ov = QString("%1 (%2%3 / %4%5)") \
                  .arg(m_Name) \
                  .arg(m_trNumber[m_CPUCoreNum]) \
-                 .arg(tr("Core(s)")) \
+                 .arg(QObject::tr("Core(s)")) \
                  .arg(m_trNumber[m_LogicalCPUNum]) \
-                 .arg(tr("Processor"));
+                 .arg(QObject::tr("Processor"));
 
     return ov;
 }
@@ -220,8 +220,8 @@ TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     ret = setTomlAttribute(mapInfo, "Core ID", m_CoreID);
     ret = setTomlAttribute(mapInfo, "Threads", m_ThreadNum);
     ret = setTomlAttribute(mapInfo, "Frequency", m_Frequency);
-    ret = setTomlAttribute(mapInfo, "Current Speed", m_CurFrequency);
-    ret = setTomlAttribute(mapInfo, "Max Speed", m_MaxFrequency);
+    ret = setTomlAttribute(mapInfo, "Current Frequency", m_CurFrequency);
+    ret = setTomlAttribute(mapInfo, "Max Frequency", m_MaxFrequency);
     ret = setTomlAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
     ret = setTomlAttribute(mapInfo, "Architecture", m_Architecture);
     ret = setTomlAttribute(mapInfo, "CPU Family", m_Familly);
@@ -267,15 +267,15 @@ void DeviceCpu::loadOtherDeviceInfo()
 {
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
-    addOtherDeviceInfo(tr("Flags"), m_Flags);
-    addOtherDeviceInfo(tr("Extensions"), m_Extensions);
-    addOtherDeviceInfo(tr("L4 Cache"), m_CacheL4);
-    addOtherDeviceInfo(tr("L3 Cache"), m_CacheL3);
-    addOtherDeviceInfo(tr("L2 Cache"), m_CacheL2);
-    addOtherDeviceInfo(tr("L1i Cache"), m_CacheL1Order);
-    addOtherDeviceInfo(tr("L1d Cache"), m_CacheL1Data);
-    addOtherDeviceInfo(tr("Stepping"), m_Step);
+    addOtherDeviceInfo(("Virtualization"), m_HardwareVirtual);
+    addOtherDeviceInfo(("Flags"), m_Flags);
+    addOtherDeviceInfo(("Extensions"), m_Extensions);
+    addOtherDeviceInfo(("L4 Cache"), m_CacheL4);
+    addOtherDeviceInfo(("L3 Cache"), m_CacheL3);
+    addOtherDeviceInfo(("L2 Cache"), m_CacheL2);
+    addOtherDeviceInfo(("L1i Cache"), m_CacheL1Order);
+    addOtherDeviceInfo(("L1d Cache"), m_CacheL1Data);
+    addOtherDeviceInfo(("Stepping"), m_Step);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
@@ -284,10 +284,10 @@ void DeviceCpu::loadOtherDeviceInfo()
 void DeviceCpu::loadTableHeader()
 {
     // 加载表头
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
-    m_TableHeader.append(frequencyIsRange() ? tr("Speed") : tr("Max Speed"));
-    m_TableHeader.append(tr("Architecture"));
+    m_TableHeader.append("Name");
+    m_TableHeader.append("Vendor");
+    m_TableHeader.append(frequencyIsRange() ? ("Frequency") : ("Max Frequency"));
+    m_TableHeader.append("Architecture");
 }
 
 void DeviceCpu::loadTableData()

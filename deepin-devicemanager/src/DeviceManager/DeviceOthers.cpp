@@ -174,28 +174,28 @@ bool DeviceOthers::available()
 
 void DeviceOthers::initFilterKey()
 {
-    addFilterKey(QObject::tr("Device File"));
-    addFilterKey(QObject::tr("Hardware Class"));
+    addFilterKey("Device File");
+    addFilterKey("Hardware Class");
 }
 
 void DeviceOthers::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addBaseDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addBaseDeviceInfo(tr("Driver"), m_Driver);
-    addBaseDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("Model"), m_Model);
+    addBaseDeviceInfo(("Version"), m_Version);
+    addBaseDeviceInfo(("Bus Info"), m_BusInfo);
+    addBaseDeviceInfo(("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(("Driver"), m_Driver);
+    addBaseDeviceInfo(("Maximum Power"), m_MaximumPower);
+    addBaseDeviceInfo(("Speed"), m_Speed);
 }
 
 void DeviceOthers::loadOtherDeviceInfo()
 {
     if (m_SerialID != m_UniqueID)
-        addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
+        addOtherDeviceInfo(("Serial Number"), m_SerialID);
     mapInfoToList();
 }
 
