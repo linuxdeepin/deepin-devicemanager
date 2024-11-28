@@ -124,19 +124,6 @@ void DeviceStorage::unitConvertByDecimal()
 {
     if(m_SizeBytes > 0)
         m_Size = decimalkilos(m_SizeBytes);
-
-    quint64 gbyte =  1000000000;
-    if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
-        if(m_SizeBytes > 255*gbyte && m_SizeBytes < 257*gbyte) {
-            m_Size = "256 GB";
-        } else if(m_SizeBytes > 511*gbyte && m_SizeBytes < 513*gbyte) {
-                m_Size = "512 GB";
-        } else if(m_SizeBytes > 999*gbyte && m_SizeBytes < 1025*gbyte) {
-            m_Size = "1 TB";
-        } else if(m_SizeBytes > 1999*gbyte && m_SizeBytes < 2049*gbyte) {
-            m_Size = "2 TB";
-        }
-    }
 }
 
 bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
@@ -355,11 +342,11 @@ bool DeviceStorage::setMediaType(const QString &name, const QString &value)
         return false;
 
     if (QString("0") == value)
-        m_MediaType = QObject::tr("SSD");
+        m_MediaType = "SSD";
     else if (QString("1") == value)
-        m_MediaType = QObject::tr("HDD");
+        m_MediaType = "HDD";
     else
-        m_MediaType = QObject::tr("Unknown");
+        m_MediaType = "Unknown";
 
     return true;
 }
@@ -416,7 +403,7 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
     }
 
     quint64 size2 = device->getDiskSizeByte();
-    if(m_SizeBytes == 0)
+    if (m_SizeBytes == 0)
         m_SizeBytes = size2;
     else if (size2 > 0) {
         m_SizeBytes += size2;
@@ -435,11 +422,10 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
         }
 
         QStringList keyList;
-        keyList.append(QObject::tr("bus info"));
-        keyList.append(QObject::tr("Device File"));
-        // keyList.append(QObject::tr("physical id"));
-        keyList.append(QObject::tr("Device Number"));
-        keyList.append(QObject::tr("logical name"));
+        keyList.append(translateStr("bus info"));
+        keyList.append(translateStr("Device File"));
+        keyList.append(translateStr("Device Number"));
+        keyList.append(translateStr("logical name"));
         for (QString keyStr : keyList) {
             QString curBusInfo = curAllOtherAttribMaps[keyStr];
             QString busInfo = allAttribMaps[keyStr];
@@ -453,16 +439,31 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
 
 void DeviceStorage::checkDiskSize()
 {
-    QRegExp reg("[0-9]*.?[0-9]*");
-    int index = reg.indexIn(m_Size);
-    // index>0时，对于"32GB"（数字开头的字符串,index=0）无法获取正确的数据32
-    // 所以要改为index >= 0
-    if (index >= 0) {
-        double num = reg.cap(0).toDouble();
-        double num1 = num - int(num);
-        QString type = m_Size.right(m_Size.length() - reg.cap(0).size()).trimmed();
-        if (!qFuzzyCompare(num1, 0.0) && type == "GB") {
-            m_Size = QString::number(int(num) + 1) + " " + type;
+    if (Common::specialVendorType() != Common::specialHString()) {
+        return; //定制机型专用，其它慎用
+    }
+
+    quint64 gbyte =  1000000000;
+    if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
+        if (m_SizeBytes > 255*gbyte && m_SizeBytes < 257*gbyte) {
+            m_Size = "256 GB";
+        } else if (m_SizeBytes > 511*gbyte && m_SizeBytes < 513*gbyte) {
+                m_Size = "512 GB";
+        } else if (m_SizeBytes > 999*gbyte && m_SizeBytes < 1025*gbyte) {
+            m_Size = "1 TB";
+        } else if (m_SizeBytes > 1999*gbyte && m_SizeBytes < 2049*gbyte) {
+            m_Size = "2 TB";
+        }
+    }
+    if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
+        if (m_SizeBytes > 15*gbyte && m_SizeBytes < 17*gbyte) {
+            m_Size = "16 GB";
+        } else if (m_SizeBytes > 31*gbyte && m_SizeBytes < 33*gbyte) {
+                m_Size = "32 GB";
+        } else if (m_SizeBytes > 63*gbyte && m_SizeBytes < 65*gbyte) {
+                m_Size = "64 GB";
+        } else if (m_SizeBytes > 127*gbyte && m_SizeBytes < 129*gbyte) {
+            m_Size = "128 GB";
         }
     }
 }
@@ -542,7 +543,7 @@ void DeviceStorage::loadBaseDeviceInfo()
     // 添加基本信息
     addBaseDeviceInfo(("Name"), m_Name);
     addBaseDeviceInfo(("Vendor"), m_Vendor);
-    addBaseDeviceInfo(("Media Type"), m_MediaType);
+    addBaseDeviceInfo(("Media Type"), translateStr(m_MediaType));
     addBaseDeviceInfo(("Size"), m_Size);
     addBaseDeviceInfo(("Version"), m_Version);
     addBaseDeviceInfo(("Capabilities"), m_Capabilities);
@@ -572,7 +573,7 @@ void DeviceStorage::loadOtherDeviceInfo()
     addOtherDeviceInfo(("Physical ID"), m_PhysID);
 
     if (m_RotationRate == QString("Solid State Device")) {
-        m_MediaType = QObject::tr("SSD");
+        m_MediaType = "SSD";
     }
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
@@ -597,7 +598,7 @@ void DeviceStorage::loadTableData()
     }
     m_TableData.append(model);
     m_TableData.append(m_Vendor);
-    m_TableData.append(m_MediaType);
+    m_TableData.append(translateStr(m_MediaType));
     m_TableData.append(m_Size);
 }
 
@@ -633,7 +634,7 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo.size() < 5) {
         if (!mapInfo.isEmpty() && m_Interface.contains("USB", Qt::CaseInsensitive)) {
-            m_MediaType = QObject::tr("SSD");
+            m_MediaType = "SSD";
         }
         return;
     }
@@ -648,12 +649,9 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
 
     setAttribute(mapInfo, "Rotation Rate", m_RotationRate);
     // 解决Bug45428,INTEL SSDSA2BW160G3L 这个型号的硬盘通过lsblk获取的rota是１，所以这里需要特殊处理
-    if (m_RotationRate == QString("Solid State Device"))
-        m_MediaType = QObject::tr("SSD");
-
-    // 按照HW的需求，如果是固态硬盘就不显示转速
-    if (m_RotationRate == QString("HW_SSD")) {
-        m_MediaType = QObject::tr("SSD");
+    // 按照H的需求，如果是固态硬盘就不显示转速
+    if (m_RotationRate == QString("Solid State Device")) {
+        m_MediaType = "SSD";
         m_RotationRate = "";
     }
 

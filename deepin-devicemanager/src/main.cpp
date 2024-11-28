@@ -89,12 +89,13 @@ int main(int argc, char *argv[])
         if (!DGuiApplicationHelper::instance()->setSingleInstance(app.applicationName(), DGuiApplicationHelper::UserScope)) {
             exit(0);
         }
+#ifndef DISABLE_POLKIT
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
                                                                                 UnixProcessSubject(getpid()),
                                                                                 Authority::AllowUserInteraction);
         if (result != Authority::Yes)
             return 0;
-
+#endif
         DApplicationSettings settinAgs;
         Dtk::Core::DLogManager::registerFileAppender();
 

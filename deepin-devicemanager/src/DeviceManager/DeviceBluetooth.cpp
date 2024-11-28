@@ -134,24 +134,6 @@ TomlFixMethod DeviceBluetooth::setInfoFromTomlOneByOne(const QMap<QString, QStri
     return ret;
 }
 
-bool DeviceBluetooth::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
-{
-    // 机器自身蓝牙
-    const QList<QPair<QString, QString> > &otherAttribs = getOtherAttribs();
-    QMap<QString, QString> tmpMaps;
-    for (QPair<QString, QString> attrib : otherAttribs) {
-        tmpMaps[attrib.first] = attrib.second;
-    }
-
-    if ("UART" == tmpMaps[QObject::tr("Bus")]) {//内置：UART 外接USB：USB
-        setAttribute(mapInfo, "Chip Type", m_Name);
-        setAttribute(mapInfo, "Vendor", m_Vendor);
-        return true;
-    } else {
-        return false;
-    }
-}
-
 const QString &DeviceBluetooth::name()const
 {
     return m_Model;
@@ -268,11 +250,11 @@ void DeviceBluetooth::loadTableData()
     QString tName = m_Name;
 
     if (!available()) {
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
 
     if (!enable()) {
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);

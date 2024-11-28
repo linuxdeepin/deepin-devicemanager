@@ -15,7 +15,7 @@
             "permissions": "readwrite",
             "visibility": "public"
           },      
-	"specialComType": {
+          "specialComType": {
             "value": -1,
             "serial": 0,
             "flags": ["global"],
@@ -24,6 +24,16 @@
             "description": "special computer type:PGUW(value:1),KLVV/L540(value:2),KLVU(value:3),PGUV/W585(value:4),PGUX(value:5)",
             "permissions": "readwrite",
             "visibility": "private"
-        }
-    }
+          },
+          "TomlFilesName": {
+            "value": "tomlFilesName",
+            "serial": 0,
+            "flags": ["global"],
+            "name": "config the toml name",
+            "name[zh_CN]": "设置toml文件名",
+            "description": "此配置项默认为无效的。如需让toml文件内容显示生效，请配置对应文件名。需保证操作者具备读取权限。",
+            "permissions": "readwrite",
+            "visibility": "private"
+          }
+  }
 }

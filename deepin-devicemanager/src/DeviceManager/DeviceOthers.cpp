@@ -204,10 +204,10 @@ void DeviceOthers::loadTableData()
     // 加载表格数据
     QString tName = m_Name;
     if (!available()) {
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
     if (!enable()) {
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);
