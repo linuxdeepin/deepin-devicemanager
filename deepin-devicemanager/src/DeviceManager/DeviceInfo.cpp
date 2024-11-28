@@ -127,8 +127,8 @@ const QStringList &DeviceBaseInfo::getTableData()
     loadTableData();
     m_TableDataTr.clear();
     for (const auto &item : m_TableData) {
-        QString trKey = translateStr(item);
-        if(trKey.isEmpty())
+        QString trKey = (item);
+        if (trKey.isEmpty())
             m_TableDataTr.append(item);
         else
             m_TableDataTr.append(trKey);
@@ -147,7 +147,7 @@ bool DeviceBaseInfo::isValueValid(QString &value)
     if (value.isEmpty())
         return false;
 
-    if (value == QObject::tr("Unknown"))
+    if (value == translateStr("Unknown"))
         return false;
 
     if (value == QString("Unknown"))
@@ -633,7 +633,7 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
 const QString DeviceBaseInfo::getDriverVersion()
 {
     QString outInfo = Common::executeClientCmd("modinfo", QStringList() << driver(), QString(), -1);
-    if(outInfo.isEmpty())
+    if (outInfo.isEmpty())
         return  QString("");
 
     foreach (QString out, outInfo.split("\n")) {
@@ -728,7 +728,7 @@ const QString DeviceBaseInfo::readDeviceInfoKeyValue(const QString &key)
     }
     QList<QPair<QString, QString> > allOtherAttribs = getOtherAttribs();
     for (const QPair<QString, QString>& pair : allOtherAttribs) {
-        if (key == key)
+        if (key == pair.first)
             return pair.second;
     }
     return QString("");

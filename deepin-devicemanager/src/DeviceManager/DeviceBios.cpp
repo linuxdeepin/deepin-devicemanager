@@ -157,7 +157,7 @@ bool DeviceBios::isBoard()const
 
 QString DeviceBios::subTitle()
 {
-    return QObject::tr(m_Name.toLatin1());
+    return translateStr(m_Name);
 }
 
 const QString DeviceBios::getOverviewInfo()
