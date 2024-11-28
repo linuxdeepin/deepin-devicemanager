@@ -7,6 +7,7 @@
 #include <QDir>
 #include <cmath>
 #include "DDLog.h"
+#include "commonfunction.h"
 
 // Qt库文件
 #include<QLoggingCategory>
@@ -204,6 +205,16 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
             file.close();
         }
     }
+    QString curPathFile2 =  "/usr/share/deepin-devicemanager/" + filename;
+    if (QFile::exists(curPathFile2) && !tomlFileRead) {
+        QFile file(curPathFile2);
+        if (file.open(QIODevice::ReadOnly)) {
+            info = file.readAll().data();
+            tomlFileRead = true;
+            file.close();
+        }
+    }
+
     if (!tomlFileRead) {
         curPathFile = "/etc/deepin/hardware/oeminfodebug.toml"; //方便调试，并不开放给用户用
         QFile file(curPathFile);
@@ -240,8 +251,18 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
             itemMap.clear();
             ValueKeyList.clear();
             deviceClassesList.append(regClass.cap(2));
-//        } else if (regKeyValue.exactMatch(line)) {  //键值对=
-        } else if (line.contains("=")) {
+        } else if (line.contains("=") && line.contains("{")  && line.contains("}")) { //内联表
+                int start = line.indexOf("{") + 1;
+                int end = line.indexOf("}");
+                QString value = line.mid(start, end - start).trimmed();
+                wordlst = line.split("=");
+                if (2 <= wordlst.size()) {
+                    QString key = wordlst[0].remove('"').trimmed();
+                    itemMap.insert(key, value);
+                    ValueKeyList.append(key);
+                }
+
+        } else if (line.contains("=")) {  //键值对=
             wordlst = line.split("=");
             if (2 == wordlst.size()) {
 
@@ -638,6 +659,12 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
         if (("dmidecode1" == key) && (mapInfo.size() > 0)) {
             QString filename = loadOemTomlFileName(mapInfo);
             parseOemTomlInfo(filename);
+
+            QString tomlFilesName = Common::tomlFilesNameGet();
+            if (!tomlFilesName.isEmpty() &&  tomlFilesName != "tomlFilesName") {
+                if (parseOemTomlInfo(tomlFilesName))
+                    qCInfo(appLog) << "config Toml File name is: /usr/share/deepin-devicemanager/" << tomlFilesName ;
+            }
         }
 
         // 过滤空cpu卡槽信息

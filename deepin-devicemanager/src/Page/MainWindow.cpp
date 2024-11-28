@@ -427,6 +427,12 @@ void MainWindow::initWindowTitle()
         Common::specialComType = dconfig->value("specialComType").toInt();
     }
     qCInfo(appLog) << "Common::specialComType value is:" << Common::specialComType;
+
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("TomlFilesName")) {
+        QString tomlFilesName = dconfig->value("TomlFilesName").toString();
+        Common::tomlFilesNameSet(tomlFilesName);
+    }
+
 #endif
     // 特殊处理
     if (!Common::boardVendorType().isEmpty())

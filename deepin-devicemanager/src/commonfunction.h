@@ -33,6 +33,9 @@ public:
     static QString boardVendorType();
     static QString specialVendorType();
     static QString specialHString();
+    static QString tomlFilesNameGet();
+    static void tomlFilesNameSet(QString name);
+
     /**
      * @brief specialComType
      * special computer type:PGUW(value:1),KLVV/L540(value:2),KLVU(value:3),PGUV/W585(value:4)

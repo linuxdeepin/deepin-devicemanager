@@ -160,7 +160,7 @@ void DevicePrint::loadOtherDeviceInfo()
     addOtherDeviceInfo(("URI"), m_URI);
     addOtherDeviceInfo(("Status"), m_Status);
     addOtherDeviceInfo(("Interface Type"), m_InterfaceType);
-    addOtherDeviceInfo(QObject::tr("printer-make-and-model"), m_MakeAndModel);
+    addOtherDeviceInfo(("printer-make-and-model"), m_MakeAndModel);
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
@@ -170,7 +170,7 @@ void DevicePrint::loadTableData()
     // 加载表格数据
     QString tName = m_Name;
     if (!enable()) {
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);

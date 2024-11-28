@@ -46,11 +46,6 @@ DeviceNetwork::DeviceNetwork()
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (!matchToLshw(mapInfo)
-        && Common::boardVendorType() != "KLVV" && Common::boardVendorType() != "KLVU"
-        && Common::boardVendorType() != "PGUW" && Common::boardVendorType() != "PGUV") {
-        return;
-    }
     // 设置由lshw获取的信息
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
@@ -183,20 +178,6 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setHwinfoLshwKey(mapInfo);
 
     return true;
-}
-
-bool DeviceNetwork::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
-{
-    // 机器自身蓝牙
-    if (m_Name.contains(Common::specialHString(), Qt::CaseInsensitive)) {
-        setAttribute(mapInfo, "Chip Type", m_Name);
-        setAttribute(mapInfo, "Vendor", m_Vendor);
-        setAttribute(mapInfo, "Type", m_Model);
-
-        return true;
-    } else {
-        return false;
-    }
 }
 
 void DeviceNetwork::setIsWireless(const QString &sysfs)
@@ -341,11 +322,11 @@ void DeviceNetwork::loadTableData()
     QString tName = m_Name;
 
     if (!available()) {
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
 
     if (!enable()) {
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     // 加载表格数据信息
