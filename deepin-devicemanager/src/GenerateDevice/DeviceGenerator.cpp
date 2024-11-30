@@ -244,6 +244,31 @@ void DeviceGenerator::generatorMonitorDevice()
     getMonitorInfoFromHwinfo();
 }
 
+bool isValidLogicalName(QString logicalName)
+{
+    if (logicalName.contains("p2p", Qt::CaseInsensitive))
+        return false;
+
+    QString addressFilePath = "/sys/class/net/" + logicalName;
+    QDir dir(addressFilePath);
+    if (dir.exists())
+        return true;
+    else
+        return false;
+}
+
+bool isValidMAC(QString macAddress)
+{
+    if (macAddress.contains("00:00:00:00:00:00", Qt::CaseInsensitive) || macAddress.contains("ff:ff:ff:ff:ff:ff", Qt::CaseInsensitive) || macAddress.isEmpty())
+        return false;
+
+    QRegularExpression macRegex("([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})");
+    if (!macRegex.match(macAddress).hasMatch())
+        return false;
+
+    return true;
+}
+
 void DeviceGenerator::generatorNetworkDevice()
 {
     bool hasWlan =false;
@@ -256,62 +281,75 @@ void DeviceGenerator::generatorNetworkDevice()
 
         const QString &logicalNameLshw =  (*it)["logical name"];
         const QString &macAddressLshw =  (*it)["serial"];
-        if (logicalNameLshw.contains("p2p", Qt::CaseInsensitive))
+        if (!isValidLogicalName(logicalNameLshw))
             continue;
+        if (!isValidMAC(macAddressLshw))
+            continue;
+
         if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive) && hasWlan) //common sense: one PC only have 1 wlan device
             continue;
-        if (macAddressLshw.contains("00:00:00:00:00:00", Qt::CaseInsensitive) || macAddressLshw.contains("ff:ff:ff:ff:ff:ff", Qt::CaseInsensitive) || macAddressLshw.isEmpty())
-            continue;
-        // Regular expression for validating MAC address
-        QRegularExpression macRegex("([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})");
-        if (!macRegex.match(macAddressLshw).hasMatch())
-             continue;
 
-        QString addressFilePath = "/sys/class/net/" + logicalNameLshw;
-        QDir dir(addressFilePath);
-        if (dir.exists()) {
-            DeviceNetwork *device = new DeviceNetwork();
-            device->setInfoFromLshw(*it);
-            lstDevice.append(device);
-            if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive))
-                    hasWlan = true;
-        }
+        DeviceNetwork *device = new DeviceNetwork();
+        device->setInfoFromLshw(*it);
+        lstDevice.append(device);
+        if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive))
+            hasWlan = true;
+
     }
 
-     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
-     for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
+    const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
+    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
 
          // 先判断是否是有效网卡信息
          // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
-         if (((*it).find("HW Address") == (*it).end() && (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())) {
+        if (((*it).find("HW Address") == (*it).end() && (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())) {
              continue;
-         }
+        }
 
-         const QString &serialNumberHwinfo =  (*it)["HW Address"];
-         const QString &logicalNameHwinfo =  (*it)["Device File"];
-         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
+        const QString &macHwinfo =  (*it)["Permanent HW Address"].isEmpty() ? (*it)["HW Address"] : (*it)["Permanent HW Address"];
+        const QString &logicalNameHwinfo =  (*it)["Device File"];
+        bool hasMatchLogicalName = false;
+        for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
              const QString &serialNumberLst =  (*itDevice)->hwAddress();
              const QString &logicalNameLst =  (*itDevice)->logicalName();
              // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
-             if ((*it).find("unique_id") != (*it).end()) {
-                 const QString &unique_id = (*it)["unique_id"];
-                 if (!unique_id.isEmpty() && (*itDevice)->uniqueID() == unique_id) {
-                         (*itDevice)->setEnableValue(false);
-                 }
+            if ((*it).find("unique_id") != (*it).end()) {
+                const QString &unique_id = (*it)["unique_id"];
+                if (!unique_id.isEmpty() && (*itDevice)->uniqueID() == unique_id) {
+                    (*itDevice)->setEnableValue(false);
+                }
 
-             } else if (serialNumberHwinfo == serialNumberLst || logicalNameHwinfo == logicalNameLst) {
-                 (*itDevice)->setInfoFromHwinfo(*it);
-             } else {
+            } else if (macHwinfo == serialNumberLst || logicalNameHwinfo == logicalNameLst) {
+                (*itDevice)->setInfoFromHwinfo(*it);
+                hasMatchLogicalName = true;
+            } else {
                 (*itDevice)->setCanUninstall(false);
                 (*itDevice)->setForcedDisplay(true);
-             }
-         }
-     }
+            }
+        }
+
+        if (!hasMatchLogicalName && isValidMAC(macHwinfo) && isValidLogicalName(logicalNameHwinfo)) {
+
+            if (!logicalNameHwinfo.contains("wlan", Qt::CaseInsensitive)) {
+                DeviceNetwork *device = new DeviceNetwork();
+                device->setInfoFromHwinfo(*it);
+                lstDevice.append(device);
+                hasMatchLogicalName = true;
+            } else if (!hasWlan) {
+                DeviceNetwork *device = new DeviceNetwork();
+                device->setInfoFromHwinfo(*it);
+                lstDevice.append(device);
+                hasMatchLogicalName = true;
+                hasWlan = true;
+            }
+        }
+    }
 
     foreach (DeviceNetwork *device, lstDevice) {
         DeviceManager::instance()->addNetworkDevice(device);
     }
 }
+
 void DeviceGenerator::generatorAudioDevice()
 {
     // 生成音频适配器
