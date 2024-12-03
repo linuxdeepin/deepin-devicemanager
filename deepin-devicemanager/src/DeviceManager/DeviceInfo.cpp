@@ -935,4 +935,294 @@ const  QString DeviceBaseInfo::get_string(const QString &sysPathfile)
     file.close();
     return info;
 }
-
+//只是为了lupdate自动增加翻译而占位
+void DeviceBaseInfo::generatorTranslate()
+{
+    QStringList translationStrings;
+    translationStrings \
+    <<  tr("Core(s)") \
+    <<  tr("Processor") \
+    <<  tr("ACL MTU") \
+    <<  tr("Address") \
+    <<  tr("Alias") \
+    <<  tr("ansiversion") \
+    <<  tr("Application") \
+    <<  tr("Architecture") \
+    <<  tr("Array Handle") \
+    <<  tr("Asset Tag") \
+    <<  tr("Auto Negotiation") \
+    <<  tr("Bank Locator") \
+    <<  tr("Base Board Information") \
+    <<  tr("BD Address") \
+    <<  tr("BIOS Information") \
+    <<  tr("BIOS Revision") \
+    <<  tr("BIOS ROMSIZE") \
+    <<  tr("Board name") \
+    <<  tr("BogoMIPS") \
+    <<  tr("Boot-up State") \
+    <<  tr("Broadcast") \
+    <<  tr("Bus") \
+    <<  tr("bus info") \
+    <<  tr("Bus Info") \
+    <<  tr("Cache Size") \
+    <<  tr("Capabilities") \
+    <<  tr("Capacity") \
+    <<  tr("Characteristics") \
+    <<  tr("Chassis Handle") \
+    <<  tr("Chassis Information") \
+    <<  tr("Chip") \
+    <<  tr("Chipset") \
+    <<  tr("Class") \
+    <<  tr("Clock") \
+    <<  tr("Config Status") \
+    <<  tr("Configured Speed") \
+    <<  tr("Configured Voltage") \
+    <<  tr("Contained Elements") \
+    <<  tr("Contained Object Handles") \
+    <<  tr("copies") \
+    <<  tr("Core ID") \
+    <<  tr("CPU architecture") \
+    <<  tr("CPU Family") \
+    <<  tr("CPU ID") \
+    <<  tr("CPU implementer") \
+    <<  tr("CPU part") \
+    <<  tr("CPU revision") \
+    <<  tr("CPU variant") \
+    <<  tr("critical-action") \
+    <<  tr("Currently Installed Language") \
+    <<  tr("Current Resolution") \
+    <<  tr("daemon-version") \
+    <<  tr("Data Width") \
+    <<  tr("Date") \
+    <<  tr("description") \
+    <<  tr("Description") \
+    <<  tr("Design Capacity") \
+    <<  tr("Design Voltage") \
+    <<  tr("Device") \
+    <<  tr("Device Class") \
+    <<  tr("Device File") \
+    <<  tr("Device Files") \
+    <<  tr("Device Name") \
+    <<  tr("Device Number") \
+    <<  tr("DigitalOutput") \
+    <<  tr("Disable") \
+    <<  tr("Discoverable") \
+    <<  tr("Discovering") \
+    <<  tr("Display Input") \
+    <<  tr("Display Output") \
+    <<  tr("Display Ratio") \
+    <<  tr("DP") \
+    <<  tr("Driver") \
+    <<  tr("Driver Activation Cmd") \
+    <<  tr("Driver Modules") \
+    <<  tr("Driver Status") \
+    <<  tr("Driver Version") \
+    <<  tr("Duplex") \
+    <<  tr("DVI") \
+    <<  tr("eDP") \
+    <<  tr("EGL client APIs") \
+    <<  tr("EGL version") \
+    <<  tr("energy") \
+    <<  tr("energy-empty") \
+    <<  tr("energy-full") \
+    <<  tr("energy-full-design") \
+    <<  tr("energy-rate") \
+    <<  tr("Error Correction Type") \
+    <<  tr("Error Information Handle") \
+    <<  tr("EV") \
+    <<  tr("Extensions") \
+    <<  tr("Family") \
+    <<  tr("Features") \
+    <<  tr("Firmware") \
+    <<  tr("Firmware Revision") \
+    <<  tr("Firmware Version") \
+    <<  tr("Flags") \
+    <<  tr("Form Factor") \
+    <<  tr("GDDR capacity") \
+    <<  tr("Geometry (Logical)") \
+    <<  tr("GLSL version") \
+    <<  tr("GL version") \
+    <<  tr("GPU type") \
+    <<  tr("GPU vendor") \
+    <<  tr("Graphics Memory") \
+    <<  tr("guid") \
+    <<  tr("Handlers") \
+    <<  tr("Hardware Class") \
+    <<  tr("has history") \
+    <<  tr("has statistics") \
+    <<  tr("HCI Version") \
+    <<  tr("HDMI") \
+    <<  tr("Height") \
+    <<  tr("icon-name") \
+    <<  tr("Input/Output") \
+    <<  tr("Installable Languages") \
+    <<  tr("Interface") \
+    <<  tr("Interface Type") \
+    <<  tr("ioport") \
+    <<  tr("IO Port") \
+    <<  tr("IP") \
+    <<  tr("IRQ") \
+    <<  tr("job-cancel-after") \
+    <<  tr("job-hold-until") \
+    <<  tr("job-priority") \
+    <<  tr("KernelModeDriver") \
+    <<  tr("KEY") \
+    <<  tr("L1d Cache") \
+    <<  tr("L1i Cache") \
+    <<  tr("L2 Cache") \
+    <<  tr("L3 Cache") \
+    <<  tr("L4 Cache") \
+    <<  tr("Language Description Format") \
+    <<  tr("latency") \
+    <<  tr("Latency") \
+    <<  tr("lid-is-closed") \
+    <<  tr("lid-is-present") \
+    <<  tr("Link") \
+    <<  tr("Link mode") \
+    <<  tr("Link policy") \
+    <<  tr("LMP Version") \
+    <<  tr("Location") \
+    <<  tr("Location In Chassis") \
+    <<  tr("Locator") \
+    <<  tr("Lock") \
+    <<  tr("logical name") \
+    <<  tr("Logical Name") \
+    <<  tr("logicalsectorsize") \
+    <<  tr("Logical Size") \
+    <<  tr("MAC Address") \
+    <<  tr("marker-change-time") \
+    <<  tr("Max Frequency") \
+    <<  tr("Maximum Capacity") \
+    <<  tr("Maximum Current") \
+    <<  tr("Maximum Power") \
+    <<  tr("Maximum Rate") \
+    <<  tr("Maximum Resolution") \
+    <<  tr("Maximum Voltage") \
+    <<  tr("Media Type") \
+    <<  tr("Memory") \
+    <<  tr("Memory Address") \
+    <<  tr("Memory Operating Mode Capability") \
+    <<  tr("Memory Subsystem Controller Manufacturer ID") \
+    <<  tr("Memory Subsystem Controller Product ID") \
+    <<  tr("Memory Technology") \
+    <<  tr("Minimum Resolution") \
+    <<  tr("Minimum Voltage") \
+    <<  tr("Modalias") \
+    <<  tr("Model") \
+    <<  tr("Module Alias") \
+    <<  tr("Module Alias") \
+    <<  tr("Module Manufacturer ID") \
+    <<  tr("Module Product ID") \
+    <<  tr("MSC") \
+    <<  tr("Multicast") \
+    <<  tr("Name") \
+    <<  tr("native-path") \
+    <<  tr("Negotiation Rate") \
+    <<  tr("network") \
+    <<  tr("Non-Volatile Size") \
+    <<  tr("Number Of Devices") \
+    <<  tr("Number Of Power Cords") \
+    <<  tr("number-up") \
+    <<  tr("OEM Information") \
+    <<  tr("on-battery") \
+    <<  tr("online") \
+    <<  tr("orientation-requested") \
+    <<  tr("Packet type") \
+    <<  tr("Pairable") \
+    <<  tr("Part Number") \
+    <<  tr("percentage") \
+    <<  tr("Phys") \
+    <<  tr("physical id") \
+    <<  tr("Physical ID") \
+    <<  tr("Physical Memory Array") \
+    <<  tr("Port") \
+    <<  tr("Powered") \
+    <<  tr("power supply") \
+    <<  tr("Power Supply State") \
+    <<  tr("Primary Monitor") \
+    <<  tr("print-color-mode") \
+    <<  tr("printer-is-accepting-jobs") \
+    <<  tr("printer-is-shared") \
+    <<  tr("printer-is-temporary") \
+    <<  tr("printer-make-and-model") \
+    <<  tr("printer-state-change-time") \
+    <<  tr("printer-state-reasons") \
+    <<  tr("printer-type") \
+    <<  tr("printer-uri-supported") \
+    <<  tr("product") \
+    <<  tr("Product Date") \
+    <<  tr("Product Name") \
+    <<  tr("PROP") \
+    <<  tr("Rank") \
+    <<  tr("rechargeable") \
+    <<  tr("Refresh Rate") \
+    <<  tr("Release date") \
+    <<  tr("Release Date") \
+    <<  tr("Revision") \
+    <<  tr("ROM Size") \
+    <<  tr("Rotation Rate") \
+    <<  tr("Runtime Size") \
+    <<  tr("SBDS Chemistry") \
+    <<  tr("SBDS Manufacture Date") \
+    <<  tr("SBDS Serial Number") \
+    <<  tr("SBDS Version") \
+    <<  tr("SCO MTU") \
+    <<  tr("sectorsize") \
+    <<  tr("Security Status") \
+    <<  tr("Serial ID") \
+    <<  tr("Serial Number") \
+    <<  tr("Service Classes") \
+    <<  tr("Set") \
+    <<  tr("Shared") \
+    <<  tr("sides") \
+    <<  tr("Size") \
+    <<  tr("SKU Number") \
+    <<  tr("Slot") \
+    <<  tr("SMBIOS Version") \
+    <<  tr("state") \
+    <<  tr("status") \
+    <<  tr("Status") \
+    <<  tr("Stepping") \
+    <<  tr("SubDevice") \
+    <<  tr("SubVendor") \
+    <<  tr("Subversion") \
+    <<  tr("Support Resolution") \
+    <<  tr("Sysfs") \
+    <<  tr("SysFS_Path") \
+    <<  tr("System Information") \
+    <<  tr("technology") \
+    <<  tr("temperature") \
+    <<  tr("Temperature") \
+    <<  tr("Thermal State") \
+    <<  tr("Threads") \
+    <<  tr("Total Width") \
+    <<  tr("Type") \
+    <<  tr("Type Detail") \
+    <<  tr("Unavailable") \
+    <<  tr("Uniq") \
+    <<  tr("updated") \
+    <<  tr("URI") \
+    <<  tr("UUID") \
+    <<  tr("Vendor") \
+    <<  tr("Version") \
+    <<  tr("VGA") \
+    <<  tr("Virtualization") \
+    <<  tr("Volatile Size") \
+    <<  tr("voltage") \
+    <<  tr("Voltage") \
+    <<  tr("Wake-up Type") \
+    <<  tr("warning-level") \
+    <<  tr("Width") \
+    <<  tr("battery") \
+    <<  tr("inch") \
+    <<  tr("Architecture") \
+    <<  tr("Frequency") \
+    <<  tr("Max Frequency") \
+    <<  tr("Media Type") \
+    <<  tr("Name") \
+    <<  tr("Size") \
+    <<  tr("Speed") \
+    <<  tr("Type") \
+    <<  tr("Vendor") \
+    <<  tr("Processor");
+}
