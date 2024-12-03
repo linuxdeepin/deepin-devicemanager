@@ -7,11 +7,8 @@
 #include "X86Generator.h"
 #include "MipsGenerator.h"
 #include "ArmGenerator.h"
-#include "PanguGenerator.h"
-#include "PanguVGenerator.h"
 #include "HWGenerator.h"
 #include "commonfunction.h"
-#include "PanguxGenerator.h"
 
 // Qt库文件
 #include <QProcess>
@@ -39,11 +36,11 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
             if (type == "KLVV")
                 generator = new HWGenerator();
             else if (type == "PGUV" || type == "PGUW")
-                generator = new PanguVGenerator();
+                generator = new HWGenerator();
             else if (type == "KLVU")
                 generator = new HWGenerator();
             else if (type == "PGUX")
-                generator = new PanguXGenerator();
+                generator = new HWGenerator();
             else
                 generator = new HWGenerator();
         } else

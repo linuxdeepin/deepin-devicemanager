@@ -13,6 +13,7 @@
 #include "DeviceInput.h"
 #include "DeviceNetwork.h"
 #include "DDLog.h"
+#include "commonfunction.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -87,7 +88,15 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     getTableListInfo(lst, m_deviceList, m_menuControlList);
 
     // 更新表格
+    mp_Table->setVisible(true);
+    mp_Table->setFixedHeight(TABLE_HEIGHT);
     mp_Table->updateTable(m_deviceList, m_menuControlList);
+    if (Common::specialComType >= 1) {
+        if (mp_Label->text() == tr("Storage") || mp_Label->text() == tr("Memory")) {
+            mp_Table->setVisible(false);
+            mp_Table->setFixedHeight(0);
+        }
+    }
 
     // 更新详细信息
     mp_Detail->showDeviceInfo(lst);
@@ -122,10 +131,20 @@ void PageMultiInfo::resizeEvent(QResizeEvent *e)
     int curHeight = this->height();
     if (curHeight < LEAST_PAGE_HEIGHT) {
         //  获取多个设备界面表格信息
-        mp_Table->updateTable(m_deviceList, m_menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
+        if (Common::specialComType <= 0) {
+            mp_Table->updateTable(m_deviceList, m_menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
+        } else {
+            if (mp_Label->text() != tr("Storage") && mp_Label->text() != tr("Memory"))
+                mp_Table->updateTable(m_deviceList, m_menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
+        }
     } else {
         //  获取多个设备界面表格信息
-        mp_Table->updateTable(m_deviceList, m_menuControlList, true, 0);
+        if (Common::specialComType <= 0) {
+            mp_Table->updateTable(m_deviceList, m_menuControlList, true, 0);
+        } else {
+            if (mp_Label->text() != tr("Storage") && mp_Label->text() != tr("Memory"))
+                mp_Table->updateTable(m_deviceList, m_menuControlList, true, 0);
+        }
     }
 
     return PageInfo::resizeEvent(e);
