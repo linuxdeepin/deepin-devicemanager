@@ -132,7 +132,9 @@ void DeviceMemory::loadBaseDeviceInfo()
 {
     // 添加基本信息
     addBaseDeviceInfo(("Name"), m_Name);
-    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    if (Common::specialComType <= 0) {
+        addBaseDeviceInfo(("Vendor"), m_Vendor);
+    }
     addBaseDeviceInfo(("Size"), m_Size);
     addBaseDeviceInfo(("Type"), m_Type);
     addBaseDeviceInfo(("Speed"), m_Speed);
