@@ -491,6 +491,9 @@ protected:
      */
     bool PhysIDMapInfo(const QMap<QString, QString> &mapInfo);
 
+private:
+    void generatorTranslate();
+
 protected:
     QString            m_Name;         //<! 【名称】
     QString            m_Vendor;       //<! 【制造商
