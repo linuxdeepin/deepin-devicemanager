@@ -31,6 +31,8 @@
 #include "DeviceInput.h"
 #include "MacroDefinition.h"
 
+#include <algorithm> // for std::sort
+
 using namespace DDLog;
 
 DeviceManager    *DeviceManager::sInstance = nullptr;
@@ -735,6 +737,7 @@ void DeviceManager::setStorageInfoFromSmartctl(const QString &name, const QMap<Q
 
 void DeviceManager::mergeDisk()
 {
+    QList<int> m_ListStorageIndex;
     QMap<QString, QList<int> > allSerialIDs;
     for (int i = 0; i < m_ListDeviceStorage.size(); ++i) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[i]);
@@ -749,10 +752,17 @@ void DeviceManager::mergeDisk()
         for (int i = serialIDs.size() - 1; i > 0; --i) {
             DeviceStorage *curDevice = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[serialIDs[i] ]);
             fDevice->appendDisk(curDevice);
-            m_ListDeviceStorage.removeAt(serialIDs[i]);
-            delete curDevice;
+            m_ListStorageIndex.append(serialIDs[i]);
         }
     }
+
+    std::sort(m_ListStorageIndex.begin(), m_ListStorageIndex.end(), std::greater<int>());
+    for(auto index : m_ListStorageIndex) {
+        DeviceStorage *curDevice = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[index]);
+        m_ListDeviceStorage.removeAt(index);
+        delete curDevice;
+    }
+
     for (int i = 0; i < m_ListDeviceStorage.size(); ++i) {
         DeviceStorage *device = dynamic_cast<DeviceStorage *>(m_ListDeviceStorage[i]);
         device->unitConvertByDecimal();
