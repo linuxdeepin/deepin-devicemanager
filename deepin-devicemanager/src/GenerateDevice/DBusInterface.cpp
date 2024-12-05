@@ -10,6 +10,7 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QLoggingCategory>
+#include <QProcess>
 
 using namespace DDLog;
 
@@ -36,7 +37,14 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
         info = reply.value();
         return true;
     } else {
-        qCInfo(appLog) << "Error in getting info from getInfo .......................................";
+        qCInfo(appLog) << "unsucess in getting info from getInfo :"  << key;
+        QProcess process;
+        QString command = "gdbus call --system --dest org.deepin.DeviceInfo --object-path /org/deepin/DeviceInfo --method org.deepin.DeviceInfo.getInfo hwinfo";
+        process.start(command);
+        process.waitForFinished();
+        QByteArray output = process.readAllStandardOutput();
+        QString outputStr = QString::fromLocal8Bit(output);
+        qCInfo(appLog) << "getInfo gdbus out:" << outputStr.left(10); //debug detect service work is really unstable
         return false;
     }
 }
