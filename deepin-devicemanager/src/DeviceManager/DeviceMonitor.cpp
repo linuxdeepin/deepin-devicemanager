@@ -6,6 +6,7 @@
 #include "DeviceMonitor.h"
 #include "EDIDParser.h"
 #include "commonfunction.h"
+#include "commondefine.h"
 #include "DDLog.h"
 
 #include <DApplication>
@@ -428,7 +429,11 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
                 qCDebug(appLog) << "Adjusting rate for board vendor type";
                 curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
             }
-            m_CurrentResolution = QString("%1@%2").arg(match.captured(1)).arg(curRate);
+            if (Common::specialComType == 5) {
+                m_CurrentResolution = QString("%1").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, main));
+            } else {
+                m_CurrentResolution = QString("%1@%2").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, main)).arg(curRate);
+            }
         } else {
             qCDebug(appLog) << "Rate is empty, setting current resolution without rate";
             m_CurrentResolution = QString("%1").arg(match.captured(1));
