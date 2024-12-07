@@ -175,7 +175,8 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "Setting monitor info from TOML configuration";
-    m_IsTomlSet = true;
+    if (Common::specialComType == 2)
+        m_IsTomlSet = true;
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Type", m_Model);
