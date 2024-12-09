@@ -630,6 +630,28 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
     return vendor;
 }
 
+void DeviceBaseInfo::setVendorNameBylsusbLspci(const QString &vidpid, const QString &modalias)
+{
+    if (!vidpid.isEmpty() && modalias.contains("usb")) {
+        QProcess process;
+        QString vendorId = vidpid.toLower().remove("0x").trimmed().left(4);
+        QString deviceId = vidpid.toLower().remove("0x").trimmed().right(4);
+        process.start("lsusb -v -d " + vendorId + ":" + deviceId);
+        process.waitForFinished(-1);
+
+        QString output = process.readAllStandardOutput();
+
+        foreach (QString out, output.split("\n")) {
+            // 从USB设备获取制造商和设备名称
+            if (out.contains("idVendor", Qt::CaseSensitive)) {
+                m_Vendor = out.remove(0, out.indexOf(vendorId) + 4).trimmed();
+            } else if (out.contains("idProduct", Qt::CaseSensitive)) {
+                m_Name = out.remove(0, out.indexOf(deviceId) + 4).trimmed();
+            }
+        }
+    }
+}
+
 const QString DeviceBaseInfo::getDriverVersion()
 {
     QString outInfo = Common::executeClientCmd("modinfo", QStringList() << driver(), QString(), -1);
