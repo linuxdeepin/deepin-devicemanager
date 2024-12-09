@@ -225,6 +225,14 @@ public:
     const QString getVendorOrModelId(const QString &sysPath, bool flag = true);
 
     /**
+     * @brief setVendorNameBylsusbLspci:获取Vendor 和 Name
+     * @param vidpid 属性vidpid
+     * @param modalias
+     * @return
+     */
+    void setVendorNameBylsusbLspci(const QString &vidpid, const QString &modalias);
+
+    /**
      * @brief get_string:读取文件内信息
      * @param path:文件绝对路径+名称
      */

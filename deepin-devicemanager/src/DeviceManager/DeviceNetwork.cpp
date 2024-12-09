@@ -55,30 +55,8 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
-    if (m_SysPath.contains("usb")) {
-        qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, sysPath contains usb";
-        QProcess process;
-        QString vendorId = getVendorOrModelId(m_SysPath, true).trimmed();
-        QString deviceId = getVendorOrModelId(m_SysPath, false).trimmed();
-        process.start("lsusb -v -d " + vendorId + ":" + deviceId);
-        process.waitForFinished(-1);
+    setAttribute(mapInfo, "description", m_Name);
 
-        QString output = process.readAllStandardOutput();
-
-        foreach (QString out, output.split("\n")) {
-            if (!m_Vendor.isEmpty() && !m_Name.isEmpty())
-                break;
-            // 从USB设备获取制造商和设备名称
-            if (m_Vendor.isEmpty() && out.contains("idVendor", Qt::CaseSensitive)) {
-                m_Vendor = out.remove(0, out.indexOf(vendorId) + 4).trimmed();
-            } else if (m_Name.isEmpty() && out.contains("idProduct", Qt::CaseSensitive)) {
-                m_Name = out.remove(0, out.indexOf(deviceId) + 4).trimmed();
-            }
-        }
-    } else {
-        qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, sysPath not contains usb";
-        setAttribute(mapInfo, "description", m_Name, false);
-    }
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
     setAttribute(mapInfo, "logical name", m_LogicalName);
@@ -169,6 +147,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     }
     qCDebug(appLog) << "DeviceNetwork::setInfoFromHwinfo, mapInfo not contains path";
     setAttribute(mapInfo, "Device", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Device File", m_LogicalName);
     setAttribute(mapInfo, "HW Address", m_MACAddress);
     setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
@@ -178,6 +157,9 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Module Alias", m_Modalias);
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
     m_PhysID = m_VID_PID;
+    if (!m_VID_PID.isEmpty() && m_Modalias.contains("usb")) {
+        setVendorNameBylsusbLspci(m_VID_PID, m_Modalias);
+    }
 
     if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
         qCDebug(appLog) << "DeviceNetwork::setInfoFromHwinfo, driver is kernel in";
@@ -192,8 +174,6 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     }
     // 判断是否是无线网卡
     setIsWireless(mapInfo["SysFS ID"]);
-
-    setHwinfoLshwKey(mapInfo);
 
     return true;
 }
