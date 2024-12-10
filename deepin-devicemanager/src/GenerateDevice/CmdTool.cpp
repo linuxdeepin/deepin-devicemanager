@@ -383,7 +383,7 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
             qCDebug(appLog) << "Parsing lshw multimedia info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_multimedia", mapInfo);
-        } else if (item.startsWith("network")) {      // 网卡信息
+        } else if (item.startsWith("network") || item.startsWith("communication")) {      // 网卡信息
             qCDebug(appLog) << "Parsing lshw network info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_network", mapInfo);
