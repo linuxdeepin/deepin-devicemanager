@@ -249,7 +249,7 @@ void DeviceGenerator::generatorMonitorDevice()
 
 bool isValidLogicalName(const QString& logicalName)
 {
-    if (logicalName.contains("p2p", Qt::CaseInsensitive))
+    if (logicalName.contains("p2p", Qt::CaseInsensitive) || logicalName.isEmpty())
         return false;
 
     QString addressFilePath = "/sys/class/net/" + logicalName;
