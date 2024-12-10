@@ -331,7 +331,7 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
         } else if (item.startsWith("multimedia")) {   // 音频信息
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_multimedia", mapInfo);
-        } else if (item.startsWith("network")) {      // 网卡信息
+        } else if (item.startsWith("network") || item.startsWith("communication")) {      // 网卡信息
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_network", mapInfo);
         } else if (item.startsWith("usb")) {          // USB 设备信息
