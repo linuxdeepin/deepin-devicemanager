@@ -430,9 +430,9 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
                 curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
             }
             if (Common::specialComType == 5) {
-                m_CurrentResolution = QString("%1").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, main));
+                m_CurrentResolution = QString("%1").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, info));
             } else {
-                m_CurrentResolution = QString("%1@%2").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, main)).arg(curRate);
+                m_CurrentResolution = QString("%1@%2").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, info)).arg(curRate);
             }
         } else {
             qCDebug(appLog) << "Rate is empty, setting current resolution without rate";
