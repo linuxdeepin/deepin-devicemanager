@@ -50,7 +50,8 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
-    setAttribute(mapInfo, "description", m_Name);
+    if (m_Name.isEmpty())
+        setAttribute(mapInfo, "description", m_Name);
 
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
