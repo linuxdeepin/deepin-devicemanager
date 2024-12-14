@@ -1,5 +1,11 @@
 deepin-devicemanager (6.0.29) unstable; urgency=medium
 
+  * chore: [disk] support multis lvm /dev/mapper
+
+ -- renbin <renbin@uniontech.com>  Sat, 14 Dec 2024 13:20:22 +0800
+
+deepin-devicemanager (6.0.29) unstable; urgency=medium
+
   * fix: toml filename del serialnumber(Bug: 272885)
   * fix: bluetooth add alias proper(Bug: 269257)
   * fix: [cmd] Remove bash calls and system script calls(Task: 362323)
