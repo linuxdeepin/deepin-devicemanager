@@ -436,12 +436,19 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
             int pos = rateMatch.capturedStart();
             if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
                 qCDebug(appLog) << "Adjusting rate for board vendor type";
-                curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
+                if (Common::specialComType == 1) {
+                    curRate = QString::number(ceil(curRate.left(pos).toDouble())) + ".00" + curRate.right(curRate.size() - pos);
+                } else {
+                    curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
+                }
+            }
+            if (Common::specialComType == 1) {
+                m_RefreshRate = QString("%1").arg(curRate);
             }
             if (Common::specialComType == 5) {
                 m_CurrentResolution = QString("%1").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, info));
             } else {
-                m_CurrentResolution = QString("%1@%2").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, info)).arg(curRate);
+                m_CurrentResolution = QString("%1 @%2").arg(QT_REGEXP_CAPTURE(reScreenSize, 1, info)).arg(curRate);
             }
         } else {
             qCDebug(appLog) << "Rate is empty, setting current resolution without rate";
