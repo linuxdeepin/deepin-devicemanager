@@ -33,6 +33,7 @@ DeviceMonitor::DeviceMonitor()
     , m_CurrentResolution("")
     , m_SerialNumber("")
     , m_ProductionWeek("")
+    , m_RefreshRate("")
     , m_Width(0)
     , m_Height(0)
     , m_IsTomlSet(false)
@@ -275,6 +276,15 @@ void DeviceMonitor::loadOtherDeviceInfo()
     if (m_CurrentResolution != "@Hz") {
         addOtherDeviceInfo(("Current Resolution"), m_CurrentResolution);
         addOtherDeviceInfo(("Display Ratio"), m_AspectRatio);
+
+        if (Common::specialComType == 4) {
+            if (m_CurrentResolution.contains("@")) {
+                QStringList refreshList = m_CurrentResolution.split('@', QString::SkipEmptyParts);
+                if (refreshList.size() == 2) {
+                    m_RefreshRate = refreshList.at(1).trimmed();
+                }
+            }
+        }
     }
     addOtherDeviceInfo(("Primary Monitor"), m_MainScreen);
     addOtherDeviceInfo(("Size"), m_ScreenSize);
