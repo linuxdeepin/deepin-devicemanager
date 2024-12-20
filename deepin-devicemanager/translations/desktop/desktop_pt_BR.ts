@@ -14,7 +14,7 @@
 <message>
 <location filename="Desktop Entry]Name" line="0"/>
 <source>Deepin Device Manager</source>
-<translation>deepin Gerenciador de Dispositivos</translation>
+<translation>Gerenciador de Dispositivos</translation>
 </message>
 </context>
 </TS>

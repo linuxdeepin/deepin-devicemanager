@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation>取消</translation>
+        <translation>取 消</translation>
     </message>
     <message>
         <source>Confirm</source>
