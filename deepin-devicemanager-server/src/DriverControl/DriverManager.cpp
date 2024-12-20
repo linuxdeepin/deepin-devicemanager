@@ -234,7 +234,7 @@ bool DriverManager::installDriver(const QString &filepath)
     //模块已被加载
     /*
      * 下面代码由 liujun 于 2021年11月9号 注释
-     * 为修复bug https://pms.uniontech.com/zentao/bug-view-101808.html
+     * 为修复bug 101808
     */
 //    if (mp_modcore->modIsLoaded(filepath)) {
 //        sigProgressDetail(10, QString("could not insert module %1 :file exist").arg(filepath));
