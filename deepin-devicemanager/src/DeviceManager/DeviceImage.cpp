@@ -18,6 +18,7 @@ DeviceImage::DeviceImage()
 {
     m_CanEnable = true;
     m_CanUninstall = true;
+    m_forcedDisplay = true;
 }
 
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
