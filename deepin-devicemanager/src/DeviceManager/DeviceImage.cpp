@@ -22,6 +22,7 @@ DeviceImage::DeviceImage()
     qCDebug(appLog) << "DeviceImage constructor initialized.";
     m_CanEnable = true;
     m_CanUninstall = true;
+    m_forcedDisplay = true;
 }
 
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
