@@ -850,7 +850,7 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
         if ((*it)["Hardware Class"] == "hub" || (*it)["Hardware Class"] == "mouse" || (*it)["Hardware Class"] == "keyboard")
             continue;
 
-        if ((*it)["Model"].contains("bluetooth", Qt::CaseInsensitive) || (*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
+        if ((*it)["Model"].contains("bluetooth", Qt::CaseInsensitive) || (*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0" || (*it)["Device"] == "SCM2625 BT 5.2 network adapter") {
 
             // 判断重复设备数据
             QString unique_id = uniqueID(*it);
