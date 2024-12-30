@@ -81,6 +81,7 @@ static bool isModeM900(void)
     }
     return false;
 }
+
 /*   dmidecode | grep -i “String 4”中的值来区分主板类型,PWC30表示PanguW（也就是W525）*/
 static bool isModeW525(void)
 {
@@ -127,6 +128,9 @@ QString Common::checkBoardVendorFlag()
             break;
         case PGUX:
             boardVendorKey = "PGUX";
+            break;
+        case M009:
+            boardVendorKey = "M009";
             break;
         default:
             boardVendorKey = "PGUW";
