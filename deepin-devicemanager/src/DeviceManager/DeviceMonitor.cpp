@@ -339,7 +339,7 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
                     curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
                 }
             }
-            if (Common::specialComType == 1 || Common::specialComType == 6) {
+            if (Common::specialComType == 1 || Common::specialComType == 5 || Common::specialComType == 6) {
                 m_RefreshRate = QString("%1").arg(curRate);
             }
             if (Common::specialComType == 5 || Common::specialComType == 6) {
