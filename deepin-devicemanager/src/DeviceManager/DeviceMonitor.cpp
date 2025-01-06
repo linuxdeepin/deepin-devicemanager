@@ -269,7 +269,8 @@ void DeviceMonitor::loadBaseDeviceInfo()
     if (Common::specialComType != 6)
         addBaseDeviceInfo(("Name"), m_Name);
     addBaseDeviceInfo(("Vendor"), m_Vendor);
-    addBaseDeviceInfo(("Type"), m_Model);
+    if (Common::specialComType != 6)
+        addBaseDeviceInfo(("Type"), m_Model);
     addBaseDeviceInfo(("Display Input"), m_DisplayInput);
     addBaseDeviceInfo(("Interface Type"), m_Interface);
 }
