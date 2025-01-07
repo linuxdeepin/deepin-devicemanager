@@ -152,7 +152,9 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         return false;
     }
 
-    setAttribute(mapInfo, "Model", m_Name);
+    if (Common::specialComType <= 0) {
+        setAttribute(mapInfo, "Model", m_Name);
+    }
     setAttribute(mapInfo, "Vendor", m_Vendor);
 
     // 希捷硬盘为ATA硬盘，无法直接获取厂商信息,只能特殊处理
@@ -520,7 +522,7 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
 void DeviceStorage::checkDiskSize()
 {
     qCDebug(appLog) << "DeviceStorage::checkDiskSize";
-    if (Common::specialVendorType() != Common::specialHString()) {
+    if (Common::specialComType <= 0) {
         return; //定制机型专用，其它慎用
     }
     quint64 gbyte =  1000000000;
