@@ -11,7 +11,7 @@
 #include <DFontSizeManager>
 #include <DStandardItem>
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 
 // Qt库文件
 #include <QHBoxLayout>

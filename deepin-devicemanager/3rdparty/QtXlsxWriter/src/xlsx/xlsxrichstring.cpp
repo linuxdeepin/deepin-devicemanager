@@ -104,7 +104,7 @@ RichString &RichString::operator =(const RichString &other)
 */
 RichString::operator QVariant() const
 {
-    return QVariant(qMetaTypeId<RichString>(), this);
+    return QVariant::fromValue(*this);
 }
 
 /*!

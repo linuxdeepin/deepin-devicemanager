@@ -6,7 +6,7 @@
 #include "DriverListView.h"
 #include "DriverListViewDelegate.h"
 
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 #include <DStyle>
 
@@ -47,7 +47,7 @@ void DriverListView::paintEvent(QPaintEvent *event)
     } else {
         cg = DPalette::Active;
     }
-    auto *dAppHelper = DApplicationHelper::instance();
+    auto *dAppHelper = DGuiApplicationHelper::instance();
     auto palette = dAppHelper->applicationPalette();
     QBrush bgBrush(palette.color(cg, DPalette::Base));
     //绘制背景
@@ -97,8 +97,13 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
     auto palette = options.palette;
     QBrush background;
     if (!(index.row() & 1)) {
-        auto dpa = DApplicationHelper::instance()->palette(this);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        auto dpa = DGuiApplicationHelper::instance()->palette(this);
         background = dpa.color(DPalette::ItemBackground);
+#else
+        // 当Qt版本为6.0或更高时，直接使用palette.color(cg, DPalette::Base)来获取背景颜
+        background = palette.color(cg, DPalette::Base);
+#endif
     } else {
         background = palette.color(cg, DPalette::Base);
     }

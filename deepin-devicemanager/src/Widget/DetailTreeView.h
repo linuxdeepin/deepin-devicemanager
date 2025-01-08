@@ -6,6 +6,11 @@
 #define DETAILTREEVIEW_H
 
 #include <QStandardItem>
+#include <QEvent>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#include <QEnterEvent>
+#endif
 
 #include <DTreeView>
 #include <DWidget>
@@ -33,8 +38,12 @@ protected:
     /**
      * @brief enterEvent:鼠标进入事件
      * @param event
-     */
-    void enterEvent(QEvent *event)override;
+    */
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    void enterEvent(QEvent *event) override;
+#else
+    void enterEvent(QEnterEvent *event) override;
+#endif
 
     /**
      * @brief leaveEvent:鼠标移出事件

@@ -266,9 +266,17 @@ int DriverHeaderView::sectionSizeHint(int logicalIndex) const
     QFontMetrics fm(DApplication::font());
     QString buf = model()->headerData(logicalIndex, Qt::Horizontal, Qt::DisplayRole).toString();
     if (sortIndicatorSection() == logicalIndex) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         return fm.width(buf) + margin * 3 + 8;
+#else
+        return fm.horizontalAdvance(buf) + margin * 3 + 8;
+#endif
     } else {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         return fm.width(buf) + margin * 2;
+#else
+        return fm.horizontalAdvance(buf) + margin * 2;
+#endif
     }
 }
 

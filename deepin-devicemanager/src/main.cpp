@@ -5,7 +5,10 @@
 
 #include "Page/MainWindow.h"
 #include "DTitlebar"
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include "DApplicationSettings"
+#endif
+
 #include "environments.h"
 #include "DebugTimeManager.h"
 #include "SingleDeviceManager.h"
@@ -23,7 +26,11 @@
 #include <DLog>
 #include "LogConfigread.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <polkit-qt5-1/PolkitQt1/Authority>
+#else
+#include <polkit-qt6-1/PolkitQt1/Authority>
+#endif
 
 using namespace DDLog;
 
@@ -94,8 +101,9 @@ int main(int argc, char *argv[])
                                                                                 Authority::AllowUserInteraction);
         if (result != Authority::Yes)
             return 0;
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         DApplicationSettings settinAgs;
+#endif
         Dtk::Core::DLogManager::registerFileAppender();
 
         QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");

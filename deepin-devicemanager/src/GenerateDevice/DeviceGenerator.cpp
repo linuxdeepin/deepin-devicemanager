@@ -31,7 +31,7 @@
 
 // Qt库文件
 #include <QLoggingCategory>
-
+#include <QRegularExpression>
 DeviceGenerator::DeviceGenerator(QObject *parent)
     : QObject(parent)
 {
@@ -74,12 +74,12 @@ void DeviceGenerator::generatorComputerDevice()
     if (verInfo.size() > 0) {
         QString info = verInfo[0]["OS"].trimmed();
         info = info.trimmed();
-        QRegExp reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)", Qt::CaseSensitive);
-        int index = reg.indexIn(info);
-        if (index != -1) {
-            QString tmp = reg.cap(0);
+        QRegularExpression reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)");
+        QRegularExpressionMatch match = reg.match(info);
+        if (match.hasMatch()) {
+            QString tmp = match.captured(0);
             info.remove(tmp);
-            info.insert(index, reg.cap(1));
+            info.insert(match.capturedStart(), match.captured(1));
         }
         device->setOS(info);
     }
@@ -1066,7 +1066,7 @@ void DeviceGenerator::getOthersInfoFromHwinfo()
 
         bool isOtherDevice = true;
         QString curBus = (*it)["SysFS BusID"];
-        curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+        curBus.replace(QRegularExpression("\\.[0-9]{1,2}$"), "");
         const QStringList &lstBusId = DeviceManager::instance()->getBusId();
         // 判断该设备是否已经在其他类别中显示
         if ((*it).find("unique_id") != (*it).end() && (*it)["Hardware Class"] != "others") {
@@ -1124,7 +1124,7 @@ void DeviceGenerator::addBusIDFromHwinfo(const QString &sysfsBusID)
         return;
 
     QString busID = sysfsBusID;
-    busID.replace(QRegExp("\\.[0-9]+$"), "");
+    busID.replace(QRegularExpression("\\.[0-9]+$"), "");
 
     m_ListBusID.append(busID);
 }

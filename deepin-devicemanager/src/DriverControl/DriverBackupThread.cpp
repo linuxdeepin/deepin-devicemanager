@@ -62,7 +62,11 @@ void DriverBackupThread::run()
         process.setWorkingDirectory(backupPath);
         connect(&process, &QProcess::readyReadStandardOutput, this, [&](){
             QByteArray outArry = process.readAllStandardOutput();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             QList<QString> lines = QString(outArry).split('\n', QString::SkipEmptyParts);
+#else
+            QList<QString> lines = QString(outArry).split('\n');
+#endif
             for (const QString &line : qAsConst(lines)) {
                 if (line.contains("无法解析域名")) {
                     qCInfo (appLog) << "network error: " << line;

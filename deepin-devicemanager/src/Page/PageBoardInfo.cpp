@@ -13,14 +13,14 @@
 #include "MacroDefinition.h"
 
 // Dtk头文件
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DPalette>
 #include <DFontSizeManager>
 
 // Qt库文件
 #include <QTableWidgetItem>
 #include <QLoggingCategory>
-
+#include <QRegularExpression>
 #include <unistd.h>
 
 PageBoardInfo::PageBoardInfo(QWidget *parent)
@@ -68,7 +68,11 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 
     // 比较页面可显示的最大行数与主板信息,取小值
     int maxRow = this->height() / ROW_HEIGHT - 3;
-    int limitSize = std::min(lst.size(), maxRow);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    int limitSize = std::min(static_cast<int>(lst.size()), maxRow);
+#else
+    int limitSize = std::min(lst.size(), static_cast<qsizetype>(maxRow));
+#endif
     if (mp_Content)
         mp_Content->setLimitRow(limitSize);
 
@@ -179,7 +183,7 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
         pair.second += second.replace(":", " ");
         pair.second += "\n";
     }
-    pair.second.replace(QRegExp("\n$"), "");
+    pair.second.replace(QRegularExpression(QStringLiteral("\\n$")), QString());
 }
 
 void PageBoardInfo::setFontChangeFlag()

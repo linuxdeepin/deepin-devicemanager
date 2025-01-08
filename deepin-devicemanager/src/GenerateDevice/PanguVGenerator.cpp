@@ -125,8 +125,11 @@ QStringList PanguVGenerator::getNetworkInfoFromifconfig()
         //filter "lo" 网卡
         if (list.at(i).contains("lo"))
             continue;
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QStringList line = list.at(i).split(" ", QString::SkipEmptyParts);
+#else
+        QStringList line = list.at(i).split(" ");
+#endif
         {
             if(line.size() < 2)
                 continue;

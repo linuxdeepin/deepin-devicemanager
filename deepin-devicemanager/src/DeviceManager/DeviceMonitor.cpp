@@ -13,7 +13,7 @@
 #include <QLoggingCategory>
 #include <QDate>
 #include <QSize>
-
+#include <QRegularExpression>
 // 其它头文件
 #include <math.h>
 
@@ -48,6 +48,8 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
 
     // 根据不同的正则表达式解析屏幕大小字符串
     QString res = sizeDescription;
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QRegExp re("^([\\d]*)x([\\d]*) mm$");
     if (re.exactMatch(sizeDescription)) {
 
@@ -73,7 +75,6 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
         m_Height = re.cap(2).toInt();
         retSize = QSize(m_Width, m_Height);
 
-        // 获取屏幕尺寸大小 inch
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
@@ -81,6 +82,37 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
         res += sizeDescription;
         res += ")";
     }
+#else
+    QRegularExpression re("^([\\d]*)x([\\d]*) mm$");
+    QRegularExpressionMatch match = re.match(sizeDescription);
+    if (match.hasMatch()) {
+        m_Width = match.captured(1).toInt();
+        m_Height = match.captured(2).toInt();
+        retSize = QSize(m_Width, m_Height);
+
+        double width = m_Width / 2.54;
+        double height = m_Height / 2.54;
+        inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+
+    re.setPattern("([0-9]\\d*)mm x ([0-9]\\d*)mm");
+    match = re.match(sizeDescription);
+    if (match.hasMatch()) {
+        m_Width = match.captured(1).toInt();
+        m_Height = match.captured(2).toInt();
+        retSize = QSize(m_Width, m_Height);
+
+        double width = m_Width / 2.54;
+        double height = m_Height / 2.54;
+        inch = std::sqrt(width * width + height * height) / 10.0;
+        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res += sizeDescription;
+        res += ")";
+    }
+#endif
 
     return res;
 }
@@ -114,7 +146,11 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 计算显示比例
     caculateScreenRatio();
 
-    m_SupportResolution.replace(QRegExp(", $"), "");
+    #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        m_SupportResolution.replace(QRegExp(", $"), "");
+    #else
+        m_SupportResolution.replace(QRegularExpression(", $"), "");
+    #endif
 
     m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
@@ -191,18 +227,21 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
     if (!m_Interface.isEmpty()) {
         // 设置当前分辨率
         if (m_CurrentResolution.isEmpty()) {
-            QRegExp reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
-            if (reScreenSize.exactMatch(main)) {
+            QRegularExpression reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
+            QRegularExpressionMatch match = reScreenSize.match(main);
+            if (match.hasMatch()) {
                 if (!rate.isEmpty()) {
                     QString curRate = rate;
-                    QRegExp rateStart("[a-zA-Z]");
-                    int pos = curRate.indexOf(rateStart);
+                    QRegularExpression rateStart("[a-zA-Z]");
+                    QRegularExpressionMatch rateMatch = rateStart.match(curRate);
+                    int pos = rateMatch.capturedStart();
                     if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
                         curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
                     }
-                    m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate);
-                } else
-                    m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+                    m_CurrentResolution = QString("%1@%2").arg(match.captured(1)).arg(curRate);
+                } else {
+                    m_CurrentResolution = QString("%1").arg(match.captured(1));
+                }
             }
         }
         return false;
@@ -305,9 +344,11 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
     //  bug89456：显示设备接口类型DP，VGA，HDMI，eDP，DisplayPort
     //  还可能会有其它接口类型，为了避免每一次遇到新的接口类型就要修改代码
     //  使用正则表达式获取接口类型进行显示
-    QRegExp reStart("^([a-zA-Z]*)-[\\s\\S]*");
-    if (reStart.exactMatch(info)) {
-        m_Interface = reStart.cap(1);
+    // 使用 QRegularExpression 替换 QRegExp
+    QRegularExpression reStart("^([a-zA-Z]*)-[\\s\\S]*");
+    QRegularExpressionMatch match = reStart.match(info);
+    if (match.hasMatch()) {
+        m_Interface = match.captured(1);
     }
 
     // wayland xrandr --verbose无primary信息
@@ -320,18 +361,20 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
     }
 
     // 设置当前分辨率
-    QRegExp reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
-    if (reScreenSize.exactMatch(info)) {
+    QRegularExpression reScreenSize(".*([0-9]{1,5}x[0-9]{1,5}).*");
+    match = reScreenSize.match(info);
+    if (match.hasMatch()) {
         if (!rate.isEmpty()) {
             QString curRate = rate;
-            QRegExp rateStart("[a-zA-Z]");
-            int pos = curRate.indexOf(rateStart);
+            QRegularExpression rateStart("[a-zA-Z]");
+            QRegularExpressionMatch rateMatch = rateStart.match(curRate);
+            int pos = rateMatch.capturedStart();
             if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
                 curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
             }
-            m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate);
+            m_CurrentResolution = QString("%1@%2").arg(match.captured(1)).arg(curRate);
         } else
-            m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+            m_CurrentResolution = QString("%1").arg(match.captured(1));
     }
 
     return true;
@@ -339,10 +382,11 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
 
 void DeviceMonitor::caculateScreenRatio()
 {
-    QRegExp re("^([\\d]*)x([\\d]*)(.*)$");
-    if (re.exactMatch(m_CurrentResolution)) {
-        int width = re.cap(1).toInt();
-        int height = re.cap(2).toInt();
+    QRegularExpression re("^([\\d]*)x([\\d]*)(.*)$");
+    QRegularExpressionMatch match = re.match(m_CurrentResolution);
+    if (match.hasMatch()) {
+        int width = match.captured(1).toInt();
+        int height = match.captured(2).toInt();
         int gys = gcd(width, height);
         int w = width / gys;
         int h = height / gys;
@@ -386,10 +430,11 @@ bool DeviceMonitor::findAspectRatio(int width, int height, int &ar_w, int &ar_h)
 void DeviceMonitor::caculateScreenSize()
 {
     // 527x296 mm
-    QRegExp re(".*([0-9]{3,5})x([0-9]{3,5})\\smm$");
-    if (re.exactMatch(m_ScreenSize)) {
-        m_Width = re.cap(1).toInt();
-        m_Height = re.cap(2).toInt();
+    QRegularExpression re(".*([0-9]{3,5})x([0-9]{3,5})\\smm$");
+    QRegularExpressionMatch match = re.match(m_ScreenSize);
+    if (match.hasMatch()) {
+        m_Width = match.captured(1).toInt();
+        m_Height = match.captured(2).toInt();
 
         double inch = std::sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54)) / 10.0;
         m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);

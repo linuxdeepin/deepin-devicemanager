@@ -30,7 +30,7 @@
 #include "DeviceCdrom.h"
 #include "DeviceInput.h"
 #include "MacroDefinition.h"
-
+#include <QRegularExpression>   
 #include <algorithm> // for std::sort
 
 using namespace DDLog;
@@ -1023,7 +1023,11 @@ DeviceBaseInfo *DeviceManager::getAudioDevice(const QString &path)
         DeviceAudio *audio = dynamic_cast<DeviceAudio *>(*it);
         QString tpath = audio->uniqueID();
         // 判断该设备是否已经存在，1.1:1.1 -> 1.1:1.0
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         if (audio && path == tpath.replace(QRegExp("[1-9]$"), "0")) {
+#else
+        if (audio && path == tpath.replace(QRegularExpression("[1-9]$"), "0")) {
+#endif
             return *it;
         }
         QString syspath = audio->sysPath();   //remove dumplicate syspath
@@ -1039,7 +1043,6 @@ DeviceBaseInfo *DeviceManager::getAudioDevice(const QString &path)
         if (audio && path == vidpid) {
             return *it;
         }
-
     }
     return nullptr;
 }

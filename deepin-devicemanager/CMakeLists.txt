@@ -106,24 +106,70 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/src/DDLog/)
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
 
-# Find the library
-find_package(PkgConfig REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5 COMPONENTS DBus REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Xml REQUIRED)
-find_package(PolkitQt5-1 REQUIRED)
-find_package(DtkWidget REQUIRED)
-find_package(DtkCore REQUIRED)
+# Find the library 
+#Qt5 
+# find_package(PkgConfig REQUIRED)
+# find_package(Qt5Widgets REQUIRED)
+# find_package(Qt5 COMPONENTS DBus REQUIRED)
+# find_package(Qt5Network REQUIRED)
+# find_package(Qt5Gui REQUIRED)
+# find_package(Qt5Xml REQUIRED)
+# find_package(PolkitQt5-1 REQUIRED)
+# find_package(DtkWidget REQUIRED)
+# find_package(DtkCore REQUIRED)
 
-include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
+#qt6
+find_package(PkgConfig REQUIRED)
+find_package(Qt6 COMPONENTS 
+    Gui 
+    Widgets 
+    DBus 
+    LinguistTools 
+    Network 
+    Concurrent 
+    Sql 
+    Svg 
+    SvgWidgets 
+    Multimedia 
+    MultimediaWidgets 
+    Xml 
+    OpenGL 
+    Core 
+    OpenGLWidgets 
+    REQUIRED
+)
+find_package(PolkitQt6-1 REQUIRED)
+
+find_package(Dtk6 COMPONENTS
+    Widget
+    Core
+    REQUIRED
+)
+
+#include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
+include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
 
 # Tell CMake to create the executable
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H} ${APP_QRC})
-
 target_include_directories(${APP_BIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
-target_link_libraries(${APP_BIN_NAME}
+
+if (Qt6_FOUND)
+    message(STATUS "Qt6_FOUND22222222222DDDDDDDDDDDD = ${Qt6_FOUND}")
+    # Qt6 environment
+    target_link_libraries(${APP_BIN_NAME}
+    Dtk6::Core
+    Dtk6::Widget
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+    Qt6::DBus
+    Qt6::Xml
+    Qt6::Network
+    PolkitQt6-1::Agent
+)
+else()
+    # Qt5 environment
+    target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}
     ${DtkCore_LIBRARIES}
     Qt5::Core
@@ -134,6 +180,7 @@ target_link_libraries(${APP_BIN_NAME}
     Qt5::Network
     PolkitQt5-1::Agent
 )
+endif()
 
 # Install files
 install(TARGETS deepin-devicemanager DESTINATION ${CMAKE_INSTALL_BINDIR})
@@ -148,9 +195,12 @@ install(FILES ${CMAKE_SOURCE_DIR}/deepin-devicemanager/assets/deepin-devicemanag
 #hw机型增加DConfig配置
 set(APPID org.deepin.devicemanager)
 set(configFile ${PROJECT_SOURCE_DIR}/assets/org.deepin.devicemanager.json)
-if (DEFINED DSG_DATA_DIR)
+if (Qt5_FOUND)
+    # Qt5 environment
+    if (DEFINED DSG_DATA_DIR)
     message("-- DConfig is supported by DTK")
     dconfig_meta_files(APPID ${APPID} FILES ${configFile})
+endif()
 endif()
 
 # Test--------deepin-devicemanager
