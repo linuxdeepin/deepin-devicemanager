@@ -440,6 +440,6 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
         return true;
 
     double inch = std::sqrt(height * height + width * width) / 2.54 / 10;
-    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(("inch")).arg(width).arg(height);
+    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(width).arg(height);
     return true;
 }
