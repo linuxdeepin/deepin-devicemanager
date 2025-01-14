@@ -310,6 +310,9 @@ void HWGenerator::generatorDiskDevice()
                 tempMap["Name"] = "nouse";
             // 应HW的要求，将描述固定为   Universal Flash Storage
             tempMap["Description"] = "Universal Flash Storage";
+            if (Common::specialComType == 2) {
+                tempMap["Interface"] = "UFS 3.1";
+            }
 
             // 读取interface版本
             QProcess process;
