@@ -2057,9 +2057,14 @@
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="330"/>
+        <source>Hardware Information Tool</source>
+        <translation>硬件查询工具</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/MainWindow.cpp" line="330"/>
         <source>Device Manager</source>
         <translation>设备管理器</translation>
-    </message>
+        </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="399"/>
         <source>Hardware</source>
@@ -2892,9 +2897,20 @@
         <translation>设备管理器</translation>
     </message>
     <message>
+        <location filename="../src/main.cpp" line="82"/>
+        <location filename="../src/main.cpp" line="84"/>
+        <source>Hardware Information Tool</source>
+        <translation>硬件查询工具</translation>
+    </message>
+    <message>
         <location filename="../src/main.cpp" line="85"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
         <translation>设备管理器是查看、管理硬件设备的工具软件。</translation>
+    </message>
+    <message>
+        <location filename="../src/main.cpp" line="85"/>
+        <source>Hardware Information Tool is a handy tool for viewing hardware information and managing the devices.</source>
+        <translation>硬件查询工具是查看、管理硬件设备的工具软件。</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="141"/>
