@@ -79,10 +79,10 @@ int main(int argc, char *argv[])
         app.loadTranslator();
         app.setOrganizationName("deepin");
         app.setApplicationName("deepin-devicemanager");
-        app.setApplicationDisplayName(QObject::tr("Device Manager"));
+        app.setApplicationDisplayName(QObject::tr("Hardware Information Tool"));
         app.setApplicationVersion(VERSION);
-        app.setProductName(QObject::tr("Device Manager"));
-        app.setApplicationDescription(QObject::tr("Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
+        app.setProductName(QObject::tr("Hardware Information Tool"));
+        app.setApplicationDescription(QObject::tr("Hardware Information Tool is a handy tool for viewing hardware information and managing the devices.") + "\n");
         const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
         app.setApplicationAcknowledgementPage(acknowledgementLink);
 
