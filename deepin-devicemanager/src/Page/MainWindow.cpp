@@ -43,6 +43,7 @@
 #include <QDir>
 #include <QVBoxLayout>
 #include <QTimer>
+#include <QRegularExpression>
 
 DWIDGET_USE_NAMESPACE
 using namespace DDLog;
@@ -238,7 +239,7 @@ bool MainWindow::exportTo()
     QString file = DFileDialog::getSaveFileName(
                        this,
                        "Export", saveDir + tr("Device Info", "export file's name") + \
-                       QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss") .remove(QRegExp("\\s")) + ".txt", \
+                       QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss").remove(QRegularExpression("\\s")) + ".txt", \
                        "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);  //
 
     if (file.isEmpty())

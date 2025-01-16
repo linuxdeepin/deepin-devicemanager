@@ -15,16 +15,26 @@
 #include <QLoggingCategory>
 #include <QProcess>
 #include <QDir>
-#include <QDBusConnection>
 #include <QFile>
-#include <QDBusConnectionInterface>
-
+#include <QRegularExpression>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <polkit-qt5-1/PolkitQt1/Authority>
+#else
+#include <polkit-qt6-1/PolkitQt1/Authority>
+#endif
 
 // 系统库文件
 #include <dirent.h>
 #include <cups.h>
 #include <string>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
+#else
+#include <QtDBus/QDBusConnection>
+#include <QtDBus/QDBusConnectionInterface>
+#endif
 
 using namespace PolkitQt1;
 using namespace DDLog;
@@ -133,8 +143,8 @@ bool ControlInterface::enable(const QString &hclass, const QString &name, const 
         return {};
     // 网卡通过ioctl禁用
     // 先判断是否是网卡
-    QRegExp reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
-    if (reg.exactMatch(value)) {
+    QRegularExpression reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
+    if (reg.match(value).hasMatch()) {
         return ioctlEnableNetwork(hclass, name, path, value, enable_device, strDriver);
     }
 
@@ -509,7 +519,7 @@ void ControlInterface::construct_uri(char *buffer, size_t buflen, const char *ba
 
 void ControlInterface::modifyPath(QString &path)
 {
-    path.replace(QRegExp("[1-9]$"), "0");
+    path.replace(QRegularExpression("[1-9]$"), "0");
 }
 
 void ControlInterface::saveWakeupInfo(const QString &unique_id, const QString &path, bool wakeup)

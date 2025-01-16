@@ -8,7 +8,7 @@
 
 #include <DFrame>
 #include <DLabel>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DFontSizeManager>
 #include <DStackedWidget>
 
@@ -59,9 +59,15 @@ void GetDriverNameWidget::init()
     mp_tipLabel->setMinimumHeight(25);
 
     DFontSizeManager::instance()->bind(mp_tipLabel, DFontSizeManager::T8, QFont::Medium);
-    DPalette pa = DApplicationHelper::instance()->palette(mp_tipLabel);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    DPalette pa = DGuiApplicationHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
-    DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
+    DGuiApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
+#else
+    DPalette pa = mp_tipLabel->palette();
+    pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
+    mp_tipLabel->setPalette(pa);
+#endif
 
     // 上方布局
     QHBoxLayout *hLayout1 = new QHBoxLayout;
@@ -91,8 +97,13 @@ void GetDriverNameWidget::init()
 
 void GetDriverNameWidget::onUpdateTheme()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
     plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
+#else
+    QPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    plt.setColor(QPalette::Window, plt.color(QPalette::Base));
+#endif
     mp_titleLabel->setPalette(plt);
 }
 
@@ -129,8 +140,9 @@ void GetDriverNameWidget::reloadDriversListPages()
         label->setText(tr("Select a driver for update"));
     }
 
-    DPalette pa = DApplicationHelper::instance()->palette(label);
-    QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
+    //TODO
+    DPalette pa = label->palette();
+    QColor color = pa.color(QPalette::Active, QPalette::BrightText).darker(130);
     pa.setColor(QPalette::WindowText, color);
     label->setPalette(pa);
 }

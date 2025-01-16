@@ -9,7 +9,7 @@
 #include <DLabel>
 #include <DWaterProgress>
 #include <DFontSizeManager>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DRadioButton>
 #include <DGuiApplicationHelper>
 #include <DLabel>

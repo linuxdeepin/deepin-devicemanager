@@ -5,7 +5,7 @@
 #include "DriverScanner.h"
 #include "DeviceManager.h"
 #include "HttpDriverInterface.h"
-
+#include <QRegularExpression>
 #include <QLoggingCategory>
 #include <QProcess>
 
@@ -39,10 +39,10 @@ void DriverScanner::run()
                 QString output = process.readAllStandardOutput();
                 QStringList lines = output.split("\n");
                 if(lines.size()>=2) {
-                    QRegExp rxlen("(\\d+\\S*)");
-                    int pos = rxlen.indexIn(lines[1]);
-                    if (pos > -1 && info->version().isEmpty()) {
-                        info->m_Version = rxlen.cap(1);
+                    QRegularExpression rxlen("(\\d+\\S*)");
+                    QRegularExpressionMatch match = rxlen.match(lines[1]);
+                    if (match.hasMatch() && info->version().isEmpty()) {
+                        info->m_Version = match.captured(1);
                     }
                 }
             }
@@ -61,24 +61,6 @@ void DriverScanner::run()
     } else {
         emit scanFinished(SR_NETWORD_ERR);
     }
-
-// 测试代码
-//    foreach (DriverInfo *info, m_ListDriverInfo) {
-//        emit scanInfo(info->name(), 0);
-//        usleep(1000);
-//        emit scanInfo(info->name(), 20);
-//        usleep(1000);
-//        emit scanInfo(info->name(), 40);
-//        usleep(1000);
-//        emit scanInfo(info->name(), 60);
-//        usleep(1000);
-//        emit scanInfo(info->name(), 80);
-//        usleep(1000);
-//        emit scanInfo(info->name(), 100);
-//    }
-
-//    usleep(100);
-//    emit scanFinished(SR_SUCESS);
 }
 
 void DriverScanner::setDriverList(QList<DriverInfo *> lstInfo)

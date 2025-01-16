@@ -15,7 +15,7 @@
 #include <QJsonArray>
 #include <QString>
 #include <DApplication>
-
+#include <QRegularExpression>
 #include <DeviceManager.h>
 #include<QDateTime>
 #ifdef OS_BUILD_V23
@@ -75,11 +75,12 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
     foreach (const QString &line, lines) {
         if (line.startsWith("Screen")) {
             lstMap.append(QMap<QString, QString>());
-            QRegExp re(".*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*");
-            if (re.exactMatch(line)) {
-                lstMap[lstMap.count() - 1].insert("minResolution", re.cap(1));
-                lstMap[lstMap.count() - 1].insert("curResolution", re.cap(2));
-                lstMap[lstMap.count() - 1].insert("maxResolution", re.cap(3));
+            QRegularExpression re(".*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*");
+            QRegularExpressionMatch match = re.match(line);
+            if (match.hasMatch()) {
+                lstMap[lstMap.count() - 1].insert("minResolution", match.captured(1));
+                lstMap[lstMap.count() - 1].insert("curResolution", match.captured(2));
+                lstMap[lstMap.count() - 1].insert("maxResolution", match.captured(3));
             }
             continue;
         }
@@ -111,9 +112,9 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
         if ((*it).startsWith("Screen"))
             continue;
 
-        //获取 HDMI-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 527mm x 296mm
-        QRegExp reg("^[A-Za-z].*");
-        if (reg.exactMatch(*it) && !(*it).contains("disconnected")) {
+        // 获取 HDMI-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 527mm x 296mm
+        QRegularExpression reg("^[A-Za-z].*");
+        if (reg.match(*it).hasMatch() && !(*it).contains("disconnected")) {
             // 新的显示屏
             QMap<QString, QString> newMap;
             newMap.insert("mainInfo", (*it).trimmed());
@@ -126,14 +127,16 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
         QMap<QString, QString> &last = lstMap.last();
         // 获取edid信息
         QString edid;
-        QRegExp reEdid("^[\\t]{2}([0-9a-f]{32}).*");
-        if (reEdid.exactMatch(*it)) {
+        QRegularExpression reEdid("^[\\t]{2}([0-9a-f]{32}).*");
+        QRegularExpressionMatch edidMatch = reEdid.match(*it);
+        if (edidMatch.hasMatch()) {
             while (true) {
-                edid.append(reEdid.cap(1));
+                edid.append(edidMatch.captured(1));
                 edid.append("\n");
                 if (++it == lines.end())
                     return;
-                if (!reEdid.exactMatch(*it)) {
+                edidMatch = reEdid.match(*it);
+                if (!edidMatch.hasMatch()) {
                     last.insert("edid", edid);
                     break;
                 }
@@ -145,9 +148,10 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
         if ((*it).contains("*current")) {
             if ((it += 2) >= lines.end())
                 return;
-            QRegExp regRate(".*([0-9]{1,5}\\.[0-9]{1,5}Hz).*");
-            if (regRate.exactMatch(*it))
-                last.insert("rate", regRate.cap(1));
+            QRegularExpression regRate(".*([0-9]{1,5}\\.[0-9]{1,5}Hz).*");
+            QRegularExpressionMatch rateMatch = regRate.match(*it);
+            if (rateMatch.hasMatch())
+                last.insert("rate", rateMatch.captured(1));
         }
     }
 }

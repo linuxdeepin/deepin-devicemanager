@@ -7,7 +7,7 @@
 
 // DTK
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DPalette>
 #include <DStyle>
 #include <DStyleHelper>
@@ -72,7 +72,7 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
     //设置高亮文字色
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
     QPen forground;
     forground.setColor(palette.color(cg, DPalette::Text));

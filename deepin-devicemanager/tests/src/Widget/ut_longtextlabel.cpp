@@ -10,7 +10,7 @@
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
-
+#include <QRegularExpression>
 #include <gtest/gtest.h>
 
 class UT_LongTextLabel : public UT_HEAD
@@ -27,15 +27,16 @@ public:
     LongTextLabel *m_ltLabel;
 };
 
-int ut_LongTextLabel_indexIn()
+QRegularExpressionMatch ut_LongTextLabel_indexIn()
 {
-    return 1;
+    QRegularExpressionMatch match;
+    return match;
 }
 
 TEST_F(UT_LongTextLabel, UT_LongTextLabel_paintEvent)
 {
     Stub stub;
-    stub.set(ADDR(QRegExp, indexIn), ut_LongTextLabel_indexIn);
+    stub.set(ADDR(QRegularExpression, match), ut_LongTextLabel_indexIn);
     QPaintEvent paint(QRect(m_ltLabel->rect()));
     m_ltLabel->paintEvent(&paint);
     EXPECT_FALSE(m_ltLabel->grab().isNull());

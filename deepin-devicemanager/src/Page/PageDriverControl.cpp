@@ -15,7 +15,7 @@
 
 #include <DBlurEffectWidget>
 #include <DWidget>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DPalette>
 #include <DTitlebar>
 #include <DIconButton>
@@ -23,7 +23,13 @@
 #include <QVBoxLayout>
 #include <QDBusConnection>
 #include <QWindow>
+
+#include <QFile>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <polkit-qt5-1/PolkitQt1/Authority>
+#else
+#include <polkit-qt6-1/PolkitQt1/Authority>
+#endif
 
 #define EUNKNOW         0
 #define E_FILE_NOT_EXISTED 100 // file_not_existed 文件不存在，主要比如点击下一步时拔掉优盘
