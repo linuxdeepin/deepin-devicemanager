@@ -464,12 +464,21 @@ void ModCore::deleteLineOfFileWithItem(const QString &filepath, const QString &i
     QString strline;
     QString newcontent;
     QTextStream newstream(&newcontent);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    while (stream.readLineInto(&strline)) {
+        if (!strline.contains(item)) {
+            newstream << strline << Qt::endl;
+            continue;
+        }
+    }
+#else
     while (stream.readLineInto(&strline)) {
         if (!strline.contains(item)) {
             newstream << strline << endl;
             continue;
         }
     }
+#endif
     //清除原有内容
     tmpfile.resize(0);
     stream << newcontent;
@@ -599,9 +608,16 @@ bool ModCore::addModBlackList(const QString &modName)
     if (!blackfile.open(QIODevice::ReadWrite))
         return  false;
     QTextStream instream(&blackfile);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    instream << QString("blacklist %1").arg(modName) << Qt::endl;
+        //屏蔽模块及所有依赖它的模块，设置后无法通过modprobe xx or insmod xx 进行安装
+    instream << QString("install %1 /bin/false").arg(modName) << Qt::endl;
+#else
     instream << QString("blacklist %1").arg(modName) << endl;
-    //屏蔽模块及所有依赖它的模块，设置后无法通过modprobe xx or insmod xx 进行安装
+            //屏蔽模块及所有依赖它的模块，设置后无法通过modprobe xx or insmod xx 进行安装
     instream << QString("install %1 /bin/false").arg(modName) << endl;
+#endif
+
     //添加黑名单后需要更新现有的initramfs
     updateInitramfs();
     return  true;

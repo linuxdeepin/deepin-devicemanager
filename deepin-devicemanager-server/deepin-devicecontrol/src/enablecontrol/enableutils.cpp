@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QCryptographicHash>
+#include <QRegularExpression>
 
 #include <net/if.h>
 #include <sys/ioctl.h>
@@ -41,7 +42,7 @@ void EnableUtils::disableOutDevice(const QString &info)
             uniqueID = mapItem["Serial ID"];
         } else {
             uniqueID = mapItem["Module Alias"];
-            uniqueID.replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
+            uniqueID.replace(QRegularExpression("[0-9a-zA-Z]{10}$"), "");
         }
 
         if (mapItem.contains("Vendor") && mapItem.contains("Device") && (mapItem.contains("SysFS ID") || mapItem.contains("SysFS Device Link"))
@@ -53,12 +54,21 @@ void EnableUtils::disableOutDevice(const QString &info)
                 QString valueStr = vendorlist[1].trimmed() + devicelist[1].remove("0x", Qt::CaseSensitive).trimmed();
                 QCryptographicHash Hash(QCryptographicHash::Md5);
                 QByteArray buf;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 buf.append(valueStr);
                 if (mapItem.contains("SysFS Device Link") && !mapItem["SysFS Device Link"].isEmpty()) {
                     buf.append(mapItem["SysFS Device Link"].trimmed());
                 } else {
                     buf.append(mapItem["SysFS ID"].trimmed());
                 }
+#else
+                buf.append(valueStr.toUtf8());
+                if (mapItem.contains("SysFS Device Link") && !mapItem["SysFS Device Link"].isEmpty()) {
+                    buf.append(mapItem["SysFS Device Link"].trimmed().toUtf8());
+                } else {
+                    buf.append(mapItem["SysFS ID"].trimmed().toUtf8());
+                }
+#endif
                 Hash.addData(buf);
                 uniqueID = QString::fromStdString(Hash.result().toBase64().toStdString());
             }
@@ -77,12 +87,12 @@ void EnableUtils::disableOutDevice(const QString &info)
         } else {
             path = mapItem["SysFS ID"];
         }
-        path.replace(QRegExp("[1-9]$"), "0");
+        path.replace(QRegularExpression("[1-9]$"), "0");
 
 
         // 网卡采用ioctl的方式禁用
-        QRegExp reg(REG_ADDRESS);
-        if (reg.exactMatch(uniqueID)) {
+        QRegularExpression reg(REG_ADDRESS);
+        if (reg.match(uniqueID).hasMatch()) {
             path = mapItem["Device File"];
             if (EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID) &&
                     EnableUtils::ioctlOperateNetworkLogicalName(path, false))
@@ -111,8 +121,8 @@ void EnableUtils::disableInDevice()
     QList<QPair<QString, QString> > lstAuthPair;
     EnableSqlManager::getInstance()->authorizedPathUniqueIDList(lstAuthPair);
     for (QList<QPair<QString, QString>>::iterator it = lstAuthPair.begin() ; it != lstAuthPair.end(); ++it) {
-        QRegExp reg(REG_ADDRESS);
-        if (reg.exactMatch((*it).second)) {
+        QRegularExpression reg(REG_ADDRESS);
+        if (reg.match((*it).second).hasMatch()) {
             EnableUtils::ioctlOperateNetworkLogicalName((*it).first, false);
             continue;
         }

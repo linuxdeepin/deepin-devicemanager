@@ -38,7 +38,11 @@ DBusWakeupInterface::DBusWakeupInterface()
 bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup, const QString &name)
 {
     if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QStringList pathList = path.split("/", QString::SkipEmptyParts);
+#else
+        QStringList pathList = path.split("/");
+#endif
         if (pathList.size() < 3)
             return false;
 

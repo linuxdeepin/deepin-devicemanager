@@ -8,7 +8,11 @@
 
 #include <QDBusConnection>
 #include <QDBusMessage>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <polkit-qt5-1/PolkitQt1/Authority>
+#else
+#include <polkit-qt6-1/PolkitQt1/Authority>
+#endif
 
 using namespace PolkitQt1;
 bool DeviceInterface::getUserAuthorPasswd()

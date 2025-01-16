@@ -14,7 +14,7 @@
 #include <DIconButton>
 #include <DProgressBar>
 #include <DPushButton>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 
 #include <QWidget>
 #include <QStringList>

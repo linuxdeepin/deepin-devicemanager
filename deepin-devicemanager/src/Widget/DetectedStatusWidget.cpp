@@ -10,7 +10,7 @@
 #include <DStyle>
 #include <DCommandLinkButton>
 #include <DFontSizeManager>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 #include <DDesktopServices>
 
@@ -28,7 +28,13 @@
 #define ICON_BT_SIZE       36
 #define ICON_LABEL_SIZE    96
 #define INIT_HEIGHT        120
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #define FONT_WEIGHT        63
+#else
+#define FONT_WEIGHT        QFont::Weight::Bold
+#endif
+
 #define PROGRESS_HEIGHT    8
 #define PROGRESS_WIDTH     569
 #define BUTTON_WIDTH       120
@@ -754,7 +760,7 @@ void DetectedStatusWidget::paintEvent(QPaintEvent *event)
     QPainterPath path;
     path.addRoundedRect(rect, 8, 8);
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     // 获取窗口当前的状态,激活，禁用，未激活

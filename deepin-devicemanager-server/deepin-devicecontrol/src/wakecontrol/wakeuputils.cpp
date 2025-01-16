@@ -11,7 +11,7 @@
 #include <QFile>
 #include <QLoggingCategory>
 #include <QCryptographicHash>
-
+#include <QRegularExpression>
 #define LEAST_NUM 10
 
 using namespace DDLog;
@@ -41,12 +41,22 @@ void WakeupUtils::updateWakeupDeviceInfo(const QString &info)
                 QString valueStr = vendorlist[1].trimmed() + devicelist[1].remove("0x", Qt::CaseSensitive).trimmed();
                 QCryptographicHash Hash(QCryptographicHash::Md5);
                 QByteArray buf;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+                // 在 Qt5 中，QByteArray::append() 可以直接接受 QString 类型的参数，会自动进行类型转换,qt6 需要使用 toUtf8() 进行显式转换
                 buf.append(valueStr);
                 if (mapItem.contains("SysFS Device Link") && !mapItem["SysFS Device Link"].isEmpty()) {
                     buf.append(mapItem["SysFS Device Link"].trimmed());
                 } else {
                     buf.append(mapItem["SysFS ID"].trimmed());
                 }
+#else
+                buf.append(valueStr.toUtf8());
+                if (mapItem.contains("SysFS Device Link") && !mapItem["SysFS Device Link"].isEmpty()) {
+                    buf.append(mapItem["SysFS Device Link"].trimmed().toUtf8());
+                } else {
+                    buf.append(mapItem["SysFS ID"].trimmed().toUtf8());
+                }
+#endif
                 Hash.addData(buf);
                 uniqueID = QString::fromStdString(Hash.result().toBase64().toStdString());
             }
@@ -184,11 +194,12 @@ bool WakeupUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInf
 QString WakeupUtils::getPS2Syspath(const QString &dfs)
 {
     // 获取 dfs 中的 event
-    QRegExp regdfs = QRegExp(".*(event[0-9]{1,2}).*");
-    if (!regdfs.exactMatch(dfs)) {
+    QRegularExpression regdfs("(event[0-9]{1,2})");
+    QRegularExpressionMatch matchDfs = regdfs.match(dfs);
+    if (!matchDfs.hasMatch()) {
         return "";
     }
-    QString eventdfs = regdfs.cap(1);
+    QString eventdfs = matchDfs.captured(1);
 
     QFile file("/proc/bus/input/devices");
     if (!file.open(QIODevice::ReadOnly))
@@ -205,21 +216,23 @@ QString WakeupUtils::getPS2Syspath(const QString &dfs)
                 sysfs = line;
                 continue;
             }
-            QRegExp reg = QRegExp("H: Handlers=.*(event[0-9]{1,2}).*");
-            if (reg.exactMatch(line)) {
-                event = reg.cap(1);
+            QRegularExpression reg("H: Handlers=.*(event[0-9]{1,2})");
+            QRegularExpressionMatch match = reg.match(line);
+            if (match.hasMatch()) {
+                event = match.captured(1);
             }
         }
 
         if (!event.isEmpty() && !sysfs.isEmpty()) {
             if (event == eventdfs) {
-                QRegExp regfs;
+                QRegularExpression regfs;
                 if (sysfs.contains("i2c_designware"))
-                    regfs = QRegExp("S: Sysfs=(.*)/input/input[0-9]{1,2}");
+                    regfs = QRegularExpression("S: Sysfs=(.*)/input/input[0-9]{1,2}");
                 else
-                    regfs = QRegExp("S: Sysfs=(.*)/input[0-9]{1,2}");
-                if (regfs.exactMatch(sysfs)) {
-                    return regfs.cap(1);
+                    regfs = QRegularExpression("S: Sysfs=(.*)/input[0-9]{1,2}");
+                QRegularExpressionMatch matchFs = regfs.match(sysfs);
+                if (matchFs.hasMatch()) {
+                    return matchFs.captured(1);
                 }
             }
         }

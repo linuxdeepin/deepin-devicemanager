@@ -6,7 +6,7 @@
 #include "logtreeview.h"
 
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DStyledItemDelegate>
 
 #include <QLoggingCategory>
@@ -209,7 +209,7 @@ void LogTreeView::paintEvent(QPaintEvent *event)
         cg = DPalette::Active;
     }
 
-    auto *dAppHelper = DApplicationHelper::instance();
+    auto *dAppHelper = DGuiApplicationHelper::instance();
     auto palette = dAppHelper->applicationPalette();
 
     QBrush bgBrush(palette.color(cg, DPalette::Base));
@@ -273,7 +273,7 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
     auto margin = style->pixelMetric(DStyle::PM_ContentsMargins, &options);
 
     // modify background color acorrding to UI designer
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 

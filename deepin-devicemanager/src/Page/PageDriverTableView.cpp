@@ -6,7 +6,7 @@
 #include "drivertableview.h"
 #include "MacroDefinition.h"
 
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 
 #include <QPainter>
@@ -111,7 +111,7 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
     painter.setClipping(true);
 
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     int radius = 8;

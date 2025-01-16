@@ -13,7 +13,7 @@
 // Dtk头文件
 #include <DApplication>
 #include <DStyle>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DFontSizeManager>
 
 // 其它头文件
@@ -56,7 +56,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     if (!style)
         return;
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 
@@ -212,7 +212,11 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     // 表格第一列，字体加粗
     if (index.column() == 0) {
         fo = opt.font;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         fo.setWeight(63);
+#else
+        fo.setWeight(QFont::Weight::Bold);
+#endif
     } else {
         fo = DFontSizeManager::instance()->t8();
     }

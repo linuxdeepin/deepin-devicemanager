@@ -50,7 +50,11 @@ void DriverWaitingWidget::init()
 void DriverWaitingWidget::onUpdateTheme()
 {
     DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
+#else
+    plt.setColor(QPalette::Window, plt.color(QPalette::Base));
+#endif
     mp_Label->setPalette(plt);
 }
 void DriverWaitingWidget::setValue(int value)
