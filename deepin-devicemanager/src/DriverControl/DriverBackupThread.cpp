@@ -65,7 +65,7 @@ void DriverBackupThread::run()
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             QList<QString> lines = QString(outArry).split('\n', QString::SkipEmptyParts);
 #else
-            QList<QString> lines = QString(outArry).split('\n');
+            QList<QString> lines = QString(outArry).split('\n', Qt::SkipEmptyParts);
 #endif
             for (const QString &line : qAsConst(lines)) {
                 if (line.contains("无法解析域名")) {

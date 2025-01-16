@@ -172,7 +172,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 QStringList items = allStr.split(":", QString::SkipEmptyParts);
 #else
-                QStringList items = allStr.split(":");
+                QStringList items = allStr.split(":", Qt::SkipEmptyParts);
 #endif
                 if (items.size() != 2)
                     continue;
@@ -205,7 +205,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 QStringList items = item.split(":", QString::SkipEmptyParts);
 #else
-                QStringList items = item.split(":");
+                QStringList items = item.split(":", Qt::SkipEmptyParts);
 #endif
                 if (items.size() != 2)
                     continue;

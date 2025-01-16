@@ -557,8 +557,8 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
     QStringList auths = sAinfo.split("\n\n", QString::SkipEmptyParts);
     QStringList remos = sRinfo.split("\n\n", QString::SkipEmptyParts);
 #else
-    QStringList auths = sAinfo.split("\n\n");
-    QStringList remos = sRinfo.split("\n\n");
+    QStringList auths = sAinfo.split("\n\n", Qt::SkipEmptyParts);
+    QStringList remos = sRinfo.split("\n\n", Qt::SkipEmptyParts);
 #endif
     QStringList resItems = items + auths + remos;
 
@@ -889,7 +889,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             QStringList gpuNumList = firstStr.split(' ', QString::SkipEmptyParts);
 #else
-            QStringList gpuNumList = firstStr.split(' ');
+            QStringList gpuNumList = firstStr.split(' ', Qt::SkipEmptyParts);
 #endif
             if (gpuNumList.size() != 2)
                 continue;
@@ -914,7 +914,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                     QStringList strList = memoryItem.split(' ', QString::SkipEmptyParts);
 #else
-                    QStringList strList = memoryItem.split(' ');
+                    QStringList strList = memoryItem.split(' ', Qt::SkipEmptyParts);
 #endif
                     curBusIdStr = strList.size() == 2 ? strList[1] : "null";
                 }
@@ -926,7 +926,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                     QStringList strList = memoryItem.split(':', QString::SkipEmptyParts);
 #else
-                    QStringList strList = memoryItem.split(' ');
+                    QStringList strList = memoryItem.split(' ', Qt::SkipEmptyParts);
 #endif
                     if (strList.size() != 2) {
                         break;
@@ -936,7 +936,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                             QStringList memorySizeList = strList[1].split(' ', QString::SkipEmptyParts);
 #else
-                            QStringList memorySizeList = strList[1].split(' ');
+                            QStringList memorySizeList = strList[1].split(' ', Qt::SkipEmptyParts);
 #endif
                             if (memorySizeList.size() == 2) {
                                 bool isOk = false;
@@ -1473,7 +1473,7 @@ void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 QStringList valueStrList = valueStr.split("(", QString::SkipEmptyParts);
 #else
-                QStringList valueStrList = valueStr.split("(");
+                QStringList valueStrList = valueStr.split("(", Qt::SkipEmptyParts);
 #endif
                 if (valueStrList.size() == 2)
                     valueStr = valueStrList[0].trimmed() + ":(" + valueStrList[1];

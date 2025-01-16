@@ -1017,7 +1017,7 @@ void PageDriverManager::getDebBackupInfo(DriverInfo *info)
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 QStringList  tmpsl = tmps.split('_', QString::SkipEmptyParts);
 #else
-                QStringList  tmpsl = tmps.split('_');
+                QStringList  tmpsl = tmps.split('_', Qt::SkipEmptyParts);
 #endif
                 info->m_DebBackupVersion = tmpsl.first();
                 info->m_BackupFileName = fileInfo.absoluteFilePath();

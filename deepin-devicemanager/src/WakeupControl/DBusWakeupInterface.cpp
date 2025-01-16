@@ -41,7 +41,7 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QStri
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QStringList pathList = path.split("/", QString::SkipEmptyParts);
 #else
-        QStringList pathList = path.split("/");
+        QStringList pathList = path.split("/", Qt::SkipEmptyParts);
 #endif
         if (pathList.size() < 3)
             return false;
