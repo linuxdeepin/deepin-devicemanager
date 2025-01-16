@@ -68,11 +68,8 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 
     // 比较页面可显示的最大行数与主板信息,取小值
     int maxRow = this->height() / ROW_HEIGHT - 3;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    int limitSize = std::min(static_cast<int>(lst.size()), maxRow);
-#else
-    int limitSize = std::min(lst.size(), static_cast<qsizetype>(maxRow));
-#endif
+    // 需要确保两个参数的类型一致 qsizetype 是在 Qt 6 中存在的无符号整数类型
+    int limitSize = std::min(static_cast<qsizetype>(lst.size()), static_cast<qsizetype>(maxRow));
     if (mp_Content)
         mp_Content->setLimitRow(limitSize);
 

@@ -128,7 +128,7 @@ QStringList PanguVGenerator::getNetworkInfoFromifconfig()
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QStringList line = list.at(i).split(" ", QString::SkipEmptyParts);
 #else
-        QStringList line = list.at(i).split(" ");
+        QStringList line = list.at(i).split(" ", Qt::SkipEmptyParts);
 #endif
         {
             if(line.size() < 2)

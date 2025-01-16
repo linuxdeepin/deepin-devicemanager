@@ -584,7 +584,7 @@ const QString DeviceBaseInfo::getDriverVersion()
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QStringList item = out.split(":", QString::SkipEmptyParts);
 #else
-        QStringList item = out.split(":");
+        QStringList item = out.split(":", Qt::SkipEmptyParts);
 #endif
         if (!item.isEmpty() && "version" == item[0].trimmed()) {
             return item[1].trimmed();
