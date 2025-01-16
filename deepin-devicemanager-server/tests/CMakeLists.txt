@@ -46,16 +46,46 @@ endforeach()
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
+#qt5
+# find_package(PkgConfig REQUIRED)
+# find_package(Qt5Widgets REQUIRED)
+# find_package(Qt5 COMPONENTS DBus REQUIRED)
+# find_package(Qt5Gui REQUIRED)
+# find_package(Qt5Sql REQUIRED)
+# find_package(DtkWidget REQUIRED)
+# find_package(Qt5Network REQUIRED)
+# find_package(DtkCore REQUIRED)
+# find_package(PolkitQt5-1 REQUIRED)
+# find_package(QApt REQUIRED)
+
+#qt6
 find_package(PkgConfig REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5 COMPONENTS DBus REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Sql REQUIRED)
-find_package(DtkWidget REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(DtkCore REQUIRED)
-find_package(PolkitQt5-1 REQUIRED)
-find_package(QApt REQUIRED)
+find_package(Qt6 COMPONENTS 
+    Core
+    Gui 
+    Widgets 
+    DBus 
+    Sql 
+    Network
+    REQUIRED)
+
+find_package(Dtk6 COMPONENTS
+    Widget
+    Core
+    REQUIRED
+)
+
+find_package(PolkitQt6-1 REQUIRED)
+
+if (Qt6_FOUND)
+    find_package(QApt-qt6 REQUIRED)
+    include_directories(${QApt-qt6_INCLUDE_DIRS})
+    set(QAPT_LIB QApt-qt6)
+else()
+    find_package(QApt REQUIRED)
+    include_directories(${QApt_INCLUDE_DIRS})
+    set(QAPT_LIB QApt)
+endif()
 
 PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 
@@ -90,7 +120,29 @@ target_include_directories(${PROJECT_NAME_TEST} PUBLIC
     ${OBJECT_BINARY_DIR}
     )
 
-target_link_libraries(${PROJECT_NAME_TEST}
+if (Qt6_FOUND)
+    # Qt6 environment
+    target_link_libraries(${PROJECT_NAME_TEST}
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+    Qt6::DBus
+    Qt6::Sql
+    Qt6::Network
+    Dtk6::Core
+    Dtk6::Widget
+    ${GTEST_LIBRARIES}
+    ${GTEST_MAIN_LIBRARIES}
+    PolkitQt6-1::Agent
+    pthread
+    kmod
+    ${QAPT_LIB}
+    cups
+    )
+
+else()
+    # Qt5 environment
+    target_link_libraries(${PROJECT_NAME_TEST}
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets
@@ -105,9 +157,10 @@ target_link_libraries(${PROJECT_NAME_TEST}
     PolkitQt5-1::Agent
     pthread
     kmod
-    QApt
+    ${QAPT_LIB}
     cups
     )
+endif()
 
 # 设置添加gocv相关信息的输出
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fprofile-arcs -ftest-coverage -fstack-protector-strong -D_FORTITY_SOURCE=1 -z noexecstack -pie -fPIC -z lazy")

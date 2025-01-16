@@ -4,7 +4,7 @@
 
 // 项目自身文件
 #include "PanguGenerator.h"
-
+#include <QRegularExpression>
 // 其它头文件
 #include "../DeviceManager/DeviceManager.h"
 #include "../DeviceManager/DeviceComputer.h"
@@ -57,18 +57,21 @@ void PanguGenerator::generatorComputerDevice()
     if (verInfo.size() > 0) {
         QString info = verInfo[0]["OS"].trimmed();
         info = info.trimmed();
-        QRegExp reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)", Qt::CaseSensitive);
-        int index = reg.indexIn(info);
-        if (index != -1) {
-            QString tmp = reg.cap(0);
+        
+        // 使用 QRegularExpression 替换 QRegExp
+        QRegularExpression reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)");
+        QRegularExpressionMatch match = reg.match(info);
+        if (match.hasMatch()) {
+            QString tmp = match.captured(0);
             info.remove(tmp);
-            info.insert(index, reg.cap(1));
+            info.insert(match.capturedStart(), match.captured(1));
         }
 
+        // 第二个正则表达式匹配
         reg.setPattern("(\\(root.*\\)) (\\(.*\\))");
-        index = reg.indexIn(info);
-        if (index != -1) {
-            QString tmp = reg.cap(1);
+        match = reg.match(info);
+        if (match.hasMatch()) {
+            QString tmp = match.captured(1);
             info.remove(tmp);
         }
 

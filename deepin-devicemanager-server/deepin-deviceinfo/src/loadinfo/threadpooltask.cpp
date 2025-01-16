@@ -14,6 +14,7 @@ using namespace DDLog;
 #include <QLoggingCategory>
 #include <QDir>
 #include <unistd.h>
+#include <QRegularExpression>
 
 ThreadPoolTask::ThreadPoolTask(QString cmd, QString file, bool replace, int waiting, QObject *parent)
     : QObject(parent),
@@ -193,7 +194,7 @@ void ThreadPoolTask::loadSmartCtlInfoToCache(const QString &info)
 {
     QStringList lines = info.split("\n");
     foreach (QString line, lines) {
-        QStringList words = line.replace(QRegExp("[\\s]+"), " ").split(" ");
+        QStringList words = line.replace(QRegularExpression("[\\s]+"), " ").split(" ");
         // NAME ROTA
         if (words.size() != 2 || words[0] == "NAME") {
             continue;
@@ -334,7 +335,7 @@ void ThreadPoolTask::loadSmartctlInfoToFile(QFile &file)
         QString info = file.readAll();
         QStringList lines = info.split("\n");
         foreach (QString line, lines) {
-            QStringList words = line.replace(QRegExp("[\\s]+"), " ").split(" ");
+            QStringList words = line.replace(QRegularExpression("[\\s]+"), " ").split(" ");
             // NAME ROTA
             if (words.size() != 2 || words[0] == "NAME") {
                 continue;

@@ -7,7 +7,7 @@
 #include "BtnLabel.h"
 
 #include <DFontSizeManager>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 #include <DToolTip>
 
@@ -247,10 +247,17 @@ void DriverOperationItem::setBtnIcon()
     }
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void DriverOperationItem::enterEvent(QEvent *event)
 {
     return DWidget::enterEvent(event);
 }
+#else
+void DriverOperationItem::enterEvent(QEnterEvent *event)
+{
+    return DWidget::enterEvent(event);
+}
+#endif
 
 void DriverOperationItem::leaveEvent(QEvent *event)
 {

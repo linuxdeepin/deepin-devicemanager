@@ -13,6 +13,7 @@
 #include<QDateTime>
 #include<QMutex>
 #include <QCryptographicHash>
+#include <QRegularExpression>
 
 // 其它头文件
 #include "../commondefine.h"
@@ -21,7 +22,6 @@
 #include "DBusInterface.h"
 #include "DBusEnableInterface.h"
 #include "MacroDefinition.h"
-
 using namespace DDLog;
 
 CmdTool::CmdTool()
@@ -61,8 +61,9 @@ void CmdTool::addUsbMapInfo(const QString &key, const QMap<QString, QString> &ma
     for (; it != m_cmdInfo["hwinfo_usb"].end(); ++it) {
         QString curBus = (*it)["SysFS BusID"];
         QString newBus = mapInfo["SysFS BusID"];
-        curBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
-        newBus.replace(QRegExp("\\.[0-9]{1,2}$"), "");
+        QRegularExpression re("\\.\\d{1,2}$");
+        curBus.replace(re, "");
+        newBus.replace(re, "");
         if (!curBus.isEmpty() && curBus == newBus) {
             return;
         }
@@ -169,7 +170,7 @@ QString CmdTool::loadOemTomlFileName(const QMap<QString, QString> &mapInfo)
         if (productname.contains("N/A"))  productname = "";
         if (version.contains("N/A"))  version = "";
 
-        QRegExp regExp("[-/'~!@#$%^&*(){}:;,.\"\\|~`]");
+        QRegularExpression regExp("[-/'~!@#$%^&*(){}:;,.\"\\|~`]");
         QString replace = "";         // 这里是将特殊字符换为空字符串,""代表直接去掉
         Manufacturer = Manufacturer.replace(regExp, replace);
         productname = productname.replace(regExp, replace);
@@ -219,9 +220,7 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
     if (info.isEmpty())
         return false;
     QStringList lines = info.split("\n");
-    QRegExp regClass("\\s*(\\[)([.\\w\\s]*)(\\])\\s*#*.*");//正则表达式提取“[XXX]”,XXX为任意字符串。  并去掉[[xxxx]]
-//    QRegExp regKeyValue("\\s*([a-zA-Z0-9_-]+)=\"(.*)\".*");       //裸键只能存在字母、数字、下划线和破折号（a-zA-Z0-9_-）
-//    QRegExp regValue("\\s*\"(.*)\".*");
+    QRegularExpression regClass(R"(\s*(\[)([.\w\s]*)(\])\s*#*.*)");
     QString classkey;
     QStringList deviceClassesList;
     QStringList ValueKeyList;
@@ -230,17 +229,16 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
     foreach (const QString &line, lines) {
         if (line.trimmed().startsWith("#"))  // # 开头为注释  不取
             continue;
-        else if (regClass.exactMatch(line)) {  //[xxx]
+        else if (regClass.match(line).hasMatch()) {  //[xxx]
             if (itemMap.count() > 0) {
                 addMapInfo("toml" + classkey, itemMap);
                 tomlPars = true;
             }
 
-            classkey = regClass.cap(2).split('.').first();
+            classkey = regClass.match(line).captured(2).split('.').first();
             itemMap.clear();
             ValueKeyList.clear();
-            deviceClassesList.append(regClass.cap(2));
-//        } else if (regKeyValue.exactMatch(line)) {  //键值对=
+            deviceClassesList.append(regClass.match(line).captured(2));
         } else if (line.contains("=")) {
             wordlst = line.split("=");
             if (2 == wordlst.size()) {
@@ -249,7 +247,7 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
                 QString valuetmp = wordlst[1];
                 QStringList valuelst;
                 QString value;
-                if (valuetmp.contains("#"))         {
+                if (valuetmp.contains("#")) {
                     valuelst = valuetmp.split("#");
                     value = valuelst[0].remove('\"').trimmed();
                 } else
@@ -344,7 +342,7 @@ void CmdTool::loadLsblkInfo(const QString &debugfile)
 
     // 获取存储设备逻辑名称以及ROTA信息
     foreach (QString line, lines) {
-        QStringList words = line.replace(QRegExp("[\\s]+"), " ").split(" ");
+        QStringList words = line.replace(QRegularExpression("[\\s]+"), " ").split(" ");
         if (words.size() != 2 || "NAME" == words[0])
             continue;
 
@@ -406,17 +404,17 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     QStringList lines = deviceInfo.split("\n");
     foreach (const QString &line, lines) {
         // DeviceCdrom m_HwinfoToLshw 值为0000:01:00.0 此处同步修改,否则显存大小无法显示
-        QRegExp reg(".*([0-9a-z]{4}:[0-9a-z]{2}:[0-9a-z]{2}.[0-9]{1}):.*VRAM([=:]{1}) ([0-9]*)[\\s]{0,1}M.*");
-        if (reg.exactMatch(line)) {
-            double size = reg.cap(3).toDouble();
+        QRegularExpression reg(".*([0-9a-z]{4}:[0-9a-z]{2}:[0-9a-z]{2}.[0-9]{1}):.*VRAM([=:]{1}) ([0-9]*)[\\s]{0,1}M.*");
+        if (reg.match(line).hasMatch()) {
+            double size = reg.match(line).captured(3).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
-            mapInfo["Size"] = reg.cap(1) + "=" + sizeS;
+            mapInfo["Size"] = reg.match(line).captured(1) + "=" + sizeS;
         }
 
         // Bug-85049 JJW 显存特殊处理
-        QRegExp regJJW(".*VRAM Size ([0-9]*)M.*");
-        if (regJJW.exactMatch(line)) {
-            double size = regJJW.cap(1).toDouble();
+        QRegularExpression regJJW(".*VRAM Size ([0-9]*)M.*");
+        if (regJJW.match(line).hasMatch()) {
+            double size = regJJW.match(line).captured(1).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
             mapInfo["Size"] = "null=" + sizeS;
         }
@@ -432,9 +430,9 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
      * ALC887:
     */
     foreach (const QString &line, lines) {
-        QRegExp reg(".*autoconfig for ([A-Za-z0-9]{6}( [A-Za-z0-9]+|-[A-Za-z0-9]+|)):.*");
-        if (reg.exactMatch(line)) {
-            QString chip = reg.cap(1);
+        QRegularExpression reg(".*autoconfig for ([A-Za-z0-9]{6}( [A-Za-z0-9]+|-[A-Za-z0-9]+|)):.*");
+        if (reg.match(line).hasMatch()) {
+            QString chip = reg.match(line).captured(1);
             mapInfo["chip"] = chip;
         }
     }
@@ -555,8 +553,13 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
 
     // 获取信息
     QStringList items = info.split("\n\n");
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QStringList auths = sAinfo.split("\n\n", QString::SkipEmptyParts);
     QStringList remos = sRinfo.split("\n\n", QString::SkipEmptyParts);
+#else
+    QStringList auths = sAinfo.split("\n\n");
+    QStringList remos = sRinfo.split("\n\n");
+#endif
     QStringList resItems = items + auths + remos;
 
     foreach (const QString &item, resItems) {
@@ -608,9 +611,9 @@ void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
     sInfo = process.readAllStandardOutput();
     QStringList lines = sInfo.split("\n");
     foreach (const QString &line, lines) {
-        QRegExp reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]{2}).*");
-        if (reg.exactMatch(line)) {
-            mapInfo.insert("Width", reg.cap(1) + " bits");
+        QRegularExpression reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]{2}).*");
+        if (reg.match(line).hasMatch()) {
+            mapInfo.insert("Width", reg.match(line).captured(1) + " bits");
         }
     }
 }
@@ -789,14 +792,14 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfil
         getMapInfoFromInput(item, mapInfo, "=");
 
         // 获取与正则表达式匹配的输入设备
-        QRegExp rem = QRegExp(".*(event[0-9]{1,2}).*");
-        if (rem.exactMatch(mapInfo["Handlers"])) {
-            QString name = rem.cap(1);
+        QRegularExpression rem(".*(event[0-9]{1,2}).*");
+        if (rem.match(mapInfo["Handlers"]).hasMatch()) {
+            QString name = rem.match(mapInfo["Handlers"]).captured(1);
             DeviceManager::instance()->addInputInfo(name, mapInfo);
         } else {
-            QRegExp re = QRegExp(".*(mouse[0-9]{1,2}).*");
-            if (re.exactMatch(mapInfo["Handlers"])) {
-                QString name = re.cap(1);
+            QRegularExpression re(".*(mouse[0-9]{1,2}).*");
+            if (re.match(mapInfo["Handlers"]).hasMatch()) {
+                QString name = re.match(mapInfo["Handlers"]).captured(1);
                 DeviceManager::instance()->addInputInfo(name, mapInfo);
             }
         }
@@ -859,9 +862,9 @@ void CmdTool::getSMBIOSVersion(const QString &info, QString &version)
 
     foreach (auto line, lineList) {
         //  SMBIOS 3.0.0 present.
-        QRegExp rx("^SMBIOS ([\\d]*.[\\d]*.[\\d])+ present.$");
-        if (rx.indexIn(line) > -1) {
-            version = rx.cap(1);
+        QRegularExpression rx("^SMBIOS ([\\d]*.[\\d]*.[\\d])+ present.$");
+        if (rx.match(line).hasMatch()) {
+            version = rx.match(line).captured(1);
             break;
         }
     }
@@ -883,7 +886,11 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
             QString lastStr = item.right(item.size() - index - 1).trimmed();
             if (firstStr.isEmpty() || lastStr.isEmpty())
                 continue;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             QStringList gpuNumList = firstStr.split(' ', QString::SkipEmptyParts);
+#else
+            QStringList gpuNumList = firstStr.split(' ');
+#endif
             if (gpuNumList.size() != 2)
                 continue;
             QString deviceStr;
@@ -904,7 +911,11 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
             foreach (QString memoryItem, memoryList) {
                 // 读取ID
                 if (curBusIdStr.isEmpty() && memoryItem.trimmed().startsWith("GPU")) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                     QStringList strList = memoryItem.split(' ', QString::SkipEmptyParts);
+#else
+                    QStringList strList = memoryItem.split(' ');
+#endif
                     curBusIdStr = strList.size() == 2 ? strList[1] : "null";
                 }
 
@@ -912,13 +923,21 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
                 if (!memoryUsageFlag && memoryItem.trimmed() == "FB Memory Usage") {
                     memoryUsageFlag = true;
                 } else if (memoryUsageFlag) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                     QStringList strList = memoryItem.split(':', QString::SkipEmptyParts);
+#else
+                    QStringList strList = memoryItem.split(' ');
+#endif
                     if (strList.size() != 2) {
                         break;
                     }
                     if (strList[0].trimmed() == "Total") {
                         if (strList[1].trimmed() != "N/A") {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                             QStringList memorySizeList = strList[1].split(' ', QString::SkipEmptyParts);
+#else
+                            QStringList memorySizeList = strList[1].split(' ');
+#endif
                             if (memorySizeList.size() == 2) {
                                 bool isOk = false;
                                 int mSize = memorySizeList[0].toInt(&isOk);
@@ -944,13 +963,13 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
 
             QMap<QString, QString> mapInfo;
             if (getDeviceInfoFromCmd(deviceInfo, "nvidia-settings  -q  VideoRam")) {
-                QRegExp reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
+                QRegularExpression reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
                 QStringList list = deviceInfo.split("\n");
 
                 foreach (QString item, list) {
                     // Attribute 'VideoRam' (jixiaomei-PC:0.0): 2097152.  正则表达式获取2097152
-                    if (reg.exactMatch(item)) {
-                        QString gpuSize = reg.cap(1);
+                    if (reg.match(item).hasMatch()) {
+                        QString gpuSize = reg.match(item).captured(1);
                         int numSize = gpuSize.toInt();
                         numSize /= 1024;
                         if (numSize >= 1024) {   // Bug109782 1024MB -> 1G
@@ -996,7 +1015,7 @@ void CmdTool::getMapInfoFromInput(const QString &info, QMap<QString, QString> &m
 {
     QStringList infoList = info.split("\n");
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
-        *it = (*it).replace(QRegExp("^[A-Z]: "), "");
+        *it = (*it).replace(QRegularExpression("^[A-Z]: "), "");
         *it = (*it).trimmed();
         if ((*it).count(ch) > 2) {
             QStringList words = (*it).split(" ");
@@ -1187,10 +1206,10 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
             }
         }
 
-        QRegExp re(".*\"(.*)\".*");
-        if (re.exactMatch(words[1].trimmed())) {
+        QRegularExpression re(".*\"(.*)\".*");
+        if (re.match(words[1].trimmed()).hasMatch()) {
             QString key = words[0].trimmed();
-            QString value = re.cap(1);
+            QString value = re.match(words[1].trimmed()).captured(1);
 
             //这里是为了防止  "usb-storage", "sr"  -》 usb-storage", "sr
             // bug112311 驱动模块显示异常
@@ -1226,18 +1245,30 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
     if (mapInfo.contains("VID_PID") && !mapInfo["VID_PID"].isEmpty() && (mapInfo.contains("SysFS ID") || mapInfo.contains("SysFS Device Link"))) {
         QCryptographicHash Hash(QCryptographicHash::Md5);
         QByteArray buf;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         buf.append(mapInfo[tmpkey]);
+#else
+        buf.append(mapInfo[tmpkey].toUtf8());
+#endif
         if (mapInfo.contains("SysFS Device Link") && !mapInfo["SysFS Device Link"].isEmpty()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             buf.append(mapInfo["SysFS Device Link"]);
+#else
+            buf.append(mapInfo["SysFS Device Link"].toUtf8());
+#endif
         } else {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             buf.append(mapInfo["SysFS ID"]);
+#else
+            buf.append(mapInfo["SysFS ID"].toUtf8());
+#endif
         }
         Hash.addData(buf);
         mapInfo["Unique ID"] = QString::fromStdString(Hash.result().toBase64().toStdString());
     }
 
     if (mapInfo.find("Module Alias") != mapInfo.end())
-        mapInfo["Module Alias"].replace(QRegExp("[0-9a-zA-Z]{10}$"), "");
+        mapInfo["Module Alias"].replace(QRegularExpression("[0-9a-zA-Z]{10}$"), "");
 
 }
 
@@ -1251,7 +1282,7 @@ void CmdTool::getMapInfoFromDmidecode(const QString &info, QMap<QString, QString
 
         QStringList words = line.split(ch);
         if (1 ==  words.size() && words[0].endsWith(":")) {
-            lasKey = words[0].replace(QRegExp(":$"), "");
+            lasKey = words[0].replace(QRegularExpression(":$"), "");
             mapInfo.insert(lasKey.trimmed(), " ");
         } else if (1 ==  words.size() && !lasKey.isEmpty()) {
             mapInfo[lasKey.trimmed()] += words[0];
@@ -1268,7 +1299,7 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
     QString indexName;
     int startIndex = 0;
 
-    QRegExp reg("^[\\s\\S]*[\\d]:[\\d][\\s\\S]*$");//time 08:00
+    QRegularExpression reg("^[\\s\\S]*[\\d]:[\\d][\\s\\S]*$");//time 08:00
 
     for (int i = 0; i < info.size(); ++i) {
         if (info[i] != '\n' && i != info.size() - 1)
@@ -1279,7 +1310,7 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
 
 
         int index = line.indexOf(ch);
-        if (index > 0 && false == reg.exactMatch(line) && false == line.contains("Error") && false == line.contains("hh:mm:SS")) {
+        if (index > 0 && false == reg.match(line).hasMatch() && false == line.contains("Error") && false == line.contains("hh:mm:SS")) {
             if (line.indexOf("(") < index && line.indexOf(")") > index)
                 continue;
 
@@ -1309,9 +1340,9 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
 
         indexName = "";
 
-        QRegExp rx("^[ ]*[0-9]+[ ]+([\\w-_]+)[ ]+0x[0-9a-fA-F-]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+([0-9\\/w-]+[ ]*[ 0-9\\/w-()]*)$");
-        if (rx.indexIn(line) > -1) {
-            mapInfo[rx.cap(1)] = rx.cap(2);
+        QRegularExpression rx("^[ ]*[0-9]+[ ]+([\\w-_]+)[ ]+0x[0-9a-fA-F-]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+([0-9\\/w-]+[ ]*[ 0-9\\/w-()]*)$");
+        if (rx.match(line).hasMatch()) {
+            mapInfo[rx.match(line).captured(1)] = rx.match(line).captured(2);
             continue;
         }
 
@@ -1439,7 +1470,11 @@ void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const 
         if (2 == keyValue.size()) {
             if ("UUID" == keyValue[0]) {
                 QString valueStr = keyValue[1].trimmed();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 QStringList valueStrList = valueStr.split("(", QString::SkipEmptyParts);
+#else
+                QStringList valueStrList = valueStr.split("(");
+#endif
                 if (valueStrList.size() == 2)
                     valueStr = valueStrList[0].trimmed() + ":(" + valueStrList[1];
                 uuid.append(valueStr);

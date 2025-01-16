@@ -4,7 +4,7 @@
 
 // 项目自身文件
 #include "DeviceCpu.h"
-
+#include <QRegularExpression>
 #include <math.h>
 
 DeviceCpu::DeviceCpu()
@@ -43,8 +43,8 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
     setInfoFromDmidecode(mapDmidecode);
 
     // CPU 名称后面不需要加个数
-    m_Name.replace(QRegExp("/[0-9]*$"), "");
-    m_Name.replace(QRegExp("x [0-9]*$"), "");
+    m_Name.replace(QRegularExpression("/[0-9]*$"), "");
+    m_Name.replace(QRegularExpression("x [0-9]*$"), "");
 
     //  获取逻辑数和core数
     m_LogicalCPUNum = logicalNum;

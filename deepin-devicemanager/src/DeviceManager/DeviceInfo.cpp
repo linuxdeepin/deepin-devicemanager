@@ -14,7 +14,7 @@
 #include <QLoggingCategory>
 #include <QProcess>
 #include <QMap>
-
+#include <QRegularExpression>
 using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
@@ -581,7 +581,11 @@ const QString DeviceBaseInfo::getDriverVersion()
         return  QString("");
 
     foreach (QString out, outInfo.split("\n")) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QStringList item = out.split(":", QString::SkipEmptyParts);
+#else
+        QStringList item = out.split(":");
+#endif
         if (!item.isEmpty() && "version" == item[0].trimmed()) {
             return item[1].trimmed();
         }
@@ -755,6 +759,21 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
                        << "i" << "j" << "k" << "l" << "m" << "n"
                        << "o" << "p" << "q" << "r" << "s" << "t"
                        << "u" << "v" << "w" << "x" << "y" << "z";
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QRegularExpression reg("([0-9a-zA-Z]+)-([0-9a-zA-Z]+)\\.([0-9a-zA-Z]+)");
+    QRegularExpressionMatch match = reg.match(words[0]);
+    if (match.hasMatch()) {
+        int first = match.captured(1).toInt();
+        int second = match.captured(2).toInt();
+        int third = match.captured(3).toInt();
+        m_HwinfoToLshw = QString("usb@%1:%2.%3").arg(nums.at(first)).arg(nums.at(second)).arg(nums.at(third));
+    } else {
+        int first = chs[0].toInt();
+        int second = chs[1].toInt();
+        m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
+    }
+#else
     QRegExp reg("([0-9a-zA-Z]+)-([0-9a-zA-Z]+)\\.([0-9a-zA-Z]+)");
     if (reg.exactMatch(words[0])) {
         int first = reg.cap(1).toInt();
@@ -766,6 +785,7 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
         int second = chs[1].toInt();
         m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
     }
+#endif
 }
 
 bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)

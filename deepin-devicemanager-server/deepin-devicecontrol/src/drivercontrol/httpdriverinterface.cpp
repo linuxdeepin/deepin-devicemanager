@@ -93,10 +93,10 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         strUrl += "&product=" + strProducts;
     }
     if (0 < iClassP) {
-        strUrl += "&class_p=" + QString(iClassP);
+        strUrl += "&class_p=" + QString::number(iClassP);
     }
     if (0 < iClass) {
-        strUrl += "&class=" + QString(iClass);
+        strUrl += "&class=" + QString::number(iClass);
     }
     qCInfo(appLog) << strUrl;
     return getRequestJson(strUrl);

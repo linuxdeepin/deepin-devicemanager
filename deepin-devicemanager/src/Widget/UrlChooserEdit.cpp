@@ -6,7 +6,7 @@
 #include "UrlChooserEdit.h"
 #include "DDLog.h"
 
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DStyle>
 #include <DLineEdit>
 #include <DSuggestButton>

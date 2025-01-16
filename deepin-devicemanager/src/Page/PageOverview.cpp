@@ -142,7 +142,11 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 设备信息加粗
     QFont font = mp_DeviceLabel->font();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     font.setWeight(63);
+#else
+    font.setWeight(QFont::Bold);
+#endif
     mp_DeviceLabel->setFont(font);
 
     // 设置字号

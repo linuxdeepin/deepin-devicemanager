@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QDir>
 #include <QLoggingCategory>
-
+#include <QRegularExpression>
 #include <sys/utsname.h>
 
 using namespace DDLog;
@@ -137,7 +137,8 @@ bool CpuInfo::parseInfo(const QString &info)
     foreach (const QString &line, lines) {
         if (line.isEmpty())
             continue;
-        QStringList words = line.split(QRegExp("[\\s]*:[\\s]*"));
+        QRegularExpression splitRegex("[\\s]*:[\\s]*");
+        QStringList words = line.split(splitRegex);
         if (words.size() != 2)
             continue;
         if ("core" == words[0]) {
@@ -229,12 +230,13 @@ void CpuInfo::readSysCpu()
     // /sys/devices/system/cpu/cpu*
     QDir dir("/sys/devices/system/cpu");
     dir.setFilter(QDir::Dirs);
-    QRegExp reg("cpu([0-9]{1,4})");
+    QRegularExpression reg("cpu([0-9]{1,4})");
     foreach (const QFileInfo &info, dir.entryInfoList()) {
         const QString &name = info.fileName();
-        if (! reg.exactMatch(name))
+        QRegularExpressionMatch match = reg.match(name);
+        if (!match.hasMatch())
             continue;
-        readSysCpuN(reg.cap(1).toInt(), info.filePath());
+        readSysCpuN(match.captured(1).toInt(), info.filePath());
     }
 }
 
@@ -317,7 +319,8 @@ int CpuInfo::readThreadSiblingsListPath(const QString &path)
     QString info = file.readAll();
     file.close();
 
-    QStringList words = info.split(QRegExp("\\D"));
+    QRegularExpression re("\\D");
+    QStringList words = info.split(re);
 
     return words.isEmpty() ? 0 : words.first().toInt();
 }
@@ -328,7 +331,8 @@ void CpuInfo::readCpuCache(const QString &path, LogicalCpu &lcpu)
     dir.setFilter(QDir::Dirs);
     foreach (const QFileInfo &fileInfo, dir.entryInfoList()) {
         QString tpath = fileInfo.absoluteFilePath();
-        if (!tpath.contains(QRegExp("index[0-9]")))
+        QRegularExpression re("index[0-9]");
+        if (!tpath.contains(re))
             continue;
         readCpuCacheIndex(tpath, lcpu);
     }

@@ -12,7 +12,7 @@
 #include "DDLog.h"
 // Qt库文件
 #include<QLoggingCategory>
-
+#include <QRegularExpression>
 using namespace DDLog;
 
 #define DISK_SCALE_1024 1024
@@ -92,10 +92,11 @@ static quint64 convertToBytes(const QString& size, double scale)
     double multiplier = 1;
     double diskSizeFloat = 0;
 
-    QRegExp reg("([0-9]*\\.?[0-9]*)([A-Za-z]*)");
-    if(reg.indexIn(size) == -1)
+    QRegularExpression reg("([0-9]*\\.?[0-9]*)([A-Za-z]*)");
+    QRegularExpressionMatch match = reg.match(size);
+    if(!match.hasMatch())
         return diskBytesSize;
-    QString sizeValue1 = reg.cap(1);
+    QString sizeValue1 = match.captured(1);
     if(sizeValue1.isEmpty())
         return diskBytesSize;
     QString diskUnits = size.right(size.length() - sizeValue1.size()).trimmed().toUpper();
@@ -155,14 +156,16 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         m_Vendor = "Longsys";
 
     setAttribute(mapInfo, "Driver", m_Driver); // 驱动
-    QRegExp exp("pci 0x[0-9a-zA-Z]*");
-    if (exp.indexIn(m_Vendor) != -1)
+    QRegularExpression exp("pci 0x[0-9a-zA-Z]*");
+    QRegularExpressionMatch match = exp.match(m_Vendor);
+    if (match.hasMatch())
         m_Vendor = "";
 
     setAttribute(mapInfo, "Attached to", m_Interface);
-    QRegExp re(".*\\((.*)\\).*");
-    if (re.exactMatch(m_Interface)) {
-        m_Interface = re.cap(1);
+    QRegularExpression re(".*\\((.*)\\).*");
+    match = re.match(m_Interface);
+    if (match.hasMatch()) {
+        m_Interface = match.captured(1);
         m_Interface.replace("Controller", "");
         m_Interface.replace("controller", "");
     }
@@ -172,19 +175,20 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Capacity", m_Size);
 
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
-    QRegExp reSize(".*\\((.*)bytes\\).*");
-    if (reSize.exactMatch(m_Size)) {
+    QRegularExpression reSize(".*\\((.*)bytes\\).*");
+    match = reSize.match(m_Size);
+    if (match.hasMatch()) {
         bool ok = false;
-        quint64 bytesSize = reSize.cap(1).trimmed().toULongLong(&ok);
+        quint64 bytesSize = match.captured(1).trimmed().toULongLong(&ok);
         if (ok) {
             m_Size = decimalkilos(bytesSize);
             m_SizeBytes = bytesSize;
         } else {
-            m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+            m_Size.replace(QRegularExpression("\\(.*\\)"), "").replace(" ", "");
             m_SizeBytes = convertToBytes(m_Size,DISK_SCALE_1024);
         }
     } else {
-        m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+        m_Size.replace(QRegularExpression("\\(.*\\)"), "").replace(" ", "");
         m_SizeBytes = convertToBytes(m_Size,DISK_SCALE_1024);
     }
 
@@ -247,11 +251,15 @@ QString DeviceStorage::getSerialID(QString &strDeviceLink)
     if (!strDeviceLink.isEmpty() && strDeviceLink.contains("platform/")) {
         // /devices/platform/f8300000.ufs/host0/target0:0:0/0:0:0:3
         // /proc/bootdevice/name:f8300000.ufs
-        QRegExp reg(".*platform/([^/]+)/.*");
+        QRegularExpression reg(".*platform/([^/]+)/.*");
         QString strName = "";
         QString strBootdeviceName = "";
-        if (reg.exactMatch(strDeviceLink)) {
-            strName = reg.cap(1);
+        if (reg.match(strDeviceLink).hasMatch()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+            strName = reg.cap(1); // Qt 5
+#else
+            strName = reg.match(strDeviceLink).captured(1); // Qt 6
+#endif
         }
         if (!strName.isEmpty()) { //取到设备名称再去读文件，因为读文件开销大。
             QString Path = "/proc/bootdevice/name";
@@ -295,9 +303,10 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Driver", m_Driver); // 驱动
 
     setAttribute(mapInfo, "Attached to", m_Interface);
-    QRegExp re(".*\\((.*)\\).*");
-    if (re.exactMatch(m_Interface)) {
-        m_Interface = re.cap(1);
+    QRegularExpression re(".*\\((.*)\\).*");
+    QRegularExpressionMatch match = re.match(m_Interface);
+    if (match.hasMatch()) {
+        m_Interface = match.captured(1);
         m_Interface.replace("Controller", "");
         m_Interface.replace("controller", "");
     }
@@ -307,23 +316,24 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Capacity", m_Size);
 
     // hwinfo里面显示的内容是  14 GB (15376000000 bytes) 需要处理
-    QRegExp reSize(".*\\((.*)bytes\\).*");
-    if (reSize.exactMatch(m_Size)) {
+    QRegularExpression reSize(".*\\((.*)bytes\\).*");
+    match = reSize.match(m_Size);
+    if (match.hasMatch()) {
         bool ok = false;
-        quint64 bytesSize = reSize.cap(1).trimmed().toULongLong(&ok);
+        quint64 bytesSize = match.captured(1).trimmed().toULongLong(&ok);
         if (ok) {
             m_Size = decimalkilos(bytesSize);
         } else {
-            m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+            m_Size.replace(QRegularExpression("\\(.*\\)"), "").replace(" ", "");
         }
     } else {
-        m_Size.replace(QRegExp("\\(.*\\)"), "").replace(" ", "");
+        m_Size.replace(QRegularExpression("\\(.*\\)"), "").replace(" ", "");
     }
     if (m_Size.startsWith("0") || m_Size == "")
         return false;
 
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
-//    setDiskSerialID(mapInfo["Device Files"]);
+    // setDiskSerialID(mapInfo["Device Files"]);
     setAttribute(mapInfo, "SysFS BusID", m_KeyToLshw);
     setAttribute(mapInfo, "Device File", m_DeviceFile);
 
@@ -456,11 +466,10 @@ void DeviceStorage::setDiskSerialID(const QString &deviceFiles)
         if (item.contains("by-id", Qt::CaseInsensitive) &&
                 item.contains(modelName, Qt::CaseInsensitive)) {
 
-            int index;/* = item.indexOf(QRegExp("_[\\S\\d]*[\\s\\S]*$"));
-            item = item.mid(index);*/
+            int index;
             index = item.lastIndexOf("_");
             item = item.mid(index + 1);
-            item.replace(QRegExp("-[\\s\\S]*$"), "");
+            item.replace(QRegularExpression("-[\\s\\S]*$"), "");
             m_SerialNumber = item;
             break;
         }
@@ -521,14 +530,18 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
 
 void DeviceStorage::checkDiskSize()
 {
-    QRegExp reg("[0-9]*.?[0-9]*");
-    int index = reg.indexIn(m_Size);
+    QRegularExpression reg("[0-9]*.?[0-9]*");
+    int index = reg.match(m_Size).capturedStart();
     // index>0时，对于"32GB"（数字开头的字符串,index=0）无法获取正确的数据32
     // 所以要改为index >= 0
     if (index >= 0) {
-        double num = reg.cap(0).toDouble();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        double num = reg.cap(0).toDouble(); // Qt 5 使用 cap
+#else
+        double num = reg.match(m_Size).captured(0).toDouble(); // Qt 6 使用 captured
+#endif
         double num1 = num - int(num);
-        QString type = m_Size.right(m_Size.length() - reg.cap(0).size()).trimmed();
+        QString type = m_Size.right(m_Size.length() - reg.match(m_Size).captured(0).size()).trimmed();
         if (!qFuzzyCompare(num1, 0.0) && type == "GB") {
             m_Size = QString::number(int(num) + 1) + " " + type;
         }
@@ -544,11 +557,19 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
     // 将字符串转为数字大小进行比较
     int num1 = 0;
     int num2 = 0;
-    QRegExp reg(".*\\[(\\d*).*\\]$");
-    if (reg.exactMatch(size1))
-        num1 = reg.cap(1).toInt();
-    if (reg.exactMatch(size2))
-        num2 = reg.cap(1).toInt();
+    QRegularExpression reg(".*\\[(\\d*).*\\]$");
+    if (reg.match(size1).hasMatch())
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        num1 = reg.cap(1).toInt(); // Qt 5 使用 cap
+#else
+        num1 = reg.match(size1).captured(1).toInt(); // Qt 6 使用 captured
+#endif
+    if (reg.match(size2).hasMatch())
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        num2 = reg.cap(1).toInt(); // Qt 5 使用 cap
+#else
+        num2 = reg.match(size2).captured(1).toInt(); // Qt 6 使用 captured
+#endif
 
     // 返回较大值
     if (num1 > num2)
@@ -681,19 +702,19 @@ void DeviceStorage::getInfoFromLshw(const QMap<QString, QString> &mapInfo)
     quint64 sizeByte = 0;
     setAttribute(mapInfo, "size", sizeFromlshw, true);
     // 样式数据 223GiB (240GB) size: 57GiB (61GB)  size: 931GiB (1TB)
-    QRegExp re(".*\\((.*)\\)$");
-    if (re.exactMatch(sizeFromlshw)) {
-        sizeFromlshw = re.cap(1);
-        sizeByte = convertToBytes(sizeFromlshw,DISK_SCALE_1000);
+    QRegularExpression re(".*\\((.*)\\)$");
+    QRegularExpressionMatch match = re.match(sizeFromlshw);
+    if (match.hasMatch()) {
+        sizeFromlshw = match.captured(1);
+        sizeByte = convertToBytes(sizeFromlshw, DISK_SCALE_1000);
     }
-    if(m_SizeBytes == 0)
+    if (m_SizeBytes == 0)
         m_SizeBytes = sizeByte;
 
-    if(m_Size.isEmpty() )
+    if (m_Size.isEmpty())
         m_Size = sizeFromlshw;
 
-
-    if (m_SerialNumber.compare("0",Qt::CaseInsensitive) == 0)
+    if (m_SerialNumber.compare("0", Qt::CaseInsensitive) == 0)
         m_SerialNumber = "";
 }
 
@@ -731,18 +752,26 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
         capacity = compareSize(mapInfo["Total NVM Capacity"], mapInfo["Namespace 1 Size/Capacity"]);
 
     if (capacity != "") {
-        QRegExp reg(".*\\[(.*)\\]$");
-        if (reg.exactMatch(capacity))
-            m_Size = reg.cap(1);
+        QRegularExpression reg(".*\\[(.*)\\]$");
+        if (reg.match(capacity).hasMatch())
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+            m_Size = reg.cap(1); // Qt 5 使用 cap
+#else
+            m_Size = reg.match(capacity).captured(1); // Qt 6 使用 captured
+#endif
 
         capacity.replace(",","").replace(" ","");
-        QRegExp re("(\\d+)bytes*");     //取值格式如： User Capacity:    1,000,204,886,016 bytes [1.00 TB]     Total NVM Capacity:   256,060,514,304 [256 GB]
-        int pos = re.indexIn(capacity);
+        QRegularExpression re("(\\d+)bytes*");     //取值格式如： User Capacity:    1,000,204,886,016 bytes [1.00 TB]     Total NVM Capacity:   256,060,514,304 [256 GB]
+        int pos = re.match(capacity).capturedStart();
         if (pos != -1) {
-            QString byteSize = re.cap(1);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+            QString byteSize = re.cap(1); // Qt 5 使用 cap
+#else
+            QString byteSize = re.match(capacity).captured(1); // Qt 6 使用 captured
+#endif
             bool isValue = false;
             quint64 value = byteSize.trimmed().toULongLong(&isValue);
-            if(value > 0 && isValue)
+            if (value > 0 && isValue)
                 m_SizeBytes = value;
         }
     }
@@ -765,7 +794,7 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     // 修正数值
     if(Common::boardVendorType() != "KLVV" && Common::boardVendorType() != "KLVU" \
         && Common::boardVendorType() != "PGUW" && Common::boardVendorType() != "PGUV")
-            m_Size.replace(QRegExp("\\.0[1-9]"), ".00");
+            m_Size.replace(QRegularExpression("\\.0[1-9]"), ".00");
     //根据产品PN中的固定前两位 RS来匹配厂商 为Longsys 如产品PN ：RSYE3836N-480G    RSYE3836N-960G    RSYE3836N-1920     RSYE3836N-3840
     if (m_Name.startsWith("RS") && m_Vendor.isEmpty())
         m_Vendor = "Longsys";

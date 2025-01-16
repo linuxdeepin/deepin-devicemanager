@@ -115,10 +115,10 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         strUrl += "&product=" + strModels;
     }
     if (0 < iClassP) {
-        strUrl += "&class_p=" + QString(iClassP);
+        strUrl += "&class_p=" + QString::number(iClassP);
     }
     if (0 < iClass) {
-        strUrl += "&class=" + QString(iClass);
+        strUrl += "&class=" + QString::number(iClass);
     }
     return getRequestJson(strUrl);
 }
@@ -233,13 +233,12 @@ int HttpDriverInterface::packageInstall(const QString &package_name, const QStri
         return 0;
     if (infoList[1].contains(version))
         return 2;
-    //return 1;
 
-    QRegExp rxlen("(\\d+\\S*)");
-    int pos = rxlen.indexIn(infoList[1]);
+    QRegularExpression rxlen("(\\d+\\S*)");
+    QRegularExpressionMatch match = rxlen.match(infoList[1]);
     QString curVersion;
-    if (pos > -1) {
-        curVersion = rxlen.cap(1);
+    if (match.hasMatch()) {
+        curVersion = match.captured(1);
     }
     // 若当前已安装版本高于推荐版本，不再更新
     if (curVersion >= version)
