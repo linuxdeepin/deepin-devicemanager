@@ -76,8 +76,6 @@ find_package(Qt6 COMPONENTS
     Sql 
     Svg 
     SvgWidgets 
-    Multimedia 
-    MultimediaWidgets 
     Xml 
     OpenGL 
     Core 

@@ -130,14 +130,13 @@ find_package(Qt6 COMPONENTS
     Sql 
     Svg 
     SvgWidgets 
-    Multimedia 
-    MultimediaWidgets 
     Xml 
     OpenGL 
     Core 
     OpenGLWidgets
     REQUIRED
 )
+
 find_package(PolkitQt6-1 REQUIRED)
 find_package(Dtk6 COMPONENTS
     Widget

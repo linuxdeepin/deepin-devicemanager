@@ -62,7 +62,6 @@ find_package(Dtk6 COMPONENTS
 )
 
 if(NOT DISABLE_DRIVER)
-    find_package(QApt REQUIRED)
     PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 endif()
 
