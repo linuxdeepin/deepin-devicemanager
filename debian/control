@@ -22,7 +22,8 @@ Build-Depends: debhelper (>= 11),
  qt6-tools-dev-tools,
  libdtk6gui-dev,
  libdtk6widget-dev,
- libdtk6core-dev
+ libdtk6core-dev,
+ qt6-svg-dev
 Standards-Version: 4.1.3
 
 Package: deepin-devicemanager
