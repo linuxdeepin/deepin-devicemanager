@@ -59,6 +59,9 @@ if (MAJOR_VERSION MATCHES "23")
     add_definitions(-DOS_BUILD_V23)
 endif()
 
+# 设置 QT_VERSION_MAJOR 变量
+set(QT_VERSION_MAJOR 6)
+
 #compile flags
 if (CMAKE_BUILD_TYPE MATCHES Debug)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Wextra")
@@ -75,7 +78,7 @@ else()
 endif()
 
 #Generate the qm file
-execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
+execute_process(COMMAND bash ${APP_TRANS_SCRIPT} ${QT_VERSION_MAJOR} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
 configure_file(src/environments.h.in environments.h @ONLY)
 configure_file(src/config.h.in config.h @ONLY)
 
@@ -106,53 +109,64 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/src/DDLog/)
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
 
-# Find the library 
-#Qt5 
-# find_package(PkgConfig REQUIRED)
-# find_package(Qt5Widgets REQUIRED)
-# find_package(Qt5 COMPONENTS DBus REQUIRED)
-# find_package(Qt5Network REQUIRED)
-# find_package(Qt5Gui REQUIRED)
-# find_package(Qt5Xml REQUIRED)
-# find_package(PolkitQt5-1 REQUIRED)
-# find_package(DtkWidget REQUIRED)
-# find_package(DtkCore REQUIRED)
+# 定义一个宏来根据QT_VERSION_MAJOR选择性执行代码
+macro(SET_QT_VERSION)
+  if(${QT_VERSION_MAJOR} EQUAL 6)
+    # Qt6 环境
+    find_package(PkgConfig REQUIRED)
+    find_package(Qt6 COMPONENTS 
+        Gui 
+        Widgets 
+        DBus 
+        LinguistTools 
+        Network 
+        Concurrent 
+        Sql 
+        Svg 
+        SvgWidgets 
+        Xml 
+        OpenGL 
+        Core 
+        OpenGLWidgets
+        REQUIRED
+    )
 
-#qt6
-find_package(PkgConfig REQUIRED)
-find_package(Qt6 COMPONENTS 
-    Gui 
-    Widgets 
-    DBus 
-    LinguistTools 
-    Network 
-    Concurrent 
-    Sql 
-    Svg 
-    SvgWidgets 
-    Xml 
-    OpenGL 
-    Core 
-    OpenGLWidgets
-    REQUIRED
-)
+    find_package(PolkitQt6-1 REQUIRED)
+    find_package(Dtk6 COMPONENTS
+        Widget
+        Core
+        REQUIRED
+    )
+  elseif(${QT_VERSION_MAJOR} EQUAL 5)
+    # Qt5 环境
+    find_package(PkgConfig REQUIRED)
+    find_package(Qt5Widgets REQUIRED)
+    find_package(Qt5 COMPONENTS DBus REQUIRED)
+    find_package(Qt5Network REQUIRED)
+    find_package(Qt5Gui REQUIRED)
+    find_package(Qt5Xml REQUIRED)
+    find_package(PolkitQt5-1 REQUIRED)
+    find_package(DtkWidget REQUIRED)
+    find_package(DtkCore REQUIRED)
+  else()
+    message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
+  endif()
+endmacro()
 
-find_package(PolkitQt6-1 REQUIRED)
-find_package(Dtk6 COMPONENTS
-    Widget
-    Core
-    REQUIRED
-)
-if (Qt6_FOUND)
+# 调用宏
+SET_QT_VERSION()
+
+if(${QT_VERSION_MAJOR} EQUAL 6)
     find_package(QApt-qt6 REQUIRED)
     include_directories(${QApt-qt6_INCLUDE_DIRS})
     set(QAPT_LIB QApt-qt6)
-else()
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
     find_package(QApt REQUIRED)
     include_directories(${QApt_INCLUDE_DIRS})
     set(QAPT_LIB QApt)
+else()
+    message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
 endif()
-
 
 #include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
 include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
@@ -161,7 +175,7 @@ include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H} ${APP_QRC})
 target_include_directories(${APP_BIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
 
-if (Qt6_FOUND)
+if(${QT_VERSION_MAJOR} EQUAL 6)
     # Qt6 environment
     target_link_libraries(${APP_BIN_NAME}
     Dtk6::Core
@@ -175,7 +189,7 @@ if (Qt6_FOUND)
     ${QAPT_LIB}
     PolkitQt6-1::Agent
 )
-else()
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
     # Qt5 environment
     target_link_libraries(${APP_BIN_NAME}
     ${DtkWidget_LIBRARIES}
@@ -188,6 +202,8 @@ else()
     Qt5::Network
     PolkitQt5-1::Agent
 )
+else()
+    message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
 endif()
 
 # Install files
@@ -203,21 +219,21 @@ install(FILES ${CMAKE_SOURCE_DIR}/deepin-devicemanager/assets/deepin-devicemanag
 #hw机型增加DConfig配置
 set(APPID org.deepin.devicemanager)
 set(configFile ${PROJECT_SOURCE_DIR}/assets/org.deepin.devicemanager.json)
-if (Qt6_FOUND)
+if(${QT_VERSION_MAJOR} EQUAL 6)
     if (DEFINED DSG_DATA_DIR)
         message("-- DConfig is supported by DTK")
         dtk_add_config_meta_files(APPID ${APPID} FILES ${configFile})
     endif()
-else()
-    # Qt5 environment
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
     if (DEFINED DSG_DATA_DIR)
         message("-- DConfig is supported by DTK")
         dconfig_meta_files(APPID ${APPID} FILES ${configFile})
     endif()
+else()
+    message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
 endif()
 
 # Test--------deepin-devicemanager
 if (CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")
    add_subdirectory(./tests)
 endif()
-

@@ -1,8 +1,8 @@
-deepin-devicemanager (6.0.31) UNRELEASED; urgency=medium
+deepin-devicemanager (6.0.31) unstable; urgency=medium
 
   * fix: feat: qt6 adaptation
 
- -- Tian ShiLin <tianshilin@uniontech.com>  Mon, 20 Jan 2025 13:19:35 +0800
+ -- Tian ShiLin <tianshilin@uniontech.com>  Mon, 20 Jan 2025 17:35:26 +0800
 
 deepin-devicemanager (6.0.30) unstable; urgency=medium
 

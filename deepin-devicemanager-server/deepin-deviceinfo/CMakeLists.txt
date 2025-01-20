@@ -34,29 +34,42 @@ file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 
 link_libraries("udev")
 
-#qt5
-# find_package(Qt5 COMPONENTS Core DBus REQUIRED)
-# find_package(DtkCore REQUIRED)
-# find_package(PolkitQt5-1 REQUIRED)
+# 设置 QT_VERSION 变量
+set(QT_VERSION_MAJOR 5)
 
-#qt6
-find_package(Qt6 COMPONENTS Core DBus REQUIRED)
-find_package(PolkitQt6-1 REQUIRED)
+# 定义一个宏来根据QT_VERSION选择性执行代码
+macro(SET_QT_VERSION)
+  if(${QT_VERSION_MAJOR} EQUAL 6)
+    # Qt6 环境
+    find_package(Qt6 COMPONENTS Core DBus REQUIRED)
+    find_package(PolkitQt6-1 REQUIRED)
+    find_package(Dtk6 COMPONENTS
+      Widget
+      Core
+      REQUIRED
+    )
+  elseif(${QT_VERSION_MAJOR} EQUAL 5)
+    # Qt5 环境
+    find_package(Qt5 COMPONENTS Core DBus REQUIRED)
+    find_package(DtkCore REQUIRED)
+    find_package(PolkitQt5-1 REQUIRED)
+  else()
+    message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION}")
+  endif()
+endmacro()
 
-find_package(Dtk6 COMPONENTS
-    Widget
-    Core
-    REQUIRED
-)
+SET_QT_VERSION()
 
-if (Qt6_FOUND)
+if(${QT_VERSION_MAJOR} EQUAL 6)
     find_package(QApt-qt6 REQUIRED)
     include_directories(${QApt-qt6_INCLUDE_DIRS})
     set(QAPT_LIB QApt-qt6)
-else()
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
     find_package(QApt REQUIRED)
     include_directories(${QApt_INCLUDE_DIRS})
     set(QAPT_LIB QApt)
+else()
+    message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION}")
 endif()
 
 add_library(${BIN_NAME} MODULE
@@ -64,7 +77,7 @@ add_library(${BIN_NAME} MODULE
     ${SRC_H}
 )
 
-if (Qt6_FOUND)
+if(${QT_VERSION_MAJOR} EQUAL 6)
     # Qt6 environment
     target_include_directories(${BIN_NAME} PUBLIC
     Qt6::Core
@@ -81,7 +94,7 @@ if (Qt6_FOUND)
     ${Dtk6Core_LIBRARIES}
     ${QAPT_LIB}
   )
-else()
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
     # Qt5 environment
     target_include_directories(${BIN_NAME} PUBLIC
     Qt5::Core
@@ -94,6 +107,8 @@ else()
     PolkitQt5-1::Agent
     ${DtkCore_LIBRARIES}
   )
+else()
+    message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION}")
 endif()
 
 

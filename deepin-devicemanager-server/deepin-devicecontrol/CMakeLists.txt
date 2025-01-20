@@ -32,34 +32,45 @@ endforeach()
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 
-#qt5
-# find_package(PkgConfig REQUIRED)
-# find_package(Qt5 COMPONENTS Core DBus Network Sql REQUIRED)
-# find_package(DtkCore REQUIRED)
-# find_package(PolkitQt5-1 REQUIRED)
-# find_package(deepin-qdbus-service REQUIRED)
+# 设置 QT_VERSION 变量
+set(QT_VERSION_MAJOR 5)
+  
+macro(SET_QT_VERSION)
+  if(${QT_VERSION_MAJOR} EQUAL 6)
+    # Qt6 环境
+    find_package(PkgConfig REQUIRED)
+    find_package(Qt6 COMPONENTS Core DBus Network Sql REQUIRED)
+    find_package(PolkitQt6-1 REQUIRED)
+    find_package(deepin-qdbus-service REQUIRED)
+    find_package(Dtk6 COMPONENTS
+      Widget
+      Core
+      REQUIRED
+    )
+  elseif(${QT_VERSION_MAJOR} EQUAL 5)
+    # Qt5 环境
+    find_package(PkgConfig REQUIRED)
+    find_package(Qt5 COMPONENTS Core DBus Network Sql REQUIRED)
+    find_package(DtkCore REQUIRED)
+    find_package(PolkitQt5-1 REQUIRED)
+    find_package(deepin-qdbus-service REQUIRED)
+  else()
+    message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION}")
+  endif()
+endmacro()
 
-#qt6
-find_package(PkgConfig REQUIRED)
-find_package(Qt6 COMPONENTS Core DBus Network Sql REQUIRED)
-find_package(PolkitQt6-1 REQUIRED)
-find_package(deepin-qdbus-service REQUIRED)
+# 调用宏
+SET_QT_VERSION()
 
-if (Qt6_FOUND)
+if(${QT_VERSION_MAJOR} EQUAL 6)
     find_package(QApt-qt6 REQUIRED)
     include_directories(${QApt-qt6_INCLUDE_DIRS})
     set(QAPT_LIB QApt-qt6)
-else()
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
     find_package(QApt REQUIRED)
     include_directories(${QApt_INCLUDE_DIRS})
     set(QAPT_LIB QApt)
 endif()
-
-find_package(Dtk6 COMPONENTS
-    Widget
-    Core
-    REQUIRED
-)
 
 if(NOT DISABLE_DRIVER)
     PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
@@ -74,7 +85,7 @@ include_directories("/usr/include/cups/")
 
 add_definitions(-DSERVICE_CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/deepin-service-manager/")
 
-if (Qt6_FOUND)
+if(${QT_VERSION_MAJOR} EQUAL 6)
     # Qt6 environment
     target_include_directories(${BIN_NAME} PUBLIC
     Dtk6::Core
@@ -100,7 +111,7 @@ if (Qt6_FOUND)
       ${QAPT_LIB}
       cups
     )
-else()
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
     # Qt5 environment
     target_include_directories(${BIN_NAME} PUBLIC
     Qt5::Core
