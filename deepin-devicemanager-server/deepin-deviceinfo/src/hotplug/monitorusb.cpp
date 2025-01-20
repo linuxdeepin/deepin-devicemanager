@@ -55,8 +55,8 @@ void MonitorUsb::monitor()
         }
         FD_ZERO(&fds);
         FD_SET(fd, &fds);
-        tv.tv_sec = 0;
-        tv.tv_usec = 10000;
+        tv.tv_sec = 1;
+        tv.tv_usec = 0;
         int ret = select(fd + 1, &fds, nullptr, nullptr, &tv);
 
         // 判断是否有事件产生
