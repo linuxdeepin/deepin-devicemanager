@@ -3892,7 +3892,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Backup All</source>
-        <translation type="unfinished"/>
+        <translation>Создайте резервную копию всех</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="283"/>
@@ -3955,14 +3955,14 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="601"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Вы устанавливаете драйвер, работа которого будет прервана, если вы выйдете из системы.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="602"/>
         <location filename="../src/Page/MainWindow.cpp" line="615"/>
         <location filename="../src/Page/MainWindow.cpp" line="628"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Вы уверены, что хотите выйти?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="605"/>
@@ -3983,12 +3983,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="614"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Вы создаете резервную копию драйверов, которая будет прервана, если вы выйдете из системы.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="627"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Вы восстанавливаете драйверы, работа которых будет прервана, если вы выйдете из системы.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="34"/>
