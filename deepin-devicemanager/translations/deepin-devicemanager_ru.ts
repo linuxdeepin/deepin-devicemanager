@@ -3562,7 +3562,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="166"/>
         <source>icon-name</source>
-        <translation type="unfinished"/>
+        <translation>icon-name</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="167"/>
@@ -3572,67 +3572,67 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="168"/>
         <source>daemon-version</source>
-        <translation type="unfinished"/>
+        <translation>версия демона</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="169"/>
         <source>on-battery</source>
-        <translation type="unfinished"/>
+        <translation>на батарее</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="170"/>
         <source>lid-is-closed</source>
-        <translation type="unfinished"/>
+        <translation>крышка закрыта</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="171"/>
         <source>lid-is-present</source>
-        <translation type="unfinished"/>
+        <translation>крышка-присутствует</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="172"/>
         <source>critical-action</source>
-        <translation type="unfinished"/>
+        <translation>критические действия</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="128"/>
         <source>copies</source>
-        <translation type="unfinished"/>
+        <translation>копии</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="129"/>
         <source>job-cancel-after</source>
-        <translation type="unfinished"/>
+        <translation>задание-отмена-после</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="130"/>
         <source>job-hold-until</source>
-        <translation type="unfinished"/>
+        <translation>задание-удерживать-до тех пор, пока</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="131"/>
         <source>job-priority</source>
-        <translation type="unfinished"/>
+        <translation>приоритетная работа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="132"/>
         <source>marker-change-time</source>
-        <translation type="unfinished"/>
+        <translation>время смены маркера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="133"/>
         <source>number-up</source>
-        <translation type="unfinished"/>
+        <translation>увеличение числа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="134"/>
         <source>orientation-requested</source>
-        <translation type="unfinished"/>
+        <translation>ориентация - по запросу</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="135"/>
         <source>print-color-mode</source>
-        <translation type="unfinished"/>
+        <translation>цветной режим печати</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="136"/>
