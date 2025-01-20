@@ -583,7 +583,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="314"/>
         <source>DigitalOutput</source>
-        <translation type="unfinished"/>
+        <translation>Цифровой выход</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="315"/>
@@ -933,7 +933,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="140"/>
         <source>Locator</source>
-        <translation type="unfinished"/>
+        <translation>Локатор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="141"/>
@@ -986,7 +986,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="271"/>
         <source>Display Input</source>
-        <translation type="unfinished"/>
+        <translation>Вход дисплея</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="272"/>
@@ -1006,7 +1006,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="281"/>
         <source>Display Ratio</source>
-        <translation type="unfinished"/>
+        <translation>Соотношение сторон дисплея</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="283"/>
@@ -1082,12 +1082,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="302"/>
         <source>Maximum Rate</source>
-        <translation type="unfinished"/>
+        <translation>Максимальная ставка</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="303"/>
         <source>Negotiation Rate</source>
-        <translation type="unfinished"/>
+        <translation>Скорость переговоров</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="304"/>
@@ -1102,7 +1102,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="306"/>
         <source>Link</source>
-        <translation type="unfinished"/>
+        <translation>Ссылка</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="307"/>
@@ -1336,32 +1336,32 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="187"/>
         <source>Design Capacity</source>
-        <translation type="unfinished"/>
+        <translation>Проектная мощность</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="188"/>
         <source>Design Voltage</source>
-        <translation type="unfinished"/>
+        <translation>Расчетное напряжение</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="189"/>
         <source>SBDS Version</source>
-        <translation type="unfinished"/>
+        <translation>Версия SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="190"/>
         <source>SBDS Serial Number</source>
-        <translation type="unfinished"/>
+        <translation>Серийный номер SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="191"/>
         <source>SBDS Manufacture Date</source>
-        <translation type="unfinished"/>
+        <translation>Дата изготовления SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="192"/>
         <source>SBDS Chemistry</source>
-        <translation type="unfinished"/>
+        <translation>Химия SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="193"/>
@@ -1394,7 +1394,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="159"/>
         <source>Shared</source>
-        <translation type="unfinished"/>
+        <translation>Общий</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="160"/>
@@ -3557,7 +3557,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="165"/>
         <source>technology</source>
-        <translation type="unfinished"/>
+        <translation>технология</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="166"/>
