@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.31) UNRELEASED; urgency=medium
+
+  * fix: feat: qt6 adaptation
+
+ -- Tian ShiLin <tianshilin@uniontech.com>  Mon, 20 Jan 2025 13:19:35 +0800
+
 deepin-devicemanager (6.0.30) unstable; urgency=medium
 
   * chore: [disk] support multis lvm /dev/mapper

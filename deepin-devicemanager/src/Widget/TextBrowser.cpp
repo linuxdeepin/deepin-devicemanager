@@ -10,7 +10,7 @@
 #include "DBusWakeupInterface.h"
 
 // Dtk头文件
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 #include <DFontSizeManager>
 #include <DMenu>
@@ -139,10 +139,15 @@ void TextBrowser::fillClipboard()
 
 void TextBrowser::paintEvent(QPaintEvent *event)
 {
-    DPalette pa = DApplicationHelper::instance()->palette(this);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    DPalette pa = DGuiApplicationHelper::instance()->palette(this);
     pa.setBrush(DPalette::WindowText, pa.color(DPalette::TextTips));
-    DApplicationHelper::instance()->setPalette(this, pa);
-
+    DGuiApplicationHelper::instance()->setPalette(this, pa);
+#else
+    QPalette pa = palette();
+    pa.setBrush(QPalette::WindowText, pa.color(QPalette::PlaceholderText));
+    setPalette(pa);
+#endif
 
     int height = int(document()->size().height());
     setFixedHeight(height);
@@ -235,7 +240,7 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
             title = "(" + tr("Disable") + ")" + title;
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
         } else if (!info->available()) {
-            DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+            DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
             DPalette palette = dAppHelper->applicationPalette();
             QColor color = palette.color(DPalette::Disabled, DPalette::PlaceholderText);
             QRgb rgb = qRgb(color.red(), color.green(), color.blue());

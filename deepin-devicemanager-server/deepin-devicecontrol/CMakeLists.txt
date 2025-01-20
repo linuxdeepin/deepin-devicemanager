@@ -32,14 +32,36 @@ endforeach()
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 
+#qt5
+# find_package(PkgConfig REQUIRED)
+# find_package(Qt5 COMPONENTS Core DBus Network Sql REQUIRED)
+# find_package(DtkCore REQUIRED)
+# find_package(PolkitQt5-1 REQUIRED)
+# find_package(deepin-qdbus-service REQUIRED)
+
+#qt6
 find_package(PkgConfig REQUIRED)
-find_package(Qt5 COMPONENTS Core DBus Network Sql REQUIRED)
-find_package(DtkCore REQUIRED)
-find_package(PolkitQt5-1 REQUIRED)
+find_package(Qt6 COMPONENTS Core DBus Network Sql REQUIRED)
+find_package(PolkitQt6-1 REQUIRED)
 find_package(deepin-qdbus-service REQUIRED)
 
-if(NOT DISABLE_DRIVER)
+if (Qt6_FOUND)
+    find_package(QApt-qt6 REQUIRED)
+    include_directories(${QApt-qt6_INCLUDE_DIRS})
+    set(QAPT_LIB QApt-qt6)
+else()
     find_package(QApt REQUIRED)
+    include_directories(${QApt_INCLUDE_DIRS})
+    set(QAPT_LIB QApt)
+endif()
+
+find_package(Dtk6 COMPONENTS
+    Widget
+    Core
+    REQUIRED
+)
+
+if(NOT DISABLE_DRIVER)
     PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 endif()
 
@@ -52,28 +74,58 @@ include_directories("/usr/include/cups/")
 
 add_definitions(-DSERVICE_CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/deepin-service-manager/")
 
-target_include_directories(${BIN_NAME} PUBLIC
-  Qt5::Core
-  Qt5::DBus
-  Qt5::Network
-  Qt5::Sql
-  ${deepin-qdbus-service_INCLUDE_DIR}
-)
-
-target_link_libraries(${BIN_NAME} PRIVATE
+if (Qt6_FOUND)
+    # Qt6 environment
+    target_include_directories(${BIN_NAME} PUBLIC
+    Dtk6::Core
+    Dtk6::Widget
+    Qt6::Core
+    Qt6::DBus
+    Qt6::Network
+    Qt6::Sql
+    Qt6::Gui
+    ${deepin-qdbus-service_INCLUDE_DIR}
+    ${QAPT_LIB}
+  )
+  
+  target_link_libraries(${BIN_NAME} PRIVATE
+      Qt6::Core
+      Qt6::DBus
+      Qt6::Network
+      Qt6::Sql
+      PolkitQt6-1::Agent
+      Dtk6::Core
+      Dtk6::Widget
+      ${deepin-qdbus-service_LIBRARIES}
+      ${QAPT_LIB}
+      cups
+    )
+else()
+    # Qt5 environment
+    target_include_directories(${BIN_NAME} PUBLIC
     Qt5::Core
     Qt5::DBus
     Qt5::Network
     Qt5::Sql
-    PolkitQt5-1::Agent
-    ${DtkCore_LIBRARIES}
-    ${deepin-qdbus-service_LIBRARIES}
-    cups
-    )
+    ${deepin-qdbus-service_INCLUDE_DIR}
+  )
+  
+  target_link_libraries(${BIN_NAME} PRIVATE
+      Qt5::Core
+      Qt5::DBus
+      Qt5::Network
+      Qt5::Sql
+      PolkitQt5-1::Agent
+      ${DtkCore_LIBRARIES}
+      ${deepin-qdbus-service_LIBRARIES}
+      cups
+      )
+endif()
+    
 if(NOT DISABLE_DRIVER)
     target_link_libraries(${BIN_NAME} PRIVATE
         kmod
-        QApt
+        ${QAPT_LIB}
         )
 endif()
 

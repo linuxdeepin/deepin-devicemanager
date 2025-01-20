@@ -32,7 +32,11 @@
 #include <QJsonArray>
 #include <QThread>
 #include <QDBusInterface>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)  
 #include <QNetworkConfigurationManager>
+#else
+#include <QNetworkInformation>
+#endif
 #include <QDir>
 #include <QFileInfoList>
 #include <QLoggingCategory>
@@ -447,10 +451,19 @@ bool DriverManager::unInstallModule(const QString &moduleName, QString &msg)
 
 bool DriverManager::isNetworkOnline()
 {
-    /*
-       -c 2（代表ping次数，ping 2次后结束ping操作） -w 2（代表超时时间，2秒后结束ping操作）
-    */
-    // example: ping www.baidu.com -c 2 -w 2 >netlog.bat
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QNetworkConfigurationManager mgr;
+    if (!mgr.isOnline()) {
+        return false;
+    }
+#else
+    if (!QNetworkInformation::instance() || 
+        QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Disconnected) {
+        return false;
+    }
+#endif
+
+    // 继续执行 ping 测试以确保实际网络连接
     QProcess process;
     process.setStandardOutputFile("netlog.bat", QIODevice::WriteOnly);
     process.start("ping", QStringList() << "www.baidu.com" << "-c" << "2" << "-w" << "2");

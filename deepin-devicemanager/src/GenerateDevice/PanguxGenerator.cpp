@@ -6,7 +6,7 @@
 #include "PanguxGenerator.h"
 
 // 其它头文件
-
+#include <QRegularExpression>
 #include "../DeviceManager/DeviceAudio.h"
 #include "../DeviceManager/DeviceBluetooth.h"
 #include "DeviceManager/DeviceManager.h"
@@ -82,7 +82,7 @@ void PanguXGenerator::generatorCpuDevice()
         foreach (const QString &line, lines) {
             if (line.isEmpty())
                 continue;
-            QStringList words = line.split(QRegExp("[\\s]*:[\\s]*"));
+            QStringList words = line.split(QRegularExpression("[\\s]*:[\\s]*"));
             if (words.size() != 2)
                 continue;
             if ("Hardware" == words[0]) {

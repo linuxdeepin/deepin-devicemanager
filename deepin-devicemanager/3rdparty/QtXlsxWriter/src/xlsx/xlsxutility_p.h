@@ -37,10 +37,18 @@
 //
 
 #include "xlsxglobal.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    #include <QStringList>
+    #include <QColor>
+#endif
+
 class QPoint;
 class QString;
-class QStringList;
-class QColor;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    class QStringList;
+    class QColor;
+#endif
 class QDateTime;
 class QTime;
 

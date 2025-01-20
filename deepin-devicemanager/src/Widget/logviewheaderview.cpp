@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DPalette>
 #include <DStyleHelper>
 
@@ -40,7 +40,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     cg = DPalette::Active;
 #endif
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
@@ -133,7 +133,7 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
     cg = DPalette::Active;
 #endif
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
@@ -174,9 +174,17 @@ int LogViewHeaderView::sectionSizeHint(int logicalIndex) const
 
     QFontMetrics fm(DApplication::font());
     QString buf = model()->headerData(logicalIndex, Qt::Horizontal, Qt::DisplayRole).toString();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (sortIndicatorSection() == logicalIndex) {
         return fm.width(buf) + margin * 3 + 8;
     } else {
         return fm.width(buf) + margin * 2;
     }
+#else
+    if (sortIndicatorSection() == logicalIndex) {
+        return fm.horizontalAdvance(buf) + margin * 3 + 8;
+    } else {
+        return fm.horizontalAdvance(buf) + margin * 2;
+    }
+#endif
 }

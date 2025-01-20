@@ -2,6 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+//  qt
+#include <QRegularExpression>
 // 项目自身文件
 #include "MipsGenerator.h"
 
@@ -64,12 +66,12 @@ void MipsGenerator::generatorComputerDevice()
     if (verInfo.size() > 0) {
         QString info = verInfo[0]["OS"].trimmed();
         info = info.trimmed();
-        QRegExp reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)", Qt::CaseSensitive);
-        int index = reg.indexIn(info);
-        if (index != -1) {
-            QString tmp = reg.cap(0);
+        QRegularExpression reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)");
+        QRegularExpressionMatch match = reg.match(info);
+        if (match.hasMatch()) {
+            QString tmp = match.captured(0);
             info.remove(tmp);
-            info.insert(index, reg.cap(1));
+            info.insert(match.capturedStart(), match.captured(1));
         }
         device->setOS(info);
     }

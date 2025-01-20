@@ -125,8 +125,11 @@ void KLUGenerator::getNetworkInfoFromCatWifiInfo()
         foreach (const QString &item, items) {
             if (item.isEmpty())
                 continue;
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             QStringList strList = item.split(':', QString::SkipEmptyParts);
+#else
+            QStringList strList = item.split(':', Qt::SkipEmptyParts);
+#endif
             if (strList.size() == 2)
                 wifiInfo[strList[0] ] = strList[1];
         }

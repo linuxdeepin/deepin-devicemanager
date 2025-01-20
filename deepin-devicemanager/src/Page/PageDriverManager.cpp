@@ -22,13 +22,17 @@
 #include "DDLog.h"
 
 #include <DScrollArea>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 #include <DDialog>
 
 #include <QBoxLayout>
 #include <QMetaType>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)  
 #include <QNetworkConfigurationManager>
+#else
+#include <QNetworkInformation>
+#endif
 #include <QScrollBar>
 #include <QTimer>
 #include <QDateTime>
@@ -913,8 +917,12 @@ void PageDriverManager::failAllIndex()
 
 bool PageDriverManager::networkIsOnline()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QNetworkConfigurationManager mgr;
     return mgr.isOnline();
+#else
+    return QNetworkInformation::instance() && QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Disconnected;
+#endif
 }
 
 void PageDriverManager::getDownloadInfo(int progress, qint64 total, QString &speed, QString &size)
@@ -1006,7 +1014,11 @@ void PageDriverManager::getDebBackupInfo(DriverInfo *info)
                 continue;
             if (fileInfo.isFile() && fileInfo.fileName().contains(".deb") && fileInfo.fileName().contains(debname)) {
                 QString tmps = fileInfo.fileName().remove(debname).remove(".deb");
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 QStringList  tmpsl = tmps.split('_', QString::SkipEmptyParts);
+#else
+                QStringList  tmpsl = tmps.split('_', Qt::SkipEmptyParts);
+#endif
                 info->m_DebBackupVersion = tmpsl.first();
                 info->m_BackupFileName = fileInfo.absoluteFilePath();
             }
