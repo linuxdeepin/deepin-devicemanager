@@ -3637,37 +3637,37 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="136"/>
         <source>printer-is-accepting-jobs</source>
-        <translation type="unfinished"/>
+        <translation>принтер-принимает-задания</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="137"/>
         <source>printer-is-shared</source>
-        <translation type="unfinished"/>
+        <translation>общий доступ к принтеру</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="138"/>
         <source>printer-is-temporary</source>
-        <translation type="unfinished"/>
+        <translation>принтер-это-временное решение</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="163"/>
         <source>printer-make-and-model</source>
-        <translation type="unfinished"/>
+        <translation>марка и модель принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="140"/>
         <source>printer-state-change-time</source>
-        <translation type="unfinished"/>
+        <translation>время изменения состояния принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="141"/>
         <source>printer-state-reasons</source>
-        <translation type="unfinished"/>
+        <translation>причины - состояние принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="142"/>
         <source>printer-type</source>
-        <translation type="unfinished"/>
+        <translation>тип принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="143"/>
@@ -3999,7 +3999,7 @@
         <location filename="../src/Tool/commontools.cpp" line="35"/>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation>Устройство для формирования изображения</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
@@ -4059,27 +4059,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not backed up</source>
-        <translation type="unfinished"/>
+        <translation>Нет резервной копии</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Backing up</source>
-        <translation type="unfinished"/>
+        <translation>Резервное копирование</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>Сбой резервного копирования</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Backup successful</source>
-        <translation type="unfinished"/>
+        <translation>Резервное копирование выполнено успешно</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Restoring</source>
-        <translation type="unfinished"/>
+        <translation>Восстановление</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="78"/>
@@ -4099,7 +4099,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось получить файлы драйверов</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="235"/>
@@ -4109,12 +4109,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Резервная копия</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Восстанавливать</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
