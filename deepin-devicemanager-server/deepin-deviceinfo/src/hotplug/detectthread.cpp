@@ -113,11 +113,19 @@ void DetectThread::curHwinfoUsbInfo(QMap<QString, QMap<QString, QString>> &usbIn
                 QString valueStr = vendorlist[1].trimmed() + devicelist[1].remove("0x", Qt::CaseSensitive).trimmed();
                 QCryptographicHash Hash(QCryptographicHash::Md5);
                 QByteArray buf;
-                buf.append(valueStr);
+                buf.append(valueStr.toUtf8());
                 if (mapItem.contains("SysFS Device Link") && !mapItem["SysFS Device Link"].isEmpty()) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                     buf.append(mapItem["SysFS Device Link"].trimmed());
+#else
+                    buf.append(mapItem["SysFS Device Link"].trimmed().toUtf8());
+#endif
                 } else {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                     buf.append(mapItem["SysFS ID"].trimmed());
+#else
+                    buf.append(mapItem["SysFS ID"].trimmed().toUtf8());
+#endif
                 }
                 Hash.addData(buf);
                 uniqueID = QString::fromStdString(Hash.result().toBase64().toStdString());

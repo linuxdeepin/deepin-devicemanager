@@ -52,16 +52,43 @@ configure_file(../src/environments.h.in environments.h @ONLY)
 configure_file(../src/config.h.in config.h @ONLY)
 
 # Find the library
+#qt5
+# find_package(PkgConfig REQUIRED)
+# find_package(Qt5Widgets REQUIRED)
+# find_package(Qt5 COMPONENTS DBus REQUIRED)
+# find_package(Qt5Network REQUIRED)
+# find_package(Qt5Gui REQUIRED)
+# find_package(Qt5Xml REQUIRED)
+# find_package(PolkitQt5-1 REQUIRED)
+# find_package(Qt5Test REQUIRED)
+# find_package(DtkWidget REQUIRED)
+# find_package(DtkCore REQUIRED)
+
+#qt6
 find_package(PkgConfig REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5 COMPONENTS DBus REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Xml REQUIRED)
-find_package(PolkitQt5-1 REQUIRED)
-find_package(Qt5Test REQUIRED)
-find_package(DtkWidget REQUIRED)
-find_package(DtkCore REQUIRED)
+find_package(Qt6 COMPONENTS 
+    Gui 
+    Widgets 
+    DBus 
+    LinguistTools 
+    Network 
+    Concurrent 
+    Sql 
+    Svg 
+    SvgWidgets 
+    Xml 
+    OpenGL 
+    Core 
+    OpenGLWidgets 
+    REQUIRED
+)
+find_package(PolkitQt6-1 REQUIRED)
+
+find_package(Dtk6 COMPONENTS
+    Widget
+    Core
+    REQUIRED
+)
 
 
 #add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager/tests/)
@@ -107,7 +134,26 @@ add_executable(${PROJECT_NAME_TEST} ${SRC_CPP} ${TEST_SRC_CPP} ${TEST_SRC_H})
 target_include_directories(${PROJECT_NAME_TEST}
     PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
 
-target_link_libraries(${PROJECT_NAME_TEST}
+if (Qt6_FOUND)
+    # Qt6 environment
+    target_link_libraries(${PROJECT_NAME_TEST}
+    Qt6::Core
+    Qt6::Gui
+    Qt6::Widgets
+    Qt6::DBus
+    Qt6::Xml
+    Qt6::Test
+    Qt6::Network
+    Dtk6::Core
+    Dtk6::Widget
+    ${GTEST_LIBRARIES}
+    ${GTEST_MAIN_LIBRARIES}
+    PolkitQt6-1::Agent
+    pthread
+)
+else()
+    # Qt5 environment
+    target_link_libraries(${PROJECT_NAME_TEST}
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets
@@ -123,6 +169,7 @@ target_link_libraries(${PROJECT_NAME_TEST}
     PolkitQt5-1::Agent
     pthread
 )
+endif()
 
 add_custom_target(test
     COMMAND echo " =================== TEST BEGIN ==================== "

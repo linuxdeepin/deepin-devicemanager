@@ -14,7 +14,7 @@
 #include <DFontSizeManager>
 #include <DApplication>
 #include <DStyle>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DHeaderView>
 #include <DMenu>
 
@@ -23,6 +23,7 @@
 #include <QLoggingCategory>
 #include <QHBoxLayout>
 #include <QPainterPath>
+#include <QFile>
 
 #define WAKEUP_OPEN 3
 #define WAKEUP_CLOSE 4
@@ -149,7 +150,7 @@ void TableWidget::paintEvent(QPaintEvent *e)
     painter.setClipping(true);
 
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     int radius = 8;

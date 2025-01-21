@@ -8,14 +8,16 @@
 
 #include <DFontSizeManager>
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 
 #include <QPropertyAnimation>
 #include <QProcess>
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QPainterPath>
-#define FONT_WEIGHT 63
+
+#define FONT_WEIGHT QFont::Weight::Normal
+
 #define ICON_LABEL_SIZE 128
 #define PROGRESS_HEIGHT 8
 #define PROGRESS_WIDTH 422
@@ -265,17 +267,18 @@ void DriverScanWidget::initUI()
     mp_ScanningLabel->setFont(font);
     DFontSizeManager::instance()->bind(mp_ScanningLabel, DFontSizeManager::T5);
 
-    // bug134487
+    // bug134487 
+    // TODO
     DFontSizeManager::instance()->bind(mp_ScanningInfoLabel, DFontSizeManager::T8);
-    DPalette pa = DApplicationHelper::instance()->palette(mp_ScanningInfoLabel);
-    pa.setColor(DPalette::Text, pa.color(DPalette::TextTips));
-    DApplicationHelper::instance()->setPalette(mp_ScanningInfoLabel, pa);
+    QPalette pa = this->palette();
+    pa.setBrush(QPalette::WindowText, pa.color(QPalette::Text));
+    this->setPalette(pa);
     mp_ScanningInfoLabel->setElideMode(Qt::ElideRight);
 
     // 切换主题
     QObject::connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [ = ] {
         DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
-        plt.setColor(DPalette::Text, plt.color(DPalette::TextTips));
+        plt.setColor(DPalette::Text, plt.color(DPalette::Text));
         mp_ScanningInfoLabel->setPalette(plt);
     });
 
@@ -369,7 +372,7 @@ void DriverScanWidget::paintEvent(QPaintEvent *event)
     QPainterPath path;
     path.addRoundedRect(rect, 8, 8);
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     // 获取窗口当前的状态,激活，禁用，未激活

@@ -5,7 +5,7 @@
 // 项目自身文件
 #include "DeviceOthers.h"
 #include "DBusEnableInterface.h"
-
+#include <QRegularExpression>
 DeviceOthers::DeviceOthers()
     : DeviceBaseInfo()
     , m_Model("")
@@ -105,7 +105,7 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     }
 
     m_BusID = mapInfo["SysFS BusID"];
-    m_BusID.replace(QRegExp("\\.[0-9]*$"), "");
+    m_BusID.replace(QRegularExpression("\\.\\d+$"), "");
 
     // 获取映射到 lshw设备信息的 关键字
     //1-2:1.0

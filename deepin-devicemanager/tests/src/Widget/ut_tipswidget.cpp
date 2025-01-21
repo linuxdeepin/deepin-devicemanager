@@ -34,7 +34,7 @@ TEST_F(UT_TipsWidget, UT_TipsWidget_onUpdateTheme)
 {
     tWidget->onUpdateTheme();
     DPalette plt = tWidget->palette();
-    EXPECT_TRUE(plt.color(Dtk::Gui::DPalette::Background) == plt.color(Dtk::Gui::DPalette::Base));
+    EXPECT_TRUE(plt.color(Dtk::Gui::DPalette::Window) == plt.color(Dtk::Gui::DPalette::Base));
 }
 
 TEST_F(UT_TipsWidget, UT_TipsWidget_setText)

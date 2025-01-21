@@ -12,7 +12,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDebug>
-
+#include <QRegularExpression>
 // 其它头文件
 #include "DeviceManager/DeviceManager.h"
 #include "DeviceManager/DeviceGpu.h"
@@ -66,15 +66,19 @@ void HWGenerator::generatorComputerDevice()
     if (verInfo.size() > 0) {
         QString info = verInfo[0]["OS"].trimmed();
         info = info.trimmed();
-        QRegExp reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)", Qt::CaseSensitive);
-        int index = reg.indexIn(info);
-        if (index != -1) {
-            QString tmp = reg.cap(0);
+        
+        // Replace QRegExp with QRegularExpression
+        QRegularExpression reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)");
+        QRegularExpressionMatch match = reg.match(info);
+        if (match.hasMatch()) {
+            QString tmp = match.captured(0);
+            QString cap1 = match.captured(1);
             info.remove(tmp);
-            info.insert(index, reg.cap(1));
+            info.insert(match.capturedStart(0), cap1);
         }
 
-        QRegExp replaceReg("\\(.*\\@.*\\)", Qt::CaseSensitive);
+        // Replace second regex
+        QRegularExpression replaceReg("\\(.*\\@.*\\)");
         info.replace(replaceReg, "");
         device->setOS(info);
     }
@@ -352,8 +356,11 @@ void HWGenerator::getBluetoothInfoFromCatWifiInfo()
         foreach (const QString &item, items) {
             if (item.isEmpty())
                 continue;
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             QStringList strList = item.split(':', QString::SkipEmptyParts);
+#else
+            QStringList strList = item.split(':', Qt::SkipEmptyParts);
+#endif
             if (strList.size() == 2)
                 wifiInfo[strList[0] ] = strList[1];
         }

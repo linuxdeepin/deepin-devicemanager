@@ -14,7 +14,7 @@
 #include <QLoggingCategory>
 #include <QAbstractTextDocumentLayout>
 #include <QDomDocument>
-
+#include <QRegularExpression>
 DCORE_USE_NAMESPACE
 
 LongTextLabel::LongTextLabel(DWidget *parent)
@@ -37,14 +37,15 @@ void LongTextLabel::paintEvent(QPaintEvent *)
     QString html;
     QString OS;
 
-    QRegExp reg("[\\s\\S]*</a>");
-    if (reg.indexIn(this->text()) != -1) {
-        html = reg.cap(0);
+    QRegularExpression reg("([\\s\\S]*</a>)");
+    QRegularExpressionMatch match = reg.match(this->text());
+    if (match.hasMatch()) {
+        html = match.captured(1);
 
-        reg.setPattern("<[\\s\\S]*>([\\s\\S]*)</a>");
-
-        if (reg.indexIn(html) != -1) {
-            OS = reg.cap(1);
+        QRegularExpression contentReg("<[\\s\\S]*>([\\s\\S]*)</a>");
+        QRegularExpressionMatch contentMatch = contentReg.match(html);
+        if (contentMatch.hasMatch()) {
+            OS = contentMatch.captured(1);
         }
     }
 

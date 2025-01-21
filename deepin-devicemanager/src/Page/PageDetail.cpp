@@ -9,7 +9,7 @@
 #include "MacroDefinition.h"
 
 // Dtk头文件
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DApplication>
 #include <DStyle>
 #include <DMenu>
@@ -57,7 +57,7 @@ void DetailButton::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     // 获取窗口当前的状态,激活，禁用，未激活
@@ -94,7 +94,7 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     // 分割线两端到边框的边距
@@ -141,7 +141,7 @@ void ScrollAreaWidget::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     // 获取窗口当前的状态,激活，禁用，未激活
@@ -264,7 +264,7 @@ void PageDetail::paintEvent(QPaintEvent *e)
     QRect rect = this->rect();
 
     // 获取调色板
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
 
     // 获取系统默认的圆角半径

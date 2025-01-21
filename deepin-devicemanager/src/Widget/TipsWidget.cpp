@@ -36,8 +36,13 @@ void TipsWidget::initWidget()
 
 void TipsWidget::onUpdateTheme()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
     plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
+#else
+    DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+    plt.setColor(QPalette::Window, plt.color(QPalette::Base));
+#endif
     setPalette(plt);
 }
 

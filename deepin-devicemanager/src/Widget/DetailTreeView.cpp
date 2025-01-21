@@ -15,12 +15,18 @@
 #include <QToolTip>
 #include <QDateTime>
 #include <QTimer>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QDesktopWidget>
+#else
+#include <QGuiApplication>
+#include <QScreen>
+#endif
+
 #include <QPainterPath>
 
 // Dtk头文件
 #include <DApplication>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 #include <DStyle>
 #include <DFontSizeManager>
 
@@ -38,11 +44,19 @@ BtnWidget::BtnWidget()
 
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void BtnWidget::enterEvent(QEvent *event)
 {
     emit enter();
     return DWidget::enterEvent(event);
 }
+#else
+void BtnWidget::enterEvent(QEnterEvent *event)
+{
+    emit enter();
+    return DWidget::enterEvent(event);
+}
+#endif
 
 void BtnWidget::leaveEvent(QEvent *event)
 {
@@ -433,7 +447,7 @@ void DetailTreeView::paintEvent(QPaintEvent *event)
         cg = DPalette::Active;
     }
 
-    auto *dAppHelper = DApplicationHelper::instance();
+    auto *dAppHelper = DGuiApplicationHelper::instance();
     auto palette = dAppHelper->applicationPalette();
 
     QRect rect = viewport()->rect();
@@ -603,7 +617,11 @@ void DetailTreeView::showTips(QTableWidgetItem *item)
 
             // 设置toolTips显示位置
             QPoint showRealPos(QCursor::pos().x(), QCursor::pos().y() + 10);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             QRect screenRect = QApplication::desktop()->screenGeometry();
+#else
+            QRect screenRect = QGuiApplication::primaryScreen()->geometry();
+#endif
             if (mp_ToolTips) {
                 // 确保tips不会出现一半在窗口，一半看不到
                 if (showRealPos.x() + mp_ToolTips->width() > screenRect.width()) {

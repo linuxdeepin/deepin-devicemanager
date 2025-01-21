@@ -6,7 +6,7 @@
 #include "UrlChooserEdit.h"
 #include "MacroDefinition.h"
 
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 
 GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
     : DWidget(parent)
@@ -71,14 +71,21 @@ void GetDriverPathWidget::init()
     mp_tipLabel->setElideMode(Qt::ElideRight);
     mp_tipLabel->setMinimumHeight(20);
 
-    DPalette pa = DApplicationHelper::instance()->palette(mp_titleLabel);
+    // TODO 
+    QPalette pa = mp_titleLabel->palette();
     QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
     pa.setColor(QPalette::WindowText, color);
     mp_titleLabel->setPalette(pa);
 
-    pa = DApplicationHelper::instance()->palette(mp_tipLabel);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    pa = DGuiApplicationHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
-    DApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
+    DGuiApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
+#else
+    pa = mp_tipLabel->palette();
+    pa.setColor(QPalette::WindowText, pa.color(QPalette::WindowText));
+    mp_tipLabel->setPalette(pa);
+#endif
 
     this->setLayout(mainLayout);
 
@@ -86,7 +93,12 @@ void GetDriverPathWidget::init()
 }
 void GetDriverPathWidget::onUpdateTheme()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
     plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
+#else
+    QPalette plt = mp_titleLabel->palette();
+    plt.setColor(QPalette::Window, plt.color(QPalette::Base));
+#endif
     mp_titleLabel->setPalette(plt);
 }

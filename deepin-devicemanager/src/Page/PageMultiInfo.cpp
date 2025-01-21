@@ -100,7 +100,11 @@ void PageMultiInfo::setLabel(const QString &itemstr)
 
         // 设备类型加粗
         QFont font = mp_Label->font();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         font.setWeight(63);
+#else
+        font.setWeight(QFont::Bold);
+#endif
         mp_Label->setFont(font);
 
         DFontSizeManager::instance()->bind(mp_Label, DFontSizeManager::T5);

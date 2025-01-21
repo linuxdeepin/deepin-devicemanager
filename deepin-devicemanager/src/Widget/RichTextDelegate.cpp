@@ -9,7 +9,7 @@
 // Dtk头文件
 #include <DApplication>
 #include <DStyle>
-#include <DApplicationHelper>
+#include <DGuiApplicationHelper>
 
 // Qt库文件
 #include <QPainter>
@@ -60,7 +60,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     if (!style)
         return;
 
-    DApplicationHelper *dAppHelper = DApplicationHelper::instance();
+    DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 
@@ -319,7 +319,7 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
         if (keyValue.size() != 2) {
             return;
         }
-        int curWidth = fm.width(keyValue[0] + ":") + 10;
+        int curWidth = fm.horizontalAdvance(keyValue[0] + ":") + 10;
         if (rowWidth < curWidth) rowWidth = curWidth;
     }
 
