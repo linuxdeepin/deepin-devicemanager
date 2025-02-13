@@ -396,7 +396,7 @@ void MainWindow::initWindowTitle()
     QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
     titlebar()->setIcon(appIcon);
     // 设置 DButtonBox 里面的 button
-    mp_ButtonBox->setFixedSize(242, 38);
+    mp_ButtonBox->setFixedWidth(242);
     mp_ButtonBox->setButtonList({new DButtonBoxButton(tr("Hardware")), new DButtonBoxButton(tr("Drivers"))}, true);
     mp_ButtonBox->setId(mp_ButtonBox->buttonList().at(0), 0);
     mp_ButtonBox->setId(mp_ButtonBox->buttonList().at(1), 1);
