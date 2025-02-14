@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.32) unstable; urgency=medium
+
+  * chore: New version 6.0.32.
+
+ -- xiepengfei <xiepengfei@uniontech.com>  Fri, 14 Feb 2025 09:18:53 +0800
+
 deepin-devicemanager (6.0.31) unstable; urgency=medium
 
   * fix: feat: qt6 adaptation
