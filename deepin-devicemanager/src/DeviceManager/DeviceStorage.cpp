@@ -617,7 +617,21 @@ QString DeviceStorage::subTitle()
 const QString DeviceStorage::getOverviewInfo()
 {
     // qCDebug(appLog) << "DeviceStorage::getOverviewInfo";
-    return QString("%1 (%2)").arg(m_Name).arg(m_Size);;
+    QString overViewInfo = QString("%1 (%2)").arg(m_Name).arg(m_Size);
+
+    // 见内网gerrit项目 os-config 中机型的 specialComType , 示例配置文件位置如下：
+    // os-config/hardware/机型/etc/dsg/configs/overrides/org.deepin.devicemanager/org.deepin.devicemanager/4000-org.deepin.devicemanager.override.json
+    if (Common::specialComType == 5){
+        if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
+            overViewInfo = QString("%1 %2").arg(m_Size).arg("UFS");
+        } else if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
+            overViewInfo = QString("%1 %2").arg(m_Size).arg("USB");
+        } else {
+            overViewInfo = QString("%1 %2").arg(m_Size).arg(m_MediaType);
+        }
+    }
+
+    return overViewInfo;
 }
 
 void DeviceStorage::initFilterKey()
