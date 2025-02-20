@@ -90,7 +90,7 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "memory", m_MemAddress);
     // setAttribute(mapInfo, "physical id", m_PhysID);
 
-    if (driverIsKernelIn(m_Driver)) {
+    if (driverIsKernelIn(m_Driver) || m_Driver.isEmpty()) {
         m_CanUninstall = false;
     }
 
@@ -149,7 +149,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
     m_PhysID = m_VID_PID;
 
-    if (driverIsKernelIn(m_Driver)) {
+    if (driverIsKernelIn(m_Driver) || m_Driver.isEmpty()) {
         m_CanUninstall = false;
     }
 

@@ -75,7 +75,7 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
     foreach (const QString &line, lines) {
         if (line.startsWith("Screen")) {
             lstMap.append(QMap<QString, QString>());
-            QRegularExpression re(".*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*");
+            QRegularExpression re(".*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*");
             QRegularExpressionMatch match = re.match(line);
             if (match.hasMatch()) {
                 lstMap[lstMap.count() - 1].insert("minResolution", match.captured(1));
