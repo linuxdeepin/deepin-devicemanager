@@ -591,6 +591,7 @@ void DeviceGenerator::getGpuInfoFromHwinfo()
             continue;
 
         DeviceGpu *device = new DeviceGpu();
+        device->setForcedDisplay(true);
         device->setHwinfoInfo(*it);
         DeviceManager::instance()->addGpuDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
