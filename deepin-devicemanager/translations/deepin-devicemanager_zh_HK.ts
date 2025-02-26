@@ -468,7 +468,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>Speed</source>
-        <translation>速度</translation>
+        <translation>頻率</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="154"/>
@@ -719,7 +719,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="456"/>
         <source>Speed</source>
-        <translation>速度</translation>
+        <translation>頻率</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="457"/>
