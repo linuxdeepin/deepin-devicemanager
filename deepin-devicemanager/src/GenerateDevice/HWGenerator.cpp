@@ -511,7 +511,7 @@ void HWGenerator::generatorMonitorDevice()
         return;
     }
 
-    QFileInfoList fileInfoList = toDir_.entryInfoList();
+    QFileInfoList fileInfoList = toDir_.entryInfoList(QDir::NoFilter, QDir::Name);
     foreach(QFileInfo fileInfo, fileInfoList) {
         if (fileInfo.fileName() == "." || fileInfo.fileName() == ".." || !fileInfo.fileName().startsWith("card"))
             continue;
