@@ -34,9 +34,6 @@ file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
 
 link_libraries("udev")
 
-# 设置 QT_VERSION 变量
-set(QT_VERSION_MAJOR 5)
-
 # 定义一个宏来根据QT_VERSION选择性执行代码
 macro(SET_QT_VERSION)
   if(${QT_VERSION_MAJOR} EQUAL 6)

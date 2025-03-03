@@ -31,9 +31,6 @@ endforeach()
 
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
-
-# 设置 QT_VERSION 变量
-set(QT_VERSION_MAJOR 5)
   
 macro(SET_QT_VERSION)
   if(${QT_VERSION_MAJOR} EQUAL 6)
