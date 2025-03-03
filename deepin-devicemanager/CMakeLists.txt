@@ -59,9 +59,6 @@ if (MAJOR_VERSION MATCHES "23")
     add_definitions(-DOS_BUILD_V23)
 endif()
 
-# 设置 QT_VERSION_MAJOR 变量
-set(QT_VERSION_MAJOR 6)
-
 #compile flags
 if (CMAKE_BUILD_TYPE MATCHES Debug)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -Wall -Wextra")
