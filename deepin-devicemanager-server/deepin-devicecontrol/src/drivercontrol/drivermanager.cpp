@@ -7,8 +7,8 @@
 #include "drivermanager.h"
 #include "utils.h"
 #include "modcore.h"
-#include "debinstaller.h"
-#include "driverinstaller.h"
+#include "aptinstaller.h"
+#include "driverinstallerapt.h"
 //#include "DeviceInfoManager.h"
 #include "httpdriverinterface.h"
 #include "DDLog.h"
@@ -45,7 +45,7 @@
 #include <string>
 #include <vector>
 
-#define DB_PATH "/usr/share/deepin-devicemanager"  //driver deb backup path
+#define DB_PATH "/var/lib/deepin-devicemanager"  //driver deb backup path
 #define SD_KEY_excat    "excat"
 #define SD_KEY_ver      "version"
 #define SD_KEY_code     "client_code"
@@ -75,12 +75,12 @@ DriverManager::DriverManager(QObject *parent)
     , mp_modcore(new ModCore(this))
 {
     mp_deboperatethread = new QThread(this);
-    mp_debinstaller = new DebInstaller;
+    mp_debinstaller = new AptInstaller;
     mp_debinstaller->moveToThread(mp_deboperatethread);
     mp_deboperatethread->start();
 
     mp_driverOperateThread = new QThread(this);
-    mp_driverInstaller = new DriverInstaller;
+    mp_driverInstaller = new DriverInstallerApt;
     mp_driverInstaller->moveToThread(mp_driverOperateThread);
     mp_driverOperateThread->start();
 
@@ -98,7 +98,7 @@ DriverManager::~DriverManager()
 
 void DriverManager::initConnections()
 {
-    connect(mp_debinstaller, &DebInstaller::installFinished, [&](bool bsuccess) {
+    connect(mp_debinstaller, &AptInstaller::installFinished, [&](bool bsuccess) {
         if (bsuccess) {
             sigProgressDetail(90, tr("Install success"));
         } else {
@@ -106,19 +106,19 @@ void DriverManager::initConnections()
         }
         sigFinished(bsuccess, errmsg);
     });
-    connect(mp_debinstaller, &DebInstaller::progressChanged, [&](int iprocess) {
+    connect(mp_debinstaller, &AptInstaller::progressChanged, [&](int iprocess) {
         m_installprocess = 20 + static_cast<int>(iprocess * 0.8);
         sigProgressDetail(m_installprocess, errmsg);
     });
-    connect(mp_debinstaller, &DebInstaller::errorOccurred, [&](QString errmsg) {
+    connect(mp_debinstaller, &AptInstaller::errorOccurred, [&](QString errmsg) {
         qCInfo(appLog) << "signal_installFailedReason:" << errmsg;
         sigFinished(false, errmsg);
         this->errmsg = errmsg;
     });
-    connect(this, &DriverManager::sigDebInstall, mp_debinstaller, &DebInstaller::installPackage);
-    connect(this, &DriverManager::sigDebUnstall, mp_debinstaller, &DebInstaller::uninstallPackage);
+    connect(this, &DriverManager::sigDebInstall, mp_debinstaller, &AptInstaller::installPackage);
+    connect(this, &DriverManager::sigDebUnstall, mp_debinstaller, &AptInstaller::uninstallPackage);
 
-    connect(mp_driverInstaller, &DriverInstaller::installProgressFinished, [&](bool bsuccess) {
+    connect(mp_driverInstaller, &DriverInstallerApt::installProgressFinished, [&](bool bsuccess) {
         if (bsuccess) {
             sigInstallProgressFinished(bsuccess, EC_NULL);
             qCInfo(appLog) << "Driver installed successfully";
@@ -127,7 +127,7 @@ void DriverManager::initConnections()
         }
     });
 
-    connect(mp_driverInstaller, &DriverInstaller::errorOccurred, [this](int err) {
+    connect(mp_driverInstaller, &DriverInstallerApt::errorOccurred, [this](int err) {
         if (EC_NETWORK != err) {
             qCInfo(appLog) << "Driver installation failed , reason : " << err;
             sigInstallProgressFinished(false, err);
@@ -161,7 +161,7 @@ void DriverManager::initConnections()
         sigInstallProgressFinished(false, EC_NETWORK);
     });
 
-    connect(mp_driverInstaller, &DriverInstaller::installProgressChanged, [&](int progress) {
+    connect(mp_driverInstaller, &DriverInstallerApt::installProgressChanged, [&](int progress) {
         sigInstallProgressChanged(progress);
         qCInfo(appLog) << "Installing driver ,  installation progress : " << progress;
     });
@@ -418,7 +418,7 @@ bool DriverManager::isDebValid(const QString &filePath)
     QMimeDatabase typedb;
     QMimeType filetype = typedb.mimeTypeForFile(filePath);
     if (filetype.filterString().contains("deb"))
-        return  mp_debinstaller->isDebValid(filePath);
+        return mp_debinstaller->isDebValid(filePath);
     return true;
 }
 

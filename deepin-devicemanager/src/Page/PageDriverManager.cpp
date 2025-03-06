@@ -890,7 +890,10 @@ void PageDriverManager::addToBackupIndex(int index)
 
 void PageDriverManager::removeFromDriverIndex(int index)
 {
-    m_ListDriverIndex.removeAt(m_ListDriverIndex.indexOf(index));
+    auto ret = m_ListDriverIndex.indexOf(index);
+    if (ret >= 0) {
+        m_ListDriverIndex.removeAt(ret);
+    }
 
     // 移除时 如果一个都没有 则一键安装按钮置灰
     if (m_ListDriverIndex.isEmpty()) {
@@ -900,7 +903,10 @@ void PageDriverManager::removeFromDriverIndex(int index)
 
 void PageDriverManager::removeFromBackupIndex(int index)
 {
-    m_ListBackupIndex.removeAt(m_ListBackupIndex.indexOf(index));
+    auto ret = m_ListBackupIndex.indexOf(index);
+    if (ret >= 0) {
+        m_ListBackupIndex.removeAt(ret);
+    }
 
     if (m_ListBackupIndex.isEmpty()) {
         mp_DriverBackupInfoPage->headWidget()->setBackupBtnEnable(false);
