@@ -9,7 +9,7 @@
 #include <QLoggingCategory>
 #include <QDir>
 #include <QSqlError>
-#define DB_PATH "/usr/share/deepin-devicemanager/"
+#define DB_PATH "/var/lib/deepin-devicemanager/"
 #define DB_FILE "enable.db"
 #define DB_CONNECT_NAME "device-enable"
 #define DB_TABLE_AUTHORIZED "authorized"

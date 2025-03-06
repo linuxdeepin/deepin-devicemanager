@@ -160,5 +160,5 @@ QString CommonTools::getUrl()
 
 QString CommonTools::getBackupPath()
 {
-    return "/usr/share/deepin-devicemanager/";
+    return "/var/lib/deepin-devicemanager/";
 }

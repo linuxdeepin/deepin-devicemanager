@@ -14,8 +14,8 @@
 #include <cups.h>
 
 class ModCore;
-class DebInstaller;
-class DriverInstaller;
+class AptInstaller;
+class DriverInstallerApt;
 class QThread;
 
 class DriverManager : public QObject
@@ -75,9 +75,9 @@ signals:
 
 private:
     ModCore *mp_modcore = nullptr;
-    DebInstaller *mp_debinstaller = nullptr;
+    AptInstaller *mp_debinstaller = nullptr;
     QThread *mp_deboperatethread = nullptr;
-    DriverInstaller *mp_driverInstaller = nullptr;
+    DriverInstallerApt *mp_driverInstaller = nullptr;
     QThread *mp_driverOperateThread = nullptr;
 
     int m_installprocess = 0;

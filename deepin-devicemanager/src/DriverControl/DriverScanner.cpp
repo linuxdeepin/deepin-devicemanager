@@ -33,7 +33,7 @@ void DriverScanner::run()
             // 检测本地安装版本
             if (!info->packages().isEmpty()) {
                 QProcess process;
-                process.start("apt", QStringList()  << "policy " << info->packages());
+                process.start("apt", QStringList()  << "policy" << info->packages());
                 process.waitForFinished(-1);
 
                 QString output = process.readAllStandardOutput();
