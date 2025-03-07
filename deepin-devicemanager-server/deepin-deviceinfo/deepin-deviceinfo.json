@@ -1,6 +1,6 @@
 {
     "name": "org.deepin.DeviceInfo",
-    "libPath": "deepin-deviceinfo.so",
+    "libPath": "libdeepin-deviceinfo.so",
     "group": "app",
     "policyStartType": "Resident",
     "startDelay": 3,
