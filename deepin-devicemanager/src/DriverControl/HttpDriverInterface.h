@@ -53,6 +53,7 @@ protected:
 private:
     int packageInstall(const QString& package_name, const QString& version);
     QString getOsBuild();
+    bool getVersion(QString &major, QString &minor);
 public:
     signals:
     void sigRequestFinished(bool sucess, QString msg);

@@ -77,6 +77,48 @@ QString Utils::machineArch()
     return  strArch;
 }
 
+QString Utils::getOsBuild()
+{
+    QFile file("/etc/os-version");
+    if (!file.open(QIODevice::ReadOnly))
+        return "";
+    QString info = file.readAll().data();
+    QStringList lines = info.split("\n");
+    foreach (const QString &line, lines) {
+        if (line.startsWith("OsBuild")) {
+            QStringList words = line.split("=");
+            if (2 == words.size()) {
+                return words[1].trimmed();
+            }
+        }
+    }
+    return "";
+}
+
+bool Utils::getVersion(QString &major, QString &minor)
+{
+    QFile file("/etc/os-version");
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+    QString info = file.readAll().data();
+    QStringList lines = info.split("\n");
+    foreach (const QString &line, lines) {
+        if (line.startsWith("MajorVersion")) {
+            QStringList words = line.split("=");
+            if (2 == words.size()) {
+                major = words[1].trimmed();
+            }
+        }
+        if (line.startsWith("MinorVersion")) {
+            QStringList words = line.split("=");
+            if (2 == words.size()) {
+                minor = words[1].trimmed();
+            }
+        }
+    }
+    return !major.isEmpty() && !minor.isEmpty();
+}
+
 bool Utils::addModBlackList(const QString &moduleName)
 {
     QProcess process;

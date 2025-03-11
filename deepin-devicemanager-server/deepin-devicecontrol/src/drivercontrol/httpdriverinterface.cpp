@@ -81,22 +81,45 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         return QString();
     }
     QString arch = Common::getArchStore();
-    QString strUrl = Utils::getUrl() + "?arch=" + arch;
-    int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();
-    int iEditionType = DTK_CORE_NAMESPACE::DSysInfo::uosEditionType();
-    strUrl += "&system=" + QString::number(iType) + '-' + QString::number(iEditionType);
+    QString build = Utils::getOsBuild();
+    QString major, minor, strUrl;
+    if (Utils::getVersion(major, minor) && major == "25") {
+        // V25版本的URL构建逻辑
+        strUrl = Utils::getUrl() + "?deb_manufacturer=" + strManufacturer;
+        if (!strProducts.isEmpty()) {
+            strUrl += "&desc=" + strProducts;
+        }
+        strUrl += "&arch=" + arch;
+        if (!build.isEmpty()) {
+            QString system = build;
+            if (build[1] == "1") //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
+                system = QString("%1-%2").arg(build[1]).arg(build[3]);
+            strUrl += "&system=" + system;
+        }
+        strUrl += "&majorVersion=" + major;
+        strUrl += "&minorVersion=" + minor;
+    } else {
+        // 其他版本的URL构建逻辑
+        strUrl = Utils::getUrl() + "?arch=" + arch;
+        if (!build.isEmpty()) {
+            QString system = build;
+            if (build[1] == "1") //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
+                system = QString("%1-%2").arg(build[1]).arg(build[3]);
+            strUrl += "&system=" + system;
+        }
 
-    if (!strManufacturer.isEmpty()) {
-        strUrl += "&deb_manufacturer=" + strManufacturer;
-    }
-    if (!strProducts.isEmpty()) {
-        strUrl += "&product=" + strProducts;
-    }
-    if (0 < iClassP) {
-        strUrl += "&class_p=" + QString::number(iClassP);
-    }
-    if (0 < iClass) {
-        strUrl += "&class=" + QString::number(iClass);
+        if (!strManufacturer.isEmpty()) {
+            strUrl += "&deb_manufacturer=" + strManufacturer;
+        }
+        if (!strProducts.isEmpty()) {
+            strUrl += "&product=" + strProducts;
+        }
+        if (0 < iClassP) {
+            strUrl += "&class_p=" + QString::number(iClassP);
+        }
+        if (0 < iClass) {
+            strUrl += "&class=" + QString::number(iClass);
+        }
     }
     qCInfo(appLog) << strUrl;
     return getRequestJson(strUrl);

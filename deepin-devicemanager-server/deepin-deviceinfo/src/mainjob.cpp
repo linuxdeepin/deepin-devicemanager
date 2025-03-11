@@ -150,7 +150,12 @@ void MainJob::initDriverRepoSource()
         return;
     }
 
-    file.write("deb https://pro-driver-packages.uniontech.com eagle non-free\n");
+    QString major, minor;
+    if (getVersion(major, minor) && major == "25") {
+        file.write("deb https://pro-driver-packages.uniontech.com/driver-V25 snipe non-free\n");
+    } else {
+        file.write("deb https://pro-driver-packages.uniontech.com eagle non-free\n");
+    }
     file.close();
 
     QString cmd = "apt update";
@@ -187,3 +192,28 @@ void MainJob::executeClientInstruction(const QString &instructions)
     }
     s_ServerIsUpdating = false;
 }
+
+bool MainJob::getVersion(QString &major, QString &minor)
+{
+    QFile file("/etc/os-version");
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+    QString info = file.readAll().data();
+    QStringList lines = info.split("\n");
+    foreach (const QString &line, lines) {
+        if (line.startsWith("MajorVersion")) {
+            QStringList words = line.split("=");
+            if (2 == words.size()) {
+                major = words[1].trimmed();
+            }
+        }
+        if (line.startsWith("MinorVersion")) {
+            QStringList words = line.split("=");
+            if (2 == words.size()) {
+                minor = words[1].trimmed();
+            }
+        }
+    }
+    return !major.isEmpty() && !minor.isEmpty();
+}
+

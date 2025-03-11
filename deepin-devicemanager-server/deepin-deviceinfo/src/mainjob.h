@@ -68,6 +68,14 @@ private:
      */
     void executeClientInstruction(const QString &instructions);
 
+    /**
+     * @brief getVersion
+     * @param major
+     * @param minor
+     * @return
+     */
+    bool getVersion(QString &major, QString &minor);
+
 private:
     ThreadPool            *m_pool = nullptr;                  //<! 生成文件的线程池
     bool                   m_firstUpdate;                      //<! 是否是第一次更新
