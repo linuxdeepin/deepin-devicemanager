@@ -15,6 +15,8 @@ public:
     static QString getModuleFilePath(const QString &moduleName);
     static QString kernelRelease();
     static QString machineArch();
+    static QString getOsBuild();
+    static bool getVersion(QString &major, QString &minor);
     static bool addModBlackList(const QString &moduleName);
     static bool unInstallPackage(const QString &packageName);
     // 判断Deb是否为驱动包
