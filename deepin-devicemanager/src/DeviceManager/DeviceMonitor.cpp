@@ -246,6 +246,15 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
         qCDebug(appLog) << "Monitor info already set from TOML, skipping xrandr";
         return false;
     }
+
+    for(auto it: m_LstBaseInfo){
+        if (it.first.contains("Display Input")){
+            if (!main.contains(it.second, Qt::CaseInsensitive)) {
+                return false;
+            }
+        }
+    }
+
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
     if (!m_Interface.isEmpty()) {
         qCDebug(appLog) << "Interface is not empty, checking current resolution";
