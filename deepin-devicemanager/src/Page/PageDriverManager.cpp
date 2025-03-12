@@ -808,6 +808,17 @@ void PageDriverManager::scanDevicesInfo(const QString &deviceType, DriverType dr
             info->m_ModelId = device->getVendorOrModelId(device->sysPath(), false);    // model id
             info->m_DriverName = device->driver();                 // 驱动名称
             info->m_Version = device->getDriverVersion();          // 驱动版本
+            if (info->m_VendorId.size() == 4 && !info->m_VendorId.startsWith("0x")) {
+                info->m_VendorId = "0x" + info->m_VendorId;
+            }
+            if (info->m_ModelId.size() == 4 && !info->m_ModelId.startsWith("0x")) {
+                info->m_ModelId = "0x" + info->m_ModelId;
+            }
+            QString vidAndPid = device->getVIDAndPID();
+            if ((info->m_VendorId.isEmpty() || info->m_ModelId.isEmpty()) && vidAndPid.size() == 10 && vidAndPid.startsWith("0x")) {
+                info->m_VendorId = vidAndPid.mid(0,6);
+                info->m_ModelId = "0x" + vidAndPid.mid(6,4);
+            }
 
             qCInfo(appLog) << "m_Name" << info->m_Name;
             qCInfo(appLog) << "m_VendorId" << info->m_VendorId;
@@ -826,7 +837,6 @@ void PageDriverManager::scanDevicesInfo(const QString &deviceType, DriverType dr
                 if (network->isWireless()) {
                     info->m_Type = DR_WiFi;
                 }
-
             }
 
             addDriverInfo(info);

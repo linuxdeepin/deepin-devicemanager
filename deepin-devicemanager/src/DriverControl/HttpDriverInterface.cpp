@@ -243,17 +243,25 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
 int HttpDriverInterface::packageInstall(const QString &package_name, const QString &version)
 {
     // 0:没有包 1:版本不一致 2:版本一致
-    QString outInfo = Common::executeClientCmd("apt", QStringList() << "policy" << package_name, QString(), -1);
+    QString outInfo = Common::executeClientCmd("apt", QStringList() << "policy" << package_name, QString(), -1, false);
     if (outInfo.isEmpty())
         return 0;
     QStringList infoList = outInfo.split("\n");
-    if (infoList.size() <= 2 || infoList[1].contains("（") || infoList[1].contains("("))
+    int index = 0;
+    for (int i = 0; i < infoList.size(); i++)
+    {
+        if (infoList[i].startsWith(package_name)) {
+            index = i;
+            break;
+        }
+    }
+    if (infoList.size() <= (2 + index) || infoList[1 + index].contains("（") || infoList[1 + index].contains("("))
         return 0;
-    if (infoList[1].contains(version))
+    if (infoList[1 + index].contains(version))
         return 2;
 
     QRegularExpression rxlen("(\\d+\\S*)");
-    QRegularExpressionMatch match = rxlen.match(infoList[1]);
+    QRegularExpressionMatch match = rxlen.match(infoList[1 + index]);
     QString curVersion;
     if (match.hasMatch()) {
         curVersion = match.captured(1);
