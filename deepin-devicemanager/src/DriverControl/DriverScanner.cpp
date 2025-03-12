@@ -5,6 +5,8 @@
 #include "DriverScanner.h"
 #include "DeviceManager.h"
 #include "HttpDriverInterface.h"
+#include "commonfunction.h"
+
 #include <QRegularExpression>
 #include <QLoggingCategory>
 #include <QProcess>
@@ -32,17 +34,25 @@ void DriverScanner::run()
 
             // 检测本地安装版本
             if (!info->packages().isEmpty()) {
-                QProcess process;
-                process.start("apt", QStringList()  << "policy" << info->packages());
-                process.waitForFinished(-1);
-
-                QString output = process.readAllStandardOutput();
-                QStringList lines = output.split("\n");
-                if(lines.size()>=2) {
-                    QRegularExpression rxlen("(\\d+\\S*)");
-                    QRegularExpressionMatch match = rxlen.match(lines[1]);
-                    if (match.hasMatch() && info->version().isEmpty()) {
-                        info->m_Version = match.captured(1);
+                QString outInfo = Common::executeClientCmd("apt", QStringList() << "policy" << info->packages(), QString(), -1, false);
+                if (!outInfo.isEmpty()) {
+                    QStringList infoList = outInfo.split("\n");
+                    int index = 0;
+                    for (int i = 0; i < infoList.size(); i++)
+                    {
+                        if (infoList[i].startsWith(info->packages())) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (infoList.size() > (2 + index) && !infoList[1 + index].contains("（") && !infoList[1 + index].contains("(")) {
+                        QRegularExpression rxlen("(\\d+\\S*)");
+                        QRegularExpressionMatch match = rxlen.match(infoList[1 + index]);
+                        QString curVersion;
+                        if (match.hasMatch()) {
+                            curVersion = match.captured(1);
+                        }
+                        info->m_Version = curVersion.trimmed();
                     }
                 }
             }

@@ -571,7 +571,7 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
     QString vendor = vendorFile.readAll();
     vendorFile.close();
 
-    return vendor;
+    return vendor.trimmed();
 }
 
 const QString DeviceBaseInfo::getDriverVersion()

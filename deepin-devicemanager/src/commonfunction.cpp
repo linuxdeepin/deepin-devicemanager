@@ -82,7 +82,7 @@ static bool isModeM900(void)
     }
     return false;
 }
-/*   dmidecode | grep -i “String 4”中的值来区分主板类型,PWC30表示PanguW（也就是W525）*/
+/*   dmidecode | grep -i "String 4"中的值来区分主板类型,PWC30表示PanguW（也就是W525）*/
 static bool isModeW525(void)
 {
     QString outInfo = Common::executeClientCmd("dmidecode");
@@ -177,16 +177,36 @@ QString Common::boardVendorType()
     return initBoardVendorFlag ? boardVendorKey : checkBoardVendorFlag();
 }
 
-QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/)
+QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/, bool useEnv/* = true*/)
 {
     QProcess process;
     if (!workPath.isEmpty())
         process.setWorkingDirectory(workPath);
 
-    process.setProgram(cmd);
-    process.setArguments(args);
-    process.setEnvironment({"LANG=en_US.UTF-8", "LANGUAGE=en_US"});
-    process.start();
+        if (useEnv) {
+            QStringList env = QProcess::systemEnvironment();
+        bool hasLang = false;
+        bool hasLanguage = false;
+        for (const QString &e : env) {
+            if (e.startsWith("LANG=")) {
+                hasLang = true;
+            } else if (e.startsWith("LANGUAGE=")) {
+                hasLanguage = true;
+            }
+        }
+        if (hasLang) {
+            env.replaceInStrings(QRegularExpression("^LANG=.*"), "LANG=en_US.UTF-8");
+        } else {
+            env.append("LANG=en_US.UTF-8");
+        }
+        if (hasLanguage) {
+            env.replaceInStrings(QRegularExpression("^LANGUAGE=.*"), "LANGUAGE=en_US");
+        } else {
+            env.append("LANGUAGE=en_US");
+        }
+        process.setEnvironment(env);
+    }
+    process.start(cmd, args);
     // Wait for process to finish without timeout.
     process.waitForFinished(msecsWaiting);
     QByteArray outPut = process.readAllStandardOutput();
