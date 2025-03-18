@@ -173,16 +173,22 @@ void EDIDParser::parseReleaseDate()
 
 void EDIDParser::parseScreenSize()
 {
-    // edid中的  15H和16H就是屏幕大小
+
+    //Detailed Timing
     if(m_LittleEndianMode){
         QString tmpw = getBytes(4,2);
         QString tmph = getBytes(4,3);
         QString tmpshl = getBytes(4,4);
         m_Width = hexToDec(tmpshl.mid(0,1) + tmpw).toInt();
         m_Height = hexToDec(tmpshl.mid(1,1) + tmph).toInt();
-    }else {
-        m_Width = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt()*10;
-        m_Height = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt()*10;
+    }
+
+    // edid中的  15H和16H就是屏幕大小 , 与Detailed Timing相差超10mm 则用15H和16H的。
+    int width15 = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt()*10;
+    int height16 = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt()*10;
+    if(m_Width+10 < width15  || m_Height+10 < height16) {
+        m_Width = width15;
+        m_Height = height16;
     }
 
     double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;

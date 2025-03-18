@@ -59,12 +59,6 @@ public:
      */
     QString parseMonitorSize(const QString &sizeDescription, double &inch, QSize &retSize);
 
-    /**@brief:华为KLU项目里面的显示屏信息是写死的*/
-    /**
-     * @brief setInfoFromSelfDefine:设置华为KLU项目里面的显示屏信息部分为固定的值
-     * @param mapInfo:固定值信息map
-     */
-    void setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo);
 
     /**@brief:华为PanGuV项目里面的显示屏信息是从edid里面获取的*/
     /**
@@ -200,6 +194,7 @@ private:
     QString         m_SerialNumber;      //<! 【流水号】
     QString         m_ProductionWeek;    //<! 【生产年月】
     QString         m_SupportResolution; //<!  支持的屏幕分辨率
+    QString         m_RefreshRate;        //<!  支持的屏幕刷新率
 
     int             m_Width;             //<!  屏幕的宽度
     int             m_Height;            //<!  屏幕的高度

@@ -38,6 +38,9 @@ public slots:
      * @return
      */
     Q_SCRIPTABLE void setMonitorDeviceFlag(bool flag);
+
+private:
+    bool getUserAuthorPasswd();
 };
 
-#endif // DEVICEINTERFACE_H
+#endif   // DEVICEINTERFACE_H

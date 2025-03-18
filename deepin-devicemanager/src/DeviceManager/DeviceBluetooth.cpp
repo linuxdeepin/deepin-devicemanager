@@ -32,7 +32,9 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 {
     // 获取设备的基本信息
     setAttribute(mapInfo, "Name", m_Name);
+    setAttribute(mapInfo, "Alias", m_Alias);
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
+    setAttribute(mapInfo, "HCI Version", m_Version, true);
 
     // 获取设备其他信息
     getOtherMapInfo(mapInfo);
@@ -132,24 +134,6 @@ TomlFixMethod DeviceBluetooth::setInfoFromTomlOneByOne(const QMap<QString, QStri
     return ret;
 }
 
-bool DeviceBluetooth::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
-{
-    // 机器自身蓝牙
-    const QList<QPair<QString, QString> > &otherAttribs = getOtherAttribs();
-    QMap<QString, QString> tmpMaps;
-    for (QPair<QString, QString> attrib : otherAttribs) {
-        tmpMaps[attrib.first] = attrib.second;
-    }
-
-    if ("UART" == tmpMaps[QObject::tr("Bus")]) {//内置：UART 外接USB：USB
-        setAttribute(mapInfo, "Chip Type", m_Name);
-        setAttribute(mapInfo, "Vendor", m_Vendor);
-        return true;
-    } else {
-        return false;
-    }
-}
-
 const QString &DeviceBluetooth::name()const
 {
     return m_Model;
@@ -202,58 +186,59 @@ bool DeviceBluetooth::enable()
 void DeviceBluetooth::initFilterKey()
 {
     // 添加可显示的属性
-    addFilterKey(QObject::tr("Bus"));
-    addFilterKey(QObject::tr("BD Address"));
-    addFilterKey(QObject::tr("ACL MTU"));
-    addFilterKey(QObject::tr("SCO MTU"));
-    addFilterKey(QObject::tr("Features"));
-    addFilterKey(QObject::tr("Packet type"));
-    addFilterKey(QObject::tr("Link policy"));
-    addFilterKey(QObject::tr("Link mode"));
-    addFilterKey(QObject::tr("Class"));
-    addFilterKey(QObject::tr("Service Classes"));
-    addFilterKey(QObject::tr("Device Class"));
-    addFilterKey(QObject::tr("HCI Version"));
-    addFilterKey(QObject::tr("LMP Version"));
-    addFilterKey(QObject::tr("Subversion"));
+    addFilterKey("Bus");
+    addFilterKey("BD Address");
+    addFilterKey("ACL MTU");
+    addFilterKey("SCO MTU");
+    addFilterKey("Features");
+    addFilterKey("Packet type");
+    addFilterKey("Link policy");
+    addFilterKey("Link mode");
+    addFilterKey("Class");
+    addFilterKey("Service Classes");
+    addFilterKey("Device Class");
+    addFilterKey("HCI Version");
+    addFilterKey("LMP Version");
+    addFilterKey("Subversion");
 
-    addFilterKey(QObject::tr("Device"));
-    addFilterKey(QObject::tr("Serial ID"));
+    addFilterKey("Device");
+    addFilterKey("Serial ID");
 
-    addFilterKey(QObject::tr("product"));
-    addFilterKey(QObject::tr("description"));
-    // addFilterKey(QObject::tr("physical id"));
-    addFilterKey(QObject::tr("Class"));
-    addFilterKey(QObject::tr("Powered"));
-    addFilterKey(QObject::tr("Discoverable"));
-    addFilterKey(QObject::tr("Pairable"));
-    addFilterKey(QObject::tr("UUID"));
-    addFilterKey(QObject::tr("Modalias"));
-    addFilterKey(QObject::tr("Discovering"));
+    addFilterKey("product");
+    addFilterKey("description");
+    // addFilterKey("physical id");
+    addFilterKey("Class");
+    addFilterKey("Powered");
+    addFilterKey("Discoverable");
+    addFilterKey("Pairable");
+    addFilterKey("UUID");
+    addFilterKey("Modalias");
+    addFilterKey("Discovering");
 }
 
 void DeviceBluetooth::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Model"), m_Model);
+    addBaseDeviceInfo(("Alias"), m_Alias);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("Version"), m_Version);
+    addBaseDeviceInfo(("Model"), m_Model);
 }
 
 void DeviceBluetooth::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
-    addOtherDeviceInfo(tr("Speed"), m_Speed);
-    addOtherDeviceInfo(tr("Maximum Power"), m_MaximumPower);
-    addOtherDeviceInfo(tr("Driver Version"), m_DriverVersion);
-    addOtherDeviceInfo(tr("Driver"), m_Driver);
-    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("Bus Info"), m_BusInfo);
-    addOtherDeviceInfo(tr("Logical Name"), m_LogicalName);
-    addOtherDeviceInfo(tr("MAC Address"), m_MAC);
+    addOtherDeviceInfo(("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(("Physical ID"), m_PhysID);
+    addOtherDeviceInfo(("Speed"), m_Speed);
+    addOtherDeviceInfo(("Maximum Power"), m_MaximumPower);
+    addOtherDeviceInfo(("Driver Version"), m_DriverVersion);
+    addOtherDeviceInfo(("Driver"), m_Driver);
+    addOtherDeviceInfo(("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(("Bus Info"), m_BusInfo);
+    addOtherDeviceInfo(("Logical Name"), m_LogicalName);
+    addOtherDeviceInfo(("MAC Address"), m_MAC);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
@@ -265,11 +250,11 @@ void DeviceBluetooth::loadTableData()
     QString tName = m_Name;
 
     if (!available()) {
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
 
     if (!enable()) {
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);

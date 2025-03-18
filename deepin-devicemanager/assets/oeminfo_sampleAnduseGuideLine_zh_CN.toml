@@ -1,590 +1,506 @@
-#详细说明见文件尾部				
-[FileInfo]
-  FileName 	="replace value"		#  文件名
-  VendorInfo 	="replace value"		#  制造商信息
-  Version 	="replace value"		#  版本  
-  Data 	="replace value"		#  数据
+#详细说明见文件下末部分：
+[FileInfo] 	#
+FileName                ="toml_FileName_demosample20240911.toml" #1  : 文件名 只交流用
+VendorInfo              ="toml_VendorInfo"                          #2  : 制造商信息 只交流用
+Version                 ="toml_Version"                             #3  : 版本 只交流用
+Data                    ="toml_Data"                                #4  : 数据 只交流用
 
-[Computer.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  HOME_URL 	="replace value"		#  主页
-  OsDescription ="replace value"		#  系统描述
-  Type 	="replace value"		#  类型  
-  OS 		="replace value"		#  操作系统  
+[Computer.flagLabel]  #(概况)
+Vendor                  ="toml_Vendor"                             #1-1  : 制造商
+Name                    ="toml_Name"                               #1-2  : 名称
+Type                    ="toml_Type"                               #1-3  : 类型
+HOME_URL                ="toml_HOME_URL"                           #2-1  : 主页
+OsDescription           ="toml_OsDescription"                      #2-2  : 系统描述
+OS                      ="toml_OS"                                 #2-3  : 操作系统
 
-[CPU.VendorLabel]
-  Name 	="replace value"		#  名称  
-  Vendor 	="replace value"		#  制造商  
-  CPU ID 	="replace value"		#  处理器ID  
-  CPU implementer ="replace value"		#  CPU程序  
-  CPU architecture ="replace value"		#  CPU架构  
-  CPU variant	="replace value"		#  CPU变量  
-  CPU part 	="replace value"		#  CPU部件  
-  CPU revision ="replace value"		#  CPU版本  
-  Core ID 	="replace value"		#  核心ID  
-  Threads 	="replace value"		#  线程数  
-  Current Speed ="replace value"		#  当前频率  
-  Max Speed 	="replace value"		#  最大频率  
-  BogoMIPS 	="replace value"		#  BogoMIPS  
-  Architecture="replace value"		#  架构  
-  CPU Family 	="replace value"		#  家族  
-  Model 	="replace value"		#  型号  
-  Virtualization ="replace value"		#  虚拟化  
-  Flags 	="replace value"		#  特性  
-  Extensions 	="replace value"		#  扩展指令集  
-  L3 Cache 	="replace value"		#  L3缓存  
-  L2 Cache 	="replace value"		#  L2缓存  
-  L1i Cache 	="replace value"		#  L1缓存（指令）  
-  L1d Cache 	="replace value"		#  L1缓存（数据）  
-  Stepping 	="replace value"		#  步进  
-  Frequency 	="replace value"		#  频率
+[CPU.flagLabel]  #(处理器)
+CPU ID               ="toml_CPU ID"                     #1  : 逻辑处理器
+Name                 ="toml_Name"                       #2  : 名称
+Vendor               ="toml_Vendor"                     #3  : 制造商
+CPU ID               ="toml_CPU ID"                     #4  : 处理器ID
+Core ID              ="toml_Core ID"                    #5  : 核心ID
+Threads              ="toml_Threads"                    #6  : 线程数
+BogoMIPS             ="toml_BogoMIPS"                   #7  : 运行速度（Bogomips）
+Architecture         ="toml_Architecture"               #8  : 架构
+CPU Family           ="toml_CPU Family"                 #9  : 家族
+Model                ="toml_Model"                      #10  : 型号
+Stepping             ="toml_Stepping"                   #11  : 步进
+L1d Cache            ="toml_L1d Cache"                  #12  : L1缓存（数据）
+L1i Cache            ="toml_L1i Cache"                  #13  : L1缓存（指令）
+L2 Cache             ="toml_L2 Cache"                   #14  : L2缓存
+L3 Cache             ="toml_L3 Cache"                   #15  : L3缓存
+Extensions           ="toml_Extensions"                 #16  : 扩展指令集
+Flags                ="toml_Flags"                      #17  : 特性
+Virtualization       ="toml_Virtualization"             #18  : 虚拟化
+CPU variant          ="toml_CPU variant"                #19  : CPU变量
+CPU architecture     ="toml_CPU architecture"           #20  : CPU架构
+CPU revision         ="toml_CPU revision"               #21  : CPU版本
+CPU implementer      ="toml_CPU implementer"            #22  : CPU程序
+CPU part             ="toml_CPU part"                   #23  : CPU部件
 
-[Motherboard.BIOSInformation]
-  Name 	="BIOS Information"			#  注意：该条Name 的值不更改 对应命令dmidecode t 0
-  Vendor 	="replace value"		#  制造商  
-  Version 	="replace value"		#  版本  
-  Release Date ="replace value"		#  发布日期  
-  Address 	="replace value"		#  地址  
-  Runtime Size ="replace value"		#  运行内存大小  
-  ROM Size 	="replace value"		#  ROM大小  
-  Characteristics 	="replace value"		#  特性  
-  BIOS Revision 	="replace value"		#  BIOS信息  
-  Firmware Revision 	="replace value"		#  固件修订版本  
-  Chipset 		="replace value"		#  芯片组  
-  Asset Tag 		="replace value"		#  资产编号  
-  Location In Chassis ="replace value"		#  机箱内位置  
-  Chassis Handle 	="replace value"		#  机箱程序  
-  SMBIOS Version 	="replace value"		#  SMBIOS版本  
-  Serial Number 	="replace value"		#  序列号  
-  Product Name 	="replace value"		#  产品名称  
-	
-[Motherboard.BaseBoardInformation]
-  Name 		="Base Board Information" 	# 注意：该条Name 的值不更改 对应命令 dmidecode t 2
-  Vendor 		="replace value"		#  制造商  
-  Manufacturer 	="replace value"		#  生产制造商
-  Product Name 	="replace value"		#  产品名称  
-  Version 	="replace value"		#  版本  
-  Serial Number ="replace value"		#  序列号  
-  Asset Tag 	="replace value"		#  资产编号  
-  Features 	="replace value"		#  特征  
-  Location In Chassis ="replace value"		#  机箱内位置  
-  Chassis Handle 	="replace value"		#  机箱程序  
-  Type 		="replace value"		#  类型  
-  Contained Object Handles ="replace value"		#  包含对象程序  
-  Chipset 		="replace value"		#  芯片组  
-  SMBIOS Version 	="replace value"		#  SMBIOS版本  
+[Motherboard.BIOSInformation]  #(主板)
+Name                     ="BIOS Information"            #1  : 注意：该条Name 的值不更改 对应命令dmi.decode t 0
+Vendor                   ="toml_Vendor"                 #2  : 制造商
+Version                  ="toml_Version"                #3  : 版本
+Chipset                  ="toml_Chipset"                #4  : 芯片组
+BIOS Revision            ="toml_BIOS Revision"          #5  : BIOS修订版本
+ROM Size                 ="toml_ROM Size"               #6  : ROM大小
+SMBIOS Version           ="toml_SMBIOS Version"         #7  : SMBIOS版本
+Product Name             ="toml_Product Name"           #8  : 产品名称
+Release Date             ="toml_Release Date"           #9  : 发布日期
+Firmware Revision        ="toml_Firmware Revision"      #10  : 固件修订版本
+Address                  ="toml_Address"                #11  : 地址
+Serial Number            ="toml_Serial Number"          #12  : 序列号
+Location In Chassis      ="toml_Location In Chassis"    #13  : 机箱内位置
+Chassis Handle           ="toml_Chassis Handle"         #14  : 机箱程序
+Characteristics          ="toml_Characteristics"        #15  : 特性
+Asset Tag                ="toml_Asset Tag"              #16  : 资产编号
+Runtime Size             ="toml_Runtime Size"           #17  : 运行内存大小
 
-[Motherboard.ChassisInformation]
-  Name 			="Chassis Information"		#  注意：该条Name 的值不更改 对应命令 dmidecode t 3
-  Manufacturer 		="replace value"		#  生产制造商
-  Type 			="replace value"		#  类型  
-  Lock 			="replace value"		#  锁  
-  Version 		="replace value"		#  版本  
-  Serial Number 	="replace value"		#  序列号  
-  Asset Tag 		="replace value"		#  资产编号  
-  Bootup State 	="replace value"		#  开机状态  
-  Power Supply State 	="replace value"		#  供电状态  
-  Thermal State 	="replace value"		#  散热状态  
-  Security Status 	="replace value"		#  安全状态  
-  OEM Information 	="replace value"		#  OEM信息  
-  Height 		="replace value"		#  高度  
-  Number Of Power Cords ="replace value"		#  电源线数  
-  Contained Elements 	="replace value"		#  包含组件数  
-  SKU Number 		="replace value"		#  SKU号  
-  Chipset 		="replace value"		#  芯片组  
-  Location In Chassis ="replace value"		#  机箱内位置  
-  Chassis Handle 	="replace value"		#  机箱程序  
-  SMBIOS Version 	="replace value"		#  SMBIOS版本  
-  Product Name 	="replace value"		#  产品名称  
-				
-[Motherboard.PhysicalMemoryArray]
-  Name 		="Physical Memory Array"        # 注意：该条Name 的值不更改 对应命令  dmidecode t 17
-  Array Handle 	="replace value"		#  数组程序  
-  Error Information Handle ="replace value"	#  错误信息程序  
-  Total Width 	="replace value"		#  总位宽  
-  Data Width 		="replace value"		#  数据位宽  
-  Size 		="replace value"		#  大小  
-  Form Factor 	="replace value"		#  尺寸型号  
-  Set 	="replace value"		#  设置  
-  Locator 		="replace value"		#  插槽  
-  Bank Locator 	="replace value"		#  内存通道  
-  Type 		="replace value"		#  类型  
-  Type Detail 	="replace value"		#  类型详情  
-  Speed 		="replace value"		#  速度  
-  Manufacturer 	="replace value"		#  生产制造商
-  Serial Number 	="replace value"		#  序列号  
-  Asset Tag 		="replace value"		#  资产编号  
-  Part Number 	="replace value"		#  部件号码  
-  Rank 		="replace value"		#  位列  	
-  Configured Memory Speed ="replace value"		#  配置Memory频率  
-  Minimum Voltage 	="replace value"		#  最低电压  
-  Maximum Voltage 	="replace value"		#  最高电压  
-  Configured Voltage 	="replace value"		#  配置电压  
-  Memory Technology 	="replace value"		#  内存技术  
-  Memory Operating Mode Capability ="replace value"		#  内存操作模式  
-  Firmware Version 	="replace value"		#  固件版本  
-  Module Manufacturer ID ="replace value"		#  组件制造商 
-  Number Of Devices 	="replace value"		#  卡槽数量  
-  Location 		="replace value"		#  位置
-  Maximum Capacity 	="replace value"		#  最大容量  
-  Chipset 		="replace value"		#  芯片组  
-  Location In Chassis ="replace value"		#  机箱内位置  
-  Chassis Handle 	="replace value"		#  机箱程序  
-  SMBIOS Version 	="replace value"		#  SMBIOS版本  
-  Product Name 	="replace value"		#  产品名称  
-  Type 		="replace value"		#  类型  
+[Motherboard.SystemInformation]  #(主板)
+Name                       ="System Information"                      #1  : 注意：该条Name 的值不更改 对应命令  dmi.decode t 1
+Vendor                     ="toml_Vendor"                            #2  : 制造商
+Version                    ="toml_Version"                           #3  : 版本
+Chipset                    ="toml_Chipset"                           #4  : 芯片组
+BIOS ROMSIZE               ="toml_BIOS ROMSIZE"                      #5  : BIOS ROM大小
+BIOS Information           ="toml_BIOS Information"                  #6  : BIOS信息
+BIOS Revision              ="toml_BIOS Revision"                     #7  : BIOS修订版本
+OEM Information            ="toml_OEM Information"                   #8  : OEM信息
+ROM Size                   ="toml_ROM Size"                          #9  : ROM大小
+SKU Number                 ="toml_SKU Number"                       #10  : SKU号
+SMBIOS Version             ="toml_SMBIOS Version"                    #11  : SMBIOS版本
+UUID                       ="toml_UUID"                               #12  : UUID
+Base Board Information     ="toml_Base Board Information"             #13  : 主板信息
+Product Name               ="toml_Product Name"                      #14  : 产品名称
+Power Supply State         ="toml_Power Supply State"                #15  : 供电状态
+Physical Memory Array      ="toml_Physical Memory Array"             #16  : 内存插槽信息
+Contained Object Handles   ="toml_Contained Object Handles"          #17  : 包含对象程序
+Contained Elements         ="toml_Contained Elements"                #18  : 包含组件数
+Release date               ="toml_Release date"                      #19  : 发布日期
+Installable Languages      ="toml_Installable Languages"             #20  : 可安装语言数
+Power Switch               ="toml_Power Switch"                      #21  : 唤醒类型
+Firmware Revision          ="toml_Firmware Revision"                 #22  : 固件修订版本
+Address                    ="toml_Address"                           #23  : 地址
+Security Status            ="toml_Security Status"                   #24  : 安全状态
+Family                     ="toml_Family"                            #25  : 家族
+Serial Number              ="toml_Serial Number"                     #26  : 序列号
+Currently Installed Language ="toml_Currently Installed Language"      #27  : 当前安装语言
+Thermal State              ="toml_Thermal State"                     #28  : 散热状态
+Chassis Information        ="toml_Chassis Information"               #29  : 机箱信息
+Location In Chassis        ="toml_Location In Chassis"               #30  : 机箱内位置
+Chassis Handle             ="toml_Chassis Handle"                    #31  : 机箱程序
+Features                   ="toml_Features"                          #32  : 特征
+Characteristics            ="toml_Characteristics"                   #33  : 特性
+Number Of Power Cords      ="toml_Number Of Power Cords"             #34  : 电源线数
+Type                       ="toml_Type"                              #35  : 类型
+System Information         ="toml_System Information"                #36  : 系统信息
+Error Correction Type      ="toml_Error Correction Type"              #37  : 纠错类型
+Language Description Format ="toml_Language Description Format"       #38  : 语言描述格式
+Asset Tag                  ="toml_Asset Tag"                         #39  : 资产编号
+Runtime Size               ="toml_Runtime Size"                      #40  : 运行内存大小
+Lock                       ="toml_Lock"                              #41  : 锁
+Error Information Handle   ="toml_Error Information Handle"           #42  : 错误信息程序
+Height                     ="toml_Height"                            #43  : 高度
 
-[Motherboard.SystemInformation]
-  Name 	="System Information" 		#  注意：该条Name 的值不更改 对应命令  dmidecode t 1	 
-  Vendor 	="replace value"		#  制造商  
-  Asset Tag 	="replace value"		#  资产编号  
-  Location In Chassis ="replace value"		#  机箱内位置  
-  Chassis Handle 	="replace value"		#  机箱程序  
-  SMBIOS Version 	="replace value"		#  SMBIOS版本  
-  Serial Number 	="replace value"		#  序列号  
-  Product Name 	="replace value"		#  产品名称 
-  Manufacturer 	="replace value"		#  生产制造商
-  Version 		="replace value"		#  版本  
-  UUID 		="replace value"		#  UUID  
-  Wakeup Type 	="replace value"		#  唤醒类型  
-  SKU Number 	="replace value"		#  SKU号  
-  Family 	="replace value"		#  家族  
-  Chipset 	="replace value"		#  芯片组  
-  Release Date 	="replace value"		#  发布日期  
-  Address 		="replace value"		#  地址  
-  Runtime Size 	="replace value"		#  运行内存大小  
-  ROM Size 		="replace value"		#  ROM大小  
-  Characteristics 	="replace value"		#  特性  
-  BIOS Revision 	="replace value"		#  BIOS修订版本  
-  Firmware Revision 	="replace value"		#  固件版本  
-   Asset Tag 		="replace value"		#  资产编号  
-  Features 		="replace value"		#  特征  
-  Type 		="replace value"		#  类型  
-  Contained Object Handles ="replace value"		#  包含对象程序  
-  UUID 		="replace value"		#  UUID  
-  Wakeup Type 	="replace value"		#  唤醒类型  
-  SKU Number 		="replace value"		#  SKU号  
-  Family 		="replace value"		#  家族  
-  Type 		="replace value"		#  类型  
-  Lock 		="replace value"		#  锁  
-  Serial Number 	="replace value"		#  序列号  
-   Asset Tag 		="replace value"		#  资产编号  
-  Bootup State 	="replace value"		#  开机状态  
-  Power Supply State 	="replace value"		#  供电状态  
-  Thermal State 	="replace value"		#  散热状态  
-  Security Status 	="replace value"		#  安全状态  
-  OEM Information 	="replace value"		#  OEM信息  
-  Height 		="replace value"		#  高度  
-  Number Of Power Cords ="replace value"		#  电源线数  
-  Contained Elements 	="replace value"		#  包含组件数  
-  SKU Number 		="replace value"		#  SKU号  
-  Error Correction Type ="replace value"		#  纠错类型  
-  Error Information Handle="replace value"		#  错误信息程序  
-  BIOS ROMSIZE 	="replace value"		#  BIOS ROM大小  
-  Release date 	="replace value"		#  发布日期  
-  Board   Name 	="replace value"		#  主板名称  
-  Family 		="replace value"		#  家族  
-  BIOS Information 	="replace value"		#  BIOS信息  
-  Base Board Information ="replace value"		#  主板信息  
-  System Information 	="replace value"		#  系统信息  
-  Chassis Information 	="replace value"		#  机箱信息  
-  Physical Memory Array 	="replace value"		#  内存插槽信息  
-  Language Description Format ="replace value"		#  语言描述格式  
-  Installable Languages 	="replace value"		#  可安装语言数  
-  Currently Installed Language 	="replace value"		#  当前安装语言  
-				
-[Memory.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 		="replace value"		#  名称  
-  Array Handle 	="replace value"		#  数组程序  
-  Error Information Handle ="replace value"		#  错误信息程序  
-  Form Factor 	="replace value"		#  尺寸型号  
-  Set 			="replace value"		#  设置  
-  Bank Locator 	="replace value"		#  内存通道  
-  Type Detail 	="replace value"		#  类型详情  
-   Asset Tag 		="replace value"		#  资产编号  
-  Part Number 	="replace value"		#  电量  
-  Rank 		="replace value"		#  位列  
-  Memory Technology 		="replace value"		#  内存技术  
-  Memory Operating Mode Capability="replace value"		#  内存操作模式  
-  Firmware Version 		="replace value"		#  固件版本  
-  Module Manufacturer ID 	="replace value"		#  组件制造商  
-  Module Product ID 		="replace value"		#  组件产品ID  
-  Memory Subsystem Controller Manufacturer ID 	="replace value"		#  内存子系统控制器制造商  
-  Memory Subsystem Controller Product ID 		="replace value"		#  内存子系统控制器产品ID  
-  NonVolatile Size 	="replace value"		#  不易丢失大小  
-  Volatile Size 	="replace value"		#  易丢失大小  
-  Cache Size 		="replace value"		#  缓存大小  
-  Logical Size 	="replace value"		#  逻辑大小  
-  Size 		="replace value"		#  大小  
-  Type 		="replace value"		#  类型  
-  Speed 		="replace value"		#  速度  
-  Total Width 	="replace value"		#  总位宽  
-  Locator 		="replace value"		#  插槽  
-  Serial Number 	="replace value"		#  序列号  
-  Configured Voltage 	="replace value"		#  配置电压  
-  Maximum Voltage 	="replace value"		#  最高电压  
-  Minimum Voltage 	="replace value"		#  最低电压  
-  Configured Speed 	="replace value"		#  配置频率  
-  Data Width 		="replace value"		#  数据位宽  
-				
-[Storage.VendorLabel]
-  Vendor 		="replace value"		#  制造商  
-  Name 		="replace value"		#  名称  
-  Hardware Class ="replace value"		#  硬件类别  
-  Device File 	="replace value"		#  设备文件  
-  ansiVersion 	="replace value"		#  ANSI版本  
-  bus info 		="replace value"		#  总线信息  
-  logical name 	="replace value"		#  逻辑名称  
-  logicalsectorsize ="replace value"		#  逻辑分区大小  
-  physical id 	="replace value"		#  物理ID  
-  sectorsize 		="replace value"		#  扇区大小  
-  guid 		="replace value"		#  全局唯一标识符  
-  Config Status 	="replace value"		#  配置状态  
-  Device Number 	="replace value"		#  设备编号  
-  Geometry (Logical) 	="replace value"		#  几何数据（逻辑）  
-  Model 		="replace value"		#  型号  
-  Media Type 		="replace value"		#  介质类型  
-  Size 		="replace value"		#  大小  
-  Capabilities 	="replace value"		#  功能  
-  Firmware Version 	="replace value"		#  固件版本  
-  Speed 		="replace value"		#  速度  
-  Serial Number 	="replace value"		#  序列号  
-  Interface 		="replace value"		#  接口  
-  Rotation Rate 	="replace value"		#  转速  
+[Motherboard.BaseBoardInformation]  #(主板)
+Name                        ="Base Board Information"                  #1  : 注意：该条Name 的值不更改 对应命令 dmi.decode t 2
+Vendor                      ="toml_Vendor"                            #2  : 制造商
+Version                     ="toml_Version"                           #3  : 版本
+Chipset                     ="toml_Chipset"                           #4  : 芯片组
+SMBIOS Version              ="toml_SMBIOS Version"                    #5  : SMBIOS版本
+Product Name                ="toml_Product Name"                      #6  : 产品名称
+Contained Object Handles    ="toml_Contained Object Handles"          #7  : 包含对象程序
+Serial Number              ="toml_Serial Number"                     #8  : 序列号
+Location In Chassis        ="toml_Location In Chassis"               #9  : 机箱内位置
+Chassis Handle             ="toml_Chassis Handle"                    #10  : 机箱程序
+Features                   ="toml_Features"                          #11  : 特征
+Type                       ="toml_Type"                              #12  : 类型
+Asset Tag                  ="toml_Asset Tag"                         #13  : 资产编号
 
-[Storage.2.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 		="replace value"		#  名称  
-  Hardware Class 	="replace value"		#  硬件类别  
-  Device File 	="replace value"		#  设备文件  
-  ansiVersion 	="replace value"		#  ANSI版本  
-  bus info 		="replace value"		#  总线信息  
-  logical name 	="replace value"		#  逻辑名称  
+[Motherboard.ChassisInformation]  #(主板)
+Name                       ="Chassis Information"                     #1  : 注意：该条Name 的值不更改 对应命令 dmi.decode t 3
+Vendor                     =" TSINGHUA TONGFANG COMPUTER"           #2  : 制造商
+Version                    ="toml_Version"                           #3  : 版本
+Chipset                    ="toml_Chipset"                           #4  : 芯片组
+OEM Information            ="toml_OEM Information"                   #5  : OEM信息
+SKU Number                 ="toml_SKU Number"                       #6  : SKU号
+SMBIOS Version             ="toml_SMBIOS Version"                    #7  : SMBIOS版本
+Product Name               ="toml_Product Name"                      #8  : 产品名称
+Power Supply State         ="toml_Power Supply State"                #9  : 供电状态
+Contained Elements         ="toml_Contained Elements"                #10  : 包含组件数
+Security Status            ="toml_Security Status"                   #11  : 安全状态
+Serial Number              ="toml_Serial Number"                     #12  : 序列号
+Bootup State               ="Safe"                                    #13  : 开机状态
+Thermal State              ="toml_Thermal State"                     #14  : 散热状态
+Location In Chassis        ="toml_Location In Chassis"               #15  : 机箱内位置
+Chassis Handle             ="toml_Chassis Handle"                    #16  : 机箱程序
+Number Of Power Cords      ="toml_Number Of Power Cords"             #17  : 电源线数
+Type                       ="toml_Type"                              #18  : 类型
+Asset Tag                  ="toml_Asset Tag"                         #19  : 资产编号
+Lock                       ="toml_Lock"                              #20  : 锁
+Height                     ="toml_Height"                            #21  : 高度
 
-[DisplayGPU.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 		="replace value"		#  名称  
-  Modalias 	="replace value"		#  设置命令别名  
-  Vendor_ID 	="replace value"		#  制造商 ID 
-  Product_ID 	="replace value"		#  产品ID
-  Model 	="replace value"		#  型号  
-  Graphics Memory ="replace value"		#  显存  
-  width 	="replace value"		#  位宽  
-  clock 	="replace value"		#  时钟频率  
-  irq 		="replace value"		#  中断  
-  capabilities ="replace value"		#  功能  
-  bus info 	="replace value"		#  总线信息  
-  ioport 	="replace value"		#  IO口
-  memory 	="replace value"		#  内存  
-  Memory Address ="replace value"		#  内存地址  
-  IO Port 	="replace value"		#  IO口
-  Bus Info 	="replace value"		#  总线信息  
-  Maximum Resolution 	="replace value"		#  最大分辨率  
-  Minimum Resolution 	="replace value"		#  最小分辨率  
-  Current Resolution 	="replace value"		#  当前分辨率  
-  Driver 	="replace value"		#  驱动  
-  Description ="replace value"		#  描述  
-  Clock 	="replace value"		#  时钟频率  
-  DP 	="replace value"		#  DP  
-  eDP 	="replace value"		#  eDP  
-  HDMI ="replace value"		#  HDMI  
-  VGA 	="replace value"		#  VGA  
-  DVI 	="replace value"		#  DVI  
-  DigitalOutput ="replace value"		#  DigitalOutput  
-  Display Output ="replace value"		#  显示输出  
-  Capabilities ="replace value"		#  功能  
-  IRQ 		="replace value"		#  中断  
-  Device   	="replace value"		#  设备  
-  SubVendor   	="replace value"		#  子设备  
-  SubDevice   	="replace value"		#  子设备  
-  Driver Modules="replace value"		#  驱动模块  
-  Config Status ="replace value"		#  配置状态  
-  latency   	="replace value"		#  延迟  
-  GDDR capacity ="replace value"		#  GDDR容量  
-  GPU vendor   ="replace value"		#  GPU供应商  
-  GPU type   	="replace value"		#  GPU类型  
-  EGL version   ="replace value"		#  EGL版本  
-  EGL client APIs="replace value"		#  EGL接口  
-  GL version  	="replace value"		#  GL版本  
-  GLSL version  ="replace value"		#  GLSL版本  
-	
-[Monitor.VendorLabel]
-  Vendor	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  Date 	="replace value"		#  日期  
-  Type 	="replace value"		#  类型  
-  Display Input 	="replace value"		#  显示输入  
-  Interface Type 	="replace value"		#  接口类型  
-  Support Resolution 	="replace value"		#  支持分辨率  
- Current Resolution 	="replace value"		#  当前分辨率  
-  Display Ratio 	="replace value"		#  显示比例  
-  Primary Monitor 	="replace value"		#  主显示器  
-  Size 		="replace value"		#  大小  
-  Serial Number 	="replace value"		#  序列号  
-  Product Date 	="replace value"		#  生产日期  
+[Motherboard.PhysicalMemoryArray]  #(主板)
+Name                       ="Physical Memory Array"                  #1  : 注意：该条Name 的值不更改 对应命令  dmi.decode t 17
+Chipset                    ="toml_Chipset"                           #2  : 芯片组
+SMBIOS Version             ="toml_SMBIOS Version"                    #3  : SMBIOS版本
+Product Name               ="toml_Product Name"                      #4  : 产品名称
+Location                   ="toml_Location"                          #5  : 位置
+Number Of Devices          ="toml_Number Of Devices"                 #6  : 卡槽数量
+Serial Number              ="toml_Serial Number"                     #7  : 序列号
+Maximum Capacity           ="toml_Maximum Capacity"                  #8  : 最大容量
+Location In Chassis        ="toml_Location In Chassis"               #9  : 机箱内位置
+Chassis Handle             ="toml_Chassis Handle"                    #10  : 机箱程序
+Type                       ="toml_Type"                              #11  : 类型
+Asset Tag                  ="toml_Asset Tag"                         #12  : 资产编号
+Error Information Handle   ="toml_Error Information Handle"          #13  : 错误信息程序
 
-[NetWork.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  Modalias 	="replace value"		#  设置命令别名  
-  ioport 	="replace value"		#  IO口
-  physical id ="replace value"		#  物理ID  
-  network 	="replace value"		#  网络  
-  Type 	="replace value"		#  类型  
-  Bus Info 	="replace value"		#  总线信息  
-  Capabilities="replace value"		#  功能  
-  Driver Version ="replace value"		#  驱动版本  
-  Maximum Rate ="replace value"		#  最大速率  
-  Negotiation Rate ="replace value"		#  协商速率  
-  Port 	="replace value"		#  端口  
-  Multicast 	="replace value"		#  组播  
-  Link 	="replace value"		#  连接  
-  Latency 	="replace value"		#  延迟  
-  IP 		="replace value"		#  IP  
-  Firmware 	="replace value"		#  固件  
-  Duplex 	="replace value"		#  双工  
-  Broadcast 	="replace value"		#  广播  
-  Auto Negotiation ="replace value"		#  自动协商  
-  Memory Address ="replace value"		#  内存地址  
-  IRQ 		="replace value"		#  中断  
-  MAC Address ="replace value"		#  物理地址  
-  logical name ="replace value"		#  逻辑名称  
+[Memory.flagLabel]  #(内存)
+Name                       ="toml_Name"                             #1  : 名称
+Vendor                     ="toml_Vendor"                           #2  : 制造商
+Size                       ="toml_Size"                             #3  : 大小
+Type                       ="toml_Type"                             #4  : 类型
+Speed                      ="toml_Speed"                            #5  : 速度
+Total Width                ="toml_Total Width"                      #6  : 总位宽
+Locator                    ="toml_Locator"                          #7  : 插槽
+Serial Number              ="toml_Serial Number"                    #8  : 序列号
+Data Width                 ="toml_Data Width"                       #9  : 数据位宽
+Configured Speed           ="toml_Configured Speed"                 #10  : 配置频率
+Rank                       ="toml_Rank"                             #11  : 位列
+Memory Subsystem Controller Product ID ="toml_Memory Subsystem Controller Product ID" #12  : 内存子系统控制器产品ID
+Memory Subsystem Controller Manufacturer ID ="toml_Memory Subsystem Controller Manufacturer ID" #13  : 内存子系统控制器制造商
+Memory Technology          ="toml_Memory Technology"                  #14  : 内存技术
+Memory Operating Mode Capability ="toml_Memory Operating Mode Capability" #15  : 内存操作模式
+Bank Locator               ="toml_Bank Locator"                      #16  : 内存通道
+Firmware Version           ="toml_Firmware Version"                  #17  : 固件版本
+Form Factor                ="toml_Form Factor"                       #18  : 尺寸型号
+Array Handle               ="toml_Array Handle"                      #19  : 数组程序
+Volatile Size              ="toml_Volatile Size"                     #20  : 易丢失大小
+Type Detail                ="toml_Type Detail"                       #23  : 类型详情
+Module Product ID          ="toml_Module Product ID"                 #24  : 组件产品ID
+Module Manufacturer ID     ="toml_Module Manufacturer ID"            #25  : 组件制造商
+Cache Size                 ="toml_Cache Size"                        #26  : 缓存大小
+Set                        ="toml_Set"                               #27  : 设置
+Asset Tag                  ="toml_Asset Tag"                         #28  : 资产编号
+Logical Size               ="toml_Logical Size"                      #29  : 逻辑大小
+Part Number                ="toml_Part Number"                       #30  : 部件号码
+Error Information Handle   ="toml_Error Information Handle"          #31  : 错误信息程序
 
-[SoundAudio.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  Modalias 	="replace value"		#  设置命令别名  
-  Device Name ="replace value"		#  设备名称  
-  SubVendor 	="replace value"		#  子设备  
-  SubDevice 	="replace value"		#  子设备  
-  Driver Status ="replace value"		#  驱动状态  
-  Driver Activation Cmd ="replace value"		#  驱动激活命令  
-  Config Status ="replace value"		#  配置状态  
-  latency 	="replace value"		#  延迟  
-  Phys 	="replace value"		#  Phys  
-  Sysfs 	="replace value"		#  Sysfs  
-  Handlers 	="replace value"		#  处理程序  
-  PROP 	="replace value"		#  PROP  
-  EV 	="replace value"		#   EV 
-  KEY 	="replace value"		#  KEY  
-  Bus 	="replace value"		#  总线  
-  Version 	="replace value"		#  版本  
-  Driver 	="replace value"		#  驱动  
-  SysFS_Path 	="replace value"		#   SysFS_Path 
-  Chip 	="replace value"		#  芯片  
-  Capabilities ="replace value"		#  功能  
-  Memory Address ="replace value"		#  内存地址  
-  IRQ 		="replace value"		#  中断  
+[Storage.flagLabel]  #(存储设备)
+Name                       ="toml_Name"                             #1  : 名称
+Vendor                     ="toml_Vendor"                           #2  : 制造商
+Media Type                 ="toml_Media Type"                       #3  : 介质类型
+Size                       ="toml_Size"                             #4  : 大小
+Version                    ="toml_Version"                          #5  : 版本
+Capabilities               ="toml_Capabilities"                     #6  : 功能
+physical id                ="toml_vidpid"                           #7  : 物理ID
+Rotation Rate              ="toml_Rotation Rate"                    #8  : 转速
+Interface                  ="toml_Interface"                        #9  : 接口
+Serial Number              ="toml_Serial Number"                    #10  : 序列号
+Description                ="toml_Description"                      #11  : 描述
+Speed                      ="toml_Speed"                            #12  : 速度
+Firmware Version           ="toml_Firmware Version"                 #13  : 固件版本
+ansiversion                ="toml_ansiversion"                      #14  : ANSI版本
+guid                       ="toml_guid"                             #15  : 全局唯一标识符
+Geometry (Logical)         ="toml_Geometry (Logical)"               #16  : 几何数据（逻辑）
+bus info                   ="toml_bus info"                         #17  : 总线信息
+sectorsize                 ="toml_sectorsize"                       #18  : 扇区大小
+Hardware Class             ="toml_Hardware Class"                   #19  : 硬件类别
+Device File                ="toml_Device File"                      #20  : 设备文件
+Device Number              ="toml_Device Number"                    #21  : 设备编号
+logicalsectorsize          ="toml_logicalsectorsize"                #22  : 逻辑分区大小
+logical name               ="toml_logical name"                     #23  : 逻辑地址
+Config Status              ="toml_Config Status"                    #24  : 配置状态
 
-[Bluetooth.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  Modalias 	="replace value"		#  设置命令别名  
-  Bus 		="replace value"		#  总线  
-  BD Address 	="replace value"		#  蓝牙设备地址  
-  ACL MTU 	="replace value"		#  ACL MTU  
-  SCO MTU 	="replace value"		#  SCO MTU  
-  Features 	="replace value"		#  特征  
-  Packet type  ="replace value"		#  数据包类型  
-  Link policy	="replace value"		#  连接策略  
-  Link mode 	="replace value"		#  连接模式  
-  Class 	="replace value"		#  类别  
-  Service Classes="replace value"		#  服务类别  
-  Device Class ="replace value"		#  设备类别  
-  HCI   Version="replace value"		#  HCI版本  
-  LMP   Version ="replace value"		#  LMP版本  
-  Sub  Version ="replace value"		#  子制造商 		
-  Device 	="replace value"		#  设备  
-  Serial ID 	="replace value"		#  序列号  
-  product 	="replace value"		#  产品  
-  Class 	="replace value"		#  时钟频率  
-  Powered 	="replace value"		#  供电  
-  Discoverable ="replace value"		#  可发现  
-  Pairable 	="replace value"		#  可配对  
-  UUID 	="replace value"		#  UUID  
-  Discovering	="replace value"		#  搜索中  
-  Model 	="replace value"		#  型号  
-  Speed 	="replace value"		#  速度  
-  Maximum Power="replace value"		#  最大功率  
-  Driver Version ="replace value"		#  驱动版本  
-  Capabilities ="replace value"		#  功能  
-  Bus Info 	="replace value"		#  总线信息  
-  logical name ="replace value"		#  逻辑名称  
-  MAC Address ="replace value"		#  物理地址  
+[DisplayGPU.flagLabel]  #(显示适配器)
+Name                       ="toml_Name"                             #1  : 名称
+Vendor                     ="toml_Vendor"                           #2  : 制造商
+Model                      ="toml_Model"                            #3  : 型号
+Version                    ="toml_Version"                          #4  : 版本
+Graphics Memory            ="toml_Graphics Memory"                  #5  : 显存
+IRQ                        ="toml_IRQ"                              #6  : 中断
+Capabilities               ="toml_Capabilities"                     #7  : 功能
+Display Output             ="toml_Display Output"                   #8  : 显示输出
+DigitalOutput              ="toml_DigitalOutput"                    #9  : DigitalOutput
+DVI                        ="toml_DVI"                              #10  : DVI
+VGA                        ="toml_Enable"                           #11  : VGA
+HDMI                       ="toml_Enable"                           #12  : HDMI
+eDP                        ="toml_eDP"                              #13  : eDP
+DP                         ="toml_DP"                               #14  : DP
+Description                ="toml_Description"                      #15  : 描述
+Driver                     ="toml_Driver"                           #16  : 驱动
+Current Resolution         ="1920 x 1080"                           #17  : 当前分辨率
+Bus Info                   ="toml_Bus Info"                         #18  : 总线信息
+IO Port                    ="toml_IO Port"                          #19  : I/O端口
+Memory Address             ="toml_Memory Address"                   #20  : 内存地址
+vendor_id                  ="toml_vendor_id"                        #21  : 物理ID
+product_id                 ="toml_product_id"                       #22  : 物理ID
+Modalias                   ="pci:xxx"                               #23  : 模块别名
+EGL client APIs            ="toml_EGL client APIs"                  #24  : EGL接口
+EGL version                ="toml_EGL version"                      #25  : EGL版本
+GDDR capacity              ="toml_GDDR capacity"                    #26  : GDDR容量
+GLSL version               ="toml_GLSL version"                     #27  : GLSL版本
+GL version                 ="toml_GL version"                       #28  : GL版本
+GPU vendor                 ="toml_GPU vendor"                       #29  : GPU供应商
+GPU type                   ="toml_GPU type"                         #30  : GPU类型
+SubVendor                  ="toml_SubVendor"                        #31  : 子制造商
+SubDevice                  ="toml_SubDevice"                        #32  : 子设备
+Latency                    ="toml_latency"                          #33  : 延迟
+Device                     ="toml_Device"                           #34  : 设备
+Config Status              ="toml_Config Status"                    #35  : 配置状态
+Driver Modules             ="toml_Driver Modules"                   #36  : 驱动模块
 
-[Power.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  nativepath 	="replace value"		#  安装路径  
-  power supply ="replace value"		#  供电  
-  updated 	="replace value"		#  更新时间  
-  has history ="replace value"		#  历史记录  
-  has statistics ="replace value"		#  用电统计  
-  rechargeable ="replace value"		#  可再充电  
-  state 	="replace value"		#  状态  
-  warninglevel ="replace value"		#  警告等级  
-  energy 	="replace value"		#  容量  
-  energyempty ="replace value"		#  最低容量  
-  energyfull 	="replace value"		#  完全充满容量  
-  energyfulldesign ="replace value"		#  设计容量  
-  energyrate 	="replace value"		#  能量密度  
-  voltage 	="replace value"		#  电压  
-  percentage 	="replace value"		#  部件号码  
-  technology 	="replace value"		#  电池技术  
-  iconName 	="replace value"		#  图标  
-  online 	="replace value"		#  在线  
-  daemon  Version ="replace value"		#  Daemon版本  
-  onbattery 	="replace value"		#  使用电池  
-  lidisclosed ="replace value"		#  笔记本合盖  
-  lidispresent ="replace value"		#  打开笔记本盖子  
-  criticalaction ="replace value"		#  电量极低时执行  
-  Model 	="replace value"		#  型号  
-  Serial Number ="replace value"		#  序列号  
-  Type 	="replace value"		#  类型  
-  Status 	="replace value"		#  状态  
-  Capacity 	="replace value"		#  容量  
-  Voltage 	="replace value"		#  电压  
-  Slot 	="replace value"		#  插槽  
-  Design Capacity ="replace value"		#  设计容量  
-  Design Voltage ="replace value"		#  设计电压  
-  SBDS Version ="replace value"		#  SBDS版本  
-  SBDS Serial Number ="replace value"		#  SBDS序列号  
-  SBDS Manufacture Date ="replace value"		#  SBDS制造日期  
-  SBDS Chemistry 	="replace value"		#  SBDS材料  
-  Temperature 	="replace value"		#  温度  
+[Monitor.flagLabel]  #(显示设备)
+Name                        ="toml_Name"                             #1  : 名称
+Vendor                      ="toml_Vendor"                           #2  : 制造商
+Type                        ="toml_Type"                             #3  : 类型
+Display Input               ="toml_Display Input"                    #4  : 显示输入
+Interface Type              ="toml_Interface Type"                   #5  : 接口类型
+Serial Number               ="toml_Serial Number"                    #6  : 序列号
+Size                        ="toml_Size"                             #7  : 大小
+Primary Monitor             ="toml_Primary Monitor"                  #8  : 主显示器
+Display Ratio               ="toml_Display Ratio"                    #9  : 显示比例
+Current Resolution          ="toml_Current Resolution"               #10  : 当前分辨率
+Support Resolution          ="toml_Support Resolution"               #11  : 支持分辨率
+Date                        ="toml_Date"                             #12  : 日期
+Refresh Rate                ="toml_Refresh Rate"                    #13  : 支持的屏幕刷新率
 
-[Keyboard.VendorLabel]
-  Vendor ="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  Modalias ="replace value"		#  设置命令别名  
-  Uniq 	="replace value"		#  Uniq  
-  PROP 	="replace value"		#  PROP  
-  EV 	="replace value"		#   EV 
-  KEY 	="replace value"		#  KEY  
-  MSC 	="replace value"		#  MSC  
-  Device File ="replace value"		#  设备文件  
-  Hardware Class ="replace value"		#  硬件类别  
-  physical id ="replace value"		#  物理ID  
-  Model 	="replace value"		#  型号  
-  Interface 	="replace value"		#  接口  
-  Bus Info 	="replace value"		#  总线信息  
-  Speed 	="replace value"		#  速度  
-  Maximum Current="replace value"		#  最大电流  
-  Capabilities ="replace value"		#  功能  
-  Revision 	="replace value"		#  版本
-  Description ="replace value"		#  描述  
+[NetWork.flagLabel]  #(网络适配器)
+Name                ="toml_Name"                #1  : 名称
+Vendor              ="toml_Vendor"              #2  : 制造商
+Type                ="toml_Type"                #3  : 类型
+Version             ="toml_Version"             #4  : 版本
+Bus Info            ="toml_Bus Info"            #5  : 总线信息
+Capabilities        ="toml_Capabilities"        #6  : 功能
+Driver              ="toml_Driver"              #7  : 驱动
+Driver Version      ="toml_Driver Version"      #8  : 驱动版本
+Logical Name        ="toml_Logical Name"        #9  : 逻辑名称
+MAC Address         ="toml_MAC Address"         #10 : 物理地址
+IRQ                 ="toml_IRQ"                 #11 : 中断
+Memory Address      ="toml_Memory Address"      #12 : 内存地址
+Auto Negotiation    ="toml_Auto Negotiation"    #13 : 自动协商
+Broadcast           ="toml_Broadcast"           #14 : 广播
+Duplex              ="toml_Duplex"              #15 : 双工
+Firmware            ="toml_Firmware"            #16 : 固件
+IP                  ="toml_IP"                  #17 : IP
+Latency             ="toml_Latency"             #18 : 延迟
+Link                ="toml_Link"                #19 : 连接
+Multicast           ="toml_Multicast"           #20 : 组播
+Port                ="toml_Port"                #21 : 端口
+Negotiation Rate    ="toml_Negotiation Rate"    #22 : 协商速率
+Maximum Rate        ="toml_Maximum Rate"        #23 : 最大速率
+Modalias            ="pci:xxx"                  #24 : 模块别名
+ioport              ="toml_ioport"              #25 : I/O端口
+network             ="toml_network"             #26 : 网络
 
-[Mouse.VendorLabel]
-  Vendor="replace value"		#  制造商  
-  Name ="replace value"		#  名称  
-  Modalias="replace value"		#  设置命令别名  
-  Uniq ="replace value"		#  Uniq  
-  PROP ="replace value"		#  PROP  
-  EV 	="replace value"		#   EV 
-  KEY 	="replace value"		#  KEY  
-  MSC 	="replace value"		#  MSC  
-  Device File ="replace value"		#  设备文件  
-  Hardware Class="replace value"		#  硬件类别  
-  physical id ="replace value"		#  物理ID  
-  Model 	="replace value"		#  型号  
-  Interface 	="replace value"		#  接口  
-  Bus Info 	="replace value"		#  总线信息  
-  Speed 	="replace value"		#  速度  
-  Maximum Current="replace value"		#  最大电流  
-  Capabilities ="replace value"		#  功能  
-  Revision 	="replace value"		#  版本
-  Description ="replace value"		#  描述  
-				
-[Printer.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 		="replace value"		#  名称  
-  copies 	="replace value"		#  复印数量  
-  jobcancelafter="replace value"		#  此时取消打印任务  
-  jobholduntil 	="replace value"		#  保留打印任务直至  
-  jobpriority 	="replace value"		#  任务优先级  
-  markerchangetime 	="replace value"		#  标记修改次数  
-  numberup 		="replace value"		#  编号  
-  orientationrequested ="replace value"		#  打印方向  
-  printcolormode 	="replace value"		#  颜色模式  
-  printerisacceptingjobs ="replace value"		#  当前可打印  
-  printerisshared 	="replace value"		#  打印机已共享  
-  printeristemporary 	="replace value"		#  临时打印机  
-  printerstatechangetime ="replace value"		#  打印机状态修改时间  
-  printerstatereasons 	="replace value"		#  打印机状态信息  
-  printertype 		="replace value"		#  打印机类型  
-  printerurisupported 	="replace value"		#  支持的URI  
-  sides 	="replace value"		#  打印面数  
-  Model 	="replace value"		#  型号  
-  Serial Number="replace value"		#  序列号  
-  Shared 	="replace value"		#  已共享  
-  URI 		="replace value"		#  URI  
-  Status 	="replace value"		#  状态  
-  Interface Typ	="replace value"		#  接口类型  
-  printermakeandmodel ="replace value"		#  制造商和型号  
+[SoundAudio.flagLabel]  #(音频适配器)
+Name                ="toml_Name"                #1  : 名称
+Vendor              ="toml_Vendor"              #3  : 制造商
+SysFS_Path          ="toml_SysFS_Path"          #4  : SysFS_Path
+Description         ="toml_Description"         #5  : 描述
+Driver              ="toml_Driver"              #6  : KernelModeDriver
+IRQ                 ="toml_IRQ"                 #7  : 中断
+Memory Address      ="toml_Memory Address"      #8  : 内存地址
+Capabilities        ="toml_Capabilities"        #9  : 功能
+Chip                ="toml_Chip"                #10 : 芯片
+Modalias            ="pci:xxx"                  #11 : 模块别名
+EV                  ="toml_EV"                  #12 : EV
+KEY                 ="toml_KEY"                 #13 : KEY
+PROP                ="toml_PROP"                #14 : PROP
+Phys                ="toml_Phys"                #15 : Phys
+Sysfs               ="toml_Sysfs"               #16 : Sysfs
+Handlers            ="toml_Handlers"            #17 : 处理程序
+SubVendor           ="toml_SubVendor"           #18 : 子制造商
+SubDevice           ="toml_SubDevice"           #19 : 子设备
+Latency             ="toml_latency"             #20 : 延迟
+Bus                 ="toml_Bus"                 #21 : 总线
+Version             ="toml_Version"             #22 : 版本
+Config Status       ="toml_Config Status"       #23 : 配置状态
+Driver              ="toml_Driver"              #24 : 驱动
+Driver Activation Cmd="toml_Driver Activation Cmd" #25 : 驱动激活命令
+Driver Status       ="toml_Driver Status"        #26 : 驱动状态
 
-[Camera.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  Model 	="replace value"		#  型号  
-  Bus Info 	="replace value"		#  总线信息  
-  Speed 	="replace value"		#  速度  
-  Maximum Power ="replace value"		#  最大功率  
-  Capabilities ="replace value"		#  功能  
-  Serial Number ="replace value"		#  序列号  
+[Bluetooth.flagLabel]  #(蓝牙)
+Name                ="toml_Name"                #1  : 名称
+Vendor              ="toml_Vendor"              #2  : 制造商
+Version             ="toml_Version"             #3  : 版本
+Model               ="toml_Model"                #4  : 型号
+MAC Address         ="toml_MAC Address"         #5  : 物理地址
+Bus Info            ="toml_Bus Info"            #6  : 总线信息
+Capabilities        ="toml_Capabilities"        #7  : 功能
+Driver Version      ="toml_Driver Version"      #8  : 驱动版本
+Maximum Power       ="toml_Maximum Power"       #9  : 最大功率
+Speed               ="toml_Speed"               #10 : 速度
+Modalias            ="usb:xxx"                  #11 : 模块别名
+ACL MTU             ="toml_ACL MTU"              #12 : ACL MTU
+SCO MTU             ="toml_SCO MTU"              #13 : SCO MTU
+UUID                ="toml_UUID"                #14 : UUID
+product             ="toml_product"             #15 : 产品
+Powered             ="toml_Powered"             #16 : 供电
+Discoverable        ="toml_Discoverable"        #17 : 可发现
+Pairable            ="toml_Pairable"            #18 : 可配对
+Serial ID           ="toml_Serial ID"           #19 : 序列号
+Bus                 ="toml_Bus"                 #20 : 总线
+Discovering         ="toml_Discovering"         #21 : 搜索中
+Packet type         ="toml_Packet type"         #22 : 数据包类型
+Service Classes      ="toml_Service Classes"    #23 : 服务类别
+Features            ="toml_Features"            #24 : 特征
+Class               ="toml_Class"               #25 : 类别
+BD Address          ="toml_BD Address"          #26 : 蓝牙设备地址
+Device              ="toml_Device"              #27 : 设备
+Device Class        ="toml_Device Class"        #28 : 设备类别
+Link mode           ="toml_Link mode"           #29 : 连接模式
+Link policy         ="toml_Link policy"         #30 : 连接策略
 
-[CDROM.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  Serial ID 	="replace value"		#  序列号  
-  Driver Module="replace value"		#  驱动模块  
-  Device File ="replace value"		#  设备文件  
-  Device Files ="replace value"		#  设备文件  
-  device Number ="replace value"		#  设备编号  
-  Config Status ="replace value"		#  配置状态  
-  Application ="replace value"		#  应用  
-  physical id ="replace value"		#  物理ID  
-  status 	="replace value"		#  状态  
-  logical name ="replace value"		#  逻辑名称  
-  ansi  Version ="replace value"		#  ANSI版本  
-  Model 	="replace value"		#  型号  
-  Bus Info 	="replace value"		#  总线信息  
-  Capabilities ="replace value"		#  功能  
-  Maximum Power ="replace value"		#  最大功率  
-  Speed 	="replace value"		#  速度  
+[Power.flagLabel]  #(电池)
+Name                ="toml_Name"                #1  : 名称
+Model               ="toml_Model"               #2  : 型号
+Vendor              ="toml_Vendor"              #3  : 制造商
+Serial Number       ="toml_Serial Number"       #4  : 序列号
+Type                ="toml_Type"                #5  : 类型
+Status              ="toml_Status"              #6  : 状态
+Capacity            ="toml_Capacity"            #7  : 最大容量
+Voltage             ="toml_Voltage"             #8  : 电压
+Slot                ="toml_Slot"                #9  : 插槽
+Design Capacity     ="toml_Design Capacity"     #10 : 设计容量
+Design Voltage      ="toml_Design Voltage"      #11 : 设计电压
+SBDS Version        ="toml_SBDS Version"        #12 : SBDS版本
+SBDS Serial Number  ="toml_SBDS Serial Number"  #13 : SBDS序列号
+SBDS Manufacture Date="toml_SBDS Manufacture Date" #14 : SBDS制造日期
+SBDS Chemistry      ="toml_SBDS Chemistry"      #15 : SBDS材料
+Temperature         ="toml_Temperature"         #16 : 温度
+power supply        ="toml_power supply"        #17 : 供电
+has history         ="toml_has history"         #18 : 历史记录
+rechargeable        ="toml_rechargeable"        #19 : 可再充电
+online              ="toml_online"              #20 : 在线
+energy              ="toml_energy"              #21 : 容量
+updated             ="toml_updated"             #22 : 更新时间
+state               ="toml_state"               #23 : 状态
+has statistics      ="toml_has statistics"      #24 : 用电统计
+voltage             ="toml_voltage"             #25 : 电压
+technology          ="toml_technology"          #26 : 电池技术
+percentage          ="toml_percentage"          #27 : 电量
 
-[OtherDevices.VendorLabel]
-  Vendor 	="replace value"		#  制造商  
-  Name 	="replace value"		#  名称  
-  Device File ="replace value"		#  设备文件  
-  Hardware Class="replace value"		#  硬件类别  
-  Model 	="replace value"		#  型号  
-  Bus Info 	="replace value"		#  总线信息  
-  Capabilities ="replace value"		#  功能  
-  Maximum Power ="replace value"		#  最大功率  
-  Speed 	="replace value"		#  速度  
-  Serial Number ="replace value"		#  序列号  
+[Keyboard.flagLabel]  #(键盘)
+Name                ="toml_Name"                #1  : 名称
+Vendor              ="toml_Vendor"              #2  : 制造商
+Model               ="toml_Model"               #3  : 型号
+Interface           ="toml_Interface"            #4  : 接口
+Bus Info            ="toml_Bus Info"            #5  : 总线信息
+Revision            ="toml_Revision"            #6  : 版本
+Capabilities        ="toml_Capabilities"        #7  : 功能
+Driver              ="toml_Driver"              #8  : 驱动
+Maximum Current     ="toml_Maximum Current"     #9  : 最大电流
+Speed               ="toml_Speed"               #10 : 频率
+Modalias            ="usb:xxx"                  #11 : 模块别名
+EV                  ="toml_EV"                  #12 : EV
+KEY                 ="toml_KEY"                 #13 : KEY
+MSC                 ="toml_MSC"                 #14 : MSC
+PROP                ="toml_PROP"                #15 : PROP
+Uniq                ="toml_Uniq"                #16 : Uniq
+Hardware Class      ="toml_Hardware Class"      #17 : 硬件类别
+Device File         ="toml_Device File"         #18 : 设备文件
+
+[Mouse.flagLabel]  #(鼠标)
+Name                ="toml_Name"                #1  : 名称
+Vendor              ="toml_Vendor"              #2  : 制造商
+Model               ="toml_Model"               #3  : 型号
+Interface           ="toml_Interface"            #4  : 接口
+Bus Info            ="toml_Bus Info"            #5  : 总线信息
+Revision            ="toml_Revision"            #6  : 版本
+Capabilities        ="toml_Capabilities"        #7  : 功能
+Driver              ="toml_Driver"              #8  : 驱动
+Maximum Current     ="toml_Maximum Current"     #9  : 最大电流
+Speed               ="toml_Speed"               #10 : 频率
+Modalias            ="usb:xxx"                  #11 : 模块别名
+EV                  ="toml_EV"                  #12 : EV
+KEY                 ="toml_KEY"                 #13 : KEY
+MSC                 ="toml_MSC"                 #14 : MSC
+PROP                ="toml_PROP"                #15 : PROP
+Uniq                ="toml_Uniq"                #16 : Uniq
+Hardware Class      ="toml_Hardware Class"      #17 : 硬件类别
+Device File         ="toml_Device File"         #18 : 设备文件
+
+[Printer.flagLabel]  #(打印机)
+Name                ="toml_Name"                #1  : 名称
+Model               ="toml_Model"               #2  : 型号
+Vendor              ="toml_Vendor"              #3  : 制造商
+Serial Number       ="toml_Serial Number"       #4  : 序列号
+Status              ="toml_Status"              #5  : 状态
+URI                 ="toml_URI"                 #6  : URI
+Shared              ="toml_Shared"              #7  : 已共享
+copies              ="toml_copies"              #8  : 复印数量
+sides               ="toml_sides"               #9  : 打印面数
+
+[Camera.flagLabel]  #(图像设备)
+Name                ="toml_Name"                #1  : 名称
+Vendor              ="toml_Vendor"              #2  : 制造商
+Version             ="toml_Version"             #3  : 版本
+Model               ="toml_Model"               #4  : 型号
+Bus Info            ="toml_Bus Info"            #5  : 总线信息
+Serial Number       ="toml_Serial Number"       #6  : 序列号
+Capabilities        ="toml_Capabilities"        #7  : 功能
+Driver              ="toml_Driver"              #8  : 驱动
+Maximum Power       ="toml_Maximum Power"       #9  : 最大功率
+Speed               ="toml_Speed"               #10 : 速度
+Modalias            ="usb:xxx"                  #11 : 模块别名
+
+[CDROM.flagLabel]  #(光驱)
+Name                ="toml_Name"                #1  : 名称
+Vendor              ="toml_Vendor"              #2  : 制造商
+Model               ="toml_Model"               #3  : 型号
+Bus Info            ="toml_Bus Info"            #4  : 总线信息
+Capabilities        ="toml_Capabilities"        #5  : 功能
+Maximum Power       ="toml_Maximum Power"       #6  : 最大功率
+Speed               ="toml_Speed"               #7  : 速度
+Serial ID           ="toml_Serial ID"           #8  : 序列号
+Application         ="toml_Application"         #9  : 应用
+status              ="toml_status"              #10 : 状态
+Device Files        ="toml_Device Files"        #11 : 设备文件
+logical name        ="toml_logical name"        #12 : 逻辑地址
+Config Status       ="toml_Config Status"       #13 : 配置状态
+
+[OtherDevices.flagLabel]  #(其他设备)
+Name                ="toml_Name"                #1  : 名称
+Vendor              ="toml_Vendor"              #2  : 制造商
+Model               ="toml_Model"               #3  : 型号
+Bus Info            ="toml_Bus Info"            #4  : 总线信息
+Capabilities        ="toml_Capabilities"        #5  : 功能
+Maximum Power       ="toml_Maximum Power"       #6  : 最大功率
+Speed               ="toml_Speed"               #7  : 速度
+Serial Number       ="toml_Serial Number"       #8  : 序列号
+Hardware Class      ="toml_Hardware Class"      #9  : 硬件类别
+Device File         ="toml_Device File"         #10 : 设备文件
 
 [End]
 
-#1. 书写规则定义与说明：
-#1-1. #号开关的为注释，文件格式按toml中表和键值对的格式书写，一个表头和下面的键值对代表一个设备信息；若信息不作替换处理，可不写上键值对。
-#1-2.表头命名格式为[hardClassName.VendorLabel] 其中的hardClassName已确定如上关键，不可更改，“.VendorLabel”可由厂商自行定义，或可没有。
-#1-3.键值对不可换行，键名取值已在代码中定义如上；相同键名，其值将替换同设备中对应的信息； replace value 需由厂商自行定义；若包括有"_NOUSE"，该条信息将不被显示。
-#1-4.主板(Motherboard)相关信息显示中的Name键值对值不更改，且相同Name表数量不能超过一个，Motherboard表下共5个已定义名字设备。
-#1-5.Computer表数量不能超过一个。
+#详细说明见文件下末部分：
+#本文目标，删，修改改设备管理器中的设备原來显示信息
+#1. 编写该toml文件方法：
+#1-1. 首先需要文件名与机型作匹; 将该文件放入目录 /etc/deepin/hardware/ 中；详见#2。
+#1-3. 书写规则定义详见#3;最后以[End]结尾。
+#1-2. 然后写入文件中的toml表，表中写入“匹配key”；详见#4。
 
-#2 同设备匹配方法及处理方法如下
-#2-1."Modalias"与原显示设备中的Module Alias值相同会被当同一设备作信息替代； 包括有"_NOUSE"则该个设备所有信息将不会被显示。
-#2-2."Vendor_ID, Product_ID"与原显示设备中的"Physical ID"中VID和PID值相同会被当同一设备作信息替代； 包括有"_NOUSE"则该个设备所有信息将不会被显示。
-#2-3."Vendor, Name"包括有"_NOUSE"与原显示设备中的"Vendor，Name"值相同会被当同一设备作信息替代； 包括有"_NOUSE"则该个设备所有信息将不会被显示。
+#2 文件名与机型匹配说明：
+#2-1.文件名格式为《oeminfo_manufacturer_productname_version.toml》。
+#2-2.其中的关键字：Manufacturer、Product Name、Version，为命令sudo dmidecode -t 1 取其对应的值；将值全转化为小写，去掉不可显示特殊字符和空格及"-/'~!@#$%^&*(){}:;,.\"\\|~`"和“N/A”字符。
+#2-3.设备管理器启动时，解析出该机型对应的文件名，然后到目录 /etc/deepin/hardware/ 中查找该文件，并打开读取相应信息，按上述规则作处理并显示。
 
+#3. 书写规则定义与说明：
+#3-1. #号开关的为注释，文件格式按toml表和键值对的格式书写，每行代表一条信息不可换行；一个表头和下面相近行的键值对代表一个设备信息；若信息不作修改时，可不写。
+#3-2.表头命名格式为[hardClassName.Label] 其中的hardClassName已确定如下关键字，不可更改，“.Label”可没有，或可自行定义仅作阅读标记（建议值add, del, modify1, modify2）。
+#3-3.“=”左边为key键名，取值已在下文定义，取其它名无效；相同key名，其key值将替换同匹配设备中的值信息； 值“toml_xxx” 需由书写人自行定义；若值尾包括有"_NOUSE"，该条信息将被删除显示。
+#3-4.主板[Motherboard.xx]字样和下面相近的Name键名对行不可更改，且数量不能超过一个，表下共5个已定义名字设备（可没有表示不用更改显示）。
+#3-5.[Computer.Label]表数量不能超过一个。
 
-#3 文件名相关说明如下：
-#3-1.文件相关的描述，主要是方便管控升级, 格式为《oeminfo_manufacturer_productname_version_serialnumber.toml》
-#3-2.其中的关键字：Manufacturer、Product Name、Version、Serial Number，为命令sudo dmidecode -t 1 取其对应的值。
-#3-3.文件名按照Linux文件命名规则，且字母全转化为小写，并去掉不可显示特殊字符和空格及"-/'~!@#$%^&*(){}:;,.\"\\|~`"字符。
-#3-4.当前PC的文件名可从~/.cache/deepin/deepin-devicemanager/deepin-devicemanager.log中查询出，搜寻关键字为：“Toml File name  is: /etc/deepin/hardware/"。
-
-#4.设备管理器启动时，解析出该机型对应的oeminfo_xx.toml文件名，然后到目录 /etc/deepin/hardware/ 中查找该文件，并打开读取相应信息，按上述规则作处理并显示。
+#4 文件中的信息与设备管理器中显示设备信息匹配；具体方法及规则如下：
+#4-1.首先文中表头匹配，表头代表对应的设备分类信息；
+#4-2.如果要修改某个设备显示信息，需要满足条件toml文中表与显示设备匹配，除匹配key值外的其它信息将作替换。
+#4-3.“匹配key”名约定：
+#4-3-1.单匹配key: key1: "Modalias"（模块别名); 单匹配key只需要一个键信息。  
+#4-3-2.双匹配key需要两个值同时匹配:key2:"Vendor_ID 和 Product_ID"（"物理ID"中VID和PID值); key3:"Vendor 和 Name"（制造商和名称);  。
+#4-4.匹配生效后表头下面每行key名与对应设备管理器中显示每条信息名一致，其值则会被显示到对应界面。
+#4-3.若匹配key匹配上某一设备且值尾包括有"_NOUSE"则该个设备所有信息将被删除显示。
+#4-4.增加一个设备信息则不需要匹配；没有写入该文件的表头所代表设备将不会被修改；没有写入该文件的key值所代表设备信息将不会被修改。
+#4-5.1 增加  tomlmatchkey             =  { Size = "512", Name = "xname" }     # 内联表  "{Size:512G}{Name:xx1}{Vendor:xx2}"                        # 匹配键名
+#4-5.2 增加  tomlconfigdemanding      ="adjust"                                      # 配置需求 “adjust  delete  add”

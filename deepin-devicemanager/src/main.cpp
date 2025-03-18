@@ -22,6 +22,9 @@
 #include <signal.h>
 #include <DLog>
 #include "LogConfigread.h"
+
+#include <polkit-qt5-1/PolkitQt1/Authority>
+
 using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
@@ -37,6 +40,7 @@ const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
 #endif
 
 DCORE_USE_NAMESPACE
+using namespace PolkitQt1;
 
 void notify(int argc, char *argv[]);
 
@@ -81,8 +85,18 @@ int main(int argc, char *argv[])
         app.setApplicationDescription(QObject::tr("Device Manager is a handy tool for viewing hardware information and managing the devices.") + "\n");
         const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
         app.setApplicationAcknowledgementPage(acknowledgementLink);
+
+        if (!DGuiApplicationHelper::instance()->setSingleInstance(app.applicationName(), DGuiApplicationHelper::UserScope)) {
+            exit(0);
+        }
+#ifndef DISABLE_POLKIT
+        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                                                UnixProcessSubject(getpid()),
+                                                                                Authority::AllowUserInteraction);
+        if (result != Authority::Yes)
+            return 0;
+#endif
         DApplicationSettings settinAgs;
-        Dtk::Core::DLogManager::registerConsoleAppender();
         Dtk::Core::DLogManager::registerFileAppender();
 
         QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");

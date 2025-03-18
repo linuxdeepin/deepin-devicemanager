@@ -160,7 +160,7 @@ void DeviceComputer::initFilterKey()
 void DeviceComputer::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
+    addBaseDeviceInfo(("Name"), m_Name);
 }
 
 void DeviceComputer::loadOtherDeviceInfo()

@@ -33,6 +33,7 @@ DeviceMonitor::DeviceMonitor()
     , m_CurrentResolution("")
     , m_SerialNumber("")
     , m_ProductionWeek("")
+    , m_RefreshRate("")
     , m_Width(0)
     , m_Height(0)
     , m_IsTomlSet(false)
@@ -60,7 +61,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
-        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res = QString::number(inch, 10, 1) + " " + translateStr("inch") + " (";
         res += sizeDescription;
         res += ")";
     }
@@ -77,7 +78,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
-        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res = QString::number(inch, 10, 1) + " " + translateStr("inch") + " (";
         res += sizeDescription;
         res += ")";
     }
@@ -125,7 +126,8 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
 TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
-    m_IsTomlSet = true;
+    if (Common::specialComType == 2)
+        m_IsTomlSet = true;
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Type", m_Model);
@@ -139,21 +141,10 @@ TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString
     ret = setTomlAttribute(mapInfo, "Size", m_ScreenSize);
     ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
     ret = setTomlAttribute(mapInfo, "Product Date", m_ProductionWeek);
+    ret = setTomlAttribute(mapInfo, "Refresh Rate", m_RefreshRate);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
-}
-
-void DeviceMonitor::setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo)
-{
-    setAttribute(mapInfo, "Name", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "CurResolution", m_CurrentResolution);
-    setAttribute(mapInfo, "SupportResolution", m_SupportResolution);
-    setAttribute(mapInfo, "Size", m_ScreenSize);
-    setAttribute(mapInfo, "Date", m_ProductionWeek);
-    // 加载其他属性
-    //loadOtherDeviceInfo(mapInfo);
 }
 
 void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
@@ -187,6 +178,15 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
 {
     if(m_IsTomlSet)
         return false;
+
+    for(auto it: m_LstBaseInfo){
+        if (it.first.contains("Display Input")){
+            if (!main.contains(it.second, Qt::CaseInsensitive)) {
+                return false;
+            }
+        }
+    }
+
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
     if (!m_Interface.isEmpty()) {
         // 设置当前分辨率
@@ -258,38 +258,54 @@ const QString DeviceMonitor::getOverviewInfo()
     QString ov;
 
     ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+    if (Common::specialComType == 6) {
+        ov = QString("(%1)").arg(m_ScreenSize);
+    } else {
+        ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+    }
 
     return ov;
 }
 
 void DeviceMonitor::initFilterKey()
 {
-    addFilterKey(QObject::tr("Date"));
+    addFilterKey("Date");
 }
 
 void DeviceMonitor::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Type"), m_Model);
-    addBaseDeviceInfo(tr("Display Input"), m_DisplayInput);
-    addBaseDeviceInfo(tr("Interface Type"), m_Interface);
+    if (Common::specialComType != 6)
+        addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    if (Common::specialComType != 6)
+        addBaseDeviceInfo(("Type"), m_Model);
+    addBaseDeviceInfo(("Display Input"), m_DisplayInput);
+    addBaseDeviceInfo(("Interface Type"), m_Interface);
 }
 
 void DeviceMonitor::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Support Resolution"), m_SupportResolution);
+    addOtherDeviceInfo(("Refresh Rate"), m_RefreshRate);
+    addOtherDeviceInfo(("Support Resolution"), m_SupportResolution);
     if (m_CurrentResolution != "@Hz") {
-        addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
-        addOtherDeviceInfo(tr("Display Ratio"), m_AspectRatio);
-    }
-    addOtherDeviceInfo(tr("Primary Monitor"), m_MainScreen);
-    addOtherDeviceInfo(tr("Size"), m_ScreenSize);
-    addOtherDeviceInfo(tr("Serial Number"), m_SerialNumber);
-//    addOtherDeviceInfo(tr("Product Date"), m_ProductionWeek);
+        addOtherDeviceInfo(("Current Resolution"), m_CurrentResolution);
+        addOtherDeviceInfo(("Display Ratio"), m_AspectRatio);
 
+        if (Common::specialComType == 4) {
+            if (m_CurrentResolution.contains("@")) {
+                QStringList refreshList = m_CurrentResolution.split('@', QString::SkipEmptyParts);
+                if (refreshList.size() == 2) {
+                    m_RefreshRate = refreshList.at(1).trimmed();
+                }
+            }
+        }
+    }
+    addOtherDeviceInfo(("Primary Monitor"), m_MainScreen);
+    addOtherDeviceInfo(("Size"), m_ScreenSize);
+    addOtherDeviceInfo(("Serial Number"), m_SerialNumber);
+//    addOtherDeviceInfo(("Product Date"), m_ProductionWeek);
     mapInfoToList();
 }
 
@@ -327,9 +343,20 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
             QRegExp rateStart("[a-zA-Z]");
             int pos = curRate.indexOf(rateStart);
             if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
-                curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
+                if (Common::specialComType == 1) {
+                    curRate = QString::number(ceil(curRate.left(pos).toDouble())) + ".00" + curRate.right(curRate.size() - pos);
+                } else {
+                    curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
+                }
             }
-            m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate);
+            if (Common::specialComType == 1 || Common::specialComType == 5 || Common::specialComType == 6) {
+                m_RefreshRate = QString("%1").arg(curRate);
+            }
+            if (Common::specialComType == 5 || Common::specialComType == 6) {
+                m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+            } else {
+                m_CurrentResolution = QString("%1 @%2").arg(reScreenSize.cap(1)).arg(curRate);
+            }
         } else
             m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
     }
@@ -392,7 +419,7 @@ void DeviceMonitor::caculateScreenSize()
         m_Height = re.cap(2).toInt();
 
         double inch = std::sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54)) / 10.0;
-        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(m_Width).arg(m_Height);
     }
 }
 
@@ -422,6 +449,6 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
         return true;
 
     double inch = std::sqrt(height * height + width * width) / 2.54 / 10;
-    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(width).arg(height);
+    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(width).arg(height);
     return true;
 }

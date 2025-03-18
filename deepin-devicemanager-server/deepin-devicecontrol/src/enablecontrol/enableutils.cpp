@@ -105,15 +105,6 @@ void EnableUtils::disableOutDevice(const QString &info)
     }
 }
 
-void EnableUtils::disableOutDevice()
-{
-    QProcess process;
-    process.start("hwinfo --usb");
-    process.waitForFinished(-1);
-    QString info = process.readAllStandardOutput();
-    EnableUtils::disableOutDevice(info);
-}
-
 void EnableUtils::disableInDevice()
 {
     // 网卡通过ioctl禁用

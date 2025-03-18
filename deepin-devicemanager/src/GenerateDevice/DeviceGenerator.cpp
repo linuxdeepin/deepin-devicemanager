@@ -25,12 +25,17 @@
 #include "DeviceManager/DevicePrint.h"
 #include "DeviceManager/DeviceInput.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DSysInfo>
 
 // Qt库文件
 #include <QLoggingCategory>
+#include <QDir>
+#include <QRegularExpression>
+
+using namespace DDLog;
 
 DeviceGenerator::DeviceGenerator(QObject *parent)
     : QObject(parent)
@@ -242,52 +247,105 @@ void DeviceGenerator::generatorMonitorDevice()
     getMonitorInfoFromHwinfo();
 }
 
+bool isValidLogicalName(const QString& logicalName)
+{
+    if (logicalName.contains("p2p", Qt::CaseInsensitive) || logicalName.isEmpty())
+        return false;
+
+    QString addressFilePath = "/sys/class/net/" + logicalName;
+    QDir dir(addressFilePath);
+    if (dir.exists())
+        return true;
+
+    qCInfo(appLog) << dir << "not exist in /sys/class/net/";
+    return false;
+}
+
+bool isValidMAC(const QString& macAddress)
+{
+    if (macAddress.contains("00:00:00:00:00:00", Qt::CaseInsensitive) || macAddress.contains("ff:ff:ff:ff:ff:ff", Qt::CaseInsensitive) || macAddress.isEmpty())
+        return false;
+
+    QRegularExpression macRegex("([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})");
+    if (!macRegex.match(macAddress).hasMatch())
+        return false;
+
+    return true;
+}
+
 void DeviceGenerator::generatorNetworkDevice()
 {
+    bool hasWlan =false;
     QList<DeviceNetwork *> lstDevice;
-    const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
-    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
-        // Hardware Class 类型为 network interface
-//        if ("network" == (*it)["Hardware Class"]) {  //去掉， 并与service端同步"hwinfo --network"改为 "hwinfo --netcard"获取网卡信息
-//            continue;
-//        }
-
-        // 先判断是否是有效网卡信息
-        // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
-        if (((*it).find("HW Address") == (*it).end() && (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())) {
-            continue;
-        }
-
-        // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
-        if ((*it).find("unique_id") == (*it).end()) {
-            DeviceNetwork *device = new DeviceNetwork();
-            device->setInfoFromHwinfo(*it);
-            lstDevice.append(device);
-        } else {
-            DeviceNetwork *device = nullptr;
-            const QString &unique_id = (*it)["unique_id"];
-            for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
-                if (!unique_id.isEmpty() && (*itNet)->uniqueID() == unique_id) {
-                    device = (*itNet);
-                }
-            }
-            if (device) {
-                device->setEnableValue(false);
-            }
-        }
-    }
-
     // 设置从lshw中获取的信息
     const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it) {
-        if ((*it).find("serial") == (*it).end())
+        if ((*it).find("serial") == (*it).end() || (*it).find("logical name") == (*it).end())
             continue;
-        const QString &serialNumber = ((*it).find("logical name") != (*it).end()) ? (*it)["serial"] + (*it)["logical name"]  :  (*it)["serial"];
+
+        const QString &logicalNameLshw =  (*it)["logical name"];
+        const QString &macAddressLshw =  (*it)["serial"];
+        if (!isValidLogicalName(logicalNameLshw))
+            continue;
+        if (!isValidMAC(macAddressLshw))
+            continue;
+
+        if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive) && hasWlan) //common sense: one PC only have 1 wlan device
+            continue;
+
+        DeviceNetwork *device = new DeviceNetwork();
+        device->setInfoFromLshw(*it);
+        lstDevice.append(device);
+        if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive))
+            hasWlan = true;
+
+    }
+
+    const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
+    for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
+
+         // 先判断是否是有效网卡信息
+         // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
+        if (((*it).find("HW Address") == (*it).end() && (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())) {
+             continue;
+        }
+
+        const QString &macHwinfo =  (*it)["Permanent HW Address"].isEmpty() ? (*it)["HW Address"] : (*it)["Permanent HW Address"];
+        const QString &logicalNameHwinfo =  (*it)["Device File"];
+        bool hasMatchLogicalName = false;
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
-            const QString &ser2Number =  (*itDevice)->logicalName().isEmpty() ? (*itDevice)->hwAddress() : (*itDevice)->hwAddress() + (*itDevice)->logicalName();
-            if (!serialNumber.isEmpty() && ((*itDevice)->uniqueID() == serialNumber ||  ser2Number == serialNumber)) {
-                (*itDevice)->setInfoFromLshw(*it);
-                break;
+             const QString &serialNumberLst =  (*itDevice)->hwAddress();
+             const QString &logicalNameLst =  (*itDevice)->logicalName();
+             // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
+            if ((*it).find("unique_id") != (*it).end()) {
+                const QString &unique_id = (*it)["unique_id"];
+                if (!unique_id.isEmpty() && (*itDevice)->uniqueID() == unique_id) {
+                    (*itDevice)->setEnableValue(false);
+                }
+
+            } else if (macHwinfo == serialNumberLst || logicalNameHwinfo == logicalNameLst) {
+                (*itDevice)->setInfoFromHwinfo(*it);
+                hasMatchLogicalName = true;
+            } else {
+                (*itDevice)->setCanUninstall(false);
+                (*itDevice)->setForcedDisplay(true);
+            }
+        }
+        //first check it's valid, if LogicalName not exist  but valid please add it .
+        if (!hasMatchLogicalName && isValidMAC(macHwinfo) && isValidLogicalName(logicalNameHwinfo)) {
+            if (!logicalNameHwinfo.contains("wlan", Qt::CaseInsensitive)) {//add wired net
+                DeviceNetwork *device = new DeviceNetwork();
+                device->setInfoFromHwinfo(*it);
+                lstDevice.append(device);
+                hasMatchLogicalName = true;
+            } else {    //add wireless net
+                if (!hasWlan) { //common sense: one PC only have 1 wlan device
+                    DeviceNetwork *device = new DeviceNetwork();
+                    device->setInfoFromHwinfo(*it);
+                    lstDevice.append(device);
+                    hasMatchLogicalName = true;
+                    hasWlan = true;
+                }
             }
         }
     }
@@ -577,6 +635,9 @@ void DeviceGenerator::getDiskInfoFromSmartCtl()
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("smart");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
+        // 剔除未识别的磁盘
+        if (!(*it).contains("ln"))
+            continue;
         DeviceManager::instance()->setStorageInfoFromSmartctl((*it)["ln"], *it);
     }
 }
@@ -789,7 +850,7 @@ void DeviceGenerator::getBlueToothInfoFromHwinfo()
         if ((*it)["Hardware Class"] == "hub" || (*it)["Hardware Class"] == "mouse" || (*it)["Hardware Class"] == "keyboard")
             continue;
 
-        if ((*it)["Model"].contains("bluetooth", Qt::CaseInsensitive) || (*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0") {
+        if ((*it)["Model"].contains("bluetooth", Qt::CaseInsensitive) || (*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0" || (*it)["Device"] == "SCM2625 BT 5.2 network adapter") {
 
             // 判断重复设备数据
             QString unique_id = uniqueID(*it);

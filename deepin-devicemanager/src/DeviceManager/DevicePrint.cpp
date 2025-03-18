@@ -125,42 +125,42 @@ bool DevicePrint::enable()
 void DevicePrint::initFilterKey()
 {
     // 初始化可显示属性
-    addFilterKey(QObject::tr("copies"));
-    addFilterKey(QObject::tr("job-cancel-after"));
-    addFilterKey(QObject::tr("job-hold-until"));
-    addFilterKey(QObject::tr("job-priority"));
-    addFilterKey(QObject::tr("marker-change-time"));
-    addFilterKey(QObject::tr("number-up"));
-    addFilterKey(QObject::tr("orientation-requested"));
-    addFilterKey(QObject::tr("print-color-mode"));
-    addFilterKey(QObject::tr("printer-is-accepting-jobs"));
-    addFilterKey(QObject::tr("printer-is-shared"));
-    addFilterKey(QObject::tr("printer-is-temporary"));
-//    addFilterKey(QObject::tr("printer-make-and-model"));
-    addFilterKey(QObject::tr("printer-state-change-time"));
-    addFilterKey(QObject::tr("printer-state-reasons"));
-    addFilterKey(QObject::tr("printer-type"));
-    addFilterKey(QObject::tr("printer-uri-supported"));
-    addFilterKey(QObject::tr("sides"));
+    addFilterKey("copies");
+    addFilterKey("job-cancel-after");
+    addFilterKey("job-hold-until");
+    addFilterKey("job-priority");
+    addFilterKey("marker-change-time");
+    addFilterKey("number-up");
+    addFilterKey("orientation-requested");
+    addFilterKey("print-color-mode");
+    addFilterKey("printer-is-accepting-jobs");
+    addFilterKey("printer-is-shared");
+    addFilterKey("printer-is-temporary");
+//    addFilterKey("printer-make-and-model");
+    addFilterKey("printer-state-change-time");
+    addFilterKey("printer-state-reasons");
+    addFilterKey("printer-type");
+    addFilterKey("printer-uri-supported");
+    addFilterKey("sides");
 }
 
 void DevicePrint::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Model"), m_Model);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("Serial Number"), m_SerialNumber);
 }
 
 void DevicePrint::loadOtherDeviceInfo()
 {
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Shared"), m_Shared);
-    addOtherDeviceInfo(tr("URI"), m_URI);
-    addOtherDeviceInfo(tr("Status"), m_Status);
-    addOtherDeviceInfo(tr("Interface Type"), m_InterfaceType);
-    addOtherDeviceInfo(QObject::tr("printer-make-and-model"), m_MakeAndModel);
+    addOtherDeviceInfo(("Shared"), m_Shared);
+    addOtherDeviceInfo(("URI"), m_URI);
+    addOtherDeviceInfo(("Status"), m_Status);
+    addOtherDeviceInfo(("Interface Type"), m_InterfaceType);
+    addOtherDeviceInfo(("printer-make-and-model"), m_MakeAndModel);
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
@@ -170,7 +170,7 @@ void DevicePrint::loadTableData()
     // 加载表格数据
     QString tName = m_Name;
     if (!enable()) {
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);

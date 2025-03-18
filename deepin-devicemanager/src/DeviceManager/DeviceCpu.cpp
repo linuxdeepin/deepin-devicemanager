@@ -54,27 +54,27 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
 void DeviceCpu::initFilterKey()
 {
     // 添加可显示的属性
-    addFilterKey(QObject::tr("CPU implementer"));
-    addFilterKey(QObject::tr("CPU architecture"));
-    addFilterKey(QObject::tr("CPU variant"));
-    addFilterKey(QObject::tr("CPU part"));
-    addFilterKey(QObject::tr("CPU revision"));
+    addFilterKey("CPU implementer");
+    addFilterKey("CPU architecture");
+    addFilterKey("CPU variant");
+    addFilterKey("CPU part");
+    addFilterKey("CPU revision");
 }
 
 void DeviceCpu::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("CPU ID"), m_PhysicalID);
-    addBaseDeviceInfo(tr("Core ID"), m_CoreID);
-    addBaseDeviceInfo(tr("Threads"), m_ThreadNum);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("CPU ID"), m_PhysicalID);
+    addBaseDeviceInfo(("Core ID"), m_CoreID);
+    addBaseDeviceInfo(("Threads"), m_ThreadNum);
     if (!m_FrequencyIsCur)
-        addBaseDeviceInfo(tr("Max Speed"), m_MaxFrequency);
-    addBaseDeviceInfo(tr("BogoMIPS"), m_BogoMIPS);
-    addBaseDeviceInfo(tr("Architecture"), m_Architecture);
-    addBaseDeviceInfo(tr("CPU Family"), m_Familly);
-    addBaseDeviceInfo(tr("Model"), m_Model);
+        addBaseDeviceInfo(("Max Frequency"), m_MaxFrequency);
+    addBaseDeviceInfo(("BogoMIPS"), m_BogoMIPS);
+    addBaseDeviceInfo(("Architecture"), m_Architecture);
+    addBaseDeviceInfo(("CPU Family"), m_Familly);
+    addBaseDeviceInfo(("Model"), m_Model);
 }
 
 const QString &DeviceCpu::vendor() const
@@ -104,7 +104,7 @@ bool DeviceCpu::frequencyIsRange()const
 
 QString DeviceCpu::subTitle()
 {
-    return QString("%1 %2").arg(tr("Processor")).arg(m_PhysicalID);
+    return QString("%1 %2").arg(translateStr("Processor")).arg(m_PhysicalID);
 }
 
 const QString DeviceCpu::getOverviewInfo()
@@ -115,9 +115,9 @@ const QString DeviceCpu::getOverviewInfo()
     QString ov = QString("%1 (%2%3 / %4%5)") \
                  .arg(m_Name) \
                  .arg(m_trNumber[m_CPUCoreNum]) \
-                 .arg(tr("Core(s)")) \
+                 .arg(translateStr("Core(s)")) \
                  .arg(m_trNumber[m_LogicalCPUNum]) \
-                 .arg(tr("Processor"));
+                 .arg(translateStr("Processor"));
 
     return ov;
 }
@@ -220,8 +220,8 @@ TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     ret = setTomlAttribute(mapInfo, "Core ID", m_CoreID);
     ret = setTomlAttribute(mapInfo, "Threads", m_ThreadNum);
     ret = setTomlAttribute(mapInfo, "Frequency", m_Frequency);
-    ret = setTomlAttribute(mapInfo, "Current Speed", m_CurFrequency);
-    ret = setTomlAttribute(mapInfo, "Max Speed", m_MaxFrequency);
+    ret = setTomlAttribute(mapInfo, "Current Frequency", m_CurFrequency);
+    ret = setTomlAttribute(mapInfo, "Max Frequency", m_MaxFrequency);
     ret = setTomlAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
     ret = setTomlAttribute(mapInfo, "Architecture", m_Architecture);
     ret = setTomlAttribute(mapInfo, "CPU Family", m_Familly);
@@ -267,15 +267,15 @@ void DeviceCpu::loadOtherDeviceInfo()
 {
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
-    addOtherDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
-    addOtherDeviceInfo(tr("Flags"), m_Flags);
-    addOtherDeviceInfo(tr("Extensions"), m_Extensions);
-    addOtherDeviceInfo(tr("L4 Cache"), m_CacheL4);
-    addOtherDeviceInfo(tr("L3 Cache"), m_CacheL3);
-    addOtherDeviceInfo(tr("L2 Cache"), m_CacheL2);
-    addOtherDeviceInfo(tr("L1i Cache"), m_CacheL1Order);
-    addOtherDeviceInfo(tr("L1d Cache"), m_CacheL1Data);
-    addOtherDeviceInfo(tr("Stepping"), m_Step);
+    addOtherDeviceInfo(("Virtualization"), m_HardwareVirtual);
+    addOtherDeviceInfo(("Flags"), m_Flags);
+    addOtherDeviceInfo(("Extensions"), m_Extensions);
+    addOtherDeviceInfo(("L4 Cache"), m_CacheL4);
+    addOtherDeviceInfo(("L3 Cache"), m_CacheL3);
+    addOtherDeviceInfo(("L2 Cache"), m_CacheL2);
+    addOtherDeviceInfo(("L1i Cache"), m_CacheL1Order);
+    addOtherDeviceInfo(("L1d Cache"), m_CacheL1Data);
+    addOtherDeviceInfo(("Stepping"), m_Step);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
@@ -284,10 +284,10 @@ void DeviceCpu::loadOtherDeviceInfo()
 void DeviceCpu::loadTableHeader()
 {
     // 加载表头
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
-    m_TableHeader.append(frequencyIsRange() ? tr("Speed") : tr("Max Speed"));
-    m_TableHeader.append(tr("Architecture"));
+    m_TableHeader.append("Name");
+    m_TableHeader.append("Vendor");
+    m_TableHeader.append(frequencyIsRange() ? ("Frequency") : ("Max Frequency"));
+    m_TableHeader.append("Architecture");
 }
 
 void DeviceCpu::loadTableData()
@@ -302,85 +302,85 @@ void DeviceCpu::loadTableData()
 void DeviceCpu::getTrNumber()
 {
     // 将数字转换为英文翻译
-    m_trNumber.insert(1, QObject::tr("One"));
-    m_trNumber.insert(2, QObject::tr("Two"));
-    m_trNumber.insert(4, QObject::tr("Four"));
-    m_trNumber.insert(6, QObject::tr("Six"));
-    m_trNumber.insert(8, QObject::tr("Eight"));
+    m_trNumber.insert(1, translateStr("One"));
+    m_trNumber.insert(2, translateStr("Two"));
+    m_trNumber.insert(4, translateStr("Four"));
+    m_trNumber.insert(6, translateStr("Six"));
+    m_trNumber.insert(8, translateStr("Eight"));
+    m_trNumber.insert(9, translateStr("Nine"));
+    m_trNumber.insert(10, translateStr("Ten"));
+    m_trNumber.insert(12, translateStr("Twelve"));
+    m_trNumber.insert(14, translateStr("Fourteen"));
+    m_trNumber.insert(16, translateStr("Sixteen"));
+    m_trNumber.insert(18, translateStr("Eighteen"));
 
-    m_trNumber.insert(10, QObject::tr("Ten"));
-    m_trNumber.insert(12, QObject::tr("Twelve"));
-    m_trNumber.insert(14, QObject::tr("Fourteen"));
-    m_trNumber.insert(16, QObject::tr("Sixteen"));
-    m_trNumber.insert(18, QObject::tr("Eighteen"));
+    m_trNumber.insert(20, translateStr("Twenty"));
+    m_trNumber.insert(22, translateStr("Twenty-two"));
+    m_trNumber.insert(24, translateStr("Twenty-four"));
+    m_trNumber.insert(26, translateStr("Twenty-six"));
+    m_trNumber.insert(28, translateStr("Twenty-eight"));
 
-    m_trNumber.insert(20, QObject::tr("Twenty"));
-    m_trNumber.insert(22, QObject::tr("Twenty-two"));
-    m_trNumber.insert(24, QObject::tr("Twenty-four"));
-    m_trNumber.insert(26, QObject::tr("Twenty-six"));
-    m_trNumber.insert(28, QObject::tr("Twenty-eight"));
+    m_trNumber.insert(30, translateStr("Thirty"));
+    m_trNumber.insert(32, translateStr("Thirty-two"));
+    m_trNumber.insert(34, translateStr("Thirty-four"));
+    m_trNumber.insert(36, translateStr("Thirty-six"));
+    m_trNumber.insert(38, translateStr("Thirty-eight"));
 
-    m_trNumber.insert(30, QObject::tr("Thirty"));
-    m_trNumber.insert(32, QObject::tr("Thirty-two"));
-    m_trNumber.insert(34, QObject::tr("Thirty-four"));
-    m_trNumber.insert(36, QObject::tr("Thirty-six"));
-    m_trNumber.insert(38, QObject::tr("Thirty-eight"));
+    m_trNumber.insert(40, translateStr("Forty"));
+    m_trNumber.insert(42, translateStr("Forty-two"));
+    m_trNumber.insert(44, translateStr("Forty-four"));
+    m_trNumber.insert(46, translateStr("Forty-six"));
+    m_trNumber.insert(48, translateStr("Forty-eight"));
 
-    m_trNumber.insert(40, QObject::tr("Forty"));
-    m_trNumber.insert(42, QObject::tr("Forty-two"));
-    m_trNumber.insert(44, QObject::tr("Forty-four"));
-    m_trNumber.insert(46, QObject::tr("Forty-six"));
-    m_trNumber.insert(48, QObject::tr("Forty-eight"));
+    m_trNumber.insert(50, translateStr("Fifty"));
+    m_trNumber.insert(52, translateStr("Fifty-two"));
+    m_trNumber.insert(54, translateStr("Fifty-four"));
+    m_trNumber.insert(56, translateStr("Fifty-six"));
+    m_trNumber.insert(58, translateStr("Fifty-eight"));
 
-    m_trNumber.insert(50, QObject::tr("Fifty"));
-    m_trNumber.insert(52, QObject::tr("Fifty-two"));
-    m_trNumber.insert(54, QObject::tr("Fifty-four"));
-    m_trNumber.insert(56, QObject::tr("Fifty-six"));
-    m_trNumber.insert(58, QObject::tr("Fifty-eight"));
+    m_trNumber.insert(60, translateStr("Sixty"));
+    m_trNumber.insert(62, translateStr("Sixty-two"));
+    m_trNumber.insert(64, translateStr("Sixty-four"));
+    m_trNumber.insert(66, translateStr("Sixty-six"));
+    m_trNumber.insert(68, translateStr("Sixty-eight"));
 
-    m_trNumber.insert(60, QObject::tr("Sixty"));
-    m_trNumber.insert(62, QObject::tr("Sixty-two"));
-    m_trNumber.insert(64, QObject::tr("Sixty-four"));
-    m_trNumber.insert(66, QObject::tr("Sixty-six"));
-    m_trNumber.insert(68, QObject::tr("Sixty-eight"));
+    m_trNumber.insert(70, translateStr("Seventy"));
+    m_trNumber.insert(72, translateStr("Seventy-two"));
+    m_trNumber.insert(74, translateStr("Seventy-four"));
+    m_trNumber.insert(76, translateStr("Seventy-six"));
+    m_trNumber.insert(78, translateStr("Seventy-eight"));
 
-    m_trNumber.insert(70, QObject::tr("Seventy"));
-    m_trNumber.insert(72, QObject::tr("Seventy-two"));
-    m_trNumber.insert(74, QObject::tr("Seventy-four"));
-    m_trNumber.insert(76, QObject::tr("Seventy-six"));
-    m_trNumber.insert(78, QObject::tr("Seventy-eight"));
+    m_trNumber.insert(80, translateStr("Eighty"));
+    m_trNumber.insert(82, translateStr("Eighty-two"));
+    m_trNumber.insert(84, translateStr("Eighty-four"));
+    m_trNumber.insert(86, translateStr("Eighty-six"));
+    m_trNumber.insert(88, translateStr("Eighty-eight"));
 
-    m_trNumber.insert(80, QObject::tr("Eighty"));
-    m_trNumber.insert(82, QObject::tr("Eighty-two"));
-    m_trNumber.insert(84, QObject::tr("Eighty-four"));
-    m_trNumber.insert(86, QObject::tr("Eighty-six"));
-    m_trNumber.insert(88, QObject::tr("Eighty-eight"));
+    m_trNumber.insert(90, translateStr("Ninety"));
+    m_trNumber.insert(92, translateStr("Ninety-two"));
+    m_trNumber.insert(94, translateStr("Ninety-four"));
+    m_trNumber.insert(96, translateStr("Ninety-six"));
+    m_trNumber.insert(98, translateStr("Ninety-eight"));
 
-    m_trNumber.insert(90, QObject::tr("Ninety"));
-    m_trNumber.insert(92, QObject::tr("Ninety-two"));
-    m_trNumber.insert(94, QObject::tr("Ninety-four"));
-    m_trNumber.insert(96, QObject::tr("Ninety-six"));
-    m_trNumber.insert(98, QObject::tr("Ninety-eight"));
+    m_trNumber.insert(100, translateStr("One hundred"));
+    m_trNumber.insert(102, translateStr("One hundred and Two"));
+    m_trNumber.insert(104, translateStr("One hundred and four"));
+    m_trNumber.insert(106, translateStr("One hundred and Six"));
+    m_trNumber.insert(108, translateStr("One hundred and Eight"));
 
-    m_trNumber.insert(100, QObject::tr("One hundred"));
-    m_trNumber.insert(102, QObject::tr("One hundred and Two"));
-    m_trNumber.insert(104, QObject::tr("One hundred and four"));
-    m_trNumber.insert(106, QObject::tr("One hundred and Six"));
-    m_trNumber.insert(108, QObject::tr("One hundred and Eight"));
+    m_trNumber.insert(110, translateStr("One hundred and Ten"));
+    m_trNumber.insert(112, translateStr("One hundred and Twelve"));
+    m_trNumber.insert(114, translateStr("One hundred and Fourteen"));
+    m_trNumber.insert(116, translateStr("One hundred and Sixteen"));
+    m_trNumber.insert(118, translateStr("One hundred and Eighteen"));
 
-    m_trNumber.insert(110, QObject::tr("One hundred and Ten"));
-    m_trNumber.insert(112, QObject::tr("One hundred and Twelve"));
-    m_trNumber.insert(114, QObject::tr("One hundred and Fourteen"));
-    m_trNumber.insert(116, QObject::tr("One hundred and Sixteen"));
-    m_trNumber.insert(118, QObject::tr("One hundred and Eighteen"));
-
-    m_trNumber.insert(120, QObject::tr("One hundred and Twenty"));
-    m_trNumber.insert(122, QObject::tr("One hundred and Twenty-two"));
-    m_trNumber.insert(124, QObject::tr("One hundred and Twenty-four"));
-    m_trNumber.insert(126, QObject::tr("One hundred and Twenty-six"));
-    m_trNumber.insert(128, QObject::tr("One hundred and Twenty-eight"));
-    m_trNumber.insert(192, QObject::tr("One hundred and Ninety-two"));
-    m_trNumber.insert(256, QObject::tr("Two hundred and fifty-six"));
+    m_trNumber.insert(120, translateStr("One hundred and Twenty"));
+    m_trNumber.insert(122, translateStr("One hundred and Twenty-two"));
+    m_trNumber.insert(124, translateStr("One hundred and Twenty-four"));
+    m_trNumber.insert(126, translateStr("One hundred and Twenty-six"));
+    m_trNumber.insert(128, translateStr("One hundred and Twenty-eight"));
+    m_trNumber.insert(192, translateStr("One hundred and Ninety-two"));
+    m_trNumber.insert(256, translateStr("Two hundred and fifty-six"));
 }
 
 

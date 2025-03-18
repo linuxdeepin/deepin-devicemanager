@@ -103,10 +103,12 @@ public:
      */
     QList<DeviceBaseInfo *>  convertDeviceList(DeviceType deviceType);
     QString  convertDeviceTomlClassName(DeviceType deviceType);
-    TomlFixMethod tomlDeviceSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo);
+    TomlFixMethod tomlDeviceMapSet(DeviceType deviceType,  DeviceBaseInfo *device, const QMap<QString, QString> &mapInfo);
     void tomlDeviceSet(DeviceType deviceType);
     void tomlDeviceDel(DeviceType deviceType, DeviceBaseInfo *const device);
     void tomlDeviceAdd(DeviceType deviceType, DeviceBaseInfo *const device);
+    QString tomlDeviceReadKeyValue(DeviceType deviceType,  DeviceBaseInfo *device, const QString &key);
+    bool tomlSetBytomlmatchkey(DeviceType deviceType, DeviceBaseInfo *device, const QString &tomltomlmatchkey, const QString &tomltomlconfigdemanding);
     /**
      * @brief 
      *   toml 方案内容定义：
@@ -129,13 +131,11 @@ public:
      * @param  KeyID  "Module Alias"  "VID_PID"
      * @return
      */
-    DeviceBaseInfo *findByModalias(DeviceType deviceType, const QString &modalias);
-    DeviceBaseInfo *findByVIDPID(DeviceType deviceType, const QString &vid, const QString &pid);
-    DeviceBaseInfo *findByVendorName(DeviceType deviceType, const QString &vendor, const QString &name);
     
     bool findByModalias(DeviceType deviceType, DeviceBaseInfo *device, const QString &modalias);
     bool findByVIDPID(DeviceType deviceType, DeviceBaseInfo *device, const QString &vid, const QString &pid);
     bool findByVendorName(DeviceType deviceType, DeviceBaseInfo *device, const QString &vendor, const QString &name);
+
 
     /**
      * @brief getBluetoothAtIndex 根据索引获取device
@@ -195,14 +195,6 @@ public:
      * @return 布尔值:true-设置成功；false-设置失败
      */
     bool setStorageDeviceMediaType(const QString &name, const QString &value);
-
-    /**
-     * @brief setKLUStorageDeviceMediaType:KLU机器设置存储设备介质类型
-     * @param name:逻辑名称
-     * @param value:存储设备介质类型信息
-     * @return 布尔值:true-设置成功；false-设置失败
-     */
-    bool setKLUStorageDeviceMediaType(const QString &name, const QString &value);
 
     /**
      * @brief setStorageInfoFromSmartctl:设置由smartctl获取的存储设备信息
@@ -313,13 +305,6 @@ public:
     bool setBluetoothInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
-     * @brief setBluetoothInfoFromWifiInfo:设置由WifiInfo获取的蓝牙信息
-     * @param mapInfo:由WifiInfo获取的蓝牙信息map
-     * @return 布尔值:true设置成功；false设置失败
-     */
-    bool setBluetoothInfoFromWifiInfo(const QMap<QString, QString> &mapInfo);
-
-    /**
      * @brief getBluetoothDevice
      * @param unique_id
      * @return
@@ -383,12 +368,6 @@ public:
      * @param device:被添加的网络适配器
      */
     void addNetworkDevice(DeviceNetwork *const device);
-
-    /**
-     * @brief setNetworkInfoFromWifiInfo:设置网络适配器
-     * @param mapInfo:由WifiInfo获取的网卡信息map
-     */
-    bool setNetworkInfoFromWifiInfo(const QMap<QString, QString> &mapInfo);
 
     /**
      * @brief getNetworkDevice 获取网卡设备

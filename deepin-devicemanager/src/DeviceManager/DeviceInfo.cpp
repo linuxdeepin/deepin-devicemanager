@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DeviceInfo.h"
+#include "commonfunction.h"
 #include "commondefine.h"
 #include"DeviceManager.h"
 #include "DDLog.h"
@@ -44,6 +45,17 @@ DeviceBaseInfo::~DeviceBaseInfo()
 
 }
 
+const QString DeviceBaseInfo::translateStr(const QString &inStr)
+{
+    return tr(inStr.toLatin1());
+}
+
+const QString DeviceBaseInfo::nameTr()
+{
+    return translateStr(m_Name);
+}
+
+
 const QList<QPair<QString, QString>> &DeviceBaseInfo::getOtherAttribs()
 {
     // 获取其他设备信息列表
@@ -60,15 +72,52 @@ const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseAttribs()
     return m_LstBaseInfo;
 }
 
+const QList<QPair<QString, QString> > &DeviceBaseInfo::getOtherTranslationAttribs()
+{
+    m_LstOtherInfoTr.clear();
+    getOtherAttribs();
+    for (const auto &pair : m_LstOtherInfo) {
+        QString trKey =translateStr(pair.first);
+        if (trKey.isEmpty())
+            m_LstOtherInfoTr.append(qMakePair(pair.first, pair.second)); // 添加到目标列表
+        else
+            m_LstOtherInfoTr.append(qMakePair(trKey, pair.second));
+    }
+    return m_LstOtherInfoTr;
+}
+
+const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseTranslationAttribs()
+{
+    m_LstBaseInfoTr.clear();
+    getBaseAttribs();
+    for (const auto &pair : m_LstBaseInfo) {
+        QString trKey = translateStr(pair.first);
+        if (trKey.isEmpty())
+            m_LstBaseInfoTr.append(qMakePair(pair.first, pair.second)); // 添加到目标列表
+        else
+            m_LstBaseInfoTr.append(qMakePair(trKey, pair.second));
+    }
+    return m_LstBaseInfoTr;
+}
+
 const QStringList &DeviceBaseInfo::getTableHeader()
 {
+    m_TableHeaderTr.clear();
     // 获取表头
     if (m_TableHeader.size() == 0) {
         loadTableHeader();
         m_TableHeader.append(m_CanEnable ? "yes" : "no");
     }
 
-    return m_TableHeader;
+    for (const auto &item : m_TableHeader) {
+        QString trKey = tr(item.toLatin1());
+        if (trKey.isEmpty())
+            m_TableHeaderTr.append(item);
+        else
+            m_TableHeaderTr.append(trKey);
+    }
+
+    return m_TableHeaderTr;
 }
 
 const QStringList &DeviceBaseInfo::getTableData()
@@ -76,7 +125,15 @@ const QStringList &DeviceBaseInfo::getTableData()
     // 获取表格数据
     m_TableData.clear();
     loadTableData();
-    return m_TableData;
+    m_TableDataTr.clear();
+    for (const auto &item : m_TableData) {
+        QString trKey = (item);
+        if (trKey.isEmpty())
+            m_TableDataTr.append(item);
+        else
+            m_TableDataTr.append(trKey);
+    }
+    return m_TableDataTr;
 }
 
 QString DeviceBaseInfo::subTitle()
@@ -90,7 +147,7 @@ bool DeviceBaseInfo::isValueValid(QString &value)
     if (value.isEmpty())
         return false;
 
-    if (value == QObject::tr("Unknown"))
+    if (value == translateStr("Unknown"))
         return false;
 
     if (value == QString("Unknown"))
@@ -143,8 +200,8 @@ void DeviceBaseInfo::setForcedDisplay(const bool &flag)
 void DeviceBaseInfo::toHtmlString(QDomDocument &doc)
 {
     // 设备信息转为Html
-    baseInfoToHTML(doc, m_LstBaseInfo);
-    baseInfoToHTML(doc, m_LstOtherInfo);
+    baseInfoToHTML(doc, m_LstBaseInfoTr);
+    baseInfoToHTML(doc, m_LstOtherInfoTr);
 }
 
 void DeviceBaseInfo::baseInfoToHTML(QDomDocument &doc, QList<QPair<QString, QString> > &infoLst)
@@ -200,8 +257,8 @@ void DeviceBaseInfo::subTitleToHTML(QDomDocument &doc)
 void DeviceBaseInfo::toDocString(Docx::Document &doc)
 {
     // 设备信息转为doc
-    baseInfoToDoc(doc, m_LstBaseInfo);
-    baseInfoToDoc(doc, m_LstOtherInfo);
+    baseInfoToDoc(doc, m_LstBaseInfoTr);
+    baseInfoToDoc(doc, m_LstOtherInfoTr);
 }
 
 void DeviceBaseInfo::baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QString> > &infoLst)
@@ -223,8 +280,8 @@ void DeviceBaseInfo::baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QSt
 void DeviceBaseInfo::toXlsxString(QXlsx::Document &xlsx, QXlsx::Format &boldFont)
 {
     // 设备信息转为xlxs表格
-    baseInfoToXlsx(xlsx, boldFont, m_LstBaseInfo);
-    baseInfoToXlsx(xlsx, boldFont, m_LstOtherInfo);
+    baseInfoToXlsx(xlsx, boldFont, m_LstBaseInfoTr);
+    baseInfoToXlsx(xlsx, boldFont, m_LstOtherInfoTr);
 }
 
 void DeviceBaseInfo::baseInfoToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont, QList<QPair<QString, QString> > &infoLst)
@@ -250,8 +307,8 @@ void DeviceBaseInfo::baseInfoToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFo
 void DeviceBaseInfo::toTxtString(QTextStream &out)
 {
     // 设备信息转为txt
-    baseInfoToTxt(out, m_LstBaseInfo);
-    baseInfoToTxt(out, m_LstOtherInfo);
+    baseInfoToTxt(out, m_LstBaseInfoTr);
+    baseInfoToTxt(out, m_LstOtherInfoTr);
 }
 
 void DeviceBaseInfo::baseInfoToTxt(QTextStream &out, QList<QPair<QString, QString> > &infoLst)
@@ -279,15 +336,15 @@ void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
     getTableData();
 
     // 判断是否有表格内容
-    if (m_TableData.size() < 1)
+    if (m_TableDataTr.size() < 1)
         return;
 
     // 设置占位宽度
-    QString text = m_TableData[0];
+    QString text = m_TableDataTr[0];
     out.setFieldWidth(int(text.size() * 1.5));
     out.setFieldAlignment(QTextStream::FieldAlignment::AlignRight);
 
-    foreach (auto item, m_TableData) {
+    foreach (auto item, m_TableDataTr) {
         out.setFieldWidth(28);
         out << item;
     }
@@ -302,18 +359,18 @@ void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
     getTableHeader();
 
     // 判断是否有表头
-    if (m_TableHeader.size() < 1)
+    if (m_TableHeaderTr.size() < 1)
         return;
 
     // 设置占位宽度
-    QString text = m_TableHeader[0];
+    QString text = m_TableHeaderTr[0];
     out.setFieldWidth(int(text.size() * 1.5));
     out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
 
     out << "\n";
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
+    for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col) {
         out.setFieldWidth(30);
-        out << m_TableHeader[col];
+        out << m_TableHeaderTr[col];
     }
     out.setFieldWidth(0);
     out << "\n";
@@ -325,11 +382,11 @@ void DeviceBaseInfo::tableInfoToHtml(QFile &html)
     getTableData();
 
     // 判断是否有表格内容
-    if (m_TableData.size() < 1)
+    if (m_TableDataTr.size() < 1)
         return;
 
     // 写表格内容
-    foreach (auto item, m_TableData) {
+    foreach (auto item, m_TableDataTr) {
         html.write(QString("<td style=\"width:200px;text-align:left;\">" + item + "</td>").toUtf8().data());
     }
 
@@ -342,14 +399,14 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
     getTableHeader();
 
     // 判断是否有表头
-    if (m_TableHeader.size() < 1)
+    if (m_TableHeaderTr.size() < 1)
         return;
 
     html.write("<thead><tr>\n");
 
     // 写表头内容
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col)
-        html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + m_TableHeader[col] + "</th>").toUtf8().data());
+    for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col)
+        html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + m_TableHeaderTr[col] + "</th>").toUtf8().data());
 
     html.write("</tr></thead>\n");
 }
@@ -363,13 +420,13 @@ void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
     // 获取表格数据
     getTableData();
 
-    if (m_TableData.size() < 1)
+    if (m_TableDataTr.size() < 1)
         return;
 
     // 添加doc表格
-    for (int col = 0; col < m_TableData.size(); ++col) {
+    for (int col = 0; col < m_TableDataTr.size(); ++col) {
         auto cel = tab->cell(row, col);
-        cel->addText(m_TableData[col]);
+        cel->addText(m_TableDataTr[col]);
     }
 }
 
@@ -378,14 +435,14 @@ void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
     // 表头保存为doc
     getTableHeader();
 
-    if (m_TableHeader.size() < 1)
+    if (m_TableHeaderTr.size() < 1)
         return;
 
     // 添加表头信息
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col)  {
+    for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col)  {
         tab->addColumn();
         auto cel = tab->cell(0, col);
-        cel->addText(m_TableHeader[col]);
+        cel->addText(m_TableHeaderTr[col]);
     }
 }
 
@@ -394,13 +451,13 @@ void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
     // 获取表格信息
     getTableData();
 
-    if (m_TableData.size() < 1)
+    if (m_TableDataTr.size() < 1)
         return;
 
     // 添加表格信息
     int curRow = DeviceManager::instance()->currentXlsRow();
-    for (int col = 0; col < m_TableData.size(); ++col)
-        xlsx.write(curRow, col + 1, m_TableData[col]);
+    for (int col = 0; col < m_TableDataTr.size(); ++col)
+        xlsx.write(curRow, col + 1, m_TableDataTr[col]);
 }
 
 void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
@@ -408,16 +465,16 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
     // 获取表头
     getTableHeader();
 
-    if (m_TableHeader.size() < 1)
+    if (m_TableHeaderTr.size() < 1)
         return;
 
     // 添加表头信息
     int curRow = DeviceManager::instance()->currentXlsRow();
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
+    for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col) {
         QXlsx::Format boldFont;
         boldFont.setFontSize(10);
         boldFont.setFontBold(true);
-        xlsx.write(curRow, col + 1, m_TableHeader[col], boldFont);
+        xlsx.write(curRow, col + 1, m_TableHeaderTr[col], boldFont);
     }
 }
 
@@ -492,14 +549,9 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
         return false;
     }
 
-    QString info = "";
-    QProcess process;
-
     // 判断lsmod是否能查询
-    process.start("sh", QStringList() << "-c" << QString("modinfo %1 | grep 'filename:'").arg(driver));
-    process.waitForFinished(-1);
-    info = process.readAllStandardOutput();
-    return info.isEmpty();
+    QString outInfo = Common::executeClientCmd("modinfo", QStringList() << driver, QString(), -1);
+    return !outInfo.contains("filename:");
 }
 
 void DeviceBaseInfo::setCanEnale(bool can)
@@ -578,22 +630,42 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
     return vendor;
 }
 
+void DeviceBaseInfo::setVendorNameBylsusbLspci(const QString &vidpid, const QString &modalias)
+{
+    if (!vidpid.isEmpty() && modalias.contains("usb")) {
+        QProcess process;
+        QString vendorId = vidpid.toLower().remove("0x").trimmed().left(4);
+        QString deviceId = vidpid.toLower().remove("0x").trimmed().right(4);
+        process.start("lsusb -v -d " + vendorId + ":" + deviceId);
+        process.waitForFinished(-1);
+
+        QString output = process.readAllStandardOutput();
+
+        foreach (QString out, output.split("\n")) {
+            // 从USB设备获取制造商和设备名称
+            if (out.contains("idVendor", Qt::CaseSensitive)) {
+                m_Vendor = out.remove(0, out.indexOf(vendorId) + 4).trimmed();
+            } else if (out.contains("idProduct", Qt::CaseSensitive)) {
+                m_Name = out.remove(0, out.indexOf(deviceId) + 4).trimmed();
+            }
+        }
+    }
+}
+
 const QString DeviceBaseInfo::getDriverVersion()
 {
-    QProcess process;
-    process.start("bash", QStringList() << "-c" << "modinfo " + driver()  + "| grep version");
-    process.waitForFinished(-1);
+    QString outInfo = Common::executeClientCmd("modinfo", QStringList() << driver(), QString(), -1);
+    if (outInfo.isEmpty())
+        return  QString("");
 
-    QString output = process.readAllStandardOutput();
-
-    foreach (QString out, output.split("\n")) {
+    foreach (QString out, outInfo.split("\n")) {
         QStringList item = out.split(":", QString::SkipEmptyParts);
         if (!item.isEmpty() && "version" == item[0].trimmed()) {
             return item[1].trimmed();
         }
     }
 
-    return "";
+    return QString("");
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()
@@ -624,9 +696,9 @@ const QString &DeviceBaseInfo::getModalias() const
 void DeviceBaseInfo::loadTableHeader()
 {
     // 添加表头信息
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
-    m_TableHeader.append(tr("Model"));
+    m_TableHeader.append("Name");
+    m_TableHeader.append("Vendor");
+    m_TableHeader.append("Model");
 }
 
 void DeviceBaseInfo::addFilterKey(const QString &key)
@@ -640,7 +712,7 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
     // 获取其他设备信息
     QMap<QString, QString>::const_iterator it = mapInfo.begin();
     for (; it != mapInfo.end(); ++it) {
-        QString k = DApplication::translate("QObject", it.key().trimmed().toStdString().data());
+        QString k = it.key();
 
         // 可显示设备属性中存在该属性
         if (m_FilterKey.find(k) != m_FilterKey.end()) {
@@ -664,6 +736,45 @@ void DeviceBaseInfo::addOtherDeviceInfo(const QString &key, const QString &value
     // 添加其他设备信息
     if (!value.isEmpty())
         m_LstOtherInfo.insert(0, QPair<QString, QString>(key, value));
+}
+
+const QString DeviceBaseInfo::readDeviceInfoKeyValue(const QString &key)
+{
+    if (key.isEmpty())
+        return QString("");
+    // qCInfo(appLog) << __FILE__ << __LINE__  << key << "after translation:"<< kk;
+    QList<QPair<QString, QString> > allBaseAttribs = getBaseAttribs();
+    for (const QPair<QString, QString>& pair : allBaseAttribs) {
+        if (key == pair.first)
+            return pair.second;
+    }
+    QList<QPair<QString, QString> > allOtherAttribs = getOtherAttribs();
+    for (const QPair<QString, QString>& pair : allOtherAttribs) {
+        if (key == pair.first)
+            return pair.second;
+    }
+    return QString("");
+}
+
+bool DeviceBaseInfo::setDeviceInfoKeyValue(const QString &key, const QString &value)
+{
+    if (key.isEmpty() ||value.isEmpty())
+        return false;
+
+    for (QPair<QString, QString> pair : getBaseAttribs()) {
+        if (key == pair.first) {
+            pair.second = value;
+            return true;
+        }
+    }
+
+    for (QPair<QString, QString> pair : getOtherAttribs()) {
+        if (key == pair.first) {
+            pair.second = value;
+            return true;
+        }
+    }
+    return false;
 }
 
 void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite)
@@ -846,4 +957,294 @@ const  QString DeviceBaseInfo::get_string(const QString &sysPathfile)
     file.close();
     return info;
 }
-
+//只是为了lupdate自动增加翻译而占位
+void DeviceBaseInfo::generatorTranslate()
+{
+    QStringList translationStrings;
+    translationStrings \
+    <<  tr("Core(s)") \
+    <<  tr("Processor") \
+    <<  tr("ACL MTU") \
+    <<  tr("Address") \
+    <<  tr("Alias") \
+    <<  tr("ansiversion") \
+    <<  tr("Application") \
+    <<  tr("Architecture") \
+    <<  tr("Array Handle") \
+    <<  tr("Asset Tag") \
+    <<  tr("Auto Negotiation") \
+    <<  tr("Bank Locator") \
+    <<  tr("Base Board Information") \
+    <<  tr("BD Address") \
+    <<  tr("BIOS Information") \
+    <<  tr("BIOS Revision") \
+    <<  tr("BIOS ROMSIZE") \
+    <<  tr("Board name") \
+    <<  tr("BogoMIPS") \
+    <<  tr("Boot-up State") \
+    <<  tr("Broadcast") \
+    <<  tr("Bus") \
+    <<  tr("bus info") \
+    <<  tr("Bus Info") \
+    <<  tr("Cache Size") \
+    <<  tr("Capabilities") \
+    <<  tr("Capacity") \
+    <<  tr("Characteristics") \
+    <<  tr("Chassis Handle") \
+    <<  tr("Chassis Information") \
+    <<  tr("Chip") \
+    <<  tr("Chipset") \
+    <<  tr("Class") \
+    <<  tr("Clock") \
+    <<  tr("Config Status") \
+    <<  tr("Configured Speed") \
+    <<  tr("Configured Voltage") \
+    <<  tr("Contained Elements") \
+    <<  tr("Contained Object Handles") \
+    <<  tr("copies") \
+    <<  tr("Core ID") \
+    <<  tr("CPU architecture") \
+    <<  tr("CPU Family") \
+    <<  tr("CPU ID") \
+    <<  tr("CPU implementer") \
+    <<  tr("CPU part") \
+    <<  tr("CPU revision") \
+    <<  tr("CPU variant") \
+    <<  tr("critical-action") \
+    <<  tr("Currently Installed Language") \
+    <<  tr("Current Resolution") \
+    <<  tr("daemon-version") \
+    <<  tr("Data Width") \
+    <<  tr("Date") \
+    <<  tr("description") \
+    <<  tr("Description") \
+    <<  tr("Design Capacity") \
+    <<  tr("Design Voltage") \
+    <<  tr("Device") \
+    <<  tr("Device Class") \
+    <<  tr("Device File") \
+    <<  tr("Device Files") \
+    <<  tr("Device Name") \
+    <<  tr("Device Number") \
+    <<  tr("DigitalOutput") \
+    <<  tr("Disable") \
+    <<  tr("Discoverable") \
+    <<  tr("Discovering") \
+    <<  tr("Display Input") \
+    <<  tr("Display Output") \
+    <<  tr("Display Ratio") \
+    <<  tr("DP") \
+    <<  tr("Driver") \
+    <<  tr("Driver Activation Cmd") \
+    <<  tr("Driver Modules") \
+    <<  tr("Driver Status") \
+    <<  tr("Driver Version") \
+    <<  tr("Duplex") \
+    <<  tr("DVI") \
+    <<  tr("eDP") \
+    <<  tr("EGL client APIs") \
+    <<  tr("EGL version") \
+    <<  tr("energy") \
+    <<  tr("energy-empty") \
+    <<  tr("energy-full") \
+    <<  tr("energy-full-design") \
+    <<  tr("energy-rate") \
+    <<  tr("Error Correction Type") \
+    <<  tr("Error Information Handle") \
+    <<  tr("EV") \
+    <<  tr("Extensions") \
+    <<  tr("Family") \
+    <<  tr("Features") \
+    <<  tr("Firmware") \
+    <<  tr("Firmware Revision") \
+    <<  tr("Firmware Version") \
+    <<  tr("Flags") \
+    <<  tr("Form Factor") \
+    <<  tr("GDDR capacity") \
+    <<  tr("Geometry (Logical)") \
+    <<  tr("GLSL version") \
+    <<  tr("GL version") \
+    <<  tr("GPU type") \
+    <<  tr("GPU vendor") \
+    <<  tr("Graphics Memory") \
+    <<  tr("guid") \
+    <<  tr("Handlers") \
+    <<  tr("Hardware Class") \
+    <<  tr("has history") \
+    <<  tr("has statistics") \
+    <<  tr("HCI Version") \
+    <<  tr("HDMI") \
+    <<  tr("Height") \
+    <<  tr("icon-name") \
+    <<  tr("Input/Output") \
+    <<  tr("Installable Languages") \
+    <<  tr("Interface") \
+    <<  tr("Interface Type") \
+    <<  tr("ioport") \
+    <<  tr("IO Port") \
+    <<  tr("IP") \
+    <<  tr("IRQ") \
+    <<  tr("job-cancel-after") \
+    <<  tr("job-hold-until") \
+    <<  tr("job-priority") \
+    <<  tr("KernelModeDriver") \
+    <<  tr("KEY") \
+    <<  tr("L1d Cache") \
+    <<  tr("L1i Cache") \
+    <<  tr("L2 Cache") \
+    <<  tr("L3 Cache") \
+    <<  tr("L4 Cache") \
+    <<  tr("Language Description Format") \
+    <<  tr("latency") \
+    <<  tr("Latency") \
+    <<  tr("lid-is-closed") \
+    <<  tr("lid-is-present") \
+    <<  tr("Link") \
+    <<  tr("Link mode") \
+    <<  tr("Link policy") \
+    <<  tr("LMP Version") \
+    <<  tr("Location") \
+    <<  tr("Location In Chassis") \
+    <<  tr("Locator") \
+    <<  tr("Lock") \
+    <<  tr("logical name") \
+    <<  tr("Logical Name") \
+    <<  tr("logicalsectorsize") \
+    <<  tr("Logical Size") \
+    <<  tr("MAC Address") \
+    <<  tr("marker-change-time") \
+    <<  tr("Max Frequency") \
+    <<  tr("Maximum Capacity") \
+    <<  tr("Maximum Current") \
+    <<  tr("Maximum Power") \
+    <<  tr("Maximum Rate") \
+    <<  tr("Maximum Resolution") \
+    <<  tr("Maximum Voltage") \
+    <<  tr("Media Type") \
+    <<  tr("Memory") \
+    <<  tr("Memory Address") \
+    <<  tr("Memory Operating Mode Capability") \
+    <<  tr("Memory Subsystem Controller Manufacturer ID") \
+    <<  tr("Memory Subsystem Controller Product ID") \
+    <<  tr("Memory Technology") \
+    <<  tr("Minimum Resolution") \
+    <<  tr("Minimum Voltage") \
+    <<  tr("Modalias") \
+    <<  tr("Model") \
+    <<  tr("Module Alias") \
+    <<  tr("Module Alias") \
+    <<  tr("Module Manufacturer ID") \
+    <<  tr("Module Product ID") \
+    <<  tr("MSC") \
+    <<  tr("Multicast") \
+    <<  tr("Name") \
+    <<  tr("native-path") \
+    <<  tr("Negotiation Rate") \
+    <<  tr("network") \
+    <<  tr("Non-Volatile Size") \
+    <<  tr("Number Of Devices") \
+    <<  tr("Number Of Power Cords") \
+    <<  tr("number-up") \
+    <<  tr("OEM Information") \
+    <<  tr("on-battery") \
+    <<  tr("online") \
+    <<  tr("orientation-requested") \
+    <<  tr("Packet type") \
+    <<  tr("Pairable") \
+    <<  tr("Part Number") \
+    <<  tr("percentage") \
+    <<  tr("Phys") \
+    <<  tr("physical id") \
+    <<  tr("Physical ID") \
+    <<  tr("Physical Memory Array") \
+    <<  tr("Port") \
+    <<  tr("Powered") \
+    <<  tr("power supply") \
+    <<  tr("Power Supply State") \
+    <<  tr("Primary Monitor") \
+    <<  tr("print-color-mode") \
+    <<  tr("printer-is-accepting-jobs") \
+    <<  tr("printer-is-shared") \
+    <<  tr("printer-is-temporary") \
+    <<  tr("printer-make-and-model") \
+    <<  tr("printer-state-change-time") \
+    <<  tr("printer-state-reasons") \
+    <<  tr("printer-type") \
+    <<  tr("printer-uri-supported") \
+    <<  tr("product") \
+    <<  tr("Product Date") \
+    <<  tr("Product Name") \
+    <<  tr("PROP") \
+    <<  tr("Rank") \
+    <<  tr("rechargeable") \
+    <<  tr("Refresh Rate") \
+    <<  tr("Release date") \
+    <<  tr("Release Date") \
+    <<  tr("Revision") \
+    <<  tr("ROM Size") \
+    <<  tr("Rotation Rate") \
+    <<  tr("Runtime Size") \
+    <<  tr("SBDS Chemistry") \
+    <<  tr("SBDS Manufacture Date") \
+    <<  tr("SBDS Serial Number") \
+    <<  tr("SBDS Version") \
+    <<  tr("SCO MTU") \
+    <<  tr("sectorsize") \
+    <<  tr("Security Status") \
+    <<  tr("Serial ID") \
+    <<  tr("Serial Number") \
+    <<  tr("Service Classes") \
+    <<  tr("Set") \
+    <<  tr("Shared") \
+    <<  tr("sides") \
+    <<  tr("Size") \
+    <<  tr("SKU Number") \
+    <<  tr("Slot") \
+    <<  tr("SMBIOS Version") \
+    <<  tr("state") \
+    <<  tr("status") \
+    <<  tr("Status") \
+    <<  tr("Stepping") \
+    <<  tr("SubDevice") \
+    <<  tr("SubVendor") \
+    <<  tr("Subversion") \
+    <<  tr("Support Resolution") \
+    <<  tr("Sysfs") \
+    <<  tr("SysFS_Path") \
+    <<  tr("System Information") \
+    <<  tr("technology") \
+    <<  tr("temperature") \
+    <<  tr("Temperature") \
+    <<  tr("Thermal State") \
+    <<  tr("Threads") \
+    <<  tr("Total Width") \
+    <<  tr("Type") \
+    <<  tr("Type Detail") \
+    <<  tr("Unavailable") \
+    <<  tr("Uniq") \
+    <<  tr("updated") \
+    <<  tr("URI") \
+    <<  tr("UUID") \
+    <<  tr("Vendor") \
+    <<  tr("Version") \
+    <<  tr("VGA") \
+    <<  tr("Virtualization") \
+    <<  tr("Volatile Size") \
+    <<  tr("voltage") \
+    <<  tr("Voltage") \
+    <<  tr("Wake-up Type") \
+    <<  tr("warning-level") \
+    <<  tr("Width") \
+    <<  tr("battery") \
+    <<  tr("inch") \
+    <<  tr("Architecture") \
+    <<  tr("Frequency") \
+    <<  tr("Max Frequency") \
+    <<  tr("Media Type") \
+    <<  tr("Name") \
+    <<  tr("Size") \
+    <<  tr("Speed") \
+    <<  tr("Type") \
+    <<  tr("Vendor") \
+    <<  tr("Processor");
+}

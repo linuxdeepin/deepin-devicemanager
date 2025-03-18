@@ -36,21 +36,21 @@ DeviceGpu::DeviceGpu()
 void DeviceGpu::initFilterKey()
 {
     // 添加可显示属性
-    addFilterKey(QObject::tr("Device"));
-    addFilterKey(QObject::tr("SubVendor"));
-    addFilterKey(QObject::tr("SubDevice"));
-    addFilterKey(QObject::tr("Driver Modules"));
-    addFilterKey(QObject::tr("Config Status"));
-    addFilterKey(QObject::tr("latency"));
+    addFilterKey("Device");
+    addFilterKey("SubVendor");
+    addFilterKey("SubDevice");
+    addFilterKey("Driver Modules");
+    addFilterKey("Config Status");
+    addFilterKey("Latency");
 
-    // gpuinfo 华为KLU和PanGuV
-    addFilterKey(QObject::tr("GDDR capacity"));
-    addFilterKey(QObject::tr("GPU vendor"));
-    addFilterKey(QObject::tr("GPU type"));
-    addFilterKey(QObject::tr("EGL version"));
-    addFilterKey(QObject::tr("EGL client APIs"));
-    addFilterKey(QObject::tr("GL version"));
-    addFilterKey(QObject::tr("GLSL version"));
+    // gpuinfo
+    addFilterKey("GDDR capacity");
+    addFilterKey("GPU vendor");
+    addFilterKey("GPU type");
+    addFilterKey("EGL version");
+    addFilterKey("EGL client APIs");
+    addFilterKey("GL version");
+    addFilterKey("GLSL version");
 
 
 }
@@ -58,11 +58,11 @@ void DeviceGpu::initFilterKey()
 void DeviceGpu::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Model"), m_Model);
-    addBaseDeviceInfo(tr("Version"), m_Version);
-    addBaseDeviceInfo(tr("Graphics Memory"), m_GraphicsMemory);
+    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo(("Vendor"), m_Vendor);
+    addBaseDeviceInfo(("Model"), m_Model);
+    addBaseDeviceInfo(("Version"), m_Version);
+    addBaseDeviceInfo(("Graphics Memory"), m_GraphicsMemory);
 }
 
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
@@ -120,6 +120,7 @@ TomlFixMethod DeviceGpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
     setTomlAttribute(mapInfo, "IRQ", m_IRQ);
     setTomlAttribute(mapInfo, "Width", m_Width);
+    setAttribute(mapInfo, "Version", m_Version);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
@@ -314,29 +315,29 @@ void DeviceGpu::loadOtherDeviceInfo()
     QString type = Common::boardVendorType();
     // 添加其他信息,成员变量
 
-    addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
-    addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
-    addOtherDeviceInfo(tr("Memory Address"), m_MemAddress);
-    addOtherDeviceInfo(tr("IO Port"), m_IOPort);
-    addOtherDeviceInfo(tr("Bus Info"), m_BusInfo);
-    if (type != "KLVV" && type != "KLVU" && type != "PGUV" && type != "PGUW") {
-        addOtherDeviceInfo(tr("Maximum Resolution"), m_MaximumResolution);
-        addOtherDeviceInfo(tr("Minimum Resolution"), m_MinimumResolution);
+    addOtherDeviceInfo(("Module Alias"), m_Modalias);
+    addOtherDeviceInfo(("Physical ID"), m_PhysID);
+    addOtherDeviceInfo(("Memory Address"), m_MemAddress);
+    addOtherDeviceInfo(("IO Port"), m_IOPort);
+    addOtherDeviceInfo(("Bus Info"), m_BusInfo);
+    if (type != Common::specialHString()) {
+        addOtherDeviceInfo(("Maximum Resolution"), m_MaximumResolution);
+        addOtherDeviceInfo(("Minimum Resolution"), m_MinimumResolution);
     }
-    addOtherDeviceInfo(tr("Current Resolution"), m_CurrentResolution);
-    addOtherDeviceInfo(tr("Driver"), m_Driver);
-    addOtherDeviceInfo(tr("Description"), m_Description);
-//    addOtherDeviceInfo(tr("Clock"), m_Clock);
-    addOtherDeviceInfo(tr("DP"), m_DisplayPort);
-    addOtherDeviceInfo(tr("eDP"), m_eDP);
-    addOtherDeviceInfo(tr("HDMI"), m_HDMI);
-    addOtherDeviceInfo(tr("VGA"), m_VGA);
-    addOtherDeviceInfo(tr("DVI"), m_DVI);
-    addOtherDeviceInfo(tr("DigitalOutput"), m_Digital);   // bug-105482添加新接口类型
-    addOtherDeviceInfo(tr("Display Output"), m_DisplayOutput);
-    addOtherDeviceInfo(tr("Capabilities"), m_Capabilities);
-    addOtherDeviceInfo(tr("IRQ"), m_IRQ);
-//    addOtherDeviceInfo(tr("Width"), m_Width);
+    addOtherDeviceInfo(("Current Resolution"), m_CurrentResolution);
+    addOtherDeviceInfo(("Driver"), m_Driver);
+    addOtherDeviceInfo(("Description"), m_Description);
+//    addOtherDeviceInfo(("Clock"), m_Clock);
+    addOtherDeviceInfo(("DP"), m_DisplayPort);
+    addOtherDeviceInfo(("eDP"), m_eDP);
+    addOtherDeviceInfo(("HDMI"), m_HDMI);
+    addOtherDeviceInfo(("VGA"), m_VGA);
+    addOtherDeviceInfo(("DVI"), m_DVI);
+    addOtherDeviceInfo(("DigitalOutput"), m_Digital);   // bug-105482添加新接口类型
+    addOtherDeviceInfo(("Display Output"), m_DisplayOutput);
+    addOtherDeviceInfo(("Capabilities"), m_Capabilities);
+    addOtherDeviceInfo(("IRQ"), m_IRQ);
+//    addOtherDeviceInfo(("Width"), m_Width);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
@@ -347,7 +348,7 @@ void DeviceGpu::loadTableData()
     // 加载表格内容
     QString tName = m_Name;
     if (!available()) {
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
     m_TableData.append(tName);
     m_TableData.append(m_Vendor);

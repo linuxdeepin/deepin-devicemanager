@@ -44,8 +44,15 @@ private slots:
      * @param usbchanged
      */
     void slotDriverControl(bool success);
-
+    /**
+     * @brief slotWakeupHandle
+     */
+    void slotWakeupHandle(bool);
 private:
+    /**
+     * @brief sqlCopytoKernel
+     */
+    void sqlCopytoKernel();
     /**
      * @brief initDriverRepoSource : 初始化驱动仓库
      * @return : 无

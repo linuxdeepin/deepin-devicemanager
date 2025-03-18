@@ -5,6 +5,8 @@
 #include "DBusDriverInterface.h"
 #include <unistd.h>
 
+#include <QApplication>
+
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<DBusDriverInterface *> DBusDriverInterface::s_Instance;
 std::mutex DBusDriverInterface::m_mutex;
@@ -174,5 +176,6 @@ void DBusDriverInterface::init()
         connect(mp_Iface, SIGNAL(sigFinished(bool, QString)), this, SIGNAL(installFinished(bool, QString)));
         connect(mp_Iface, SIGNAL(sigProgressDetail(int, QString)), this, SIGNAL(installProgressDetail(int, QString)));
         connect(mp_Iface, SIGNAL(sigBackupProgressFinished(bool)), this, SIGNAL(backupProgressFinished(bool)));
+
     }
 }

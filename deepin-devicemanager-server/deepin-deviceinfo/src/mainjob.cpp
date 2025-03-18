@@ -15,6 +15,7 @@
 #include <QFile>
 #include <QLoggingCategory>
 #include <QTimer>
+#include <QDBusConnection>
 
 #include <DSysInfo>
 
@@ -49,24 +50,52 @@ MainJob::MainJob(const char *name, QObject *parent)
         }
 #endif
 
-        // 后台加载后先禁用设备
-        QProcess process;
-        QStringList options;
-        options << "-c" << "hwinfo --netcard --keyboard --mouse --usb";
-        process.start("/bin/bash", options);
-        process.waitForFinished(-1);
-        QString info = process.readAllStandardOutput();
-        process.close();
-
-        ControlInterface::getInstance()->disableOutDevice(info);
-        ControlInterface::getInstance()->disableInDevice();
-        ControlInterface::getInstance()->updateWakeup(info);
+        sqlCopytoKernel();
 
         connect(m_deviceInterface, &DeviceInterface::sigUpdate, this, &MainJob::slotUsbChanged);
         connect(ControlInterface::getInstance(), &ControlInterface::sigUpdate, this, &MainJob::slotUsbChanged);
 #ifndef DISABLE_DRIVER
         connect(ControlInterface::getInstance(), &ControlInterface::sigFinished, this, &MainJob::slotDriverControl);
 #endif
+    });
+
+    QDBusConnection::systemBus().connect("org.freedesktop.login1", "/org/freedesktop/login1", "org.freedesktop.login1.Manager", "PrepareForSleep", //"System has woken up from sleep (S3)" Signal
+        this, SLOT(slotWakeupHandle(bool))
+    );
+}
+
+void MainJob::sqlCopytoKernel()
+{
+    ControlInterface::getInstance()->disableInDevice();
+    // 后台加载后先禁用设备 内核参数持久化
+    QProcess process;
+    QStringList options;
+    options << "--netcard" << "--keyboard"  << "--mouse" <<  "--usb";
+    process.start("hwinfo", options);
+    process.waitForFinished(-1);
+    QString info = process.readAllStandardOutput();
+    process.close();
+    // init from sql db
+    ControlInterface::getInstance()->disableOutDevice(info);
+    ControlInterface::getInstance()->updateWakeup(info);
+}
+
+void MainJob::slotWakeupHandle(bool isSleep)
+{
+    QTimer::singleShot(1500, this, [ = ]() {
+        qCInfo(appLog) << "Signal: login1.Manager.PrepareForSleep:" << isSleep;
+        if (isSleep)
+            return;
+
+        QProcess process; //先唤醒DBUS
+        QString command = "gdbus call --system --dest org.deepin.DeviceControl --object-path /org/deepin/DeviceControl --method org.deepin.DeviceControl.disableInDevice";
+        process.start(command);
+        process.waitForFinished(1000);
+
+        //有的硬件唤醒起来也需要延时
+        QTimer::singleShot(2000, this, [ = ]() {
+            sqlCopytoKernel();
+        });
     });
 }
 

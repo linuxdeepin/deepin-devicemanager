@@ -198,6 +198,13 @@ bool DriverManager::unInstallDriver(const QString &modulename)
     return  bsuccess;
 }
 
+static void depmod_a()
+{
+    QProcess process;
+    process.start("depmod -a");
+    process.waitForFinished(-1);
+}
+
 bool DriverManager::installDriver(const QString &filepath)
 {
     /*1.检查模块是否已存在 存在报错返回，不报错返回
@@ -285,9 +292,7 @@ bool DriverManager::installDriver(const QString &filepath)
                     QFile::remove(installpath);
 
                     //删除后执行depmod更新
-                    QProcess process;
-                    process.start("depmod -a");
-                    process.waitForFinished(-1);
+                    depmod_a();
 
                     sigFinished(false, errmsg);
                     return  false;
@@ -364,6 +369,11 @@ bool DriverManager::isDriverPackage(const QString &filepath)
  */
 bool DriverManager::isSigned(const QString &filepath)
 {
+    // If hierarchical verification is enabled, we assume that all packages are signed.
+    if (Utils::HierarchicalVerifyAvailable == Utils::hierarchicalEnabled()) {
+        return true;
+    }
+
     //如果是开发者模式，直接返回true
     QDBusInterface *dbusInterFace = new QDBusInterface("com.deepin.sync.Helper", "/com/deepin/sync/Helper",
                                                        "com.deepin.sync.Helper", QDBusConnection::systemBus());
@@ -387,9 +397,8 @@ bool DriverManager::isSigned(const QString &filepath)
         strSignCheckString = "Verified successfully";
     }
 
-    QString outInfo;
-    bool ret = Utils::runCmdSafeWithArgs(outInfo, program, arguments, -1);
-    return (ret && outInfo.contains(strSignCheckString));
+    QString outInfo = Utils::executeServerCmd(program, arguments, QString(), -1, true);
+    return outInfo.contains(strSignCheckString);
 }
 bool DriverManager::isArchMatched(const QString &path)
 {
@@ -441,8 +450,16 @@ bool DriverManager::isNetworkOnline()
     /*
        -c 2（代表ping次数，ping 2次后结束ping操作） -w 2（代表超时时间，2秒后结束ping操作）
     */
-// system("ping www.google.com -c 2 -w 2 >netlog.bat");
-    system("ping www.baidu.com -c 2 -w 2 >netlog.bat");
+    // example: ping www.baidu.com -c 2 -w 2 >netlog.bat
+    QProcess process;
+    process.setStandardOutputFile("netlog.bat", QIODevice::WriteOnly);
+    process.start("ping", QStringList() << "www.baidu.com" << "-c" << "2" << "-w" << "2");
+    process.waitForFinished(-1);
+    bool bRet = (process.exitStatus() == QProcess::NormalExit && process.exitCode() == 0);
+    if (!bRet) {
+        return false;
+    }
+
     sleep(2);
 
     //把文件一行一行读取放入vector
@@ -710,20 +727,15 @@ bool DriverManager::delDeb(const QString &debname)
     }
     return (!destdir.exists());
 }
-
-bool DriverManager::aptUpdate()
+static void cmdAptUpdate()
 {
     QProcess process;
-    /* connect(&process, &QProcess::readyReadStandardOutput, this, [&](){
-        QByteArray outArry = process.readAllStandardOutput();
-        QList<QString> lines = QString(outArry).split('\n', QString::SkipEmptyParts);
-        for (const QString &line : qAsConst(lines)) {
-            // qCDebug() << line;
-            // error handling...
-        }
-    }); */
     process.start("apt update");
     process.waitForFinished(-1);
+}
+bool DriverManager::aptUpdate()
+{
+    cmdAptUpdate();
     return true;
 }
 

@@ -106,39 +106,41 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 void DeviceMemory::initFilterKey()
 {
     // 初始化可显示属性
-    addFilterKey(QObject::tr("Array Handle"));  // 数组程序
-    addFilterKey(QObject::tr("Error Information Handle")); //错误信息程序
-    addFilterKey(QObject::tr("Form Factor")); // 尺寸型号
-    addFilterKey(QObject::tr("Set"));    // 设置
-    addFilterKey(QObject::tr("Bank Locator")); // 内存通道
-    addFilterKey(QObject::tr("Type Detail"));   // 类型详细信息
-    addFilterKey(QObject::tr("Asset Tag"));    // 资产标签
-    addFilterKey(QObject::tr("Part Number"));
-    addFilterKey(QObject::tr("Rank"));
-    addFilterKey(QObject::tr("Memory Technology"));  // 内存技术
-    addFilterKey(QObject::tr("Memory Operating Mode Capability"));  // 内存操作模式
-    addFilterKey(QObject::tr("Firmware Version"));   //固件版本
-    addFilterKey(QObject::tr("Module Manufacturer ID"));
-    addFilterKey(QObject::tr("Module Product ID"));
-    addFilterKey(QObject::tr("Memory Subsystem Controller Manufacturer ID"));
-    addFilterKey(QObject::tr("Memory Subsystem Controller Product ID"));
-    addFilterKey(QObject::tr("Non-Volatile Size"));   // 不易丢失大小
-    addFilterKey(QObject::tr("Volatile Size"));       // 易丢失大小
-    addFilterKey(QObject::tr("Cache Size"));   // 缓存大小
-    addFilterKey(QObject::tr("Logical Size"));  // 逻辑大小
+    addFilterKey("Array Handle");  // 数组程序-2
+    addFilterKey("Error Information Handle"); //错误信息程序-2
+    addFilterKey("Form Factor"); // 尺寸型号-2
+    addFilterKey("Set");    // 设置-2
+    addFilterKey("Bank Locator"); // 内存通道-2
+    addFilterKey("Type Detail");   // 类型详细信息-2
+    addFilterKey("Asset Tag");    // 资产标签-2
+    addFilterKey("Part Number");
+    addFilterKey("Rank");
+    addFilterKey("Memory Technology");  // 内存技术-2
+    addFilterKey("Memory Operating Mode Capability");  // 内存操作模式-2
+    addFilterKey("Firmware Version");   //固件版本-2
+    addFilterKey("Module Manufacturer ID");
+    addFilterKey("Module Product ID");
+    addFilterKey("Memory Subsystem Controller Manufacturer ID");
+    addFilterKey("Memory Subsystem Controller Product ID");
+    addFilterKey("Non-Volatile Size");   // 不易丢失大小-2
+    addFilterKey("Volatile Size");       // 易丢失大小-2
+    addFilterKey("Cache Size");   // 缓存大小-2
+    addFilterKey("Logical Size");  // 逻辑大小-2
 }
 
 void DeviceMemory::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    addBaseDeviceInfo(tr("Name"), m_Name);
-    addBaseDeviceInfo(tr("Vendor"), m_Vendor);
-    addBaseDeviceInfo(tr("Size"), m_Size);
-    addBaseDeviceInfo(tr("Type"), m_Type);
-    addBaseDeviceInfo(tr("Speed"), m_Speed);
-    addBaseDeviceInfo(tr("Total Width"), m_TotalBandwidth);
-    addBaseDeviceInfo(tr("Locator"), m_Locator);
-    addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    addBaseDeviceInfo(("Name"), m_Name);
+    if (Common::specialComType <= 0) {
+        addBaseDeviceInfo(("Vendor"), m_Vendor);
+    }
+    addBaseDeviceInfo(("Size"), m_Size);
+    addBaseDeviceInfo(("Type"), m_Type);
+    addBaseDeviceInfo(("Speed"), m_Speed);
+    addBaseDeviceInfo(("Total Width"), m_TotalBandwidth);
+    addBaseDeviceInfo(("Locator"), m_Locator);
+    addBaseDeviceInfo(("Serial Number"), m_SerialNumber);
 }
 
 void DeviceMemory::loadOtherDeviceInfo()
@@ -146,14 +148,14 @@ void DeviceMemory::loadOtherDeviceInfo()
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
     if (Common::boardVendorType().isEmpty()) {
-        addOtherDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
-        addOtherDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
-        addOtherDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
-        addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
+        addOtherDeviceInfo(("Configured Voltage"), m_ConfiguredVoltage);
+        addOtherDeviceInfo(("Maximum Voltage"), m_MaximumVoltage);
+        addOtherDeviceInfo(("Minimum Voltage"), m_MinimumVoltage);
+        addOtherDeviceInfo(("Configured Speed"), m_ConfiguredSpeed);
     } else {
-        addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
+        addOtherDeviceInfo(("Configured Speed"), m_ConfiguredSpeed);
     }
-    addOtherDeviceInfo(tr("Data Width"), m_DataBandwidth);
+    addOtherDeviceInfo(("Data Width"), m_DataBandwidth);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
@@ -162,11 +164,11 @@ void DeviceMemory::loadOtherDeviceInfo()
 void DeviceMemory::loadTableHeader()
 {
     // 加载表头
-    m_TableHeader.append(tr("Name"));
-    m_TableHeader.append(tr("Vendor"));
-    m_TableHeader.append(tr("Type"));
-    m_TableHeader.append(tr("Speed"));
-    m_TableHeader.append(tr("Size"));
+    m_TableHeader.append("Name");
+    m_TableHeader.append("Vendor");
+    m_TableHeader.append("Type");
+    m_TableHeader.append("Speed");
+    m_TableHeader.append("Size");
 }
 
 void DeviceMemory::loadTableData()

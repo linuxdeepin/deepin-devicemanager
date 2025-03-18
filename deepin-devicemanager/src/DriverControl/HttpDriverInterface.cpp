@@ -225,13 +225,10 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
 int HttpDriverInterface::packageInstall(const QString &package_name, const QString &version)
 {
     // 0:没有包 1:版本不一致 2:版本一致
-    QProcess process;
-    QStringList options;
-    options << "-c" << "apt policy " + package_name;
-    process.start("/bin/bash", options);
-    process.waitForFinished(-1);
-    QStringList infoList = QString(process.readAllStandardOutput()).split("\n");
-
+    QString outInfo = Common::executeClientCmd("apt", QStringList() << "policy" << package_name, QString(), -1);
+    if (outInfo.isEmpty())
+        return 0;
+    QStringList infoList = outInfo.split("\n");
     if (infoList.size() <= 2 || infoList[1].contains("（") || infoList[1].contains("("))
         return 0;
     if (infoList[1].contains(version))

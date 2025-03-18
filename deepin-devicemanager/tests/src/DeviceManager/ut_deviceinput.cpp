@@ -123,46 +123,6 @@ TEST_F(UT_DeviceInput, UT_DeviceInput_setInfoFromHwinfo_002)
     EXPECT_STREQ("usb@1:8", m_deviceInput->m_HwinfoToLshw.toStdString().c_str());
 }
 
-TEST_F(UT_DeviceInput, UT_DeviceInput_setKLUInfoFromHwinfo_001)
-{
-    QMap<QString, QString> map;
-    setHwinfoMap(map);
-    map.insert("Device File", "/dev/input/mice (/dev/input/mouse1)");
-
-    m_deviceInput->setKLUInfoFromHwinfo(map);
-    EXPECT_STREQ("MX board 8.0", m_deviceInput->m_Name.toStdString().c_str());
-    EXPECT_STREQ("Cherry GmbH", m_deviceInput->m_Vendor.toStdString().c_str());
-    EXPECT_STREQ("Cherry MX board 8.0", m_deviceInput->m_Model.toStdString().c_str());
-    EXPECT_STREQ("1.07", m_deviceInput->m_Version.toStdString().c_str());
-    EXPECT_STREQ("USB", m_deviceInput->m_Interface.toStdString().c_str());
-    EXPECT_STREQ("1-8:1.1", m_deviceInput->m_BusInfo.toStdString().c_str());
-    EXPECT_STREQ("keyboard", m_deviceInput->m_Description.toStdString().c_str());
-    EXPECT_STREQ("usbhid", m_deviceInput->m_Driver.toStdString().c_str());
-    EXPECT_STREQ("12 Mbps", m_deviceInput->m_Speed.toStdString().c_str());
-    EXPECT_STREQ("usb@1:8", m_deviceInput->m_KeyToLshw.toStdString().c_str());
-}
-
-TEST_F(UT_DeviceInput, UT_DeviceInput_setKLUInfoFromHwinfo_002)
-{
-    QMap<QString, QString> map;
-    setHwinfoMap(map);
-    map.insert("Model", "Cherry MX board 8.0 Bluetooth");
-    map.insert("Device", "MX board 8.0 Bluetooth");
-    map.remove("Hotplug");
-
-    m_deviceInput->setKLUInfoFromHwinfo(map);
-    EXPECT_STREQ("MX board 8.0 Bluetooth", m_deviceInput->m_Name.toStdString().c_str());
-    EXPECT_STREQ("Cherry GmbH", m_deviceInput->m_Vendor.toStdString().c_str());
-    EXPECT_STREQ("Cherry MX board 8.0 Bluetooth", m_deviceInput->m_Model.toStdString().c_str());
-    EXPECT_STREQ("1.07", m_deviceInput->m_Version.toStdString().c_str());
-    EXPECT_STREQ("Bluetooth", m_deviceInput->m_Interface.toStdString().c_str());
-    EXPECT_STREQ("1-8:1.1", m_deviceInput->m_BusInfo.toStdString().c_str());
-    EXPECT_STREQ("keyboard", m_deviceInput->m_Description.toStdString().c_str());
-    EXPECT_STREQ("usbhid", m_deviceInput->m_Driver.toStdString().c_str());
-    EXPECT_STREQ("12 Mbps", m_deviceInput->m_Speed.toStdString().c_str());
-    EXPECT_STREQ("usb@1:8", m_deviceInput->m_KeyToLshw.toStdString().c_str());
-}
-
 bool ut_isValueValid()
 {
     return true;

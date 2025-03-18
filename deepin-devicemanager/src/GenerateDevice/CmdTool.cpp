@@ -7,6 +7,7 @@
 #include <QDir>
 #include <cmath>
 #include "DDLog.h"
+#include "commonfunction.h"
 
 // Qt库文件
 #include<QLoggingCategory>
@@ -150,43 +151,32 @@ QMap<QString, QList<QMap<QString, QString> > > &CmdTool::cmdInfo()
 {
     return m_cmdInfo;
 }
-/*
-使用 sudo dmidecode -t 1 命令查询结果下的关键字：Manufacturer、Product Name、Version、Serial Number，取其值，
-文件取名以`oeminfo_`开头，取名格式为《oeminfo_manufacturer_productname_version_serialnumber.toml，
-后文简称为：《oeminfo_system.toml》文件名字母全转化为小写，并去掉不可显示特殊字符和空格。并基于此进行匹配。
-文件路径存放在/etc/deepin/hardware
-*/
+
 QString CmdTool::loadOemTomlFileName(const QMap<QString, QString> &mapInfo)
 {
-    bool tomlFileRead = false;
     if (mapInfo.size() <= 0)
         return QString();
 
     QString tomlFileName;
-    //获取文件名字《oeminfo_manufacturer_productname_version_serialnumber.toml，
+    //获取文件名字oeminfo_manufacturer_productname_version.toml，
     if (mapInfo.contains("Manufacturer")
-            && mapInfo.contains("Manufacturer")
             && mapInfo.contains("Product Name")
-            && mapInfo.contains("Version")
-            && mapInfo.contains("Serial Number")) {
+            && mapInfo.contains("Version")) {
         QString Manufacturer = mapInfo["Manufacturer"];
         QString productname = mapInfo["Product Name"];
         QString version = mapInfo["Version"];
-        QString serialnumber = mapInfo["Serial Number"];
 
         if (Manufacturer.contains("N/A"))  Manufacturer = "";
         if (productname.contains("N/A"))  productname = "";
         if (version.contains("N/A"))  version = "";
-        if (serialnumber.contains("N/A"))  serialnumber = "";
 
         QRegExp regExp("[-/'~!@#$%^&*(){}:;,.\"\\|~`]");
         QString replace = "";         // 这里是将特殊字符换为空字符串,""代表直接去掉
         Manufacturer = Manufacturer.replace(regExp, replace);
         productname = productname.replace(regExp, replace);
         version = version.replace(regExp, replace);
-        serialnumber = serialnumber.replace(regExp, replace);
 
-        tomlFileName = "oeminfo_" + Manufacturer + "_" + productname + "_" + version + "_" + serialnumber;
+        tomlFileName = "oeminfo_" + Manufacturer + "_" + productname + "_" + version;
         tomlFileName = tomlFileName.trimmed().toLower();
         tomlFileName = tomlFileName.remove(" ") + ".toml";
         return tomlFileName;
@@ -215,6 +205,16 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
             file.close();
         }
     }
+    QString curPathFile2 =  "/usr/share/deepin-devicemanager/" + filename;
+    if (QFile::exists(curPathFile2) && !tomlFileRead) {
+        QFile file(curPathFile2);
+        if (file.open(QIODevice::ReadOnly)) {
+            info = file.readAll().data();
+            tomlFileRead = true;
+            file.close();
+        }
+    }
+
     if (!tomlFileRead) {
         curPathFile = "/etc/deepin/hardware/oeminfodebug.toml"; //方便调试，并不开放给用户用
         QFile file(curPathFile);
@@ -251,8 +251,18 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
             itemMap.clear();
             ValueKeyList.clear();
             deviceClassesList.append(regClass.cap(2));
-//        } else if (regKeyValue.exactMatch(line)) {  //键值对=
-        } else if (line.contains("=")) {
+        } else if (line.contains("=") && line.contains("{")  && line.contains("}")) { //内联表
+                int start = line.indexOf("{") + 1;
+                int end = line.indexOf("}");
+                QString value = line.mid(start, end - start).trimmed();
+                wordlst = line.split("=");
+                if (2 <= wordlst.size()) {
+                    QString key = wordlst[0].remove('"').trimmed();
+                    itemMap.insert(key, value);
+                    ValueKeyList.append(key);
+                }
+
+        } else if (line.contains("=")) {  //键值对=
             wordlst = line.split("=");
             if (2 == wordlst.size()) {
 
@@ -321,7 +331,7 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
         } else if (item.startsWith("multimedia")) {   // 音频信息
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_multimedia", mapInfo);
-        } else if (item.startsWith("network")) {      // 网卡信息
+        } else if (item.startsWith("network") || item.startsWith("communication")) {      // 网卡信息
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_network", mapInfo);
         } else if (item.startsWith("usb")) {          // USB 设备信息
@@ -579,12 +589,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             // mapInfo["Device"].contains("USB Audio") 是为了处理未识别的USB声卡 Bug-118773
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network")) {
-            //if (mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/platform"))
-            bool hasAddress = mapInfo.find("HW Address") != mapInfo.end() || mapInfo.find("Permanent HW Address") != mapInfo.end();
-            bool hasPath = mapInfo.find("path") != mapInfo.end();
-            if (hasPath || hasAddress) {
-                addMapInfo("hwinfo_network", mapInfo);
-            }
+            addMapInfo("hwinfo_network", mapInfo);
         } else if ("keyboard" == mapInfo["Hardware Class"]) {
             addMouseKeyboardInfoMapInfo("hwinfo_keyboard", mapInfo);
         } else if ("mouse" == mapInfo["Hardware Class"]) {
@@ -654,6 +659,12 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
         if (("dmidecode1" == key) && (mapInfo.size() > 0)) {
             QString filename = loadOemTomlFileName(mapInfo);
             parseOemTomlInfo(filename);
+
+            QString tomlFilesName = Common::tomlFilesNameGet();
+            if (!tomlFilesName.isEmpty() &&  tomlFilesName != "tomlFilesName") {
+                if (parseOemTomlInfo(tomlFilesName))
+                    qCInfo(appLog) << "config Toml File name is: /usr/share/deepin-devicemanager/" << tomlFilesName ;
+            }
         }
 
         // 过滤空cpu卡槽信息

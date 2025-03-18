@@ -43,6 +43,14 @@ public:
     explicit DeviceBaseInfo(QObject *parent = nullptr);
     virtual ~DeviceBaseInfo();
 
+    const QString translateStr(const QString &inStr);
+    const QString nameTr();
+    /**
+     * @brief name:获取设备名称
+     * @return 设备名称
+     */
+    virtual const QString &name() const = 0;
+
     /**
      * @brief getOtherAttribs:获取设备的其它信息
      * @return 其他信息组成的map
@@ -55,6 +63,19 @@ public:
      * @return 基本信息组成的list
      */
     const QList<QPair<QString, QString>> &getBaseAttribs();
+
+    /**
+     * @brief getOtherAttribs:获取设备的其它信息
+     * @return 其他信息组成的map
+     */
+    //const QMap<QString, QString> &getOtherAttribs()const;
+    const QList<QPair<QString, QString>> &getOtherTranslationAttribs();
+
+    /**
+     * @brief getBaseAttribs::获取基本设备信息
+     * @return 基本信息组成的list
+     */
+    const QList<QPair<QString, QString>> &getBaseTranslationAttribs();
 
     /**
      * @brief getTableHeader : 用于存放表格的头部
@@ -79,12 +100,6 @@ public:
      * @return 概况信息
      */
     virtual const QString getOverviewInfo();
-
-    /**
-     * @brief name:获取设备名称
-     * @return 设备名称
-     */
-    virtual const QString &name() const = 0;
 
     /**
      * @brief vendor:获取设备制造商
@@ -210,6 +225,14 @@ public:
     const QString getVendorOrModelId(const QString &sysPath, bool flag = true);
 
     /**
+     * @brief setVendorNameBylsusbLspci:获取Vendor 和 Name
+     * @param vidpid 属性vidpid
+     * @param modalias
+     * @return
+     */
+    void setVendorNameBylsusbLspci(const QString &vidpid, const QString &modalias);
+
+    /**
      * @brief get_string:读取文件内信息
      * @param path:文件绝对路径+名称
      */
@@ -220,6 +243,20 @@ public:
      * @return
      */
     const QString getDriverVersion();
+
+    /**
+     * @brief readDeviceInfoKeyValue:读取key信息
+     * @param key:属性名称
+     * @return :value属性值
+     */
+    const QString readDeviceInfoKeyValue(const QString &key);
+
+    /**
+     * @brief readDeviceInfoKeyValue:设置key信息
+     * @param key:属性名称
+     * @return :value属性值
+     */
+    bool setDeviceInfoKeyValue(const QString &key, const QString &value);
 
     /**
      * @brief isValid：判断属性值是否有效
@@ -462,6 +499,9 @@ protected:
      */
     bool PhysIDMapInfo(const QMap<QString, QString> &mapInfo);
 
+private:
+    void generatorTranslate();
+
 protected:
     QString            m_Name;         //<! 【名称】
     QString            m_Vendor;       //<! 【制造商
@@ -480,7 +520,11 @@ protected:
     QString                        m_HwinfoToLshw;  //<! 匹配hwinfo和lshw的key
     QList<QPair<QString, QString>> m_LstBaseInfo;   //<! 基本信息
     QList<QPair<QString, QString>> m_LstOtherInfo;  //<! 其它信息
+    QList<QPair<QString, QString>> m_LstBaseInfoTr;   //<! 基本信息 翻译后的
+    QList<QPair<QString, QString>> m_LstOtherInfoTr;  //<! 其它信息 翻译后的
     QStringList                    m_TableHeader;   //<! 用于存放表格的表头
+    QStringList                    m_TableHeaderTr;   //<! 用于存放表格的表头 翻译后的
+    QStringList                    m_TableDataTr;     //<! 用于存放表格的内容  翻译后的
     QStringList                    m_TableData;     //<! 用于存放表格的内容
     QSet<QString>                  m_FilterKey;     //<! 用于避免添加重复信息
     bool                           m_Enable;        //<! 设备是否是启用状态

@@ -231,7 +231,9 @@ void ThreadExecXrandr::getMonitorInfoFromXrandrVerbose()
 {
     QList<QMap<QString, QString>> lstMap;
     loadXrandrVerboseInfo(lstMap, "xrandr --verbose");
-
+    if (Common::specialComType == Common::SpecialComputerType::NormalCom) {
+        std::reverse(lstMap.begin(), lstMap.end());
+    }
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1)

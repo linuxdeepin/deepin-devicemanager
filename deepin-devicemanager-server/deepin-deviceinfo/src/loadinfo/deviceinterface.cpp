@@ -7,16 +7,29 @@
 #include "mainjob.h"
 
 #include <QDBusConnection>
+#include <QDBusMessage>
+#include <polkit-qt5-1/PolkitQt1/Authority>
+
+using namespace PolkitQt1;
+bool DeviceInterface::getUserAuthorPasswd()
+{
+#ifdef DISABLE_POLKIT
+    return true;
+#endif
+    Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                                             SystemBusNameSubject(message().service()),
+                                                                             Authority::AllowUserInteraction);
+    return result == Authority::Yes;
+}
 
 DeviceInterface::DeviceInterface(const char *name, QObject *parent)
     : QObject(parent)
 {
     QDBusConnection::RegisterOptions opts =
-        QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals |
-        QDBusConnection::ExportAllProperties;
+            QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties;
 
     QDBusConnection::connectToBus(QDBusConnection::SystemBus, QString(name))
-    .registerObject("/org/deepin/DeviceInfo", this, opts);
+            .registerObject("/org/deepin/DeviceInfo", this, opts);
 }
 
 QString DeviceInterface::getInfo(const QString &key)

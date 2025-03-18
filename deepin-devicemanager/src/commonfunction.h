@@ -8,6 +8,7 @@
 
 // 其它头文件
 #include <QString>
+#include <QStringList>
 
 class Common
 {
@@ -30,11 +31,17 @@ public:
     static QString checkBoardVendorFlag();
 
     static QString boardVendorType();
+    static QString specialVendorType();
+    static QString specialHString();
+    static QString tomlFilesNameGet();
+    static void tomlFilesNameSet(QString name);
 
     /**
      * @brief specialComType
      * special computer type:PGUW(value:1),KLVV/L540(value:2),KLVU(value:3),PGUV/W585(value:4)
      */
     static int specialComType;
+
+    static QByteArray executeClientCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
 };
 #endif // COMMONFUNCTION_H
