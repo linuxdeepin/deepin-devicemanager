@@ -3,21 +3,21 @@ host = https://www.transifex.com
 minimum_perc = 80
 mode = developer
 
-[o:linuxdeepin:p:deepin-device-manager:r:deepin-device-manager]
+[o:linuxdeepin:p:deepin-device-manager:r:b97583e592a1a4cda05b276b6f193e45]
 file_filter = deepin-devicemanager/translations/deepin-devicemanager_<lang>.ts
 source_file = deepin-devicemanager/translations/deepin-devicemanager.ts
 preTranslate_file = deepin-devicemanager/translations/policy
 source_lang = en
 type = QT
 
-[o:linuxdeepin:p:deepin-device-manager:r:deepin-device-manager-desktop]
+[o:linuxdeepin:p:deepin-device-manager:r:a9b459cc7c27940c9f2ee32522d9694b]
 file_filter = deepin-devicemanager/translations/desktop/desktop_<lang>.ts
 source_file = deepin-devicemanager/translations/desktop/desktop.ts
 preTranslate_file = deepin-devicemanager/translations/policy
 source_lang = en
 type = QT
 
-[o:linuxdeepin:p:deepin-device-manager:r:deepin-device-manager-policy]
+[o:linuxdeepin:p:deepin-device-manager:r:b81d55382abc8418ae7409d30db2ed4a]
 file_filter = deepin-devicemanager/translations/policy/policy_<lang>.ts
 source_file = deepin-devicemanager/translations/policy/policy.ts
 preTranslate_file = deepin-devicemanager/translations/policy
