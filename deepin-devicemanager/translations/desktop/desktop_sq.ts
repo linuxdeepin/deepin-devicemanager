@@ -4,7 +4,7 @@
 <message>
 <location filename="Desktop Entry]Comment" line="0"/>
 <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-<translation>Përgjegjësi i Pajisjeve është një mjet i dobishëm për të parë të dhëna hardware dhe për administrim pajisjesh.</translation>
+<translation>Përgjegjësi i Pajisjeve është një mjet i dobishëm për të parë hollësi hardware-i dhe për administrim pajisjesh.</translation>
 </message>
 <message>
 <location filename="Desktop Entry]GenericName" line="0"/>
@@ -14,7 +14,7 @@
 <message>
 <location filename="Desktop Entry]Name" line="0"/>
 <source>Deepin Device Manager</source>
-<translation>Deepin Device Manager</translation>
+<translation>Përgjegjës Deepin Pajisjesh</translation>
 </message>
 </context>
 </TS>
