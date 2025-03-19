@@ -446,7 +446,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
         <source>L4 Cache</source>
-        <translation type="unfinished"/>
+        <translation>L2 välimuisti {4 ?}</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
@@ -2624,7 +2624,7 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="518"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="624"/>
         <source>Device Number</source>
-        <translation>Laitteen numero</translation>
+        <translation>Laitenumero</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="115"/>
@@ -2662,7 +2662,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>CPU variant</source>
-        <translation>CPU-muunnelma</translation>
+        <translation>CPU-variantti</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
@@ -2702,7 +2702,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
         <source>Nine</source>
-        <translation type="unfinished"/>
+        <translation>Yhdeksän</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
