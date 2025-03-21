@@ -1,17 +1,17 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="sq" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="et" version="2.1">
 <context>
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation>Për të lexuar të hollësi hardware-i, lypset mirëfilltësim</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Anuloje</translation>
+        <translation>Loobu</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation>Ripohojeni</translation>
+        <translation>Kinnita</translation>
     </message>
 </context>
 </TS>

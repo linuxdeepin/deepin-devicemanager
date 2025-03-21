@@ -1,21 +1,21 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="sl">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ar">
 <context>
     <name>BtnLabel</name>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="43"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>موافق</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="44"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>التغذية الراجعة</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="56"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>موافق</translation>
     </message>
 </context>
 <context>
@@ -23,7 +23,7 @@
     <message>
         <location filename="../src/Widget/CmdButtonWidget.cpp" line="22"/>
         <source>More</source>
-        <translation>Več</translation>
+        <translation>المزيد</translation>
     </message>
 </context>
 <context>
@@ -31,17 +31,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="85"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation type="unfinished"/>
+        <translation>EC_.notify_network</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="86"/>
         <source>EC_REINSTALL</source>
-        <translation type="unfinished"/>
+        <translation>EC_reinstall</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="87"/>
         <source>EC_6</source>
-        <translation type="unfinished"/>
+        <translation>EC_6</translation>
     </message>
 </context>
 <context>
@@ -50,12 +50,12 @@
         <location filename="../src/Page/PageDetail.cpp" line="44"/>
         <location filename="../src/Page/PageDetail.cpp" line="47"/>
         <source>More</source>
-        <translation>Več</translation>
+        <translation>المزيد</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDetail.cpp" line="45"/>
         <source>Collapse</source>
-        <translation>Zloži</translation>
+        <translation>التجويف</translation>
     </message>
 </context>
 <context>
@@ -64,13 +64,13 @@
         <location filename="../src/Widget/DetailTreeView.cpp" line="155"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="376"/>
         <source>More</source>
-        <translation>Več</translation>
+        <translation>المزيد</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetailTreeView.cpp" line="159"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="383"/>
         <source>Collapse</source>
-        <translation>Zloži</translation>
+        <translation>التجويف</translation>
     </message>
 </context>
 <context>
@@ -79,12 +79,12 @@
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="233"/>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="244"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="236"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متاح</translation>
     </message>
 </context>
 <context>
@@ -92,79 +92,79 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="307"/>
         <source>Device Name</source>
-        <translation>Ime naprave</translation>
+        <translation>اسم الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="328"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="352"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>اسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="329"/>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="353"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="341"/>
         <source>Chip</source>
-        <translation>Čip</translation>
+        <translation>رقاقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="342"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="339"/>
         <source>Module Alias</source>
-        <translation>Alias modula</translation>
+        <translation>اسم المعرف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="340"/>
         <source>Physical ID</source>
-        <translation>Fizični ID</translation>
+        <translation>معرف الفيزيائي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="330"/>
         <source>SysFS_Path</source>
-        <translation type="unfinished"/>
+        <translation>مسار SysFS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="331"/>
         <source>Description</source>
-        <translation>Opis</translation>
+        <translation>الوصف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="332"/>
         <source>Revision</source>
-        <translation type="unfinished"/>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="333"/>
         <source>KernelModeDriver</source>
-        <translation type="unfinished"/>
+        <translation>المحرك في الوضع kernel</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="343"/>
         <source>Memory Address</source>
-        <translation>Pomnilniški naslov</translation>
+        <translation>عنوان الذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="344"/>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation>خطوط الإخلاء</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="362"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متوفر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="366"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
 </context>
 <context>
@@ -172,17 +172,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="625"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="626"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>البائع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="627"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
 </context>
 <context>
@@ -190,17 +190,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="243"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>البائع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="244"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="245"/>
         <source>Chipset</source>
-        <translation>Nabor vezja</translation>
+        <translation>الشريحة</translation>
     </message>
 </context>
 <context>
@@ -208,87 +208,87 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="240"/>
         <source>Alias</source>
-        <translation type="unfinished"/>
+        <translation>الاسم المستعار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="241"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="242"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>البائع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="243"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="250"/>
         <source>Module Alias</source>
-        <translation>Alias modula</translation>
+        <translation>اسم المعرف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="251"/>
         <source>Physical ID</source>
-        <translation>Fizični ID</translation>
+        <translation>المعرف المادي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="252"/>
         <source>Speed</source>
-        <translation>Hitrost</translation>
+        <translation>السرعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="253"/>
         <source>Maximum Power</source>
-        <translation>Največja moč</translation>
+        <translation>الطاقة القصوى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="254"/>
         <source>Driver Version</source>
-        <translation>Različica gonilnika</translation>
+        <translation>اصدار الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="255"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation>برنامج التشغيل (ملف التعريف)</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="256"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>القدرات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="257"/>
         <source>Bus Info</source>
-        <translation>Podatki o vodilu</translation>
+        <translation>معلومات الناقل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="258"/>
         <source>Logical Name</source>
-        <translation>Logično ime</translation>
+        <translation>الاسم المنطقي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="259"/>
         <source>MAC Address</source>
-        <translation>MAC naslov</translation>
+        <translation>عنوان ماك</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="271"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متوفر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="275"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
 </context>
 <context>
@@ -296,67 +296,67 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="128"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="129"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="130"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="131"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="132"/>
         <source>Bus Info</source>
-        <translation>Podatki o vodilu</translation>
+        <translation>معلومات الحافلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="133"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="134"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation>المحرك</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="135"/>
         <source>Maximum Power</source>
-        <translation>Največja moč</translation>
+        <translation>الطاقة القصوى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="136"/>
         <source>Speed</source>
-        <translation>Hitrost</translation>
+        <translation>السرعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="141"/>
         <source>Module Alias</source>
-        <translation>Alias modula</translation>
+        <translation>اسم الوحدة الفرعية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="142"/>
         <source>Physical ID</source>
-        <translation>Fizični ID</translation>
+        <translation>معرف الفيزيائي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="153"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متوفر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="157"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
 </context>
 <context>
@@ -364,7 +364,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceComputer.cpp" line="163"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
 </context>
 <context>
@@ -373,28 +373,28 @@
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="287"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="288"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
         <source>CPU ID</source>
-        <translation>ID procesorja</translation>
+        <translation>معرف وحدة المعالجة المركزية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>Core ID</source>
-        <translation>ID jedra</translation>
+        <translation>معرف النواة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
         <source>Threads</source>
-        <translation>Niti</translation>
+        <translation>الخيوط</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
@@ -405,43 +405,43 @@
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="75"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
         <source>Architecture</source>
-        <translation>Arhitektura</translation>
+        <translation>الهندسة المعمارية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="76"/>
         <source>CPU Family</source>
-        <translation>Družina procesorjev</translation>
+        <translation>عائلة وحدة المعالجة المركزية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="77"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="107"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="120"/>
         <source>Processor</source>
-        <translation>Procesor</translation>
+        <translation>المعالج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="118"/>
         <source>Core(s)</source>
-        <translation>Jeder</translation>
+        <translation>النوى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="270"/>
         <source>Virtualization</source>
-        <translation>Virtualizacija</translation>
+        <translation>التقليد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="271"/>
         <source>Flags</source>
-        <translation>Zastavice</translation>
+        <translation>العلامات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="272"/>
         <source>Extensions</source>
-        <translation>Razširitve</translation>
+        <translation>التوسيعات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
@@ -451,38 +451,38 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
         <source>L3 Cache</source>
-        <translation>L3 predpomnilnik</translation>
+        <translation>مساحة التخزين المؤقت الثالثة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="275"/>
         <source>L2 Cache</source>
-        <translation>L2 predpomnilnik</translation>
+        <translation>مساحة التخزين المؤقت الثانية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="276"/>
         <source>L1i Cache</source>
-        <translation>L1i predpomnilnik</translation>
+        <translation>مساحة التخزين المؤقت_LEVEL 1 داخل المعالج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="277"/>
         <source>L1d Cache</source>
-        <translation>L1d predpomnilnik</translation>
+        <translation>مساحة التخزين المؤقت_LEVEL 1 خارج المعالج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="278"/>
         <source>Stepping</source>
-        <translation>Revizija</translation>
+        <translation>خطوة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
         <source>Speed</source>
-        <translation>Hitrost</translation>
+        <translation>السرعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="289"/>
         <source>Max Speed</source>
-        <translation>Največja hitrost</translation>
+        <translation>أقصى سرعة</translation>
     </message>
 </context>
 <context>
@@ -490,77 +490,77 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="62"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="63"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="64"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="65"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="66"/>
         <source>Graphics Memory</source>
-        <translation>Grafični pomnilnik</translation>
+        <translation>ذاكرة الرسومات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="327"/>
         <source>Module Alias</source>
-        <translation>Alias modula</translation>
+        <translation>اسم الوحدة الشبكي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="328"/>
         <source>Physical ID</source>
-        <translation>Fizični ID</translation>
+        <translation>معرف الفيزيائي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="329"/>
         <source>Memory Address</source>
-        <translation>Pomnilniški naslov</translation>
+        <translation>عنوان الذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="330"/>
         <source>IO Port</source>
-        <translation>V/I vrata</translation>
+        <translation>منفذ الإدخال / الإخراج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="331"/>
         <source>Bus Info</source>
-        <translation>Podatki o vodilu</translation>
+        <translation>معلومات الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="333"/>
         <source>Maximum Resolution</source>
-        <translation>Največja ločljivost</translation>
+        <translation>أقصى دقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="334"/>
         <source>Minimum Resolution</source>
-        <translation>Najmanjša ločljivost</translation>
+        <translation>أدنى دقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="336"/>
         <source>Current Resolution</source>
-        <translation>Trenutna ločljivost</translation>
+        <translation>الدقة الحالية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="337"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation>المحرك</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="338"/>
         <source>Description</source>
-        <translation>Opis</translation>
+        <translation>الوصف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="340"/>
@@ -590,17 +590,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="345"/>
         <source>DigitalOutput</source>
-        <translation type="unfinished"/>
+        <translation>إخراج رقمي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="346"/>
         <source>Display Output</source>
-        <translation>Display Output</translation>
+        <translation>إخراج العرض</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="347"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="348"/>
@@ -610,7 +610,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="360"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متاح</translation>
     </message>
 </context>
 <context>
@@ -618,72 +618,72 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="163"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>اسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="164"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="165"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="166"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="167"/>
         <source>Bus Info</source>
-        <translation>Podatki o vodilu</translation>
+        <translation>معلومات الحافلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="173"/>
         <source>Module Alias</source>
-        <translation>Alias modula</translation>
+        <translation>اسم الوحدة الفرعية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="174"/>
         <source>Physical ID</source>
-        <translation>Fizični ID</translation>
+        <translation>معرف المادي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="175"/>
         <source>Speed</source>
-        <translation>Hitrost</translation>
+        <translation>السرعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="176"/>
         <source>Maximum Power</source>
-        <translation>Največja moč</translation>
+        <translation>الحد الأقصى للطاقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="177"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation> trình điều khiển</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="178"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="180"/>
         <source>Serial Number</source>
-        <translation>Serijska številka</translation>
+        <translation>رقم التسلسل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="192"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متاح</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="196"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
 </context>
 <context>
@@ -691,72 +691,72 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="515"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>اسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="516"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="517"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="518"/>
         <source>Interface</source>
-        <translation>Vmesnik</translation>
+        <translation>الوصلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="519"/>
         <source>Bus Info</source>
-        <translation>Podatki o vodilu</translation>
+        <translation>معلومات الحافلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="525"/>
         <source>Module Alias</source>
-        <translation>Alias modula</translation>
+        <translation>اسم الوحدة الفرعية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="526"/>
         <source>Physical ID</source>
-        <translation>Fizični ID</translation>
+        <translation>معرف المادي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="527"/>
         <source>Speed</source>
-        <translation>Hitrost</translation>
+        <translation>السرعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="528"/>
         <source>Maximum Current</source>
-        <translation type="unfinished"/>
+        <translation> الحد الأقصى للتيار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="529"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation>المحرك</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="530"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="531"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="543"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متوفر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="547"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
 </context>
 <context>
@@ -773,131 +773,131 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1579"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1595"/>
         <source>Overview</source>
-        <translation>Pregled</translation>
+        <translation>overview</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="150"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="263"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1681"/>
         <source>CPU</source>
-        <translation>Procesor</translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="155"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1684"/>
         <source>CPU quantity</source>
-        <translation>Število procesorjev</translation>
+        <translation>كمية المعالجات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="264"/>
         <source>Motherboard</source>
-        <translation>Matična plošča</translation>
+        <translation>لوحة الأم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="265"/>
         <source>Memory</source>
-        <translation>Pomnilnik</translation>
+        <translation>الذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="266"/>
         <source>Display Adapter</source>
-        <translation>Grafični vmesnik</translation>
+        <translation>مثبت الشاشة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="181"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Sound Adapter</source>
-        <translation>Zvočni vmesnik</translation>
+        <translation>مثبت الصوت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="186"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="268"/>
         <source>Storage</source>
-        <translation>Shramba</translation>
+        <translation>التخزين</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="191"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="269"/>
         <source>Other PCI Devices</source>
-        <translation>Druge PCI naprave</translation>
+        <translation>أجهزة PCI الأخرى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="196"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="270"/>
         <source>Battery</source>
-        <translation>Akumulator</translation>
+        <translation>البطارية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="207"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="271"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation>بلوتوث</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="212"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="272"/>
         <source>Network Adapter</source>
-        <translation>Omrežni vmesnik</translation>
+        <translation>بطاقة الشبكة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="223"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="273"/>
         <source>Mouse</source>
-        <translation>Miška</translation>
+        <translation>الفارة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="228"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="274"/>
         <source>Keyboard</source>
-        <translation>Tipkovnica</translation>
+        <translation>الكيبورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="238"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="275"/>
         <source>Monitor</source>
-        <translation>Monitor</translation>
+        <translation>الشاشة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="242"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="276"/>
         <source>CD-ROM</source>
-        <translation>CD-ROM</translation>
+        <translation> قرص مضغوط محرك</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="246"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="277"/>
         <source>Printer</source>
-        <translation>Tiskalnik</translation>
+        <translation>طابعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="250"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="278"/>
         <source>Camera</source>
-        <translation>Kamera</translation>
+        <translation>كاميرا</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="254"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="279"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Druge naprave</translation>
+        <translation>أجهزة إدخال أخرى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1491"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1555"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1586"/>
         <source>Device</source>
-        <translation>Naprava</translation>
+        <translation>جهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1499"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1559"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1590"/>
         <source>OS</source>
-        <translation>OS</translation>
+        <translation>نظام التشغيل</translation>
     </message>
 </context>
 <context>
@@ -906,72 +906,72 @@
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="134"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="165"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="135"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="166"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="136"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="169"/>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation>الحجم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="137"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="167"/>
         <source>Type</source>
-        <translation>VrstaVrsta</translation>
+        <translation>النوع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="138"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="168"/>
         <source>Speed</source>
-        <translation>Hitrost</translation>
+        <translation>السرعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="139"/>
         <source>Total Width</source>
-        <translation>Celotna širina</translation>
+        <translation>العرض الكلي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="140"/>
         <source>Locator</source>
-        <translation>Lokator</translation>
+        <translation>الموقع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="141"/>
         <source>Serial Number</source>
-        <translation>Serijska številka</translation>
+        <translation>رقم التسلسل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="149"/>
         <source>Configured Voltage</source>
-        <translation>Nastavljena napetost</translation>
+        <translation>التوتر المconfigure</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="150"/>
         <source>Maximum Voltage</source>
-        <translation>Največja napetost</translation>
+        <translation>أقصى جهد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="151"/>
         <source>Minimum Voltage</source>
-        <translation>Najmanjša napetost</translation>
+        <translation>أدنى جهد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="152"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="154"/>
         <source>Configured Speed</source>
-        <translation>Nastavljena hitrost</translation>
+        <translation>السرعة المconfigure</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="156"/>
         <source>Data Width</source>
-        <translation>Podatkovna širina</translation>
+        <translation>عرض البيانات</translation>
     </message>
 </context>
 <context>
@@ -979,57 +979,57 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="312"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="313"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="314"/>
         <source>Type</source>
-        <translation>VrstaVrsta</translation>
+        <translation>النوع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="315"/>
         <source>Display Input</source>
-        <translation>Vhod zaslona</translation>
+        <translation>عرض المدخلات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="316"/>
         <source>Interface Type</source>
-        <translation>Vrsta vmesnika</translation>
+        <translation>نوع الواجهة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="322"/>
         <source>Support Resolution</source>
-        <translation>Podprta ločljivost</translation>
+        <translation> دعم معدل التحديث</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="324"/>
         <source>Current Resolution</source>
-        <translation>Trenutna ločljivost</translation>
+        <translation> معدل التحديث الحالي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="325"/>
         <source>Display Ratio</source>
-        <translation>Razmerje slike</translation>
+        <translation>نسبة العرض</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="327"/>
         <source>Primary Monitor</source>
-        <translation>Glavni monitor</translation>
+        <translation>الشاشة الرئيسية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="328"/>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation>الحجم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="329"/>
         <source>Serial Number</source>
-        <translation>Serijska številka</translation>
+        <translation>رقم التسلسل</translation>
     </message>
 </context>
 <context>
@@ -1038,84 +1038,84 @@
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="294"/>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="333"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="295"/>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="334"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="296"/>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="335"/>
         <source>Type</source>
-        <translation>VrstaVrsta</translation>
+        <translation>النوع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="297"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="298"/>
         <source>Bus Info</source>
-        <translation>Podatki o vodilu</translation>
+        <translation>معلومات الحافلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="299"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="300"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation> trình điều khiển</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="301"/>
         <source>Driver Version</source>
-        <translation>Različica gonilnika</translation>
+        <translation>إصدار trình điều khiển</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="307"/>
         <source>Module Alias</source>
-        <translation>Alias modula</translation>
+        <translation>اسم الوحدة الفرعية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="308"/>
         <source>Physical ID</source>
-        <translation>Fizični ID</translation>
+        <translation>معرف المادية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="309"/>
         <source>Maximum Rate</source>
-        <translation type="unfinished"/>
+        <translation>المعدل الأقصى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="310"/>
         <source>Negotiation Rate</source>
-        <translation type="unfinished"/>
+        <translation> معدل التفاوض</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="311"/>
         <source>Port</source>
-        <translation>Vrata</translation>
+        <translation> المنفذ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="312"/>
         <source>Multicast</source>
-        <translation>Hkratno dostavljanje</translation>
+        <translation>multicast</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="313"/>
         <source>Link</source>
-        <translation>Povezava</translation>
+        <translation>الرابط</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="314"/>
         <source>Latency</source>
-        <translation>Latenca</translation>
+        <translation>latency</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="315"/>
@@ -1125,52 +1125,52 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="316"/>
         <source>Firmware</source>
-        <translation>Strojni program</translation>
+        <translation>البرمجيات الثابتة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="317"/>
         <source>Duplex</source>
-        <translation>Dupleks</translation>
+        <translation>الكثافة المزدوجة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="318"/>
         <source>Broadcast</source>
-        <translation>Oddajanje</translation>
+        <translation>البث</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="319"/>
         <source>Auto Negotiation</source>
-        <translation>Samodejno pogajanje</translation>
+        <translation>التعديل التلقائي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="322"/>
         <source>Memory Address</source>
-        <translation>Pomnilniški naslov</translation>
+        <translation>عنوان الذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="323"/>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation>خطوط الإخلاء</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="324"/>
         <source>MAC Address</source>
-        <translation>MAC naslov</translation>
+        <translation>عنوان MAC</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="325"/>
         <source>Logical Name</source>
-        <translation>Logično ime</translation>
+        <translation>اسم منطقي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="344"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متاح</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="348"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
 </context>
 <context>
@@ -1178,57 +1178,57 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="74"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>اسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="75"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>البائع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="76"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="77"/>
         <source>Bus Info</source>
-        <translation>Podatki o vodilu</translation>
+        <translation>معلومات الحافلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="78"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="84"/>
         <source>Input/Output</source>
-        <translation>Vhod/Izhod</translation>
+        <translation>مدخل/مخرج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="85"/>
         <source>Memory</source>
-        <translation>Pomnilnik</translation>
+        <translation>ذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="86"/>
         <source>IRQ</source>
-        <translation>IRQ</translation>
+        <translation>خطوط الإخلاء</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="87"/>
         <source>Latency</source>
-        <translation>Latenca</translation>
+        <translation>الانتظار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="90"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation> trình điều khiển</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOtherPCI.cpp" line="91"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
 </context>
 <context>
@@ -1236,62 +1236,62 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="184"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>اسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="185"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>البائع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="186"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="187"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="188"/>
         <source>Bus Info</source>
-        <translation>Podatki o vodilu</translation>
+        <translation>معلومات الحافلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="189"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="190"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation>المحرك</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="191"/>
         <source>Maximum Power</source>
-        <translation>Največja moč</translation>
+        <translation>القوة القصوى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="192"/>
         <source>Speed</source>
-        <translation>Hitrost</translation>
+        <translation>السرعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="198"/>
         <source>Serial Number</source>
-        <translation>Serijska številka</translation>
+        <translation>رقم التسلسل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="207"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متاح</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="210"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
 </context>
 <context>
@@ -1299,82 +1299,82 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="178"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="179"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="180"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>البائع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="181"/>
         <source>Serial Number</source>
-        <translation>Serijska številka</translation>
+        <translation>رقم التسلسل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="182"/>
         <source>Type</source>
-        <translation>VrstaVrsta</translation>
+        <translation>النوع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="183"/>
         <source>Status</source>
-        <translation>Status</translation>
+        <translation>الحالة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="184"/>
         <source>Capacity</source>
-        <translation>Zmogljivost</translation>
+        <translation>السعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="185"/>
         <source>Voltage</source>
-        <translation>Napetost</translation>
+        <translation>التوتر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="186"/>
         <source>Slot</source>
-        <translation>Reža</translation>
+        <translation>فتحة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="187"/>
         <source>Design Capacity</source>
-        <translation>Načrtovana zmogljivost</translation>
+        <translation>السعة التصميمية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="188"/>
         <source>Design Voltage</source>
-        <translation>Načrtovana napetost</translation>
+        <translation>جهد التصميم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="189"/>
         <source>SBDS Version</source>
-        <translation>SBDS različica</translation>
+        <translation>إصدار SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="190"/>
         <source>SBDS Serial Number</source>
-        <translation>SBDS serijska številka</translation>
+        <translation>رقم التسلسل SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="191"/>
         <source>SBDS Manufacture Date</source>
-        <translation>SBDS datum izdelave</translation>
+        <translation>تاريخ صنع SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="192"/>
         <source>SBDS Chemistry</source>
-        <translation>SBDS kemija</translation>
+        <translation>كيمياء SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="193"/>
         <source>Temperature</source>
-        <translation>Temperatura</translation>
+        <translation>درجة الحرارة</translation>
     </message>
 </context>
 <context>
@@ -1382,27 +1382,27 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="150"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="151"/>
         <source>Model</source>
-        <translation>Model</translation>
+        <translation>الطراز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="152"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="153"/>
         <source>Serial Number</source>
-        <translation>Serijska številka</translation>
+        <translation>رقم التسلسل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="159"/>
         <source>Shared</source>
-        <translation>Skupna raba</translation>
+        <translation>مشاركة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="160"/>
@@ -1412,17 +1412,17 @@
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="161"/>
         <source>Status</source>
-        <translation>Status</translation>
+        <translation>الحالة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="162"/>
         <source>Interface Type</source>
-        <translation>Vrsta vmesnika</translation>
+        <translation>نوع الواجهة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="173"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
 </context>
 <context>
@@ -1431,80 +1431,80 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="633"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="675"/>
         <source>Vendor</source>
-        <translation>Proizvajalec</translation>
+        <translation>المورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="634"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="676"/>
         <source>Media Type</source>
-        <translation>Vrsta nosilca</translation>
+        <translation>نوع الوسائط</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="635"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="677"/>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation>الحجم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="632"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="674"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="636"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="637"/>
         <source>Capabilities</source>
-        <translation>Zmogljivosti</translation>
+        <translation>المهارات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="660"/>
         <source>Module Alias</source>
-        <translation>Alias modula</translation>
+        <translation>اسم الوحدة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="661"/>
         <source>Physical ID</source>
-        <translation>Fizični ID</translation>
+        <translation>معرف المادية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="643"/>
         <source>Firmware Version</source>
-        <translation>Različica strojnega programa</translation>
+        <translation>إصدار البرنامج الثابت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="644"/>
         <source>Speed</source>
-        <translation>Hitrost</translation>
+        <translation>السرعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="645"/>
         <source>Description</source>
-        <translation>Opis</translation>
+        <translation>الوصف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="657"/>
         <source>Serial Number</source>
-        <translation>Serijska številka</translation>
+        <translation>رقم التسلسل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="658"/>
         <source>Interface</source>
-        <translation>Vmesnik</translation>
+        <translation>الواجهة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="659"/>
         <source>Rotation Rate</source>
-        <translation>Hitrost vrtenja</translation>
+        <translation>معدل الدوران</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="685"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متوفر</translation>
     </message>
 </context>
 <context>
@@ -1513,12 +1513,12 @@
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="52"/>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="140"/>
         <source>Select a driver for update</source>
-        <translation type="unfinished"/>
+        <translation>اختر trình điều khiển للتحديث</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="134"/>
         <source>No drivers found in this folder</source>
-        <translation type="unfinished"/>
+        <translation>لم يتم العثور على برامج تشغيل في هذا المجلد</translation>
     </message>
 </context>
 <context>
@@ -1526,52 +1526,52 @@
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="75"/>
         <source>Loading Audio Device Info...</source>
-        <translation>Nalaganje podatkov o zvočni napravi...</translation>
+        <translation>تحميل معلومات جهاز الصوت...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="78"/>
         <source>Loading BIOS Info...</source>
-        <translation>Nalaganje podatkov o BIOS...</translation>
+        <translation>تحميل معلومات BIOS...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="88"/>
         <source>Loading CD-ROM Info...</source>
-        <translation>Nalaganje podatkov o CD-ROM pogonu</translation>
+        <translation>تحميل معلومات CD-ROM...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="93"/>
         <source>Loading Operating System Info...</source>
-        <translation>Nalaganje podatkov o operacijskem sistemu...</translation>
+        <translation>تحميل معلومات نظام التشغيل...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="96"/>
         <source>Loading CPU Info...</source>
-        <translation>Nalaganje podatkov o procesorju...</translation>
+        <translation>تحميل معلومات وحدة المعالجة المركزية...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="97"/>
         <source>Loading Other Devices Info...</source>
-        <translation>Nalaganje podatkov o drugih napravah...</translation>
+        <translation>تحميل معلومات الأجهزة الأخرى...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="98"/>
         <source>Loading Power Info...</source>
-        <translation>Nalaganje podatkov o napajanju...</translation>
+        <translation>تحميل معلومات الطاقة...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="99"/>
         <source>Loading Printer Info...</source>
-        <translation>Nalaganje podatkov o tiskalniku...</translation>
+        <translation>تحميل معلومات الطابعة...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="102"/>
         <source>Loading Mouse Info...</source>
-        <translation>Nalaganje podatkov o miški...</translation>
+        <translation>تحميل معلومات الفأرة...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="103"/>
         <source>Loading Network Adapter Info...</source>
-        <translation>Nalaganje podatkov o omrežnem vmesniku...</translation>
+        <translation>تحميل معلومات محول الشبكة...</translation>
     </message>
 </context>
 <context>
@@ -1581,12 +1581,12 @@
         <location filename="../src/Widget/logtreeview.cpp" line="119"/>
         <location filename="../src/Widget/logtreeview.cpp" line="121"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/logtreeview.cpp" line="100"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متاح</translation>
     </message>
 </context>
 <context>
@@ -1594,12 +1594,12 @@
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="108"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="110"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متاح</translation>
     </message>
 </context>
 <context>
@@ -1608,87 +1608,87 @@
         <location filename="../src/Page/MainWindow.cpp" line="241"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
-        <translation>Podatki o napravi</translation>
+        <translation>معلومات الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="312"/>
         <source>Display shortcuts</source>
-        <translation>Bližnjice zaslona</translation>
+        <translation>عرض المقتطفات</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="313"/>
         <source>Close</source>
-        <translation>Zapri</translation>
+        <translation>إغلاق</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="314"/>
         <source>Help</source>
-        <translation>Pomoč</translation>
+        <translation>المساعدة</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="315"/>
         <source>Copy</source>
-        <translation>Kopiraj</translation>
+        <translation>نسخ</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="319"/>
         <source>System</source>
-        <translation>Sistem</translation>
+        <translation>النظام</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="326"/>
         <source>Export</source>
-        <translation>Izvozi</translation>
+        <translation>تصدير</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="327"/>
         <source>Refresh</source>
-        <translation>Osveži</translation>
+        <translation>تحديث</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="331"/>
         <source>Device Manager</source>
-        <translation>Upravitelj naprav</translation>
+        <translation>مدير الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="400"/>
         <source>Hardware</source>
-        <translation type="unfinished"/>
+        <translation>الأجهزة</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="400"/>
         <source>Drivers</source>
-        <translation type="unfinished"/>
+        <translation>المحركات</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="550"/>
         <source>Monitor</source>
-        <translation>Monitor</translation>
+        <translation>المراقب</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="550"/>
         <source>Overview</source>
-        <translation>Pregled</translation>
+        <translation>مoverview</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="554"/>
         <source>Display Adapter</source>
-        <translation>Grafični vmesnik</translation>
+        <translation>مثبت الشاشة</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="558"/>
         <source>CPU</source>
-        <translation>Procesor</translation>
+        <translation>معالج</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="562"/>
         <source>Network Adapter</source>
-        <translation>Omrežni vmesnik</translation>
+        <translation>مودم الشبكة</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="568"/>
         <source>Battery</source>
-        <translation>Akumulator</translation>
+        <translation>بطارية</translation>
     </message>
 </context>
 <context>
@@ -1696,7 +1696,7 @@
     <message>
         <location filename="../src/Page/PageDetail.cpp" line="308"/>
         <source>More</source>
-        <translation>Več</translation>
+        <translation>المزيد</translation>
     </message>
 </context>
 <context>
@@ -1705,39 +1705,39 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="92"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>اسم</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="93"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>الإصدار الحالي</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="93"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>إصدار نظام التشغيل للسائق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="94"/>
         <source>Status</source>
-        <translation>Status</translation>
+        <translation>الحالة</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="94"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>عمل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="179"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>المحركات القابلة للنسخ الاحتياطي</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="180"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>المحركات المستنسخة احتياطيًا</translation>
     </message>
 </context>
 <context>
@@ -1746,7 +1746,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="101"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="234"/>
         <source>Updating</source>
-        <translation type="unfinished"/>
+        <translation>التحديث</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="106"/>
@@ -1754,128 +1754,128 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="187"/>
         <source>Cancel</source>
         <comment>button</comment>
-        <translation>Prekini</translation>
+        <translation>إلغاء</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="107"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>التالي</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>تحذير</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>سيصبح الجهاز غير متاح بعد إلغاء تثبيت السائق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
         <source>Uninstall</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>إلغاء التثبيت</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
         <source>Uninstalling</source>
-        <translation type="unfinished"/>
+        <translation>يعمل على إلغاء التثبيت</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="159"/>
         <source>Update successful</source>
-        <translation type="unfinished"/>
+        <translation>تم التحديث بنجاح</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="159"/>
         <source>Uninstallation successful</source>
-        <translation type="unfinished"/>
+        <translation>تمت عملية الإلغاء بنجاح</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>Update failed</source>
-        <translation type="unfinished"/>
+        <translation>فشل التحديث</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>Uninstallation failed</source>
-        <translation type="unfinished"/>
+        <translation>فشل عملية الإلغاء</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="167"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>موافق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="186"/>
         <source>Next</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>التالي</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>المجلد المحدد غير موجود، يرجى إعادة الاختيار</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="212"/>
         <source>Update</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>تحديث</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
         <source>Previous</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>السابق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="246"/>
         <source>Broken package</source>
-        <translation type="unfinished"/>
+        <translation>حزمة معطوبة</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="250"/>
         <source>Unmatched package architecture</source>
-        <translation type="unfinished"/>
+        <translation>هيكل حزمة غير مطابق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="255"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="338"/>
         <source>The selected file does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>الملف المحدد غير موجود، يرجى إعادة الاختيار</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="339"/>
         <source>It is not a driver</source>
-        <translation type="unfinished"/>
+        <translation>ليس برنامجا تشغيل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="340"/>
         <source>Unable to install - no digital signature</source>
-        <translation type="unfinished"/>
+        <translation>غير قادر على التثبيت - لا وجود للتوقيع الرقمي</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>خطأ غير معروف</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
         <source>The driver module was not found</source>
-        <translation type="unfinished"/>
+        <translation>لم يتم العثور على وحدة التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
         <source>Invalid module format</source>
-        <translation type="unfinished"/>
+        <translation>تنسيق وحدة التشغيل غير صالح</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="337"/>
         <source>The driver module has dependencies</source>
-        <translation type="unfinished"/>
+        <translation>توجد عناصر تعتمد عليها وحدة التشغيل</translation>
     </message>
 </context>
 <context>
@@ -1885,55 +1885,55 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="115"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Device Name</source>
-        <translation>Ime naprave</translation>
+        <translation>اسم الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="103"/>
         <source>Version Available</source>
-        <translation type="unfinished"/>
+        <translation>النسخة المتاحة</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="104"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="117"/>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation>الحجم</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="105"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="118"/>
         <source>Status</source>
-        <translation>Status</translation>
+        <translation>الحالة</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="106"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>العمل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>الإصدار الجديد</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>الإصدار الحالي</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="212"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>المحركات المفقودة (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="213"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>المحركات القديمة (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="214"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>المحركات محدثة (%1)</translation>
     </message>
 </context>
 <context>
@@ -1943,7 +1943,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="115"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="485"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>تثبيت برنامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="99"/>
@@ -1951,23 +1951,23 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="116"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="487"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>نسخ احتياطي السائق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="117"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="489"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>استعادة السائق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>موافق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="629"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>التغذية الراجعة</translation>
     </message>
 </context>
 <context>
@@ -1975,37 +1975,37 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="93"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>لم يكن لديك أي سائقين يمكن استعادتها، يرجى القيام بالنسخ الاحتياطي أولا</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="96"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>اذهب إلى جهاز النسخ الاحتياطي للسائق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation>الاسم</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>الإصدار الحالي</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="124"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>إصدار النسخ الاحتياطي</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="125"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>العمل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="167"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>السائق القابل للاسترداد</translation>
     </message>
 </context>
 <context>
@@ -2013,32 +2013,32 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="20"/>
         <source>Refresh</source>
-        <translation>Osveži</translation>
+        <translation>تحديث</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="21"/>
         <source>Export</source>
-        <translation>Izvozi</translation>
+        <translation>تصدير</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="23"/>
         <source>Overview</source>
-        <translation>Pregled</translation>
+        <translation>مoverview</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>تثبيت السائق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>نسخ احتياطي السائق</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>استعادة السائق</translation>
     </message>
 </context>
 <context>
@@ -2046,27 +2046,27 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="162"/>
         <source>Failed to enable the device</source>
-        <translation>Neuspešen vklop naprave</translation>
+        <translation>فشل في تمكين الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="165"/>
         <source>Failed to disable the device</source>
-        <translation>Neuspešen izklop naprave</translation>
+        <translation>فشل في تعطيل الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="170"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>فشل في تعطيله: عدم القدرة على الحصول على رقم.Serial الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="192"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>تحديث السائقين</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="210"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>إزالة السائقين</translation>
     </message>
 </context>
 <context>
@@ -2074,22 +2074,22 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="39"/>
         <source>Refresh</source>
-        <translation>Osveži</translation>
+        <translation>تحديث</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="40"/>
         <source>Export</source>
-        <translation>Izvozi</translation>
+        <translation>تصدير</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="41"/>
         <source>Copy</source>
-        <translation>Kopiraj</translation>
+        <translation>نسخ</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="84"/>
         <source>Overview</source>
-        <translation>Pregled</translation>
+        <translation>الإجمالي</translation>
     </message>
 </context>
 <context>
@@ -2097,69 +2097,69 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="42"/>
         <source>Refresh</source>
-        <translation>Osveži</translation>
+        <translation>تحديث</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="43"/>
         <source>Export</source>
-        <translation>Izvozi</translation>
+        <translation>تصدير</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="44"/>
         <source>Copy</source>
-        <translation>Kopiraj</translation>
+        <translation>نسخ</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="45"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="208"/>
         <source>Enable</source>
-        <translation>Omogoči</translation>
+        <translation>تمكين</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="46"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>تحديث برامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="47"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>إزالة برامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="48"/>
         <source>Allow it to wake the computer</source>
-        <translation type="unfinished"/>
+        <translation>السماح لها باستيقاظ الكمبيوتر</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="210"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="292"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="309"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>فشل تعطيله: عدم القدرة على الحصول على رقم.Serial الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="296"/>
         <source>Failed to disable the device</source>
-        <translation>Neuspešen izklop naprave</translation>
+        <translation>فشل تعطيل الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="313"/>
         <source>Failed to enable the device</source>
-        <translation>Neuspešen vklop naprave</translation>
+        <translation>فشل تمكين الجهاز</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="328"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>تحديث برامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="345"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>إزالة برامج التشغيل</translation>
     </message>
 </context>
 <context>
@@ -2168,28 +2168,28 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="308"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="41"/>
         <source>SubVendor</source>
-        <translation>Podizvajalec</translation>
+        <translation>مورد فرعي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="309"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="42"/>
         <source>SubDevice</source>
-        <translation>Pod-naprava</translation>
+        <translation>جهاز فرعي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="322"/>
         <source>Driver</source>
-        <translation>Gonilnik</translation>
+        <translation> trình điều khiển</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="310"/>
         <source>Driver Status</source>
-        <translation>Status gonilnika</translation>
+        <translation>حالة الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="311"/>
         <source>Driver Activation Cmd</source>
-        <translation>Ukaz za aktivacijo gonilnika</translation>
+        <translation>cmd تنشيط الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="312"/>
@@ -2197,18 +2197,18 @@
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="44"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="623"/>
         <source>Config Status</source>
-        <translation>Status nastavitev</translation>
+        <translation>حالة التكوين</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="313"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="45"/>
         <source>latency</source>
-        <translation>latenca</translation>
+        <translation>الضرر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="314"/>
         <source>Phys</source>
-        <translation>Fiz.</translation>
+        <translation>فيزيائي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="315"/>
@@ -2218,7 +2218,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="316"/>
         <source>Handlers</source>
-        <translation>Ročice</translation>
+        <translation>المتصرفون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="317"/>
@@ -2230,137 +2230,137 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="318"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="502"/>
         <source>EV</source>
-        <translation>EV</translation>
+        <translation>حدث غير متوقع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="319"/>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="503"/>
         <source>KEY</source>
-        <translation>KLJUČ</translation>
+        <translation>مفتاح</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="321"/>
         <source>Version</source>
-        <translation>Različica</translation>
+        <translation>إصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="320"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="146"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="207"/>
         <source>Bus</source>
-        <translation>Vodilo</translation>
+        <translation>خط</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="42"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="226"/>
         <source>BIOS Information</source>
-        <translation>Podatki o BIOS</translation>
+        <translation>معلومات BIOS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="64"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="227"/>
         <source>Base Board Information</source>
-        <translation>Osnovni podatki o plošči</translation>
+        <translation>معلومات اللوحة الأساسية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="86"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="228"/>
         <source>System Information</source>
-        <translation>Podatki o sistemu</translation>
+        <translation>معلومات النظام</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="102"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="229"/>
         <source>Chassis Information</source>
-        <translation>Podatki o ohišju</translation>
+        <translation>معلومات الهيكل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="118"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="230"/>
         <source>Physical Memory Array</source>
-        <translation>Polje fizičnega pomnilnika</translation>
+        <translation>مصفوفة ذاكرة الوصول العشوائي الفعلية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="176"/>
         <source>Release Date</source>
-        <translation>Datum izdaje</translation>
+        <translation>تاريخ الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="177"/>
         <source>Address</source>
-        <translation>Naslov</translation>
+        <translation>عنوان</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="178"/>
         <source>Runtime Size</source>
-        <translation>Velikost ob zagonu</translation>
+        <translation>حجم التشغيل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="179"/>
         <source>ROM Size</source>
-        <translation>Velikost ROM</translation>
+        <translation>حجم ROM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="180"/>
         <source>Characteristics</source>
-        <translation>Karakteristike</translation>
+        <translation>الميزات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="181"/>
         <source>BIOS Revision</source>
-        <translation>BIOS revizija</translation>
+        <translation>تحديث BIOS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="182"/>
         <source>Firmware Revision</source>
-        <translation>Revizija strojnega programa</translation>
+        <translation>تحديث البرامج الثابتة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="184"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="193"/>
         <source>Product Name</source>
-        <translation>Ime izdelka</translation>
+        <translation>اسم المنتج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="185"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="194"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="203"/>
         <source>Serial Number</source>
-        <translation>Serijska številka</translation>
+        <translation>رقم التسلسل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="186"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="204"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="115"/>
         <source>Asset Tag</source>
-        <translation>Oznaka dobrine</translation>
+        <translation>علامة الأصول</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="187"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="211"/>
         <source>Features</source>
-        <translation>Funkcionalnost</translation>
+        <translation>الميزات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="188"/>
         <source>Location In Chassis</source>
-        <translation>Lokacija v ohišju</translation>
+        <translation>الموقع داخل الهيكل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="189"/>
         <source>Chassis Handle</source>
-        <translation>Ročica ohišja</translation>
+        <translation>مقبض الهيكل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="190"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="201"/>
         <source>Type</source>
-        <translation>VrstaVrsta</translation>
+        <translation>النوع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="191"/>
         <source>Contained Object Handles</source>
-        <translation>Vsebovane ročice objekta</translation>
+        <translation>أيدي 对象 المخفية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="195"/>
@@ -2371,130 +2371,130 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="196"/>
         <source>Wake-up Type</source>
-        <translation>Vrsta bujenja</translation>
+        <translation>نوع الاستيقاظ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="197"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="213"/>
         <source>SKU Number</source>
-        <translation>SKU številka</translation>
+        <translation>رقم SKU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="198"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="224"/>
         <source>Family</source>
-        <translation>Rod</translation>
+        <translation>العائلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="202"/>
         <source>Lock</source>
-        <translation>Zaklep</translation>
+        <translation>قفل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="205"/>
         <source>Boot-up State</source>
-        <translation>Zagonsko stanje</translation>
+        <translation>حالة التشغيل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="206"/>
         <source>Power Supply State</source>
-        <translation>Stanje napajanja</translation>
+        <translation>حالة إمداد الطاقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="207"/>
         <source>Thermal State</source>
-        <translation>Termalno stanje</translation>
+        <translation>حالة الحرارة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="208"/>
         <source>Security Status</source>
-        <translation>Varnostni status</translation>
+        <translation>حالة الأمان</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="209"/>
         <source>OEM Information</source>
-        <translation>OEM podatki</translation>
+        <translation>معلومات OEM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="210"/>
         <source>Height</source>
-        <translation>Višina</translation>
+        <translation>الارتفاع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="211"/>
         <source>Number Of Power Cords</source>
-        <translation>Število napajalnih kablov</translation>
+        <translation>عدد أسلاك الطاقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="212"/>
         <source>Contained Elements</source>
-        <translation>Vsebovani predmeti</translation>
+        <translation>المكونات المضمنة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="215"/>
         <source>Location</source>
-        <translation>Lokacija</translation>
+        <translation>الموقع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="216"/>
         <source>Error Correction Type</source>
-        <translation>Vrsta popravljanja napak</translation>
+        <translation>نوع تصحيح الأخطاء</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="217"/>
         <source>Maximum Capacity</source>
-        <translation>Največja zmogljivost</translation>
+        <translation>السعة القصوى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="218"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="110"/>
         <source>Error Information Handle</source>
-        <translation>Ročica podatkov ob napakah</translation>
+        <translation>معالجة معلومات الخطأ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="219"/>
         <source>Number Of Devices</source>
-        <translation>Število naprav</translation>
+        <translation>عدد الأجهزة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="221"/>
         <source>BIOS ROMSIZE</source>
-        <translation>BIOS velikost ROM</translation>
+        <translation>حجم ROM BIOS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="222"/>
         <source>Release date</source>
-        <translation>Datum izdaje</translation>
+        <translation>تاريخ الإصدار</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="223"/>
         <source>Board name</source>
-        <translation>Ime plošče</translation>
+        <translation>اسم اللوحة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="232"/>
         <source>SMBIOS Version</source>
-        <translation>SMBIOS različica</translation>
+        <translation>إصدار SMBIOS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="234"/>
         <source>Language Description Format</source>
-        <translation>Format opisa jezika</translation>
+        <translation>تنسيق beschrieben Sprache</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="235"/>
         <source>Installable Languages</source>
-        <translation>Jeziki za namestitev</translation>
+        <translation>اللغات القابلة للتثبيت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="236"/>
         <source>Currently Installed Language</source>
-        <translation>Trenutno nameščen jezik</translation>
+        <translation>اللغة المثبتة حاليًا</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="208"/>
         <source>BD Address</source>
-        <translation>BD naslov</translation>
+        <translation>عنوان BD</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="209"/>
@@ -2509,101 +2509,101 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="212"/>
         <source>Packet type</source>
-        <translation>Vrsta paketa</translation>
+        <translation>نوع الحزمة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="213"/>
         <source>Link policy</source>
-        <translation>Pravila povezovanja</translation>
+        <translation>سياسة الاتصال</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="214"/>
         <source>Link mode</source>
-        <translation>Vrsta povezave</translation>
+        <translation>وضع الاتصال</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="215"/>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="228"/>
         <source>Class</source>
-        <translation>Razred</translation>
+        <translation>الفئة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="216"/>
         <source>Service Classes</source>
-        <translation>Razred storitve</translation>
+        <translation>فئات الخدمة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="217"/>
         <source>Device Class</source>
-        <translation>Razred naprave</translation>
+        <translation>فئة الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="218"/>
         <source>HCI Version</source>
-        <translation>HCI različice</translation>
+        <translation>إصدار HCI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="219"/>
         <source>LMP Version</source>
-        <translation>LMP različica</translation>
+        <translation>إصدار LMP</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="220"/>
         <source>Subversion</source>
-        <translation>Pod-različica</translation>
+        <translation>الإصدار الفرعي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="222"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="40"/>
         <source>Device</source>
-        <translation>Naprava</translation>
+        <translation>الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="223"/>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="108"/>
         <source>Serial ID</source>
-        <translation>Serijski ID</translation>
+        <translation>رقم التعريف السريع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="225"/>
         <source>product</source>
-        <translation>proizvod</translation>
+        <translation>المنتج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="226"/>
         <source>description</source>
-        <translation>opis</translation>
+        <translation>الوصف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="229"/>
         <source>Powered</source>
-        <translation>Napajan</translation>
+        <translation>مدعوم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="230"/>
         <source>Discoverable</source>
-        <translation>Viden</translation>
+        <translation>يمكن اكتشافه</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="231"/>
         <source>Pairable</source>
-        <translation>Se lahko pari</translation>
+        <translation>يمكن الاقتران به</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="233"/>
         <source>Modalias</source>
-        <translation>Mod-alias</translation>
+        <translation>معرفات الترميز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="234"/>
         <source>Discovering</source>
-        <translation>Odkrivanje</translation>
+        <translation>اكتشاف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="109"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="43"/>
         <source>Driver Modules</source>
-        <translation>Moduli gonilnika</translation>
+        <translation>وحدات تشغيل الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="110"/>
@@ -2612,92 +2612,92 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="516"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="615"/>
         <source>Device File</source>
-        <translation>Datoteka naprave</translation>
+        <translation>ملف الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="111"/>
         <source>Device Files</source>
-        <translation>Datoteke naprave</translation>
+        <translation>ملفات الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="112"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="518"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="624"/>
         <source>Device Number</source>
-        <translation>Številka naprave</translation>
+        <translation>رقم الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="115"/>
         <source>Application</source>
-        <translation>Aplikacija</translation>
+        <translation>التطبيق</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="118"/>
         <source>status</source>
-        <translation>status</translation>
+        <translation>الحالة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="119"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="519"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="618"/>
         <source>logical name</source>
-        <translation>logično ime</translation>
+        <translation>اسم منطقي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="121"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="616"/>
         <source>ansiversion</source>
-        <translation>ansir-azličica</translation>
+        <translation>إصدارAnswers</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
         <source>CPU implementer</source>
-        <translation>Implementacija procesorja</translation>
+        <translation>مطور وحدة المعالجة المركزية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>CPU architecture</source>
-        <translation>Arhitektura procesorja</translation>
+        <translation>هيكل وحدة المعالجة المركزية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>CPU variant</source>
-        <translation>Izvedba procesorja</translation>
+        <translation>متغير وحدة المعالجة المركزية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
         <source>CPU part</source>
-        <translation>Del procesorja</translation>
+        <translation>قطعة وحدة المعالجة المركزية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
         <source>CPU revision</source>
-        <translation>Revizija procesorja</translation>
+        <translation>تعديل وحدة المعالجة المركزية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="305"/>
         <source>One</source>
-        <translation>Ena</translation>
+        <translation>واحد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="306"/>
         <source>Two</source>
-        <translation>Dve</translation>
+        <translation>اثنان</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="307"/>
         <source>Four</source>
-        <translation>Štiri</translation>
+        <translation>أربعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="308"/>
         <source>Six</source>
-        <translation>Šest</translation>
+        <translation>ستة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="309"/>
         <source>Eight</source>
-        <translation>Osem</translation>
+        <translation>ثمانية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
@@ -2707,359 +2707,359 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
         <source>Ten</source>
-        <translation>Deset</translation>
+        <translation> عشرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="312"/>
         <source>Twelve</source>
-        <translation>Dvanajst</translation>
+        <translation>اثنا عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="313"/>
         <source>Fourteen</source>
-        <translation>Štirinajst</translation>
+        <translation>أربعة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="314"/>
         <source>Sixteen</source>
-        <translation>Šestnajst</translation>
+        <translation>ستة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="315"/>
         <source>Eighteen</source>
-        <translation>Osemnajst</translation>
+        <translation>ثمانية عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="317"/>
         <source>Twenty</source>
-        <translation>Dvajset</translation>
+        <translation> عشرون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="318"/>
         <source>Twenty-two</source>
-        <translation>Dvaindvajset</translation>
+        <translation> عشرون وعشرون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="319"/>
         <source>Twenty-four</source>
-        <translation>Štiriindvajset</translation>
+        <translation> عشرون وأربعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="320"/>
         <source>Twenty-six</source>
-        <translation>Šestindvajset</translation>
+        <translation> عشرون وستة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="321"/>
         <source>Twenty-eight</source>
-        <translation>Osemindvajset</translation>
+        <translation> عشرون ثمانية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
         <source>Thirty</source>
-        <translation>Trideset</translation>
+        <translation> ثلاثون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="324"/>
         <source>Thirty-two</source>
-        <translation>Dvaintrideset</translation>
+        <translation> ثلاثون واثنان</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="325"/>
         <source>Thirty-four</source>
-        <translation>Štirintrideset</translation>
+        <translation>ثلاثة وأربعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="326"/>
         <source>Thirty-six</source>
-        <translation>Šestintrideset</translation>
+        <translation>ثلاثة وستون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="327"/>
         <source>Thirty-eight</source>
-        <translation>Osemintrideset</translation>
+        <translation>ثلاثة وثمانون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="329"/>
         <source>Forty</source>
-        <translation>Štirideset</translation>
+        <translation>أربعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="330"/>
         <source>Forty-two</source>
-        <translation>Dvainštirideset</translation>
+        <translation>أربعون وعشرون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="331"/>
         <source>Forty-four</source>
-        <translation>Štiriinštirideset</translation>
+        <translation>أربعون وأربعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="332"/>
         <source>Forty-six</source>
-        <translation>Šestinštirideset</translation>
+        <translation>أربعون ستة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="333"/>
         <source>Forty-eight</source>
-        <translation>Oseminštirideset</translation>
+        <translation>أربعون ثمانية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="335"/>
         <source>Fifty</source>
-        <translation>Petdeset</translation>
+        <translation>خمسون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="336"/>
         <source>Fifty-two</source>
-        <translation>Dvainpetdeset</translation>
+        <translation>خمس وعشرون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="337"/>
         <source>Fifty-four</source>
-        <translation>Štiriinpetdeset</translation>
+        <translation>خمس وأربعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="338"/>
         <source>Fifty-six</source>
-        <translation>Šestinpetdeset</translation>
+        <translation>خمسون وستون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="339"/>
         <source>Fifty-eight</source>
-        <translation>Oseminpetdeset</translation>
+        <translation>خمسون ثمانية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="341"/>
         <source>Sixty</source>
-        <translation>Šestdeset</translation>
+        <translation>ستون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="342"/>
         <source>Sixty-two</source>
-        <translation>Dvainšestdeset</translation>
+        <translation>ستون وعشرون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="343"/>
         <source>Sixty-four</source>
-        <translation>Štiriinšestdeset</translation>
+        <translation>ستون وأربعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="344"/>
         <source>Sixty-six</source>
-        <translation>Šestinšestdeset</translation>
+        <translation>ستون وستون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="345"/>
         <source>Sixty-eight</source>
-        <translation>Oseminšestdeset</translation>
+        <translation>ستون ثمانية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="347"/>
         <source>Seventy</source>
-        <translation>Sedemdeset</translation>
+        <translation>سبعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="348"/>
         <source>Seventy-two</source>
-        <translation>Dvainsedemdeset</translation>
+        <translation>سبع وعشرون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="349"/>
         <source>Seventy-four</source>
-        <translation>Štiriinsedemdeset</translation>
+        <translation>سبع وأربعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="350"/>
         <source>Seventy-six</source>
-        <translation>Šestinsedemdeset</translation>
+        <translation>سبعون وستون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="351"/>
         <source>Seventy-eight</source>
-        <translation>Oseminsedemdeset</translation>
+        <translation>سبعون ثمانية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="353"/>
         <source>Eighty</source>
-        <translation>Osemdeset</translation>
+        <translation>ثمانون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="354"/>
         <source>Eighty-two</source>
-        <translation>Dvainosemdeset</translation>
+        <translation>ثمانون وعشرون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="355"/>
         <source>Eighty-four</source>
-        <translation>Štiriinosemdeset</translation>
+        <translation>ثمانية وأربعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="356"/>
         <source>Eighty-six</source>
-        <translation>Šestinosemdeset</translation>
+        <translation>ثمانية وستون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="357"/>
         <source>Eighty-eight</source>
-        <translation>Oseminosemdeset</translation>
+        <translation>ثمانية وثمانون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="359"/>
         <source>Ninety</source>
-        <translation>Devetdeset</translation>
+        <translation>تسعة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="360"/>
         <source>Ninety-two</source>
-        <translation>Dvaindevetdeset</translation>
+        <translation>تسعة عشر ونصف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="361"/>
         <source>Ninety-four</source>
-        <translation>Štiriindevetdeset</translation>
+        <translation>تسعة عشر وأربعون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="362"/>
         <source>Ninety-six</source>
-        <translation>Šestindevetdeset</translation>
+        <translation>تسعة عشر وستون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="363"/>
         <source>Ninety-eight</source>
-        <translation>Osemindevetdeset</translation>
+        <translation>تسعة عشر وثمانون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="365"/>
         <source>One hundred</source>
-        <translation>Sto</translation>
+        <translation>مائة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="366"/>
         <source>One hundred and Two</source>
-        <translation>Stodve</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="367"/>
         <source>One hundred and four</source>
-        <translation>Stoštiri</translation>
+        <translation>مائة وأربعة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="368"/>
         <source>One hundred and Six</source>
-        <translation>Stošest</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="369"/>
         <source>One hundred and Eight</source>
-        <translation>Stoosem</translation>
+        <translation>مائة وأربع عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="371"/>
         <source>One hundred and Ten</source>
-        <translation>Stodeset</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="372"/>
         <source>One hundred and Twelve</source>
-        <translation>Stodvanajst</translation>
+        <translation>مائة وأربع عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="373"/>
         <source>One hundred and Fourteen</source>
-        <translation>Stoštirinajst</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="374"/>
         <source>One hundred and Sixteen</source>
-        <translation>Stošestnajst</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="375"/>
         <source>One hundred and Eighteen</source>
-        <translation>Stoosemnajst</translation>
+        <translation>مائة وأربع عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="377"/>
         <source>One hundred and Twenty</source>
-        <translation>Stodvajset</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="378"/>
         <source>One hundred and Twenty-two</source>
-        <translation>Stodvaindvajset</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="379"/>
         <source>One hundred and Twenty-four</source>
-        <translation>Stoštiriindvajset</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="380"/>
         <source>One hundred and Twenty-six</source>
-        <translation>Stošestindvajset</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="381"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>Stoosemindvajset</translation>
+        <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="382"/>
         <source>One hundred and Ninety-two</source>
-        <translation type="unfinished"/>
+        <translation>مائة وتسعة عشر وخمسون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="383"/>
         <source>Two hundred and fifty-six</source>
-        <translation>Dvestošestinpetdeset</translation>
+        <translation>مائتان وخمسون وخمس十六条</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="48"/>
         <source>GDDR capacity</source>
-        <translation>Zmogljivost GDDR</translation>
+        <translation>سعة GDDR</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="49"/>
         <source>GPU vendor</source>
-        <translation>Proizvajalec GPE</translation>
+        <translation>مورد GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="50"/>
         <source>GPU type</source>
-        <translation>Vrsta GPE</translation>
+        <translation>نوع GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="51"/>
         <source>EGL version</source>
-        <translation>Različica EGL</translation>
+        <translation>إصدار EGL</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="52"/>
         <source>EGL client APIs</source>
-        <translation>API knjižnice EGL odjemalca</translation>
+        <translation>موارد برمجة تطبيقات EGL</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="53"/>
         <source>GL version</source>
-        <translation>Različica GL</translation>
+        <translation>إصدار GL</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="54"/>
         <source>GLSL version</source>
-        <translation>Različica GLSL</translation>
+        <translation>إصدار GLSL</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="94"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="422"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="440"/>
         <source>Unknown</source>
-        <translation>Neznano</translation>
+        <translation>غير معروف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="500"/>
         <source>Uniq</source>
-        <translation>Uniq</translation>
+        <translation>مختلف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="504"/>
@@ -3071,7 +3071,7 @@
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="178"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="614"/>
         <source>Hardware Class</source>
-        <translation>Razred strojne opreme</translation>
+        <translation>فئة الجهاز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1359"/>
@@ -3079,7 +3079,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1415"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1451"/>
         <source>CPU</source>
-        <translation>Procesor</translation>
+        <translation>معالج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1359"/>
@@ -3087,7 +3087,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1415"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1451"/>
         <source>No CPU found</source>
-        <translation>Procesor ni bil najden</translation>
+        <translation>لم يتم العثور على وحدة معالجة مركزية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1360"/>
@@ -3095,7 +3095,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1416"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1452"/>
         <source>Motherboard</source>
-        <translation>Matična plošča</translation>
+        <translation>لوحة الأم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1360"/>
@@ -3103,7 +3103,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1416"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1452"/>
         <source>No motherboard found</source>
-        <translation>Ni najdene osnovne plošče</translation>
+        <translation>لم يتم العثور على لوحة أم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1361"/>
@@ -3111,7 +3111,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1417"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1453"/>
         <source>Memory</source>
-        <translation>Pomnilnik</translation>
+        <translation>ذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1361"/>
@@ -3119,7 +3119,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1417"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1453"/>
         <source>No memory found</source>
-        <translation>Ni najdenega pomnilnika</translation>
+        <translation>لم يتم العثور على ذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1362"/>
@@ -3127,7 +3127,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1418"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1454"/>
         <source>Storage</source>
-        <translation>Shramba</translation>
+        <translation>التخزين</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1362"/>
@@ -3135,23 +3135,23 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1418"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1454"/>
         <source>No disk found</source>
-        <translation>Ni najdenega diska</translation>
+        <translation>لم يتم العثور على قرص</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>فشل إصلاح برنامج التشغيل!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="35"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>يرجى المحاولة مرة أخرى أو تقديم ملاحظات لنا</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>فشل النسخ الاحتياطي لبرنامج التشغيل!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
@@ -3160,7 +3160,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1455"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="673"/>
         <source>Display Adapter</source>
-        <translation>Grafični vmesnik</translation>
+        <translation>مثبت العرض</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
@@ -3168,7 +3168,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1419"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1455"/>
         <source>No GPU found</source>
-        <translation>Ni najdene GPE</translation>
+        <translation>لم يتم العثور على معالج رسومات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1364"/>
@@ -3176,7 +3176,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1420"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1456"/>
         <source>Monitor</source>
-        <translation>Monitor</translation>
+        <translation>الشاشة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1364"/>
@@ -3184,7 +3184,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1420"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1456"/>
         <source>No monitor found</source>
-        <translation>Ni najdenega monitorja</translation>
+        <translation>لم يتم العثور على جهاز العرض</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1365"/>
@@ -3193,7 +3193,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1457"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="682"/>
         <source>Network Adapter</source>
-        <translation>Omrežni vmesnik</translation>
+        <translation>موجه الشبكة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1365"/>
@@ -3201,7 +3201,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1421"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1457"/>
         <source>No network adapter found</source>
-        <translation>Ni najdenega omrežnega vmesnika</translation>
+        <translation>لم يتم العثور على جهاز التوجيه الشبكي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1366"/>
@@ -3210,7 +3210,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1458"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="676"/>
         <source>Sound Adapter</source>
-        <translation>Zvočni vmesnik</translation>
+        <translation>مكبر الصوت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1366"/>
@@ -3218,7 +3218,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1422"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1458"/>
         <source>No audio device found</source>
-        <translation>Ni najdene zvočne naprave</translation>
+        <translation>لم يتم العثور على جهاز صوت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1367"/>
@@ -3227,7 +3227,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1459"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="679"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation>بلوتوث</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1367"/>
@@ -3235,7 +3235,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1423"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1459"/>
         <source>No Bluetooth device found</source>
-        <translation>Ni najdene bluetooth naprave</translation>
+        <translation>لم يتم العثور على جهاز بلوتوث</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1368"/>
@@ -3243,7 +3243,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1424"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1460"/>
         <source>Other PCI Devices</source>
-        <translation>Druge PCI naprave</translation>
+        <translation>أجهزة PCI أخرى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1368"/>
@@ -3251,7 +3251,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1424"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1460"/>
         <source>No other PCI devices found</source>
-        <translation>Ni najdenih drugih PCI naprav</translation>
+        <translation>لم يتم العثور على أجهزة PCI أخرى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1369"/>
@@ -3259,7 +3259,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1425"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1461"/>
         <source>Power</source>
-        <translation>Napajanje</translation>
+        <translation>الطاقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1369"/>
@@ -3267,7 +3267,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1425"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1461"/>
         <source>No battery found</source>
-        <translation>Ni najdenega akumulatorja</translation>
+        <translation>لم يتم العثور على بطارية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1370"/>
@@ -3276,7 +3276,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1462"/>
         <location filename="../src/Tool/commontools.cpp" line="39"/>
         <source>Keyboard</source>
-        <translation>Tipkovnica</translation>
+        <translation>الكيبورد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1370"/>
@@ -3284,7 +3284,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1426"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1462"/>
         <source>No keyboard found</source>
-        <translation>Ni najdene tipkovnice</translation>
+        <translation>لم يتم العثور على لوحة مفاتيح</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1371"/>
@@ -3293,7 +3293,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1463"/>
         <location filename="../src/Tool/commontools.cpp" line="41"/>
         <source>Mouse</source>
-        <translation>Miška</translation>
+        <translation>الفأرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1371"/>
@@ -3301,7 +3301,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1427"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1463"/>
         <source>No mouse found</source>
-        <translation>Ni najdene miške</translation>
+        <translation>لم يتم العثور على الفأرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1372"/>
@@ -3310,7 +3310,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1464"/>
         <location filename="../src/Tool/commontools.cpp" line="43"/>
         <source>Printer</source>
-        <translation>Tiskalnik</translation>
+        <translation>الطابعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1372"/>
@@ -3318,7 +3318,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1428"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1464"/>
         <source>No printer found</source>
-        <translation>Ni najdenega tiskalnika</translation>
+        <translation>لم يتم العثور على الطابعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1373"/>
@@ -3326,7 +3326,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1429"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1465"/>
         <source>Camera</source>
-        <translation>Kamera</translation>
+        <translation>كاميرا</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1373"/>
@@ -3334,7 +3334,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1429"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1465"/>
         <source>No camera found</source>
-        <translation>Ni najdene kamere</translation>
+        <translation>لم يتم العثور على الكاميرا</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1374"/>
@@ -3342,7 +3342,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1430"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1466"/>
         <source>CD-ROM</source>
-        <translation>CD-ROM</translation>
+        <translation> قرص مضغوط-ROM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1374"/>
@@ -3350,7 +3350,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1430"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1466"/>
         <source>No CD-ROM found</source>
-        <translation>Ni najdenega CD-ROM pogona</translation>
+        <translation>لم يتم العثور على قرص مضغوط-ROM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1375"/>
@@ -3360,7 +3360,7 @@
         <location filename="../src/Tool/commontools.cpp" line="45"/>
         <location filename="../src/Tool/commontools.cpp" line="47"/>
         <source>Other Devices</source>
-        <translation>Druge naprave</translation>
+        <translation>أجهزة أخرى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1375"/>
@@ -3368,97 +3368,97 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1431"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1467"/>
         <source>No other devices found</source>
-        <translation>Ni najdenih drugih naprav</translation>
+        <translation>لم يتم العثور على أجهزة أخرى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="109"/>
         <source>Array Handle</source>
-        <translation>Ročica polja</translation>
+        <translation>مقبض المصفوفة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="111"/>
         <source>Form Factor</source>
-        <translation>Oblikovni faktor</translation>
+        <translation>معامل الشكل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="112"/>
         <source>Set</source>
-        <translation>Nabor</translation>
+        <translation>تعيين</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="113"/>
         <source>Bank Locator</source>
-        <translation>Lokator banke</translation>
+        <translation>موقع الصندوق</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="114"/>
         <source>Type Detail</source>
-        <translation>Podrobnosti o vrsti</translation>
+        <translation>تفاصيل النوع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="116"/>
         <source>Part Number</source>
-        <translation>Številka dela</translation>
+        <translation>رقم الجزء</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="117"/>
         <source>Rank</source>
-        <translation>Uvrstitev</translation>
+        <translation>الصف</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="118"/>
         <source>Memory Technology</source>
-        <translation>Tehnologija pomnilnika</translation>
+        <translation>تكنولوجيا الذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="119"/>
         <source>Memory Operating Mode Capability</source>
-        <translation>Zmožnosti načina delovanja pomnilnika</translation>
+        <translation>قدرة وضع تشغيل الذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="120"/>
         <source>Firmware Version</source>
-        <translation>Različica strojnega programa</translation>
+        <translation>إصدار البرنامج الثابت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="121"/>
         <source>Module Manufacturer ID</source>
-        <translation>ID proizvajalca modula</translation>
+        <translation>معرف مصنع وحدة المعالجة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="122"/>
         <source>Module Product ID</source>
-        <translation>ID izdelka modula</translation>
+        <translation>معرف منتج وحدة المعالجة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="123"/>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation>ID proizvajalca kontrolerja pomnilniškega podsistema</translation>
+        <translation>معرف مصنع وحدة التحكم في وحدة الذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="124"/>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation>ID izdelka  kontrolerja pomnilniškega podsistema</translation>
+        <translation>معرف منتج وحدة التحكم في وحدة الذاكرة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="125"/>
         <source>Non-Volatile Size</source>
-        <translation>Ohlapna velikost</translation>
+        <translation>الحجم غير المتغير</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="126"/>
         <source>Volatile Size</source>
-        <translation>Obstojna velikost</translation>
+        <translation>الحجم المتغير</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="127"/>
         <source>Cache Size</source>
-        <translation>Velikost medpomnilnika</translation>
+        <translation>حجم التخزين المؤقت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="128"/>
         <source>Logical Size</source>
-        <translation>Logična velikost</translation>
+        <translation>الحجم المنطقي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="65"/>
@@ -3469,227 +3469,227 @@
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="470"/>
         <location filename="../src/Tool/EDIDParser.cpp" line="195"/>
         <source>inch</source>
-        <translation>palcev</translation>
+        <translation>بوصة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="306"/>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation>التاريخ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="287"/>
         <source>ioport</source>
-        <translation>V/I-vrata</translation>
+        <translation>ioport</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="288"/>
         <source>network</source>
-        <translation>omrežje</translation>
+        <translation>شبكة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="111"/>
         <source>battery</source>
-        <translation>akumulator</translation>
+        <translation>البطارية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="149"/>
         <source>native-path</source>
-        <translation>izvorna pot</translation>
+        <translation>المسار الأصلي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="150"/>
         <source>power supply</source>
-        <translation>napajalnik</translation>
+        <translation>مsupply الطاقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="151"/>
         <source>updated</source>
-        <translation>posodobljeno</translation>
+        <translation>تم التحديث</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="152"/>
         <source>has history</source>
-        <translation>ima zgodovino</translation>
+        <translation>له تاريخ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="153"/>
         <source>has statistics</source>
-        <translation>ima statistiko</translation>
+        <translation>له إحصائيات</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="154"/>
         <source>rechargeable</source>
-        <translation>možnost polnjenja</translation>
+        <translation>شحن</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="155"/>
         <source>state</source>
-        <translation>stanje</translation>
+        <translation>الحالة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="156"/>
         <source>warning-level</source>
-        <translation>opozorilni nivo</translation>
+        <translation>مستوى التحذير</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="157"/>
         <source>energy</source>
-        <translation>energija</translation>
+        <translation>الطاقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="158"/>
         <source>energy-empty</source>
-        <translation>energija-prazno</translation>
+        <translation>الطاقة الفارغة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="159"/>
         <source>energy-full</source>
-        <translation>energija-polno</translation>
+        <translation>الطاقة الكاملة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="160"/>
         <source>energy-full-design</source>
-        <translation>energija-polno-načrtovano</translation>
+        <translation>تصميم الطاقة الكاملة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="161"/>
         <source>energy-rate</source>
-        <translation>enerijga-stopnja</translation>
+        <translation>معدل الطاقة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="162"/>
         <source>voltage</source>
-        <translation>napetost</translation>
+        <translation>الجهد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="163"/>
         <source>percentage</source>
-        <translation>odstotek</translation>
+        <translation>النسبة المئوية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="165"/>
         <source>technology</source>
-        <translation>tehnologija</translation>
+        <translation>التكنولوجيا</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="166"/>
         <source>icon-name</source>
-        <translation>ime-ikone</translation>
+        <translation>اسم الرمز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="167"/>
         <source>online</source>
-        <translation>povezano</translation>
+        <translation>متصل</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="168"/>
         <source>daemon-version</source>
-        <translation>različica pritajenega demona</translation>
+        <translation>إصدار الخادم</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="169"/>
         <source>on-battery</source>
-        <translation>na-akumulatorju</translation>
+        <translation>على البطارية</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="170"/>
         <source>lid-is-closed</source>
-        <translation>poklopec-je-zaprt</translation>
+        <translation>غطاء الغلاف مغلق</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="171"/>
         <source>lid-is-present</source>
-        <translation>poklopec-je-na-voljo</translation>
+        <translation>غطاء الغلاف موجود</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="172"/>
         <source>critical-action</source>
-        <translation>kritično-dejanje</translation>
+        <translation>إجراء حرج</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="128"/>
         <source>copies</source>
-        <translation>kopije</translation>
+        <translation>مجموع النسخ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="129"/>
         <source>job-cancel-after</source>
-        <translation>prekini-opravilo-po</translation>
+        <translation>إلغاء المهام بعد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="130"/>
         <source>job-hold-until</source>
-        <translation>zadrži-opravilo-po</translation>
+        <translation>ابقَ حتى يتم إلغاء المهام</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="131"/>
         <source>job-priority</source>
-        <translation>prioriteta-opravila</translation>
+        <translation>priorité de tâche</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="132"/>
         <source>marker-change-time</source>
-        <translation>označba-spremembe-časa</translation>
+        <translation>وقت تغيير المؤشر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="133"/>
         <source>number-up</source>
-        <translation>število-gor</translation>
+        <translation>عدد الرفع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="134"/>
         <source>orientation-requested</source>
-        <translation>orientacija-zahtevana</translation>
+        <translation>مطلوب التوجه</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="135"/>
         <source>print-color-mode</source>
-        <translation>tiskanje-barvni-način</translation>
+        <translation>وضع الطباعة بالألوان</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="136"/>
         <source>printer-is-accepting-jobs</source>
-        <translation>tiskalni-sprejema-opravila</translation>
+        <translation>الطابعة تقبل المهام</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="137"/>
         <source>printer-is-shared</source>
-        <translation>tiskalnik-v-skupni-rabi</translation>
+        <translation>تمت مشاركة الطابعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="138"/>
         <source>printer-is-temporary</source>
-        <translation>tiskalnik-je-začasen</translation>
+        <translation>الطابعة مؤقتة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="163"/>
         <source>printer-make-and-model</source>
-        <translation>tiskalnik-izdelava-in-model</translation>
+        <translation>صانع الطابعة ونموذجه</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="140"/>
         <source>printer-state-change-time</source>
-        <translation>tiskalnik-stanje-sprememba-čas</translation>
+        <translation>وقت تغيير حالة الطابعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="141"/>
         <source>printer-state-reasons</source>
-        <translation>tiskalnik-stanje-razlogi</translation>
+        <translation>أسباب حالة الطابعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="142"/>
         <source>printer-type</source>
-        <translation>tiskalnik-vrsta</translation>
+        <translation>نوع الطابعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="143"/>
         <source>printer-uri-supported</source>
-        <translation>tiskalnik-url-podprt</translation>
+        <translation>مدعوم URI الطابعة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePrint.cpp" line="144"/>
         <source>sides</source>
-        <translation>strani</translation>
+        <translation>أوجه</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="418"/>
@@ -3711,190 +3711,190 @@
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="515"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="617"/>
         <source>bus info</source>
-        <translation>podatki vodila</translation>
+        <translation>معلومات الحافلة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="619"/>
         <source>logicalsectorsize</source>
-        <translation>velikostlogičnegasektorja</translation>
+        <translation>حجم القطاع المنطقي</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="621"/>
         <source>sectorsize</source>
-        <translation>velikostsektorja</translation>
+        <translation>حجم القطاع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="622"/>
         <source>guid</source>
-        <translation>guid</translation>
+        <translation>GUID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="625"/>
         <source>Geometry (Logical)</source>
-        <translation>Geometrija (logična)</translation>
+        <translation>المجال (منطقي)</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="89"/>
         <location filename="../src/main.cpp" line="91"/>
         <source>Device Manager</source>
-        <translation>Upravitelj naprav</translation>
+        <translation>مدير الأجهزة</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="92"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>Upravitelj naprav je priročno orodje za prikaz podatkov o strojni opremi in upravljanje naprav.</translation>
+        <translation>مدير الأجهزة أداة مفيدة لعرض معلومات الأجهزة وإدارة الأجهزة.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="148"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"/>
+        <translation>متوفرة برامج تشغيل جديدة! قم بتثبيتها أو تحديثها الآن.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="149"/>
         <source>View</source>
-        <translation type="unfinished"/>
+        <translation>عرض</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="14"/>
         <source>Include subfolders</source>
-        <translation type="unfinished"/>
+        <translation> incluye carpetas secundarias</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="55"/>
         <source>Search for drivers in this path</source>
-        <translation type="unfinished"/>
+        <translation>ابحث عن برامج التشغيل في هذا المسار</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="103"/>
         <source>%1 driver updates available</source>
-        <translation type="unfinished"/>
+        <translation>%1 برامج تشغيل متوفرة</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="109"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="377"/>
         <source>Time checked: %1</source>
-        <translation type="unfinished"/>
+        <translation>تم التحقق من الوقت: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="159"/>
         <source>Downloading drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>قيد تنزيل برامج تشغيل %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="161"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"/>
+        <translation>سرعة التنزيل: %1 تم تنزيل %2/%3</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="207"/>
         <source>Installing drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>قيد تثبيت برامج تشغيل %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="249"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 برنامج تشغيل مثبت، %2 برنامج تشغيل فشل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="251"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"/>
+        <translation>%1 برنامج تشغيل مثبت</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="291"/>
         <source>Failed to install drivers</source>
-        <translation type="unfinished"/>
+        <translation>فشل في تثبيت برامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="331"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>خطأ في الشبكة. إعادة الاتصال...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="333"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>سرعة التنزيل: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="374"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"/>
+        <translation>برامج تشغيلك محدثة</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="462"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>تم عمل نسخة احتياطية لجميع برامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="464"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>مجموع %1 برنامج تشغيل، من بينها %2 تم عمل نسخة احتياطية</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="502"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"/>
+        <translation>&gt;- لديك %1 برنامج تشغيل يمكن عمل نسخة احتياطية، يوصى بعمل ذلك على الفور</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="505"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"/>
+        <translation>لدينا %1 برنامج تشغيل يمكن عمل نسخة احتياطية</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>عمل نسخة احتياطية لبرنامج التشغيل %1، المجموع %2 برنامج تشغيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"/>
+        <translation>عمل النسخة الاحتياطية: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="589"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 برنامج تشغيل عمل نسخة احتياطية، %2 برنامج تشغيل فشل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="591"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>فشل في عمل نسخة احتياطية للبرامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="593"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"/>
+        <translation>%1 برنامج تشغيل عمل نسخة احتياطية</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="632"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"/>
+        <translation>لدينا %1 برنامج تشغيل يمكن استعادته</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="633"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"/>
+        <translation>يرجى اختيار برنامج تشغيل لإعادة الاسترجاع</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="663"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"/>
+        <translation>يقوم البرنامج التشغيل بإجراء عملية الاسترجاع...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="664"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"/>
+        <translation>استعادة: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="807"/>
         <source>reboot</source>
-        <translation type="unfinished"/>
+        <translation>إعادة التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="808"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"/>
+        <translation>يرجى %1 للتأثير على برامج التشغيل المثبتة</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="816"/>
@@ -3904,7 +3904,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="829"/>
         <source>Backup All</source>
-        <translation type="unfinished"/>
+        <translation>نسخ الاحتياطي للكل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="811"/>
@@ -3920,44 +3920,44 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>تثبيت الكل</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="824"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="290"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>فحص مرة أخرى</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="834"/>
         <source>Cancel</source>
-        <translation>Prekini</translation>
+        <translation>إلغاء</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="68"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>يتم الآن فحص برامج تشغيل الأجهزة، الرجاء الانتظار...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="76"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="357"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>جاري فحص 1%</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="132"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>فشلت عملية الفحص</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="190"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>الشبكة غير متاحة</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="194"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>الرجاء التحقق من اتصال الشبكة الخاص بك</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
@@ -3967,14 +3967,14 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="678"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>تتم الآن عملية تثبيت برامج التشغيل (ملفات التعريف)، وستتم تعطيل العملية في حالة الخروج.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="679"/>
         <location filename="../src/Page/MainWindow.cpp" line="692"/>
         <location filename="../src/Page/MainWindow.cpp" line="705"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>هل أنت متأكد من أنك تريد الخروج؟</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="682"/>
@@ -3982,7 +3982,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="708"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>خروج</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="683"/>
@@ -3990,153 +3990,153 @@
         <location filename="../src/Page/MainWindow.cpp" line="709"/>
         <source>Cancel</source>
         <comment>button</comment>
-        <translation>Prekini</translation>
+        <translation>إلغاء</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="691"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>تتم الآن عملية النسخ الإحتياطي لبرامج التشغيل (ملفات التعريف)، وستتم تعطيل العملية في حالة الخروج.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="704"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>تتم الآن عملية استعادة برامج التشغيل (ملفات التعريف)، وستتم تعطيل العملية في حالة الخروج.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
+        <translation>محول البلوتوث</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="37"/>
         <location filename="../src/Tool/commontools.cpp" line="44"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation>جهاز التصوير</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="38"/>
         <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <translation>كرت الشاشة</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="40"/>
         <source>Sound card</source>
-        <translation type="unfinished"/>
+        <translation>كرت الصوت</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation>محول الشبكة</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="46"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
+        <translation>محول الشبكة اللاسلكية</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>Installation successful</source>
-        <translation type="unfinished"/>
+        <translation>نجاح التثبيت</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation>فشل التثبيت</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
         <source>Downloading</source>
-        <translation type="unfinished"/>
+        <translation>التحميل</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="69"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>التثبيت</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not installed</source>
-        <translation type="unfinished"/>
+        <translation>غير مثبت</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <translation>غير محدث</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Waiting</source>
-        <translation type="unfinished"/>
+        <translation>يستwaiting</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Not backed up</source>
-        <translation type="unfinished"/>
+        <translation>لم يتم الاحتفاظ بنسخة احتياطية</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Backing up</source>
-        <translation type="unfinished"/>
+        <translation>يجري النسخ الاحتياطي</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="75"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>فشل النسخ الاحتياطي</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="76"/>
         <source>Backup successful</source>
-        <translation type="unfinished"/>
+        <translation>نجح النسخ الاحتياطي</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="77"/>
         <source>Restoring</source>
-        <translation type="unfinished"/>
+        <translation>يجري الاستعادة</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>خطأ غير معروف</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="82"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation>خطأ الشبكة</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="83"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation>تم الإلغاء</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="84"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"/>
+        <translation>فشل في الحصول على ملفات السائق</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="235"/>
         <source>Update</source>
-        <translation type="unfinished"/>
+        <translation>التحديث</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>النسخ الاحتياطي</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>استعادة</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>تثبيت</translation>
     </message>
     <message>
         <location filename="../tests/src/DeviceManager/ut_devicemanager.cpp" line="89"/>
         <source>Overview</source>
-        <translation>Pregled</translation>
+        <translation>نظرة عامة</translation>
     </message>
 </context>
 <context>
@@ -4145,38 +4145,38 @@
         <location filename="../src/Widget/TableWidget.cpp" line="35"/>
         <location filename="../src/Widget/TableWidget.cpp" line="208"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="36"/>
         <source>Refresh</source>
-        <translation>Osveži</translation>
+        <translation>تحديث</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="37"/>
         <source>Export</source>
-        <translation>Izvozi</translation>
+        <translation>تصدير</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="38"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>تحديث برامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="39"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>إلغاء تثبيت برامج التشغيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="40"/>
         <source>Allow it to wake the computer</source>
-        <translation type="unfinished"/>
+        <translation>اسمح بتشغيل الكمبيوتر</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="213"/>
         <location filename="../src/Widget/TableWidget.cpp" line="320"/>
         <source>Enable</source>
-        <translation>Omogoči</translation>
+        <translation>تمكين</translation>
     </message>
 </context>
 <context>
@@ -4184,27 +4184,27 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="29"/>
         <source>Refresh</source>
-        <translation>Osveži</translation>
+        <translation>تحديث</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="30"/>
         <source>Export</source>
-        <translation>Izvozi</translation>
+        <translation>تصدير</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="31"/>
         <source>Copy</source>
-        <translation>Kopiraj</translation>
+        <translation>نسخ</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="240"/>
         <source>Disable</source>
-        <translation>Onemogoči</translation>
+        <translation>تعطيل</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="248"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>غير متوفر</translation>
     </message>
 </context>
 <context>
@@ -4212,7 +4212,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="89"/>
         <source>Select a local folder please</source>
-        <translation type="unfinished"/>
+        <translation>يرجى اختيار مجلد محلي</translation>
     </message>
 </context>
 <context>
@@ -4220,7 +4220,7 @@
     <message>
         <location filename="../src/Page/WaitingWidget.cpp" line="20"/>
         <source>Loading...</source>
-        <translation>Nalaganje...</translation>
+        <translation>جارٍ التحميل...</translation>
     </message>
 </context>
 </TS>
