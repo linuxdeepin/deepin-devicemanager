@@ -448,7 +448,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
         <source>L4 Cache</source>
-        <translation type="unfinished">L2 Cache {4 ?}</translation>
+        <translation type="unfinished">L4 Cache</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
