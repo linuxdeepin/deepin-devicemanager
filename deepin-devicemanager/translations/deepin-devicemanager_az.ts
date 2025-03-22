@@ -3823,48 +3823,48 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="462"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Bütün sürücülərin ehtiyyat nüsxəsi saxlanılıb</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="464"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Cəmi %1 sürücü, bunlardan %2 sürücünün eht. nüsxəsi saxlanıldı</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="502"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsi saxlanıla biləcək %1 sürücü var, bunu dərhal etmək tövsiyyə olunur</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="505"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsi saxlanıla biləcək %1 sürücünüz var</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücünün eht. nüsxəsi saxlanılır, cəmi %2 sürücü var</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsi saxlanılır: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="589"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücünün eht. nüsxəsi saxlanıldı, %2 sürücü mümkün olmadı</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="591"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>Sürücülərin eht. nüsxəsini saxlamaq mümkün olmadı</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="593"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücünün eht. nüsxəsi saxlanıldı</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="632"/>
