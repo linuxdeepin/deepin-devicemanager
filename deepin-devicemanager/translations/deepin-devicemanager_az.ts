@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="44"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Rəy bildirişi</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="56"/>
@@ -1717,7 +1717,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="93"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü platforması versiyası</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="94"/>
@@ -1732,12 +1732,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="179"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Ehtiyyat nüsxəsi saxlanılabilən sürücülər</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="180"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Ehtiyyat nüsxəsi saxlanılan sürücülər</translation>
     </message>
 </context>
 <context>
@@ -1943,7 +1943,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="115"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="485"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü quraşdırmaq</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="99"/>
@@ -1951,13 +1951,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="116"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="487"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünün eht. nüsxəsini saxlamaq</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="117"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="489"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünü bərpa etmək</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
@@ -1967,7 +1967,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="629"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Rəy bildirişi</translation>
     </message>
 </context>
 <context>
@@ -1975,12 +1975,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="93"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa ediləcək heç bir sürücünüz yoxdur, öncə eht. nüsxəsini saxlayın</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="96"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Ehtiyyat nesxə sürücüsünə keçin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
@@ -1995,7 +1995,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="124"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxə versiyası</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="125"/>
@@ -2005,7 +2005,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="167"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa ediləbilən sürücülər</translation>
     </message>
 </context>
 <context>
@@ -2028,17 +2028,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü quraşdırmaq</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünün eht. nüsxəsini saxlamaq</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünü bərpa etmək</translation>
     </message>
 </context>
 <context>
@@ -3140,18 +3140,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Sürücün bərpa etmək mümkün olmadı!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="35"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Yenidən cəhd edin və ya bizə rəy bildirin</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünün eht. nüsxəsini saxlamaq mümkün olmadı!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
