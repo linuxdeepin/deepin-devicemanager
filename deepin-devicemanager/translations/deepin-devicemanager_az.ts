@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="240"/>
         <source>Alias</source>
-        <translation type="unfinished"/>
+        <translation>Ləqəb</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="241"/>
@@ -446,7 +446,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
         <source>L4 Cache</source>
-        <translation type="unfinished"/>
+        <translation>L4 keş</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
@@ -2702,7 +2702,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
         <source>Nine</source>
-        <translation type="unfinished"/>
+        <translation>Doqquz</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
@@ -4126,7 +4126,7 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa etmək</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
