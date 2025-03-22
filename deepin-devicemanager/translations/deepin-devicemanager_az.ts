@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="44"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Rəy bildirişi</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="56"/>
@@ -208,7 +208,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="240"/>
         <source>Alias</source>
-        <translation type="unfinished"/>
+        <translation>Ləqəb</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="241"/>
@@ -446,7 +446,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
         <source>L4 Cache</source>
-        <translation type="unfinished"/>
+        <translation>L4 keş</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
@@ -1717,7 +1717,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="93"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü platforması versiyası</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="94"/>
@@ -1732,12 +1732,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="179"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Ehtiyyat nüsxəsi saxlanılabilən sürücülər</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="180"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Ehtiyyat nüsxəsi saxlanılan sürücülər</translation>
     </message>
 </context>
 <context>
@@ -1943,7 +1943,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="115"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="485"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü quraşdırmaq</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="99"/>
@@ -1951,13 +1951,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="116"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="487"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünün eht. nüsxəsini saxlamaq</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="117"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="489"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünü bərpa etmək</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
@@ -1967,7 +1967,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="629"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Rəy bildirişi</translation>
     </message>
 </context>
 <context>
@@ -1975,12 +1975,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="93"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa ediləcək heç bir sürücünüz yoxdur, öncə eht. nüsxəsini saxlayın</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="96"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Ehtiyyat nesxə sürücüsünə keçin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
@@ -1995,7 +1995,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="124"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxə versiyası</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="125"/>
@@ -2005,7 +2005,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="167"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa ediləbilən sürücülər</translation>
     </message>
 </context>
 <context>
@@ -2028,17 +2028,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü quraşdırmaq</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünün eht. nüsxəsini saxlamaq</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünü bərpa etmək</translation>
     </message>
 </context>
 <context>
@@ -2702,7 +2702,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
         <source>Nine</source>
-        <translation type="unfinished"/>
+        <translation>Doqquz</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
@@ -3140,18 +3140,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Sürücün bərpa etmək mümkün olmadı!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="35"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Yenidən cəhd edin və ya bizə rəy bildirin</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Sürücünün eht. nüsxəsini saxlamaq mümkün olmadı!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
@@ -3823,68 +3823,68 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="462"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Bütün sürücülərin ehtiyyat nüsxəsi saxlanılıb</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="464"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Cəmi %1 sürücü, bunlardan %2 sürücünün eht. nüsxəsi saxlanıldı</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="502"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsi saxlanıla biləcək %1 sürücü var, bunu dərhal etmək tövsiyyə olunur</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="505"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsi saxlanıla biləcək %1 sürücünüz var</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücünün eht. nüsxəsi saxlanılır, cəmi %2 sürücü var</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsi saxlanılır: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="589"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücünün eht. nüsxəsi saxlanıldı, %2 sürücü mümkün olmadı</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="591"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>Sürücülərin eht. nüsxəsini saxlamaq mümkün olmadı</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="593"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"/>
+        <translation>%1 sürücünün eht. nüsxəsi saxlanıldı</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="632"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa edilə biləcək %1 sürücünüz var</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="633"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa ediləcək sürücünü seçin</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="663"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"/>
+        <translation>Sürücü bərpa olunur...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="664"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa olunur: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="807"/>
@@ -3899,12 +3899,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="816"/>
         <source>View backup path</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxə yoluna baxmaq</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="829"/>
         <source>Backup All</source>
-        <translation type="unfinished"/>
+        <translation>Hamısının eht. nüsxəsini saxlamaq</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="811"/>
@@ -3995,12 +3995,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="691"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Sürücülərin eht. nüsxəsini saxlayırsınız, çıxış etsəniz bu əməliyyat yarımçıq qalacaq.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="704"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Sürücüləri bərpa edirsiniz, çıxış etsəniz bu əməliyyat yarımçıq kəsiləcək.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
@@ -4071,27 +4071,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Not backed up</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsi saxlanılmadı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Backing up</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsi saxlanılır</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="75"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxəsni saxlamaq mümkün olmadı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="76"/>
         <source>Backup successful</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxə uğurla saxlanıldı</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="77"/>
         <source>Restoring</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa olunur</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
@@ -4121,12 +4121,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Eht. nüsxə saxlamaq</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Bərpa etmək</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
