@@ -446,7 +446,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="273"/>
         <source>L4 Cache</source>
-        <translation type="unfinished"/>
+        <translation>الكاش L4</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="274"/>
@@ -2702,7 +2702,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
         <source>Nine</source>
-        <translation type="unfinished"/>
+        <translation>تسع</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
@@ -3899,7 +3899,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="816"/>
         <source>View backup path</source>
-        <translation type="unfinished"/>
+        <translation>عرض مسار النسخ الس.Beanدة</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="829"/>
@@ -3910,12 +3910,12 @@
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="811"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="286"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>صمغ ردود الأفعال</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="812"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>يرجى المحاولة مرة أخرى أو %1 معنا</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
@@ -3962,7 +3962,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>يرجى تصوير مرة أخرى أو %1 معنا</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="678"/>
