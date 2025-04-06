@@ -3,7 +3,7 @@
     <name>policy</name>
     <message>
         <source>Authentication is required to read hardware information</source>
-        <translation type="unfinished"/>
+        <translation>Onluk kirjamine hariduseandmete lugemiseks on vajalik</translation>
     </message>
     <message>
         <source>Cancel</source>
