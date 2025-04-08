@@ -4,18 +4,18 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="43"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>V redu</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="44"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Zaupanje</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="56"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>V redu</translation>
     </message>
 </context>
 <context>
@@ -84,7 +84,7 @@
     <message>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="236"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
 </context>
 <context>
@@ -159,7 +159,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="362"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="366"/>
@@ -283,7 +283,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="271"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="275"/>
@@ -351,7 +351,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="153"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="157"/>
@@ -610,7 +610,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="360"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
 </context>
 <context>
@@ -678,7 +678,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="192"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceImage.cpp" line="196"/>
@@ -751,7 +751,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="543"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="547"/>
@@ -1165,7 +1165,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="344"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="348"/>
@@ -1286,7 +1286,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="207"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceOthers.cpp" line="210"/>
@@ -1504,7 +1504,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="685"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
 </context>
 <context>
@@ -1513,12 +1513,12 @@
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="52"/>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="140"/>
         <source>Select a driver for update</source>
-        <translation type="unfinished"/>
+        <translation>Izberi voditelja za posodobitev</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="134"/>
         <source>No drivers found in this folder</source>
-        <translation type="unfinished"/>
+        <translation>V tej mapi ni najdenih vodilnikov</translation>
     </message>
 </context>
 <context>
@@ -1586,7 +1586,7 @@
     <message>
         <location filename="../src/Widget/logtreeview.cpp" line="100"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
 </context>
 <context>
@@ -1599,7 +1599,7 @@
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="110"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
 </context>
 <context>
@@ -1653,12 +1653,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="400"/>
         <source>Hardware</source>
-        <translation type="unfinished"/>
+        <translation>Opremo</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="400"/>
         <source>Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Vodilniki</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="550"/>
@@ -1711,13 +1711,13 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="93"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Trenutna različica</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="93"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>Različica platforme vodilnika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="94"/>
@@ -1727,17 +1727,17 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="94"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Dejanje</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="179"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Vodilniki v zgradi</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="180"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Zgrajeni vodilniki</translation>
     </message>
 </context>
 <context>
@@ -1746,7 +1746,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="101"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="234"/>
         <source>Updating</source>
-        <translation type="unfinished"/>
+        <translation>Posodabljanje</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="106"/>
@@ -1759,123 +1759,123 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="107"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Naprej</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>Opozorilo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>UREJALNIK bo neodpren po odinstalaciji vodilnika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
         <source>Uninstall</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Odinstaliraj</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="133"/>
         <source>Uninstalling</source>
-        <translation type="unfinished"/>
+        <translation>Odinstaliranje</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="159"/>
         <source>Update successful</source>
-        <translation type="unfinished"/>
+        <translation>Posodobitev je uspešna</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="159"/>
         <source>Uninstallation successful</source>
-        <translation type="unfinished"/>
+        <translation>Odinstaliranje je uspešno</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>Update failed</source>
-        <translation type="unfinished"/>
+        <translation>Posodobitev je spodletela</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>Uninstallation failed</source>
-        <translation type="unfinished"/>
+        <translation>Odinstaliranje je spodletelo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="167"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>V redu</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="186"/>
         <source>Next</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Naprej</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="207"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>Izbrana mape ne obstaja, izberite jo ponovno</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="212"/>
         <source>Update</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Posodobi</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
         <source>Previous</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Predhodno</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="246"/>
         <source>Broken package</source>
-        <translation type="unfinished"/>
+        <translation>Kovajsko paketo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="250"/>
         <source>Unmatched package architecture</source>
-        <translation type="unfinished"/>
+        <translation>Neprispevna arhitektura paketa</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="255"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="338"/>
         <source>The selected file does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>Izbrani datotekni ne obstajajo, izberite znova</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="339"/>
         <source>It is not a driver</source>
-        <translation type="unfinished"/>
+        <translation>To ni voditelj</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="340"/>
         <source>Unable to install - no digital signature</source>
-        <translation type="unfinished"/>
+        <translation>Nemogoče namestiti - brez digitalne izdaje</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Neznana napaka</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
         <source>The driver module was not found</source>
-        <translation type="unfinished"/>
+        <translation>Vodilnik modul ni bil najden</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
         <source>Invalid module format</source>
-        <translation type="unfinished"/>
+        <translation>Neveljaven format modula</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="337"/>
         <source>The driver module has dependencies</source>
-        <translation type="unfinished"/>
+        <translation>Vodilnik modul ima odvisnosti</translation>
     </message>
 </context>
 <context>
@@ -1890,7 +1890,7 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="103"/>
         <source>Version Available</source>
-        <translation type="unfinished"/>
+        <translation>Dostopna različica</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="104"/>
@@ -1908,32 +1908,32 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="106"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Dejanje</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="116"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>Novi izbor</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="128"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Trenutna različica</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="212"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Manjkajoči vodilniki (%1</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="213"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Prestarjeli vodilniki (%1</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="214"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Vzgojeni vodilniki (%1</translation>
     </message>
 </context>
 <context>
@@ -1943,7 +1943,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="115"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="485"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Namestitev vodilnika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="99"/>
@@ -1951,23 +1951,23 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="116"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="487"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Vodilniški odznamek</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="117"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="489"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Vračanje vodilnika</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="628"/>
         <source>OK</source>
-        <translation type="unfinished"/>
+        <translation>V redu</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="629"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Zaupanje</translation>
     </message>
 </context>
 <context>
@@ -1975,12 +1975,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="93"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>Niste imeli vodilnikov za obnoviti, prosimo, najprej naredite odznamek</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="96"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Idite na vodilniški odznamek</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
@@ -1990,22 +1990,22 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="123"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Trenutna različica</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="124"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation> Varčevna različica</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="125"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Dejanje</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="167"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Vrata za vrnitev v-operacinsko vrednost</translation>
     </message>
 </context>
 <context>
@@ -2028,17 +2028,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation> Namestitev vodilca</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Ustvarjanje varnostne kopije vodilca</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="124"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Vrnitev v-operacinskega vrednosti vodilca</translation>
     </message>
 </context>
 <context>
@@ -2056,17 +2056,17 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="170"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Ni bilo mogoče onemogočiti: ni mogoče prebrati SN-niza za uravnoteževalno orodje</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="192"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Nadgradnja vodilcev</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="210"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Odstranitev vodilcev</translation>
     </message>
 </context>
 <context>
@@ -2118,17 +2118,17 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="46"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>Nadgradnja vodilcev</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="47"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>Odstranitev vodilcev</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="48"/>
         <source>Allow it to wake the computer</source>
-        <translation type="unfinished"/>
+        <translation>Dozvoli, da ga začne vzbuditi računalnik</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="210"/>
@@ -2139,7 +2139,7 @@
         <location filename="../src/Page/PageSingleInfo.cpp" line="292"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="309"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Ni bilo mogoče onemogočiti: ni mogoče prebrati SN-niza za uravnoteževalno orodje</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="296"/>
@@ -2154,12 +2154,12 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="328"/>
         <source>Update Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Nadgradnja vodilcev</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="345"/>
         <source>Uninstall Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Odstranitev vodilcev</translation>
     </message>
 </context>
 <context>
@@ -2702,7 +2702,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="310"/>
         <source>Nine</source>
-        <translation type="unfinished"/>
+        <translation>Devet</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="311"/>
@@ -3007,7 +3007,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="382"/>
         <source>One hundred and Ninety-two</source>
-        <translation type="unfinished"/>
+        <translation> sto devetdvajset</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="383"/>
@@ -3140,18 +3140,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Pritisnil se napak pri vrni v-operacinskega vrednosti vodilca</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="35"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Poskusi znova ali nam dajte odziv</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Ustvarjanje varnostne kopije vodilca je spodletelo</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
@@ -3747,186 +3747,186 @@
     <message>
         <location filename="../src/main.cpp" line="148"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"/>
+        <translation>Novi vodilci so na voljo! Namestite lepo ali nadgradnje jih zdaj.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="149"/>
         <source>View</source>
-        <translation type="unfinished"/>
+        <translation>Pogled</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="14"/>
         <source>Include subfolders</source>
-        <translation type="unfinished"/>
+        <translation>Vključi podmappe</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="55"/>
         <source>Search for drivers in this path</source>
-        <translation type="unfinished"/>
+        <translation>Iskanje vodilcev v tej poti</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="103"/>
         <source>%1 driver updates available</source>
-        <translation type="unfinished"/>
+        <translation>%1 posodobitev vodilca so na voljo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="109"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="377"/>
         <source>Time checked: %1</source>
-        <translation type="unfinished"/>
+        <translation>Ustavljeno časovno: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="159"/>
         <source>Downloading drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Prenosi vodilne mreže za %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="161"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"/>
+        <translation>Hitrost prenosa: %1 Preneheno %2/%3</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="207"/>
         <source>Installing drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Nameščam vodilne mreže za %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="249"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 vodilnih mrež nameščeno, %2 vodilnih mrež je zgodila napaka</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="251"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"/>
+        <translation>%1 vodilnih mrež nameščeno</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="291"/>
         <source>Failed to install drivers</source>
-        <translation type="unfinished"/>
+        <translation>Nameščanje vodilnih mrež je spodletelo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="331"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>Omrežna napaka. Ponovno povezovanje...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="333"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>Hitrost prenosa: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="374"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"/>
+        <translation>Vaše vodilne mreže so na voljo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="462"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Vse vodilne mreže so bili varnostno kopirane</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="464"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Skupno %1 vodilnih mrež, od katerega %2 je bilo varnostno kopirano</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="502"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"/>
+        <translation>Imate %1 vodilnih mrež, ki jih je mogoče varnostno kopirati, je priporočljivo to narediti meden čas</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="505"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"/>
+        <translation>Imate %1 vodilnih mrež, ki jih je mogoče varnostno kopirati</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>Varnostno kopiranje vodilne mreže %1, skupno %2 vodilnih mrež</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"/>
+        <translation>Varnostno kopiranje: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="589"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 vodilnih mrež je bilo varnostno kopirano, %2 vodilnih mrež je zgodila napaka</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="591"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>Varnostno kopiranje vodilnih mrež je spodletelo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="593"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"/>
+        <translation>%1 vodilnih mrež je bilo varnostno kopirano</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="632"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"/>
+        <translation>Imate %1 vodilnih mrež, ki jih je mogoče obnoviti</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="633"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"/>
+        <translation>Izberite vodilno mrežo za obnovo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="663"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"/>
+        <translation>Vodilna mreža se obnovuje...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="664"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"/>
+        <translation>Obnava: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="807"/>
         <source>reboot</source>
-        <translation type="unfinished"/>
+        <translation>ponovno zagon</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="808"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"/>
+        <translation>Prosim %1, da so nameščene vodilne mreže vplivalne</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="816"/>
         <source>View backup path</source>
-        <translation type="unfinished"/>
+        <translation>Pogledaj pot za varnostno kopijo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="829"/>
         <source>Backup All</source>
-        <translation type="unfinished"/>
+        <translation>Varnostno kopiraj vse</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="811"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="286"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>posreduj opinijo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="812"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Prosim poskusite znova ali %1 nam</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="819"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>Namesti vse</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="824"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="290"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>Ispreverni skeniranje</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="834"/>
@@ -3936,45 +3936,46 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="68"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Skeneiranje vrtilkov za opremnike, prosim počakajte...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="76"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="357"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>Skeneiranje %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="132"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Skeneiranje je spodletelo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="190"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Omrežje ni na voljo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="194"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>Prosim preverite povezavo s omrežjem</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Prosim ispreverite skeniranje ali %1 nam</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="678"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Namestiti ste vrtilko, ki bo prekinjena, če se izklopite.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="679"/>
         <location filename="../src/Page/MainWindow.cpp" line="692"/>
         <location filename="../src/Page/MainWindow.cpp" line="705"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Ste сигурни, da želite izkloniti?
+</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="682"/>
@@ -3982,7 +3983,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="708"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Izhod</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="683"/>
@@ -3995,143 +3996,143 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="691"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Varnostno kopirate vrtike, ki bo prekinjeno, če se izklopite.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="704"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Vrnitev vrtilkov bo prekinjena, če se izklopite.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adapter Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="37"/>
         <location filename="../src/Tool/commontools.cpp" line="44"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation>Opremnik za snimanje slik</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="38"/>
         <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adapter za prikaz</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="40"/>
         <source>Sound card</source>
-        <translation type="unfinished"/>
+        <translation>Zvonska karta</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Adapter za omrežje</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="46"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Neovpršniki adapter za omrežje</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
         <source>Installation successful</source>
-        <translation type="unfinished"/>
+        <translation>Namestitev je uspešna</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation>Namestitev je spodletela</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
         <source>Downloading</source>
-        <translation type="unfinished"/>
+        <translation>Prenos</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="69"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Namestevanje</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="70"/>
         <source>Not installed</source>
-        <translation type="unfinished"/>
+        <translation>Ni nameščen</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="71"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <translation>Zanemarjen</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="72"/>
         <source>Waiting</source>
-        <translation type="unfinished"/>
+        <translation>Čakam</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="73"/>
         <source>Not backed up</source>
-        <translation type="unfinished"/>
+        <translation>Ni narejeno varnostne kopije</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="74"/>
         <source>Backing up</source>
-        <translation type="unfinished"/>
+        <translation>Varnostna kopija</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="75"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>Varnostna kopija je spodletela</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="76"/>
         <source>Backup successful</source>
-        <translation type="unfinished"/>
+        <translation>Varnostna kopija je uspešno zaključljiva</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="77"/>
         <source>Restoring</source>
-        <translation type="unfinished"/>
+        <translation>Ponovno namestevanje</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Neznana napaka</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="82"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation>Omrežna napaka</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="83"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation>Preklicano</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="84"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"/>
+        <translation>Napaka pri prenosu datotek za operacijsko sistem</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="235"/>
         <source>Update</source>
-        <translation type="unfinished"/>
+        <translation>Posodobitev</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="240"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Varnostna kopija</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="245"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Ponovno namestevanje</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="231"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>Namestitev</translation>
     </message>
     <message>
         <location filename="../tests/src/DeviceManager/ut_devicemanager.cpp" line="89"/>
@@ -4160,17 +4161,17 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="38"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>Posodobitev vodilnikov</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="39"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>Odinstaliranje vodilnikov</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="40"/>
         <source>Allow it to wake the computer</source>
-        <translation type="unfinished"/>
+        <translation>Dozvoli, da ga vzbudi računalnik</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="213"/>
@@ -4204,7 +4205,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="248"/>
         <source>Unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nedostopno</translation>
     </message>
 </context>
 <context>
@@ -4212,7 +4213,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="89"/>
         <source>Select a local folder please</source>
-        <translation type="unfinished"/>
+        <translation>Izberi, molim, varno mapo</translation>
     </message>
 </context>
 <context>
