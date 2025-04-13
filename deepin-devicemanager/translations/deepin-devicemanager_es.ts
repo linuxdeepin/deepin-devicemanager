@@ -3995,12 +3995,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="691"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation>Estás respaldando controladores, lo cual se interrumpirá si sales.</translation>
+        <translation>Está respaldando controladores, lo cual se interrumpirá si sale.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="704"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation>Estás restaurando controladores, lo cual se interrumpirá si sales.</translation>
+        <translation>Está restaurando controladores, lo cual se interrumpirá si sale.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
