@@ -5,6 +5,7 @@
 // 项目自身文件
 #include "DeviceStorage.h"
 #include "commonfunction.h"
+#include <cfloat>
 #include <cmath>
 
 // Qt库文件
@@ -561,7 +562,7 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
     // 将字符串转为数字大小进行比较
     int num1 = 0;
     int num2 = 0;
-    QRegularExpression reg(".*\\[(\\d*).*\\]$");
+    QRegularExpression reg(".*\\[(\\d+\\.?\\d+).*\\]");
     if (reg.match(size1).hasMatch())
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         num1 = reg.cap(1).toInt(); // Qt 5 使用 cap
@@ -576,7 +577,7 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
 #endif
 
     // 返回较大值
-    if (num1 > num2) {
+    if ((num1 - num2) > FLT_EPSILON * fmaxf(fabsf(num1), fabsf(num2))) {
         qCDebug(appLog) << "DeviceStorage::compareSize, num1 > num2";
         return size1;
     } else {
