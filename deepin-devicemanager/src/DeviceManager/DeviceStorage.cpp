@@ -5,6 +5,7 @@
 // 项目自身文件
 #include "DeviceStorage.h"
 #include "commonfunction.h"
+#include <cfloat>
 #include <cmath>
 
 // Qt库文件
@@ -477,16 +478,16 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
         return size1 + size2;
 
     // 将字符串转为数字大小进行比较
-    int num1 = 0;
-    int num2 = 0;
-    QRegExp reg(".*\\[(\\d*).*\\]$");
+    float num1 = 0;
+    float num2 = 0;
+    QRegExp reg(".*\\[(\\d+\\.?\\d+).*\\]");
     if (reg.exactMatch(size1))
-        num1 = reg.cap(1).toInt();
+        num1 = reg.cap(1).toFloat();
     if (reg.exactMatch(size2))
-        num2 = reg.cap(1).toInt();
+        num2 = reg.cap(1).toFloat();
 
     // 返回较大值
-    if (num1 > num2)
+    if ((num1 - num2) > FLT_EPSILON * fmaxf(fabsf(num1), fabsf(num2)))
         return size1;
     else
         return size2;
@@ -685,6 +686,9 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
 
         capacity.replace(",","").replace(" ","");
         QRegExp re("(\\d+)bytes*");     //取值格式如： User Capacity:    1,000,204,886,016 bytes [1.00 TB]     Total NVM Capacity:   256,060,514,304 [256 GB]
+        if (!capacity.contains("bytes", Qt::CaseInsensitive)) {
+            re.setPattern("(\\d+)");
+        }
         int pos = re.indexIn(capacity);
         if (pos != -1) {
             QString byteSize = re.cap(1);
