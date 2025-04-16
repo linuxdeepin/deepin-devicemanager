@@ -361,6 +361,16 @@ QString DeviceInput::eventStrFromDeviceFiles(const QString &dfs)
     return "";
 }
 
+QString DeviceInput::getBusInfo() const
+{
+    return m_SysPath;
+}
+
+QString DeviceInput::getInterface() const
+{
+    return m_Interface;
+}
+
 const QString &DeviceInput::name() const
 {
     // qCDebug(appLog) << "Entering name() const.";
@@ -501,7 +511,7 @@ bool DeviceInput::isWakeupMachine()
     }
     QString info = file.readAll();
 
-    if (m_Name.contains("PS/2")) {
+    if (m_Name.contains("PS/2") || m_Interface.contains("PS/2")) {
 //        QStringList lines = info.split("\n");
 //        for (QString line : lines) {
 //            if (line.startsWith("PS2M" && line.contains("disabled"))) {
