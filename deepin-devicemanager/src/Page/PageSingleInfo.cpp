@@ -352,7 +352,10 @@ void PageSingleInfo::slotWakeupMachine()
     // 键盘鼠标唤醒机器
     DeviceInput *input = qobject_cast<DeviceInput *>(mp_Device);
     if (input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()) {
-        DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(), input->sysPath(), mp_WakeupMachine->isChecked(), input->name());
+        DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),
+                                                             input->sysPath(),
+                                                             mp_WakeupMachine->isChecked(),
+                                                             input->getInterface());
     }
 
     // 网卡的远程唤醒

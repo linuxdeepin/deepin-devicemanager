@@ -119,6 +119,10 @@ public:
      */
     bool bluetoothIsConnected();
 
+    QString getBusInfo() const;
+
+    QString getInterface() const;
+
 protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
@@ -181,7 +185,6 @@ private:
     bool                m_wakeupChanged = true;                //<!   记录鼠标的唤醒状态
 
     QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
-    
 };
 
 #endif // DEVICEINPUT_H
