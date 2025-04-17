@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.39) unstable; urgency=medium
+
+  * chore: update translations.
+
+ -- renbin <renbin@uniontech.com>  Thu, 17 Apr 2025 10:07:28 +0800
+
 deepin-devicemanager (6.0.38) unstable; urgency=medium
 
   * chore: New version 6.0.38.
