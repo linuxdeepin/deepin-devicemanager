@@ -595,7 +595,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="346"/>
         <source>Display Output</source>
-        <translation>Wyjście wyświetlacza</translation>
+        <translation>Wyjście ekranu</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="347"/>
