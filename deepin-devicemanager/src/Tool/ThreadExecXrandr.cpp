@@ -330,8 +330,8 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
     }
 
     if (maxResolutionWidth != -1) {
-        lstMap.insert("maxResolution", QString("%1 x %2").arg(maxResolutionWidth).arg(maxResolutionHeight));
-        lstMap.insert("minResolution", QString("%1 x %2").arg(minResolutionWidth).arg(minResolutionHeight));
+        lstMap.insert("maxResolution", QString("%1×%2").arg(maxResolutionWidth).arg(maxResolutionHeight));
+        lstMap.insert("minResolution", QString("%1×%2").arg(minResolutionWidth).arg(minResolutionHeight));
     }
 }
 
@@ -409,7 +409,7 @@ void ThreadExecXrandr::getResolutionRateFromDBus(QList<QMap<QString, QString> > 
             curResolutionHeight = resolution.height;
             resRate = resolution.refreshRate;
             QMap<QString,QString>infoMap;
-            QString tmpS = QString("%1 x %2 @").arg(curResolutionWidth).arg(curResolutionHeight)  + QString::number(resRate, 'f', 2);
+            QString tmpS = QString("%1×%2@").arg(curResolutionWidth).arg(curResolutionHeight)  + QString::number(resRate, 'f', 2);
             infoMap.insert("CurResolution", tmpS + "Hz");
             infoMap.insert("Name", tname.toString());
             infoMap.insert("Display Input", tname.toString());

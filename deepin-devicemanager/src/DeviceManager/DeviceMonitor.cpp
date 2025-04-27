@@ -200,9 +200,9 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
                     if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
                         curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
                     }
-                    m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate);
+                    m_CurrentResolution = QString("%1@%2").arg(reScreenSize.cap(1)).arg(curRate).replace("x", "×", Qt::CaseInsensitive);
                 } else
-                    m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+                    m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1)).replace("x", "×", Qt::CaseInsensitive);
             }
         }
         return false;
@@ -275,12 +275,12 @@ void DeviceMonitor::initFilterKey()
 void DeviceMonitor::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    if (Common::specialComType != 6)
+    if (Common::specialComType != 6 && Common::specialComType != 5) {
         addBaseDeviceInfo(("Name"), m_Name);
-    addBaseDeviceInfo(("Vendor"), m_Vendor);
-    if (Common::specialComType != 6)
+        addBaseDeviceInfo(("Vendor"), m_Vendor);
         addBaseDeviceInfo(("Type"), m_Model);
-    addBaseDeviceInfo(("Display Input"), m_DisplayInput);
+        addBaseDeviceInfo(("Display Input"), m_DisplayInput);
+    }
     addBaseDeviceInfo(("Interface Type"), m_Interface);
 }
 
@@ -353,12 +353,12 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
                 m_RefreshRate = QString("%1").arg(curRate);
             }
             if (Common::specialComType == 5 || Common::specialComType == 6) {
-                m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+                m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1)).replace("x", "×", Qt::CaseInsensitive);
             } else {
-                m_CurrentResolution = QString("%1 @%2").arg(reScreenSize.cap(1)).arg(curRate);
+                m_CurrentResolution = QString("%1 @%2").arg(reScreenSize.cap(1)).arg(curRate).replace("x", "×", Qt::CaseInsensitive);
             }
         } else
-            m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1));
+            m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1)).replace("x", "×", Qt::CaseInsensitive);
     }
 
     return true;
@@ -419,7 +419,7 @@ void DeviceMonitor::caculateScreenSize()
         m_Height = re.cap(2).toInt();
 
         double inch = std::sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54)) / 10.0;
-        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(m_Width).arg(m_Height);
+        m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(m_Width).arg(m_Height);
     }
 }
 
@@ -449,6 +449,6 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
         return true;
 
     double inch = std::sqrt(height * height + width * width) / 2.54 / 10;
-    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(width).arg(height);
+    m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(width).arg(height);
     return true;
 }
