@@ -490,7 +490,7 @@ static void parseEDID(QStringList allEDIDS,QString input)
             QMap<QString, QString> mapInfo;
             mapInfo.insert("Vendor",edidParser.vendor());
             mapInfo.insert("Model",edidParser.model());
-            mapInfo.insert("Date",edidParser.releaseDate());
+            //mapInfo.insert("Date",edidParser.releaseDate());
             mapInfo.insert("Size",edidParser.screenSize());
             mapInfo.insert("Display Input",input);
 
