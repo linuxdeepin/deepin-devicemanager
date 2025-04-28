@@ -221,7 +221,7 @@ void EDIDParser::parseScreenSize()
     }
 
     double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;
-    m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+    m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
     qCDebug(appLog) << "Screen size parsed:" << m_ScreenSize << "Width:" << m_Width << "Height:" << m_Height;
 }
 
