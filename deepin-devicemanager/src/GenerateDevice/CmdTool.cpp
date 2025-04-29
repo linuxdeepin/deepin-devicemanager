@@ -592,7 +592,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             bool canAdd = true;
             for (; it != lstMap.end(); ++it) {
                 auto item = *it;
-                if (item.value("Device") == mapInfo["Device"] && item.value("Hardware Class") != "sound") {
+                if (item.value("Device") == mapInfo["Device"] && mapInfo.value("Hardware Class") != "sound") {
                     canAdd = false;
                 }
             }
