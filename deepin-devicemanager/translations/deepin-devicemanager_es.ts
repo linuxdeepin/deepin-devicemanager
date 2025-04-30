@@ -3146,7 +3146,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="35"/>
         <source>Please try again or give us feedback</source>
-        <translation>Por favor, inténtalo de nuevo o danos tu opinión.</translation>
+        <translation>Por favor, inténtelo de nuevo o denos su opinión</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
