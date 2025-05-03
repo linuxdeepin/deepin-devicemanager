@@ -3574,7 +3574,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="166"/>
         <source>icon-name</source>
-        <translation>nombre-ícono</translation>
+        <translation>nombre-icono</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="167"/>
