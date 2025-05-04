@@ -1717,7 +1717,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="93"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Driver Platform Version</source>
-        <translation>Versión de la Plataforma del Controlador</translation>
+        <translation>Versión de la plataforma del controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="94"/>
@@ -1980,7 +1980,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="96"/>
         <source>Go to Backup Driver</source>
-        <translation>Ir a Copia de Seguridad del Controlador</translation>
+        <translation>Ir a copia de seguridad del controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
@@ -1995,7 +1995,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="124"/>
         <source>Backup Version</source>
-        <translation>Versión de Respaldo</translation>
+        <translation>Versión de respaldo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="125"/>
@@ -2005,7 +2005,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="167"/>
         <source>Restorable Drivers</source>
-        <translation>Controladores Restaurables</translation>
+        <translation>Controladores restaurables</translation>
     </message>
 </context>
 <context>
@@ -3904,7 +3904,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="829"/>
         <source>Backup All</source>
-        <translation>Respaldar Todo</translation>
+        <translation>Respaldar todo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="811"/>
