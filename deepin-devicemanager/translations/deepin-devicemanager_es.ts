@@ -3874,7 +3874,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="633"/>
         <source>Please select a driver to restore</source>
-        <translation>Por favor selecciona un controlador para restaurar.</translation>
+        <translation>Seleccione un controlador para restaurar.</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="663"/>
