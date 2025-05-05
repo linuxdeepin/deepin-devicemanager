@@ -1795,7 +1795,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>Update failed</source>
-        <translation>Actualización fallida</translation>
+        <translation>La actualización falló</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
@@ -4041,7 +4041,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>Installation failed</source>
-        <translation>Instalación fallida</translation>
+        <translation>La instalación falló</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
@@ -4081,7 +4081,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="75"/>
         <source>Backup failed</source>
-        <translation>Copia de seguridad fallida</translation>
+        <translation>La copia de seguridad falló</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="76"/>
