@@ -1800,7 +1800,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>Uninstallation failed</source>
-        <translation>Desinstalación Fallida</translation>
+        <translation>La desinstalación falló</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="167"/>
