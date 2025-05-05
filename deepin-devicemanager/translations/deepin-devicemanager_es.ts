@@ -3140,7 +3140,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
         <source>Driver restore failed!</source>
-        <translation>¡Restauración del controlador fallida!</translation>
+        <translation>¡La restauración del controlador falló!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
@@ -3151,7 +3151,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Driver backup failed!</source>
-        <translation>¡Copia de seguridad del controlador fallida!</translation>
+        <translation>¡La copia de seguridad del controlador falló!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
@@ -3947,7 +3947,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="132"/>
         <source>Scan failed</source>
-        <translation>Búsqueda fallida</translation>
+        <translation>La búsqueda falló</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="190"/>
@@ -3962,7 +3962,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
         <source>Please scan again or %1 to us</source>
-        <translation>Escanee de nuevo o %1 contáctenos</translation>
+        <translation>Busque de nuevo o %1 contáctenos</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="678"/>
