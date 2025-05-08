@@ -741,13 +741,17 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
 
         QString path = pciPath(*it);
         DeviceAudio *device = dynamic_cast<DeviceAudio *>(DeviceManager::instance()->getAudioDevice(path));
-        if (device) {
+        if (device && (*it).size() != 5) {
             device->setEnableValue(false);
             continue;
         }
 
         device = new DeviceAudio();
         device->setInfoFromHwinfo(*it);
+        if ((*it).size() == 5 && (*it).find("unique_id") != (*it).end()) {
+            device->setEnableValue(false);
+            device->setUniqueID((*it)["unique_id"]);
+        }
         DeviceManager::instance()->addAudioDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
