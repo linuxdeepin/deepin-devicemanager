@@ -9,6 +9,7 @@
 // Qt库文件
 #include <QLoggingCategory>
 #include <QFile>
+#include <QFileInfo>
 #include <QMutexLocker>
 
 // 其它头文件
@@ -1233,21 +1234,27 @@ void DeviceManager::delAudioDevice(DeviceAudio *const device)
 void DeviceManager::deleteDisableDuplicate_AudioDevice(void)
 {
     qCDebug(appLog) << "Deleting disable duplicate audio device";
-    if (m_ListDeviceAudio.size() > 0) {
-        for (QList<DeviceBaseInfo *>::iterator it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
-            DeviceAudio *audio_1 = dynamic_cast<DeviceAudio *>(*it);
-            //QString tpath = audio_1->uniqueID();
-            // 判断该设备是否已经存在，
-            if (!audio_1->enable()) {
-                for (QList<DeviceBaseInfo *>::iterator it2 = m_ListDeviceAudio.begin(); it2 != m_ListDeviceAudio.end(); ++it2) {
-                    DeviceAudio *audio_2 = dynamic_cast<DeviceAudio *>(*it2);
-                    if (audio_2->name() == audio_1->name())
-                        if (audio_2->enable())
-                            m_ListDeviceAudio.removeOne(audio_2);
-                }
+    QHash<QString, DeviceAudio*> enabledDevices;
+    for (auto it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
+        DeviceAudio* audio = dynamic_cast<DeviceAudio*>(*it);
+        if (!audio) {
+            continue;
+        }
+        if (audio->enable()  || !enabledDevices.contains(audio->uniqueID())) {
+            QString usbDir = "/sys" + audio->sysPath();
+            if (QFileInfo::exists(usbDir) || !audio->driver().contains("usb")) {
+                enabledDevices[audio->uniqueID()] = audio;
+            }
+        } else {
+            if (enabledDevices.contains(audio->uniqueID()) && enabledDevices[audio->uniqueID()]->enable()) {
+                delete enabledDevices[audio->uniqueID()];
+                enabledDevices[audio->uniqueID()] = audio;
             }
         }
-
+    }
+    m_ListDeviceAudio.clear();
+    for(auto it : enabledDevices.values()){
+        m_ListDeviceAudio.push_back(it);
     }
 }
 

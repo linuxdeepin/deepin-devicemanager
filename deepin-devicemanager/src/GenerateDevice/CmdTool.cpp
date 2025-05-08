@@ -698,18 +698,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
         if (mapInfo["Hardware Class"] == "sound" || mapInfo["Device"].contains("USB Audio")) {
             qCDebug(appLog) << "Found sound device.";
             // mapInfo["Device"].contains("USB Audio") 是为了处理未识别的USB声卡 Bug-118773
-            const QList<QMap<QString, QString>> &lstMap = m_cmdInfo["hwinfo_sound"];
-            QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
-            bool canAdd = true;
-            for (; it != lstMap.end(); ++it) {
-                auto item = *it;
-                if (item.value("Device") == mapInfo["Device"] && mapInfo.value("Hardware Class") != "sound") {
-                    canAdd = false;
-                }
-            }
-            if (canAdd) {
-                addMapInfo("hwinfo_sound", mapInfo);
-            }
+            addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network")) {
             qCDebug(appLog) << "Found network device.";
             addMapInfo("hwinfo_network", mapInfo);

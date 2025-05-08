@@ -1487,3 +1487,8 @@ void DeviceBaseInfo::generatorTranslate()
     <<  tr("Vendor") \
     <<  tr("Processor");
 }
+
+void DeviceBaseInfo::setUniqueID(const QString &UniqueID)
+{
+    m_UniqueID = UniqueID;
+}
