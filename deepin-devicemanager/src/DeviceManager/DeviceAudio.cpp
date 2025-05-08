@@ -314,7 +314,7 @@ const QString &DeviceAudio::driver() const
 const QString &DeviceAudio::uniqueID() const
 {
     qCDebug(appLog) << "DeviceAudio::uniqueID called.";
-    return m_SysPath;
+    return m_UniqueID;
 }
 EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
