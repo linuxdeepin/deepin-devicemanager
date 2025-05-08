@@ -394,6 +394,7 @@ public:
        */
     TomlFixMethod setInfoFromTomlBase(const QMap<QString, QString> &mapInfo);
 
+    void setUniqueID(const QString &UniqueID);
 protected:
     /**
      * @brief:初始化过滤信息

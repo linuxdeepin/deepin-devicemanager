@@ -263,7 +263,7 @@ const QString &DeviceAudio::driver() const
 }
 const QString &DeviceAudio::uniqueID() const
 {
-    return m_SysPath;
+    return m_UniqueID;
 }
 EnableDeviceStatus DeviceAudio::setEnable(bool e)
 {
