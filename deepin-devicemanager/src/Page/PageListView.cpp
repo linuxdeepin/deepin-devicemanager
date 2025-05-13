@@ -9,6 +9,7 @@
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
+#include <DPaletteHelper>
 
 // Qt库文件
 #include <QHBoxLayout>
@@ -95,23 +96,14 @@ void PageListView::setCurType(QString type)
 void PageListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色
-    // TODO qt6 中使用 QPalette 替代 DPalette
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    DPalette pa;
-    pa = DGuiApplicationHelper::instance()->palette(this);
+    DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::ItemBackground, pa.brush(DPalette::Base));
-    pa.setBrush(DPalette::Background, pa.brush(DPalette::Base));
-#else
-    QPalette pa = this->palette(); // 使用 QPalette 替代 Dtk::Gui::DPalette
-    pa.setBrush(QPalette::Window, pa.brush(QPalette::Base)); // 统一使用 QPalette
-#endif
-
-    // 设置调色板
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    DGuiApplicationHelper::instance()->setPalette(this, pa);
+    pa.setBrush(QPalette::Background, pa.brush(QPalette::Base));
 #else
-    this->setPalette(pa);
+    pa.setColor(QPalette::Window, pa.color(QPalette::Base));
 #endif
+    DPaletteHelper::instance()->setPalette(this, pa);
 
     return DWidget::paintEvent(event);
 }

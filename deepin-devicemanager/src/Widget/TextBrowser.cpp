@@ -11,6 +11,7 @@
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
+#include <DPaletteHelper>
 #include <DApplication>
 #include <DFontSizeManager>
 #include <DMenu>
@@ -139,15 +140,9 @@ void TextBrowser::fillClipboard()
 
 void TextBrowser::paintEvent(QPaintEvent *event)
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    DPalette pa = DGuiApplicationHelper::instance()->palette(this);
+    DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::WindowText, pa.color(DPalette::TextTips));
-    DGuiApplicationHelper::instance()->setPalette(this, pa);
-#else
-    QPalette pa = palette();
-    pa.setBrush(QPalette::WindowText, pa.color(QPalette::PlaceholderText));
-    setPalette(pa);
-#endif
+    DPaletteHelper::instance()->setPalette(this, pa);
 
     int height = int(document()->size().height());
     setFixedHeight(height);
