@@ -8,6 +8,7 @@
 // Dtk头文件
 #include <DGuiApplicationHelper>
 #include <DApplication>
+#include <DPaletteHelper>
 
 // Qt库文件
 #include <qdrawutil.h>
@@ -163,18 +164,9 @@ void DeviceListView::clearItem()
 void DeviceListView::paintEvent(QPaintEvent *event)
 {
     // 让背景色适合主题颜色
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    // Qt 6 中的处理
-    QPalette pa = DApplication::palette();
-    pa.setBrush(QPalette::Window, pa.brush(QPalette::Base));
-    setPalette(pa);
-#else
-    // Qt 5 中的处理
-    DPalette pa;
-    pa = DGuiApplicationHelper::instance()->palette(this);
+    DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::ItemBackground, pa.brush(DPalette::Base));
-    DGuiApplicationHelper::instance()->setPalette(this, pa);
-#endif
+    DPaletteHelper::instance()->setPalette(this, pa);
 
     DListView::paintEvent(event);
 }

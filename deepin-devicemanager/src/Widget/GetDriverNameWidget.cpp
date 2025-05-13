@@ -9,6 +9,7 @@
 #include <DFrame>
 #include <DLabel>
 #include <DGuiApplicationHelper>
+#include <DPaletteHelper>
 #include <DFontSizeManager>
 #include <DStackedWidget>
 
@@ -59,15 +60,10 @@ void GetDriverNameWidget::init()
     mp_tipLabel->setMinimumHeight(25);
 
     DFontSizeManager::instance()->bind(mp_tipLabel, DFontSizeManager::T8, QFont::Medium);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    DPalette pa = DGuiApplicationHelper::instance()->palette(mp_tipLabel);
+
+    DPalette pa = DPaletteHelper::instance()->palette(mp_tipLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
-    DGuiApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
-#else
-    DPalette pa = mp_tipLabel->palette();
-    pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
-    mp_tipLabel->setPalette(pa);
-#endif
+    DPaletteHelper::instance()->setPalette(mp_tipLabel, pa);
 
     // 上方布局
     QHBoxLayout *hLayout1 = new QHBoxLayout;
