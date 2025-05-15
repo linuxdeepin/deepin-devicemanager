@@ -841,7 +841,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="217"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Mouse</source>
-        <translation>Mouse</translation>
+        <translation>Mouse and Pointer Devices</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="222"/>

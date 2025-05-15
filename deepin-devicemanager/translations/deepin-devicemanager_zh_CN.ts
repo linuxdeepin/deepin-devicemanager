@@ -1852,7 +1852,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="221"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="271"/>
         <source>Mouse</source>
-        <translation>鼠标</translation>
+        <translation>鼠标与指针设备</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="226"/>
