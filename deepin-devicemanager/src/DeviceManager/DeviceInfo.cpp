@@ -1249,6 +1249,11 @@ void DeviceBaseInfo::generatorTranslate()
     <<  tr("Processor");
 }
 
+void DeviceBaseInfo::setSysPath(const QString &newSysPath)
+{
+    m_SysPath = newSysPath;
+}
+
 void DeviceBaseInfo::setUniqueID(const QString &UniqueID)
 {
     m_UniqueID = UniqueID;

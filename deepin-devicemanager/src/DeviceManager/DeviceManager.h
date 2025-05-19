@@ -331,6 +331,8 @@ public:
      */
     void deleteDisableDuplicate_AudioDevice(void);
 
+    void setAudioDeviceEnable(DeviceAudio *const devivce, bool enable);
+
     /**
      * @brief getAudioDevice 获取音频设备
      * @param path
