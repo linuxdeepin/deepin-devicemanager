@@ -1235,27 +1235,76 @@ void DeviceManager::deleteDisableDuplicate_AudioDevice(void)
 {
     qCDebug(appLog) << "Deleting disable duplicate audio device";
     QHash<QString, DeviceAudio*> enabledDevices;
+    QHash<QString, int> enableDevicePriority;
     for (auto it = m_ListDeviceAudio.begin(); it != m_ListDeviceAudio.end(); ++it) {
         DeviceAudio* audio = dynamic_cast<DeviceAudio*>(*it);
         if (!audio) {
             continue;
         }
-        if (audio->enable()  || !enabledDevices.contains(audio->uniqueID())) {
-            QString usbDir = "/sys" + audio->sysPath();
-            if (QFileInfo::exists(usbDir) || !audio->driver().contains("usb")) {
-                enabledDevices[audio->uniqueID()] = audio;
+        if (audio->enable() || !enabledDevices.contains(audio->uniqueID())) {
+            enabledDevices[audio->uniqueID()] = audio;
+            if (!enableDevicePriority.contains(audio->uniqueID())) {
+                if (audio->enable() || ! audio->driver().contains("usb")) {
+                    enableDevicePriority.insert(audio->uniqueID(), 2);
+                } else {
+                    enableDevicePriority.insert(audio->uniqueID(), 1);
+                }
+            } else {
+                enableDevicePriority[audio->uniqueID()] = enableDevicePriority[audio->uniqueID()] + 1;
             }
         } else {
             if (enabledDevices.contains(audio->uniqueID()) && enabledDevices[audio->uniqueID()]->enable()) {
+                if (!enableDevicePriority.contains(audio->uniqueID())) {
+                    if (audio->enable()) {
+                        enableDevicePriority.insert(audio->uniqueID(), 2);
+                    } else {
+                        enableDevicePriority.insert(audio->uniqueID(), 1);
+                    }
+                } else {
+                    enableDevicePriority[audio->uniqueID()] = enableDevicePriority[audio->uniqueID()] + 1;
+                }
+                audio->setSysPath(enabledDevices[audio->uniqueID()]->sysPath());
                 delete enabledDevices[audio->uniqueID()];
                 enabledDevices[audio->uniqueID()] = audio;
             }
         }
     }
+    qWarning()<<"delete before: "<< m_ListDeviceAudio.size();
+    qWarning() << enableDevicePriority;
     m_ListDeviceAudio.clear();
-    for(auto it : enabledDevices.values()){
-        m_ListDeviceAudio.push_back(it);
+    for(auto it : enabledDevices.keys()){
+        if (enableDevicePriority.value(it) <= 1) {
+            continue;
+        }
+        m_ListDeviceAudio.push_back(enabledDevices.value(it));
+
+        setAudioDeviceEnable(enabledDevices.value(it), enabledDevices.value(it)->enable());
     }
+    qWarning()<<"delete after: "<< m_ListDeviceAudio.size();
+}
+
+void DeviceManager::setAudioDeviceEnable(DeviceAudio * const devivce, bool enable)
+{
+    EnableDeviceStatus status ;
+
+    int i = 0;
+    do{
+        status = devivce->setEnable(enable);
+        if (status == EDS_Success) {
+            break;
+        }
+        qWarning() << "retry: " << ++i;
+    }while (i < 3);
+
+    qWarning() << [](EnableDeviceStatus status) {
+        switch(status) {
+        case EDS_Cancle: return "Device enable operation was cancelled";
+        case EDS_NoSerial: return "Device enable failed: No serial number available";
+        case EDS_Faild: return "-----Device enable failed due to unknown error";
+        case EDS_Success: return "Device enabled successfully";
+        default: return "Unknown device enable status";
+        }
+    }(status);
 }
 
 DeviceBaseInfo *DeviceManager::getAudioDevice(const QString &path)
