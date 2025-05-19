@@ -904,7 +904,7 @@ void DeviceGenerator::getAudioInfoFromHwinfo()
         DeviceManager::instance()->addAudioDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }
-    DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();
+//    DeviceManager::instance()->deleteDisableDuplicate_AudioDevice();
     qCDebug(appLog) << "DeviceGenerator::getAudioInfoFromHwinfo end";
 }
 
