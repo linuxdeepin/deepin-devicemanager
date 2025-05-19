@@ -90,14 +90,14 @@ public:
      * @param key
      * @return
      */
-    bool uniqueIDExisted(const QString &key);
+    bool uniqueIDExisted(const QString &key, const QString path = "");
 
     /**
      * @brief uniqueIDExistedForEnable
      * @param key
      * @return
      */
-    bool uniqueIDExistedEX(const QString &key);
+    bool uniqueIDExistedEX(const QString &key, const QString path = "");
 
     /**
      * @brief isUniqueIdEnabled 判断设备是否被禁用了

@@ -140,9 +140,7 @@ bool ControlInterface::enable(const QString &hclass, const QString &name, const 
 
     // 先从数据库中查找路径，防止设备更换usb接口
     QString sPath = EnableSqlManager::getInstance()->authorizedPath(value);
-    if (sPath.isEmpty()) {
-        sPath = path;
-    }
+    sPath = path;
 
     // 判断是内置设备，还是外设，内置设备通过remove文件禁用，外设通过authorized文件禁用
     bool res = false;

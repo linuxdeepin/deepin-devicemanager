@@ -52,14 +52,17 @@ void EnableSqlManager::removeDateFromRemoveTable(const QString &path)
 void EnableSqlManager::insertDataToAuthorizedTable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool exist, const QString &strDriver)
 {
     // 数据库已经存在该设备记录
-    if (uniqueIDExistedEX(unique_id)) {
+    if (uniqueIDExistedEX(unique_id, path)) {
         return;
     }
 
     // 数据库没有该设备记录，则直接插入
     // QString sql = QString("INSERT INTO %1 (class, name, path, unique_id, exist, driver) VALUES (%2, %3, %4, %5, %6, %7);")
     //               .arg(DB_TABLE_AUTHORIZED).arg(":hclass").arg(":name").arg(":path").arg(":unique_id").arg(":exist").arg(":strDriver");
-    if(!m_sqlQuery.prepare("INSERT INTO authorized (class, name, path, unique_id, exist, driver) VALUES (:hclass, :name, :path, :unique_id, :exist, :strDriver);")) return;
+    if(!m_sqlQuery.prepare("INSERT INTO authorized (class, name, path, unique_id, exist, driver) VALUES (:hclass, :name, :path, :unique_id, :exist, :strDriver);")){
+        qDebug() << "insert data to authorized table failed";
+        return;
+    }
     m_sqlQuery.bindValue(":hclass", QVariant(hclass));
     m_sqlQuery.bindValue(":name", QVariant(name));
     m_sqlQuery.bindValue(":path", QVariant(path));
@@ -124,20 +127,26 @@ void EnableSqlManager::removeDataFromPrinterTable(const QString &name)
     }
 }
 
-bool EnableSqlManager::uniqueIDExisted(const QString &key)
+bool EnableSqlManager::uniqueIDExisted(const QString &key, const QString path)
 {
     QString sql = QString("SELECT COUNT(*) FROM %1 WHERE unique_id=%2;").arg(DB_TABLE_AUTHORIZED).arg(":param");
+    if (!path.isEmpty()){
+        sql = QString("SELECT COUNT(*) FROM %1 WHERE unique_id=%2 and path=%3;").arg(DB_TABLE_AUTHORIZED).arg(":param").arg(":path");
+    }
     if(!m_sqlQuery.prepare(sql)) return false;
     m_sqlQuery.bindValue(":param", QVariant(key));
+    if (!path.isEmpty()){
+        m_sqlQuery.bindValue(":path", QVariant(path));
+    }
     if (m_sqlQuery.exec() && m_sqlQuery.next()) {
             return m_sqlQuery.value(0).toInt() > 0;
     }
     return false;
 }
 
-bool EnableSqlManager::uniqueIDExistedEX(const QString &key)
+bool EnableSqlManager::uniqueIDExistedEX(const QString &key, const QString path)
 {
-    return uniqueIDExisted(key);
+    return uniqueIDExisted(key, path);
 }
 
 bool EnableSqlManager::isUniqueIdEnabled(const QString &key)
