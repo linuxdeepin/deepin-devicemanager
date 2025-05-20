@@ -71,7 +71,9 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "DevicePower::setInfoFromUpower";
     // 设置upower中获取的信息
-    if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
+    if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive) ||
+        mapInfo["state"].contains("empty", Qt::CaseInsensitive) ||
+        mapInfo["state"].contains("unknown", Qt::CaseInsensitive)) {
         qCDebug(appLog) << "DevicePower::setInfoFromUpower, device contains line_power";
         return false;
     }
