@@ -66,7 +66,9 @@ TomlFixMethod DevicePower::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 {
     // 设置upower中获取的信息
-    if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
+    if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive) ||
+        mapInfo["state"].contains("empty", Qt::CaseInsensitive) ||
+        mapInfo["state"].contains("unknown", Qt::CaseInsensitive)) {
         return false;
     }
 
