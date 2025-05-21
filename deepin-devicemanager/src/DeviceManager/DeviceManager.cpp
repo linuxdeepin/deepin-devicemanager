@@ -696,11 +696,6 @@ void DeviceManager::tomlDeviceSet(DeviceType deviceType)
             DeviceBaseInfo *newDevice = createDevice(deviceType);
             tomlDeviceMapSet(deviceType, newDevice, tomlMapLst[j]);
             tomlDeviceAdd(deviceType, newDevice); //加
-        } else if ((deviceType != DT_Bios) && (deviceType != DT_Computer) && !fixSameOne) {
-            fixSameOne = true;  //标记为该项信息有用过 ，则不再增加了
-            DeviceBaseInfo *device = createDevice(deviceType);
-            tomlDeviceMapSet(deviceType, device, tomlMapLst[j]);
-            tomlDeviceAdd(deviceType, device); //不存在 就加
         }
     } //end of for (int j = 0;...
 }
