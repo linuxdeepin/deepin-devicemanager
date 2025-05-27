@@ -117,6 +117,10 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
             // 新的显示屏
             QMap<QString, QString> newMap;
             newMap.insert("mainInfo", (*it).trimmed());
+            auto mainInfoList = (*it).trimmed().split(" ");
+            if (mainInfoList.size() > 0) {
+                newMap.insert("port", mainInfoList.at(0));
+            }
             lstMap.append(newMap);
             continue;
         }
@@ -231,9 +235,12 @@ void ThreadExecXrandr::getMonitorInfoFromXrandrVerbose()
 {
     QList<QMap<QString, QString>> lstMap;
     loadXrandrVerboseInfo(lstMap, "xrandr --verbose");
-    if (Common::specialComType == Common::SpecialComputerType::NormalCom) {
-        std::reverse(lstMap.begin(), lstMap.end());
-    }
+    std::sort(lstMap.begin(), lstMap.end(), [](const QMap<QString, QString> &monintor1, const QMap<QString, QString> &monintor2) {
+        if (monintor1.contains("port") && monintor2.contains("port"))
+            return monintor1.value("port") < monintor2.value("port");
+        else
+            return false;
+    });
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1)
