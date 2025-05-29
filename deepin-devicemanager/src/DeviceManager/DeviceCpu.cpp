@@ -251,6 +251,12 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "product", m_Name);
     }
 
+    if (Common::specialComType > 0) {
+        if (mapInfo.contains("Version")) {
+            setAttribute(mapInfo, "Version", m_Name);
+        }
+    }
+
     // 获取设备基本信息
     setAttribute(mapInfo, "Manufacturer", m_Vendor);
     setAttribute(mapInfo, "Max Speed", m_Frequency, false);
