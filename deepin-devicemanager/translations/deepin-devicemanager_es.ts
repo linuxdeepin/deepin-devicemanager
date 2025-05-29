@@ -1975,7 +1975,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="93"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation>No tienes controladores para restaurar, por favor realiza una copia de seguridad primero.</translation>
+        <translation>No tienes controladores para restaurar, por favor realice una copia de seguridad primero.</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="96"/>
@@ -3962,7 +3962,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
         <source>Please scan again or %1 to us</source>
-        <translation>Busque de nuevo o %1 contáctenos</translation>
+        <translation>Busque de nuevo o envíenos %1</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="678"/>
