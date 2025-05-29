@@ -186,9 +186,9 @@ void DeviceBios::initFilterKey()
     addFilterKey("Asset Tag");
     addFilterKey("Features");
     addFilterKey("Location In Chassis");
-    addFilterKey("Chassis Handle");
+//    addFilterKey("Chassis Handle");
     addFilterKey("Type");
-    addFilterKey("Contained Object Handles");
+//    addFilterKey("Contained Object Handles");
 
     addFilterKey("Product Name");
     addFilterKey("Serial Number");
