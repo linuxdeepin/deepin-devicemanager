@@ -6,7 +6,7 @@
 #ifndef DEVICECPU_H
 #define DEVICECPU_H
 #include "DeviceInfo.h"
-
+#include "commonfunction.h"
 /**
  * @brief The DeviceCpu class
  * 用来描述CPU的类
