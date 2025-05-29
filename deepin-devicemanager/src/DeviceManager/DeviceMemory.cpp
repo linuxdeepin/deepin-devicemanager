@@ -127,7 +127,7 @@ void DeviceMemory::initFilterKey()
 {
     qCDebug(appLog) << "Initializing filter keys for memory device";
     // 初始化可显示属性
-    addFilterKey("Array Handle");  // 数组程序-2
+//    addFilterKey("Array Handle");  // 数组程序-2
     addFilterKey("Error Information Handle"); //错误信息程序-2
     addFilterKey("Form Factor"); // 尺寸型号-2
     addFilterKey("Set");    // 设置-2
