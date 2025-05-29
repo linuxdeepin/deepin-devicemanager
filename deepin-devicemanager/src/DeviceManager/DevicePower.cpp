@@ -160,9 +160,9 @@ void DevicePower::initFilterKey()
 {
     qCDebug(appLog) << "DevicePower::initFilterKey";
     // 初始化可显示属性
-    addFilterKey("native-path");
+//    addFilterKey("native-path");
     addFilterKey("power supply");
-    addFilterKey("updated");
+//    addFilterKey("updated");
     addFilterKey("has history");
     addFilterKey("has statistics");
     addFilterKey("rechargeable");
@@ -181,7 +181,7 @@ void DevicePower::initFilterKey()
     addFilterKey("percentage");
     //    addFilterKey("temperature"));    // 温度已经常规显示-2
     addFilterKey("technology");
-    addFilterKey("icon-name");
+//    addFilterKey("icon-name");
     addFilterKey("online");
     addFilterKey("daemon-version");
     addFilterKey("on-battery");
