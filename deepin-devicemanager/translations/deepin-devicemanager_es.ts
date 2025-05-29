@@ -3926,7 +3926,7 @@
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="824"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="290"/>
         <source>Scan Again</source>
-        <translation>Buscar nuevamente</translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="834"/>
