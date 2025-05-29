@@ -792,7 +792,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="264"/>
         <source>Motherboard</source>
-        <translation>Tarjeta madre</translation>
+        <translation>Placa base</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
@@ -804,13 +804,13 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="266"/>
         <source>Display Adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation>GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="181"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Sound Adapter</source>
-        <translation>Adaptador de sonido</translation>
+        <translation>Sonido</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="186"/>
@@ -840,7 +840,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="212"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="272"/>
         <source>Network Adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="223"/>
@@ -1673,7 +1673,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="554"/>
         <source>Display Adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation>GPU</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="558"/>
@@ -1683,7 +1683,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="562"/>
         <source>Network Adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="568"/>
@@ -3095,7 +3095,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1416"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1452"/>
         <source>Motherboard</source>
-        <translation>Tarjeta madre</translation>
+        <translation>Placa base</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1360"/>
@@ -3103,7 +3103,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1416"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1452"/>
         <source>No motherboard found</source>
-        <translation>No se encontró la tarjeta madre</translation>
+        <translation>No se encontró la placa base</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1361"/>
@@ -3160,7 +3160,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1455"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="673"/>
         <source>Display Adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation>GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
@@ -3193,7 +3193,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1457"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="682"/>
         <source>Network Adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1365"/>
@@ -3210,7 +3210,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1458"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="676"/>
         <source>Sound Adapter</source>
-        <translation>Adaptador de sonido</translation>
+        <translation>Sonido</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1366"/>
@@ -3936,7 +3936,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="68"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation>Buscando controladores para los dispositivos , espere...</translation>
+        <translation>Buscando controladores para los dispositivos, espere...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="76"/>
@@ -4005,7 +4005,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Bluetooth adapter</source>
-        <translation>Adaptador de Bluetooth</translation>
+        <translation>Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="37"/>
@@ -4016,7 +4016,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="38"/>
         <source>Display adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation>GPU</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="40"/>
@@ -4026,12 +4026,12 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Network adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="46"/>
         <source>Wireless network adapter</source>
-        <translation>Adaptador de red inalámbrica</translation>
+        <translation>Red inalámbrica</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
