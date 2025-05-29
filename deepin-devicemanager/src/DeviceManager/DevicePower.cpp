@@ -209,7 +209,7 @@ void DevicePower::loadBaseDeviceInfo()
     addBaseDeviceInfo("SBDS Serial Number", m_SBDSSerialNumber);
     addBaseDeviceInfo("SBDS Manufacture Date", m_SBDSManufactureDate);
     addBaseDeviceInfo("SBDS Chemistry", m_SBDSChemistry);
-    addBaseDeviceInfo("Temperature", m_Temp);
+    addBaseDeviceInfo(("Temperature"), m_Temp.replace("degrees C", "℃", Qt::CaseInsensitive));
 }
 
 void DevicePower::loadOtherDeviceInfo()
