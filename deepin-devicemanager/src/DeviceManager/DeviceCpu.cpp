@@ -66,12 +66,12 @@ void DeviceCpu::loadBaseDeviceInfo()
     // 添加基本信息
     addBaseDeviceInfo(("Name"), m_Name);
     addBaseDeviceInfo(("Vendor"), m_Vendor);
-    addBaseDeviceInfo(("CPU ID"), m_PhysicalID);
-    addBaseDeviceInfo(("Core ID"), m_CoreID);
+//    addBaseDeviceInfo(("CPU ID"), m_PhysicalID);
+//    addBaseDeviceInfo(("Core ID"), m_CoreID);
     addBaseDeviceInfo(("Threads"), m_ThreadNum);
     if (!m_FrequencyIsCur)
         addBaseDeviceInfo(("Max Frequency"), m_MaxFrequency);
-    addBaseDeviceInfo(("BogoMIPS"), m_BogoMIPS);
+//    addBaseDeviceInfo(("BogoMIPS"), m_BogoMIPS);
     addBaseDeviceInfo(("Architecture"), m_Architecture);
     addBaseDeviceInfo(("CPU Family"), m_Familly);
     addBaseDeviceInfo(("Model"), m_Model);
