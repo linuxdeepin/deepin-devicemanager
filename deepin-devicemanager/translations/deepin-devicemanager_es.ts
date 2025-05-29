@@ -3360,7 +3360,7 @@
         <location filename="../src/Tool/commontools.cpp" line="45"/>
         <location filename="../src/Tool/commontools.cpp" line="47"/>
         <source>Other Devices</source>
-        <translation>Otros dispositivos</translation>
+        <translation>Otros</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1375"/>
