@@ -16,7 +16,7 @@ using namespace DDLog;
 SingleDeviceManager::SingleDeviceManager(int &argc, char **argv)
     : DApplication(argc, argv)
 {
-
+    qCDebug(appLog) << "SingleDeviceManager constructor called";
 }
 
 void SingleDeviceManager::activateWindow()
@@ -63,6 +63,7 @@ bool SingleDeviceManager::parseCmdLine()
     if (paraList.size() > 0 && m_PageDescription.isEmpty()) {
         return false;
     }
+    qCDebug(appLog) << "SingleDeviceManager::parseCmdLine() result:" << true;
     return true;
 }
 
@@ -71,7 +72,9 @@ void SingleDeviceManager::startDeviceManager(QString pageDescription)
     qCInfo(appLog) << "SingleDeviceManager::startDeviceManager" << pageDescription;
     if (!pageDescription.isEmpty()) {
         QMetaObject::invokeMethod(m_qspMainWnd.get(), "slotSetPage", Qt::QueuedConnection, Q_ARG(QString, pageDescription));
+        qCDebug(appLog) << "SingleDeviceManager::startDeviceManager with page:" << pageDescription;
     } else {
+        qCDebug(appLog) << "SingleDeviceManager::startDeviceManager with empty page";
         if (m_qspMainWnd.get()) {                   //先判断当前是否已经存在一个进程。
             m_qspMainWnd.get()->setWindowState((m_qspMainWnd.get()->windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
 //            m_qspMainWnd.get()->activateWindow();   //特效模式下激活窗口            m_qspMainWnd.get()->showNormal();       //无特效激活窗口

@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "TipsWidget.h"
+#include "DDLog.h"
 
 #include <DPlatformWindowHandle>
 #include <DGuiApplicationHelper>
@@ -12,8 +13,12 @@
 #include <QPainter>
 #include <QLoggingCategory>
 
+using namespace DDLog;
+
 TipsWidget::TipsWidget(QWidget *parent) : DWidget(parent)
 {
+    qCDebug(appLog) << "TipsWidget instance created";
+
     setWindowFlags(Qt::ToolTip);
     initWidget();
     onUpdateTheme();
@@ -48,6 +53,8 @@ void TipsWidget::onUpdateTheme()
 
 void TipsWidget::setText(const QString &text)
 {
+    qCDebug(appLog) << "Setting tips text:" << text;
+
     if (text != m_text) {
         m_text = text;
         m_text.replace(QChar('\n'), QString(""));

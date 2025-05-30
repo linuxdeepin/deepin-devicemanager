@@ -6,6 +6,7 @@
 #include "DeviceManager.h"
 #include "HttpDriverInterface.h"
 #include "commonfunction.h"
+#include "DDLog.h"
 
 #include <QRegularExpression>
 #include <QLoggingCategory>
@@ -13,23 +14,27 @@
 
 #include <unistd.h>
 
+using namespace DDLog;
 
 DriverScanner::DriverScanner(QObject *parent)
     : QThread(parent)
     , m_IsStop(false)
 {
-
+    qCDebug(appLog) << "DriverScanner constructor";
 }
 
 void DriverScanner::run()
 {
+    qCDebug(appLog) << "DriverScanner thread started";
     HttpDriverInterface *hdi  = HttpDriverInterface::getInstance();
     connect(hdi, &HttpDriverInterface::sigRequestFinished, this, [ = ]() {
         m_IsStop = true;
     });
 
+    qCDebug(appLog) << "Start scanning" << m_ListDriverInfo.size() << "drivers";
     foreach (DriverInfo *info, m_ListDriverInfo) {
         if (!m_IsStop) {
+            qCDebug(appLog) << "Processing driver:" << info->name();
             hdi->getRequest(info);
 
             // 检测本地安装版本
@@ -57,24 +62,29 @@ void DriverScanner::run()
                 }
             }
 
+            qCDebug(appLog) << "Driver scan progress:" << info->name() << "progress:" << 100 / m_ListDriverInfo.size();
             emit scanInfo(info->name(), 100 / m_ListDriverInfo.size());
             sleep(1);
         } else {
+            qCWarning(appLog) << "Scan interrupted for driver:" << info->name();
             emit scanFinished(SR_NETWORD_ERR);
         }
     }
 
     if (!m_IsStop) {
         // 扫描结束
+        qCDebug(appLog) << "Driver scan completed successfully";
         usleep(10000);
         emit scanFinished(SR_SUCESS);
     } else {
+        qCWarning(appLog) << "Driver scan interrupted by network error";
         emit scanFinished(SR_NETWORD_ERR);
     }
 }
 
 void DriverScanner::setDriverList(QList<DriverInfo *> lstInfo)
 {
+    qCDebug(appLog) << "Set driver list with" << lstInfo.size() << "items";
     m_ListDriverInfo = lstInfo;
     m_IsStop = false;
 }

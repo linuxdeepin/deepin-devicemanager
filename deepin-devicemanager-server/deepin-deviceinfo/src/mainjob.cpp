@@ -32,6 +32,7 @@ MainJob::MainJob(const char *name, QObject *parent)
     , m_pool(new ThreadPool)
     , m_firstUpdate(true)
 {
+    qCDebug(appLog) << "Initializing MainJob with name:" << name;
     m_deviceInterface = new DeviceInterface(name, this);
     // 守护进程启动的时候加载所有信息
     updateAllDevice();
@@ -166,11 +167,15 @@ void MainJob::initDriverRepoSource()
 
 void MainJob::updateAllDevice()
 {
+    qCDebug(appLog) << "Start updating device information, firstUpdate:" << m_firstUpdate;
     PERF_PRINT_BEGIN("POINT-01", "MainJob::updateAllDevice()");
-    if (m_firstUpdate)
+    if (m_firstUpdate) {
+        qCDebug(appLog) << "Loading device info for the first time";
         m_pool->loadDeviceInfo();
-    else
+    } else {
+        qCDebug(appLog) << "Updating existing device info";
         m_pool->updateDeviceInfo();
+    }
     m_pool->waitForDone(-1);
     PERF_PRINT_END("POINT-01");
     m_firstUpdate = false;
@@ -178,14 +183,18 @@ void MainJob::updateAllDevice()
 
 void MainJob::executeClientInstruction(const QString &instructions)
 {
+    qCDebug(appLog) << "Received client instruction:" << instructions;
     QMutexLocker locker(&mainJobMutex);
     s_ServerIsUpdating = true;
+    qCDebug(appLog) << "Server update flag set to true";
 
     if (instructions.startsWith("DETECT")) {
+        qCDebug(appLog) << "Processing DETECT instruction";
         this->thread()->msleep(1000);
         // 跟新缓存信息
         updateAllDevice();
     } else if (instructions.startsWith("START")) {
+        qCDebug(appLog) << "Processing START instruction";
         if (m_firstUpdate) {
             updateAllDevice();
         }

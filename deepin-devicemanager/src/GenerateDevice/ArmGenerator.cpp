@@ -5,7 +5,9 @@
 // 项目自身文件
 #include "ArmGenerator.h"
 
+#include <QDebug>
+
 ArmGenerator::ArmGenerator()
 {
-
+    qDebug() << "ArmGenerator constructor";
 }

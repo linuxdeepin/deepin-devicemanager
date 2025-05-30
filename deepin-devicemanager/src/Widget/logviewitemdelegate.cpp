@@ -19,12 +19,16 @@
 
 // other
 #include "logviewitemdelegate.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
 
 LogViewItemDelegate::LogViewItemDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
 {
+    qCDebug(appLog) << "LogViewItemDelegate instance created";
 }
 
 void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
@@ -132,6 +136,7 @@ QSize LogViewItemDelegate::sizeHint(const QStyleOptionViewItem &option,
 void LogViewItemDelegate::initStyleOption(QStyleOptionViewItem *option,
                                           const QModelIndex &index) const
 {
+    qCDebug(appLog) << "Initializing style options for row:" << index.row();
     option->showDecorationSelected = true;
     bool ok = false;
     if (index.data(Qt::TextAlignmentRole).isValid()) {

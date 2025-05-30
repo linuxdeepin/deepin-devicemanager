@@ -5,6 +5,7 @@
 
 #include "DriverListView.h"
 #include "DriverListViewDelegate.h"
+#include "DDLog.h"
 
 #include <DGuiApplicationHelper>
 #include <DApplication>
@@ -15,8 +16,12 @@
 #include <QStandardItemModel>
 #include <QPainterPath>
 
+using namespace DDLog;
+
 DriverListView::DriverListView(QWidget *parent) : DTreeView(parent)
 {
+    qCDebug(appLog) << "DriverListView instance created";
+
     initUI();
 }
 
@@ -129,6 +134,8 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
  */
 void DriverListView::keyPressEvent(QKeyEvent *event)
 {
+    qCDebug(appLog) << "Key pressed:" << event->key();
+
     DTreeView::keyPressEvent(event);
     Qt::KeyboardModifiers modifiers = event->modifiers();
     if (modifiers != Qt::NoModifier) {

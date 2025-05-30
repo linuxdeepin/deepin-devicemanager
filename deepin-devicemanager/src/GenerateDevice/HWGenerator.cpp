@@ -5,6 +5,7 @@
 // 项目自身文件
 #include "HWGenerator.h"
 #include "EDIDParser.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QLoggingCategory>
@@ -27,13 +28,16 @@
 #include "DeviceManager/DeviceNetwork.h"
 #include "DeviceManager/DeviceMemory.h"
 
+using namespace DDLog;
+
 HWGenerator::HWGenerator()
 {
-
+    qCDebug(appLog) << "HWGenerator constructor";
 }
 
 void HWGenerator::generatorComputerDevice()
 {
+    qCDebug(appLog) << "HWGenerator::generatorComputerDevice start";
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
     DeviceComputer *device = new DeviceComputer() ;
 
@@ -83,21 +87,25 @@ void HWGenerator::generatorComputerDevice()
         device->setOS(info);
     }
     DeviceManager::instance()->addComputerDevice(device);
+    qCDebug(appLog) << "HWGenerator::generatorComputerDevice end";
 }
 
 void HWGenerator::generatorCpuDevice()
 {
+    qCDebug(appLog) << "HWGenerator::generatorCpuDevice start";
     DeviceGenerator::generatorCpuDevice();
     DeviceManager::instance()->setCpuFrequencyIsCur(false);
 }
 
 void HWGenerator::generatorAudioDevice()
 {
+    qCDebug(appLog) << "HWGenerator::generatorAudioDevice start";
     getAudioInfoFromCatAudio();
 }
 
 void HWGenerator::generatorBluetoothDevice()
 {
+    qCDebug(appLog) << "HWGenerator::generatorBluetoothDevice start";
     getBluetoothInfoFromHciconfig();
     getBlueToothInfoFromHwinfo();
     getBluetoothInfoFromLshw();

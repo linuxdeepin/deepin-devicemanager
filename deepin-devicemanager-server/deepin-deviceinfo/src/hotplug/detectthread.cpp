@@ -18,25 +18,33 @@ DetectThread::DetectThread(QObject *parent)
     : QThread(parent)
     , mp_MonitorUsb(new MonitorUsb())
 {
+    qCDebug(appLog) << "Initializing DetectThread";
     // 连接槽函数
     connect(mp_MonitorUsb, SIGNAL(usbChanged()), this, SLOT(slotUsbChanged()), Qt::QueuedConnection);
 
     QMap<QString, QMap<QString, QString>> usbInfo;
+    qCDebug(appLog) << "Getting initial USB info";
     curHwinfoUsbInfo(usbInfo);
     updateMemUsbInfo(usbInfo);
+    qCDebug(appLog) << "Initial USB devices count:" << usbInfo.size();
 }
 
 void DetectThread::run()
 {
+    qCDebug(appLog) << "Starting USB detection thread";
     if (mp_MonitorUsb) {
+        qCDebug(appLog) << "Starting USB monitor";
         mp_MonitorUsb->monitor();
     }
+    qCDebug(appLog) << "USB detection thread finished";
 }
 
 void DetectThread::setWorkingFlag(bool flag)
 {
+    qCDebug(appLog) << "Setting working flag to:" << flag;
     mp_MonitorUsb->setWorkingFlag(flag);
     if (flag && !isRunning()) {
+        qCDebug(appLog) << "Starting thread due to flag change";
         start();
     }
 }
@@ -59,11 +67,13 @@ void DetectThread::slotUsbChanged()
 
 bool DetectThread::isUsbDevicesChanged()
 {
+    qCDebug(appLog) << "Checking for USB device changes";
     QMap<QString, QMap<QString, QString>> curUsbInfo;
     curHwinfoUsbInfo(curUsbInfo);
 
     // 拔出的时候，如果当前的usb设备个数小于m_MapUsbInfo的个数则返回true
     if (curUsbInfo.size() < m_MapUsbInfo.size()) {
+        qCDebug(appLog) << "USB device removed, count changed from" << m_MapUsbInfo.size() << "to" << curUsbInfo.size();
         updateMemUsbInfo(curUsbInfo);
         return true;
     }
@@ -76,9 +86,11 @@ bool DetectThread::isUsbDevicesChanged()
         if ("disk" == curUsbInfo[key]["Hardware Class"]
                 && curUsbInfo[key].find("Capacity") == curUsbInfo[key].end())
             continue;
+        qCDebug(appLog) << "New USB device detected:" << key;
         updateMemUsbInfo(curUsbInfo);
         return true;
     }
+    qCDebug(appLog) << "No USB device changes detected";
     return false;
 }
 
@@ -90,12 +102,16 @@ void DetectThread::updateMemUsbInfo(const QMap<QString, QMap<QString, QString>> 
 
 void DetectThread::curHwinfoUsbInfo(QMap<QString, QMap<QString, QString>> &usbInfo)
 {
+    qCDebug(appLog) << "Getting current USB info from hwinfo";
     QProcess process;
     process.start("hwinfo --usb --keyboard --mouse");
     process.waitForFinished(-1);
     QString info = process.readAllStandardOutput();
+    qCDebug(appLog) << "hwinfo output length:" << info.length();
 
     QStringList items = info.split("\n\n");
+    qCDebug(appLog) << "Found" << items.size() << "USB devices in hwinfo output";
+    
     foreach (const QString &item, items) {
         QMap<QString, QString> mapItem;
         if (!getMapInfo(item, mapItem))
@@ -129,6 +145,7 @@ void DetectThread::curHwinfoUsbInfo(QMap<QString, QMap<QString, QString>> &usbIn
                 }
                 Hash.addData(buf);
                 uniqueID = QString::fromStdString(Hash.result().toBase64().toStdString());
+                qCDebug(appLog) << "Generated Unique ID:" << uniqueID;
             }
         }
 

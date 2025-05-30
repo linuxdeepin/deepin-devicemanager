@@ -3,9 +3,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "DBusDriverInterface.h"
+#include "DDLog.h"
 #include <unistd.h>
 
 #include <QApplication>
+
+using namespace DDLog;
 
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<DBusDriverInterface *> DBusDriverInterface::s_Instance;
@@ -17,6 +20,7 @@ const QString DRIVER_INTERFACE = "org.deepin.DeviceControl";
 
 void DBusDriverInterface::uninstallDriver(const QString &driver)
 {
+    qCDebug(appLog) << "Uninstall driver:" << driver;
     QDBusPendingCall async = mp_Iface->asyncCall("unInstallDriver", driver);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
     QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)),
@@ -25,6 +29,7 @@ void DBusDriverInterface::uninstallDriver(const QString &driver)
 
 void DBusDriverInterface::uninstallPrinter(const QString &vendor, const QString &model)
 {
+    qCDebug(appLog) << "Uninstall printer - vendor:" << vendor << "model:" << model;
     //Sets the timeout in milliseconds for all future DBus calls to timeout. -1 means the default DBus timeout (usually 25 seconds).
     //超时默认是25s，打印卸载超时大概30s
     mp_Iface->setTimeout(1000 * 1000);
@@ -36,6 +41,7 @@ void DBusDriverInterface::uninstallPrinter(const QString &vendor, const QString 
 
 void DBusDriverInterface::installDriver(const QString &driver)
 {
+    qCDebug(appLog) << "Install driver:" << driver;
     QDBusPendingCall async = mp_Iface->asyncCall("installDriver", driver);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
     QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)),
@@ -44,6 +50,7 @@ void DBusDriverInterface::installDriver(const QString &driver)
 
 void DBusDriverInterface::installDriver(const QString &driverName, const QString &version)
 {
+    qCDebug(appLog) << "Install driver:" << driverName << "version:" << version;
     QDBusPendingCall async = mp_Iface->asyncCall("installDriver", driverName, version);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
     QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)),
@@ -52,15 +59,20 @@ void DBusDriverInterface::installDriver(const QString &driverName, const QString
 
 void DBusDriverInterface::undoInstallDriver()
 {
+    qCDebug(appLog) << "Undo driver installation";
     mp_Iface->call("undoInstallDriver");
 }
 
 bool DBusDriverInterface::isDriverPackage(const QString &path)
 {
+    qCDebug(appLog) << "Check if path is driver package:" << path;
     mp_Iface->setTimeout(1000 * 1000);
     QDBusReply<bool> reply = mp_Iface->call("isDriverPackage", path);
-    if (reply.isValid())
+    if (reply.isValid()) {
+        qCDebug(appLog) << "Is driver package";
         return reply.value();
+    }
+    qCWarning(appLog) << "Invalid DBus reply when checking driver package";
     return false;
 }
 
@@ -105,12 +117,13 @@ DBusDriverInterface::DBusDriverInterface(QObject *parent)
     : QObject(parent)
     , mp_Iface(nullptr)
 {
+    qCDebug(appLog) << "DBusDriverInterface constructor";
     init();
 }
 
 DBusDriverInterface::~DBusDriverInterface()
 {
-
+    qCDebug(appLog) << "DBusDriverInterface destructor";
 }
 
 void DBusDriverInterface::slotProcessChange(qint32 value, QString detail)
@@ -155,8 +168,10 @@ void DBusDriverInterface::slotInstallProgressChanged(qint32 progress)
 
 void DBusDriverInterface::init()
 {
+    qCDebug(appLog) << "Initialize DBus connection";
     // 1. 连接到dbus
     if (!QDBusConnection::systemBus().isConnected()) {
+        qCCritical(appLog) << "Cannot connect to the D-Bus system bus";
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
                 "To start it, run:/n"
                 "/teval `dbus-launch --auto-syntax`/n");
@@ -164,6 +179,7 @@ void DBusDriverInterface::init()
 
     // 2. create interface
     mp_Iface = new QDBusInterface(SERVICE_NAME, DRIVER_SERVICE_PATH, DRIVER_INTERFACE, QDBusConnection::systemBus());
+    qCDebug(appLog) << "DBus interface created for service:" << SERVICE_NAME;
 
     if (mp_Iface->isValid()) {
         connect(mp_Iface, SIGNAL(sigProgressDetail(qint32, QString)), this, SLOT(slotProcessChange(qint32, QString)));

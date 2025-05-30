@@ -23,6 +23,7 @@ WakeupUtils::WakeupUtils()
 
 void WakeupUtils::updateWakeupDeviceInfo(const QString &info)
 {
+    qCDebug(appLog) << "Updating wakeup device info";
     QStringList items = info.split("\n\n");
     foreach (const QString &item, items) {
         QMap<QString, QString> mapItem;
@@ -81,6 +82,7 @@ void WakeupUtils::updateWakeupDeviceInfo(const QString &info)
 
 bool WakeupUtils::wakeupPath(const QString &syspath, QString &wakeuppath)
 {
+    qCDebug(appLog) << "Finding wakeup path for syspath:" << syspath;
     int index = syspath.lastIndexOf('/');
     if (index < 1) {
         return false;
@@ -94,6 +96,7 @@ bool WakeupUtils::wakeupPath(const QString &syspath, QString &wakeuppath)
 
 bool WakeupUtils::writeWakeupFile(const QString &path, bool wakeup)
 {
+    qCDebug(appLog) << "Writing wakeup file:" << path << "value:" << (wakeup ? "enabled" : "disabled");
     QFile file(path);
     if (!file.open(QIODevice::ReadWrite)) {
         return false;
@@ -150,6 +153,7 @@ WakeupUtils::EthStatus WakeupUtils::wakeOnLanIsOpen(const QString &logicalName)
 
 bool WakeupUtils::setWakeOnLan(const QString &logicalName, bool open)
 {
+    qCDebug(appLog) << "Setting Wake-on-LAN for interface:" << logicalName << "enable:" << open;
     int fd = socket(AF_INET, SOCK_DGRAM, 0);
     if (fd < 0)
         return false;
@@ -172,6 +176,7 @@ bool WakeupUtils::setWakeOnLan(const QString &logicalName, bool open)
 
 bool WakeupUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Parsing device info map";
     QStringList lines = item.split("\n");
     // 行数太少则为无用信息
     if (lines.size() <= LEAST_NUM) {
@@ -193,6 +198,7 @@ bool WakeupUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInf
 
 QString WakeupUtils::getPS2Syspath(const QString &dfs)
 {
+    qCDebug(appLog) << "Getting PS/2 syspath for device:" << dfs;
     // 获取 dfs 中的 event
     QRegularExpression regdfs("(event[0-9]{1,2})");
     QRegularExpressionMatch matchDfs = regdfs.match(dfs);

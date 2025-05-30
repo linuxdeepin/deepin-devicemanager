@@ -4,6 +4,7 @@
 
 #include "enableutils.h"
 #include "enablesqlmanager.h"
+#include "DDLog.h"
 
 #include <QStringList>
 #include <QMap>
@@ -16,6 +17,8 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
+using namespace DDLog;
+
 #define LEAST_NUM 10
 #define REG_ADDRESS "^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$"
 
@@ -26,6 +29,7 @@ EnableUtils::EnableUtils()
 
 void EnableUtils::disableOutDevice(const QString &info)
 {
+    qCDebug(appLog) << "Disabling out device with info:" << info;
     QStringList items = info.split("\n\n");
     foreach (const QString &item, items) {
         QMap<QString, QString> mapItem;
@@ -117,6 +121,7 @@ void EnableUtils::disableOutDevice(const QString &info)
 
 void EnableUtils::disableInDevice()
 {
+    qCDebug(appLog) << "Disabling in devices";
     // 网卡通过ioctl禁用
     QList<QPair<QString, QString> > lstAuthPair;
     EnableSqlManager::getInstance()->authorizedPathUniqueIDList(lstAuthPair);
@@ -148,6 +153,7 @@ void EnableUtils::disableInDevice()
 
 bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable)
 {
+    qCDebug(appLog) << "Performing ioctl operation on network interface:" << logicalName << "enable:" << enable;
     // 1. 通过ioctl禁用
     int fd = socket(AF_INET, SOCK_STREAM, 0);
     if (fd < 0)
@@ -182,6 +188,7 @@ bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, boo
 
 bool EnableUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Parsing device info map";
     QStringList lines = item.split("\n");
     // 行数太少则为无用信息
     if (lines.size() <= LEAST_NUM) {

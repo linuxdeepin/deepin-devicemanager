@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "CmdButtonWidget.h"
+#include "DDLog.h"
 #include "DetailTreeView.h"
 
 // Qt库文件
@@ -17,10 +18,13 @@
 #include <DApplication>
 #include <DGuiApplicationHelper>
 
+using namespace DDLog;
+
 CmdButtonWidget::CmdButtonWidget(DetailTreeView *parent)
     : DWidget(parent)
     , mp_cmdButton(new DCommandLinkButton(tr("More"), this))
 {
+    qCDebug(appLog) << "CmdButtonWidget constructor called";
     // 初始化UI界面
     initUI();
 
@@ -74,6 +78,8 @@ void CmdButtonWidget::paintEvent(QPaintEvent *event)
 
 void CmdButtonWidget::initUI()
 {
+    qCDebug(appLog) << "Initializing CmdButtonWidget UI";
+
     // 设置字号
     DFontSizeManager::instance()->bind(mp_cmdButton, DFontSizeManager::T8);
 

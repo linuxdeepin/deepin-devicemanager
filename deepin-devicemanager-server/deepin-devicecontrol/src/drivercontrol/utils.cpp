@@ -28,6 +28,7 @@ Utils::Utils()
 
 QString Utils::file2PackageName(const QString &fileName)
 {
+    qCDebug(appLog) << "Getting package name for file:" << fileName;
     QString packageName("");
     QProcess process;
     process.start("dpkg", QStringList() << "-S" << fileName);
@@ -47,6 +48,7 @@ QString Utils::file2PackageName(const QString &fileName)
 
 QString Utils::getModuleFilePath(const QString &moduleName)
 {
+    qCDebug(appLog) << "Getting module file path for:" << moduleName;
     QString koPath("");
     QProcess process;
     process.start("modinfo", QStringList() << "-n" << moduleName);
@@ -69,6 +71,7 @@ QString Utils::kernelRelease()
 
 QString Utils::machineArch()
 {
+    qCDebug(appLog) << "Getting machine architecture";
     struct utsname name;
     uname(&name);
     QString strArch(name.machine);
@@ -79,6 +82,7 @@ QString Utils::machineArch()
 
 QString Utils::getOsBuild()
 {
+    qCDebug(appLog) << "Getting OS build info";
     QFile file("/etc/os-version");
     if (!file.open(QIODevice::ReadOnly))
         return "";
@@ -97,6 +101,7 @@ QString Utils::getOsBuild()
 
 bool Utils::getVersion(QString &major, QString &minor)
 {
+    qCDebug(appLog) << "Getting OS version";
     QFile file("/etc/os-version");
     if (!file.open(QIODevice::ReadOnly))
         return false;
@@ -121,6 +126,7 @@ bool Utils::getVersion(QString &major, QString &minor)
 
 bool Utils::addModBlackList(const QString &moduleName)
 {
+    qCDebug(appLog) << "Adding module to blacklist:" << moduleName;
     QProcess process;
     process.start(QString("echo blacklist %1 >> %2").arg(moduleName).arg(BLACKLIST_CONF));
     if (!process.waitForFinished())
@@ -130,6 +136,7 @@ bool Utils::addModBlackList(const QString &moduleName)
 
 bool Utils::unInstallPackage(const QString &packageName)
 {
+    qCDebug(appLog) << "Uninstalling package:" << packageName;
     QProcess process;
     process.start(QString("apt remove %1").arg(packageName));
     if (!process.waitForFinished())
@@ -144,6 +151,7 @@ bool Utils::unInstallPackage(const QString &packageName)
  */
 bool Utils::isDriverPackage(const QString &filepath)
 {
+    qCDebug(appLog) << "Checking if file is driver package:" << filepath;
     if (!QFile::exists(filepath)) {
         return  false;
     }
@@ -176,6 +184,7 @@ bool Utils::isDriverPackage(const QString &filepath)
 
 bool Utils::updateModDeps(bool bquick)
 {
+    qCDebug(appLog) << "Updating module dependencies, quick mode:" << bquick;
     QProcess process;
     QString strcomd;
     if (bquick) {
@@ -192,6 +201,7 @@ bool Utils::updateModDeps(bool bquick)
 
 bool Utils::isFileLocked(const QString &filepath, bool bread)
 {
+    qCDebug(appLog) << "Checking file lock status:" << filepath << "read mode:" << bread;
     short int ltype;
     int opentype;
     if (bread) {

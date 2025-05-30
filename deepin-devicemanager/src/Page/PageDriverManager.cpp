@@ -58,6 +58,7 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     , mp_DriverRestoreInfoPage(new PageDriverRestoreInfo(this))
     , mp_BackupThread(new DriverBackupThread(this))
 {
+    qCDebug(appLog) << "PageDriverManager constructor start";
     mp_ListView->setCurType(tr("Driver Install"));
 
     // 初始化界面
@@ -120,13 +121,16 @@ PageDriverManager::PageDriverManager(DWidget *parent)
 
 PageDriverManager::~PageDriverManager()
 {
+    qCDebug(appLog) << "PageDriverManager destructor start";
     // 扫描驱动时关闭线程
     if (mp_scanner->isRunning()) {
+        qCDebug(appLog) << "Terminating scanner thread";
         mp_scanner->terminate();
         mp_scanner->wait();
     }
 
     if (mp_BackupThread->isRunning()) {
+        qCDebug(appLog) << "Terminating backup thread";
         mp_BackupThread->terminate();
         mp_BackupThread->wait();
     }
@@ -136,6 +140,7 @@ PageDriverManager::~PageDriverManager()
     DELETE_PTR(mp_CurDriverInfo);
     DELETE_PTR(mp_CurBackupDriverInfo);
     DELETE_PTR(mp_CurRestoreDriverInfo);
+    qCDebug(appLog) << "PageDriverManager destructor end";
 }
 
 void PageDriverManager::addDriverInfo(DriverInfo *info)
@@ -182,8 +187,11 @@ void PageDriverManager::updateListView(const QList<QPair<QString, QString> > &ls
 
 void PageDriverManager::scanDriverInfo()
 {
-    if (m_Scanning)
+    qCDebug(appLog) << "Starting driver scan";
+    if (m_Scanning) {
+        qCDebug(appLog) << "Scan already in progress";
         return;
+    }
     m_IsFirstScan = false;
     m_Scanning = true;
     // 如果在安装、备份、还原过程中则不扫描
@@ -384,6 +392,7 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
 
 void PageDriverManager::slotInstallAllDrivers()
 {
+    qCDebug(appLog) << "Installing all drivers, count:" << m_ListDriverIndex.size();
     mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(false);
     mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(false);
 

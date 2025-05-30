@@ -21,15 +21,17 @@ DriverBackupThread::DriverBackupThread(QObject *parent)
     : QThread(parent)
     , mp_driverInfo(nullptr)
 {
-
+    qCDebug(appLog) << "DriverBackupThread constructor";
 }
 
 void DriverBackupThread::run()
 {
+    qCDebug(appLog) << "Driver backup thread started";
     if (!m_isStop && mp_driverInfo) {
         QString debname = mp_driverInfo->packages();
         QString debversion = mp_driverInfo->debVersion();
         if (debname.isEmpty()  && debversion.isEmpty()) {
+            qCWarning(appLog) << "Empty package name or version for driver backup";
             emit backupProgressFinished(false);
             return;
         }
@@ -130,6 +132,7 @@ void DriverBackupThread::run()
 
 void DriverBackupThread::setBackupDriverInfo(DriverInfo *info)
 {
+    qCDebug(appLog) << "Set backup driver info:" << (info ? info->name() : "null");
     m_isStop = false;
     mp_driverInfo = info;
     m_status = Waiting;
@@ -137,9 +140,11 @@ void DriverBackupThread::setBackupDriverInfo(DriverInfo *info)
 
 void DriverBackupThread::undoBackup()
 {
+    qCDebug(appLog) << "Backup operation cancelled";
     m_isStop = true;
 }
 
 void DriverBackupThread::setStatus(BackupStatus status){
+    qCDebug(appLog) << "Backup status changed to:" << status;
     m_status = status;
 }

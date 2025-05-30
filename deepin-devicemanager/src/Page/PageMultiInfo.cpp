@@ -39,6 +39,7 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     , mp_Table(new PageTableHeader(this))
     , mp_Detail(new PageDetail(this))
 {
+    qCDebug(appLog) << "PageMultiInfo constructor start";
     m_deviceList.clear();
     m_menuControlList.clear();
     // 初始化界面布局
@@ -60,6 +61,7 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
 
 PageMultiInfo::~PageMultiInfo()
 {
+    qCDebug(appLog) << "PageMultiInfo destructor start";
     // 清空指针
     if (mp_Table) {
         delete mp_Table;
@@ -71,15 +73,19 @@ PageMultiInfo::~PageMultiInfo()
     }
     m_deviceList.clear();
     m_menuControlList.clear();
+    qCDebug(appLog) << "PageMultiInfo destructor end";
 }
 
 void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
+    qCDebug(appLog) << "Updating multi device info, device count:" << lst.size();
     m_lstDevice.clear();
     m_lstDevice = lst;
 
-    if (lst.size() < 1)
+    if (lst.size() < 1) {
+        qCWarning(appLog) << "Empty device list provided";
         return;
+    }
     m_deviceList.clear();
     m_menuControlList.clear();
 
@@ -181,9 +187,11 @@ void PageMultiInfo::slotWakeupMachine(int row, bool wakeup)
 
 void PageMultiInfo::slotActionUpdateDriver(int row)
 {
+    qCDebug(appLog) << "Updating driver for device at row:" << row;
     DeviceBaseInfo *device = m_lstDevice[row];
     //打印设备卸载驱动时，通过dde-printer来操作
     if (nullptr != device && device->hardwareClass() == "printer") {
+        qCDebug(appLog) << "Printer device detected, launching dde-printer";
         if (!QProcess::startDetached("dde-printer"))
             qCInfo(appLog) << "dde-printer startDetached error";
         return;
@@ -196,8 +204,10 @@ void PageMultiInfo::slotActionUpdateDriver(int row)
 
 void PageMultiInfo::slotActionRemoveDriver(int row)
 {
+    qCDebug(appLog) << "Removing driver for device at row:" << row;
     DeviceBaseInfo *device = m_lstDevice[row];
     if (nullptr == device) {
+        qCWarning(appLog) << "Null device at row:" << row;
         return;
     }
     QString printerVendor;

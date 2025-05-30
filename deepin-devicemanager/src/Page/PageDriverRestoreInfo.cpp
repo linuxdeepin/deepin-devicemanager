@@ -11,6 +11,9 @@
 #include "DetectedStatusWidget.h"
 #include "PageDriverTableView.h"
 #include "driveritem.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 PageDriverRestoreInfo::PageDriverRestoreInfo(QWidget *parent)
     : DFrame(parent)
@@ -22,6 +25,7 @@ PageDriverRestoreInfo::PageDriverRestoreInfo(QWidget *parent)
     , mp_NoRestoreDriverFrame(new DFrame(this))
     , mp_GotoBackupSgButton(new DSuggestButton(this))
 {
+    qCDebug(appLog) << "PageDriverRestoreInfo constructor start";
     initUI();
 
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverRestoreInfo::operatorClicked);
@@ -131,11 +135,13 @@ void PageDriverRestoreInfo::initTable()
 
 void PageDriverRestoreInfo::addDriverInfoToTableView(DriverInfo *info, int index)
 {
+    qCDebug(appLog) << "Adding driver info to table view, name:" << info->name() << "index:" << index;
     PageDriverTableView *view = nullptr;
     if (!info->debBackupVersion().isEmpty()) {
         view = mp_ViewBackable;
         view->appendRowItems(4);
     } else {
+        qCDebug(appLog) << "Driver has no backup version, skipping";
         return;
     }
 
@@ -164,12 +170,15 @@ void PageDriverRestoreInfo::addDriverInfoToTableView(DriverInfo *info, int index
 
 void PageDriverRestoreInfo::showTables(int backedLength)
 {
+    qCDebug(appLog) << "Showing tables with backed driver count:" << backedLength;
     mp_BackableDriverLabel->setText(tr("Restorable Drivers"));
     mp_HeadWidget->setRestoreDriverUI(backedLength);
 
     if (backedLength == 0) {
+        qCDebug(appLog) << "No backed drivers, showing empty state";
         mp_StackWidget->setCurrentIndex(0);
     } else {
+        qCDebug(appLog) << "Showing backed drivers list";
         mp_StackWidget->setCurrentIndex(1);
     }
 }
@@ -188,6 +197,7 @@ void PageDriverRestoreInfo::setItemOperationEnable(int index, bool enable)
 
 void PageDriverRestoreInfo::slotOperatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode)
 {
+    qCDebug(appLog) << "Operator clicked, index:" << index << "itemIndex:" << itemIndex << "mode:" << mode;
     PageDriverTableView *view = mp_ViewBackable;
     // 设置状态
     DriverStatusItem *statusItem = new DriverStatusItem(this, ST_DRIVER_RESTORING);

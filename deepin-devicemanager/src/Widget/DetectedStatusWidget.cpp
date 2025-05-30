@@ -75,12 +75,14 @@ DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
     , mp_VLayoutLabel(nullptr)
     , mp_HLayoutLabel(nullptr)
 {
+    qCDebug(appLog) << "Initializing UI and connections";
     initUI();
     initConnect();
 }
 
 DetectedStatusWidget::~DetectedStatusWidget()
 {
+    qCDebug(appLog) << "DetectedStatusWidget destructor called";
     DELETE_PTR(mp_HLayoutButton);
     DELETE_PTR(mp_VLayoutLabel);
     DELETE_PTR(mp_HLayoutTotal);
@@ -93,6 +95,8 @@ DetectedStatusWidget::~DetectedStatusWidget()
 
 void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString &model, bool hasInstall)
 {
+    qCDebug(appLog) << "Setting detect finish UI. Size:" << size << "Model:" << model << "HasInstall:" << hasInstall;
+
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/update.svg"));
@@ -148,6 +152,7 @@ void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString 
 void DetectedStatusWidget::setDownloadUI(const DriverType &driverType, const QString &speed
                                          , const QString &downloadSize, const QString &totalSize, int progressValue)
 {
+    qCDebug(appLog) << "Setting download UI. DriverType:" << driverType << "Speed:" << speed;
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/update.svg"));
@@ -196,6 +201,8 @@ void DetectedStatusWidget::setDownloadUI(const DriverType &driverType, const QSt
 
 void DetectedStatusWidget::setInstallUI(const DriverType &driverType, const QString &driverDescription, int progressValue)
 {
+    qCDebug(appLog) << "Setting install UI. DriverType:" << driverType << "Progress:" << progressValue;
+
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/update.svg"));
@@ -237,6 +244,8 @@ void DetectedStatusWidget::setInstallUI(const DriverType &driverType, const QStr
 
 void DetectedStatusWidget::setInstallSuccessUI(const QString &success, const QString &failed)
 {
+    qCInfo(appLog) << "Setting install success UI. Success:" << success << "Failed:" << failed;
+
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/latest.svg"));
@@ -281,6 +290,8 @@ void DetectedStatusWidget::setInstallSuccessUI(const QString &success, const QSt
 
 void DetectedStatusWidget::setInstallFailedUI()
 {
+    qCWarning(appLog) << "Setting install failed UI";
+
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/update failed.svg"));
@@ -321,6 +332,8 @@ void DetectedStatusWidget::setInstallFailedUI()
 
 void DetectedStatusWidget::setNetworkErrorUI(const QString &speed, int progressValue)
 {
+    qCWarning(appLog) << "Setting network error UI. Speed:" << speed << "Progress:" << progressValue;
+
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/erro-96.svg"));
@@ -364,6 +377,8 @@ void DetectedStatusWidget::setNetworkErrorUI(const QString &speed, int progressV
 
 void DetectedStatusWidget::setNoUpdateDriverUI(const QString &model)
 {
+    qCDebug(appLog) << "Setting no update driver UI. Model:" << model;
+
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/latest.svg"));
@@ -403,6 +418,8 @@ void DetectedStatusWidget::setNoUpdateDriverUI(const QString &model)
 
 void DetectedStatusWidget::refreshUI(Status pageType)
 {
+    qCDebug(appLog) << "Refreshing UI for page type:" << pageType;
+
     qCInfo(appLog) << pageType;
     switch (pageType) {
     case ST_NOT_INSTALL: {
@@ -438,6 +455,8 @@ void DetectedStatusWidget::refreshUI(Status pageType)
 
 void DetectedStatusWidget::setInstallBtnEnable(bool enable)
 {
+    qCDebug(appLog) << "Setting install button enable state:" << enable;
+
     if (mp_InstallButton) {
         mp_InstallButton->setEnabled(enable);
     }
@@ -445,6 +464,8 @@ void DetectedStatusWidget::setInstallBtnEnable(bool enable)
 
 void DetectedStatusWidget::setBackupBtnEnable(bool enable)
 {
+    qCDebug(appLog) << "Setting backup button enable state:" << enable;
+
     if (mp_BackupSgButton) {
         mp_BackupSgButton->setEnabled(enable);
     }
@@ -452,6 +473,8 @@ void DetectedStatusWidget::setBackupBtnEnable(bool enable)
 
 void DetectedStatusWidget::setNoBackupDriverUI(int backableSize, int backedupSize)
 {
+    qCDebug(appLog) << "Setting no backup driver UI. Backable:" << backableSize << "Backedup:" << backedupSize;
+
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/latest.svg"));

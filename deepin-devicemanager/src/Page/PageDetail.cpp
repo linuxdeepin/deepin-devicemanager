@@ -7,6 +7,7 @@
 #include "TextBrowser.h"
 #include "DeviceInfo.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
@@ -32,6 +33,8 @@
 #define MIN_HEIGHT 50 // 当前Widget的最小高度
 
 DWIDGET_USE_NAMESPACE
+
+using namespace DDLog;
 
 DetailButton::DetailButton(const QString &txt)
     : DCommandLinkButton(txt)
@@ -166,6 +169,7 @@ PageDetail::PageDetail(QWidget *parent)
     , mp_ScrollArea(new QScrollArea(this))
     , mp_ScrollWidget(new ScrollAreaWidget(this))
 {
+    qCDebug(appLog) << "PageDetail constructor start";
     this->setMinimumHeight(MIN_HEIGHT);
 
     setContentsMargins(0, 0, 0, 0);
@@ -188,6 +192,7 @@ PageDetail::PageDetail(QWidget *parent)
 
 void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
 {
+    qCDebug(appLog) << "Showing device info for" << lstInfo.size() << "devices";
     // Clear widgets first
     clearWidget();
 
@@ -231,8 +236,11 @@ void PageDetail::showInfoOfNum(int index)
 
 EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
 {
-    if (m_ListTextBrowser.size() <= row)
+    qCDebug(appLog) << "Setting device enable state, row:" << row << "enable:" << enable;
+    if (m_ListTextBrowser.size() <= row) {
+        qCWarning(appLog) << "Invalid row index:" << row;
         return EDS_Cancle;
+    }
 
     // 设置 TextBrowser 可用
     TextBrowser *browser = m_ListTextBrowser.at(row);
@@ -244,8 +252,11 @@ EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
 
 void PageDetail::setWakeupMachine(int row, bool wakeup)
 {
-    if (m_ListTextBrowser.size() <= row)
-        return ;
+    qCDebug(appLog) << "Setting wakeup machine state, row:" << row << "wakeup:" << wakeup;
+    if (m_ListTextBrowser.size() <= row) {
+        qCWarning(appLog) << "Invalid row index:" << row;
+        return;
+    }
     // 设置 TextBrowser 可用
     TextBrowser *browser = m_ListTextBrowser.at(row);
     if (!browser)
@@ -403,6 +414,7 @@ void PageDetail::slotBtnClicked()
 
 void PageDetail::slotCopyAllInfo()
 {
+    qCDebug(appLog) << "Copying all device info to clipboard";
     QString str;
     foreach (TextBrowser *tb, m_ListTextBrowser) {
         if (tb)

@@ -25,6 +25,7 @@ UrlChooserEdit::UrlChooserEdit(QWidget *parent) : DWidget(parent)
   ,mp_urlEdit(new DLineEdit)
   ,mp_urlBtn(new DSuggestButton)
 {
+    qCDebug(appLog) << "UrlChooserEdit instance created";
    initUI();
    initConnections();
 }
@@ -64,6 +65,8 @@ QString UrlChooserEdit::text() const
 
 void UrlChooserEdit::slotChooseUrl()
 {
+    qCDebug(appLog) << "Choosing URL path";
+
     QString path = QFileDialog::getExistingDirectory(this,"","",QFileDialog::ReadOnly);
     QFontMetrics fEdlit(mp_urlEdit->font());
     QString floderPath = fEdlit.elidedText(path, Qt::ElideMiddle, mp_urlEdit->width() - 80);
@@ -79,6 +82,8 @@ void UrlChooserEdit::slotChooseUrl()
 
 void UrlChooserEdit::checkLocalFolder(const QString &path)
 {
+    qCDebug(appLog) << "Checking if folder is local:" << path;
+
     Q_UNUSED(path);
     bool isLocal = true;
     mp_urlEdit->setAlert(false);

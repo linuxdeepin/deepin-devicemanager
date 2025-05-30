@@ -22,6 +22,8 @@ const int TEST_TIME_INTERVAL = 2000;
 
 DebInstaller::DebInstaller(QObject *parent): QObject(parent)
 {
+    qCDebug(appLog) << "DebInstaller initialized";
+
     initBackend();
 }
 
@@ -32,6 +34,8 @@ bool DebInstaller::isValid()
 
 bool DebInstaller::isArchMatched(const QString &path)
 {
+    qCDebug(appLog) << "Checking architecture match for:" << path;
+
     QApt::DebFile deb(path);
     if (!deb.isValid()) {
         return false;
@@ -49,12 +53,16 @@ bool DebInstaller::isArchMatched(const QString &path)
 
 bool DebInstaller::isDebValid(const QString &path)
 {
+    qCDebug(appLog) << "Validating deb package:" << path;
+
     QApt::DebFile deb(path);
     return deb.isValid();
 }
 
 void DebInstaller::initBackend()
 {
+    qCDebug(appLog) << "Initializing QApt backend";
+
     m_backend = new QApt::Backend;
     m_bValid = m_backend->init();
     if (!m_bValid) {
@@ -64,6 +72,8 @@ void DebInstaller::initBackend()
 
 void DebInstaller::reset()
 {
+    qCDebug(appLog) << "Resetting DebInstaller";
+
     m_bValid = m_backend->reloadCache();
     if (!m_bValid) {
         qCInfo(appLog) << m_backend->initErrorMessage();
@@ -74,6 +84,8 @@ void DebInstaller::reset()
 
 void DebInstaller::doOperate(const QString &package, bool binstall)
 {
+    qCDebug(appLog) << "Operating on package:" << package << "install:" << binstall;
+
     if (binstall) {
         QApt::DebFile deb(package);
         if (!deb.isValid()) {
@@ -112,6 +124,8 @@ void DebInstaller::doOperate(const QString &package, bool binstall)
  */
 void DebInstaller::installPackage(const QString &filepath)
 {
+    qCDebug(appLog) << "Installing package from:" << filepath;
+
     //检查dpkg是否正在运行，如果正在运行等待2s重试,最多尝试20次
     if (Utils::isDpkgLocked()) {
         if (m_iRuningTestCount < MAX_DPKGRUNING_TEST) {
@@ -133,6 +147,8 @@ void DebInstaller::installPackage(const QString &filepath)
 
 void DebInstaller::uninstallPackage(const QString &packagename)
 {
+    qCDebug(appLog) << "Uninstalling package:" << packagename;
+
     //检查dpkg是否正在运行，如果正在运行等待2s重试,最多尝试20次
     if (Utils::isFileLocked("/var/lib/dpkg/lock")) {
         if (m_iRuningTestCount < MAX_DPKGRUNING_TEST) {
