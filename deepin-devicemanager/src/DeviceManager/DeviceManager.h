@@ -211,6 +211,11 @@ public:
      */
     virtual void checkDiskSize();
 
+    /**
+     * @brief orderDiskByType:按照磁盘类型UFS、SSD、HDD、移动存储设备的顺序显示
+     */
+    virtual void orderDiskByType();
+
     // GPU设备相关 **************************************************************************************
     /**
      * @brief addGpuDevice:添加显卡

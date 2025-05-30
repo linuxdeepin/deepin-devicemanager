@@ -1017,6 +1017,55 @@ void DeviceManager::checkDiskSize()
     }
 }
 
+void DeviceManager::orderDiskByType()
+{
+    // 自定义排序
+    auto compareDevices = [](DeviceBaseInfo* baseInfo1, DeviceBaseInfo* baseInfo2) {
+        DeviceStorage *storageA = dynamic_cast<DeviceStorage *>(baseInfo1);
+        DeviceStorage *storageB = dynamic_cast<DeviceStorage *>(baseInfo2);
+
+        if (storageA == nullptr || storageB == nullptr) {
+            return false;
+        }
+
+        // 判断是否为 USB 设备（包括 USB 接口的 SSD）
+        auto isUSBDevice = [](DeviceStorage *device) {
+            return device->interface().contains("USB") ||
+                   (device->interface().contains("USB") && device->mediaType().contains("SSD"));
+        };
+
+        // 1. 首先按照 UFS 优先
+        if (storageA->interface().contains("UFS") && !storageB->interface().contains("UFS"))
+            return true;
+        if (!storageA->interface().contains("UFS") && storageB->interface().contains("UFS"))
+            return false;
+
+        // 2. 然后按照 SSD、HDD 排序（排除 USB 接口的 SSD）
+        if (!isUSBDevice(storageA) && !isUSBDevice(storageB)) {
+            if (storageA->mediaType().contains("SSD") && !storageB->mediaType().contains("SSD"))
+                return true;
+            if (!storageA->mediaType().contains("SSD") && storageB->mediaType().contains("SSD"))
+                return false;
+            if (storageA->mediaType().contains("HDD") && !storageB->mediaType().contains("HDD"))
+                return true;
+            if (!storageA->mediaType().contains("HDD") && storageB->mediaType().contains("HDD"))
+                return false;
+        }
+
+        // 3. 最后按照 USB 设备排序（包括 USB 接口的 SSD）
+        if (isUSBDevice(storageA) && !isUSBDevice(storageB))
+            return false;  // USB 设备排在后面
+        if (!isUSBDevice(storageA) && isUSBDevice(storageB))
+            return true;
+
+        // 如果所有条件都相同，保持原有顺序
+        return false;
+    };
+
+    // 使用自定义比较函数对列表进行排序
+    std::sort(m_ListDeviceStorage.begin(), m_ListDeviceStorage.end(), compareDevices);
+}
+
 bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString &value)
 {
     qCDebug(appLog) << "Setting storage device media type";

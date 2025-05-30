@@ -329,6 +329,16 @@ QString DeviceStorage::getSerialID(QString &strDeviceLink)
     return strSerialNumber;
 }
 
+const QString &DeviceStorage::mediaType() const
+{
+    return m_MediaType;
+}
+
+const QString &DeviceStorage::interface() const
+{
+    return m_Interface;
+}
+
 bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "Add lshw info for storage device";
@@ -621,16 +631,12 @@ const QString DeviceStorage::getOverviewInfo()
     // qCDebug(appLog) << "DeviceStorage::getOverviewInfo";
     QString overViewInfo = QString("%1 (%2)").arg(m_Name).arg(m_Size);
 
-    // 见内网gerrit项目 os-config 中机型的 specialComType , 示例配置文件位置如下：
-    // os-config/hardware/机型/etc/dsg/configs/overrides/org.deepin.devicemanager/org.deepin.devicemanager/4000-org.deepin.devicemanager.override.json
-    if (Common::specialComType == 5){
-        if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
-            overViewInfo = QString("%1 %2").arg(m_Size).arg("UFS");
-        } else if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
-            overViewInfo = QString("%1 %2").arg(m_Size).arg("USB");
-        } else {
-            overViewInfo = QString("%1 %2").arg(m_Size).arg(m_MediaType);
-        }
+    if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
+        overViewInfo = QString("%1 %2").arg(m_Size).arg("UFS");
+    } else if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
+        overViewInfo = QString("%1 %2").arg(m_Size).arg("USB");
+    } else {
+        overViewInfo = QString("%1 %2").arg(m_Size).arg(m_MediaType);
     }
 
     return overViewInfo;

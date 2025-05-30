@@ -273,6 +273,7 @@ void DeviceGenerator::generatorDiskDevice()
     getDiskInfoFromLsblk();
     getDiskInfoFromSmartCtl();
     DeviceManager::instance()->mergeDisk();
+    DeviceManager::instance()->orderDiskByType();
     qCDebug(appLog) << "DeviceGenerator::generatorDiskDevice end";
 }
 
