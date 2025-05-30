@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QCryptographicHash>
+#include <QDebug>
 
 #include <net/if.h>
 #include <sys/ioctl.h>
@@ -138,34 +139,51 @@ void EnableUtils::disableInDevice()
 
 bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable)
 {
-    // 1. 通过ioctl禁用
-    int fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (fd < 0)
-        return false;
-    struct ifreq ifr;
-    strncpy(ifr.ifr_name, logicalName.toStdString().c_str(),IFNAMSIZ);
-    ifr.ifr_name[IFNAMSIZ - 1] = '\0';
-    short flag;
-    if (enable) {
-        flag = IFF_UP | IFF_PROMISC;
+    if (logicalName.startsWith("wlan") || logicalName.startsWith("wlp")) {  // Wireless LAN
+        QString cmd = QString("rfkill %1 $(rfkill list | grep -A 2 \"phy$(iw dev %2 info 2>/dev/null | awk '/wiphy/{print $2}')\" | awk 'NR==1{print $1}' | tr -d ':')")
+                .arg(enable ? "unblock" : "block")
+                .arg(logicalName);
+        int ret = system(cmd.toStdString().c_str());
+        if (ret != 0) {
+            qCritical() << "Failed to block/unblock wifi: " << " error code: " << ret ;
+        }
+        cmd = QString("/sbin/ifconfig %1 %2").arg(logicalName).arg(enable ? "up" : "down");
+        ret = system(cmd.toStdString().c_str());
+        if (ret != 0) {
+            qCritical() << "Failed to up/down network: " << logicalName << enable << " error code: " << ret ;
+            return false;
+        }
     } else {
-        flag = ~(IFF_UP | IFF_PROMISC);
-    }
-    // 先获取标识
-    if (ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) {
-        close(fd);
-        return false;
-    }
-    // 获取后重新设置标识
-    if (enable) {
-        ifr.ifr_ifru.ifru_flags |= flag;
-    } else {
-        ifr.ifr_ifru.ifru_flags &= flag;
-    }
+        // 1. 通过ioctl禁用
+        int fd = socket(AF_INET, SOCK_STREAM, 0);
+        if (fd < 0)
+            return false;
 
-    if (ioctl(fd, SIOCSIFFLAGS, &ifr) < 0) {
-        close(fd);
-        return false;
+        struct ifreq ifr;
+        strncpy(ifr.ifr_name, logicalName.toStdString().c_str(),IFNAMSIZ);
+        ifr.ifr_name[IFNAMSIZ - 1] = '\0';
+        short flag;
+        if (enable) {
+            flag = IFF_UP | IFF_PROMISC;
+        } else {
+            flag = ~(IFF_UP | IFF_PROMISC);
+        }
+        // 先获取标识
+        if (ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) {
+            close(fd);
+            return false;
+        }
+        // 获取后重新设置标识
+        if (enable) {
+            ifr.ifr_ifru.ifru_flags |= flag;
+        } else {
+            ifr.ifr_ifru.ifru_flags &= flag;
+        }
+
+        if (ioctl(fd, SIOCSIFFLAGS, &ifr) < 0) {
+            close(fd);
+            return false;
+        }
     }
     return true;
 }
