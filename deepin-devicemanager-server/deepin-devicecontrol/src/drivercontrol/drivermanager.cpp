@@ -74,6 +74,8 @@ DriverManager::DriverManager(QObject *parent)
     : QObject(parent)
     , mp_modcore(new ModCore(this))
 {
+    qCDebug(appLog) << "DriverManager initialized";
+
     mp_deboperatethread = new QThread(this);
     mp_debinstaller = new AptInstaller;
     mp_debinstaller->moveToThread(mp_deboperatethread);
@@ -174,6 +176,8 @@ void DriverManager::initConnections()
  */
 bool DriverManager::unInstallDriver(const QString &modulename)
 {
+    qCDebug(appLog) << "Uninstalling driver module:" << modulename;
+
     bool bsuccess = false;
     sigProgressDetail(5, "");
     QString modulePath = mp_modcore->modGetPath(modulename);
@@ -211,6 +215,8 @@ static void depmod_a()
 
 bool DriverManager::installDriver(const QString &filepath)
 {
+    qCDebug(appLog) << "Installing driver from file:" << filepath;
+
     /*1.检查模块是否已存在 存在报错返回，不报错返回
      *2.拷贝、安装（重复目前不处理，提供接口由前端判断，也不指定KMOD_INSERT_FORCE_MODVERSION）
      *3.检测是否在黑名单，如果在黑名单则需要先去除黑名单设置
@@ -312,6 +318,8 @@ bool DriverManager::installDriver(const QString &filepath)
 
 void DriverManager::installDriver(const QString &pkgName, const QString &version)
 {
+    qCDebug(appLog) << "Installing driver package:" << pkgName << "version:" << version;
+
     if (!mp_driverOperateThread->isRunning())
         mp_driverOperateThread->start();
     mp_driverInstaller->installPackage(pkgName, version);
@@ -319,6 +327,8 @@ void DriverManager::installDriver(const QString &pkgName, const QString &version
 
 void DriverManager::undoInstallDriver()
 {
+    qCDebug(appLog) << "Undoing driver installation";
+
     if (m_IsNetworkOnline) {
         mp_driverInstaller->undoInstallDriver();
     } else {
@@ -355,6 +365,8 @@ bool DriverManager::isBlackListed(const QString &modName)
  */
 bool DriverManager::isDriverPackage(const QString &filepath)
 {
+    qCDebug(appLog) << "Checking if file is driver package:" << filepath;
+
     bool bdriver = false;
     QMimeDatabase typedb;
     QMimeType filetype = typedb.mimeTypeForFile(filepath);
@@ -373,6 +385,8 @@ bool DriverManager::isDriverPackage(const QString &filepath)
  */
 bool DriverManager::isSigned(const QString &filepath)
 {
+    qCDebug(appLog) << "Checking file signature:" << filepath;
+
     // If hierarchical verification is enabled, we assume that all packages are signed.
     if (Utils::HierarchicalVerifyAvailable == Utils::hierarchicalEnabled()) {
         return true;
@@ -451,6 +465,8 @@ bool DriverManager::unInstallModule(const QString &moduleName, QString &msg)
 
 bool DriverManager::isNetworkOnline()
 {
+    qCDebug(appLog) << "Checking network connectivity";
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QNetworkConfigurationManager mgr;
     if (!mgr.isOnline()) {

@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DetailTreeView.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QHeaderView>
@@ -39,6 +40,8 @@
 #include "CmdButtonWidget.h"
 #include "TipsWidget.h"
 
+using namespace DDLog;
+
 BtnWidget::BtnWidget()
 {
 
@@ -46,6 +49,8 @@ BtnWidget::BtnWidget()
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void BtnWidget::enterEvent(QEvent *event)
+{
+    qCDebug(appLog) << "Mouse entered button widget";
 {
     emit enter();
     return DWidget::enterEvent(event);
@@ -78,6 +83,7 @@ DetailTreeView::DetailTreeView(DWidget *parent)
     , mp_Timer(new QTimer(this))
     , mp_ToolTips(nullptr)
 {
+    qCDebug(appLog) << "DetailTreeView constructor called";
     setMouseTracking(true);
     // 初始化界面
     initUI();
@@ -92,6 +98,8 @@ DetailTreeView::DetailTreeView(DWidget *parent)
 
 void DetailTreeView::setColumnAndRow(int row, int column)
 {
+    qCDebug(appLog) << "Setting table dimensions. Rows:" << row << "Columns:" << column;
+
     // 设置表格行数列数
     setRowCount(row);
     setColumnCount(column);
@@ -117,6 +125,8 @@ void DetailTreeView::setColumnAndRow(int row, int column)
 
 void DetailTreeView::setItem(int row, int column, QTableWidgetItem *item)
 {
+    qCDebug(appLog) << "Setting item at row:" << row << "column:" << column;
+
     // 设置表格高度
     setFixedHeight(ROW_HEIGHT * std::min((row + 1), m_LimitRow + 1));
 
@@ -134,6 +144,8 @@ void DetailTreeView::setItem(int row, int column, QTableWidgetItem *item)
 
 void DetailTreeView::clear()
 {
+    qCDebug(appLog) << "Clearing table contents";
+
     mp_OldItem = nullptr;
     mp_CurItem = nullptr;
     // 清空表格内容
@@ -151,6 +163,8 @@ void DetailTreeView::clear()
 
 void DetailTreeView::setCommanLinkButton(int row)
 {
+    qCDebug(appLog) << "Setting command link button at row:" << row;
+
     // 设置mp_CommandBtn属性
     mp_CommandBtn = new DCommandLinkButton(tr("More"), this);
 
@@ -187,6 +201,8 @@ void DetailTreeView::setCommanLinkButton(int row)
 
 int DetailTreeView::setTableHeight(int paintHeight)
 {
+    qCDebug(appLog) << "Setting table height:" << paintHeight << "Device enabled:" << m_IsEnable << "Available:" << m_IsAvailable;
+
     // 设备禁用状态下,只显示一行
     if (!m_IsEnable  || !m_IsAvailable) {
         paintHeight = 40;
@@ -264,6 +280,8 @@ bool DetailTreeView::hasExpendInfo()
 
 void DetailTreeView::setLimitRow(int row)
 {
+    qCDebug(appLog) << "Setting limit row:" << row;
+
     // 设置页面显示行数
     m_LimitRow = row;
 
@@ -315,6 +333,8 @@ bool DetailTreeView::isCurDeviceAvailable()
 
 void DetailTreeView::setCurDeviceState(bool enable, bool available)
 {
+    qCDebug(appLog) << "Setting device state. Enabled:" << enable << "Available:" << available;
+
     // 设置当前设备状态
     m_IsEnable = enable;
     m_IsAvailable = available;
@@ -371,6 +391,8 @@ bool DetailTreeView::isExpanded()
 
 void DetailTreeView::expandCommandLinkClicked()
 {
+    qCInfo(appLog) << "Expand/collapse button clicked. Current state:" << m_IsExpand;
+
     // 当前已展开详细信息
     if (m_IsExpand) {
         mp_CommandBtn->setText(tr("More"));
@@ -391,6 +413,8 @@ void DetailTreeView::expandCommandLinkClicked()
 
 void DetailTreeView::initUI()
 {
+    qCDebug(appLog) << "Initializing UI components";
+
     // 设置Item自定义代理
     mp_ItemDelegate = new DetailViewDelegate(this);
     setItemDelegate(mp_ItemDelegate);

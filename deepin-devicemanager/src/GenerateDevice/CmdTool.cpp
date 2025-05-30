@@ -26,11 +26,13 @@ using namespace DDLog;
 
 CmdTool::CmdTool()
 {
+    qCInfo(appLog) << "CmdTool constructor";
 
 }
 
 void CmdTool::addMapInfo(const QString &key, const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "CmdTool::addMapInfo, key:" << key << "map size:" << mapInfo.size();
     // 设备分类，与设备信息对照表
     if (m_cmdInfo.find(key) != m_cmdInfo.end()) {
         m_cmdInfo[key].append(mapInfo);
@@ -43,6 +45,7 @@ void CmdTool::addMapInfo(const QString &key, const QMap<QString, QString> &mapIn
 
 void CmdTool::addMouseKeyboardInfoMapInfo(const QString &key, const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "CmdTool::addMouseKeyboardInfoMapInfo, key:" << key << "map size:" << mapInfo.size();
     if (containsInfoInTheMap("Linux Foundation", mapInfo) // 在服务器版本中发现，hwinfo --mouse 和 hwinfo --keyboard获取的信息里面有多余的无用信息，需要过滤
             || containsInfoInTheMap("Elite Remote Control Driver", mapInfo) // 在笔记本中发现了一个多余信息，做特殊处理 Elite Remote Control Driver
             || containsInfoInTheMap("serial console", mapInfo) // 鲲鹏台式机子上发现一条多余信息  Model: "serial console"
@@ -54,6 +57,7 @@ void CmdTool::addMouseKeyboardInfoMapInfo(const QString &key, const QMap<QString
 
 void CmdTool::addUsbMapInfo(const QString &key, const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "CmdTool::addUsbMapInfo, key:" << key << "map size:" << mapInfo.size();
     QList<QMap<QString, QString>>::iterator it = m_cmdInfo["hwinfo_usb"].begin();
     // 有的是有同一个设备有两段信息，我们只需要一个
     // 比如 SysFS BusID: 1-3:1.2   和  SysFS BusID: 1-3:1.0 这个是同一个设备
@@ -112,6 +116,7 @@ void CmdTool::getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src)
 
 void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
 {
+    qCInfo(appLog) << "CmdTool::loadCmdInfo start, key:" << key << "debugFile:" << debugFile;
     // 根据命令获取设备文件信息
     if ("lshw" == key)
         loadLshwInfo(debugFile);
@@ -145,6 +150,7 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
         loadNvidiaSettingInfo(key, debugFile);
     else
         loadCatInfo(key, debugFile);
+    qCInfo(appLog) << "CmdTool::loadCmdInfo end, key:" << key;
 }
 
 QMap<QString, QList<QMap<QString, QString> > > &CmdTool::cmdInfo()
@@ -186,6 +192,7 @@ QString CmdTool::loadOemTomlFileName(const QMap<QString, QString> &mapInfo)
 
 bool CmdTool::parseOemTomlInfo(const QString filename)
 {
+    qCInfo(appLog) << "CmdTool::parseOemTomlInfo start, filename:" << filename;
     bool tomlFileRead = false;
     bool tomlPars = false;
     QString info = QString();
@@ -263,6 +270,7 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
         addMapInfo("toml" + classkey, itemMap);
     }
 
+    qCInfo(appLog) << "CmdTool::parseOemTomlInfo end, result:" << tomlPars;
     return tomlPars;
 }
 

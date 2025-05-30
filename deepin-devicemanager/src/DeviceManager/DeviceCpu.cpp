@@ -4,8 +4,11 @@
 
 // 项目自身文件
 #include "DeviceCpu.h"
+#include "DDLog.h"
 #include <QRegularExpression>
 #include <math.h>
+
+using namespace DDLog;
 
 DeviceCpu::DeviceCpu()
     : DeviceBaseInfo()
@@ -32,11 +35,14 @@ DeviceCpu::DeviceCpu()
     , m_FrequencyIsRange(false)
     , m_FrequencyIsCur(true)
 {
+    qCDebug(appLog) << "DeviceCpu constructor initialized";
     initFilterKey();
 }
 
 void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QString, QString> &mapLshw, const QMap<QString, QString> &mapDmidecode, int coreNum, int logicalNum)
 {
+    qCDebug(appLog) << "Start setting CPU info";
+
     // 设置CPU信息
     setInfoFromLscpu(mapLscpu);
     setInfoFromLshw(mapLshw);
@@ -63,6 +69,8 @@ void DeviceCpu::initFilterKey()
 
 void DeviceCpu::loadBaseDeviceInfo()
 {
+    qCDebug(appLog) << "Start loading base CPU info";
+
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
@@ -109,6 +117,8 @@ QString DeviceCpu::subTitle()
 
 const QString DeviceCpu::getOverviewInfo()
 {
+    qCDebug(appLog) << "Getting CPU overview info";
+
     // 获取阿拉伯数字的英文翻译
     getTrNumber();
 
@@ -124,6 +134,8 @@ const QString DeviceCpu::getOverviewInfo()
 
 void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Start setting CPU info from lscpu";
+
     // 设置CPU属性
     setAttribute(mapInfo, "model name", m_Name);
     setAttribute(mapInfo, "vendor_id", m_Vendor, false);

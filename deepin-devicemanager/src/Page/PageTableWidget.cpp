@@ -7,6 +7,7 @@
 #include "DetailTreeView.h"
 #include "PageInfo.h"
 #include "RichTextDelegate.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
@@ -20,22 +21,27 @@
 #include <QLoggingCategory>
 #include <QHeaderView>
 
+using namespace DDLog;
+
 PageTableWidget::PageTableWidget(DWidget *parent)
     : DWidget(parent)
     , mp_Table(new DetailTreeView(parent))
 {
+    qCDebug(appLog) << "PageTableWidget constructor start";
     // 初始化UI
     initUI();
 }
 
 void PageTableWidget::setLimitRow(int row)
 {
+    qCDebug(appLog) << "Setting table row limit to:" << row;
     // 设置限制行数
     mp_Table->setLimitRow(row);
 }
 
 void PageTableWidget::setColumnAndRow(int row, int column)
 {
+    qCDebug(appLog) << "Setting table dimensions - rows:" << row << "columns:" << column;
     // 设置行列数
     mp_Table->setColumnAndRow(row, column);
 }
@@ -116,6 +122,7 @@ bool PageTableWidget::isExpanded()
 
 void PageTableWidget::setDeviceEnable(bool enable, bool available)
 {
+    qCInfo(appLog) << "Setting device state - enabled:" << enable << "available:" << available;
     // 设置设备状态
     mp_Table->setCurDeviceState(enable, available);
 }

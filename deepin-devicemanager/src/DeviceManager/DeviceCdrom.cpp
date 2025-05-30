@@ -4,6 +4,9 @@
 
 // 项目自身文件
 #include "DeviceCdrom.h"
+#include "DDLog/DDLog.h"
+
+using namespace DDLog;
 
 DeviceCdrom::DeviceCdrom()
     : DeviceBaseInfo()
@@ -13,12 +16,15 @@ DeviceCdrom::DeviceCdrom()
     , m_MaxPower("")
     , m_Speed("")
 {
+    qCDebug(appLog) << "DeviceCdrom constructor initialized";
     // 初始化可显示属性
     initFilterKey();
 }
 
 bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Start setting CDROM info from lshw";
+
     // 通过总线信息判断是否是同一台设备
     if (!matchToLshw(mapInfo))
         return false;
@@ -36,6 +42,7 @@ bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
+    qCDebug(appLog) << "Finished setting CDROM info from lshw";
     return true;
 }
 
@@ -54,6 +61,8 @@ TomlFixMethod DeviceCdrom::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 
 void DeviceCdrom::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Start setting CDROM info from hwinfo";
+
     // 获取设备的基本信息
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);

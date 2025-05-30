@@ -12,6 +12,7 @@
 #include "DBusInterface.h"
 #include "drivericonwidget.h"
 #include "HttpDriverInterface.h"
+#include "DDLog.h"
 
 #include <DBlurEffectWidget>
 #include <DWidget>
@@ -37,6 +38,7 @@
 #define E_NOT_SIGNED      102 // not signed 没有数字签名
 
 using namespace PolkitQt1;
+using namespace DDLog;
 
 PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool install, QString deviceName, QString driverName, QString printerVendor, QString printerModel)
     : DDialog(parent)
@@ -47,6 +49,8 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
     , m_printerModel(printerModel)
     , m_deviceName(deviceName)
 {
+    qCDebug(appLog) << "PageDriverControl constructor start, operation:" << operation
+                   << "device:" << deviceName << "driver:" << driverName;
     setObjectName("PageDriverControl");
     setFixedSize(480, 335);
     setOnButtonClickedClose(false);
@@ -141,6 +145,7 @@ void PageDriverControl::slotBtnCancel()
 
 void PageDriverControl::slotBtnNext()
 {
+    qCDebug(appLog) << "Next button clicked, operation:" << (m_Install ? "Install" : "Uninstall");
     if (m_Install) {
         installDriverLogical();
     } else {
@@ -156,6 +161,7 @@ void PageDriverControl::slotProcessChange(qint32 value, QString detail)
 
 void PageDriverControl::slotProcessEnd(bool sucess, QString errCode)
 {
+    qCDebug(appLog) << "Process ended, success:" << sucess << "error:" << errCode;
     QString successStr = m_Install ? tr("Update successful") : tr("Uninstallation successful");
     QString failedStr = m_Install ? tr("Update failed") : tr("Uninstallation failed");
     QString status = sucess ? successStr : failedStr;
@@ -241,20 +247,25 @@ void PageDriverControl::installDriverLogical()
 
 bool PageDriverControl::installErrorTips(const QString &driveName)
 {
+    qCDebug(appLog) << "Validating driver package:" << driveName;
     QFile file(driveName);
     if (!DBusDriverInterface::getInstance()->isDebValid(driveName)) {
+        qCWarning(appLog) << "Invalid/broken package:" << driveName;
         mp_NameDialog->updateTipLabelText(tr("Broken package"));
         return false;
     }
     if (!DBusDriverInterface::getInstance()->isArchMatched(driveName)) {
+        qCWarning(appLog) << "Architecture mismatch for package:" << driveName;
         mp_NameDialog->updateTipLabelText(tr("Unmatched package architecture"));
         return false;
     }
 
     if (driveName.isEmpty() || !file.exists()) {
+        qCWarning(appLog) << "Driver file not found:" << driveName;
         mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
         return false;
     }
+    qCDebug(appLog) << "Driver package validation passed:" << driveName;
     return true;
 }
 

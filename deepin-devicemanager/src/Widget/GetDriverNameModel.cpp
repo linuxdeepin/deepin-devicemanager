@@ -4,11 +4,14 @@
 
 #include "GetDriverNameModel.h"
 #include "DBusAnythingInterface.h"
+#include "DDLog.h"
 
 #include <QDir>
 #include <QFileIconProvider>
 
 #include <unistd.h>
+
+using namespace DDLog;
 
 GetDriverNameModel::GetDriverNameModel(QObject *parent)
     : QObject(parent)
@@ -23,6 +26,8 @@ void GetDriverNameModel::stopLoadingDrivers()
 
 void GetDriverNameModel::startLoadDrivers(QStandardItemModel* model, bool includeSub, const QString &path)
 {
+    qCDebug(appLog) << "Starting to load drivers, includeSub:" << includeSub << "path:" << path;
+
     m_Stop = false;
     if(includeSub){
         mp_driverPathList.clear();
@@ -63,6 +68,8 @@ void GetDriverNameModel::startLoadDrivers(QStandardItemModel* model, bool includ
 
 void GetDriverNameModel::traverseFolders(const QString &path, bool recursion)
 {
+    qCDebug(appLog) << "Traversing folder:" << path << "recursion:" << recursion;
+
     if(m_Stop)
         return;
     QDir dir(path);
@@ -73,6 +80,7 @@ void GetDriverNameModel::traverseFolders(const QString &path, bool recursion)
     nameFiltes << "*.deb" << "*.ko";
     QFileInfoList list = dir.entryInfoList(nameFiltes, QDir::Files | QDir::NoSymLinks);
     foreach(const QFileInfo& info , list){
+        qCDebug(appLog) << "Found driver file:" << info.fileName();
         mp_driversList.append(info.fileName());
         mp_driverPathList.append(info.absoluteFilePath());
     }

@@ -5,6 +5,7 @@
 #include "deviceinterface.h"
 #include "deviceinfomanager.h"
 #include "mainjob.h"
+#include "DDLog.h"
 
 #include <QDBusConnection>
 #include <QDBusMessage>
@@ -14,6 +15,7 @@
 #include <polkit-qt6-1/PolkitQt1/Authority>
 #endif
 
+using namespace DDLog;
 using namespace PolkitQt1;
 bool DeviceInterface::getUserAuthorPasswd()
 {
@@ -29,6 +31,7 @@ bool DeviceInterface::getUserAuthorPasswd()
 DeviceInterface::DeviceInterface(const char *name, QObject *parent)
     : QObject(parent)
 {
+    qCDebug(appLog) << "Initializing DeviceInterface for service:" << name;
     QDBusConnection::RegisterOptions opts =
             QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties;
 
@@ -38,13 +41,16 @@ DeviceInterface::DeviceInterface(const char *name, QObject *parent)
 
 QString DeviceInterface::getInfo(const QString &key)
 {
+    qCDebug(appLog) << "Getting info for key:" << key;
     // 不能返回用常引用
     if ("is_server_running" != key) {
         return DeviceInfoManager::getInstance()->getInfo(key);
     }
     if (MainJob::serverIsRunning()) {
+        qCDebug(appLog) << "Server is running";
         return "1";
     }
+    qCDebug(appLog) << "Server is not running";
     return "0";
 }
 
@@ -55,8 +61,12 @@ void DeviceInterface::refreshInfo()
 
 void DeviceInterface::setMonitorDeviceFlag(bool flag)
 {
+    qCDebug(appLog) << "Setting monitor device flag to:" << flag;
     MainJob *parentMainJob = dynamic_cast<MainJob *>(parent());
     if (parentMainJob != nullptr) {
         parentMainJob->setWorkingFlag(flag);
+        qCDebug(appLog) << "Monitor flag set successfully";
+    } else {
+        qCWarning(appLog) << "Failed to set monitor flag - parent MainJob not found";
     }
 }

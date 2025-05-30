@@ -5,9 +5,12 @@
 // 项目自身文件
 #include "DeviceBluetooth.h"
 #include "DBusEnableInterface.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QLoggingCategory>
+
+using namespace DDLog;
 
 DeviceBluetooth::DeviceBluetooth()
     : DeviceBaseInfo()
@@ -21,6 +24,8 @@ DeviceBluetooth::DeviceBluetooth()
     , m_MaximumPower("")
     , m_Speed("")
 {
+    qCDebug(appLog) << "DeviceBluetooth constructor initialized";
+
     // 初始化可显示属性
     initFilterKey();
 
@@ -42,6 +47,8 @@ void DeviceBluetooth::setInfoFromHciconfig(const QMap<QString, QString> &mapInfo
 
 bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Start setting bluetooth info from hwinfo";
+
     if (mapInfo.find("path") != mapInfo.end()) {
         setAttribute(mapInfo, "name", m_Name);
         setAttribute(mapInfo, "driver", m_Driver);
@@ -91,6 +98,8 @@ bool DeviceBluetooth::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceBluetooth::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Start setting bluetooth info from lshw";
+
     // 根据 总线信息 与 设备信息中的唯一key值 判断是否是同一台设备
     if (!matchToLshw(mapInfo))
         return false;
@@ -174,6 +183,8 @@ QString DeviceBluetooth::subTitle()
 
 const QString DeviceBluetooth::getOverviewInfo()
 {
+    qCDebug(appLog) << "Getting bluetooth overview info";
+
     // 获取概况信息
     return m_Name.isEmpty() ? m_Model : m_Name;
 }

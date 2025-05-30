@@ -5,9 +5,12 @@
 #include "GetDriverPathWidget.h"
 #include "UrlChooserEdit.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 #include <DGuiApplicationHelper>
 #include <DPaletteHelper>
+
+using namespace DDLog;
 
 GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
     : DWidget(parent)
@@ -15,6 +18,7 @@ GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
     , mp_includeCheckBox(new DCheckBox(QObject::tr("Include subfolders"), this))
     , mp_tipLabel(new DLabel)
 {
+    qCDebug(appLog) << "GetDriverPathWidget instance created";
     init();
     connect(mp_fileChooseEdit, &UrlChooserEdit::signalNotLocalFolder, this, &GetDriverPathWidget::signalNotLocalFolder);
     connect(mp_fileChooseEdit, &UrlChooserEdit::signalNotLocalFolder, this, &GetDriverPathWidget::clearTipLabelText);
@@ -33,11 +37,15 @@ QString GetDriverPathWidget::path()
 
 bool GetDriverPathWidget::includeSubdir()
 {
+    qCDebug(appLog) << "Checking include subdir:" << (mp_includeCheckBox->checkState() == Qt::Checked);
+
     return mp_includeCheckBox->checkState() == Qt::Checked;
 }
 
 void GetDriverPathWidget::updateTipLabelText(const QString &text)
 {
+    qCDebug(appLog) << "Updating tip label text:" << text;
+
     mp_tipLabel->setText(text);
     mp_tipLabel->setToolTip(text);
 }

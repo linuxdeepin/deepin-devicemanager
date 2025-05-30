@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DeviceListView.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
@@ -22,11 +23,12 @@
 
 DWIDGET_USE_NAMESPACE
 
-
+using namespace DDLog;
 
 DeviceListviewDelegate::DeviceListviewDelegate(QAbstractItemView *parent)
     : DStyledItemDelegate(parent)
 {
+    qCDebug(appLog) << "DeviceListviewDelegate instance created";
     //setItemSpacing(10);
 }
 
@@ -78,6 +80,7 @@ void DeviceListviewDelegate::paintSeparator(QPainter *painter, const QStyleOptio
 DeviceListView::DeviceListView(QWidget *parent)
     : DListView(parent), mp_ItemModel(new QStandardItemModel(this))
 {
+    qCDebug(appLog) << "DeviceListView instance created";
     // 设置View的Model
     setModel(mp_ItemModel);
 
@@ -103,6 +106,8 @@ DeviceListView::~DeviceListView()
 
 void DeviceListView::addItem(const QString &name, const QString &iconFile)
 {
+    qCDebug(appLog) << "Adding item:" << name << "icon:" << iconFile;
+
     QStringList lst = iconFile.split("##");
     if (lst.size() != 2) {
         return;
@@ -191,6 +196,8 @@ void DeviceListView::mouseMoveEvent(QMouseEvent *event)
 
 void DeviceListView::keyPressEvent(QKeyEvent *keyEvent)
 {
+    qCDebug(appLog) << "Key pressed:" << keyEvent->key();
+
     DListView::keyPressEvent(keyEvent);
 
     // 当前Item 为Separator时，需要跳过Separator
