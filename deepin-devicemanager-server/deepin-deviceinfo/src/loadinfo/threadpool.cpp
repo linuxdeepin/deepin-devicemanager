@@ -5,6 +5,7 @@
 #include "threadpool.h"
 #include "threadpooltask.h"
 #include "deviceinfomanager.h"
+#include "DDLog.h"
 
 #include <QObjectCleanupHandler>
 #include <QProcess>
@@ -12,9 +13,12 @@
 #include <QDateTime>
 #include <QLoggingCategory>
 
+using namespace DDLog;
+
 ThreadPool::ThreadPool(QObject *parent)
     : QThreadPool(parent)
 {
+    qCDebug(appLog) << "Initializing ThreadPool";
     initCmd();
 
     QDir dir;
@@ -23,9 +27,12 @@ ThreadPool::ThreadPool(QObject *parent)
 
 void ThreadPool::loadDeviceInfo()
 {
+    qCDebug(appLog) << "Loading device info, command count:" << m_ListCmd.size();
+    
     // 根据m_ListCmd生成所有设备信息
     QList<Cmd>::iterator it = m_ListCmd.begin();
     for (; it != m_ListCmd.end(); ++it) {
+        qCDebug(appLog) << "Starting task for cmd:" << (*it).cmd;
         ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
         task->setAutoDelete(true);
         start(task);
@@ -64,6 +71,8 @@ void ThreadPool::updateDeviceInfo()
 
 void ThreadPool::runCmdToCache(const Cmd &cmd)
 {
+    qCDebug(appLog) << "Running command to cache:" << cmd.cmd;
+    
     QString key = cmd.file;
     key.replace(".txt", "");
 
@@ -75,13 +84,16 @@ void ThreadPool::runCmdToCache(const Cmd &cmd)
     QStringList args;
     if (!cmdArg.isEmpty())
         args = cmdArg.split(' ');
-    if (cmdStr.isEmpty())
+    if (cmdStr.isEmpty()) {
+        qCWarning(appLog) << "Empty command string";
         return;
+    }
 
     QProcess process;
     process.start(cmdStr, args);
     process.waitForFinished(-1);
     info = process.readAllStandardOutput();
+    qCDebug(appLog) << "Command output length:" << info.length();
     DeviceInfoManager::getInstance()->addInfo(key, info);
 }
 

@@ -51,6 +51,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , m_SameDevice(false)
     , m_ItemDelegate(new RichTextDelegate(this))
 {
+    qCDebug(appLog) << "PageSingleInfo constructor start";
     // 初始化页面布局
     initWidgets();
 
@@ -70,6 +71,7 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
 
 PageSingleInfo::~PageSingleInfo()
 {
+    qCDebug(appLog) << "PageSingleInfo destructor start";
     DELETE_PTR(mp_Content);
 }
 
@@ -98,8 +100,11 @@ void PageSingleInfo::setLabel(const QString &itemstr)
 
 void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
-    if (lst.size() < 1)
+    qCDebug(appLog) << "Updating device info, device count:" << lst.size();
+    if (lst.size() < 1) {
+        qCWarning(appLog) << "Empty device list provided";
         return;
+    }
     mp_Device = lst[0];
 
     // 清空内容
@@ -273,6 +278,7 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 
 void PageSingleInfo::slotActionCopy()
 {
+    qCDebug(appLog) << "Copying device info to clipboard";
     // 拷贝
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Content->toString());
@@ -319,8 +325,10 @@ void PageSingleInfo::slotActionEnable()
 
 void PageSingleInfo::slotActionUpdateDriver()
 {
+    qCDebug(appLog) << "Updating driver for device:" << mp_Device->name();
     //打印设备更新驱动时，通过dde-printer来操作
     if (mp_Device->hardwareClass() == "printer") {
+        qCDebug(appLog) << "Printer device detected, launching dde-printer";
         if (!QProcess::startDetached("dde-printer"))
             qCInfo(appLog) << "dde-printer startDetached error";
         return;
@@ -335,12 +343,14 @@ void PageSingleInfo::slotActionUpdateDriver()
 
 void PageSingleInfo::slotActionRemoveDriver()
 {
+    qCDebug(appLog) << "Removing driver for device:" << mp_Device->name();
     QString printerVendor;
     QString printerModel;
     DevicePrint *printer = qobject_cast<DevicePrint *>(mp_Device);
     if (printer) {
         printerVendor = printer->getVendor();
         printerModel = printer->getModel();
+        qCDebug(appLog) << "Printer details - vendor:" << printerVendor << "model:" << printerModel;
     }
     PageDriverControl *rmDriver = new PageDriverControl(this, tr("Uninstall Drivers"), false,
                                                         mp_Device->name(), mp_Device->driver(), printerVendor, printerModel);
@@ -353,6 +363,7 @@ void PageSingleInfo::slotActionRemoveDriver()
 
 void PageSingleInfo::slotWakeupMachine()
 {
+    qCDebug(appLog) << "Setting wakeup machine state:" << mp_WakeupMachine->isChecked();
     // 键盘鼠标唤醒机器
     DeviceInput *input = qobject_cast<DeviceInput *>(mp_Device);
     if (input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()) {

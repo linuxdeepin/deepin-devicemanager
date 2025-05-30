@@ -10,6 +10,7 @@
 #include "LongTextLabel.h"
 #include "MacroDefinition.h"
 #include "DeviceGenerator.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -27,6 +28,8 @@
 #include <QLoggingCategory>
 #include <QClipboard>
 
+using namespace DDLog;
+
 #define ENTER_ONE 60    // 换行的位置 1
 #define ENTER_TWO 120   // 换行的位置 2                                                                    // end html
 
@@ -41,6 +44,7 @@ PageOverview::PageOverview(DWidget *parent)
     , mp_Copy(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Copy"), this))
     , mp_Menu(new DMenu(this))
 {
+    qCDebug(appLog) << "PageOverview constructor start";
     // 初始化界面布局
     initWidgets();
 
@@ -61,6 +65,7 @@ void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &)
 
 void PageOverview::updateInfo(const QMap<QString, QString> &map)
 {
+    qCDebug(appLog) << "Updating overview info with" << map.size() << "items";
     mp_Overview->clear();
 
     int row = map.size();
@@ -108,6 +113,7 @@ void PageOverview::setLabel(const QString &)
 
 void PageOverview::setLabel(const QString &str1, const QString &str2)
 {
+    qCDebug(appLog) << "Setting labels - device:" << str1 << "OS:" << str2;
     // 打开超链接属性
     mp_OSLabel->setOpenExternalLinks(true);
 
@@ -187,6 +193,7 @@ void PageOverview::slotShowMenu(const QPoint &)
 
 void PageOverview::slotActionCopy()
 {
+    qCDebug(appLog) << "Copying overview info to clipboard";
     // 拷贝
     QClipboard *clipboard = DApplication::clipboard();
     clipboard->setText(mp_Overview->toString());

@@ -10,6 +10,9 @@
 #include "DetectedStatusWidget.h"
 #include "PageDriverTableView.h"
 #include "DeviceManager.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 PageDriverInstallInfo::PageDriverInstallInfo(QWidget *parent)
     : DFrame(parent)
@@ -23,6 +26,7 @@ PageDriverInstallInfo::PageDriverInstallInfo(QWidget *parent)
     , mp_InstallWidget(new DWidget(this))
     , mp_UpdateWidget(new DWidget(this))
 {
+    qCDebug(appLog) << "PageDriverInstallInfo constructor start";
     initUI();
 
     connect(mp_ViewNotInstall, &PageDriverTableView::operatorClicked, this, &PageDriverInstallInfo::operatorClicked);
@@ -131,6 +135,7 @@ void PageDriverInstallInfo::initTable()
 
 void PageDriverInstallInfo::addDriverInfoToTableView(DriverInfo *info, int index)
 {
+    qCDebug(appLog) << "Adding driver info to table view, name:" << info->name() << "index:" << index << "status:" << info->status();
     PageDriverTableView *view = nullptr;
     if (ST_NOT_INSTALL == info->status()) {
         view = mp_ViewNotInstall;
@@ -142,6 +147,7 @@ void PageDriverInstallInfo::addDriverInfoToTableView(DriverInfo *info, int index
         view = mp_AllDriverIsNew;
         view->appendRowItems(2);
     } else {
+        qCDebug(appLog) << "Unknown driver status, skipping";
         return;
     }
 
@@ -208,6 +214,7 @@ void PageDriverInstallInfo::addCurDriverInfo(DriverInfo *info)
 
 void PageDriverInstallInfo::showTables(int installLength, int updateLength, int newLength)
 {
+    qCDebug(appLog) << "Showing tables with install:" << installLength << "update:" << updateLength << "new:" << newLength;
     // Label显示
     mp_InstallLabel->setText(tr("Missing drivers (%1)").arg(installLength));
     mp_UpdateLabel->setText(tr("Outdated drivers (%1)").arg(updateLength));
@@ -247,6 +254,7 @@ void PageDriverInstallInfo::clearAllData()
 
 void PageDriverInstallInfo::updateItemStatus(int index, Status status, QString errS)
 {
+    qCDebug(appLog) << "Updating item status, index:" << index << "status:" << status << "error:" << errS;
     mp_ViewCanUpdate->setItemStatus(index, status);
     mp_ViewNotInstall->setItemStatus(index, status);
 

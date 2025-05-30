@@ -23,7 +23,7 @@ ThreadPoolTask::ThreadPoolTask(QString cmd, QString file, bool replace, int wait
       m_CanNotReplace(replace),
       m_Waiting(waiting)
 {
-
+    qCDebug(appLog) << "Creating ThreadPoolTask for cmd:" << cmd << "output file:" << file;
 }
 
 ThreadPoolTask::~ThreadPoolTask()
@@ -33,11 +33,14 @@ ThreadPoolTask::~ThreadPoolTask()
 
 void ThreadPoolTask::run()
 {
+    qCDebug(appLog) << "Running task for cmd:" << m_Cmd;
     if (m_Cmd == "lscpu") {
+        qCDebug(appLog) << "Loading CPU info";
         loadCpuInfo();
         return;
     }
     runCmdToCache(m_Cmd);
+    qCDebug(appLog) << "Finished running task for cmd:" << m_Cmd;
 }
 
 void ThreadPoolTask::runCmd(const QString &cmd)
@@ -53,11 +56,16 @@ void ThreadPoolTask::runCmd(const QString &cmd)
     if (cmdStr.isEmpty())
         return;
 
+    qCDebug(appLog) << "Executing command:" << cmdStr << "with args:" << args;
     QProcess process;
-    if (!outPath.isEmpty())
+    if (!outPath.isEmpty()) {
+        qCDebug(appLog) << "Redirecting output to:" << outPath;
         process.setStandardOutputFile(outPath, QIODevice::WriteOnly);
+    }
     process.start(cmdStr, args);
-    process.waitForFinished(-1);
+    if (!process.waitForFinished(-1)) {
+        qCWarning(appLog) << "Command execution timed out:" << cmdStr;
+    }
 }
 
 void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
@@ -108,10 +116,15 @@ void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
         return;
     }
 
+    qCDebug(appLog) << "Executing command with output capture:" << cmdStr;
     QProcess process;
     process.start(cmdStr, args);
-    process.waitForFinished(m_Waiting);
+    if (!process.waitForFinished(m_Waiting)) {
+        qCWarning(appLog) << "Command execution timed out:" << cmdStr;
+        return;
+    }
     info = process.readAllStandardOutput();
+    qCDebug(appLog) << "Command output length:" << info.length();
 
     //qCInfo(deviceInfoLog) << "runcmdExec:" << cmdExec << "args:" << args << "outPut:" << info;
 }

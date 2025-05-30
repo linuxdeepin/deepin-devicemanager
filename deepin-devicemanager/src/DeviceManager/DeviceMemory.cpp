@@ -6,29 +6,39 @@
 #include "DeviceMemory.h"
 #include "commonfunction.h"
 #include "DeviceCpu.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 DeviceMemory::DeviceMemory()
     : DeviceBaseInfo()
     , m_MatchedFromDmi(false)
 {
+    qCDebug(appLog) << "DeviceMemory constructor initialized";
     // 初始化可显示属性
     initFilterKey();
 }
 
 void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting memory info from lshw data";
     // 由lshw设置基本信息
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "description", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "slot", m_Locator);
     setAttribute(mapInfo, "size", m_Size);
+    qCInfo(appLog) << "Basic memory attributes set - Name:" << m_Name << "Vendor:" << m_Vendor << "Size:" << m_Size;
 
     // 替换内存大小单位
-    if (m_Size.contains("GiB"))
+    qCInfo(appLog) << "Processing memory size units conversion";
+    if (m_Size.contains("GiB")) {
+        qCInfo(appLog) << "Converting GiB to GB";
         m_Size.replace("GiB", "GB");
+    }
 
     if (m_Size.contains("MiB")) {
+        qCInfo(appLog) << "Converting MiB to GB, original value:" << m_Size;
         m_Size.replace("MiB", "");
         // MiB换算MB
         double size = m_Size.toDouble() / 1024.0;
@@ -73,6 +83,7 @@ TomlFixMethod DeviceMemory::setInfoFromTomlOneByOne(const QMap<QString, QString>
 
 bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting memory info from dmidecode data";
     // 由 locator属性判断是否为同一内存条
     if (mapInfo["Locator"] != m_Locator || m_MatchedFromDmi == true)
         return false;
@@ -80,6 +91,7 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     // 由dmidecode设置基本属性
     setAttribute(mapInfo, "Part Number", m_Name);
     setAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    qCInfo(appLog) << "Basic attributes set from dmidecode - Name:" << m_Name << "Serial:" << m_SerialNumber;
 
     setAttribute(mapInfo, "Speed", m_Speed);
     // 设置配置频率
@@ -207,6 +219,7 @@ QString DeviceMemory::subTitle()
 
 const QString DeviceMemory::getOverviewInfo()
 {
+    qCDebug(appLog) << "Getting memory overview information";
     // 获取概况信息
     QString ov;
     QString nameStr = m_Name != "" ? m_Name : m_Vendor;
@@ -218,5 +231,6 @@ const QString DeviceMemory::getOverviewInfo()
           .arg(m_Type) \
           .arg(m_Speed);
 
+    qCDebug(appLog) << "Memory overview info:" << ov;
     return ov;
 }

@@ -25,16 +25,19 @@ const QString DEVICE_SERVICE_INTERFACE = "org.deepin.DeviceInfo";
 DBusInterface::DBusInterface()
     : mp_Iface(nullptr)
 {
+    qCDebug(appLog) << "DBusInterface constructor";
     // 初始化dbus
     init();
 }
 
 bool DBusInterface::getInfo(const QString &key, QString &info)
 {
+    qCDebug(appLog) << "DBusInterface::getInfo start, key:" << key;
     // 调用dbus接口获取设备信息
     QDBusReply<QString> reply = mp_Iface->call("getInfo", key);
     if (reply.isValid()) {
         info = reply.value();
+        qCDebug(appLog) << "DBusInterface::getInfo success, key:" << key << "info length:" << info.length();
         return true;
     } else {
         qCInfo(appLog) << "unsucess in getting info from getInfo :"  << key;
@@ -51,11 +54,13 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
 
 void DBusInterface::refreshInfo()
 {
+    qCDebug(appLog) << "DBusInterface::refreshInfo";
     mp_Iface->asyncCall("refreshInfo");
 }
 
 void DBusInterface::init()
 {
+    qCDebug(appLog) << "DBusInterface::init start";
     // 1. 连接到dbus
     if (!QDBusConnection::systemBus().isConnected()) {
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
@@ -65,4 +70,5 @@ void DBusInterface::init()
 
     // 2. create interface
     mp_Iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::systemBus());
+    qCDebug(appLog) << "DBusInterface::init end, iface created:" << (mp_Iface != nullptr);
 }

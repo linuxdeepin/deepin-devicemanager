@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "PanguVGenerator.h"
+#include "DDLog.h"
 
 // 其它头文件
 #include "../DeviceManager/DeviceManager.h"
@@ -12,13 +13,17 @@
 #include "DeviceManager/DeviceNetwork.h"
 #include <QProcess>
 
+using namespace DDLog;
+
 PanguVGenerator::PanguVGenerator()
 {
+    qCDebug(appLog) << "PanguVGenerator constructor";
 
 }
 
 void parseEDID(QStringList allEDIDS,QString input)
 {
+    qCDebug(appLog) << "parseEDID start, input:" << input;
     for (auto edid:allEDIDS) {
         QProcess process;
         process.start(QString("hexdump %1").arg(edid));
@@ -62,6 +67,7 @@ void parseEDID(QStringList allEDIDS,QString input)
 
 void PanguVGenerator::generatorMonitorDevice()
 {
+    qCDebug(appLog) << "PanguVGenerator::generatorMonitorDevice start";
     QStringList allEDIDS1;
     allEDIDS1.append("/sys/devices/platform/hisi-drm/drm/card0/card0-HDMI-A-1/edid");
     allEDIDS1.append("/sys/devices/platform/hldrm/drm/card0/card0-HDMI-A-1/edid");
@@ -75,6 +81,7 @@ void PanguVGenerator::generatorMonitorDevice()
 
 void PanguVGenerator::generatorNetworkDevice()
 {
+    qCDebug(appLog) << "PanguVGenerator::generatorNetworkDevice start";
     QStringList ifconfigCardName =  getNetworkInfoFromifconfig();
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
@@ -104,11 +111,12 @@ void PanguVGenerator::generatorNetworkDevice()
         DeviceManager::instance()->addNetworkDevice(device);
     }
 
-
+    qCDebug(appLog) << "PanguVGenerator::generatorNetworkDevice end";
 }
 
 QStringList PanguVGenerator::getNetworkInfoFromifconfig()
 {
+    qCDebug(appLog) << "PanguVGenerator::getNetworkInfoFromifconfig start";
     //通过ifconfig 判断网络是否valiate
     QStringList ret;
     QProcess process;
@@ -139,5 +147,6 @@ QStringList PanguVGenerator::getNetworkInfoFromifconfig()
                 ret.append(line.at(0));
         }
     }
+    qCDebug(appLog) << "PanguVGenerator::getNetworkInfoFromifconfig end, found interfaces:" << ret;
     return ret;
 }

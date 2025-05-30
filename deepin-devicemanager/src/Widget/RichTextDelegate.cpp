@@ -5,6 +5,7 @@
 // 项目自身文件
 #include "RichTextDelegate.h"
 #include "PageBoardInfo.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DApplication>
@@ -24,10 +25,12 @@
 
 DWIDGET_USE_NAMESPACE
 
+using namespace DDLog;
+
 RichTextDelegate::RichTextDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
 {
-
+    qCDebug(appLog) << "RichTextDelegate instance created";
 }
 
 void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -308,6 +311,8 @@ void RichTextDelegate::initStyleOption(QStyleOptionViewItem *option, const QMode
 
 void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)const
 {
+    qCDebug(appLog) << "Generating DOM document from string list";
+
     QDomElement table = doc.createElement("table");
     table.setAttribute("style", "border-collapse: collapse;border-spacing: 0;");
 

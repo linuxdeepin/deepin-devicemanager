@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "logtreeview.h"
+#include "DDLog.h"
 
 #include <DApplication>
 #include <DGuiApplicationHelper>
@@ -22,6 +23,8 @@
 
 DWIDGET_USE_NAMESPACE
 
+using namespace DDLog;
+
 LogTreeView::LogTreeView(QWidget *parent)
     : DTreeView(parent)
     , m_RowCount(4)
@@ -29,6 +32,7 @@ LogTreeView::LogTreeView(QWidget *parent)
     , mp_ItemDelegate(nullptr)
     , mp_HeaderView(nullptr)
 {
+    qCDebug(appLog) << "LogTreeView instance created";
     initUI();
 }
 
@@ -310,6 +314,8 @@ void LogTreeView::drawRow(QPainter *painter, const QStyleOptionViewItem &options
 
 void LogTreeView::keyPressEvent(QKeyEvent *event)
 {
+    qCDebug(appLog) << "Key pressed:" << event->key();
+
     DTreeView::keyPressEvent(event);
     if (event->key() == Qt::Key_Up || event->key() == Qt::Key_Down) {
         emit clicked(this->currentIndex());

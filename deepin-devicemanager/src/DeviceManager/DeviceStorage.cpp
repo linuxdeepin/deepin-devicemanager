@@ -32,6 +32,7 @@ DeviceStorage::DeviceStorage()
     , m_KeyToLshw("")
     , m_KeyFromStorage("")
 {
+    qCDebug(appLog) << "DeviceStorage constructor";
     // 初始化可显示属性
     initFilterKey();
 }
@@ -140,10 +141,13 @@ void DeviceStorage::unitConvertByDecimal()
 
 bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Set hwinfo info for storage device";
     // 龙芯机器中 hwinfo --disk会列出所有的分区信息
     // 存储设备不应包含分区，根据SysFS BusID 来确定是否是分区信息
-    if (mapInfo.find("SysFS BusID") == mapInfo.end())
+    if (mapInfo.find("SysFS BusID") == mapInfo.end()) {
+        qCDebug(appLog) << "Invalid hwinfo info - missing SysFS BusID";
         return false;
+    }
 
     setAttribute(mapInfo, "Model", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -193,8 +197,10 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     }
 
     // 如果既没有capacity也没有序列号则认为该磁盘无效,否则都属于有效磁盘
-    if ((m_Size.startsWith("0") || m_Size == "") && m_SerialNumber == "")
+    if ((m_Size.startsWith("0") || m_Size == "") && m_SerialNumber == "") {
+        qCDebug(appLog) << "Invalid storage device - empty size and serial number";
         return false;
+    }
 
     // get serial num
     m_SerialNumber = "";
@@ -347,17 +353,21 @@ bool DeviceStorage::setKLUHwinfoInfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceStorage::addInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
-
+    qCDebug(appLog) << "Add lshw info for storage device";
     // 先获取需要进行匹配的关键字
     QStringList keys = mapInfo["bus info"].split("@");
-    if (keys.size() != 2)
+    if (keys.size() != 2) {
+        qCDebug(appLog) << "Invalid lshw info - malformed bus info";
         return false;
+    }
 
     QString key = keys[1].trimmed();
     key.replace(".", ":");
 
-    if (key != m_KeyToLshw)
+    if (key != m_KeyToLshw) {
+        qCDebug(appLog) << "Key mismatch - expected:" << m_KeyToLshw << "got:" << key;
         return false;
+    }
 
     // 获取唯一key
     QStringList words = mapInfo["bus info"].split(":");
@@ -445,8 +455,10 @@ bool DeviceStorage::setKLUMediaType(const QString &name, const QString &value)
 bool DeviceStorage::isValid()
 {
     // 若是m_Size为空则 该设备无效
-    if (m_Size.isEmpty() && m_SizeBytes == 0)
+    if (m_Size.isEmpty() && m_SizeBytes == 0) {
+        qCDebug(appLog) << "Storage device invalid - empty size";
         return false;
+    }
 
     return true;
 }

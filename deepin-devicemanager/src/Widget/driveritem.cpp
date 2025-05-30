@@ -5,6 +5,7 @@
 #include "driveritem.h"
 #include "commontools.h"
 #include "BtnLabel.h"
+#include "DDLog.h"
 
 #include <DFontSizeManager>
 #include <DGuiApplicationHelper>
@@ -13,10 +14,13 @@
 
 #include <QHBoxLayout>
 
+using namespace DDLog;
+
 DriverCheckItem::DriverCheckItem(DWidget *parent, bool header)
     : DWidget(parent)
     , mp_cb(new DCheckBox(this))
 {
+    qCDebug(appLog) << "DriverCheckItem instance created, header:" << header;
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     if (header) {
         hLayout->setContentsMargins(9, 7, 0, 0);
@@ -32,6 +36,8 @@ DriverCheckItem::DriverCheckItem(DWidget *parent, bool header)
 
 void DriverCheckItem::setChecked(bool checked, bool dis)
 {
+    qCDebug(appLog) << "Setting checkbox state:" << checked << "disconnect signals:" << dis;
+
     // 设置之前先断开
     if (dis)
         disconnect(mp_cb, &DCheckBox::stateChanged, this, &DriverCheckItem::slotStateChanged);
@@ -78,6 +84,7 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
     , mp_Name(new TipsLabel(this))
     , m_Index(-1)
 {
+    qCDebug(appLog) << "DriverNameItem instance created, type:" << dt;
     mp_Type->setAlignment(Qt::AlignLeft | Qt::AlignBottom);
     mp_Type->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     mp_Type->setElideMode(Qt::ElideRight);
@@ -111,6 +118,8 @@ DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
 
 void DriverNameItem::setName(const QString &name)
 {
+    qCDebug(appLog) << "Setting driver name:" << name;
+
     mp_Name->setText(name);
     mp_Name->setToolTip(name);
 }
@@ -148,6 +157,7 @@ DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
     , mp_Icon(new DLabel(this))
     , mp_Status(new BtnLabel(this))
 {
+    qCDebug(appLog) << "DriverStatusItem instance created, initial status:" << s;
     mp_Spinner->setFixedSize(16, 16);
     mp_Spinner->start();
     mp_Status->setElideMode(Qt::ElideRight);
@@ -168,6 +178,8 @@ DriverStatusItem::DriverStatusItem(DWidget *parent, Status s)
 
 void DriverStatusItem::setStatus(Status st)
 {
+    qCDebug(appLog) << "Setting driver status:" << st;
+
     showSpinner(ST_DOWNLOADING == st || ST_INSTALL == st || ST_DRIVER_BACKING_UP == st || ST_DRIVER_RESTORING == st);
     mp_Icon->setPixmap(QIcon(CommonTools::getStatusPixmap(st)).pixmap(16, 16));
 
@@ -220,6 +232,8 @@ DriverOperationItem::DriverOperationItem(DWidget *parent, Mode mode)
 
 void DriverOperationItem::setBtnEnable(bool enable)
 {
+    qCDebug(appLog) << "Setting button enable:" << enable;
+
     mp_Btn->setEnabled(enable);
 }
 

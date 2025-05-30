@@ -43,16 +43,19 @@ QMutex addCmdMutex;
 DeviceManager::DeviceManager()
     : m_CpuNum(1)
 {
-
+    qCDebug(appLog) << "DeviceManager constructor initialized";
 }
 
 DeviceManager::~DeviceManager()
 {
+    qCDebug(appLog) << "DeviceManager destructor started";
     clear();
 }
 
 void DeviceManager::clear()
 {
+    qCDebug(appLog) << "Starting to clear all device resources";
+    
     // 清除所有命令
     m_cmdInfo.clear();
 
@@ -131,6 +134,7 @@ void DeviceManager::clear()
     m_ListDeviceMemory.clear();
     m_ListDeviceCPU.clear();
     m_DeviceClassMap.clear();
+    qCDebug(appLog) << "All device resources cleared successfully";
 }
 
 const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()

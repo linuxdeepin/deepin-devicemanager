@@ -35,6 +35,8 @@ int Common::specialComType = -1;
 
 QString Common::getArch()
 {
+    qCDebug(appLog) << "Getting system architecture";
+
     QString arch;
     struct utsname utsbuf;
     if (-1 != uname(&utsbuf)) {
@@ -45,6 +47,8 @@ QString Common::getArch()
 
 QString Common::getArchStore()
 {
+    qCDebug(appLog) << "Getting architecture store mapping";
+
     return mapArch[getArch()];
 }
 
@@ -179,6 +183,8 @@ QString Common::boardVendorType()
 
 QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/, bool useEnv/* = true*/)
 {
+    qCDebug(appLog) << "Executing command:" << cmd << "args:" << args;
+
     QProcess process;
     if (!workPath.isEmpty())
         process.setWorkingDirectory(workPath);
@@ -211,6 +217,7 @@ QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args,
     process.waitForFinished(msecsWaiting);
     QByteArray outPut = process.readAllStandardOutput();
     int nExitCode = process.exitCode();
+    qCDebug(appLog) << "Command execution completed, exit code:" << nExitCode;
     bool bRet = (process.exitStatus() == QProcess::NormalExit && nExitCode == 0);
     if (!bRet) {
         qCWarning(appLog) << "run cmd error, caused by:" << process.errorString() << "output:" << outPut;

@@ -80,7 +80,9 @@ static int getPidByName(const QString &taskName)
 
 bool ControlInterface::getUserAuthorPasswd()
 {
+    qCDebug(appLog) << "Checking user authorization...";
 #ifdef DISABLE_POLKIT
+    qCDebug(appLog) << "Polkit disabled, authorization granted";
     return true;
 #endif
     if (connection().interface()->serviceUid(message().service()).value() == 0) {
@@ -105,6 +107,7 @@ ControlInterface::ControlInterface(QObject *parent)
       pcore(new ModCore(this))
 #endif
 {
+    qCDebug(appLog) << "ControlInterface initializing...";
     initPolicy(QDBusConnection::SystemBus, QString(SERVICE_CONFIG_DIR) + "other/deepin-devicecontrol.json");
     initConnects();
 }
@@ -139,8 +142,11 @@ QString ControlInterface::getAuthorizedInfo()
 
 bool ControlInterface::enable(const QString &hclass, const QString &name, const QString &path, const QString &value, bool enable_device, const QString strDriver)
 {
-    if (!getUserAuthorPasswd())
+    qCDebug(appLog) << "Enable device request:" << hclass << name << path << "enable:" << enable_device;
+    if (!getUserAuthorPasswd()) {
+        qCWarning(appLog) << "Authorization failed for enable operation";
         return {};
+    }
     // 网卡通过ioctl禁用
     // 先判断是否是网卡
     QRegularExpression reg("^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$");
@@ -376,6 +382,7 @@ bool ControlInterface::aptUpdate()
 #endif
 bool ControlInterface::authorizedEnable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool enable_device, const QString strDriver)
 {
+    qCDebug(appLog) << "Authorized enable operation:" << hclass << name << path << "enable:" << enable_device;
     // 通过authorized文件启用禁用设备
     // 0:表示禁用 ，1:表示启用
     QFile file("/sys" + path + QString("/authorized"));
@@ -419,6 +426,7 @@ bool ControlInterface::authorizedEnable(const QString &hclass, const QString &na
 
 bool ControlInterface::removeEnable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool enable, const QString strDriver)
 {
+    qCDebug(appLog) << "Remove enable operation:" << hclass << name << path << "enable:" << enable;
     if (enable) {
         // 1. 先rescan 向rescan写入1,则重新加载
         QFile file("/sys/bus/pci/rescan");

@@ -30,6 +30,7 @@ HttpDriverInterface::~HttpDriverInterface()
 
 QString HttpDriverInterface::getRequestJson(QString strUrl)
 {
+    qCDebug(appLog) << "Starting HTTP request to:" << strUrl;
     const QUrl newUrl = QUrl::fromUserInput(strUrl);
 
     QNetworkRequest request(newUrl);
@@ -48,6 +49,7 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
     QNetworkReply::NetworkError error = reply->error();
     reply.reset();
     if (error != QNetworkReply::NoError) {
+        qCWarning(appLog) << "HTTP request failed with error:" << error;
         return "";
     }
 
@@ -56,6 +58,7 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
 
 bool HttpDriverInterface::checkDriverInfo(DriverInfo &driverInfo)
 {
+    qCDebug(appLog) << "Checking driver info for:" << driverInfo.vendorName << driverInfo.modelName;
     QString strJson;
     switch (driverInfo.type) {
     case DR_Printer:
@@ -77,6 +80,7 @@ bool HttpDriverInterface::checkDriverInfo(DriverInfo &driverInfo)
 
 QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString strProducts, int iClassP, int iClass)
 {
+    qCDebug(appLog) << "Getting board info for manufacturer:" << strManufacturer << "product:" << strProducts;
     if(strManufacturer.isEmpty() || strProducts.isEmpty()) {
         return QString();
     }
@@ -127,6 +131,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
 
 QString HttpDriverInterface::getRequestPrinter(QString strDebManufacturer, QString strDesc)
 {
+    qCDebug(appLog) << "Getting printer info for manufacturer:" << strDebManufacturer << "description:" << strDesc;
     QString arch = Common::getArchStore();
     QString strUrl = Utils::getUrl() + "?arch=" + arch;
     int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();
@@ -147,6 +152,7 @@ QString HttpDriverInterface::getRequestPrinter(QString strDebManufacturer, QStri
 
 QString HttpDriverInterface::getRequestCamera(QString strDesc)
 {
+    qCDebug(appLog) << "Getting camera info for description:" << strDesc;
     QString arch = Common::getArchStore();
     QString strUrl = Utils::getUrl() + "?arch=" + arch;
     int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();
@@ -161,6 +167,7 @@ QString HttpDriverInterface::getRequestCamera(QString strDesc)
 
 bool HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo &driverInfo)
 {
+    qCDebug(appLog) << "Parsing driver info from JSON";
     if (strJson.isEmpty()) {
         return false;
     }
@@ -210,6 +217,7 @@ bool HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo &driverInf
 
 bool HttpDriverInterface::isPkgInstalled(QString strPkgName, QString strVersion)
 {
+    qCDebug(appLog) << "Checking if package is installed:" << strPkgName << "version:" << strVersion;
     //调用apt命令查看包是否安装。
     QString outInfo = Utils::executeServerCmd("apt", QStringList() << "policy" << strPkgName, QString(), -1);
     if(outInfo.isEmpty())
@@ -224,6 +232,7 @@ bool HttpDriverInterface::isPkgInstalled(QString strPkgName, QString strVersion)
 
 bool HttpDriverInterface::getDriverInfoFromJson(QString strJson, QList<RepoDriverInfo> &lstDriverInfo)
 {
+    qCDebug(appLog) << "Extracting driver info from JSON";
     QJsonArray ja;
     QJsonArray jappds;
     QJsonArray jamodel;

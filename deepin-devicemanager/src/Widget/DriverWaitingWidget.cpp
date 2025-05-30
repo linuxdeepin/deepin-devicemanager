@@ -3,17 +3,21 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "DriverWaitingWidget.h"
+#include "DDLog.h"
 
 #include <DFontSizeManager>
 #include <DGuiApplicationHelper>
 
 #include <QVBoxLayout>
 
+using namespace DDLog;
+
 DriverWaitingWidget::DriverWaitingWidget(QString status, QWidget *parent)
     : DWidget(parent)
     , mp_Progress(new DWaterProgress(this))
     , mp_Label(new DLabel(status, this))
 {
+    qCDebug(appLog) << "DriverWaitingWidget instance created with status:" << status;
     init();
 }
 
@@ -65,5 +69,7 @@ void DriverWaitingWidget::setValue(int value)
 
 void DriverWaitingWidget::setText(const QString &text)
 {
+    qCDebug(appLog) << "Setting label text:" << text;
+
     mp_Label->setText(text);
 }

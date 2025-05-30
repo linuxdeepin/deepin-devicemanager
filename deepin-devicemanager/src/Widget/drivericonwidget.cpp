@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "drivericonwidget.h"
+#include "DDLog.h"
 
 #include <DBlurEffectWidget>
 #include <DWidget>
@@ -17,6 +18,8 @@
 #include <DFrame>
 
 #include <QVBoxLayout>
+
+using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
 /**
@@ -34,6 +37,7 @@ static void palrtteTransparency(QWidget *widget, qint8 alphaFloat)
 DriverIconWidget::DriverIconWidget(const QString &strTitle, const QString &strDesc, QWidget *parent)
     : DWidget(parent)
 {
+    qCDebug(appLog) << "Creating DriverIconWidget with progress, title:" << strTitle << "desc:" << strDesc;
     iconWidget = new DWaterProgress;
     iconWidget->setFixedSize(100, 100);
     iconWidget->setValue(50);
@@ -45,6 +49,7 @@ DriverIconWidget::DriverIconWidget(const QString &strTitle, const QString &strDe
 DriverIconWidget::DriverIconWidget(const QPixmap &pixmap, const QString &strTitle, const QString &strDesc, QWidget *parent)
     : DWidget(parent)
 {
+    qCDebug(appLog) << "Creating DriverIconWidget with pixmap, title:" << strTitle << "desc:" << strDesc;
     DLabel *iconWidget = new DLabel;
     iconWidget->setFixedSize(100, 100);
     iconWidget->setPixmap(pixmap);
@@ -60,6 +65,8 @@ DriverIconWidget::~DriverIconWidget()
 
 void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, const QString &strDesc)
 {
+    qCDebug(appLog) << "Initializing UI with title:" << strTitle << "desc:" << strDesc;
+
     QVBoxLayout *vlayout = new QVBoxLayout;
     vlayout->setContentsMargins(0, 0, 0, 0);
 

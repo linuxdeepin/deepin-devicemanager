@@ -5,6 +5,7 @@
 #include "GetDriverNameWidget.h"
 #include "GetDriverNameModel.h"
 #include "WaitingWidget.h"
+#include "DDLog.h"
 
 #include <DFrame>
 #include <DLabel>
@@ -19,6 +20,9 @@
 #include <QThread>
 
 #include "MacroDefinition.h"
+
+using namespace DDLog;
+
 GetDriverNameWidget::GetDriverNameWidget(QWidget *parent)
     : DWidget(parent)
     , mp_StackWidget(new DStackedWidget(this))
@@ -28,6 +32,7 @@ GetDriverNameWidget::GetDriverNameWidget(QWidget *parent)
     , mp_GetModel(new GetDriverNameModel())
     , mp_Thread(new QThread(this))
 {
+    qCDebug(appLog) << "GetDriverNameWidget instance created";
     mp_GetModel->moveToThread(mp_Thread);
     mp_Thread->start();
     init();
@@ -112,6 +117,8 @@ void GetDriverNameWidget::initConnections()
 
 void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString &path)
 {
+    qCDebug(appLog) << "Loading all drivers, includeSub:" << includeSub << "path:" << path;
+
     mp_WaitingWidget->start();
     mp_StackWidget->setCurrentIndex(0);
     mp_model = new QStandardItemModel(this);
@@ -145,6 +152,8 @@ void GetDriverNameWidget::reloadDriversListPages()
 
 QString GetDriverNameWidget::selectName()
 {
+    qCDebug(appLog) << "Getting selected driver name, row:" << mp_selectedRow;
+
     if (-1 == mp_selectedRow || !(mp_selectedRow < mp_model->rowCount() && mp_selectedRow > -1))
         return "";
     return mp_model->item(mp_selectedRow)->data(Qt::UserRole).toString();
@@ -181,6 +190,8 @@ void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
 
 void GetDriverNameWidget::slotFinishLoadDrivers()
 {
+    qCDebug(appLog) << "Driver loading finished, row count:" << mp_model->rowCount();
+
     reloadDriversListPages();
     mp_ListView->setModel(mp_model);
     mp_ListView->setColumnWidth(0, 40);

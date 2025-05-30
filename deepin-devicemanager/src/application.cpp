@@ -4,11 +4,16 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "application.h"
+#include "DDLog.h"
 
 #include <QMetaType>
+
+using namespace DDLog;
 
 Application::Application(int &argc, char **argv)
     : DApplication(argc, argv)
 {
+    qCDebug(appLog) << "Application instance created";
+
     qRegisterMetaType<Application::TaskState>("Application::BackgroundTaskState");
 }

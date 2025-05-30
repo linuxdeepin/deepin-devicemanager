@@ -14,18 +14,22 @@
 #include "KLVGenerator.h"
 #include "commonfunction.h"
 #include "PanguxGenerator.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QProcess>
 #include <QFile>
 
+using namespace DDLog;
+
 DeviceFactory::DeviceFactory()
 {
-
+    qCDebug(appLog) << "DeviceFactory constructor";
 }
 
 DeviceGenerator *DeviceFactory::getDeviceGenerator()
 {
+    qCDebug(appLog) << "DeviceFactory::getDeviceGenerator start";
     // 获取系统架构
     QString arch = Common::getArch();
 
@@ -53,5 +57,6 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
     } else
         generator = new X86Generator();
 
+    qCDebug(appLog) << "DeviceFactory::getDeviceGenerator end, arch:" << Common::getArch() << "type:" << Common::boardVendorType() << "generator:" << generator;
     return generator;
 }

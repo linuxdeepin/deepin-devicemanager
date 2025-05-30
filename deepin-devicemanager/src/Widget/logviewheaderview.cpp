@@ -14,12 +14,16 @@
 #include <QPainterPath>
 
 #include "logviewheaderview.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 static const int kSpacingMargin = 4;
 
 LogViewHeaderView::LogViewHeaderView(Qt::Orientation orientation, QWidget *parent)
     : DHeaderView(orientation, parent)
 {
+    qCDebug(appLog) << "LogViewHeaderView instance created";
     viewport()->setAutoFillBackground(false);
 }
 void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const

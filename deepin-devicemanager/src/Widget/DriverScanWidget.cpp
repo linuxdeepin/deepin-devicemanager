@@ -5,6 +5,7 @@
 #include "DriverScanWidget.h"
 #include "AnimationLabel.h"
 #include "commontools.h"
+#include "DDLog.h"
 
 #include <DFontSizeManager>
 #include <DApplication>
@@ -15,6 +16,8 @@
 #include <QScrollArea>
 #include <QScrollBar>
 #include <QPainterPath>
+
+using namespace DDLog;
 
 #define FONT_WEIGHT QFont::Weight::Normal
 
@@ -46,12 +49,15 @@ DriverScanWidget::DriverScanWidget(DWidget *parent)
     , mp_HLayout(nullptr)
     , mp_VLayout(nullptr)
 {
+    qCDebug(appLog) << "DriverScanWidget instance created";
     initUI();
     initConnect();
 }
 
 void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
 {
+    qCDebug(appLog) << "Setting scanning UI, info:" << scanInfo << "progress:" << progressValue;
+
     hideAll();
     // Animation Label
     if (nullptr == animation) {
@@ -121,6 +127,8 @@ void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
 
 void DriverScanWidget::setScanFailedUI()
 {
+    qCDebug(appLog) << "Setting scan failed UI";
+
     hideAll();
     // Scan Failed Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/fail.svg"));
@@ -179,6 +187,8 @@ void DriverScanWidget::setScanFailedUI()
 
 void DriverScanWidget::setNetworkErr()
 {
+    qCDebug(appLog) << "Setting network error UI";
+
     hideAll();
     // Scan Failed Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/erro-128.svg"));
@@ -347,6 +357,8 @@ void DriverScanWidget::hideAll()
 
 void DriverScanWidget::setProgressFinish()
 {
+    qCDebug(appLog) << "Setting progress to finish";
+
     if (nullptr != animation)
         animation->stop();
     mp_ScanningProgress->setValue(100);

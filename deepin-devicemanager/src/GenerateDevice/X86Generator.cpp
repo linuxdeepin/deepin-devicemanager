@@ -4,8 +4,11 @@
 
 // 项目自身文件
 #include "X86Generator.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 X86Generator::X86Generator()
 {
-
+    qCDebug(appLog) << "X86Generator constructor";
 }

@@ -4,6 +4,7 @@
 
 #include "drivertableview.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 #include <DApplication>
 #include <DStyle>
@@ -17,6 +18,7 @@
 #include <QHeaderView>
 #include <QPainterPath>
 
+using namespace DDLog;
 
 static const int kSpacingMargin = 4;
 
@@ -291,6 +293,7 @@ DriverTableView::DriverTableView(DWidget *parent)
     , mp_Model(new QStandardItemModel(this))
     , mp_HeaderCb(nullptr)
 {
+    qCDebug(appLog) << "DriverTableView instance created";
     setModel(mp_Model);
     setHeader(mp_HeadView);
     setItemDelegate(mp_Delegate);
@@ -324,6 +327,8 @@ DriverTableView::DriverTableView(DWidget *parent)
 
 void DriverTableView::initHeaderView(const QStringList &headerList, bool firstCheckbox)
 {
+    qCDebug(appLog) << "Initializing header view with columns:" << headerList << "firstCheckbox:" << firstCheckbox;
+
     // 水平右对齐
     mp_HeadView->setDefaultAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     mp_HeadView->setStretchLastSection(true);
@@ -349,6 +354,7 @@ void DriverTableView::initHeaderView(const QStringList &headerList, bool firstCh
 
 void DriverTableView::appendRowItems(int column)
 {
+    qCDebug(appLog) << "Appending row with" << column << "columns";
 
     QList<QStandardItem *> lstItem;
     for (int i = 0; i < column; i++) {
@@ -363,6 +369,8 @@ void DriverTableView::appendRowItems(int column)
 
 void DriverTableView::setWidget(int row, int column, DWidget *widget)
 {
+    qCDebug(appLog) << "Setting widget at row:" << row << "column:" << column << "type:" << widget->metaObject()->className();
+
     QModelIndex index = mp_Model->index(row, column);
     setIndexWidget(index, widget);
 

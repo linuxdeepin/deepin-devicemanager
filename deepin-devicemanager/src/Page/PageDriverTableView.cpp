@@ -5,6 +5,7 @@
 #include "PageDriverTableView.h"
 #include "drivertableview.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 #include <DGuiApplicationHelper>
 #include <DApplication>
@@ -13,11 +14,14 @@
 #include <QHBoxLayout>
 #include <QPainterPath>
 
+using namespace DDLog;
+
 PageDriverTableView::PageDriverTableView(DWidget *parent)
     : DWidget(parent)
     , mp_View(new DriverTableView(this))
     , m_PreWidth(width())
 {
+    qCDebug(appLog) << "PageDriverTableView constructor start";
     initWidgets();
     connect(mp_View, &DriverTableView::operatorClicked, this, &PageDriverTableView::operatorClicked);
     connect(mp_View, &DriverTableView::itemChecked, this, &PageDriverTableView::itemChecked);
@@ -25,11 +29,13 @@ PageDriverTableView::PageDriverTableView(DWidget *parent)
 
 void PageDriverTableView::setColumnWidth(int row, int column)
 {
+    qCDebug(appLog) << "Setting column width, row:" << row << "column:" << column;
     mp_View->setColumnWidth(row, column);
 }
 
 void PageDriverTableView::appendRowItems(int column)
 {
+    qCDebug(appLog) << "Appending row items to column:" << column;
     mp_View->appendRowItems(column);
     this->setFixedHeight(height() + DRIVER_TABLE_ROW_HEIGHT);
 }
@@ -72,6 +78,7 @@ void PageDriverTableView::setItemStatus(int index, Status s)
 
 void PageDriverTableView::setErrorMsg(int index, const QString &msg)
 {
+    qCWarning(appLog) << "Setting error message for index:" << index << "message:" << msg;
     mp_View->setErrorMsg(index, msg);
 }
 
@@ -82,6 +89,7 @@ bool PageDriverTableView::hasItemDisabled()
 
 void PageDriverTableView::clear()
 {
+    qCDebug(appLog) << "Clearing driver table view";
     this->setFixedHeight(DRIVER_TABLE_HEADER_HEIGHT + 5);
     mp_View->clear();
 }

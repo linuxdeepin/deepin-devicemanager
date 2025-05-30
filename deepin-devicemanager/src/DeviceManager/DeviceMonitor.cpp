@@ -6,6 +6,7 @@
 #include "DeviceMonitor.h"
 #include "EDIDParser.h"
 #include "commonfunction.h"
+#include "DDLog.h"
 
 #include <DApplication>
 
@@ -18,6 +19,7 @@
 #include <math.h>
 
 DWIDGET_USE_NAMESPACE
+using namespace DDLog;
 
 DeviceMonitor::DeviceMonitor()
     : DeviceBaseInfo()
@@ -37,6 +39,7 @@ DeviceMonitor::DeviceMonitor()
     , m_Height(0)
     , m_IsTomlSet(false)
 {
+    qCDebug(appLog) << "DeviceMonitor constructor initialized";
     // 初始化可显示属性
     initFilterKey();
 }
@@ -119,6 +122,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
 
 void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting monitor info from hwinfo data";
     //设置由hwinfo --monitor获取信息
     setAttribute(mapInfo, "Model", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -127,11 +131,13 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "", m_MainScreen);
     setAttribute(mapInfo, "Resolution", m_SupportResolution);
+    qCDebug(appLog) << "Basic monitor attributes set - Name:" << m_Name << "Vendor:" << m_Vendor << "Model:" << m_Model;
 
     double inch = 0.0;
     QSize size(0, 0);
     QString inchValue = parseMonitorSize(m_ScreenSize, inch, size);
     m_ScreenSize = inchValue;
+    qCDebug(appLog) << "Screen size parsed:" << m_ScreenSize << "Width:" << size.width() << "Height:" << size.height();
 
     // 获取当前分辨率 和 当前支持分辨率
     QStringList listResolution = m_SupportResolution.split(" ");
@@ -151,9 +157,11 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     #else
         m_SupportResolution.replace(QRegularExpression(", $"), "");
     #endif
+    qCDebug(appLog) << "Supported resolutions processed:" << m_SupportResolution;
 
     m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
+    qCDebug(appLog) << "Production week:" << m_ProductionWeek << "Serial:" << m_SerialNumber;
 
     // 加载其他属性
     getOtherMapInfo(mapInfo);
@@ -161,21 +169,28 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
 TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting monitor info from TOML configuration";
     m_IsTomlSet = true;
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Type", m_Model);
     ret = setTomlAttribute(mapInfo, "Display Input", m_DisplayInput);
     ret = setTomlAttribute(mapInfo, "Interface Type", m_Interface);
+    qCDebug(appLog) << "Basic monitor attributes set from TOML - Model:" << m_Model << "Input:" << m_DisplayInput << "Interface:" << m_Interface;
+
     // 添加其他信息,成员变量
     ret = setTomlAttribute(mapInfo, "Support Resolution", m_SupportResolution);
     ret = setTomlAttribute(mapInfo, "Current Resolution", m_CurrentResolution);
     ret = setTomlAttribute(mapInfo, "Display Ratio", m_AspectRatio);
+    qCDebug(appLog) << "Resolution info set - Supported:" << m_SupportResolution << "Current:" << m_CurrentResolution << "Ratio:" << m_AspectRatio;
+
     ret = setTomlAttribute(mapInfo, "Primary Monitor", m_MainScreen);
     ret = setTomlAttribute(mapInfo, "Size", m_ScreenSize);
     ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
     ret = setTomlAttribute(mapInfo, "Product Date", m_ProductionWeek);
-//3. 获取设备的其它信息
+    qCDebug(appLog) << "Additional info set - Primary:" << m_MainScreen << "Size:" << m_ScreenSize << "Serial:" << m_SerialNumber << "Date:" << m_ProductionWeek;
+
+    //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
 }
@@ -194,12 +209,14 @@ void DeviceMonitor::setInfoFromSelfDefine(const QMap<QString, QString> &mapInfo)
 
 void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting monitor info from EDID data";
     m_Name = "Monitor " + mapInfo["Vendor"];
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Date", m_ProductionWeek);
     setAttribute(mapInfo, "Display Input", m_DisplayInput);
     setAttribute(mapInfo, "Model", m_Model);
+    qCDebug(appLog) << "Monitor attributes set from EDID - Name:" << m_Name << "Vendor:" << m_Vendor << "Size:" << m_ScreenSize << "Date:" << m_ProductionWeek;
     getOtherMapInfo(mapInfo);
 }
 
@@ -294,9 +311,11 @@ QString DeviceMonitor::subTitle()
 
 const QString DeviceMonitor::getOverviewInfo()
 {
+    qCDebug(appLog) << "Getting monitor overview information";
     QString ov;
 
     ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+    qCDebug(appLog) << "Monitor overview:" << ov;
 
     return ov;
 }

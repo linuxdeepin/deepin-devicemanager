@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "KLUGenerator.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QLoggingCategory>
@@ -21,13 +22,17 @@
 #include "DeviceManager/DeviceInput.h"
 #include "DeviceManager/DeviceNetwork.h"
 
+using namespace DDLog;
+
 KLUGenerator::KLUGenerator()
 {
+    qCDebug(appLog) << "KLUGenerator constructor";
 
 }
 
 void KLUGenerator::getDiskInfoFromLshw()
 {
+    qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw start";
     QString bootdevicePath("/proc/bootdevice/product_name");
     QString modelStr = "";
     QFile file(bootdevicePath);
@@ -83,6 +88,7 @@ void KLUGenerator::getDiskInfoFromLshw()
 
 void KLUGenerator::generatorNetworkDevice()
 {
+    qCDebug(appLog) << "KLUGenerator::generatorNetworkDevice start";
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
@@ -108,10 +114,12 @@ void KLUGenerator::generatorNetworkDevice()
     }
     // HW 要求修改名称,制造商以及类型
     getNetworkInfoFromCatWifiInfo();
+    qCDebug(appLog) << "KLUGenerator::generatorNetworkDevice end";
 }
 
 void KLUGenerator::getNetworkInfoFromCatWifiInfo()
 {
+    qCDebug(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo start";
     QList<QMap<QString, QString> >  lstWifiInfo;
     QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
     QFile file(wifiDevicesInfoPath);
@@ -168,6 +176,7 @@ void KLUGenerator::getNetworkInfoFromCatWifiInfo()
 
 void KLUGenerator::generatorMonitorDevice()
 {
+    qCDebug(appLog) << "KLUGenerator::generatorMonitorDevice start";
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Name", "LCD");
 //    mapInfo.insert("Vendor", "HUAWEI");

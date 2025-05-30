@@ -6,6 +6,7 @@
 #include "PageTableHeader.h"
 #include "TableWidget.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -19,10 +20,13 @@
 #include <QPainter>
 #include <QLoggingCategory>
 
+using namespace DDLog;
+
 PageTableHeader::PageTableHeader(QWidget *parent)
     : DWidget(parent)
     , mp_Table(new TableWidget(this))
 {
+    qCDebug(appLog) << "PageTableHeader constructor start";
     // 初始化页面布局
     initWidgets();
 
@@ -39,6 +43,7 @@ PageTableHeader::PageTableHeader(QWidget *parent)
 
 PageTableHeader::~PageTableHeader()
 {
+    qCDebug(appLog) << "PageTableHeader destructor start";
     if (mp_Table) {
         delete mp_Table;
         mp_Table = nullptr;
@@ -56,6 +61,7 @@ void PageTableHeader::initWidgets()
 
 void PageTableHeader::updateTable(const QList<QStringList> &lst, const QList<QStringList>& lstMenuControl, bool resizeTable, int step)
 {
+    qCInfo(appLog) << "Updating table with" << lst.size() << "rows, resize:" << resizeTable << "step:" << step;
     int configRowNum = ROW_NUM;
     if(resizeTable)
         configRowNum = ROW_NUM - step;
@@ -104,6 +110,7 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst, const QList<QSt
 
 void PageTableHeader::setColumnAverage()
 {
+    qCDebug(appLog) << "Setting table columns to average width";
     // 列宽平均分配
     if (mp_Table)
         mp_Table->setColumnAverage();

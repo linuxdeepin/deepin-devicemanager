@@ -4,18 +4,22 @@
 
 // 项目自身文件
 #include "PanguGenerator.h"
+#include "DDLog.h"
 #include <QRegularExpression>
 // 其它头文件
 #include "../DeviceManager/DeviceManager.h"
 #include "../DeviceManager/DeviceComputer.h"
 
+using namespace DDLog;
+
 PanguGenerator::PanguGenerator()
 {
-
+    qCDebug(appLog) << "PanguGenerator constructor";
 }
 
 void PanguGenerator::generatorComputerDevice()
 {
+    qCDebug(appLog) << "PanguGenerator::generatorComputerDevice start";
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
 
     DeviceComputer *device = new  DeviceComputer();
@@ -80,4 +84,5 @@ void PanguGenerator::generatorComputerDevice()
     }
 
     DeviceManager::instance()->addComputerDevice(device);
+    qCDebug(appLog) << "PanguGenerator::generatorComputerDevice end, added computer device";
 }

@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DeviceGenerator.h"
+#include "DDLog.h"
 
 // 其它头文件
 #include "CmdTool.h"
@@ -32,14 +33,18 @@
 // Qt库文件
 #include <QLoggingCategory>
 #include <QRegularExpression>
+
+using namespace DDLog;
+
 DeviceGenerator::DeviceGenerator(QObject *parent)
     : QObject(parent)
 {
-
+    qCDebug(appLog) << "DeviceGenerator constructor";
 }
 
 DeviceGenerator::~DeviceGenerator()
 {
+    qCDebug(appLog) << "DeviceGenerator destructor";
 
 }
 
@@ -47,6 +52,7 @@ DeviceGenerator::~DeviceGenerator()
 
 void DeviceGenerator::generatorComputerDevice()
 {
+    qCDebug(appLog) << "DeviceGenerator::generatorComputerDevice start";
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
     DeviceComputer *device = new DeviceComputer() ;
 
@@ -84,6 +90,7 @@ void DeviceGenerator::generatorComputerDevice()
         device->setOS(info);
     }
     DeviceManager::instance()->addComputerDevice(device);
+    qCDebug(appLog) << "DeviceGenerator::generatorComputerDevice end";
 }
 
 void mergeSortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QString, QString> > &tmpLst, int begin, int end)
@@ -140,6 +147,7 @@ void sortCpuInfoByLogicalID(QList<QMap<QString, QString> > &lsCpu, QList<QMap<QS
 
 void DeviceGenerator::generatorCpuDevice()
 {
+    qCDebug(appLog) << "DeviceGenerator::generatorCpuDevice start";
     // 生成CPU
     // get info from lscpu
     const QList<QMap<QString, QString> >  &lsCpu = DeviceManager::instance()->cmdInfo("lscpu");
@@ -200,6 +208,7 @@ void DeviceGenerator::generatorCpuDevice()
 
 void DeviceGenerator::generatorBiosDevice()
 {
+    qCDebug(appLog) << "DeviceGenerator::generatorBiosDevice start";
     // 生成BIOS
     getBiosInfo();
     getSystemInfo();
@@ -210,6 +219,7 @@ void DeviceGenerator::generatorBiosDevice()
 
 void DeviceGenerator::generatorMemoryDevice()
 {
+    qCDebug(appLog) << "DeviceGenerator::generatorMemoryDevice start";
     // 生成内存
     getMemoryInfoFromLshw();
     getMemoryInfoFromDmidecode();
@@ -217,6 +227,7 @@ void DeviceGenerator::generatorMemoryDevice()
 
 void DeviceGenerator::generatorDiskDevice()
 {
+    qCDebug(appLog) << "DeviceGenerator::generatorDiskDevice start";
     // 生成存储设备
     // 添加从hwinfo中获取的信息
     getDiskInfoFromHwinfo();

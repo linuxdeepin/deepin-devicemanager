@@ -7,6 +7,7 @@
 #include "GenerateDevicePool.h"
 #include "DBusInterface.h"
 #include "DeviceManager.h"
+#include "DDLog.h"
 
 #include <DApplication>
 
@@ -17,6 +18,7 @@
 #include<malloc.h>
 #include <unistd.h>
 
+using namespace DDLog;
 DWIDGET_USE_NAMESPACE
 static bool firstLoadFlag = true;
 
@@ -27,11 +29,13 @@ LoadInfoThread::LoadInfoThread()
     , m_FinishedReadFilePool(false)
     , m_Start(true)
 {
+    qDebug() << "LoadInfoThread constructor";
     connect(&mp_ReadFilePool, &GetInfoPool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
 }
 
 LoadInfoThread::~LoadInfoThread()
 {
+    qDebug() << "LoadInfoThread destructor start";
     long long begin = QDateTime::currentMSecsSinceEpoch();
     while (m_Running)
     {
@@ -42,11 +46,13 @@ LoadInfoThread::~LoadInfoThread()
     }
     mp_ReadFilePool.deleteLater();
     mp_GenerateDevicePool.deleteLater();
+    qDebug() << "LoadInfoThread destructor end";
 }
 
 
 void LoadInfoThread::run()
 {
+    qDebug() << "LoadInfoThread::run start";
     // 判断后台是否正处理update状态
     QString info;
     DBusInterface::getInstance()->getInfo("is_server_running", info);
@@ -100,10 +106,12 @@ void LoadInfoThread::run()
 
     emit finished("finish");
     m_Running = false;
+    qDebug() << "LoadInfoThread::run end";
 }
 
 void LoadInfoThread::slotFinishedReadFilePool(const QString &)
 {
+    qDebug() << "LoadInfoThread::slotFinishedReadFilePool";
     m_FinishedReadFilePool = true;
     // 首次加载刷新
     if (firstLoadFlag) {
@@ -114,6 +122,7 @@ void LoadInfoThread::slotFinishedReadFilePool(const QString &)
 
 void LoadInfoThread::setFramework(const QString &arch)
 {
+    qDebug() << "LoadInfoThread::setFramework, arch:" << arch;
     // 设置架构
     mp_ReadFilePool.setFramework(arch);
 }

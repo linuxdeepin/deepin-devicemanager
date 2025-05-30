@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
         Dtk::Core::DLogManager::registerConsoleAppender();
     #endif
     QCoreApplication a(argc, argv);
+    qCDebug(appLog) << "QCoreApplication created";
 
     ControlInterface controlInterface;
     QDBusConnection connection = controlInterface.qDbusConnection();

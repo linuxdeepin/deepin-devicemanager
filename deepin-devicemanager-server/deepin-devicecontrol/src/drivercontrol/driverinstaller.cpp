@@ -32,11 +32,13 @@ DriverInstaller::DriverInstaller(QObject *parent)
     , m_iRuningTestCount(0)
     , m_Cancel(false)
 {
-
+    qCDebug(appLog) << "DriverInstaller initialized";
 }
 
 bool DriverInstaller::initBackend()
 {
+    qCDebug(appLog) << "Initializing QApt backend";
+
     if (nullptr == mp_Backend)
         mp_Backend = new QApt::Backend;
     aptClean();
@@ -45,6 +47,8 @@ bool DriverInstaller::initBackend()
 
 void DriverInstaller::installPackage(const QString &package, const QString &version)
 {
+    qCDebug(appLog) << "Starting package installation:" << package << "version:" << version;
+
     //检查dpkg是否正在运行，如果正在运行等待2s重试,最多尝试20次
     if (Utils::isDpkgLocked()) {
         if (m_iRuningTestCount < MAX_DPKGRUNING_TEST) {
@@ -66,6 +70,8 @@ void DriverInstaller::installPackage(const QString &package, const QString &vers
 
 void DriverInstaller::undoInstallDriver()
 {
+    qCDebug(appLog) << "Undoing driver installation";
+
     if (nullptr != mp_Trans) {
         mp_Trans->setProperty("isCancellable", true);
         mp_Trans->setProperty("isCancelled", true);
@@ -78,6 +84,8 @@ void DriverInstaller::undoInstallDriver()
 
 void DriverInstaller::aptClean()
 {
+    qCDebug(appLog) << "Cleaning apt cache";
+
     QProcess process;
     process.start("/usr/bin/lastore-apt-clean");//调用商店后端lastore中的接口
     process.waitForFinished();
@@ -85,6 +93,8 @@ void DriverInstaller::aptClean()
 
 bool DriverInstaller::isNetworkOnline(uint usec)
 {
+    qCDebug(appLog) << "Checking network connectivity";
+
     /*
        -c 2（代表ping次数，ping 2次后结束ping操作） -w 2（代表超时时间，2秒后结束ping操作）
     */
@@ -134,6 +144,8 @@ bool DriverInstaller::isNetworkOnline(uint usec)
 
 void DriverInstaller::doOperate(const QString &package, const QString &version)
 {
+    qCDebug(appLog) << "Operating on package:" << package << "version:" << version;
+
     if (!initBackend()) {
         emit errorOccurred(EC_NULL);
         qCInfo(appLog) << "DRIVER_LOG : ************************** 初始化backend失败";

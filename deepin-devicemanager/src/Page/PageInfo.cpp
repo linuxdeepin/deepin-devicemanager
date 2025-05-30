@@ -5,6 +5,7 @@
 // 项目自身文件
 #include "PageInfo.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
@@ -17,14 +18,14 @@
 #include <QPainterPath>
 #include <QProcess>
 
-
+using namespace DDLog;
 DWIDGET_USE_NAMESPACE
 PageInfo::PageInfo(QWidget *parent)
     : QWidget(parent)
     , m_AllInfoNum(0)
     , m_multiFlag(false)
 {
-
+    qCDebug(appLog) << "PageInfo constructor";
 }
 
 void PageInfo::updateInfo(const QMap<QString, QString> &)
@@ -44,6 +45,7 @@ void PageInfo::clearContent()
 
 void PageInfo::setDeviceInfoNum(int num)
 {
+    qCDebug(appLog) << "Setting device info count to:" << num;
     // 设置设备信息数目
     m_AllInfoNum = num;
 }
@@ -66,6 +68,7 @@ bool PageInfo::getMultiFlag()
 
 bool PageInfo::packageHasInstalled(const QString &packageName)
 {
+    qCDebug(appLog) << "Checking if package is installed:" << packageName;
     QProcess p;
     QString cmd = "dpkg -s " + packageName;
     p.start(cmd);

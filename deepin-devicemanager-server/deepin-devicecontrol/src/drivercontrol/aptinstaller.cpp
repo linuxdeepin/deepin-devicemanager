@@ -18,6 +18,8 @@ AptInstaller::AptInstaller(QObject *parent)
     , m_bValid(true)
     , m_iRuningTestCount(0)
 {
+    qCDebug(appLog) << "AptInstaller initialized";
+
     // 连接进程信号
     connect(m_process, &QProcess::readyReadStandardOutput, this, [this]() {
         QString output = QString::fromLocal8Bit(m_process->readAllStandardOutput());
@@ -41,6 +43,8 @@ bool AptInstaller::isValid()
 
 bool AptInstaller::isArchMatched(const QString &path)
 {
+    qCDebug(appLog) << "Checking architecture match for:" << path;
+
     QProcess process;
     process.start("dpkg", {"-I", path});
     process.waitForFinished();
@@ -60,6 +64,8 @@ bool AptInstaller::isArchMatched(const QString &path)
 
 bool AptInstaller::isDebValid(const QString &path)
 {
+    qCDebug(appLog) << "Validating deb package:" << path;
+
     QFileInfo fileInfo(path);
     if (!fileInfo.exists() || !path.endsWith(".deb")) {
         return false;
@@ -74,6 +80,8 @@ bool AptInstaller::isDebValid(const QString &path)
 
 void AptInstaller::doOperate(const QString &package, bool isInstall)
 {
+    qCDebug(appLog) << "Operating on package:" << package << "install:" << isInstall;
+
     QStringList args;
     if (isInstall) {
         args << "install" << "-y" << package;
@@ -86,6 +94,8 @@ void AptInstaller::doOperate(const QString &package, bool isInstall)
 
 void AptInstaller::installPackage(const QString &filepath)
 {
+    qCDebug(appLog) << "Installing package from:" << filepath;
+
     if (Utils::isDpkgLocked()) {
         if (m_iRuningTestCount < MAX_DPKGRUNING_TEST) {
             QTimer::singleShot(TEST_TIME_INTERVAL, this, [this, filepath]() {
@@ -109,6 +119,8 @@ void AptInstaller::installPackage(const QString &filepath)
 
 void AptInstaller::uninstallPackage(const QString &packagename)
 {
+    qCDebug(appLog) << "Uninstalling package:" << packagename;
+
     if (Utils::isFileLocked("/var/lib/dpkg/lock")) {
         if (m_iRuningTestCount < MAX_DPKGRUNING_TEST) {
             QTimer::singleShot(TEST_TIME_INTERVAL, this, [this, packagename]() {
@@ -128,6 +140,8 @@ void AptInstaller::uninstallPackage(const QString &packagename)
 
 void AptInstaller::parseAptOutput(const QString &output)
 {
+    qCDebug(appLog) << "Parsing apt output";
+
     // 解析apt输出以更新进度
     static QRegularExpression progressRe("\\b(\\d+)%");
     auto match = progressRe.match(output);

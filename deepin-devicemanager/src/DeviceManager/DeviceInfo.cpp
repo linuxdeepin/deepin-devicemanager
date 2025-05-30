@@ -830,12 +830,14 @@ bool DeviceBaseInfo::PhysIDMapInfo(const QMap<QString, QString> &mapInfo)
     // Modalias 或 "Module Alias" 匹配上  ，硬件 IDS 参考内核 Module Alias 规则标准
     if (mapInfo.find("Module Alias") != mapInfo.end()) {
         if (m_PhysIDMap == mapInfo["Module Alias"]) {
+            qCDebug(appLog) << "PhysIDMapInfo match Module Alias";
             return true;
         }
     }
     // VID_PID 匹配上
     if (mapInfo.find("VID_PID") != mapInfo.end()) {
         if (m_PhysIDMap == mapInfo["VID_PID"]) {
+            qCDebug(appLog) << "PhysIDMapInfo match VID_PID";
             return true;
         }
     }

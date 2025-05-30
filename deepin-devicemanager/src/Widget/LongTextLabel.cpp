@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "LongTextLabel.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -17,10 +18,13 @@
 #include <QRegularExpression>
 DCORE_USE_NAMESPACE
 
+using namespace DDLog;
+
 LongTextLabel::LongTextLabel(DWidget *parent)
     : DLabel(parent)
     , m_width(width())
 {
+    qCDebug(appLog) << "LongTextLabel instance created";
     setAlignment(Qt::AlignVCenter);
     DFontSizeManager::instance()->bind(this, DFontSizeManager::T8);
 }

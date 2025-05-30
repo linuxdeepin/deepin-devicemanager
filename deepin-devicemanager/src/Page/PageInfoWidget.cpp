@@ -9,6 +9,7 @@
 #include "PageOverview.h"
 #include "PageBoardInfo.h"
 #include "DeviceBios.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DMenu>
@@ -18,6 +19,7 @@
 #include <QLoggingCategory>
 #include <QAction>
 
+using namespace DDLog;
 
 PageInfoWidget::PageInfoWidget(QWidget *parent)
     : DWidget(parent)
@@ -27,6 +29,7 @@ PageInfoWidget::PageInfoWidget(QWidget *parent)
     , mp_PageOverviewInfo(new PageOverview(this))
     , mp_PageBoardInfo(new PageBoardInfo(this))
 {
+    qCDebug(appLog) << "PageInfoWidget constructor start";
     // 初始化界面布局
     initWidgets();
 
@@ -44,16 +47,19 @@ PageInfoWidget::PageInfoWidget(QWidget *parent)
 
 void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseInfo *> &lst)
 {
+    qCDebug(appLog) << "Updating table with" << lst.size() << "devices, type:" << itemStr;
     mp_PageInfo->clearWidgets();
 
     // 设备个数为0,是概况界面
     if (lst.size() == 0) {
+        qCDebug(appLog) << "Showing overview page";
         mp_PageOverviewInfo->setVisible(true);
         mp_PageSignalInfo->setVisible(false);
         mp_PageMutilInfo->setVisible(false);
         mp_PageBoardInfo->setVisible(false);
         mp_PageInfo = mp_PageOverviewInfo;
     } else if (lst.size() == 1) {                 // 设备个数为1,是单个设备界面
+        qCDebug(appLog) << "Showing single device page";
         mp_PageOverviewInfo->setVisible(false);
         mp_PageSignalInfo->setVisible(true);
         mp_PageMutilInfo->setVisible(false);
@@ -71,6 +77,7 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
             mp_PageMutilInfo->setVisible(false);
         } else {
             // 多设备界面
+            qCDebug(appLog) << "Showing multi-device page";
             mp_PageInfo = mp_PageMutilInfo;
             mp_PageBoardInfo->setVisible(false);
             mp_PageMutilInfo->setVisible(true);
@@ -86,6 +93,7 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
 
 void PageInfoWidget::updateTable(const QMap<QString, QString> &map)
 {
+    qCDebug(appLog) << "Updating overview table with map size:" << map.size();
     // 更新概况界面
     mp_PageOverviewInfo->setVisible(true);
     mp_PageSignalInfo->setVisible(false);

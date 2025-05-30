@@ -4,10 +4,13 @@
 
 // 项目自身文件
 #include "DeviceComputer.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QMap>
 #include <QLoggingCategory>
+
+using namespace DDLog;
 
 DeviceComputer::DeviceComputer()
     : m_HomeUrl("")
@@ -16,11 +19,13 @@ DeviceComputer::DeviceComputer()
     , m_Type("")
     //, m_Driver("")
 {
-
+    qCDebug(appLog) << "DeviceComputer constructor initialized";
 }
 
 TomlFixMethod DeviceComputer::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Start setting computer info from toml";
+
         TomlFixMethod ret = TOML_None;
 //  must cover the  loadOtherDeviceInfo
     // 添加基本信息
@@ -139,11 +144,13 @@ void DeviceComputer::setName(const QString &dm1Name, const QString &dm2Name, con
 const QString DeviceComputer::getOverviewInfo()
 {
     // 获取概况信息
+    qCDebug(appLog) << "Getting computer overview info";
     QString model;
     model += m_Vendor + QString(" ");
     model += m_Name + QString(" ");
     model += m_Type + QString(" ");
 
+    qCInfo(appLog) << "Computer overview:" << model;
     return model;
 }
 

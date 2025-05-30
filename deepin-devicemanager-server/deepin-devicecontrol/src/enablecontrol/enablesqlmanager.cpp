@@ -126,6 +126,7 @@ void EnableSqlManager::removeDataFromPrinterTable(const QString &name)
 
 bool EnableSqlManager::uniqueIDExisted(const QString &key)
 {
+    qCDebug(appLog) << "Checking if unique ID exists:" << key;
     QString sql = QString("SELECT COUNT(*) FROM %1 WHERE unique_id=%2;").arg(DB_TABLE_AUTHORIZED).arg(":param");
     if(!m_sqlQuery.prepare(sql)) return false;
     m_sqlQuery.bindValue(":param", QVariant(key));
@@ -142,6 +143,7 @@ bool EnableSqlManager::uniqueIDExistedEX(const QString &key)
 
 bool EnableSqlManager::isUniqueIdEnabled(const QString &key)
 {
+    qCDebug(appLog) << "Checking if unique ID is enabled:" << key;
     QString sql = QString("SELECT enable FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_AUTHORIZED).arg(":key");
     if(!m_sqlQuery.prepare(sql)) return false;
     m_sqlQuery.bindValue(":key", QVariant(key));
@@ -360,11 +362,13 @@ void EnableSqlManager::setMonitorWorkingFlag(const bool &flag)
 EnableSqlManager::EnableSqlManager(QObject *parent)
     : QObject(parent)
 {
+    qCDebug(appLog) << "Initializing EnableSqlManager...";
     initDB();
 }
 
 void EnableSqlManager::initDB()
 {
+    qCDebug(appLog) << "Initializing database...";
     //初始化数据库
     QDir dbDir;
     if (!dbDir.exists(DB_PATH)) {
@@ -373,7 +377,7 @@ void EnableSqlManager::initDB()
     m_db = QSqlDatabase::addDatabase("QSQLITE", DB_CONNECT_NAME);
     m_db.setDatabaseName(QString("%1%2").arg(DB_PATH).arg(DB_FILE));
     if (!m_db.open()) {
-        qCDebug(appLog) << Q_FUNC_INFO << "local db open error!";
+        qCWarning(appLog) << "Failed to open database:" << m_db.lastError().text();
         return;
     }
 
@@ -383,7 +387,9 @@ void EnableSqlManager::initDB()
     // 创建数据库表
     QStringList tableStrList = m_db.tables();
 
+    qCDebug(appLog) << "Checking database tables...";
     if (!tableStrList.contains(DB_TABLE_AUTHORIZED)) {
+        qCDebug(appLog) << "Creating table:" << DB_TABLE_AUTHORIZED;
         QString sql = QString("CREATE TABLE %1 (class text, name text, path text, unique_id text, exist boolean, driver text);").arg(DB_TABLE_AUTHORIZED);
         bool res = m_sqlQuery.exec(sql);
         if (!res) {

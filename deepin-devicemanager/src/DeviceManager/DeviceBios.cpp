@@ -4,9 +4,12 @@
 
 // 项目自身文件
 #include "DeviceBios.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QLoggingCategory>
+
+using namespace DDLog;
 
 DeviceBios::DeviceBios()
     : DeviceBaseInfo()
@@ -14,6 +17,7 @@ DeviceBios::DeviceBios()
     , m_ChipsetFamily("")
     , m_IsBoard(false)
 {
+    qCDebug(appLog) << "DeviceBios constructor initialized";
     // 初始化可显示属性
     initFilterKey();
 }
@@ -35,6 +39,8 @@ TomlFixMethod DeviceBios::setInfoFromTomlOneByOne(const QMap<QString, QString> &
 
 bool DeviceBios::setBiosInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Start setting BIOS info";
+
     if (mapInfo.size() < 2)
         return false;
 
@@ -57,6 +63,8 @@ bool DeviceBios::setBiosLanguageInfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceBios::setBaseBoardInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Start setting base board info";
+
     if (mapInfo.size() < 2)
         return false;
 
@@ -162,6 +170,8 @@ QString DeviceBios::subTitle()
 
 const QString DeviceBios::getOverviewInfo()
 {
+    qCDebug(appLog) << "Getting BIOS overview info";
+
     // 获取主板概况信息
     if (isBoard())
         return m_ProductName;

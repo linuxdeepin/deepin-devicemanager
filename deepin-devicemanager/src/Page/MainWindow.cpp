@@ -77,8 +77,10 @@ MainWindow::MainWindow(QWidget *parent)
     , mp_WorkingThread(new LoadInfoThread)
     , mp_ButtonBox(new DButtonBox(this))
 {
+    qCDebug(appLog) << "MainWindow constructor start";
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
+    qCDebug(appLog) << "MainWindow constructor end";
 
     // 加载设备信息
     refreshDataBase();
@@ -139,9 +141,12 @@ void MainWindow::refreshDataBaseLater()
 
 MainWindow::~MainWindow()
 {
+    qCDebug(appLog) << "MainWindow destructor start";
     // 释放指针
-    if (mp_WorkingThread && mp_WorkingThread->isRunning())
+    if (mp_WorkingThread && mp_WorkingThread->isRunning()) {
+        qCWarning(appLog) << "Terminating running working thread";
         mp_WorkingThread->terminate();
+    }
     while (mp_WorkingThread && mp_WorkingThread->isRunning()) {}
     if (mp_WaitingWidget) {
         delete mp_WaitingWidget;
@@ -164,12 +169,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::refresh()
 {
+    qCDebug(appLog) << "MainWindow::refresh start";
     //电池状态刷新
     refreshBatteryStatus();
 
     // 正在刷新,避免重复操作
-    if (m_refreshing || startScanningFlag || mp_DriverManager->isScanning() || mp_WorkingThread->isRunning())
+    if (m_refreshing || startScanningFlag || mp_DriverManager->isScanning() || mp_WorkingThread->isRunning()) {
+        qCDebug(appLog) << "Refresh skipped - operation already in progress";
         return;
+    }
 
     if (mp_ButtonBox->checkedId() == 1) {
         startScanningFlag = true;
@@ -189,6 +197,7 @@ void MainWindow::refresh()
 
 void MainWindow::refreshBatteryStatus()
 {
+    qCDebug(appLog) << "Refreshing battery status";
     QDBusConnection bus = QDBusConnection::systemBus();
 
     //创建Dbus接口
@@ -217,7 +226,7 @@ void MainWindow::refreshBatteryStatus()
              }
          }
     } else {
-       qDebug() << "interface UPower invalid";
+       qCWarning(appLog) << "UPower interface invalid - cannot refresh battery status";
     }
 }
 
@@ -458,6 +467,7 @@ void MainWindow::initWidgets()
 
 void MainWindow::refreshDataBase()
 {
+    qCDebug(appLog) << "Refreshing device database";
     if (mp_WorkingThread) {
         /* 一定要与 restoreOverrideCursor 成对使用*/
         if(!m_statusCursorIsWait) {
@@ -481,6 +491,7 @@ void MainWindow::slotSetPage(QString page)
 
 void MainWindow::slotLoadingFinish(const QString &message)
 {
+    qCDebug(appLog) << "Loading finished with message:" << message;
     static bool begin = true;
 
     if (begin)

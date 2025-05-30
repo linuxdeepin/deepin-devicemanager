@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "DBusWakeupInterface.h"
+#include "DDLog.h"
 
 #include <QDBusConnection>
 #include <QDBusInterface>
@@ -10,6 +11,8 @@
 #include <QLoggingCategory>
 #include <QFile>
 #include <QMetaMethod>
+
+using namespace DDLog;
 
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<DBusWakeupInterface *> DBusWakeupInterface::s_Instance;
@@ -32,11 +35,14 @@ const QString INPUT_WAKEUP_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properti
 DBusWakeupInterface::DBusWakeupInterface()
     : mp_Iface(nullptr), mp_InputIface(nullptr)
 {
+    qCDebug(appLog) << "DBusWakeupInterface constructor called";
     init();
 }
 
 bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup, const QString &name)
 {
+    qCDebug(appLog) << "Setting wakeup for device. ID:" << unique_id << "Path:" << path << "Wakeup:" << wakeup << "Name:" << name;
+
     if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QStringList pathList = path.split("/", QString::SkipEmptyParts);
@@ -46,6 +52,7 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QStri
         if (pathList.size() < 3)
             return false;
 
+        qCDebug(appLog) << "Processing PS/2 device";
         if (name.contains("PS/2")) {
             // ps2设备无法通过/sys/devices/platform/i8042/serio1/power/wakeup控制，只能通过acpi的接口进行控制
             QDBusInterface interface(INPUT_SERVICE_NAME, INPUT_WAKEUP_SERVICE_PATH, INPUT_WAKEUP_PROPERTIES_INTERFACE, QDBusConnection::systemBus());
@@ -67,6 +74,7 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QStri
                 }
             }
         } else {
+            qCDebug(appLog) << "Processing non-PS/2 device";
             auto metaObject = mp_InputIface->metaObject();
             for (int i = 0 ; i < metaObject->methodCount(); ++i) {
                 if (metaObject->method(i).name() == "SetWakeupDevices") {
@@ -79,6 +87,7 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QStri
         }
     }
 
+    qCDebug(appLog) << "Calling DBus setWakeupMachine";
     QDBusReply<bool> reply = mp_Iface->call("setWakeupMachine", unique_id, path, wakeup);
     if (reply.isValid()) {
         return reply.value();
@@ -88,7 +97,11 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QStri
 
 bool DBusWakeupInterface::canInputWakeupMachine(const QString &path)
 {
-    if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
+    qCDebug(appLog) << "Checking if input device can wakeup machine. Path:" << path;
+
+    bool inputIfaceValid = (nullptr != mp_InputIface && mp_InputIface->isValid());
+    qCDebug(appLog) << "Input interface valid:" << inputIfaceValid;
+    if (inputIfaceValid) {
         QDBusInterface interface(INPUT_SERVICE_NAME, INPUT_WAKEUP_SERVICE_PATH, INPUT_WAKEUP_PROPERTIES_INTERFACE, QDBusConnection::systemBus());
         if (interface.isValid()) {
             QDBusMessage replay = interface.call("Get", INPUT_WAKEUP_INTERFACE, "SupportWakeupDevices");
@@ -110,13 +123,18 @@ bool DBusWakeupInterface::canInputWakeupMachine(const QString &path)
         }
     }
 
+    qCDebug(appLog) << "Falling back to file check for wakeup capability";
     QFile file(path);
     return file.open(QIODevice::ReadOnly);
 }
 
 bool DBusWakeupInterface::isInputWakeupMachine(const QString &path, const QString &name)
 {
-    if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
+    qCDebug(appLog) << "Checking input wakeup state. Path:" << path << "Name:" << name;
+
+    bool inputIfaceValid = (nullptr != mp_InputIface && mp_InputIface->isValid());
+    qCDebug(appLog) << "Input interface valid:" << inputIfaceValid;
+    if (inputIfaceValid) {
         QDBusInterface interface(INPUT_SERVICE_NAME, INPUT_WAKEUP_SERVICE_PATH, INPUT_WAKEUP_PROPERTIES_INTERFACE, QDBusConnection::systemBus());
         if (interface.isValid()) {
             QDBusMessage replay = interface.call("Get", INPUT_WAKEUP_INTERFACE, "SupportWakeupDevices");
@@ -164,6 +182,7 @@ int DBusWakeupInterface::isNetworkWakeup(const QString &logical_name)
 
 bool DBusWakeupInterface::setNetworkWakeup(const QString &logical_name, bool wake)
 {
+    qCDebug(appLog) << "Calling DBus setNetworkWake";
     QDBusReply<bool> reply = mp_Iface->call("setNetworkWake", logical_name, wake);
     if (reply.isValid()) {
         return reply.value();
@@ -174,8 +193,12 @@ bool DBusWakeupInterface::setNetworkWakeup(const QString &logical_name, bool wak
 
 void DBusWakeupInterface::init()
 {
+    qCDebug(appLog) << "Initializing DBus interfaces";
+
     // 1. 连接到dbus
-    if (!QDBusConnection::systemBus().isConnected()) {
+    bool isConnected = QDBusConnection::systemBus().isConnected();
+    qCDebug(appLog) << "DBus system bus connected:" << isConnected;
+    if (!isConnected) {
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
                 "To start it, run:/n"
                 "/teval `dbus-launch --auto-syntax`/n");

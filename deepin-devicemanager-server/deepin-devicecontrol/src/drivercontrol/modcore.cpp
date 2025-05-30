@@ -25,7 +25,7 @@ const QString  LOADONBOOT_FILENAME_TEMPLETE = "%1-drivermanager.conf";  //驱动
 ModCore::ModCore(QObject *parent)
     : QObject(parent)
 {
-
+    qCDebug(appLog) << "ModCore initialized";
 }
 
 /**
@@ -87,6 +87,7 @@ QStringList ModCore::checkModuleInUsed(const QString &modName)
  */
 bool ModCore::rmModForce(const QString &modName, QString &errMsg)
 {
+    qCDebug(appLog) << "Force removing module:" << modName;
     bool bsuccess = true;
     struct kmod_ctx *ctx = nullptr;
     const char **null_config = nullptr;
@@ -126,6 +127,7 @@ bool ModCore::rmModForce(const QString &modName, QString &errMsg)
  */
 bool ModCore::modInstall(const QString &modName, QString &errMsg, unsigned int flags)
 {
+    qCDebug(appLog) << "Installing module:" << modName << "with flags:" << flags;
     bool success = true;
     struct kmod_ctx *ctx = nullptr;
     const char **null_config = nullptr;
@@ -301,6 +303,7 @@ bool ModCore::modIsLoaded(const QString &modName)
  */
 bool ModCore::modIsBlackListed(const QString &modName)
 {
+    qCDebug(appLog) << "Checking if module is blacklisted:" << modName;
     QStringList confs = modGetConfsWithType(EBlackListConf);
     return  confs.contains(modGetName(modName));
 }
@@ -409,6 +412,7 @@ int ModCore::modGetInitState(const QString &modName)
  */
 void ModCore::rmModFromBlackListFile(const QString &filepath, const QString &modName)
 {
+    qCDebug(appLog) << "Removing module from blacklist file:" << filepath << "module:" << modName;
     QFileInfo info(filepath);
     QString strpath = filepath;
     if (info.isSymLink()) {
@@ -432,6 +436,7 @@ void ModCore::rmModFromBlackListFile(const QString &filepath, const QString &mod
  */
 void ModCore::rmModFromLoadonBootConf(const QString &filepath, const QString &modName)
 {
+    qCDebug(appLog) << "Removing module from load-on-boot config:" << filepath << "module:" << modName;
     QFileInfo info(filepath);
     QString strpath = filepath;
     if (info.isSymLink()) {
@@ -488,6 +493,7 @@ void ModCore::deleteLineOfFileWithItem(const QString &filepath, const QString &i
 //更新现有的initramfs
 void ModCore::updateInitramfs()
 {
+    qCDebug(appLog) << "Updating initramfs";
     QProcess process;
     process.start("update-initramfs -u");
     process.waitForFinished(-1);

@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "EDIDParser.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include<QLoggingCategory>
@@ -11,6 +12,8 @@
 
 // 其它头文件
 #include<qmath.h>
+
+using namespace DDLog;
 
 EDIDParser::EDIDParser()
     : m_Vendor()
@@ -20,6 +23,7 @@ EDIDParser::EDIDParser()
     , m_Width(0)
     , m_Height(0)
 {
+    qCDebug(appLog) << "EDIDParser constructor called";
     m_MapCh.insert("00001", "A");
     m_MapCh.insert("00010", "B");
     m_MapCh.insert("00011", "C");
@@ -50,16 +54,20 @@ EDIDParser::EDIDParser()
 
 bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &ch, bool littleEndianMode)
 {
+    qCDebug(appLog) << "Setting EDID data. Little endian mode:" << littleEndianMode;
+
     m_LittleEndianMode = littleEndianMode;
     // 判断是否是合理的edid
     if (m_LittleEndianMode) {
         if (!edid.startsWith("00ffffffffffff00")) {
             errorMsg = "Error edid info";
+            qCWarning(appLog) << "Invalid EDID header in little endian mode";
             return false;
         }
     } else {
         if (!edid.startsWith("ff00ffffffff00ff")) {
             errorMsg = "Error edid info";
+            qCWarning(appLog) << "Invalid EDID header in big endian mode";
             return false;
         }
     }
@@ -73,10 +81,13 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
     }
 
     // 解析厂商信息
+    qCDebug(appLog) << "Parsing vendor info";
     parserVendor();
     // 解析发布日期
+    qCDebug(appLog) << "Parsing release date";
     parseReleaseDate();
     // 解析屏幕尺寸
+    qCDebug(appLog) << "Parsing screen size";
     parseScreenSize();
 
 
@@ -115,6 +126,8 @@ int EDIDParser::height()
 
 void EDIDParser::parserVendor()
 {
+    qCDebug(appLog) << "Parsing vendor info from EDID";
+
     // 获取制造商信息，edid中的 08h 和 09h 是厂商信息
     // 08表示 第0行  第9个字节
     QString vendorStr;
@@ -138,11 +151,13 @@ void EDIDParser::parserVendor()
     name[3] = 0;
 
     m_Vendor = QString(name);
+    qCDebug(appLog) << "Vendor parsed:" << m_Vendor;
 
     QString h0a = getBytes(0, 10);
     QString h0b = getBytes(0, 11);
 
     m_Model = h0a + h0b;
+    qCDebug(appLog) << "Model parsed:" << m_Model;
 
 //    // 将16进制的厂商信息转换成二进制的厂商信息
 //    QString binStr = hexToBin(vendorStr);
@@ -159,6 +174,8 @@ void EDIDParser::parserVendor()
 
 void EDIDParser::parseReleaseDate()
 {
+    qCDebug(appLog) << "Parsing release date from EDID";
+
     // edid中的  10H和11H就是发布日期信息
     QString hWeek = getBytes(1, m_LittleEndianMode ? 0 : 1);
     QString hYear = getBytes(1, m_LittleEndianMode ? 1 : 0);
@@ -173,6 +190,7 @@ void EDIDParser::parseReleaseDate()
 
 void EDIDParser::parseScreenSize()
 {
+    qCDebug(appLog) << "Parsing screen size from EDID";
 
     //Detailed Timing
     if(m_LittleEndianMode){
@@ -193,6 +211,7 @@ void EDIDParser::parseScreenSize()
 
     double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;
     m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+    qCDebug(appLog) << "Screen size parsed:" << m_ScreenSize << "Width:" << m_Width << "Height:" << m_Height;
 }
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制

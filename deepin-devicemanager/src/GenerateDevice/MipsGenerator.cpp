@@ -6,6 +6,7 @@
 #include <QRegularExpression>
 // 项目自身文件
 #include "MipsGenerator.h"
+#include "DDLog.h"
 
 // 其它头文件
 #include "CmdTool.h"
@@ -28,13 +29,16 @@
 
 #include "MacroDefinition.h"
 
+using namespace DDLog;
+
 MipsGenerator::MipsGenerator()
 {
-
+    qCDebug(appLog) << "MipsGenerator constructor";
 }
 
 void MipsGenerator::generatorComputerDevice()
 {
+    qCDebug(appLog) << "MipsGenerator::generatorComputerDevice start";
     const QList<QMap<QString, QString> >  &cmdInfo = DeviceManager::instance()->cmdInfo("cat_os_release");
     DeviceComputer *device = new DeviceComputer() ;
 
@@ -76,4 +80,5 @@ void MipsGenerator::generatorComputerDevice()
         device->setOS(info);
     }
     DeviceManager::instance()->addComputerDevice(device);
+    qCDebug(appLog) << "MipsGenerator::generatorComputerDevice end, added computer device";
 }

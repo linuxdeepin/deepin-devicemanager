@@ -23,6 +23,7 @@ DriverInstallerApt::DriverInstallerApt(QObject *parent)
     , m_iRuningTestCount(0)
     , m_Cancel(false)
 {
+    qCDebug(appLog) << "DriverInstallerApt initialized";
 }
 
 DriverInstallerApt::~DriverInstallerApt()
@@ -36,6 +37,7 @@ DriverInstallerApt::~DriverInstallerApt()
 
 void DriverInstallerApt::installPackage(const QString &package, const QString &version)
 {
+    qCDebug(appLog) << "Starting package installation:" << package << "version:" << version;
     // 检查dpkg是否正在运行
     if (Utils::isDpkgLocked()) {
         if (m_iRuningTestCount < MAX_DPKGRUNING_TEST) {
@@ -58,6 +60,8 @@ void DriverInstallerApt::installPackage(const QString &package, const QString &v
 
 void DriverInstallerApt::undoInstallDriver()
 {
+    qCDebug(appLog) << "Undoing driver installation";
+
     m_Cancel = true;
     if (m_process && m_process->state() == QProcess::Running) {
         m_process->kill();
@@ -67,11 +71,15 @@ void DriverInstallerApt::undoInstallDriver()
 
 void DriverInstallerApt::aptClean()
 {
+    qCDebug(appLog) << "Cleaning apt cache";
+
     executeCommand("lastore-apt-clean");
 }
 
 QString DriverInstallerApt::executeCommand(const QString &cmd)
 {
+    qCDebug(appLog) << "Executing command:" << cmd;
+
     QProcess process;
     process.start("bash", QStringList() << "-c" << cmd);
     process.waitForFinished();
@@ -80,6 +88,8 @@ QString DriverInstallerApt::executeCommand(const QString &cmd)
 
 void DriverInstallerApt::doOperate(const QString &package, const QString &version)
 {
+    qCDebug(appLog) << "Operating on package:" << package << "version:" << version;
+
     // 清理apt缓存
     aptClean();
     
@@ -145,6 +155,8 @@ void DriverInstallerApt::doOperate(const QString &package, const QString &versio
 
 bool DriverInstallerApt::isNetworkOnline(uint sec)
 {
+    qCDebug(appLog) << "Checking network connectivity";
+
     QProcess process;
     process.setStandardOutputFile("netlog.bat", QIODevice::WriteOnly);
     process.start("ping", QStringList() << "www.baidu.com" << "-c" << "2" << "-w" << "2");

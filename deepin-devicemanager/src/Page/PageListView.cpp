@@ -6,6 +6,7 @@
 #include "PageListView.h"
 #include "DeviceListView.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
@@ -15,6 +16,8 @@
 #include <QHBoxLayout>
 #include <QLoggingCategory>
 
+using namespace DDLog;
+
 PageListView::PageListView(DWidget *parent)
     : DWidget(parent)
     , mp_ListView(new DeviceListView(this))
@@ -23,6 +26,7 @@ PageListView::PageListView(DWidget *parent)
     , mp_Menu(new QMenu(this))
     , m_CurType(tr("Overview"))
 {
+    qCDebug(appLog) << "PageListView constructor start";
     //初始化界面
     QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->addWidget(mp_ListView);
@@ -43,12 +47,14 @@ PageListView::PageListView(DWidget *parent)
 
 PageListView::~PageListView()
 {
-
+    qCDebug(appLog) << "PageListView destructor";
 }
 
 void PageListView::updateListItems(const QList<QPair<QString, QString> > &lst)
 {
+    qCDebug(appLog) << "Updating list items, count:" << lst.size();
     if (! mp_ListView) {
+        qCWarning(appLog) << "ListView is null";
         return;
     }
 
@@ -62,6 +68,7 @@ void PageListView::updateListItems(const QList<QPair<QString, QString> > &lst)
 
     // 更新之后恢复之前显示的设备
     mp_ListView->setCurItem(m_CurType);
+    qCDebug(appLog) << "Setting current item:" << m_CurType;
     emit itemClicked(m_CurType);
 }
 
@@ -129,6 +136,7 @@ void PageListView::slotListViewItemClicked(const QModelIndex &index)
 {
     // Item 点击事件
     QString concateStr = mp_ListView->getConcatenateStrings(index);
+    qCDebug(appLog) << "List item clicked:" << concateStr;
     if (!concateStr.isEmpty() && concateStr != QString("Separator")) {
         emit itemClicked(concateStr);
         m_CurType = concateStr;

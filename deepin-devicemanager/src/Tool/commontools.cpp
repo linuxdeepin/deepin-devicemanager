@@ -115,6 +115,8 @@ QString CommonTools::getStatusPixmap(Status type)
 
 QString CommonTools::getSystemTime()
 {
+    qCDebug(appLog) << "Getting current system time";
+
     QDateTime time = QDateTime::currentDateTime();
     QString date = time.toString("yyyy-M-d hh:mm");
     return date;
@@ -122,11 +124,15 @@ QString CommonTools::getSystemTime()
 
 QString CommonTools::getErrorString(int err)
 {
+    qCDebug(appLog) << "Getting error string for code:" << err;
+
     return m_MapErrorString[err];
 }
 
 void CommonTools::feedback()
 {
+    qCDebug(appLog) << "Initiating feedback session";
+
     QDBusInterface interface("com.deepin.dde.ServiceAndSupport",
                               "/com/deepin/dde/ServiceAndSupport",
                               "com.deepin.dde.ServiceAndSupport");
@@ -146,12 +152,16 @@ void CommonTools::feedback()
 
 QString CommonTools::getUrl()
 {
+    qCDebug(appLog) << "Getting driver search URL";
+
     QFile file(QDir::homePath() + "/url");
     if(!file.open(QIODevice::ReadOnly)){
+        qCDebug(appLog) << "Using default driver search URL";
         return "https://driver.uniontech.com/api/v1/drive/search";
     }
     QString info = file.readAll();
     if("true" == info){
+        qCDebug(appLog) << "Using production driver search URL";
         return "https://driver.uniontech.com/api/v1/drive/search";
     }else{
         return "https://drive-pre.uniontech.com/api/v1/drive/search";

@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "KLVGenerator.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QLoggingCategory>
@@ -15,13 +16,17 @@
 #include "DeviceManager/DeviceNetwork.h"
 #include "DeviceManager/DeviceImage.h"
 
+using namespace DDLog;
+
 KLVGenerator::KLVGenerator()
 {
+    qCDebug(appLog) << "KLVGenerator constructor";
 
 }
 
 void KLVGenerator::generatorMonitorDevice()
 {
+    qCDebug(appLog) << "KLVGenerator::generatorMonitorDevice start";
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Name", "LCD");
 //    mapInfo.insert("Vendor", "HUAWEI");
@@ -35,10 +40,12 @@ void KLVGenerator::generatorMonitorDevice()
     DeviceManager::instance()->addMonitor(monitor);
 
     HWGenerator::generatorMonitorDevice();
+    qCDebug(appLog) << "KLVGenerator::generatorMonitorDevice end";
 }
 
 void KLVGenerator::generatorNetworkDevice()
 {
+    qCDebug(appLog) << "KLVGenerator::generatorNetworkDevice start";
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
@@ -64,10 +71,12 @@ void KLVGenerator::generatorNetworkDevice()
     }
     // HW 要求修改名称,制造商以及类型
     getNetworkInfoFromCatWifiInfo();
+    qCDebug(appLog) << "KLVGenerator::generatorNetworkDevice end";
 }
 
 void KLVGenerator::getNetworkInfoFromCatWifiInfo()
 {
+    qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo start";
     QList<QMap<QString, QString> >  lstWifiInfo;
     QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
     QFile file(wifiDevicesInfoPath);
@@ -124,6 +133,7 @@ void KLVGenerator::getNetworkInfoFromCatWifiInfo()
 
 void KLVGenerator::getDiskInfoFromLshw()
 {
+    qCDebug(appLog) << "KLVGenerator::getDiskInfoFromLshw start";
     QString bootdevicePath("/proc/bootdevice/product_name");
     QString modelStr = "";
     QFile file(bootdevicePath);
@@ -159,6 +169,7 @@ void KLVGenerator::getDiskInfoFromLshw()
 
 void KLVGenerator::getImageInfoFromHwinfo()
 {
+    qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo start";
     //  加载从hwinfo中获取的图像设备信息
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
@@ -213,6 +224,7 @@ void KLVGenerator::getImageInfoFromHwinfo()
 
 void KLVGenerator::getImageInfoFromLshw()
 {
+    qCDebug(appLog) << "KLVGenerator::getImageInfoFromLshw start";
     //  加载从lshw中获取的图像设备信息
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
