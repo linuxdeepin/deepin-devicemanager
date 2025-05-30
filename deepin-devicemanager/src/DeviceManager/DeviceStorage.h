@@ -152,9 +152,9 @@ public:
      */
     const QString getOverviewInfo() override;
 
-    QString interface() const;
+    const QString &interface() const;
 
-    QString mediaType() const;
+    const QString &mediaType() const;
 
 protected:
 
