@@ -308,8 +308,7 @@ void HWGenerator::generatorDiskDevice()
                 tempMap["Vendor"] = "nouse";
             if (name.contains("SDINFDO4-256G",Qt::CaseInsensitive))
                 tempMap["Name"] = "nouse";
-            // 应HW的要求，将描述固定为   Universal Flash Storage
-            tempMap["Description"] = "Universal Flash Storage";
+
             if (Common::specialComType == 2) {
                 tempMap["Interface"] = "UFS 3.1";
             }
