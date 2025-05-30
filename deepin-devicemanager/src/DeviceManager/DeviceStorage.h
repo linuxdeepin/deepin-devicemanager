@@ -152,6 +152,10 @@ public:
      */
     const QString getOverviewInfo() override;
 
+    QString interface() const;
+
+    QString mediaType() const;
+
 protected:
 
     /**

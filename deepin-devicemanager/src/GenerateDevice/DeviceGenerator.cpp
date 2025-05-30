@@ -231,6 +231,8 @@ void DeviceGenerator::generatorDiskDevice()
     getDiskInfoFromLsblk();
     getDiskInfoFromSmartCtl();
     DeviceManager::instance()->mergeDisk();
+
+    DeviceManager::instance()->orderDiskByType();
 }
 
 void DeviceGenerator::generatorGpuDevice()
