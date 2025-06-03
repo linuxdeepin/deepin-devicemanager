@@ -191,6 +191,20 @@ void EDIDParser::parseScreenSize()
         m_Height = height16;
     }
 
+    QString s66 = getBytes(4, m_LittleEndianMode ? 2 : 3),
+            s67 = getBytes(4, m_LittleEndianMode ? 3 : 2),
+            s68 = getBytes(4, m_LittleEndianMode ? 4 : 5);
+
+    if (!s66.isEmpty() && !s67.isEmpty() && !s68.isEmpty()) {
+        int width_mm = hexToDec(s66).toInt() + ((hexToDec(s68).toInt() & 0xF0) << 4);
+        int height_mm = hexToDec(s67).toInt() + ((hexToDec(s68).toInt() & 0x0F) << 8);
+
+        if (width_mm > 0 && height_mm > 0) {
+            m_Width = width_mm;
+            m_Height = height_mm;
+        }
+    }
+
     double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;
     m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
 }
