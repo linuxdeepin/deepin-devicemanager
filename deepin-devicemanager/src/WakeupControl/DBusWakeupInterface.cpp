@@ -4,6 +4,7 @@
 
 #include "DBusWakeupInterface.h"
 #include "DDLog.h"
+#include <DSysInfo>
 
 #include <QDBusConnection>
 #include <QDBusInterface>
@@ -21,15 +22,20 @@ std::mutex DBusWakeupInterface::m_mutex;
 const QString SERVICE_NAME = "org.deepin.DeviceControl";
 const QString WAKEUP_SERVICE_PATH = "/org/deepin/DeviceControl";
 const QString WAKEUP_INTERFACE = "org.deepin.DeviceControl";
-#ifdef OS_BUILD_V23
-const QString INPUT_SERVICE_NAME = "org.deepin.dde.InputDevices1";
-const QString INPUT_WAKEUP_SERVICE_PATH = "/org/deepin/dde/InputDevices1";
-const QString INPUT_WAKEUP_INTERFACE = "org.deepin.dde.InputDevices1";
-#else
-const QString INPUT_SERVICE_NAME = "com.deepin.system.InputDevices";
-const QString INPUT_WAKEUP_SERVICE_PATH = "/com/deepin/system/InputDevices";
-const QString INPUT_WAKEUP_INTERFACE = "com.deepin.system.InputDevices";
-#endif
+
+const QString INPUT_SERVICE_NAME_V23 = "org.deepin.dde.InputDevices1";
+const QString INPUT_WAKEUP_SERVICE_PATH_V23 = "/org/deepin/dde/InputDevices1";
+const QString INPUT_WAKEUP_INTERFACE_V23 = "org.deepin.dde.InputDevices1";
+
+const QString INPUT_SERVICE_NAME_V20 = "com.deepin.system.InputDevices";
+const QString INPUT_WAKEUP_SERVICE_PATH_V20 = "/com/deepin/system/InputDevices";
+const QString INPUT_WAKEUP_INTERFACE_V20 = "com.deepin.system.InputDevices";
+
+inline bool isV20() { return Dtk::Core::DSysInfo::majorVersion() == "20"; }
+const QString INPUT_SERVICE_NAME = isV20() ? INPUT_SERVICE_NAME_V20 : INPUT_SERVICE_NAME_V23;
+const QString INPUT_WAKEUP_SERVICE_PATH = isV20() ? INPUT_WAKEUP_SERVICE_PATH_V20 : INPUT_WAKEUP_SERVICE_PATH_V23;
+const QString INPUT_WAKEUP_INTERFACE = isV20() ? INPUT_WAKEUP_INTERFACE_V20 : INPUT_WAKEUP_INTERFACE_V23;
+
 const QString INPUT_WAKEUP_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
 
 DBusWakeupInterface::DBusWakeupInterface()
