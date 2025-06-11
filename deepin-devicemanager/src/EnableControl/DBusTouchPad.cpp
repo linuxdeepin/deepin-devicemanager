@@ -5,6 +5,7 @@
 #include "DBusTouchPad.h"
 #include "MacroDefinition.h"
 #include "DDLog.h"
+#include <DSysInfo>
 
 #include <QDBusConnection>
 #include <QDBusInterface>
@@ -14,15 +15,18 @@
 
 using namespace DDLog;
 
-#ifdef OS_BUILD_V23
-const QString Service = "org.deepin.dde.InputDevices1";
-const QString Path = "/org/deepin/dde/InputDevice1/TouchPad";
-const QString Interface = "org.deepin.dde.InputDevice1.TouchPad";
-#else
-const QString Service = "com.deepin.daemon.InputDevices";
-const QString Path = "/com/deepin/daemon/InputDevice/TouchPad";
-const QString Interface = "com.deepin.daemon.InputDevice.TouchPad";
-#endif
+const QString Service_V23 = "org.deepin.dde.InputDevices1";
+const QString Path_V23 = "/org/deepin/dde/InputDevice1/TouchPad";
+const QString Interface_V23 = "org.deepin.dde.InputDevice1.TouchPad";
+
+const QString Service_V20 = "com.deepin.daemon.InputDevices";
+const QString Path_V20 = "/com/deepin/daemon/InputDevice/TouchPad";
+const QString Interface_V20 = "com.deepin.daemon.InputDevice.TouchPad";
+
+inline bool isV20() { return Dtk::Core::DSysInfo::majorVersion() == "20"; }
+const QString Service = isV20() ? Service_V20 : Service_V23;
+const QString Path = isV20() ? Path_V20 : Path_V23;
+const QString Interface = isV20() ? Interface_V20 : Interface_V23;
 
 DBusTouchPad *DBusTouchPad::sInstance = nullptr;
 DBusTouchPad::DBusTouchPad()

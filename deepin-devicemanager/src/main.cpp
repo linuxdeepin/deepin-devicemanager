@@ -16,6 +16,7 @@
 #include <DApplication>
 #include <DWidgetUtil>
 #include <DLog>
+#include <DSysInfo>
 
 #include <QDBusConnection>
 #include <QDBusInterface>
@@ -36,15 +37,18 @@ using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
 
-#ifdef OS_BUILD_V23
-const QString SERVICE_NAME = "org.deepin.dde.Notification1";
-const QString DEVICE_SERVICE_PATH = "/org/deepin/dde/Notification1";
-const QString DEVICE_SERVICE_INTERFACE = "org.deepin.dde.Notification1";
-#else
-const QString SERVICE_NAME = "com.deepin.dde.Notification";
-const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/Notification";
-const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
-#endif
+const QString SERVICE_NAME_V23 = "org.deepin.dde.Notification1";
+const QString DEVICE_SERVICE_PATH_V23 = "/org/deepin/dde/Notification1";
+const QString DEVICE_SERVICE_INTERFACE_V23 = "org.deepin.dde.Notification1";
+
+const QString SERVICE_NAME_V20 = "com.deepin.dde.Notification";
+const QString DEVICE_SERVICE_PATH_V20 = "/com/deepin/dde/Notification";
+const QString DEVICE_SERVICE_INTERFACE_V20 = "com.deepin.dde.Notification";
+
+inline bool isV20() { return Dtk::Core::DSysInfo::majorVersion() == "20"; }
+const QString SERVICE_NAME = isV20() ? SERVICE_NAME_V20 : SERVICE_NAME_V23;
+const QString DEVICE_SERVICE_PATH = isV20() ? DEVICE_SERVICE_PATH_V20 : DEVICE_SERVICE_PATH_V23;
+const QString DEVICE_SERVICE_INTERFACE = isV20() ? DEVICE_SERVICE_INTERFACE_V20 : DEVICE_SERVICE_INTERFACE_V23;
 
 DCORE_USE_NAMESPACE
 using namespace PolkitQt1;

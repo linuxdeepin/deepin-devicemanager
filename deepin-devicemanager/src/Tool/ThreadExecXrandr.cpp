@@ -5,6 +5,7 @@
 #include "ThreadExecXrandr.h"
 #include "commonfunction.h"
 #include "DDLog.h"
+#include <DSysInfo>
 
 #include <QProcess>
 #include <QLoggingCategory>
@@ -18,27 +19,38 @@
 #include <QRegularExpression>
 #include <DeviceManager.h>
 #include<QDateTime>
-#ifdef OS_BUILD_V23
-const QString DISPLAY_SERVICE_NAME = "org.deepin.dde.Display1";
-const QString DISPLAY_SERVICE_PATH = "/org/deepin/dde/Display1";
-const QString DISPLAY_INTERFACE = "org.deepin.dde.Display1";
 
-const QString DISPLAY_DAEMON_SERVICE_NAME = "org.deepin.dde.Display1";
-const QString DISPLAY_DAEMON_SERVICE_PATH = "/org/deepin/dde/Display1";
-const QString DISPLAY_DAEMON_INTERFACE = "org.deepin.dde.Display1";
-const QString DISPLAY_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
-const QString DISPLAY_MONITOR_INTERFACE = "org.deepin.dde.Display1.Monitor";
-#else
-const QString DISPLAY_SERVICE_NAME = "com.deepin.system.Display";
-const QString DISPLAY_SERVICE_PATH = "/com/deepin/system/Display";
-const QString DISPLAY_INTERFACE = "com.deepin.system.Display";
+const QString DISPLAY_SERVICE_NAME_V23 = "org.deepin.dde.Display1";
+const QString DISPLAY_SERVICE_PATH_V23 = "/org/deepin/dde/Display1";
+const QString DISPLAY_INTERFACE_V23 = "org.deepin.dde.Display1";
 
-const QString DISPLAY_DAEMON_SERVICE_NAME = "com.deepin.daemon.Display";
-const QString DISPLAY_DAEMON_SERVICE_PATH = "/com/deepin/daemon/Display";
-const QString DISPLAY_DAEMON_INTERFACE = "com.deepin.daemon.Display";
+const QString DISPLAY_DAEMON_SERVICE_NAME_V23 = "org.deepin.dde.Display1";
+const QString DISPLAY_DAEMON_SERVICE_PATH_V23 = "/org/deepin/dde/Display1";
+const QString DISPLAY_DAEMON_INTERFACE_V23 = "org.deepin.dde.Display1";
+const QString DISPLAY_MONITOR_INTERFACE_V23 = "org.deepin.dde.Display1.Monitor";
+
+const QString DISPLAY_SERVICE_NAME_V20 = "com.deepin.system.Display";
+const QString DISPLAY_SERVICE_PATH_V20 = "/com/deepin/system/Display";
+const QString DISPLAY_INTERFACE_V20 = "com.deepin.system.Display";
+
+const QString DISPLAY_DAEMON_SERVICE_NAME_V20 = "com.deepin.daemon.Display";
+const QString DISPLAY_DAEMON_SERVICE_PATH_V20 = "/com/deepin/daemon/Display";
+const QString DISPLAY_DAEMON_INTERFACE_V20 = "com.deepin.daemon.Display";
+const QString DISPLAY_MONITOR_INTERFACE_V20 = "com.deepin.daemon.Display.Monitor";
+
+inline bool isV20() { return Dtk::Core::DSysInfo::majorVersion() == "20"; }
+
+const QString DISPLAY_SERVICE_NAME = isV20() ? DISPLAY_SERVICE_NAME_V20 : DISPLAY_SERVICE_NAME_V23;
+const QString DISPLAY_SERVICE_PATH = isV20() ? DISPLAY_SERVICE_PATH_V20 : DISPLAY_SERVICE_PATH_V23;
+const QString DISPLAY_INTERFACE = isV20() ? DISPLAY_INTERFACE_V20 : DISPLAY_INTERFACE_V23;
+
+const QString DISPLAY_DAEMON_SERVICE_NAME = isV20() ? DISPLAY_DAEMON_SERVICE_NAME_V20 : DISPLAY_DAEMON_SERVICE_NAME_V23;
+const QString DISPLAY_DAEMON_SERVICE_PATH = isV20() ? DISPLAY_DAEMON_SERVICE_PATH_V20 : DISPLAY_DAEMON_SERVICE_PATH_V23;
+const QString DISPLAY_DAEMON_INTERFACE = isV20() ? DISPLAY_DAEMON_INTERFACE_V20 : DISPLAY_DAEMON_INTERFACE_V23;
+const QString DISPLAY_MONITOR_INTERFACE = isV20() ? DISPLAY_MONITOR_INTERFACE_V20 : DISPLAY_MONITOR_INTERFACE_V23;
+
 const QString DISPLAY_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
-const QString DISPLAY_MONITOR_INTERFACE = "com.deepin.daemon.Display.Monitor";
-#endif
+
 using namespace DDLog;
 ThreadExecXrandr::ThreadExecXrandr(bool gpu, bool isDXcbPlatform)
     : m_Gpu(gpu), m_isDXcbPlatform(isDXcbPlatform)
