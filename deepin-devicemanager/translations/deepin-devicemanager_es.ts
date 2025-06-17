@@ -792,7 +792,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="166"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="264"/>
         <source>Motherboard</source>
-        <translation>Tarjeta madre</translation>
+        <translation>Placa base</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
@@ -804,13 +804,13 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="266"/>
         <source>Display Adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation>GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="181"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="267"/>
         <source>Sound Adapter</source>
-        <translation>Adaptador de sonido</translation>
+        <translation>Sonido</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="186"/>
@@ -840,7 +840,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="212"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="272"/>
         <source>Network Adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="223"/>
@@ -1673,7 +1673,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="554"/>
         <source>Display Adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation>GPU</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="558"/>
@@ -1683,7 +1683,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="562"/>
         <source>Network Adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="568"/>
@@ -1717,7 +1717,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="93"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="104"/>
         <source>Driver Platform Version</source>
-        <translation>Versión de la Plataforma del Controlador</translation>
+        <translation>Versión de la plataforma del controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="94"/>
@@ -1795,12 +1795,12 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>Update failed</source>
-        <translation>Actualización fallida</translation>
+        <translation>La actualización falló</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="160"/>
         <source>Uninstallation failed</source>
-        <translation>Desinstalación Fallida</translation>
+        <translation>La desinstalación falló</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="167"/>
@@ -1975,12 +1975,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="93"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation>No tienes controladores para restaurar, por favor realiza una copia de seguridad primero.</translation>
+        <translation>No tienes controladores para restaurar, por favor realice una copia de seguridad primero.</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="96"/>
         <source>Go to Backup Driver</source>
-        <translation>Ir a Copia de Seguridad del Controlador</translation>
+        <translation>Ir a copia de seguridad del controlador</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="122"/>
@@ -1995,7 +1995,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="124"/>
         <source>Backup Version</source>
-        <translation>Versión de Respaldo</translation>
+        <translation>Versión de respaldo</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="125"/>
@@ -2005,7 +2005,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="167"/>
         <source>Restorable Drivers</source>
-        <translation>Controladores Restaurables</translation>
+        <translation>Controladores restaurables</translation>
     </message>
 </context>
 <context>
@@ -3095,7 +3095,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1416"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1452"/>
         <source>Motherboard</source>
-        <translation>Tarjeta madre</translation>
+        <translation>Placa base</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1360"/>
@@ -3103,7 +3103,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1416"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1452"/>
         <source>No motherboard found</source>
-        <translation>No se encontró la tarjeta madre</translation>
+        <translation>No se encontró la placa base</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1361"/>
@@ -3140,18 +3140,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="626"/>
         <source>Driver restore failed!</source>
-        <translation>¡Restauración del controlador fallida!</translation>
+        <translation>¡La restauración del controlador falló!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="622"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="35"/>
         <source>Please try again or give us feedback</source>
-        <translation>Por favor, inténtalo de nuevo o danos tu opinión.</translation>
+        <translation>Por favor, inténtelo de nuevo o denos su opinión</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Driver backup failed!</source>
-        <translation>¡Copia de seguridad del controlador fallida!</translation>
+        <translation>¡La copia de seguridad del controlador falló!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
@@ -3160,7 +3160,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1455"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="673"/>
         <source>Display Adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation>GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1363"/>
@@ -3193,7 +3193,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1457"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="682"/>
         <source>Network Adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1365"/>
@@ -3210,7 +3210,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1458"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="676"/>
         <source>Sound Adapter</source>
-        <translation>Adaptador de sonido</translation>
+        <translation>Sonido</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1366"/>
@@ -3360,7 +3360,7 @@
         <location filename="../src/Tool/commontools.cpp" line="45"/>
         <location filename="../src/Tool/commontools.cpp" line="47"/>
         <source>Other Devices</source>
-        <translation>Otros dispositivos</translation>
+        <translation>Otros</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1375"/>
@@ -3574,7 +3574,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="166"/>
         <source>icon-name</source>
-        <translation>nombre-ícono</translation>
+        <translation>nombre-icono</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="167"/>
@@ -3874,7 +3874,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="633"/>
         <source>Please select a driver to restore</source>
-        <translation>Por favor selecciona un controlador para restaurar.</translation>
+        <translation>Seleccione un controlador para restaurar</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="663"/>
@@ -3904,7 +3904,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="829"/>
         <source>Backup All</source>
-        <translation>Respaldar Todo</translation>
+        <translation>Respaldar todo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="811"/>
@@ -3926,7 +3926,7 @@
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="824"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="290"/>
         <source>Scan Again</source>
-        <translation>Buscar nuevamente</translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="834"/>
@@ -3936,7 +3936,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="68"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation>Buscando controladores para los dispositivos , espere...</translation>
+        <translation>Buscando controladores para los dispositivos, espere...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="76"/>
@@ -3947,7 +3947,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="132"/>
         <source>Scan failed</source>
-        <translation>Búsqueda fallida</translation>
+        <translation>La búsqueda falló</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="190"/>
@@ -3962,7 +3962,7 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="287"/>
         <source>Please scan again or %1 to us</source>
-        <translation>Escanee de nuevo o %1 contáctenos</translation>
+        <translation>Busque de nuevo o envíenos %1</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="678"/>
@@ -4005,7 +4005,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
         <source>Bluetooth adapter</source>
-        <translation>Adaptador de Bluetooth</translation>
+        <translation>Bluetooth</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="37"/>
@@ -4016,7 +4016,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="38"/>
         <source>Display adapter</source>
-        <translation>Adaptador de pantalla</translation>
+        <translation>GPU</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="40"/>
@@ -4026,12 +4026,12 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="42"/>
         <source>Network adapter</source>
-        <translation>Adaptador de red</translation>
+        <translation>Red</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="46"/>
         <source>Wireless network adapter</source>
-        <translation>Adaptador de red inalámbrica</translation>
+        <translation>Red inalámbrica</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="66"/>
@@ -4041,7 +4041,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="67"/>
         <source>Installation failed</source>
-        <translation>Instalación fallida</translation>
+        <translation>La instalación falló</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="68"/>
@@ -4081,7 +4081,7 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="75"/>
         <source>Backup failed</source>
-        <translation>Copia de seguridad fallida</translation>
+        <translation>La copia de seguridad falló</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="76"/>
