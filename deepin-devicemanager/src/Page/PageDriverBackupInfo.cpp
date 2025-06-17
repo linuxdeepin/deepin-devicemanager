@@ -10,6 +10,9 @@
 #include "DetectedStatusWidget.h"
 #include "PageDriverTableView.h"
 #include "driveritem.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 PageDriverBackupInfo::PageDriverBackupInfo(QWidget *parent)
     : DFrame(parent)
@@ -21,6 +24,7 @@ PageDriverBackupInfo::PageDriverBackupInfo(QWidget *parent)
     , mp_ViewBackedUp(new PageDriverTableView(this))
     , mp_BackedUpDriverLabel(new DLabel(this))
 {
+    qCDebug(appLog) << "PageDriverBackupInfo constructor start";
     initUI();
 
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverBackupInfo::operatorClicked);
@@ -108,8 +112,10 @@ void PageDriverBackupInfo::initTable()
 
 void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
 {
+    qCDebug(appLog) << "Adding driver info to backup table, name:" << info->name() << "index:" << index;
     PageDriverTableView *view = nullptr;
     if (info->debBackupVersion() != info->debVersion()) {
+        qCDebug(appLog) << "Driver is backupable, version:" << info->version() << "debVersion:" << info->debVersion();
         view = mp_ViewBackable;
         view->appendRowItems(6);
 
@@ -175,6 +181,7 @@ void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
 
 void PageDriverBackupInfo::showTables(int backableLength, int backedupLength)
 {
+    qCDebug(appLog) << "Showing backup tables, backable:" << backableLength << "backedup:" << backedupLength;
     // Label显示
     mp_BackableDriverLabel->setText(tr("Backupable Drivers"));
     mp_BackedUpDriverLabel->setText(tr("Backed up Drivers"));
@@ -208,9 +215,12 @@ void PageDriverBackupInfo::clearAllData()
 
 void PageDriverBackupInfo::updateItemStatus(int index, Status status)
 {
+    qCDebug(appLog) << "Updating backup item status, index:" << index << "status:" << status;
     mp_ViewBackable->setItemStatus(index, status);
-    if (status == ST_DRIVER_BACKUP_FAILED)
+    if (status == ST_DRIVER_BACKUP_FAILED) {
+        qCWarning(appLog) << "Driver backup failed for index:" << index;
         mp_ViewBackable->setErrorMsg(index, QString("Backup Failed"));
+    }
 }
 
 void PageDriverBackupInfo::setCheckedCBDisnable()

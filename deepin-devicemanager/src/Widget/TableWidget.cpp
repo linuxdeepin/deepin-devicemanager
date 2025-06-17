@@ -9,6 +9,7 @@
 #include "logviewitemdelegate.h"
 #include "logtreeview.h"
 #include "DBusWakeupInterface.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DFontSizeManager>
@@ -24,6 +25,8 @@
 #include <QHBoxLayout>
 #include <QPainterPath>
 #include <QFile>
+
+using namespace DDLog;
 
 #define WAKEUP_OPEN 3
 #define WAKEUP_CLOSE 4
@@ -42,6 +45,7 @@ TableWidget::TableWidget(QWidget *parent)
     , m_Enable(false)
 
 {
+    qCDebug(appLog) << "TableWidget instance created";
     initWidget();
 
     // 连接信号和曹函数
@@ -302,16 +306,22 @@ void TableWidget::slotShowMenu(const QPoint &point)
 
 void TableWidget::slotActionRefresh()
 {
+    qCDebug(appLog) << "Refresh action triggered";
+
     emit refreshInfo();
 }
 
 void TableWidget::slotActionExport()
 {
+    qCDebug(appLog) << "Export action triggered";
+
     emit exportInfo();
 }
 
 void TableWidget::slotActionEnable()
 {
+    qCDebug(appLog) << "Enable/Disable action triggered, state:" << (mp_Enable->text() == tr("Enable"));
+
     if (!mp_Table) {
         return;
     }
@@ -327,21 +337,29 @@ void TableWidget::slotActionEnable()
 
 void TableWidget::slotActionUpdateDriver()
 {
+    qCDebug(appLog) << "Update driver action triggered";
+
     emit installDriver(mp_Table->currentRow());
 }
 
 void TableWidget::slotActionRemoveDriver()
 {
+    qCDebug(appLog) << "Remove driver action triggered";
+
     emit uninstallDriver(mp_Table->currentRow());
 }
 
 void TableWidget::slotWakeupMachine()
 {
+    qCDebug(appLog) << "Wakeup machine action triggered, state:" << mp_WakeupMachine->isChecked();
+
     emit wakeupMachine(mp_Table->currentRow(),mp_WakeupMachine->isChecked());
 }
 
 void TableWidget::slotItemClicked(const QModelIndex &index)
 {
+    qCDebug(appLog) << "Item clicked at row:" << index.row();
+
     // click table item
     int row = index.row();
     if (row >= 0) {

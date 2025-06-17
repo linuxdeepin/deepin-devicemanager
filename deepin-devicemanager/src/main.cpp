@@ -16,6 +16,7 @@
 #include <DApplication>
 #include <DWidgetUtil>
 #include <DLog>
+#include <DSysInfo>
 
 #include <QDBusConnection>
 #include <QDBusInterface>
@@ -36,15 +37,18 @@ using namespace DDLog;
 
 DWIDGET_USE_NAMESPACE
 
-#ifdef OS_BUILD_V23
-const QString SERVICE_NAME = "org.deepin.dde.Notification1";
-const QString DEVICE_SERVICE_PATH = "/org/deepin/dde/Notification1";
-const QString DEVICE_SERVICE_INTERFACE = "org.deepin.dde.Notification1";
-#else
-const QString SERVICE_NAME = "com.deepin.dde.Notification";
-const QString DEVICE_SERVICE_PATH = "/com/deepin/dde/Notification";
-const QString DEVICE_SERVICE_INTERFACE = "com.deepin.dde.Notification";
-#endif
+const QString SERVICE_NAME_V23 = "org.deepin.dde.Notification1";
+const QString DEVICE_SERVICE_PATH_V23 = "/org/deepin/dde/Notification1";
+const QString DEVICE_SERVICE_INTERFACE_V23 = "org.deepin.dde.Notification1";
+
+const QString SERVICE_NAME_V20 = "com.deepin.dde.Notification";
+const QString DEVICE_SERVICE_PATH_V20 = "/com/deepin/dde/Notification";
+const QString DEVICE_SERVICE_INTERFACE_V20 = "com.deepin.dde.Notification";
+
+inline bool isV20() { return Dtk::Core::DSysInfo::majorVersion() == "20"; }
+const QString SERVICE_NAME = isV20() ? SERVICE_NAME_V20 : SERVICE_NAME_V23;
+const QString DEVICE_SERVICE_PATH = isV20() ? DEVICE_SERVICE_PATH_V20 : DEVICE_SERVICE_PATH_V23;
+const QString DEVICE_SERVICE_INTERFACE = isV20() ? DEVICE_SERVICE_INTERFACE_V20 : DEVICE_SERVICE_INTERFACE_V23;
 
 DCORE_USE_NAMESPACE
 using namespace PolkitQt1;
@@ -93,14 +97,19 @@ int main(int argc, char *argv[])
         const QString acknowledgementLink = "https://www.deepin.org/original/device-manager/";
         app.setApplicationAcknowledgementPage(acknowledgementLink);
 
+        qCDebug(appLog) << "Checking single instance...";
         if (!DGuiApplicationHelper::instance()->setSingleInstance(app.applicationName(), DGuiApplicationHelper::UserScope)) {
+            qCDebug(appLog) << "Another instance is running, exiting";
             exit(0);
         }
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
                                                                                 UnixProcessSubject(getpid()),
                                                                                 Authority::AllowUserInteraction);
-        if (result != Authority::Yes)
+        qCDebug(appLog) << "Authorization check result:" << result;
+        if (result != Authority::Yes) {
+            qCDebug(appLog) << "Authorization failed, exiting";
             return 0;
+        }
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         DApplicationSettings settinAgs;
 #endif
@@ -114,12 +123,15 @@ int main(int argc, char *argv[])
         }
 
         QDBusConnection dbus = QDBusConnection::sessionBus();
+        qCDebug(appLog) << "Registering DBus service...";
         if (dbus.registerService("com.deepin.DeviceManagerNotify")) {
+            qCDebug(appLog) << "DBus service registered successfully";
             dbus.registerObject("/com/deepin/DeviceManagerNotify", &app, QDBusConnection::ExportScriptableSlots);
             app.parseCmdLine();
             app.activateWindow();
             return app.exec();
         } else {
+            qCDebug(appLog) << "DBus service already registered, activating existing instance";
             QCommandLineParser parser;
             parser.process(app);
 
@@ -138,7 +150,9 @@ int main(int argc, char *argv[])
 void notify(int argc, char *argv[])
 {
     // 1. 连接到dbus
+    qCDebug(appLog) << "Starting notification process";
     if (!QDBusConnection::sessionBus().isConnected()) {
+        qCWarning(appLog) << "Cannot connect to D-Bus session bus";
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
                 "To start it, run:/n"
                 "/teval `dbus-launch --auto-syntax`/n");
@@ -178,8 +192,10 @@ void notify(int argc, char *argv[])
     while (count < 10) {
         QDBusReply<uint32_t> reply  = mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
         if (reply.isValid()) {
+            qCDebug(appLog) << "Notification sent successfully";
             return;
         }
+        qCDebug(appLog) << "Notification attempt" << count << "failed";
         count++;
     }
 }

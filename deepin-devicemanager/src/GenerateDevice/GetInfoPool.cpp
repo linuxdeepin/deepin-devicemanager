@@ -9,6 +9,9 @@
 
 #include "CmdTool.h"
 #include "DeviceManager.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 static QMutex mutex;
 
@@ -23,11 +26,14 @@ CmdTask::CmdTask(QString key, QString file, QString info, GetInfoPool *parent)
 
 CmdTask::~CmdTask()
 {
+    qCDebug(appLog) << "CmdTask destructor";
 
 }
 
 void CmdTask::run()
 {
+    qCDebug(appLog) << "CmdTask::run start";
+
     CmdTool tool;
     tool.loadCmdInfo(m_Key, m_File);
     const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo = tool.cmdInfo();
@@ -38,11 +44,13 @@ GetInfoPool::GetInfoPool()
     : m_Arch("")
     , m_FinishedNum(0)
 {
+    qCDebug(appLog) << "GetInfoPool constructor";
     initCmd();
 }
 
 void GetInfoPool::getAllInfo()
 {
+    qCDebug(appLog) << "GetInfoPool::getAllInfo start";
     DeviceManager::instance()->clear();
 
     QList<QStringList>::iterator it = m_CmdList.begin();
@@ -55,6 +63,7 @@ void GetInfoPool::getAllInfo()
 
 void GetInfoPool::finishedCmd(const QString &info, const QMap<QString, QList<QMap<QString, QString> > > &cmdInfo)
 {
+    qCDebug(appLog) << "GetInfoPool::finishedCmd, info:" << info << "cmdInfo size:" << cmdInfo.size();
     DeviceManager::instance()->addCmdInfo(cmdInfo);
     QMutexLocker m_lock(&mutex);
     m_FinishedNum++;
@@ -66,12 +75,14 @@ void GetInfoPool::finishedCmd(const QString &info, const QMap<QString, QList<QMa
 
 void GetInfoPool::setFramework(const QString &arch)
 {
+    qCDebug(appLog) << "GetInfoPool::setFramework, arch:" << arch;
     // 设置架构
     m_Arch = arch;
 }
 
 void GetInfoPool::initCmd()
 {
+    qCDebug(appLog) << "GetInfoPool::initCmd start";
     m_CmdList.append({ "lshw",                 "lshw.txt",               tr("Loading Audio Device Info...") });
     m_CmdList.append({ "printer",              "printer.txt",            ""});
 
@@ -106,4 +117,5 @@ void GetInfoPool::initCmd()
     m_CmdList.append({ "cat_audio",            "/proc/asound/card0/codec#0",     ""});
     m_CmdList.append({ "cat_gpuinfo",          "/proc/gpuinfo_0 ",     ""});
     m_CmdList.append({ "bt_device",            "bt_device.txt",          ""}); // 蓝牙设备配对信息
+    qCDebug(appLog) << "GetInfoPool::initCmd end, initialized" << m_CmdList.size() << "commands";
 }

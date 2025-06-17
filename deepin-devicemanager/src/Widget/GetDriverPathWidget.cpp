@@ -5,8 +5,12 @@
 #include "GetDriverPathWidget.h"
 #include "UrlChooserEdit.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 #include <DGuiApplicationHelper>
+#include <DPaletteHelper>
+
+using namespace DDLog;
 
 GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
     : DWidget(parent)
@@ -14,6 +18,7 @@ GetDriverPathWidget::GetDriverPathWidget(QWidget *parent)
     , mp_includeCheckBox(new DCheckBox(QObject::tr("Include subfolders"), this))
     , mp_tipLabel(new DLabel)
 {
+    qCDebug(appLog) << "GetDriverPathWidget instance created";
     init();
     connect(mp_fileChooseEdit, &UrlChooserEdit::signalNotLocalFolder, this, &GetDriverPathWidget::signalNotLocalFolder);
     connect(mp_fileChooseEdit, &UrlChooserEdit::signalNotLocalFolder, this, &GetDriverPathWidget::clearTipLabelText);
@@ -32,11 +37,15 @@ QString GetDriverPathWidget::path()
 
 bool GetDriverPathWidget::includeSubdir()
 {
+    qCDebug(appLog) << "Checking include subdir:" << (mp_includeCheckBox->checkState() == Qt::Checked);
+
     return mp_includeCheckBox->checkState() == Qt::Checked;
 }
 
 void GetDriverPathWidget::updateTipLabelText(const QString &text)
 {
+    qCDebug(appLog) << "Updating tip label text:" << text;
+
     mp_tipLabel->setText(text);
     mp_tipLabel->setToolTip(text);
 }
@@ -71,21 +80,16 @@ void GetDriverPathWidget::init()
     mp_tipLabel->setElideMode(Qt::ElideRight);
     mp_tipLabel->setMinimumHeight(20);
 
-    // TODO 
-    QPalette pa = mp_titleLabel->palette();
+
+    DPalette pa = DPaletteHelper::instance()->palette(mp_titleLabel);
+    pa.setBrush(DPalette::WindowText, pa.color(DPalette::TextTips));
     QColor color = DGuiApplicationHelper::adjustColor(pa.color(QPalette::Active, QPalette::BrightText), 0, 0, 0, 0, 0, 0, -30);
     pa.setColor(QPalette::WindowText, color);
     mp_titleLabel->setPalette(pa);
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    pa = DGuiApplicationHelper::instance()->palette(mp_tipLabel);
+    pa = DPaletteHelper::instance()->palette(mp_titleLabel);
     pa.setColor(DPalette::WindowText, pa.color(DPalette::TextWarning));
-    DGuiApplicationHelper::instance()->setPalette(mp_tipLabel, pa);
-#else
-    pa = mp_tipLabel->palette();
-    pa.setColor(QPalette::WindowText, pa.color(QPalette::WindowText));
-    mp_tipLabel->setPalette(pa);
-#endif
+    DPaletteHelper::instance()->setPalette(mp_titleLabel, pa);
 
     this->setLayout(mainLayout);
 

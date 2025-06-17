@@ -5,11 +5,16 @@
 // 项目自身文件
 #include "DeviceAudio.h"
 #include "DBusEnableInterface.h"
+#include "DDLog.h"
+
 #include <QFile>
 #include <QDir>
 #include <QFileInfo>
 // 其它头文件
 #include <QLoggingCategory>
+
+using namespace DDLog;
+
 DeviceAudio::DeviceAudio()
     : DeviceBaseInfo()
     , m_Model("")
@@ -33,6 +38,7 @@ DeviceAudio::DeviceAudio()
 
 bool DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "setInfoFromHwinfo start";
     if (mapInfo.find("path") != mapInfo.end()) {
         setAttribute(mapInfo, "name", m_Name);
         setAttribute(mapInfo, "driver", m_Driver);
@@ -41,6 +47,7 @@ bool DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_Enable = false;
         //设备禁用的情况，没必要再继续向下执行(可能会引起不必要的问题)，直接return
         m_CanUninstall = !driverIsKernelIn(m_Driver);
+        qCWarning(appLog) << "Device disabled, skip further processing";
         return false;
     }
     //1. 获取设备的基本信息
@@ -75,14 +82,18 @@ bool DeviceAudio::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     // 获取设备的唯一标识
     setPhysIDMapKey(mapInfo);
+    qCDebug(appLog) << "setInfoFromHwinfo end";
     return true;
 }
 
 bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     //1. 先判断传入的设备信息是否是该设备信息，根据总线信息来判断
-    if (!matchToLshw(mapInfo))
+    qCDebug(appLog) << "setInfoFromLshw start";
+    if (!matchToLshw(mapInfo)) {
+        qCDebug(appLog) << "Device not matched in lshw info";
         return false;
+    }
 
     //2. 确定了是该设备信息，则获取设备的基本信息
     setAttribute(mapInfo, "product", m_Name);
@@ -113,6 +124,7 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
 
+    qCDebug(appLog) << "setInfoFromLshw end";
     return true;
 }
 
@@ -273,6 +285,7 @@ EnableDeviceStatus DeviceAudio::setEnable(bool e)
     m_HardwareClass = "sound";
     // 设置设备状态
     if (m_UniqueID.isEmpty() || m_SysPath.isEmpty()) {
+        qCWarning(appLog) << "Enable failed: UniqueID or SysPath empty";
         return EDS_Faild;
     }
     bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e, m_Driver);
@@ -280,6 +293,7 @@ EnableDeviceStatus DeviceAudio::setEnable(bool e)
         m_Enable = e;
     }
     // 设置设备状态
+    qCDebug(appLog) << "Set enable status:" << e << "result:" << res;
     return res ? EDS_Success : EDS_Faild;
 }
 

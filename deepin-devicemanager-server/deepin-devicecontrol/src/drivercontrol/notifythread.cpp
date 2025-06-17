@@ -19,6 +19,7 @@ NotifyThread::NotifyThread(QObject *parent) : QThread(parent)
 
 void NotifyThread::run()
 {
+    qCDebug(appLog) << "NotifyThread started";
     QString strUsername("");
     QProcess process;
     forever {
@@ -55,5 +56,6 @@ void NotifyThread::run()
         process.waitForFinished(-1);
         break;
     }
+    qCDebug(appLog) << "NotifyThread finished";
 }
 

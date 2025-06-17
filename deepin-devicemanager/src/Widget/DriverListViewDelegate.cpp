@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "DriverListViewDelegate.h"
+#include "DDLog.h"
 
 // DTK
 #include <DApplication>
@@ -23,9 +24,11 @@
 
 DWIDGET_USE_NAMESPACE
 
+using namespace DDLog;
+
 DriverListViewDelegate::DriverListViewDelegate(QObject *parent) : QStyledItemDelegate(parent)
 {
-
+    qCDebug(appLog) << "DriverListViewDelegate instance created";
 }
 
 void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const

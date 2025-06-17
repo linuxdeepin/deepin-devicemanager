@@ -8,11 +8,14 @@
 #include "DBusEnableInterface.h"
 #include "DBusTouchPad.h"
 #include "DBusWakeupInterface.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QLoggingCategory>
 #include <QProcess>
 #include <QRegularExpression>
+
+using namespace DDLog;
 
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()
@@ -33,8 +36,10 @@ DeviceInput::DeviceInput()
 
 bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "setInfoFromlshw";
     // 根据bus info属性值与m_KeyToLshw对比,判断是否为同一设备
     if (!matchToLshw(mapInfo)) {
+        qCDebug(appLog) << "not match to lshw";
         return false;
     }
 
@@ -66,6 +71,8 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
 
 TomlFixMethod DeviceInput::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "setInfoFromTomlOneByOne";
+
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Model", m_Model);
@@ -83,6 +90,8 @@ TomlFixMethod DeviceInput::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 
 void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "setInfoFromHwinfo";
+
     //取触摸板的状态
     if (mapInfo.find("Model") != mapInfo.end() && mapInfo["Model"].contains("Touchpad", Qt::CaseInsensitive)) {
         m_Enable = DBusTouchPad::instance()->getEnable();
@@ -153,6 +162,8 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
 void DeviceInput::setKLUInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "setKLUInfoFromHwinfo";
+
     // 设置设备基本属性
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -268,12 +279,16 @@ bool DeviceInput::isBluetoothDevice(const QString &dfs)
 {
     // 获取 dfs 中的 event
     QString eventdfs = eventStrFromDeviceFiles(dfs);
-    if (eventdfs.isEmpty())
+    if (eventdfs.isEmpty()) {
+        qCDebug(appLog) << "eventdfs is empty";
         return false;
+    }
 
     QFile file("/proc/bus/input/devices");
-    if (!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly)) {
+        qCDebug(appLog) << "open file failed";
         return false;
+    }
 
     QString info = file.readAll();
     QStringList lstDevices = info.split("\n\n");
@@ -317,12 +332,14 @@ bool DeviceInput::isBluetoothDevice(const QString &dfs)
                 QString hciInfo = process.readAllStandardOutput();
                 if (!hciInfo.contains(id))
                     m_BluetoothIsConnected = false;
+                qCDebug(appLog) << "id:" << id << "hciInfo:" << hciInfo << "m_BluetoothIsConnected:" << m_BluetoothIsConnected;
                 return true;
             }
             break;
         }
     }
 
+    qCDebug(appLog) << "not found in bluetoothctl";
     return false;
 }
 
@@ -449,6 +466,7 @@ bool DeviceInput::isWakeupMachine()
 {
     QFile file(wakeupPath());
     if (!file.open(QIODevice::ReadOnly)) {
+        qCDebug(appLog) << "open wakeup file failed";
         return false;
     }
     QString info = file.readAll();
@@ -459,14 +477,18 @@ bool DeviceInput::isWakeupMachine()
 //            if (line.startsWith("PS2M" && line.contains("disabled"))) {
 //                return false;
 //            }
+        qCDebug(appLog) << "return ps2 wakeup";
         // /proc/acpi/wakeup文件中状态未刷新，ps2设备通过dbus获取状态
         return DBusWakeupInterface::getInstance()->isInputWakeupMachine(m_SysPath, m_Name);
 
     } else {
-        if (info.contains("disabled"))
+        if (info.contains("disabled")) {
+            qCDebug(appLog) << "wakeup is disabled";
             return false;
+        }
     }
 
+    qCDebug(appLog) << "wakeup is enabled";
     return true;
 }
 

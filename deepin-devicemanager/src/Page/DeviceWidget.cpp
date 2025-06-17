@@ -10,10 +10,13 @@
 #include "MacroDefinition.h"
 #include "DeviceManager.h"
 #include "DeviceBios.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QHBoxLayout>
 #include <QLoggingCategory>
+
+using namespace DDLog;
 
 
 DeviceWidget::DeviceWidget(QWidget *parent)
@@ -23,8 +26,10 @@ DeviceWidget::DeviceWidget(QWidget *parent)
     , m_CurItemStr("")
     , m_Layout(nullptr)
 {
+    qCDebug(appLog) << "DeviceWidget constructor start";
     // 初始化界面布局
     initWidgets();
+    qCDebug(appLog) << "DeviceWidget constructor end";
 
     // 连接槽函数
     connect(mp_ListView, &PageListView::itemClicked, this, &DeviceWidget::slotListViewWidgetItemClicked);
@@ -38,6 +43,7 @@ DeviceWidget::DeviceWidget(QWidget *parent)
 
 DeviceWidget::~DeviceWidget()
 {
+    qCDebug(appLog) << "DeviceWidget destructor start";
     if (mp_ListView) {
         delete mp_ListView;
         mp_ListView = nullptr;
@@ -50,33 +56,44 @@ DeviceWidget::~DeviceWidget()
         delete m_Layout;
         m_Layout = nullptr;
     }
+    qCDebug(appLog) << "DeviceWidget destructor end";
 }
 
 void DeviceWidget::updateListView(const QList<QPair<QString, QString> > &lst)
 {
+    qCDebug(appLog) << "DeviceWidget::updateListView start";
     // 更新左边的列表
     if (mp_ListView)
         mp_ListView->updateListItems(lst);
+    qCDebug(appLog) << "DeviceWidget::updateListView end";
 }
 
 void DeviceWidget::updateDevice(const QString &itemStr, const QList<DeviceBaseInfo *> &lst)
 {
-    if (lst.size() == 0)
+    qCDebug(appLog) << "DeviceWidget::updateDevice start, item:" << itemStr << "device count:" << lst.size();
+    if (lst.size() == 0) {
+        qCWarning(appLog) << "DeviceWidget::updateDevice empty device list";
         return;
+    }
 
     // 更新右边的详细内容
     if (mp_PageInfo)
         mp_PageInfo->updateTable(itemStr, lst);
+    qCDebug(appLog) << "DeviceWidget::updateDevice end";
 }
 
 void DeviceWidget::updateOverview(const QMap<QString, QString> &map)
 {
-    if (map.size() == 0)
+    qCDebug(appLog) << "DeviceWidget::updateOverview start, map size:" << map.size();
+    if (map.size() == 0) {
+        qCWarning(appLog) << "DeviceWidget::updateOverview empty map";
         return;
+    }
 
     // 更新概况
     if (mp_PageInfo)
         mp_PageInfo->updateTable(map);
+    qCDebug(appLog) << "DeviceWidget::updateOverview end";
 }
 
 QString DeviceWidget::currentIndex() const
@@ -131,6 +148,7 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(deviceType, lst);
     if (! ret) {
+        qCWarning(appLog) << "DeviceWidget::resizeEvent failed to get device list for type:" << deviceType;
         // 更新Overview界面
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
         mp_PageInfo->updateTable(overviewMap);

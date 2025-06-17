@@ -10,20 +10,25 @@
 #include "DeviceGenerator.h"
 #include "DeviceFactory.h"
 #include "DeviceManager.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 GenerateTask::GenerateTask(DeviceType deviceType)
     : m_Type(deviceType)
 {
-
+    qCDebug(appLog) << "GenerateTask destructor, type:" << m_Type;
 }
 
 GenerateTask::~GenerateTask()
 {
-
+    qCDebug(appLog) << "GenerateTask destructor";
 }
 
 void GenerateTask::run()
 {
+    qCDebug(appLog) << "GenerateTask::run start";
+
     DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
 
     if (!generator)
@@ -111,11 +116,13 @@ void GenerateTask::run()
 GenerateDevicePool::GenerateDevicePool()
     : QThreadPool()
 {
+    qCDebug(appLog) << "GenerateDevicePool constructor";
     initType();
 }
 
 void GenerateDevicePool::generateDevice()
 {
+    qCDebug(appLog) << "GenerateDevicePool::generateDevice start";
     m_FinishedGenerator = 0;
 
     QList<DeviceType>::iterator it = m_TypeList.begin();
@@ -147,6 +154,7 @@ void GenerateDevicePool::generateDevice()
 
 void GenerateDevicePool::initType()
 {
+    qCDebug(appLog) << "GenerateDevicePool::initType start";
     m_TypeList.push_back(DT_Bluetoorh);
     m_TypeList.push_back(DT_Keyboard);
     m_TypeList.push_back(DT_Mouse);
@@ -164,10 +172,12 @@ void GenerateDevicePool::initType()
     m_TypeList.push_back(DT_Cdrom);
     m_TypeList.push_back(DT_Power);
 //    m_TypeList.push_back(DT_Others);
+    qCDebug(appLog) << "GenerateDevicePool::initType end, initialized" << m_TypeList.size() << "device types";
 }
 
 void GenerateDevicePool::slotFinished(const QStringList &lst)
 {
+    qCDebug(appLog) << "GenerateDevicePool::slotFinished, busIDs:" << lst << "finished:" << m_FinishedGenerator+1 << "/" << m_TypeList.size();
     DeviceManager::instance()->addBusId(lst);
     m_FinishedGenerator++;
 }

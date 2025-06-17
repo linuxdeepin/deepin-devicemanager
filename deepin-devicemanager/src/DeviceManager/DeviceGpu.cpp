@@ -5,10 +5,13 @@
 // 项目自身文件
 #include "DeviceGpu.h"
 #include "commonfunction.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include<QLoggingCategory>
 #include <QRegularExpression>
+
+using namespace DDLog;
 
 DeviceGpu::DeviceGpu()
     : DeviceBaseInfo()
@@ -29,6 +32,7 @@ DeviceGpu::DeviceGpu()
     , m_MinimumResolution("")
     , m_MaximumResolution("")
 {
+    qCDebug(appLog) << "Device GPU created";
     // 初始化可显示属性
     initFilterKey();
     m_CanUninstall = true;
@@ -52,12 +56,12 @@ void DeviceGpu::initFilterKey()
     addFilterKey(QObject::tr("EGL client APIs"));
     addFilterKey(QObject::tr("GL version"));
     addFilterKey(QObject::tr("GLSL version"));
-
-
 }
 
 void DeviceGpu::loadBaseDeviceInfo()
 {
+    qCDebug(appLog) << "Loading base device info";
+
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
@@ -68,9 +72,13 @@ void DeviceGpu::loadBaseDeviceInfo()
 
 void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting LSHW info";
+
     // 判断是否是同一个gpu
-    if (!matchToLshw(mapInfo))
+    if (!matchToLshw(mapInfo)) {
+        qCDebug(appLog) << "Not the same GPU";
         return;
+    }
 
     // 设置属性
     if ((m_Name.isEmpty() || m_Name.startsWith("pci")) && mapInfo.contains("product") && !mapInfo["product"].startsWith("pci")) {
@@ -91,6 +99,7 @@ void DeviceGpu::setLshwInfo(const QMap<QString, QString> &mapInfo)
     // setAttribute(mapInfo, "physical id", m_PhysID);
 
     if (driverIsKernelIn(m_Driver) || m_Driver.isEmpty()) {
+        qCDebug(appLog) << "Driver is kernel module or empty";
         m_CanUninstall = false;
     }
 
@@ -129,6 +138,8 @@ TomlFixMethod DeviceGpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
 
 bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting HWINFO info";
+
     // 设置属性
     setAttribute(mapInfo, "Vendor", m_Vendor, false);
     setAttribute(mapInfo, "Device", m_Name, true);
@@ -150,6 +161,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     m_PhysID = m_VID_PID;
 
     if (driverIsKernelIn(m_Driver) || m_Driver.isEmpty()) {
+        qCDebug(appLog) << "Driver is kernel module or empty";
         m_CanUninstall = false;
     }
 
@@ -253,6 +265,8 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
 
 void DeviceGpu::setDmesgInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting DMESG info";
+
     if (mapInfo.contains("BusID") && mapInfo["BusID"].size() >= m_HwinfoToLshw.size()
             && mapInfo["BusID"].right(m_HwinfoToLshw.size()) != m_HwinfoToLshw)
         return;
@@ -280,6 +294,8 @@ void DeviceGpu::setDmesgInfo(const QMap<QString, QString> &mapInfo)
 
 void DeviceGpu::setGpuInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting GPU info";
+
     // 华为KLU和PanGuV机器中不需要显示以下信息
     m_HDMI = "";
     m_VGA = "";
@@ -321,6 +337,8 @@ const QString DeviceGpu::getOverviewInfo()
 
 void DeviceGpu::loadOtherDeviceInfo()
 {
+    qCDebug(appLog) << "Loading other device info";
+
     QString type = Common::boardVendorType();
     // 添加其他信息,成员变量
 

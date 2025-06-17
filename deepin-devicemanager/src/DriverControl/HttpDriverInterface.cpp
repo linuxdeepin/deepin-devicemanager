@@ -22,15 +22,17 @@ std::mutex HttpDriverInterface::m_mutex;
 
 HttpDriverInterface::HttpDriverInterface(QObject *parent) : QObject(parent)
 {
+    qCDebug(appLog) << "HttpDriverInterface constructor";
 }
 
 HttpDriverInterface::~HttpDriverInterface()
 {
-
+    qCDebug(appLog) << "HttpDriverInterface destructor";
 }
 
 QString HttpDriverInterface::getRequestJson(QString strUrl)
 {
+    qCDebug(appLog) << "Get request from URL:" << strUrl;
     strJsonDriverInfo = "";
     const QUrl newUrl = QUrl::fromUserInput(strUrl);
 
@@ -62,6 +64,7 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
 
 void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
 {
+    qCDebug(appLog) << "Get request for driver:" << driverInfo->m_Name << "Type:" << driverInfo->type();
     QString strJson;
     switch (driverInfo->type()) {
     case DR_Printer:
@@ -82,6 +85,7 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
     }
     qCInfo(appLog) << "device name :" << driverInfo->m_Name  << "VendorId:" << driverInfo->m_VendorId << "ModelId:" << driverInfo->m_ModelId;
     if (strJson.contains("network error")) {
+        qCWarning(appLog) << "Network error when getting driver info for:" << driverInfo->m_Name;
         emit sigRequestFinished(false, "network error");
     } else {
         checkDriverInfo(strJson, driverInfo);
@@ -94,6 +98,7 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
 QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString strModels, int iClassP, int iClass)
 {
     if(strManufacturer.isEmpty() || strModels.isEmpty()) {
+        qCWarning(appLog) << "Empty manufacturer or model when getting board info";
         return QString();
     }
     QString arch = Common::getArchStore();
@@ -275,9 +280,12 @@ int HttpDriverInterface::packageInstall(const QString &package_name, const QStri
 
 QString HttpDriverInterface::getOsBuild()
 {
+    qCDebug(appLog) << "Get OS build info";
     QFile file("/etc/os-version");
-    if (!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly)) {
+        qCWarning(appLog) << "Failed to open /etc/os-version";
         return "";
+    }
     QString info = file.readAll().data();
     QStringList lines = info.split("\n");
     foreach (const QString &line, lines) {
@@ -293,9 +301,12 @@ QString HttpDriverInterface::getOsBuild()
 
 bool HttpDriverInterface::getVersion(QString &major, QString &minor)
 {
+    qCDebug(appLog) << "Get OS version";
     QFile file("/etc/os-version");
-    if (!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly)) {
+        qCWarning(appLog) << "Failed to open /etc/os-version";
         return false;
+    }
     QString info = file.readAll().data();
     QStringList lines = info.split("\n");
     foreach (const QString &line, lines) {
@@ -325,9 +336,11 @@ bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<RepoDri
 
     lstDriverInfo.clear();
     if (strJson.isEmpty() || json_error.error != QJsonParseError::NoError) {
+        qCWarning(appLog) << "Invalid JSON data or parse error:" << json_error.errorString();
         return false;
     }
     if ("success" != jsonDoc.object().value("msg").toString()) {
+        qCWarning(appLog) << "API returned error message:" << jsonDoc.object().value("msg").toString();
         return false;
     }
     ja = jsonDoc.object().value("data").toObject().value("list").toArray();

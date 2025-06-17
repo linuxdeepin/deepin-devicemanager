@@ -11,6 +11,7 @@
 #include "PageTableWidget.h"
 #include "DeviceManager.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
@@ -23,17 +24,22 @@
 #include <QRegularExpression>
 #include <unistd.h>
 
+using namespace DDLog;
+
 PageBoardInfo::PageBoardInfo(QWidget *parent)
     : PageSingleInfo(parent)
     , m_FontChangeFlag(false)
 {
-
+    qCDebug(appLog) << "PageBoardInfo constructor";
 }
 
 void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 {
-    if (lst.size() < 1)
+    qCDebug(appLog) << "Updating board info with" << lst.size() << "devices";
+    if (lst.size() < 1) {
+        qCWarning(appLog) << "Empty device list provided";
         return;
+    }
     mp_Device = lst[0];
 
     // 获取主板信息
@@ -63,8 +69,11 @@ void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
 void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const QList<QPair<QString, QString>> &lst)
 {
-    if (lst.size() < 1)
+    qCDebug(appLog) << "Loading device info, lst size:" << lst.size() << "devices size:" << devices.size();
+    if (lst.size() < 1) {
+        qCWarning(appLog) << "Empty info list provided";
         return;
+    }
 
     // 比较页面可显示的最大行数与主板信息,取小值
     int maxRow = this->height() / ROW_HEIGHT - 3;
@@ -185,6 +194,7 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
 
 void PageBoardInfo::setFontChangeFlag()
 {
+    qCDebug(appLog) << "Setting font change flag";
     // 设置字体变化标志
     m_FontChangeFlag = true;
 }

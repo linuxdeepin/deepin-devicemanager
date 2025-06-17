@@ -5,6 +5,7 @@
 #include "ThreadExecXrandr.h"
 #include "commonfunction.h"
 #include "DDLog.h"
+#include <DSysInfo>
 
 #include <QProcess>
 #include <QLoggingCategory>
@@ -18,49 +19,68 @@
 #include <QRegularExpression>
 #include <DeviceManager.h>
 #include<QDateTime>
-#ifdef OS_BUILD_V23
-const QString DISPLAY_SERVICE_NAME = "org.deepin.dde.Display1";
-const QString DISPLAY_SERVICE_PATH = "/org/deepin/dde/Display1";
-const QString DISPLAY_INTERFACE = "org.deepin.dde.Display1";
 
-const QString DISPLAY_DAEMON_SERVICE_NAME = "org.deepin.dde.Display1";
-const QString DISPLAY_DAEMON_SERVICE_PATH = "/org/deepin/dde/Display1";
-const QString DISPLAY_DAEMON_INTERFACE = "org.deepin.dde.Display1";
-const QString DISPLAY_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
-const QString DISPLAY_MONITOR_INTERFACE = "org.deepin.dde.Display1.Monitor";
-#else
-const QString DISPLAY_SERVICE_NAME = "com.deepin.system.Display";
-const QString DISPLAY_SERVICE_PATH = "/com/deepin/system/Display";
-const QString DISPLAY_INTERFACE = "com.deepin.system.Display";
+const QString DISPLAY_SERVICE_NAME_V23 = "org.deepin.dde.Display1";
+const QString DISPLAY_SERVICE_PATH_V23 = "/org/deepin/dde/Display1";
+const QString DISPLAY_INTERFACE_V23 = "org.deepin.dde.Display1";
 
-const QString DISPLAY_DAEMON_SERVICE_NAME = "com.deepin.daemon.Display";
-const QString DISPLAY_DAEMON_SERVICE_PATH = "/com/deepin/daemon/Display";
-const QString DISPLAY_DAEMON_INTERFACE = "com.deepin.daemon.Display";
+const QString DISPLAY_DAEMON_SERVICE_NAME_V23 = "org.deepin.dde.Display1";
+const QString DISPLAY_DAEMON_SERVICE_PATH_V23 = "/org/deepin/dde/Display1";
+const QString DISPLAY_DAEMON_INTERFACE_V23 = "org.deepin.dde.Display1";
+const QString DISPLAY_MONITOR_INTERFACE_V23 = "org.deepin.dde.Display1.Monitor";
+
+const QString DISPLAY_SERVICE_NAME_V20 = "com.deepin.system.Display";
+const QString DISPLAY_SERVICE_PATH_V20 = "/com/deepin/system/Display";
+const QString DISPLAY_INTERFACE_V20 = "com.deepin.system.Display";
+
+const QString DISPLAY_DAEMON_SERVICE_NAME_V20 = "com.deepin.daemon.Display";
+const QString DISPLAY_DAEMON_SERVICE_PATH_V20 = "/com/deepin/daemon/Display";
+const QString DISPLAY_DAEMON_INTERFACE_V20 = "com.deepin.daemon.Display";
+const QString DISPLAY_MONITOR_INTERFACE_V20 = "com.deepin.daemon.Display.Monitor";
+
+inline bool isV20() { return Dtk::Core::DSysInfo::majorVersion() == "20"; }
+
+const QString DISPLAY_SERVICE_NAME = isV20() ? DISPLAY_SERVICE_NAME_V20 : DISPLAY_SERVICE_NAME_V23;
+const QString DISPLAY_SERVICE_PATH = isV20() ? DISPLAY_SERVICE_PATH_V20 : DISPLAY_SERVICE_PATH_V23;
+const QString DISPLAY_INTERFACE = isV20() ? DISPLAY_INTERFACE_V20 : DISPLAY_INTERFACE_V23;
+
+const QString DISPLAY_DAEMON_SERVICE_NAME = isV20() ? DISPLAY_DAEMON_SERVICE_NAME_V20 : DISPLAY_DAEMON_SERVICE_NAME_V23;
+const QString DISPLAY_DAEMON_SERVICE_PATH = isV20() ? DISPLAY_DAEMON_SERVICE_PATH_V20 : DISPLAY_DAEMON_SERVICE_PATH_V23;
+const QString DISPLAY_DAEMON_INTERFACE = isV20() ? DISPLAY_DAEMON_INTERFACE_V20 : DISPLAY_DAEMON_INTERFACE_V23;
+const QString DISPLAY_MONITOR_INTERFACE = isV20() ? DISPLAY_MONITOR_INTERFACE_V20 : DISPLAY_MONITOR_INTERFACE_V23;
+
 const QString DISPLAY_PROPERTIES_INTERFACE = "org.freedesktop.DBus.Properties";
-const QString DISPLAY_MONITOR_INTERFACE = "com.deepin.daemon.Display.Monitor";
-#endif
+
 using namespace DDLog;
 ThreadExecXrandr::ThreadExecXrandr(bool gpu, bool isDXcbPlatform)
     : m_Gpu(gpu), m_isDXcbPlatform(isDXcbPlatform)
 {
-
+    qCDebug(appLog) << "ThreadExecXrandr created. GPU mode:" << gpu << "DXcbPlatform:" << isDXcbPlatform;
 }
 
 void ThreadExecXrandr::run()
 {
+    qCDebug(appLog) << "Thread started execution";
+
     if (m_Gpu) {
+        qCDebug(appLog) << "Getting GPU info from xrandr";
         getGpuInfoFromXrandr();
     } else {           
        if(Common::boardVendorType() == "PGUV") {
+           qCDebug(appLog) << "PGUV platform detected, getting resolution from DBus";
            QList<QMap<QString, QString>> lstMap;
            getResolutionRateFromDBus(lstMap);
-       }else 
+       } else {
+            qCDebug(appLog) << "Getting monitor info from xrandr --verbose";
             getMonitorInfoFromXrandrVerbose();
+       }
     }
 }
 
 void ThreadExecXrandr::runCmd(QString &info, const QString &cmd)
 {
+    qCDebug(appLog) << "Executing command:" << cmd;
+
     QProcess process;
     process.start(cmd);
     process.waitForFinished(-1);
@@ -69,6 +89,8 @@ void ThreadExecXrandr::runCmd(QString &info, const QString &cmd)
 
 void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, const QString &cmd)
 {
+    qCDebug(appLog) << "Loading xrandr info with command:" << cmd;
+
     QString deviceInfo;
     runCmd(deviceInfo, cmd);
     QStringList lines = deviceInfo.split("\n");
@@ -103,6 +125,8 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
 
 void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstMap, const QString &cmd)
 {
+    qCDebug(appLog) << "Loading verbose xrandr info with command:" << cmd;
+
     QString deviceInfo;
     runCmd(deviceInfo, cmd);
 
@@ -158,6 +182,7 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
 
 void ThreadExecXrandr::getRefreshRateFromDBus(QList<QMap<QString, QString> > &lstMap)
 {
+    qCDebug(appLog) << "Creating display interface";
     QDBusInterface displayInterface(DISPLAY_SERVICE_NAME, DISPLAY_SERVICE_PATH, DISPLAY_INTERFACE, QDBusConnection::systemBus());
     if (!displayInterface.isValid())
         return;
@@ -233,6 +258,8 @@ void ThreadExecXrandr::getRefreshRateFromDBus(QList<QMap<QString, QString> > &ls
 
 void ThreadExecXrandr::getMonitorInfoFromXrandrVerbose()
 {
+    qCDebug(appLog) << "Getting monitor info from xrandr verbose";
+
     QList<QMap<QString, QString>> lstMap;
     loadXrandrVerboseInfo(lstMap, "xrandr --verbose");
 
@@ -264,6 +291,8 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, MonitorResolution
 }
 void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
 {
+    qCDebug(appLog) << "Getting resolution from DBus";
+
     QDBusInterface displayInterface(DISPLAY_DAEMON_SERVICE_NAME, DISPLAY_DAEMON_SERVICE_PATH, DISPLAY_DAEMON_INTERFACE, QDBusConnection::sessionBus());
     if (!displayInterface.isValid())
         return;
@@ -339,6 +368,8 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
 
 void ThreadExecXrandr::getGpuInfoFromXrandr()
 {
+    qCDebug(appLog) << "Getting GPU info from xrandr";
+
     QList<QMap<QString, QString>> lstMap;
     loadXrandrInfo(lstMap, "xrandr");
 
@@ -365,6 +396,8 @@ void ThreadExecXrandr::getGpuInfoFromXrandr()
 
 void ThreadExecXrandr::getResolutionRateFromDBus(QList<QMap<QString, QString> > &lstMap)
 {
+    qCDebug(appLog) << "Getting resolution rate from DBus";
+
     QDBusInterface displayInterface(DISPLAY_DAEMON_SERVICE_NAME, DISPLAY_DAEMON_SERVICE_PATH, DISPLAY_DAEMON_INTERFACE, QDBusConnection::sessionBus());
     if (!displayInterface.isValid())
         return;

@@ -5,9 +5,12 @@
 // 项目自身文件
 #include "WaitingWidget.h"
 #include "MacroDefinition.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QHBoxLayout>
+
+using namespace DDLog;
 
 
 #define SPINNER_WIDTH  32  // 小圈圈的宽度
@@ -19,6 +22,7 @@ WaitingWidget::WaitingWidget(QWidget *parent)
     , mp_Spinner(new DSpinner(this))
     , mp_Label(new DLabel(tr("Loading..."), this))
 {
+    qCDebug(appLog) << "WaitingWidget constructor start";
     // 设置小圈圈的参数,小圈圈的大小
     mp_Spinner->setFixedSize(SPINNER_WIDTH, SPINNER_HEIGHT);
 
@@ -47,22 +51,26 @@ WaitingWidget::WaitingWidget(QWidget *parent)
     hLayout->addLayout(vLayout);
     hLayout->addStretch();
     setLayout(hLayout);
+    qCDebug(appLog) << "WaitingWidget constructor end";
 }
 
 WaitingWidget::~WaitingWidget()
 {
+    qCDebug(appLog) << "WaitingWidget destructor start";
     DELETE_PTR(mp_Spinner);
     DELETE_PTR(mp_Label);
 }
 
 void WaitingWidget::start()
 {
+    qCDebug(appLog) << "Starting waiting spinner";
     // 开始转动
     if (mp_Spinner)
         mp_Spinner->start();
 }
 void WaitingWidget::stop()
 {
+    qCDebug(appLog) << "Stopping waiting spinner";
     // 停止转动
     if (mp_Spinner)
         mp_Spinner->stop();

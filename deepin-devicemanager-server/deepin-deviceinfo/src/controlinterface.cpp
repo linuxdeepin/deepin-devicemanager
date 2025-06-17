@@ -3,11 +3,14 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "controlinterface.h"
+#include "DDLog.h"
 
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QLoggingCategory>
+
+using namespace DDLog;
 
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<ControlInterface *> ControlInterface::s_instance;
@@ -20,15 +23,19 @@ const QString ENABLE_SERVICE_INTER = "org.deepin.DeviceControl";
 ControlInterface::ControlInterface()
     : m_iface(nullptr)
 {
+    qCDebug(appLog) << "Initializing ControlInterface";
     // 初始化dbus
     init();
 }
 
 void ControlInterface::disableOutDevice(const QString &devInfo)
 {
+    qCDebug(appLog) << "Calling disableOutDevice with info:" << devInfo;
     // 调用dbus接口获取设备信息
     if (m_iface != nullptr && m_iface->isValid()) {
         m_iface->call("disableOutDevice", devInfo);
+    } else {
+        qCWarning(appLog) << "DBus interface not available for disableOutDevice";
     }
 }
 
@@ -72,11 +79,13 @@ void ControlInterface::init()
 {
     // 1. 连接到dbus
     if (!QDBusConnection::systemBus().isConnected()) {
+        qCWarning(appLog) << "Cannot connect to the D-Bus session bus";
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
                 "To start it, run:/n"
                 "/teval `dbus-launch --auto-syntax`/n");
     }
 
+    qCDebug(appLog) << "Creating DBus interface for service:" << SERVICE_NAME;
     // 2. create interface
     m_iface = new QDBusInterface(SERVICE_NAME, ENABLE_SERVICE_PATH, ENABLE_SERVICE_INTER, QDBusConnection::systemBus());
 //    QDBusConnection::systemBus().connect(SERVICE_NAME, ENABLE_SERVICE_PATH, ENABLE_SERVICE_INTER, "sigFinished", this, SIGNAL(sigFinished(bool, QString)));

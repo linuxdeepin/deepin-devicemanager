@@ -11,6 +11,7 @@
 #include <DDialog>
 #include <DFontSizeManager>
 #include <DGuiApplicationHelper>
+#include <DPaletteHelper>
 #include <DApplication>
 #include <QLoggingCategory>
 using namespace DDLog;
@@ -74,13 +75,10 @@ void BtnLabel::paintEvent(QPaintEvent* e)
     }
 
     DFontSizeManager::instance()->bind(this, DFontSizeManager::T8);
-    DPalette pa = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
+
+    DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setColor(DPalette::Text, pa.color(cg, DPalette::TextTips));
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    this->setPalette(pa);
-#else
-    DGuiApplicationHelper::instance()->setPalette(this, pa);
-#endif
+    DPaletteHelper::instance()->setPalette(this, pa);
 
     return DLabel::paintEvent(e);
 }
@@ -104,11 +102,7 @@ void TipsLabel::paintEvent(QPaintEvent* e)
     DFontSizeManager::instance()->bind(this, DFontSizeManager::T8);
     DPalette pa = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
     pa.setColor(DPalette::Text, pa.color(cg, DPalette::TextTips));
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    this->setPalette(pa);
-#else
-    DGuiApplicationHelper::instance()->setPalette(this, pa);
-#endif
+    DPaletteHelper::instance()->setPalette(this, pa);
 
     return DLabel::paintEvent(e);
 }
@@ -130,11 +124,7 @@ void TitleLabel::paintEvent(QPaintEvent* e)
 
     DPalette pa = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
     pa.setColor(DPalette::Text, pa.color(cg, DPalette::TextTitle));
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    this->setPalette(pa);
-#else
-    DGuiApplicationHelper::instance()->setPalette(this, pa);
-#endif
+    DPaletteHelper::instance()->setPalette(this, pa);
 
     return DLabel::paintEvent(e);
 }

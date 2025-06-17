@@ -7,6 +7,9 @@
 #include "DeviceManager.h"
 #include "DBusEnableInterface.h"
 #include "DBusInterface.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 DeviceImage::DeviceImage()
     : DeviceBaseInfo()
@@ -22,8 +25,11 @@ DeviceImage::DeviceImage()
 
 void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (!matchToLshw(mapInfo))
+    qCDebug(appLog) << "setInfoFromLshw";
+    if (!matchToLshw(mapInfo)) {
+        qCDebug(appLog) << "not match to lshw";
         return;
+    }
 
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor);
@@ -40,6 +46,8 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
 TomlFixMethod DeviceImage::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "setInfoFromTomlOneByOne";
+
     TomlFixMethod ret = TOML_None;
 
     // 添加基本信息
@@ -58,6 +66,8 @@ TomlFixMethod DeviceImage::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 
 void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "setInfoFromHwinfo";
+
     if (mapInfo.find("unique_id") != mapInfo.end()) {
         m_UniqueID = mapInfo["unique_id"];
         m_Name = mapInfo["name"];
@@ -67,6 +77,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "driver", m_Driver);
         //设备禁用的情况，没必要再继续向下执行，直接return
         m_CanUninstall = !driverIsKernelIn(m_Driver);
+        qCDebug(appLog) << "info found unique_id:" << m_UniqueID << " name:" << m_Name << " path:" << m_SysPath << " class:" << m_HardwareClass;
         return;
     }
     if (mapInfo.find("Enable") != mapInfo.end()) {

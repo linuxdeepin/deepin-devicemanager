@@ -8,9 +8,11 @@
 #include "DeviceInfo.h"
 #include "DeviceInput.h"
 #include "DBusWakeupInterface.h"
+#include "DDLog.h"
 
 // Dtk头文件
 #include <DGuiApplicationHelper>
+#include <DPaletteHelper>
 #include <DApplication>
 #include <DFontSizeManager>
 #include <DMenu>
@@ -23,6 +25,8 @@
 #include <QAction>
 #include <QLoggingCategory>
 
+using namespace DDLog;
+
 TextBrowser::TextBrowser(QWidget *parent)
     : DTextBrowser(parent)
     , m_ShowOtherInfo(false)
@@ -32,6 +36,7 @@ TextBrowser::TextBrowser(QWidget *parent)
     , mp_Menu(new DMenu(this))
     , m_IsMenuShowing(false)
 {
+    qCDebug(appLog) << "TextBrowser instance created";
     DFontSizeManager::instance()->bind(this, DFontSizeManager::SizeType(DFontSizeManager::T7));
     setFrameShape(QFrame::NoFrame);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -47,6 +52,8 @@ TextBrowser::TextBrowser(QWidget *parent)
 
 void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
 {
+    qCDebug(appLog) << "Showing device info for:" << (info ? info->name() : "null");
+
     mp_Info = info;
     // 先清空内容 *************************************************
     clear();
@@ -73,6 +80,8 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
 
 void TextBrowser::updateInfo()
 {
+    qCDebug(appLog) << "Updating device info";
+
     // 先清空内容 *************************************************
     clear();
     if (!mp_Info) {
@@ -100,6 +109,8 @@ void TextBrowser::updateInfo()
 
 EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
 {
+    qCDebug(appLog) << "Setting device enabled:" << enable;
+
     if (!mp_Info) {
         return EDS_Cancle;
     }
@@ -108,6 +119,8 @@ EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
 
 void TextBrowser::setWakeupMachine(bool wakeup)
 {
+    qCDebug(appLog) << "Setting wakeup machine:" << wakeup;
+
     // 键盘鼠标唤醒机器
     DeviceInput *input = qobject_cast<DeviceInput*>(mp_Info);
     if(input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()){
@@ -128,6 +141,8 @@ void TextBrowser::updateShowOtherInfo()
 
 void TextBrowser::fillClipboard()
 {
+    qCDebug(appLog) << "Filling clipboard with selected text";
+
     QString str = QTextEdit::textCursor().selectedText();
     if (str.isEmpty()) {
         return;
@@ -139,15 +154,9 @@ void TextBrowser::fillClipboard()
 
 void TextBrowser::paintEvent(QPaintEvent *event)
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    DPalette pa = DGuiApplicationHelper::instance()->palette(this);
+    DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::WindowText, pa.color(DPalette::TextTips));
-    DGuiApplicationHelper::instance()->setPalette(this, pa);
-#else
-    QPalette pa = palette();
-    pa.setBrush(QPalette::WindowText, pa.color(QPalette::PlaceholderText));
-    setPalette(pa);
-#endif
+    DPaletteHelper::instance()->setPalette(this, pa);
 
     int height = int(document()->size().height());
     setFixedHeight(height);
@@ -203,14 +212,20 @@ void TextBrowser::slotShowMenu(const QPoint &)
 }
 void TextBrowser::slotActionRefresh()
 {
+    qCDebug(appLog) << "Refresh action triggered";
+
     emit refreshInfo();
 }
 void TextBrowser::slotActionExport()
 {
+    qCDebug(appLog) << "Export action triggered";
+
     emit exportInfo();
 }
 void TextBrowser::slotActionCopy()
 {
+    qCDebug(appLog) << "Copy action triggered";
+
     QString str = QTextEdit::textCursor().selectedText();
     if (str.isEmpty()) {
         emit copyAllInfo();
