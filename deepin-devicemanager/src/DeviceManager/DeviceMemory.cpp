@@ -214,11 +214,13 @@ const QString DeviceMemory::getOverviewInfo()
     QString nameStr = m_Name != "" ? m_Name : m_Vendor;
     if (nameStr == "--")
         nameStr.clear();
-    ov += QString("%1(%2 %3 %4)") \
+    ov += QString("%1(%2%3 %4)") \
           .arg(m_Size) \
-          .arg(nameStr) \
+          .arg(nameStr + (nameStr.isEmpty() ? "" : " ")) \
           .arg(m_Type) \
           .arg(m_Speed);
+
+    ov = ov.trimmed();
 
     return ov;
 }
