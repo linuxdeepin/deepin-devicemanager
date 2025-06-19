@@ -1,235 +1,202 @@
-# Device Manager|deepin-devicemanager|
+# device-manager_EN.md
+# Device Manager | deepin-devicemanager
 
-## Overview 
+## Overview
 
-Device Manager is a tool to view and manage hardware devices, through which you can view all details of hardware running in the operating system, and you can manage drivers as well. 
+Device Manager is a tool for viewing and managing hardware devices. It allows you to view hardware device information running on the operating system and perform driver management.
 
+## Getting Started
 
+You can run or close the Device Manager, or create shortcuts through the following methods.
 
-## Guide
+### Running Device Manager
 
-You can run, close or create a shortcut for Device Manager as follows.
-
-### Run Device Manager
-
-1. Click ![deepin_launcher](../common/deepin_launcher.svg) on the Dock to enter the interface of launcher.
-
-2. Locate ![deepin_devicemanager](../common/deepin_devicemanager.svg) by scrolling the mouse wheel or searching "Device Manager" in the Launcher interface and click it to run. 
-
+1. Click the Launcher icon ![deepin_launcher](../common/deepin_launcher.svg) on the taskbar to enter the Launcher interface.
+2. Scroll the mouse wheel or search to locate the Device Manager icon ![deepin_devicemanager](../common/deepin_devicemanager.svg), then click to run.
 3. Right-click ![deepin_devicemanager](../common/deepin_devicemanager.svg) to:
+   - Click **Send to Desktop** to create a desktop shortcut.
+   - Click **Pin to Taskbar** to pin the application to the taskbar.
+   - Click **Start on Boot** to add the application to startup items, automatically running when the computer starts.
 
-   - Select **Send to desktop** to create a shortcut on the desktop.
+### Closing Device Manager
 
-   - Select  **Send to dock** to fix it onto the dock.
+- Click ![close](../common/close.svg) in the Device Manager interface to exit.
+- Right-click ![deepin_devicemanager](../common/deepin_devicemanager.svg) on the taskbar and select **Close All** to exit Device Manager.
+- Click ![icon_menu](../common/icon_menu.svg) in the Device Manager interface and select **Exit** to exit Device Manager.
 
-   - Select **Add to startup** to run it automatically when the computer is turned on.
-
-   
-
-### Exit Device Manager
-
-- On the main interface, click ![close_icon](../common/close.svg) to exit.
-- Right-click ![deepin_devicemanager](../common/deepin_devicemanager.svg)  on the Dock, select **Close all** to exit.
-- On interface of Device Manager, click ![icon_menu](../common/icon_menu.svg)  and select **Exit** to exit.
-
-## Hardware
-
-The information displayed by Device Manager is related to the computer hardwares. If your computer is connected to a mouse, keyboard, etc., the corresponding device information is displayed. If multiple devices of the same type are detected, the device information is displayed in a list. 
+## Hardware Information
+Device Manager displays device information related to computer hardware. If your computer is connected to devices such as a mouse or keyboard, corresponding device information will be displayed. If multiple devices of the same type are detected, device information is displayed in list form.
 
 ### Device Information
 
-On the main interface, click **Hardware** to view details of each hardware running in this system.
+In the Device Manager interface, click **Hardware Information** to view detailed hardware information running on the operating system.
 
 ![0|overview](fig/overview.png)
 
-The following table mainly introduces common hardware information and is for reference only, please refer to the actual situation.
+The following table introduces common hardware information for reference only; actual information may vary.
 
 <table class="block1">
     <caption></caption>
     <tbody>
         <tr>
             <td width="150px"><b>Hardware Name</b></td>
-            <td><b>Details</b></td>
+            <td><b>Hardware Information</b></td>
         </tr>
         <tr>
             <td>Overview</td>
-            <td>Including the kernel and the hardware list.</td>
+            <td>Displays operating system kernel information and hardware device list.</td>
         </tr>
         <tr>
-            <td>CPU</td>
-            <td>Including name, vendor, CPU ID, architecture and so on.</td>
+            <td>Processor</td>
+            <td>Displays processor name, manufacturer, processor details, and architecture.</td>
         </tr>
         <tr>
             <td>Motherboard</td>
-            <td>Including vendor, version, chipset, SMBIOS version and so on.</td>
+            <td>Displays motherboard manufacturer, version, chipset, SMBIOS version, etc.</td>
         </tr>
          <tr>
             <td>Memory</td>
-            <td>Including name, vendor, size, type, speed and so on.</td>
+            <td>Displays memory name, manufacturer, size, type, and speed.</td>
       </tr>
       <tr>
             <td>Display Adapter</td>
-            <td>Including name, vendor, model and so on.</td>
+            <td>Displays display adapter name, manufacturer, and model.</td>
         </tr>
        <tr>
-            <td>Sound Adapter</td>
-            <td>Including name, vendor, model and so on.</td>
+            <td>Audio Adapter</td>
+            <td>Displays audio adapter name, manufacturer, and model.</td>
         </tr>
          <tr>
-            <td>Storage</td>
-            <td>Including model, vendor, media type and so on.</td>
+            <td>Storage Device</td>
+            <td>Displays storage device model, manufacturer, and media type.</td>
         </tr>
         <tr>
             <td>Network Adapter</td>
-            <td>Including name, vendor, type, driver and so on.</td>
+            <td>Displays network adapter name, manufacturer, type, and driver.</td>
         </tr>
          <tr>
             <td>Mouse</td>
-            <td>Including name, vendor, model, interface and so on.</td>
+            <td>Displays mouse name, manufacturer, model, and interface.</td>
         </tr>
           <tr>
             <td>Keyboard</td>
-            <td>Including name, vendor, model, interface and so on.</td>
+            <td>Displays keyboard name, model, manufacturer, and interface.</td>
         </tr>
         <tr>
-            <td>Monitior</td>
-            <td>Including name, vendor, type, interface type and so on.</td>
+            <td>Display Device</td>
+            <td>Displays display device name, manufacturer, type, and interface.</td>
         </tr>
    </tbody>
    </table>
 
-### Context Menu 
+### Right-click Menu
 
-Right-click in the details area of any device to carry out corresponding operations.
+Right-click in the device details area to perform related operations.
 
-![0|rightclick](fig/rightclick.png)
+![0|menu](fig/menu.png)
 
 #### Copy
-To copy contents of the current page or selected contents.
+
+Copy all information on the current page. For selectable information, partial copying is also supported.
 
 #### Refresh
-To reload info of all devices of the operating system. You can also use shortcut key F5 to realize this function.
+
+Reload all current device information of the operating system. Shortcut key: **F5**.
 
 #### Export
-To export the device information to the specified folder, formats such as txt/docx/xls/html are supported. 
+
+Export device information to a specified folder. Supports txt/docx/xls/html formats.
 
 #### Disable/Enable
 
-You can disable /enable some hardware drives, which are enabled by default. You can judge whether the hardware device supports the disable function according to the right-click menu options. 
+Some hardware drivers support disable and enable functions. Hardware drivers are enabled by default; check right-click menu options to determine if disabling is supported.
 
-#### Update drivers
+#### Update Driver
 
-Some hardware supports update/uninstall driver function, which can be judged by the right-click menu options. 
+Some hardware supports updating/uninstalling drivers; check right-click menu options to determine.
 
-> ![tips](../common/tips.svg) Tips: Update online is supported in "Drivers" interface.
+> ![tips](../common/tips.svg)Tips: Driver updates are supported online in the driver management interface.
 
-1. Select **Update drivers** in the right-click menu to bring up a pop-up window.
-2. Select the folder where the driver is located and click the **Next** button. The "Include subfolders" is checked by default, indicating that the folder and the driver files contained in the subfolder are detected.
+1. Select **Update Driver** from the right-click menu to open a window.
+2. Select the folder containing the driver and click **Next**. "Include subfolders" is checked by default to detect driver files in subfolders.
 
    ![0|file_location](fig/file_location.png)
-
-3. The system will detect all installable deb and ko format driver files contained in this file location. Select the corresponding driver file and then click the **Update** button.
+3. The system will detect all installable deb and ko format driver files in the location. Select the corresponding driver file and click **Update**.
 
    ![0|renew](fig/renew.png)
+4. An authentication window will appear; enter the system login password to complete authentication and proceed with the update.
+5. If the update fails, the system automatically rolls back the device driver to the previous version without affecting usage. It is recommended to check the failure reason according to system prompts and retry.
 
-4. Authentication window pops up. Input login password to complete authentication and proceed.
-5. If the update fails, the system automatically rolls back the device's driver to the previous driver version, which does not affect the use. It is recommended to find the reason of failure according to the system prompt and update again.
+#### Uninstall Driver
 
-#### Uninstall drivers
+For devices you don't want to use, you can uninstall the driver.
 
-You can uninstall devices that you don't want to use.
+1. Select **Uninstall Driver** from the right-click menu, confirm again, then click **Uninstall**.
+   - Uninstall successful: Device status becomes unavailable.
+   - Uninstall failed: Original driver remains functional. Check failure reason according to system prompts and retry.
+2. To reuse the device, right-click on the device details page and select **Update Driver** to install the driver.
 
-1. Select **Uninstall drivers** in the right-click menu, after confirming again, click **Uninstall**. 
+#### Wake Computer
 
-   - Successful: The device status becomes unavailable.
+When the computer is in standby, it can be awakened using a mouse, keyboard, or network card to light up the screen. If the device is disabled, this function cannot be used.
 
-   - Failure: The original driver works normally. It is recommended to find the reason for failure according to the system prompt and uninstall again.
+**Wake Computer via Mouse or Keyboard**
 
-2. If you want to use the device again, right-click on the device details page and select **Update Driver** to install the driver.
+1. In the hardware information interface, click **Mouse** or **Keyboard** to display device details.
+2. Right-click in the details area and check/uncheck **Allow Wake Computer**.
+   - Allowed: When computer is in standby, left/right/middle-clicking mouse or pressing any key on the keyboard will wake the computer.
+   - Not allowed: Mouse/keyboard actions won't wake the computer.
 
-#### Wake up the computer
+**Wake Computer via Network Card**
 
-When the computer is suspending, it supports waking up the computer and lighting up the screen via mouse, keyboard and network card. If the devices are disabled, this feature is not available.
+1. In the hardware information interface, click **Network Adapter** to display device details.
+2. Right-click in the details area and check/uncheck **Allow Wake Computer**.
+   - Allowed: When computer is in standby, it can be awakened by receiving special network packets (Wake On LAN commands) from other computers in the same network segment.
+   - Not allowed: Network packets won't wake the computer.
 
-**Wake up the computer by mouse and keyboard**
+## Driver Management
 
-1. Click **Mouse** or **Keyboard** in "Hardware" interface to display details.
-2. Right-click in the details area to check or uncheck **Allow it to wake the computer**.
+Driver management mainly includes driver update detection, driver list display, and online driver installation.
 
-   - Allow it to wake the computer: When the computer is suspending, left-click / right-click / middle-click or hit any key on keyboard to wake up the computer and light up the screen.
-   - Don't allow it to wake the computer: When the computer is suspending, the computer does not respond when you left-click / right-click / middle-click or hit any key on keyboard.
+### Driver Update Detection
 
-**Wake up the computer by network card**
+Open Device Manager, click **Driver Management**, and the system will automatically detect if there are drivers that can be updated/installed.
 
-1. Click **Network Adapter** in "Hardware" interface to display details.
-2. Right-click in the details area to check or uncheck **Allow it to wake the computer**.
+>![notes](../common/notes.svg)Note: When starting the computer, if updatable/installable drivers are detected, a prompt will appear. Click **View** to enter the driver management interface.
 
-   - Allow it to wake the computer: When this computer is suspending, other computers (in the same network segment that can be pinged through to each other's IP address) can wake up this computer and light up the screen by sending special network packet requests (Wake On LAN command) to it.
-   - Don't allow it to wake the computer: When this computer is suspending, it does not respond if other computers (in the same network segment that can be pinged through to each other's IP address) send special network packet requests (Wake On LAN command) to it.
-
-## Drivers
-
-"Drivers" interface mainly includes features such as driver list, driver updates scan, driver online installation, etc.
-
-### Scan for updates
-
-Open Device Manager, click **Drivers**. The system will detect if there is any updates available automatically.
-
-   - Already up to date: It means that there are no drivers that can be updated/installed, and the names and versions of devices that do not require driver updates are displayed.
-   - Updates available: It means that updates are detected and can be installed online.
+- No updates: No updatable/installable drivers; shows device names and versions that don't need updates.
+- Updates available: Updatable/installable drivers detected; online installation is possible.
 
 ![0|update_detection](fig/update_detection.png)
 
-If the detection fails, click **Scan Again** after fixing the problem according to the prompt, or click **Feedback** for unknown reasons to jump to the "Consults" interface of Support to give feedback on the problem.
+If detection fails, fix the issue according to the prompt and click **Redetect** to try again. For unknown reasons, click **Feedback** to jump to the "Service and Support" application's message consultation interface to report related issues.
 
-### Install drivers online
+### Online Driver Installation
 
-1. In the "Drivers" interface, you can view the list of updatable/installable drivers and install them online.
-
-   - Click ![install](../common/install.svg) to install the installable drivers.
-   - Click ![reinstall](../common/reinstall.svg) to update the updatable drivers.
-
-   ![0|drive_management](fig/drive_management.png)
-
-2. For batch installation, check all drivers you want and click **Install All**.
-
-3. Wait for the installation result.
-
-   - Installation successful: The status bar will change to "Installation successful" and take effect after restarting the computer.
-
-   - Installation failed: The status bar changes to "Installation failed", follow the prompts to fix the problem and click the refresh button ![refresh](../common/refresh.svg) to re-scan and try to install again. For unknown reasons, you can click the **Feedback** button to jump to the "Consults" interface of Support to give feedback on the problem..
-
-   - Installation partially  successful: For batch installation, some of the drivers may be installed successfully and some may not, you can check the status of each driver in the driver list.
-
-   
+1. In the driver management interface, view the list of updatable/installable drivers and install them online.
+2. For batch installation, select corresponding drivers and click **Install All** to install them sequentially.
+3. Wait for installation results.
+   - Installation successful: Status changes to "Installation successful"; takes effect after rebooting.
+   - Installation failed: Status changes to "Installation failed"; click the operation bar button to retry. Or click "Installation failed" to view the reason. For unknown reasons, click **Feedback** to report issues.
+   - Partial success: For batch installations, some may succeed while others fail; check individual driver statuses in the list.
 
 ## Main Menu
 
-In the main menu, you can switch themes, view manual, and so on.
+In the main menu, you can switch window themes, view help manuals, etc.
 
 ### Theme
-
-The window theme includes Light Theme, Dark Theme and System Theme.
-
-1. Click ![icon_menu](../common/icon_menu.svg)on the interface.
-2. Click  **Theme** to select one.
-
+Window themes include Light, Dark, and System.
+1. In the Device Manager interface, click ![icon_menu](../common/icon_menu.svg).
+2. Click **Theme** and select a theme color.
 
 ### Help
-
-Click Help to get the manual, which will help you further know and use Device Manager.
-
-1. Click ![icon_menu](../common/icon_menu.svg)on the interface.
-2. Click **Help** to view the manual to further know and use Device Manager.
-
+1. In the Device Manager interface, click ![icon_menu](../common/icon_menu.svg).
+2. Click **Help** to view the help manual and learn more about using Device Manager.
 
 ### About
-
-1. Click ![icon_menu](../common/icon_menu.svg)on the interface.
-2. Click **About** to view version and introduction about Device Manager.
+1. In the Device Manager interface, click ![icon_menu](../common/icon_menu.svg).
+2. Click **About** to view the version and introduction of Device Manager.
 
 ### Exit
-
-1. Click ![icon_menu](../common/icon_menu.svg)on the interface.
-2. Click  **Exit**.
-
+1. In the Device Manager interface, click ![icon_menu](../common/icon_menu.svg).
+2. Click **Exit**.
