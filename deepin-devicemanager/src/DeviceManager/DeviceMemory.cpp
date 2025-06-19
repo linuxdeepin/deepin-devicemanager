@@ -254,12 +254,13 @@ const QString DeviceMemory::getOverviewInfo()
         qCDebug(appLog) << "Name string is '--', clearing it";
         nameStr.clear();
     }
-    ov += QString("%1(%2 %3 %4)") \
+    ov += QString("%1(%2%3 %4)") \
           .arg(m_Size) \
-          .arg(nameStr) \
+          .arg(nameStr + (nameStr.isEmpty() ? "" : " ")) \
           .arg(m_Type) \
           .arg(m_Speed);
 
+    ov = ov.trimmed();
     qCDebug(appLog) << "Memory overview info:" << ov;
     return ov;
 }
