@@ -798,7 +798,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="171"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="265"/>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation>RAM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="176"/>
@@ -3111,7 +3111,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1417"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1453"/>
         <source>Memory</source>
-        <translation>Memoria</translation>
+        <translation>RAM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1361"/>
@@ -3119,7 +3119,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1417"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1453"/>
         <source>No memory found</source>
-        <translation>No se encontró la memoria</translation>
+        <translation>No se encontró la memoria RAM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1362"/>
