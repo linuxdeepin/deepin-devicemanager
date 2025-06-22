@@ -3773,7 +3773,7 @@
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="109"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="377"/>
         <source>Time checked: %1</source>
-        <translation>Tiempo de comprobación: %1</translation>
+        <translation>Fecha de comprobación: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="159"/>
