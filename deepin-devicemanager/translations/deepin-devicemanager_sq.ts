@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="45"/>
         <source>Feedback</source>
-        <translation>Feedbajt</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="57"/>
@@ -30,7 +30,7 @@
         <location filename="../src/Widget/DetailTreeView.cpp" line="173"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="405"/>
         <source>Collapse</source>
-        <translation>Tkurre</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="355"/>
         <source>Chip</source>
-        <translation>Chip</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="356"/>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="344"/>
         <source>SysFS_Path</source>
-        <translation>SysFS_Path</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="345"/>
@@ -139,12 +139,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="346"/>
         <source>Revision</source>
-        <translation>Revisjon</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="347"/>
         <source>KernelModeDriver</source>
-        <translation>Driver Modë Kernel</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="357"/>
@@ -200,7 +200,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="255"/>
         <source>Chipset</source>
-        <translation>Chipset</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -389,12 +389,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
         <source>Core ID</source>
-        <translation>ID e Këndit</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="79"/>
         <source>Threads</source>
-        <translation>Tredha</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="82"/>
@@ -426,7 +426,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="128"/>
         <source>Core(s)</source>
-        <translation>Kënd(s)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="282"/>
@@ -446,7 +446,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>L4 Cache</source>
-        <translation>L4 Cache</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
@@ -471,7 +471,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="290"/>
         <source>Stepping</source>
-        <translation>Step</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="301"/>
@@ -590,7 +590,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="363"/>
         <source>DigitalOutput</source>
-        <translation>Output Digital</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="364"/>
@@ -940,7 +940,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="152"/>
         <source>Locator</source>
-        <translation>Indikator</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="153"/>
@@ -1090,12 +1090,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="309"/>
         <source>Maximum Rate</source>
-        <translation>Rritja Maksimale</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="310"/>
         <source>Negotiation Rate</source>
-        <translation>Rritja e Nogjuar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="311"/>
@@ -1140,7 +1140,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="319"/>
         <source>Auto Negotiation</source>
-        <translation>Nogjimi Auto</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="322"/>
@@ -1344,12 +1344,12 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="187"/>
         <source>Design Capacity</source>
-        <translation>Kapaciteti i Designit</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="188"/>
         <source>Design Voltage</source>
-        <translation>Tenshia e Designit</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="189"/>
@@ -1369,7 +1369,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="192"/>
         <source>SBDS Chemistry</source>
-        <translation>Kimi i SBDS</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="193"/>
@@ -1653,7 +1653,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="409"/>
         <source>Hardware</source>
-        <translation>Hardware</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="409"/>
@@ -1967,7 +1967,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="638"/>
         <source>Feedback</source>
-        <translation>Feedbajt</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2208,7 +2208,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="328"/>
         <source>Phys</source>
-        <translation>Fizik</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="329"/>
@@ -2218,7 +2218,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="330"/>
         <source>Handlers</source>
-        <translation>Shërbimë</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="331"/>
@@ -2278,7 +2278,7 @@
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="126"/>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="240"/>
         <source>Physical Memory Array</source>
-        <translation>Masjina Fizike të Memorisë</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="186"/>
@@ -2293,7 +2293,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="188"/>
         <source>Runtime Size</source>
-        <translation>Mëdha e Ejektores</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="189"/>
@@ -2349,7 +2349,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="199"/>
         <source>Chassis Handle</source>
-        <translation>Kontrolli Këndi i Kapsules</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="200"/>
@@ -2360,7 +2360,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="201"/>
         <source>Contained Object Handles</source>
-        <translation>Kontrolli Objekte të Mbuluar</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="205"/>
@@ -2388,7 +2388,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="212"/>
         <source>Lock</source>
-        <translation>Blokuje</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="215"/>
@@ -2449,7 +2449,7 @@
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="228"/>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="122"/>
         <source>Error Information Handle</source>
-        <translation>Kontrolli Informacioneve të Shikimites të Gabitës</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBios.cpp" line="229"/>
@@ -2577,27 +2577,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="240"/>
         <source>Powered</source>
-        <translation>Po Përgjigjet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="241"/>
         <source>Discoverable</source>
-        <translation>Shërbimi i Discoverable</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="242"/>
         <source>Pairable</source>
-        <translation>Shërbimi i Pairable</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="244"/>
         <source>Modalias</source>
-        <translation>Modalias</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceBluetooth.cpp" line="245"/>
         <source>Discovering</source>
-        <translation>Po Discovering</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="118"/>
@@ -2647,7 +2647,7 @@
         <location filename="../src/DeviceManager/DeviceCdrom.cpp" line="130"/>
         <location filename="../src/DeviceManager/DeviceStorage.cpp" line="628"/>
         <source>ansiversion</source>
-        <translation>ansiversion</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
@@ -2667,12 +2667,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
         <source>CPU part</source>
-        <translation>Bërë nga CPU</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
         <source>CPU revision</source>
-        <translation>Revisioni i CPU-së</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="317"/>
@@ -2702,7 +2702,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
         <source>Nine</source>
-        <translation>Nëna</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
@@ -3059,7 +3059,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="522"/>
         <source>Uniq</source>
-        <translation>Uniq</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInput.cpp" line="526"/>
@@ -3373,22 +3373,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="121"/>
         <source>Array Handle</source>
-        <translation>Kontrolli Array-ut</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="123"/>
         <source>Form Factor</source>
-        <translation>Formë e Formatit</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="124"/>
         <source>Set</source>
-        <translation>Poza</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="125"/>
         <source>Bank Locator</source>
-        <translation>Banki i Lokatorit</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="126"/>
@@ -3403,7 +3403,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="129"/>
         <source>Rank</source>
-        <translation>Rank</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="130"/>
@@ -3443,12 +3443,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="137"/>
         <source>Non-Volatile Size</source>
-        <translation>Mëdha e sështës së Sëshës së Sëshës</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="138"/>
         <source>Volatile Size</source>
-        <translation>Mëdha e Sëshës së Sëshës</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="139"/>
@@ -3479,7 +3479,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="287"/>
         <source>ioport</source>
-        <translation>ioport</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceNetwork.cpp" line="288"/>
@@ -3494,7 +3494,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="149"/>
         <source>native-path</source>
-        <translation>native-path</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="150"/>
@@ -3549,7 +3549,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="160"/>
         <source>energy-full-design</source>
-        <translation>Shtrimi i plotë të energjisë</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="161"/>
@@ -3579,7 +3579,7 @@
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="167"/>
         <source>online</source>
-        <translation>Po online</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DevicePower.cpp" line="168"/>
