@@ -1,5 +1,4 @@
-# device-manager_EN.md
-# Device Manager | deepin-devicemanager
+# Device Manager|deepin-devicemanager|
 
 ## Overview
 
