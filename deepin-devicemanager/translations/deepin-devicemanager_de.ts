@@ -1943,7 +1943,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="116"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="494"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Treiber Einrichtung</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="100"/>
@@ -1951,13 +1951,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="117"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="496"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Treiber-Sicherung</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="118"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="498"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Treiber-Wiederherstellung</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="637"/>
@@ -1975,12 +1975,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="97"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>Es gibt keine Treiber wiederherzustellen, bitte zuerst Daten sichern</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="100"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Gehen Sie zur Treiber-Sicherung </translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="126"/>
@@ -2028,17 +2028,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="123"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Treiber Einrichtung</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="123"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Treiber-Sicherung</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="123"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Treiber-Wiederherstellung</translation>
     </message>
 </context>
 <context>
@@ -2168,13 +2168,13 @@
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="322"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="45"/>
         <source>SubVendor</source>
-        <translation type="unfinished"/>
+        <translation>Unter-Anbieter</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="323"/>
         <location filename="../src/DeviceManager/DeviceGpu.cpp" line="46"/>
         <source>SubDevice</source>
-        <translation type="unfinished"/>
+        <translation>Unter-Gerät</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceAudio.cpp" line="336"/>
