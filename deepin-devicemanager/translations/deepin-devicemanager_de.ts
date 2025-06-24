@@ -3140,18 +3140,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="635"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Treiber-Wiederherstellung fehlgeschlagen!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="631"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="36"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Bitte nochmals versuchen oder Rückmeldung an uns geben</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="42"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Treiber-Sicherung fehlgeschlagen!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1367"/>
@@ -3423,7 +3423,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="133"/>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>Modul-Hersteller-ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceMemory.cpp" line="134"/>
@@ -3844,7 +3844,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="573"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>%1-Treiber sichern, von insgesamt %2 Treibern</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="574"/>
@@ -3859,7 +3859,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="614"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>Treiber sichern fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="616"/>
@@ -3995,12 +3995,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="702"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Treiber werden gerade installiert, was unterbrochen wird, wenn Sie weggehen.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="715"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Treiber werden gerade wiederhergestellt, was unterbrochen wird, wenn Sie weggehen.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="36"/>
