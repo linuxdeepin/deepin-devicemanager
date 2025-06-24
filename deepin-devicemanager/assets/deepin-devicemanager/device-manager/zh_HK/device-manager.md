@@ -1,5 +1,4 @@
-# device-manager_香港繁體.md
-# 裝置管理員 | deepin-devicemanager
+# 裝置管理員|deepin-devicemanager|
 
 ## 概述
 

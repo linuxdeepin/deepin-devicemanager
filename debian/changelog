@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.43) unstable; urgency=medium
+
+  * fix bugs
+
+ -- Liu Zhangjian <liuzhangjian@uniontech.com>  Tue, 24 Jun 2025 17:51:19 +0800
+
 deepin-devicemanager (6.0.42) unstable; urgency=medium
 
   * chore: New version 6.0.42.
