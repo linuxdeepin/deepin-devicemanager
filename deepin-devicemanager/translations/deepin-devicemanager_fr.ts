@@ -446,7 +446,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="285"/>
         <source>L4 Cache</source>
-        <translation type="unfinished"/>
+        <translation>Cache L4</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="286"/>
@@ -2702,7 +2702,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="322"/>
         <source>Nine</source>
-        <translation type="unfinished"/>
+        <translation>Neuf</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="323"/>
