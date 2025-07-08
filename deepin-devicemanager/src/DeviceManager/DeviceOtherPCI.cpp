@@ -4,6 +4,9 @@
 
 // 项目自身文件
 #include "DeviceOtherPCI.h"
+#include "DDLog.h"
+
+using namespace DDLog;
 
 DeviceOtherPCI::DeviceOtherPCI()
     : DeviceBaseInfo()
@@ -17,11 +20,12 @@ DeviceOtherPCI::DeviceOtherPCI()
     , m_Latency("")
     , m_InputOutput("")
 {
-
+    qCDebug(appLog) << "DeviceOtherPCI::DeviceOtherPCI()";
 }
 
 TomlFixMethod DeviceOtherPCI::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceOtherPCI::setInfoFromTomlOneByOne";
     TomlFixMethod ret = TOML_None;
    // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Model", m_Model);
@@ -40,36 +44,42 @@ TomlFixMethod DeviceOtherPCI::setInfoFromTomlOneByOne(const QMap<QString, QStrin
 
 const QString &DeviceOtherPCI::name()const
 {
+    // qCDebug(appLog) << "DeviceOtherPCI::name";
     return m_Name;
 }
 
 const QString &DeviceOtherPCI::vendor() const
 {
+    // qCDebug(appLog) << "DeviceOtherPCI::vendor";
     return m_Vendor;
 }
 
 const QString &DeviceOtherPCI::driver()const
 {
+    // qCDebug(appLog) << "DeviceOtherPCI::driver";
     return m_Driver;
 }
 
 QString DeviceOtherPCI::subTitle()
 {
+    // qCDebug(appLog) << "DeviceOtherPCI::subTitle";
     return m_Model;
 }
 
 const QString DeviceOtherPCI::getOverviewInfo()
 {
+    // qCDebug(appLog) << "DeviceOtherPCI::getOverviewInfo";
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
 void DeviceOtherPCI::initFilterKey()
 {
-
+    // qCDebug(appLog) << "DeviceOtherPCI::initFilterKey";
 }
 
 void DeviceOtherPCI::loadBaseDeviceInfo()
 {
+    qCDebug(appLog) << "DeviceOtherPCI::loadBaseDeviceInfo";
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name.isEmpty() ? m_Vendor + m_Model : m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
@@ -80,6 +90,7 @@ void DeviceOtherPCI::loadBaseDeviceInfo()
 
 void DeviceOtherPCI::loadOtherDeviceInfo()
 {
+    qCDebug(appLog) << "DeviceOtherPCI::loadOtherDeviceInfo";
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Input/Output"), m_InputOutput);
     addOtherDeviceInfo(tr("Memory"), m_Memory);
@@ -96,6 +107,7 @@ void DeviceOtherPCI::loadOtherDeviceInfo()
 
 void DeviceOtherPCI::loadTableData()
 {
+    qCDebug(appLog) << "DeviceOtherPCI::loadTableData";
     // 加载表格数据
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);

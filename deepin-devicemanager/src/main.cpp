@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
 
     // /usr/bin/devicemanager notify
     if (argc > 2 && QString(argv[1]).contains("notify")) {
+        qCDebug(appLog) << "Starting notification process";
         notify(argc, argv);
         return -1;
     }
@@ -74,6 +75,7 @@ int main(int argc, char *argv[])
     #endif
 
     if (!QString(qgetenv("XDG_CURRENT_DESKTOP")).toLower().startsWith("deepin")) {
+        qCDebug(appLog) << "XDG_CURRENT_DESKTOP is not deepin, setting it to Deepin";
         setenv("XDG_CURRENT_DESKTOP", "Deepin", 1);
     }
 
@@ -118,6 +120,7 @@ int main(int argc, char *argv[])
         QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
 
         if (false == appIcon.isNull()) {
+            qCDebug(appLog) << "Setting application icon";
             app.setProductIcon(appIcon);
             app.setWindowIcon(appIcon);
         }
@@ -149,6 +152,7 @@ int main(int argc, char *argv[])
 
 void notify(int argc, char *argv[])
 {
+    qCDebug(appLog) << "Starting notification process";
     // 1. 连接到dbus
     qCDebug(appLog) << "Starting notification process";
     if (!QDBusConnection::sessionBus().isConnected()) {
@@ -163,12 +167,15 @@ void notify(int argc, char *argv[])
     QString view = QObject::tr("View");
     QString l = QString(argv[2]);
     if ("zh_CN" == l) {
+        qCDebug(appLog) << "Setting notification language to zh_CN";
         body = QString("您有驱动可进行安装/更新");
         view = QString("查 看");
     } else if ("zh_HK" == l) {
+        qCDebug(appLog) << "Setting notification language to zh_HK";
         body = QString("您有驅動可進行安裝/更新");
         view = QString("查 看");
     } else if ("zh_TW" == l) {
+        qCDebug(appLog) << "Setting notification language to zh_TW";
         body = QString("您有驅動可進行安裝/更新");
         view = QString("查 看");
     }
@@ -189,6 +196,7 @@ void notify(int argc, char *argv[])
     int timeout = 3000;
 
     int count = 0;
+    qCDebug(appLog) << "Attempting to send notification...";
     while (count < 10) {
         QDBusReply<uint32_t> reply  = mp_Iface->call("Notify", appname, replaces_id, appicon, title, body, actionlist, hints, timeout);
         if (reply.isValid()) {

@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DevicePower.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include<QFileInfo>
@@ -12,6 +13,7 @@
 #include <DApplication>
 
 DWIDGET_USE_NAMESPACE
+using namespace DDLog;
 
 DevicePower::DevicePower()
     : DeviceBaseInfo()
@@ -35,12 +37,14 @@ DevicePower::DevicePower()
     , m_Temp("")
 
 {
+    qCDebug(appLog) << "DevicePower::DevicePower()";
     // 初始化可显示属性
     initFilterKey();
 }
 
 TomlFixMethod DevicePower::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DevicePower::setInfoFromTomlOneByOne";
     TomlFixMethod ret = TOML_None;
     // 添加基本信息    
     ret = setTomlAttribute(mapInfo, "Model", m_Model);    
@@ -64,8 +68,10 @@ TomlFixMethod DevicePower::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 
 bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DevicePower::setInfoFromUpower";
     // 设置upower中获取的信息
     if (mapInfo["Device"].contains("line_power", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "DevicePower::setInfoFromUpower, device contains line_power";
         return false;
     }
     // m_Name = QObject::tr("battery");  
@@ -107,6 +113,7 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
 
 void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DevicePower::setDaemonInfo";
     // 设置守护进程信息
     if (m_Name == QObject::tr("battery"))
         getOtherMapInfo(mapInfo);
@@ -114,37 +121,44 @@ void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 
 const QString &DevicePower::name()const
 {
+    // qCDebug(appLog) << "DevicePower::name";
     return m_Name;
 }
 
 const QString &DevicePower::vendor() const
 {
+    // qCDebug(appLog) << "DevicePower::vendor";
     return m_Vendor;
 }
 
 const QString &DevicePower::driver() const
 {
+    // qCDebug(appLog) << "DevicePower::driver";
     return m_Driver;
 }
 
 bool DevicePower::available()
 {
+    // qCDebug(appLog) << "DevicePower::available";
     return true;
 }
 
 QString DevicePower::subTitle()
 {
+    // qCDebug(appLog) << "DevicePower::subTitle";
     return m_Name;
 }
 
 const QString DevicePower::getOverviewInfo()
 {
+    // qCDebug(appLog) << "DevicePower::getOverviewInfo";
     // 获取概况信息
     return DApplication::translate("ManulTrack", m_Name.trimmed().toStdString().data(), "");
 }
 
 void DevicePower::initFilterKey()
 {
+    qCDebug(appLog) << "DevicePower::initFilterKey";
     // 初始化可显示属性
     addFilterKey(QObject::tr("native-path"));
     addFilterKey(QObject::tr("power supply"));
@@ -174,6 +188,7 @@ void DevicePower::initFilterKey()
 
 void DevicePower::loadBaseDeviceInfo()
 {
+    qCDebug(appLog) << "DevicePower::loadBaseDeviceInfo";
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Model"), m_Model);
@@ -195,12 +210,14 @@ void DevicePower::loadBaseDeviceInfo()
 
 void DevicePower::loadOtherDeviceInfo()
 {
+    qCDebug(appLog) << "DevicePower::loadOtherDeviceInfo";
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
 }
 
 void DevicePower::loadTableData()
 {
+    qCDebug(appLog) << "DevicePower::loadTableData";
     // 加载表格信息
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);

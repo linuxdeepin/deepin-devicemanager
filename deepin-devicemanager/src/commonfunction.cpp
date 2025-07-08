@@ -54,73 +54,100 @@ QString Common::getArchStore()
 
 static bool getDeviceInfo(QString &deviceInfo, const QString &debugFile)
 {
+    qCDebug(appLog) << "Getting device info for" << debugFile;
     QString key = debugFile;
     key.replace(".txt", "");
-    if (DBusInterface::getInstance()->getInfo(key, deviceInfo))
+    if (DBusInterface::getInstance()->getInfo(key, deviceInfo)) {
+        qCDebug(appLog) << "Successfully get device info from D-Bus for" << key;
         return true;
+    }
 
     // deviceInfo 不为空时信息已读取
-    if (!deviceInfo.isEmpty())
+    if (!deviceInfo.isEmpty()) {
+        qCDebug(appLog) << "Device info already exists for" << key;
         return true;
+    }
 
     // 从文件中获取设备信息
+    qCDebug(appLog) << "Getting device info from file for" << debugFile;
     QFile inputDeviceFile(DEVICEINFO_PATH + "/" + debugFile);
-    if (false == inputDeviceFile.open(QIODevice::ReadOnly))
+    if (false == inputDeviceFile.open(QIODevice::ReadOnly)) {
+        qCWarning(appLog) << "Failed to open device info file:" << inputDeviceFile.fileName();
         return false;
+    }
 
     deviceInfo = inputDeviceFile.readAll();
     inputDeviceFile.close();
 
+    qCDebug(appLog) << "Successfully get device info from file for" << debugFile;
     return true;
 }
 
 static bool isModeM900(void)
 {
+    qCDebug(appLog) << "Checking if mode is M900";
     QFile file("/proc/cpuinfo");   // Hardware        : PANGU M900
     if (file.open(QIODevice::ReadOnly)){
         QString cpuInfo = file.readAll();
         file.close();
         if(cpuInfo.contains("Hardware") && cpuInfo.contains("PANGU M900")){
+            qCDebug(appLog) << "Mode is M900";
             return true;
         }
+    } else {
+        qCWarning(appLog) << "Failed to open /proc/cpuinfo";
     }
+    qCDebug(appLog) << "Mode is not M900";
     return false;
 }
 /*   dmidecode | grep -i "String 4"中的值来区分主板类型,PWC30表示PanguW（也就是W525）*/
 static bool isModeW525(void)
 {
+    qCDebug(appLog) << "Checking if mode is W525";
     QString outInfo = Common::executeClientCmd("dmidecode");
-    if(outInfo.isEmpty())
+    if(outInfo.isEmpty()) {
+        qCWarning(appLog) << "dmidecode command output is empty";
         return false;
+    }
 
     // 使用正则表达式进行匹配
     QRegularExpression regex("String 4: (.*)");
     QRegularExpressionMatch match = regex.match(outInfo);
     if (match.hasMatch()) {
-        return match.captured(1).contains("PWC30", Qt::CaseInsensitive);  // 返回匹配的内容
+        bool contains = match.captured(1).contains("PWC30", Qt::CaseInsensitive);
+        qCDebug(appLog) << "Mode is W525:" << contains;
+        return contains;  // 返回匹配的内容
     } else {
+        qCDebug(appLog) << "No match found for W525 mode";
        return false; // 返回空字符串，表示没有找到
     }
 }
 
 static QString readDmidecode11_String4(void)
 {
+    qCDebug(appLog) << "Reading dmidecode -t 11 String 4";
     QString outInfo = Common::executeClientCmd("dmidecode", QStringList() << "-t" << "11");
-    if(outInfo.isEmpty())
+    if(outInfo.isEmpty()) {
+        qCWarning(appLog) << "dmidecode -t 11 output is empty";
         return QString("");
+    }
 
     // 使用正则表达式进行匹配
     QRegularExpression regex("String 4: (.*)");
     QRegularExpressionMatch match = regex.match(outInfo);
     if (match.hasMatch()) {
-        return match.captured(1).trimmed(); // 返回匹配的内容
+        QString result = match.captured(1).trimmed();
+        qCDebug(appLog) << "Found String 4:" << result;
+        return result; // 返回匹配的内容
     } else {
+        qCDebug(appLog) << "No String 4 found in dmidecode -t 11 output";
         return QString(); // 返回空字符串，表示没有找到
     }
 }
 
 QString Common::checkBoardVendorFlag()
 {
+    qCDebug(appLog) << "Checking board vendor flag, specialComType:" << specialComType;
     if(specialComType != -1){
         switch (specialComType) {
         case NormalCom:
@@ -151,6 +178,7 @@ QString Common::checkBoardVendorFlag()
         process.waitForFinished(-1);
         QString info = process.readAllStandardOutput();
         if (info.isEmpty()) {
+            qCDebug(appLog) << "dmidecode output is empty, getting info from file";
             getDeviceInfo(info, "dmidecode_spn.txt");
         }
         if (info.contains("KLVV", Qt::CaseInsensitive) || info.contains("L540", Qt::CaseInsensitive)) {
@@ -167,6 +195,7 @@ QString Common::checkBoardVendorFlag()
         process.close();
 
         if(boardVendorKey.isEmpty() && (isModeM900() || isModeW525())){
+            qCDebug(appLog) << "Board vendor key is empty, checking for M900 or W525 mode";
             boardVendorKey = "PGUW";
         }
         qCInfo(appLog) << "boardVendorKey:" <<  boardVendorKey;
@@ -178,6 +207,7 @@ QString Common::checkBoardVendorFlag()
 
 QString Common::boardVendorType()
 {
+    qCDebug(appLog) << "Getting board vendor type, initBoardVendorFlag:" << initBoardVendorFlag;
     return initBoardVendorFlag ? boardVendorKey : checkBoardVendorFlag();
 }
 
@@ -186,11 +216,14 @@ QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args,
     qCDebug(appLog) << "Executing command:" << cmd << "args:" << args;
 
     QProcess process;
-    if (!workPath.isEmpty())
+    if (!workPath.isEmpty()) {
+        qCDebug(appLog) << "Setting working directory to" << workPath;
         process.setWorkingDirectory(workPath);
+    }
 
-        if (useEnv) {
-            QStringList env = QProcess::systemEnvironment();
+    if (useEnv) {
+        qCDebug(appLog) << "Setting process environment";
+        QStringList env = QProcess::systemEnvironment();
         bool hasLang = false;
         bool hasLanguage = false;
         for (const QString &e : env) {

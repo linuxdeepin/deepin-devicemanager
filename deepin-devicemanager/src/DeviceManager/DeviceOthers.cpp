@@ -5,7 +5,11 @@
 // 项目自身文件
 #include "DeviceOthers.h"
 #include "DBusEnableInterface.h"
+#include "DDLog.h"
 #include <QRegularExpression>
+
+using namespace DDLog;
+
 DeviceOthers::DeviceOthers()
     : DeviceBaseInfo()
     , m_Model("")
@@ -15,6 +19,7 @@ DeviceOthers::DeviceOthers()
     , m_Speed("")
     , m_LogicalName("")
 {
+    qCDebug(appLog) << "DeviceOthers::DeviceOthers()";
     initFilterKey();
     m_CanEnable = true;
     m_CanUninstall = true;
@@ -22,8 +27,11 @@ DeviceOthers::DeviceOthers()
 
 void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
-    if (!matchToLshw(mapInfo))
+    qCDebug(appLog) << "DeviceOthers::setInfoFromLshw";
+    if (!matchToLshw(mapInfo)) {
+        qCDebug(appLog) << "DeviceOthers::setInfoFromLshw, not match to lshw";
         return;
+    }
     QString            tmp_Name = m_Name;
     setAttribute(mapInfo, "product", m_Name, false);
     setAttribute(mapInfo, "vendor", m_Vendor, false);
@@ -37,6 +45,7 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "logical name", m_LogicalName);
 
     if(m_Driver.isEmpty() && !m_Avail.compare("yes", Qt::CaseInsensitive)){
+        qCDebug(appLog) << "DeviceOthers::setInfoFromLshw, driver is empty and avail is yes";
         setForcedDisplay(true);
         setCanEnale(false);
         if(!(tmp_Name.contains("fingerprint", Qt::CaseInsensitive) || tmp_Name. contains("MOH", Qt::CaseInsensitive)))
@@ -45,12 +54,14 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
     // 核内驱动不显示卸载菜单
     if (driverIsKernelIn(m_Driver)) {
+        qCDebug(appLog) << "DeviceOthers::setInfoFromLshw, driver is kernel in";
         m_CanUninstall = false;
     }
 }
 
 TomlFixMethod DeviceOthers::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceOthers::setInfoFromTomlOneByOne";
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Model", m_Model);
@@ -67,6 +78,7 @@ TomlFixMethod DeviceOthers::setInfoFromTomlOneByOne(const QMap<QString, QString>
 
 void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceOthers::setInfoFromHwinfo";
     // 设置设备基本属性
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -79,28 +91,35 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     /* 禁用时提示获取序列号失败*/
     setAttribute(mapInfo, "Unique ID", m_UniqueID);
     // 防止Serial ID为空
-    if (m_SerialID.isEmpty())
+    if (m_SerialID.isEmpty()) {
+        qCDebug(appLog) << "DeviceOthers::setInfoFromHwinfo, serial id is empty";
         m_SerialID = m_UniqueID;
+    }
 
     setAttribute(mapInfo, "Module Alias", m_Modalias);
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
     m_PhysID = m_VID_PID;
 
     if (mapInfo["Hardware Class"] != "fingerprint") {
+        qCDebug(appLog) << "DeviceOthers::setInfoFromHwinfo, hardware class is not fingerprint";
         m_HardwareClass = "others";
     } else {
+        qCDebug(appLog) << "DeviceOthers::setInfoFromHwinfo, hardware class is fingerprint";
         // 机器自带指纹模块不支持禁用,和卸载驱动
         setAttribute(mapInfo, "Hardware Class", m_HardwareClass);
         m_CanEnable = false;
         m_CanUninstall = false;
     }
     setAttribute(mapInfo, "cfg_avail", m_Avail);
-    if(!m_Avail.compare("yes", Qt::CaseInsensitive))
+    if(!m_Avail.compare("yes", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "DeviceOthers::setInfoFromHwinfo, avail is yes";
         setForcedDisplay(true);
+    }
 
     getOtherMapInfo(mapInfo);
     // 核内驱动不显示卸载菜单
     if (driverIsKernelIn(m_Driver)) {
+        qCDebug(appLog) << "DeviceOthers::setInfoFromHwinfo, driver is kernel in";
         m_CanUninstall = false;
     }
 
@@ -114,15 +133,19 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
 EnableDeviceStatus DeviceOthers::setEnable(bool e)
 {
+    qCDebug(appLog) << "DeviceOthers::setEnable, enable:" << e;
     if (m_SerialID.isEmpty()) {
+        qCDebug(appLog) << "DeviceOthers::setEnable, serial id is empty";
         return EDS_NoSerial;
     }
 
     if (m_UniqueID.isEmpty() || m_SysPath.isEmpty()) {
+        qCDebug(appLog) << "DeviceOthers::setEnable, unique id or sys path is empty";
         return EDS_Faild;
     }
     bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e);
     if (res) {
+        qCDebug(appLog) << "DeviceOthers::setEnable, enable success";
         m_Enable = e;
     }
     // 设置设备状态
@@ -131,42 +154,51 @@ EnableDeviceStatus DeviceOthers::setEnable(bool e)
 
 const QString &DeviceOthers::name()const
 {
+    // qCDebug(appLog) << "DeviceOthers::name";
     return m_Name;
 }
 
 const QString &DeviceOthers::vendor() const
 {
+    // qCDebug(appLog) << "DeviceOthers::vendor";
     return m_Vendor;
 }
 
 const QString &DeviceOthers::busInfo()const
 {
+    // qCDebug(appLog) << "DeviceOthers::busInfo";
     return m_BusInfo;
 }
 
 const QString &DeviceOthers::driver()const
 {
+    // qCDebug(appLog) << "DeviceOthers::driver";
     return m_Driver;
 }
 
 const QString &DeviceOthers::logicalName()const
 {
+    // qCDebug(appLog) << "DeviceOthers::logicalName";
     return m_LogicalName;
 }
 
 QString DeviceOthers::subTitle()
 {
+    // qCDebug(appLog) << "DeviceOthers::subTitle";
     return m_Model;
 }
 
 const QString DeviceOthers::getOverviewInfo()
 {
+    // qCDebug(appLog) << "DeviceOthers::getOverviewInfo";
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
 bool DeviceOthers::available()
 {
+    qCDebug(appLog) << "DeviceOthers::available";
     if (driver().isEmpty() && m_HardwareClass == "others") {
+        qCDebug(appLog) << "DeviceOthers::available, driver is empty and hardware class is others";
         m_Available = false;
     }
     return m_forcedDisplay ? m_forcedDisplay : m_Available;
@@ -174,12 +206,14 @@ bool DeviceOthers::available()
 
 void DeviceOthers::initFilterKey()
 {
+    // qCDebug(appLog) << "DeviceOthers::initFilterKey";
     addFilterKey(QObject::tr("Device File"));
     addFilterKey(QObject::tr("Hardware Class"));
 }
 
 void DeviceOthers::loadBaseDeviceInfo()
 {
+    qCDebug(appLog) << "DeviceOthers::loadBaseDeviceInfo";
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
@@ -194,6 +228,7 @@ void DeviceOthers::loadBaseDeviceInfo()
 
 void DeviceOthers::loadOtherDeviceInfo()
 {
+    qCDebug(appLog) << "DeviceOthers::loadOtherDeviceInfo";
     if (m_SerialID != m_UniqueID)
         addOtherDeviceInfo(tr("Serial Number"), m_SerialID);
     mapInfoToList();
@@ -201,12 +236,15 @@ void DeviceOthers::loadOtherDeviceInfo()
 
 void DeviceOthers::loadTableData()
 {
+    qCDebug(appLog) << "DeviceOthers::loadTableData";
     // 加载表格数据
     QString tName = m_Name;
     if (!available()) {
+        qCDebug(appLog) << "DeviceOthers::loadTableData, not available";
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
     if (!enable()) {
+        qCDebug(appLog) << "DeviceOthers::loadTableData, not enable";
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 

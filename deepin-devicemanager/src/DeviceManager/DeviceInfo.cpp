@@ -38,127 +38,175 @@ DeviceBaseInfo::DeviceBaseInfo(QObject *parent)
     , m_forcedDisplay(false)
     , m_Driver("")
 {
+    qCDebug(appLog) << "DeviceBaseInfo constructor initialized.";
 }
 
 DeviceBaseInfo::~DeviceBaseInfo()
 {
-
+    qCDebug(appLog) << "DeviceBaseInfo destructor called.";
 }
 
 const QList<QPair<QString, QString>> &DeviceBaseInfo::getOtherAttribs()
 {
+    qCDebug(appLog) << "DeviceBaseInfo::getOtherAttribs called.";
     // 获取其他设备信息列表
     m_LstOtherInfo.clear();
     loadOtherDeviceInfo();
+    qCDebug(appLog) << "Other attributes loaded. Count: " << m_LstOtherInfo.count();
     return m_LstOtherInfo;
 }
 
 const QList<QPair<QString, QString> > &DeviceBaseInfo::getBaseAttribs()
 {
+    qCDebug(appLog) << "DeviceBaseInfo::getBaseAttribs called.";
     // 获取基本信息列表
     m_LstBaseInfo.clear();
     loadBaseDeviceInfo();
+    qCDebug(appLog) << "Base attributes loaded. Count: " << m_LstBaseInfo.count();
     return m_LstBaseInfo;
 }
 
 const QStringList &DeviceBaseInfo::getTableHeader()
 {
+    qCDebug(appLog) << "DeviceBaseInfo::getTableHeader called.";
     // 获取表头
     if (m_TableHeader.size() == 0) {
+        qCDebug(appLog) << "Table header is empty, loading.";
         loadTableHeader();
         m_TableHeader.append(m_CanEnable ? "yes" : "no");
     }
-
+    qCDebug(appLog) << "Table header: " << m_TableHeader;
     return m_TableHeader;
 }
 
 const QStringList &DeviceBaseInfo::getTableData()
 {
+    qCDebug(appLog) << "DeviceBaseInfo::getTableData called.";
     // 获取表格数据
     m_TableData.clear();
     loadTableData();
+    qCDebug(appLog) << "Table data loaded. Count: " << m_TableData.count();
     return m_TableData;
 }
 
 QString DeviceBaseInfo::subTitle()
 {
+    qCDebug(appLog) << "DeviceBaseInfo::subTitle called, returning empty string as default.";
     return QString("");
 }
 
 bool DeviceBaseInfo::isValueValid(QString &value)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::isValueValid called for value: " << value;
     // 判断属性值是否有效
-    if (value.isEmpty())
+    if (value.isEmpty()) {
+        // qCDebug(appLog) << "Value is empty, returning false.";
         return false;
+    }
 
-    if (value == QObject::tr("Unknown"))
+    if (value == QObject::tr("Unknown")) {
+        // qCDebug(appLog) << "Value is 'Unknown', returning false.";
         return false;
+    }
 
-    if (value == QString("Unknown"))
+    if (value == QString("Unknown")) {
+        // qCDebug(appLog) << "Value is 'Unknown' (QString), returning false.";
         return false;
+    }
 
-    if (value.compare(QString("N/A"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("N/A"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'N/A', returning false.";
         return false;
+    }
 
-    if (value == QString(""))
+    if (value == QString("")) {
+        // qCDebug(appLog) << "Value is empty (QString), returning false.";
         return false;
+    }
 
-    if (value.compare(QString("Null"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("Null"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'Null', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("none"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("none"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'none', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("Not Provided"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("Not Provided"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'Not Provided', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("Not Specified"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("Not Specified"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'Not Specified', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("Default string"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("Default string"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'Default string', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("Unspecified"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("Unspecified"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'Unspecified', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("Not Present"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("Not Present"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'Not Present', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("<OUT OF SPEC>"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("<OUT OF SPEC>"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is '<OUT OF SPEC>', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("Other"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("Other"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'Other', returning false.";
         return false;
+    }
 
-    if (value.compare(QString("TBD"), Qt::CaseInsensitive) == 0)
+    if (value.compare(QString("TBD"), Qt::CaseInsensitive) == 0) {
+        // qCDebug(appLog) << "Value is 'TBD', returning false.";
         return false;
-
+    }
+    // qCDebug(appLog) << "Value is valid, returning true.";
     return true;
 }
 
 void DeviceBaseInfo::setForcedDisplay(const bool &flag)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::setForcedDisplay called with flag: " << flag;
     m_forcedDisplay = flag;
+    qCDebug(appLog) << "m_forcedDisplay set to: " << m_forcedDisplay;
 }
 
 void DeviceBaseInfo::toHtmlString(QDomDocument &doc)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::toHtmlString called.";
     // 设备信息转为Html
     baseInfoToHTML(doc, m_LstBaseInfo);
     baseInfoToHTML(doc, m_LstOtherInfo);
+    qCDebug(appLog) << "HTML string conversion finished.";
 }
 
 void DeviceBaseInfo::baseInfoToHTML(QDomDocument &doc, QList<QPair<QString, QString> > &infoLst)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::baseInfoToHTML called for info list.";
     // 设备信息转为HTML
     QDomElement table = doc.createElement("table");
     table.setAttribute("border", "0");
     table.setAttribute("width", "100%");
     table.setAttribute("cellpadding", "3");
+    qCDebug(appLog) << "HTML table element created.";
 
     // 添加HTML表格内容
     foreach (auto info, infoLst) {
         if (isValueValid(info.second)) {
+            // qCDebug(appLog) << "Adding valid info to HTML table: " << info.first << ": " << info.second;
             QDomElement tr = doc.createElement("tr");
 
             // 第一列
@@ -185,84 +233,109 @@ void DeviceBaseInfo::baseInfoToHTML(QDomDocument &doc, QList<QPair<QString, QStr
 
         doc.appendChild(table);
     }
+    qCDebug(appLog) << "Finished adding items to HTML table.";
 }
 
 void DeviceBaseInfo::subTitleToHTML(QDomDocument &doc)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::subTitleToHTML called.";
     // 子标题转为HTML格式
     if (false == this->subTitle().isEmpty()) {
+        qCDebug(appLog) << "Subtitle is not empty, adding to HTML: " << this->subTitle();
         QDomElement h3 = doc.createElement("h3");
         QDomText valueText = doc.createTextNode(this->subTitle());
         h3.appendChild(valueText);
         doc.appendChild(h3);
+    } else {
+        qCDebug(appLog) << "Subtitle is empty, skipping HTML addition.";
     }
 }
 
 void DeviceBaseInfo::toDocString(Docx::Document &doc)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::toDocString called.";
     // 设备信息转为doc
     baseInfoToDoc(doc, m_LstBaseInfo);
     baseInfoToDoc(doc, m_LstOtherInfo);
+    qCDebug(appLog) << "Doc string conversion finished.";
 }
 
 void DeviceBaseInfo::baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QString> > &infoLst)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::baseInfoToDoc called for info list.";
     // 设备信息保存为Doc
     foreach (auto item, infoLst) {
         QString value = item.second;
 
         // 判断属性值是否有效
-        if (false == isValueValid(value))
+        if (false == isValueValid(value)) {
+            // qCDebug(appLog) << "Skipping invalid info for Doc: " << item.first << ": " << item.second;
             continue;
+        }
 
         // 添加doc段落
         QString line = item.first + ":  " + item.second;
         doc.addParagraph(line);
+        // qCDebug(appLog) << "Added paragraph to Doc: " << line;
     }
+    qCDebug(appLog) << "Finished adding items to Doc.";
 }
 
 void DeviceBaseInfo::toXlsxString(QXlsx::Document &xlsx, QXlsx::Format &boldFont)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::toXlsxString called.";
     // 设备信息转为xlxs表格
     baseInfoToXlsx(xlsx, boldFont, m_LstBaseInfo);
     baseInfoToXlsx(xlsx, boldFont, m_LstOtherInfo);
+    qCDebug(appLog) << "Xlsx string conversion finished.";
 }
 
 void DeviceBaseInfo::baseInfoToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont, QList<QPair<QString, QString> > &infoLst)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::baseInfoToXlsx called for info list.";
     // 设置表格内容字体不加粗,字号10
     boldFont.setFontBold(false);
     boldFont.setFontSize(10);
+    qCDebug(appLog) << "Xlsx format set: bold=" << boldFont.fontBold() << ", size=" << boldFont.fontSize();
 
     foreach (auto item, infoLst) {
         QString value = item.second;
 
         // 判断属性值是否有效
-        if (false == isValueValid(value))
+        if (false == isValueValid(value)) {
+            // qCDebug(appLog) << "Skipping invalid info for Xlsx: " << item.first << ": " << item.second;
             continue;
+        }
 
         // 获取行数
         int _row = DeviceManager::instance()->currentXlsRow();
         xlsx.write(_row, 1, item.first, boldFont);
         xlsx.write(_row, 2, item.second, boldFont);
+        // qCDebug(appLog) << "Written to Xlsx at row " << _row << ": " << item.first << " = " << item.second;
     }
+    qCDebug(appLog) << "Finished writing items to Xlsx.";
 }
 
 void DeviceBaseInfo::toTxtString(QTextStream &out)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::toTxtString called.";
     // 设备信息转为txt
     baseInfoToTxt(out, m_LstBaseInfo);
     baseInfoToTxt(out, m_LstOtherInfo);
+    qCDebug(appLog) << "Txt string conversion finished.";
 }
 
 void DeviceBaseInfo::baseInfoToTxt(QTextStream &out, QList<QPair<QString, QString> > &infoLst)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::baseInfoToTxt called for info list.";
     foreach (auto item, infoLst) {
         QString value = item.second;
 
         // 判断属性值是否有效
-        if (false == isValueValid(value))
+        if (false == isValueValid(value)) {
+            // qCDebug(appLog) << "Skipping invalid info for Txt: " << item.first << ": " << item.second;
             continue;
+        }
 
         // 设置第一列占21个字符
         out.setFieldWidth(21);
@@ -271,146 +344,193 @@ void DeviceBaseInfo::baseInfoToTxt(QTextStream &out, QList<QPair<QString, QStrin
         out.setFieldWidth(0);
         out << item.second;
         out << "\n";
+        // qCDebug(appLog) << "Written to Txt: " << item.first << " = " << item.second;
     }
+    qCDebug(appLog) << "Finished writing items to Txt.";
 }
 
 void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::tableInfoToTxt called.";
     // 获取表格内容
     getTableData();
 
     // 判断是否有表格内容
-    if (m_TableData.size() < 1)
+    if (m_TableData.size() < 1) {
+        qCDebug(appLog) << "Table data is empty, skipping Txt conversion.";
         return;
+    }
 
     // 设置占位宽度
     QString text = m_TableData[0];
     out.setFieldWidth(int(text.size() * 1.5));
     out.setFieldAlignment(QTextStream::FieldAlignment::AlignRight);
+    qCDebug(appLog) << "Txt field width set for table info.";
 
     foreach (auto item, m_TableData) {
         out.setFieldWidth(28);
         out << item;
+        // qCDebug(appLog) << "Written table item to Txt: " << item;
     }
 
     out.setFieldWidth(0);
     out << "\n";
+    qCDebug(appLog) << "Finished writing table info to Txt.";
 }
 
 void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::tableHeaderToTxt called.";
     // 获取表头
     getTableHeader();
 
     // 判断是否有表头
-    if (m_TableHeader.size() < 1)
+    if (m_TableHeader.size() < 1) {
+        qCDebug(appLog) << "Table header is empty, skipping Txt conversion.";
         return;
+    }
 
     // 设置占位宽度
     QString text = m_TableHeader[0];
     out.setFieldWidth(int(text.size() * 1.5));
     out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
+    qCDebug(appLog) << "Txt field width set for table header.";
 
     out << "\n";
     for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
         out.setFieldWidth(30);
         out << m_TableHeader[col];
+        // qCDebug(appLog) << "Written table header item to Txt: " << m_TableHeader[col];
     }
     out.setFieldWidth(0);
     out << "\n";
+    qCDebug(appLog) << "Finished writing table header to Txt.";
 }
 
 void DeviceBaseInfo::tableInfoToHtml(QFile &html)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::tableInfoToHtml called.";
     // 获取表格内容
     getTableData();
 
     // 判断是否有表格内容
-    if (m_TableData.size() < 1)
+    if (m_TableData.size() < 1) {
+        qCDebug(appLog) << "Table data is empty, skipping HTML table info conversion.";
         return;
+    }
 
     // 写表格内容
     foreach (auto item, m_TableData) {
         html.write(QString("<td style=\"width:200px;text-align:left;\">" + item + "</td>").toUtf8().data());
+        // qCDebug(appLog) << "Written table info item to HTML: " << item;
     }
 
     html.write("</tr>\n");
+    qCDebug(appLog) << "Finished writing table info to HTML.";
 }
 
 void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::tableHeaderToHtml called.";
     // 获取表头信息
     getTableHeader();
 
     // 判断是否有表头
-    if (m_TableHeader.size() < 1)
+    if (m_TableHeader.size() < 1) {
+        qCDebug(appLog) << "Table header is empty, skipping HTML table header conversion.";
         return;
+    }
 
     html.write("<thead><tr>\n");
+    qCDebug(appLog) << "Written HTML table header start tags.";
 
     // 写表头内容
-    for (int col = 0; col < m_TableHeader.size() - 1; ++col)
+    for (int col = 0; col < m_TableHeader.size() - 1; ++col) {
         html.write(QString("<th style=\"width:200px;text-align:left; white-space:pre;\">" + m_TableHeader[col] + "</th>").toUtf8().data());
+        // qCDebug(appLog) << "Written table header item to HTML: " << m_TableHeader[col];
+    }
 
     html.write("</tr></thead>\n");
+    qCDebug(appLog) << "Finished writing table header to HTML.";
 }
 
 void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::tableInfoToDoc called with row: " << row;
     // 表格信息保存为Doc
-    if (nullptr == tab)
+    if (nullptr == tab) {
+        qCDebug(appLog) << "Table pointer is null, returning.";
         return;
+    }
 
     // 获取表格数据
     getTableData();
 
-    if (m_TableData.size() < 1)
+    if (m_TableData.size() < 1) {
+        qCDebug(appLog) << "Table data is empty, skipping Doc table info conversion.";
         return;
+    }
 
     // 添加doc表格
     for (int col = 0; col < m_TableData.size(); ++col) {
         auto cel = tab->cell(row, col);
         cel->addText(m_TableData[col]);
+        // qCDebug(appLog) << "Added table info to Doc cell (" << row << ", " << col << "): " << m_TableData[col];
     }
+    qCDebug(appLog) << "Finished adding table info to Doc.";
 }
 
 void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::tableHeaderToDoc called.";
     // 表头保存为doc
     getTableHeader();
 
-    if (m_TableHeader.size() < 1)
+    if (m_TableHeader.size() < 1) {
+        qCDebug(appLog) << "Table header is empty, skipping Doc table header conversion.";
         return;
+    }
 
     // 添加表头信息
     for (int col = 0; col < m_TableHeader.size() - 1; ++col)  {
         tab->addColumn();
         auto cel = tab->cell(0, col);
         cel->addText(m_TableHeader[col]);
+        // qCDebug(appLog) << "Added table header to Doc cell (0, " << col << "): " << m_TableHeader[col];
     }
+    qCDebug(appLog) << "Finished adding table header to Doc.";
 }
 
 void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::tableInfoToXlsx called.";
     // 获取表格信息
     getTableData();
 
-    if (m_TableData.size() < 1)
+    if (m_TableData.size() < 1) {
+        qCDebug(appLog) << "Table data is empty, skipping Xlsx table info conversion.";
         return;
+    }
 
     // 添加表格信息
     int curRow = DeviceManager::instance()->currentXlsRow();
-    for (int col = 0; col < m_TableData.size(); ++col)
+    for (int col = 0; col < m_TableData.size(); ++col) {
         xlsx.write(curRow, col + 1, m_TableData[col]);
+        // qCDebug(appLog) << "Written table info to Xlsx at row " << curRow << ", col " << col + 1 << ": " << m_TableData[col];
+    }
+    qCDebug(appLog) << "Finished writing table info to Xlsx.";
 }
 
 void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::tableHeaderToXlsx called.";
     // 获取表头
     getTableHeader();
 
-    if (m_TableHeader.size() < 1)
+    if (m_TableHeader.size() < 1) {
+        qCDebug(appLog) << "Table header is empty, skipping Xlsx table header conversion.";
         return;
+    }
 
     // 添加表头信息
     int curRow = DeviceManager::instance()->currentXlsRow();
@@ -419,16 +539,20 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
         boldFont.setFontSize(10);
         boldFont.setFontBold(true);
         xlsx.write(curRow, col + 1, m_TableHeader[col], boldFont);
+        // qCDebug(appLog) << "Written table header to Xlsx at row " << curRow << ", col " << col + 1 << ": " << m_TableHeader[col];
     }
+    qCDebug(appLog) << "Finished writing table header to Xlsx.";
 }
 
 void DeviceBaseInfo::setOtherDeviceInfo(const QString &key, const QString &value)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::setOtherDeviceInfo called for key: " << key << ", value: " << value;
     m_MapOtherInfo[key] = value;
 }
 
 TomlFixMethod DeviceBaseInfo::setInfoFromTomlBase(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::setInfoFromTomlBase started.";
     TomlFixMethod ret = TOML_None;
     TomlFixMethod ret1 = TOML_None;
     TomlFixMethod ret2 = TOML_None;
@@ -460,91 +584,115 @@ TomlFixMethod DeviceBaseInfo::setInfoFromTomlBase(const QMap<QString, QString> &
     return ret;
 }
 
-EnableDeviceStatus DeviceBaseInfo::setEnable(bool)
+EnableDeviceStatus DeviceBaseInfo::setEnable(bool e)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::setEnable called with status: " << e;
     return EDS_Success;
 }
 
 bool DeviceBaseInfo::enable()
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::enable called, returning current enable status: " << m_Enable;
     return m_Enable;
 }
 
 bool DeviceBaseInfo::available()
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::available called.";
     if (driver().isEmpty()) {
+        // qCDebug(appLog) << "Driver is empty, setting m_Available to false.";
         m_Available = false;
     }
+    // qCDebug(appLog) << "Returning available status: " << (m_forcedDisplay ? m_forcedDisplay : m_Available);
     return m_forcedDisplay ? m_forcedDisplay : m_Available;
 }
 
 bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::driverIsKernelIn called for driver: " << driver;
     // 驱动为空情况:
     // 1. 驱动被卸载了 此时驱动属于核外驱动
     // 2. ps/2 笔记本触摸板 暂无法获取驱动 此时当成核内驱动处理
     // 3. 但是由于判断是否是ps/2或者笔记本触摸板在子类判断(无需放在基类)，因此此处为空时先返回false，而在子类(DeviceInput)调用后判断是否是ps/2鼠标
     if (driver.isEmpty()) {
+        qCDebug(appLog) << "Driver is empty, returning false.";
         return false;
     }
 
     // 英伟达驱动无法获取驱动模块，但是不属于核内驱动
     if ("nvidia" == driver) {
+        qCDebug(appLog) << "Driver is 'nvidia', returning false.";
         return false;
     }
 
     // 判断lsmod是否能查询
     QString outInfo = Common::executeClientCmd("modinfo", QStringList() << driver, QString(), -1);
-    return !outInfo.contains("filename:");
+    bool isKernelIn = !outInfo.contains("filename:");
+    qCDebug(appLog) << "Driver: " << driver << ", modinfo output contains filename: " << !isKernelIn << ", returning: " << isKernelIn;
+    return isKernelIn;
 }
 
 void DeviceBaseInfo::setCanEnale(bool can)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::setCanEnale called with can: " << can;
     m_CanEnable = can;
+    // qCDebug(appLog) << "m_CanEnable set to: " << m_CanEnable;
 }
 
 bool DeviceBaseInfo::canEnable()
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::canEnable called, returning: " << m_CanEnable;
     return m_CanEnable;
 }
 
 void DeviceBaseInfo::setEnableValue(bool e)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::setEnableValue called with e: " << e;
     m_Enable = e;
+    // qCDebug(appLog) << "m_Enable set to: " << m_Enable;
 }
 
 bool DeviceBaseInfo::canUninstall()
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::canUninstall called, returning: " << m_CanUninstall;
     return m_CanUninstall;
 }
 
 void DeviceBaseInfo::setCanUninstall(bool can)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::setCanUninstall called with can: " << can;
     m_CanUninstall = can;
+    // qCDebug(appLog) << "m_CanUninstall set to: " << m_CanUninstall;
 }
 
 void DeviceBaseInfo::setHardwareClass(const QString &hclass)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::setHardwareClass called with hclass: " << hclass;
     m_HardwareClass = hclass;
+    // qCDebug(appLog) << "m_HardwareClass set to: " << m_HardwareClass;
 }
 
 const QString &DeviceBaseInfo::hardwareClass() const
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::hardwareClass called, returning: " << m_HardwareClass;
     return m_HardwareClass;
 }
 
 const QString &DeviceBaseInfo::uniqueID() const
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::uniqueID called, returning: " << m_UniqueID;
     return m_UniqueID;
 }
 
 const QString &DeviceBaseInfo::sysPath() const
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::sysPath called, returning: " << m_SysPath;
     return m_SysPath;
 }
 
 const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool flag)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::getVendorOrModelId called with sysPath: " << sysPath << ", flag: " << flag;
     // 从文件中获取制造商ID信息
     QFile vendorFile;
     QString strVendorFile("/vendor");
@@ -552,33 +700,43 @@ const QString DeviceBaseInfo::getVendorOrModelId(const QString &sysPath, bool fl
     QString strSysFSLink = sysPath;
 
     if (sysPath.contains("usb")) {
+        qCDebug(appLog) << "SysPath contains 'usb', adjusting file names and sys path link.";
         strVendorFile = "/idVendor";
         strDeviceFile = "/idProduct";
         if (!QFile::exists("/sys" + strSysFSLink + strVendorFile)) {
+            qCDebug(appLog) << "Vendor file does not exist, adjusting sys path link.";
             strSysFSLink = strSysFSLink.mid(0, sysPath.lastIndexOf('/'));
         }
     }
 
     if (flag) {
+        qCDebug(appLog) << "Flag is true, setting file name for vendor: " << QString("/sys") + strSysFSLink + strVendorFile;
         vendorFile.setFileName(QString("/sys") + strSysFSLink + strVendorFile);
     } else {
+        qCDebug(appLog) << "Flag is false, setting file name for device: " << QString("/sys") + strSysFSLink + strDeviceFile;
         vendorFile.setFileName(QString("/sys") + strSysFSLink + strDeviceFile);
     }
 
-    if (false == vendorFile.open(QIODevice::ReadOnly))
+    if (false == vendorFile.open(QIODevice::ReadOnly)) {
+        qCWarning(appLog) << "Failed to open vendor/device file: " << vendorFile.fileName();
         return QString();
+    }
 
     QString vendor = vendorFile.readAll();
     vendorFile.close();
+    qCDebug(appLog) << "Read vendor/device info: " << vendor.trimmed();
 
     return vendor.trimmed();
 }
 
 const QString DeviceBaseInfo::getDriverVersion()
 {
+    qCDebug(appLog) << "DeviceBaseInfo::getDriverVersion called.";
     QString outInfo = Common::executeClientCmd("modinfo", QStringList() << driver(), QString(), -1);
-    if(outInfo.isEmpty())
+    if(outInfo.isEmpty()) {
+        qCDebug(appLog) << "Modinfo output is empty, returning empty string.";
         return  QString("");
+    }
 
     foreach (QString out, outInfo.split("\n")) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -587,40 +745,47 @@ const QString DeviceBaseInfo::getDriverVersion()
         QStringList item = out.split(":", Qt::SkipEmptyParts);
 #endif
         if (!item.isEmpty() && "version" == item[0].trimmed()) {
+            // qCDebug(appLog) << "Found driver version: " << item[1].trimmed();
             return item[1].trimmed();
         }
     }
-
+    qCDebug(appLog) << "Driver version not found, returning empty string.";
     return QString("");
 }
 
 const QString DeviceBaseInfo::getOverviewInfo()
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::getOverviewInfo called, returning empty string as default.";
     return QString("");
 }
 
 const QString &DeviceBaseInfo::getVID() const
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::getVID called, returning: " << m_VID;
     return m_VID;
 }
 
 const QString &DeviceBaseInfo::getPID() const
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::getPID called, returning: " << m_PID;
     return m_PID;
 }
 
 const QString &DeviceBaseInfo::getVIDAndPID() const
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::getVIDAndPID called, returning: " << m_VID_PID;
     return m_VID_PID;
 }
 
 const QString &DeviceBaseInfo::getModalias() const
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::getModalias called, returning: " << m_Modalias;
     return m_Modalias;
 }
 
 void DeviceBaseInfo::loadTableHeader()
 {
+    qCDebug(appLog) << "DeviceBaseInfo::loadTableHeader called. Adding default table headers.";
     // 添加表头信息
     m_TableHeader.append(tr("Name"));
     m_TableHeader.append(tr("Vendor"));
@@ -629,12 +794,14 @@ void DeviceBaseInfo::loadTableHeader()
 
 void DeviceBaseInfo::addFilterKey(const QString &key)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::addFilterKey called with key: " << key;
     // 添加可显示设备属性
     m_FilterKey.insert(key);
 }
 
 void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::getOtherMapInfo called.";
     // 获取其他设备信息
     QMap<QString, QString>::const_iterator it = mapInfo.begin();
     for (; it != mapInfo.end(); ++it) {
@@ -642,63 +809,88 @@ void DeviceBaseInfo::getOtherMapInfo(const QMap<QString, QString> &mapInfo)
 
         // 可显示设备属性中存在该属性
         if (m_FilterKey.find(k) != m_FilterKey.end()) {
-            if (it.value().toLower().contains("nouse"))
+            if (it.value().toLower().contains("nouse")) {
+                // qCDebug(appLog) << "DeviceBaseInfo::getOtherMapInfo remove key: " << k;
                 m_MapOtherInfo.remove(k);
-            else
+            } else {
+                // qCDebug(appLog) << "DeviceBaseInfo::getOtherMapInfo insert key: " << k;
                 m_MapOtherInfo.insert(k, it.value().trimmed());
+            }
         }
     }
 }
 
 void DeviceBaseInfo::addBaseDeviceInfo(const QString &key, const QString &value)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::addBaseDeviceInfo called with key: " << key << ", value: " << value;
     // 添加基础设备信息
-    if (!value.isEmpty())
+    if (!value.isEmpty()) {
+        qCDebug(appLog) << "DeviceBaseInfo::addBaseDeviceInfo append key: " << key;
         m_LstBaseInfo.append(QPair<QString, QString>(key, value));
+    }
 }
 
 void DeviceBaseInfo::addOtherDeviceInfo(const QString &key, const QString &value)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::addOtherDeviceInfo called with key: " << key << ", value: " << value;
     // 添加其他设备信息
-    if (!value.isEmpty())
+    if (!value.isEmpty()) {
+        qCDebug(appLog) << "DeviceBaseInfo::addOtherDeviceInfo insert key: " << key;
         m_LstOtherInfo.insert(0, QPair<QString, QString>(key, value));
+    }
 }
 
 void DeviceBaseInfo::setAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::setAttribute called with key: " << key << ", overwrite: " << overwrite;
     // map中存在该属性
-    if (mapInfo.find(key) == mapInfo.end())
+    if (mapInfo.find(key) == mapInfo.end()) {
+        qCDebug(appLog) << "DeviceBaseInfo::setAttribute map does not contain key: " << key;
         return;
+    }
 
     // 属性值不能为空
-    if (mapInfo[key] == "")
+    if (mapInfo[key] == "") {
+        qCDebug(appLog) << "DeviceBaseInfo::setAttribute attribute value is empty";
         return;
+    }
 
     // overwrite 为true直接覆盖
     if (overwrite) {
         variable = mapInfo[key].trimmed();
     } else {
-
+        qCDebug(appLog) << "DeviceBaseInfo::setAttribute overwrite is false";
         // overwrite 为false,如果当前属性值为空或unknown时可覆盖
-        if (variable.isEmpty())
+        if (variable.isEmpty()) {
+            qCDebug(appLog) << "DeviceBaseInfo::setAttribute variable is empty, set value from map";
             variable = mapInfo[key].trimmed();
+        }
 
-        if (variable.contains("Unknown", Qt::CaseInsensitive))
+        if (variable.contains("Unknown", Qt::CaseInsensitive)) {
+            qCDebug(appLog) << "DeviceBaseInfo::setAttribute variable contains Unknown, set value from map";
             variable = mapInfo[key].trimmed();
+        }
     }
+    qCDebug(appLog) << "DeviceBaseInfo::setAttribute end";
 }
 
 TomlFixMethod DeviceBaseInfo::setTomlAttribute(const QMap<QString, QString> &mapInfo, const QString &key, QString &variable, bool overwrite)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::setTomlAttribute called with key: " << key << ", overwrite: " << overwrite;
     // map中存在该属性
-    if (mapInfo.find(key) == mapInfo.end())
+    if (mapInfo.find(key) == mapInfo.end()) {
+        qCDebug(appLog) << "DeviceBaseInfo::setTomlAttribute map does not contain key: " << key;
         return TOML_None;
+    }
 
     // 属性值不能为空
-    if (mapInfo[key] == "")
+    if (mapInfo[key] == "") {
+        qCDebug(appLog) << "DeviceBaseInfo::setTomlAttribute attribute value is empty";
         return TOML_None;
+    }
     //如果有 关键字nouse 为直接接去掉清除
     if (mapInfo[key].toLower().contains("nouse")) {
+        qCDebug(appLog) << "DeviceBaseInfo::setTomlAttribute attribute value contains nouse";
         variable.clear();
         return TOML_nouse;
     }
@@ -706,15 +898,18 @@ TomlFixMethod DeviceBaseInfo::setTomlAttribute(const QMap<QString, QString> &map
     // overwrite 为true直接覆盖
     if (overwrite) {
         setAttribute(mapInfo, key, variable, true);
+        qCDebug(appLog) << "DeviceBaseInfo::setTomlAttribute overwrite is true, return TOML_Cover";
         return TOML_Cover;
     } else {
         setAttribute(mapInfo, key, variable, false);
+        qCDebug(appLog) << "DeviceBaseInfo::setTomlAttribute overwrite is false, return TOML_Cover";
         return TOML_Cover;
     }
 }
 
 void DeviceBaseInfo::mapInfoToList()
 {
+    qCDebug(appLog) << "DeviceBaseInfo::mapInfoToList called";
     // m_MapOtherInfo --> m_LstOtherInfo
     // QMap内容转为QList存储
     auto iter = m_MapOtherInfo.begin();
@@ -723,13 +918,16 @@ void DeviceBaseInfo::mapInfoToList()
         if (isValueValid(iter.value()))
             m_LstOtherInfo.append(QPair<QString, QString>(iter.key(), iter.value()));
     }
+    qCDebug(appLog) << "DeviceBaseInfo::mapInfoToList end";
 }
 
 void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey called";
     // 网卡使用物理地址+逻辑设备名作为匹配值
     if (mapInfo.find("HW Address") != mapInfo.end()) {
         m_HwinfoToLshw = (mapInfo.find("Device File") != mapInfo.end()) ? mapInfo["HW Address"] + mapInfo["Device File"] : mapInfo["HW Address"];
+        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey match HW Address";
         return;
     }
 
@@ -738,16 +936,19 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
             && mapInfo.find("SysFS BusID") != mapInfo.end()
             && !mapInfo["SysFS ID"].contains("usb")) {
         m_HwinfoToLshw = mapInfo["SysFS BusID"];
+        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey match SysFS BusID";
         return;
     }
 
     // usb总线设备
     QStringList words = mapInfo["SysFS BusID"].split(":");
     if (words.size() != 2) {
+        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey words size is not 2";
         return;
     }
     QStringList chs = words[0].split("-");
     if (chs.size() != 2) {
+        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey chs size is not 2";
         return;
     }
 
@@ -768,10 +969,12 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
         int second = match.captured(2).toInt();
         int third = match.captured(3).toInt();
         m_HwinfoToLshw = QString("usb@%1:%2.%3").arg(nums.at(first)).arg(nums.at(second)).arg(nums.at(third));
+        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey match";
     } else {
         int first = chs[0].toInt();
         int second = chs[1].toInt();
         m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
+        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey not match";
     }
 #else
     QRegExp reg("([0-9a-zA-Z]+)-([0-9a-zA-Z]+)\\.([0-9a-zA-Z]+)");
@@ -780,53 +983,65 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
         int second = reg.cap(2).toInt();
         int third = reg.cap(3).toInt();
         m_HwinfoToLshw = QString("usb@%1:%2.%3").arg(nums.at(first)).arg(nums.at(second)).arg(nums.at(third));
+        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey match";
     } else {
         int first = chs[0].toInt();
         int second = chs[1].toInt();
         m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
+        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey no match";
     }
 #endif
 }
 
 bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::matchToLshw called";
     // 网卡设备与序列号匹配上 或者加上逻辑设备名
     if (mapInfo.find("logical name") != mapInfo.end() && mapInfo.find("serial") != mapInfo.end()) {
         if (m_HwinfoToLshw == mapInfo["serial"] + mapInfo["logical name"]) {
+            qCDebug(appLog) << "DeviceBaseInfo::matchToLshw match serial and logical name";
             return true;
         } else if (m_HwinfoToLshw == mapInfo["serial"]) {
+            qCDebug(appLog) << "DeviceBaseInfo::matchToLshw match serial";
             return true;
         }
     }
 
     if (mapInfo.find("bus info") == mapInfo.end()) {
+        qCDebug(appLog) << "DeviceBaseInfo::matchToLshw bus info not found";
         return false;
     }
     // 非usb设备
     if (mapInfo["bus info"].startsWith("pci")) {
         QStringList words = mapInfo["bus info"].split("@");
         if (2 == words.size() && words[1] == m_HwinfoToLshw) {
+            qCDebug(appLog) << "DeviceBaseInfo::matchToLshw match pci";
             return true;
         }
     }
 
     // USB 设备
     if (m_HwinfoToLshw == mapInfo["bus info"]) {
+        qCDebug(appLog) << "DeviceBaseInfo::matchToLshw match usb";
         return true;
     }
+    qCDebug(appLog) << "DeviceBaseInfo::matchToLshw no match";
     return false;
 }
 
 void DeviceBaseInfo::setPhysIDMapKey(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::setPhysIDMapKey called";
     if (mapInfo.find("VID_PID") != mapInfo.end()) {
         m_PhysIDMap = mapInfo["VID_PID"];
+        qCDebug(appLog) << "DeviceBaseInfo::setPhysIDMapKey match VID_PID";
         return;
     }
 }
 
 bool DeviceBaseInfo::PhysIDMapInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceBaseInfo::PhysIDMapInfo called";
     // Modalias 或 "Module Alias" 匹配上  ，硬件 IDS 参考内核 Module Alias 规则标准
     if (mapInfo.find("Module Alias") != mapInfo.end()) {
         if (m_PhysIDMap == mapInfo["Module Alias"]) {
@@ -852,6 +1067,7 @@ bool DeviceBaseInfo::PhysIDMapInfo(const QMap<QString, QString> &mapInfo)
 
 const  QString DeviceBaseInfo::get_string(const QString &sysPathfile)
 {
+    // qCDebug(appLog) << "DeviceBaseInfo::get_string called with sysPathfile: " << sysPathfile;
     // 从文件中获取D信息
     QFile file(sysPathfile);
     if (!file.open(QIODevice::ReadOnly))
@@ -860,6 +1076,7 @@ const  QString DeviceBaseInfo::get_string(const QString &sysPathfile)
     QString info = file.readAll();
     info = info.trimmed();
     file.close();
+    // qCDebug(appLog) << "DeviceBaseInfo::get_string end";
     return info;
 }
 
