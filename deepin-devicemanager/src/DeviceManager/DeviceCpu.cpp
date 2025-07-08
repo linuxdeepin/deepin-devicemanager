@@ -51,20 +51,25 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
     // CPU 名称后面不需要加个数
     m_Name.replace(QRegularExpression("/[0-9]*$"), "");
     m_Name.replace(QRegularExpression("x [0-9]*$"), "");
+    qCDebug(appLog) << "CPU name after regex replacement: " << m_Name;
 
     //  获取逻辑数和core数
     m_LogicalCPUNum = logicalNum;
     m_CPUCoreNum = coreNum;
+    qCDebug(appLog) << "Logical CPU Num: " << m_LogicalCPUNum << ", CPU Core Num: " << m_CPUCoreNum;
+    qCDebug(appLog) << "DeviceCpu::setCpuInfo finished.";
 }
 
 void DeviceCpu::initFilterKey()
 {
+    qCDebug(appLog) << "DeviceCpu::initFilterKey called.";
     // 添加可显示的属性
     addFilterKey(QObject::tr("CPU implementer"));
     addFilterKey(QObject::tr("CPU architecture"));
     addFilterKey(QObject::tr("CPU variant"));
     addFilterKey(QObject::tr("CPU part"));
     addFilterKey(QObject::tr("CPU revision"));
+    qCDebug(appLog) << "Filter keys initialized.";
 }
 
 void DeviceCpu::loadBaseDeviceInfo()
@@ -77,41 +82,50 @@ void DeviceCpu::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("CPU ID"), m_PhysicalID);
     addBaseDeviceInfo(tr("Core ID"), m_CoreID);
     addBaseDeviceInfo(tr("Threads"), m_ThreadNum);
-    if (!m_FrequencyIsCur)
+    if (!m_FrequencyIsCur) {
+        qCDebug(appLog) << "Frequency is not current, adding Max Speed.";
         addBaseDeviceInfo(tr("Max Speed"), m_MaxFrequency);
+    }
     addBaseDeviceInfo(tr("BogoMIPS"), m_BogoMIPS);
     addBaseDeviceInfo(tr("Architecture"), m_Architecture);
     addBaseDeviceInfo(tr("CPU Family"), m_Familly);
     addBaseDeviceInfo(tr("Model"), m_Model);
+    qCDebug(appLog) << "Base device info loaded.";
 }
 
 const QString &DeviceCpu::vendor() const
 {
+    // qCDebug(appLog) << "DeviceCpu::vendor called, returning: " << m_Vendor;
     return m_Vendor;
 }
 
 const QString &DeviceCpu::name() const
 {
+    // qCDebug(appLog) << "DeviceCpu::name called, returning: " << m_Name;
     return m_Name ;
 }
 
 const QString &DeviceCpu::driver() const
 {
+    // qCDebug(appLog) << "DeviceCpu::driver called, returning: " << m_Driver;
     return m_Driver;
 }
 
 bool DeviceCpu::available()
 {
+    // qCDebug(appLog) << "DeviceCpu::available called, returning true.";
     return true;
 }
 
 bool DeviceCpu::frequencyIsRange()const
 {
+    // qCDebug(appLog) << "DeviceCpu::frequencyIsRange called, returning: " << m_FrequencyIsRange;
     return m_FrequencyIsRange;
 }
 
 QString DeviceCpu::subTitle()
 {
+    // qCDebug(appLog) << "DeviceCpu::subTitle called, returning: " << QString("%1 %2").arg(tr("Processor")).arg(m_PhysicalID);
     return QString("%1 %2").arg(tr("Processor")).arg(m_PhysicalID);
 }
 
@@ -128,7 +142,8 @@ const QString DeviceCpu::getOverviewInfo()
                  .arg(tr("Core(s)")) \
                  .arg(m_trNumber[m_LogicalCPUNum]) \
                  .arg(tr("Processor"));
-
+    qCDebug(appLog) << "Overview info: " << ov;
+    qCDebug(appLog) << "DeviceCpu::getOverviewInfo finished.";
     return ov;
 }
 
@@ -156,11 +171,13 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 
     setAttribute(mapInfo, "processor", m_PhysicalID);
     setAttribute(mapInfo, "core id", m_CoreID);
+    qCDebug(appLog) << "Attributes set from lscpu.";
 
     // 计算频率范围
     bool min = mapInfo.find("CPU min MHz") != mapInfo.end();
     bool max = mapInfo.find("CPU max MHz") != mapInfo.end();
     if (min && max) {
+        qCDebug(appLog) << "Min and max CPU MHz found, calculating frequency range.";
         QString minS = mapInfo["CPU min MHz"];
         QString maxS = mapInfo["CPU max MHz"];
         m_MaxFrequency = maxS;
@@ -170,62 +187,79 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
 
         // 如果最大最小频率相等则不显示范围
         if (fabs(minHz - maxHz) < 0.001) {
+            qCDebug(appLog) << "Min and max frequency are close, setting as single value.";
             m_FrequencyIsRange = false;
             m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(maxHz) : QString("%1 MHz").arg(maxHz * 1000);
         } else {
+            qCDebug(appLog) << "Min and max frequency differ, setting as range.";
             m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
         }
     } else if (mapInfo.find("CPU MHz") != mapInfo.end()) {
+        qCDebug(appLog) << "Only CPU MHz found, setting as single value.";
         QString maxS = mapInfo["CPU MHz"];
         m_Frequency = maxS.indexOf("MHz") > -1 ? maxS : maxS + " MHz";
     }
     //获取扩展指令集
     QStringList orders = {"MMX", "SSE", "SSE2", "SSE3", "3D Now", "SSE4", "SSSE3", "SSE4_1", "SSE4_2", "AMD64", "EM64T"};
     foreach (const QString &order, orders) {
-        if (mapInfo["Flags"].contains(order, Qt::CaseInsensitive))
+        if (mapInfo["Flags"].contains(order, Qt::CaseInsensitive)) {
             m_Extensions += QString("%1 ").arg(order);
+            qCDebug(appLog) << "Found extension:" << order;
+        }
     }
+    qCDebug(appLog) << "Extensions found: " << m_Extensions.trimmed();
 
     // 获取其他属性
     getOtherMapInfo(mapInfo);
+    qCDebug(appLog) << "DeviceCpu::setInfoFromLscpu finished.";
 }
 
 void DeviceCpu::setCurFreq(const QString &curFreq)
 {
-    if (!curFreq.isEmpty())
+    qCDebug(appLog) << "DeviceCpu::setCurFreq called with curFreq: " << curFreq;
+    if (!curFreq.isEmpty()) {
         m_CurFrequency = curFreq;
+        qCDebug(appLog) << "Current frequency set to: " << m_CurFrequency;
+    }
 }
 
 void DeviceCpu::setFrequencyIsCur(const bool &flag)
 {
+    qCDebug(appLog) << "DeviceCpu::setFrequencyIsCur called with flag: " << flag;
     m_FrequencyIsCur = flag;
 }
 
 void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceCpu::setInfoFromLshw started.";
     // longxin CPU型号不从lshw中获取
     // bug39874
-    if (m_Name.contains("Loongson", Qt::CaseInsensitive))
+    if (m_Name.contains("Loongson", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "CPU name contains 'Loongson', skipping product attribute setting.";
         setAttribute(mapInfo, "version", m_Name, false);
-    else {
+    } else {
         setAttribute(mapInfo, "product", m_Name, false);//这里覆盖了lscpu中的数据。主要版本中lshw中的version是CPU信息，而1050A中读取到的是版本信息。
-
+        qCDebug(appLog) << "Product attribute set from lshw: " << m_Name;
         // bug-108166 lshw 中 product 包含NULL信息，version 信息正确
         // bug-112403 lshw 中 product 包含ARMv信息，version 信息正确
         if (m_Name.contains("null", Qt::CaseInsensitive) || m_Name.contains("ARMv", Qt::CaseInsensitive)) {
+            qCDebug(appLog) << "Product name contains 'null' or 'ARMv', using version for name.";
             setAttribute(mapInfo, "version", m_Name);
         }
     }
 
     // 获取设备基本信息
     setAttribute(mapInfo, "vendor", m_Vendor);
+    qCDebug(appLog) << "Vendor attribute set from lshw: " << m_Vendor;
 
     // 获取设备其他信息
     getOtherMapInfo(mapInfo);
+    qCDebug(appLog) << "DeviceCpu::setInfoFromLshw finished.";
 }
 
 TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceCpu::setInfoFromTomlOneByOne started.";
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "CPU ID", m_PhysicalID);
@@ -238,6 +272,7 @@ TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     ret = setTomlAttribute(mapInfo, "Architecture", m_Architecture);
     ret = setTomlAttribute(mapInfo, "CPU Family", m_Familly);
     ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    qCDebug(appLog) << "Basic toml attributes set.";
     // 添加其他信息,成员变量
     ret = setTomlAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
     ret = setTomlAttribute(mapInfo, "Flags", m_Flags);
@@ -255,11 +290,14 @@ TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
 
 void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting CPU info from dmidecode";
     // longxin CPU型号不从dmidecode中获取
     // bug39874
     if (m_Name.contains("Loongson", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "Loongson CPU detected, not setting product from dmidecode";
         setAttribute(mapInfo, "product", m_Name, false);
     } else {
+        qCDebug(appLog) << "Setting product from dmidecode";
         setAttribute(mapInfo, "product", m_Name);
     }
 
@@ -273,10 +311,12 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 
     // 获取其他cpu信息
     getOtherMapInfo(mapInfo);
+    qCDebug(appLog) << "Finished setting CPU info from dmidecode";
 }
 
 void DeviceCpu::loadOtherDeviceInfo()
 {
+    qCDebug(appLog) << "Loading other device info";
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Virtualization"), m_HardwareVirtual);
@@ -291,10 +331,12 @@ void DeviceCpu::loadOtherDeviceInfo()
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
+    qCDebug(appLog) << "Other device info loaded.";
 }
 
 void DeviceCpu::loadTableHeader()
 {
+    qCDebug(appLog) << "Loading table header";
     // 加载表头
     m_TableHeader.append(tr("Name"));
     m_TableHeader.append(tr("Vendor"));
@@ -304,6 +346,7 @@ void DeviceCpu::loadTableHeader()
 
 void DeviceCpu::loadTableData()
 {
+    qCDebug(appLog) << "Loading table data";
     // 加载表格信息
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
@@ -313,6 +356,7 @@ void DeviceCpu::loadTableData()
 
 void DeviceCpu::getTrNumber()
 {
+    qCDebug(appLog) << "Getting translated numbers";
     // 将数字转换为英文翻译
     m_trNumber.insert(1, QObject::tr("One"));
     m_trNumber.insert(2, QObject::tr("Two"));

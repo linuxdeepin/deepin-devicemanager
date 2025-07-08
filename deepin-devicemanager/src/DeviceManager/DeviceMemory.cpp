@@ -58,10 +58,12 @@ void DeviceMemory::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "serial", m_SerialNumber);
 
     getOtherMapInfo(mapInfo);
+    qCDebug(appLog) << "Finished setting memory info from lshw";
 }
 
 TomlFixMethod DeviceMemory::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Setting memory info from TOML one by one";
     TomlFixMethod ret = TOML_None;
         // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Size", m_Size);
@@ -78,6 +80,7 @@ TomlFixMethod DeviceMemory::setInfoFromTomlOneByOne(const QMap<QString, QString>
     ret = setTomlAttribute(mapInfo, "Data Width", m_DataBandwidth);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
+    qCDebug(appLog) << "Finished setting memory info from TOML";
     return ret;
 }
 
@@ -85,8 +88,10 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "Setting memory info from dmidecode data";
     // 由 locator属性判断是否为同一内存条
-    if (mapInfo["Locator"] != m_Locator || m_MatchedFromDmi == true)
+    if (mapInfo["Locator"] != m_Locator || m_MatchedFromDmi == true) {
+        qCDebug(appLog) << "Memory locator does not match or already matched from DMI, skipping";
         return false;
+    }
 
     // 由dmidecode设置基本属性
     setAttribute(mapInfo, "Part Number", m_Name);
@@ -106,17 +111,21 @@ bool DeviceMemory::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
 
     // 设置类型
     setAttribute(mapInfo, "Type", m_Type);
-    if (m_Type == "<OUT OF SPEC>")
+    if (m_Type == "<OUT OF SPEC>") {
+        qCDebug(appLog) << "Memory type is '<OUT OF SPEC>', clearing it";
         m_Type = "";
+    }
 
     // 获取其他属性
     getOtherMapInfo(mapInfo);
     m_MatchedFromDmi = true;
+    qCDebug(appLog) << "Successfully set memory info from dmidecode";
     return true;
 }
 
 void DeviceMemory::initFilterKey()
 {
+    qCDebug(appLog) << "Initializing filter keys for memory device";
     // 初始化可显示属性
     addFilterKey(QObject::tr("Array Handle"));  // 数组程序
     addFilterKey(QObject::tr("Error Information Handle")); //错误信息程序
@@ -138,10 +147,12 @@ void DeviceMemory::initFilterKey()
     addFilterKey(QObject::tr("Volatile Size"));       // 易丢失大小
     addFilterKey(QObject::tr("Cache Size"));   // 缓存大小
     addFilterKey(QObject::tr("Logical Size"));  // 逻辑大小
+    qCDebug(appLog) << "Filter keys initialized";
 }
 
 void DeviceMemory::loadBaseDeviceInfo()
 {
+    qCDebug(appLog) << "Loading base device info for memory";
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
@@ -151,68 +162,82 @@ void DeviceMemory::loadBaseDeviceInfo()
     addBaseDeviceInfo(tr("Total Width"), m_TotalBandwidth);
     addBaseDeviceInfo(tr("Locator"), m_Locator);
     addBaseDeviceInfo(tr("Serial Number"), m_SerialNumber);
+    qCDebug(appLog) << "Base device info loaded";
 }
 
 void DeviceMemory::loadOtherDeviceInfo()
 {
+    qCDebug(appLog) << "Loading other device info for memory";
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
     if (Common::boardVendorType().isEmpty()) {
+        qCDebug(appLog) << "Board vendor type is empty, loading full voltage info";
         addOtherDeviceInfo(tr("Configured Voltage"), m_ConfiguredVoltage);
         addOtherDeviceInfo(tr("Maximum Voltage"), m_MaximumVoltage);
         addOtherDeviceInfo(tr("Minimum Voltage"), m_MinimumVoltage);
         addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
     } else {
+        qCDebug(appLog) << "Board vendor type is not empty, loading configured speed only";
         addOtherDeviceInfo(tr("Configured Speed"), m_ConfiguredSpeed);
     }
     addOtherDeviceInfo(tr("Data Width"), m_DataBandwidth);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
+    qCDebug(appLog) << "Other device info loaded";
 }
 
 void DeviceMemory::loadTableHeader()
 {
+    qCDebug(appLog) << "Loading table header for memory";
     // 加载表头
     m_TableHeader.append(tr("Name"));
     m_TableHeader.append(tr("Vendor"));
     m_TableHeader.append(tr("Type"));
     m_TableHeader.append(tr("Speed"));
     m_TableHeader.append(tr("Size"));
+    qCDebug(appLog) << "Table header loaded";
 }
 
 void DeviceMemory::loadTableData()
 {
+    qCDebug(appLog) << "Loading table data for memory";
     // 加载表格内容
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Type);
     m_TableData.append(m_Speed);
     m_TableData.append(m_Size);
+    qCDebug(appLog) << "Table data loaded";
 }
 
 const QString &DeviceMemory::name()const
 {
+    // qCDebug(appLog) << "Getting memory name:" << m_Name;
     return m_Name;
 }
 
 const QString &DeviceMemory::vendor() const
 {
+    // qCDebug(appLog) << "Getting memory vendor:" << m_Vendor;
     return m_Vendor;
 }
 
 const QString &DeviceMemory::driver() const
 {
+    // qCDebug(appLog) << "Getting memory driver:" << m_Driver;
     return m_Driver;
 }
 
 bool DeviceMemory::available()
 {
+    // qCDebug(appLog) << "Checking memory availability, returning true";
     return true;
 }
 
 QString DeviceMemory::subTitle()
 {
+    // qCDebug(appLog) << "Getting memory subtitle";
     // 获取子标题
     return m_Vendor + " " + m_Name;
 }
@@ -223,8 +248,10 @@ const QString DeviceMemory::getOverviewInfo()
     // 获取概况信息
     QString ov;
     QString nameStr = m_Name != "" ? m_Name : m_Vendor;
-    if (nameStr == "--")
+    if (nameStr == "--") {
+        qCDebug(appLog) << "Name string is '--', clearing it";
         nameStr.clear();
+    }
     ov += QString("%1(%2 %3 %4)") \
           .arg(m_Size) \
           .arg(nameStr) \

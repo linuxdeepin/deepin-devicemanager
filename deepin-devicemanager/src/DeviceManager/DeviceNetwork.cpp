@@ -6,9 +6,12 @@
 #include "DeviceNetwork.h"
 #include "DBusEnableInterface.h"
 #include "commonfunction.h"
+#include "DDLog.h"
 
 #include <QFileInfo>
 #include <QProcess>
+
+using namespace DDLog;
 
 DeviceNetwork::DeviceNetwork()
     : DeviceBaseInfo()
@@ -36,6 +39,7 @@ DeviceNetwork::DeviceNetwork()
     , m_Multicast("")
     , m_IsWireless(false)
 {
+    qCDebug(appLog) << "DeviceNetwork::DeviceNetwork()";
     // 初始化可显示属性
     initFilterKey();
 
@@ -46,9 +50,11 @@ DeviceNetwork::DeviceNetwork()
 
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw";
     if (!matchToLshw(mapInfo)
         && Common::boardVendorType() != "KLVV" && Common::boardVendorType() != "KLVU"
         && Common::boardVendorType() != "PGUW" && Common::boardVendorType() != "PGUV") {
+        qCDebug(appLog) << "Board vendor type is not matched, return";
         return;
     }
     // 设置由lshw获取的信息
@@ -56,6 +62,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "product", m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
     if (m_SysPath.contains("usb")) {
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, sysPath contains usb";
         QProcess process;
         QString vendorId = getVendorOrModelId(m_SysPath, true).trimmed();
         QString deviceId = getVendorOrModelId(m_SysPath, false).trimmed();
@@ -75,6 +82,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
             }
         }
     } else {
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, sysPath not contains usb";
         setAttribute(mapInfo, "description", m_Name, false);
     }
     setAttribute(mapInfo, "version", m_Version);
@@ -100,13 +108,18 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
     if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, driver is kernel in";
         m_CanUninstall = false;
     }
     if (m_Vendor.isEmpty() && !m_Name.isEmpty()) {
-        if (m_Name.contains("ARM", Qt::CaseInsensitive))
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, vendor is empty and name is not empty";
+        if (m_Name.contains("ARM", Qt::CaseInsensitive)) {
+            qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, name contains ARM";
             m_Vendor = "ARM Ltd";
-         else
+        } else {
+            qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw, name not contains ARM";
             m_Vendor = m_Name;
+        }
     }
 
     // 加载其他信息
@@ -115,6 +128,7 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 
 TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceNetwork::setInfoFromTomlOneByOne";
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
     ret = setTomlAttribute(mapInfo, "Type", m_Model);
@@ -146,7 +160,9 @@ TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString
 
 bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceNetwork::setInfoFromHwinfo";
     if (mapInfo.find("path") != mapInfo.end()) {
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromHwinfo, mapInfo contains path";
         setAttribute(mapInfo, "name", m_Name);
         setAttribute(mapInfo, "unique_id", m_UniqueID);
         setAttribute(mapInfo, "path", m_SysPath);
@@ -157,6 +173,7 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_CanUninstall = !driverIsKernelIn(m_Driver);
         return true;
     }
+    qCDebug(appLog) << "DeviceNetwork::setInfoFromHwinfo, mapInfo not contains path";
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Device File", m_LogicalName);
     setAttribute(mapInfo, "HW Address", m_MACAddress);
@@ -169,12 +186,14 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     m_PhysID = m_VID_PID;
 
     if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromHwinfo, driver is kernel in";
         m_CanUninstall = false;
     }
 
     // 获取设备路径
     if (m_SysPath.isEmpty() && !mapInfo.contains("SysFS Device Link")
             && mapInfo["SysFS ID"].startsWith("/devices")) {
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromHwinfo, get device path";
         m_SysPath = mapInfo["SysFS ID"];
     }
     // 判断是否是无线网卡
@@ -187,67 +206,84 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
 bool DeviceNetwork::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "DeviceNetwork::setInfoFromWifiInfo";
     // 机器自身蓝牙
     if (m_Name.contains("Huawei", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromWifiInfo, name contains Huawei";
         setAttribute(mapInfo, "Chip Type", m_Name);
         setAttribute(mapInfo, "Vendor", m_Vendor);
         setAttribute(mapInfo, "Type", m_Model);
 
         return true;
     } else {
+        qCDebug(appLog) << "DeviceNetwork::setInfoFromWifiInfo, name not contains Huawei";
         return false;
     }
 }
 
 void DeviceNetwork::setIsWireless(const QString &sysfs)
 {
+    qCDebug(appLog) << "DeviceNetwork::setIsWireless";
     // 路径下包含 phy80211 或 wireless 是无线网卡
     QFileInfo fileInfo(QString("/sys") + sysfs);
     if (fileInfo.exists("phy80211") || fileInfo.exists("wireless")) {
+        qCDebug(appLog) << "DeviceNetwork::setIsWireless, is wireless";
         m_IsWireless = true;
     }
 }
 
 const QString &DeviceNetwork::name()const
 {
+    // qCDebug(appLog) << "DeviceNetwork::name";
     return m_Name;
 }
 
 const QString &DeviceNetwork::vendor() const
 {
+    // qCDebug(appLog) << "DeviceNetwork::vendor";
     return m_Vendor;
 }
 
 const QString &DeviceNetwork::driver()const
 {
-    if (! m_DriverModules.isEmpty())
+    qCDebug(appLog) << "DeviceNetwork::driver";
+    if (! m_DriverModules.isEmpty()) {
+        qCDebug(appLog) << "DeviceNetwork::driver, driverModules is not empty";
         return m_DriverModules;
+    }
+    qCDebug(appLog) << "DeviceNetwork::driver, driverModules is empty, returning driver:" << m_Driver;
     return m_Driver;
 }
 
 QString DeviceNetwork::subTitle()
 {
+    // qCDebug(appLog) << "DeviceNetwork::subTitle";
     return m_Name;
 }
 
 const QString DeviceNetwork::getOverviewInfo()
 {
+    // qCDebug(appLog) << "DeviceNetwork::getOverviewInfo";
     // 获取概况信息
     return m_Name.isEmpty() ? m_Model : m_Name;
 }
 
 EnableDeviceStatus DeviceNetwork::setEnable(bool e)
 {
+    qCDebug(appLog) << "DeviceNetwork::setEnable, enable:" << e;
     m_HardwareClass = "network interface";
     // 设置设备状态
     if (m_SysPath.isEmpty()) {
+        qCDebug(appLog) << "DeviceNetwork::setEnable, sysPath is empty";
         return EDS_Faild;
     } else if (m_SysPath.contains("usb") && m_UniqueID.isEmpty()) {
+        qCDebug(appLog) << "DeviceNetwork::setEnable, sysPath contains usb and uniqueID is empty";
         return EDS_Faild;
     }
 
     bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_LogicalName, m_UniqueID, e, m_Driver);
     if (res) {
+        qCDebug(appLog) << "DeviceNetwork::setEnable, enable success";
         m_Enable = e;
     }
     // 设置设备状态
@@ -256,33 +292,39 @@ EnableDeviceStatus DeviceNetwork::setEnable(bool e)
 
 bool DeviceNetwork::enable()
 {
+    // qCDebug(appLog) << "DeviceNetwork::enable";
     // 通过ifconfig配置网卡禁用启用
     return m_Enable;
 }
 
 void DeviceNetwork::correctCurrentLinkStatus(QString linkStatus)
 {
+    // qCDebug(appLog) << "DeviceNetwork::correctCurrentLinkStatus";
     if (m_Link != linkStatus)
         m_Link = linkStatus;
 }
 
 QString DeviceNetwork::logicalName()
 {
+    // qCDebug(appLog) << "DeviceNetwork::logicalName";
     return m_LogicalName;
 }
 
 bool DeviceNetwork::isWireless()
 {
+    // qCDebug(appLog) << "DeviceNetwork::isWireless";
     return m_IsWireless;
 }
 
 QString DeviceNetwork::hwAddress()
 {
+    // qCDebug(appLog) << "DeviceNetwork::hwAddress";
     return m_MACAddress;
 }
 
 void DeviceNetwork::initFilterKey()
 {
+    qCDebug(appLog) << "DeviceNetwork::initFilterKey";
     // 初始化可显示属性
     addFilterKey(QObject::tr("ioport"));
     addFilterKey(QObject::tr("network"));
@@ -290,6 +332,7 @@ void DeviceNetwork::initFilterKey()
 
 void DeviceNetwork::loadBaseDeviceInfo()
 {
+    qCDebug(appLog) << "DeviceNetwork::loadBaseDeviceInfo";
     // 添加基本信息
     addBaseDeviceInfo(tr("Name"), m_Name);
     addBaseDeviceInfo(tr("Vendor"), m_Vendor);
@@ -303,6 +346,7 @@ void DeviceNetwork::loadBaseDeviceInfo()
 
 void DeviceNetwork::loadOtherDeviceInfo()
 {
+    qCDebug(appLog) << "DeviceNetwork::loadOtherDeviceInfo";
     // 添加其他信息,成员变量
     addOtherDeviceInfo(tr("Module Alias"), m_Modalias);
     addOtherDeviceInfo(tr("Physical ID"), m_PhysID);
@@ -330,6 +374,7 @@ void DeviceNetwork::loadOtherDeviceInfo()
 
 void DeviceNetwork::loadTableHeader()
 {
+    qCDebug(appLog) << "DeviceNetwork::loadTableHeader";
     m_TableHeader.append(tr("Name"));
     m_TableHeader.append(tr("Vendor"));
     m_TableHeader.append(tr("Type"));
@@ -337,14 +382,17 @@ void DeviceNetwork::loadTableHeader()
 
 void DeviceNetwork::loadTableData()
 {
+    qCDebug(appLog) << "DeviceNetwork::loadTableData";
     // 根据是否禁用设置设备名称
     QString tName = m_Name;
 
     if (!available()) {
+        qCDebug(appLog) << "DeviceNetwork::loadTableData, device not available";
         tName = "(" + tr("Unavailable") + ") " + m_Name;
     }
 
     if (!enable()) {
+        qCDebug(appLog) << "DeviceNetwork::loadTableData, device not enable";
         tName = "(" + tr("Disable") + ") " + m_Name;
     }
 
