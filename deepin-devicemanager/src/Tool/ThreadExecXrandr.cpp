@@ -392,8 +392,8 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
     }
 
     if (maxResolutionWidth != -1) {
-        lstMap.insert("maxResolution", QString("%1×%2").arg(maxResolutionWidth).arg(maxResolutionHeight));
-        lstMap.insert("minResolution", QString("%1×%2").arg(minResolutionWidth).arg(minResolutionHeight));
+        lstMap.insert("maxResolution", QString("%1 x %2").arg(maxResolutionWidth).arg(maxResolutionHeight));
+        lstMap.insert("minResolution", QString("%1 x %2").arg(minResolutionWidth).arg(minResolutionHeight));
     }
 }
 
