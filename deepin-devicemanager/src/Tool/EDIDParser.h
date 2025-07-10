@@ -8,7 +8,7 @@
 #include<QString>
 #include<QStringList>
 #include<QMap>
-
+#include <commonfunction.h>
 /**
  * @brief The EDIDParser class
  * 用于解析edid的类

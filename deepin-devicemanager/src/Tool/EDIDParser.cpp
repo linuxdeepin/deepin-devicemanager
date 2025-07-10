@@ -205,8 +205,12 @@ void EDIDParser::parseScreenSize()
         }
     }
 
+    if (Common::specialComType == 7){ // sepcial task:378963
+        m_Width = 296;
+        m_Height = 197;
+    }
     double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;
-    m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+    m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', Common::specialComType == 7 ? 0 : 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
 }
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
