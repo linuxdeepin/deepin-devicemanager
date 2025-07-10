@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.45) unstable; urgency=medium
+
+  * chore: Update deepin-manual resources
+
+ -- dengzhongyuan <dengzhongyuan@uniontech.com>  Wed, 09 Jul 2025 16:21:00 +0800
+
 deepin-devicemanager (6.0.44) unstable; urgency=medium
 
   * chore: New version 6.0.44.
