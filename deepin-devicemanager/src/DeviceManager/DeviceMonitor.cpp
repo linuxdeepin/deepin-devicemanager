@@ -258,7 +258,7 @@ const QString DeviceMonitor::getOverviewInfo()
     QString ov;
 
     ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
-    if (Common::specialComType == 6) {
+    if (Common::specialComType == 6 || Common::specialComType == 7) {
         ov = QString("(%1)").arg(m_ScreenSize);
     } else {
         ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
@@ -275,7 +275,7 @@ void DeviceMonitor::initFilterKey()
 void DeviceMonitor::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    if (Common::specialComType != 6 && Common::specialComType != 5) {
+    if (Common::specialComType != 6 && Common::specialComType != 5 && Common::specialComType != 7) {
         addBaseDeviceInfo(("Name"), m_Name);
         addBaseDeviceInfo(("Vendor"), m_Vendor);
         addBaseDeviceInfo(("Type"), m_Model);
@@ -349,10 +349,10 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
                     curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
                 }
             }
-            if (Common::specialComType == 1 || Common::specialComType == 5 || Common::specialComType == 6) {
+            if (Common::specialComType == 1 || Common::specialComType == 5 || Common::specialComType == 6  || Common::specialComType == 7) {
                 m_RefreshRate = QString("%1").arg(curRate);
             }
-            if (Common::specialComType == 5 || Common::specialComType == 6) {
+            if (Common::specialComType == 5 || Common::specialComType == 6 || Common::specialComType == 7) {
                 m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1)).replace("x", "×", Qt::CaseInsensitive);
             } else {
                 m_CurrentResolution = QString("%1 @%2").arg(reScreenSize.cap(1)).arg(curRate).replace("x", "×", Qt::CaseInsensitive);
