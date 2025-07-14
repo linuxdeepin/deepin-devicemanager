@@ -45,14 +45,17 @@ DeviceWidget::~DeviceWidget()
 {
     qCDebug(appLog) << "DeviceWidget destructor start";
     if (mp_ListView) {
+        qCDebug(appLog) << "DeviceWidget destructor delete list view";
         delete mp_ListView;
         mp_ListView = nullptr;
     }
     if (mp_PageInfo) {
+        qCDebug(appLog) << "DeviceWidget destructor delete page info";
         delete mp_PageInfo;
         mp_PageInfo = nullptr;
     }
     if (m_Layout) {
+        qCDebug(appLog) << "DeviceWidget destructor delete layout";
         delete m_Layout;
         m_Layout = nullptr;
     }
@@ -63,8 +66,10 @@ void DeviceWidget::updateListView(const QList<QPair<QString, QString> > &lst)
 {
     qCDebug(appLog) << "DeviceWidget::updateListView start";
     // 更新左边的列表
-    if (mp_ListView)
+    if (mp_ListView) {
+        qCDebug(appLog) << "DeviceWidget::updateListView update list items";
         mp_ListView->updateListItems(lst);
+    }
     qCDebug(appLog) << "DeviceWidget::updateListView end";
 }
 
@@ -77,8 +82,10 @@ void DeviceWidget::updateDevice(const QString &itemStr, const QList<DeviceBaseIn
     }
 
     // 更新右边的详细内容
-    if (mp_PageInfo)
+    if (mp_PageInfo) {
+        qCDebug(appLog) << "DeviceWidget::updateDevice update table";
         mp_PageInfo->updateTable(itemStr, lst);
+    }
     qCDebug(appLog) << "DeviceWidget::updateDevice end";
 }
 
@@ -91,8 +98,10 @@ void DeviceWidget::updateOverview(const QMap<QString, QString> &map)
     }
 
     // 更新概况
-    if (mp_PageInfo)
+    if (mp_PageInfo) {
+        qCDebug(appLog) << "DeviceWidget::updateOverview update table";
         mp_PageInfo->updateTable(map);
+    }
     qCDebug(appLog) << "DeviceWidget::updateOverview end";
 }
 
@@ -110,12 +119,15 @@ void DeviceWidget::setFontChangeFlag()
 
 void DeviceWidget::clear()
 {
+    qCDebug(appLog) << "DeviceWidget::clear start";
     mp_ListView->clear();
     mp_PageInfo->clear();
+    qCDebug(appLog) << "DeviceWidget::clear end";
 }
 
 void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
 {
+    qCDebug(appLog) << "DeviceWidget::slotListViewWidgetItemClicked item:" << itemStr;
     // ListView Item 点击
     m_CurItemStr = itemStr;
     emit itemClicked(itemStr);
@@ -123,23 +135,28 @@ void DeviceWidget::slotListViewWidgetItemClicked(const QString &itemStr)
 
 void DeviceWidget::slotUpdateUI()
 {
+    qCDebug(appLog) << "DeviceWidget::slotUpdateUI start";
     // 更新当前UI界面
     emit itemClicked(m_CurItemStr);
 }
 
 void DeviceWidget::resizeEvent(QResizeEvent *event)
 {
+    // qCDebug(appLog) << "DeviceWidget::resizeEvent start";
     DWidget::resizeEvent(event);
     // 获取所有设备类别
     const QList<QPair<QString, QString>> &types = DeviceManager::instance()->getDeviceTypes();
 
     // 根据右侧Listview当前Index获取当前设备类别的
     QString userStr = mp_ListView->currentIndex();
+    // qCDebug(appLog) << "DeviceWidget::resizeEvent current index:" << userStr;
 
     QString deviceType = "";
     foreach (auto iter, types) {
+        // qCDebug(appLog) << "DeviceWidget::resizeEvent check type:" << iter.second;
         if (iter.second.contains(userStr)) {
             deviceType = iter.first;
+            // qCDebug(appLog) << "DeviceWidget::resizeEvent found device type:" << deviceType;
             break;
         }
     }
@@ -152,21 +169,28 @@ void DeviceWidget::resizeEvent(QResizeEvent *event)
         // 更新Overview界面
         QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
         mp_PageInfo->updateTable(overviewMap);
+        qCDebug(appLog) << "DeviceWidget::resizeEvent update overview table";
     }
 
     // 更新设备信息界面
     if (lst.size() == 1) {
+        qCDebug(appLog) << "DeviceWidget::resizeEvent update single device table";
         mp_PageInfo->updateTable(deviceType, lst);
     } else if (lst.size() > 1) {
+        qCDebug(appLog) << "DeviceWidget::resizeEvent update multi device table";
         // 判断是否是BIOS界面
         DeviceBios *bios = dynamic_cast<DeviceBios *>(lst[0]);
-        if (bios)
+        if (bios) {
+            qCDebug(appLog) << "DeviceWidget::resizeEvent is bios device, update table";
             mp_PageInfo->updateTable(deviceType, lst);
+        }
     }
+    qCDebug(appLog) << "DeviceWidget::resizeEvent end";
 }
 
 void DeviceWidget::initWidgets()
 {
+    qCDebug(appLog) << "DeviceWidget::initWidgets start";
     // 初始化页面布局
     m_Layout = new QHBoxLayout();
     m_Layout->setContentsMargins(0, 0, 0, 0);

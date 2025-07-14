@@ -63,6 +63,7 @@ void DBusInterface::init()
     qCDebug(appLog) << "DBusInterface::init start";
     // 1. 连接到dbus
     if (!QDBusConnection::systemBus().isConnected()) {
+        qCWarning(appLog) << "Cannot connect to the D-Bus session bus.";
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
                 "To start it, run:/n"
                 "/teval `dbus-launch --auto-syntax`/n");

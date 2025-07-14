@@ -46,19 +46,27 @@ void PageBoardInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     DeviceBaseInfo *board = nullptr;
     QList<DeviceBaseInfo *> lstOther;
     foreach (DeviceBaseInfo *info, lst) {
+        // qCDebug(appLog) << "PageBoardInfo::updateInfo processing device:" << info->name();
         DeviceBios *bios = dynamic_cast<DeviceBios *>(info);
-        if (!bios)
+        if (!bios) {
+            // qCDebug(appLog) << "PageBoardInfo::updateInfo not a bios device, continue";
             continue;
+        }
 
         // 判断是否是主板
-        if (bios->isBoard())
+        if (bios->isBoard()) {
+            // qCDebug(appLog) << "PageBoardInfo::updateInfo is a board device";
             board = info;
-        else
+        } else {
+            // qCDebug(appLog) << "PageBoardInfo::updateInfo is not a board device, add to other list";
             lstOther.append(info);
+        }
     }
 
-    if (!board)
+    if (!board) {
+        qCWarning(appLog) << "PageBoardInfo::updateInfo no board device found";
         return;
+    }
 
     // 获取主板信息并加载
     QList<QPair<QString, QString>> baseInfoMap = board->getBaseAttribs();
@@ -79,13 +87,18 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
     int maxRow = this->height() / ROW_HEIGHT - 3;
     // 需要确保两个参数的类型一致 qsizetype 是在 Qt 6 中存在的无符号整数类型
     int limitSize = std::min(static_cast<qsizetype>(lst.size()), static_cast<qsizetype>(maxRow));
-    if (mp_Content)
+    if (mp_Content) {
+        qCDebug(appLog) << "PageBoardInfo::loadDeviceInfo set limit row:" << limitSize;
         mp_Content->setLimitRow(limitSize);
+    }
 
     // 字体无变化如果是展开状态则不更新
     if (!m_FontChangeFlag) {
-        if (isExpanded())
+        qCDebug(appLog) << "PageBoardInfo::loadDeviceInfo font not changed";
+        if (isExpanded()) {
+            qCDebug(appLog) << "PageBoardInfo::loadDeviceInfo is expanded, return";
             return;
+        }
     }
     m_FontChangeFlag = false;
     // clear info
@@ -100,6 +113,7 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 
     // 主板信息正常显示
     for (int i = 0; i < lst.size(); ++i) {
+        // qCDebug(appLog) << "PageBoardInfo::loadDeviceInfo add board info item:" << lst[i].first;
         QTableWidgetItem *itemFirst = new QTableWidgetItem(lst[i].first);
         mp_Content->setItem(i, 0, itemFirst);
         QTableWidgetItem *itemSecond = new QTableWidgetItem(lst[i].second);
@@ -112,6 +126,7 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
     // 其他信息使用富文本代理
     // 其他信息的Id是出去所有BIOS信息以外的信息,使用Richtext进行显示
     for (int i = lst.size(); i < row; ++i) {
+        // qCDebug(appLog) << "PageBoardInfo::loadDeviceInfo add other info item:" << pairs[i - lst.size()].first;
         mp_Content->setItemDelegateForRow(i, m_ItemDelegate);
         QTableWidgetItem *itemFirst = new QTableWidgetItem(pairs[i - lst.size()].first);
         mp_Content->setItem(i, 0, itemFirst);
@@ -161,26 +176,33 @@ void PageBoardInfo::loadDeviceInfo(const QList<DeviceBaseInfo *> &devices, const
 
 void PageBoardInfo::getOtherInfoPair(const QList<DeviceBaseInfo *> &lst, QList<QPair<QString, QString>> &lstPair)
 {
+    qCDebug(appLog) << "PageBoardInfo::getOtherInfoPair start, lst size:" << lst.size();
     // 获取其他信息键值对
     foreach (DeviceBaseInfo *dev, lst) {
+        // qCDebug(appLog) << "PageBoardInfo::getOtherInfoPair process device:" << dev->name();
         DeviceBios *bios = dynamic_cast<DeviceBios *>(dev);
-        if (!bios)
+        if (!bios) {
+            // qCDebug(appLog) << "PageBoardInfo::getOtherInfoPair not a bios device, continue";
             continue;
+        }
         QPair<QString, QString> pair;
         pair.first = bios->name();
         getValueInfo(bios, pair);
         lstPair.append(pair);
     }
+    qCDebug(appLog) << "PageBoardInfo::getOtherInfoPair end";
 }
 
 void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString> &pair)
 {
+    qCDebug(appLog) << "PageBoardInfo::getValueInfo start, device:" << device->name();
     // 获取信息并保存为pair
     QList<QPair<QString, QString>> baseInfoMap = device->getBaseAttribs();
     QList<QPair<QString, QString>> otherInfoMap = device->getOtherAttribs();
     baseInfoMap = baseInfoMap + otherInfoMap;
     QList<QPair<QString, QString>>::iterator it = baseInfoMap.begin();
     for (; it != baseInfoMap.end(); ++it) {
+        // qCDebug(appLog) << "PageBoardInfo::getValueInfo process attribute:" << (*it).first;
         QString first = (*it).first;
         QString second = (*it).second;
         // 防止字符串本的 : 带来影响
@@ -190,6 +212,7 @@ void PageBoardInfo::getValueInfo(DeviceBaseInfo *device, QPair<QString, QString>
         pair.second += "\n";
     }
     pair.second.replace(QRegularExpression(QStringLiteral("\\n$")), QString());
+    qCDebug(appLog) << "PageBoardInfo::getValueInfo end";
 }
 
 void PageBoardInfo::setFontChangeFlag()

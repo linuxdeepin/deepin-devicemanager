@@ -81,6 +81,7 @@ void HttpDriverInterface::getRequest(DriverInfo *driverInfo)
         strJson = getRequestBoard(driverInfo->vendorId(), driverInfo->modelId());
         break;
     default:
+        qCDebug(appLog) << "Unsupported driver type for getRequest:" << driverInfo->type();
         break;
     }
     qCInfo(appLog) << "device name :" << driverInfo->m_Name  << "VendorId:" << driverInfo->m_VendorId << "ModelId:" << driverInfo->m_ModelId;
@@ -101,6 +102,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         qCWarning(appLog) << "Empty manufacturer or model when getting board info";
         return QString();
     }
+    qCDebug(appLog) << "getRequestBoard with manufacturer:" << strManufacturer << "models:" << strModels;
     QString arch = Common::getArchStore();
     QString build = getOsBuild();
     QString major, minor, strUrl;
@@ -111,6 +113,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         }
         strUrl += "&arch=" + arch;
         if (!build.isEmpty()) {
+            qCDebug(appLog) << "OS build is not empty, adding to URL";
             QString system = build;
             if (build[1] == "1") //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
                 system = QString("%1-%2").arg(build[1]).arg(build[3]);
@@ -121,6 +124,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
     } else {
         strUrl = CommonTools::getUrl() + "?arch=" + arch;
         if (!build.isEmpty()) {
+            qCDebug(appLog) << "OS build is not empty, adding to URL";
             QString system = build;
 
             if (build[1] == "1") //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
@@ -143,11 +147,13 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         }
     }
 
+    qCDebug(appLog) << "Constructed URL for getRequestBoard:" << strUrl;
     return getRequestJson(strUrl);
 }
 
 QString HttpDriverInterface::getRequestPrinter(QString strDebManufacturer, QString strDesc)
 {
+    qCDebug(appLog) << "getRequestPrinter with manufacturer:" << strDebManufacturer << "desc:" << strDesc;
     QString arch = Common::getArchStore();
     QString strUrl = CommonTools::getUrl() + "?arch=" + arch;
     int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();
@@ -156,6 +162,7 @@ QString HttpDriverInterface::getRequestPrinter(QString strDebManufacturer, QStri
 
     if (!strDebManufacturer.isEmpty()) {
         if (strDebManufacturer == "HP" || strDebManufacturer == "Hewlett-Packard") {
+            qCDebug(appLog) << "Standardizing HP manufacturer name";
             strDebManufacturer = "HP";
         }
         strUrl += "&deb_manufacturer=" + strDebManufacturer;
@@ -163,11 +170,13 @@ QString HttpDriverInterface::getRequestPrinter(QString strDebManufacturer, QStri
     if (!strDesc.isEmpty()) {
         strUrl += "&desc=" + strDesc;
     }
+    qCDebug(appLog) << "Constructed URL for getRequestPrinter:" << strUrl;
     return getRequestJson(strUrl);
 }
 
 QString HttpDriverInterface::getRequestCamera(QString strDesc)
 {
+    qCDebug(appLog) << "getRequestCamera with desc:" << strDesc;
     QString arch = Common::getArchStore();
     QString strUrl = CommonTools::getUrl() + "?arch=" + arch;
     int iType = DTK_CORE_NAMESPACE::DSysInfo::uosType();
@@ -177,20 +186,26 @@ QString HttpDriverInterface::getRequestCamera(QString strDesc)
     if (!strDesc.isEmpty()) {
         strUrl += "&desc=" + strDesc;
     }
+    qCDebug(appLog) << "Constructed URL for getRequestCamera:" << strUrl;
     return getRequestJson(strUrl);
 }
 
 void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInfo)
 {
+    qCDebug(appLog) << "Checking driver info from JSON for driver:" << driverInfo->name();
     if (strJson.isEmpty()) {
+        qCDebug(appLog) << "JSON string is empty, nothing to check.";
         return;
     }
 
     QList<RepoDriverInfo> lstDriverInfo;
-    if (! convertJsonToDeviceList(strJson, lstDriverInfo))
-        return ;
+    if (! convertJsonToDeviceList(strJson, lstDriverInfo)) {
+        qCWarning(appLog) << "Failed to convert JSON to device list.";
+        return;
+    }
 
     if (lstDriverInfo.size() == 0) {
+        qCDebug(appLog) << "No driver info found in JSON.";
         return;
     }
 
@@ -247,23 +262,32 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
 
 int HttpDriverInterface::packageInstall(const QString &package_name, const QString &version)
 {
+    qCDebug(appLog) << "Checking package installation status for:" << package_name << "version:" << version;
     // 0:没有包 1:版本不一致 2:版本一致
     QString outInfo = Common::executeClientCmd("apt", QStringList() << "policy" << package_name, QString(), -1, false);
-    if (outInfo.isEmpty())
+    if (outInfo.isEmpty()) {
+        qCDebug(appLog) << "No info from apt policy for package:" << package_name;
         return 0;
+    }
+    qCDebug(appLog) << "apt policy output:" << outInfo;
     QStringList infoList = outInfo.split("\n");
     int index = 0;
     for (int i = 0; i < infoList.size(); i++)
     {
         if (infoList[i].startsWith(package_name)) {
             index = i;
+            qCDebug(appLog) << "Found package info at index:" << index;
             break;
         }
     }
-    if (infoList.size() <= (2 + index) || infoList[1 + index].contains("（") || infoList[1 + index].contains("("))
+    if (infoList.size() <= (2 + index) || infoList[1 + index].contains("（") || infoList[1 + index].contains("(")) {
+        qCDebug(appLog) << "Installed version not found or in unexpected format.";
         return 0;
-    if (infoList[1 + index].contains(version))
+    }
+    if (infoList[1 + index].contains(version)) {
+        qCDebug(appLog) << "Installed version matches required version.";
         return 2;
+    }
 
     QRegularExpression rxlen("(\\d+\\S*)");
     QRegularExpressionMatch match = rxlen.match(infoList[1 + index]);
@@ -271,11 +295,15 @@ int HttpDriverInterface::packageInstall(const QString &package_name, const QStri
     if (match.hasMatch()) {
         curVersion = match.captured(1);
     }
+    qCDebug(appLog) << "Current installed version:" << curVersion;
     // 若当前已安装版本高于推荐版本，不再更新
-    if (curVersion >= version)
+    if (curVersion >= version) {
+        qCDebug(appLog) << "Current version is higher or equal to recommended, no update needed.";
         return 2;
-    else
+    } else {
+        qCDebug(appLog) << "Current version is lower than recommended, update needed.";
         return 1;
+    }
 }
 
 QString HttpDriverInterface::getOsBuild()
@@ -296,6 +324,7 @@ QString HttpDriverInterface::getOsBuild()
             }
         }
     }
+    qCWarning(appLog) << "OsBuild not found in /etc/os-version";
     return "";
 }
 
@@ -323,6 +352,7 @@ bool HttpDriverInterface::getVersion(QString &major, QString &minor)
             }
         }
     }
+    qCDebug(appLog) << "Found Major:" << major << "Minor:" << minor;
     return !major.isEmpty() && !minor.isEmpty();
 }
 
@@ -335,6 +365,7 @@ bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<RepoDri
     QJsonDocument jsonDoc(QJsonDocument::fromJson(strJson.toLocal8Bit(), &json_error));
 
     lstDriverInfo.clear();
+    qCDebug(appLog) << "Attempting to parse JSON driver list.";
     if (strJson.isEmpty() || json_error.error != QJsonParseError::NoError) {
         qCWarning(appLog) << "Invalid JSON data or parse error:" << json_error.errorString();
         return false;
@@ -345,9 +376,11 @@ bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<RepoDri
     }
     ja = jsonDoc.object().value("data").toObject().value("list").toArray();
     if (ja.size() < 1) {
+        qCDebug(appLog) << "JSON data list is empty.";
         return false;
     }
 
+    qCDebug(appLog) << "Found" << ja.size() << "drivers in JSON data.";
     QJsonObject _jsonObj;
     QJsonObject _jsonObjppds;
     for (int i = 0; i < ja.size(); i++) {
@@ -441,6 +474,7 @@ bool HttpDriverInterface::convertJsonToDeviceList(QString strJson, QList<RepoDri
         lstDriverInfo.push_back(_driverinfo);
     }
 
+    qCDebug(appLog) << "Successfully parsed" << lstDriverInfo.size() << "driver entries from JSON.";
     return true;
 }
 

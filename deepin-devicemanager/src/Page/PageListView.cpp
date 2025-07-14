@@ -63,6 +63,7 @@ void PageListView::updateListItems(const QList<QPair<QString, QString> > &lst)
 
     // 更新 list
     foreach (auto it, lst) {
+        qCDebug(appLog) << "Adding item:" << it.first;
         mp_ListView->addItem(it.first, it.second);
     }
 
@@ -74,19 +75,24 @@ void PageListView::updateListItems(const QList<QPair<QString, QString> > &lst)
 
 QString PageListView::currentIndex()
 {
+    QString index = mp_ListView->currentIndex().data(Qt::UserRole).toString();
+    // qCDebug(appLog) << "PageListView::currentIndex, index:" << index;
     // 获取当前Index的UserRole
-    return mp_ListView->currentIndex().data(Qt::UserRole).toString();
+    return index;
 }
 
 QString PageListView::currentType()
 {
+    // qCDebug(appLog) << "PageListView::currentType, type:" << m_CurType;
     // 获取当前设备类型
     return m_CurType;
 }
 
 void PageListView::clear()
 {
+    qCDebug(appLog) << "PageListView::clear";
     if (!mp_ListView) {
+        qCWarning(appLog) << "ListView is null";
         return;
     }
 
@@ -96,12 +102,14 @@ void PageListView::clear()
 
 void PageListView::setCurType(QString type)
 {
+    qCDebug(appLog) << "PageListView::setCurType, type:" << type;
     m_CurType = type;
     mp_ListView->setCurItem(m_CurType);
 }
 
 void PageListView::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "PageListView::paintEvent"; //This log is too frequent
     // 让背景色适合主题颜色
     DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::ItemBackground, pa.brush(DPalette::Base));
@@ -117,14 +125,18 @@ void PageListView::paintEvent(QPaintEvent *event)
 
 void PageListView::slotShowMenu(const QPoint &point)
 {
+    qCDebug(appLog) << "PageListView::slotShowMenu";
     // 右键菜单
     mp_Menu->clear();
 
-    if (m_CurType == tr("Driver Install") || m_CurType == tr("Driver Backup") || m_CurType == tr("Driver Restore"))
+    if (m_CurType == tr("Driver Install") || m_CurType == tr("Driver Backup") || m_CurType == tr("Driver Restore")) {
+        qCDebug(appLog) << "Driver related item, no context menu";
         return;
+    }
 
     // 导出/刷新
     if (mp_ListView->indexAt(point).isValid()) {
+        qCDebug(appLog) << "Show context menu";
         mp_Menu->addAction(mp_Export);
         mp_Menu->addAction(mp_Refresh);
 
@@ -134,10 +146,12 @@ void PageListView::slotShowMenu(const QPoint &point)
 
 void PageListView::slotListViewItemClicked(const QModelIndex &index)
 {
+    // qCDebug(appLog) << "PageListView::slotListViewItemClicked";
     // Item 点击事件
     QString concateStr = mp_ListView->getConcatenateStrings(index);
     qCDebug(appLog) << "List item clicked:" << concateStr;
     if (!concateStr.isEmpty() && concateStr != QString("Separator")) {
+        qCDebug(appLog) << "Emit itemClicked signal";
         emit itemClicked(concateStr);
         m_CurType = concateStr;
     }

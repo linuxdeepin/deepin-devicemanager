@@ -39,14 +39,17 @@ void DriverScanner::run()
 
             // 检测本地安装版本
             if (!info->packages().isEmpty()) {
+                // qCDebug(appLog) << "Checking local version for package:" << info->packages();
                 QString outInfo = Common::executeClientCmd("apt", QStringList() << "policy" << info->packages(), QString(), -1, false);
                 if (!outInfo.isEmpty()) {
+                    // qCDebug(appLog) << "apt policy output:" << outInfo;
                     QStringList infoList = outInfo.split("\n");
                     int index = 0;
                     for (int i = 0; i < infoList.size(); i++)
                     {
                         if (infoList[i].startsWith(info->packages())) {
                             index = i;
+                            // qCDebug(appLog) << "Found package info at index:" << index;
                             break;
                         }
                     }
@@ -56,13 +59,14 @@ void DriverScanner::run()
                         QString curVersion;
                         if (match.hasMatch()) {
                             curVersion = match.captured(1);
+                            // qCDebug(appLog) << "Found current version:" << curVersion;
                         }
                         info->m_Version = curVersion.trimmed();
                     }
                 }
             }
 
-            qCDebug(appLog) << "Driver scan progress:" << info->name() << "progress:" << 100 / m_ListDriverInfo.size();
+            // qCDebug(appLog) << "Driver scan progress:" << info->name() << "progress:" << 100 / m_ListDriverInfo.size();
             emit scanInfo(info->name(), 100 / m_ListDriverInfo.size());
             sleep(1);
         } else {

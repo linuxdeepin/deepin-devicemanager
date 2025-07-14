@@ -37,6 +37,7 @@ void KLUGenerator::getDiskInfoFromLshw()
     QString modelStr = "";
     QFile file(bootdevicePath);
     if (file.open(QIODevice::ReadOnly)) {
+        qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw open bootdevice file success";
         modelStr = file.readLine().simplified();
         file.close();
     }
@@ -44,8 +45,11 @@ void KLUGenerator::getDiskInfoFromLshw()
     const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_disk");
     QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
     for (; dIt != lstDisk.end(); ++dIt) {
-        if ((*dIt).size() < 2)
+        // qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw process lshw disk info";
+        if ((*dIt).size() < 2) {
+            // qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw disk info not enough";
             continue;
+        }
 
         // KLU的问题特殊处理
         QMap<QString, QString> tempMap;
@@ -56,6 +60,7 @@ void KLUGenerator::getDiskInfoFromLshw()
 //        qCInfo(appLog) << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"] == modelStr);
         // HW写死
         if (tempMap["product"] == modelStr) {
+            // qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw find boot device";
             // 应HW的要求，将描述固定为   Universal Flash Storage
             tempMap["description"] = "Universal Flash Storage";
             // 应HW的要求，添加interface   UFS 3.0
@@ -67,14 +72,18 @@ void KLUGenerator::getDiskInfoFromLshw()
             process.waitForFinished(-1);
             int exitCode = process.exitCode();
             if (exitCode != 127 && exitCode != 126) {
+                // qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw get wb_en success";
                 QString deviceInfo = process.readAllStandardOutput();
                 if (deviceInfo.trimmed() == "true") {
+                    // qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw wb_en is true";
                     process.start("cat /sys/block/sdd/device/spec_version");
                     process.waitForFinished(-1);
                     exitCode = process.exitCode();
                     if (exitCode != 127 && exitCode != 126) {
+                        // qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw get spec_version success";
                         deviceInfo = process.readAllStandardOutput();
                         if (deviceInfo.trimmed() == "310") {
+                            // qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw spec_version is 310, set interface to UFS 3.1";
                             tempMap["interface"] = "UFS 3.1";
                         }
                     }
@@ -84,6 +93,7 @@ void KLUGenerator::getDiskInfoFromLshw()
 
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
     }
+    qCDebug(appLog) << "KLUGenerator::getDiskInfoFromLshw end";
 }
 
 void KLUGenerator::generatorNetworkDevice()
@@ -92,7 +102,9 @@ void KLUGenerator::generatorNetworkDevice()
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
+        // qCDebug(appLog) << "KLUGenerator::generatorNetworkDevice process lshw network info";
         if ((*it).size() < 2) {
+            // qCDebug(appLog) << "KLUGenerator::generatorNetworkDevice network info not enough";
             continue;
         }
         QMap<QString, QString> tempMap = *it;
@@ -102,6 +114,7 @@ void KLUGenerator::generatorNetworkDevice()
         */
         if ((tempMap["configuration"].indexOf("wireless=IEEE 802.11") > -1) ||
                 (tempMap["capabilities"].indexOf("wireless") > -1)) {
+            // qCDebug(appLog) << "KLUGenerator::generatorNetworkDevice is wireless interface, skip";
             continue;
         }
 
@@ -124,6 +137,7 @@ void KLUGenerator::getNetworkInfoFromCatWifiInfo()
     QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
     QFile file(wifiDevicesInfoPath);
     if (file.open(QIODevice::ReadOnly)) {
+        qCDebug(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo open wifi info file success";
         QMap<QString, QString>  wifiInfo;
         QString allStr = file.readAll();
         file.close();
@@ -138,20 +152,29 @@ void KLUGenerator::getNetworkInfoFromCatWifiInfo()
 #else
             QStringList strList = item.split(':', Qt::SkipEmptyParts);
 #endif
-            if (strList.size() == 2)
+            if (strList.size() == 2) {
+                // qCDebug(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo get wifi info:" << strList[0] << strList[1];
                 wifiInfo[strList[0] ] = strList[1];
+            }
         }
 
-        if (!wifiInfo.isEmpty())
+        if (!wifiInfo.isEmpty()) {
+            // qCDebug(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo wifi info not empty, add to list";
             lstWifiInfo.append(wifiInfo);
+        }
+    } else {
+        qCWarning(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo open wifi info file failed";
     }
     if (lstWifiInfo.size() == 0) {
+        qCWarning(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo no wifi info";
         return;
     }
     QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
 
     for (; it != lstWifiInfo.end(); ++it) {
+        // qCDebug(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo process wifi info";
         if ((*it).size() < 3) {
+            // qCDebug(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo wifi info not enough";
             continue;
         }
 
@@ -163,6 +186,7 @@ void KLUGenerator::getNetworkInfoFromCatWifiInfo()
 
         // cat /sys/hisys/wal/wifi_devices_info  获取结果为 HUAWEI HI103
         if (tempMap["Chip Type"].contains("HUAWEI", Qt::CaseInsensitive)) {
+            // qCDebug(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo fix chip type";
             tempMap["Chip Type"] = tempMap["Chip Type"].remove("HUAWEI").trimmed();
         }
 
@@ -172,6 +196,7 @@ void KLUGenerator::getNetworkInfoFromCatWifiInfo()
 
         DeviceManager::instance()->setNetworkInfoFromWifiInfo(tempMap);
     }
+    qCDebug(appLog) << "KLUGenerator::getNetworkInfoFromCatWifiInfo end";
 }
 
 void KLUGenerator::generatorMonitorDevice()
@@ -188,5 +213,6 @@ void KLUGenerator::generatorMonitorDevice()
     DeviceMonitor *monitor = new  DeviceMonitor();
     monitor->setInfoFromSelfDefine(mapInfo);
     DeviceManager::instance()->addMonitor(monitor);
+    qCDebug(appLog) << "KLUGenerator::generatorMonitorDevice end";
 }
 

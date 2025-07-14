@@ -77,11 +77,15 @@ PageSingleInfo::~PageSingleInfo()
 
 void PageSingleInfo::setLabel(const QString &itemstr)
 {
+    qCDebug(appLog) << "Setting label:" << itemstr;
     // 判断是否是同一界面刷新
-    if (mp_Label->text() == itemstr)
+    if (mp_Label->text() == itemstr) {
+        qCDebug(appLog) << "Same device, setting same device flag to true";
         m_SameDevice = true;
-    else
+    } else {
+        qCDebug(appLog) << "Different device, setting same device flag to false";
         m_SameDevice = false;
+    }
 
     mp_Label->setText(itemstr);
 
@@ -126,13 +130,17 @@ void PageSingleInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
 void PageSingleInfo::clearWidgets()
 {
+    // qCDebug(appLog) << "Clearing widgets";
     mp_Device = nullptr;
 }
 
 void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
 {
-    if (lst.size() < 1)
+    qCDebug(appLog) << "Loading device info, item count:" << lst.size();
+    if (lst.size() < 1) {
+        qCWarning(appLog) << "Empty device info list, returning.";
         return;
+    }
 
     // 设置单个设备界面信息显示的行数,与表格高度相关
     int maxRow = this->height() / ROW_HEIGHT - 3;
@@ -148,6 +156,7 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
     for (int i = 0; i < row; ++i) {
         QStringList lstStr = lst[i].second.split("\n");
         if (lstStr.size() > 1) {
+            qCDebug(appLog) << "Setting rich text delegate for row:" << i;
             mp_Content->setItemDelegateForRow(i, m_ItemDelegate);
         } else {
             mp_Content->setItemDelegateForRow(i, nullptr);
@@ -165,6 +174,7 @@ void PageSingleInfo::loadDeviceInfo(const QList<QPair<QString, QString>> &lst)
 
 void PageSingleInfo::clearContent()
 {
+    qCDebug(appLog) << "Clearing content";
     // 清空表格内容
     mp_Content->clear();
     setMultiFlag(false);
@@ -172,22 +182,30 @@ void PageSingleInfo::clearContent()
 
 bool PageSingleInfo::isExpanded()
 {
-    if (mp_Content)
+    qCDebug(appLog) << "Checking if the table is expanded";
+    if (mp_Content) {
+        qCDebug(appLog) << "Table is expanded";
         return mp_Content->isExpanded();
+    }
+    qCDebug(appLog) << "Table is not expanded";
     return false;
 }
 
 void PageSingleInfo::setRowHeight(int row, int height)
 {
+    qCDebug(appLog) << "Setting row height:" << height;
     mp_Content->setRowHeight(row, height);
     setMultiFlag(true);
 }
 
 void PageSingleInfo::slotShowMenu(const QPoint &)
 {
+    qCDebug(appLog) << "Showing context menu";
     // 设备为空
-    if (nullptr == mp_Device)
+    if (nullptr == mp_Device) {
+        qCWarning(appLog) << "Device is null, not showing context menu.";
         return;
+    }
     mp_Menu->clear();
     // 不管什么状态 导出、刷新、复制 都有
     mp_Refresh->setEnabled(true);
@@ -202,20 +220,24 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 
     // 不可用状态：卸载和启用禁用置灰
     if (!mp_Device->available()) {
+        qCDebug(appLog) << "Device not available, disabling remove/enable actions.";
         mp_removeDriver->setEnabled(false);
         mp_Enable->setEnabled(false);
     }
     // 禁用状态：更新卸载置灰
     if (!mp_Device->enable()) {
+        qCDebug(appLog) << "Device disabled, setting enable action text to 'Enable'.";
         mp_Enable->setEnabled(true);
         mp_updateDriver->setEnabled(false);
         mp_removeDriver->setEnabled(false);
         mp_Enable->setText(tr("Enable"));
     } else {
+        qCDebug(appLog) << "Device enabled, setting enable action text to 'Disable'.";
         mp_Enable->setText(tr("Disable"));
     }
     // 驱动界面打开状态： 驱动的更新卸载和设备的启用禁用置灰
     if (PageDriverControl::isRunning()) {
+        qCDebug(appLog) << "Driver control page is running, disabling driver/device actions.";
         mp_updateDriver->setEnabled(false);
         mp_removeDriver->setEnabled(false);
         mp_Enable->setEnabled(false);
@@ -224,6 +246,7 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     //dde-printer未安装，updateDriver不可选
     DevicePrint *printer = qobject_cast<DevicePrint *>(mp_Device);
     if (printer && !PageInfo::packageHasInstalled("dde-printer")) {
+        qCDebug(appLog) << "dde-printer not installed, disabling update driver action.";
         mp_updateDriver->setEnabled(false);
     }
 
@@ -232,10 +255,12 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     if (mp_Device->canEnable()) {
+        qCDebug(appLog) << "Device can be enabled/disabled, adding enable/disable action.";
         mp_Menu->addAction(mp_Enable);
     }
     // 主板、内存、cpu等没有驱动，无需右键按钮
     if (mp_Device->canUninstall()) {
+        qCDebug(appLog) << "Device can be uninstalled, adding driver actions.";
         mp_Menu->addSeparator();
         mp_Menu->addAction(mp_updateDriver);
         mp_Menu->addAction(mp_removeDriver);
@@ -243,33 +268,43 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 
     DeviceInput *input = dynamic_cast<DeviceInput *>(mp_Device);
     if (input) {
+        qCDebug(appLog) << "Device is an input device, adding wakeup action.";
         mp_Menu->addSeparator();
         if (input->canWakeupMachine()) {
             mp_WakeupMachine->setChecked(input->isWakeupMachine());
+            qCDebug(appLog) << "Wakeup action checked state set to:" << input->isWakeupMachine();
         } else {
             mp_WakeupMachine->setEnabled(false);
+            qCDebug(appLog) << "Device cannot wake up machine, disabling wakeup action.";
         }
         // 如果是禁用状态，则唤醒置灰
-        if (!mp_Device->enable())
+        if (!mp_Device->enable()) {
             mp_WakeupMachine->setEnabled(false);
+            qCDebug(appLog) << "Device is disabled, disabling wakeup action.";
+        }
         mp_Menu->addAction(mp_WakeupMachine);
     }
 
     // 网卡远程唤醒
     DeviceNetwork *network = dynamic_cast<DeviceNetwork *>(mp_Device);
     if (network) {
+        qCDebug(appLog) << "Device is a network device, checking wakeup status.";
         int res = DBusWakeupInterface::getInstance()->isNetworkWakeup(network->logicalName());
+        qCDebug(appLog) << "Network wakeup status:" << res;
         if (WAKEUP_OPEN == res) {
             mp_WakeupMachine->setChecked(true);
         } else if (WAKEUP_CLOSE == res) {
             mp_WakeupMachine->setChecked(false);
         } else {
             mp_WakeupMachine->setEnabled(false);
+            qCDebug(appLog) << "Unknown network wakeup status, disabling wakeup action.";
         }
 
         // 如果是禁用状态，则唤醒置灰
-        if (!mp_Device->enable())
+        if (!mp_Device->enable()) {
             mp_WakeupMachine->setEnabled(false);
+            qCDebug(appLog) << "Device is disabled, disabling wakeup action.";
+        }
         mp_Menu->addAction(mp_WakeupMachine);
     }
 
@@ -286,8 +321,10 @@ void PageSingleInfo::slotActionCopy()
 
 void PageSingleInfo::slotActionEnable()
 {
+    qCDebug(appLog) << "Toggling device enable state.";
     if (mp_Content->isCurDeviceEnable()) {
         // 当前设备是不可用状态
+        qCDebug(appLog) << "Disabling device.";
         EnableDeviceStatus res = mp_Device->setEnable(false);
 
         // 除设置成功的情况，其他情况需要提示设置失败
@@ -296,16 +333,19 @@ void PageSingleInfo::slotActionEnable()
             emit refreshInfo();
         }  else if (res == EDS_NoSerial) {
             QString con = tr("Failed to disable it: unable to get the device SN");
+            qCWarning(appLog) << con;
             // 禁用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         } else {
             QString con = tr("Failed to disable the device");
+            qCWarning(appLog) << con;
 
             // 启用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         }
     } else {
         // 当前设备是可用状态
+        qCDebug(appLog) << "Enabling device.";
         EnableDeviceStatus res = mp_Device->setEnable(true);
 
         // 除设置成功的情况，其他情况需要提示设置失败
@@ -313,10 +353,12 @@ void PageSingleInfo::slotActionEnable()
             emit refreshInfo();
         } else if (res == EDS_NoSerial) {
             QString con = tr("Failed to disable it: unable to get the device SN");
+            qCWarning(appLog) << con;
             // 禁用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         } else {
             QString con = tr("Failed to enable the device");
+            qCWarning(appLog) << con;
             // 禁用失败提示
             DMessageManager::instance()->sendMessage(this->window(), QIcon::fromTheme("warning"), con);
         }
@@ -379,6 +421,7 @@ void PageSingleInfo::slotWakeupMachine()
 
 void PageSingleInfo::initWidgets()
 {
+    qCDebug(appLog) << "Initializing widgets";
     // 初始化页面布局
     QVBoxLayout *hLayout = new QVBoxLayout();
     QHBoxLayout *labelLayout = new QHBoxLayout();
@@ -397,7 +440,10 @@ void PageSingleInfo::initWidgets()
 
 void PageSingleInfo::expandTable()
 {
+    qCDebug(appLog) << "Expanding table";
     // 展开表格
-    if (mp_Content)
+    if (mp_Content) {
+        qCDebug(appLog) << "Expanding table";
         mp_Content->expandTable();
+    }
 }

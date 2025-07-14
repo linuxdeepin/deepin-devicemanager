@@ -39,19 +39,25 @@ using namespace DDLog;
 DetailButton::DetailButton(const QString &txt)
     : DCommandLinkButton(txt)
 {
+    qCDebug(appLog) << "DetailButton constructor";
     setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
 }
 
 void DetailButton::updateText()
 {
-    if (this->text() == tr("More"))
+    qCDebug(appLog) << "DetailButton::updateText start";
+    if (this->text() == tr("More")) {
+        qCDebug(appLog) << "DetailButton::updateText set text to Collapse";
         this->setText(tr("Collapse"));
-    else
+    } else {
+        qCDebug(appLog) << "DetailButton::updateText set text to More";
         this->setText(tr("More"));
+    }
 }
 
 void DetailButton::paintEvent(QPaintEvent *e)
 {
+    qCDebug(appLog) << "DetailButton::paintEvent";
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing, true);
@@ -66,10 +72,12 @@ void DetailButton::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid /* && wid == this*/)
+    if (wid /* && wid == this*/) {
         cg = DPalette::Active;
-    else
+    } else {
+        qCDebug(appLog) << "DetailButton::paintEvent, inactive window";
         cg = DPalette::Inactive;
+    }
 
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
@@ -83,12 +91,14 @@ void DetailButton::paintEvent(QPaintEvent *e)
 DetailSeperator::DetailSeperator(DWidget *parent)
     : DWidget(parent)
 {
+    qCDebug(appLog) << "DetailSeperator constructor";
     // 设置分隔符高度一个像素
     setFixedHeight(LINE_WIDTH);
 }
 
 void DetailSeperator::paintEvent(QPaintEvent *e)
 {
+    // qCDebug(appLog) << "DetailSeperator::paintEvent";
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing, true);
@@ -106,10 +116,13 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid /* && wid == this*/)
+    if (wid /* && wid == this*/) {
+        // qCDebug(appLog) << "DetailSeperator::paintEvent, active window";
         cg = DPalette::Active;
-    else
+    } else {
+        // qCDebug(appLog) << "DetailSeperator::paintEvent, inactive window";
         cg = DPalette::Inactive;
+    }
 
     // 清除背景色颜色
     QBrush clearBrush(palette.color(cg, DPalette::Base));
@@ -131,11 +144,12 @@ void DetailSeperator::paintEvent(QPaintEvent *e)
 ScrollAreaWidget::ScrollAreaWidget(DWidget *parent)
     : DWidget(parent)
 {
-
+    // qCDebug(appLog) << "ScrollAreaWidget constructor";
 }
 
 void ScrollAreaWidget::paintEvent(QPaintEvent *e)
 {
+    // qCDebug(appLog) << "ScrollAreaWidget::paintEvent";
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing, true);
@@ -150,10 +164,13 @@ void ScrollAreaWidget::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid /* && wid == this*/)
+    if (wid /* && wid == this*/) {
+        // qCDebug(appLog) << "ScrollAreaWidget::paintEvent, active window";
         cg = DPalette::Active;
-    else
+    } else {
+        // qCDebug(appLog) << "ScrollAreaWidget::paintEvent, inactive window";
         cg = DPalette::Inactive;
+    }
 
     // 清除背景色颜色
     QBrush clearBrush(palette.color(cg, DPalette::Base));
@@ -198,7 +215,11 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
 
     // Create widgets for showing device info
     foreach (auto device, lstInfo) {
-        if (!device) {continue;}
+        // qCDebug(appLog) << "PageDetail::showDeviceInfo process device:" << device->name();
+        if (!device) {
+            // qCDebug(appLog) << "PageDetail::showDeviceInfo device is null, continue";
+            continue;
+        }
         TextBrowser *txtBrowser = new TextBrowser(this);
         txtBrowser->showDeviceInfo(device);
         connect(txtBrowser, &TextBrowser::refreshInfo, this, &PageDetail::refreshInfo);
@@ -206,8 +227,10 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
         addWidgets(txtBrowser, device->enable() && device->available() && !device->getOtherAttribs().isEmpty());
         // 当添加到最后一个设备详细信息时，隐藏分隔符
-        if (device == lstInfo.last())
+        if (device == lstInfo.last()) {
+            // qCDebug(appLog) << "PageDetail::showDeviceInfo is last device, hide seperator";
             m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
+        }
     }
     // 刷新展示页面时,滚动条还原
     mp_ScrollArea->verticalScrollBar()->setValue(0);
@@ -218,20 +241,24 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
 
 void PageDetail::showInfoOfNum(int index)
 {
+    qCDebug(appLog) << "PageDetail::showInfoOfNum start, index:" << index;
     if (index >= m_ListHlayout.size()
             || index >= m_ListTextBrowser.size()
             || index >= m_ListDetailButton.size()
             || index >= m_ListDetailSeperator.size()) {
+        qCWarning(appLog) << "PageDetail::showInfoOfNum index out of range";
         return;
     }
     int value = 0;
     for (int i = 0; i <= index - 1; i++) {
+        // qCDebug(appLog) << "PageDetail::showInfoOfNum calculate scroll value, i:" << i;
         value += m_ListTextBrowser[i]->height();
         value += m_ListDetailButton[i]->height();
         value += m_ListDetailSeperator[i]->height();
         value += SPACE_HEIGHT;
     }
     mp_ScrollArea->verticalScrollBar()->setValue(value);
+    qCDebug(appLog) << "PageDetail::showInfoOfNum end, value:" << value;
 }
 
 EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
@@ -244,8 +271,10 @@ EnableDeviceStatus PageDetail::enableDevice(int row, bool enable)
 
     // 设置 TextBrowser 可用
     TextBrowser *browser = m_ListTextBrowser.at(row);
-    if (!browser)
+    if (!browser) {
+        qCWarning(appLog) << "PageDetail::enableDevice browser is null";
         return EDS_Cancle;
+    }
 
     return browser->setDeviceEnabled(enable);
 }
@@ -267,6 +296,7 @@ void PageDetail::setWakeupMachine(int row, bool wakeup)
 
 void PageDetail::paintEvent(QPaintEvent *e)
 {
+    // qCDebug(appLog) << "PageDetail::paintEvent";
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing, true);
@@ -284,10 +314,13 @@ void PageDetail::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid /* && wid == this*/)
+    if (wid /* && wid == this*/) {
+        qCDebug(appLog) << "PageDetail::paintEvent, active window";
         cg = DPalette::Active;
-    else
+    } else {
+        qCDebug(appLog) << "PageDetail::paintEvent, inactive window";
         cg = DPalette::Inactive;
+    }
 
     // 开始绘制边框 *********************************************************
     // 计算绘制区域
@@ -302,11 +335,13 @@ void PageDetail::paintEvent(QPaintEvent *e)
 
 void PageDetail::resizeEvent(QResizeEvent *event)
 {
+    // qCDebug(appLog) << "PageDetail::resizeEvent";
     DWidget::resizeEvent(event);
 }
 
 void PageDetail::addWidgets(TextBrowser *widget, bool enable)
 {
+    qCDebug(appLog) << "PageDetail::addWidgets start, enable:" << enable;
     // 添加 textBrowser
     if (widget != nullptr && m_ListTextBrowser.size() != 0)
         mp_ScrollAreaLayout->addSpacing(SEPERATOR_HEIGHT);
@@ -336,10 +371,12 @@ void PageDetail::addWidgets(TextBrowser *widget, bool enable)
     m_ListHlayout.append(hLayout);
     m_ListDetailButton.append(button);
     m_ListDetailSeperator.append(seperator);
+    qCDebug(appLog) << "PageDetail::addWidgets end";
 }
 
 void PageDetail::clearWidget()
 {
+    qCDebug(appLog) << "PageDetail::clearWidget start";
     QList<TextBrowser *> listTextBrowser = m_ListTextBrowser;
     m_ListTextBrowser.clear();
     //  清空TextBrowser
@@ -386,13 +423,17 @@ void PageDetail::clearWidget()
     mp_ScrollAreaLayout->setContentsMargins(0, 0, 0, 0);
     mp_ScrollAreaLayout->setSpacing(0);
     mp_ScrollWidget->setLayout(mp_ScrollAreaLayout);
+    qCDebug(appLog) << "PageDetail::clearWidget end";
 }
 
 void PageDetail::slotBtnClicked()
 {
+    qCDebug(appLog) << "PageDetail::slotBtnClicked start";
     DetailButton *button = qobject_cast<DetailButton *>(sender());
-    if (!button)
+    if (!button) {
+        qCWarning(appLog) << "PageDetail::slotBtnClicked, invalid button";
         return;
+    }
     int index = 0;
     foreach (DetailButton *b, m_ListDetailButton) {
         if (button == b)

@@ -35,6 +35,7 @@ PageDriverRestoreInfo::PageDriverRestoreInfo(QWidget *parent)
 }
 void PageDriverRestoreInfo::initUI()
 {
+    qCDebug(appLog) << "PageDriverRestoreInfo::initUI start";
     this->setLineWidth(0);
     initTable();
 
@@ -119,10 +120,12 @@ void PageDriverRestoreInfo::initUI()
 
     mainLayout->addWidget(mp_StackWidget);
     this->setLayout(mainLayout);
+    qCDebug(appLog) << "PageDriverRestoreInfo::initUI end";
 }
 
 void PageDriverRestoreInfo::initTable()
 {
+    qCDebug(appLog) << "PageDriverRestoreInfo::initTable start";
     mp_ViewBackable->initHeaderView(QStringList()<< tr("Name")
                                     << tr("Current Version")
                                     << tr("Backup Version")
@@ -131,6 +134,7 @@ void PageDriverRestoreInfo::initTable()
     mp_ViewBackable->setColumnWidth(0, 324);
     mp_ViewBackable->setColumnWidth(1, 158);
     mp_ViewBackable->setColumnWidth(2, 158);
+    qCDebug(appLog) << "PageDriverRestoreInfo::initTable end";
 }
 
 void PageDriverRestoreInfo::addDriverInfoToTableView(DriverInfo *info, int index)
@@ -138,6 +142,7 @@ void PageDriverRestoreInfo::addDriverInfoToTableView(DriverInfo *info, int index
     qCDebug(appLog) << "Adding driver info to table view, name:" << info->name() << "index:" << index;
     PageDriverTableView *view = nullptr;
     if (!info->debBackupVersion().isEmpty()) {
+        qCDebug(appLog) << "Driver has backup version, adding to view";
         view = mp_ViewBackable;
         view->appendRowItems(4);
     } else {
@@ -148,6 +153,7 @@ void PageDriverRestoreInfo::addDriverInfoToTableView(DriverInfo *info, int index
     int row = view->model()->rowCount() - 1;
 
     if (view == mp_ViewBackable) {
+        qCDebug(appLog) << "Setting widgets for backable driver";
         // 设置名称
         DriverNameItem *nameItem = new DriverNameItem(this, info->type());
         nameItem->setName(info->name());
@@ -185,13 +191,16 @@ void PageDriverRestoreInfo::showTables(int backedLength)
 
 void PageDriverRestoreInfo::clearAllData()
 {
+    qCDebug(appLog) << "PageDriverRestoreInfo::clearAllData start";
     mp_ViewBackable->clear();
 
     initTable();
+    qCDebug(appLog) << "PageDriverRestoreInfo::clearAllData end";
 }
 
 void PageDriverRestoreInfo::setItemOperationEnable(int index, bool enable)
 {
+    qCDebug(appLog) << "PageDriverRestoreInfo::setItemOperationEnable, index:" << index << "enable:" << enable;
     mp_ViewBackable->setItemOperationEnable(index, enable);
 }
 

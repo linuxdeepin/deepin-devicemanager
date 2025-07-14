@@ -78,22 +78,27 @@ bool DBusDriverInterface::isDriverPackage(const QString &path)
 
 bool DBusDriverInterface::isArchMatched(const QString &path)
 {
+    qCDebug(appLog) << "DBusDriverInterface::isArchMatched";
     QDBusReply<bool> reply = mp_Iface->call("isArchMatched", path);
     if (reply.isValid())
         return reply.value();
+    qCDebug(appLog) << "DBusDriverInterface::isArchMatched, reply is invalid";
     return false;
 }
 
 bool DBusDriverInterface::isDebValid(const QString &path)
 {
+    qCDebug(appLog) << "DBusDriverInterface::isDebValid";
     QDBusReply<bool> reply = mp_Iface->call("isDebValid", path);
     if (reply.isValid())
         return reply.value();
+    qCDebug(appLog) << "DBusDriverInterface::isDebValid, reply is invalid";
     return false;
 }
 
 bool DBusDriverInterface::backupDeb(const QString &debpath)
 {
+    qCDebug(appLog) << "DBusDriverInterface::backupDeb";
     QDBusReply<bool> reply = mp_Iface->call("backupDeb", debpath);
 
     return reply.value();
@@ -101,6 +106,7 @@ bool DBusDriverInterface::backupDeb(const QString &debpath)
 
 bool DBusDriverInterface::delDeb(const QString &debname)
 {
+    qCDebug(appLog) << "DBusDriverInterface::delDeb";
     QDBusReply<bool> reply = mp_Iface->call("delDeb",debname);
 
     return reply.value();
@@ -108,6 +114,7 @@ bool DBusDriverInterface::delDeb(const QString &debname)
 
 bool DBusDriverInterface::aptUpdate()
 {
+    qCDebug(appLog) << "DBusDriverInterface::aptUpdate";
     QDBusReply<bool> reply = mp_Iface->call("aptUpdate");
 
     return reply.value();
@@ -128,12 +135,15 @@ DBusDriverInterface::~DBusDriverInterface()
 
 void DBusDriverInterface::slotProcessChange(qint32 value, QString detail)
 {
+    qCDebug(appLog) << "DBusDriverInterface::slotProcessChange";
     emit processChange(value, detail);
 }
 
 void DBusDriverInterface::slotProcessEnd(bool success, QString msg)
 {
+    qCDebug(appLog) << "DBusDriverInterface::slotProcessEnd";
     if (success) {
+        qCDebug(appLog) << "DBusDriverInterface::slotProcessEnd, success";
         emit processChange(100, "");
         usleep(300000);
     }
@@ -142,27 +152,32 @@ void DBusDriverInterface::slotProcessEnd(bool success, QString msg)
 
 void DBusDriverInterface::slotCallFinished(QDBusPendingCallWatcher *watcher)
 {
+    qCDebug(appLog) << "DBusDriverInterface::slotCallFinished";
     QDBusPendingReply<bool> reply = *watcher;
     watcher->deleteLater();
 }
 
 void DBusDriverInterface::slotDownloadProgressChanged(QStringList msg)
 {
+    qCDebug(appLog) << "DBusDriverInterface::slotDownloadProgressChanged";
     emit downloadProgressChanged(msg);
 }
 
 void DBusDriverInterface::slotDownloadFinished()
 {
+    qCDebug(appLog) << "DBusDriverInterface::slotDownloadFinished";
     emit downloadFinished();
 }
 
 void DBusDriverInterface::slotInstallProgressFinished(bool bsuccess, int err)
 {
+    qCDebug(appLog) << "DBusDriverInterface::slotInstallProgressFinished";
     emit installProgressFinished(bsuccess, err);
 }
 
 void DBusDriverInterface::slotInstallProgressChanged(qint32 progress)
 {
+    qCDebug(appLog) << "DBusDriverInterface::slotInstallProgressChanged";
     emit installProgressChanged(progress);
 }
 
@@ -182,6 +197,7 @@ void DBusDriverInterface::init()
     qCDebug(appLog) << "DBus interface created for service:" << SERVICE_NAME;
 
     if (mp_Iface->isValid()) {
+        qCDebug(appLog) << "DBusDriverInterface::init, iface is valid";
         connect(mp_Iface, SIGNAL(sigProgressDetail(qint32, QString)), this, SLOT(slotProcessChange(qint32, QString)));
         connect(mp_Iface, SIGNAL(sigFinished(bool, QString)), this, SLOT(slotProcessEnd(bool, QString)));
 
