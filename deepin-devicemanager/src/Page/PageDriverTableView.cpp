@@ -42,37 +42,44 @@ void PageDriverTableView::appendRowItems(int column)
 
 void PageDriverTableView::setWidget(int row, int column, DWidget *widget)
 {
+    // qCDebug(appLog) << "PageDriverTableView::setWidget, row:" << row << "column:" << column;
     mp_View->setWidget(row, column, widget);
     mp_View->resizeColumn(column);
 }
 
 QAbstractItemModel *PageDriverTableView::model() const
 {
+    // qCDebug(appLog) << "PageDriverTableView::model";
     return mp_View->model();
 }
 
 void PageDriverTableView::initHeaderView(const QStringList &headerList, bool check)
 {
+    qCDebug(appLog) << "PageDriverTableView::initHeaderView, check:" << check;
     mp_View->initHeaderView(headerList, check);
 }
 
 void PageDriverTableView::setHeaderCbStatus(bool checked)
 {
+    qCDebug(appLog) << "PageDriverTableView::setHeaderCbStatus, checked:" << checked;
     mp_View->setHeaderCbStatus(checked);
 }
 
 void PageDriverTableView::setCheckedCBDisnable()
 {
+    qCDebug(appLog) << "PageDriverTableView::setCheckedCBDisnable";
     mp_View->setCheckedCBDisable();
 }
 
 void PageDriverTableView::getCheckedDriverIndex(QList<int> &lstIndex)
 {
+    qCDebug(appLog) << "PageDriverTableView::getCheckedDriverIndex";
     mp_View->getCheckedDriverIndex(lstIndex);
 }
 
 void PageDriverTableView::setItemStatus(int index, Status s)
 {
+    qCDebug(appLog) << "PageDriverTableView::setItemStatus, index:" << index << "status:" << s;
     mp_View->setItemStatus(index, s);
 }
 
@@ -84,6 +91,7 @@ void PageDriverTableView::setErrorMsg(int index, const QString &msg)
 
 bool PageDriverTableView::hasItemDisabled()
 {
+    qCDebug(appLog) << "PageDriverTableView::hasItemDisabled";
     return mp_View->hasItemDisabled();
 }
 
@@ -96,16 +104,19 @@ void PageDriverTableView::clear()
 
 void PageDriverTableView::setItemOperationEnable(int index, bool enable)
 {
+    qCDebug(appLog) << "PageDriverTableView::setItemOperationEnable, index:" << index << "enable:" << enable;
     mp_View->setItemOperationEnable(index, enable);
 }
 
 void PageDriverTableView::removeItemAndWidget(int row, int column)
 {
+    qCDebug(appLog) << "PageDriverTableView::removeItemAndWidget, row:" << row << "column:" << column;
     mp_View->removeItemAndWidget(row, column);
 }
 
 void PageDriverTableView::setHeaderCbEnable(bool enable)
 {
+    qCDebug(appLog) << "PageDriverTableView::setHeaderCbEnable, enable:" << enable;
     mp_View->setHeaderCbEnable(enable);
 }
 
@@ -129,8 +140,10 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
     DWidget *wid = DApplication::activeWindow();
     if (wid/* && wid == this*/) {
         cg = DPalette::Active;
+        // qCDebug(appLog) << "Paint event on active window";
     } else {
         cg = DPalette::Inactive;
+        // qCDebug(appLog) << "Paint event on inactive window";
     }
 
     // 设置Widget固定高度,(+1)表示包含表头高度,(*2)表示上下边距，为保证treewidget横向滚动条与item不重叠，添加滚动条高度
@@ -155,7 +168,9 @@ void PageDriverTableView::paintEvent(QPaintEvent *e)
 
 void PageDriverTableView::resizeEvent(QResizeEvent *e)
 {
+    // qCDebug(appLog) << "PageDriverTableView::resizeEvent, new size:" << e->size() << "old size:" << e->oldSize();
     if(m_PreWidth < 680){
+        // qCDebug(appLog) << "PageDriverTableView::resizeEvent, width too small, skip";
         m_PreWidth = this->width();
         return DWidget::resizeEvent(e);
     }
@@ -166,6 +181,7 @@ void PageDriverTableView::resizeEvent(QResizeEvent *e)
 
     // 宽度不变，不做处理
     if(0 == detal) {
+        // qCDebug(appLog) << "PageDriverTableView::resizeEvent, width not changed, skip";
         return DWidget::resizeEvent(e);
     }
 
@@ -176,6 +192,7 @@ void PageDriverTableView::resizeEvent(QResizeEvent *e)
 
 void PageDriverTableView::initWidgets()
 {
+    qCDebug(appLog) << "PageDriverTableView::initWidgets";
     this->setFixedHeight(DRIVER_TABLE_HEADER_HEIGHT);
     setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
@@ -187,24 +204,31 @@ void PageDriverTableView::initWidgets()
 
 void PageDriverTableView::resizeColumnWidth(int detal)
 {
+    qCDebug(appLog) << "PageDriverTableView::resizeColumnWidth, detal:" << detal;
     bool newDriverTable = mp_View->columnWidth(5) == 0;
     if(newDriverTable){
+        qCDebug(appLog) << "PageDriverTableView::resizeColumnWidth, is new driver table";
         int columnZeroWidth = mp_View->columnWidth(0);
         if(detal > 0){ // 放大
+            qCDebug(appLog) << "PageDriverTableView::resizeColumnWidth, zoom in";
             mp_View->setColumnWidth(0,columnZeroWidth + detal);
         }else{ // 缩小
+            qCDebug(appLog) << "PageDriverTableView::resizeColumnWidth, zoom out";
             if(columnZeroWidth + detal > 120){
                 mp_View->setColumnWidth(0,columnZeroWidth + detal);
             }
         }
     }else{
+        qCDebug(appLog) << "PageDriverTableView::resizeColumnWidth, is not new driver table";
         int columnOneWidth = mp_View->columnWidth(1);
         int columnTwoWidth = mp_View->columnWidth(2);
         int columnFourWidth = mp_View->columnWidth(4);
         if(detal > 0){ // 放大
+            qCDebug(appLog) << "PageDriverTableView::resizeColumnWidth, zoom in";
             // 第一步：先放大第一列
             int detalOne = 324 - columnOneWidth;
             if(detalOne - detal >= 0){ // 此时只需要放大第一列
+                qCDebug(appLog) << "Zoom in: expanding column 1 only.";
                 mp_View->setColumnWidth(1,columnOneWidth + detal);
                 return;
             }else {
@@ -215,6 +239,7 @@ void PageDriverTableView::resizeColumnWidth(int detal)
             // 第二步：放大第二列
             int detalTwo = 186 - columnTwoWidth;
             if(detalTwo - detal >= 0){ // 此时只需要放大第一列
+                qCDebug(appLog) << "Zoom in: expanding column 2.";
                 mp_View->setColumnWidth(2,columnTwoWidth + detal);
                 return;
             }else {
@@ -225,6 +250,7 @@ void PageDriverTableView::resizeColumnWidth(int detal)
             // 第三步：放大第四列
             int detalFour = 150 - columnFourWidth;
             if(detalFour - detal >= 0){ // 此时只需要放大第一列
+                qCDebug(appLog) << "Zoom in: expanding column 4.";
                 mp_View->setColumnWidth(4,columnFourWidth + detal);
                 return;
             }else {
@@ -234,12 +260,15 @@ void PageDriverTableView::resizeColumnWidth(int detal)
 
             // 第五步：继续放大第一列
             columnOneWidth = mp_View->columnWidth(1);
+            qCDebug(appLog) << "Zoom in: expanding column 1 further.";
             mp_View->setColumnWidth(1, columnOneWidth + detal);
 
         }else{ // 缩小
+            qCDebug(appLog) << "PageDriverTableView::resizeColumnWidth, zoom out";
             // 第一步：先缩小第一列
             int detalOne = columnOneWidth - 120; // 计算第一列可缩小距离
             if(detalOne + detal >= 0){ // 此时只需要降低第一列
+                qCDebug(appLog) << "Zoom out: shrinking column 1 only.";
                 mp_View->setColumnWidth(1,columnOneWidth + detal);
                 return;
             }else { // 此时需要降低第二列，但是先把第一列降低了再说
@@ -248,8 +277,9 @@ void PageDriverTableView::resizeColumnWidth(int detal)
             }
 
             // 第二步：缩小第二列
-            int detalTwo = columnTwoWidth - 120;
+            int detalTwo = columnTwoWidth - 120; // 计算第二列可缩小距离
             if(detalTwo + detal >= 0){ // 此时只需要降低第一列
+                qCDebug(appLog) << "Zoom out: shrinking column 2.";
                 mp_View->setColumnWidth(2,columnTwoWidth + detal);
                 return;
             }else { // 此时需要降低第二列，但是先把第一列降低了再说
@@ -260,6 +290,7 @@ void PageDriverTableView::resizeColumnWidth(int detal)
             // 第三步：缩小第四列
             int detalFour = columnFourWidth - 120;
             if(detalFour + detal >= 0){ // 此时只需要降低第一列
+                qCDebug(appLog) << "Zoom out: shrinking column 4.";
                 mp_View->setColumnWidth(4,columnFourWidth + detal);
             }else { // 此时需要降低第二列，但是先把第一列降低了再说
                 mp_View->setColumnWidth(4,columnFourWidth - detalFour);

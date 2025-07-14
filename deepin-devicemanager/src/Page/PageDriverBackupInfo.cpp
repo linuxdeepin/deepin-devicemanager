@@ -31,6 +31,7 @@ PageDriverBackupInfo::PageDriverBackupInfo(QWidget *parent)
     connect(mp_ViewBackable, &PageDriverTableView::itemChecked, this, &PageDriverBackupInfo::itemChecked);
     connect(mp_HeadWidget, &DetectedStatusWidget::backupAll, this, &PageDriverBackupInfo::backupAll);
     connect(mp_HeadWidget, &DetectedStatusWidget::backupAll, this, [=](){
+        qCDebug(appLog) << "PageDriverBackupInfo backupAll triggered, set checked cb disnable";
         mp_ViewBackable->setCheckedCBDisnable();
     });
     connect(mp_HeadWidget, &DetectedStatusWidget::cancelClicked, this, &PageDriverBackupInfo::undoBackup);
@@ -39,6 +40,7 @@ PageDriverBackupInfo::PageDriverBackupInfo(QWidget *parent)
 
 void PageDriverBackupInfo::initUI()
 {
+    qCDebug(appLog) << "PageDriverBackupInfo::initUI start";
     this->setLineWidth(0);
     initTable();
 
@@ -89,10 +91,12 @@ void PageDriverBackupInfo::initUI()
     mainLayout->addSpacing(16);
     mainLayout->addWidget(area);
     this->setLayout(mainLayout);
+    qCDebug(appLog) << "PageDriverBackupInfo::initUI end";
 }
 
 void PageDriverBackupInfo::initTable()
 {
+    qCDebug(appLog) << "PageDriverBackupInfo::initTable start";
     mp_ViewBackable->initHeaderView(QStringList() << "" << tr("Name")
                                     << tr("Current Version") << tr("Driver Platform Version")
                                     << tr("Status") << tr("Action"), true);
@@ -108,6 +112,7 @@ void PageDriverBackupInfo::initTable()
     mp_ViewBackedUp->initHeaderView(QStringList() << tr("Name") << tr("Current Version") << tr("Driver Platform Version"));
     mp_ViewBackedUp->setColumnWidth(0, 418);
     mp_ViewBackedUp->setColumnWidth(1, 185);
+    qCDebug(appLog) << "PageDriverBackupInfo::initTable end";
 }
 
 void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
@@ -124,6 +129,7 @@ void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
         // 设置CheckBtn
         DriverCheckItem *cbItem = new DriverCheckItem(this);
         connect(cbItem, &DriverCheckItem::sigChecked, view, [index, view](bool checked) {
+            qCDebug(appLog) << "PageDriverBackupInfo check item " << index << " checked:" << checked;
             Q_UNUSED(index)
             view->setHeaderCbStatus(checked);
         });
@@ -158,6 +164,7 @@ void PageDriverBackupInfo::addDriverInfoToTableView(DriverInfo *info, int index)
     }
 
     if (!info->debBackupVersion().isEmpty()) {
+        qCDebug(appLog) << "Driver is backed up, version:" << info->debBackupVersion();
         view = mp_ViewBackedUp;
         view->appendRowItems(3);
 
@@ -194,23 +201,29 @@ void PageDriverBackupInfo::showTables(int backableLength, int backedupLength)
 
     // 显示表头显示的内容
     if (backableLength == 0) {
+        qCDebug(appLog) << "PageDriverBackupInfo::showTables no backable driver";
         mp_HeadWidget->setNoBackupDriverUI(backableLength, backedupLength);
     } else {
+        qCDebug(appLog) << "PageDriverBackupInfo::showTables has backable driver";
         mp_HeadWidget->setBackableDriverUI(backableLength, backedupLength);
     }
 }
 
 void PageDriverBackupInfo::getCheckedDriverIndex(QList<int> &lstIndex)
 {
+    qCDebug(appLog) << "PageDriverBackupInfo::getCheckedDriverIndex start";
     mp_ViewBackable->getCheckedDriverIndex(lstIndex);
+    qCDebug(appLog) << "PageDriverBackupInfo::getCheckedDriverIndex end, count:" << lstIndex.size();
 }
 
 void PageDriverBackupInfo::clearAllData()
 {
+    qCDebug(appLog) << "PageDriverBackupInfo::clearAllData start";
     mp_ViewBackable->clear();
     mp_ViewBackedUp->clear();
 
     initTable();
+    qCDebug(appLog) << "PageDriverBackupInfo::clearAllData end";
 }
 
 void PageDriverBackupInfo::updateItemStatus(int index, Status status)
@@ -225,10 +238,12 @@ void PageDriverBackupInfo::updateItemStatus(int index, Status status)
 
 void PageDriverBackupInfo::setCheckedCBDisnable()
 {
+    qCDebug(appLog) << "PageDriverBackupInfo::setCheckedCBDisnable";
     mp_ViewBackable->setCheckedCBDisnable();
 }
 
 void PageDriverBackupInfo::setHeaderCbEnable(bool enable)
 {
+    qCDebug(appLog) << "PageDriverBackupInfo::setHeaderCbEnable, enable:" << enable;
     mp_ViewBackable->setHeaderCbEnable(enable);
 }

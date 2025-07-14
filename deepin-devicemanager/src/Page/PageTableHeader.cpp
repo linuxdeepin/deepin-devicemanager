@@ -45,6 +45,7 @@ PageTableHeader::~PageTableHeader()
 {
     qCDebug(appLog) << "PageTableHeader destructor start";
     if (mp_Table) {
+        qCDebug(appLog) << "Deleting table widget";
         delete mp_Table;
         mp_Table = nullptr;
     }
@@ -52,6 +53,7 @@ PageTableHeader::~PageTableHeader()
 
 void PageTableHeader::initWidgets()
 {
+    qCDebug(appLog) << "Initializing widgets";
     // 布局
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     hLayout->setContentsMargins(0, 0, 0, 10);
@@ -63,12 +65,16 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst, const QList<QSt
 {
     qCInfo(appLog) << "Updating table with" << lst.size() << "rows, resize:" << resizeTable << "step:" << step;
     int configRowNum = ROW_NUM;
-    if(resizeTable)
+    if(resizeTable) {
+        qCDebug(appLog) << "Resizing table, step:" << step;
         configRowNum = ROW_NUM - step;
+    }
 
     // 如果lst.size() == 1 则说明改设备只有一个
-    if (lst.size() <= 1)
+    if (lst.size() <= 1) {
+        qCDebug(appLog) << "List size <= 1, no data to display.";
         return;
+    }
 
     // 提前清楚内容
     mp_Table->clear();
@@ -86,10 +92,12 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst, const QList<QSt
         // 表格内容行数小于4,表格高度与行数一致，为保证treewidget横向滚动条与item不重叠，添加滚动条高度
         mp_Table->setRowNum(row - 1);
         this->setFixedHeight(TREE_ROW_HEIGHT * row + HORSCROLL_WIDTH + WIDGET_MARGIN * 2 + BOTTOM_MARGIN);
+        qCDebug(appLog) << "Row count < configRowNum, setting row number to" << row - 1;
     } else {
         // 表格内容行数大于等于4,表格行数固定为4，为保证treewidget横向滚动条与item不重叠，添加滚动条高度
         mp_Table->setRowNum(configRowNum);
         this->setFixedHeight(TREE_ROW_HEIGHT * (configRowNum + 1) + HORSCROLL_WIDTH + WIDGET_MARGIN * 2  + BOTTOM_MARGIN);
+        qCDebug(appLog) << "Row count >= configRowNum, setting row number to" << configRowNum;
     }
 
     for (int i = 0; i < row - 1; i++) {
@@ -99,6 +107,7 @@ void PageTableHeader::updateTable(const QList<QStringList> &lst, const QList<QSt
                 for(int index = 0; index < lstMenuControl[i].size(); index++){
                     item->setData(lstMenuControl[i][index],Qt::UserRole+index);
                 }
+                qCDebug(appLog) << "Set data for header item at row:" << i << "column:" << j;
             }
             mp_Table->setItem(i, j, item);
         }
@@ -118,6 +127,7 @@ void PageTableHeader::setColumnAverage()
 
 void PageTableHeader::paintEvent(QPaintEvent *e)
 {
+    // qCDebug(appLog) << "Painting table header";
     DWidget::paintEvent(e);
 }
 

@@ -28,6 +28,7 @@ ui_*.h
 *.jsc
 Makefile*
 *build-*
+build/
 
 # Qt unit tests
 target_wrapper.*
@@ -45,3 +46,4 @@ CMakeLists.txt.user*
 # AI
 .cursor
 .specstory
+.cursorindexingignore

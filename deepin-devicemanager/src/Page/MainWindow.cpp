@@ -57,13 +57,17 @@ static bool startScanningFlag = false;
 static int monitorNumber = 1;
 static bool checkWaylandMode()
 {
+    qCDebug(appLog) << "checkWaylandMode start";
     auto e = QProcessEnvironment::systemEnvironment();
     QString XDG_SESSION_TYPE = e.value(QStringLiteral("XDG_SESSION_TYPE"));
     QString WAYLAND_DISPLAY = e.value(QStringLiteral("WAYLAND_DISPLAY"));
     bool waylandMode = false;
-    if (XDG_SESSION_TYPE == QLatin1String("wayland") || WAYLAND_DISPLAY.contains(QLatin1String("wayland"), Qt::CaseInsensitive)) //是否开启wayland
+    if (XDG_SESSION_TYPE == QLatin1String("wayland") || WAYLAND_DISPLAY.contains(QLatin1String("wayland"), Qt::CaseInsensitive)) { //是否开启wayland
+        qCDebug(appLog) << "checkWaylandMode: wayland mode is on";
         waylandMode = true;
+    }
 
+    qCDebug(appLog) << "checkWaylandMode end, waylandMode:" << waylandMode;
     return waylandMode;
 }
 
@@ -92,8 +96,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mp_DeviceWidget, &DeviceWidget::exportInfo, this, &MainWindow::slotExportInfo);
     connect(this, &MainWindow::fontChange, this, &MainWindow::slotChangeUI);
     connect(mp_DriverManager, &PageDriverManager::startScanning, this, [ = ]() {
+        qCDebug(appLog) << "MainWindow startScanning triggered";
         // 正在刷新,避免重复操作
         if (m_refreshing || mp_WorkingThread->isRunning()) {
+            qCDebug(appLog) << "MainWindow is refreshing or working thread is running, set startScanningFlag to true and return";
             mp_ButtonBox->setEnabled(false);
             startScanningFlag = true;
             return;
@@ -104,20 +110,26 @@ MainWindow::MainWindow(QWidget *parent)
         // 加载设备信息
         refreshDataBase();
         startScanningFlag = true;
+        qCDebug(appLog) << "MainWindow startScanning finished";
     });
     connect(mp_DriverManager, &PageDriverManager::scanFinished, this, [ = ](ScanResult sr) {
+        qCDebug(appLog) << "MainWindow scanFinished triggered, result:" << sr;
         mp_ButtonBox->setEnabled(true);
 
         if (SR_Failed == sr) {
+            qCDebug(appLog) << "MainWindow scan failed";
             mp_DriverScanWidget->setScanFailedUI();
         } else if (SR_SUCESS == sr) {
+            qCDebug(appLog) << "MainWindow scan success";
             mp_DriverScanWidget->setProgressFinish();
             mp_MainStackWidget->setCurrentIndex(3);
         } else if (SR_NETWORD_ERR == sr) {
+            qCDebug(appLog) << "MainWindow scan network error";
             mp_DriverScanWidget->setNetworkErr();
         }
     });
     connect(mp_DriverManager, &PageDriverManager::scanInfo, this, [ = ](const QString &info, int progress) {
+        qCDebug(appLog) << "MainWindow scanInfo triggered, info:" << info << "progress:" << progress;
         mp_DriverScanWidget->refreshProgress(info, progress);
     });
     connect(mp_DriverScanWidget, &DriverScanWidget::redetected, mp_DriverManager, &PageDriverManager::startScanning);
@@ -127,16 +139,20 @@ MainWindow::MainWindow(QWidget *parent)
     txgpu.wait();
     monitorNumber = txgpu.getMonitorNumber();
     connect(mp_WorkingThread, &LoadInfoThread::finishedReadFilePool, this, [ = ]() {
+        qCDebug(appLog) << "MainWindow finishedReadFilePool triggered";
         refreshDataBaseLater();
     });
 }
 void MainWindow::refreshDataBaseLater()
 {
+    qCDebug(appLog) << "MainWindow::refreshDataBaseLater start";
     DBusInterface::getInstance()->refreshInfo();
     QTimer::singleShot(2000, this, [ = ]() {  //test the x86 the fast desktop PC need 2s
+        qCDebug(appLog) << "MainWindow::refreshDataBaseLater timeout, refresh database";
         // 加载设备信息
         refreshDataBase();
     });
+    qCDebug(appLog) << "MainWindow::refreshDataBaseLater end";
 }
 
 MainWindow::~MainWindow()
@@ -149,22 +165,27 @@ MainWindow::~MainWindow()
     }
     while (mp_WorkingThread && mp_WorkingThread->isRunning()) {}
     if (mp_WaitingWidget) {
+        qCDebug(appLog) << "MainWindow destructor delete waiting widget";
         delete mp_WaitingWidget;
         mp_WaitingWidget = nullptr;
     }
     if (mp_DeviceWidget) {
+        qCDebug(appLog) << "MainWindow destructor delete device widget";
         delete mp_DeviceWidget;
         mp_DeviceWidget = nullptr;
     }
     //    DELETE_PTR(mp_DriverManager)
     if (mp_MainStackWidget) {
+        qCDebug(appLog) << "MainWindow destructor delete main stack widget";
         delete mp_MainStackWidget;
         mp_MainStackWidget = nullptr;
     }
     if (mp_WorkingThread) {
+        qCDebug(appLog) << "MainWindow destructor delete working thread";
         delete mp_WorkingThread;
         mp_WorkingThread = nullptr;
     }
+    qCDebug(appLog) << "MainWindow destructor end";
 }
 
 void MainWindow::refresh()
@@ -180,6 +201,7 @@ void MainWindow::refresh()
     }
 
     if (mp_ButtonBox->checkedId() == 1) {
+        qCDebug(appLog) << "MainWindow::refresh driver manager page, set startScanningFlag to true";
         startScanningFlag = true;
     }
     // 正在刷新标志
@@ -193,6 +215,7 @@ void MainWindow::refresh()
 
     // 加载设备信息
     refreshDataBase();
+    qCDebug(appLog) << "MainWindow::refresh end";
 }
 
 void MainWindow::refreshBatteryStatus()
@@ -203,6 +226,7 @@ void MainWindow::refreshBatteryStatus()
     //创建Dbus接口
     QDBusInterface interfaceService("org.freedesktop.UPower", "/org/freedesktop/UPower", "org.freedesktop.UPower", bus);
     if (interfaceService.isValid()) {
+        qCDebug(appLog) << "UPower interface valid";
          QProcess process;
          QString command = "gdbus call --system --dest org.freedesktop.UPower --object-path /org/freedesktop/UPower --method org.freedesktop.UPower.EnumerateDevices";
          process.start(command);
@@ -213,11 +237,15 @@ void MainWindow::refreshBatteryStatus()
          QStringList outputList = outputStr.split(",");
 
          foreach (const QString& str, outputList) {
+            // qCDebug(appLog) << "Processing battery device path:" << str;
              if (str.contains("BAT")) {
+                // qCDebug(appLog) << "Found battery device";
                  QStringList pathStr = str.split("'");
                  if (pathStr.size() >= 2) {
+                    // qCDebug(appLog) << "Valid battery path found:" << pathStr.at(1);
                      QDBusInterface interfaceBattery("org.freedesktop.UPower", pathStr.at(1), "org.freedesktop.UPower.Device", bus);
                      if (interfaceBattery.isValid()) {
+                        // qCDebug(appLog) << "Battery interface valid, calling Refresh";
                          QDBusMessage reply = interfaceBattery.call("Refresh");
                          if (reply.type() != QDBusMessage::ReplyMessage)
                              qWarning() << "call Refresh failure:" << reply.errorMessage();
@@ -228,18 +256,23 @@ void MainWindow::refreshBatteryStatus()
     } else {
        qCWarning(appLog) << "UPower interface invalid - cannot refresh battery status";
     }
+    qCDebug(appLog) << "refreshBatteryStatus end";
 }
 
 bool MainWindow::exportTo()
 {
+    qCDebug(appLog) << "MainWindow::exportTo start";
     QString selectFilter;
 
     // 导出信息文件保存路径
     static QString saveDir = []() {
+        // qCDebug(appLog) << "MainWindow::exportTo get save dir";
         QString dirStr = "./";
         QDir dir(QDir::homePath() + "/Desktop/");
-        if (dir.exists())
+        if (dir.exists()) {
+            // qCDebug(appLog) << "MainWindow::exportTo save dir exists";
             dirStr = QDir::homePath() + "/Desktop/";
+        }
         return dirStr;
     }
     ();
@@ -251,8 +284,10 @@ bool MainWindow::exportTo()
                        QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss").remove(QRegularExpression("\\s")) + ".txt", \
                        "Text (*.txt);; Doc (*.docx);; Xls (*.xls);; Html (*.html)", &selectFilter);  //
 
-    if (file.isEmpty())
+    if (file.isEmpty()) {
+        qCDebug(appLog) << "MainWindow::exportTo file is empty, return";
         return true;
+    }
 
     QFileInfo fileInfo(file);
 
@@ -272,6 +307,7 @@ bool MainWindow::exportTo()
     if (selectFilter == "Xls (*.xls)")
         return DeviceManager::instance()->exportToXlsx(file);
 
+    qCDebug(appLog) << "MainWindow::exportTo return false!";
     return false;
 }
 
@@ -279,6 +315,7 @@ bool MainWindow::exportTo()
 
 void MainWindow::showDisplayShortcutsHelpDialog()
 {
+    qCDebug(appLog) << "MainWindow::showDisplayShortcutsHelpDialog start";
     QJsonDocument doc;
 
     //获取快捷键json文本
@@ -304,6 +341,7 @@ void MainWindow::showDisplayShortcutsHelpDialog()
 
 void MainWindow::addJsonArrayItem(QJsonArray &windowJsonItems, const QString &name, const QString &value)
 {
+    qCDebug(appLog) << "MainWindow::addJsonArrayItem name:" << name << "value:" << value;
     // 添加json数组对
     QJsonObject jsonObject;
     jsonObject.insert("name", name);
@@ -313,6 +351,7 @@ void MainWindow::addJsonArrayItem(QJsonArray &windowJsonItems, const QString &na
 
 void MainWindow::getJsonDoc(QJsonDocument &doc)
 {
+    qCDebug(appLog) << "MainWindow::getJsonDoc start";
     QJsonArray jsonGroups;
 
     // 窗口快捷键组
@@ -350,26 +389,32 @@ void MainWindow::getJsonDoc(QJsonDocument &doc)
 
 void MainWindow::windowMaximizing()
 {
+    qCDebug(appLog) << "MainWindow::windowMaximizing start";
     if (!window()->windowState().testFlag(Qt::WindowMaximized)) {
+        qCDebug(appLog) << "MainWindow::windowMaximizing not maximized";
         window()->setWindowState(windowState() | Qt::WindowMaximized);
     } else {
+        qCDebug(appLog) << "MainWindow::windowMaximizing maximized";
         window()->setWindowState(windowState() & ~Qt::WindowMaximized);
     }
 }
 
 void MainWindow::swichStackWidget()
 {
+    qCDebug(appLog) << "MainWindow::swichStackWidget start";
     if (0 == mp_MainStackWidget->currentIndex())
         mp_MainStackWidget->setCurrentIndex(1);
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
+    qCDebug(appLog) << "MainWindow::resizeEvent start";
     DMainWindow::resizeEvent(event);
 }
 
 void MainWindow::initWindow()
 {
+    qCDebug(appLog) << "MainWindow::initWindow start";
     //1. 第一步初始化窗口大小
     initWindowSize();
 
@@ -391,6 +436,7 @@ void MainWindow::initWindow()
 
 void MainWindow::initWindowSize()
 {
+    qCDebug(appLog) << "MainWindow::initWindowSize start";
     // 设置窗口的最小尺寸
     QSize minSize(MIN_WIDTH, MIN_HEIGHT);
     setMinimumSize(minSize);
@@ -402,6 +448,7 @@ void MainWindow::initWindowSize()
 
 void MainWindow::initWindowTitle()
 {
+    qCDebug(appLog) << "MainWindow::initWindowTitle start";
     QIcon appIcon = QIcon::fromTheme("deepin-devicemanager");
     titlebar()->setIcon(appIcon);
     // 设置 DButtonBox 里面的 button
@@ -448,6 +495,7 @@ void MainWindow::initWindowTitle()
 
 void MainWindow::initWidgets()
 {
+    qCDebug(appLog) << "MainWindow::initWidgets start";
     // 设置窗口的主控件
     setCentralWidget(mp_MainStackWidget);
     setContentsMargins(0, 0, 0, 0);
@@ -480,10 +528,14 @@ void MainWindow::refreshDataBase()
 
 void MainWindow::slotSetPage(QString page)
 {
+    qCDebug(appLog) << "MainWindow::slotSetPage page:" << page;
     if ("driver" == page) {
+        qCDebug(appLog) << "MainWindow::slotSetPage driver";
         if (m_IsFirstRefresh) {
+            qCDebug(appLog) << "MainWindow::slotSetPage driver first refresh";
             m_ShowDriverPage = true;
         } else {
+            qCDebug(appLog) << "MainWindow::slotSetPage driver not first refresh";
             mp_ButtonBox->buttonList().at(1)->click();
         }
     }
@@ -499,13 +551,15 @@ void MainWindow::slotLoadingFinish(const QString &message)
 
     // finish 表示所有设备信息加载完成
     if (message == "finish") {
+        qCDebug(appLog) << "MainWindow::slotLoadingFinish finish";
         begin = true;
 
-    /* 一定要有与 setOverrideCursor 成对使用 否则指针一直显示圆圈*/
-    if( m_statusCursorIsWait) {
-        m_statusCursorIsWait = false;
-        DApplication::restoreOverrideCursor();
-    }
+        /* 一定要有与 setOverrideCursor 成对使用 否则指针一直显示圆圈*/
+        if( m_statusCursorIsWait) {
+            qCDebug(appLog) << "MainWindow::slotLoadingFinish restore cursor";
+            m_statusCursorIsWait = false;
+            DApplication::restoreOverrideCursor();
+        }
 
         // 信息显示界面
         // 获取设备类型列表
@@ -548,6 +602,7 @@ void MainWindow::slotLoadingFinish(const QString &message)
         }
     }
     if (startScanningFlag) {
+        qCDebug(appLog) << "MainWindow::slotLoadingFinish start scanning";
         mp_MainStackWidget->setCurrentIndex(2);
         mp_DriverManager->scanDriverInfo();
         mp_DriverScanWidget->setScanningUI("", 0);
@@ -557,6 +612,7 @@ void MainWindow::slotLoadingFinish(const QString &message)
 
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
+    qCDebug(appLog) << "MainWindow::slotListItemClicked itemStr:" << itemStr;
     // xrandr would be execed later
     if (tr("Monitor") == itemStr || tr("Overview") == itemStr) { //点击显示设备，执行线程加载信息
         ThreadExecXrandr tx(false, !checkWaylandMode());
@@ -597,7 +653,10 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         }
 
     // 数据刷新时不处理界面刷新
-    if (m_refreshing || mp_WorkingThread->isRunning()) return;
+    if (m_refreshing || mp_WorkingThread->isRunning()) {
+        qCDebug(appLog) << "MainWindow::slotListItemClicked refreshing or working thread running";
+        return;
+    }
 
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
@@ -612,6 +671,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 
 void MainWindow::slotRefreshInfo()
 {
+    qCDebug(appLog) << "MainWindow::slotRefreshInfo";
     refreshDataBaseLater();
     // 界面刷新
     refresh();
@@ -619,12 +679,14 @@ void MainWindow::slotRefreshInfo()
 
 void MainWindow::slotExportInfo()
 {
+    qCDebug(appLog) << "MainWindow::slotExportInfo";
     // 设备信息导出
     exportTo();
 }
 
 void MainWindow::slotChangeUI()
 {
+    qCDebug(appLog) << "MainWindow::slotChangeUI";
     // 设置字体变化标志
     mp_DeviceWidget->setFontChangeFlag();
 
@@ -634,10 +696,13 @@ void MainWindow::slotChangeUI()
 
 void MainWindow::keyPressEvent(QKeyEvent *e)
 {
+    // qCDebug(appLog) << "MainWindow::keyPressEvent key:" << e->key();
     // ctrl+e:导出
     if (e->key() == Qt::Key_E) {
+        qCDebug(appLog) << "MainWindow::keyPressEvent ctrl+e";
         Qt::KeyboardModifiers modifiers = e->modifiers();
         if (modifiers != Qt::NoModifier) {
+            qCDebug(appLog) << "MainWindow::keyPressEvent ctrl+e modifiers:" << modifiers;
             if (modifiers.testFlag(Qt::ControlModifier)) {
                 exportTo();
                 return;
@@ -647,6 +712,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
     // ctrl+shift+command:快捷键提示界面
     if (e->key() == Qt::Key_Question) {
+        qCDebug(appLog) << "MainWindow::keyPressEvent ctrl+shift+command";
         Qt::KeyboardModifiers modifiers = e->modifiers();
         if (modifiers != Qt::NoModifier) {
             if (modifiers.testFlag(Qt::ControlModifier)) {
@@ -658,6 +724,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
     // ctrl+alt：窗口最大化
     if (e->key() == Qt::Key_F) {
+        qCDebug(appLog) << "MainWindow::keyPressEvent ctrl+alt";
         Qt::KeyboardModifiers modifiers = e->modifiers();
         if (modifiers != Qt::NoModifier) {
             if (modifiers.testFlag(Qt::ControlModifier) && modifiers.testFlag(Qt::AltModifier)) {
@@ -672,8 +739,10 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 
 bool MainWindow::event(QEvent *event)
 {
+    // qCDebug(appLog) << "MainWindow::event type:" << event->type();    
     // 字体大小改变
     if (QEvent::ApplicationFontChange == event->type()) {
+        qCDebug(appLog) << "MainWindow::event font change";
         emit fontChange();
         DWidget::event(event);
     }
@@ -683,7 +752,9 @@ bool MainWindow::event(QEvent *event)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    // qCDebug(appLog) << "MainWindow::closeEvent";
     if (mp_DriverManager->isInstalling()) {
+        qCDebug(appLog) << "MainWindow::closeEvent is installing";
         // 当前界面正在驱动安装，弹窗提示
         // bug134487
         DDialog dialog(QObject::tr("You are installing a driver, which will be interrupted if you exit.")
@@ -694,11 +765,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
         dialog.addButton(QObject::tr("Cancel", "button"));
         int ret = dialog.exec();
         if (0 == ret) {
+            qCDebug(appLog) << "MainWindow::closeEvent exit";
             return DMainWindow::closeEvent(event);
         } else {
+            qCDebug(appLog) << "MainWindow::closeEvent ignore";
             event->ignore();
         }
     } else if (mp_DriverManager->isBackingup()) {
+        qCDebug(appLog) << "MainWindow::closeEvent is backing up";
         DDialog dialog(QObject::tr("You are backing up drivers, which will be interrupted if you exit.")
                        , QObject::tr("Are you sure you want to exit?"));
 
@@ -707,11 +781,14 @@ void MainWindow::closeEvent(QCloseEvent *event)
         dialog.addButton(QObject::tr("Cancel", "button"));
         int ret = dialog.exec();
         if (0 == ret) {
+            qCDebug(appLog) << "MainWindow::closeEvent exit";
             return DMainWindow::closeEvent(event);
         } else {
+            qCDebug(appLog) << "MainWindow::closeEvent ignore";
             event->ignore();
         }
     } else if (mp_DriverManager->isRestoring()) {
+        qCDebug(appLog) << "MainWindow::closeEvent is restoring";
         DDialog dialog(QObject::tr("You are restoring drivers, which will be interrupted if you exit.")
                        , QObject::tr("Are you sure you want to exit?"));
 
@@ -720,8 +797,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
         dialog.addButton(QObject::tr("Cancel", "button"));
         int ret = dialog.exec();
         if (0 == ret) {
+            qCDebug(appLog) << "MainWindow::closeEvent exit";
             return DMainWindow::closeEvent(event);
         } else {
+            qCDebug(appLog) << "MainWindow::closeEvent ignore";
             event->ignore();
         }
     } else {

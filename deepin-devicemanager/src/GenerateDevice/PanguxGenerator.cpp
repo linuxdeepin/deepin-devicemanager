@@ -52,13 +52,17 @@ void PanguXGenerator::generatorBluetoothDevice()
     const QList<QMap<QString, QString> > lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
+        // qCDebug(appLog) << "PanguXGenerator::generatorBluetoothDevice process hwinfo usb info";
         if ((*it).size() < 1) {
+            // qCDebug(appLog) << "PanguXGenerator::generatorBluetoothDevice usb info not enough";
             continue;
         }
         if ((*it)["Hardware Class"] == "hub" || (*it)["Hardware Class"] == "mouse" || (*it)["Hardware Class"] == "keyboard") {
+            // qCDebug(appLog) << "PanguXGenerator::generatorBluetoothDevice is hub/mouse/keyboard, skip";
             continue;
         }
         if ((*it)["Hardware Class"] == "bluetooth" || (*it)["Driver"] == "btusb" || (*it)["Device"] == "BCM20702A0"|| (*it)["Device"].contains("bluetooth", Qt::CaseInsensitive)) {
+            // qCDebug(appLog) << "PanguXGenerator::generatorBluetoothDevice is bluetooth device, add it";
             DeviceBluetooth *device = new DeviceBluetooth();
             device->setCanEnale(false);
             device->setForcedDisplay(true);
@@ -68,6 +72,7 @@ void PanguXGenerator::generatorBluetoothDevice()
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
         }
     }
+    qCDebug(appLog) << "PanguXGenerator::generatorBluetoothDevice end";
 }
 void PanguXGenerator::generatorCpuDevice()
 {
@@ -75,34 +80,48 @@ void PanguXGenerator::generatorCpuDevice()
     HWGenerator::generatorCpuDevice();
 
     QFile file("/proc/cpuinfo");
-    if (!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly)) {
+        qCWarning(appLog) << "PanguXGenerator::generatorCpuDevice open cpuinfo file failed";
         return;
+    }
 
     QMap<QString, QString> mapInfo;
     QString cpuInfo = file.readAll();
     QStringList infos = cpuInfo.split("\n\n");
     foreach (const QString &info, infos) {
-        if (info.isEmpty())
+        // qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice process cpu info";
+        if (info.isEmpty()) {
+            // qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice cpu info is empty, skip";
             continue;
+        }
 
         QStringList lines = info.split("\n");
         foreach (const QString &line, lines) {
-            if (line.isEmpty())
+            // qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice process line:" << line;
+            if (line.isEmpty()) {
+                // qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice line is empty, skip";
                 continue;
+            }
             QStringList words = line.split(QRegularExpression("[\\s]*:[\\s]*"));
-            if (words.size() != 2)
+            if (words.size() != 2) {
+                // qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice words size is not 2, skip";
                 continue;
+            }
             if ("Hardware" == words[0]) {
+                // qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice get cpu name:" << words[1];
                 mapInfo.insert("Name", words[1]);
             }
         }
     }
     file.close();
-    if (mapInfo.find("Name") == mapInfo.end())
+    if (mapInfo.find("Name") == mapInfo.end()) {
+        qCWarning(appLog) << "PanguXGenerator::generatorCpuDevice cpu name not found";
         return;
+    }
 
     QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Cpu);
     for (int i = 0; i < lst.size(); i++) {
+        // qCDebug(appLog) << "PanguXGenerator::generatorCpuDevice set cpu info";
         DeviceBaseInfo *device = lst[i];
         DeviceManager::instance()->tomlDeviceSet(DT_Cpu, device,mapInfo);
     }

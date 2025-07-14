@@ -35,8 +35,10 @@ void CmdTool::addMapInfo(const QString &key, const QMap<QString, QString> &mapIn
     qCDebug(appLog) << "CmdTool::addMapInfo, key:" << key << "map size:" << mapInfo.size();
     // 设备分类，与设备信息对照表
     if (m_cmdInfo.find(key) != m_cmdInfo.end()) {
+        qCDebug(appLog) << "Key exists, appending info.";
         m_cmdInfo[key].append(mapInfo);
     } else {
+        qCDebug(appLog) << "Key does not exist, inserting new list.";
         QList<QMap<QString, QString> > lstMap;
         lstMap.append(mapInfo);
         m_cmdInfo.insert(key, lstMap);
@@ -50,6 +52,7 @@ void CmdTool::addMouseKeyboardInfoMapInfo(const QString &key, const QMap<QString
             || containsInfoInTheMap("Elite Remote Control Driver", mapInfo) // 在笔记本中发现了一个多余信息，做特殊处理 Elite Remote Control Driver
             || containsInfoInTheMap("serial console", mapInfo) // 鲲鹏台式机子上发现一条多余信息  Model: "serial console"
             || containsInfoInTheMap("Wacom", mapInfo)) { // 数位板信息被显示成了mouse信息,这里需要做特殊处理(搞不懂数位板为什么不能显示成鼠标)
+        qCDebug(appLog) << "Filtered out mouse/keyboard info.";
         return;
     }
     addMapInfo(key, mapInfo);
@@ -63,12 +66,14 @@ void CmdTool::addUsbMapInfo(const QString &key, const QMap<QString, QString> &ma
     // 比如 SysFS BusID: 1-3:1.2   和  SysFS BusID: 1-3:1.0 这个是同一个设备
     // 我们只需要一个
     for (; it != m_cmdInfo["hwinfo_usb"].end(); ++it) {
+        qCDebug(appLog) << "Iterating through existing USB devices.";
         QString curBus = (*it)["SysFS BusID"];
         QString newBus = mapInfo["SysFS BusID"];
         QRegularExpression re("\\.\\d{1,2}$");
         curBus.replace(re, "");
         newBus.replace(re, "");
         if (!curBus.isEmpty() && curBus == newBus) {
+            qCDebug(appLog) << "Duplicate USB device found, skipping:" << newBus;
             return;
         }
     }
@@ -76,38 +81,53 @@ void CmdTool::addUsbMapInfo(const QString &key, const QMap<QString, QString> &ma
     // 这个是用来过滤，没有接入任何设备的usb接口
     if (mapInfo["Model"].contains("Linux Foundation")
             || mapInfo["Model"].contains("Wireless Network Adapter")
-            || mapInfo["Model"].contains("Hub Controller"))
+            || mapInfo["Model"].contains("Hub Controller")) {
+        qCDebug(appLog) << "Filtered out empty USB port info.";
         return;
+    }
 
-    if (mapInfo["Hardware Class"].contains("hub", Qt::CaseInsensitive))
+    if (mapInfo["Hardware Class"].contains("hub", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "Filtered out USB hub.";
         return;
+    }
 
     // 打印机几信息不从hwinfo --usb里面获取，需要过滤
-    if (containsInfoInTheMap("Printer", mapInfo) || containsInfoInTheMap("LaserJet", mapInfo))
+    if (containsInfoInTheMap("Printer", mapInfo) || containsInfoInTheMap("LaserJet", mapInfo)) {
+        qCDebug(appLog) << "Filtered out printer info from USB devices.";
         return;
+    }
 
     // 提前过滤掉键盘鼠标
-    if (containsInfoInTheMap("mouse", mapInfo) || containsInfoInTheMap("keyboard", mapInfo))
+    if (containsInfoInTheMap("mouse", mapInfo) || containsInfoInTheMap("keyboard", mapInfo)) {
+        qCDebug(appLog) << "Filtered out mouse/keyboard from USB devices.";
         return;
+    }
 
     // 这里特殊处理数位板信息，通过hwinfo --mouse可以获取到数位板信息，但是根据需求数位板应该在其它设备里面(虽然这很不合理)
     // 所以这里需要做特殊处理 即 item 里面包含了 Wacom 的 就说明是数位板设备，那就应该添加到其它设备里面
-    if (containsInfoInTheMap("Wacom", mapInfo))
+    if (containsInfoInTheMap("Wacom", mapInfo)) {
+        qCDebug(appLog) << "Filtered out Wacom tablet from USB devices.";
         return;
+    }
     addMapInfo(key, mapInfo);
 }
 
 bool CmdTool::containsInfoInTheMap(const QString &info, const QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Checking if map contains info:" << info;
     foreach (const QString &key, mapInfo.keys()) {
-        if (mapInfo[key].contains(info, Qt::CaseInsensitive))
+        if (mapInfo[key].contains(info, Qt::CaseInsensitive)) {
+            // qCDebug(appLog) << "Found info in key:" << key;
             return true;
+        }
     }
+    qCDebug(appLog) << "Info not found in map.";
     return false;
 }
 
 void CmdTool::getMapInfo(QMap<QString, QString> &mapInfo, cups_dest_t *src)
 {
+    qCDebug(appLog) << "Getting printer info from cups_dest_t for:" << src->name;
     // 获取打印机信息
     mapInfo.insert("Name", src->name);
     for (int i = 0; i < src->num_options; i++)
@@ -155,19 +175,24 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
 
 QMap<QString, QList<QMap<QString, QString> > > &CmdTool::cmdInfo()
 {
+    qCDebug(appLog) << "Getting cmdInfo map.";
     return m_cmdInfo;
 }
 
 QString CmdTool::loadOemTomlFileName(const QMap<QString, QString> &mapInfo)
 {
-    if (mapInfo.size() <= 0)
+    qCDebug(appLog) << "Loading OEM toml filename.";
+    if (mapInfo.size() <= 0) {
+        qCDebug(appLog) << "Map info is empty.";
         return QString();
+    }
 
     QString tomlFileName;
     //获取文件名字oeminfo_manufacturer_productname_version.toml，
     if (mapInfo.contains("Manufacturer")
             && mapInfo.contains("Product Name")
             && mapInfo.contains("Version")) {
+        qCDebug(appLog) << "Found required keys for toml filename.";
         QString Manufacturer = mapInfo["Manufacturer"];
         QString productname = mapInfo["Product Name"];
         QString version = mapInfo["Version"];
@@ -185,8 +210,10 @@ QString CmdTool::loadOemTomlFileName(const QMap<QString, QString> &mapInfo)
         tomlFileName = "oeminfo_" + Manufacturer + "_" + productname + "_" + version;
         tomlFileName = tomlFileName.trimmed().toLower();
         tomlFileName = tomlFileName.remove(" ") + ".toml";
+        qCDebug(appLog) << "Generated toml filename:" << tomlFileName;
         return tomlFileName;
     }
+    qCDebug(appLog) << "Required keys for toml filename not found.";
     return QString();
 }
 
@@ -207,25 +234,35 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
     if (QFile::exists(curPathFile)) {
         QFile file(curPathFile);
         if (file.open(QIODevice::ReadOnly)) {
+            qCDebug(appLog) << "Reading toml file:" << curPathFile;
             info = file.readAll().data();
             tomlFileRead = true;
             file.close();
+        } else {
+            qCWarning(appLog) << "Failed to open toml file:" << curPathFile;
         }
     }
     if (!tomlFileRead) {
         curPathFile = "/etc/deepin/hardware/oeminfodebug.toml"; //方便调试，并不开放给用户用
+        qCDebug(appLog) << "Primary toml file not found, trying debug file:" << curPathFile;
         QFile file(curPathFile);
         if (file.open(QIODevice::ReadOnly)) {
             info = file.readAll().data();
             tomlFileRead = true;
             file.close();
+        } else {
+            qCWarning(appLog) << "Failed to open debug toml file:" << curPathFile;
         }
     }
 
-    if (!tomlFileRead)
+    if (!tomlFileRead) {
+        qCWarning(appLog) << "Could not read any toml file.";
         return tomlFileRead;
-    if (info.isEmpty())
+    }
+    if (info.isEmpty()) {
+        qCWarning(appLog) << "Toml file is empty.";
         return false;
+    }
     QStringList lines = info.split("\n");
     QRegularExpression regClass(R"(\s*(\[)([.\w\s]*)(\])\s*#*.*)");
     QString classkey;
@@ -234,9 +271,11 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
     QStringList wordlst;
     QMap<QString, QString> itemMap;
     foreach (const QString &line, lines) {
-        if (line.trimmed().startsWith("#"))  // # 开头为注释  不取
+        if (line.trimmed().startsWith("#")) { // # 开头为注释  不取
+            qCDebug(appLog) << "Skipping comment line:" << line;
             continue;
-        else if (regClass.match(line).hasMatch()) {  //[xxx]
+        } else if (regClass.match(line).hasMatch()) {  //[xxx]
+            qCDebug(appLog) << "Found class line:" << line;
             if (itemMap.count() > 0) {
                 addMapInfo("toml" + classkey, itemMap);
                 tomlPars = true;
@@ -247,6 +286,7 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
             ValueKeyList.clear();
             deviceClassesList.append(regClass.match(line).captured(2));
         } else if (line.contains("=")) {
+            qCDebug(appLog) << "Found key-value line:" << line;
             wordlst = line.split("=");
             if (2 == wordlst.size()) {
 
@@ -276,6 +316,7 @@ bool CmdTool::parseOemTomlInfo(const QString filename)
 
 void CmdTool::loadLshwInfo(const QString &debugFile)
 {
+    qCDebug(appLog) << "Loading lshw info from" << debugFile;
     // 加载lshw信息
     QString deviceInfo;
     getDeviceInfo(deviceInfo, debugFile);
@@ -286,6 +327,7 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
     foreach (const QString &item, items) {
         QMap<QString, QString> mapInfo;
         if (isFirst) {
+            qCDebug(appLog) << "Parsing lshw system info.";
             // 系统信息
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_system", mapInfo);
@@ -295,12 +337,15 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
 
         // CPU 信息
         if (item.startsWith("cpu")) {
+            qCDebug(appLog) << "Parsing lshw cpu info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_cpu", mapInfo);
         } else if (item.startsWith("disk")) {         // 存储设备信息
+            qCDebug(appLog) << "Parsing lshw disk info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_disk", mapInfo);
         } else if (item.startsWith("storage")) {
+            qCDebug(appLog) << "Parsing lshw storage info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_storage", mapInfo);
 #ifdef __sw_64__
@@ -308,26 +353,33 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
 #else
         } else if (item.startsWith("bank")) {      // 内存信息
 #endif
+            qCDebug(appLog) << "Parsing lshw memory info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_memory", mapInfo);
         } else if (item.startsWith("display")) {      // 显卡信息
+            qCDebug(appLog) << "Parsing lshw display info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_display", mapInfo);
         } else if (item.startsWith("multimedia")) {   // 音频信息
+            qCDebug(appLog) << "Parsing lshw multimedia info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_multimedia", mapInfo);
         } else if (item.startsWith("network")) {      // 网卡信息
+            qCDebug(appLog) << "Parsing lshw network info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_network", mapInfo);
         } else if (item.startsWith("usb")) {          // USB 设备信息
+            qCDebug(appLog) << "Parsing lshw usb info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_usb", mapInfo);
         } else if (item.startsWith("cdrom")) {        // 光盘信息
+            qCDebug(appLog) << "Parsing lshw cdrom info.";
             getMapInfoFromLshw(item, mapInfo);
             addMapInfo("lshw_cdrom", mapInfo);
         }
     }
     if (!m_cmdInfo.contains("lshw_memory")) {     // 内存信息
+        qCDebug(appLog) << "Parsing lshw memory info (fallback).";
         foreach (const QString &item, items) {
             if (item.startsWith("memory")) {
                 QMap<QString, QString> mapInfo;
@@ -340,10 +392,13 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
 
 void CmdTool::loadLsblkInfo(const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading lsblk info from" << debugfile;
     // 加载lsblk信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile))
+    if (!getDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get lsblk device info.";
         return;
+    }
 
     QStringList lines = deviceInfo.split("\n");
     QMap<QString, QString> mapInfo;
@@ -351,8 +406,10 @@ void CmdTool::loadLsblkInfo(const QString &debugfile)
     // 获取存储设备逻辑名称以及ROTA信息
     foreach (QString line, lines) {
         QStringList words = line.replace(QRegularExpression("[\\s]+"), " ").split(" ");
-        if (words.size() != 2 || "NAME" == words[0])
+        if (words.size() != 2 || "NAME" == words[0]) {
+            qCDebug(appLog) << "Skipping invalid lsblk line:" << line;
             continue;
+        }
 
         mapInfo.insert(words[0].trimmed(), words[1].trimmed());
 
@@ -364,33 +421,43 @@ void CmdTool::loadLsblkInfo(const QString &debugfile)
 
 void CmdTool::loadLssgInfo(const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading lssg info from" << debugfile;
     // 加载ls /dev/sg*信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile))
+    if (!getDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get lssg device info.";
         return;
+    }
 
     QStringList lines = deviceInfo.split("\n");
 
     // 获取存储设备逻辑名称以及ROTA信息
     foreach (QString line, lines) {
-        if (line.isEmpty())
+        if (line.isEmpty()) {
+            qCDebug(appLog) << "Skipping empty lssg line.";
             continue;
+        }
 
         QStringList words = line.split("/");
 
         //sudo smartctl --all /dev/%1   文件信息
         if (words.count() > 2)
             loadSmartCtlInfo(words[2].trimmed(), "smartctl_" + words[2].trimmed() + ".txt");
+        else
+            qCWarning(appLog) << "Invalid line in lssg output:" << line;
     }
 }
 
 void CmdTool::loadSmartCtlInfo(const QString &logicalName, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading smartctl info for" << logicalName << "from" << debugfile;
     QString deviceInfo;
 
     // 获取硬盘smartctl信息
-    if (!getDeviceInfo(deviceInfo, debugfile))
+    if (!getDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get smartctl device info.";
         return;
+    }
 
     QMap<QString, QString> mapInfo;
 
@@ -403,9 +470,12 @@ void CmdTool::loadSmartCtlInfo(const QString &logicalName, const QString &debugf
 
 void CmdTool::loadDmesgInfo(const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading dmesg info from" << debugfile;
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile))
+    if (!getDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get dmesg info.";
         return;
+    }
 
     // 获取显存大小信息
     QMap<QString, QString> mapInfo;
@@ -414,6 +484,7 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
         // DeviceCdrom m_HwinfoToLshw 值为0000:01:00.0 此处同步修改,否则显存大小无法显示
         QRegularExpression reg(".*([0-9a-z]{4}:[0-9a-z]{2}:[0-9a-z]{2}.[0-9]{1}):.*VRAM([=:]{1}) ([0-9]*)[\\s]{0,1}M.*");
         if (reg.match(line).hasMatch()) {
+            qCDebug(appLog) << "Found VRAM info in dmesg:" << line;
             double size = reg.match(line).captured(3).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
             mapInfo["Size"] = reg.match(line).captured(1) + "=" + sizeS;
@@ -422,6 +493,7 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
         // Bug-85049 JJW 显存特殊处理
         QRegularExpression regJJW(".*VRAM Size ([0-9]*)M.*");
         if (regJJW.match(line).hasMatch()) {
+            qCDebug(appLog) << "Found JJW VRAM info in dmesg:" << line;
             double size = regJJW.match(line).captured(1).toDouble();
             QString sizeS = QString("%1GB").arg(size / 1024);
             mapInfo["Size"] = "null=" + sizeS;
@@ -449,12 +521,14 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
 
 void CmdTool::loadHciconfigInfo(const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading hciconfig info from" << debugfile;
     // 获取hciconfig文件信息
     QString deviceInfo;
 
     // 判断是否是系统是否是个人版
     DSysInfo::UosEdition type = DSysInfo::uosEditionType();
     if (DSysInfo::UosHome == type) {
+        qCDebug(appLog) << "UOS Home edition detected, running hciconfig command.";
         // 如果是个人版则直接执行命令获取设备信息
         // bug 目前服务端与直接执行命令获取结果不一致
         QProcess process;
@@ -464,19 +538,27 @@ void CmdTool::loadHciconfigInfo(const QString &debugfile)
 
         // 获取命令执行结果
         bool res = process.waitForFinished(msecs);
-        if (res)
+        if (res) {
             deviceInfo = process.readAllStandardOutput();
+        } else {
+            qCWarning(appLog) << "hciconfig command timed out.";
+        }
 
     } else {
+        qCDebug(appLog) << "Non-home edition, reading from file.";
         // 获取文件信息
-        if (!getDeviceInfo(deviceInfo, debugfile))
+        if (!getDeviceInfo(deviceInfo, debugfile)) {
+            qCWarning(appLog) << "Failed to get hciconfig info from file.";
             return;
+        }
     }
 
     QStringList paragraphs = deviceInfo.split(QString("\n\n"));
     foreach (const QString &paragraph, paragraphs) {
-        if (paragraph.isEmpty())
+        if (paragraph.isEmpty()) {
+            qCDebug(appLog) << "Skipping empty hciconfig paragraph.";
             continue;
+        }
         QMap<QString, QString> mapInfo;
         getMapInfoFromHciconfig(mapInfo, paragraph);
         loadBluetoothCtlInfo(mapInfo);
@@ -485,7 +567,9 @@ void CmdTool::loadHciconfigInfo(const QString &debugfile)
 
 void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Loading bluetoothctl info.";
     if (mapInfo.find("BD Address") == mapInfo.end()) {
+        qCDebug(appLog) << "No BD Address found in map, skipping bluetoothctl.";
         addMapInfo("hciconfig", mapInfo);
         return;
     }
@@ -493,9 +577,11 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
     process.start("bluetoothctl show " + mapInfo["BD Address"]);
     process.waitForFinished(2000);
     QString deviceInfo = process.readAllStandardOutput();
+    qCDebug(appLog) << "bluetoothctl output:" << deviceInfo;
 
     // 读取文件信息
     if (deviceInfo.isEmpty()) {
+        qCDebug(appLog) << "bluetoothctl show command returned no info.";
         addMapInfo("hciconfig", mapInfo);
         return;
     }
@@ -507,6 +593,7 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
 
 void CmdTool::loadPrinterInfo()
 {
+    qCDebug(appLog) << "Loading printer info from CUPS.";
     // 通过cups获取打印机信息
     //cups会识别打印机信息，之前通过文件判断概率性出现文件无信息的情况
 
@@ -515,38 +602,49 @@ void CmdTool::loadPrinterInfo()
     int num_dests;
     num_dests = cupsGetDests2(http, &dests);
     if (nullptr == dests) {
+        qCDebug(appLog) << "cupsGetDests2 returned no destinations.";
         cupsFreeDests(num_dests, dests);
         return;
     }
+    qCDebug(appLog) << "Found" << num_dests << "CUPS destinations.";
     for (int i = 0; i < num_dests; i++) {
         cups_dest_t *dest = nullptr;
         QMap<QString, QString> mapInfo;
         dest = dests + i;
         getMapInfo(mapInfo, dest);
         // 这里为了和打印机管理保持一致，做出限制
-        if (mapInfo.size() > 10)
+        if (mapInfo.size() > 10) {
+            // qCDebug(appLog) << "Adding printer:" << mapInfo["Name"];
             addMapInfo("printer", mapInfo);
+        }
     }
     cupsFreeDests(num_dests, dests);
 }
 
 void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading hwinfo for key:" << key << "from" << debugfile;
     // 显示屏信息从前台直接获取
     QString deviceInfo;
     if ("hwinfo_monitor" == key) {
+        qCDebug(appLog) << "Processing hwinfo_monitor.";
 //        getDeviceInfoFromCmd(deviceInfo, "hwinfo --monitor");
         getDeviceInfo(deviceInfo, debugfile);
         QStringList items = deviceInfo.split("\n\n");
         foreach (const QString &item, items) {
-            if (item.isEmpty())
+            if (item.isEmpty()) {
+                qCDebug(appLog) << "Skipping empty hwinfo_monitor item.";
                 continue;
+            }
             QMap<QString, QString> mapInfo;
             getMapInfoFromHwinfo(item, mapInfo);
-            if ("monitor" == mapInfo["Hardware Class"])
+            if ("monitor" == mapInfo["Hardware Class"]) {
+                // qCDebug(appLog) << "Adding monitor info.";
                 addMapInfo(key, mapInfo);
+            }
         }
     } else { // 处理其它信息 mouse sound keyboard usb display cdrom disk
+        qCDebug(appLog) << "Processing other hwinfo.";
         getDeviceInfo(deviceInfo, debugfile);
         getMulHwinfoInfo(deviceInfo);
     }
@@ -554,6 +652,7 @@ void CmdTool::loadHwinfoInfo(const QString &key, const QString &debugfile)
 
 void CmdTool::getMulHwinfoInfo(const QString &info)
 {
+    qCDebug(appLog) << "Parsing multiple hwinfo sections.";
 //    // 获取已经禁用的设备的信息
     QString sAinfo, sRinfo;
     DBusEnableInterface::getInstance()->getRemoveInfo(sRinfo);
@@ -571,34 +670,46 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
     QStringList resItems = items + auths + remos;
 
     foreach (const QString &item, resItems) {
-        if (item.isEmpty())
+        if (item.isEmpty()) {
+            qCDebug(appLog) << "Skipping empty hwinfo item.";
             continue;
+        }
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
         if (mapInfo["Hardware Class"] == "sound" || mapInfo["Device"].contains("USB Audio")) {
+            qCDebug(appLog) << "Found sound device.";
             // mapInfo["Device"].contains("USB Audio") 是为了处理未识别的USB声卡 Bug-118773
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network")) {
+            qCDebug(appLog) << "Found network device.";
             //if (mapInfo.find("SysFS Device Link") != mapInfo.end() && mapInfo["SysFS Device Link"].contains("/devices/platform"))
             bool hasAddress = mapInfo.find("HW Address") != mapInfo.end() || mapInfo.find("Permanent HW Address") != mapInfo.end();
             bool hasPath = mapInfo.find("path") != mapInfo.end();
             if (hasPath || hasAddress) {
                 addMapInfo("hwinfo_network", mapInfo);
+            } else {
+                qCDebug(appLog) << "Skipping network device without path or address.";
             }
         } else if ("keyboard" == mapInfo["Hardware Class"]) {
+            qCDebug(appLog) << "Found keyboard device.";
             addMouseKeyboardInfoMapInfo("hwinfo_keyboard", mapInfo);
         } else if ("mouse" == mapInfo["Hardware Class"]) {
+            qCDebug(appLog) << "Found mouse device.";
             addMouseKeyboardInfoMapInfo("hwinfo_mouse", mapInfo);
         } else if ("cdrom" == mapInfo["Hardware Class"]) {
+            qCDebug(appLog) << "Found cdrom device.";
             addMapInfo("hwinfo_cdrom", mapInfo);
         } else if ("disk" == mapInfo["Hardware Class"]) {
+            qCDebug(appLog) << "Found disk device.";
             addMapInfo("hwinfo_disk", mapInfo);
         } else if ("graphics card" == mapInfo["Hardware Class"]) {
             if (mapInfo["Device"].contains("Graphics Processing Unit"))
                 continue;
+            qCDebug(appLog) << "Found graphics card.";
             addWidthToMap(mapInfo);
             addMapInfo("hwinfo_display", mapInfo);
         } else {
+            qCDebug(appLog) << "Found other USB device.";
             addUsbMapInfo("hwinfo_usb", mapInfo);
         }
     }
@@ -606,8 +717,10 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
 
 void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
 {
+    qCDebug(appLog) << "Adding width to map for NVIDIA cards.";
     QString vendor = mapInfo["Vendor"];
     if (!vendor.contains("NVIDIA Corporation")) {
+        qCDebug(appLog) << "Not an NVIDIA card, skipping.";
         return;
     }
 
@@ -622,12 +735,14 @@ void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
         QRegularExpression reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]{2}).*");
         if (reg.match(line).hasMatch()) {
             mapInfo.insert("Width", reg.match(line).captured(1) + " bits");
+            // qCDebug(appLog) << "Found width:" << mapInfo["Width"];
         }
     }
 }
 
 void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading dmidecode info for key:" << key << "from" << debugfile;
     // dmidecode -t 2信息单独处理
     if ("dmidecode2" == key) {
         loadDmidecode2Info(key, debugfile);
@@ -640,6 +755,7 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
     if ("dmidecode3" == key) {
         if (deviceInfo.contains("laptop", Qt::CaseInsensitive) ||
                 deviceInfo.contains("notebook", Qt::CaseInsensitive)) {
+            qCDebug(appLog) << "Laptop/notebook detected, skipping chassis info.";
             return;
         }
     }
@@ -667,6 +783,7 @@ void CmdTool::loadDmidecodeInfo(const QString &key, const QString &debugfile)
 
 void CmdTool::loadDmidecode2Info(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading dmidecode2 info from" << debugfile;
     // 通过命令获取设备信息
     QString deviceInfo;
     getDeviceInfo(deviceInfo, debugfile);
@@ -682,6 +799,7 @@ void CmdTool::loadDmidecode2Info(const QString &key, const QString &debugfile)
 
         // 芯片信息,SMBIOS版本信息
         if (false == isGetInfo) {
+            qCDebug(appLog) << "Getting chipset and SMBIOS version.";
             QString chipset;
             loadBiosInfoFromLspci(chipset);
             mapInfo.insert("chipset", chipset);
@@ -697,6 +815,7 @@ void CmdTool::loadDmidecode2Info(const QString &key, const QString &debugfile)
 
 void CmdTool::loadLscpuInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading lscpu info for key:" << key << "from" << debugfile;
     // 通过命令获取设备信息
     QString deviceInfo;
     getDeviceInfo(deviceInfo, debugfile);
@@ -712,8 +831,10 @@ void CmdTool::loadLscpuInfo(const QString &key, const QString &debugfile)
     }
 
     QString info;
-    if (!DBusInterface::getInstance()->getInfo("lscpu_num", info))
+    if (!DBusInterface::getInstance()->getInfo("lscpu_num", info)) {
+        qCWarning(appLog) << "Failed to get lscpu_num info from DBus.";
         return;
+    }
     QMap<QString, QString> mapInfo;
     getMapInfoFromCmd(info, mapInfo, " : ");
     addMapInfo("lscpu_num", mapInfo);
@@ -721,10 +842,13 @@ void CmdTool::loadLscpuInfo(const QString &key, const QString &debugfile)
 
 void CmdTool::loadCatInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading cat info for key:" << key << "from" << debugfile;
     // 获取设备信息
     QString deviceInfo;
-    if (!getCatDeviceInfo(deviceInfo, debugfile))
+    if (!getCatDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get cat device info.";
         return;
+    }
 
     QStringList items = deviceInfo.split("\n\n");
     foreach (const QString &item, items) {
@@ -743,35 +867,45 @@ void CmdTool::loadCatInfo(const QString &key, const QString &debugfile)
 
 void CmdTool::loadUpowerInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading upower info for key:" << key << "from" << debugfile;
     // 获取设备信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile))
+    if (!getDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get upower device info.";
         return;
-
+    }
     QStringList items = deviceInfo.split("\n\n");
     foreach (const QString &item, items) {
         if (item.isEmpty() || item.contains("DisplayDevice")
                 || item.contains("mouse", Qt::CaseInsensitive)
-                || item.contains("keyboard", Qt::CaseInsensitive)) // 98003远程后发现无线鼠标电量干扰了计算机电池电量的显示，排除无线鼠标，无线键盘
+                || item.contains("keyboard", Qt::CaseInsensitive)) { // 98003远程后发现无线鼠标电量干扰了计算机电池电量的显示，排除无线鼠标，无线键盘
+            qCDebug(appLog) << "Skipping irrelevant upower item.";
             continue;
+        }
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromCmd(item, mapInfo);
-        if (item.contains("Daemon:"))
+        if (item.contains("Daemon:")) {
             // 守护进程
+            qCDebug(appLog) << "Adding Daemon info.";
             addMapInfo("Daemon", mapInfo);
-        else
+        } else {
             //电池信息
+            qCDebug(appLog) << "Adding battery info.";
             addMapInfo(key, mapInfo);
+        }
     }
 }
 
 void CmdTool::loadBiosInfoFromLspci(QString &chipsetFamliy)
 {
+    qCDebug(appLog) << "Loading BIOS info from lspci.";
     QString chipset;
     // 通过文件获取 lspci -v -s %1 信息
-    if (!getDeviceInfo(chipset, "lspci_vs.txt"))
+    if (!getDeviceInfo(chipset, "lspci_vs.txt")) {
+        qCWarning(appLog) << "Failed to get lspci_vs.txt info.";
         return;
+    }
 
     QStringList lines = chipset.split("\n");
     foreach (const QString &line, lines) {
@@ -779,6 +913,7 @@ void CmdTool::loadBiosInfoFromLspci(QString &chipsetFamliy)
             QStringList words = line.split(": ");
             if (2 == words.size())
                 chipsetFamliy = words[1].trimmed();
+            qCDebug(appLog) << "Found chipset family:" << chipsetFamliy;
             break;
         }
     }
@@ -786,10 +921,13 @@ void CmdTool::loadBiosInfoFromLspci(QString &chipsetFamliy)
 
 void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading cat input device info for key:" << key << "from" << debugfile;
     // 获取设备信息
     QString deviceInfo;
-    if (!getCatDeviceInfo(deviceInfo, debugfile))
+    if (!getCatDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get cat input device info.";
         return;
+    }
 
     QStringList items = deviceInfo.split("\n\n");
     foreach (const QString &item, items) {
@@ -803,11 +941,13 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfil
         QRegularExpression rem(".*(event[0-9]{1,2}).*");
         if (rem.match(mapInfo["Handlers"]).hasMatch()) {
             QString name = rem.match(mapInfo["Handlers"]).captured(1);
+            qCDebug(appLog) << "Found event device:" << name;
             DeviceManager::instance()->addInputInfo(name, mapInfo);
         } else {
             QRegularExpression re(".*(mouse[0-9]{1,2}).*");
             if (re.match(mapInfo["Handlers"]).hasMatch()) {
                 QString name = re.match(mapInfo["Handlers"]).captured(1);
+                qCDebug(appLog) << "Found mouse device:" << name;
                 DeviceManager::instance()->addInputInfo(name, mapInfo);
             }
         }
@@ -818,10 +958,13 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfil
 
 void CmdTool::loadCatAudioInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading cat audio info for key:" << key << "from" << debugfile;
     // 获取设备信息
     QString deviceInfo;
-    if (!getCatDeviceInfo(deviceInfo, debugfile))
+    if (!getCatDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get cat audio info.";
         return;
+    }
 
     QStringList items = deviceInfo.split("\n\n");
     foreach (const QString &item, items) {
@@ -836,9 +979,12 @@ void CmdTool::loadCatAudioInfo(const QString &key, const QString &debugfile)
 
 void CmdTool::loadCatConfigInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading cat config info for key:" << key << "from" << debugfile;
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile))
+    if (!getDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get cat config info.";
         return;
+    }
     QStringList items = deviceInfo.split("\n");
     foreach (const QString &item, items) {
         if (item.isEmpty())
@@ -854,10 +1000,13 @@ void CmdTool::loadCatConfigInfo(const QString &key, const QString &debugfile)
 
 void CmdTool::loadBootDeviceManfid(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading boot device manfid for key:" << key << "from" << debugfile;
     // 加载硬盘信息
     QString deviceInfo;
-    if (!getDeviceInfo(deviceInfo, debugfile))
+    if (!getDeviceInfo(deviceInfo, debugfile)) {
+        qCWarning(appLog) << "Failed to get boot device info.";
         return;
+    }
 
     QMap<QString, QString> mapInfo;
     mapInfo.insert("Model", deviceInfo.trimmed());
@@ -866,6 +1015,7 @@ void CmdTool::loadBootDeviceManfid(const QString &key, const QString &debugfile)
 
 void CmdTool::getSMBIOSVersion(const QString &info, QString &version)
 {
+    qCDebug(appLog) << "Getting SMBIOS version.";
     QStringList lineList = info.split("\n");
 
     foreach (auto line, lineList) {
@@ -873,6 +1023,7 @@ void CmdTool::getSMBIOSVersion(const QString &info, QString &version)
         QRegularExpression rx("^SMBIOS ([\\d]*.[\\d]*.[\\d])+ present.$");
         if (rx.match(line).hasMatch()) {
             version = rx.match(line).captured(1);
+            qCDebug(appLog) << "Found SMBIOS version:" << version;
             break;
         }
     }
@@ -880,11 +1031,13 @@ void CmdTool::getSMBIOSVersion(const QString &info, QString &version)
 
 void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile)
 {
+    qCDebug(appLog) << "Loading NVIDIA settings info.";
     Q_UNUSED(debugfile);
     // 加载nvidia-settings  -q  VideoRam 信息
     // 命令与xrandr命令一样无法在后台运行,该从前台命令直接获取信息
     QString deviceInfo;
     if (getDeviceInfoFromCmd(deviceInfo, "nvidia-smi -L")) {
+        qCDebug(appLog) << "nvidia-smi -L output:" << deviceInfo;
         QStringList gpuList = deviceInfo.split("\n");
         for (QString item : gpuList) {
             int index = item.indexOf(":");
@@ -910,6 +1063,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
             QString memoryInfo;
             if (!getDeviceInfoFromCmd(memoryInfo, QString("nvidia-smi -i %1 -q -d MEMORY").arg(gpuNumList[1])))
                 continue;
+            qCDebug(appLog) << "nvidia-smi memory info for GPU" << gpuNumList[1] << ":" << memoryInfo;
 
             // 读取Bus Id
             QString sizeStr;
@@ -971,6 +1125,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
 
             QMap<QString, QString> mapInfo;
             if (getDeviceInfoFromCmd(deviceInfo, "nvidia-settings  -q  VideoRam")) {
+                qCDebug(appLog) << "nvidia-settings -q VideoRam output:" << deviceInfo;
                 QRegularExpression reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
                 QStringList list = deviceInfo.split("\n");
 
@@ -1005,12 +1160,15 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
             if (mapInfo.contains("Size"))
                 addMapInfo(key, mapInfo);
         }
+    } else {
+        qCWarning(appLog) << "Failed to get device info from nvidia-smi -L";
     }
 
 }
 
 void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
+    qCDebug(appLog) << "Getting map info from command output with separator:" << ch;
     QStringList infoList = info.split("\n");
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
         QStringList words = (*it).split(ch);
@@ -1021,6 +1179,7 @@ void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &map
 
 void CmdTool::getMapInfoFromInput(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
+    qCDebug(appLog) << "Getting map info from input with separator:" << ch;
     QStringList infoList = info.split("\n");
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
         *it = (*it).replace(QRegularExpression("^[A-Z]: "), "");
@@ -1045,6 +1204,7 @@ void CmdTool::getMapInfoFromInput(const QString &info, QMap<QString, QString> &m
 
 void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
+    qCDebug(appLog) << "Getting map info from lshw output.";
     QStringList infoList = info.split("\n");
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
         QStringList words = (*it).split(ch);
@@ -1056,6 +1216,7 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
         QString keyStr = words[0].trimmed();
         QString valueStr = words[1].trimmed();
         if (keyStr.contains("configuration")) {
+            qCDebug(appLog) << "Parsing lshw configuration.";
             QStringList keyValues = valueStr.split(" ");
 
             for (QStringList::iterator itKV = keyValues.begin(); itKV != keyValues.end(); ++itKV) {
@@ -1066,6 +1227,7 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
                 mapInfo.insert(attr[0].trimmed(), attr[1].trimmed());
             }
         } else if (keyStr.contains("resources")) {
+            qCDebug(appLog) << "Parsing lshw resources.";
             QStringList keyValues = valueStr.split(" ");
 
             for (QStringList::iterator itKV = keyValues.begin(); itKV != keyValues.end(); ++itKV) {
@@ -1098,6 +1260,7 @@ void CmdTool::getMapInfoFromLshw(const QString &info, QMap<QString, QString> &ma
 
 QString CmdTool::getCurNetworkLinkStatus(QString driverName)
 {
+    qCDebug(appLog) << "Getting current network link status for:" << driverName;
     //通过ifconfig 判断网络是否连接
     QProcess process;
     QString cmd = "ifconfig";
@@ -1105,25 +1268,34 @@ QString CmdTool::getCurNetworkLinkStatus(QString driverName)
     QString ifconfigInfo;
     QString link;
     bool re = process.waitForFinished(-1);
-    if (!re)
+    if (!re) {
+        qCWarning(appLog) << "ifconfig command timed out.";
         return "";
+    }
     ifconfigInfo = process.readAllStandardOutput();
+    qCDebug(appLog) << "ifconfig output:" << ifconfigInfo;
     //截取查询到的各个网卡连接信息
     QStringList list = ifconfigInfo.split("\n\n");
     for (int i = 0; i < list.size(); i++) {
         //判断具体的网卡
-        if (!list.at(i).contains(driverName))
+        if (!list.at(i).contains(driverName)) {
+            qCDebug(appLog) << "Skipping interface not matching" << driverName;
             continue;
-        if (list.at(i).contains("broadcast")) //若网络连接，会出现子网信息
+        }
+        if (list.at(i).contains("broadcast")) { //若网络连接，会出现子网信息
             link = "yes";
-        else
+            qCDebug(appLog) << driverName << "is connected.";
+        } else {
             link = "no";
+            qCDebug(appLog) << driverName << "is not connected.";
+        }
     }
     return link;
 }
 
 QMap<QString, QMap<QString, QString>> CmdTool::getCurPowerInfo()
 {
+    qCDebug(appLog) << "Getting current power info from upower.";
     QString powerInfo;
     QMap<QString, QMap<QString, QString>> map;
     QProcess process;
@@ -1135,26 +1307,31 @@ QMap<QString, QMap<QString, QString>> CmdTool::getCurPowerInfo()
     // 获取命令执行结果
     process.waitForFinished(-1);
     powerInfo = process.readAllStandardOutput();
+    qCDebug(appLog) << "upower --dump output:" << powerInfo;
     QStringList items = powerInfo.split("\n\n");
     foreach (const QString &item, items) {
         if (item.isEmpty() || item.contains("DisplayDevice")
                 || item.contains("line_power", Qt::CaseInsensitive)
                 || item.contains("mouse", Qt::CaseInsensitive)
-                || item.contains("keyboard", Qt::CaseInsensitive)) // 98003远程后发现无线鼠标电量干扰了计算机电池电量的显示，排除无线鼠标，无线键盘
+                || item.contains("keyboard", Qt::CaseInsensitive)) { // 98003远程后发现无线鼠标电量干扰了计算机电池电量的显示，排除无线鼠标，无线键盘
+            qCDebug(appLog) << "Skipping irrelevant power item.";
             continue;
+        }
 
         QMap<QString, QString> mapInfo;
         getMapInfoFromCmd(item, mapInfo);
-        if (!item.contains("Daemon:"))
+        if (!item.contains("Daemon:")) {
             map.insert("upower", mapInfo);
-        else
+        } else {
             map.insert("Daemon", mapInfo);
+        }
     }
     return map;
 }
 
 void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
+    qCDebug(appLog) << "Getting map info from hwinfo.";
     QString tmpkey;
     QString tmpvalue;
     QString tmpvid;
@@ -1163,6 +1340,7 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
     for (QStringList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
         QStringList words = (*it).split(ch);
         if ((*it).contains("PS/2 Mouse")) {
+            qCDebug(appLog) << "Found PS/2 Mouse, setting Hotplug to PS/2.";
             words.clear();
             words << "Hotplug" << "PS/2";
         }
@@ -1282,6 +1460,7 @@ void CmdTool::getMapInfoFromHwinfo(const QString &info, QMap<QString, QString> &
 
 void CmdTool::getMapInfoFromDmidecode(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)
 {
+    qCDebug(appLog) << "Getting map info from dmidecode.";
     QStringList lines = info.split("\n");
     QString lasKey;
     foreach (const QString &line, lines) {
@@ -1293,6 +1472,7 @@ void CmdTool::getMapInfoFromDmidecode(const QString &info, QMap<QString, QString
             lasKey = words[0].replace(QRegularExpression(":$"), "");
             mapInfo.insert(lasKey.trimmed(), " ");
         } else if (1 ==  words.size() && !lasKey.isEmpty()) {
+            qCDebug(appLog) << "Appending to last key:" << lasKey;
             mapInfo[lasKey.trimmed()] += words[0];
             mapInfo[lasKey.trimmed()] += "  /  ";
         } else if (2 ==  words.size()) {
@@ -1304,11 +1484,13 @@ void CmdTool::getMapInfoFromDmidecode(const QString &info, QMap<QString, QString
 
 void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QString &info, const QString &ch)
 {
+    qCDebug(appLog) << "Getting map info from smartctl.";
     QString indexName;
     int startIndex = 0;
 
     QRegularExpression reg("^[\\s\\S]*[\\d]:[\\d][\\s\\S]*$");//time 08:00
 
+    qCDebug(appLog) << "Parsing smartctl info line by line.";
     for (int i = 0; i < info.size(); ++i) {
         if (info[i] != '\n' && i != info.size() - 1)
             continue;
@@ -1319,11 +1501,15 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
 
         int index = line.indexOf(ch);
         if (index > 0 && false == reg.match(line).hasMatch() && false == line.contains("Error") && false == line.contains("hh:mm:SS")) {
-            if (line.indexOf("(") < index && line.indexOf(")") > index)
+            if (line.indexOf("(") < index && line.indexOf(")") > index) {
+                // qCDebug(appLog) << "Skipping line with separator inside parentheses:" << line;
                 continue;
+            }
 
-            if (line.indexOf("[") < index && line.indexOf("]") > index)
+            if (line.indexOf("[") < index && line.indexOf("]") > index) {
+                // qCDebug(appLog) << "Skipping line with separator inside brackets:" << line;
                 continue;
+            }
 
             indexName = line.mid(0, index).trimmed().remove(" is");
             if (mapInfo.contains(indexName)) {
@@ -1332,6 +1518,7 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
             } else {
                 mapInfo[indexName] = line.mid(index + 1).trimmed();
             }
+            // qCDebug(appLog) << "Parsed smartctl attribute:" << indexName << "=" << mapInfo[indexName];
             continue;
         }
 
@@ -1342,7 +1529,7 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
             } else {
                 mapInfo[indexName] = line.trimmed();
             }
-
+            // qCDebug(appLog) << "Appended to smartctl attribute:" << indexName << "=" << mapInfo[indexName];
             continue;
         }
 
@@ -1350,6 +1537,7 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
 
         QRegularExpression rx("^[ ]*[0-9]+[ ]+([\\w-_]+)[ ]+0x[0-9a-fA-F-]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+([0-9\\/w-]+[ ]*[ 0-9\\/w-()]*)$");
         if (rx.match(line).hasMatch()) {
+            // qCDebug(appLog) << "Matched smartctl attribute regex:" << line;
             mapInfo[rx.match(line).captured(1)] = rx.match(line).captured(2);
             continue;
         }
@@ -1455,6 +1643,7 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
 
 void CmdTool::getMapInfoFromHciconfig(QMap<QString, QString> &mapInfo, const QString &info)
 {
+    qCDebug(appLog) << "Getting map info from hciconfig.";
     QStringList lines = info.split("\n");
     foreach (const QString &line, lines) {
         QStringList pairs = line.trimmed().split("  ");
@@ -1471,20 +1660,24 @@ void CmdTool::getMapInfoFromHciconfig(QMap<QString, QString> &mapInfo, const QSt
 
 void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const QString &info)
 {
+    qCDebug(appLog) << "Getting map info from bluetoothctl.";
     QStringList lines = info.split("\n");
     QString uuid = "";
     foreach (const QString &line, lines) {
         QStringList keyValue = line.trimmed().split(": ");
         if (2 == keyValue.size()) {
             if ("UUID" == keyValue[0]) {
+                // qCDebug(appLog) << "Parsing UUID from bluetoothctl.";
                 QString valueStr = keyValue[1].trimmed();
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                 QStringList valueStrList = valueStr.split("(", QString::SkipEmptyParts);
 #else
                 QStringList valueStrList = valueStr.split("(", Qt::SkipEmptyParts);
 #endif
-                if (valueStrList.size() == 2)
+                if (valueStrList.size() == 2) {
+                    // qCDebug(appLog) << "Reformatting UUID string.";
                     valueStr = valueStrList[0].trimmed() + ":(" + valueStrList[1];
+                }
                 uuid.append(valueStr);
                 uuid.append("\n");
             } else {
@@ -1494,51 +1687,68 @@ void CmdTool::getMapInfoFromBluetoothCtl(QMap<QString, QString> &mapInfo, const 
     }
     if (uuid != "")
         mapInfo["UUID"] = uuid;
+    qCDebug(appLog) << "Final parsed bluetoothctl info:" << mapInfo;
 }
 
 bool CmdTool::getDeviceInfo(QString &deviceInfo, const QString &debugFile)
 {
+    qCDebug(appLog) << "Getting device info for" << debugFile;
     QString key = debugFile;
     key.replace(".txt", "");
-    if (DBusInterface::getInstance()->getInfo(key, deviceInfo))
+    if (DBusInterface::getInstance()->getInfo(key, deviceInfo)) {
+        qCDebug(appLog) << "Got device info from DBus.";
         return true;
+    }
 
     // deviceInfo 不为空时信息已读取
-    if (!deviceInfo.isEmpty())
+    if (!deviceInfo.isEmpty()) {
+        qCDebug(appLog) << "Device info already loaded.";
         return true;
+    }
 
     // 从文件中获取设备信息
     QFile inputDeviceFile(DEVICEINFO_PATH + "/" + debugFile);
-    if (false == inputDeviceFile.open(QIODevice::ReadOnly))
+    if (false == inputDeviceFile.open(QIODevice::ReadOnly)) {
+        qCWarning(appLog) << "Failed to open device info file:" << inputDeviceFile.fileName();
         return false;
+    }
 
     deviceInfo = inputDeviceFile.readAll();
     inputDeviceFile.close();
+    qCDebug(appLog) << "Successfully read device info from file.";
 
     return true;
 }
 
 bool CmdTool::getDeviceInfoFromCmd(QString &deviceInfo, const QString &cmd)
 {
+    qCDebug(appLog) << "Getting device info from command:" << cmd;
     QProcess process;
     process.start(cmd);
     process.waitForFinished(-1);
     deviceInfo = process.readAllStandardOutput();
+    qCDebug(appLog) << "Command output:" << deviceInfo;
     return true;
 }
 
 bool CmdTool::getCatDeviceInfo(QString &deviceInfo, const QString &debugFile)
 {
+    qCDebug(appLog) << "Getting cat device info from" << debugFile;
     // deviceInfo 不为空时信息已读取
-    if (!deviceInfo.isEmpty())
+    if (!deviceInfo.isEmpty()) {
+        qCDebug(appLog) << "Device info already loaded.";
         return true;
+    }
 
     // 从文件中获取设备信息
     QFile inputDeviceFile(debugFile);
-    if (false == inputDeviceFile.open(QIODevice::ReadOnly))
+    if (false == inputDeviceFile.open(QIODevice::ReadOnly)) {
+        qCWarning(appLog) << "Failed to open cat device info file:" << debugFile;
         return false;
+    }
 
     deviceInfo = inputDeviceFile.readAll();
     inputDeviceFile.close();
+    qCDebug(appLog) << "Successfully read cat device info from file.";
     return true;
 }

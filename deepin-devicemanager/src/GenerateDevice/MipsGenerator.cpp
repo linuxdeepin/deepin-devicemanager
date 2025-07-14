@@ -44,6 +44,7 @@ void MipsGenerator::generatorComputerDevice()
 
     // home url
     if (cmdInfo.size() > 0) {
+        qCDebug(appLog) << "MipsGenerator::generatorComputerDevice get home url";
         QString value = cmdInfo[0]["HOME_URL"];
         device->setHomeUrl(value.replace("\"", ""));
     }
@@ -51,6 +52,7 @@ void MipsGenerator::generatorComputerDevice()
     // name type
     const QList<QMap<QString, QString> >  &sysInfo = DeviceManager::instance()->cmdInfo("lshw_system");
     if (sysInfo.size() > 0) {
+        qCDebug(appLog) << "MipsGenerator::generatorComputerDevice get system info";
         device->setType(sysInfo[0]["description"]);
         device->setVendor(sysInfo[0]["vendor"]);
         device->setName(sysInfo[0]["product"]);
@@ -58,21 +60,26 @@ void MipsGenerator::generatorComputerDevice()
 
     // 龙心机器从sudo dmidecode -t 1中获取机器信息
     const QList<QMap<QString, QString> >  &dmiInfo = DeviceManager::instance()->cmdInfo("dmidecode1");
-    if (dmiInfo.size() > 1)
+    if (dmiInfo.size() > 1) {
+        qCDebug(appLog) << "MipsGenerator::generatorComputerDevice get product name from dmidecode";
         device->setName(dmiInfo[1]["Product Name"]);
+    }
 
     // set Os Description from /etc/os-version
     QString productName = DeviceGenerator::getProductName();
     device->setOsDescription(productName);
+    qCDebug(appLog) << "MipsGenerator::generatorComputerDevice get product name" << productName;
 
     // os
     const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
     if (verInfo.size() > 0) {
+        qCDebug(appLog) << "MipsGenerator::generatorComputerDevice get os version";
         QString info = verInfo[0]["OS"].trimmed();
         info = info.trimmed();
         QRegularExpression reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)");
         QRegularExpressionMatch match = reg.match(info);
         if (match.hasMatch()) {
+            qCDebug(appLog) << "MipsGenerator::generatorComputerDevice match os version";
             QString tmp = match.captured(0);
             info.remove(tmp);
             info.insert(match.capturedStart(), match.captured(1));

@@ -62,6 +62,7 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
 
     DBlurEffectWidget *widget = findChild<DBlurEffectWidget *>();
     if (nullptr != widget) {
+        qCDebug(appLog) << "PageDriverControl constructor, find DBlurEffectWidget";
         widget->lower();
         widget->setBlurEnabled(false);
     }
@@ -73,8 +74,10 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
     vLayout->addWidget(mp_stackWidget);
     cenWidget->setLayout(vLayout);
     if (m_Install) {
+        qCDebug(appLog) << "PageDriverControl constructor, init install widget";
         initInstallWidget();
     } else {
+        qCDebug(appLog) << "PageDriverControl constructor, init uninstall widget";
         initUninstallWidget();
     }
     addContent(cenWidget);
@@ -84,17 +87,23 @@ PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool in
 
 bool PageDriverControl::isRunning()
 {
+    qCDebug(appLog) << "PageDriverControl::isRunning start";
     for (auto w : qApp->allWindows()) {
+        // qCDebug(appLog) << "PageDriverControl::isRunning check window:" << w->objectName();
         if ("PageDriverControlWindow" == w->objectName()) {
-            if (w->isVisible())
+            if (w->isVisible()) {
+                // qCDebug(appLog) << "PageDriverControl::isRunning is running";
                 return true;
+            }
         }
     }
+    qCDebug(appLog) << "PageDriverControl::isRunning not running";
     return false;
 }
 
 void PageDriverControl::initInstallWidget()
 {
+    qCDebug(appLog) << "PageDriverControl::initInstallWidget start";
     // 先添加用户选择驱动文件所在目录路径的界面
     mp_PathDialog = new GetDriverPathWidget(this);
     mp_stackWidget->addWidget(mp_PathDialog);
@@ -112,6 +121,7 @@ void PageDriverControl::initInstallWidget()
     connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBtnCancel);
     connect(this->getButton(1), &QPushButton::clicked, this, &PageDriverControl::slotBtnNext);
     connect(mp_PathDialog, &GetDriverPathWidget::signalNotLocalFolder, this, [ = ](bool isLocal) {
+        qCDebug(appLog) << "PageDriverControl::initInstallWidget signalNotLocalFolder isLocal:" << isLocal;
         if (!isLocal)
             getButton(1)->setDisabled(true);
         else
@@ -123,6 +133,7 @@ void PageDriverControl::initInstallWidget()
 
 void PageDriverControl::initUninstallWidget()
 {
+    qCDebug(appLog) << "PageDriverControl::initUninstallWidget start";
     // 先添加警告界面
     QIcon icon(QIcon::fromTheme("cautious"));
     QPixmap pic = icon.pixmap(80, 80);
@@ -136,10 +147,12 @@ void PageDriverControl::initUninstallWidget()
 
     mp_WaitDialog = new DriverWaitingWidget(tr("Uninstalling"), this);
     mp_stackWidget->addWidget(mp_WaitDialog);
+    qCDebug(appLog) << "PageDriverControl::initUninstallWidget end";
 }
 
 void PageDriverControl::slotBtnCancel()
 {
+    qCDebug(appLog) << "PageDriverControl::slotBtnCancel";
     this->close();
 }
 
@@ -147,14 +160,17 @@ void PageDriverControl::slotBtnNext()
 {
     qCDebug(appLog) << "Next button clicked, operation:" << (m_Install ? "Install" : "Uninstall");
     if (m_Install) {
+        qCDebug(appLog) << "PageDriverControl::slotBtnNext install driver";
         installDriverLogical();
     } else {
+        qCDebug(appLog) << "PageDriverControl::slotBtnNext uninstall driver";
         uninstallDriverLogical();
     }
 }
 
 void PageDriverControl::slotProcessChange(qint32 value, QString detail)
 {
+    qCDebug(appLog) << "PageDriverControl::slotProcessChange, value:" << value << "detail:" << detail;
     Q_UNUSED(detail)
     mp_WaitDialog->setValue(value);
 }
@@ -177,16 +193,19 @@ void PageDriverControl::slotProcessEnd(bool sucess, QString errCode)
     disconnect(DBusDriverInterface::getInstance(), &DBusDriverInterface::processEnd, this, &PageDriverControl::slotProcessEnd);
     setProperty("DriverProcessStatus", "Done"); //卸载或者加载程序已完成
     enableCloseBtn(true);
+    qCDebug(appLog) << "PageDriverControl::slotProcessEnd end";
 }
 
 void PageDriverControl::slotClose()
 {
+    qCDebug(appLog) << "PageDriverControl::slotClose";
     emit refreshInfo();
     this->close();
 }
 
 void PageDriverControl::slotBackPathPage()
 {
+    qCDebug(appLog) << "PageDriverControl::slotBackPathPage";
     mp_NameDialog->stopLoadingDrivers();
     mp_stackWidget->setCurrentIndex(0);
     this->setButtonText(1, tr("Next", "button"));
@@ -198,18 +217,22 @@ void PageDriverControl::slotBackPathPage()
 
 void PageDriverControl::removeBtn()
 {
+    qCDebug(appLog) << "PageDriverControl::removeBtn";
     clearButtons();
 }
 
 void PageDriverControl::installDriverLogical()
 {
+    qCDebug(appLog) << "PageDriverControl::installDriverLogical start";
     int curIndex = mp_stackWidget->currentIndex();
     if (0 == curIndex) {
+        qCDebug(appLog) << "PageDriverControl::installDriverLogical at path page";
         QString path = mp_PathDialog->path();
         QFile file(path);
         bool includeSubdir = mp_PathDialog->includeSubdir();
         mp_PathDialog->updateTipLabelText("");
         if (path.isEmpty() || !file.exists()) {
+            qCWarning(appLog) << "PageDriverControl::installDriverLogical path is empty or not exists";
             mp_PathDialog->updateTipLabelText(tr("The selected folder does not exist, please select again"));
             return;
         }
@@ -221,11 +244,13 @@ void PageDriverControl::installDriverLogical()
         this->getButton(0)->disconnect();
         connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
+        qCDebug(appLog) << "PageDriverControl::installDriverLogical at name page";
         // 驱动安装之前需要先提权
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
                                                                                  UnixProcessSubject(getpid()),
                                                                                  Authority::AllowUserInteraction);
         if (result != Authority::Yes) {
+            qCWarning(appLog) << "PageDriverControl::installDriverLogical no authorization";
             return;
         }
 
@@ -233,8 +258,10 @@ void PageDriverControl::installDriverLogical()
         //先判断是否是驱动文件，如果不是，再判断是否存在。
         //因为后台isDriverPackage返回false的情况有2种：1.文件不存在 2.不是驱动文件
         mp_NameDialog->updateTipLabelText("");
-        if (!installErrorTips(driveName))
+        if (!installErrorTips(driveName)) {
+            qCWarning(appLog) << "PageDriverControl::installDriverLogical install error tips";
             return;
+        }
         removeBtn();
         mp_WaitDialog->setValue(0);
         mp_WaitDialog->setText(tr("Updating"));
@@ -243,6 +270,7 @@ void PageDriverControl::installDriverLogical()
         setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
         enableCloseBtn(false);
     }
+    qCDebug(appLog) << "PageDriverControl::installDriverLogical end";
 }
 
 bool PageDriverControl::installErrorTips(const QString &driveName)
@@ -271,6 +299,7 @@ bool PageDriverControl::installErrorTips(const QString &driveName)
 
 void PageDriverControl::uninstallDriverLogical()
 {
+    qCDebug(appLog) << "PageDriverControl::uninstallDriverLogical start";
     // 点击卸载之后进入正在卸载界面
     removeBtn();
     mp_stackWidget->setCurrentIndex(mp_stackWidget->currentIndex() + 1);
@@ -281,56 +310,70 @@ void PageDriverControl::uninstallDriverLogical()
     }
     setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
     enableCloseBtn(false);
+    qCDebug(appLog) << "PageDriverControl::uninstallDriverLogical end";
 }
 
 void PageDriverControl::keyPressEvent(QKeyEvent *event)
 {
+    // qCDebug(appLog) << "PageDriverControl::keyPressEvent key:" << event->key();
     // Esc、Alt+F4：如果后台更新时，直接返回。如果后台更新结束，触发close事件。如果是开始状态，则不处理
     bool blIsClose = false;
     if (event->key() == Qt::Key_F4) {
         Qt::KeyboardModifiers modifiers = event->modifiers();
         if (modifiers != Qt::NoModifier) {
             if (modifiers.testFlag(Qt::AltModifier)) {
+                qCDebug(appLog) << "keyPressEvent: Alt+F4 pressed";
                 blIsClose = true;
             }
         }
     }
     if (Qt::Key_Escape == event->key()) {
+        qCDebug(appLog) << "keyPressEvent: Escape key pressed";
         blIsClose = true;
     }
     if (!blIsClose) {
+        qCDebug(appLog) << "keyPressEvent: not a close event, key:" << event->key();
         return;
     }
     if ("Doing" == property("DriverProcessStatus").toString()) {
+        qCDebug(appLog) << "keyPressEvent: driver processing, ignore close event";
         return;
     } else if ("Done" == property("DriverProcessStatus").toString()) {
+        qCDebug(appLog) << "keyPressEvent: driver process done, closing";
         slotClose();//卸载或者更新后，关闭时刷新
     } else {
+        qCDebug(appLog) << "keyPressEvent: closing window";
         this->close();
     }
 }
 void PageDriverControl::closeEvent(QCloseEvent *event)
 {
+    qCDebug(appLog) << "closeEvent triggered";
     // 如果后台更新时，直接返回，否则不处理
     if ("Doing" == property("DriverProcessStatus").toString()) {
+        qCDebug(appLog) << "closeEvent: driver processing, ignore close event";
         event->ignore();
         return;
     } else if ("Done" == property("DriverProcessStatus").toString()) {
+        qCDebug(appLog) << "closeEvent: driver process done, closing";
         slotClose();//卸载或者更新后，关闭时刷新
     }
 }
 
 void PageDriverControl::enableCloseBtn(bool enable)
 {
+    qCDebug(appLog) << "PageDriverControl::enableCloseBtn enable:" << enable;
     // 获取titlebar
     DTitlebar *titlebar = findChild<DTitlebar *>();
     if (!titlebar) {
+        qCWarning(appLog) << "PageDriverControl::enableCloseBtn titlebar not found";
         return;
     }
 
     // 获取安装按钮
     DIconButton *closeBtn = titlebar->findChild<DIconButton *>("DTitlebarDWindowCloseButton");
     if (!closeBtn) {
+        qCWarning(appLog) << "PageDriverControl::enableCloseBtn close button not found";
         return;
     }
 
@@ -341,6 +384,7 @@ void PageDriverControl::enableCloseBtn(bool enable)
 
 void PageDriverControl::initErrMsg()
 {
+    qCDebug(appLog) << "PageDriverControl::initErrMsg";
     // 初始化错误消息
     m_MapErrMsg.insert(EUNKNOW,tr("Unknown error"));
     m_MapErrMsg.insert(ENOENT,tr("The driver module was not found")); // 2	未发现该驱动模块 /* No such file or directory */
@@ -357,10 +401,13 @@ void PageDriverControl::initErrMsg()
 
 const QString &PageDriverControl::errMsg(const QString &errCode)
 {
+    qCDebug(appLog) << "PageDriverControl::errMsg errCode:" << errCode;
     // 将错误码转换为错误信息
     if (m_MapErrMsg.find(errCode.toInt()) != m_MapErrMsg.end()) {
+        qCDebug(appLog) << "PageDriverControl::errMsg errCode:" << errCode.toInt();
         return m_MapErrMsg[errCode.toInt()];
     } else {
+        qCWarning(appLog) << "PageDriverControl::errMsg errCode UNKNOW";
         return m_MapErrMsg[EUNKNOW];
     }
 }

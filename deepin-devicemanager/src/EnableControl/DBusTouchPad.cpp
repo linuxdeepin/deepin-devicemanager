@@ -49,7 +49,9 @@ bool DBusTouchPad::isExists()
 {
     qCDebug(appLog) << "Check touchpad existence";
     if (m_dbusTouchPad->isValid()) {
-        return m_dbusTouchPad->property("Exist").toBool();
+        bool exists = m_dbusTouchPad->property("Exist").toBool();
+        qCDebug(appLog) << "Touchpad exists:" << exists;
+        return exists;
     }
     qCWarning(appLog) << "Invalid DBus interface when checking touchpad existence";
     return false;
@@ -78,7 +80,9 @@ bool DBusTouchPad::getEnable()
 {
     qCDebug(appLog) << "Get touchpad enable state";
     if (m_dbusTouchPad->isValid()) {
-        return m_dbusTouchPad->property("TPadEnable").toBool();
+        bool enabled = m_dbusTouchPad->property("TPadEnable").toBool();
+        qCDebug(appLog) << "Touchpad enabled state:" << enabled;
+        return enabled;
     }
     qCWarning(appLog) << "Invalid DBus interface when getting touchpad state";
     return false;

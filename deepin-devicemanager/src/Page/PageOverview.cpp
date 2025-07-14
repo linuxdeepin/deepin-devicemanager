@@ -56,11 +56,12 @@ PageOverview::PageOverview(DWidget *parent)
     connect(mp_Refresh, &QAction::triggered, this, &PageOverview::refreshInfo);
     connect(mp_Export, &QAction::triggered, this, &PageOverview::exportInfo);
     connect(mp_Copy, &QAction::triggered, this, &PageOverview::slotActionCopy);
+    qCDebug(appLog) << "PageOverview constructor end";
 }
 
 void PageOverview::updateInfo(const QList<DeviceBaseInfo *> &)
 {
-
+    // qCDebug(appLog) << "PageOverview::updateInfo with list, doing nothing";
 }
 
 void PageOverview::updateInfo(const QMap<QString, QString> &map)
@@ -73,8 +74,10 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     // 根据页面高度确定表格最多显示行数
     int maxRow = this->height() / ROW_HEIGHT - 4;
     if (maxRow < 1) {
+        qCDebug(appLog) << "Max row is less than 1, set to 11";
         mp_Overview->setLimitRow(11);
     } else {
+        qCDebug(appLog) << "Set max row to" << std::min(11, maxRow);
         mp_Overview->setLimitRow(std::min(11, maxRow));
     }
 
@@ -87,11 +90,13 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
 
     foreach (auto iter, types) {
         if (iter.first == tr("Overview")) {
+            qCDebug(appLog) << "Skipping overview item";
             continue;
         }
 
         // 按设备类型列表顺序显示概况信息
         if (map.find(iter.first) != map.end()) {
+            qCDebug(appLog) << "Adding item:" << iter.first;
             QTableWidgetItem *itemFirst = new QTableWidgetItem(iter.first);
             mp_Overview->setItem(i, 0, itemFirst);
             QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find(iter.first).value());
@@ -103,12 +108,13 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
 
 void PageOverview::clearWidgets()
 {
+    qCDebug(appLog) << "PageOverview::clearWidgets";
     mp_Overview->clear();
 }
 
 void PageOverview::setLabel(const QString &)
 {
-
+    qCDebug(appLog) << "PageOverview::setLabel with one arg, doing nothing";
 }
 
 void PageOverview::setLabel(const QString &str1, const QString &str2)
@@ -119,10 +125,14 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
     // 设置ToolTip
     QString tips = str2;
-    if (tips.length() > ENTER_ONE)
+    if (tips.length() > ENTER_ONE) {
+        qCDebug(appLog) << "Adding newline to tips at" << ENTER_ONE;
         tips.insert(ENTER_ONE, QChar('\n'));
-    if (tips.length() > ENTER_TWO)
+    }
+    if (tips.length() > ENTER_TWO) {
+        qCDebug(appLog) << "Adding newline to tips at" << ENTER_TWO;
         tips.insert(ENTER_TWO, QChar('\n'));
+    }
 
     mp_OSLabel->setToolTip(tips);
 
@@ -133,6 +143,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     // 社区版链接不同
     DSysInfo::UosEdition type = DSysInfo::uosEditionType();
     if (DSysInfo::UosCommunity == type) {
+        qCDebug(appLog) << "Community edition detected, using deepin link";
         linkStr = DEEPIN_LINK;
     }
 
@@ -161,17 +172,23 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
     // 资源文件获取
     QString path = "";
     if (str1.contains("desktop", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "Device is desktop";
         path = "device_desktop";
     } else if (str1.contains("laptop", Qt::CaseInsensitive) ||
                str1.contains("notebook", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "Device is laptop";
         path = "device_laptop";
     } else if (str1.contains("ternimal", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "Device is terminal";
         path = "device_terminal";
     } else if (str1.contains("Tablet", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "Device is tablet";
         path = "device_tablet";
     } else if (str1.contains("server", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "Device is server";
         path = "device_server";
     } else {
+        qCDebug(appLog) << "Device is unknown, using desktop icon";
         path = "device_desktop";
     }
 
@@ -183,6 +200,7 @@ void PageOverview::setLabel(const QString &str1, const QString &str2)
 
 void PageOverview::slotShowMenu(const QPoint &)
 {
+    qCDebug(appLog) << "Showing context menu";
     // 右键菜单
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
@@ -201,6 +219,7 @@ void PageOverview::slotActionCopy()
 
 void PageOverview::initWidgets()
 {
+    qCDebug(appLog) << "PageOverview::initWidgets start";
     // 初始化页面布局
     mp_OSLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     mp_DeviceLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
@@ -228,4 +247,5 @@ void PageOverview::initWidgets()
     vLayout->addWidget(mp_Overview);
     vLayout->addStretch();
     setLayout(vLayout);
+    qCDebug(appLog) << "PageOverview::initWidgets end";
 }

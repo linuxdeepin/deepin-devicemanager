@@ -21,7 +21,7 @@ CmdTask::CmdTask(QString key, QString file, QString info, GetInfoPool *parent)
     , m_Info(info)
     , mp_Parent(parent)
 {
-
+    qCDebug(appLog) << "CmdTask constructor, key:" << key;
 }
 
 CmdTask::~CmdTask()
@@ -55,6 +55,7 @@ void GetInfoPool::getAllInfo()
 
     QList<QStringList>::iterator it = m_CmdList.begin();
     for (; it != m_CmdList.end(); ++it) {
+        qCDebug(appLog) << "GetInfoPool::getAllInfo start task for key:" << (*it)[0];
         CmdTask *task = new CmdTask((*it)[0], (*it)[1], (*it)[2], this);
         start(task);
         task->deleteLater();
@@ -68,6 +69,7 @@ void GetInfoPool::finishedCmd(const QString &info, const QMap<QString, QList<QMa
     QMutexLocker m_lock(&mutex);
     m_FinishedNum++;
     if (m_FinishedNum == m_CmdList.size()) {
+        qCDebug(appLog) << "GetInfoPool::finishedCmd all tasks finished";
         emit finishedAll(info);
         m_FinishedNum = 0;
     }

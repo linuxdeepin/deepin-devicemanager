@@ -35,27 +35,40 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
 
     // 根据架构创建设备信息生成器
     DeviceGenerator *generator = nullptr;
-    if (arch == "x86_64")
+    if (arch == "x86_64") {
+        qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create X86Generator";
         generator = new X86Generator();
-    else if (arch == "mips64")
+    } else if (arch == "mips64") {
+        qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create MipsGenerator";
         generator = new MipsGenerator();
-    else if (arch == "aarch64") {
+    } else if (arch == "aarch64") {
         QString type = Common::boardVendorType();
+        qCDebug(appLog) << "DeviceFactory::getDeviceGenerator arch is aarch64, type is" << type;
         if (!type.isEmpty()) {
-            if (type == "KLVV")
+            if (type == "KLVV") {
+                qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create KLVGenerator";
                 generator = new KLVGenerator();
-            else if (type == "PGUV" || type == "PGUW")
+            } else if (type == "PGUV" || type == "PGUW") {
+                qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create PanguVGenerator";
                 generator = new PanguVGenerator();
-            else if (type == "KLVU")
+            } else if (type == "KLVU") {
+                qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create KLUGenerator";
                 generator = new KLUGenerator();
-            else if (type == "PGUX")
+            } else if (type == "PGUX") {
+                qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create PanguXGenerator";
                 generator = new PanguXGenerator();
-            else
+            } else {
+                qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create HWGenerator";
                 generator = new HWGenerator();
-        } else
+            }
+        } else {
+            qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create ArmGenerator";
             generator = new ArmGenerator();
-    } else
+        }
+    } else {
+        qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create X86Generator by default";
         generator = new X86Generator();
+    }
 
     qCDebug(appLog) << "DeviceFactory::getDeviceGenerator end, arch:" << Common::getArch() << "type:" << Common::boardVendorType() << "generator:" << generator;
     return generator;

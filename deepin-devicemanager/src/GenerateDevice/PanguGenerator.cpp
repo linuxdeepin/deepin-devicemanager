@@ -26,6 +26,7 @@ void PanguGenerator::generatorComputerDevice()
 
     // home url
     if (cmdInfo.size() > 0) {
+        qCDebug(appLog) << "PanguGenerator::generatorComputerDevice get home url";
         QString value = cmdInfo[0]["HOME_URL"];
         device->setHomeUrl(value.replace("\"", ""));
     }
@@ -36,29 +37,37 @@ void PanguGenerator::generatorComputerDevice()
     const QList<QMap<QString, QString> >  &dmidecode3List = DeviceManager::instance()->cmdInfo("dmidecode3");
 
     if (dmidecode1List.size() > 1) {
+        qCDebug(appLog) << "PanguGenerator::generatorComputerDevice get device info from dmidecode";
         device->setVendor(dmidecode1List[1]["Manufacturer"], dmidecode2List[0]["Manufacturer"]);
         device->setName(dmidecode1List[1]["Product Name"], dmidecode2List[0]["Product Name"], dmidecode1List[1]["Family"], dmidecode1List[1]["Version"]);
     }
 
     if (dmidecode3List.size() > 1) {
+        qCDebug(appLog) << "PanguGenerator::generatorComputerDevice get device type from dmidecode";
         device->setType(dmidecode3List[1]["Type"]);
     }
 
     // setOsDescription
     QString os = "UOS";
     DSysInfo::DeepinType type = DSysInfo::deepinType();
-    if (DSysInfo::DeepinProfessional == type)
+    qCDebug(appLog) << "PanguGenerator::generatorComputerDevice get deepin type:" << type;
+    if (DSysInfo::DeepinProfessional == type) {
+        qCDebug(appLog) << "PanguGenerator::generatorComputerDevice deepin type is professional";
         os =  "UOS 20";
-    else if (DSysInfo::DeepinPersonal == type)
+    } else if (DSysInfo::DeepinPersonal == type) {
+        qCDebug(appLog) << "PanguGenerator::generatorComputerDevice deepin type is personal";
         os =  "UOS 20 Home";
-    else if (DSysInfo::DeepinDesktop == type)
+    } else if (DSysInfo::DeepinDesktop == type) {
+        qCDebug(appLog) << "PanguGenerator::generatorComputerDevice deepin type is desktop";
         os =  "Deepin 20 Beta";
+    }
 
     device->setOsDescription(os);
 
     // os
     const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
     if (verInfo.size() > 0) {
+        qCDebug(appLog) << "PanguGenerator::generatorComputerDevice get os version";
         QString info = verInfo[0]["OS"].trimmed();
         info = info.trimmed();
         
@@ -66,6 +75,7 @@ void PanguGenerator::generatorComputerDevice()
         QRegularExpression reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)");
         QRegularExpressionMatch match = reg.match(info);
         if (match.hasMatch()) {
+            qCDebug(appLog) << "PanguGenerator::generatorComputerDevice match os version 1";
             QString tmp = match.captured(0);
             info.remove(tmp);
             info.insert(match.capturedStart(), match.captured(1));
@@ -75,6 +85,7 @@ void PanguGenerator::generatorComputerDevice()
         reg.setPattern("(\\(root.*\\)) (\\(.*\\))");
         match = reg.match(info);
         if (match.hasMatch()) {
+            qCDebug(appLog) << "PanguGenerator::generatorComputerDevice match os version 2";
             QString tmp = match.captured(1);
             info.remove(tmp);
         }

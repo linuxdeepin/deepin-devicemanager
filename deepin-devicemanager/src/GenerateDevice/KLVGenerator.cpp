@@ -49,7 +49,9 @@ void KLVGenerator::generatorNetworkDevice()
     const QList<QMap<QString, QString>> lstInfo = DeviceManager::instance()->cmdInfo("lshw_network");
     QList<QMap<QString, QString> >::const_iterator it = lstInfo.begin();
     for (; it != lstInfo.end(); ++it) {
+        // qCDebug(appLog) << "KLVGenerator::generatorNetworkDevice process lshw network info";
         if ((*it).size() < 2) {
+            // qCDebug(appLog) << "KLVGenerator::generatorNetworkDevice network info not enough";
             continue;
         }
         QMap<QString, QString> tempMap = *it;
@@ -59,6 +61,7 @@ void KLVGenerator::generatorNetworkDevice()
         */
         if ((tempMap["configuration"].indexOf("wireless=IEEE 802.11") > -1) ||
                 (tempMap["capabilities"].indexOf("wireless") > -1)) {
+            // qCDebug(appLog) << "KLVGenerator::generatorNetworkDevice is wireless interface, skip";
             continue;
         }
 
@@ -81,6 +84,7 @@ void KLVGenerator::getNetworkInfoFromCatWifiInfo()
     QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
     QFile file(wifiDevicesInfoPath);
     if (file.open(QIODevice::ReadOnly)) {
+        qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo open wifi info file success";
         QMap<QString, QString>  wifiInfo;
         QString allStr = file.readAll();
         file.close();
@@ -88,27 +92,39 @@ void KLVGenerator::getNetworkInfoFromCatWifiInfo()
         // 解析数据
         QStringList items = allStr.split("\n");
         foreach (const QString &item, items) {
-            if (item.isEmpty())
+            // qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo process item:" << item;
+            if (item.isEmpty()) {
+                // qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo item is empty, skip";
                 continue;
+            }
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             QStringList strList = item.split(':', QString::SkipEmptyParts);
 #else
             QStringList strList = item.split(':');
 #endif
-            if (strList.size() == 2)
+            if (strList.size() == 2) {
+                // qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo get wifi info:" << strList[0] << strList[1];
                 wifiInfo[strList[0] ] = strList[1];
+            }
         }
 
-        if (!wifiInfo.isEmpty())
+        if (!wifiInfo.isEmpty()) {
+            // qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo wifi info not empty, add to list";
             lstWifiInfo.append(wifiInfo);
+        }
+    } else {
+        qCWarning(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo open wifi info file failed";
     }
     if (lstWifiInfo.size() == 0) {
+        qCWarning(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo no wifi info";
         return;
     }
     QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
 
     for (; it != lstWifiInfo.end(); ++it) {
+        // qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo process wifi info";
         if ((*it).size() < 3) {
+            // qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo wifi info not enough";
             continue;
         }
 
@@ -120,6 +136,7 @@ void KLVGenerator::getNetworkInfoFromCatWifiInfo()
 
         // cat /sys/hisys/wal/wifi_devices_info  获取结果为 HUAWEI HI103
         if (tempMap["Chip Type"].contains("HUAWEI", Qt::CaseInsensitive)) {
+            // qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo fix chip type";
             tempMap["Chip Type"] = tempMap["Chip Type"].remove("HUAWEI").trimmed();
         }
 
@@ -129,6 +146,7 @@ void KLVGenerator::getNetworkInfoFromCatWifiInfo()
 
         DeviceManager::instance()->setNetworkInfoFromWifiInfo(tempMap);
     }
+    qCDebug(appLog) << "KLVGenerator::getNetworkInfoFromCatWifiInfo end";
 }
 
 void KLVGenerator::getDiskInfoFromLshw()
@@ -138,25 +156,32 @@ void KLVGenerator::getDiskInfoFromLshw()
     QString modelStr = "";
     QFile file(bootdevicePath);
     if (file.open(QIODevice::ReadOnly)) {
+        qCDebug(appLog) << "KLVGenerator::getDiskInfoFromLshw open bootdevice file success";
         modelStr = file.readLine().simplified();
         file.close();
+    } else {
+        qCWarning(appLog) << "KLVGenerator::getDiskInfoFromLshw open bootdevice file failed";
     }
 
     const QList<QMap<QString, QString>> lstDisk = DeviceManager::instance()->cmdInfo("lshw_disk");
     QList<QMap<QString, QString> >::const_iterator dIt = lstDisk.begin();
     for (; dIt != lstDisk.end(); ++dIt) {
-        if ((*dIt).size() < 2)
+        // qCDebug(appLog) << "KLVGenerator::getDiskInfoFromLshw process lshw disk info";
+        if ((*dIt).size() < 2) {
+            // qCDebug(appLog) << "KLVGenerator::getDiskInfoFromLshw disk info not enough";
             continue;
+        }
 
         // KLU的问题特殊处理
         QMap<QString, QString> tempMap;
         foreach (const QString &key, (*dIt).keys()) {
             tempMap.insert(key, (*dIt)[key]);
         }
-
+        // qCDebug(appLog) << "KLVGenerator::getDiskInfoFromLshw disk product:" << tempMap["product"] << "modelStr:" << modelStr;
 //        qCInfo(appLog) << tempMap["product"] << " ***** " << modelStr << " " << (tempMap["product"] == modelStr);
         // HW写死
         if (tempMap["product"] == modelStr) {
+            // qCDebug(appLog) << "KLVGenerator::getDiskInfoFromLshw find boot device";
             // 应HW的要求，将描述固定为   Universal Flash Storage
             tempMap["description"] = "Universal Flash Storage";
             // 应HW的要求，添加interface   UFS 3.1
@@ -165,6 +190,7 @@ void KLVGenerator::getDiskInfoFromLshw()
 
         DeviceManager::instance()->addLshwinfoIntoStorageDevice(tempMap);
     }
+    qCDebug(appLog) << "KLVGenerator::getDiskInfoFromLshw end";
 }
 
 void KLVGenerator::getImageInfoFromHwinfo()
@@ -174,8 +200,11 @@ void KLVGenerator::getImageInfoFromHwinfo()
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 3)
+        // qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo process hwinfo usb info";
+        if ((*it).size() < 3) {
+            // qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo usb info not enough";
             continue;
+        }
 
         // hwinfo中对camera的分类不明确，通过camera等关键字认定图像设备
         if (!(*it)["Model"].contains("camera", Qt::CaseInsensitive) &&
@@ -183,6 +212,7 @@ void KLVGenerator::getImageInfoFromHwinfo()
                 !(*it)["Driver"].contains("uvcvideo", Qt::CaseInsensitive) &&
                 !(*it)["Model"].contains("webcam", Qt::CaseInsensitive) &&
                 (*it)["Hardware Class"] != "camera") {
+            // qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo not camera device";
             continue;
         }
 
@@ -196,8 +226,10 @@ void KLVGenerator::getImageInfoFromHwinfo()
         // 判断该摄像头是否存在，被禁用的和被拔出
         QString path = pciPath(tempMap);
         if (path.contains("usb")) {
+            // qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo is usb device";
             // 判断authorized是否存在，不存在则直接返回
             if (!QFile::exists("/sys" + path + "/authorized")) {
+                // qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo authorized file not exists, skip";
                 continue;
             }
         }
@@ -206,20 +238,24 @@ void KLVGenerator::getImageInfoFromHwinfo()
         QString unique_id = uniqueID(tempMap);
         DeviceImage *device = dynamic_cast<DeviceImage *>(DeviceManager::instance()->getImageDevice(unique_id));
         if (device) {
+            // qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo device already exists, update it";
             device->setEnableValue(false);
             device->setInfoFromHwinfo(tempMap);
             continue;
         } else {
             if (tempMap.contains("path")) {
+                // qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo tempMap contains path, skip";
                 continue;
             }
         }
 
         device = new DeviceImage();
+        // qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo add image device";
         device->setInfoFromHwinfo(tempMap);
         DeviceManager::instance()->addImageDevice(device);
         addBusIDFromHwinfo(tempMap["SysFS BusID"]);
     }
+    qCDebug(appLog) << "KLVGenerator::getImageInfoFromHwinfo end";
 }
 
 void KLVGenerator::getImageInfoFromLshw()
@@ -229,8 +265,11 @@ void KLVGenerator::getImageInfoFromLshw()
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
-        if ((*it).size() < 2)
+        // qCDebug(appLog) << "KLVGenerator::getImageInfoFromLshw process lshw usb info";
+        if ((*it).size() < 2) {
+            // qCDebug(appLog) << "KLVGenerator::getImageInfoFromLshw usb info not enough";
             continue;
+        }
 
         QMap<QString, QString> tempMap;
         foreach (const QString &key, (*it).keys()) {
@@ -239,6 +278,8 @@ void KLVGenerator::getImageInfoFromLshw()
         }
 
         DeviceManager::instance()->setCameraInfoFromLshw(tempMap);
+        // qCDebug(appLog) << "KLVGenerator::getImageInfoFromLshw set camera info";
     }
+    qCDebug(appLog) << "KLVGenerator::getImageInfoFromLshw end";
 }
 

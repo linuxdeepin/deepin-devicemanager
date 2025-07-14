@@ -30,17 +30,17 @@ PageInfo::PageInfo(QWidget *parent)
 
 void PageInfo::updateInfo(const QMap<QString, QString> &)
 {
-
+    qCDebug(appLog) << "PageInfo::updateInfo";
 }
 
 void PageInfo::setLabel(const QString &, const QString &)
 {
-
+    qCDebug(appLog) << "PageInfo::setLabel";
 }
 
 void PageInfo::clearContent()
 {
-
+    qCDebug(appLog) << "PageInfo::clearContent";
 }
 
 void PageInfo::setDeviceInfoNum(int num)
@@ -52,17 +52,20 @@ void PageInfo::setDeviceInfoNum(int num)
 
 int PageInfo::getDeviceInfoNum()
 {
+    qCDebug(appLog) << "PageInfo::getDeviceInfoNum, num:" << m_AllInfoNum;
     // 获取设备信息数目
     return m_AllInfoNum;
 }
 
 void PageInfo::setMultiFlag(const bool &flag)
 {
+    // qCDebug(appLog) << "PageInfo::setMultiFlag, flag:" << flag;
     m_multiFlag = flag;
 }
 
 bool PageInfo::getMultiFlag()
 {
+    // qCDebug(appLog) << "PageInfo::getMultiFlag, flag:" << m_multiFlag;
     return m_multiFlag;
 }
 
@@ -75,11 +78,14 @@ bool PageInfo::packageHasInstalled(const QString &packageName)
     p.waitForFinished(-1);
 
     QByteArray r = p.readAll();
-    return r.contains("installed");
+    bool installed = r.contains("installed");
+    qCDebug(appLog) << "Package" << packageName << "is" << (installed ? "installed" : "not installed");
+    return installed;
 }
 
 void PageInfo::paintEvent(QPaintEvent *e)
 {
+    // qCDebug(appLog) << "PageInfo::paintEvent";
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing, true);
@@ -97,10 +103,13 @@ void PageInfo::paintEvent(QPaintEvent *e)
     // 获取窗口当前的状态,激活，禁用，未激活
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
-    if (wid /* && wid == this*/)
+    if (wid /* && wid == this*/) {
+        // qCDebug(appLog) << "PageInfo::paintEvent, active window";
         cg = DPalette::Active;
-    else
+    } else {
+        // qCDebug(appLog) << "PageInfo::paintEvent, inactive window";
         cg = DPalette::Inactive;
+    }
 
     // 开始绘制边框 *********************************************************
     // 计算绘制区域

@@ -72,6 +72,7 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
 
         // 判断是否是BIOS界面
         if (bios) {
+            qCDebug(appLog) << "Showing board info page";
             mp_PageInfo = mp_PageBoardInfo;
             mp_PageBoardInfo->setVisible(true);
             mp_PageMutilInfo->setVisible(false);
@@ -86,6 +87,7 @@ void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseI
 
     // 设置页面Label以及显示设备信息
     if (mp_PageInfo) {
+        qCDebug(appLog) << "Updating page info";
         mp_PageInfo->setLabel(itemStr);
         mp_PageInfo->updateInfo(lst);
     }
@@ -101,6 +103,7 @@ void PageInfoWidget::updateTable(const QMap<QString, QString> &map)
     mp_PageBoardInfo->setVisible(false);
     mp_PageInfo = mp_PageOverviewInfo;
     if (mp_PageInfo) {
+        qCDebug(appLog) << "Updating page info with map";
         mp_PageInfo->updateInfo(map);
         mp_PageInfo->setLabel(map["Overview"], map["OS"]);
     }
@@ -108,11 +111,13 @@ void PageInfoWidget::updateTable(const QMap<QString, QString> &map)
 
 void PageInfoWidget::setFontChangeFlag()
 {
+    qCDebug(appLog) << "PageInfoWidget::setFontChangeFlag";
     mp_PageBoardInfo->setFontChangeFlag();
 }
 
 void PageInfoWidget::clear()
 {
+    qCDebug(appLog) << "PageInfoWidget::clear";
     mp_PageOverviewInfo->clearWidgets();
     mp_PageMutilInfo->clearWidgets();
     mp_PageSignalInfo->clearWidgets();
@@ -121,11 +126,13 @@ void PageInfoWidget::clear()
 
 void PageInfoWidget::resizeEvent(QResizeEvent *event)
 {
+    qCDebug(appLog) << "PageInfoWidget::resizeEvent";
     DWidget::resizeEvent(event);
 }
 
 void PageInfoWidget::initWidgets()
 {
+    qCDebug(appLog) << "PageInfoWidget::initWidgets";
     // 初始化页面布局
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     hLayout->setContentsMargins(10, 10, 10, 10);

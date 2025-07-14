@@ -35,6 +35,7 @@ PageDriverInstallInfo::PageDriverInstallInfo(QWidget *parent)
     connect(mp_ViewCanUpdate, &PageDriverTableView::itemChecked, this, &PageDriverInstallInfo::itemChecked);
     connect(mp_HeadWidget, &DetectedStatusWidget::installAll, this, &PageDriverInstallInfo::installAll);
     connect(mp_HeadWidget, &DetectedStatusWidget::installAll, this, [=](){
+        qCDebug(appLog) << "PageDriverInstallInfo installAll triggered, set checked cb disnable";
         // 安装过程中，所有已经选中的勾选框置灰
         mp_ViewNotInstall->setCheckedCBDisnable();
         mp_ViewCanUpdate->setCheckedCBDisnable();
@@ -45,6 +46,7 @@ PageDriverInstallInfo::PageDriverInstallInfo(QWidget *parent)
 
 void PageDriverInstallInfo::initUI()
 {
+    qCDebug(appLog) << "PageDriverInstallInfo::initUI start";
     this->setLineWidth(0);
     initTable();
 
@@ -97,10 +99,12 @@ void PageDriverInstallInfo::initUI()
     vLaout->addSpacing(16);
     vLaout->addWidget(area);
     this->setLayout(vLaout);
+    qCDebug(appLog) << "PageDriverInstallInfo::initUI end";
 }
 
 void PageDriverInstallInfo::initTable()
 {
+    qCDebug(appLog) << "PageDriverInstallInfo::initTable start";
     // 设置列宽
     mp_ViewNotInstall->initHeaderView(QStringList() << ""
                                       << tr("Device Name")
@@ -131,6 +135,7 @@ void PageDriverInstallInfo::initTable()
 
     mp_AllDriverIsNew->initHeaderView(QStringList() << tr("Device Name") << tr("Current Version"));
     mp_AllDriverIsNew->setColumnWidth(0, 418);
+    qCDebug(appLog) << "PageDriverInstallInfo::initTable end";
 }
 
 void PageDriverInstallInfo::addDriverInfoToTableView(DriverInfo *info, int index)
@@ -138,12 +143,15 @@ void PageDriverInstallInfo::addDriverInfoToTableView(DriverInfo *info, int index
     qCDebug(appLog) << "Adding driver info to table view, name:" << info->name() << "index:" << index << "status:" << info->status();
     PageDriverTableView *view = nullptr;
     if (ST_NOT_INSTALL == info->status()) {
+        qCDebug(appLog) << "Driver not installed";
         view = mp_ViewNotInstall;
         view->appendRowItems(6);
     } else if (ST_CAN_UPDATE == info->status()) {
+        qCDebug(appLog) << "Driver can be updated";
         view = mp_ViewCanUpdate;
         view->appendRowItems(6);
     } else if (ST_DRIVER_IS_NEW == info->status()) {
+        qCDebug(appLog) << "Driver is new";
         view = mp_AllDriverIsNew;
         view->appendRowItems(2);
     } else {
@@ -154,10 +162,11 @@ void PageDriverInstallInfo::addDriverInfoToTableView(DriverInfo *info, int index
     int row = view->model()->rowCount() - 1;
 
     if (view != mp_AllDriverIsNew) {
-
+        qCDebug(appLog) << "Driver is not new, add check box and buttons";
         // 设置CheckBtn
         DriverCheckItem *cbItem = new DriverCheckItem(this);
         connect(cbItem, &DriverCheckItem::sigChecked, view, [index, view](bool checked) {
+            qCDebug(appLog) << "PageDriverInstallInfo check item " << index << " checked:" << checked;
             Q_UNUSED(index)
             view->setHeaderCbStatus(checked);
         });
@@ -186,6 +195,7 @@ void PageDriverInstallInfo::addDriverInfoToTableView(DriverInfo *info, int index
         DriverOperationItem *operateItem = new DriverOperationItem(this, ST_NOT_INSTALL == info->status() ? DriverOperationItem::INSTALL : DriverOperationItem::UPDATE);
         view->setWidget(row, 5, operateItem);
     } else {
+        qCDebug(appLog) << "Driver is new, just show info";
         // 设置设备信息
         DriverNameItem *nameItem = new DriverNameItem(this, info->type());
         nameItem->setName(info->name());
@@ -200,6 +210,7 @@ void PageDriverInstallInfo::addDriverInfoToTableView(DriverInfo *info, int index
 
 void PageDriverInstallInfo::addCurDriverInfo(DriverInfo *info)
 {
+    qCDebug(appLog) << "PageDriverInstallInfo::addCurDriverInfo, name:" << info->name();
     mp_AllDriverIsNew->appendRowItems(2);
 
     DriverNameItem *nameItem = new DriverNameItem(this, info->type());
@@ -231,25 +242,31 @@ void PageDriverInstallInfo::showTables(int installLength, int updateLength, int 
     // 显示表头显示的内容
     const QMap<QString, QString> &overviewMap = DeviceManager::instance()->getDeviceOverview();
     if (installLength == 0 && updateLength == 0) {
+        qCDebug(appLog) << "No driver to install or update";
         mp_HeadWidget->setNoUpdateDriverUI(overviewMap["Overview"]);
     } else {
+        qCDebug(appLog) << "Driver to install or update";
         mp_HeadWidget->setDetectFinishUI(QString::number(installLength + updateLength), overviewMap["Overview"], installLength != 0);
     }
 }
 
 void PageDriverInstallInfo::getCheckedDriverIndex(QList<int> &lstIndex)
 {
+    qCDebug(appLog) << "PageDriverInstallInfo::getCheckedDriverIndex start";
     mp_ViewNotInstall->getCheckedDriverIndex(lstIndex);
     mp_ViewCanUpdate->getCheckedDriverIndex(lstIndex);
+    qCDebug(appLog) << "PageDriverInstallInfo::getCheckedDriverIndex end, count:" << lstIndex.size();
 }
 
 void PageDriverInstallInfo::clearAllData()
 {
+    qCDebug(appLog) << "PageDriverInstallInfo::clearAllData start";
     mp_ViewCanUpdate->clear();
     mp_ViewNotInstall->clear();
     mp_AllDriverIsNew->clear();
 
     initTable();
+    qCDebug(appLog) << "PageDriverInstallInfo::clearAllData end";
 }
 
 void PageDriverInstallInfo::updateItemStatus(int index, Status status, QString errS)
@@ -270,17 +287,20 @@ void PageDriverInstallInfo::setCheckedCBDisnable()
 
 void PageDriverInstallInfo::setHeaderCbEnable(bool enable)
 {
+    qCDebug(appLog) << "PageDriverInstallInfo::setHeaderCbEnable, enable:" << enable;
     mp_ViewNotInstall->setHeaderCbEnable(enable);
     mp_ViewCanUpdate->setHeaderCbEnable(enable);
 }
 void PageDriverInstallInfo::slotDownloadProgressChanged(DriverType type, QString size, QStringList msg)
 {
+    qCDebug(appLog) << "PageDriverInstallInfo::slotDownloadProgressChanged, type:" << type << "size:" << size;
     // 将下载过程时时更新到表格上方的状态里面 qCInfo(appLog) << "Download ********** " << msg[0] << " , " << msg[1] << " , " << msg[2];
     mp_HeadWidget->setDownloadUI(type, msg[2], msg[1], size, msg[0].toInt());
 }
 
 void PageDriverInstallInfo::slotDownloadFinished(int index, Status status)
 {
+    // qCDebug(appLog) << "Download finished, index:" << index << "status:" << status;
     mp_ViewCanUpdate->setItemStatus(index, status);
     mp_ViewNotInstall->setItemStatus(index, status);
 }

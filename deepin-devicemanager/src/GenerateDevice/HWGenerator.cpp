@@ -43,6 +43,7 @@ void HWGenerator::generatorComputerDevice()
 
     // home url
     if (cmdInfo.size() > 0) {
+        qCDebug(appLog) << "HWGenerator::generatorComputerDevice get home url";
         QString value = cmdInfo[0]["HOME_URL"];
         device->setHomeUrl(value.replace("\"", ""));
     }
@@ -50,6 +51,7 @@ void HWGenerator::generatorComputerDevice()
     // name type
     const QList<QMap<QString, QString> >  &sysInfo = DeviceManager::instance()->cmdInfo("lshw_system");
     if (sysInfo.size() > 0) {
+        qCDebug(appLog) << "HWGenerator::generatorComputerDevice get system info";
         device->setType(sysInfo[0]["description"]);
 //        device->setVendor(sysInfo[0]["vendor"]);
         device->setName(sysInfo[0]["product"]);
@@ -57,6 +59,7 @@ void HWGenerator::generatorComputerDevice()
 
     const QList<QMap<QString, QString> >  &dmidecode1List = DeviceManager::instance()->cmdInfo("dmidecode1");
     if (!dmidecode1List.isEmpty() && dmidecode1List[0].contains("Product Name") && !dmidecode1List[0]["Product Name"].isEmpty()) {
+        qCDebug(appLog) << "HWGenerator::generatorComputerDevice get product name from dmidecode";
         device->setName(dmidecode1List[0]["Product Name"]);
     }
 
@@ -64,10 +67,12 @@ void HWGenerator::generatorComputerDevice()
 
     QString productName = DeviceGenerator::getProductName();
     device->setOsDescription(productName);
+    qCDebug(appLog) << "HWGenerator::generatorComputerDevice get product name" << productName;
 
     // os
     const QList<QMap<QString, QString> >  &verInfo = DeviceManager::instance()->cmdInfo("cat_version");
     if (verInfo.size() > 0) {
+        qCDebug(appLog) << "HWGenerator::generatorComputerDevice get os version";
         QString info = verInfo[0]["OS"].trimmed();
         info = info.trimmed();
         
@@ -75,6 +80,7 @@ void HWGenerator::generatorComputerDevice()
         QRegularExpression reg("\\(gcc [\\s\\S]*(\\([\\s\\S]*\\))\\)");
         QRegularExpressionMatch match = reg.match(info);
         if (match.hasMatch()) {
+            qCDebug(appLog) << "HWGenerator::generatorComputerDevice match os version";
             QString tmp = match.captured(0);
             QString cap1 = match.captured(1);
             info.remove(tmp);
@@ -95,12 +101,14 @@ void HWGenerator::generatorCpuDevice()
     qCDebug(appLog) << "HWGenerator::generatorCpuDevice start";
     DeviceGenerator::generatorCpuDevice();
     DeviceManager::instance()->setCpuFrequencyIsCur(false);
+    qCDebug(appLog) << "HWGenerator::generatorCpuDevice end";
 }
 
 void HWGenerator::generatorAudioDevice()
 {
     qCDebug(appLog) << "HWGenerator::generatorAudioDevice start";
     getAudioInfoFromCatAudio();
+    qCDebug(appLog) << "HWGenerator::generatorAudioDevice end";
 }
 
 void HWGenerator::generatorBluetoothDevice()
@@ -110,15 +118,18 @@ void HWGenerator::generatorBluetoothDevice()
     getBlueToothInfoFromHwinfo();
     getBluetoothInfoFromLshw();
     getBluetoothInfoFromCatWifiInfo();
+    qCDebug(appLog) << "HWGenerator::generatorBluetoothDevice end";
 }
 
 void HWGenerator::generatorGpuDevice()
 {
+    qCDebug(appLog) << "HWGenerator::generatorGpuDevice start";
     QProcess process;
     process.start("gpuinfo");
     process.waitForFinished(-1);
     int exitCode = process.exitCode();
     if (exitCode == 127 || exitCode == 126) {
+        qCWarning(appLog) << "HWGenerator::generatorGpuDevice gpuinfo not found, exit code:" << exitCode;
         return;
     }
 
@@ -128,10 +139,13 @@ void HWGenerator::generatorGpuDevice()
 
     QMap<QString, QString> mapInfo;
     for (QString itemStr : items) {
-        if (itemStr.contains(":"))
+        if (itemStr.contains(":")) {
+            // qCDebug(appLog) << "HWGenerator::generatorGpuDevice skip item:" << itemStr;
             continue;
+        }
         QString curItemStr = itemStr.trimmed();
         if (!curItemStr.isEmpty()) {
+            qCDebug(appLog) << "HWGenerator::generatorGpuDevice get gpu name:" << curItemStr;
             mapInfo.insert("Name", curItemStr);
             break;
         }
@@ -140,24 +154,30 @@ void HWGenerator::generatorGpuDevice()
     for (int i = 1; i < items.size(); ++i) {
         QStringList words = items[i].split(":");
         if (words.size() == 2) {
+            // qCDebug(appLog) << "HWGenerator::generatorGpuDevice get gpu info:" << words[0] << words[1];
             mapInfo.insert(words[0].trimmed(), words[1].trimmed());
         }
     }
-    if (mapInfo.size() < 2)
+    if (mapInfo.size() < 2) {
+        qCWarning(appLog) << "HWGenerator::generatorGpuDevice gpu info not enough";
         return;
+    }
 
     DeviceGpu *device = new DeviceGpu();
     device->setCanUninstall(false);
     device->setForcedDisplay(true);
     device->setGpuInfo(mapInfo);
     DeviceManager::instance()->addGpuDevice(device);
+    qCDebug(appLog) << "HWGenerator::generatorGpuDevice end";
 }
 
 void HWGenerator::generatorNetworkDevice()
 {
+    qCDebug(appLog) << "HWGenerator::generatorNetworkDevice start";
     QList<DeviceNetwork *> lstDevice;
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstHWInfo.begin(); it != lstHWInfo.end(); ++it) {
+        // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice process hwinfo";
         // Hardware Class 类型为 network interface
 //        if ("network" == (*it)["Hardware Class"]) {
 //            continue;
@@ -166,20 +186,24 @@ void HWGenerator::generatorNetworkDevice()
         // 先判断是否是有效网卡信息
         // 符合两种情况中的一种 1. "HW Address" 和 "Permanent HW Address" 都必须有  2. 有 "unique_id"
         if (((*it).find("HW Address") == (*it).end() || (*it).find("Permanent HW Address") == (*it).end()) && ((*it).find("unique_id") == (*it).end())) {
+            // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice invalid network device";
             continue;
         }
 
         // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
         if ((*it).find("unique_id") == (*it).end()) {
+            // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice create network device from hwinfo";
             DeviceNetwork *device = new DeviceNetwork();
             device->setInfoFromHwinfo(*it);
             if (!device->available()) {
+                // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice device not available";
                 device->setCanEnale(false);
                 device->setCanUninstall(false);
                 device->setForcedDisplay(true);
             }
             lstDevice.append(device);
         } else {
+            // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice create network device from db";
             DeviceNetwork *device = nullptr;
             const QString &unique_id = (*it)["unique_id"];
             for (QList<DeviceNetwork *>::iterator itNet = lstDevice.begin(); itNet != lstDevice.end(); ++itNet) {
@@ -188,6 +212,7 @@ void HWGenerator::generatorNetworkDevice()
                 }
             }
             if (device) {
+                // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice set device enable value to false";
                 device->setEnableValue(false);
             }
         }
@@ -196,11 +221,15 @@ void HWGenerator::generatorNetworkDevice()
     // 设置从lshw中获取的信息
     const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it) {
-        if ((*it).find("serial") == (*it).end())
+        // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice process lshw";
+        if ((*it).find("serial") == (*it).end()) {
+            // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice no serial in lshw info";
             continue;
+        }
         const QString &serialNumber = (*it)["serial"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
             if (!serialNumber.isEmpty() && (*itDevice)->uniqueID() == serialNumber) {
+                qCDebug(appLog) << "HWGenerator::generatorNetworkDevice set lshw info to device";
                 (*itDevice)->setInfoFromLshw(*it);
                 break;
             }
@@ -208,31 +237,40 @@ void HWGenerator::generatorNetworkDevice()
     }
 
     foreach (DeviceNetwork *device, lstDevice) {
+        // qCDebug(appLog) << "HWGenerator::generatorNetworkDevice add network device";
         DeviceManager::instance()->addNetworkDevice(device);
     }
+    qCDebug(appLog) << "HWGenerator::generatorNetworkDevice end";
 }
 
 void HWGenerator::generatorDiskDevice()
 {
+    qCDebug(appLog) << "HWGenerator::generatorDiskDevice start";
     DeviceGenerator::generatorDiskDevice();
     DeviceManager::instance()->checkDiskSize();
+    qCDebug(appLog) << "HWGenerator::generatorDiskDevice end";
 }
 
 void HWGenerator::getAudioInfoFromCatAudio()
 {
+    qCDebug(appLog) << "HWGenerator::getAudioInfoFromCatAudio start";
     const QList<QMap<QString, QString>> lstAudio = DeviceManager::instance()->cmdInfo("cat_audio");
     QList<QMap<QString, QString> >::const_iterator it = lstAudio.begin();
     for (; it != lstAudio.end(); ++it) {
-        if ((*it).size() < 2)
+        if ((*it).size() < 2) {
+            // qCDebug(appLog) << "HWGenerator::getAudioInfoFromCatAudio audio info not enough";
             continue;
+        }
 
         QMap<QString, QString> tempMap = *it;
         if (tempMap["Name"].contains("da_combine_v5", Qt::CaseInsensitive)) {
+            // qCDebug(appLog) << "HWGenerator::getAudioInfoFromCatAudio fix audio name";
             tempMap["Name"] = "Hi6405";
             tempMap["Model"] = "Hi6405";
         }
 
         if (tempMap.contains("Vendor")) {
+            // qCDebug(appLog) << "HWGenerator::getAudioInfoFromCatAudio fix audio vendor";
             tempMap["Vendor"]= "HUAWEI";
         }
 
@@ -242,11 +280,14 @@ void HWGenerator::getAudioInfoFromCatAudio()
         device->setForcedDisplay(true);
         device->setInfoFromCatAudio(tempMap);
         DeviceManager::instance()->addAudioDevice(device);
+        // qCDebug(appLog) << "HWGenerator::getAudioInfoFromCatAudio add audio device";
     }
+    qCDebug(appLog) << "HWGenerator::getAudioInfoFromCatAudio end";
 }
 
 void HWGenerator::getDiskInfoFromLshw()
 {
+    qCDebug(appLog) << "HWGenerator::getDiskInfoFromLshw start";
     QString bootdevicePath("/proc/bootdevice/product_name");
     QString modelStr = "";
     QFile file(bootdevicePath);
@@ -282,6 +323,7 @@ void HWGenerator::getDiskInfoFromLshw()
 
 void HWGenerator::getDiskInfoFromSmartCtl()
 {
+    qCDebug(appLog) << "HWGenerator::getDiskInfoFromSmartCtl start";
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("smart");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
@@ -305,10 +347,12 @@ void HWGenerator::getDiskInfoFromSmartCtl()
 
 void HWGenerator::getBluetoothInfoFromHciconfig()
 {
+    qCDebug(appLog) << "HWGenerator::getBluetoothInfoFromHciconfig start";
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hciconfig");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1) {
+            // qCDebug(appLog) << "HWGenerator::getBluetoothInfoFromHciconfig invalid bluetooth info";
             continue;
         }
         DeviceBluetooth *device = new DeviceBluetooth();
@@ -317,10 +361,12 @@ void HWGenerator::getBluetoothInfoFromHciconfig()
         device->setInfoFromHciconfig(*it);
         DeviceManager::instance()->addBluetoothDevice(device);
     }
+    qCDebug(appLog) << "HWGenerator::getBluetoothInfoFromHciconfig end";
 }
 
 void HWGenerator::getBlueToothInfoFromHwinfo()
 {
+    qCDebug(appLog) << "HWGenerator::getBlueToothInfoFromHwinfo start";
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("hwinfo_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
@@ -339,6 +385,7 @@ void HWGenerator::getBlueToothInfoFromHwinfo()
 
 void HWGenerator::getBluetoothInfoFromLshw()
 {
+    qCDebug(appLog) << "HWGenerator::getBluetoothInfoFromLshw start";
     const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("lshw_usb");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
@@ -351,6 +398,7 @@ void HWGenerator::getBluetoothInfoFromLshw()
 
 void HWGenerator::getBluetoothInfoFromCatWifiInfo()
 {
+    qCDebug(appLog) << "HWGenerator::getBluetoothInfoFromCatWifiInfo start";
     QList<QMap<QString, QString> >  lstWifiInfo;
     QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
     QFile file(wifiDevicesInfoPath);
@@ -408,6 +456,7 @@ void HWGenerator::getBluetoothInfoFromCatWifiInfo()
 
 void HWGenerator::getMemoryInfoFromLshw()
 {
+    qCDebug(appLog) << "HWGenerator::getMemoryInfoFromLshw start";
     // 从lshw中获取内存信息
     const QList<QMap<QString, QString>> &lstMemory = DeviceManager::instance()->cmdInfo("lshw_memory");
     QList<QMap<QString, QString> >::const_iterator it = lstMemory.begin();
@@ -436,6 +485,7 @@ void HWGenerator::getMemoryInfoFromLshw()
 
 static void parseEDID(QStringList allEDIDS,QString input)
 {
+    qCDebug(appLog) << "HWGenerator::generatorMonitorDevice start";
     for (auto edid:allEDIDS) {
         QProcess process;
         process.start(QString("hexdump %1").arg(edid));
@@ -480,11 +530,14 @@ static void parseEDID(QStringList allEDIDS,QString input)
 
 void HWGenerator::generatorMonitorDevice()
 {
+    qCDebug(appLog) << "HWGenerator::generatorMonitorDevice start";
     QString toDir = "/sys/class/drm";
     QDir toDir_(toDir);
 
-    if (!toDir_.exists())
+    if (!toDir_.exists()) {
+        qCDebug(appLog) << "HWGenerator::generatorMonitorDevice no monitor device";
         return;
+    }
 
     QFileInfoList fileInfoList = toDir_.entryInfoList();
     foreach(QFileInfo fileInfo, fileInfoList) {
@@ -492,6 +545,7 @@ void HWGenerator::generatorMonitorDevice()
             continue;
 
         if(QFile::exists(fileInfo.filePath() + "/" + "edid")) {
+            // qCDebug() << "Found edid file:" << fileInfo.filePath() + "/" + "edid";
             QStringList allEDIDS_all;
             allEDIDS_all.append(fileInfo.filePath() + "/" + "edid");
             QString interface = fileInfo.fileName().remove("card0-").remove("card1-").remove("card2-");
