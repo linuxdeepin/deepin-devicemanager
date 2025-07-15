@@ -212,11 +212,13 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     QString Path = "/sys/block/" + logicalName + "/device/spec_version";
     QFile file(Path);
     if (file.open(QIODevice::ReadOnly)) {
-        QString output2 = file.readAll();
-        if (output2.contains("310", Qt::CaseInsensitive)) {
+        QString output = file.readAll();
+        if (output.contains("310", Qt::CaseInsensitive)) {
             m_Interface = "UFS 3.1";
-        } else if (output2.contains("300", Qt::CaseInsensitive)) {
+        } else if (output.contains("300", Qt::CaseInsensitive)) {
             m_Interface = "UFS 3.0";
+        } else if (output.contains("400", Qt::CaseInsensitive)) {
+            m_Interface = "UFS 4.0";
         }
         file.close();
     }
