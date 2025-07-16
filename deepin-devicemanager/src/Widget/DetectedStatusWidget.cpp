@@ -128,8 +128,10 @@ void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString 
 
     // icon button 和 一键安装
     if (hasInstall) {
+        qCDebug(appLog) << "There are drivers to install, enabling install button";
         mp_InstallButton->setEnabled(true);
     } else {
+        qCDebug(appLog) << "No drivers to install, disable install button";
         mp_InstallButton->setEnabled(false);
     }
 
@@ -183,10 +185,13 @@ void DetectedStatusWidget::setDownloadUI(const DriverType &driverType, const QSt
 
     // 取消
     mp_HLayoutTotal->addSpacing(100);
-    if (progressValue > 90)
+    if (progressValue > 90) {
+        qCDebug(appLog) << "Download progress is over 90%, disable cancel button";
         mp_CancelButton->setEnabled(false);
-    else
+    } else {
+        qCDebug(appLog) << "Download progress is less than 90%, enable cancel button";
         mp_CancelButton->setEnabled(true);
+    }
     mp_HLayoutButton->addWidget(mp_CancelButton);
     mp_HLayoutTotal->addLayout(mp_HLayoutButton);
 
@@ -255,8 +260,10 @@ void DetectedStatusWidget::setInstallSuccessUI(const QString &success, const QSt
     // 成功失败个数  和  重启
     QString successStr;
     if (failed.toInt() > 0) {
+        qCDebug(appLog) << "Some drivers failed to install";
         successStr = QObject::tr("%1 drivers installed, %2 drivers failed").arg(success).arg(failed);
     } else {
+        qCDebug(appLog) << "All drivers installed successfully";
         successStr = QObject::tr("%1 drivers installed").arg(success);
     }
 
@@ -423,30 +430,37 @@ void DetectedStatusWidget::refreshUI(Status pageType)
     qCInfo(appLog) << pageType;
     switch (pageType) {
     case ST_NOT_INSTALL: {
+        qCDebug(appLog) << "Status: Not installed";
         this->setDetectFinishUI("5", "fffffff", true);
         break;
     }
     case ST_DOWNLOADING: {
+        qCDebug(appLog) << "Status: Downloading";
         this->setDownloadUI(DR_Bluetooth, "7.00MB/s", "28.96MB", "192.78MB", 28.96 * 100 / 192.78);
         break;
     }
     case ST_INSTALL: {
+        qCDebug(appLog) << "Status: Installing";
         this->setInstallUI(DR_Bluetooth, "Audio Driver Audio Driver Audio Driver", 75);
         break;
     }
     case ST_SUCESS: {
+        qCDebug(appLog) << "Status: Success";
         this->setInstallSuccessUI("4", "2");
         break;
     }
     case ST_FAILED: {
+        qCDebug(appLog) << "Status: Failed";
         this->setInstallFailedUI();
         break;
     }
     case ST_NetWorkErr: {
+        qCDebug(appLog) << "Status: Network Error";
         this->setNetworkErrorUI("0.00MB/s", 40);
         break;
     }
     case ST_DRIVER_IS_NEW: {
+        qCDebug(appLog) << "Status: Driver is new";
         this->setNoUpdateDriverUI("ddddddddddddddddddddddddddddddd");
         break;
     }
@@ -458,6 +472,7 @@ void DetectedStatusWidget::setInstallBtnEnable(bool enable)
     qCDebug(appLog) << "Setting install button enable state:" << enable;
 
     if (mp_InstallButton) {
+        qCDebug(appLog) << "Setting install button enable state:" << enable;
         mp_InstallButton->setEnabled(enable);
     }
 }
@@ -467,6 +482,7 @@ void DetectedStatusWidget::setBackupBtnEnable(bool enable)
     qCDebug(appLog) << "Setting backup button enable state:" << enable;
 
     if (mp_BackupSgButton) {
+        qCDebug(appLog) << "Setting backup button enable state:" << enable;
         mp_BackupSgButton->setEnabled(enable);
     }
 }
@@ -514,6 +530,7 @@ void DetectedStatusWidget::setNoBackupDriverUI(int backableSize, int backedupSiz
 
 void DetectedStatusWidget::setBackableDriverUI(int backableSize, int backedupSize)
 {
+    qCDebug(appLog) << "Setting backable driver UI. Backable:" << backableSize << "Backedup:" << backedupSize;
     hideAll();
 
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/backup_96.svg"));
@@ -522,9 +539,11 @@ void DetectedStatusWidget::setBackableDriverUI(int backableSize, int backedupSiz
 
     int total = backableSize + backedupSize;
     if (backedupSize <= 0) {
+        qCDebug(appLog) << "No backedup drivers";
         mp_UpdateLabel->setText(QObject::tr("You have %1 drivers that can be backed up, it is recommended to do so immediately").arg(backableSize));
         mp_ModelLabel->setText("");
     } else {
+        qCDebug(appLog) << "Backedup drivers";
         mp_UpdateLabel->setText(QObject::tr("You have %1 drivers that can be backed up").arg(backableSize));
         mp_ModelLabel->setText(QObject::tr("A total of %1 drivers, of which %2 have been backed up").arg(total).arg(backedupSize));
     }
@@ -557,6 +576,7 @@ void DetectedStatusWidget::setBackableDriverUI(int backableSize, int backedupSiz
     mp_ReDetectedIconButton->show();
     mp_BackupSgButton->show();
     if (backedupSize > 0) {
+        qCDebug(appLog) << "Backedup drivers, show backup path label";
         mp_BackupPathLabel->show();
     }
     this->setLayout(mp_HLayoutTotal);
@@ -564,6 +584,7 @@ void DetectedStatusWidget::setBackableDriverUI(int backableSize, int backedupSiz
 
 void DetectedStatusWidget::setBackingUpDriverUI(const QString &driverDescription, int totalValue, int progressValue)
 {
+    qCDebug(appLog) << "Setting backing up driver UI. Driver description:" << driverDescription << "Total value:" << totalValue << "Progress value:" << progressValue;
     hideAll();
 
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/backup_96.svg"));
@@ -601,6 +622,7 @@ void DetectedStatusWidget::setBackingUpDriverUI(const QString &driverDescription
 
 void DetectedStatusWidget::setBackupSuccessUI(int success, int failed)
 {
+    qCDebug(appLog) << "Setting backup success UI. Success:" << success << "Failed:" << failed;
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/backup_96.svg"));
@@ -609,10 +631,13 @@ void DetectedStatusWidget::setBackupSuccessUI(int success, int failed)
 
     QString successStr;
     if (failed > 0) {
+        qCDebug(appLog) << "Some drivers failed to backup";
         successStr = QObject::tr("%1 drivers backed up, %2 drivers failed").arg(success).arg(failed);
     } else if (success <= 0) {
+        qCWarning(appLog) << "Failed to backup drivers";
         successStr = QObject::tr("Failed to backup drivers");
     } else {
+        qCDebug(appLog) << "All drivers backed up successfully";
         successStr = QObject::tr("%1 drivers backed up").arg(success);
     }
 
@@ -646,6 +671,7 @@ void DetectedStatusWidget::setBackupSuccessUI(int success, int failed)
 
 void DetectedStatusWidget::setRestoreDriverUI(int restorableSize)
 {
+    qCDebug(appLog) << "Setting restore driver UI. Restorable size:" << restorableSize;
     hideAll();
 
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/restore_96.svg"));
@@ -677,6 +703,7 @@ void DetectedStatusWidget::setRestoreDriverUI(int restorableSize)
 
 void DetectedStatusWidget::setRestoringUI(int progressValue, QString driverDescription)
 {
+    qCDebug(appLog) << "Setting restoring UI. Progress value:" << progressValue << "Driver description:" << driverDescription;
     hideAll();
 
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/restore_96.svg"));
@@ -712,6 +739,7 @@ void DetectedStatusWidget::setRestoringUI(int progressValue, QString driverDescr
 
 void DetectedStatusWidget::setReDetectEnable(bool enable)
 {
+    qCDebug(appLog) << "Setting re-detect enable state:" << enable;
     if (mp_ReDetectedSgButton)
         mp_ReDetectedSgButton->setEnabled(enable);
     if (mp_ReDetectedIconButton)
@@ -720,8 +748,10 @@ void DetectedStatusWidget::setReDetectEnable(bool enable)
 
 void DetectedStatusWidget::slotReboot()
 {
+    qCDebug(appLog) << "Rebooting system";
     // 调用DBus接口重启
     if (!QDBusConnection::sessionBus().isConnected()) {
+        qCCritical(appLog) << "Cannot connect to the D-Bus session bus";
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
                 "To start it, run:/n"
                 "/teval `dbus-launch --auto-syntax`/n");
@@ -733,37 +763,44 @@ void DetectedStatusWidget::slotReboot()
 
 void DetectedStatusWidget::slotFeedBack()
 {
+    qCDebug(appLog) << "Submitting feedback";
     CommonTools::feedback();
 }
 
 void DetectedStatusWidget::slotBackupPath()
 {
+    qCDebug(appLog) << "Showing backup path";
     Dtk::Widget::DDesktopServices::showFolder(CommonTools::getBackupPath() + "driver");
 }
 
 
 void DetectedStatusWidget::slotInstall()
 {
+    qCDebug(appLog) << "Installing all drivers";
     emit installAll();
 }
 
 void DetectedStatusWidget::slotBackup()
 {
+    qCDebug(appLog) << "Backing up all drivers";
     emit backupAll();
 }
 
 void DetectedStatusWidget::slotReDetectSlot()
 {
+    qCDebug(appLog) << "Re-detecting drivers";
     emit redetected();
 }
 
 void DetectedStatusWidget::slotCancel()
 {
+    qCDebug(appLog) << "Cancelling operation";
     emit cancelClicked();
 }
 
 void DetectedStatusWidget::onUpdateTheme()
 {
+    qCDebug(appLog) << "Updating theme";
     // 根据主题设置字体颜色
     DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
     plt.setColor(DPalette::Text, plt.color(DPalette::TextTitle));
@@ -774,6 +811,7 @@ void DetectedStatusWidget::onUpdateTheme()
 
 void DetectedStatusWidget::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "Painting widget";
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing, true);
@@ -806,6 +844,7 @@ void DetectedStatusWidget::paintEvent(QPaintEvent *event)
 
 void DetectedStatusWidget::initUI()
 {
+    qCDebug(appLog) << "Initializing UI";
     hideAll();
 
     // 无边框直角
@@ -869,6 +908,7 @@ void DetectedStatusWidget::initUI()
 
 void DetectedStatusWidget::initConnect()
 {
+    qCDebug(appLog) << "Initializing connections";
     // 重启
     connect(mp_RebootLabel, &QLabel::linkActivated, this, &DetectedStatusWidget::slotReboot);
 
@@ -897,6 +937,7 @@ void DetectedStatusWidget::initConnect()
 
 void DetectedStatusWidget::hideAll()
 {
+    qCDebug(appLog) << "Hiding all widgets";
     mp_PicLabel->hide();
     mp_UpdateLabel->hide();
     mp_TimeLabel->hide();

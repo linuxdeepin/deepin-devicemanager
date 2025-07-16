@@ -32,9 +32,10 @@ EventLogUtils::EventLogUtils()
     init =reinterpret_cast<bool (*)(const std::string &, bool)>(library.resolve("Initialize"));
     writeEventLog = reinterpret_cast<void (*)(const std::string &)>(library.resolve("WriteEventLog"));
 
-    if (init == nullptr)
+    if (init == nullptr) {
         qCWarning(appLog) << "Failed to resolve Initialize function";
         return;
+    }
 
     init("deepin-devicemanager", true);
 }

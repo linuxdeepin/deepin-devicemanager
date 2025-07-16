@@ -31,6 +31,7 @@ LongTextLabel::LongTextLabel(DWidget *parent)
 
 void LongTextLabel::paintEvent(QPaintEvent *)
 {
+    // qCDebug(appLog) << "Painting LongTextLabel";
     QPainter painter(this);
     QTextDocument docText;
     painter.save();
@@ -44,17 +45,20 @@ void LongTextLabel::paintEvent(QPaintEvent *)
     QRegularExpression reg("([\\s\\S]*</a>)");
     QRegularExpressionMatch match = reg.match(this->text());
     if (match.hasMatch()) {
+        // qCDebug(appLog) << "Found HTML tag in label text";
         html = match.captured(1);
 
         QRegularExpression contentReg("<[\\s\\S]*>([\\s\\S]*)</a>");
         QRegularExpressionMatch contentMatch = contentReg.match(html);
         if (contentMatch.hasMatch()) {
+            // qCDebug(appLog) << "Extracted OS from HTML tag";
             OS = contentMatch.captured(1);
         }
     }
 
     QString src = this->text();
     if (!html.isEmpty() && !OS.isEmpty()) {
+        // qCDebug(appLog) << "Processing text with HTML removed";
         src  = OS + this->text().remove(html);
     }
 
@@ -62,6 +66,7 @@ void LongTextLabel::paintEvent(QPaintEvent *)
 
     QString dst = text;
     if (!html.isEmpty() && !OS.isEmpty()) {
+        // qCDebug(appLog) << "Re-adding HTML to elided text";
         dst = html + text.remove(OS);
     }
 

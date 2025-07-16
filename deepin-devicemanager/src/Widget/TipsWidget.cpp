@@ -26,6 +26,7 @@ TipsWidget::TipsWidget(QWidget *parent) : DWidget(parent)
 
 void TipsWidget::initWidget()
 {
+    qCDebug(appLog) << "initWidget";
     m_tbMargin = 8;
     m_lrMargin = 10;
     m_maxLineCount = 10;
@@ -41,6 +42,7 @@ void TipsWidget::initWidget()
 
 void TipsWidget::onUpdateTheme()
 {
+    qCDebug(appLog) << "onUpdateTheme";
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
     plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
@@ -56,6 +58,7 @@ void TipsWidget::setText(const QString &text)
     qCDebug(appLog) << "Setting tips text:" << text;
 
     if (text != m_text) {
+        qCDebug(appLog) << "Text changed, updating widget";
         m_text = text;
         m_text.replace(QChar('\n'), QString(""));
         m_text.replace(QChar('\t'), QString(""));
@@ -65,12 +68,14 @@ void TipsWidget::setText(const QString &text)
 
 void TipsWidget::setAlignment(Qt::Alignment alignment)
 {
+    qCDebug(appLog) << "Setting alignment:" << alignment;
     m_alignment = alignment;
     update();
 }
 
 void TipsWidget::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "Painting widget";
     DWidget::paintEvent(event);
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
@@ -85,9 +90,14 @@ void TipsWidget::paintEvent(QPaintEvent *event)
 
 void TipsWidget::adjustContent(const QString &text)
 {
+    qCDebug(appLog) << "Adjusting content";
     QFontMetricsF fontMetris(this->font());
     int wordHeight = static_cast<int>(fontMetris.boundingRect(QRectF(0, 0, this->width() - 2 * m_lrMargin, 0),
                                                               static_cast<int>(m_alignment | Qt::TextWrapAnywhere), text).height() + 2 * m_tbMargin);
-    if (this->height() == wordHeight) return;
+    if (this->height() == wordHeight) {
+        qCDebug(appLog) << "Height is already correct";
+        return;
+    }
+    qCDebug(appLog) << "Adjusting widget height to" << wordHeight;
     setFixedHeight(wordHeight);
 }

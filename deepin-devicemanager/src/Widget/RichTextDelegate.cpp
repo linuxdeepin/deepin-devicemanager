@@ -35,7 +35,9 @@ RichTextDelegate::RichTextDelegate(QObject *parent)
 
 void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Painting rich text delegate";
     if (!index.isValid()) {
+        // qCWarning(appLog) << "Invalid index";
         QStyledItemDelegate::paint(painter, option, index);
         return;
     }
@@ -51,25 +53,31 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     DPalette::ColorGroup cg;
     if (!(opt.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
+        // qCDebug(appLog) << "Item is disabled";
     } else {
         if (!wnd) {
             cg = DPalette::Inactive;
+            // qCDebug(appLog) << "Window is inactive";
         } else {
             cg = DPalette::Active;
         }
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
+    if (!style) {
+        // qCWarning(appLog) << "Failed to get DStyle";
         return;
+    }
 
     DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
     DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 
     if (opt.features & QStyleOptionViewItem::Alternate) {
+        // qCDebug(appLog) << "Painting alternate row";
         background = palette.color(cg, DPalette::ItemBackground);
     } else {
+        // qCDebug(appLog) << "Painting normal row";
         background = palette.color(cg, DPalette::Base);
     }
 
@@ -81,14 +89,17 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     rectpath.setWidth(rect.width() - 1);
 
     DWidget *par = dynamic_cast<DWidget *>(this->parent());
-    if (!par)
+    if (!par) {
+        // qCWarning(appLog) << "Failed to get parent widget";
         return;
+    }
     if (rectpath.y() > 0) {
 
         // 高度不超过表格高度
         if (rectpath.y() + rectpath.height() < 40 * (par->height() / 40 - 1)) {
             path.addRect(rectpath);
         } else {
+            // qCDebug(appLog) << "Cell exceeds table bottom border";
             // 单元格超过表格下边框
             QRect tmpRect = rectpath;
             tmpRect.setHeight(40 * (par->height() / 40 - 1) - rectpath.y());
@@ -96,6 +107,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
             path.addRoundedRect(tmpRect, 8, 8);
 
             if (index.column() == 0) {
+                // qCDebug(appLog) << "Painting first column of last row";
 
                 // 填充左上，右侧
                 // 左上空白
@@ -123,6 +135,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
             }
 
             if (index.column() == 1) {
+                // qCDebug(appLog) << "Painting second column of last row";
 
                 //填充左侧,右上
                 // 左侧空白
@@ -150,18 +163,22 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
     }
 
     if (rectpath.y() <= 0) {
+        // qCDebug(appLog) << "Painting first row";
         QRect tmpRect = rectpath;
         tmpRect.setY(0);
 
         // 高度超过表格下边框
         if (rectpath.y() + rectpath.height() > 40 * (par->height() / 40 - 1) - rectpath.y()) {
+            // qCDebug(appLog) << "Cell exceeds table bottom border";
             tmpRect.setHeight(40 * (par->height() / 40 - 1));
             path.addRect(rectpath);
         } else {
+            // qCDebug(appLog) << "Painting normal first row";
 
             path.addRoundedRect(tmpRect, 8, 8);
             // 填充第一列空白
             if (index.column() == 0) {
+                // qCDebug(appLog) << "Painting first column of first row";
 
                 // 左下空白
                 QRect rect1(tmpRect.bottomLeft().x(), tmpRect.bottomLeft().y() - 7, 8, 8);
@@ -189,6 +206,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
 
             // 填充第二列空白
             if (index.column() == 1) {
+                // qCDebug(appLog) << "Painting second column of first row";
                 // 左侧空白
                 QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y() + 1, 8, tmpRect.height());
 
@@ -218,6 +236,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
 
     QStringList lstStr = opt.text.split("\n");
     if (lstStr.size() > 1) {
+        // qCDebug(appLog) << "Painting multi-line text";
         QTextDocument  textDoc;
         //设置文字居中显示
         textDoc.setTextWidth(option.rect.width() - 6);//设置文本左边空6px的位置。1. 文本长度减6
@@ -243,6 +262,7 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         textDoc.documentLayout()->draw(painter, paintContext);
         painter->restore();
     } else {
+        // qCDebug(appLog) << "Painting single-line text";
         QTextDocument  textDoc;
         //设置文字居中显示
         textDoc.setTextWidth(option.rect.width() - 6);//设置文本左边空6px的位置。1. 文本长度减6
@@ -276,15 +296,18 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
 
 QWidget *RichTextDelegate::createEditor(QWidget *, const QStyleOptionViewItem &, const QModelIndex &) const
 {
+    qCDebug(appLog) << "Creating editor, returning nullptr";
     return nullptr;
 }
 
 QSize RichTextDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Getting size hint";
     QSize size = QStyledItemDelegate::sizeHint(option, index);
     size.setHeight(std::max(40, size.height()));
 
     if (index.column()) {
+        // qCDebug(appLog) << "Setting width to 150";
         size.setWidth(std::max(150, size.width()));
     }
     return size;
@@ -292,15 +315,19 @@ QSize RichTextDelegate::sizeHint(const QStyleOptionViewItem &option, const QMode
 
 void RichTextDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Initializing style option";
     option->showDecorationSelected = true;
     bool ok = false;
     if (index.data(Qt::TextAlignmentRole).isValid()) {
+        // qCDebug(appLog) << "Setting display alignment";
         uint value = index.data(Qt::TextAlignmentRole).toUInt(&ok);
         option->displayAlignment = static_cast<Qt::Alignment>(value);
     }
 
-    if (!ok)
+    if (!ok) {
+        // qCDebug(appLog) << "Using default alignment";
         option->displayAlignment = Qt::AlignLeft | Qt::AlignTop;
+    }
     option->textElideMode = Qt::ElideRight;
     option->features = QStyleOptionViewItem::HasDisplay;
     if (index.row() % 2 == 0)
@@ -322,6 +349,7 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
     foreach (auto kv, lst) {
         QStringList keyValue = kv.split(":");
         if (keyValue.size() != 2) {
+            qCWarning(appLog) << "Invalid key-value pair format:" << kv;
             return;
         }
         int curWidth = fm.horizontalAdvance(keyValue[0] + ":") + 10;
@@ -343,6 +371,7 @@ void RichTextDelegate::getDocFromLst(QDomDocument &doc, const QStringList &lst)c
 
 void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair<QString, QString> &pair, const int &rowWidth)const
 {
+    qCDebug(appLog) << "Adding row";
     QDomElement tr = doc.createElement("tr");
 //    tr.setAttribute("style", "line-height:100;height:100;");
 
@@ -354,6 +383,7 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
     // 如果该列的内容很多则分行显示
     QStringList strList = pair.second.split("  /  \t\t");
     if (strList.size() > 2) {
+        qCDebug(appLog) << "Splitting value into multiple rows";
 
         QStringList::iterator it = strList.begin();
         addTd2(doc, tr, *it);
@@ -365,6 +395,7 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
             addRow(doc, tr, tempPair, rowWidth);
         }
     } else {
+        qCDebug(appLog) << "Adding single row";
         addTd2(doc, tr, pair.second);
     }
 
@@ -373,6 +404,7 @@ void RichTextDelegate::addRow(QDomDocument &doc, QDomElement &table, const QPair
 
 void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString &value, const int &rowWidth)const
 {
+    qCDebug(appLog) << "Adding first column";
     QDomElement td = doc.createElement("td");
     td.setAttribute("width", QString("%1").arg(rowWidth));
     int px = DFontSizeManager::instance()->t8().pixelSize();
@@ -387,6 +419,7 @@ void RichTextDelegate::addTd1(QDomDocument &doc, QDomElement &tr, const QString 
 
 void RichTextDelegate::addTd2(QDomDocument &doc, QDomElement &tr, const QString &value)const
 {
+    qCDebug(appLog) << "Adding second column";
     QDomElement td = doc.createElement("td");
     int px = DFontSizeManager::instance()->t8().pixelSize();
     QString fontSize = QString("font-size:%1px;").arg(px);

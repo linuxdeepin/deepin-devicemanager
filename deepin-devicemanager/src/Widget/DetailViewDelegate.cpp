@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DetailViewDelegate.h"
+#include "DDLog.h"
 
 // Qt库文件
 #include <QPainter>
@@ -20,16 +21,19 @@
 #include "DetailTreeView.h"
 
 DWIDGET_USE_NAMESPACE
+using namespace DDLog;
 
 DetailViewDelegate::DetailViewDelegate(QObject *parent)
     : QStyledItemDelegate(parent)
 {
-
+    qCDebug(appLog) << "Initializing detail view delegate";
 }
 
 void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Painting detail view delegate";
     if (!index.isValid()) {
+        // qCDebug(appLog) << "Invalid index, painting default";
         QStyledItemDelegate::paint(painter, option, index);
         return;
     }
@@ -45,11 +49,15 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     DPalette::ColorGroup cg;
     if (!(opt.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
+        // qCDebug(appLog) << "Style is disabled";
     } else {
-        if (!wnd)
+        if (!wnd) {
             cg = DPalette::Inactive;
-        else
+            // qCDebug(appLog) << "Window is inactive";
+        } else {
             cg = DPalette::Active;
+            // qCDebug(appLog) << "Window is active";
+        }
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
@@ -60,10 +68,11 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     DPalette palette = dAppHelper->applicationPalette();
     QBrush background;
 
-    if (opt.features & QStyleOptionViewItem::Alternate)
+    if (opt.features & QStyleOptionViewItem::Alternate) {
         background = palette.color(cg, DPalette::ItemBackground);
-    else
+    } else {
         background = palette.color(cg, DPalette::Base);
+    }
 
     QRect rect = opt.rect;
     QPainterPath path;
@@ -77,6 +86,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     // 最后一行是更多信息按钮行，背景色为白色，单元格上边框要绘制横线以
     if (index.row() == dynamic_cast<DetailTreeView *>(this->parent())->rowCount() - 1
             && index.row() != 0 && dynamic_cast<DetailTreeView *>(this->parent())->hasExpendInfo()) {
+        // qCDebug(appLog) << "Painting the 'More' button row";
         // 上方要空一个像素用来绘制横线
         rectpath.setY(rect.y() + 1);
         path.addRoundedRect(rectpath, 8, 8);
@@ -87,6 +97,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
     } else {
         if (rectpath.y() <= 0) {
+            // qCDebug(appLog) << "Painting the first row";
             QRect tmpRect = rectpath;
             tmpRect.setY(0);
             path.addRoundedRect(tmpRect, 8, 8);
@@ -96,6 +107,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
                 // 填充第一列空白
                 if (index.column() == 0) {
+                    // qCDebug(appLog) << "Filling the blank in the first column";
 
                     // 左下空白
                     QRect rect1(tmpRect.bottomLeft().x(), tmpRect.bottomLeft().y() - 7, 8, 8);
@@ -120,6 +132,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
                     pathRight = pathRight.subtracted(path);
                     painter->fillPath(pathRight, background);
                 } else if (index.column() == 1) { // 填充第二列空白
+                    // qCDebug(appLog) << "Filling the blank in the second column";
                     // 左侧空白
                     QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y() + 1, 8, tmpRect.height());
 
@@ -143,6 +156,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
             }
 
         } else if (rectpath.y() + rect.height() >= dynamic_cast<DetailTreeView *>(this->parent())->height()) {
+            // qCDebug(appLog) << "Painting the last row";
             QRect tmpRect = rectpath;
             tmpRect.setHeight(dynamic_cast<DetailTreeView *>(this->parent())->height() - rectpath.y());
             path.addRoundedRect(tmpRect, 8, 8);
@@ -150,6 +164,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
             if (tmpRect.height() > 8) {
                 // 填充第列空白
                 if (index.column() == 0) {
+                    // qCDebug(appLog) << "Filling the blank in the first column";
                     // 左上空白
                     QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y(), 8, tmpRect.height() - 8);
 
@@ -173,6 +188,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
                     pathRight = pathRight.subtracted(path);
                     painter->fillPath(pathRight, background);
                 } else if (index.column() == 1) {
+                    // qCDebug(appLog) << "Filling the blank in the second column";
                     // 左侧空白
                     QRect rect1(tmpRect.topLeft().x(), tmpRect.topLeft().y(), 8, tmpRect.height());
 
@@ -229,9 +245,11 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     if (dynamic_cast<DetailTreeView *>(this->parent())->isCurDeviceEnable()) {
         // 在设备没有被禁用的前提下，如果设备不可用则，则按照不可用要求显示
         if(dynamic_cast<DetailTreeView *>(this->parent())->isCurDeviceAvailable()){
+            // qCDebug(appLog) << "Device is available";
             if (index.row() == 0 && index.column() == 1)
                 text = text.remove("(" + tr("Disable") + ")");
-        }else{
+        } else{
+            // qCDebug(appLog) << "Device is unavailable";
             if (index.row() == 0 && index.column() == 1) {
                 text = "(" + tr("Unavailable") + ")" + text;
                 QPen pen = painter->pen();
@@ -240,6 +258,7 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
             }
         }
     } else { // 设备被禁用的情况下的显示效果
+        // qCDebug(appLog) << "Device is disabled";
         if (index.row() == 0 && index.column() == 1) {
             text = "(" + tr("Disable") + ")" + text;
             QPen pen = painter->pen();
@@ -255,11 +274,13 @@ void DetailViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
 QWidget *DetailViewDelegate::createEditor(QWidget *, const QStyleOptionViewItem &, const QModelIndex &) const
 {
+    // qCDebug(appLog) << "Creating editor, return nullptr";
     return nullptr;
 }
 
 QSize DetailViewDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Getting size hint";
     QSize size = QStyledItemDelegate::sizeHint(option, index);
     size.setHeight(std::max(50, size.height()));
 
@@ -271,9 +292,11 @@ QSize DetailViewDelegate::sizeHint(const QStyleOptionViewItem &option, const QMo
 
 void DetailViewDelegate::initStyleOption(QStyleOptionViewItem *option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Initializing style option";
     option->showDecorationSelected = true;
     bool ok = false;
     if (index.data(Qt::TextAlignmentRole).isValid()) {
+        // qCDebug(appLog) << "Setting display alignment from index data";
         uint value = index.data(Qt::TextAlignmentRole).toUInt(&ok);
         option->displayAlignment = static_cast<Qt::Alignment>(value);
     }

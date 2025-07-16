@@ -32,6 +32,7 @@ UrlChooserEdit::UrlChooserEdit(QWidget *parent) : DWidget(parent)
 
 void UrlChooserEdit::initUI()
 {
+    qCDebug(appLog) << "Initializing UI";
    setFixedSize(460,36);
    mp_urlEdit->setFixedSize(410,36);
    mp_urlEdit->setText(QDir::homePath());
@@ -55,11 +56,13 @@ void UrlChooserEdit::initUI()
 
 void UrlChooserEdit::initConnections()
 {
+    qCDebug(appLog) << "Initializing connections";
     connect(mp_urlBtn,&DSuggestButton::clicked, this, &UrlChooserEdit::slotChooseUrl);
 }
 
 QString UrlChooserEdit::text() const
 {
+    // qCDebug(appLog) << "Getting text";
     return  mp_folderPath;
 }
 
@@ -71,6 +74,7 @@ void UrlChooserEdit::slotChooseUrl()
     QFontMetrics fEdlit(mp_urlEdit->font());
     QString floderPath = fEdlit.elidedText(path, Qt::ElideMiddle, mp_urlEdit->width() - 80);
     if (path.isEmpty()){
+        qCDebug(appLog) << "No path selected, restoring previous path";
         floderPath = mp_elidParh;         //带...的路径
         path = mp_folderPath;
     }
@@ -90,6 +94,7 @@ void UrlChooserEdit::checkLocalFolder(const QString &path)
     QStorageInfo info(mp_folderPath);                               //获取路径信息
     qCInfo(appLog) << __func__ <<info.device();
     if (!info.isValid() || !info.device().startsWith("/dev/")) {     //判断路径信息是不是本地路径
+        qCWarning(appLog) << "Selected folder is not local";
         mp_urlEdit->setAlert(true);
         mp_urlEdit->showAlertMessage(tr("Select a local folder please"),this,1000);
         isLocal = false;

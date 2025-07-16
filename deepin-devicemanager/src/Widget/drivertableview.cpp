@@ -25,11 +25,14 @@ static const int kSpacingMargin = 4;
 DriverItemDelegate::DriverItemDelegate(QAbstractItemView *parent)
     : QStyledItemDelegate(parent)
 {
+    // qCDebug(appLog) << "DriverItemDelegate instance created";
 }
 
 void DriverItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Painting DriverItemDelegate for index:" << index.row();
     if (!index.isValid()) {
+        qCWarning(appLog) << "Invalid index";
         QStyledItemDelegate::paint(painter, option, index);
         return;
     }
@@ -45,17 +48,22 @@ void DriverItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     DPalette::ColorGroup cg;
     if (!(opt.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
+        // qCDebug(appLog) << "Item is disabled";
     } else {
         if (!wnd) {
             cg = DPalette::Inactive;
+            // qCDebug(appLog) << "Window is inactive";
         } else {
+            // qCDebug(appLog) << "Window is active";
             cg = DPalette::Active;
         }
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
+    if (!style) {
+        qCWarning(appLog) << "Failed to get DStyle";
         return;
+    }
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
 
     DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
@@ -70,6 +78,7 @@ void DriverItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     forground.setColor(palette.color(cg, DPalette::Text));
     if (opt.state & DStyle::State_Enabled) {
         if (opt.state & DStyle::State_Selected) {
+            // qCDebug(appLog) << "Item is selected";
             background = palette.color(cg, DPalette::Highlight);
             forground.setColor(palette.color(cg, DPalette::HighlightedText));
         }
@@ -86,6 +95,7 @@ void DriverItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
     QRect iconRect = rect;
     if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
             index.data(Qt::DecorationRole).isValid()) {
+        // qCDebug(appLog) << "Painting icon for first item";
         iconRect.setX(rect.x() - margin);
         iconRect.setWidth(64);
         QIcon ic = index.data(Qt::DecorationRole).value<QIcon>();
@@ -105,6 +115,7 @@ void DriverItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
 
 QSize DriverItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Getting size hint for index:" << index.row();
     QSize size = QStyledItemDelegate::sizeHint(option, index);
     size.setHeight(std::max(DRIVER_TABLE_ROW_HEIGHT, size.height()));
     return size;
@@ -118,10 +129,12 @@ QSize DriverItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QMo
 DriverHeaderView::DriverHeaderView(Qt::Orientation orientation, QWidget *parent)
     : DHeaderView(orientation, parent)
 {
+    // qCDebug(appLog) << "DriverHeaderView instance created";
     viewport()->setAutoFillBackground(false);
 }
 void DriverHeaderView::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
 {
+    // qCDebug(appLog) << "Painting header section for index:" << logicalIndex;
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setOpacity(1);
@@ -129,15 +142,19 @@ void DriverHeaderView::paintSection(QPainter *painter, const QRect &rect, int lo
     DPalette::ColorGroup cg;
     if (Qt::ApplicationActive == DApplication::applicationState()) {
         cg = DPalette::Active;
+        // qCDebug(appLog) << "Application is active";
     } else {
         cg = DPalette::Inactive;
+        // qCDebug(appLog) << "Application is inactive";
     }
 
     DPalette palette = DGuiApplicationHelper::instance()->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
+    if (!style) {
+        qCWarning(appLog) << "Failed to get DStyle";
         return;
+    }
 
     QStyleOptionHeader option;
     initStyleOption(&option);
@@ -195,6 +212,7 @@ void DriverHeaderView::paintSection(QPainter *painter, const QRect &rect, int lo
 
     // sort indicator
     if (isSortIndicatorShown() && logicalIndex == sortIndicatorSection()) {
+        // qCDebug(appLog) << "Drawing sort indicator";
         // TODO: arrow size (8x5)
         QRect sortIndicator(textRect.x() + textRect.width() + margin,
                             textRect.y() + (textRect.height() - 5) / 2, 8, 5);
@@ -211,6 +229,7 @@ void DriverHeaderView::paintSection(QPainter *painter, const QRect &rect, int lo
 
 void DriverHeaderView::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "Painting DriverHeaderView";
     QPainter painter(viewport());
     painter.save();
 
@@ -255,11 +274,13 @@ void DriverHeaderView::paintEvent(QPaintEvent *event)
 
 QSize DriverHeaderView::sizeHint() const
 {
+    // qCDebug(appLog) << "Getting size hint for DriverHeaderView";
     return QSize(width(), 36 + m_spacing);
 }
 
 int DriverHeaderView::sectionSizeHint(int logicalIndex) const
 {
+    // qCDebug(appLog) << "Getting section size hint for index:" << logicalIndex;
     QStyleOptionHeader option;
     initStyleOption(&option);
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
@@ -343,6 +364,7 @@ void DriverTableView::initHeaderView(const QStringList &headerList, bool firstCh
             mp_HeaderCb->setChecked(true);
             mp_HeaderCb->setCbEnable(true);
         } else {
+            qCDebug(appLog) << "Creating header checkbox";
             mp_HeaderCb = new DriverCheckItem(this, true);
             mp_HeadView->setIndexWidget(model->index(0, 0), mp_HeaderCb);
             connect(mp_HeaderCb, &DriverCheckItem::sigChecked, this, &DriverTableView::slotAllItemChecked);
@@ -377,6 +399,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
     // 选中的操作函数处理
     DriverCheckItem *cbItem = qobject_cast<DriverCheckItem *>(widget);
     if (cbItem) {
+        qCDebug(appLog) << "Connecting checked signal for checkbox item at row" << row;
         connect(cbItem, &DriverCheckItem::sigChecked, this, [this, row](bool checked) {
             // 获取此行的index
             DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(row, 1)));
@@ -390,6 +413,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
     // 做三件事，1:当前行的勾选框置灰，2:当前行的按钮置灰，3:其它行如果选中则取消选中且为可安装或可更新状态
     DriverOperationItem *orItem = qobject_cast<DriverOperationItem *>(widget);
     if (orItem) {
+        qCDebug(appLog) << "Connecting clicked signal for operation item at row" << row;
         connect(orItem, &DriverOperationItem::clicked, this, [this, orItem](bool checked) {
             Q_UNUSED(checked)
             int rowCount = mp_Model->rowCount();
@@ -407,6 +431,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
                     DriverOperationItem *curItem = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 5)));
                     if (curItem && cb && name && status) {
                         if (curItem == orItem) {
+                            // qCDebug(appLog) << "Processing operation for row" << i;
                             // 当前行按钮置灰
                             curItem->setBtnEnable(false);
                             // 当前行的勾选框置灰
@@ -419,6 +444,7 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
                         } else {
                             // 此时如果选中，则取消选中
                             if (cb->checked() && (status->getStatus() == ST_NOT_INSTALL || status->getStatus() == ST_CAN_UPDATE)) {
+                                // qCDebug(appLog) << "Unchecking row" << i;
                                 cb->setChecked(false);
                             }
                         }
@@ -432,11 +458,15 @@ void DriverTableView::setWidget(int row, int column, DWidget *widget)
 
 void DriverTableView::setHeaderCbStatus(bool checked)
 {
-    if (!mp_HeaderCb)
+    qCDebug(appLog) << "Setting header checkbox status to:" << checked;
+    if (!mp_HeaderCb) {
+        qCDebug(appLog) << "Header checkbox is null, cannot set status";
         return;
+    }
 
     // 如果取消选中，则取消表头选中
     if (!checked) {
+        qCDebug(appLog) << "Unchecking header checkbox";
         mp_HeaderCb->setChecked(checked, true);
         return;
     }
@@ -453,17 +483,20 @@ void DriverTableView::setHeaderCbStatus(bool checked)
     }
 
     if (allChecked) {
+        qCDebug(appLog) << "All items checked, checking header checkbox";
         mp_HeaderCb->setChecked(true);
     }
 }
 
 void DriverTableView::setHeaderCbEnable(bool enable)
 {
+    // qCDebug(appLog) << "Setting header checkbox enabled state to:" << enable;
     mp_HeaderCb->setCbEnable(enable);
 }
 
 void DriverTableView::setItemCbEnable(int row, bool enable)
 {
+    // qCDebug(appLog) << "Setting checkbox enabled state for row" << row << "to" << enable;
     DriverCheckItem *item = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(row, 0)));
     if (item) {
         item->setCbEnable(enable);
@@ -472,6 +505,7 @@ void DriverTableView::setItemCbEnable(int row, bool enable)
 
 void DriverTableView::setAllItemCbEanble(bool enable)
 {
+    // qCDebug(appLog) << "Setting all item checkboxes enabled state to:" << enable;
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         setItemCbEnable(i, enable);
@@ -480,7 +514,9 @@ void DriverTableView::setAllItemCbEanble(bool enable)
 
 void DriverTableView::setCheckedCBDisable()
 {
+    // qCDebug(appLog) << "Disabling checkboxes for checked items";
     if (mp_HeaderCb->checked()) {
+        qCDebug(appLog) << "Header checkbox is checked, disabling it";
         mp_HeaderCb->setCbEnable(false);
     }
 
@@ -509,6 +545,7 @@ void DriverTableView::setCheckedCBDisable()
 
 void DriverTableView::setItemOperationEnable(int index, bool enable)
 {
+    // qCDebug(appLog) << "Setting operation enable for item at index:" << index << "to" << enable;
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 0)));
@@ -516,6 +553,7 @@ void DriverTableView::setItemOperationEnable(int index, bool enable)
             DriverOperationItem *opera = dynamic_cast<DriverOperationItem *>(indexWidget(mp_Model->index(i, 3)));
 
             if (opera) {
+                // qCDebug(appLog) << "Setting operation enable for item at index" << index << "to" << enable;
                 opera->setBtnEnable(enable);
             }
         }
@@ -524,6 +562,7 @@ void DriverTableView::setItemOperationEnable(int index, bool enable)
 
 void DriverTableView::getCheckedDriverIndex(QList<int> &lstIndex)
 {
+    // qCDebug(appLog) << "Getting checked driver indices";
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         DriverCheckItem *item = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
@@ -536,17 +575,20 @@ void DriverTableView::getCheckedDriverIndex(QList<int> &lstIndex)
 
 void DriverTableView::setItemStatus(int index, Status s)
 {
+    // qCDebug(appLog) << "Setting item status for index:" << index << "to" << s;
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 1)));
         DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
 
         if (name && status && name->index() == index) {
+            // qCDebug(appLog) << "Setting status for item at index" << index << "to" << s;
             status->setStatus(s);
 
             // 如果是安装成功则取消选中且不可选
             if (ST_SUCESS == s || ST_FAILED == s|| ST_DRIVER_BACKUP_FAILED == s || ST_DRIVER_BACKUP_SUCCESS == s
                     || ST_DRIVER_NOT_BACKUP == s || ST_CAN_UPDATE == s || ST_NOT_INSTALL == s) {
+                // qCDebug(appLog) << "Resetting item state after status change";
                 DriverCheckItem *cb = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
                 if (cb) {
                     cb->setCbEnable(ST_FAILED == s || ST_DRIVER_BACKUP_FAILED == s || ST_DRIVER_NOT_BACKUP == s  || ST_CAN_UPDATE == s || ST_NOT_INSTALL == s ? true : false);
@@ -564,12 +606,14 @@ void DriverTableView::setItemStatus(int index, Status s)
 
 void DriverTableView::setErrorMsg(int index, const QString &msg)
 {
+    // qCDebug(appLog) << "Setting error message for item at index:" << index << "msg:" << msg;
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         DriverNameItem *name = dynamic_cast<DriverNameItem *>(indexWidget(mp_Model->index(i, 1)));
         DriverStatusItem *status = dynamic_cast<DriverStatusItem *>(indexWidget(mp_Model->index(i, 4)));
 
         if (name && status && name->index() == index) {
+            qCDebug(appLog) << "Setting error message for item at index" << index << ":" << msg;
             status->setErrorMsg(msg);
             break;
         }
@@ -578,10 +622,12 @@ void DriverTableView::setErrorMsg(int index, const QString &msg)
 
 bool DriverTableView::hasItemDisabled()
 {
+    // qCDebug(appLog) << "Checking if any item is disabled";
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         DriverCheckItem *cb = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
         if (cb && !cb->isEnabled()) {
+            qCDebug(appLog) << "Found disabled item at row" << i;
             return true;
         }
     }
@@ -590,6 +636,7 @@ bool DriverTableView::hasItemDisabled()
 
 void DriverTableView::clear()
 {
+    qCDebug(appLog) << "Clearing DriverTableView";
     int rowCount = mp_Model->rowCount();
     int columnCount = mp_Model->columnCount();
     for (int row = 0; row < rowCount; row++) {
@@ -604,6 +651,7 @@ void DriverTableView::clear()
 
 void DriverTableView::removeItemAndWidget(int row, int column)
 {
+    qCDebug(appLog) << "Removing item and widget at row:" << row << "column:" << column;
     QWidget *widget = indexWidget(mp_Model->index(row, column));
     if (widget) {
         delete widget;
@@ -613,11 +661,13 @@ void DriverTableView::removeItemAndWidget(int row, int column)
 
 void DriverTableView::resizeColumn(int column)
 {
+    // qCDebug(appLog) << "Resizing column:" << column;
     mp_HeadView->sectionResized(column, mp_HeadView->sectionSize(column), mp_HeadView->sectionSize(column));
 }
 
 void DriverTableView::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "Painting DriverTableView";
     QPainter painter(viewport());
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing);
@@ -628,8 +678,10 @@ void DriverTableView::paintEvent(QPaintEvent *event)
     DPalette::ColorGroup cg;
     if (!wnd) {
         cg = DPalette::Inactive;
+        // qCDebug(appLog) << "Window is inactive";
     } else {
         cg = DPalette::Active;
+        // qCDebug(appLog) << "Window is active";
     }
 
     auto palette = DGuiApplicationHelper::instance()->applicationPalette();;
@@ -656,11 +708,13 @@ void DriverTableView::paintEvent(QPaintEvent *event)
 
 void DriverTableView::showEvent(QShowEvent *event)
 {
+    // qCDebug(appLog) << "Showing DriverTableView";
     return DTreeView::showEvent(event);
 }
 
 void DriverTableView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Drawing row for index:" << index.row();
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
 
@@ -672,8 +726,10 @@ void DriverTableView::drawRow(QPainter *painter, const QStyleOptionViewItem &opt
     }
 
     auto *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
+    if (!style) {
+        qCWarning(appLog) << "Failed to get DStyle";
         return;
+    }
     // 圆角以及边距
     auto radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
     auto margin = 6;
@@ -712,6 +768,7 @@ void DriverTableView::drawRow(QPainter *painter, const QStyleOptionViewItem &opt
 
 void DriverTableView::slotAllItemChecked(bool checked)
 {
+    // qCDebug(appLog) << "Checking all items with checked:" << checked;
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
         DriverCheckItem *item = dynamic_cast<DriverCheckItem *>(indexWidget(mp_Model->index(i, 0)));
@@ -722,6 +779,7 @@ void DriverTableView::slotAllItemChecked(bool checked)
 
 void DriverTableView::slotHeaderSectionResized(int logicalIndex, int oldSize, int newSize)
 {
+    // qCDebug(appLog) << "Header section resized for index:" << logicalIndex << "oldSize:" << oldSize << "newSize:" << newSize;
     Q_UNUSED(oldSize)
     int rowCount = mp_Model->rowCount();
     for (int i = 0; i < rowCount; i++) {
@@ -741,6 +799,7 @@ void DriverTableView::slotHeaderSectionResized(int logicalIndex, int oldSize, in
 
 QPainterPath DriverTableView::getTopRadiusPath(const QRect &rect)
 {
+    // qCDebug(appLog) << "Creating top radius path for rect:" << rect;
     QPainterPath path;
     //设置圆角半径
     const int radius = 8;

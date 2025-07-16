@@ -58,6 +58,7 @@ void TextBrowser::showDeviceInfo(DeviceBaseInfo *info)
     // 先清空内容 *************************************************
     clear();
     if (!info) {
+        qCWarning(appLog) << "Info is null, clearing browser";
         return;
     }
 
@@ -85,6 +86,7 @@ void TextBrowser::updateInfo()
     // 先清空内容 *************************************************
     clear();
     if (!mp_Info) {
+        qCWarning(appLog) << "Info is null, clearing browser";
         return;
     }
 
@@ -99,6 +101,7 @@ void TextBrowser::updateInfo()
         const QList<QPair<QString, QString>> &baseInfo = mp_Info->getBaseAttribs();
         domTableInfo(doc, baseInfo);
         if (m_ShowOtherInfo) {
+            qCDebug(appLog) << "Showing other info";
             const QList<QPair<QString, QString>> &otherInfo = mp_Info->getOtherAttribs();
             domTableInfo(doc, otherInfo);
         }
@@ -112,6 +115,7 @@ EnableDeviceStatus TextBrowser::setDeviceEnabled(bool enable)
     qCDebug(appLog) << "Setting device enabled:" << enable;
 
     if (!mp_Info) {
+        qCWarning(appLog) << "Info is null, cannot set device enabled";
         return EDS_Cancle;
     }
     return mp_Info->setEnable(enable);
@@ -124,18 +128,21 @@ void TextBrowser::setWakeupMachine(bool wakeup)
     // 键盘鼠标唤醒机器
     DeviceInput *input = qobject_cast<DeviceInput*>(mp_Info);
     if(input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()){
+        qCDebug(appLog) << "Setting wakeup for input device";
         DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),wakeup, input->name());
     }
 
     // 网卡的远程唤醒
     DeviceNetwork* network = qobject_cast<DeviceNetwork*>(mp_Info);
     if(network && !network->logicalName().isEmpty()){
+        qCDebug(appLog) << "Setting wakeup for network device";
         DBusWakeupInterface::getInstance()->setNetworkWakeup(network->logicalName(),wakeup);
     }
 }
 
 void TextBrowser::updateShowOtherInfo()
 {
+    // qCDebug(appLog) << "Updating show other info";
     m_ShowOtherInfo = !m_ShowOtherInfo;
 }
 
@@ -145,6 +152,7 @@ void TextBrowser::fillClipboard()
 
     QString str = QTextEdit::textCursor().selectedText();
     if (str.isEmpty()) {
+        qCDebug(appLog) << "No text selected";
         return;
     }
     QClipboard *clipboard = DApplication::clipboard();
@@ -154,6 +162,7 @@ void TextBrowser::fillClipboard()
 
 void TextBrowser::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "Painting event";
     DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::WindowText, pa.color(DPalette::TextTips));
     DPaletteHelper::instance()->setPalette(this, pa);
@@ -166,10 +175,12 @@ void TextBrowser::paintEvent(QPaintEvent *event)
 
 void TextBrowser::keyPressEvent(QKeyEvent *event)
 {
+    // qCDebug(appLog) << "Key press event";
     if (event->key() == Qt::Key_C) {
         Qt::KeyboardModifiers modifiers = event->modifiers();
         if (modifiers != Qt::NoModifier) {
             if (modifiers.testFlag(Qt::ControlModifier)) {
+                qCDebug(appLog) << "Ctrl+C pressed, copying text";
                 fillClipboard();
                 return;
             }
@@ -180,15 +191,18 @@ void TextBrowser::keyPressEvent(QKeyEvent *event)
 
 void TextBrowser::focusInEvent(QFocusEvent *e)
 {
+    // qCDebug(appLog) << "Focus in event";
     QTextBrowser::focusInEvent(e);
 }
 
 void TextBrowser::focusOutEvent(QFocusEvent *e)
 {
+    // qCDebug(appLog) << "Focus out event";
     if(m_IsMenuShowing){
         DTextBrowser::focusOutEvent(e);
     }
     else {
+        qCDebug(appLog) << "Focus lost, simulating mouse press";
         // 模拟单击效果，当焦点失去的时候刷新界面选中效果
         QMouseEvent pressEvent(QEvent::MouseButtonPress, this->mapFromGlobal(QCursor::pos()), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
         QTextBrowser::mousePressEvent(&pressEvent);
@@ -197,11 +211,13 @@ void TextBrowser::focusOutEvent(QFocusEvent *e)
 
 void TextBrowser::slotCloseMenu()
 {
+    // qCDebug(appLog) << "Menu closed";
     m_IsMenuShowing = false;
 }
 
 void TextBrowser::slotShowMenu(const QPoint &)
 {
+    // qCDebug(appLog) << "Menu shown";
     m_IsMenuShowing = true;
     // 右键菜单
     mp_Menu->clear();
@@ -228,8 +244,10 @@ void TextBrowser::slotActionCopy()
 
     QString str = QTextEdit::textCursor().selectedText();
     if (str.isEmpty()) {
+        qCDebug(appLog) << "No text selected, copying all info";
         emit copyAllInfo();
     } else {
+        qCDebug(appLog) << "Copying selected text";
 //        mp_Copy->setText(tr("Copy Selected Text"));
         QClipboard *clipboard = DApplication::clipboard();
         clipboard->setText(str);
@@ -244,7 +262,9 @@ void TextBrowser::slotActionCopy()
 
 void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
 {
+    qCDebug(appLog) << "Creating title info";
     if (!info) {
+        qCWarning(appLog) << "Info is null, cannot create title";
         return;
     }
     QString title = info->subTitle();
@@ -252,9 +272,11 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
         QDomElement h3 = doc.createElement("h3");
 
         if (!info->enable()) {
+            qCDebug(appLog) << "Device is disabled, adding disable tag to title";
             title = "(" + tr("Disable") + ")" + title;
             h3.setAttribute("style", "text-indent:2px;text-align:left;font-weight:504;padding:10px;color:#FF5736;");
         } else if (!info->available()) {
+            qCDebug(appLog) << "Device is unavailable, adding unavailable tag to title";
             DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
             DPalette palette = dAppHelper->applicationPalette();
             QColor color = palette.color(DPalette::Disabled, DPalette::PlaceholderText);
@@ -274,6 +296,7 @@ void TextBrowser::domTitleInfo(QDomDocument &doc, DeviceBaseInfo *info)
 
 void TextBrowser::domTableInfo(QDomDocument &doc, const QList<QPair<QString, QString>> &info)
 {
+    qCDebug(appLog) << "Creating table info";
     QDomElement table = doc.createElement("table");
     table.setAttribute("border", "0");
     table.setAttribute("width", "100%");

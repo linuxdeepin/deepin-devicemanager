@@ -19,13 +19,18 @@ BtnLabel::BtnLabel(DWidget *parent)
     : DLabel(parent)
     , m_Desc("")
 {
+    qCDebug(appLog) << "BtnLabel constructor called.";
     // bug132075 安装成功状态此button无法点击
     // 仅安装失败可点击
     connect(this, &QLabel::linkActivated, this, [this]() {
-        if (m_Desc.isEmpty())
+        if (m_Desc.isEmpty()) {
+            qCDebug(appLog) << "Link activated but description is empty.";
             return;
+        }
 
+        qCDebug(appLog) << "Link activated with description:" << m_Desc;
         if (m_Desc == QString("Backup Failed")) {
+            qCDebug(appLog) << "Showing backup failed dialog.";
             DDialog dialog;
 
             DWidget *contentFrame = new DWidget(this);
@@ -51,6 +56,7 @@ BtnLabel::BtnLabel(DWidget *parent)
                 CommonTools::feedback();
             }
         } else {
+            qCDebug(appLog) << "Showing generic dialog with title:" << m_Desc;
             DDialog dialog;
             dialog.setIcon(style()->standardIcon(QStyle::SP_MessageBoxWarning));
             dialog.setTitle(m_Desc);
@@ -62,15 +68,19 @@ BtnLabel::BtnLabel(DWidget *parent)
 
 void BtnLabel::setDesc(const QString &txt)
 {
+    qCDebug(appLog) << "Setting description to:" << txt;
     m_Desc = txt;
 }
 
 void BtnLabel::paintEvent(QPaintEvent* e)
 {
+    // qCDebug(appLog) << "BtnLabel paint event called.";
     DPalette::ColorGroup cg;
     if (Qt::ApplicationActive == DApplication::applicationState()) {
+        // qCDebug(appLog) << "BtnLabel paint event on active window.";
         cg = DPalette::Active;
     } else {
+        // qCDebug(appLog) << "BtnLabel paint event on inactive window.";
         cg = DPalette::Inactive;
     }
 
@@ -87,15 +97,18 @@ void BtnLabel::paintEvent(QPaintEvent* e)
 TipsLabel::TipsLabel(DWidget *parent)
     : DLabel(parent)
 {
-
+    qCDebug(appLog) << "TipsLabel constructor called.";
 }
 
 void TipsLabel::paintEvent(QPaintEvent* e)
 {
+    // qCDebug(appLog) << "TipsLabel paint event called.";
     DPalette::ColorGroup cg;
     if (Qt::ApplicationActive == DApplication::applicationState()) {
+        // qCDebug(appLog) << "TipsLabel paint event on active window.";
         cg = DPalette::Active;
     } else {
+        // qCDebug(appLog) << "TipsLabel paint event on inactive window.";
         cg = DPalette::Inactive;
     }
 
@@ -110,15 +123,19 @@ void TipsLabel::paintEvent(QPaintEvent* e)
 TitleLabel::TitleLabel(DWidget *parent)
     : DLabel(parent)
 {
+    // qCDebug(appLog) << "TitleLabel constructor called.";
     DFontSizeManager::instance()->bind(this, DFontSizeManager::T8);
 }
 
 void TitleLabel::paintEvent(QPaintEvent* e)
 {
+    // qCDebug(appLog) << "TitleLabel paint event called.";
     DPalette::ColorGroup cg;
     if (Qt::ApplicationActive == DApplication::applicationState()) {
+        // qCDebug(appLog) << "TitleLabel paint event on active window.";
         cg = DPalette::Active;
     } else {
+        // qCDebug(appLog) << "TitleLabel paint event on inactive window.";
         cg = DPalette::Inactive;
     }
 

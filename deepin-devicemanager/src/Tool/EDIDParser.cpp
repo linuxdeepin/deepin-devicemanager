@@ -96,31 +96,37 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
 
 const QString &EDIDParser::vendor()const
 {
+    // qCDebug(appLog) << "Getting vendor";
     return m_Vendor;
 }
 
 const QString &EDIDParser::model()const
 {
+    // qCDebug(appLog) << "Getting model";
     return m_Model;
 }
 
 const QString &EDIDParser::releaseDate()const
 {
+    // qCDebug(appLog) << "Getting release date";
     return m_ReleaseDate;
 }
 
 const QString &EDIDParser::screenSize()const
 {
+    // qCDebug(appLog) << "Getting screen size";
     return m_ScreenSize;
 }
 
 int EDIDParser::width()
 {
+    // qCDebug(appLog) << "Getting width";
     return m_Width;
 }
 
 int EDIDParser::height()
 {
+    // qCDebug(appLog) << "Getting height";
     return m_Height;
 }
 
@@ -135,10 +141,12 @@ void EDIDParser::parserVendor()
     QString h09 = getBytes(0, 9);
     char h0809[2];
     if (m_LittleEndianMode) {
+        qCDebug(appLog) << "Little endian mode";
         vendorStr = h08 + h09;
         h0809[0] = static_cast<char>(hexToDec(h08).toInt());
         h0809[1] = static_cast<char>(hexToDec(h09).toInt());
     } else {
+        qCDebug(appLog) << "Big endian mode";
         vendorStr = h09 + h08;
         h0809[0] = static_cast<char>(hexToDec(h09).toInt());
         h0809[1] = static_cast<char>(hexToDec(h08).toInt());
@@ -199,12 +207,15 @@ void EDIDParser::parseScreenSize()
         QString tmpshl = getBytes(4,4);
         m_Width = hexToDec(tmpshl.mid(0,1) + tmpw).toInt();
         m_Height = hexToDec(tmpshl.mid(1,1) + tmph).toInt();
+        qCDebug(appLog) << "Parsed width and height from detailed timing:" << m_Width << "x" << m_Height;
     }
 
     // edid中的  15H和16H就是屏幕大小 , 与Detailed Timing相差超10mm 则用15H和16H的。
     int width15 = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt()*10;
     int height16 = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt()*10;
+    qCDebug(appLog) << "Parsed width and height from bytes 15H/16H:" << width15 << "x" << height16;
     if(m_Width+10 < width15  || m_Height+10 < height16) {
+        qCDebug(appLog) << "Detailed timing differs significantly, using 15H/16H values.";
         m_Width = width15;
         m_Height = height16;
     }
@@ -216,6 +227,7 @@ void EDIDParser::parseScreenSize()
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
 {
+    // qCDebug(appLog) << "Converting binary to decimal";
     // 二进制转十进制
     QString decimal;
     int nDec = 0, nLen;
@@ -234,11 +246,13 @@ QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
     }
 
     decimal = QString::number(nDec);
+    // qCDebug(appLog) << "Converted binary" << strBin << "to decimal" << decimal;
     return decimal;
 }
 
 QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
 {
+    // qCDebug(appLog) << "Converting decimal to binary";
     int nDec = strDec.toInt();
     int nYushu = 0;
     int nShang = 0;
@@ -252,8 +266,10 @@ QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
         strTemp = strBin;
         //strBin.Format("%s%s", buf, strTemp);
         nDec = nShang;
-        if (nShang == 0)
+        if (nShang == 0) {
+            // qCDebug(appLog) << "Decimal to binary conversion finished.";
             bContinue = false;
+        }
     }
     int nTemp = strBin.length() % 4;
     switch (nTemp) {
@@ -280,6 +296,7 @@ QString EDIDParser::decTobin(QString strDec)   //十进制转二进制
 
 QString EDIDParser::decToHex(QString strDec)   //十进制转十六进制
 {
+    // qCDebug(appLog) << "Converting decimal to hexadecimal";
     int hex = strDec.toInt();
     QString hex1 = QString("%1").arg(hex, 8, 16, QLatin1Char('0'));
     return hex1;
@@ -287,6 +304,7 @@ QString EDIDParser::decToHex(QString strDec)   //十进制转十六进制
 
 int EDIDParser::hex2(unsigned char ch)           //十六进制转换工具
 {
+    // qCDebug(appLog) << "Converting hexadecimal to decimal";
     if ((ch >= '0') && (ch <= '9'))
         return ch - 0x30;
     else if ((ch >= 'A') && (ch <= 'F'))
@@ -298,6 +316,7 @@ int EDIDParser::hex2(unsigned char ch)           //十六进制转换工具
 
 QString EDIDParser::hexToDec(QString strHex)   //十六进制转十进制
 {
+    // qCDebug(appLog) << "Converting hexadecimal to decimal";
     int i;
     int v = 0;
     for (i = 0; i < strHex.length(); i++) {
@@ -309,6 +328,7 @@ QString EDIDParser::hexToDec(QString strHex)   //十六进制转十进制
 
 QString EDIDParser::hexToBin(QString strHex)
 {
+    // qCDebug(appLog) << "Converting hexadecimal to binary";
     // 十六进制转二进制
     QString dec = hexToDec(strHex);
     return decTobin(dec);
@@ -316,14 +336,19 @@ QString EDIDParser::hexToBin(QString strHex)
 
 QString EDIDParser::getBytes(int l, int n)
 {
+    // qCDebug(appLog) << "Getting bytes";
     // 获取指定字节
     int index = n * 2;
-    if (m_ListEdid.size() < l + 1)
+    if (m_ListEdid.size() < l + 1) {
+        qCWarning(appLog) << "Line index" << l << "is out of bounds.";
         return "";
+    }
 
     QString line = m_ListEdid[l];
-    if (line.length() < n + 1)
+    if (line.length() < n + 1) {
+        qCWarning(appLog) << "Byte index" << n << "is out of bounds for line" << l;
         return "";
+    }
 
     return line.mid(index, 2);
 }
