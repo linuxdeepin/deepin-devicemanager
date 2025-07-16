@@ -78,7 +78,7 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
             QRegExp re(".*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*([0-9]{1,5}\\sx\\s[0-9]{1,5}).*");
             if (re.exactMatch(line)) {
                 lstMap[lstMap.count() - 1].insert("minResolution", re.cap(1));
-                lstMap[lstMap.count() - 1].insert("curResolution", re.cap(2).replace("x", "×", Qt::CaseInsensitive));
+                lstMap[lstMap.count() - 1].insert("curResolution", re.cap(2).replace(" ", "").replace("x", "×", Qt::CaseInsensitive));
                 lstMap[lstMap.count() - 1].insert("maxResolution", re.cap(3));
             }
             continue;
