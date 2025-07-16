@@ -34,6 +34,7 @@ CmdButtonWidget::CmdButtonWidget(DetailTreeView *parent)
 
 void CmdButtonWidget::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "CmdButtonWidget paint event called.";
     DWidget::paintEvent(event);
 
     QPainter painter(this);
@@ -50,8 +51,10 @@ void CmdButtonWidget::paintEvent(QPaintEvent *event)
     DPalette::ColorGroup cg;
     DWidget *wid = DApplication::activeWindow();
     if (wid/* && wid == this*/) {
+        // qCDebug(appLog) << "The window is activated";
         cg = DPalette::Active;
     } else {
+        // qCDebug(appLog) << "The window is not activated";
         cg = DPalette::Inactive;
     }
 

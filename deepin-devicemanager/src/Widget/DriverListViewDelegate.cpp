@@ -33,7 +33,9 @@ DriverListViewDelegate::DriverListViewDelegate(QObject *parent) : QStyledItemDel
 
 void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Painting driver list view delegate";
     if (!index.isValid()) {
+        qCWarning(appLog) << "Invalid index, painting default";
         QStyledItemDelegate::paint(painter, option, index);
         return;
     }
@@ -65,9 +67,11 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     DPalette::ColorGroup cg;
     if (!(opt.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
+        // qCDebug(appLog) << "Item is disabled";
     } else {
         if (!wnd) {
             cg = DPalette::Inactive;
+            // qCDebug(appLog) << "Window is inactive";
         } else {
             cg = DPalette::Active;
         }
@@ -87,16 +91,20 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     QRect textRect = rect;
     switch (opt.viewItemPosition) {
     case QStyleOptionViewItem::Beginning: {
+        // qCDebug(appLog) << "Painting first item";
         // 左间距
         rect.setX(rect.x() + margin);
     } break;
     case QStyleOptionViewItem::Middle: {
+        // qCDebug(appLog) << "Painting middle item";
     } break;
     case QStyleOptionViewItem::End: {
+        // qCDebug(appLog) << "Painting last item";
         // 右间距
         rect.setWidth(rect.width() - margin);
     } break;
     case QStyleOptionViewItem::OnlyOne: {
+        // qCDebug(appLog) << "Painting only one item";
         // 左间距
         rect.setX(rect.x() + margin);
         // 右间距
@@ -112,6 +120,7 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
     QRect iconRect = rect;
     if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
             index.data(Qt::DecorationRole).isValid()) {
+        // qCDebug(appLog) << "Painting icon for first item";
         iconRect.setWidth(30);
         iconRect.setHeight(30);
         iconRect.setX(rect.x() + 6);
@@ -129,6 +138,7 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
 QSize DriverListViewDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Getting size hint";
     QSize size = QStyledItemDelegate::sizeHint(option, index);
     size.setHeight(36);
     return size;

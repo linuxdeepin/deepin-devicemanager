@@ -60,7 +60,7 @@ DriverIconWidget::DriverIconWidget(const QPixmap &pixmap, const QString &strTitl
 
 DriverIconWidget::~DriverIconWidget()
 {
-
+    qCDebug(appLog) << "Destroying DriverIconWidget";
 }
 
 void DriverIconWidget::initUI(QWidget *iconWidget, const QString &strTitle, const QString &strDesc)
