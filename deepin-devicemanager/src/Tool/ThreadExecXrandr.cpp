@@ -102,7 +102,7 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
             QRegularExpressionMatch match = re.match(line);
             if (match.hasMatch()) {
                 lstMap[lstMap.count() - 1].insert("minResolution", match.captured(1));
-                lstMap[lstMap.count() - 1].insert("curResolution", match.captured(2));
+                lstMap[lstMap.count() - 1].insert("curResolution", match.captured(2).replace(" ", "").replace("x", "×", Qt::CaseInsensitive));
                 lstMap[lstMap.count() - 1].insert("maxResolution", match.captured(3));
                 qCDebug(appLog) << "Parsed resolutions: min" << match.captured(1) << "cur" << match.captured(2) << "max" << match.captured(3);
             }
