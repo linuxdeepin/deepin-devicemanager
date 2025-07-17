@@ -23,6 +23,7 @@ DriverWaitingWidget::DriverWaitingWidget(QString status, QWidget *parent)
 
 void DriverWaitingWidget::init()
 {
+    qCDebug(appLog) << "Initializing driver waiting widget";
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(0, 0, 0, 70);
 
@@ -53,6 +54,7 @@ void DriverWaitingWidget::init()
 }
 void DriverWaitingWidget::onUpdateTheme()
 {
+    qCDebug(appLog) << "Updating theme";
     DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
@@ -63,6 +65,7 @@ void DriverWaitingWidget::onUpdateTheme()
 }
 void DriverWaitingWidget::setValue(int value)
 {
+    qCDebug(appLog) << "Setting progress value:" << value;
     mp_Progress->setValue(value);
     mp_Progress->repaint();
 }

@@ -90,26 +90,30 @@ QMap<int, QString> CommonTools::m_MapErrorString = {
 CommonTools::CommonTools(QObject *parent)
     : QObject(parent)
 {
-
+    qCDebug(appLog) << "Initializing common tools";
 }
 
 QString CommonTools::getDriverType(DriverType type)
 {
+    // qCDebug(appLog) << "Getting driver type";
     return m_MapDriverType[type];
 }
 
 QString CommonTools::getDriverPixmap(DriverType type)
 {
+    // qCDebug(appLog) << "Getting driver pixmap";
     return m_MapDriverIcon[type];
 }
 
 QString CommonTools::getStausType(Status type)
 {
+    // qCDebug(appLog) << "Getting status type";
     return m_MapStatusType[type];
 }
 
 QString CommonTools::getStatusPixmap(Status type)
 {
+    // qCDebug(appLog) << "Getting status pixmap";
     return m_MapStatusIcon[type];
 }
 
@@ -164,11 +168,13 @@ QString CommonTools::getUrl()
         qCDebug(appLog) << "Using production driver search URL";
         return "https://driver.uniontech.com/api/v1/drive/search";
     }else{
+        qCDebug(appLog) << "Using pre-production driver search URL";
         return "https://drive-pre.uniontech.com/api/v1/drive/search";
     }
 }
 
 QString CommonTools::getBackupPath()
 {
+    qCDebug(appLog) << "Getting backup path";
     return "/var/lib/deepin-devicemanager/";
 }

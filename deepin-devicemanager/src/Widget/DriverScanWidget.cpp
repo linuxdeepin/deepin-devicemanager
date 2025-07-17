@@ -61,6 +61,7 @@ void DriverScanWidget::setScanningUI(const QString &scanInfo, int progressValue)
     hideAll();
     // Animation Label
     if (nullptr == animation) {
+        qCDebug(appLog) << "Creating new animation";
         animation = new QPropertyAnimation(mp_ScanningPicLabel, "icon");
         animation->setLoopCount(-1);
         animation->setDuration(800);
@@ -249,17 +250,20 @@ void DriverScanWidget::setNetworkErr()
 
 void DriverScanWidget::slotFeedBack()
 {
+    qCDebug(appLog) << "Feedback link activated";
     CommonTools::feedback();
 }
 
 void DriverScanWidget::slotReDetected()
 {
+    qCDebug(appLog) << "Re-detecting drivers";
     setScanningUI("", 0);
     emit redetected();
 }
 
 void DriverScanWidget::initUI()
 {
+    qCDebug(appLog) << "Initializing DriverScanWidget UI";
     this->setLineWidth(0);
     // 设置动画关键帧
     mp_ScanningPicLabel->setImageList(QStringList() << ":/icons/deepin/builtin/icons/animation/0.png"
@@ -322,6 +326,7 @@ void DriverScanWidget::initUI()
 
 void DriverScanWidget::initConnect()
 {
+    qCDebug(appLog) << "Initializing connections for DriverScanWidget";
     // 反馈
     connect(mp_FeedBackLabel, &QLabel::linkActivated, this, &DriverScanWidget::slotFeedBack);
 
@@ -332,6 +337,7 @@ void DriverScanWidget::initConnect()
 
 void DriverScanWidget::hideAll()
 {
+    qCDebug(appLog) << "Hiding all scanning UI elements";
     // 隐藏控件
     mp_ScanningPicLabel->hide();
     mp_ErrPicLabel->hide();
@@ -366,6 +372,7 @@ void DriverScanWidget::setProgressFinish()
 
 void DriverScanWidget::refreshProgress(QString info, int progress)
 {
+    // qCDebug(appLog) << "Refreshing progress. Info:" << info << "Progress:" << progress;
     mp_ScanningInfoLabel->setText(QObject::tr("Scanning %1").arg(info));
     mp_ScanningInfoLabel->show();
 
@@ -375,6 +382,7 @@ void DriverScanWidget::refreshProgress(QString info, int progress)
 
 void DriverScanWidget::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "Painting DriverScanWidget";
     QPainter painter(this);
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing, true);
@@ -407,6 +415,7 @@ void DriverScanWidget::paintEvent(QPaintEvent *event)
 
 void DriverScanWidget::resizeEvent(QResizeEvent *event)
 {
+    // qCDebug(appLog) << "Resizing DriverScanWidget";
     mp_ScroBar->setValue(mp_ScroBar->maximum());
     mp_ScroBar->setVisible(false);
     return DFrame::resizeEvent(event);

@@ -96,8 +96,10 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QStri
     qCDebug(appLog) << "Calling DBus setWakeupMachine";
     QDBusReply<bool> reply = mp_Iface->call("setWakeupMachine", unique_id, path, wakeup);
     if (reply.isValid()) {
+        qCDebug(appLog) << "setWakeupMachine DBus call successful, returned:" << reply.value();
         return reply.value();
     }
+    qCWarning(appLog) << "setWakeupMachine DBus call failed:" << reply.error().message();
     return false;
 }
 
@@ -124,14 +126,20 @@ bool DBusWakeupInterface::canInputWakeupMachine(const QString &path)
                 }
                 curPath = curPath.right(curPath.size() - index - 1);
                 QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
+                qCDebug(appLog) << "Checking if wakeup is supported for bus path:" << busPath;
                 return allSupportWakeupDevices.contains(busPath);
             }
+            qCWarning(appLog) << "Could not get SupportWakeupDevices property from DBus";
         }
     }
 
     qCDebug(appLog) << "Falling back to file check for wakeup capability";
     QFile file(path);
-    return file.open(QIODevice::ReadOnly);
+    bool canOpen = file.open(QIODevice::ReadOnly);
+    if (!canOpen) {
+        qCWarning(appLog) << "Failed to open wakeup file:" << path;
+    }
+    return canOpen;
 }
 
 bool DBusWakeupInterface::isInputWakeupMachine(const QString &path, const QString &name)
@@ -163,14 +171,18 @@ bool DBusWakeupInterface::isInputWakeupMachine(const QString &path, const QStrin
                         return false;
                     curPath = curPath.right(curPath.size() - index - 1);
                     QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
-                    return (allSupportWakeupDevices.contains(busPath) && allSupportWakeupDevices[busPath] == "enabled");
+                    bool isWakeupEnabled = (allSupportWakeupDevices.contains(busPath) && allSupportWakeupDevices[busPath] == "enabled");
+                    qCDebug(appLog) << "Wakeup state for bus path" << busPath << "is" << isWakeupEnabled;
+                    return isWakeupEnabled;
                 }
             }
+            qCWarning(appLog) << "Could not get SupportWakeupDevices property from DBus";
         }
     }
 
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly)) {
+        qCWarning(appLog) << "Failed to open wakeup file:" << path;
         return false;
     }
     QString info = file.readAll();
@@ -181,8 +193,10 @@ int DBusWakeupInterface::isNetworkWakeup(const QString &logical_name)
 {
     QDBusReply<int> reply = mp_Iface->call("isNetworkWakeup", logical_name);
     if (reply.isValid()) {
+        qCDebug(appLog) << "isNetworkWakeup returned:" << reply.value();
         return reply.value();
     }
+    qCWarning(appLog) << "isNetworkWakeup DBus call failed:" << reply.error().message();
     return -1;
 }
 
@@ -191,8 +205,10 @@ bool DBusWakeupInterface::setNetworkWakeup(const QString &logical_name, bool wak
     qCDebug(appLog) << "Calling DBus setNetworkWake";
     QDBusReply<bool> reply = mp_Iface->call("setNetworkWake", logical_name, wake);
     if (reply.isValid()) {
+        qCDebug(appLog) << "setNetworkWakeup returned:" << reply.value();
         return reply.value();
     }
+    qCWarning(appLog) << "setNetworkWakeup DBus call failed:" << reply.error().message();
     return false;
 }
 

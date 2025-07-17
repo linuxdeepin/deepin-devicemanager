@@ -51,30 +51,38 @@ void DriverCheckItem::setChecked(bool checked, bool dis)
 
 bool DriverCheckItem::checked()
 {
+    // qCDebug(appLog) << "Getting checkbox state, checked:" << mp_cb->isChecked();
     return mp_cb->isChecked();
 }
 
 bool DriverCheckItem::isEnabled()
 {
+    // qCDebug(appLog) << "Getting checkbox state, enabled:" << mp_cb->isEnabled();
     return mp_cb->isEnabled();
 }
 
 void DriverCheckItem::setCbEnable(bool e)
 {
+    // qCDebug(appLog) << "Setting checkbox enabled state to:" << e;
     mp_cb->setEnabled(e);
 }
 
 void DriverCheckItem::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "DriverCheckItem paint event called.";
     return DWidget::paintEvent(event);
 }
 
 void DriverCheckItem::slotStateChanged(int state)
 {
-    if (Qt::Unchecked == state)
+    qCDebug(appLog) << "Checkbox state changed to:" << state;
+    if (Qt::Unchecked == state) {
+        qCDebug(appLog) << "Checkbox unchecked, emitting sigChecked(false)";
         emit sigChecked(false);
-    else
+    } else {
+        qCDebug(appLog) << "Checkbox checked, emitting sigChecked(true)";
         emit sigChecked(true);
+    }
 }
 
 DriverNameItem::DriverNameItem(DWidget *parent, DriverType dt)
@@ -126,11 +134,13 @@ void DriverNameItem::setName(const QString &name)
 
 void DriverNameItem::setIndex(int index)
 {
+    // qCDebug(appLog) << "Setting driver index to:" << index;
     m_Index = index;
 }
 
 int DriverNameItem::index()
 {
+    // qCDebug(appLog) << "Getting driver index:" << m_Index;
     return m_Index;
 }
 
@@ -139,6 +149,7 @@ DriverLabelItem::DriverLabelItem(DWidget *parent,  const QString &txt)
     : DWidget(parent)
     , mp_Txt(new TipsLabel(this))
 {
+    qCDebug(appLog) << "Creating DriverLabelItem with text:" << txt;
     mp_Txt->setText(txt);
     mp_Txt->setElideMode(Qt::ElideRight);
 
@@ -187,6 +198,7 @@ void DriverStatusItem::setStatus(Status st)
     QString ts = DApplication::translate("QObject", CommonTools::getStausType(st).toStdString().data());
 
     if (ST_FAILED == st || ST_DRIVER_BACKUP_FAILED == st) {
+        qCWarning(appLog) << "Driver status is failed, setting error message";
         QString statusStr = QString("<a style=\"text-decoration:none\" href=\"failed\">") + ts + "</a>";
         mp_Status->setText(statusStr);
     } else {
@@ -198,16 +210,19 @@ void DriverStatusItem::setStatus(Status st)
 
 Status DriverStatusItem::getStatus()
 {
+    // qCDebug(appLog) << "Getting driver status:" << m_Status;
     return m_Status;
 }
 
 void DriverStatusItem::setErrorMsg(const QString &msg)
 {
+    // qCDebug(appLog) << "Setting error message:" << msg;
     mp_Status->setDesc(msg);
 }
 
 void DriverStatusItem::showSpinner(bool spin)
 {
+    // qCDebug(appLog) << "Showing spinner:" << spin;
     mp_Icon->setVisible(!spin);
     mp_Spinner->setVisible(spin);
     spin ? mp_Spinner->start() : mp_Spinner->stop();
@@ -218,6 +233,7 @@ DriverOperationItem::DriverOperationItem(DWidget *parent, Mode mode)
     : DWidget(parent)
     , mp_Btn(new DToolButton(this))
 {
+    // qCDebug(appLog) << "Creating DriverOperationItem with mode:" << mode;
     QHBoxLayout *hLayout = new QHBoxLayout(this);
     hLayout->setContentsMargins(0, 0, 0, 0);
     hLayout->addWidget(mp_Btn);
@@ -239,21 +255,26 @@ void DriverOperationItem::setBtnEnable(bool enable)
 
 void DriverOperationItem::setBtnIcon()
 {
+    qCDebug(appLog) << "Setting button icon for mode:" << m_mode;
     switch (m_mode) {
     case Mode::INSTALL:
+        qCDebug(appLog) << "Setting icon for install mode";
         mp_Btn->setIcon(QIcon::fromTheme("install"));
         mp_Btn->setToolTip(QObject::tr("Install"));
         break;
     case Mode::UPDATE:
+        qCDebug(appLog) << "Setting icon for update mode";
         mp_Btn->setIcon(QIcon::fromTheme("update-btn"));
         mp_Btn->setToolTip(QObject::tr("Update"));
         break;
     case Mode::BACKUP:
+        qCDebug(appLog) << "Setting icon for backup mode";
         mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/light/backup.svg"));
         mp_Btn->setIconSize(QSize(16, 16));
         mp_Btn->setToolTip(QObject::tr("Backup"));
         break;
     case Mode::RESTORE:
+        qCDebug(appLog) << "Setting icon for restore mode";
         mp_Btn->setIcon(QIcon(":/icons/deepin/builtin/light/restore.svg"));
         mp_Btn->setIconSize(QSize(16, 16));
         mp_Btn->setToolTip(QObject::tr("Restore"));
@@ -264,16 +285,19 @@ void DriverOperationItem::setBtnIcon()
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void DriverOperationItem::enterEvent(QEvent *event)
 {
+    // qCDebug(appLog) << "Mouse entered driver operation item";
     return DWidget::enterEvent(event);
 }
 #else
 void DriverOperationItem::enterEvent(QEnterEvent *event)
 {
+    // qCDebug(appLog) << "Mouse entered driver operation item";
     return DWidget::enterEvent(event);
 }
 #endif
 
 void DriverOperationItem::leaveEvent(QEvent *event)
 {
+    // qCDebug(appLog) << "Mouse left driver operation item";
     return DWidget::leaveEvent(event);
 }

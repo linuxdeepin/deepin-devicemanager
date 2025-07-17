@@ -34,7 +34,9 @@ DeviceListviewDelegate::DeviceListviewDelegate(QAbstractItemView *parent)
 
 void DeviceListviewDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Painting DeviceListviewDelegate for index:" << index.row();
     if (index.data().toString() == "Separator") {
+        qCDebug(appLog) << "Painting separator";
         return paintSeparator(painter, option);
     }
     return DStyledItemDelegate::paint(painter, option, index);
@@ -42,7 +44,9 @@ void DeviceListviewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
 
 QSize DeviceListviewDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Getting size hint for index:" << index.row();
     if (index.data().toString() == "Separator") {
+        qCDebug(appLog) << "Setting size hint for separator";
         return QSize(option.rect.width(), 5);
     }
     return DStyledItemDelegate::sizeHint(option, index);
@@ -50,13 +54,16 @@ QSize DeviceListviewDelegate::sizeHint(const QStyleOptionViewItem &option, const
 
 void DeviceListviewDelegate::paintSeparator(QPainter *painter, const QStyleOptionViewItem &option) const
 {
+    // qCDebug(appLog) << "Painting separator line";
     painter->save();
 
     QWidget *wnd = DApplication::activeWindow();
     DPalette::ColorGroup cg;
     if (!wnd) {
+        qCDebug(appLog) << "No active window";
         cg = DPalette::Inactive;
     } else {
+        qCDebug(appLog) << "Window is active";
         cg = DPalette::Active;
     }
 
@@ -101,6 +108,7 @@ DeviceListView::DeviceListView(QWidget *parent)
 
 DeviceListView::~DeviceListView()
 {
+    // qCDebug(appLog) << "DeviceListView instance destroyed";
     DELETE_PTR(mp_ItemModel);
 }
 
@@ -110,6 +118,7 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
 
     QStringList lst = iconFile.split("##");
     if (lst.size() != 2) {
+        qCWarning(appLog) << "Invalid icon file format";
         return;
     }
 
@@ -121,6 +130,7 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
         item->setToolTip(name);
         item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemNeverHasChildren);
     } else {
+        qCDebug(appLog) << "Item is a separator, setting flags accordingly";
         item->setFlags(Qt::ItemNeverHasChildren);
     }
     item->setIcon(QIcon::fromTheme(lst[0]));
@@ -130,6 +140,7 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
 
 void DeviceListView::setCurItemEnable(bool enable)
 {
+    qCDebug(appLog) << "Setting current item enable state to:" << enable;
     const QModelIndex &index =  this->currentIndex();
     int rowNum = index.row();
     QStandardItem *item = mp_ItemModel->item(rowNum);
@@ -139,12 +150,15 @@ void DeviceListView::setCurItemEnable(bool enable)
 
 void DeviceListView::setCurItem(const QString &str)
 {
+    qCDebug(appLog) << "Setting current item to:" << str;
     if (!mp_ItemModel) {
+        qCWarning(appLog) << "Item model is null";
         return;
     }
 
     QList<QStandardItem *> lstItems = mp_ItemModel->findItems(str);
     if (lstItems.size() != 1) {
+        qCWarning(appLog) << "Found" << lstItems.size() << "items for" << str << ", expected 1";
         return;
     }
 
@@ -154,20 +168,24 @@ void DeviceListView::setCurItem(const QString &str)
 
 QString DeviceListView::getConcatenateStrings(const QModelIndex &index)
 {
+    qCDebug(appLog) << "Getting concatenated strings for index:" << index.row();
     QStandardItem *item = mp_ItemModel->item(index.row());
     if (item) {
         return item->data(Qt::DisplayRole).toString();
     }
+    qCWarning(appLog) << "Item not found at index" << index.row();
     return "";
 }
 
 void DeviceListView::clearItem()
 {
+    qCDebug(appLog) << "Clearing all items in DeviceListView";
     mp_ItemModel->clear();
 }
 
 void DeviceListView::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "DeviceListView paint event called.";
     // 让背景色适合主题颜色
     DPalette pa = DPaletteHelper::instance()->palette(this);
     pa.setBrush(DPalette::ItemBackground, pa.brush(DPalette::Base));
@@ -178,8 +196,10 @@ void DeviceListView::paintEvent(QPaintEvent *event)
 
 void DeviceListView::mousePressEvent(QMouseEvent *event)
 {
+    // qCDebug(appLog) << "Mouse pressed at position:" << event->pos();
     if ((QApplication::keyboardModifiers() == Qt::ControlModifier) && (event->button() == Qt::LeftButton)) {
         // 当键盘按住ctrl，不响应鼠标点击事件
+        qCDebug(appLog) << "Ctrl key pressed, ignoring mouse press event";
     } else {
         DListView::mousePressEvent(event);
     }
@@ -187,8 +207,10 @@ void DeviceListView::mousePressEvent(QMouseEvent *event)
 
 void DeviceListView::mouseMoveEvent(QMouseEvent *event)
 {
+    // qCDebug(appLog) << "Mouse moved to position:" << event->pos();
     if ((QApplication::keyboardModifiers() == Qt::ControlModifier)/* && (event->button() == Qt::LeftButton)*/) {
         // 当键盘按住ctrl，不响应鼠标移动事件
+        qCDebug(appLog) << "Ctrl key pressed, ignoring mouse move event";
     } else {
         DListView::mouseMoveEvent(event);
     }
@@ -196,15 +218,17 @@ void DeviceListView::mouseMoveEvent(QMouseEvent *event)
 
 void DeviceListView::keyPressEvent(QKeyEvent *keyEvent)
 {
-    qCDebug(appLog) << "Key pressed:" << keyEvent->key();
+    // qCDebug(appLog) << "Key pressed:" << keyEvent->key();
 
     DListView::keyPressEvent(keyEvent);
 
     // 当前Item 为Separator时，需要跳过Separator
     if (this->currentIndex().data(Qt::DisplayRole) == "Separator") {
+        qCDebug(appLog) << "Current item is a separator, handling key events for navigation";
         // 按键：下一个
         if (keyEvent->key() == Qt::Key_Down) {
             int curRow = this->currentIndex().row();
+            qCDebug(appLog) << "Key down on separator, moving to next item";
 
             // 当前 Separator 不是最后一个Item，显示下一个Item
             if (curRow != mp_ItemModel->rowCount() - 1) {
@@ -216,6 +240,7 @@ void DeviceListView::keyPressEvent(QKeyEvent *keyEvent)
         // 按键：上一个
         if (keyEvent->key() == Qt::Key_Up) {
             int curRow = this->currentIndex().row();
+            qCDebug(appLog) << "Key up on separator, moving to previous item";
             // 当前 Separator 不是第一个Item，显示上一个Item
             if (curRow != 0) {
                 QModelIndex index = this->currentIndex().siblingAtRow(curRow - 1);

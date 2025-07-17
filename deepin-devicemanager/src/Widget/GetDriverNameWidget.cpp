@@ -41,10 +41,12 @@ GetDriverNameWidget::GetDriverNameWidget(QWidget *parent)
 
 GetDriverNameWidget::~GetDriverNameWidget()
 {
+    qCDebug(appLog) << "GetDriverNameWidget destructor start";
     stopLoadingDrivers();
     mp_Thread->quit();
     mp_Thread->wait();
     if (mp_GetModel) {
+        qCDebug(appLog) << "Deleting get model";
         delete mp_GetModel;
         mp_GetModel = nullptr;
     }
@@ -53,6 +55,7 @@ GetDriverNameWidget::~GetDriverNameWidget()
 
 void GetDriverNameWidget::init()
 {
+    qCDebug(appLog) << "Initializing get driver name widget";
     QVBoxLayout *mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(0, 0, 0, 0);
     mp_titleLabel = new DLabel(tr("Select a driver for update"));
@@ -98,6 +101,7 @@ void GetDriverNameWidget::init()
 
 void GetDriverNameWidget::onUpdateTheme()
 {
+    qCDebug(appLog) << "Updating theme";
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     DPalette plt = Dtk::Gui::DGuiApplicationHelper::instance()->applicationPalette();
     plt.setColor(Dtk::Gui::DPalette::Background, plt.color(Dtk::Gui::DPalette::Base));
@@ -110,6 +114,7 @@ void GetDriverNameWidget::onUpdateTheme()
 
 void GetDriverNameWidget::initConnections()
 {
+    qCDebug(appLog) << "Initializing connections";
     connect(mp_ListView, &DriverListView::clicked, this, &GetDriverNameWidget::slotSelectedDriver);
     connect(this, &GetDriverNameWidget::startLoadDrivers, mp_GetModel, &GetDriverNameModel::startLoadDrivers);
     connect(mp_GetModel, &GetDriverNameModel::finishLoadDrivers, this, &GetDriverNameWidget::slotFinishLoadDrivers);
@@ -127,17 +132,20 @@ void GetDriverNameWidget::loadAllDrivers(bool includeSub, const QString &path)
 
 void GetDriverNameWidget::reloadDriversListPages()
 {
+    qCDebug(appLog) << "Reloading drivers list pages";
     DFrame *frame = this->findChild<DFrame *>();
     DLabel *label = this->findChild<DLabel *>();
     if (!(frame && label))
         return;
     if (mp_model->rowCount() <= 0) {
+        qCDebug(appLog) << "No drivers found";
         frame->hide();
         mp_tipLabel->hide();
         label->setText(tr("No drivers found in this folder"));
         mp_selectedRow = -1;
         emit  signalDriversCount();
     } else {
+        qCDebug(appLog) << "Drivers found, showing frame and tip label";
         frame->show();
         mp_tipLabel->show();
         label->setText(tr("Select a driver for update"));
@@ -154,37 +162,47 @@ QString GetDriverNameWidget::selectName()
 {
     qCDebug(appLog) << "Getting selected driver name, row:" << mp_selectedRow;
 
-    if (-1 == mp_selectedRow || !(mp_selectedRow < mp_model->rowCount() && mp_selectedRow > -1))
+    if (-1 == mp_selectedRow || !(mp_selectedRow < mp_model->rowCount() && mp_selectedRow > -1)) {
+        qCWarning(appLog) << "No driver selected or invalid row";
         return "";
+    }
     return mp_model->item(mp_selectedRow)->data(Qt::UserRole).toString();
 }
 
 void GetDriverNameWidget::updateTipLabelText(const QString &text)
 {
+    qCDebug(appLog) << "Updating tip label text to:" << text;
     mp_tipLabel->setText(text);
     mp_tipLabel->setToolTip(text);
 }
 
 void GetDriverNameWidget::stopLoadingDrivers()
 {
+    // qCDebug(appLog) << "Stopping driver loading";
     mp_GetModel->stopLoadingDrivers();
 }
 
 void GetDriverNameWidget::slotSelectedDriver(const QModelIndex &index)
 {
+    qCDebug(appLog) << "Selected driver at row:" << index.row();
     updateTipLabelText("");
     emit signalItemClicked();
     int row = index.row();
     QStandardItem *item =  mp_model->item(row, 1);
-    if (!item)
+    if (!item) {
+        qCWarning(appLog) << "Item not found at row" << row;
         return;
+    }
     QStandardItem *lastItem = mp_model->item(mp_selectedRow, 1);
     if (lastItem) {
+        qCDebug(appLog) << "Setting last item check state to unchecked";
         lastItem->setCheckState(Qt::Unchecked);
         lastItem->setData(QVariant(), Qt::CheckStateRole);
     }
-    if (Qt::Unchecked == item->checkState())
+    if (Qt::Unchecked == item->checkState()) {
+        qCDebug(appLog) << "Setting item check state to checked";
         item->setCheckState(Qt::Checked);
+    }
     mp_selectedRow = row;
 }
 
@@ -197,6 +215,7 @@ void GetDriverNameWidget::slotFinishLoadDrivers()
     mp_ListView->setColumnWidth(0, 40);
     updateTipLabelText("");
     if (mp_model->rowCount() > 0) {
+        qCDebug(appLog) << "Setting current index to first item";
         QModelIndex index = mp_model->index(0, 0);
         mp_ListView->setCurrentIndex(index);
     }

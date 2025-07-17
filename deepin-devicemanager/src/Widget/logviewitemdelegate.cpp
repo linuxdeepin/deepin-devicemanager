@@ -34,7 +34,9 @@ LogViewItemDelegate::LogViewItemDelegate(QObject *parent)
 void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
                                 const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Painting log view item delegate";
     if (!index.isValid()) {
+        qCWarning(appLog) << "Invalid index";
         QStyledItemDelegate::paint(painter, option, index);
         return;
     }
@@ -50,17 +52,22 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     DPalette::ColorGroup cg;
     if (!(opt.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
+        // qCDebug(appLog) << "Item is disabled";
     } else {
         if (!wnd) {
             cg = DPalette::Inactive;
+            // qCDebug(appLog) << "Window is inactive";
         } else {
             cg = DPalette::Active;
+            // qCDebug(appLog) << "Window is active";
         }
     }
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
+    if (!style) {
+        qCWarning(appLog) << "Failed to get DStyle";
         return;
+    }
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
 
     DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
@@ -77,6 +84,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     forground.setColor(palette.color(cg, DPalette::Text));
     if (opt.state & DStyle::State_Enabled) {
         if (opt.state & DStyle::State_Selected) {
+            // qCDebug(appLog) << "Item is selected";
             background = palette.color(cg, DPalette::Highlight);
             forground.setColor(palette.color(cg, DPalette::HighlightedText));
             enableAndSelect = true;
@@ -94,6 +102,7 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
     QRect iconRect = rect;
     if (opt.viewItemPosition == QStyleOptionViewItem::Beginning &&
             index.data(Qt::DecorationRole).isValid()) {
+        // qCDebug(appLog) << "Painting icon for first item";
         iconRect.setX(rect.x() - margin);
         iconRect.setWidth(64);
         QIcon ic = index.data(Qt::DecorationRole).value<QIcon>();
@@ -110,8 +119,10 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 
     QPen p = painter->pen();
     if (text.startsWith("(" + tr("Disable") + ")") && !enableAndSelect) {
+        // qCDebug(appLog) << "Setting text color for disabled item";
         p.setColor(QColor("#FF5736"));
     }else if(text.startsWith("(" + tr("Unavailable") + ")")){
+        // qCDebug(appLog) << "Setting text color for unavailable item";
         palette.color(cg, DPalette::PlaceholderText);
     }
     painter->setPen(p);
@@ -122,12 +133,14 @@ void LogViewItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &o
 QWidget *LogViewItemDelegate::createEditor(QWidget *, const QStyleOptionViewItem &,
                                            const QModelIndex &) const
 {
+    qCDebug(appLog) << "Creating editor, return nullptr";
     return nullptr;
 }
 
 QSize LogViewItemDelegate::sizeHint(const QStyleOptionViewItem &option,
                                     const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Getting size hint";
     QSize size = QStyledItemDelegate::sizeHint(option, index);
     size.setHeight(std::max(36, size.height()));
     return size;
@@ -136,16 +149,19 @@ QSize LogViewItemDelegate::sizeHint(const QStyleOptionViewItem &option,
 void LogViewItemDelegate::initStyleOption(QStyleOptionViewItem *option,
                                           const QModelIndex &index) const
 {
-    qCDebug(appLog) << "Initializing style options for row:" << index.row();
+    // qCDebug(appLog) << "Initializing style options for row:" << index.row();
     option->showDecorationSelected = true;
     bool ok = false;
     if (index.data(Qt::TextAlignmentRole).isValid()) {
+        // qCDebug(appLog) << "Text alignment role is valid";
         uint value = index.data(Qt::TextAlignmentRole).toUInt(&ok);
         option->displayAlignment = static_cast<Qt::Alignment>(value);
     }
 
-    if (!ok)
+    if (!ok) {
+        // qCDebug(appLog) << "Using default alignment";
         option->displayAlignment = Qt::AlignLeft | Qt::AlignVCenter;
+    }
     option->textElideMode = Qt::ElideRight;
     option->features = QStyleOptionViewItem::HasDisplay;
     if (index.row() % 2 == 0)

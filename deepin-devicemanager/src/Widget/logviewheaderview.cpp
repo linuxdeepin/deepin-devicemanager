@@ -28,6 +28,7 @@ LogViewHeaderView::LogViewHeaderView(Qt::Orientation orientation, QWidget *paren
 }
 void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
 {
+    // qCDebug(appLog) << "Painting section";
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setOpacity(1);
@@ -37,8 +38,10 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     QWidget *wnd = DApplication::activeWindow();
     if (!wnd) {
         cg = DPalette::Inactive;
+        // qCDebug(appLog) << "Window is inactive";
     } else {
         cg = DPalette::Active;
+        // qCDebug(appLog) << "Window is active";
     }
 #else
     cg = DPalette::Active;
@@ -48,8 +51,10 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
+    if (!style) {
+        qCWarning(appLog) << "Failed to get DStyle";
         return;
+    }
 
     QStyleOptionHeader option;
     initStyleOption(&option);
@@ -106,6 +111,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
 
     // sort indicator
     if (isSortIndicatorShown() && logicalIndex == sortIndicatorSection()) {
+        // qCDebug(appLog) << "Drawing sort indicator";
         // TODO: arrow size (8x5)
         QRect sortIndicator(textRect.x() + textRect.width() + margin,
                             textRect.y() + (textRect.height() - 5) / 2, 8, 5);
@@ -122,6 +128,7 @@ void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int l
 
 void LogViewHeaderView::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "Painting event";
     QPainter painter(viewport());
     painter.save();
 
@@ -130,7 +137,9 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
     QWidget *wnd = DApplication::activeWindow();
     if (!wnd) {
         cg = DPalette::Inactive;
+        // qCDebug(appLog) << "Window is inactive";
     } else {
+        // qCDebug(appLog) << "Window is active";
         cg = DPalette::Active;
     }
 #else
@@ -141,8 +150,10 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
     DPalette palette = dAppHelper->applicationPalette();
 
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    if (!style)
+    if (!style) {
+        qCWarning(appLog) << "Failed to get DStyle";
         return;
+    }
 
     QBrush bgBrush(palette.color(cg, DPalette::Base));
 
@@ -166,11 +177,13 @@ void LogViewHeaderView::paintEvent(QPaintEvent *event)
 
 QSize LogViewHeaderView::sizeHint() const
 {
+    // qCDebug(appLog) << "Getting size hint";
     return QSize(width(), 36 + m_spacing);
 }
 
 int LogViewHeaderView::sectionSizeHint(int logicalIndex) const
 {
+    qCDebug(appLog) << "Getting section size hint";
     QStyleOptionHeader option;
     initStyleOption(&option);
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());

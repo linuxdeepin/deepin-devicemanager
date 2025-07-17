@@ -27,6 +27,7 @@ DriverListView::DriverListView(QWidget *parent) : DTreeView(parent)
 
 void DriverListView::initUI()
 {
+    qCDebug(appLog) << "Initializing UI";
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setFrameStyle(QFrame::NoFrame);
     setHeaderHidden(true);
@@ -39,6 +40,7 @@ void DriverListView::initUI()
 
 void DriverListView::paintEvent(QPaintEvent *event)
 {
+    // qCDebug(appLog) << "Painting event";
     QPainter painter(viewport());
     painter.save();
     painter.setRenderHints(QPainter::Antialiasing);
@@ -49,7 +51,9 @@ void DriverListView::paintEvent(QPaintEvent *event)
     DPalette::ColorGroup cg;
     if (!wnd) {
         cg = DPalette::Inactive;
+        qCDebug(appLog) << "Window is inactive";
     } else {
+        qCDebug(appLog) << "Window is active";
         cg = DPalette::Active;
     }
     auto *dAppHelper = DGuiApplicationHelper::instance();
@@ -70,6 +74,7 @@ void DriverListView::paintEvent(QPaintEvent *event)
 
 void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &options, const QModelIndex &index) const
 {
+    // qCDebug(appLog) << "Drawing row";
     painter->save();
     painter->setRenderHint(QPainter::Antialiasing);
 
@@ -79,13 +84,16 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
     DPalette::ColorGroup cg;
     if (!(options.state & DStyle::State_Enabled)) {
         cg = DPalette::Disabled;
+        // qCDebug(appLog) << "Item is disabled";
     } else {
 #ifdef ENABLE_INACTIVE_DISPLAY
         if (!wnd) {
             cg = DPalette::Inactive;
+            // qCDebug(appLog) << "Window is inactive";
         } else {
             if (wnd->isModal()) {
                 cg = DPalette::Inactive;
+                // qCDebug(appLog) << "Window is modal";
             } else {
                 cg = DPalette::Active;
             }
@@ -134,12 +142,13 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
  */
 void DriverListView::keyPressEvent(QKeyEvent *event)
 {
-    qCDebug(appLog) << "Key pressed:" << event->key();
+    // qCDebug(appLog) << "Key pressed:" << event->key();
 
     DTreeView::keyPressEvent(event);
     Qt::KeyboardModifiers modifiers = event->modifiers();
     if (modifiers != Qt::NoModifier) {
         if (modifiers.testFlag(Qt::ControlModifier) || modifiers.testFlag(Qt::ShiftModifier) || modifiers.testFlag(Qt::AltModifier)) {
+            qCDebug(appLog) << "Modifier key pressed, ignoring key event";
             return;
         }
     }
@@ -147,12 +156,17 @@ void DriverListView::keyPressEvent(QKeyEvent *event)
 
     int curRow = this->currentIndex().row();
     switch (event->key()) {
-    case Qt::Key_Home:     curRow = 0;
+    case Qt::Key_Home:
+        qCDebug(appLog) << "Home key pressed, moving to first item";
+        curRow = 0;
         break;
-    case Qt::Key_End:      curRow = pModel->rowCount() - 1;
+    case Qt::Key_End:
+        qCDebug(appLog) << "End key pressed, moving to last item";
+        curRow = pModel->rowCount() - 1;
         break;
     case Qt::Key_Up:
     case Qt::Key_Down:
+        qCDebug(appLog) << "Up/Down key pressed, navigating to next/previous item";
         break;
     default:
         return;

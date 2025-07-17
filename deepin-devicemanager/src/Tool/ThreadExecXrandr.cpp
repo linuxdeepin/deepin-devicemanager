@@ -96,6 +96,7 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
     QStringList lines = deviceInfo.split("\n");
     foreach (const QString &line, lines) {
         if (line.startsWith("Screen")) {
+            qCDebug(appLog) << "Found Screen line:" << line;
             lstMap.append(QMap<QString, QString>());
             QRegularExpression re(".*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*");
             QRegularExpressionMatch match = re.match(line);
@@ -103,21 +104,28 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
                 lstMap[lstMap.count() - 1].insert("minResolution", match.captured(1));
                 lstMap[lstMap.count() - 1].insert("curResolution", match.captured(2));
                 lstMap[lstMap.count() - 1].insert("maxResolution", match.captured(3));
+                qCDebug(appLog) << "Parsed resolutions: min" << match.captured(1) << "cur" << match.captured(2) << "max" << match.captured(3);
             }
             continue;
         }
 
         if (line.startsWith("HDMI")) {
+            qCDebug(appLog) << "Found HDMI interface.";
             lstMap[lstMap.count() - 1].insert("HDMI", "Enable");
         } else if (line.startsWith("VGA")) {
+            qCDebug(appLog) << "Found VGA interface.";
             lstMap[lstMap.count() - 1].insert("VGA", "Enable");
         } else if (line.startsWith("DP") || line.startsWith("DisplayPort")) {
+            qCDebug(appLog) << "Found DP interface.";
             lstMap[lstMap.count() - 1].insert("DP", "Enable");
         } else if (line.startsWith("eDP")) {
+            qCDebug(appLog) << "Found eDP interface.";
             lstMap[lstMap.count() - 1].insert("eDP", "Enable");
         } else if (line.startsWith("DVI")) {
+            qCDebug(appLog) << "Found DVI interface.";
             lstMap[lstMap.count() - 1].insert("DVI", "Enable");
         } else if (line.startsWith("DigitalOutput")) {
+            qCDebug(appLog) << "Found DigitalOutput interface.";
             lstMap[lstMap.count() - 1].insert("DigitalOutput", "Enable");
         }
     }
@@ -139,6 +147,7 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
         // 获取 HDMI-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 527mm x 296mm
         QRegularExpression reg("^[A-Za-z].*");
         if (reg.match(*it).hasMatch() && !(*it).contains("disconnected")) {
+            qCDebug(appLog) << "Found new display screen:" << (*it).trimmed();
             // 新的显示屏
             QMap<QString, QString> newMap;
             newMap.insert("mainInfo", (*it).trimmed());
@@ -161,6 +170,7 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
                     return;
                 edidMatch = reEdid.match(*it);
                 if (!edidMatch.hasMatch()) {
+                    qCDebug(appLog) << "Parsed EDID info:" << edid;
                     last.insert("edid", edid);
                     break;
                 }
@@ -174,8 +184,10 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
                 return;
             QRegularExpression regRate(".*([0-9]{1,5}\\.[0-9]{1,5}Hz).*");
             QRegularExpressionMatch rateMatch = regRate.match(*it);
-            if (rateMatch.hasMatch())
+            if (rateMatch.hasMatch()) {
                 last.insert("rate", rateMatch.captured(1));
+                qCDebug(appLog) << "Parsed refresh rate:" << rateMatch.captured(1);
+            }
         }
     }
 }
@@ -221,6 +233,7 @@ void ThreadExecXrandr::getRefreshRateFromDBus(QList<QMap<QString, QString> > &ls
             continue;
         QJsonObject screenObject = screenValue.toObject();
         QStringList screenKeys = screenObject.keys();
+        qCDebug(appLog) << "Processing screen:" << screenKey;
 
         if (!screenKeys.contains("Extend"))
             continue;
@@ -245,6 +258,7 @@ void ThreadExecXrandr::getRefreshRateFromDBus(QList<QMap<QString, QString> > &ls
             QStringList monitorKeys = monitorObject.keys();
             if (!monitorKeys.contains("Name") || !monitorKeys.contains("RefreshRate"))
                 continue;
+            qCDebug(appLog) << "Processing monitor:" << monitorObject.value("Name").toString();
 
             QJsonValue ss = monitorObject.value("RefreshRate");
             QMap<QString, QString> infoMap;
@@ -307,19 +321,26 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
     for (auto monitor : monitorList) {
         if (monitor.path().isEmpty())
             continue;
+        qCDebug(appLog) << "Processing monitor:" << monitor.path();
 
         m_monitorLst << monitor.path();
         QDBusInterface monitorEnabledInterface(DISPLAY_DAEMON_SERVICE_NAME, monitor.path(), DISPLAY_MONITOR_INTERFACE, QDBusConnection::sessionBus());
-        if (!monitorEnabledInterface.isValid())
+        if (!monitorEnabledInterface.isValid()) {
+            qCWarning(appLog) << "Monitor interface is not valid for" << monitor.path();
             continue;
+        }
 
         QVariant enbaled = monitorEnabledInterface.property("Enabled");
-        if (!enbaled.isValid() || !enbaled.toBool())
+        if (!enbaled.isValid() || !enbaled.toBool()) {
+            qCDebug(appLog) << "Monitor is not enabled:" << monitor.path();
             continue;
+        }
 
         QDBusInterface monitorInterface(DISPLAY_DAEMON_SERVICE_NAME, monitor.path(), DISPLAY_PROPERTIES_INTERFACE, QDBusConnection::sessionBus());
-        if (!monitorInterface.isValid())
+        if (!monitorInterface.isValid()) {
+            qCWarning(appLog) << "Monitor properties interface is not valid for" << monitor.path();
             continue;
+        }
 
         QDBusMessage replay = monitorInterface.call("Get", DISPLAY_MONITOR_INTERFACE, "Modes");
         QVariant v =  replay.arguments().first();
@@ -330,6 +351,7 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
         while (!arg.atEnd()) {
             MonitorResolution resolution;
             arg >> resolution;
+            qCDebug(appLog) << "Found resolution:" << resolution.width << "x" << resolution.height << "@" << resolution.refreshRate;
             if (curMaxResolutionWidth == -1) {
                 curMaxResolutionWidth = resolution.width;
                 curMaxResolutionHeight = resolution.height;
@@ -379,9 +401,11 @@ void ThreadExecXrandr::getGpuInfoFromXrandr()
     for (auto &lstInfo : lstMap) {
         if (dbusMap.contains("minResolution")) {
             lstInfo["minResolution"] = dbusMap["minResolution"];
+            qCDebug(appLog) << "Set min resolution from DBus:" << dbusMap["minResolution"];
         }
         if (dbusMap.contains("maxResolution")) {
             lstInfo["maxResolution"] = dbusMap["maxResolution"];
+            qCDebug(appLog) << "Set max resolution from DBus:" << dbusMap["maxResolution"];
         }
     }
 
@@ -411,14 +435,19 @@ void ThreadExecXrandr::getResolutionRateFromDBus(QList<QMap<QString, QString> > 
     for (auto monitor : monitorList) {
         if (monitor.path().isEmpty())
             continue;
+        qCDebug(appLog) << "Processing monitor:" << monitor.path();
 
         QDBusInterface monitorEnabledInterface(DISPLAY_DAEMON_SERVICE_NAME, monitor.path(), DISPLAY_MONITOR_INTERFACE, QDBusConnection::sessionBus());
-        if (!monitorEnabledInterface.isValid())
+        if (!monitorEnabledInterface.isValid()) {
+            qCWarning(appLog) << "Monitor interface is not valid for" << monitor.path();
             continue;
+        }
 
         QVariant enbaled = monitorEnabledInterface.property("Enabled");
-        if (!enbaled.isValid() || !enbaled.toBool())
+        if (!enbaled.isValid() || !enbaled.toBool()) {
+            qCDebug(appLog) << "Monitor is not enabled:" << monitor.path();
             continue;
+        }
         QVariant tconnected = monitorEnabledInterface.property("Connected");
         QVariant tmanufacture = monitorEnabledInterface.property("Manufacturer");
         QVariant tname = monitorEnabledInterface.property("Name");
@@ -457,6 +486,7 @@ void ThreadExecXrandr::getResolutionRateFromDBus(QList<QMap<QString, QString> > 
     for (; it != lstMap.end(); ++it) {
         if ((*it).size() < 1)
             continue;
+        // qCDebug(appLog) << "Setting monitor info from DBus for:" << (*it)["Name"];
 
         DeviceManager::instance()->setMonitorInfoFromDbus(*it);
     }

@@ -30,6 +30,7 @@ void DBusAnythingInterface::init()
 
     // 1. 连接到dbus
     if (!QDBusConnection::systemBus().isConnected()) {
+        qCritical(appLog) << "Cannot connect to the D-Bus session bus.";
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
                 "To start it, run:/n"
                 "/teval `dbus-launch --auto-syntax`/n");
@@ -44,8 +45,11 @@ bool DBusAnythingInterface::hasLFT(const QString& path)
     qCDebug(appLog) << "Checking LFT for path:" << path;
 
     QDBusReply<bool> reply = mp_Iface->call("hasLFT",path);
-    if(reply.isValid())
+    if(reply.isValid()) {
+        qCDebug(appLog) << "hasLFT reply is valid, value:" << reply.value();
         return reply.value();
+    }
+    qCWarning(appLog) << "hasLFT reply is invalid:" << reply.error().message();
     return false;
 }
 
@@ -59,9 +63,13 @@ bool DBusAnythingInterface::searchDriver(const QString& sPath, QStringList& lstD
         qCDebug(appLog) << "No LFT found for path:" << path;
         path.prepend("/data");
         if(QDir(path).exists()){
-            if(!hasLFT(path))
+            qCDebug(appLog) << "Prepended /data, new path exists:" << path;
+            if(!hasLFT(path)) {
+                qCWarning(appLog) << "Still no LFT for path:" << path;
                 return false;
+            }
         }else{
+            qCWarning(appLog) << "Prepended /data, but new path does not exist:" << path;
             return false;
         }
     }
@@ -70,7 +78,9 @@ bool DBusAnythingInterface::searchDriver(const QString& sPath, QStringList& lstD
     QDBusReply<QStringList> reply = mp_Iface->call("search", path, "^.*(\\.deb|\\.ko)$",true);
     if (reply.isValid()){
         lstDriver = reply.value();
+        qCDebug(appLog) << "Driver search successful, found" << lstDriver.size() << "drivers.";
         return true;
     }
+    qCWarning(appLog) << "Driver search failed:" << reply.error().message();
     return false;
 }
