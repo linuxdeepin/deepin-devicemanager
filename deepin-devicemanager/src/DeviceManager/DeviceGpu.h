@@ -56,6 +56,8 @@ public:
        */
     void setGpuInfo(const QMap<QString, QString> &mapInfo);
 
+    void setGpuInfoByCustom(const QMap<QString, QString> &mapInfo);
+
     /**
      * @brief name:获取名称属性值
      * @return QString 名称属性值

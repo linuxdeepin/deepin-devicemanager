@@ -34,6 +34,16 @@
             "description": "此配置项默认为无效的。如需让toml文件内容显示生效，请配置对应文件名。需保证操作者具备读取权限。",
             "permissions": "readwrite",
             "visibility": "private"
+          },
+          "CommandToGetGPUInfo": {
+            "value": "",
+            "serial": 0,
+            "flags": ["global"],
+            "name": "Command to get GPU infomation",
+            "name[zh_CN]": "获取GPU信息的命令",
+            "description": "此配置项默认为空。如果specialComType==8,程序则启用此项配置。",
+            "permissions": "readwrite",
+            "visibility": "private"
           }
   }
 }

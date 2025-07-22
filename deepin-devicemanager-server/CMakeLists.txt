@@ -2,6 +2,7 @@ project(deepin-devicemanager-server C CXX)
 
 add_subdirectory(deepin-deviceinfo)
 add_subdirectory(deepin-devicecontrol)
+add_subdirectory(customgpuinfo)
 
 #TEST--------------------------------------------------
 if (CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")

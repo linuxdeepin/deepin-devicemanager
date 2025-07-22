@@ -8,6 +8,7 @@
 #include "MipsGenerator.h"
 #include "ArmGenerator.h"
 #include "HWGenerator.h"
+#include "CustomGenerator.h"
 #include "commonfunction.h"
 
 // Qt库文件
@@ -41,6 +42,8 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
                 generator = new HWGenerator();
             else if (type == "PGUX")
                 generator = new HWGenerator();
+            else if (type == "CustomType")
+                generator = new CustomGenerator();
             else
                 generator = new HWGenerator();
         } else
