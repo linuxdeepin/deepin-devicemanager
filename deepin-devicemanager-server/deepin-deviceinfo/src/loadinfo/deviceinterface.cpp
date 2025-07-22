@@ -9,6 +9,8 @@
 
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QProcess>
+#include <QDebug>
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <polkit-qt5-1/PolkitQt1/Authority>
 #else
@@ -87,4 +89,31 @@ void DeviceInterface::setMonitorDeviceFlag(bool flag)
     } else {
         qCWarning(appLog) << "Failed to set monitor flag - parent MainJob not found";
     }
+}
+
+QString DeviceInterface::getGpuInfoByCustom(const QString &cmd, const QStringList &arguments)
+{
+    static bool firstFlag = true;
+    static QString gpuinfo;
+    if (firstFlag) {
+        firstFlag =  false;
+
+        QProcess process;
+        QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+        if (arguments.size() > 1) {
+            env.insert("DISPLAY", arguments[0]);
+            env.insert("XAUTHORITY", arguments[1]);
+        }
+        process.setProcessEnvironment(env);
+        process.start(cmd, arguments);
+        if (!process.waitForFinished(4000)) {
+            qCritical() << QString("Error executing %1 :").arg(cmd) << process.errorString();
+            return gpuinfo;
+        }
+
+        if (process.exitCode() == 0)
+            gpuinfo = QString::fromLocal8Bit(process.readAllStandardOutput());
+    }
+
+    return gpuinfo;
 }

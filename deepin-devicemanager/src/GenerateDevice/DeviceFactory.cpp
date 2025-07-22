@@ -8,6 +8,7 @@
 #include "MipsGenerator.h"
 #include "ArmGenerator.h"
 #include "HWGenerator.h"
+#include "CustomGenerator.h"
 #include "commonfunction.h"
 #include "DDLog.h"
 
@@ -52,6 +53,8 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
             } else if (type == "PGUX") {
                 qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create PanguXGenerator";
                 generator = new HWGenerator();
+            } else if (type == "CustomType") {
+                    generator = new CustomGenerator();
             } else {
                 qCDebug(appLog) << "DeviceFactory::getDeviceGenerator create HWGenerator";
                 generator = new HWGenerator();

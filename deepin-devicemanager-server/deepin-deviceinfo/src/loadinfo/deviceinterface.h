@@ -39,6 +39,8 @@ public slots:
      */
     Q_SCRIPTABLE void setMonitorDeviceFlag(bool flag);
 
+    Q_SCRIPTABLE QString getGpuInfoByCustom(const QString &cmd, const QStringList &arguments);
+
 private:
     bool getUserAuthorPasswd();
 };
