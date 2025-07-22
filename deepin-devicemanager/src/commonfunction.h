@@ -22,7 +22,10 @@ public:
         KLVV,
         KLVU,
         PGUV,
-        PGUX
+        PGUX,
+        kSpecialType6,
+        kSpecialType7,
+        kCustomType
     };
     static QString getArch();
 

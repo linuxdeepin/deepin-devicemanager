@@ -284,6 +284,15 @@ void DeviceGpu::setGpuInfo(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 }
 
+//  名称(Name) 厂商(Vendor) 型号(Model) 显存(Graphics Memory)
+void DeviceGpu::setGpuInfoByCustom(const QMap<QString, QString> &mapInfo)
+{
+    setAttribute(mapInfo, "Name", m_Name);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Model", m_Model);
+    setAttribute(mapInfo, "Graphics Memory", m_GraphicsMemory);
+}
+
 const QString &DeviceGpu::name() const
 {
     return m_Name;
