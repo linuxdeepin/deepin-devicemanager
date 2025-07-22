@@ -4,6 +4,8 @@
 
 #include "commontools.h"
 #include "DDLog.h"
+#include "EDIDParser.h"
+#include "DeviceMonitor.h"
 
 #include <QLoggingCategory>
 #include <QDateTime>
@@ -11,6 +13,8 @@
 #include <QDBusReply>
 #include <QFile>
 #include <QDir>
+#include <QProcess>
+#include <DConfig>
 
 DWIDGET_USE_NAMESPACE
 using namespace DDLog;
@@ -177,4 +181,57 @@ QString CommonTools::getBackupPath()
 {
     qCDebug(appLog) << "Getting backup path";
     return "/var/lib/deepin-devicemanager/";
+}
+
+void CommonTools::parseEDID(const QStringList &allEDIDS, const QString &input)
+{
+    for (auto edid:allEDIDS) {
+        QProcess process;
+        process.start(QString("hexdump %1").arg(edid));
+        process.waitForFinished(-1);
+
+        QString deviceInfo = process.readAllStandardOutput();
+        if (deviceInfo.isEmpty())
+            continue;
+
+        QString edidStr;
+        QStringList lines = deviceInfo.split("\n");
+        for (auto line:lines) {
+            QStringList words = line.trimmed().split(" ");
+            if (words.size() != 9)
+                continue;
+
+            words.removeAt(0);
+            QString l = words.join("");
+            l.append("\n");
+            edidStr.append(l);
+        }
+
+        lines = edidStr.split("\n");
+        if (lines.size() > 3){
+            EDIDParser edidParser;
+            QString errorMsg;
+            edidParser.setEdid(edidStr,errorMsg,"\n", false);
+
+            QMap<QString, QString> mapInfo;
+            mapInfo.insert("Vendor",edidParser.vendor());
+            mapInfo.insert("Model",edidParser.model());
+            //mapInfo.insert("Date",edidParser.releaseDate());
+            mapInfo.insert("Size",edidParser.screenSize());
+            mapInfo.insert("Display Input",input);
+
+            DeviceMonitor *device = new DeviceMonitor();
+            device->setInfoFromEdid(mapInfo);
+            DeviceManager::instance()->addMonitor(device);
+        }
+    }
+}
+
+QString CommonTools::getGpuInfoCommandFromDConfig()
+{
+    QString cmd;
+    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("CommandToGetGPUInfo"))
+        cmd = dconfig->value("CommandToGetGPUInfo").toString();
+    return cmd;
 }

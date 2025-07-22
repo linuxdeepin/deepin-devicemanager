@@ -78,6 +78,9 @@ public:
      */
     static QString getBackupPath();
 
+    static void parseEDID(const QStringList &allEDIDS, const QString &input);
+    static QString getGpuInfoCommandFromDConfig();
+
 signals:
 
 public slots:

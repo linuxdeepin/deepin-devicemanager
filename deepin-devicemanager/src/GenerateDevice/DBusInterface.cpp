@@ -58,6 +58,18 @@ void DBusInterface::refreshInfo()
     mp_Iface->asyncCall("refreshInfo");
 }
 
+bool DBusInterface::getGpuInfoByCustom(const QString &cmd, const QStringList &arguments, QString &gpuInfo)
+{
+    QDBusReply<QString> replyList = mp_Iface->call("getGpuInfoByCustom", cmd, arguments);
+    if (replyList.isValid()) {
+        gpuInfo = replyList.value();
+        return true;
+    } else {
+        qCritical() << "Error: failed to call dbus to get gpu memery info! ";
+        return false;
+    }
+}
+
 void DBusInterface::init()
 {
     qCDebug(appLog) << "DBusInterface::init start";
