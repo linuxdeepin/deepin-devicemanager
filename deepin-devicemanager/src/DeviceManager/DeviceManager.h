@@ -268,7 +268,7 @@ public:
      * @param main:主显示器信息
      * @param edid:edid信息
      */
-    void setMonitorInfoFromXrandr(const QString &main, const QString &edid, const QString &rate = "");
+    void setMonitorInfoFromXrandr(const QString &main, const QString &edid, const QString &rate = "", const QString &xrandr = "");
 
     /**
      * @brief setMonitorInfoFromDbus:设置由 dbus 获取的显示设备信息
