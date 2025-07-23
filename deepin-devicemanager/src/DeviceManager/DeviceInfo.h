@@ -263,7 +263,7 @@ public:
      * @param value：属性值
      * @return true:属性值有效
      */
-    bool isValueValid(QString &value);
+    bool isValueValid(const QString &value);
 
     /**
      * @brief setForcedDisplay：设置强制显示

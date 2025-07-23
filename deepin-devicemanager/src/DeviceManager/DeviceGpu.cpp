@@ -353,13 +353,25 @@ void DeviceGpu::setGpuInfo(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 }
 
-//  名称(Name) 厂商(Vendor) 型号(Model) 显存(Graphics Memory)
+//  名称(Name) 厂商(Vendor) 型号(Model) 版本(Version) 显存(Graphics Memory)
 void DeviceGpu::setGpuInfoByCustom(const QMap<QString, QString> &mapInfo)
 {
-    setAttribute(mapInfo, "Name", m_Name);
-    setAttribute(mapInfo, "Vendor", m_Vendor);
-    setAttribute(mapInfo, "Model", m_Model);
-    setAttribute(mapInfo, "Graphics Memory", m_GraphicsMemory);
+    QMap<QString, QString>::const_iterator it = mapInfo.constBegin();
+    for (; it != mapInfo.constEnd(); ++it) {
+        if (it.key() == "Name") {
+            m_Name = it.value();
+        } else if (it.key() == "Vendor") {
+            m_Vendor = it.value();
+        } else if (it.key() == "Model") {
+            m_Model = it.value();
+        } else if (it.key() == "Version") {
+            m_Version = it.value();
+        } else if (it.key() == "Graphics Memory") {
+            m_GraphicsMemory = it.value();
+        } else {
+            m_extraInfo.insert(it.key(), it.value());
+        }
+    }
 }
 
 const QString &DeviceGpu::name() const
@@ -426,6 +438,9 @@ void DeviceGpu::loadOtherDeviceInfo()
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
+
+    // 将m_extraInfo追加到m_LstOtherInfo中
+    appendExtraInfoToOtherInfo();
 }
 
 void DeviceGpu::loadTableData()
@@ -441,4 +456,13 @@ void DeviceGpu::loadTableData()
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Model);
     qCDebug(appLog) << "Table data loaded.";
+}
+
+void DeviceGpu::appendExtraInfoToOtherInfo()
+{
+    QMap<QString, QString>::const_iterator iter = m_extraInfo.constBegin();
+    for (; iter != m_extraInfo.constEnd(); ++iter) {
+        if (isValueValid(iter.value()))
+            m_LstOtherInfo.append(QPair<QString, QString>(iter.key(), iter.value()));
+    }
 }
