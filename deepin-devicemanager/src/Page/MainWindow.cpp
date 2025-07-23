@@ -44,6 +44,7 @@
 #include <QVBoxLayout>
 #include <QTimer>
 #include <QRegularExpression>
+#include <QtConcurrent/QtConcurrent>
 
 DWIDGET_USE_NAMESPACE
 using namespace DDLog;
@@ -587,6 +588,15 @@ void MainWindow::slotLoadingFinish(const QString &message)
 
         if (ret && lst.size() > 0) {//当设备大小为0时，显示概况信息
             mp_DeviceWidget->updateDevice(mp_DeviceWidget->currentIndex(), lst);
+
+            // bug-325731
+            if (mp_DeviceWidget->currentIndex() == QObject::tr("Monitor")) {
+                QtConcurrent::run([=](){
+                    QThread::msleep(700);
+                    emit mp_DeviceWidget->itemClicked(mp_DeviceWidget->currentIndex());
+                    qWarning() << mp_DeviceWidget->currentIndex();
+                });
+            }
         } else {
             QMap<QString, QString> overviewMap = DeviceManager::instance()->getDeviceOverview();
             mp_DeviceWidget->updateOverview(overviewMap);

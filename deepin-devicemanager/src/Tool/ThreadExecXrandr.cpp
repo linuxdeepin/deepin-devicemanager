@@ -137,6 +137,8 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
 
     QString deviceInfo;
     runCmd(deviceInfo, cmd);
+    QString xrandInfo;
+    runCmd(xrandInfo, "xrandr");
 
     QStringList lines = deviceInfo.split("\n");
     QStringList::iterator it = lines.begin();
@@ -150,10 +152,11 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
             qCDebug(appLog) << "Found new display screen:" << (*it).trimmed();
             // 新的显示屏
             QMap<QString, QString> newMap;
-            newMap.insert("mainInfo", (*it).trimmed());
+            newMap.insert("mainInfo", (*it).trimmed());            
             auto mainInfoList = (*it).trimmed().split(" ");
             if (mainInfoList.size() > 0) {
                 newMap.insert("port", mainInfoList.at(0));
+                newMap.insert("xrandr", xrandInfo);
             }
             lstMap.append(newMap);
             continue;
@@ -184,6 +187,7 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
 
         // 获取当前频率
         if ((*it).contains("*current")) {
+            // QString ss = *it;
             if ((it += 2) >= lines.end())
                 return;
             QRegularExpression regRate(".*([0-9]{1,5}\\.[0-9]{1,5}Hz).*");
@@ -291,7 +295,7 @@ void ThreadExecXrandr::getMonitorInfoFromXrandrVerbose()
         if ((*it).size() < 1)
             continue;
 
-        DeviceManager::instance()->setMonitorInfoFromXrandr((*it)["mainInfo"], (*it)["edid"], (*it)["rate"]);
+        DeviceManager::instance()->setMonitorInfoFromXrandr((*it)["mainInfo"], (*it)["edid"], (*it)["rate"], (*it)["xrandr"]);
     }
 }
 
