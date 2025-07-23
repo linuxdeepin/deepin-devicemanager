@@ -141,7 +141,7 @@ QString DeviceBaseInfo::subTitle()
     return QString("");
 }
 
-bool DeviceBaseInfo::isValueValid(QString &value)
+bool DeviceBaseInfo::isValueValid(const QString &value)
 {
     // 判断属性值是否有效
     if (value.isEmpty())
