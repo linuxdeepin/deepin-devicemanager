@@ -111,6 +111,9 @@ protected:
     void loadTableData() override;
 
 private:
+       void appendExtraInfoToOtherInfo();
+
+private:
     QString            m_Model;                   //<! 【型号】  
     QString            m_GraphicsMemory;          //<! 【显存】
     QString            m_Width;                   //<! 【位宽】
@@ -132,6 +135,7 @@ private:
     QString            m_IOPort;                  //<! 【ioport】
     QString            m_MemAddress;              //<! 【内存地址】
     // QString            m_PhysID;                  //<! 【物理ID】
+    QMap<QString, QString> m_extraInfo;
 };
 
 #endif // DEVICEGPU_H
