@@ -38,7 +38,7 @@ public:
      * @param edid:edid信息
      * @return 布尔值，true:信息设置成功；false:信息设置失败
      */
-    bool setInfoFromXradr(const QString &main, const QString &edid, const QString &rate);
+    bool setInfoFromXradr(const QString &main, const QString &edid, const QString &rate, const QString &xrandr);
 
     // 将年周转化为年月
     /**
@@ -178,7 +178,14 @@ private:
      */
     bool caculateScreenSize(const QString &edid);
 
-
+    /**
+     * @brief getMonitorResolutionMap:从xrandr字符串获取格式化
+     * @param rawText:原始xrandr输出字符串
+     * @param key:显示器编号:如 HDMI-0, VGA-1
+     * @param round:是否保留整数，如60.00Hz保留后为60Hz
+     * @return 显示器编号键值对，如{"HDMI-0": ["1920x1080@60Hz, "1920x1080@50Hz",..]}
+     */
+    QMap<QString, QStringList> getMonitorResolutionMap(QString rawText, QString key = "", bool round = true);
 
 private:
     QString         m_Model;             //<! 【型号】
@@ -186,7 +193,7 @@ private:
     QString         m_VGA;               //<! 【VGA】
     QString         m_HDMI;              //<! 【HDMI】
     QString         m_DVI;               //<! 【DVI】
-    QString         m_Interface;         //<! 【显示屏借口类型】
+    QString         m_Interface;         //<! 【显示屏接口类型】
     QString         m_ScreenSize;        //<! 【屏幕尺寸】
     QString         m_AspectRatio;       //<! 【显示比例】
     QString         m_MainScreen;        //<! 【主显示器】
@@ -199,6 +206,7 @@ private:
     int             m_Width;             //<!  屏幕的宽度
     int             m_Height;            //<!  屏幕的高度
     bool            m_IsTomlSet;
+    QString         m_RawInterface;      //<! 【原始显示屏接口类型】
 };
 
 #endif // DEVICEMONITOR_H

@@ -16,6 +16,7 @@
 
 // 其它头文件
 #include <math.h>
+#include <QProcess>
 
 DWIDGET_USE_NAMESPACE
 
@@ -95,7 +96,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_DisplayInput);
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "", m_MainScreen);
-    setAttribute(mapInfo, "Resolution", m_SupportResolution);
+//    setAttribute(mapInfo, "Resolution", m_SupportResolution);
 
     double inch = 0.0;
     QSize size(0, 0);
@@ -103,19 +104,19 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     m_ScreenSize = inchValue;
 
     // 获取当前分辨率 和 当前支持分辨率
-    QStringList listResolution = m_SupportResolution.split(" ");
-    m_SupportResolution = "";
-    foreach (const QString &word, listResolution) {
-        if (word.contains("@")) {
-            m_SupportResolution.append(word);
-            m_SupportResolution.append(", ");
-        }
-    }
+//    QStringList listResolution = m_SupportResolution.split(" ");
+//    m_SupportResolution = "";
+//    foreach (const QString &word, listResolution) {
+//        if (word.contains("@")) {
+//            m_SupportResolution.append(word);
+//            m_SupportResolution.append(", ");
+//        }
+//    }
 
     // 计算显示比例
     caculateScreenRatio();
 
-    m_SupportResolution.replace(QRegExp(", $"), "");
+//    m_SupportResolution.replace(QRegExp(", $"), "");
 
     m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
     setAttribute(mapInfo, "Serial ID", m_SerialNumber);
@@ -174,7 +175,7 @@ QString DeviceMonitor::transWeekToDate(const QString &year, const QString &week)
     return date.toString("yyyy-MM");
 }
 
-bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, const QString &rate)
+bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, const QString &rate, const QString &xrandr)
 {
     if(m_IsTomlSet)
         return false;
@@ -204,6 +205,19 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
                 } else
                     m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1)).replace("x", "×", Qt::CaseInsensitive);
             }
+        }
+
+        QMap<QString, QStringList> monitorResolutionMap = getMonitorResolutionMap(xrandr, m_RawInterface);
+
+        if (monitorResolutionMap.size() == 1) {
+            m_SupportResolution.clear();
+            foreach (const QString &word, monitorResolutionMap.value(m_RawInterface)) {
+                if (word.contains("@")) {
+                    m_SupportResolution.append(word);
+                    m_SupportResolution.append(", ");
+                }
+            }
+            m_SupportResolution.replace(QRegExp(", $"), "");
         }
         return false;
     }
@@ -324,6 +338,13 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
     QRegExp reStart("^([a-zA-Z]*)-[\\s\\S]*");
     if (reStart.exactMatch(info)) {
         m_Interface = reStart.cap(1);
+    }
+
+    if (info.contains("connected")) {
+        QStringList monitorInfoList = info.split(" ", QString::SkipEmptyParts);
+        if (monitorInfoList.size() > 0){
+            m_RawInterface = monitorInfoList.at(0).trimmed();
+        }
     }
 
     // wayland xrandr --verbose无primary信息
@@ -451,4 +472,64 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
     double inch = std::sqrt(height * height + width * width) / 2.54 / 10;
     m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(width).arg(height);
     return true;
+}
+
+QMap<QString, QStringList> DeviceMonitor::getMonitorResolutionMap(QString rawText, QString key, bool round)
+{
+    QMap<QString, QStringList> monitorResolutionMap;
+
+    if (!rawText.isEmpty()) {
+        QStringList rawLines = rawText.split("\n", QString::SkipEmptyParts);
+
+        // get the resolution
+        for (auto line : rawLines) {
+
+            // handel disconnected monitor
+            if (line.contains("disconnected", Qt::CaseInsensitive))
+                continue;
+
+            // handel connected monitor
+            if (!line.startsWith(" ") && line.contains("connected")) {
+                QStringList monitorInfoList = line.split(" ", QString::SkipEmptyParts);
+                if (monitorInfoList.size() > 0){
+                    monitorResolutionMap.insert(monitorInfoList.at(0).trimmed(), QStringList());
+                }
+            }
+
+            // handel resolution
+            if (line.startsWith(" ") && !line.contains("connect") && !line.contains(":")){
+                QStringList resolutions = line.trimmed().replace("*", "").replace("+", "").split(" ", QString::SkipEmptyParts);
+                if (resolutions.size() >= 2 && monitorResolutionMap.size() > 0) {
+                    QString resolution = resolutions.at(0);
+                    resolutions.pop_front();
+
+                    for(auto rate : resolutions) {
+                        QString realResolution;
+
+                        if (round) {
+                            bool ok = false;
+                            double realRate = rate.toDouble(&ok);
+                            if (ok) {
+                                realResolution = tr("%1@%2Hz").arg(resolution).arg(QString::number(realRate, 'g', realRate >=100 ? 3 : 2));
+                            }
+                        } else {
+                            realResolution = tr("%1@%2Hz").arg(resolution).arg(rate);
+                        }
+
+                        if (!monitorResolutionMap.value(monitorResolutionMap.lastKey()).contains(realResolution)) {
+                            monitorResolutionMap[monitorResolutionMap.lastKey()].append(realResolution);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (monitorResolutionMap.keys().contains(key)) {
+        return QMap<QString, QStringList>{{key, monitorResolutionMap.value(key)}};
+    } else {
+        monitorResolutionMap.clear();
+    }
+
+    return monitorResolutionMap;
 }
