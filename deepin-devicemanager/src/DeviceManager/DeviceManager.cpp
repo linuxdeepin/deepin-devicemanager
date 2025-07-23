@@ -1162,7 +1162,7 @@ void DeviceManager::addMonitor(DeviceMonitor *const device)
     m_ListDeviceMonitor.append(device);
 }
 
-void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString &edid, const QString &rate)
+void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString &edid, const QString &rate, const QString &xrandr)
 {
     qCDebug(appLog) << "Setting monitor info from xrandr";
     // 从xrandr中添加显示设备信息
@@ -1172,7 +1172,7 @@ void DeviceManager::setMonitorInfoFromXrandr(const QString &main, const QString 
         if (!device)
             continue;
 
-        if (device->setInfoFromXradr(main, edid, rate))
+        if (device->setInfoFromXradr(main, edid, rate, xrandr))
             return;
     }
 }
