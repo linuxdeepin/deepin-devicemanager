@@ -151,7 +151,7 @@ QString DeviceBaseInfo::subTitle()
     return QString("");
 }
 
-bool DeviceBaseInfo::isValueValid(QString &value)
+bool DeviceBaseInfo::isValueValid(const QString &value)
 {
     // qCDebug(appLog) << "DeviceBaseInfo::isValueValid called for value: " << value;
     // 判断属性值是否有效

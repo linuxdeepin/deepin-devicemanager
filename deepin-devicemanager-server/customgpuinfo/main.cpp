@@ -10,11 +10,12 @@
 
 #include <iostream>
 
-//  名称("Name") 厂商("Vendor") 型号("Model") 显存("Graphics Memory")
+//  名称("Name") 厂商("Vendor") 型号("Model") 版本(Version) 显存("Graphics Memory")
 
 constexpr char kName[] { "Name" };
 constexpr char kVendor[] { "Vendor" };
 constexpr char kModel[] { "Model" };
+constexpr char kVersion[] { "Version" };
 constexpr char kGraphicsMemory[] { "Graphics Memory" };
 
 bool getGpuBaseInfo(QMap<QString, QString> &mapInfo)
