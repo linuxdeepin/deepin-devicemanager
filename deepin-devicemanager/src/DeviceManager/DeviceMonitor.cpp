@@ -137,7 +137,9 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_DisplayInput);
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "", m_MainScreen);
-    // setAttribute(mapInfo, "Resolution", m_SupportResolution);
+    if (Common::specialComType > 0){
+        setAttribute(mapInfo, "Resolution", m_SupportResolution);
+    }
     qCDebug(appLog) << "Basic monitor attributes set - Name:" << m_Name << "Vendor:" << m_Vendor << "Model:" << m_Model;
 
     double inch = 0.0;
@@ -147,23 +149,27 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     qCDebug(appLog) << "Screen size parsed:" << m_ScreenSize << "Width:" << size.width() << "Height:" << size.height();
 
     // 获取当前分辨率 和 当前支持分辨率
-//    QStringList listResolution = m_SupportResolution.split(" ");
-//    m_SupportResolution = "";
-//    foreach (const QString &word, listResolution) {
-//        if (word.contains("@")) {
-//            m_SupportResolution.append(word);
-//            m_SupportResolution.append(", ");
-//        }
-//    }
+    if (Common::specialComType > 0){
+        QStringList listResolution = m_SupportResolution.split(" ");
+        m_SupportResolution = "";
+        foreach (const QString &word, listResolution) {
+            if (word.contains("@")) {
+                m_SupportResolution.append(word);
+                m_SupportResolution.append(", ");
+            }
+        }
+    }
 
     // 计算显示比例
     caculateScreenRatio();
 
-    #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        // m_SupportResolution.replace(QRegExp(", $"), "");
-    #else
-        // m_SupportResolution.replace(QRegularExpression(", $"), "");
-    #endif
+    if (Common::specialComType > 0){
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        m_SupportResolution.replace(QRegExp(", $"), "");
+#else
+        m_SupportResolution.replace(QRegularExpression(", $"), "");
+#endif
+    }
     qCDebug(appLog) << "Supported resolutions processed:" << m_SupportResolution;
 
     m_ProductionWeek  = transWeekToDate(mapInfo["Year of Manufacture"], mapInfo["Week of Manufacture"]);
@@ -283,21 +289,23 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
             }
         }
 
-        QMap<QString, QStringList> monitorResolutionMap = getMonitorResolutionMap(xrandr, m_RawInterface);
+        if (Common::specialComType <= 0) {
+            QMap<QString, QStringList> monitorResolutionMap = getMonitorResolutionMap(xrandr, m_RawInterface);
 
-        if (monitorResolutionMap.size() == 1) {
-            m_SupportResolution.clear();
-            foreach (const QString &word, monitorResolutionMap.value(m_RawInterface)) {
-                if (word.contains("@")) {
-                    m_SupportResolution.append(word);
-                    m_SupportResolution.append(", ");
+            if (monitorResolutionMap.size() == 1) {
+                m_SupportResolution.clear();
+                foreach (const QString &word, monitorResolutionMap.value(m_RawInterface)) {
+                    if (word.contains("@")) {
+                        m_SupportResolution.append(word);
+                        m_SupportResolution.append(", ");
+                    }
                 }
-            }
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            m_SupportResolution.remove(QRegExp(", $"));
+                m_SupportResolution.remove(QRegExp(", $"));
 #else
-            m_SupportResolution.remove(QRegularExpression(", $"));
+                m_SupportResolution.remove(QRegularExpression(", $"));
 #endif
+            }
         }
         qCDebug(appLog) << "Interface already processed, returning false";
         return false;
