@@ -150,7 +150,6 @@ void ThreadExecXrandr::loadXrandrVerboseInfo(QList<QMap<QString, QString>> &lstM
 
         // 获取当前频率
         if ((*it).contains("*current")) {
-            // QString ss = *it;
             if ((it += 2) >= lines.end())
                 return;
              QRegExp regRate(".*([0-9]{1,5}\\.[0-9]{1,5}Hz).*");
