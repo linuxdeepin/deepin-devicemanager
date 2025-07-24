@@ -742,7 +742,6 @@ const QString DeviceBaseInfo::readDeviceInfoKeyValue(const QString &key)
 {
     if (key.isEmpty())
         return QString("");
-    // qCInfo(appLog) << __FILE__ << __LINE__  << key << "after translation:"<< kk;
     QList<QPair<QString, QString> > allBaseAttribs = getBaseAttribs();
     for (const QPair<QString, QString>& pair : allBaseAttribs) {
         if (key == pair.first)
@@ -830,9 +829,9 @@ void DeviceBaseInfo::mapInfoToList()
 {
     // m_MapOtherInfo --> m_LstOtherInfo
     // QMap内容转为QList存储
-    auto iter = m_MapOtherInfo.begin();
+    QMap<QString, QString>::const_iterator iter = m_MapOtherInfo.constBegin();
 
-    for (; iter != m_MapOtherInfo.end(); ++iter) {
+    for (; iter != m_MapOtherInfo.constEnd(); ++iter) {
         if (isValueValid(iter.value()))
             m_LstOtherInfo.append(QPair<QString, QString>(iter.key(), iter.value()));
     }
