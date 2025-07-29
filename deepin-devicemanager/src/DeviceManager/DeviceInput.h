@@ -9,6 +9,17 @@
 #include "DeviceInfo.h"
 
 /**
+ * @brief The InputDeviceBusInfo class
+ * 描述InputDevice设备的Bus信息
+ */
+struct InputDeviceBusInfo {
+    QString busId;
+    QString interfaceType;
+    QString typicalDevices;
+    QString description;
+};
+
+/**
  * @brief The DeviceInput class
  * 用来描述输入设备的类
  */
@@ -171,6 +182,18 @@ private:
      */
     QString eventStrFromDeviceFiles(const QString &dfs);
 
+    /**
+     * @brief getDetailBusInfo
+     * @param busId Bus ID类别号
+     * @return
+     */
+    InputDeviceBusInfo getDetailBusInfo(const QString &busId);
+
+    /**
+     * @brief getMouseInfoFromBusDevice
+     * 实时从/proc/bus/input/devices获取设备接口信息
+     */
+    void getMouseInfoFromBusDevice();
 private:
 
     QString             m_Model;                        //<! 【型号】
