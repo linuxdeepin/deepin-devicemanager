@@ -67,7 +67,9 @@ public:
      */
     void setInfoFromEdid(const QMap<QString, QString> &mapInfo);
 
-    /**@brief:PanGuV项目里面的显示屏信息是从dbus里面获取的*/
+    void setInfoFromEdidForCustom(const QMap<QString, QString> &mapInfo);
+
+    /**@brief:华为PanGuV项目里面的显示屏信息是从dbus里面获取的*/
     /**
      * @brief setInfoFromDbus:设置PanGuV项目里面的显示屏信息
      * @param mapInfo:获取的信息map
