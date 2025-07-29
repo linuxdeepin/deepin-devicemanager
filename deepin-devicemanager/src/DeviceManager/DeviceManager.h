@@ -385,7 +385,7 @@ public:
      * @brief correctNetworkLinkStatus:校正网络连接状态
      * @param linkStatus:连接状态
      */
-    void correctNetworkLinkStatus(QString linkStatus, QString networkDriver);
+    void correctNetworkLinkStatus(const QString &linkStatus, const QString &networkDriver);
 
     /**
      * @brief networkDriver:获取所有网络驱动

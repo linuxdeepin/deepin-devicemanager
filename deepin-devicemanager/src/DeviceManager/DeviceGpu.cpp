@@ -4,6 +4,7 @@
 
 // 项目自身文件
 #include "DeviceGpu.h"
+#include "commondefine.h"
 #include "commonfunction.h"
 #include "DDLog.h"
 
@@ -198,18 +199,14 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
                     // qCDebug(appLog) << "Skipping empty item in gpu-info.";
                     continue;
                 }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-                QStringList items = allStr.split(":", QString::SkipEmptyParts);
-#else
-                QStringList items = allStr.split(":", Qt::SkipEmptyParts);
-#endif
-                if (items.size() != 2) {
+                QStringList tmpItems = allStr.split(":", QT_SKIP_EMPTY_PARTS);
+                if (tmpItems.size() != 2) {
                     // qCDebug(appLog) << "Skipping item with incorrect size in gpu-info: " << item;
                     continue;
                 }
-                if (items.first().trimmed() == "VRAM total size") {
+                if (tmpItems.first().trimmed() == "VRAM total size") {
                     bool ok;
-                    quint64 vramSize = items.last().trimmed().toULong(&ok, 16);
+                    quint64 vramSize = tmpItems.last().trimmed().toULong(&ok, 16);
                     if (ok && vramSize >= 1048576) {
                         // qCDebug(appLog) << "VRAM total size found and valid, converting.";
                         vramSize /= 1048576;
