@@ -9,6 +9,7 @@
 #include "DBusTouchPad.h"
 #include "DBusWakeupInterface.h"
 #include "DDLog.h"
+#include "commondefine.h"
 
 // Qt库文件
 #include <QLoggingCategory>
@@ -67,6 +68,7 @@ bool DeviceInput::setInfoFromlshw(const QMap<QString, QString> &mapInfo)
         qCDebug(appLog) << "Driver is empty and interface is PS/2, setting m_CanUninstall to false.";
         m_CanUninstall = false;
     }
+    getMouseInfoFromBusDevice();
 
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
@@ -177,6 +179,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setInfoFromBluetoothctl();
     qCDebug(appLog) << "Info set from Bluetoothctl.";
 
+    getMouseInfoFromBusDevice();
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
     qCDebug(appLog) << "Exiting setInfoFromHwinfo.";
@@ -361,6 +364,102 @@ QString DeviceInput::eventStrFromDeviceFiles(const QString &dfs)
     return "";
 }
 
+InputDeviceBusInfo DeviceInput::getDetailBusInfo(const QString &busId)
+{
+    InputDeviceBusInfo info;
+    info.busId = busId;
+
+    // 根据 Bus ID 查找对应的接口类型信息-只会使用 interfaceType，其他内容预留维护参考
+    static QMap<QString, InputDeviceBusInfo> busInfoMap = {
+        {"0000", {"0000", "UINPUT", "虚拟设备", "用于软件模拟输入"}},
+        {"0001", {"0001", "PCI", "特殊输入卡", "通过 PCI/PCIe 总线连接的设备"}},
+        {"0002", {"0002", "ISA", "古老 ISA 设备", "已淘汰的 ISA 接口设备"}},
+        {"0003", {"0003", "USB", "USB鼠标/键盘/手柄", "最常见的外设接口，设备路径含 usb"}},
+        {"0004", {"0004", "HIL", "HP-HIL终端设备", "历史遗留系统 (HP-HIL)"}},
+        {"0005", {"0005", "BLUETOOTH", "蓝牙鼠标/键盘", "设备名称含 bluetooth，需 rfkill 管理"}},
+        {"0006", {"0006", "VIRTUAL", "VMware/QEMU虚拟输入", "虚拟机中的输入设备"}},
+        {"0007", {"0007", "SERIAL)", "串口鼠标", "设备节点为 /dev/ttyS*"}},
+        {"0008", {"0008", "HOST", "内置键盘/触摸板", "通过主板直接连接的设备"}},
+        {"0009", {"0009", "Game Port", "游戏手柄", "15针 D-Sub 接口"}},
+        {"0010", {"0010", "PARALLEL", "老式输入设备", "/dev/parport*"}},
+        {"0011", {"0011", "PS/2", "PS/2鼠标/键盘", "圆形 6-pin 接口，设备节点为 /dev/psaux"}},
+        {"0012", {"0012", "RADIO", "无线接收器", "专用 2.4G 设备 (如罗技 Unifying)"}},
+        {"0013", {"0013", "J1939", "车载工业设备", "CAN 总线扩展"}},
+        {"0018", {"0018", "I2C", "高端触摸板/触控笔", "设备名称含 i2c，需 i2c-tools 调试"}},
+        {"0019", {"0019", "SPI", "嵌入式触控屏", "通过 SPI 总线通信"}},
+        {"001a", {"001A", "ILLUMINANCE", "环境光传感器", "部分笔记本的自动亮度调节"}},
+        {"001b", {"001B", "GDIX", "Surface Dial", "微软 Surface Dial 特殊旋转输入设备"}},
+        {"001c", {"001C", "WACOM", "数位板/绘图屏", "设备名含 wacom"}},
+        {"001d", {"001D", "UCSI", "USB Type-C输入", "新式笔记本的 USB-C 扩展设备"}}
+    };
+
+    // 查找匹配的 Bus ID (不区分大小写)
+    QString lowerBusId = busId.toLower();
+    if (busInfoMap.contains(lowerBusId)) {
+        return busInfoMap.value(lowerBusId);
+    }
+
+    // 如果没有找到匹配的，返回未知类型
+    info.interfaceType = "Unknown";
+    info.typicalDevices = "UnKnown Device";
+    info.description = QString("Unrecognized Bus ID: %1").arg(busId);
+
+    return info;
+}
+
+void DeviceInput::getMouseInfoFromBusDevice()
+{
+    QProcess process;
+    process.start("cat", QStringList() << "/proc/bus/input/devices");
+    process.waitForFinished(10000);
+    QString rawContent = process.readAllStandardOutput();
+
+    QMap<QString, QString> nameToBusMap;
+
+    if (rawContent.isEmpty()) {
+        return ;
+    }
+
+    QStringList deviceBlocks = rawContent.split("\n\n", QT_SKIP_EMPTY_PARTS);
+
+    for (const QString &block : deviceBlocks) {
+        QString bus, name;
+        QStringList lines = block.split("\n", QT_SKIP_EMPTY_PARTS);
+
+        for (const QString &line : lines) {
+            QString trimmedLine = line.trimmed();
+
+            // 提取 Bus 信息 (I: Bus=0019 ...)
+            if (trimmedLine.startsWith("I:") && trimmedLine.contains("Bus=")) {
+                QRegularExpression busRegex("Bus=([0-9a-fA-F]+)");
+                QRegularExpressionMatch match = busRegex.match(trimmedLine);
+                if (match.hasMatch()) {
+                    bus = match.captured(1);
+                }
+            }
+
+            // 提取 Name 信息 (N: Name="Sleep Button")
+            if (trimmedLine.startsWith("N:") && trimmedLine.contains("Name=")) {
+                QRegularExpression nameRegex("Name=\"([^\"]+)\"");
+                QRegularExpressionMatch match = nameRegex.match(trimmedLine);
+                if (match.hasMatch()) {
+                    name = match.captured(1);
+                }
+            }
+        }
+
+        // 如果同时找到了 name 和 bus，则添加到映射中
+        if (!name.isEmpty() && !bus.isEmpty()) {
+            nameToBusMap.insert(name, bus);
+        }
+    }
+
+    if (nameToBusMap.contains(m_Name)) {
+        QString busID = nameToBusMap.value(m_Name);
+        m_Interface = getDetailBusInfo(busID).interfaceType;
+    }
+}
+
 QString DeviceInput::getBusInfo() const
 {
     return m_SysPath;
@@ -397,7 +496,7 @@ bool DeviceInput::available()
         // qCDebug(appLog) << "driver is empty";
         m_Available = false;
     }
-    if ("PS/2" == m_Interface || "Bluetooth" == m_Interface) {
+    if ("PS/2" == m_Interface || "Bluetooth" == m_Interface || "I2C" == m_Interface) {
         // qCDebug(appLog) << "interface is PS/2 or Bluetooth";
         m_Available = true;
     }
