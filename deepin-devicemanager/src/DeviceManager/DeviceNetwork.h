@@ -92,7 +92,7 @@ public:
      * @brief correctCurrentLinkStatus
      * @param linkStatus
      */
-    void correctCurrentLinkStatus(QString linkStatus);
+    void correctCurrentLinkStatus(const QString &linkStatus);
 
     /**
      * @brief logicalName: 获取网卡逻辑名称
