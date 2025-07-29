@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "commontools.h"
+#include "commondefine.h"
 #include "DDLog.h"
 #include "EDIDParser.h"
 #include "DeviceMonitor.h"
@@ -183,45 +184,83 @@ QString CommonTools::getBackupPath()
     return "/var/lib/deepin-devicemanager/";
 }
 
-void CommonTools::parseEDID(const QStringList &allEDIDS, const QString &input)
+void CommonTools::parseEDID(const QStringList &allEDIDS, const QString &input, bool isHW)
 {
     for (auto edid:allEDIDS) {
-        QProcess process;
-        process.start(QString("hexdump %1").arg(edid));
-        process.waitForFinished(-1);
-
-        QString deviceInfo = process.readAllStandardOutput();
-        if (deviceInfo.isEmpty())
-            continue;
-
         QString edidStr;
-        QStringList lines = deviceInfo.split("\n");
-        for (auto line:lines) {
-            QStringList words = line.trimmed().split(" ");
-            if (words.size() != 9)
+        if (isHW) {
+            QProcess process;
+            process.start(QString("hexdump %1").arg(edid));
+            process.waitForFinished(-1);
+
+            QString deviceInfo = process.readAllStandardOutput();
+            if (deviceInfo.isEmpty())
                 continue;
 
-            words.removeAt(0);
-            QString l = words.join("");
-            l.append("\n");
-            edidStr.append(l);
+            QStringList lines = deviceInfo.split("\n");
+            for (auto line:lines) {
+                QStringList words = line.trimmed().split(" ");
+                if (words.size() != 9)
+                    continue;
+
+                words.removeAt(0);
+                QString l = words.join("");
+                l.append("\n");
+                edidStr.append(l);
+            }
+        } else {
+            QProcess process;
+            process.start(QString("hexdump -C %1").arg(edid));
+            process.waitForFinished(-1);
+            QString deviceInfo = process.readAllStandardOutput();
+            if (deviceInfo.isEmpty())
+                continue;
+
+            QStringList lines = deviceInfo.split("\n");
+            for (auto line: lines) {
+                if (line.trimmed().isEmpty())
+                    continue;
+                int firstSpace = line.indexOf(" ");
+                int lastPipe = line.indexOf("|");
+
+                if (firstSpace == -1 || lastPipe == -1 || firstSpace >= lastPipe)
+                    continue;
+
+                QString hexPart = line.mid(firstSpace + 2, lastPipe - firstSpace -3).trimmed();
+
+                QStringList hexBytes = hexPart.split(QRegularExpression("\\s+"));
+
+                QString lineData;
+                for (const QString &hexByte : hexBytes) {
+                    if (hexByte.length() == 2 && hexByte != "")
+                        lineData.append(hexByte);
+                }
+
+                if (lineData.length() == 32)
+                    edidStr.append(lineData + "\n");
+            }
         }
 
-        lines = edidStr.split("\n");
+        QStringList lines = edidStr.split("\n");
         if (lines.size() > 3){
             EDIDParser edidParser;
             QString errorMsg;
-            edidParser.setEdid(edidStr,errorMsg,"\n", false);
+            edidParser.setEdid(edidStr,errorMsg,"\n", isHW ? false : true);
 
             QMap<QString, QString> mapInfo;
             mapInfo.insert("Vendor",edidParser.vendor());
-            mapInfo.insert("Model",edidParser.model());
-            //mapInfo.insert("Date",edidParser.releaseDate());
+            if (isHW)
+                mapInfo.insert("Model",edidParser.model());
+            else
+                mapInfo.insert("Model",edidParser.monitorName());
             mapInfo.insert("Size",edidParser.screenSize());
             mapInfo.insert("Display Input",input);
 
             DeviceMonitor *device = new DeviceMonitor();
-            device->setInfoFromEdid(mapInfo);
+            if (isHW)
+                device->setInfoFromEdid(mapInfo);
+            else
+                device->setInfoFromEdidForCustom(mapInfo);
             DeviceManager::instance()->addMonitor(device);
         }
     }
