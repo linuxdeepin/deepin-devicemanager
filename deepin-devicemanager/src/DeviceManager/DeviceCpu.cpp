@@ -216,25 +216,25 @@ TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
 {
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "CPU ID", m_PhysicalID);
-    ret = setTomlAttribute(mapInfo, "Core ID", m_CoreID);
-    ret = setTomlAttribute(mapInfo, "Threads", m_ThreadNum);
-    ret = setTomlAttribute(mapInfo, "Frequency", m_Frequency);
-    ret = setTomlAttribute(mapInfo, "Current Frequency", m_CurFrequency);
-    ret = setTomlAttribute(mapInfo, "Max Frequency", m_MaxFrequency);
-    ret = setTomlAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
-    ret = setTomlAttribute(mapInfo, "Architecture", m_Architecture);
-    ret = setTomlAttribute(mapInfo, "CPU Family", m_Familly);
-    ret = setTomlAttribute(mapInfo, "Model", m_Model);
+    setTomlAttribute(mapInfo, "CPU ID", m_PhysicalID);
+    setTomlAttribute(mapInfo, "Core ID", m_CoreID);
+    setTomlAttribute(mapInfo, "Threads", m_ThreadNum);
+    setTomlAttribute(mapInfo, "Frequency", m_Frequency);
+    setTomlAttribute(mapInfo, "Current Frequency", m_CurFrequency);
+    setTomlAttribute(mapInfo, "Max Frequency", m_MaxFrequency);
+    setTomlAttribute(mapInfo, "BogoMIPS", m_BogoMIPS);
+    setTomlAttribute(mapInfo, "Architecture", m_Architecture);
+    setTomlAttribute(mapInfo, "CPU Family", m_Familly);
+    setTomlAttribute(mapInfo, "Model", m_Model);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
-    ret = setTomlAttribute(mapInfo, "Flags", m_Flags);
-    ret = setTomlAttribute(mapInfo, "Extensions", m_Extensions);
-    ret = setTomlAttribute(mapInfo, "L4 Cache", m_CacheL4);
-    ret = setTomlAttribute(mapInfo, "L3 Cache", m_CacheL3);
-    ret = setTomlAttribute(mapInfo, "L2 Cache", m_CacheL2);
-    ret = setTomlAttribute(mapInfo, "L1i Cache", m_CacheL1Order);
-    ret = setTomlAttribute(mapInfo, "L1d Cache", m_CacheL1Data);
+    setTomlAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
+    setTomlAttribute(mapInfo, "Flags", m_Flags);
+    setTomlAttribute(mapInfo, "Extensions", m_Extensions);
+    setTomlAttribute(mapInfo, "L4 Cache", m_CacheL4);
+    setTomlAttribute(mapInfo, "L3 Cache", m_CacheL3);
+    setTomlAttribute(mapInfo, "L2 Cache", m_CacheL2);
+    setTomlAttribute(mapInfo, "L1i Cache", m_CacheL1Order);
+    setTomlAttribute(mapInfo, "L1d Cache", m_CacheL1Data);
     ret = setTomlAttribute(mapInfo, "Stepping", m_Step);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);

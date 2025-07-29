@@ -44,19 +44,19 @@ TomlFixMethod DevicePower::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 {
     TomlFixMethod ret = TOML_None;
     // 添加基本信息    
-    ret = setTomlAttribute(mapInfo, "Model", m_Model);    
-    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
-    ret = setTomlAttribute(mapInfo, "Type", m_Type);
-    ret = setTomlAttribute(mapInfo, "Status", m_Status);
-    ret = setTomlAttribute(mapInfo, "Capacity", m_Capacity);
-    ret = setTomlAttribute(mapInfo, "Voltage", m_Voltage);
-    ret = setTomlAttribute(mapInfo, "Slot", m_Slot);
-    ret = setTomlAttribute(mapInfo, "Design Capacity", m_DesignCapacity);
-    ret = setTomlAttribute(mapInfo, "Design Voltage", m_DesignVoltage);
-    ret = setTomlAttribute(mapInfo, "SBDS Version", m_SBDSVersion);
-    ret = setTomlAttribute(mapInfo, "SBDS Serial Number", m_SBDSSerialNumber);
-    ret = setTomlAttribute(mapInfo, "SBDS Manufacture Date", m_SBDSManufactureDate);
-    ret = setTomlAttribute(mapInfo, "SBDS Chemistry", m_SBDSChemistry);
+    setTomlAttribute(mapInfo, "Model", m_Model);
+    setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    setTomlAttribute(mapInfo, "Type", m_Type);
+    setTomlAttribute(mapInfo, "Status", m_Status);
+    setTomlAttribute(mapInfo, "Capacity", m_Capacity);
+    setTomlAttribute(mapInfo, "Voltage", m_Voltage);
+    setTomlAttribute(mapInfo, "Slot", m_Slot);
+    setTomlAttribute(mapInfo, "Design Capacity", m_DesignCapacity);
+    setTomlAttribute(mapInfo, "Design Voltage", m_DesignVoltage);
+    setTomlAttribute(mapInfo, "SBDS Version", m_SBDSVersion);
+    setTomlAttribute(mapInfo, "SBDS Serial Number", m_SBDSSerialNumber);
+    setTomlAttribute(mapInfo, "SBDS Manufacture Date", m_SBDSManufactureDate);
+    setTomlAttribute(mapInfo, "SBDS Chemistry", m_SBDSChemistry);
     ret = setTomlAttribute(mapInfo, "Temperature", m_Temp);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);

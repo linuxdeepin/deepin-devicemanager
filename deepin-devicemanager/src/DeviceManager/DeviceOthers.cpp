@@ -53,14 +53,14 @@ TomlFixMethod DeviceOthers::setInfoFromTomlOneByOne(const QMap<QString, QString>
 {
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Model", m_Model);
-    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
-    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
-    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
-////Others
+    setTomlAttribute(mapInfo, "Model", m_Model);
+    setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
+    setTomlAttribute(mapInfo, "Speed", m_Speed);
+    // Others
     ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialID);
-//3. 获取设备的其它信息
+    // 3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
 }

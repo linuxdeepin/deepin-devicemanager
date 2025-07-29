@@ -54,17 +54,17 @@ TomlFixMethod DeviceMemory::setInfoFromTomlOneByOne(const QMap<QString, QString>
 {
     TomlFixMethod ret = TOML_None;
         // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Size", m_Size);
-    ret = setTomlAttribute(mapInfo, "Type", m_Type);
-    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
-    ret = setTomlAttribute(mapInfo, "Total Width", m_TotalBandwidth);
-    ret = setTomlAttribute(mapInfo, "Locator", m_Locator);
-    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    setTomlAttribute(mapInfo, "Size", m_Size);
+    setTomlAttribute(mapInfo, "Type", m_Type);
+    setTomlAttribute(mapInfo, "Speed", m_Speed);
+    setTomlAttribute(mapInfo, "Total Width", m_TotalBandwidth);
+    setTomlAttribute(mapInfo, "Locator", m_Locator);
+    setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Configured Voltage", m_ConfiguredVoltage);
-    ret = setTomlAttribute(mapInfo, "Maximum Voltage", m_MaximumVoltage);
-    ret = setTomlAttribute(mapInfo, "Minimum Voltage", m_MinimumVoltage);
-    ret = setTomlAttribute(mapInfo, "Configured Speed", m_ConfiguredSpeed);
+    setTomlAttribute(mapInfo, "Configured Voltage", m_ConfiguredVoltage);
+    setTomlAttribute(mapInfo, "Maximum Voltage", m_MaximumVoltage);
+    setTomlAttribute(mapInfo, "Minimum Voltage", m_MinimumVoltage);
+    setTomlAttribute(mapInfo, "Configured Speed", m_ConfiguredSpeed);
     ret = setTomlAttribute(mapInfo, "Data Width", m_DataBandwidth);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
