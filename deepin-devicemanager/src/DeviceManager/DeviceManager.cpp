@@ -1299,7 +1299,7 @@ DeviceBaseInfo *DeviceManager::getNetworkDevice(const QString &unique_id)
     return nullptr;
 }
 
-void DeviceManager::correctNetworkLinkStatus(QString linkStatus, QString networkDriver)
+void DeviceManager::correctNetworkLinkStatus(const QString &linkStatus, const QString &networkDriver)
 {
     if (m_ListDeviceNetwork.size() == 0)
         return;

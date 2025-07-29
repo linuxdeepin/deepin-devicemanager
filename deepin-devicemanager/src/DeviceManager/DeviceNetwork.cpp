@@ -224,7 +224,7 @@ bool DeviceNetwork::enable()
     return m_Enable;
 }
 
-void DeviceNetwork::correctCurrentLinkStatus(QString linkStatus)
+void DeviceNetwork::correctCurrentLinkStatus(const QString &linkStatus)
 {
     if (m_Link != linkStatus)
         m_Link = linkStatus;
