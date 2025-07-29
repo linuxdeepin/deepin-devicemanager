@@ -53,6 +53,12 @@ public:
     const QString &screenSize()const;
 
     /**
+     * @brief screenSize:获取监视器名称
+     * @return 监视器名称
+     */
+    const QString &monitorName()const;
+
+    /**
      * @brief width : get screen width
      * @return
      */
@@ -80,6 +86,11 @@ private:
      * @brief parseScreenSize:从edid中获取屏幕大小
      */
     void parseScreenSize();
+
+    /**
+     * @brief parseScreenSize:从edid中获取监视器名称
+     */
+    void parseMonitorName();
 
     /**
      * @brief binToDec:将二进制转换成十进制
@@ -140,6 +151,7 @@ private:
     QString                m_Model;                           // 显示屏的型号信息
     QString                m_ReleaseDate;                      // 显示屏的生产日期
     QString                m_ScreenSize;                       // 屏幕大小
+    QString                m_MonitorName;                      // 监视器名称
     bool                   m_LittleEndianMode;                 // 小端模式
     int                    m_Width;                            // width
     int                    m_Height;                           // heigth

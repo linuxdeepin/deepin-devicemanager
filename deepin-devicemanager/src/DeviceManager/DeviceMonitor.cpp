@@ -164,6 +164,17 @@ void DeviceMonitor::setInfoFromEdid(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 }
 
+void DeviceMonitor::setInfoFromEdidForCustom(const QMap<QString, QString> &mapInfo)
+{
+    setAttribute(mapInfo, "Size", m_ScreenSize);
+    setAttribute(mapInfo, "Vendor", m_Vendor);
+    setAttribute(mapInfo, "Date", m_ProductionWeek);
+    setAttribute(mapInfo, "Display Input", m_DisplayInput);
+    setAttribute(mapInfo, "Model", m_Model);
+    m_Name = m_Model;
+    getOtherMapInfo(mapInfo);
+}
+
 void DeviceMonitor::setInfoFromDbus(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo["Name"].toLower().contains(m_DisplayInput.toLower(), Qt::CaseInsensitive)) {

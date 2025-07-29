@@ -86,7 +86,7 @@ void CustomGenerator::generatorMonitorDevice()
             QStringList allEDIDS_all;
             allEDIDS_all.append(fileInfo.filePath() + "/" + "edid");
             QString interface = fileInfo.fileName().remove("card0-").remove("card1-").remove("card2-");
-            CommonTools::parseEDID(allEDIDS_all, interface);
+            CommonTools::parseEDID(allEDIDS_all, interface, false);
          }
     }
 }

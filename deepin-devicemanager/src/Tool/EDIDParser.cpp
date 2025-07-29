@@ -78,7 +78,8 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
     parseReleaseDate();
     // 解析屏幕尺寸
     parseScreenSize();
-
+    // 解析监视器名称
+    parseMonitorName();
 
     return true;
 }
@@ -101,6 +102,11 @@ const QString &EDIDParser::releaseDate()const
 const QString &EDIDParser::screenSize()const
 {
     return m_ScreenSize;
+}
+
+const QString &EDIDParser::monitorName() const
+{
+    return m_MonitorName;
 }
 
 int EDIDParser::width()
@@ -211,6 +217,66 @@ void EDIDParser::parseScreenSize()
     }
     double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;
     m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', Common::specialComType == 7 ? 0 : 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+}
+
+void EDIDParser::parseMonitorName()
+{
+    // EDID中从字节54开始有4个18字节的Descriptor Block
+    // 每个Descriptor Block可能包含显示器名称信息
+    // 显示器名称的标识符是0xFC（Display Product Name） 注意：部分机型有一些特殊，标识符为0xFE
+
+    // 4个Descriptor Block的起始字节位置
+    int descriptorStarts[4] = {54, 72, 90, 108};
+
+    for (int i = 0; i < 4; i++) {
+        int startByte = descriptorStarts[i];
+
+        // 计算行号和字节位置（每行16字节）
+        int line = startByte / 16;
+        int byteInLine = startByte % 16;
+
+        // 获取Descriptor Block的关键字节
+        QString byte0 = getBytes(line, byteInLine);      // 第0字节
+        QString byte1 = getBytes(line, byteInLine + 1);  // 第1字节
+        QString byte3 = getBytes(line, byteInLine + 3);  // 第3字节（类型标识）
+
+        // 检查是否为Display Descriptor (字节0-1为0x0000) 且类型为Display Product Name (字节3为0xFC)
+        if (byte0.toUpper() == "00" && byte1.toUpper() == "00" && (byte3.toUpper() == "FC" || byte3.toUpper() == "FE")) {
+
+            // 找到显示器名称描述符，提取ASCII字符串（字节5-17）
+            QString monitorName;
+
+            for (int j = 5; j <= 17; j++) {
+                int currentByte = startByte + j;
+                int currentLine = currentByte / 16;
+                int currentByteInLine = currentByte % 16;
+
+                QString charByte = getBytes(currentLine, currentByteInLine);
+
+                if (!charByte.isEmpty()) {
+                    int asciiValue = hexToDec(charByte).toInt();
+
+                    // ASCII可打印字符范围：32-126，0x0A为换行符，0x00为结束符
+                    if (asciiValue == 0x00 || asciiValue == 0x0A) {
+                        break; // 遇到结束符或换行符，停止解析
+                    } else if (asciiValue >= 32 && asciiValue <= 126) {
+                        monitorName.append(QChar(asciiValue));
+                    }
+                }
+            }
+
+            // 去除首尾空白字符
+            m_MonitorName = monitorName.trimmed();
+
+            // 如果找到有效的监视器名称，记录日志并返回
+            if (!m_MonitorName.isEmpty())
+                return;
+        }
+    }
+
+    // 如果没有找到有效的监视器名称，设置默认值
+    if (m_MonitorName.isEmpty())
+        m_MonitorName = "Unknown Monitor";
 }
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
