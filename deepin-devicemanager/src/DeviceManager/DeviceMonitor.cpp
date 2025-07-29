@@ -188,21 +188,22 @@ TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString
         m_IsTomlSet = true;
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Type", m_Model);
-    ret = setTomlAttribute(mapInfo, "Display Input", m_DisplayInput);
-    ret = setTomlAttribute(mapInfo, "Interface Type", m_Interface);
+    setTomlAttribute(mapInfo, "Type", m_Model);
+    setTomlAttribute(mapInfo, "Display Input", m_DisplayInput);
+    setTomlAttribute(mapInfo, "Interface Type", m_Interface);
     qCDebug(appLog) << "Basic monitor attributes set from TOML - Model:" << m_Model << "Input:" << m_DisplayInput << "Interface:" << m_Interface;
 
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Support Resolution", m_SupportResolution);
-    ret = setTomlAttribute(mapInfo, "Current Resolution", m_CurrentResolution);
-    ret = setTomlAttribute(mapInfo, "Display Ratio", m_AspectRatio);
+    setTomlAttribute(mapInfo, "Support Resolution", m_SupportResolution);
+    setTomlAttribute(mapInfo, "Current Resolution", m_CurrentResolution);
+    setTomlAttribute(mapInfo, "Display Ratio", m_AspectRatio);    
     qCDebug(appLog) << "Resolution info set - Supported:" << m_SupportResolution << "Current:" << m_CurrentResolution << "Ratio:" << m_AspectRatio;
 
-    ret = setTomlAttribute(mapInfo, "Primary Monitor", m_MainScreen);
-    ret = setTomlAttribute(mapInfo, "Size", m_ScreenSize);
-    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
-    ret = setTomlAttribute(mapInfo, "Product Date", m_ProductionWeek);
+    setTomlAttribute(mapInfo, "Primary Monitor", m_MainScreen);
+    setTomlAttribute(mapInfo, "Size", m_ScreenSize);
+    setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    setTomlAttribute(mapInfo, "Product Date", m_ProductionWeek);
+
     ret = setTomlAttribute(mapInfo, "Refresh Rate", m_RefreshRate);
     qCDebug(appLog) << "Additional info set - Primary:" << m_MainScreen << "Size:" << m_ScreenSize << "Serial:" << m_SerialNumber << "Date:" << m_ProductionWeek;
 

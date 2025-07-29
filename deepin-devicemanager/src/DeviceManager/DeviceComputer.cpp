@@ -29,10 +29,10 @@ TomlFixMethod DeviceComputer::setInfoFromTomlOneByOne(const QMap<QString, QStrin
         TomlFixMethod ret = TOML_None;
 //  must cover the  loadOtherDeviceInfo
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "HOME_URL", m_HomeUrl);
-    ret = setTomlAttribute(mapInfo, "Type", m_Type);
-    ret = setTomlAttribute(mapInfo, "vendor", m_Vendor);
-    ret = setTomlAttribute(mapInfo, "OS", m_OS);
+    setTomlAttribute(mapInfo, "HOME_URL", m_HomeUrl);
+    setTomlAttribute(mapInfo, "Type", m_Type);
+    setTomlAttribute(mapInfo, "vendor", m_Vendor);
+    setTomlAttribute(mapInfo, "OS", m_OS);
     ret = setTomlAttribute(mapInfo, "OsDescription", m_OsDescription);
     qCDebug(appLog) << "Toml attributes set: HomeUrl=" << m_HomeUrl << ", Type=" << m_Type << ", Vendor=" << m_Vendor << ", OS=" << m_OS << ", OsDescription=" << m_OsDescription;
 //3. 获取设备的其它信息

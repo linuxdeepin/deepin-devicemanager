@@ -81,12 +81,12 @@ TomlFixMethod DeviceInput::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Model", m_Model);
-    ret = setTomlAttribute(mapInfo, "Interface", m_Interface);
-    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    setTomlAttribute(mapInfo, "Model", m_Model);
+    setTomlAttribute(mapInfo, "Interface", m_Interface);
+    setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
-    ret = setTomlAttribute(mapInfo, "Maximum Current", m_MaximumPower);   // 将最大功率改为最大电流
+    setTomlAttribute(mapInfo, "Speed", m_Speed);
+    setTomlAttribute(mapInfo, "Maximum Current", m_MaximumPower);   // 将最大功率改为最大电流
     ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
 
 //3. 获取设备的其它信息
