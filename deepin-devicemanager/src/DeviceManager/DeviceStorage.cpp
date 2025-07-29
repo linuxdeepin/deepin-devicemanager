@@ -41,16 +41,16 @@ TomlFixMethod DeviceStorage::setInfoFromTomlOneByOne(const QMap<QString, QString
 {
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Media Type", m_MediaType);
-    ret = setTomlAttribute(mapInfo, "Size", m_Size);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    setTomlAttribute(mapInfo, "Media Type", m_MediaType);
+    setTomlAttribute(mapInfo, "Size", m_Size);
+    setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Firmware Version", m_FirmwareVersion);
-    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
-    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
-    ret = setTomlAttribute(mapInfo, "Interface", m_Interface);
+    setTomlAttribute(mapInfo, "Firmware Version", m_FirmwareVersion);
+    setTomlAttribute(mapInfo, "Speed", m_Speed);
+    setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    setTomlAttribute(mapInfo, "Interface", m_Interface);
     ret = setTomlAttribute(mapInfo, "Rotation Rate", m_RotationRate);
-    //3. 获取设备的其它信息
+    // 3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
 }

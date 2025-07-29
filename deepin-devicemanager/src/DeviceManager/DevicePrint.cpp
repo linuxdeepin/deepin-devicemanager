@@ -31,15 +31,15 @@ TomlFixMethod DevicePrint::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 {
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Model", m_Model);
-    ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
+    setTomlAttribute(mapInfo, "Model", m_Model);
+    setTomlAttribute(mapInfo, "Serial Number", m_SerialNumber);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Shared", m_Shared);
-    ret = setTomlAttribute(mapInfo, "URI", m_URI);
-    ret = setTomlAttribute(mapInfo, "Status", m_Status);
-    ret = setTomlAttribute(mapInfo, "Interface Type", m_InterfaceType);
+    setTomlAttribute(mapInfo, "Shared", m_Shared);
+    setTomlAttribute(mapInfo, "URI", m_URI);
+    setTomlAttribute(mapInfo, "Status", m_Status);
+    setTomlAttribute(mapInfo, "Interface Type", m_InterfaceType);
     ret = setTomlAttribute(mapInfo, "printer-make-and-model", m_MakeAndModel);
-//3. 获取设备的其它信息
+    // 3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
 }

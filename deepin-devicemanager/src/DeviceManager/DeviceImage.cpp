@@ -44,13 +44,13 @@ TomlFixMethod DeviceImage::setInfoFromTomlOneByOne(const QMap<QString, QString> 
     TomlFixMethod ret = TOML_None;
 
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Model", m_Model);
-    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
-    ret = setTomlAttribute(mapInfo, "Version", m_Version);
+    setTomlAttribute(mapInfo, "Model", m_Model);
+    setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    setTomlAttribute(mapInfo, "Version", m_Version);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
-    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    setTomlAttribute(mapInfo, "Speed", m_Speed);
+    setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
+    setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
     ret = setTomlAttribute(mapInfo, "Serial Number", m_SerialID);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
