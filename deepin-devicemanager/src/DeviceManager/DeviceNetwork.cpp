@@ -104,27 +104,27 @@ TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString
     qCDebug(appLog) << "DeviceNetwork::setInfoFromTomlOneByOne";
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Type", m_Model);
-    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
-    ret = setTomlAttribute(mapInfo, "Driver Version", m_DriverVersion);
+    setTomlAttribute(mapInfo, "Type", m_Model);
+    setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    setTomlAttribute(mapInfo, "Driver Version", m_DriverVersion);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Maximum Rate", m_Capacity);
-    ret = setTomlAttribute(mapInfo, "Negotiation Rate", m_Speed);
-    ret = setTomlAttribute(mapInfo, "Port", m_Port);
-    ret = setTomlAttribute(mapInfo, "Multicast", m_Multicast);
-    ret = setTomlAttribute(mapInfo, "Link", m_Link);
-    ret = setTomlAttribute(mapInfo, "Latency", m_Latency);
-    ret = setTomlAttribute(mapInfo, "IP", m_Ip);
-    ret = setTomlAttribute(mapInfo, "Firmware", m_Firmware);
-    ret = setTomlAttribute(mapInfo, "Duplex", m_Duplex);
-    ret = setTomlAttribute(mapInfo, "Broadcast", m_Broadcast);
-    ret = setTomlAttribute(mapInfo, "Auto Negotiation", m_Autonegotiation);
+    setTomlAttribute(mapInfo, "Maximum Rate", m_Capacity);
+    setTomlAttribute(mapInfo, "Negotiation Rate", m_Speed);
+    setTomlAttribute(mapInfo, "Port", m_Port);
+    setTomlAttribute(mapInfo, "Multicast", m_Multicast);
+    setTomlAttribute(mapInfo, "Link", m_Link);
+    setTomlAttribute(mapInfo, "Latency", m_Latency);
+    setTomlAttribute(mapInfo, "IP", m_Ip);
+    setTomlAttribute(mapInfo, "Firmware", m_Firmware);
+    setTomlAttribute(mapInfo, "Duplex", m_Duplex);
+    setTomlAttribute(mapInfo, "Broadcast", m_Broadcast);
+    setTomlAttribute(mapInfo, "Auto Negotiation", m_Autonegotiation);
 //    ret = setTomlAttribute(mapInfo, "Clock", m_Clock);
 //    ret = setTomlAttribute(mapInfo, "Width", m_Width);
-    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);
-    ret = setTomlAttribute(mapInfo, "IRQ", m_Irq);
-    ret = setTomlAttribute(mapInfo, "MAC Address", m_MACAddress);
+    setTomlAttribute(mapInfo, "Memory Address", m_Memory);
+    setTomlAttribute(mapInfo, "IRQ", m_Irq);
+    setTomlAttribute(mapInfo, "MAC Address", m_MACAddress);
     ret = setTomlAttribute(mapInfo, "Logical Name", m_LogicalName);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
