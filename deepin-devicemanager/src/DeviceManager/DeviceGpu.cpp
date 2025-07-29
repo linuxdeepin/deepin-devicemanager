@@ -168,12 +168,12 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
             foreach (const QString &item, items) {
                 if (item.isEmpty())
                     continue;
-                QStringList items = allStr.split(":", QString::SkipEmptyParts);
-                if (items.size() != 2)
+                QStringList tmpItems = allStr.split(":", QString::SkipEmptyParts);
+                if (tmpItems.size() != 2)
                     continue;
-                if (items.first().trimmed() == "VRAM total size") {
+                if (tmpItems.first().trimmed() == "VRAM total size") {
                     bool ok;
-                    quint64 vramSize = items.last().trimmed().toULong(&ok, 16);
+                    quint64 vramSize = tmpItems.last().trimmed().toULong(&ok, 16);
                     if (ok && vramSize >= 1048576) {
                         vramSize /= 1048576;
                         auto curSize = vramSize / 1024.0;
