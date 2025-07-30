@@ -116,20 +116,20 @@ TomlFixMethod DeviceBluetooth::setInfoFromTomlOneByOne(const QMap<QString, QStri
 {
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "Model", m_Model);
-    ret = setTomlAttribute(mapInfo, "Name", m_Name);
-    ret = setTomlAttribute(mapInfo, "Vendor", m_Vendor);
-    ret = setTomlAttribute(mapInfo, "Version", m_Version);
+    setTomlAttribute(mapInfo, "Model", m_Model);
+    setTomlAttribute(mapInfo, "Name", m_Name);
+    setTomlAttribute(mapInfo, "Vendor", m_Vendor);
+    setTomlAttribute(mapInfo, "Version", m_Version);
 
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
-    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
-    ret = setTomlAttribute(mapInfo, "Driver Version", m_DriverVersion);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
-    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
-    ret = setTomlAttribute(mapInfo, "Logical Name", m_LogicalName);
+    setTomlAttribute(mapInfo, "Speed", m_Speed);
+    setTomlAttribute(mapInfo, "Maximum Power", m_MaximumPower);
+    setTomlAttribute(mapInfo, "Driver Version", m_DriverVersion);
+    setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    setTomlAttribute(mapInfo, "Logical Name", m_LogicalName);
     ret = setTomlAttribute(mapInfo, "MAC Address", m_MAC);
-//3. 获取设备的其它信息
+    //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
 }

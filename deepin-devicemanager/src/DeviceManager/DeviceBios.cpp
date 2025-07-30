@@ -23,8 +23,8 @@ TomlFixMethod DeviceBios::setInfoFromTomlOneByOne(const QMap<QString, QString> &
     TomlFixMethod ret = TOML_None;
 
     ret = setTomlAttribute(mapInfo, "Version", m_Version, true);
-    ret = setTomlAttribute(mapInfo, "Product Name", m_ProductName, true);
-    ret = setTomlAttribute(mapInfo, "Chipset", m_ChipsetFamily, true);
+    setTomlAttribute(mapInfo, "Product Name", m_ProductName, true);
+    setTomlAttribute(mapInfo, "Chipset", m_ChipsetFamily, true);
     // ret = setTomlAttribute(mapInfo, "Vendor", m_Vendor,true);
     // m_IsBoard = true;
 

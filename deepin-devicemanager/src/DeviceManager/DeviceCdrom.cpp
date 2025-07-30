@@ -42,10 +42,10 @@ bool DeviceCdrom::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 TomlFixMethod DeviceCdrom::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
     TomlFixMethod ret = TOML_None;
-    ret = setTomlAttribute(mapInfo, "Model", m_Type);
-    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
-    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaxPower);
+    setTomlAttribute(mapInfo, "Model", m_Type);
+    setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    setTomlAttribute(mapInfo, "Maximum Power", m_MaxPower);
     ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
