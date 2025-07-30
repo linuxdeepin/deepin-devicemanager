@@ -288,8 +288,6 @@ QString DeviceMonitor::subTitle()
 const QString DeviceMonitor::getOverviewInfo()
 {
     QString ov;
-
-    ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
     if (Common::specialComType == 6 || Common::specialComType == 7) {
         ov = QString("(%1)").arg(m_ScreenSize);
     } else {
