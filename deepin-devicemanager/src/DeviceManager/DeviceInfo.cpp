@@ -630,8 +630,8 @@ TomlFixMethod DeviceBaseInfo::setInfoFromTomlBase(const QMap<QString, QString> &
         return TOML_Del;
     }
 
-    ret2 = setTomlAttribute(mapInfo, "Revision", m_Version);
-    ret2 = setTomlAttribute(mapInfo, "Description", m_Description);
+    setTomlAttribute(mapInfo, "Revision", m_Version);
+    setTomlAttribute(mapInfo, "Description", m_Description);
     m_VID = m_VID.toLower();
     m_PID = m_PID.toLower();
     m_VID_PID = m_VID + m_PID.remove("0x");
