@@ -39,7 +39,7 @@ using namespace DDLog;
 DeviceManager    *DeviceManager::sInstance = nullptr;
 int DeviceManager::m_CurrentXlsRow = 1;
 
-QMutex addCmdMutex;
+static QMutex addCmdMutex;
 
 DeviceManager::DeviceManager()
     : m_CpuNum(1)
@@ -398,12 +398,14 @@ QList<DeviceBaseInfo *> DeviceManager::convertDeviceList(DeviceType deviceType)
     if (deviceType == DT_Print)     {return m_ListDevicePrint;}
     if (deviceType == DT_Image)     {return m_ListDeviceImage;}
     if (deviceType == DT_Others)    {return m_ListDeviceOthers;}
+
+    return QList<DeviceBaseInfo *>();
 }
 
 DeviceBaseInfo *DeviceManager::createDevice(DeviceType deviceType)
 {
     qCDebug(appLog) << "Creating device for deviceType:" << deviceType;
-    DeviceBaseInfo *vTemp;
+    DeviceBaseInfo *vTemp { nullptr };
     if (deviceType == DT_Computer)  {vTemp = new DeviceComputer();  return vTemp;}
     if (deviceType == DT_Cpu)       {vTemp = new DeviceCpu();  return vTemp;}
     if (deviceType == DT_Bios)      {vTemp = new DeviceBios();  return vTemp;}
@@ -508,7 +510,6 @@ TomlFixMethod DeviceManager::tomlDeviceMapSet(DeviceType deviceType,  DeviceBase
         DevicePower *tomldevice = dynamic_cast<DevicePower *>(device);
         (TOML_Del == tomldevice->setInfoFromTomlBase(mapInfo)) ? ret = TOML_Del : ret = tomldevice->setInfoFromTomlOneByOne(mapInfo);
     } break;
-    default: {    } break;
     }
     return ret;
 }
@@ -518,83 +519,81 @@ QString DeviceManager::tomlDeviceReadKeyValue(DeviceType deviceType, DeviceBaseI
     if (!device)
         return QString("");
 
-    TomlFixMethod ret = TOML_None;
     switch (deviceType) {
     case DT_Null:
         break;
     case DT_Computer: {
         DeviceComputer *tomldevice = dynamic_cast<DeviceComputer *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Cpu: {
         DeviceCpu *tomldevice = dynamic_cast<DeviceCpu *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Bios: {
         DeviceBios *tomldevice = dynamic_cast<DeviceBios *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Memory: {
         DeviceMemory *tomldevice = dynamic_cast<DeviceMemory *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
-    case DT_Storage: {
+    };
+     case DT_Storage: {
         DeviceStorage *tomldevice = dynamic_cast<DeviceStorage *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Gpu: {
         DeviceGpu *tomldevice = dynamic_cast<DeviceGpu *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Monitor: {
         DeviceMonitor *tomldevice = dynamic_cast<DeviceMonitor *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Network: {
         DeviceNetwork *tomldevice = dynamic_cast<DeviceNetwork *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Audio: {
         DeviceAudio *tomldevice = dynamic_cast<DeviceAudio *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Bluetoorh: {
         DeviceBluetooth *tomldevice = dynamic_cast<DeviceBluetooth *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Keyboard: {
         DeviceInput *tomldevice = dynamic_cast<DeviceInput *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Mouse: {
         DeviceInput *tomldevice = dynamic_cast<DeviceInput *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Print: {
         DevicePrint *tomldevice = dynamic_cast<DevicePrint *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Image: {
         DeviceImage *tomldevice = dynamic_cast<DeviceImage *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Cdrom: {
         DeviceCdrom *tomldevice = dynamic_cast<DeviceCdrom *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Others: {
         DeviceOthers *tomldevice = dynamic_cast<DeviceOthers *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_OtherPCI: {
         DeviceOtherPCI *tomldevice = dynamic_cast<DeviceOtherPCI *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
+    };
     case DT_Power: {
         DevicePower *tomldevice = dynamic_cast<DevicePower *>(device);
         return tomldevice->readDeviceInfoKeyValue(key);
-    } break;
-    default: {    } break;
+    };
     }
     return QString("");
 }
@@ -602,6 +601,8 @@ QString DeviceManager::tomlDeviceReadKeyValue(DeviceType deviceType, DeviceBaseI
 bool DeviceManager::tomlSetBytomlmatchkey(DeviceType deviceType, DeviceBaseInfo *device, const QString &tomltomlmatchkey, const QString &tomltomlconfigdemanding)
 {
     Q_UNUSED(deviceType)
+    Q_UNUSED(tomltomlconfigdemanding)
+
     QMap<QString, QString> itemMap;
     QStringList keyValues = tomltomlmatchkey.split(",");
     foreach (const QString &keyValue, keyValues) {
@@ -739,10 +740,12 @@ void DeviceManager::tomlDeviceAdd(DeviceType deviceType, DeviceBaseInfo *const d
 bool DeviceManager::findByModalias(DeviceType deviceType, DeviceBaseInfo *device, const QString &modalias)
 {
     qCDebug(appLog) << "Finding by Modalias for deviceType:" << deviceType;
+
     if (modalias.isEmpty()) {
         qCDebug(appLog) << "Modalias is empty";
         return false;
     }
+
     {
         if (!device) {
             qCDebug(appLog) << "Device is null";

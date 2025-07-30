@@ -386,8 +386,7 @@ const QString DeviceMonitor::getOverviewInfo()
     qCDebug(appLog) << "Getting monitor overview information";
     QString ov;
 
-    ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
-    if (Common::specialComType == 6) {
+    if (Common::specialComType == 6 || Common::specialComType == 7) {
         ov = QString("(%1)").arg(m_ScreenSize);
     } else {
         ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
