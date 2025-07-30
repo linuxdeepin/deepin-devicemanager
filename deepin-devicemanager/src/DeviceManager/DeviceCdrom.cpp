@@ -53,10 +53,10 @@ TomlFixMethod DeviceCdrom::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 {
     qCDebug(appLog) << "DeviceCdrom::setInfoFromTomlOneByOne started.";
     TomlFixMethod ret = TOML_None;
-    ret = setTomlAttribute(mapInfo, "Model", m_Type);
-    ret = setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
-    ret = setTomlAttribute(mapInfo, "Maximum Power", m_MaxPower);
+    setTomlAttribute(mapInfo, "Model", m_Type);
+    setTomlAttribute(mapInfo, "Bus Info", m_BusInfo);
+    setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    setTomlAttribute(mapInfo, "Maximum Power", m_MaxPower);
     ret = setTomlAttribute(mapInfo, "Speed", m_Speed);
     qCDebug(appLog) << "Toml attributes set.";
 //3. 获取设备的其它信息
