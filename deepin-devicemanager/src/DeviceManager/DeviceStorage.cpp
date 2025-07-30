@@ -532,7 +532,7 @@ QString DeviceStorage::subTitle()
 
 const QString DeviceStorage::getOverviewInfo()
 {
-    QString overViewInfo = QString("%1 (%2)").arg(m_Name).arg(m_Size);
+    QString overViewInfo;
 
     if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
         overViewInfo = QString("%1 %2").arg(m_Size).arg("UFS");
