@@ -1060,9 +1060,13 @@ bool PageDriverManager::networkIsOnline()
     qCDebug(appLog) << "Network is" << (isOnline ? "online" : "offline");
     return isOnline;
 #else
-    auto interfaces = QNetworkInformation::instance()->reachability();
-    qCDebug(appLog) << "Network reachability:" << interfaces;
-    return interfaces == QNetworkInformation::Reachability::Disconnected;
+    bool networkFlag = false;
+    if (QNetworkInformation::instance()) {
+        auto interfaces = QNetworkInformation::instance()->reachability();
+        qCDebug(appLog) << "Network reachability:" << interfaces;
+        networkFlag = (interfaces == QNetworkInformation::Reachability::Disconnected);
+    }
+    return networkFlag;
 #endif
 }
 
