@@ -119,14 +119,14 @@ bool DeviceAudio::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 TomlFixMethod DeviceAudio::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
     TomlFixMethod ret = TOML_None;
-//  must cover the  loadOtherDeviceInfo
+    //  must cover the  loadOtherDeviceInfo
     // 添加基本信息
-    ret = setTomlAttribute(mapInfo, "SysFS_Path", m_SysPath);
-    ret = setTomlAttribute(mapInfo, "KernelModeDriver", m_Driver);
+    setTomlAttribute(mapInfo, "SysFS_Path", m_SysPath);
+    setTomlAttribute(mapInfo, "KernelModeDriver", m_Driver);
     // 添加其他信息,成员变量
-    ret = setTomlAttribute(mapInfo, "Chip", m_Chip);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
-    ret = setTomlAttribute(mapInfo, "Memory Address", m_Memory);
+    setTomlAttribute(mapInfo, "Chip", m_Chip);
+    setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
+    setTomlAttribute(mapInfo, "Memory Address", m_Memory);
     ret = setTomlAttribute(mapInfo, "IRQ", m_Irq);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
