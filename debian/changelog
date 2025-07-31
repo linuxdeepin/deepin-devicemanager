@@ -1,3 +1,10 @@
+deepin-devicemanager (6.0.47) unstable; urgency=medium
+
+  * chore: More logs for ui.
+  * fix: add null check for QNetworkInformation instance.
+
+ -- Wang Yu <wangyu@uniontch.com>  Thu, 31 Jul 2025 16:41:04 +0800
+
 deepin-devicemanager (6.0.46) unstable; urgency=medium
 
   * chore: update the help manual
