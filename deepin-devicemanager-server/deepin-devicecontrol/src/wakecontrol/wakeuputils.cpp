@@ -130,7 +130,12 @@ WakeupUtils::EthStatus WakeupUtils::wakeOnLanIsOpen(const QString &logicalName)
     struct ifreq ifr;
     struct ethtool_wolinfo wolinfo;
     memset(&ifr, 0, sizeof(ifr));
-    strncpy(ifr.ifr_name, logicalName.toStdString().c_str(), sizeof(logicalName.toStdString().c_str()));
+    memset(&wolinfo, 0, sizeof(wolinfo));
+
+    QByteArray nameBytes = logicalName.toLocal8Bit();
+    strncpy(ifr.ifr_name, nameBytes.constData(), IFNAMSIZ - 1);
+    ifr.ifr_name[IFNAMSIZ - 1] = '\0';
+
     wolinfo.cmd = ETHTOOL_GWOL;
     ifr.ifr_data = reinterpret_cast<char *>(&wolinfo);
     if (0 != ioctl(fd, SIOCETHTOOL, &ifr)) {
@@ -161,7 +166,12 @@ bool WakeupUtils::setWakeOnLan(const QString &logicalName, bool open)
     struct ifreq ifr;
     struct ethtool_wolinfo wolinfo;
     memset(&ifr, 0, sizeof(ifr));
-    strncpy(ifr.ifr_name, logicalName.toStdString().c_str(), sizeof(logicalName.toStdString().c_str()));
+    memset(&wolinfo, 0, sizeof(wolinfo));
+
+    QByteArray nameBytes = logicalName.toLocal8Bit();
+    strncpy(ifr.ifr_name, nameBytes.constData(), IFNAMSIZ - 1);
+    ifr.ifr_name[IFNAMSIZ - 1] = '\0';
+
     wolinfo.cmd = ETHTOOL_SWOL;
     if (open)
         wolinfo.wolopts = 0 | WAKE_MAGIC;
