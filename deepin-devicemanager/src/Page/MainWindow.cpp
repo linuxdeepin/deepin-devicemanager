@@ -533,7 +533,7 @@ void MainWindow::refreshDataBase()
     }
 }
 
-void MainWindow::slotSetPage(QString page)
+void MainWindow::slotSetPage(const QString &page)
 {
     qCDebug(appLog) << "MainWindow::slotSetPage page:" << page;
     if ("driver" == page) {

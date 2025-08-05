@@ -86,7 +86,7 @@ void DriverScanner::run()
     }
 }
 
-void DriverScanner::setDriverList(QList<DriverInfo *> lstInfo)
+void DriverScanner::setDriverList(const QList<DriverInfo *> &lstInfo)
 {
     qCDebug(appLog) << "Set driver list with" << lstInfo.size() << "items";
     m_ListDriverInfo = lstInfo;
