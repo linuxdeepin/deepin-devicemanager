@@ -969,9 +969,9 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
                 QRegExp reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
                 QStringList list = deviceInfo.split("\n");
 
-                foreach (QString item, list) {
+                foreach (QString tmpInfo, list) {
                     // Attribute 'VideoRam' (jixiaomei-PC:0.0): 2097152.  正则表达式获取2097152
-                    if (reg.exactMatch(item)) {
+                    if (reg.exactMatch(tmpInfo)) {
                         QString gpuSize = reg.cap(1);
                         int numSize = gpuSize.toInt();
                         numSize /= 1024;

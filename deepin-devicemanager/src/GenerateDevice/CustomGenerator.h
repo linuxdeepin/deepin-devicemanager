@@ -11,7 +11,7 @@
 class CustomGenerator : public DeviceGenerator
 {
 public:
-    CustomGenerator(QObject *parent = nullptr);
+    explicit CustomGenerator(QObject *parent = nullptr);
 
     /**
      * @brief generatorGpuDevice:生成显卡信息

@@ -45,7 +45,7 @@ class GenerateTask: public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    GenerateTask(DeviceType deviceType);
+    explicit GenerateTask(DeviceType deviceType);
     ~GenerateTask();
 signals:
     void finished(const QStringList &lst);
