@@ -25,7 +25,7 @@ public:
      * @brief setDriverList
      * @param lstInfo
      */
-    void setDriverList(QList<DriverInfo *> lstInfo);
+    void setDriverList(const QList<DriverInfo *> &lstInfo);
 
 signals:
     void scanInfo(const QString &info, int progress);

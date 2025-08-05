@@ -184,7 +184,7 @@ QString CmdTool::loadOemTomlFileName(const QMap<QString, QString> &mapInfo)
     return QString();
 }
 
-bool CmdTool::parseOemTomlInfo(const QString filename)
+bool CmdTool::parseOemTomlInfo(const QString &filename)
 {
     bool tomlFileRead = false;
     bool tomlPars = false;

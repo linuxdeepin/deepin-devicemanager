@@ -61,7 +61,7 @@ public:
         /**
      * @brief parseOemTomlInfo: 解析并加载厂商适配信息
      */
-    bool parseOemTomlInfo(const QString filename);
+    bool parseOemTomlInfo(const QString &filename);
 
 private:
 
