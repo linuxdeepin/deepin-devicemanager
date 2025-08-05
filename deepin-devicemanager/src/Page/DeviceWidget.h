@@ -26,7 +26,7 @@ class DeviceWidget : public DWidget
     Q_OBJECT
 public:
     explicit DeviceWidget(QWidget *parent = nullptr);
-    ~DeviceWidget();
+    ~DeviceWidget() override;
 
     /**
      * @brief updateListView:更新ListView
