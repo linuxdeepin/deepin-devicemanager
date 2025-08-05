@@ -134,7 +134,7 @@ private slots:
      * @brief slotSetPage
      * @param page
      */
-    void slotSetPage(QString page);
+    void slotSetPage(const QString &page);
 
     /**
      * @brief loadingFinishSlot:加载设备信息结束 槽

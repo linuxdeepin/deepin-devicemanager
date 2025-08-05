@@ -133,13 +133,13 @@ DBusDriverInterface::~DBusDriverInterface()
     qCDebug(appLog) << "DBusDriverInterface destructor";
 }
 
-void DBusDriverInterface::slotProcessChange(qint32 value, QString detail)
+void DBusDriverInterface::slotProcessChange(qint32 value, const QString &detail)
 {
     qCDebug(appLog) << "DBusDriverInterface::slotProcessChange";
     emit processChange(value, detail);
 }
 
-void DBusDriverInterface::slotProcessEnd(bool success, QString msg)
+void DBusDriverInterface::slotProcessEnd(bool success, const QString &msg)
 {
     qCDebug(appLog) << "DBusDriverInterface::slotProcessEnd";
     if (success) {
@@ -157,7 +157,7 @@ void DBusDriverInterface::slotCallFinished(QDBusPendingCallWatcher *watcher)
     watcher->deleteLater();
 }
 
-void DBusDriverInterface::slotDownloadProgressChanged(QStringList msg)
+void DBusDriverInterface::slotDownloadProgressChanged(const QStringList &msg)
 {
     qCDebug(appLog) << "DBusDriverInterface::slotDownloadProgressChanged";
     emit downloadProgressChanged(msg);

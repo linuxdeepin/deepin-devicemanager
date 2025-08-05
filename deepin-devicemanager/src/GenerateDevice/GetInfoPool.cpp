@@ -15,7 +15,7 @@ using namespace DDLog;
 
 static QMutex mutex;
 
-CmdTask::CmdTask(QString key, QString file, QString info, GetInfoPool *parent)
+CmdTask::CmdTask(const QString &key, const QString &file, const QString &info, GetInfoPool *parent)
     : m_Key(key)
     , m_File(file)
     , m_Info(info)

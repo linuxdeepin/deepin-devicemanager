@@ -123,13 +123,13 @@ private slots:
      * @param value 当前处理的进度
      * @param detail 发送过来的时时信息
      */
-    void slotProcessChange(qint32 value, QString detail);
+    void slotProcessChange(qint32 value, const QString &detail);
 
     /**
      * @brief slotProcessEnd 接收后台结束信号
      * @param success
      */
-    void slotProcessEnd(bool success, QString msg);
+    void slotProcessEnd(bool success, const QString &msg);
 
     /**
      * @brief slotCallFinished 更新结束结束的回调
@@ -139,7 +139,7 @@ private slots:
     /**
      * @brief slotDownloadProgressChanged 驱动下载时回调，返回驱动下载进度、速度、已下载大小信息
      */
-    void slotDownloadProgressChanged(QStringList msg);
+    void slotDownloadProgressChanged(const QStringList &msg);
 
     /**
      * @brief slotDownloadFinished 驱动下载完成
