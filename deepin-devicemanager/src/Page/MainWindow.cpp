@@ -474,7 +474,7 @@ void MainWindow::refreshDataBase()
     }
 }
 
-void MainWindow::slotSetPage(QString page)
+void MainWindow::slotSetPage(const QString &page)
 {
     if ("driver" == page) {
         if (m_IsFirstRefresh) {

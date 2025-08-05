@@ -81,7 +81,7 @@ void DriverScanner::run()
 //    emit scanFinished(SR_SUCESS);
 }
 
-void DriverScanner::setDriverList(QList<DriverInfo *> lstInfo)
+void DriverScanner::setDriverList(const QList<DriverInfo *> &lstInfo)
 {
     m_ListDriverInfo = lstInfo;
     m_IsStop = false;
