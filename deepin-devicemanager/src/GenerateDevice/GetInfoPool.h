@@ -20,7 +20,7 @@ class CmdTask: public QObject, public QRunnable
     Q_OBJECT
 public:
     CmdTask(const QString &key, const QString &file, const QString &info, GetInfoPool *parent);
-    ~CmdTask();
+    ~CmdTask() override;
 protected:
     void run() override;
 

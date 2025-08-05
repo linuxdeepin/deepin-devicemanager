@@ -16,7 +16,7 @@ class LoadInfoThread : public QThread
     Q_OBJECT
 public:
     LoadInfoThread();
-    ~LoadInfoThread();
+    ~LoadInfoThread() override;
 
     /**
      * @brief setFramework：设置架构
