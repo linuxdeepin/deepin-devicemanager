@@ -51,13 +51,12 @@ bool getGpuBaseInfo(QMap<QString, QString> &mapInfo)
 
 bool getGpuMemInfoForFTDTM(QMap<QString, QString> &mapInfo)
 {
-    const QString filePath = "/sys/kernel/debug/gc/meminfo";
+    const QString filePath = "/sys/kernel/debug/gc/total_mem";
     QString totalValue;
-    bool foundTotal = false;
 
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qCritical() << "Error opening /sys/kernel/debug/gc/meminfo:" << file.errorString();
+        qCritical() << "Error opening /sys/kernel/debug/gc/total_mem:" << file.errorString();
         return false;
     }
 
@@ -65,42 +64,30 @@ bool getGpuMemInfoForFTDTM(QMap<QString, QString> &mapInfo)
     file.close();
 
     if (content.isEmpty()) {
-        qCritical() << "Error: /sys/kernel/debug/gc/meminfo File is empty!";
+        qCritical() << "Error: /sys/kernel/debug/gc/total_mem File is empty!";
         return false;
     }
 
-    QRegularExpression system0Regex(R"(POOL SYSTEM0:*(.*?)POOL VIRTUAL:)",
-                                    QRegularExpression::DotMatchesEverythingOption);
-    QRegularExpressionMatch system0Match = system0Regex.match(content);
+    QRegularExpression regex(R"((\d+(?:\.\d+)?)\s*\(?(MB|GB|KB|B)\)?)",
+                                    QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch memInfoMatch = regex.match(content);
 
-    if (!system0Match.hasMatch()) {
-        qCritical() << "Error: Failed to find SYSTEM0 section";
+    if (!memInfoMatch.hasMatch()) {
+        qCritical() << "Error: Failed to find memory info";
         return false;
     }
 
-    QString system0Content = system0Match.captured(1);
-    QRegularExpression totalRegex(R"(Total\s*:\s*(\d+)\s+B)");
-    QRegularExpressionMatch totalMatch = totalRegex.match(system0Content);
-    if (totalMatch.hasMatch()) {
-        totalValue = totalMatch.captured(1);
-        foundTotal = true;
-    }
+    double value = memInfoMatch.captured(1).toDouble();
+    QString unit = memInfoMatch.captured(2).toUpper();
 
-    if (!foundTotal || totalValue.isEmpty()) {
-        qCritical() << "Error: Failed to find Total value in SYSTEM0 content";
-        return false;
-    }
-
-    bool ok;
-    quint64 memSize = totalValue.trimmed().toULong(&ok, 10);
-    if (ok && memSize >= 1048576) {
-        memSize /= 1048576;
-        auto curSize = memSize / 1024.0;
-        if (curSize >= 1) {
-            totalValue = QString::number(curSize) + "GB";
-        } else {
-            totalValue = QString::number(memSize) + "MB";
-        }
+    if (unit == "MB") {
+        totalValue = QString("%1GB").arg(value / 1024.0, 0, 'f', 2);
+    } else if (unit == "GB") {
+        totalValue = QString("%1GB").arg(value, 0, 'f', 2);
+    } else if (unit == "KB") {
+        totalValue = QString("%1GB").arg(value / (1024.0 * 1024.0), 0, 'f', 2);
+    } else if (unit == "B") {
+        totalValue = QString("%1GB").arg(value / (1024.0 * 1024.0 * 1024.0), 0, 'f', 2);
     }
 
     mapInfo.insert(kGraphicsMemory, totalValue);
