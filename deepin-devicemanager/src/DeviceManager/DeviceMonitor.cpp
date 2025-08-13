@@ -282,6 +282,9 @@ bool DeviceMonitor::available()
 
 QString DeviceMonitor::subTitle()
 {
+    if (Common::specialComType >= 1) {
+        m_Name.clear();
+    }
     return m_Name;
 }
 
