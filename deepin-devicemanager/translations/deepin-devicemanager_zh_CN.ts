@@ -2468,6 +2468,13 @@
         <translation>内存</translation>
     </message>
     <message>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="137"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="145"/>
+        <source>Monitor</source>
+        <translation>显示设备</translation>
+    </message>
+    <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="177"/>
         <source>Failed to enable the device</source>
         <translation>启用失败</translation>
