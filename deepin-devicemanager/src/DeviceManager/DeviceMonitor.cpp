@@ -378,6 +378,9 @@ bool DeviceMonitor::available()
 QString DeviceMonitor::subTitle()
 {
     // qCDebug(appLog) << "Getting monitor subtitle";
+    if (Common::specialComType >= 1) {
+        m_Name.clear();
+    }
     return m_Name;
 }
 
