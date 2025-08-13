@@ -491,6 +491,8 @@ void MainWindow::initWindowTitle()
 #ifdef DISABLE_DRIVER
     mp_ButtonBox->hide();
 #endif
+    // Hide hardware info and driver management buttons from title bar
+    mp_ButtonBox->hide();
 }
 
 void MainWindow::initWidgets()
