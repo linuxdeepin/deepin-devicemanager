@@ -188,6 +188,9 @@ void PageDriverRestoreInfo::setItemOperationEnable(int index, bool enable)
 
 void PageDriverRestoreInfo::slotOperatorClicked(int index, int itemIndex, DriverOperationItem::Mode mode)
 {
+    Q_UNUSED(index)
+    Q_UNUSED(mode)
+
     PageDriverTableView *view = mp_ViewBackable;
     // 设置状态
     DriverStatusItem *statusItem = new DriverStatusItem(this, ST_DRIVER_RESTORING);

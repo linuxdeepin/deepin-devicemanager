@@ -32,7 +32,9 @@
 
 using namespace PolkitQt1;
 
-PageDriverControl::PageDriverControl(QWidget *parent, QString operation, bool install, QString deviceName, QString driverName, QString printerVendor, QString printerModel)
+PageDriverControl::PageDriverControl(QWidget *parent, const QString &operation, bool install,
+                                     const QString &deviceName, const QString &driverName,
+                                     const QString &printerVendor, const QString &printerModel)
     : DDialog(parent)
     , mp_stackWidget(new DStackedWidget)
     , m_Install(install)
@@ -142,13 +144,13 @@ void PageDriverControl::slotBtnNext()
     }
 }
 
-void PageDriverControl::slotProcessChange(qint32 value, QString detail)
+void PageDriverControl::slotProcessChange(qint32 value, const QString &detail)
 {
     Q_UNUSED(detail)
     mp_WaitDialog->setValue(value);
 }
 
-void PageDriverControl::slotProcessEnd(bool sucess, QString errCode)
+void PageDriverControl::slotProcessEnd(bool sucess, const QString &errCode)
 {
     QString successStr = m_Install ? tr("Update successful") : tr("Uninstallation successful");
     QString failedStr = m_Install ? tr("Update failed") : tr("Uninstallation failed");

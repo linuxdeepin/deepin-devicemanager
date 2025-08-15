@@ -86,7 +86,7 @@ void PageListView::clear()
     mp_ListView->clearItem();
 }
 
-void PageListView::setCurType(QString type)
+void PageListView::setCurType(const QString &type)
 {
     m_CurType = type;
     mp_ListView->setCurItem(m_CurType);
