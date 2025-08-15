@@ -224,6 +224,8 @@ void PageDriverManager::scanDriverInfo()
 void PageDriverManager::slotDriverOperationClicked(int index, int itemIndex, DriverOperationItem::Mode mode)
 {
     qCDebug(appLog) << "PageDriverManager::slotDriverOperationClicked, index:" << index << "itemIndex:" << itemIndex << "mode:" << mode;
+    Q_UNUSED(itemIndex)
+
     mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(false);
     mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(false);
     mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(false);
@@ -555,7 +557,7 @@ void PageDriverManager::slotListViewWidgetItemClicked(const QString &itemStr)
 void PageDriverManager::slotBackupProgressChanged(int progress)
 {
     qCDebug(appLog) << "PageDriverManager::slotBackupProgressChanged, progress:" << progress;
-
+    Q_UNUSED(progress)
 }
 
 void PageDriverManager::slotBackupFinished(bool bsuccess)
@@ -616,9 +618,10 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
     }
 }
 
-void PageDriverManager::slotRestoreProgress(int progress, QString strDeatils)
+void PageDriverManager::slotRestoreProgress(int progress, const QString &strDeatils)
 {
     qCDebug(appLog) << "PageDriverManager::slotRestoreProgress, progress:" << progress << "details:" << strDeatils;
+    Q_UNUSED(strDeatils)
     if(mp_CurRestoreDriverInfo == nullptr) {
         qCWarning(appLog) << "Current restore driver info is null, returning.";
         return;
@@ -632,9 +635,10 @@ void PageDriverManager::slotRestoreProgress(int progress, QString strDeatils)
     }
 }
 
-void PageDriverManager::slotRestoreFinished(bool success, QString msg)
+void PageDriverManager::slotRestoreFinished(bool success, const QString &msg)
 {
     qCDebug(appLog) << "PageDriverManager::slotRestoreFinished, success:" << success << "msg:" << msg;
+    Q_UNUSED(msg)
     int index = -1;
     if (mp_CurRestoreDriverInfo) {
         index = m_ListDriverInfo.indexOf(mp_CurRestoreDriverInfo);

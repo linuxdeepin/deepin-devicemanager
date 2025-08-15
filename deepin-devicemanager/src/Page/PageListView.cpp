@@ -100,7 +100,7 @@ void PageListView::clear()
     mp_ListView->clearItem();
 }
 
-void PageListView::setCurType(QString type)
+void PageListView::setCurType(const QString &type)
 {
     qCDebug(appLog) << "PageListView::setCurType, type:" << type;
     m_CurType = type;

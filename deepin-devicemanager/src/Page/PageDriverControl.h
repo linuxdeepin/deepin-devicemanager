@@ -27,8 +27,9 @@ public:
      * @param install 标识卸载还是更新
      * @param parent
      */
-    PageDriverControl(QWidget *parent, QString operation, bool install,
-                      QString deviceName, QString driverName, QString printerVendor = "", QString printerModel = "");
+    PageDriverControl(QWidget *parent, const QString &operation, bool install,
+                      const QString &deviceName, const QString &driverName,
+                      const QString &printerVendor = "", const QString &printerModel = "");
 
     /**
      * @brief hasWidgetIsVisible 有驱动界面显示
@@ -68,13 +69,13 @@ private slots:
      * @param value 当前进度 0 ～ 100
      * @param detail 当前处理的详细信息
      */
-    void slotProcessChange(qint32 value, QString detail);
+    void slotProcessChange(qint32 value, const QString &detail);
 
     /**
      * @brief slotProcessEnd 更新处理结束的信号
      * @param sucess 更新是否成功
      */
-    void slotProcessEnd(bool sucess, QString errCode);
+    void slotProcessEnd(bool sucess, const QString &errCode);
 
     /**
      * @brief slotClose
