@@ -699,7 +699,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             qCDebug(appLog) << "Found sound device.";
             // mapInfo["Device"].contains("USB Audio") 是为了处理未识别的USB声卡 Bug-118773
             addMapInfo("hwinfo_sound", mapInfo);
-        } else if (mapInfo["Hardware Class"].contains("network")) {
+        } else if (mapInfo["Hardware Class"].contains("network") || mapInfo["Device"].toUpper().contains("WI-FI")) {
             qCDebug(appLog) << "Found network device.";
             addMapInfo("hwinfo_network", mapInfo);
         } else if ("keyboard" == mapInfo["Hardware Class"]) {
