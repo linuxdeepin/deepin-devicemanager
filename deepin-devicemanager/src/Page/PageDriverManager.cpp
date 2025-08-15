@@ -201,6 +201,8 @@ void PageDriverManager::scanDriverInfo()
 
 void PageDriverManager::slotDriverOperationClicked(int index, int itemIndex, DriverOperationItem::Mode mode)
 {
+    Q_UNUSED(itemIndex)
+
     mp_DriverInstallInfoPage->headWidget()->setReDetectEnable(false);
     mp_DriverBackupInfoPage->headWidget()->setReDetectEnable(false);
     mp_DriverRestoreInfoPage->headWidget()->setReDetectEnable(false);
@@ -489,7 +491,7 @@ void PageDriverManager::slotListViewWidgetItemClicked(const QString &itemStr)
 
 void PageDriverManager::slotBackupProgressChanged(int progress)
 {
-
+    Q_UNUSED(progress)
 }
 
 void PageDriverManager::slotBackupFinished(bool bsuccess)
@@ -539,8 +541,10 @@ void PageDriverManager::slotBackupFinished(bool bsuccess)
     }
 }
 
-void PageDriverManager::slotRestoreProgress(int progress, QString strDeatils)
+void PageDriverManager::slotRestoreProgress(int progress, const QString &strDeatils)
 {
+    Q_UNUSED(strDeatils)
+
     if(mp_CurRestoreDriverInfo == nullptr)
         return;
     if (progress >= 100) {
@@ -550,11 +554,12 @@ void PageDriverManager::slotRestoreProgress(int progress, QString strDeatils)
     }
 }
 
-void PageDriverManager::slotRestoreFinished(bool success, QString msg)
+void PageDriverManager::slotRestoreFinished(bool success, const QString &msg)
 {
-    int index = -1;
+    Q_UNUSED(msg)
+
     if (mp_CurRestoreDriverInfo) {
-        index = m_ListDriverInfo.indexOf(mp_CurRestoreDriverInfo);
+        int index = m_ListDriverInfo.indexOf(mp_CurRestoreDriverInfo);
         for (int i = 0; i < m_ListRestorableIndex.size(); i++) {
             if (index == m_ListRestorableIndex[i]) {
                 if (success) {

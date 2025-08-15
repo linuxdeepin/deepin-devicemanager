@@ -46,7 +46,7 @@ public:
      */
     void clear();
 
-    void setCurType(QString type);
+    void setCurType(const QString &type);
 
 protected:
     /**@brief:事件重写*/
