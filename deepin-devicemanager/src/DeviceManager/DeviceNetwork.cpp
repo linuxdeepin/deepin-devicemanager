@@ -160,6 +160,9 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 判断是否是无线网卡
     setIsWireless(mapInfo["SysFS ID"]);
 
+    if (mapInfo.contains("Device")) {
+        m_Name = mapInfo["Device"];
+    }
     return true;
 }
 
