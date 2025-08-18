@@ -171,12 +171,12 @@ private slots:
     /**
      * @brief slotRestoreProgress 还原进度刷新
      */
-    void slotRestoreProgress(int progress, QString strDeatils);
+    void slotRestoreProgress(int progress, const QString &strDeatils);
 
     /**
      * @brief slotRestoreFinished 还原结束
      */
-    void slotRestoreFinished(bool success, QString msg);
+    void slotRestoreFinished(bool success, const QString &msg);
 
 signals:
     void startScanning();
