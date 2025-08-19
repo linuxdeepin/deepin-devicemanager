@@ -315,6 +315,8 @@ void DetectedStatusWidget::setInstallFailedUI()
 
 void DetectedStatusWidget::setNetworkErrorUI(const QString &speed, int progressValue)
 {
+    Q_UNUSED(progressValue)
+
     hideAll();
     // Icon Label
     QIcon icon(QIcon::fromTheme(":/icons/deepin/builtin/icons/erro-96.svg"));
@@ -404,7 +406,7 @@ void DetectedStatusWidget::refreshUI(Status pageType)
         break;
     }
     case ST_DOWNLOADING: {
-        this->setDownloadUI(DR_Bluetooth, "7.00MB/s", "28.96MB", "192.78MB", 28.96 * 100 / 192.78);
+        this->setDownloadUI(DR_Bluetooth, "7.00MB/s", "28.96MB", "192.78MB", static_cast<int>(28.96 * 100 / 192.78));
         break;
     }
     case ST_INSTALL: {
@@ -427,6 +429,8 @@ void DetectedStatusWidget::refreshUI(Status pageType)
         this->setNoUpdateDriverUI("ddddddddddddddddddddddddddddddd");
         break;
     }
+    default:
+        break;
     }
 }
 

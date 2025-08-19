@@ -14,7 +14,7 @@ DWIDGET_USE_NAMESPACE
 class DriverWaitingWidget : public DWidget
 {
 public:
-    explicit DriverWaitingWidget(QString status, QWidget *parent = nullptr);
+    explicit DriverWaitingWidget(const QString &status, QWidget *parent = nullptr);
 
     /**
      * @brief setValue 设置进度条的数值
