@@ -130,6 +130,8 @@ int main(int argc, char *argv[])
 
 void notify(int argc, char *argv[])
 {
+    Q_UNUSED(argc)
+
     // 1. 连接到dbus
     if (!QDBusConnection::sessionBus().isConnected()) {
         fprintf(stderr, "Cannot connect to the D-Bus session bus./n"

@@ -37,7 +37,7 @@ public:
     static QString specialVendorType();
     static QString specialHString();
     static QString tomlFilesNameGet();
-    static void tomlFilesNameSet(QString name);
+    static void tomlFilesNameSet(const QString &name);
 
     /**
      * @brief specialComType
