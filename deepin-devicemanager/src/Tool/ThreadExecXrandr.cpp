@@ -361,7 +361,7 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
         arg.beginArray();
         int curMaxResolutionWidth = -1, curMaxResolutionHeight = -1;
         while (!arg.atEnd()) {
-            MonitorResolution resolution;
+            MonitorResolution resolution{};
             arg >> resolution;
             qCDebug(appLog) << "Found resolution:" << resolution.width << "x" << resolution.height << "@" << resolution.refreshRate;
             if (curMaxResolutionWidth == -1) {
@@ -477,21 +477,19 @@ void ThreadExecXrandr::getResolutionRateFromDBus(QList<QMap<QString, QString> > 
 
         int curResolutionWidth = -1, curResolutionHeight = -1;
         double resRate = 0;
-        {
-           MonitorResolution resolution;
-           arg >> resolution;
+        MonitorResolution resolution {};
+        arg >> resolution;
 
-            curResolutionWidth = resolution.width;
-            curResolutionHeight = resolution.height;
-            resRate = resolution.refreshRate;
-            QMap<QString,QString>infoMap;
-            QString tmpS = QString("%1×%2@").arg(curResolutionWidth).arg(curResolutionHeight)  + QString::number(resRate, 'f', 2);
-            infoMap.insert("CurResolution", tmpS + "Hz");
-            infoMap.insert("Name", tname.toString());
-            infoMap.insert("Display Input", tname.toString());
-            infoMap.insert("Manufacture", tmanufacture.toString());
-            lstMap.append(infoMap);
-        }  //end of while
+        curResolutionWidth = resolution.width;
+        curResolutionHeight = resolution.height;
+        resRate = resolution.refreshRate;
+        QMap<QString,QString>infoMap;
+        QString tmpS = QString("%1×%2@").arg(curResolutionWidth).arg(curResolutionHeight)  + QString::number(resRate, 'f', 2);
+        infoMap.insert("CurResolution", tmpS + "Hz");
+        infoMap.insert("Name", tname.toString());
+        infoMap.insert("Display Input", tname.toString());
+        infoMap.insert("Manufacture", tmanufacture.toString());
+        lstMap.append(infoMap);
     }  //end of for
 
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
