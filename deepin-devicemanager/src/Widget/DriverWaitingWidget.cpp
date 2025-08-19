@@ -12,7 +12,7 @@
 
 using namespace DDLog;
 
-DriverWaitingWidget::DriverWaitingWidget(QString status, QWidget *parent)
+DriverWaitingWidget::DriverWaitingWidget(const QString &status, QWidget *parent)
     : DWidget(parent)
     , mp_Progress(new DWaterProgress(this))
     , mp_Label(new DLabel(status, this))

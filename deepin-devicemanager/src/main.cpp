@@ -155,6 +155,8 @@ int main(int argc, char *argv[])
 void notify(int argc, char *argv[])
 {
     qCDebug(appLog) << "Starting notification process";
+    Q_UNUSED(argc)
+
     // 1. 连接到dbus
     qCDebug(appLog) << "Starting notification process";
     if (!QDBusConnection::sessionBus().isConnected()) {
