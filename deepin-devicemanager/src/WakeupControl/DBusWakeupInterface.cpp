@@ -69,9 +69,9 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QStri
                     QDBusArgument arg = v.value<QDBusVariant>().variant().value<QDBusArgument>();
                     QMap<QString, QString> allSupportWakeupDevices;
                     arg >> allSupportWakeupDevices;
-                    QStringList pathList = allSupportWakeupDevices.keys();
+                    QStringList wakeupPathList = allSupportWakeupDevices.keys();
 
-                    for (QString path : pathList) {
+                    for (QString path : wakeupPathList) {
                         if (path.contains("PS2")) {
                             mp_InputIface->call("SetWakeupDevices", path, wakeup ? "enabled" : "disabled");
                             return true;
