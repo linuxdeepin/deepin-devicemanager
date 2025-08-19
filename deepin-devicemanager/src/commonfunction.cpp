@@ -234,7 +234,7 @@ QString Common::specialHString()
     return result;
 }
 
-void Common::tomlFilesNameSet(QString name)
+void Common::tomlFilesNameSet(const QString &name)
 {
     tomlFilesName = name;
 }

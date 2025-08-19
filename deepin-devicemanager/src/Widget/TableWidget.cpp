@@ -213,6 +213,8 @@ void TableWidget::paintEvent(QPaintEvent *e)
 void TableWidget::slotShowMenu(const QPoint &point)
 {
     qCDebug(appLog) << "Showing menu";
+    Q_UNUSED(point)
+
     mp_Menu->clear();
     // 不管什么状态 导出、刷新、复制 都有
     mp_Refresh->setEnabled(true);
