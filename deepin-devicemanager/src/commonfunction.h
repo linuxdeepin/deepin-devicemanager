@@ -38,6 +38,7 @@ public:
     static QString specialHString();
     static QString tomlFilesNameGet();
     static void tomlFilesNameSet(const QString &name);
+    static bool isHwPlatform();
 
     /**
      * @brief specialComType

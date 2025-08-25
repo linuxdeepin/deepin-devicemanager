@@ -180,6 +180,8 @@ private:
      */
     bool caculateScreenSize(const QString &edid);
 
+    QString getMonitorNameFromEdid(const QString &edid);
+
     /**
      * @brief getMonitorResolutionMap:从xrandr字符串获取格式化
      * @param rawText:原始xrandr输出字符串

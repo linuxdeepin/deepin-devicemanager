@@ -205,6 +205,13 @@ void Common::tomlFilesNameSet(const QString &name)
     tomlFilesName = name;
 }
 
+bool Common::isHwPlatform()
+{
+    if (specialComType == Unknow || specialComType == NormalCom || specialComType == kCustomType)
+        return false;
+    return true;
+}
+
 QString Common::tomlFilesNameGet()
 {
     return tomlFilesName;
