@@ -204,6 +204,14 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
         }
     }
 
+    if (!Common::isHwPlatform()) {
+        QString monitorName = getMonitorNameFromEdid(edid);
+        if (!m_Model.isEmpty() && !monitorName.isEmpty() && monitorName != "Unknown Monitor") {
+            if (!m_Model.contains(monitorName))
+                return false;
+        }
+    }
+
     // 判断该显示器设备是否已经设置过从xrandr获取的消息
     if (!m_Interface.isEmpty()) {
         // 设置当前分辨率
@@ -491,6 +499,16 @@ bool DeviceMonitor::caculateScreenSize(const QString &edid)
     double inch = std::sqrt(height * height + width * width) / 2.54 / 10;
     m_ScreenSize = QString("%1 %2(%3mm×%4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(width).arg(height);
     return true;
+}
+
+QString DeviceMonitor::getMonitorNameFromEdid(const QString &edid)
+{
+    EDIDParser edidParse;
+    QString errormsg;
+    if (!edidParse.setEdid(edid, errormsg))
+        return "";
+
+    return edidParse.monitorName();
 }
 
 QMap<QString, QStringList> DeviceMonitor::getMonitorResolutionMap(QString rawText, QString key, bool round)
