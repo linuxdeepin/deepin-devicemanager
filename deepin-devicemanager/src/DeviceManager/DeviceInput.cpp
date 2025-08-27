@@ -13,6 +13,8 @@
 #include <QLoggingCategory>
 #include <QProcess>
 
+QStringList DeviceInput::m_supportInterfaces= {"PS/2", "Bluetooth", "I2C"};
+
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()
     , m_Model("")
@@ -387,9 +389,9 @@ bool DeviceInput::available()
     if (driver().isEmpty()) {
         m_Available = false;
     }
-    if ("PS/2" == m_Interface || "Bluetooth" == m_Interface || "I2C" == m_Interface) {
-        m_Available = true;
-    }
+
+    m_Available = m_supportInterfaces.contains(m_Interface, Qt::CaseInsensitive);
+
     return m_forcedDisplay ? m_forcedDisplay : m_Available;
 }
 
