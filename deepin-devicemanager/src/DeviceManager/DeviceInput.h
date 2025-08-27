@@ -208,6 +208,8 @@ private:
     bool                m_wakeupChanged = true;                //<!   记录鼠标的唤醒状态
 
     QString             m_keysToPairedDevice;           //<! 【用来标识蓝牙键盘】
+
+    static QStringList m_supportInterfaces;             //<! 【支持的所有蓝牙接口】
 };
 
 #endif // DEVICEINPUT_H

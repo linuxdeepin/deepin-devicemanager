@@ -18,6 +18,8 @@
 
 using namespace DDLog;
 
+QStringList DeviceInput::m_supportInterfaces= {"PS/2", "Bluetooth", "I2C"};
+
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()
     , m_Model("")
@@ -496,11 +498,9 @@ bool DeviceInput::available()
         // qCDebug(appLog) << "driver is empty";
         m_Available = false;
     }
-    if ("PS/2" == m_Interface || "Bluetooth" == m_Interface || "I2C" == m_Interface) {
-        // qCDebug(appLog) << "interface is PS/2 or Bluetooth";
-        m_Available = true;
-    }
-    // qCDebug(appLog) << "available end";
+
+    m_Available = m_supportInterfaces.contains(m_Interface, Qt::CaseInsensitive);
+
     return m_forcedDisplay ? m_forcedDisplay : m_Available;
 }
 
