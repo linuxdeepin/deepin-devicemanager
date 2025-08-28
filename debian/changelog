@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.51) unstable; urgency=medium
+
+  * chore: update zh_HK documentation for device manager
+
+ -- dengzhongyuan <dengzhongyuan@uniontech.com>  Thu, 28 Aug 2025 11:47:55 +0800
+
 deepin-devicemanager (6.0.50) unstable; urgency=medium
 
   * chore: update translations and add Lao language support
