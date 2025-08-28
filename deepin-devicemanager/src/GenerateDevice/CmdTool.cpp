@@ -585,9 +585,7 @@ void CmdTool::getMulHwinfoInfo(const QString &info)
             continue;
         QMap<QString, QString> mapInfo;
         getMapInfoFromHwinfo(item, mapInfo);
-        if (mapInfo["Hardware Class"] == "sound"
-                || (mapInfo["Device"].contains("USB Audio") && mapInfo["Device"].contains("snd-usb-audio"))
-                || mapInfo["Driver"].contains("snd-usb-audio")) {
+        if (mapInfo["Hardware Class"] == "sound" || (mapInfo["Device"].contains("USB Audio") && mapInfo["Device"].contains("snd-usb-audio"))) {
             // mapInfo["Device"].contains("USB Audio") 是为了处理未识别的USB声卡 Bug-118773
             addMapInfo("hwinfo_sound", mapInfo);
         } else if (mapInfo["Hardware Class"].contains("network") || mapInfo["Device"].toUpper().contains("WI-FI")) {
