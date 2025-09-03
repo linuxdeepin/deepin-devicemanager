@@ -98,7 +98,8 @@ bool getGpuMemInfoForFTDTM(QMap<QString, QString> &mapInfo)
 int main(int argc, char *argv[])
 {
     QMap<QString, QString> mapInfo;
-    if (getGpuBaseInfo(mapInfo) && getGpuMemInfoForFTDTM(mapInfo)) {
+    if (getGpuBaseInfo(mapInfo)) {
+        getGpuMemInfoForFTDTM(mapInfo);
         for (auto it = mapInfo.begin(); it != mapInfo.end(); ++it)
             std::cout << it.key().toStdString() << ": " << it.value().toStdString() << std::endl;
         return 0;
