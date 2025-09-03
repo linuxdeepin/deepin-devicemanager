@@ -2,7 +2,7 @@ Source: deepin-devicemanager
 Section: devel
 Priority: optional
 Maintainer: Packages <packages@deepin.com>
-Build-Depends: debhelper (>= 11),
+Build-Depends: debhelper-compat (= 11),
  pkg-config,
  cmake,
  libzmq3-dev,
