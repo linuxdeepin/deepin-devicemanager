@@ -18,7 +18,7 @@
 
 using namespace DDLog;
 
-QStringList DeviceInput::m_supportInterfaces= {"PS/2", "Bluetooth", "I2C"};
+QStringList DeviceInput::m_supportInterfaces= {"PS/2", "Bluetooth", "I2C", "USB"};
 
 DeviceInput::DeviceInput()
     : DeviceBaseInfo()
