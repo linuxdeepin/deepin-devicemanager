@@ -1324,7 +1324,10 @@ void DeviceManager::deleteDisableDuplicate_AudioDevice(void)
             continue;
         }
         m_ListDeviceAudio.push_back(enabledDevices.value(it));
-
+        qDebug() << enabledDevices.value(it)->name() << "is enable: " << enabledDevices.value(it)->enable();
+        if (enabledDevices.value(it)->enable()){
+            continue;
+        }
         setAudioDeviceEnable(enabledDevices.value(it), enabledDevices.value(it)->enable());
     }
     qWarning()<<"delete after: "<< m_ListDeviceAudio.size();
