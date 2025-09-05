@@ -176,7 +176,7 @@ void MainJob::updateAllDevice()
         qCDebug(appLog) << "Updating existing device info";
         m_pool->updateDeviceInfo();
     }
-    m_pool->waitForDone(-1);
+    m_pool->waitForDone(60000);
     PERF_PRINT_END("POINT-01");
     m_firstUpdate = false;
 }
