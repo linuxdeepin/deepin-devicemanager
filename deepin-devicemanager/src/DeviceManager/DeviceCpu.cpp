@@ -46,7 +46,8 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
     m_Name.replace(QRegExp("/[0-9]*$"), "");
     m_Name.replace(QRegExp("x [0-9]*$"), "");
 
-    if (Common::specialComType == Common::kSpecialType6){
+    if (Common::specialComType == Common::kSpecialType5 ||
+        Common::specialComType == Common::kSpecialType6) {
         m_Frequency = m_Frequency.replace("2.189", "2.188");
         m_MaxFrequency = m_MaxFrequency.replace("2189", "2188");
     }
