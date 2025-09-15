@@ -135,7 +135,7 @@ QString Common::checkBoardVendorFlag()
         case PGUV:
             boardVendorKey = "PGUV";
             break;
-        case PGUX:
+        case kSpecialType5:
             boardVendorKey = "PGUX";
             break;
         case kCustomType:
