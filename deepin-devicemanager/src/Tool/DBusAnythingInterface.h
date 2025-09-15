@@ -64,8 +64,8 @@ private:
 
 private:
     static std::atomic<DBusAnythingInterface *> s_Instance;
-    static std::mutex m_mutex;
-    QDBusInterface       *mp_Iface;
+    static std::mutex                           m_mutex;
+    QDBusInterface                              *mp_Iface;
 };
 
 #endif // DBUSANYTHINGINTERFACE_H

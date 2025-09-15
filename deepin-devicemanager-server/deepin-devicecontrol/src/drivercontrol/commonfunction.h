@@ -11,7 +11,8 @@
 
 #include <sys/utsname.h>
 
-static QMap<QString, QString> mapArch = {   {"aarch64", "arm64"}
+static QMap<QString, QString> mapArch = {
+    {"aarch64", "arm64"}
     , {"x86_64", "amd64"}
     , {"mips64", "mips64el"}
     , {"i386", "i386"}
