@@ -76,7 +76,7 @@ private:
 private:
     bool m_Gpu;                //<!  判断是否是gpu
     bool m_isDXcbPlatform;     //<!  判断是否是DXcbPlatform
-    QStringList m_monitorLst;
+    QStringList m_monitorLst;  //<!  DBus中反馈的显示器列表
 };
 
 #endif // THREADEXECXRANDR_H
