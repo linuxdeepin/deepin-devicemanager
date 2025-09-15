@@ -90,8 +90,7 @@ public:
     static QMap<DriverType, QString> m_MapDriverType;
     static QMap<Status, QString>     m_MapStatusIcon;
     static QMap<Status, QString>     m_MapStatusType;
-
-    static QMap<int, QString>     m_MapErrorString;
+    static QMap<int, QString>        m_MapErrorString;
 };
 
 #endif // COMMONTOOLS_H
