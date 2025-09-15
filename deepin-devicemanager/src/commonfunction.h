@@ -22,7 +22,7 @@ public:
         KLVV,
         KLVU,
         PGUV,
-        PGUX,
+        kSpecialType5,
         kSpecialType6,
         kSpecialType7,
         kCustomType
