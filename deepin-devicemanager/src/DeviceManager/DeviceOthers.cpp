@@ -43,7 +43,8 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "maxpower", m_MaximumPower);
     setAttribute(mapInfo, "speed", m_Speed);
     setAttribute(mapInfo, "logical name", m_LogicalName);
-
+    if (m_Driver.toLower() == "usbfs")
+        m_Driver.clear();
     if(m_Driver.isEmpty() && !m_Avail.compare("yes", Qt::CaseInsensitive)){
         qCDebug(appLog) << "DeviceOthers::setInfoFromLshw, driver is empty and avail is yes";
         setForcedDisplay(true);
@@ -99,7 +100,8 @@ void DeviceOthers::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Module Alias", m_Modalias);
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
     m_PhysID = m_VID_PID;
-
+    if (m_Driver.toLower() == "usbfs")
+        m_Driver.clear();
     if (mapInfo["Hardware Class"] != "fingerprint") {
         qCDebug(appLog) << "DeviceOthers::setInfoFromHwinfo, hardware class is not fingerprint";
         m_HardwareClass = "others";
