@@ -688,7 +688,7 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
     return isKernelIn;
 }
 
-void DeviceBaseInfo::setCanEnale(bool can)
+void DeviceBaseInfo::setCanEnable(bool can)
 {
     // qCDebug(appLog) << "DeviceBaseInfo::setCanEnale called with can: " << can;
     m_CanEnable = can;
