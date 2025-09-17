@@ -554,7 +554,7 @@ bool DeviceBaseInfo::driverIsKernelIn(const QString &driver)
     return !outInfo.contains("filename:");
 }
 
-void DeviceBaseInfo::setCanEnale(bool can)
+void DeviceBaseInfo::setCanEnable(bool can)
 {
     m_CanEnable = can;
 }
