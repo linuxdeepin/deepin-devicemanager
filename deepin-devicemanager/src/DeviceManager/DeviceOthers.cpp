@@ -39,7 +39,7 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
         m_Driver.clear();
     if(m_Driver.isEmpty() && !m_Avail.compare("yes", Qt::CaseInsensitive)){
         setForcedDisplay(true);
-        setCanEnale(false);
+        setCanEnable(false);
         if(!(tmp_Name.contains("fingerprint", Qt::CaseInsensitive) || tmp_Name. contains("MOH", Qt::CaseInsensitive)))
             setCanUninstall(false);
     }

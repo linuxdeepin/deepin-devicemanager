@@ -164,10 +164,10 @@ public:
     virtual bool driverIsKernelIn(const QString &driver);
 
     /**
-     * @brief setCanEnale : set can enable or not
+     * @brief setCanEnable : set can enable or not
      * @param can
      */
-    void setCanEnale(bool can);
+    void setCanEnable(bool can);
 
     /**
      * @brief canEnable : 该设备是否可以禁用
