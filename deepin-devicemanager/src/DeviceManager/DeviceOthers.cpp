@@ -48,7 +48,7 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     if(m_Driver.isEmpty() && !m_Avail.compare("yes", Qt::CaseInsensitive)){
         qCDebug(appLog) << "DeviceOthers::setInfoFromLshw, driver is empty and avail is yes";
         setForcedDisplay(true);
-        setCanEnale(false);
+        setCanEnable(false);
         if(!(tmp_Name.contains("fingerprint", Qt::CaseInsensitive) || tmp_Name. contains("MOH", Qt::CaseInsensitive)))
             setCanUninstall(false);
     }

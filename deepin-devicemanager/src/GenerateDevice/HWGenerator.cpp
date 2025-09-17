@@ -366,7 +366,7 @@ void HWGenerator::getAudioInfoFromCatAudio()
         }
 
         DeviceAudio *device = new DeviceAudio();
-        device->setCanEnale(false);
+        device->setCanEnable(false);
         device->setCanUninstall(false);
         device->setForcedDisplay(true);
         device->setInfoFromCatAudio(tempMap);
@@ -387,7 +387,7 @@ void HWGenerator::getBluetoothInfoFromHciconfig()
             continue;
         }
         DeviceBluetooth *device = new DeviceBluetooth();
-        device->setCanEnale(false);
+        device->setCanEnable(false);
         device->setForcedDisplay(true);
         device->setInfoFromHciconfig(*it);
         DeviceManager::instance()->addBluetoothDevice(device);
