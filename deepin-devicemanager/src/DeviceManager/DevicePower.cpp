@@ -7,10 +7,15 @@
 #include "commonfunction.h"
 
 // Qt库文件
-#include<QFileInfo>
+#include <QFileInfo>
+#include <QDBusInterface>
 
 // Dtk头文件
 #include <DApplication>
+
+constexpr const char* kPowerService = "com.deepin.system.Power";
+constexpr const char* kPowerPath = "/com/deepin/system/Power";
+constexpr const char* kPowerInterface = "com.deepin.system.Power";
 
 DWIDGET_USE_NAMESPACE
 
@@ -101,7 +106,19 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
         m_Temp = QString("%1 degrees C").arg(temp);
     }*/
 
-    getOtherMapInfo(mapInfo);
+    // 当前电池容量修改成通过DDE接口获得，目的是与状态栏的当前电池容量保持一致（bug#333825）
+    QMap<QString, QString> tmpMapInfo = mapInfo;
+    if (tmpMapInfo.contains("percentage")) {
+        QDBusInterface interface(kPowerService, kPowerPath, kPowerInterface, QDBusConnection::systemBus());
+        if (interface.isValid()) {
+            double tmpValue = interface.property("BatteryPercentage").toDouble();
+            tmpMapInfo["percentage"] = QString("%1%").arg(static_cast<int>(tmpValue));
+        } else {
+            qCritical() << QString("Dbus %1 is not valid!").arg(kPowerService);
+        }
+    }
+
+    getOtherMapInfo(tmpMapInfo);
     return true;
 }
 
