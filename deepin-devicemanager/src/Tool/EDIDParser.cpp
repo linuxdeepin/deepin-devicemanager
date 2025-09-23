@@ -82,7 +82,8 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
 
     // 解析厂商信息
     qCDebug(appLog) << "Parsing vendor info";
-    parserVendor();
+    parseVendor();
+
     // 解析发布日期
     qCDebug(appLog) << "Parsing release date";
     parseReleaseDate();
@@ -136,7 +137,7 @@ int EDIDParser::height()
     return m_Height;
 }
 
-void EDIDParser::parserVendor()
+void EDIDParser::parseVendor()
 {
     qCDebug(appLog) << "Parsing vendor info from EDID";
 
