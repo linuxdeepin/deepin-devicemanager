@@ -73,7 +73,7 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
     }
 
     // 解析厂商信息
-    parserVendor();
+    parseVendor();
     // 解析发布日期
     parseReleaseDate();
     // 解析屏幕尺寸
@@ -119,7 +119,7 @@ int EDIDParser::height()
     return m_Height;
 }
 
-void EDIDParser::parserVendor()
+void EDIDParser::parseVendor()
 {
     // 获取制造商信息，edid中的 08h 和 09h 是厂商信息
     // 08表示 第0行  第9个字节

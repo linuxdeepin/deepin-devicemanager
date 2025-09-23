@@ -66,16 +66,16 @@ public:
 
     /**
      * @brief height : get screen height
-     * @return
+     * @return screen height
      */
     int height();
 
 private:
 
     /**
-     * @brief parserVendor:从edid中获取厂商信息
+     * @brief parseVendor:从edid中获取厂商信息
      */
-    void parserVendor();
+    void parseVendor();
 
     /**
      * @brief parseReleaseDate:从edid中获取发布日期
@@ -154,7 +154,7 @@ private:
     QString                m_MonitorName;                      // 监视器名称
     bool                   m_LittleEndianMode;                 // 小端模式
     int                    m_Width;                            // width
-    int                    m_Height;                           // heigth
+    int                    m_Height;                           // height
     QStringList            m_ListEdid;                         // edid数据
     QMap<QString, QString> m_MapCh;                            // 二进制字符串映射到字母A-Z
 
