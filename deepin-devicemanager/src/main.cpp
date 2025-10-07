@@ -10,6 +10,8 @@
 #include "DebugTimeManager.h"
 #include "SingleDeviceManager.h"
 #include "DDLog.h"
+#include "commontools.h"
+
 #include <DApplication>
 #include <DWidgetUtil>
 #include <DLog>
@@ -110,6 +112,12 @@ int main(int argc, char *argv[])
         if (dbus.registerService("com.deepin.DeviceManagerNotify")) {
             dbus.registerObject("/com/deepin/DeviceManagerNotify", &app, QDBusConnection::ExportScriptableSlots);
             app.parseCmdLine();
+
+            QString cmd = CommonTools::getGpuInfoCommandFromDConfig();
+            if (!cmd.isEmpty()) {
+                CommonTools::preGenerateGpuInfo();
+            }
+
             app.activateWindow();
             return app.exec();
         } else {
