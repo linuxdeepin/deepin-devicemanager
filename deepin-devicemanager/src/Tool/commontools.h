@@ -80,6 +80,10 @@ public:
 
     static void parseEDID(const QStringList &allEDIDS, const QString &input, bool isHW = true);
     static QString getGpuInfoCommandFromDConfig();
+    static QString preGenerateGpuInfo();
+
+private:
+    static bool getGpuBaseInfo(QMap<QString, QString> &mapInfo);
 
 signals:
 
