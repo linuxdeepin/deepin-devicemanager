@@ -21,6 +21,14 @@ using namespace DDLog;
 #define ICON_SIZE_WIDTH 36
 #define ICON_SIZE_HEIGHT 36
 
+//  名称("Name") 厂商("Vendor") 型号("Model") 版本(Version) 显存("Graphics Memory")
+
+constexpr char kName[] { "Name" };
+constexpr char kVendor[] { "Vendor" };
+constexpr char kModel[] { "Model" };
+constexpr char kVersion[] { "Version" };
+constexpr char kGraphicsMemory[] { "Graphics Memory" };
+
 QMap<DriverType, QString> CommonTools::m_MapDriverIcon = {
     {DR_Bluetooth, QString(":/icons/deepin/builtin/icons/bluetooth.svg")}
     , {DR_Camera, QString(":/icons/deepin/builtin/icons/image.svg")}
@@ -256,4 +264,75 @@ QString CommonTools::getGpuInfoCommandFromDConfig()
     if (dconfig && dconfig->isValid() && dconfig->keyList().contains("CommandToGetGPUInfo"))
         cmd = dconfig->value("CommandToGetGPUInfo").toString();
     return cmd;
+}
+
+QString CommonTools::preGenerateGpuInfo()
+{
+    static QString gpuInfo { "" };
+
+    if (gpuInfo.isEmpty()) {
+        QStringList arguments;
+        QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+        QString display = env.value("DISPLAY");
+        QString xauthority = env.value("XAUTHORITY");
+        if (display.isEmpty() || xauthority.isEmpty()) {
+            qCritical() << "DISPLAY or XAUTHORITY is not set!";
+        } else {
+            arguments << display << xauthority;
+        }
+
+        QDBusInterface iface("org.deepin.DeviceInfo",
+                             "/org/deepin/DeviceInfo",
+                             "org.deepin.DeviceInfo",
+                             QDBusConnection::systemBus());
+        if (iface.isValid()) {
+            QDBusReply<QString> replyList = iface.call("getGpuInfoByCustom", arguments, gpuInfo);
+            if (replyList.isValid()) {
+                gpuInfo = replyList.value();
+            } else {
+                qCritical() << "Error: failed to call dbus to get gpu memery info! ";
+            }
+        }
+
+        QMap<QString, QString> mapInfo;
+        if (getGpuBaseInfo(mapInfo)) {
+            for (auto it = mapInfo.begin(); it != mapInfo.end(); ++it) {
+                QString tmpInfo = it.key() + ": " + it.value() + "\n";
+                gpuInfo.append(tmpInfo);
+            }
+        }
+    }
+
+    return gpuInfo;
+}
+
+bool CommonTools::getGpuBaseInfo(QMap<QString, QString> &mapInfo)
+{
+    QProcess process;
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    process.setProcessEnvironment(env);
+    process.start("/usr/bin/glxinfo", QStringList() << "-B");
+    if (!process.waitForFinished()) {
+        qCritical() << "Error executing glxinfo:" << process.errorString();
+        return false;
+    }
+
+    QString output = QString::fromLocal8Bit(process.readAllStandardOutput());
+    QStringList lines = output.split('\n');
+    QRegularExpression regex("^([^:]+):\\s*(.+)$");
+    for (const QString &line : lines) {
+        QRegularExpressionMatch match = regex.match(line);
+        if (match.hasMatch()) {
+            QString key = match.captured(1).trimmed();
+            QString value = match.captured(2).trimmed();
+            if (key == "OpenGL renderer string") {
+                mapInfo.insert(kName, value);
+                mapInfo.insert(kModel, value);
+            } else if (key == "OpenGL vendor string") {
+                mapInfo.insert(kVendor, value);
+            }
+        }
+    }
+
+    return true;
 }

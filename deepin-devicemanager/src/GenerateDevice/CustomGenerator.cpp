@@ -26,18 +26,7 @@ void CustomGenerator::generatorGpuDevice()
         return;
     }
 
-    QStringList arguments;
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    QString display = env.value("DISPLAY");
-    QString xauthority = env.value("XAUTHORITY");
-    if (display.isEmpty() || xauthority.isEmpty()) {
-        qWarning() << "DISPLAY or XAUTHORITY is not set!";
-    } else {
-        arguments << display << xauthority;
-    }
-
-    QString tmpGpuInfo;
-    DBusInterface::getInstance()->getGpuInfoByCustom(cmd, arguments, tmpGpuInfo);
+    QString tmpGpuInfo = CommonTools::preGenerateGpuInfo();
     if (tmpGpuInfo.isEmpty()) {
         qCritical() << "Failed to get gpu info by commad " << cmd;
         return;
