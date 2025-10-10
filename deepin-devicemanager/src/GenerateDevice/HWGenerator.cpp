@@ -281,7 +281,7 @@ void HWGenerator::generatorDiskDevice()
                 tempMap["Name"] = "nouse";
 
             if (Common::specialComType == 2) {
-                tempMap["Interface"] = "UFS 3.1";
+                tempMap["Interface"] = "UFS";
             }
 
             // 读取interface版本
@@ -297,10 +297,10 @@ void HWGenerator::generatorDiskDevice()
                     exitCode = process.exitCode();
                     if (exitCode != 127 && exitCode != 126) {
                         deviceInfo = process.readAllStandardOutput();
-                        if (deviceInfo.trimmed() == "310") {
-                            tempMap["interface"] = "UFS 3.1";
-                        } else if  (deviceInfo.trimmed() == "300")
-                            tempMap["interface"] = "UFS 3.0";
+
+                        if (!deviceInfo.trimmed().isEmpty()) {
+                            tempMap["interface"] = "UFS";
+                        }
                     }
                 }
             }
