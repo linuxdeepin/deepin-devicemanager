@@ -349,6 +349,14 @@ void TableWidget::slotShowMenu(const QPoint &point)
         }
         mp_Menu->addAction(mp_WakeupMachine);
     }
+
+    // 根据网卡情况判断是否支持禁用
+    QVariant canDisableForNetwork = item->data(Qt::UserRole + 3);
+    if (canDisableForNetwork.isValid()) {
+        if (canDisableForNetwork.toString() == "false")
+            mp_Menu->removeAction(mp_Enable);
+    }
+
     mp_Menu->exec(QCursor::pos());
 }
 
