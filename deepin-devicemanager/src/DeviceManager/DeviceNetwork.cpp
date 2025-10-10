@@ -283,6 +283,14 @@ QString DeviceNetwork::hwAddress()
     return m_MACAddress;
 }
 
+bool DeviceNetwork::canDisable()
+{
+    if (m_SysPath.isEmpty()) {
+        return false;
+    }
+    return true;
+}
+
 void DeviceNetwork::initFilterKey()
 {
     qCDebug(appLog) << "DeviceNetwork::initFilterKey";

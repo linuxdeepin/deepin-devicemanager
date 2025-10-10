@@ -306,6 +306,10 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
             qCDebug(appLog) << "Device is disabled, disabling wakeup action.";
         }
         mp_Menu->addAction(mp_WakeupMachine);
+
+        // 根据网卡情况判断是否支持禁用
+        if (!network->canDisable())
+            mp_Menu->removeAction(mp_Enable);
     }
 
     mp_Menu->exec(QCursor::pos());
