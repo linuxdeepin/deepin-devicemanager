@@ -287,6 +287,7 @@ void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<Q
         DeviceNetwork *network = dynamic_cast<DeviceNetwork *>(info);
         if (network) {
             menuControl.append(network->logicalName());
+            menuControl.append(network->canDisable() ? "true" : "false");
         }
 
         menuControlList.append(menuControl);

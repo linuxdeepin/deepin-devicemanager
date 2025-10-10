@@ -262,6 +262,10 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
         if (!mp_Device->enable())
             mp_WakeupMachine->setEnabled(false);
         mp_Menu->addAction(mp_WakeupMachine);
+
+        // 根据网卡情况判断是否支持禁用
+        if (!network->canDisable())
+            mp_Menu->removeAction(mp_Enable);
     }
 
     mp_Menu->exec(QCursor::pos());

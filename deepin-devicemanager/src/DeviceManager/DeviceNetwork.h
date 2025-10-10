@@ -112,6 +112,8 @@ public:
      */
     QString hwAddress();
 
+    bool canDisable();
+
 protected:
 
     /**
