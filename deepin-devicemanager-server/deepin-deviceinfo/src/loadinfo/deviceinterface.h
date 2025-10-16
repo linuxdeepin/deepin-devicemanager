@@ -39,10 +39,11 @@ public slots:
      */
     Q_SCRIPTABLE void setMonitorDeviceFlag(bool flag);
 
-    Q_SCRIPTABLE QString getGpuInfoByCustom(const QString &cmd, const QStringList &arguments);
+    Q_SCRIPTABLE QString getGpuInfoForFTDTM();
 
 private:
     bool getUserAuthorPasswd();
+    bool getGpuMemInfoForFTDTM(QMap<QString, QString> &mapInfo);
 };
 
 #endif   // DEVICEINTERFACE_H
