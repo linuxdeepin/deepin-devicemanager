@@ -20,15 +20,9 @@ CustomGenerator::CustomGenerator(QObject *parent)
 
 void CustomGenerator::generatorGpuDevice()
 {
-    QString cmd = CommonTools::getGpuInfoCommandFromDConfig();
-    if (cmd.isEmpty()) {
-        DeviceGenerator::generatorGpuDevice();
-        return;
-    }
-
     QString tmpGpuInfo = CommonTools::preGenerateGpuInfo();
     if (tmpGpuInfo.isEmpty()) {
-        qCritical() << "Failed to get gpu info by commad " << cmd;
+        qCritical() << "Error: Failed to get gpu info!";
         return;
     }
 

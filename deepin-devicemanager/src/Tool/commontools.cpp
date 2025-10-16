@@ -268,42 +268,40 @@ QString CommonTools::getGpuInfoCommandFromDConfig()
 
 QString CommonTools::preGenerateGpuInfo()
 {
-    static QString gpuInfo { "" };
+    static QString gpuBaseInfo { "" };
+    static QString gpuMemInfo { "" };
 
-    if (gpuInfo.isEmpty()) {
-        QStringList arguments;
-        QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-        QString display = env.value("DISPLAY");
-        QString xauthority = env.value("XAUTHORITY");
-        if (display.isEmpty() || xauthority.isEmpty()) {
-            qCritical() << "DISPLAY or XAUTHORITY is not set!";
-        } else {
-            arguments << display << xauthority;
+    if (gpuBaseInfo.isEmpty()) {
+        QMap<QString, QString> mapInfo;
+        if (getGpuBaseInfo(mapInfo)) {
+            for (auto it = mapInfo.begin(); it != mapInfo.end(); ++it) {
+                QString tmpInfo = it.key() + ": " + it.value() + "\n";
+                gpuBaseInfo.append(tmpInfo);
+            }
         }
+    }
 
+    if (gpuBaseInfo.isEmpty()) {
+        qCritical() << "Error: failed to get gpu base info!";
+        return "";
+    }
+
+    if (gpuMemInfo.isEmpty()) {
         QDBusInterface iface("org.deepin.DeviceInfo",
                              "/org/deepin/DeviceInfo",
                              "org.deepin.DeviceInfo",
                              QDBusConnection::systemBus());
         if (iface.isValid()) {
-            QDBusReply<QString> replyList = iface.call("getGpuInfoByCustom", arguments, gpuInfo);
+            QDBusReply<QString> replyList = iface.call("getGpuInfoForFTDTM");
             if (replyList.isValid()) {
-                gpuInfo = replyList.value();
+                gpuMemInfo = replyList.value();
             } else {
                 qCritical() << "Error: failed to call dbus to get gpu memery info! ";
             }
         }
-
-        QMap<QString, QString> mapInfo;
-        if (getGpuBaseInfo(mapInfo)) {
-            for (auto it = mapInfo.begin(); it != mapInfo.end(); ++it) {
-                QString tmpInfo = it.key() + ": " + it.value() + "\n";
-                gpuInfo.append(tmpInfo);
-            }
-        }
     }
 
-    return gpuInfo;
+    return (gpuBaseInfo + gpuMemInfo);
 }
 
 bool CommonTools::getGpuBaseInfo(QMap<QString, QString> &mapInfo)
