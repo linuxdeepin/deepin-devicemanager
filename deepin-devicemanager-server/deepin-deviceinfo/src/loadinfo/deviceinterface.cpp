@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
-
 #include "deviceinterface.h"
 #include "deviceinfomanager.h"
 #include "mainjob.h"
@@ -11,6 +10,9 @@
 #include <QDBusMessage>
 #include <QProcess>
 #include <QDebug>
+#include <QFile>
+#include <QRegularExpression>
+
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <polkit-qt5-1/PolkitQt1/Authority>
 #else
@@ -18,6 +20,8 @@
 #endif
 
 using namespace DDLog;
+constexpr char kGraphicsMemory[] { "Graphics Memory" };
+
 using namespace PolkitQt1;
 bool DeviceInterface::getUserAuthorPasswd()
 {
@@ -28,6 +32,52 @@ bool DeviceInterface::getUserAuthorPasswd()
                                                                              SystemBusNameSubject(message().service()),
                                                                              Authority::AllowUserInteraction);
     return result == Authority::Yes;
+}
+
+bool DeviceInterface::getGpuMemInfoForFTDTM(QMap<QString, QString> &mapInfo)
+{
+    const QString filePath = "/sys/kernel/debug/gc/total_mem";
+    QString totalValue;
+
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qCritical() << "Error opening /sys/kernel/debug/gc/total_mem:" << file.errorString();
+        return false;
+    }
+
+    QString content = QString::fromUtf8(file.readAll());
+    file.close();
+
+    if (content.isEmpty()) {
+        qCritical() << "Error: /sys/kernel/debug/gc/total_mem File is empty!";
+        return false;
+    }
+
+    QRegularExpression regex(R"((\d+(?:\.\d+)?)\s*\(?(MB|GB|KB|B)\)?)",
+                                    QRegularExpression::CaseInsensitiveOption);
+    QRegularExpressionMatch memInfoMatch = regex.match(content);
+
+    if (!memInfoMatch.hasMatch()) {
+        qCritical() << "Error: Failed to find memory info";
+        return false;
+    }
+
+    double value = memInfoMatch.captured(1).toDouble();
+    QString unit = memInfoMatch.captured(2).toUpper();
+
+    if (unit == "MB") {
+        totalValue = QString("%1GB").arg(value / 1024.0, 0, 'f', 2);
+    } else if (unit == "GB") {
+        totalValue = QString("%1GB").arg(value, 0, 'f', 2);
+    } else if (unit == "KB") {
+        totalValue = QString("%1GB").arg(value / (1024.0 * 1024.0), 0, 'f', 2);
+    } else if (unit == "B") {
+        totalValue = QString("%1GB").arg(value / (1024.0 * 1024.0 * 1024.0), 0, 'f', 2);
+    }
+
+    mapInfo.insert(kGraphicsMemory, totalValue);
+
+    return true;
 }
 
 DeviceInterface::DeviceInterface(const char *name, QObject *parent)
@@ -91,24 +141,17 @@ void DeviceInterface::setMonitorDeviceFlag(bool flag)
     }
 }
 
-QString DeviceInterface::getGpuInfoByCustom(const QString &cmd, const QStringList &arguments)
+QString DeviceInterface::getGpuInfoForFTDTM()
 {
-    QString gpuinfo;
-    QProcess process;
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    if (arguments.size() > 1) {
-        env.insert("DISPLAY", arguments[0]);
-        env.insert("XAUTHORITY", arguments[1]);
+    static QString gpuMemInfo { "" };
+    if (gpuMemInfo.isEmpty()) {
+        QMap<QString, QString> mapInfo;
+        if (getGpuMemInfoForFTDTM(mapInfo)) {
+            for (auto it = mapInfo.begin(); it != mapInfo.end(); ++it) {
+                QString tmpInfo = it.key() + ": " + it.value() + "\n";
+                gpuMemInfo.append(tmpInfo);
+            }
+        }
     }
-    process.setProcessEnvironment(env);
-    process.start(cmd, arguments);
-    if (!process.waitForFinished()) {
-        qCritical() << QString("Error executing %1 :").arg(cmd) << process.errorString();
-        return gpuinfo;
-    }
-
-    if (process.exitCode() == 0)
-        gpuinfo = QString::fromLocal8Bit(process.readAllStandardOutput());
-
-    return gpuinfo;
+    return gpuMemInfo;
 }
