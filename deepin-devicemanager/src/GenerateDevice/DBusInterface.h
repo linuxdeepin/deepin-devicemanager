@@ -47,8 +47,6 @@ public:
      */
     void refreshInfo();
 
-    bool getGpuInfoByCustom(const QString &cmd, const QStringList &arguments, QString &gpuInfo);
-
 protected:
     DBusInterface();
 

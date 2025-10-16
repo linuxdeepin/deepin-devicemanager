@@ -112,12 +112,6 @@ int main(int argc, char *argv[])
         if (dbus.registerService("com.deepin.DeviceManagerNotify")) {
             dbus.registerObject("/com/deepin/DeviceManagerNotify", &app, QDBusConnection::ExportScriptableSlots);
             app.parseCmdLine();
-
-            QString cmd = CommonTools::getGpuInfoCommandFromDConfig();
-            if (!cmd.isEmpty()) {
-                CommonTools::preGenerateGpuInfo();
-            }
-
             app.activateWindow();
             return app.exec();
         } else {
