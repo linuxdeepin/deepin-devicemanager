@@ -555,12 +555,12 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
         }
         if(e){
             //鼠标启用时，唤醒能力打开
-            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), true, name());
+            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), true, name(), m_HardwareClass);
             m_wakeupChanged = true;
 
         } else if (m_wakeupChanged) { //鼠标禁用时，唤醒能力关闭
             m_wakeupChanged = false;
-            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), false, name());
+            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), false, name(), m_HardwareClass);
         }
         bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e, m_Driver);
         if (res) {
@@ -587,10 +587,9 @@ bool DeviceInput::enable()
 bool DeviceInput::canWakeupMachine()
 {
     qCDebug(appLog) << "canWakeupMachine";
-    if (m_WakeupID.isEmpty() || (m_HardwareClass == "keyboard" && "PS/2" == m_Interface)) {
-        qCDebug(appLog) << "canWakeupMachine return false";
+    if (m_WakeupID.isEmpty())
         return false;
-    }
+
     QFile file(wakeupPath());
     if (!file.open(QIODevice::ReadOnly)) {
         qCDebug(appLog) << "canWakeupMachine open file failed";
@@ -618,7 +617,7 @@ bool DeviceInput::isWakeupMachine()
 //            }
         qCDebug(appLog) << "return ps2 wakeup";
         // /proc/acpi/wakeup文件中状态未刷新，ps2设备通过dbus获取状态
-        return DBusWakeupInterface::getInstance()->isInputWakeupMachine(m_SysPath, m_Name);
+        return DBusWakeupInterface::getInstance()->isInputWakeupMachine(m_SysPath, m_Name, m_HardwareClass, m_Interface);
 
     } else {
         if (info.contains("disabled")) {
