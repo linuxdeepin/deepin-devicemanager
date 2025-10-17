@@ -129,7 +129,7 @@ void TextBrowser::setWakeupMachine(bool wakeup)
     DeviceInput *input = qobject_cast<DeviceInput*>(mp_Info);
     if(input && !input->wakeupID().isEmpty() && !input->sysPath().isEmpty()){
         qCDebug(appLog) << "Setting wakeup for input device";
-        DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),wakeup, input->name());
+        DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),input->sysPath(),wakeup, input->name(), input->hardwareClass());
     }
 
     // 网卡的远程唤醒
