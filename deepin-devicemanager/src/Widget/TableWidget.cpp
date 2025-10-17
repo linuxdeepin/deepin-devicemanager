@@ -284,7 +284,9 @@ void TableWidget::slotShowMenu(const QPoint &point)
                     QString info = file.readAll();
                     if (wakeupPath.contains("/proc/acpi/wakeup")) {
                         bool wakedUp = DBusWakeupInterface::getInstance()->isInputWakeupMachine(item->data(Qt::UserRole+4).toString(),
-                                                                                                item->data(Qt::UserRole+5).toString());
+                                                                                                item->data(Qt::UserRole+5).toString(),
+                                                                                                item->data(Qt::UserRole+6).toString(),
+                                                                                                item->data(Qt::UserRole+7).toString());
                         isWakeup = wakedUp;
                     } else {
                         if(info.contains("disabled")) {
