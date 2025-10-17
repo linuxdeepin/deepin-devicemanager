@@ -35,7 +35,11 @@ DBusWakeupInterface::DBusWakeupInterface()
     init();
 }
 
-bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QString &path, bool wakeup, const QString &name)
+bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id,
+                                           const QString &path,
+                                           bool wakeup,
+                                           const QString &name,
+                                           const QString &hardwareclass)
 {
     if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
         QStringList pathList = path.split("/", QString::SkipEmptyParts);
@@ -53,9 +57,9 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id, const QStri
                     QMap<QString, QString> allSupportWakeupDevices;
                     arg >> allSupportWakeupDevices;
                     QStringList wakeupPathList = allSupportWakeupDevices.keys();
-
+                    QString key = (hardwareclass == "mouse") ? "PS2M" : "PS2K";
                     for (QString path : wakeupPathList) {
-                        if (path.contains("PS2")) {
+                        if (path.contains(key)) {
                             mp_InputIface->call("SetWakeupDevices", path, wakeup ? "enabled" : "disabled");
                             return true;
                         }
@@ -110,7 +114,10 @@ bool DBusWakeupInterface::canInputWakeupMachine(const QString &path)
     return file.open(QIODevice::ReadOnly);
 }
 
-bool DBusWakeupInterface::isInputWakeupMachine(const QString &path, const QString &name)
+bool DBusWakeupInterface::isInputWakeupMachine(const QString &path,
+                                               const QString &name,
+                                               const QString &hardwareClass,
+                                               const QString &interfaceType)
 {
     if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
         QDBusInterface interface(INPUT_SERVICE_NAME, INPUT_WAKEUP_SERVICE_PATH, INPUT_WAKEUP_PROPERTIES_INTERFACE, QDBusConnection::systemBus());
@@ -122,9 +129,10 @@ bool DBusWakeupInterface::isInputWakeupMachine(const QString &path, const QStrin
                 QMap<QString, QString> allSupportWakeupDevices;
                 arg >> allSupportWakeupDevices;
 
-                if (name.contains("PS/2")) {
+                if (interfaceType.contains("PS/2")) {
+                    QString key = (hardwareClass == "mouse") ? "PS2M" : "PS2K";
                     for(QString path : allSupportWakeupDevices.keys()) {
-                        if (path.contains("PS2")) {
+                        if (path.contains(key)) {
                             return allSupportWakeupDevices[path] == "enabled";
                         }
                     }

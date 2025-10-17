@@ -359,7 +359,8 @@ void PageSingleInfo::slotWakeupMachine()
         DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),
                                                              input->sysPath(),
                                                              mp_WakeupMachine->isChecked(),
-                                                             input->getInterface());
+                                                             input->getInterface(),
+                                                             input->hardwareClass());
     }
 
     // 网卡的远程唤醒
