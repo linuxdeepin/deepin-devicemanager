@@ -111,7 +111,12 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_SupportResolution = "";
         foreach (const QString &word, listResolution) {
             if (word.contains("@")) {
-                m_SupportResolution.append(word);
+                if (word.contains("1920") && word.contains("1080")) {
+                    QString newResolution = word;
+                    m_SupportResolution.append(newResolution.replace("1080", "1200"));
+                } else {
+                    m_SupportResolution.append(word);
+                }
                 m_SupportResolution.append(", ");
             }
         }
@@ -231,6 +236,10 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
             }
         }
 
+        if (m_CurrentResolution.contains("1920") && m_CurrentResolution.contains("1080")) {
+            m_CurrentResolution.replace("1080", "1200");
+        }
+
         if (Common::specialComType <= 0) {
             QMap<QString, QStringList> monitorResolutionMap = getMonitorResolutionMap(xrandr, m_RawInterface);
 
@@ -238,7 +247,12 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
                 m_SupportResolution.clear();
                 foreach (const QString &word, monitorResolutionMap.value(m_RawInterface)) {
                     if (word.contains("@")) {
-                        m_SupportResolution.append(word);
+                        if (word.contains("1920") && word.contains("1080")) {
+                            QString newResolution = word;
+                            m_SupportResolution.append(newResolution.replace("1080", "1200"));
+                        } else {
+                            m_SupportResolution.append(word);
+                        }
                         m_SupportResolution.append(", ");
                     }
                 }
@@ -407,6 +421,10 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
             }
         } else
             m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1)).replace("x", "×", Qt::CaseInsensitive);
+    }
+
+    if (m_CurrentResolution.contains("1920") && m_CurrentResolution.contains("1080")) {
+        m_CurrentResolution.replace("1080", "1200");
     }
 
     return true;

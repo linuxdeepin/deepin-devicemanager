@@ -222,6 +222,16 @@ void DeviceGpu::setXrandrInfo(const QMap<QString, QString> &mapInfo)
     m_CurrentResolution = mapInfo["curResolution"];
     m_MaximumResolution = mapInfo["maxResolution"];
 
+    if (m_MinimumResolution.contains("1920") && m_MinimumResolution.contains("1080")) {
+        m_MinimumResolution.replace("1080", "1200");
+    }
+    if (m_CurrentResolution.contains("1920") && m_CurrentResolution.contains("1080")) {
+        m_CurrentResolution.replace("1080", "1200");
+    }
+    if (m_MaximumResolution.contains("1920") && m_MaximumResolution.contains("1080")) {
+        m_MaximumResolution.replace("1080", "1200");
+    }
+
     // 设置显卡支持的接口
     if (mapInfo.find("HDMI") != mapInfo.end())
         m_HDMI = mapInfo["HDMI"];
