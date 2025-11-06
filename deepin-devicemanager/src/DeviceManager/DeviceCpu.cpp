@@ -307,7 +307,7 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
         setAttribute(mapInfo, "product", m_Name);
     }
 
-    if (Common::specialComType > 0) {
+    if (Common::isHwPlatform()) {
         if (mapInfo.contains("Version")) {
             setAttribute(mapInfo, "Version", m_Name);
         }

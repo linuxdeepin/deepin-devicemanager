@@ -137,7 +137,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_DisplayInput);
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "", m_MainScreen);
-    if (Common::specialComType > 0){
+    if (Common::isHwPlatform()){
         setAttribute(mapInfo, "Resolution", m_SupportResolution);
     }
     qCDebug(appLog) << "Basic monitor attributes set - Name:" << m_Name << "Vendor:" << m_Vendor << "Model:" << m_Model;
@@ -149,7 +149,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     qCDebug(appLog) << "Screen size parsed:" << m_ScreenSize << "Width:" << size.width() << "Height:" << size.height();
 
     // 获取当前分辨率 和 当前支持分辨率
-    if (Common::specialComType > 0){
+    if (Common::isHwPlatform()){
         QStringList listResolution = m_SupportResolution.split(" ");
         m_SupportResolution = "";
         foreach (const QString &word, listResolution) {
@@ -163,7 +163,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     // 计算显示比例
     caculateScreenRatio();
 
-    if (Common::specialComType > 0){
+    if (Common::isHwPlatform()){
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         m_SupportResolution.replace(QRegExp(", $"), "");
 #else
@@ -386,7 +386,7 @@ bool DeviceMonitor::available()
 QString DeviceMonitor::subTitle()
 {
     // qCDebug(appLog) << "Getting monitor subtitle";
-    if (Common::specialComType >= 1) {
+    if (Common::isHwPlatform()) {
         m_Name.clear();
     }
     return m_Name;
