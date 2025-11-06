@@ -96,7 +96,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "", m_DisplayInput);
     setAttribute(mapInfo, "Size", m_ScreenSize);
     setAttribute(mapInfo, "", m_MainScreen);
-    if (Common::specialComType > 0){
+    if (Common::isHwPlatform()){
         setAttribute(mapInfo, "Resolution", m_SupportResolution);
     }
 
@@ -106,7 +106,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     m_ScreenSize = inchValue;
 
     // 获取当前分辨率 和 当前支持分辨率
-    if (Common::specialComType > 0){
+    if (Common::isHwPlatform()){
         QStringList listResolution = m_SupportResolution.split(" ");
         m_SupportResolution = "";
         foreach (const QString &word, listResolution) {
@@ -119,7 +119,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
     // 计算显示比例
     caculateScreenRatio();
-    if (Common::specialComType > 0){
+    if (Common::isHwPlatform()){
         m_SupportResolution.replace(QRegExp(", $"), "");
     }
 
@@ -290,7 +290,7 @@ bool DeviceMonitor::available()
 
 QString DeviceMonitor::subTitle()
 {
-    if (Common::specialComType >= 1) {
+    if (Common::isHwPlatform()) {
         m_Name.clear();
     }
     return m_Name;
