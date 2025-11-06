@@ -91,7 +91,7 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
     mp_Table->setVisible(true);
     mp_Table->setFixedHeight(TABLE_HEIGHT);
     mp_Table->updateTable(m_deviceList, m_menuControlList);
-    if (Common::specialComType >= 1) {
+    if (Common::isHwPlatform()) {
         if (mp_Label->text() == tr("Storage") || mp_Label->text() == tr("Memory") || mp_Label->text() == tr("Monitor")) {
             mp_Table->setVisible(false);
             mp_Table->setFixedHeight(0);
@@ -130,19 +130,19 @@ void PageMultiInfo::resizeEvent(QResizeEvent *e)
     int curHeight = this->height();
     if (curHeight < LEAST_PAGE_HEIGHT) {
         //  获取多个设备界面表格信息
-        if (Common::specialComType <= 0) {
-            mp_Table->updateTable(m_deviceList, m_menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
-        } else {
+        if (Common::isHwPlatform()) {
             if (mp_Label->text() != tr("Storage") && mp_Label->text() != tr("Memory") && mp_Label->text() != tr("Monitor"))
                 mp_Table->updateTable(m_deviceList, m_menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
+        } else {
+            mp_Table->updateTable(m_deviceList, m_menuControlList, true, (LEAST_PAGE_HEIGHT - curHeight) / TREE_ROW_HEIGHT + 1);
         }
     } else {
         //  获取多个设备界面表格信息
-        if (Common::specialComType <= 0) {
-            mp_Table->updateTable(m_deviceList, m_menuControlList, true, 0);
-        } else {
+        if (Common::isHwPlatform()) {
             if (mp_Label->text() != tr("Storage") && mp_Label->text() != tr("Memory") && mp_Label->text() != tr("Monitor"))
                 mp_Table->updateTable(m_deviceList, m_menuControlList, true, 0);
+        } else {
+            mp_Table->updateTable(m_deviceList, m_menuControlList, true, 0);
         }
     }
 
