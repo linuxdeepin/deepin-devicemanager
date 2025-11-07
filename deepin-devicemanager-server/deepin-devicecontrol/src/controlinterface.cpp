@@ -89,15 +89,10 @@ bool ControlInterface::getUserAuthorPasswd()
         return true;
     }
 
-    int pid = getPidByName("deepin-devicemanager");
-    if (pid >= 0) {
-        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                                                 UnixProcessSubject(pid),
-                                                                                 Authority::AllowUserInteraction);
-        return result == Authority::Yes;
-    }
-
-    return false;
+    Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                                             SystemBusNameSubject(message().service()),
+                                                                             Authority::AllowUserInteraction);
+    return result == Authority::Yes;
 }
 ControlInterface::ControlInterface(QObject *parent)
     : QDBusService(parent)
@@ -132,11 +127,15 @@ void ControlInterface::initConnects()
 
 QString ControlInterface::getRemoveInfo()
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return EnableSqlManager::getInstance()->removedInfo();
 }
 
 QString ControlInterface::getAuthorizedInfo()
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return EnableSqlManager::getInstance()->authorizedInfo();
 }
 
@@ -223,6 +222,8 @@ void ControlInterface::disableOutDevice(const QString &devInfo)
 
 bool ControlInterface::isDeviceEnabled(const QString &unique_id)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return EnableSqlManager::getInstance()->isUniqueIdEnabled(unique_id);
 }
 
@@ -263,6 +264,8 @@ void ControlInterface::updateWakeup(const QString &devInfo)
 
 int ControlInterface::isNetworkWakeup(const QString &logicalName)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return WakeupUtils::wakeOnLanIsOpen(logicalName);
 }
 
@@ -275,6 +278,8 @@ void ControlInterface::setMonitorWorkingDBFlag(bool flag)
 
 bool ControlInterface::monitorWorkingDBFlag()
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return EnableSqlManager::getInstance()->monitorWorkingFlag();
 }
 
@@ -317,6 +322,8 @@ void ControlInterface::undoInstallDriver()
 
 QStringList ControlInterface::checkModuleInUsed(const QString &modulename)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return mp_drivermanager->checkModuleInUsed(modulename);
 }
 
@@ -330,16 +337,22 @@ bool ControlInterface::isDriverPackage(const QString &filepath)
 
 bool ControlInterface::isBlackListed(const QString &modName)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return mp_drivermanager->isBlackListed(modName);
 }
 
 bool ControlInterface::isArchMatched(const QString &filePath)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return mp_drivermanager->isArchMatched(filePath);
 }
 
 bool ControlInterface::isDebValid(const QString &filePath)
 {
+    if (!getUserAuthorPasswd())
+        return {};
     return mp_drivermanager->isDebValid(filePath);
 }
 

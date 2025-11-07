@@ -47,3 +47,14 @@ CMakeLists.txt.user*
 .cursor
 .specstory
 .cursorindexingignore
+
+# debian
+debian/.debhelper/
+debian/deepin-devicemanager.debhelper.log
+debian/deepin-devicemanager.postrm.debhelper
+debian/deepin-devicemanager.substvars
+debian/deepin-devicemanager/
+debian/files
+
+# build
+obj-x86_64-linux-gnu/

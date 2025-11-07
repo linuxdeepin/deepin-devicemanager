@@ -245,15 +245,6 @@ void PageDriverControl::installDriverLogical()
         connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
         qCDebug(appLog) << "PageDriverControl::installDriverLogical at name page";
-        // 驱动安装之前需要先提权
-        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                                                 UnixProcessSubject(getpid()),
-                                                                                 Authority::AllowUserInteraction);
-        if (result != Authority::Yes) {
-            qCWarning(appLog) << "PageDriverControl::installDriverLogical no authorization";
-            return;
-        }
-
         QString driveName = mp_NameDialog->selectName();
         //先判断是否是驱动文件，如果不是，再判断是否存在。
         //因为后台isDriverPackage返回false的情况有2种：1.文件不存在 2.不是驱动文件

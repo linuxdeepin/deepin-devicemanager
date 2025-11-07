@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
             exit(0);
         }
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                                                UnixProcessSubject(getpid()),
+                                                                                SystemBusNameSubject(QDBusConnection::systemBus().baseService()),
                                                                                 Authority::AllowUserInteraction);
         qCDebug(appLog) << "Authorization check result:" << result;
         if (result != Authority::Yes) {
