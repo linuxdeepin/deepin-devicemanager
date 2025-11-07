@@ -11,6 +11,7 @@
 #include "SingleDeviceManager.h"
 #include "DDLog.h"
 #include "commontools.h"
+#include "commonfunction.h"
 
 #include <DApplication>
 #include <DWidgetUtil>
@@ -107,6 +108,27 @@ int main(int argc, char *argv[])
             app.setProductIcon(appIcon);
             app.setWindowIcon(appIcon);
         }
+
+#ifdef DTKCORE_CLASS_DConfigFile
+    //需要查询是否支持特殊机型静音恢复，例如hw机型
+    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
+    //需要判断Dconfig文件是否合法
+    if(dconfig && dconfig->isValid() && dconfig->keyList().contains("specialComType")){
+        Common::specialComType = dconfig->value("specialComType").toInt();
+    }
+    qCInfo(appLog) << "Common::specialComType value is:" << Common::specialComType;
+
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("TomlFilesName")) {
+        QString tomlFilesName = dconfig->value("TomlFilesName").toString();
+        Common::tomlFilesNameSet(tomlFilesName);
+    }
+
+    // 特殊机型，提前缓存GPU信息
+    if (Common::specialComType == Common::kCustomType) {
+        CommonTools::preGenerateGpuInfo();
+    }
+
+#endif
 
         QDBusConnection dbus = QDBusConnection::sessionBus();
         if (dbus.registerService("com.deepin.DeviceManagerNotify")) {
