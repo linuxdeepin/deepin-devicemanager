@@ -9,9 +9,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QLoggingCategory>
-
-// 备份临时路径
-#define DB_PATH_TMP "/tmp/deepin-devicemanager"
+#include <QTemporaryDir>
 
 static bool updateFlag = false;
 
@@ -37,7 +35,8 @@ void DriverBackupThread::run()
             return;
         }
 
-        QString backupPath =  QString("%1/driver/%2").arg(DB_PATH_TMP).arg(debname);
+        QTemporaryDir tempDir(QDir::tempPath() + "/XXXXXX");
+        QString backupPath =  QString("%1/driver/%2").arg(tempDir.path()).arg(debname);
         QDir destdir(backupPath);
         if (!destdir.exists()) {
             qCDebug(appLog) << "Backup destination directory does not exist, creating:" << backupPath;

@@ -66,7 +66,6 @@ systemctl enable deepin-devicemanager-server.service
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/translations/*.qm
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
-/usr/share/dbus-1/services/com.deepin.Devicemanager.service
 /usr/share/polkit-1/actions/com.deepin.deepin-devicemanager.policy
 /lib/systemd/system/deepin-devicemanager-server.service
 %{_bindir}/deepin-devicemanager-server

@@ -42,6 +42,13 @@ DeviceInterface::DeviceInterface(const char *name, QObject *parent)
 QString DeviceInterface::getInfo(const QString &key)
 {
     qCDebug(appLog) << "Getting info for key:" << key;
+
+    // 获取设备信息需要身份验证
+    if (!getUserAuthorPasswd()) {
+        qCWarning(appLog) << "Authorization failed for getInfo operation";
+        return "0";
+    }
+
     // 不能返回用常引用
     if ("is_server_running" != key) {
         return DeviceInfoManager::getInstance()->getInfo(key);
@@ -56,12 +63,23 @@ QString DeviceInterface::getInfo(const QString &key)
 
 void DeviceInterface::refreshInfo()
 {
+    if (!getUserAuthorPasswd()) {
+        qCWarning(appLog) << "Authorization failed for refreshInfo operation";
+        return;
+    }
+    
     emit sigUpdate();
 }
 
 void DeviceInterface::setMonitorDeviceFlag(bool flag)
 {
     qCDebug(appLog) << "Setting monitor device flag to:" << flag;
+    
+    if (!getUserAuthorPasswd()) {
+        qCWarning(appLog) << "Authorization failed for setMonitorDeviceFlag operation";
+        return;
+    }
+    
     MainJob *parentMainJob = dynamic_cast<MainJob *>(parent());
     if (parentMainJob != nullptr) {
         parentMainJob->setWorkingFlag(flag);

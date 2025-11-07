@@ -73,15 +73,15 @@ void DriverInstallerApt::aptClean()
 {
     qCDebug(appLog) << "Cleaning apt cache";
 
-    executeCommand("lastore-apt-clean");
+    executeCommand("lastore-apt-clean", QStringList());
 }
 
-QString DriverInstallerApt::executeCommand(const QString &cmd)
+QString DriverInstallerApt::executeCommand(const QString &cmd, const QStringList &args)
 {
-    qCDebug(appLog) << "Executing command:" << cmd;
+    qCDebug(appLog) << "Executing command:" << cmd << args;
 
     QProcess process;
-    process.start("bash", QStringList() << "-c" << cmd);
+    process.start(cmd, args);
     process.waitForFinished();
     return QString::fromUtf8(process.readAllStandardOutput());
 }
@@ -94,11 +94,11 @@ void DriverInstallerApt::doOperate(const QString &package, const QString &versio
     aptClean();
     
     // 更新软件源
-    executeCommand("apt update");
+    executeCommand("apt", QStringList() << "update");
 
     // 检查包是否存在
-    QString checkCmd = QString("apt-cache show %1=%2").arg(package).arg(version);
-    if (executeCommand(checkCmd).isEmpty()) {
+    QStringList args = QStringList() << "show" << QString("%1=%2").arg(package).arg(version);
+    if (executeCommand("apt-cache", args).isEmpty()) {
         emit errorOccurred(1);  // 包不存在
         qCInfo(appLog) << "DRIVER_LOG : ************************** 安装包不存在";
         return;
@@ -149,8 +149,8 @@ void DriverInstallerApt::doOperate(const QString &package, const QString &versio
     });
 
     // 执行安装命令
-    QString cmd = QString("apt-get install -y %1=%2").arg(package).arg(version);
-    m_process->start("bash", QStringList() << "-c" << cmd);
+    QStringList installArgs = QStringList() << "install" << "-y" << QString("%1=%2").arg(package).arg(version);
+    m_process->start("apt-get", installArgs);
 }
 
 bool DriverInstallerApt::isNetworkOnline(uint sec)

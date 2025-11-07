@@ -61,7 +61,7 @@ private:
      * @param cmd 命令字符串
      * @return 命令输出
      */
-    QString executeCommand(const QString &cmd);
+    QString executeCommand(const QString &cmd, const QStringList &args);
 
 private:
     QProcess *m_process;        // apt进程指针

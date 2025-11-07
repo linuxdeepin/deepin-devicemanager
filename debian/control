@@ -1,5 +1,5 @@
 Source: deepin-devicemanager
-Section: devel
+Section: utils
 Priority: optional
 Maintainer: Packages <packages@deepin.com>
 Build-Depends: debhelper-compat (= 11),
@@ -29,7 +29,27 @@ Standards-Version: 4.1.3
 
 Package: deepin-devicemanager
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, dmidecode, x11-xserver-utils, hwinfo, cups, upower, deepin-shortcut-viewer, lshw, libdtk6core,libkmod2,libdeepin-service-framework,deepin-service-manager
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ dmidecode,
+ x11-xserver-utils,
+ hwinfo,
+ cups,
+ upower,
+ deepin-shortcut-viewer,
+ lshw,
+ libdtk6core,
+ libkmod2,
+ libdeepin-service-framework,
+ deepin-service-manager,
+ usbutils,
+ pciutils,
+ smartmontools,
+ bluez,
+ apt,
+ lastore-daemon,
+ kmod,
+ iputils-ping,
+ net-tools
 Recommends: uos-reporter, deepin-event-log, deepin-elf-sign-tool
 Description: Device Manager is a handy tool for viewing hardware information and managing the devices.
  Device Manager helps users manage hardware devices installed on computers,
