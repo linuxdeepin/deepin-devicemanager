@@ -19,6 +19,8 @@ endif()
 # 设置 QT_VERSION 变量
 set(QT_VERSION_MAJOR 6)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-z,relro -Wl,-z,now")
+
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager)
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager-server)
 
