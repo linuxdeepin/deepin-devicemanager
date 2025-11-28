@@ -846,7 +846,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="227"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="277"/>
         <source>Mouse</source>
-        <translation type="unfinished"/>
+        <translation>Mi dhe Pajisje të Ngjashme</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="232"/>
@@ -1967,7 +1967,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="638"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Mi dhe Pajisje të Ngjashme</translation>
     </message>
 </context>
 <context>
