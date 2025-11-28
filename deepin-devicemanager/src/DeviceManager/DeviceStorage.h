@@ -6,6 +6,7 @@
 #ifndef DEVICESTORAGE_H
 #define DEVICESTORAGE_H
 #include"DeviceInfo.h"
+#include "commonfunction.h"
 
 /**
  * @brief The DeviceStorage class

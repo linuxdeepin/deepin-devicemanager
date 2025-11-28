@@ -502,21 +502,6 @@ static void parseEDID(QStringList allEDIDS,QString input)
 
 void HWGenerator::generatorMonitorDevice()
 {
-    qCDebug(appLog) << "HWGenerator::generatorMonitorDevice start";
-
-    QMap<QString, QString> mapInfo;
-    mapInfo.insert("Name", "LCD");
-    mapInfo.insert("Current Resolution", "2160x1440");
-    mapInfo.insert("Support Resolution", "2160x1440");
-    mapInfo.insert("Size", "14 Inch");
-    mapInfo.insert("Interface Type", "eDP");
-    mapInfo.insert("Refresh Rate", "60Hz");
-
-    DeviceMonitor *monitor = new  DeviceMonitor();
-    monitor->setInfoFromTomlBase(mapInfo);
-    monitor->setInfoFromTomlOneByOne(mapInfo);
-    DeviceManager::instance()->addMonitor(monitor);
-
     QString toDir = "/sys/class/drm";
     QDir toDir_(toDir);
 
