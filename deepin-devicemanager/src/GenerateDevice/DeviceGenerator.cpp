@@ -294,6 +294,32 @@ void DeviceGenerator::generatorMonitorDevice()
     qCDebug(appLog) << "DeviceGenerator::generatorMonitorDevice end";
 }
 
+bool isValidLogicalName(const QString& logicalName)
+{
+    if (logicalName.contains("p2p", Qt::CaseInsensitive))
+        return false;
+
+    QString addressFilePath = "/sys/class/net/" + logicalName;
+    QDir dir(addressFilePath);
+    if (dir.exists())
+        return true;
+
+    qCInfo(appLog) << dir << "not exist in /sys/class/net/";
+    return false;
+}
+
+bool isValidMAC(const QString& macAddress)
+{
+    if (macAddress.contains("00:00:00:00:00:00", Qt::CaseInsensitive) || macAddress.contains("ff:ff:ff:ff:ff:ff", Qt::CaseInsensitive) || macAddress.isEmpty())
+        return false;
+
+    QRegularExpression macRegex("([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})");
+    if (!macRegex.match(macAddress).hasMatch())
+        return false;
+
+    return true;
+}
+
 void DeviceGenerator::generatorNetworkDevice()
 {
     bool hasWlan =false;
@@ -308,27 +334,18 @@ void DeviceGenerator::generatorNetworkDevice()
         const QString &logicalNameLshw =  (*it)["logical name"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
             const QString &macAddressLshw =  (*it)["serial"];
-            if (logicalNameLshw.contains("p2p", Qt::CaseInsensitive))
+            if (!isValidLogicalName(logicalNameLshw))
+                continue;
+            if (!isValidMAC(macAddressLshw))
                 continue;
             if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive) && hasWlan) //common sense: one PC only have 1 wlan device
                 continue;
-            if (macAddressLshw.contains("00:00:00:00:00:00", Qt::CaseInsensitive) || macAddressLshw.contains("ff:ff:ff:ff:ff:ff", Qt::CaseInsensitive) || macAddressLshw.isEmpty())
-                continue;
-            // Regular expression for validating MAC address
-            QRegularExpression macRegex("([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})");
-            if (!macRegex.match(macAddressLshw).hasMatch())
-                continue;
 
-            QString addressFilePath = "/sys/class/net/" + logicalNameLshw;
-            QDir dir(addressFilePath);
-            if (dir.exists()) {
-                DeviceNetwork *device = new DeviceNetwork();
-                device->setInfoFromLshw(*it);
-                lstDevice.append(device);
-                if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive))
-                    hasWlan = true;
-                continue;
-            }
+            DeviceNetwork *device = new DeviceNetwork();
+            device->setInfoFromLshw(*it);
+            lstDevice.append(device);
+            if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive))
+                hasWlan = true;
         }
     }
 
@@ -341,8 +358,9 @@ void DeviceGenerator::generatorNetworkDevice()
             continue;
         }
 
-        const QString &serialNumberHwinfo =  (*it)["HW Address"];
+        const QString &macHwinfo =  (*it)["Permanent HW Address"].isEmpty() ? (*it)["HW Address"] : (*it)["Permanent HW Address"];
         const QString &logicalNameHwinfo =  (*it)["Device File"];
+        bool hasMatchLogicalName = false;
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
             const QString &serialNumberLst =  (*itDevice)->hwAddress();
             const QString &logicalNameLst =  (*itDevice)->logicalName();
@@ -353,11 +371,29 @@ void DeviceGenerator::generatorNetworkDevice()
                     (*itDevice)->setEnableValue(false);
                 }
 
-            } else if (serialNumberHwinfo == serialNumberLst || logicalNameHwinfo == logicalNameLst) {
+            } else if (macHwinfo == serialNumberLst || logicalNameHwinfo == logicalNameLst) {
                 (*itDevice)->setInfoFromHwinfo(*it);
+                hasMatchLogicalName = true;
             } else {
                 (*itDevice)->setCanUninstall(false);
                 (*itDevice)->setForcedDisplay(true);
+            }
+        }
+        //first check it's valid, if LogicalName not exist  but valid please add it .
+        if (!hasMatchLogicalName && isValidMAC(macHwinfo) && isValidLogicalName(logicalNameHwinfo)) {
+            if (!logicalNameHwinfo.contains("wlan", Qt::CaseInsensitive)) {//add wired net
+                DeviceNetwork *device = new DeviceNetwork();
+                device->setInfoFromHwinfo(*it);
+                lstDevice.append(device);
+                hasMatchLogicalName = true;
+            } else {    //add wireless net
+                if (!hasWlan) { //common sense: one PC only have 1 wlan device
+                    DeviceNetwork *device = new DeviceNetwork();
+                    device->setInfoFromHwinfo(*it);
+                    lstDevice.append(device);
+                    hasMatchLogicalName = true;
+                    hasWlan = true;
+                }
             }
         }
     }
