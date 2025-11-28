@@ -2169,7 +2169,25 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="168"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="92"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="108"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="136"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="140"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="143"/>
+        <source>Storage</source>
+        <translation>存储设备</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="92"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="108"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="136"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="140"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="143"/>
+        <source>Memory</source>
+        <translation>内存</translation>
+    </message>
+    <message>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="154"/>
         <source>Failed to enable the device</source>
         <translation>启用失败</translation>
     </message>

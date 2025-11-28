@@ -642,7 +642,9 @@ void DeviceStorage::loadBaseDeviceInfo()
     qCDebug(appLog) << "DeviceStorage::loadBaseDeviceInfo";
     // 添加基本信息
     addBaseDeviceInfo("Name", m_Name);
-    addBaseDeviceInfo("Vendor", m_Vendor);
+    if (Common::specialComType <= 0) {
+        addBaseDeviceInfo(("Vendor"), m_Vendor);
+    }
     addBaseDeviceInfo("Media Type", translateStr(m_MediaType));
     addBaseDeviceInfo("Size", m_Size);
     addBaseDeviceInfo("Version", m_Version);
