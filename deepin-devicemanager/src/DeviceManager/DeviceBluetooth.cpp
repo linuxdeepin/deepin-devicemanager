@@ -161,28 +161,6 @@ TomlFixMethod DeviceBluetooth::setInfoFromTomlOneByOne(const QMap<QString, QStri
     return ret;
 }
 
-bool DeviceBluetooth::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
-{
-    qCDebug(appLog) << "DeviceBluetooth::setInfoFromWifiInfo started.";
-    // 机器自身蓝牙
-    const QList<QPair<QString, QString> > &otherAttribs = getOtherAttribs();
-    QMap<QString, QString> tmpMaps;
-    for (QPair<QString, QString> attrib : otherAttribs) {
-        tmpMaps[attrib.first] = attrib.second;
-    }
-
-    if ("UART" == tmpMaps[QObject::tr("Bus")]) {//内置：UART 外接USB：USB
-        qCDebug(appLog) << "Bus is UART, setting chip type and vendor.";
-        setAttribute(mapInfo, "Chip Type", m_Name);
-        setAttribute(mapInfo, "Vendor", m_Vendor);
-        qCDebug(appLog) << "DeviceBluetooth::setInfoFromWifiInfo finished, returning true.";
-        return true;
-    } else {
-        qCDebug(appLog) << "Bus is not UART, returning false.";
-        return false;
-    }
-}
-
 const QString &DeviceBluetooth::name()const
 {
     // qCDebug(appLog) << "DeviceBluetooth::name called, returning: " << m_Model;
@@ -316,11 +294,11 @@ void DeviceBluetooth::loadTableData()
     QString tName = m_Name;
 
     if (!available()) {
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
 
     if (!enable()) {
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);

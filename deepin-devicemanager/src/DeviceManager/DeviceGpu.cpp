@@ -426,7 +426,7 @@ void DeviceGpu::loadTableData()
     QString tName = m_Name;
     if (!available()) {
         qCDebug(appLog) << "Device not available, updating tName.";
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
     m_TableData.append(tName);
     m_TableData.append(m_Vendor);

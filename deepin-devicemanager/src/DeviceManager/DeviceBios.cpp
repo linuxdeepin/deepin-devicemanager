@@ -200,7 +200,7 @@ bool DeviceBios::isBoard()const
 QString DeviceBios::subTitle()
 {
     // qCDebug(appLog) << "DeviceBios::subTitle called, returning: " << m_Name;
-    return QObject::tr(m_Name.toLatin1());;
+    return translateStr(m_Name);;
 }
 
 const QString DeviceBios::getOverviewInfo()

@@ -105,16 +105,6 @@ void HWGenerator::generatorCpuDevice()
     qCDebug(appLog) << "HWGenerator::generatorCpuDevice start";
     DeviceGenerator::generatorCpuDevice();
     DeviceManager::instance()->setCpuFrequencyIsCur(false);
-
-    if (boardVendorType == "KLVV") {
-        QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Cpu);
-        for (int i = 0; i < lst.size(); i++) {
-            QMap<QString, QString> tempMap;
-            tempMap["Name"] = "Kirin 9006C";
-            DeviceBaseInfo *device = lst[i];
-            DeviceManager::instance()->tomlDeviceMapSet(DT_Cpu, device,tempMap);
-        }
-    }
     qCDebug(appLog) << "HWGenerator::generatorCpuDevice end";
 }
 
@@ -125,20 +115,70 @@ void HWGenerator::generatorAudioDevice()
     qCDebug(appLog) << "HWGenerator::generatorAudioDevice end";
 }
 
+QList<QMap<QString, QString> > readFileSysWifi()
+{
+    QList<QMap<QString, QString> >  lstWifiInfo;
+    QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
+    QFile file(wifiDevicesInfoPath);
+    if (file.open(QIODevice::ReadOnly)) {
+        QMap<QString, QString>  wifiInfo;
+        QString allStr = file.readAll();
+        file.close();
+
+        // 解析数据
+        QStringList items = allStr.split("\n");
+        foreach (const QString &item, items) {
+            if (item.isEmpty())
+                continue;
+
+            QStringList strList = item.split(':', QT_SKIP_EMPTY_PARTS);
+            if (strList.size() == 2)
+                wifiInfo[strList[0] ] = strList[1];
+        }
+
+        if (!wifiInfo.isEmpty())
+            lstWifiInfo.append(wifiInfo);
+    }
+    return lstWifiInfo;
+}
+
 void HWGenerator::generatorBluetoothDevice()
 {
     qCDebug(appLog) << "HWGenerator::generatorBluetoothDevice start";
     getBluetoothInfoFromHciconfig();
     getBlueToothInfoFromHwinfo();
     getBluetoothInfoFromLshw();
-    getBluetoothInfoFromCatWifiInfo();
+
+    QList<QMap<QString, QString> >  lstWifiInfo = readFileSysWifi();
+    if (lstWifiInfo.size() == 0) {
+        return;
+    }
+    QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
+    QMap<QString, QString> tempMap;
+    for (; it != lstWifiInfo.end(); ++it) {
+        if ((*it).size() < 3) {
+            continue;
+        }
+
+        foreach (const QString &key, (*it).keys()) {
+            tempMap.insert(key, (*it)[key]);
+        }
+
+        // cat /sys/hisys/wal/wifi_devices_info  获取结果为  HI103
+        if (tempMap["Chip Type"].contains(Common::specialHString(), Qt::CaseInsensitive)) {
+            tempMap["Chip Type"] = tempMap["Chip Type"].remove(Common::specialHString()).trimmed();
+        }
+
+        tempMap["Vendor"] = Common::specialHString();
+        tempMap["Type"] = "Bluetooth Device";
+        tempMap["Name"] = tempMap["Chip Type"];
+    }
+
     QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Bluetoorh);
     for (int i = 0; i < lst.size(); i++) {
         DeviceBaseInfo *device = lst[i];
-        QString  vendor = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Bluetoorh, device, "Vendor");
-        if (vendor.contains("HISILICON",Qt::CaseInsensitive)) {
-            QMap<QString, QString> tempMap;
-            tempMap["Vendor"] = Common::specialHString();
+        QString  bus = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Bluetoorh, device, "Bus"); //内置：UART 外接USB：USB
+        if (bus.contains("UART",Qt::CaseInsensitive)) {
             DeviceManager::instance()->tomlDeviceMapSet(DT_Bluetoorh, device,tempMap);
         }
     }
@@ -201,8 +241,42 @@ void HWGenerator::generatorNetworkDevice()
 
     DeviceGenerator::generatorNetworkDevice();
 
-    if (boardVendorType == "KLVV") {
-        getNetworkInfoFromCatWifiInfo();
+    QList<QMap<QString, QString> >  lstWifiInfo = readFileSysWifi();
+    if (lstWifiInfo.size() == 0) {
+        return;
+    }
+
+    QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
+    for (; it != lstWifiInfo.end(); ++it) {
+        if ((*it).size() < 3) {
+            continue;
+        }
+
+        // cat /sys/hisys/wal/wifi_devices_info的问题特殊处理       获取结果为  HI103
+        QMap<QString, QString> tempMap;
+        foreach (const QString &key, (*it).keys()) {
+            tempMap.insert(key, (*it)[key]);
+        }
+
+        tempMap["Name"] = tempMap["Chip Type"];
+        if (tempMap["Chip Type"].contains(Common::specialHString(), Qt::CaseInsensitive)) {
+            tempMap["Name"] = tempMap["Chip Type"].remove(Common::specialHString()).trimmed();
+        }
+
+        if (tempMap["NIC  Type"].contains("WLAN", Qt::CaseInsensitive)) {
+        }
+
+        tempMap["Vendor"] = "HISILICON";
+        tempMap["Type"] = "Wireless network";
+
+        QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Network);
+        for (int i = 0; i < lst.size(); i++) {
+            DeviceBaseInfo *device = lst[i];
+            QString  logicalName = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Network, device, "Logical Name");
+            if (logicalName.contains("wlan", Qt::CaseInsensitive)) {
+                DeviceManager::instance()->tomlDeviceMapSet(DT_Network, device,tempMap);
+            }
+        }
     }
 
     qCDebug(appLog) << "HWGenerator::generatorNetworkDevice end";
@@ -212,7 +286,6 @@ void HWGenerator::generatorDiskDevice()
 {
     qCDebug(appLog) << "HWGenerator::generatorDiskDevice start";
     DeviceGenerator::generatorDiskDevice();
-    DeviceManager::instance()->checkDiskSize();
 
     QString bootdevicePath("/proc/bootdevice/product_name");
     QString modelStr = "";
@@ -221,7 +294,7 @@ void HWGenerator::generatorDiskDevice()
         modelStr = file.readLine().simplified();
         file.close();
     }
-    if(modelStr.isEmpty())
+    if (modelStr.isEmpty())
         return;
 
     QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Storage);
@@ -237,28 +310,26 @@ void HWGenerator::generatorDiskDevice()
                 tempMap["Name"] = "nouse";
             // 应HW的要求，将描述固定为   Universal Flash Storage
             tempMap["Description"] = "Universal Flash Storage";
-            // 应HW的要求，添加interface   UFS 3.1
+            // 应H的要求，添加interface   UFS 3.1
+            tempMap["Interface"] = "UFS 3.1";
 
-            if (boardVendorType == "KLVV")
-                tempMap["Interface"] = "UFS 3.1";
-            else if (boardVendorType == "KLVU") {
-                // 读取interface版本
-                QProcess process;
-                process.start("cat /sys/devices/platform/f8200000.ufs/host0/scsi_host/host0/wb_en");
-                process.waitForFinished(-1);
-                int exitCode = process.exitCode();
-                if (exitCode != 127 && exitCode != 126) {
-                    QString deviceInfo = process.readAllStandardOutput();
-                    if (deviceInfo.trimmed() == "true") {
-                        process.start("cat /sys/block/sdd/device/spec_version");
-                        process.waitForFinished(-1);
-                        exitCode = process.exitCode();
-                        if (exitCode != 127 && exitCode != 126) {
-                            deviceInfo = process.readAllStandardOutput();
-                            if (deviceInfo.trimmed() == "310") {
-                                tempMap["interface"] = "UFS 3.1";
-                            }
-                        }
+            // 读取interface版本
+            QProcess process;
+            process.start("cat /sys/devices/platform/f8200000.ufs/host0/scsi_host/host0/wb_en");
+            process.waitForFinished(-1);
+            int exitCode = process.exitCode();
+            if (exitCode != 127 && exitCode != 126) {
+                QString deviceInfo = process.readAllStandardOutput();
+                if (deviceInfo.trimmed() == "true") {
+                    process.start("cat /sys/block/sdd/device/spec_version");
+                    process.waitForFinished(-1);
+                    exitCode = process.exitCode();
+                    if (exitCode != 127 && exitCode != 126) {
+                        deviceInfo = process.readAllStandardOutput();
+                        if (deviceInfo.trimmed() == "310") {
+                            tempMap["interface"] = "UFS 3.1";
+                        } else if  (deviceInfo.trimmed() == "300")
+                            tempMap["interface"] = "UFS 3.0";
                     }
                 }
             }
@@ -266,6 +337,7 @@ void HWGenerator::generatorDiskDevice()
             DeviceManager::instance()->tomlDeviceMapSet(DT_Storage, device,tempMap);
         }
     }
+    DeviceManager::instance()->checkDiskSize(); //place in the end
     qCDebug(appLog) << "HWGenerator::generatorDiskDevice end";
 }
 
@@ -301,30 +373,6 @@ void HWGenerator::getAudioInfoFromCatAudio()
         // qCDebug(appLog) << "HWGenerator::getAudioInfoFromCatAudio add audio device";
     }
     qCDebug(appLog) << "HWGenerator::getAudioInfoFromCatAudio end";
-}
-
-void HWGenerator::getDiskInfoFromSmartCtl()
-{
-    qCDebug(appLog) << "HWGenerator::getDiskInfoFromSmartCtl start";
-    const QList<QMap<QString, QString>> lstMap = DeviceManager::instance()->cmdInfo("smart");
-    QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
-    for (; it != lstMap.end(); ++it) {
-        // 剔除未识别的磁盘
-        if (!(*it).contains("ln"))
-            continue;
-
-        // KLU的问题特殊处理
-        QMap<QString, QString> tempMap;
-        foreach (const QString &key, (*it).keys()) {
-            tempMap.insert(key, (*it)[key]);
-        }
-
-        // 按照HW的需求，如果是固态硬盘就不显示转速
-        if (tempMap["Rotation Rate"] == "Solid State Device")
-            tempMap["Rotation Rate"] = "HW_SSD";
-
-        DeviceManager::instance()->setStorageInfoFromSmartctl(tempMap["ln"], tempMap);
-    }
 }
 
 void HWGenerator::getBluetoothInfoFromHciconfig()
@@ -378,64 +426,6 @@ void HWGenerator::getBluetoothInfoFromLshw()
     }
 }
 
-void HWGenerator::getBluetoothInfoFromCatWifiInfo()
-{
-    qCDebug(appLog) << "HWGenerator::getBluetoothInfoFromCatWifiInfo start";
-    QList<QMap<QString, QString> >  lstWifiInfo;
-    QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
-    QFile file(wifiDevicesInfoPath);
-    if (file.open(QIODevice::ReadOnly)) {
-        QMap<QString, QString>  wifiInfo;
-        QString allStr = file.readAll();
-        file.close();
-
-        // 解析数据
-        QStringList items = allStr.split("\n");
-        foreach (const QString &item, items) {
-            if (item.isEmpty())
-                continue;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            QStringList strList = item.split(':', QString::SkipEmptyParts);
-#else
-            QStringList strList = item.split(':', Qt::SkipEmptyParts);
-#endif
-            if (strList.size() == 2)
-                wifiInfo[strList[0] ] = strList[1];
-        }
-
-        if (!wifiInfo.isEmpty())
-            lstWifiInfo.append(wifiInfo);
-    }
-
-    if (lstWifiInfo.size() == 0) {
-        return;
-    }
-    QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
-
-    for (; it != lstWifiInfo.end(); ++it) {
-        if ((*it).size() < 3) {
-            continue;
-        }
-
-        // KLU的问题特殊处理
-        QMap<QString, QString> tempMap;
-        foreach (const QString &key, (*it).keys()) {
-            tempMap.insert(key, (*it)[key]);
-        }
-
-        // cat /sys/hisys/wal/wifi_devices_info  获取结果为  HI103
-        if (tempMap["Chip Type"].contains(Common::specialHString(), Qt::CaseInsensitive)) {
-            tempMap["Chip Type"] = tempMap["Chip Type"].remove(Common::specialHString()).trimmed();
-        }
-
-        // 按照的需求，设置蓝牙制造商和类型
-        tempMap["Vendor"] = "HISILICON";
-        tempMap["Type"] = "Bluetooth Device";
-
-        DeviceManager::instance()->setBluetoothInfoFromWifiInfo(tempMap);
-    }
-}
-
 void HWGenerator::getMemoryInfoFromLshw()
 {
     qCDebug(appLog) << "HWGenerator::getMemoryInfoFromLshw start";
@@ -474,14 +464,14 @@ static void parseEDID(QStringList allEDIDS,QString input)
         process.waitForFinished(-1);
 
         QString deviceInfo = process.readAllStandardOutput();
-        if(deviceInfo.isEmpty())
+        if (deviceInfo.isEmpty())
             continue;
 
         QString edidStr;
         QStringList lines = deviceInfo.split("\n");
         for (auto line:lines) {
             QStringList words = line.trimmed().split(" ");
-            if(words.size() != 9)
+            if (words.size() != 9)
                 continue;
 
             words.removeAt(0);
@@ -491,7 +481,7 @@ static void parseEDID(QStringList allEDIDS,QString input)
         }
 
         lines = edidStr.split("\n");
-        if(lines.size() > 3){
+        if (lines.size() > 3){
             EDIDParser edidParser;
             QString errorMsg;
             edidParser.setEdid(edidStr,errorMsg,"\n", false);
@@ -514,20 +504,18 @@ void HWGenerator::generatorMonitorDevice()
 {
     qCDebug(appLog) << "HWGenerator::generatorMonitorDevice start";
 
-    if (boardVendorType == "KLVV" || boardVendorType == "KLVU") {
-        QMap<QString, QString> mapInfo;
-        mapInfo.insert("Name", "LCD");
-        mapInfo.insert("Current Resolution", "2160x1440");
-        mapInfo.insert("Support Resolution", "2160x1440");
-        mapInfo.insert("Size", "14 Inch");
-        mapInfo.insert("Interface Type", "eDP");
-        mapInfo.insert("Refresh Rate", "60Hz");
+    QMap<QString, QString> mapInfo;
+    mapInfo.insert("Name", "LCD");
+    mapInfo.insert("Current Resolution", "2160x1440");
+    mapInfo.insert("Support Resolution", "2160x1440");
+    mapInfo.insert("Size", "14 Inch");
+    mapInfo.insert("Interface Type", "eDP");
+    mapInfo.insert("Refresh Rate", "60Hz");
 
-        DeviceMonitor *monitor = new  DeviceMonitor();
-        monitor->setInfoFromTomlBase(mapInfo);
-        monitor->setInfoFromTomlOneByOne(mapInfo);
-        DeviceManager::instance()->addMonitor(monitor);
-    }
+    DeviceMonitor *monitor = new  DeviceMonitor();
+    monitor->setInfoFromTomlBase(mapInfo);
+    monitor->setInfoFromTomlOneByOne(mapInfo);
+    DeviceManager::instance()->addMonitor(monitor);
 
     QString toDir = "/sys/class/drm";
     QDir toDir_(toDir);
@@ -539,10 +527,10 @@ void HWGenerator::generatorMonitorDevice()
 
     QFileInfoList fileInfoList = toDir_.entryInfoList();
     foreach(QFileInfo fileInfo, fileInfoList) {
-        if(fileInfo.fileName() == "." || fileInfo.fileName() == ".." || !fileInfo.fileName().startsWith("card"))
+        if (fileInfo.fileName() == "." || fileInfo.fileName() == ".." || !fileInfo.fileName().startsWith("card"))
             continue;
 
-        if(QFile::exists(fileInfo.filePath() + "/" + "edid")) {
+        if (QFile::exists(fileInfo.filePath() + "/" + "edid")) {
             // qCDebug() << "Found edid file:" << fileInfo.filePath() + "/" + "edid";
             QStringList allEDIDS_all;
             allEDIDS_all.append(fileInfo.filePath() + "/" + "edid");
@@ -555,135 +543,29 @@ void HWGenerator::generatorMonitorDevice()
 void HWGenerator::generatorPowerDevice()
 {
     DeviceGenerator::generatorPowerDevice();
-
-    QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Power);
-    for (int i = 0; i < lst.size(); i++) {
-        DeviceBaseInfo *device = lst[i];
-        QMap<QString, QString> tempMap;
-        tempMap["energy-full-design"] = "nouse";
-        tempMap["energy-full"] = "nouse";
-        tempMap["Design Capacity"] = "56 Wh";
-        DeviceManager::instance()->tomlDeviceMapSet(DT_Power, device,tempMap);
-    }
 }
 
 void HWGenerator::generatorKeyboardDevice()
 {
     DeviceGenerator::generatorKeyboardDevice();
-
-    QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Keyboard);
-    for (int i = 0; i < lst.size(); i++) {
-        DeviceBaseInfo *device = lst[i];
-        QString  vendor = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Keyboard, device, "Vendor");
-        if (vendor.contains("14f3",Qt::CaseInsensitive)) {
-            QMap<QString, QString> tempMap;
-            tempMap["Vendor"] = Common::specialHString();
-            DeviceManager::instance()->tomlDeviceMapSet(DT_Keyboard, device,tempMap);
-        }
-    }
 }
 
 void HWGenerator::generatorMemoryDevice()
 {
     DeviceGenerator::generatorMemoryDevice();
-
-    QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Memory);
-    for (int i = 0; i < lst.size(); i++) {
-        DeviceBaseInfo *device = lst[i];
-        QString  vendor = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Memory, device, "Vendor");
-        QString  partNumber = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Memory, device, "Name");
-        if (vendor.contains("Samsung",Qt::CaseInsensitive)) {
-            QMap<QString, QString> tempMap;
-            tempMap["Vendor"] = "nouse";
-            tempMap["Part Number"] = "nouse";
-            DeviceManager::instance()->tomlDeviceMapSet(DT_Memory, device,tempMap);
-        }
-        if (partNumber.contains("K3LK7K70BM",Qt::CaseInsensitive)) {
-            QMap<QString, QString> tempMap;
-            tempMap["Name"] = "nouse";
-            tempMap["Part Number"] = "nouse";
-            DeviceManager::instance()->tomlDeviceMapSet(DT_Memory, device,tempMap);
-        }
-    }
 }
 
 void HWGenerator::generatorCameraDevice()
 {
     DeviceGenerator::generatorCameraDevice();
-
-    if (boardVendorType == "KLVV") {
-        QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Image);
-        for (int i = 0; i < lst.size(); i++) {
-            DeviceBaseInfo *device = lst[i];
-            QString  vendor = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Image, device, "Vendor");
-            if (vendor.contains("0000058020",Qt::CaseInsensitive)) {
-                QMap<QString, QString> tempMap;
-                tempMap["Vendor"] = "nouse";
-                DeviceManager::instance()->tomlDeviceMapSet(DT_Image, device,tempMap);
-            }
-        }
-    }
-}
-
-void HWGenerator::getNetworkInfoFromCatWifiInfo()
-{
-    QList<QMap<QString, QString> >  lstWifiInfo;
-    QString wifiDevicesInfoPath("/sys/hisys/wal/wifi_devices_info");
-    QFile file(wifiDevicesInfoPath);
-    if (file.open(QIODevice::ReadOnly)) {
-        QMap<QString, QString>  wifiInfo;
-        QString allStr = file.readAll();
-        file.close();
-
-        // 解析数据
-        QStringList items = allStr.split("\n");
-        foreach (const QString &item, items) {
-            if (item.isEmpty())
-                continue;
-
-            QStringList strList = item.split(':', QT_SKIP_EMPTY_PARTS);
-            if (strList.size() == 2)
-                wifiInfo[strList[0] ] = strList[1];
-        }
-
-        if (!wifiInfo.isEmpty())
-            lstWifiInfo.append(wifiInfo);
-    }
-    if (lstWifiInfo.size() == 0) {
-        return;
-    }
-
-    QList<QMap<QString, QString> >::const_iterator it = lstWifiInfo.begin();
-    for (; it != lstWifiInfo.end(); ++it) {
-        if ((*it).size() < 3) {
-            continue;
-        }
-
-        // KLU的问题特殊处理
-        QMap<QString, QString> tempMap;
-        foreach (const QString &key, (*it).keys()) {
-            tempMap.insert(key, (*it)[key]);
-        }
-
-        // cat /sys/hisys/wal/wifi_devices_info  获取结果为  HI103
-        tempMap["Name"] = tempMap["Chip Type"];
-        if (tempMap["Chip Type"].contains(Common::specialHString(), Qt::CaseInsensitive)) {
-            tempMap["Name"] = tempMap["Chip Type"].remove(Common::specialHString()).trimmed();
-        }
-
-        if (tempMap["NIC  Type"].contains("WLAN", Qt::CaseInsensitive)) {
-        }
-
-        tempMap["Vendor"] = "HISILICON";
-        tempMap["Type"] = "Wireless network";
-
-        QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Network);
-        for (int i = 0; i < lst.size(); i++) {
-            DeviceBaseInfo *device = lst[i];
-            QString  logicalName = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Network, device, "Logical Name");
-            if (logicalName.contains("wlan", Qt::CaseInsensitive)) {
-                DeviceManager::instance()->tomlDeviceMapSet(DT_Network, device,tempMap);
-            }
+    QList<DeviceBaseInfo *> lst = DeviceManager::instance()->convertDeviceList(DT_Image);
+    for (int i = 0; i < lst.size(); i++) {
+        DeviceBaseInfo *device = lst[i];
+        QString  vendor = DeviceManager::instance()->tomlDeviceReadKeyValue(DT_Image, device, "Vendor");
+        if (vendor.contains("0000058020",Qt::CaseInsensitive)) {
+            QMap<QString, QString> tempMap;
+            tempMap["Vendor"] = "nouse";
+            DeviceManager::instance()->tomlDeviceMapSet(DT_Image, device,tempMap);
         }
     }
 }

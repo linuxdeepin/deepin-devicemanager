@@ -32,7 +32,7 @@ static QMap<QString, QString> mapArch = {   {"aarch64", "arm64"}
 static bool initBoardVendorFlag = false;
 static QString boardVendorKey = "";
 int Common::specialComType = -1;
-
+static QString tomlFilesName = "tomlFilesName";
 QString Common::getArch()
 {
     qCDebug(appLog) << "Getting system architecture";
@@ -229,6 +229,16 @@ QString Common::specialHString()
         result.append(QChar(ascii)); // Convert ASCII to QChar and append to QString
     }
     return result;
+}
+
+void Common::tomlFilesNameSet(QString name)
+{
+    tomlFilesName = name;
+}
+
+QString Common::tomlFilesNameGet()
+{
+    return tomlFilesName;
 }
 
 QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args, const QString &workPath, int msecsWaiting/* = 30000*/, bool useEnv/* = true*/)

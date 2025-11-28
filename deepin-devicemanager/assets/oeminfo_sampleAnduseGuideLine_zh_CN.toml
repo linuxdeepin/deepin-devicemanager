@@ -502,3 +502,5 @@ Device File         ="toml_Device File"         #10 : 设备文件
 #4-4.匹配生效后表头下面每行key名与对应设备管理器中显示每条信息名一致，其值则会被显示到对应界面。
 #4-3.若匹配key匹配上某一设备且值尾包括有"_NOUSE"则该个设备所有信息将被删除显示。
 #4-4.增加一个设备信息则不需要匹配；没有写入该文件的表头所代表设备将不会被修改；没有写入该文件的key值所代表设备信息将不会被修改。
+#4-5.1 增加  tomlmatchkey             =  { Size = "512", Name = "xname" }     # 内联表  "{Size:512G}{Name:xx1}{Vendor:xx2}"                        # 匹配键名
+#4-5.2 增加  tomlconfigdemanding      ="adjust"                                      # 配置需求 “adjust  delete  add”
