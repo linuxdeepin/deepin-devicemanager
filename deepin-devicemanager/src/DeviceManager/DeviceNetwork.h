@@ -40,13 +40,6 @@ public:
     bool setInfoFromHwinfo(const QMap<QString, QString> &mapInfo);
 
     /**
-     * @brief setInfoFromWifiInfo:设置从cat /sys/hisys/wal/wifi_devices_info里面获取的信息
-     * @param mapInfo: 由cat /sys/hisys/wal/wifi_devices_info获取的信息map
-     * @return 布尔值，true：信息设置成功；false：信息设置失败
-     */
-    bool setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo);
-
-    /**
      * @brief setIsWireless: 设置是否是无线网
      * @param sysFSID: SysFS ID: /class/net/enp2s0
      */

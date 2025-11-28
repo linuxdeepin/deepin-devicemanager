@@ -66,7 +66,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
-        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res = QString::number(inch, 10, 1) + " " + translateStr("inch") + " (";
         res += sizeDescription;
         res += ")";
     }
@@ -82,7 +82,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
-        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res = QString::number(inch, 10, 1) + " " + translateStr("inch") + " (";
         res += sizeDescription;
         res += ")";
     }
@@ -98,7 +98,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
-        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res = QString::number(inch, 10, 1) + " " + translateStr("inch") + " (";
         res += sizeDescription;
         res += ")";
     }
@@ -114,7 +114,7 @@ QString DeviceMonitor::parseMonitorSize(const QString &sizeDescription, double &
         double width = m_Width / 2.54;
         double height = m_Height / 2.54;
         inch = std::sqrt(width * width + height * height) / 10.0;
-        res = QString::number(inch, 10, 1) + " " + QObject::tr("inch") + " (";
+        res = QString::number(inch, 10, 1) + " " + translateStr("inch") + " (";
         res += sizeDescription;
         res += ")";
     }
@@ -504,7 +504,7 @@ void DeviceMonitor::caculateScreenSize()
         m_Height = match.captured(2).toInt();
 
         double inch = std::sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54)) / 10.0;
-        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+        m_ScreenSize = QString("%1 %2(%3mm X %4mm)").arg(QString::number(inch, '0', 1)).arg(translateStr("inch")).arg(m_Width).arg(m_Height);
         qCDebug(appLog) << "Calculated screen size:" << m_ScreenSize;
     }
 }

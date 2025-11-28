@@ -51,12 +51,6 @@ DeviceNetwork::DeviceNetwork()
 void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "DeviceNetwork::setInfoFromLshw";
-    if (!matchToLshw(mapInfo)
-        && Common::boardVendorType() != "KLVV" && Common::boardVendorType() != "KLVU"
-        && Common::boardVendorType() != "PGUW" && Common::boardVendorType() != "PGUV") {
-        qCDebug(appLog) << "Board vendor type is not matched, return";
-        return;
-    }
     // 设置由lshw获取的信息
     setAttribute(mapInfo, "description", m_Model);
     setAttribute(mapInfo, "product", m_Name);
@@ -202,23 +196,6 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setHwinfoLshwKey(mapInfo);
 
     return true;
-}
-
-bool DeviceNetwork::setInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
-{
-    qCDebug(appLog) << "DeviceNetwork::setInfoFromWifiInfo";
-    // 机器自身蓝牙
-    if (m_Name.contains(Common::specialHString(), Qt::CaseInsensitive)) {
-        qCDebug(appLog) << "DeviceNetwork::setInfoFromWifiInfo, name contains Huawei";
-        setAttribute(mapInfo, "Chip Type", m_Name);
-        setAttribute(mapInfo, "Vendor", m_Vendor);
-        setAttribute(mapInfo, "Type", m_Model);
-
-        return true;
-    } else {
-        qCDebug(appLog) << "DeviceNetwork::setInfoFromWifiInfo, name not contains Huawei";
-        return false;
-    }
 }
 
 void DeviceNetwork::setIsWireless(const QString &sysfs)
@@ -388,12 +365,12 @@ void DeviceNetwork::loadTableData()
 
     if (!available()) {
         qCDebug(appLog) << "DeviceNetwork::loadTableData, device not available";
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
 
     if (!enable()) {
         qCDebug(appLog) << "DeviceNetwork::loadTableData, device not enable";
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     // 加载表格数据信息

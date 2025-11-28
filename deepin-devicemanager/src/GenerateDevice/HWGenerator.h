@@ -85,16 +85,6 @@ protected:
      */
     virtual void getAudioInfoFromCatAudio() ;
 
-    // /**
-    //  * @brief getDiskInfoFromLshw:从lshw获取存储设备信息
-    //  */
-    // virtual void getDiskInfoFromLshw() override;
-
-    /**
-     * @brief getDiskInfoFromSmartCtl:从smartctl获取存储设备信息
-     */
-    virtual void getDiskInfoFromSmartCtl() override;
-
     /**
      * @brief getBluetoothInfoFromHciconfig:hciconfig获取蓝牙信息
      */
@@ -110,17 +100,10 @@ protected:
      */
     virtual void getBluetoothInfoFromLshw() override;
 
-    /**@brief:generator bluetooth info*/
-    virtual void getBluetoothInfoFromCatWifiInfo();
-
     /**
      * @brief getMemoryInfoFromLshw:从lshw获取内存信息
      */
     virtual void getMemoryInfoFromLshw() override;
-
-    /**@brief:generator network info*/
-    virtual void getNetworkInfoFromCatWifiInfo();
-
 };
 
 #endif // PANGUVGENERATOR_H

@@ -104,6 +104,7 @@ int main(int argc, char *argv[])
             qCDebug(appLog) << "Another instance is running, exiting";
             exit(0);
         }
+#ifndef DISABLE_POLKIT
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
                                                                                 SystemBusNameSubject(QDBusConnection::systemBus().baseService()),
                                                                                 Authority::AllowUserInteraction);
@@ -112,6 +113,7 @@ int main(int argc, char *argv[])
             qCDebug(appLog) << "Authorization failed, exiting";
             return 0;
         }
+#endif
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         DApplicationSettings settinAgs;
 #endif

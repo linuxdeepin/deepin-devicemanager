@@ -5,7 +5,7 @@
 // 项目自身文件
 #include "DeviceGenerator.h"
 #include "DDLog.h"
-
+#include "commondefine.h"
 // 其它头文件
 #include "CmdTool.h"
 #include "DeviceManager/DeviceManager.h"
@@ -296,54 +296,38 @@ void DeviceGenerator::generatorMonitorDevice()
 
 void DeviceGenerator::generatorNetworkDevice()
 {
+    bool hasWlan =false;
     QList<DeviceNetwork *> lstDevice;
-
-    QDir dir("/sys/class/net");
-    // 获取所有的子目录
-    QStringList subDirs = dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-
-    foreach (const QString &subDir, subDirs) {
-        if (subDir.contains("lo", Qt::CaseInsensitive) || subDir.contains("p2p", Qt::CaseInsensitive))
-            continue;
-
-        QString addressFilePath = dir.filePath(subDir + "/address");
-        QFile addressFile(addressFilePath);
-
-        // 尝试打开文件
-        if (addressFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QTextStream in(&addressFile);
-            QString address = in.readLine(); // 读取内容
-            qDebug() << "Interface:" << subDir << "Address:" << address;
-            if (address.length() == 17
-                    && !address.contains("00:00:00:00", Qt::CaseInsensitive)
-                    && !address.contains("ff:ff:ff:ff", Qt::CaseInsensitive)) {
-
-                DeviceNetwork *device = new DeviceNetwork();
-                QMap<QString, QString> tempMap;
-                tempMap["Logical Name"] = subDir;
-                tempMap["MAC Address"] = address;
-                DeviceManager::instance()->tomlDeviceMapSet(DT_Network, device,tempMap);
-                lstDevice.append(device);
-            }
-            addressFile.close();
-        } else {
-            qDebug() << "Failed to open file:" << addressFilePath;
-        }
-    }
 
     // 设置从lshw中获取的信息
     const QList<QMap<QString, QString>> &lstLshw = DeviceManager::instance()->cmdInfo("lshw_network");
     for (QList<QMap<QString, QString> >::const_iterator it = lstLshw.begin(); it != lstLshw.end(); ++it) {
-        if ((*it).find("serial") == (*it).end() && (*it).find("logical name") == (*it).end())
+        if ((*it).find("serial") == (*it).end() || (*it).find("logical name") == (*it).end())
             continue;
 
-        const QString &serialNumberLshw =  (*it)["serial"];
         const QString &logicalNameLshw =  (*it)["logical name"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
-            const QString &serialNumberLst =  (*itDevice)->hwAddress();
-            const QString &logicalNameLst =  (*itDevice)->logicalName();
-            if (serialNumberLshw == serialNumberLst || logicalNameLshw == logicalNameLst) {
-                (*itDevice)->setInfoFromLshw(*it);
+            const QString &macAddressLshw =  (*it)["serial"];
+            if (logicalNameLshw.contains("p2p", Qt::CaseInsensitive))
+                continue;
+            if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive) && hasWlan) //common sense: one PC only have 1 wlan device
+                continue;
+            if (macAddressLshw.contains("00:00:00:00:00:00", Qt::CaseInsensitive) || macAddressLshw.contains("ff:ff:ff:ff:ff:ff", Qt::CaseInsensitive) || macAddressLshw.isEmpty())
+                continue;
+            // Regular expression for validating MAC address
+            QRegularExpression macRegex("([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})");
+            if (!macRegex.match(macAddressLshw).hasMatch())
+                continue;
+
+            QString addressFilePath = "/sys/class/net/" + logicalNameLshw;
+            QDir dir(addressFilePath);
+            if (dir.exists()) {
+                DeviceNetwork *device = new DeviceNetwork();
+                device->setInfoFromLshw(*it);
+                lstDevice.append(device);
+                if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive))
+                    hasWlan = true;
+                continue;
             }
         }
     }
@@ -357,14 +341,23 @@ void DeviceGenerator::generatorNetworkDevice()
             continue;
         }
 
-        const QString &serialNumberLshw =  (*it)["HW Address"];
-        const QString &logicalNameLshw =  (*it)["Device File"];
+        const QString &serialNumberHwinfo =  (*it)["HW Address"];
+        const QString &logicalNameHwinfo =  (*it)["Device File"];
         for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
             const QString &serialNumberLst =  (*itDevice)->hwAddress();
             const QString &logicalNameLst =  (*itDevice)->logicalName();
-            if (serialNumberLshw == serialNumberLst || logicalNameLshw == logicalNameLst) {
-                // (*itDevice)->setEnableValue(false);
+            // 如果(*it)中包含unique_id属性，则说明是从数据库里面获取的，否则是从hwinfo中获取的
+            if ((*it).find("unique_id") != (*it).end()) {
+                const QString &unique_id = (*it)["unique_id"];
+                if (!unique_id.isEmpty() && (*itDevice)->uniqueID() == unique_id) {
+                    (*itDevice)->setEnableValue(false);
+                }
+
+            } else if (serialNumberHwinfo == serialNumberLst || logicalNameHwinfo == logicalNameLst) {
                 (*itDevice)->setInfoFromHwinfo(*it);
+            } else {
+                (*itDevice)->setCanUninstall(false);
+                (*itDevice)->setForcedDisplay(true);
             }
         }
     }
@@ -373,6 +366,7 @@ void DeviceGenerator::generatorNetworkDevice()
         DeviceManager::instance()->addNetworkDevice(device);
     }
 }
+
 
 void DeviceGenerator::generatorAudioDevice()
 {
@@ -724,6 +718,9 @@ void DeviceGenerator::getDiskInfoFromSmartCtl()
     const QList<QMap<QString, QString>> &lstMap = DeviceManager::instance()->cmdInfo("smart");
     QList<QMap<QString, QString> >::const_iterator it = lstMap.begin();
     for (; it != lstMap.end(); ++it) {
+        // 剔除未识别的磁盘
+        if (!(*it).contains("ln"))
+            continue;
         // qCDebug(appLog) << "Setting storage info from smartctl for" << (*it)["ln"];
         DeviceManager::instance()->setStorageInfoFromSmartctl((*it)["ln"], *it);
     }

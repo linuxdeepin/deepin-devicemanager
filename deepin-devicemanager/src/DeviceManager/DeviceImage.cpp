@@ -236,12 +236,12 @@ void DeviceImage::loadTableData()
 
     if (!available()) {
         qCDebug(appLog) << "Device not available, updating tName.";
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
 
     if (!enable()) {
         qCDebug(appLog) << "Device disabled, updating tName.";
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);

@@ -598,6 +598,42 @@ QString DeviceManager::tomlDeviceReadKeyValue(DeviceType deviceType, DeviceBaseI
     return QString("");
 }
 
+bool DeviceManager::tomlSetBytomlmatchkey(DeviceType deviceType, DeviceBaseInfo *device, const QString &tomltomlmatchkey, const QString &tomltomlconfigdemanding)
+{
+    Q_UNUSED(deviceType)
+    QMap<QString, QString> itemMap;
+    QStringList keyValues = tomltomlmatchkey.split(",");
+    foreach (const QString &keyValue, keyValues) {
+        QStringList wordlst = keyValue.split("=");
+        if (2 == wordlst.size()) {
+
+            QString key = wordlst[0].remove('"').trimmed();
+            QString valuetmp = wordlst[1];
+            QStringList valuelst;
+            QString value;
+            if (valuetmp.contains("#")) {
+                valuelst = valuetmp.split("#");
+                value = valuelst[0].remove('\"').trimmed();
+            } else
+                value = valuetmp.remove('\"').trimmed();
+
+            itemMap.insert(key, value);
+        }
+    }
+    if(itemMap.size() == 0 )
+        return false;
+
+    for (auto key : itemMap.keys()) {
+        QString tomlKey = key;
+        QString tomlVal = itemMap.value(key);
+        QString deviceVal = device->readDeviceInfoKeyValue(tomlKey);
+        if((0 != deviceVal.compare(tomlVal, Qt::CaseInsensitive))) {
+            return false;
+        }
+    }
+
+    return true;
+}
 
 void DeviceManager::tomlDeviceSet(DeviceType deviceType)
 {
@@ -607,6 +643,9 @@ void DeviceManager::tomlDeviceSet(DeviceType deviceType)
     for (int j = 0; j < tomlMapLst.size(); j++) { // 加载从toml中获取的信息
         bool fixSameOne = false;                  //初始值设为该项信息没有用过
         bool isSameOne = false;
+
+        QString tomltomlmatchkey = tomlMapLst[j]["tomlmatchkey"];
+        QString tomltomlconfigdemanding = PhysID(tomlMapLst[j], "tomlconfigdemanding");
         QList<DeviceBaseInfo *> lst = convertDeviceList(deviceType);
         for (int i = 0; i < lst.size(); i++) {   // toml中获取的信息 与 原设备信息遍历，相比较作处理
             DeviceBaseInfo *device = lst[i];
@@ -615,27 +654,52 @@ void DeviceManager::tomlDeviceSet(DeviceType deviceType)
             QString pid = PhysID(tomlMapLst[j], "Product_ID");
             QString vendor = PhysID(tomlMapLst[j], "Vendor");
             QString name = PhysID(tomlMapLst[j], "Name");
-            //取出toml中获取的关键字信息设备唯一标识硬件IDS "Modalias"， "Vendor_ID"， "Vendor"，"Name"；作比较处理
-            isSameOne = findByModalias(deviceType, device, modalias);
-            if (!isSameOne) {
-                isSameOne = findByVIDPID(deviceType, device, vid, pid);
-            }
-            if (!isSameOne) {
-                isSameOne = findByVendorName(deviceType, device, vendor, name);
-            }
-            if (isSameOne) {   //存在 就合并信息 setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo);
+            bool isSameOne = false;                   //初始值设为该项信息不属于该设备
+
+
+            isSameOne = tomlSetBytomlmatchkey(deviceType, device, tomltomlmatchkey,tomltomlconfigdemanding);
+
+            if (tomltomlconfigdemanding == "adjust") {
                 fixSameOne = true;   //标记为该项信息有用过 ，
-                if (TOML_Del == tomlDeviceMapSet(deviceType, device, tomlMapLst[j])) {
+                if (isSameOne)
+                    tomlDeviceMapSet(deviceType, device, tomlMapLst[j]);
+            } else if (tomltomlconfigdemanding == "delete") {
+                fixSameOne = true;   //标记为该项信息有用过 ，
+                if (isSameOne) {
                     tomlDeviceDel(deviceType, device); //toml 去掉该设备
                     delete (device);
                 }
+            } else if (tomltomlconfigdemanding == "add" && !fixSameOne) {
+
+            } else {
+                //取出toml中获取的关键字信息设备唯一标识硬件IDS "Modalias"， "Vendor_ID"， "Vendor"，"Name"；作比较处理
+                if (!isSameOne)
+                    isSameOne = findByModalias(deviceType, device, modalias);
+                if (!isSameOne) {
+                    isSameOne = findByVIDPID(deviceType, device, vid, pid);
+                }
+                if (!isSameOne) {
+                    isSameOne = findByVendorName(deviceType, device, vendor, name);
+                }
+                if (isSameOne&& !fixSameOne) {   //存在 就合并信息
+                    fixSameOne = true;   //标记为该项信息有用过 ，
+                    if (TOML_Del == tomlDeviceMapSet(deviceType, device, tomlMapLst[j])) {
+                        tomlDeviceDel(deviceType, device); //toml 去掉该设备
+                        delete (device);
+                    }
+                }
             }
         }  //与原设备信息遍历相比完再作添加设备
-        if ((deviceType != DT_Bios) && (deviceType != DT_Computer) && !fixSameOne) {
-                fixSameOne = true;  //标记为该项信息有用过 ，则不再增加了
-                DeviceBaseInfo *device = createDevice(deviceType);
-                tomlDeviceMapSet(deviceType, device, tomlMapLst[j]);
-                tomlDeviceAdd(deviceType, device); //不存在 就加
+        if (tomltomlconfigdemanding == "add" && !fixSameOne) {
+            fixSameOne = true;   //标记为该项信息有用过
+            DeviceBaseInfo *newDevice = createDevice(deviceType);
+            tomlDeviceMapSet(deviceType, newDevice, tomlMapLst[j]);
+            tomlDeviceAdd(deviceType, newDevice); //加
+        } else if ((deviceType != DT_Bios) && (deviceType != DT_Computer) && !fixSameOne) {
+            fixSameOne = true;  //标记为该项信息有用过 ，则不再增加了
+            DeviceBaseInfo *device = createDevice(deviceType);
+            tomlDeviceMapSet(deviceType, device, tomlMapLst[j]);
+            tomlDeviceAdd(deviceType, device); //不存在 就加
         }
     } //end of for (int j = 0;...
 }
@@ -1142,19 +1206,6 @@ bool DeviceManager::setBluetoothInfoFromHwinfo(const QMap<QString, QString> &map
     return false;
 }
 
-bool DeviceManager::setBluetoothInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
-{
-    qCDebug(appLog) << "Setting bluetooth info from wifi info";
-    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceBluetooth.begin();
-    for (; it != m_ListDeviceBluetooth.end(); ++it) {
-        DeviceBluetooth *device = dynamic_cast<DeviceBluetooth *>(*it);
-        if (device->setInfoFromWifiInfo(mapInfo)) {
-            return true;
-        }
-    }
-    return false;
-}
-
 DeviceBaseInfo *DeviceManager::getBluetoothDevice(const QString &unique_id)
 {
     qCDebug(appLog) << "Getting bluetooth device with unique ID:" << unique_id;
@@ -1266,24 +1317,6 @@ void DeviceManager::addNetworkDevice(DeviceNetwork *const device)
     // qCDebug(appLog) << "Adding network device";
     // 添加网络适配器
     m_ListDeviceNetwork.append(device);
-}
-
-bool DeviceManager::setNetworkInfoFromWifiInfo(const QMap<QString, QString> &mapInfo)
-{
-    qCDebug(appLog) << "Setting network info from wifi info";
-    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceNetwork.begin();
-    for (; it != m_ListDeviceNetwork.end(); ++it) {
-
-        DeviceNetwork *device = dynamic_cast<DeviceNetwork *>(*it);
-        if (!device)
-            continue;
-
-        if (device->setInfoFromWifiInfo(mapInfo)) {
-            return true;
-        }
-    }
-    qCDebug(appLog) << "Network info from wifi info not found";
-    return false;
 }
 
 DeviceBaseInfo *DeviceManager::getNetworkDevice(const QString &unique_id)

@@ -241,11 +241,11 @@ void DeviceOthers::loadTableData()
     QString tName = m_Name;
     if (!available()) {
         qCDebug(appLog) << "DeviceOthers::loadTableData, not available";
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
     if (!enable()) {
         qCDebug(appLog) << "DeviceOthers::loadTableData, not enable";
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);

@@ -605,12 +605,12 @@ void DeviceInput::loadTableData()
 
     if (!available()) {
         qCDebug(appLog) << "loadTableData unavailable";
-        tName = "(" + tr("Unavailable") + ") " + m_Name;
+        tName = "(" + translateStr("Unavailable") + ") " + m_Name;
     }
 
     if (!enable()) {
         qCDebug(appLog) << "loadTableData disable";
-        tName = "(" + tr("Disable") + ") " + m_Name;
+        tName = "(" + translateStr("Disable") + ") " + m_Name;
     }
 
     m_TableData.append(tName);

@@ -75,7 +75,6 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
         qCDebug(appLog) << "DevicePower::setInfoFromUpower, device contains line_power";
         return false;
     }
-    // m_Name = QObject::tr("battery");  
 
     setAttribute(mapInfo, "", m_Vendor);
     setAttribute(mapInfo, "", m_Model);
@@ -114,7 +113,7 @@ void DevicePower::setDaemonInfo(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "DevicePower::setDaemonInfo";
     // 设置守护进程信息
-    if (m_Name == QObject::tr("battery"))
+    if (m_Name == translateStr("battery"))
         getOtherMapInfo(mapInfo);
 }
 
