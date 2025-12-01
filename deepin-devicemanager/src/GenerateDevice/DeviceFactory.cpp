@@ -10,6 +10,7 @@
 #include "HWGenerator.h"
 #include "CustomGenerator.h"
 #include "commonfunction.h"
+#include "commontools.h"
 
 // Qt库文件
 #include <QProcess>
@@ -42,9 +43,13 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
                 generator = new HWGenerator();
             else if (type == "PGUX")
                 generator = new HWGenerator();
-            else if (type == "CustomType")
-                generator = new CustomGenerator();
-            else
+            else if (type == "CustomType") {
+                if (CommonTools::hasPciGraphicsCard()) {
+                    generator = new ArmGenerator();
+                } else {
+                    generator = new CustomGenerator();
+                }
+            } else
                 generator = new HWGenerator();
         } else
             generator = new ArmGenerator();
