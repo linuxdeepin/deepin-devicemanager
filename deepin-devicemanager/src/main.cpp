@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     }
 
     // 特殊机型，提前缓存GPU信息
-    if (Common::specialComType == Common::kCustomType) {
+    if (Common::specialComType == Common::kCustomType && !CommonTools::hasPciGraphicsCard()) {
         CommonTools::preGenerateGpuInfo();
     }
 

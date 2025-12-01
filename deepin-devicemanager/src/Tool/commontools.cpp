@@ -14,6 +14,8 @@
 #include <QFile>
 #include <QDir>
 #include <QProcess>
+#include <QMutex>
+#include <QMutexLocker>
 #include <DConfig>
 
 DWIDGET_USE_NAMESPACE
@@ -302,6 +304,35 @@ QString CommonTools::preGenerateGpuInfo()
     }
 
     return (gpuBaseInfo + gpuMemInfo);
+}
+
+bool CommonTools::hasPciGraphicsCard()
+{
+    static bool result = false;
+    static bool initialized = false;
+    static QMutex mutex;
+
+    QMutexLocker locker(&mutex);
+
+    if (!initialized) {
+        QProcess process;
+        process.setProgram("lspci");
+        process.setArguments(QStringList() << "-v" << "-d" << "::0300");
+        process.start();
+        if (!process.waitForFinished(5000)) {
+            qCritical() << "Exec lspci time out!";
+            result = false;
+        } else if (process.exitCode() != 0) {
+            qCritical() << "Failed to exec lspci, code : " << process.exitCode();
+            result = false;
+        } else {
+            QString output = process.readAllStandardOutput();
+            result = !output.trimmed().isEmpty();
+        }
+        initialized = true;
+    }
+
+    return result;
 }
 
 bool CommonTools::getGpuBaseInfo(QMap<QString, QString> &mapInfo)
