@@ -9,13 +9,33 @@ export QT_SELECT := 6
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 include /usr/share/dpkg/default.mk
 
+DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+DH_AUTO_ARGS = --parallel --buildsystem=cmake
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+# 检测当前安装的Qt版本，优先使用Qt6，否则使用Qt5
+define detect_qt_version
+ifneq (,$(shell which qmake6 2>/dev/null))
+    QT_DIR="/usr/lib/$(DEB_HOST_MULTIARCH)/cmake/Qt6"
+else
+    QT_DIR="/usr/lib/$(DEB_HOST_MULTIARCH)/cmake/Qt5"
+endif
+endef
+
+$(eval $(call detect_qt_version))
+
 override_dh_auto_configure:
 	dh_auto_configure -- \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_SAFETYTEST_ARG="CMAKE_SAFETYTEST_ARG_OFF" \
-    -DAPP_VERSION=$(DEB_VERSION_UPSTREAM) -DVERSION=$(DEB_VERSION_UPSTREAM) LIB_INSTALL_DIR=/usr/lib/$(DEB_HOST_MULTIARCH)
+    -DUSE_AM_DBUS=ON \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DAPP_VERSION=$(DEB_VERSION_UPSTREAM) \
+	-DCVERSION=$(DEB_VERSION_UPSTREAM) \
+	-DQT_DIR=$(QT_DIR)
 %:
-	dh $@
+	dh $@ --parallel
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
