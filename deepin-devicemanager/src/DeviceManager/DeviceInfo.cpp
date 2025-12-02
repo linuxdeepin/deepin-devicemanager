@@ -817,11 +817,7 @@ const QString DeviceBaseInfo::getDriverVersion()
     }
 
     foreach (QString out, outInfo.split("\n")) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        QStringList item = out.split(":", QString::SkipEmptyParts);
-#else
-        QStringList item = out.split(":", Qt::SkipEmptyParts);
-#endif
+        QStringList item = out.split(":", QT_SKIP_EMPTY_PARTS);
         if (!item.isEmpty() && "version" == item[0].trimmed()) {
             // qCDebug(appLog) << "Found driver version: " << item[1].trimmed();
             return item[1].trimmed();
@@ -1077,7 +1073,6 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
                        << "o" << "p" << "q" << "r" << "s" << "t"
                        << "u" << "v" << "w" << "x" << "y" << "z";
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QRegularExpression reg("([0-9a-zA-Z]+)-([0-9a-zA-Z]+)\\.([0-9a-zA-Z]+)");
     QRegularExpressionMatch match = reg.match(words[0]);
     if (match.hasMatch()) {
@@ -1090,23 +1085,8 @@ void DeviceBaseInfo::setHwinfoLshwKey(const QMap<QString, QString> &mapInfo)
         int first = chs[0].toInt();
         int second = chs[1].toInt();
         m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
-        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey not match";
-    }
-#else
-    QRegExp reg("([0-9a-zA-Z]+)-([0-9a-zA-Z]+)\\.([0-9a-zA-Z]+)");
-    if (reg.exactMatch(words[0])) {
-        int first = reg.cap(1).toInt();
-        int second = reg.cap(2).toInt();
-        int third = reg.cap(3).toInt();
-        m_HwinfoToLshw = QString("usb@%1:%2.%3").arg(nums.at(first)).arg(nums.at(second)).arg(nums.at(third));
-        qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey match";
-    } else {
-        int first = chs[0].toInt();
-        int second = chs[1].toInt();
-        m_HwinfoToLshw = QString("usb@%1:%2").arg(nums.at(first)).arg(nums.at(second));
         qCDebug(appLog) << "DeviceBaseInfo::setHwinfoLshwKey no match";
     }
-#endif
 }
 
 bool DeviceBaseInfo::matchToLshw(const QMap<QString, QString> &mapInfo)

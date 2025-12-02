@@ -51,7 +51,6 @@ BtnWidget::BtnWidget()
 void BtnWidget::enterEvent(QEvent *event)
 {
     qCDebug(appLog) << "Mouse entered button widget";
-{
     emit enter();
     return DWidget::enterEvent(event);
 }
