@@ -233,35 +233,17 @@ bool DeviceInput::getPS2Syspath(const QString &dfs)
                 // qCDebug(appLog) << "Found sysfs line: " << sysfs;
                 continue;
             }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            QRegExp reg("H: Handlers=.*(event[0-9]{1,2}).*");
-            if (reg.exactMatch(line)) {
-                event = reg.cap(1);
-                // qCDebug(appLog) << "Matched event using QRegExp: " << event;
-            }
-#else
             QRegularExpression reg("H: Handlers=.*(event[0-9]{1,2}).*");
             QRegularExpressionMatch match = reg.match(line);
             if (match.hasMatch()) {
                 event = match.captured(1);
                 // qCDebug(appLog) << "Matched event using QRegularExpression: " << event;
             }
-#endif
         }
 
         if (!event.isEmpty() && !sysfs.isEmpty()) {
             // qCDebug(appLog) << "Event and sysfs are not empty. Checking for match.";
             if (event == eventdfs) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-                QRegExp regfs;
-                if (sysfs.contains("i2c_designware"))
-                    regfs = QRegExp("S: Sysfs=(.*)/input/input[0-9]{1,2}");
-                else
-                    regfs = QRegExp("S: Sysfs=(.*)/input[0-9]{1,2}");
-                if (regfs.exactMatch(sysfs)) {
-                    m_SysPath = regfs.cap(1);
-                }
-#else
                 QRegularExpression regfs;
                 if (sysfs.contains("i2c_designware"))
                     regfs = QRegularExpression("S: Sysfs=(.*)/input/input[0-9]{1,2}");
@@ -271,7 +253,6 @@ bool DeviceInput::getPS2Syspath(const QString &dfs)
                 if (match.hasMatch()) {
                     m_SysPath = match.captured(1);
                 }
-#endif
             }
         }
     }
@@ -307,31 +288,18 @@ bool DeviceInput::isBluetoothDevice(const QString &dfs)
                 Uniq = line;
                 continue;
             }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            QRegExp reg("H: Handlers=.*(event[0-9]{1,2}).*");
-            if (reg.exactMatch(line)) {
-                event = reg.cap(1);
-            }
-#else
             QRegularExpression reg("H: Handlers=.*(event[0-9]{1,2}).*");
             QRegularExpressionMatch match = reg.match(line);
             if (match.hasMatch()) {
                 event = match.captured(1);
             }
-#endif
         }
 
         if (event == eventdfs) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            QRegExp regUniq(".*([0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}).*");
-            if (regUniq.exactMatch(Uniq)) {
-                QString id = regUniq.cap(1);
-#else
             QRegularExpression regUniq(".*([0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}:[0-9A-Z]{2}).*");
             QRegularExpressionMatch match = regUniq.match(Uniq);
             if (match.hasMatch()) {
                 QString id = match.captured(1);
-#endif
                 QProcess process;
                 process.start("hcitool con");
                 process.waitForFinished(-1);
@@ -352,16 +320,10 @@ bool DeviceInput::isBluetoothDevice(const QString &dfs)
 QString DeviceInput::eventStrFromDeviceFiles(const QString &dfs)
 {
     qCDebug(appLog) << "eventStrFromDeviceFiles";
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QRegularExpression regdfs(".*(event[0-9]{1,2}).*");
     QRegularExpressionMatch match = regdfs.match(dfs);
     if (match.hasMatch())
         return match.captured(1);
-#else
-    QRegExp regdfs(".*(event[0-9]{1,2}).*");
-    if (regdfs.exactMatch(dfs))
-        return regdfs.cap(1);
-#endif
     qCDebug(appLog) << "eventStrFromDeviceFiles end";
     return "";
 }

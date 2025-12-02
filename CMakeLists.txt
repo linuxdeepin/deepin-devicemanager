@@ -16,8 +16,20 @@ if(CMAKE_BUILD_TYPE  STREQUAL "Debug")
     add_definitions(-DDISABLE_POLKIT)
 endif()
 
-# 设置 QT_VERSION 变量
-set(QT_VERSION_MAJOR 6)
+# 自动检测系统中的Qt版本
+if(NOT DEFINED QT_VERSION_MAJOR)
+    # 首先尝试查找Qt6
+    find_package(Qt6 QUIET)
+    if(Qt6_FOUND)
+        set(QT_VERSION_MAJOR 6)
+        message("Found Qt6, using Qt version 6")
+    else()
+        set(QT_VERSION_MAJOR 5)
+        message("Found Qt5, using Qt version 5")
+    endif()
+else()
+    message("Using manually specified QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
+endif()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-z,relro -Wl,-z,now")
 

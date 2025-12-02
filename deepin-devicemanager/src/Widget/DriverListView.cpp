@@ -16,6 +16,10 @@
 #include <QStandardItemModel>
 #include <QPainterPath>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <DApplicationHelper>
+#endif
+
 using namespace DDLog;
 
 DriverListView::DriverListView(QWidget *parent) : DTreeView(parent)
@@ -111,7 +115,7 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
     QBrush background;
     if (!(index.row() & 1)) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        auto dpa = DGuiApplicationHelper::instance()->palette(this);
+        auto dpa = DApplicationHelper::instance()->palette(this);
         background = dpa.color(DPalette::ItemBackground);
 #else
         // 当Qt版本为6.0或更高时，直接使用palette.color(cg, DPalette::Base)来获取背景颜

@@ -33,18 +33,3 @@ const QString DEVICEINFO_PATH = "/tmp/device-info";
 #else
 #define QT_SKIP_EMPTY_PARTS Qt::SkipEmptyParts
 #endif
-
-// Regular expression compatibility macros for Qt5/Qt6
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-// Qt5 uses QRegExp
-#define QT_REGEXP QRegExp
-#define QT_REGEXP_MATCH(pattern, string) pattern.exactMatch(string)
-#define QT_REGEXP_CAPTURE(pattern, index) pattern.cap(index)
-#define QT_REGEXP_INDEX_IN(pattern, string) pattern.indexIn(string)
-#else
-// Qt6 uses QRegularExpression
-#define QT_REGEXP QRegularExpression
-#define QT_REGEXP_MATCH(pattern, string) pattern.match(string).hasMatch()
-#define QT_REGEXP_CAPTURE(pattern, index, string) pattern.match(string).captured(index)
-#define QT_REGEXP_INDEX_IN(pattern, string) pattern.match(string).hasMatch() ? 0 : -1
-#endif

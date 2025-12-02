@@ -145,18 +145,17 @@ SET_QT_VERSION()
 
 if(${QT_VERSION_MAJOR} EQUAL 6)
     find_package(QApt-qt6 REQUIRED)
-    include_directories(${QApt-qt6_INCLUDE_DIRS})
+    include_directories(${QApt-qt6_INCLUDE_DIRS})    
+    include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
     set(QAPT_LIB QApt-qt6)
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
     find_package(QApt REQUIRED)
     include_directories(${QApt_INCLUDE_DIRS})
+    include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
     set(QAPT_LIB QApt)
 else()
     message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
 endif()
-
-#include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
-include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
 
 # Tell CMake to create the executable
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H} ${APP_QRC})

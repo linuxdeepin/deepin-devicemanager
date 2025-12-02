@@ -5,6 +5,7 @@
 // 项目自身文件
 #include "DeviceStorage.h"
 #include "commonfunction.h"
+#include "commondefine.h"
 #include <cfloat>
 #include <cmath>
 
@@ -281,16 +282,13 @@ QString DeviceStorage::getSerialID(QString &strDeviceLink)
         qCDebug(appLog) << "DeviceStorage::getSerialID, device link contains platform";
         // /devices/platform/f8300000.ufs/host0/target0:0:0/0:0:0:3
         // /proc/bootdevice/name:f8300000.ufs
-        QRegularExpression reg(".*platform/([^/]+)/.*");
-        QString strName = "";
-        QString strBootdeviceName = "";
-        if (reg.match(strDeviceLink).hasMatch()) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            strName = reg.cap(1); // Qt 5
-#else
-            strName = reg.match(strDeviceLink).captured(1); // Qt 6
-#endif
-        }
+         QRegularExpression reg(".*platform/([^/]+)/.*");
+         QString strName = "";
+         QString strBootdeviceName = "";
+         QRegularExpressionMatch match = reg.match(strDeviceLink);
+         if (match.hasMatch()) {
+             strName = match.captured(1);
+         }
         if (!strName.isEmpty()) { //取到设备名称再去读文件，因为读文件开销大。
             qCDebug(appLog) << "DeviceStorage::getSerialID, strName is not empty";
             QString Path = "/proc/bootdevice/name";
@@ -571,18 +569,12 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
     int num1 = 0;
     int num2 = 0;
     QRegularExpression reg(".*\\[(\\d+\\.?\\d+).*\\]");
-    if (reg.match(size1).hasMatch())
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        num1 = reg.cap(1).toInt(); // Qt 5 使用 cap
-#else
-        num1 = reg.match(size1).captured(1).toInt(); // Qt 6 使用 captured
-#endif
-    if (reg.match(size2).hasMatch())
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        num2 = reg.cap(1).toInt(); // Qt 5 使用 cap
-#else
-        num2 = reg.match(size2).captured(1).toInt(); // Qt 6 使用 captured
-#endif
+    QRegularExpressionMatch match1 = reg.match(size1);
+    if (match1.hasMatch())
+        num1 = match1.captured(1).toInt();
+    QRegularExpressionMatch match2 = reg.match(size2);
+    if (match2.hasMatch())
+        num2 = match2.captured(1).toInt();
 
     // 返回较大值
     if ((num1 - num2) > FLT_EPSILON * fmaxf(fabsf(num1), fabsf(num2))) {
@@ -797,23 +789,17 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     if (capacity != "") {
         qCDebug(appLog) << "DeviceStorage::getInfoFromsmartctl, capacity is not empty";
         QRegularExpression reg(".*\\[(.*)\\]$");
-        if (reg.match(capacity).hasMatch())
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            m_Size = reg.cap(1); // Qt 5 使用 cap
-#else
-            m_Size = reg.match(capacity).captured(1); // Qt 6 使用 captured
-#endif
+        QRegularExpressionMatch sizeMatch = reg.match(capacity);
+        if (sizeMatch.hasMatch())
+            m_Size = sizeMatch.captured(1);
 
         capacity.replace(",","").replace(" ","");
         QRegularExpression re("(\\d+)bytes*");     //取值格式如： User Capacity:    1,000,204,886,016 bytes [1.00 TB]     Total NVM Capacity:   256,060,514,304 [256 GB]
         int pos = re.match(capacity).capturedStart();
         if (pos != -1) {
             qCDebug(appLog) << "DeviceStorage::getInfoFromsmartctl, capacity has match";
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-            QString byteSize = re.cap(1); // Qt 5 使用 cap
-#else
-            QString byteSize = re.match(capacity).captured(1); // Qt 6 使用 captured
-#endif
+            QRegularExpressionMatch byteMatch = re.match(capacity);
+            QString byteSize = byteMatch.captured(1);
             bool isValue = false;
             quint64 value = byteSize.trimmed().toULongLong(&isValue);
             if (value > 0 && isValue)
