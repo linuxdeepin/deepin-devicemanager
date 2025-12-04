@@ -1,3 +1,106 @@
+deepin-devicemanager (6.0.54) unstable; urgency=medium
+
+  * chore: Update version to 6.0.54
+  * build: conditionally disable driver features for Qt6 builds
+  * build(deps): add Qt5 compatibility support alongside Qt6
+  * refactor(qt): add automatic Qt version detection and update compatibility code
+  * Fix: [GPU] GPU info not show.
+  * Fix: [Memory] The memory list not show.
+  * Fix: [Awake] The mouse and keyboard set awake error.
+  * Fix: [gpu-info] The gpu mem not show.
+  * Fix: [network] Disable network failed
+  * fix: Simplify UFS interface version detection
+  * Fix: [gpu-info] The gpu info not show in special platform.
+  * fix: [typo] Correct spelling errors in EDIDparser.
+  * Fix: [Battery] The battery percentage show error.
+  * fix: [typo] Correct method name spelling from setCanEnale to setCanEnable
+  * fix: Clear driver field when value is usbfs
+  * feat: Adjust CPU frequency values for specific device type
+  * feat: Adjust CPU frequency for kSpecialType5 device
+  * fix: [cppcheck] Improve code formatting for architecture mapping
+  * feat: Adjust CPU frequency values for specific device type
+  * fix: Set timeout for device info loading to prevent infinite waiting
+  * fix: Prevent music playback interruption when opening Device Manager with USB headphones
+  * fix: add input device bus interface for USB Devices
+  * Fix: [GPU] Not show gpu on some platform.
+  * Revert "Fix: [Audio] The audio device of usb not show."
+  * Pref: [cppcheck] fix cppcheck warning.
+  * Fix: [Audio] The audio device of usb not show.
+  * fix: Improve input device Bus interface detection
+  * Fix: [Monitor-Info] add hardware platform detection for monitor validation
+  * Fix: [cppcheck] Resolve cppcheck issue
+  * Fix: [cppcheck] Fix cppcheck warnings.
+  * fix: Improve network adapter model detection
+  * fix: update filter for some unkown netcard
+  * fix: update monitor of subtitle for specific device models
+  * fix: Handle display configuration for specific device models
+  * fix: [memory] Memory show error in special platform.
+  * Chore: Fix the cppcheck warning.
+  * Perf: Improve program performance
+  * fix: [Net-Wakeup] The net card can not wakeup.
+  * Perf: [cppcheck] Improve program execution efficiency.
+  * fix: [cppcheck] Remove the useless code.
+  * Feat: [Monitor] The monitor name show error.
+  * fix: Update input device Bus interface display
+  * Perf: [cppcheck] parameter should be passed by const reference.
+  * Chore: [cppcheck] Resolve issue identified by cppcheck
+  * feat: [GPU] Add logic to show GPU info.
+  * feat: [GPU] Add feature for GPU.
+  * feat: [GPU] Add logic to show GPU info.
+  * fix: maintain the monitor info in special machine.
+  * fix: Improve supported resolution detection for display devices
+  * feat: [GPU] Add extra information display logic.
+  * feat: [GPU] Add logic to show GPU info.
+  * fix: Format graphics card resolution display
+  * fix: [GPU] The max resolution and min resolution show error.
+  * fix: format the overview of memory display
+  * fix: fix wakeup ps/2 mouse
+  * fix: [network] The wireless maybe connect.
+  * fix: add the detail mode of screen size
+  * fix: update device description to Universal Flash Storage
+  * fix: adjust the storage display order.
+  * fix: remove useless info.
+  * fix: the cpu model in special machine.
+  * fix: modify the temperature of battery.
+  * Fix: the monitor device incorrect order (#463)
+  * fix: the invalded device show incorrect (#462)
+  * fix: filter the invalid power device (#461)
+  * fix: the USB audio device can't be disable
+  * fix: modify the mouse device name
+  * fix: fit multiple audio device enable function
+  * fix: the audio device may cause crush
+  * fix: the audio device registe two pci device can't be disable
+  * fix: the monitor display info in special machine (#453)
+  * fix: get the storage size info from smartctl (#450)
+  * fix: the monitor info in single screen mode (#436)
+  * fix: the get info from edit in order
+  * feat: modify the storage size
+  * feat: add the storage overview info
+  * fix: adjust the select usb timeout
+  * Revert "fix: adjust the select usb timeout"
+  * fix: fit the UFS for klv
+  * fix: adjust the select usb timeout
+  * fix: the monitor get info from xrander
+  * fix: the storage siez display
+  * fix: the device of monitor display
+  * fix: the bluetooth of false identification
+  * fix: the camera info show incorrect
+  * fix: fix the UFS display
+  * fix: the w525 device of monitor display
+  * fix: the w515 device of monitor display
+  * fix: [network] add communication network  support
+  * fix: [network] add communication network  support
+  * fix: get the network of usb vender info
+  * fix: the pgux device of monitor display
+  * fix: the flmx device of monitor display
+  * chore: extend flmx mode of device
+  * chore: [translate] support lupdate auto
+  * fix: [network] add network full support
+  * chore: extend toml
+  * chore: uniform some arm model code
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Thu, 04 Dec 2025 09:44:05 +0800
+
 deepin-devicemanager (6.0.53) unstable; urgency=medium
 
   * chore: Update compiler flags for security enhancements
