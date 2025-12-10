@@ -304,7 +304,7 @@ void DeviceCpu::loadTableHeader()
     m_TableHeader.append("Vendor");
     m_TableHeader.append(frequencyIsRange() ? ("Frequency") : ("Max Frequency"));
     if (Common::curCpuType == Common::kSpecialCpuType1)
-        m_TableHeader.append(tr("Max Boost Clock"));
+        m_TableHeader.append("Max Boost Clock");
     m_TableHeader.append("Architecture");
 }
 

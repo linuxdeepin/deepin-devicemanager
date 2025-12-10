@@ -1245,7 +1245,8 @@ void DeviceBaseInfo::generatorTranslate()
     <<  tr("Speed") \
     <<  tr("Type") \
     <<  tr("Vendor") \
-    <<  tr("Processor");
+    <<  tr("Processor") \
+    << tr("Max Boost Clock");
 }
 
 void DeviceBaseInfo::setSysPath(const QString &newSysPath)
