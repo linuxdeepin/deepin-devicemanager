@@ -113,14 +113,15 @@ int main(int argc, char *argv[])
     //需要查询是否支持特殊机型静音恢复，例如hw机型
     DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
     //需要判断Dconfig文件是否合法
-    if(dconfig && dconfig->isValid() && dconfig->keyList().contains("specialComType")){
-        Common::specialComType = dconfig->value("specialComType").toInt();
-    }
-    qCInfo(appLog) << "Common::specialComType value is:" << Common::specialComType;
-
-    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("TomlFilesName")) {
-        QString tomlFilesName = dconfig->value("TomlFilesName").toString();
-        Common::tomlFilesNameSet(tomlFilesName);
+    if(dconfig && dconfig->isValid()) {
+        if (dconfig->keyList().contains("specialComType"))
+            Common::specialComType = dconfig->value("specialComType").toInt();
+        if (dconfig->keyList().contains("TomlFilesName")) {
+            QString tomlFilesName = dconfig->value("TomlFilesName").toString();
+            Common::tomlFilesNameSet(tomlFilesName);
+        }
+        if (dconfig->keyList().contains("specialCpuType"))
+            Common::curCpuType = static_cast<Common::SpecialCpuType>(dconfig->value("specialCpuType").toInt());
     }
 
     // 特殊机型，提前缓存GPU信息

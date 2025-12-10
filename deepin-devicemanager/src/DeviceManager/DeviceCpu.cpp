@@ -271,6 +271,9 @@ void DeviceCpu::setInfoFromDmidecode(const QMap<QString, QString> &mapInfo)
     // 飞腾架构由于无法通过lscpu获取当前频率，因此需要通过dmidecode获取
     setAttribute(mapInfo, "Current Speed", m_CurFrequency, false);
     setAttribute(mapInfo, "Family", m_Familly, false);
+    // 特殊机型，通过 dmidecode 获取最大加速频率
+    if (Common::curCpuType == Common::kSpecialCpuType1)
+        setAttribute(mapInfo, "Max Speed", m_MaxBoostClock);
 
     // 获取其他cpu信息
     getOtherMapInfo(mapInfo);
@@ -300,6 +303,8 @@ void DeviceCpu::loadTableHeader()
     m_TableHeader.append("Name");
     m_TableHeader.append("Vendor");
     m_TableHeader.append(frequencyIsRange() ? ("Frequency") : ("Max Frequency"));
+    if (Common::curCpuType == Common::kSpecialCpuType1)
+        m_TableHeader.append(tr("Max Boost Clock"));
     m_TableHeader.append("Architecture");
 }
 
@@ -309,6 +314,8 @@ void DeviceCpu::loadTableData()
     m_TableData.append(m_Name);
     m_TableData.append(m_Vendor);
     m_TableData.append(m_Frequency);
+    if (Common::curCpuType == Common::kSpecialCpuType1)
+        m_TableData.append(m_MaxBoostClock);
     m_TableData.append(m_Architecture);
 }
 

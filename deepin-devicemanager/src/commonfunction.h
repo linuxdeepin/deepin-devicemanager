@@ -27,6 +27,12 @@ public:
         kSpecialType7,
         kCustomType
     };
+
+    enum SpecialCpuType {
+        kUnknowCpuType = 0,
+        kSpecialCpuType1
+    };
+
     static QString getArch();
 
     static QString getArchStore();
@@ -45,6 +51,7 @@ public:
      * special computer type:PGUW(value:1),KLVV/L540(value:2),KLVU(value:3),PGUV/W585(value:4)
      */
     static int specialComType;
+    static SpecialCpuType curCpuType;
 
     static QByteArray executeClientCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
 };

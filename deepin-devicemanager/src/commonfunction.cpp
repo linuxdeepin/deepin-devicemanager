@@ -33,6 +33,7 @@ static QMap<QString, QString> mapArch = {
 static bool initBoardVendorFlag = false;
 static QString boardVendorKey = "";
 int Common::specialComType = -1;
+Common::SpecialCpuType Common::curCpuType = Common::SpecialCpuType::kUnknowCpuType;
 static QString tomlFilesName = "tomlFilesName";
 QString Common::getArch()
 {

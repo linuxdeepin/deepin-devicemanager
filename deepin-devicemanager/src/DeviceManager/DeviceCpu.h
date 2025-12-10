@@ -171,6 +171,9 @@ private:
     bool              m_FrequencyIsCur;     //<! 频率显示是当前还是最大值
 
     QMap<int, QString>        m_trNumber;
+
+    // 特殊机型定制，显示最大加速频率
+    QString           m_MaxBoostClock;      // 最大加速频率(睿频)
 };
 
 #endif // DEVICECPU_H

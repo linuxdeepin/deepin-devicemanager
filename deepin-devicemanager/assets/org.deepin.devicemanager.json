@@ -25,6 +25,16 @@
             "permissions": "readwrite",
             "visibility": "private"
           },
+          "specialCpuType": {
+            "value": 0,
+            "serial": 0,
+            "flags": ["global"],
+            "name": "Special Cpu Type",
+            "name[zh_CN]": "定制CPU类型",
+            "description": "Special Cpu Type: Unknow cpu type(value:0)",
+            "permissions": "readwrite",
+            "visibility": "private"
+          },
           "TomlFilesName": {
             "value": "tomlFilesName",
             "serial": 0,
