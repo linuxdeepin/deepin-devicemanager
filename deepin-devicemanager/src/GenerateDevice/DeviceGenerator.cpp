@@ -187,10 +187,13 @@ void DeviceGenerator::generatorCpuDevice()
         if (dd4.contains("Thread Count"))
             logicalNum_dmi += dd4["Thread Count"].toInt();
     }
+    if(coreNum_dmi > coreNum && coreNum_dmi <= 512) { //due to offline policy
+    	// If obtaining data from /proc/cpuinfo is incorrect, refer to the content of dmidecode.
+        if (logicalNum != logicalNum_dmi)
+            coreNum = coreNum_dmi;
+    }
     if(logicalNum_dmi > logicalNum && logicalNum_dmi < 1024)  //due to offline policy
         logicalNum = logicalNum_dmi;
-    if(coreNum_dmi > coreNum && coreNum_dmi <= 512) //due to offline policy
-        coreNum = coreNum_dmi;
 
     DeviceManager::instance()->setCpuNum(allCPUS.isEmpty() ? dmidecode4.size() : allCPUS.size());
 
