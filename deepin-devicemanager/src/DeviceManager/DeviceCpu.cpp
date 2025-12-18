@@ -111,7 +111,7 @@ bool DeviceCpu::frequencyIsRange()const
 
 QString DeviceCpu::subTitle()
 {
-    return QString("%1 %2").arg(translateStr("Processor")).arg(m_PhysicalID);
+    return QString("%1 %2").arg(tr("Processor")).arg(m_PhysicalID);
 }
 
 const QString DeviceCpu::getOverviewInfo()
@@ -122,9 +122,9 @@ const QString DeviceCpu::getOverviewInfo()
     QString ov = QString("%1 (%2%3 / %4%5)") \
                  .arg(m_Name) \
                  .arg(m_trNumber[m_CPUCoreNum]) \
-                 .arg(translateStr("Core(s)")) \
+                 .arg(tr("Core(s)")) \
                  .arg(m_trNumber[m_LogicalCPUNum]) \
-                 .arg(translateStr("Processor"));
+                 .arg(tr("Processor"));
 
     return ov;
 }
@@ -322,85 +322,85 @@ void DeviceCpu::loadTableData()
 void DeviceCpu::getTrNumber()
 {
     // 将数字转换为英文翻译
-    m_trNumber.insert(1, translateStr("One"));
-    m_trNumber.insert(2, translateStr("Two"));
-    m_trNumber.insert(4, translateStr("Four"));
-    m_trNumber.insert(6, translateStr("Six"));
-    m_trNumber.insert(8, translateStr("Eight"));
-    m_trNumber.insert(9, translateStr("Nine"));
-    m_trNumber.insert(10, translateStr("Ten"));
-    m_trNumber.insert(12, translateStr("Twelve"));
-    m_trNumber.insert(14, translateStr("Fourteen"));
-    m_trNumber.insert(16, translateStr("Sixteen"));
-    m_trNumber.insert(18, translateStr("Eighteen"));
+    m_trNumber.insert(1, tr("One"));
+    m_trNumber.insert(2, tr("Two"));
+    m_trNumber.insert(4, tr("Four"));
+    m_trNumber.insert(6, tr("Six"));
+    m_trNumber.insert(8, tr("Eight"));
+    m_trNumber.insert(9, tr("Nine"));
+    m_trNumber.insert(10, tr("Ten"));
+    m_trNumber.insert(12, tr("Twelve"));
+    m_trNumber.insert(14, tr("Fourteen"));
+    m_trNumber.insert(16, tr("Sixteen"));
+    m_trNumber.insert(18, tr("Eighteen"));
 
-    m_trNumber.insert(20, translateStr("Twenty"));
-    m_trNumber.insert(22, translateStr("Twenty-two"));
-    m_trNumber.insert(24, translateStr("Twenty-four"));
-    m_trNumber.insert(26, translateStr("Twenty-six"));
-    m_trNumber.insert(28, translateStr("Twenty-eight"));
+    m_trNumber.insert(20, tr("Twenty"));
+    m_trNumber.insert(22, tr("Twenty-two"));
+    m_trNumber.insert(24, tr("Twenty-four"));
+    m_trNumber.insert(26, tr("Twenty-six"));
+    m_trNumber.insert(28, tr("Twenty-eight"));
 
-    m_trNumber.insert(30, translateStr("Thirty"));
-    m_trNumber.insert(32, translateStr("Thirty-two"));
-    m_trNumber.insert(34, translateStr("Thirty-four"));
-    m_trNumber.insert(36, translateStr("Thirty-six"));
-    m_trNumber.insert(38, translateStr("Thirty-eight"));
+    m_trNumber.insert(30, tr("Thirty"));
+    m_trNumber.insert(32, tr("Thirty-two"));
+    m_trNumber.insert(34, tr("Thirty-four"));
+    m_trNumber.insert(36, tr("Thirty-six"));
+    m_trNumber.insert(38, tr("Thirty-eight"));
 
-    m_trNumber.insert(40, translateStr("Forty"));
-    m_trNumber.insert(42, translateStr("Forty-two"));
-    m_trNumber.insert(44, translateStr("Forty-four"));
-    m_trNumber.insert(46, translateStr("Forty-six"));
-    m_trNumber.insert(48, translateStr("Forty-eight"));
+    m_trNumber.insert(40, tr("Forty"));
+    m_trNumber.insert(42, tr("Forty-two"));
+    m_trNumber.insert(44, tr("Forty-four"));
+    m_trNumber.insert(46, tr("Forty-six"));
+    m_trNumber.insert(48, tr("Forty-eight"));
 
-    m_trNumber.insert(50, translateStr("Fifty"));
-    m_trNumber.insert(52, translateStr("Fifty-two"));
-    m_trNumber.insert(54, translateStr("Fifty-four"));
-    m_trNumber.insert(56, translateStr("Fifty-six"));
-    m_trNumber.insert(58, translateStr("Fifty-eight"));
+    m_trNumber.insert(50, tr("Fifty"));
+    m_trNumber.insert(52, tr("Fifty-two"));
+    m_trNumber.insert(54, tr("Fifty-four"));
+    m_trNumber.insert(56, tr("Fifty-six"));
+    m_trNumber.insert(58, tr("Fifty-eight"));
 
-    m_trNumber.insert(60, translateStr("Sixty"));
-    m_trNumber.insert(62, translateStr("Sixty-two"));
-    m_trNumber.insert(64, translateStr("Sixty-four"));
-    m_trNumber.insert(66, translateStr("Sixty-six"));
-    m_trNumber.insert(68, translateStr("Sixty-eight"));
+    m_trNumber.insert(60, tr("Sixty"));
+    m_trNumber.insert(62, tr("Sixty-two"));
+    m_trNumber.insert(64, tr("Sixty-four"));
+    m_trNumber.insert(66, tr("Sixty-six"));
+    m_trNumber.insert(68, tr("Sixty-eight"));
 
-    m_trNumber.insert(70, translateStr("Seventy"));
-    m_trNumber.insert(72, translateStr("Seventy-two"));
-    m_trNumber.insert(74, translateStr("Seventy-four"));
-    m_trNumber.insert(76, translateStr("Seventy-six"));
-    m_trNumber.insert(78, translateStr("Seventy-eight"));
+    m_trNumber.insert(70, tr("Seventy"));
+    m_trNumber.insert(72, tr("Seventy-two"));
+    m_trNumber.insert(74, tr("Seventy-four"));
+    m_trNumber.insert(76, tr("Seventy-six"));
+    m_trNumber.insert(78, tr("Seventy-eight"));
 
-    m_trNumber.insert(80, translateStr("Eighty"));
-    m_trNumber.insert(82, translateStr("Eighty-two"));
-    m_trNumber.insert(84, translateStr("Eighty-four"));
-    m_trNumber.insert(86, translateStr("Eighty-six"));
-    m_trNumber.insert(88, translateStr("Eighty-eight"));
+    m_trNumber.insert(80, tr("Eighty"));
+    m_trNumber.insert(82, tr("Eighty-two"));
+    m_trNumber.insert(84, tr("Eighty-four"));
+    m_trNumber.insert(86, tr("Eighty-six"));
+    m_trNumber.insert(88, tr("Eighty-eight"));
 
-    m_trNumber.insert(90, translateStr("Ninety"));
-    m_trNumber.insert(92, translateStr("Ninety-two"));
-    m_trNumber.insert(94, translateStr("Ninety-four"));
-    m_trNumber.insert(96, translateStr("Ninety-six"));
-    m_trNumber.insert(98, translateStr("Ninety-eight"));
+    m_trNumber.insert(90, tr("Ninety"));
+    m_trNumber.insert(92, tr("Ninety-two"));
+    m_trNumber.insert(94, tr("Ninety-four"));
+    m_trNumber.insert(96, tr("Ninety-six"));
+    m_trNumber.insert(98, tr("Ninety-eight"));
 
-    m_trNumber.insert(100, translateStr("One hundred"));
-    m_trNumber.insert(102, translateStr("One hundred and Two"));
-    m_trNumber.insert(104, translateStr("One hundred and four"));
-    m_trNumber.insert(106, translateStr("One hundred and Six"));
-    m_trNumber.insert(108, translateStr("One hundred and Eight"));
+    m_trNumber.insert(100, tr("One hundred"));
+    m_trNumber.insert(102, tr("One hundred and Two"));
+    m_trNumber.insert(104, tr("One hundred and four"));
+    m_trNumber.insert(106, tr("One hundred and Six"));
+    m_trNumber.insert(108, tr("One hundred and Eight"));
 
-    m_trNumber.insert(110, translateStr("One hundred and Ten"));
-    m_trNumber.insert(112, translateStr("One hundred and Twelve"));
-    m_trNumber.insert(114, translateStr("One hundred and Fourteen"));
-    m_trNumber.insert(116, translateStr("One hundred and Sixteen"));
-    m_trNumber.insert(118, translateStr("One hundred and Eighteen"));
+    m_trNumber.insert(110, tr("One hundred and Ten"));
+    m_trNumber.insert(112, tr("One hundred and Twelve"));
+    m_trNumber.insert(114, tr("One hundred and Fourteen"));
+    m_trNumber.insert(116, tr("One hundred and Sixteen"));
+    m_trNumber.insert(118, tr("One hundred and Eighteen"));
 
-    m_trNumber.insert(120, translateStr("One hundred and Twenty"));
-    m_trNumber.insert(122, translateStr("One hundred and Twenty-two"));
-    m_trNumber.insert(124, translateStr("One hundred and Twenty-four"));
-    m_trNumber.insert(126, translateStr("One hundred and Twenty-six"));
-    m_trNumber.insert(128, translateStr("One hundred and Twenty-eight"));
-    m_trNumber.insert(192, translateStr("One hundred and Ninety-two"));
-    m_trNumber.insert(256, translateStr("Two hundred and fifty-six"));
+    m_trNumber.insert(120, tr("One hundred and Twenty"));
+    m_trNumber.insert(122, tr("One hundred and Twenty-two"));
+    m_trNumber.insert(124, tr("One hundred and Twenty-four"));
+    m_trNumber.insert(126, tr("One hundred and Twenty-six"));
+    m_trNumber.insert(128, tr("One hundred and Twenty-eight"));
+    m_trNumber.insert(192, tr("One hundred and Ninety-two"));
+    m_trNumber.insert(256, tr("Two hundred and fifty-six"));
 }
 
 
