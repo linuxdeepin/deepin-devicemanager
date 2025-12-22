@@ -846,7 +846,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="227"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="277"/>
         <source>Mouse</source>
-        <translation type="unfinished"/>
+        <translation>Souris et curseurs</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="232"/>
