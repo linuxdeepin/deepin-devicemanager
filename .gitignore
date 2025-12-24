@@ -47,6 +47,12 @@ CMakeLists.txt.user*
 .cursor
 .specstory
 .cursorindexingignore
+.claude_settings.json
+# Auto Claude data directory
+.auto-claude/
+
+# vs code
+.vscode/
 
 # debian
 debian/.debhelper/
