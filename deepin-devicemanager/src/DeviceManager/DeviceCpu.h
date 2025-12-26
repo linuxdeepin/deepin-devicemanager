@@ -120,8 +120,6 @@ protected:
      */
     void loadTableData() override;
 
-    void getTrNumber();
-
 private:
 
     /**
@@ -170,7 +168,8 @@ private:
     bool              m_FrequencyIsRange;   //<! 频率显示的是范围还是最大值
     bool              m_FrequencyIsCur;     //<! 频率显示是当前还是最大值
 
-    QMap<int, QString>        m_trNumber;
+public:
+    static const QMap<int, const char*> m_trNumber;
 };
 
 #endif // DEVICECPU_H
