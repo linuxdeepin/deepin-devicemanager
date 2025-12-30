@@ -1097,7 +1097,6 @@ void DeviceGenerator::getKeyboardInfoFromHwinfo()
         DeviceInput *device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
         device->setHardwareClass("keyboard");
-        device->setCanEnable(false);
         DeviceManager::instance()->addKeyboardDevice(device);
         addBusIDFromHwinfo((*it)["SysFS BusID"]);
     }

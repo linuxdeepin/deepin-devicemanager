@@ -97,6 +97,19 @@ bool DBusEnableInterface::enablePrinter(const QString &hclass, const QString &na
     return false;
 }
 
+bool DBusEnableInterface::enableKeyboard(const QString &vid, const QString &pid, const QString &hclass, const QString &name, const QString &sPath, const QString &value, bool enable_device, const QString &strDriver)
+{
+    qCDebug(appLog) << "Enable keyboard - vid:" << vid << "pid:" << pid << "hclass:" << hclass << "name:" << name << "sPath:" << sPath << "value:" << value << "enable:" << enable_device << "driver:" << strDriver;
+    QDBusReply<bool> reply = mp_Iface->call("enableKeyboard", vid, pid, hclass, name, sPath, value, enable_device, strDriver);
+    if (reply.isValid()) {
+        bool result = reply.value();
+        qCInfo(appLog) << "Keyboard enable operation result:" << result;
+        return result;
+    }
+    qCWarning(appLog) << "Invalid DBus reply when enabling keyboard";
+    return false;
+}
+
 void DBusEnableInterface::init()
 {
     qCDebug(appLog) << "Initialize DBus connection";

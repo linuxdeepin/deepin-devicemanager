@@ -16,6 +16,8 @@
 #include <QProcess>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
+#include <QTextStream>
 #include <QRegularExpression>
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <polkit-qt5-1/PolkitQt1/Authority>
@@ -200,6 +202,93 @@ bool ControlInterface::enablePrinter(const QString &hclass, const QString &name,
     } else {
         EnableSqlManager::getInstance()->insertDataToPrinterTable(hclass, name, path);
     }
+    emit sigUpdate();
+    return true;
+}
+
+bool ControlInterface::enableKeyboard(const QString& vid, const QString& pid, const QString &hclass, const QString &name, const QString &sPath, const QString &value, bool enable_device, const QString strDriver)
+{
+    qCInfo(appLog) << "Enable keyboard request:" << hclass << name << sPath << value << "enable:" << enable_device;
+    
+    if (!getUserAuthorPasswd()) {
+        qCWarning(appLog) << "Authorization failed for keyboard enable operation";
+        return false;
+    }
+    
+    // Use EnableUtils's validation function
+    QString safeVid, safePid;
+    if (!EnableUtils::validateAndNormalizeVidPid(vid, pid, safeVid, safePid)) {
+        qCWarning(appLog) << "VID or PID validation failed. VID:" << vid << "PID:" << pid;
+        return false;
+    }
+
+    QString rulesFile = QString(UDEV_RULES_PATH_LOCAL "/99-keyboard-device-control-%1-%2.rules").arg(vid).arg(pid);
+    
+    QString ruleContent;
+    if (enable_device) {
+        ruleContent = QString("# enable keyboard - VID:%1 PID:%2\n"
+                              "ACTION==\"add|change\", SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"%1\", ATTRS{idProduct}==\"%2\", "
+                              "ATTR{authorized}=\"1\"").arg(safeVid, safePid);
+        qCInfo(appLog) << "Creating rule to enable keyboard";
+    } else {
+        ruleContent = QString("# disable keyboard - VID:%1 PID:%2\n"
+                              "ACTION==\"add|change\", SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"%1\", ATTRS{idProduct}==\"%2\", "
+                              "ATTR{authorized}=\"0\"").arg(safeVid, safePid);
+        qCInfo(appLog) << "Creating rule to disable keyboard";
+    }
+
+    QFileInfo fileInfo(rulesFile);
+    QDir rulesDir = fileInfo.absoluteDir();
+    if (!rulesDir.exists()) {
+        qCWarning(appLog) << "Udev rules directory does not exist:" << rulesDir.absolutePath();
+        return false;
+    }
+
+    QFile file(rulesFile);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        qCWarning(appLog) << "Failed to open udev rules file for writing:" << rulesFile;
+        qCWarning(appLog) << "Error:" << file.errorString();
+        return false;
+    }
+    
+    QTextStream out(&file);
+    out << ruleContent;
+    file.close();
+    
+    if (file.error() != QFile::NoError) {
+        qCWarning(appLog) << "Failed to write udev rule. Error:" << file.errorString();
+        return false;
+    }
+
+    QProcess reloadProcess;
+    qCInfo(appLog) << "Reloading udev rules";
+    reloadProcess.start("udevadm", QStringList() << "control" << "--reload-rules");
+    reloadProcess.waitForFinished(10000);
+    
+    if (reloadProcess.exitCode() != 0) {
+        qCWarning(appLog) << "Failed to reload udev rules. Error:" << reloadProcess.readAllStandardError();
+        return false;
+    }
+    
+    QProcess triggerProcess;
+    qCInfo(appLog) << "Triggering udev rules";
+    triggerProcess.start("udevadm", QStringList() << "trigger");
+    triggerProcess.waitForFinished(10000);
+    
+    if (triggerProcess.exitCode() != 0) {
+        qCWarning(appLog) << "Failed to trigger udev rules. Error:" << triggerProcess.readAllStandardError();
+        return false;
+    }
+
+    if (!enable_device) {
+        EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass, name, sPath, value, true, strDriver);
+        qCInfo(appLog) << "insertDataToAuthorizedTable";
+    } else {
+        EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(value);
+        qCInfo(appLog) << "removeDataFromAuthorizedTable";
+    }
+    
+    qCInfo(appLog) << "Keyboard udev rule created and applied successfully";
     emit sigUpdate();
     return true;
 }

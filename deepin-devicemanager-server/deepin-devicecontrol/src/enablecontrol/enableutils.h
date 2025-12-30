@@ -18,7 +18,6 @@ public:
      */
     static void disableOutDevice(const QString &info);
 
-
     /**
      * @brief disableInDevice 禁用非外设
      */
@@ -31,7 +30,17 @@ public:
      * @return
      */
     static bool ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable);
-
+    
+    /**
+     * @brief validateAndNormalizeVidPid 验证并标准化VID和PID
+     * @param vid 输入的VID
+     * @param pid 输入的PID
+     * @param normalizedVid 输出的标准化VID
+     * @param normalizedPid 输出的标准化PID
+     * @return 验证是否成功
+     */
+    static bool validateAndNormalizeVidPid(const QString &vid, const QString &pid, QString &normalizedVid, QString &normalizedPid);
+    
     /**
      * @brief getMapInfo 解析usb信息
      * @param item

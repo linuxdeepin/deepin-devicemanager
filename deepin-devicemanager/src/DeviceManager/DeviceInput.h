@@ -154,7 +154,6 @@ protected:
      * @brief loadTableData:加载表头信息
      */
     void loadTableData() override;
-
 private:
 
     /**
