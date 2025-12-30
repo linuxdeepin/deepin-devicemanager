@@ -204,6 +204,45 @@ bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, boo
     return true;
 }
 
+bool EnableUtils::validateAndNormalizeVidPid(const QString &vid, const QString &pid, QString &normalizedVid, QString &normalizedPid)
+{
+    qCDebug(appLog) << "Validating and normalizing VID:" << vid << "PID:" << pid;
+    
+    // Check if VID or PID is empty
+    if (vid.isEmpty() || pid.isEmpty()) {
+        qCWarning(appLog) << "VID or PID is empty for validation";
+        return false;
+    }
+    
+    // Normalize VID
+    normalizedVid = vid.toLower();
+    if (normalizedVid.startsWith("0x")) {
+        normalizedVid = normalizedVid.mid(2);
+    }
+    
+    // Normalize PID
+    normalizedPid = pid.toLower();
+    if (normalizedPid.startsWith("0x")) {
+        normalizedPid = normalizedPid.mid(2);
+    }
+    
+    // Validate VID and PID format (should be 4 characters each after normalization)
+    if (normalizedVid.length() != 4 || normalizedPid.length() != 4) {
+        qCWarning(appLog) << "Invalid VID or PID format after normalization. VID:" << normalizedVid << "PID:" << normalizedPid;
+        return false;
+    }
+    
+    // Validate that VID and PID contain only hex characters
+    QRegularExpression hexPattern("^[0-9a-f]{4}$");
+    if (!hexPattern.match(normalizedVid).hasMatch() || !hexPattern.match(normalizedPid).hasMatch()) {
+        qCWarning(appLog) << "VID or PID contains non-hex characters. VID:" << normalizedVid << "PID:" << normalizedPid;
+        return false;
+    }
+    
+    qCDebug(appLog) << "VID and PID validation successful. Normalized VID:" << normalizedVid << "Normalized PID:" << normalizedPid;
+    return true;
+}
+
 bool EnableUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "Parsing device info map";

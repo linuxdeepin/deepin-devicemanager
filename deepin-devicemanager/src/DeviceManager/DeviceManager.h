@@ -16,6 +16,9 @@
 #include <QDomDocument>
 #include <QObject>
 #include <QFile>
+#include <QMutex>
+#include <QRegularExpression>
+#include <algorithm> // for std::sort
 
 //class DeviceMouse;
 class DeviceCpu;
@@ -628,6 +631,16 @@ public:
      * @param flag:频率显示是当前还是最大值
      */
     void setCpuFrequencyIsCur(const bool &flag);
+
+    /**
+     * @brief validateKeyboardVidPid:校验有效的vid和pid
+     * @param vid
+     * @param pid
+     * @param normalizedVid
+     * @param normalizedPid
+     * @return
+     */
+    bool validateKeyboardVidPid(const QString &vid, const QString &pid, QString &normalizedVid, QString &normalizedPid);
 
 protected:
     DeviceManager();

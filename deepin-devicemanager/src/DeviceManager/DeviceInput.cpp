@@ -102,6 +102,24 @@ TomlFixMethod DeviceInput::setInfoFromTomlOneByOne(const QMap<QString, QString> 
 void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 {
     qCDebug(appLog) << "setInfoFromHwinfo";
+    if (mapInfo.find("path") != mapInfo.end()) {
+        qCDebug(appLog) << "Path found in mapInfo, setting basic attributes.";
+        setAttribute(mapInfo, "name", m_Name);
+        setAttribute(mapInfo, "driver", m_Driver);
+        setAttribute(mapInfo, "path", m_SysPath);
+        setAttribute(mapInfo, "unique_id", m_VID_PID);
+        if (m_SysPath.contains("usb", Qt::CaseInsensitive)) {
+            m_Interface = "USB";
+        }
+        if (m_VID_PID.size() == 10) {
+            m_VID = m_VID_PID.mid(2, 4);
+            m_PID = m_VID_PID.last(4);
+        }
+        m_Enable = false;
+        // m_CanUninstall = !driverIsKernelIn(m_Driver);
+        qCWarning(appLog) << "Device disabled, skip further processing";
+        return;
+    }
 
     //取触摸板的状态
     if (mapInfo.find("Model") != mapInfo.end() && mapInfo["Model"].contains("Touchpad", Qt::CaseInsensitive)) {
@@ -125,6 +143,8 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Unique ID", m_UniqueID);
     setAttribute(mapInfo, "Module Alias", m_Modalias);
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
+    setAttribute(mapInfo, "PID", m_PID);
+    setAttribute(mapInfo, "VID", m_VID);
     m_PhysID = m_VID_PID;
     // 防止Serial ID为空
     if (m_SerialID.isEmpty()) {
@@ -500,6 +520,45 @@ const QString DeviceInput::getOverviewInfo()
 EnableDeviceStatus DeviceInput::setEnable(bool e)
 {
     qCDebug(appLog) << "setEnable";
+    
+    // 处理键盘设备
+    if (m_HardwareClass == "keyboard") {
+        qCDebug(appLog) << "setEnable keyboard device";
+        
+        if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
+            qCDebug(appLog) << "USB keyboard detected, using backend service";
+            
+            QString vid = getVID();
+            QString pid = getPID();
+            
+            if (vid.isEmpty() || pid.isEmpty()) {
+                qCWarning(appLog) << "Cannot enable keyboard: VID or PID is empty. VID:" << vid << "PID:" << pid;
+                return EDS_Faild;
+            }
+    
+            // Use DeviceManager's validation function
+            QString safeVid, safePid;
+            if (!DeviceManager::instance()->validateKeyboardVidPid(vid, pid, safeVid, safePid)) {
+                qCWarning(appLog) << "VID or PID validation failed. VID:" << vid << "PID:" << pid;
+                return EDS_Faild;
+            }
+
+            bool res = DBusEnableInterface::getInstance()->enableKeyboard(safeVid, safePid, m_HardwareClass, m_Name, m_SysPath, m_VID_PID, e, m_Driver);
+            if (res) {
+                m_Enable = e;
+                qCDebug(appLog) << "Keyboard enable operation successful:" << e;
+            } else {
+                qCWarning(appLog) << "Keyboard enable operation failed";
+            }
+            
+            return res ? EDS_Success : EDS_Faild;
+        } else {
+            qCDebug(appLog) << "Non-USB keyboard detected, cannot disable/enable using udev rules";
+            return EDS_Faild;
+        }
+    }
+    
+    // 处理触摸板设备
     if (m_Name.contains("Touchpad", Qt::CaseInsensitive)) {
         qCDebug(appLog) << "setEnable touchpad";
         DBusTouchPad::instance()->setEnable(e);
@@ -537,12 +596,6 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
 bool DeviceInput::enable()
 {
     // qCDebug(appLog) << "enable";
-    // 键盘不可禁用
-    if (m_HardwareClass == "keyboard") {
-        // qCDebug(appLog) << "enable keyboard";
-        m_Enable = true;
-    }
-    // qCDebug(appLog) << "enable end";
     return m_Enable;
 }
 

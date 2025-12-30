@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QMutexLocker>
+#include <QProcess>
 
 // 其它头文件
 #include "DeviceCpu.h"
@@ -1523,8 +1524,60 @@ void DeviceManager::setCameraInfoFromLshw(const QMap<QString, QString> &mapInfo)
 void DeviceManager::addKeyboardDevice(DeviceInput *const device)
 {
     // qCDebug(appLog) << "Adding keyboard device";
-    // 添加键盘
-    m_ListDeviceKeyboard.append(device);
+
+    QString vid = device->getVID();
+    QString pid = device->getPID();
+
+    if (vid.isEmpty() || pid.isEmpty()) {
+        qCDebug(appLog) << "VID or PID is empty, adding keyboard device without verification";
+        device->deleteLater();
+        return;
+    }
+
+    // Use DeviceManager's validation function
+    QString normalizedVid, normalizedPid;
+    if (!validateKeyboardVidPid(vid, pid, normalizedVid, normalizedPid)) {
+        qCWarning(appLog) << "VID or PID validation failed. VID:" << vid << "PID:" << pid;
+        device->deleteLater();
+        return;
+    }
+
+    QProcess process;
+    process.start("lsusb");
+    process.waitForFinished(3000);
+    
+    if (process.exitCode() != 0) {
+        qCWarning(appLog) << "Failed to execute lsusb command, adding keyboard device without verification";
+        device->deleteLater();
+        return;
+    }
+    
+    QString lsusbOutput = process.readAllStandardOutput();
+
+    // lsusb output: Bus xxx Device xxx: ID xxxx:xxxx Description
+    QRegularExpression regex(QString("ID\\s+([0-9a-fA-F]{4}):([0-9a-fA-F]{4})"));
+    QRegularExpressionMatchIterator iterator = regex.globalMatch(lsusbOutput);
+    
+    bool deviceExists = false;
+    while (iterator.hasNext()) {
+        QRegularExpressionMatch match = iterator.next();
+        QString lsusbVid = match.captured(1).toLower();
+        QString lsusbPid = match.captured(2).toLower();
+        
+        if (lsusbVid == normalizedVid && lsusbPid == normalizedPid) {
+            deviceExists = true;
+            qCDebug(appLog) << "Found matching device in lsusb output:" << lsusbVid << ":" << lsusbPid;
+            break;
+        }
+    }
+    
+    if (deviceExists) {
+        m_ListDeviceKeyboard.append(device);
+        qCDebug(appLog) << "Keyboard device added successfully";
+    } else {
+        qCDebug(appLog) << "Keyboard device not found in lsusb output, device not added";
+        device->deleteLater();
+    }
 }
 
 void DeviceManager::setKeyboardInfoFromLshw(const QMap<QString, QString> &mapInfo)
@@ -2124,4 +2177,43 @@ void DeviceManager::setCpuFrequencyIsCur(const bool &flag)
 
         device->setFrequencyIsCur(flag);
     }
+}
+
+bool DeviceManager::validateKeyboardVidPid(const QString &vid, const QString &pid, QString &normalizedVid, QString &normalizedPid)
+{
+    qCDebug(appLog) << "Validating keyboard VID:" << vid << "PID:" << pid;
+
+    // Check if VID or PID is empty
+    if (vid.isEmpty() || pid.isEmpty()) {
+        qCWarning(appLog) << "VID or PID is empty for keyboard validation";
+        return false;
+    }
+
+    // Normalize VID
+    normalizedVid = vid.toLower();
+    if (normalizedVid.startsWith("0x")) {
+        normalizedVid = normalizedVid.mid(2);
+    }
+
+    // Normalize PID
+    normalizedPid = pid.toLower();
+    if (normalizedPid.startsWith("0x")) {
+        normalizedPid = normalizedPid.mid(2);
+    }
+
+    // Validate VID and PID format (should be 4 characters each after normalization)
+    if (normalizedVid.length() != 4 || normalizedPid.length() != 4) {
+        qCWarning(appLog) << "Invalid VID or PID format after normalization. VID:" << normalizedVid << "PID:" << normalizedPid;
+        return false;
+    }
+
+    // Validate that VID and PID contain only hex characters
+    QRegularExpression hexPattern("^[0-9a-f]{4}$");
+    if (!hexPattern.match(normalizedVid).hasMatch() || !hexPattern.match(normalizedPid).hasMatch()) {
+        qCWarning(appLog) << "VID or PID contains non-hex characters. VID:" << normalizedVid << "PID:" << normalizedPid;
+        return false;
+    }
+
+    qCDebug(appLog) << "Keyboard VID and PID validation successful. Normalized VID:" << normalizedVid << "Normalized PID:" << normalizedPid;
+    return true;
 }

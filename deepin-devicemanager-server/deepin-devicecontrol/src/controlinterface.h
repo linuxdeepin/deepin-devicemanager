@@ -13,6 +13,23 @@
 #include <QObject>
 #include <QDBusContext>
 
+// Udev rules directory paths
+/*
+ * Udev rules are read from the following directories in priority order:
+ * 1. /etc/udev/rules.d/ - Highest priority, for local administrator custom rules
+ * 2. /run/udev/rules.d/ - Runtime rules (may not exist on all systems)
+ * 3. /usr/local/lib/udev/rules.d/ - Local software rules (recommended for applications)
+ * 4. /usr/lib/udev/rules.d/ - System default rules
+ *
+ * All rules files are processed in lexical order, regardless of the directory they live in.
+ * Files with identical filenames replace each other. Files in /etc have the highest priority.
+ * Rule files must have the extension .rules; other extensions are ignored.
+ */
+#define UDEV_RULES_PATH_LOCAL "/usr/local/lib/udev/rules.d"
+#define UDEV_RULES_PATH_SYSTEM "/etc/udev/rules.d"
+#define UDEV_RULES_PATH_RUNTIME "/run/udev/rules.d"
+#define UDEV_RULES_PATH_LIB "/usr/lib/udev/rules.d"
+
 class DriverManager;
 class ModCore;
 class ControlInterface : public QDBusService, protected QDBusContext
@@ -69,6 +86,17 @@ public slots:
      * @return
      */
     Q_SCRIPTABLE bool enablePrinter(const QString &hclass, const QString &name, const QString &path, bool enable_device);
+    /**
+     * @brief enableKeyboard 启用/禁用键盘设备
+     * @param hclass 设备类型
+     * @param name 设备名称
+     * @param sPath 设备路径
+     * @param value 设备唯一标识
+     * @param enable_device 是否启用
+     * @param strDriver 驱动名称
+     * @return 操作是否成功
+     */
+    Q_SCRIPTABLE bool enableKeyboard(const QString& vid, const QString& pid, const QString &hclass, const QString &name, const QString &sPath, const QString &value, bool enable_device, const QString strDriver);
     /**
      * @brief disableOutDevice 禁用设备
      * @param devInfo 设备信息

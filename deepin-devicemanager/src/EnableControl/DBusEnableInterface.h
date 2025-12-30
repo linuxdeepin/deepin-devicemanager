@@ -72,6 +72,20 @@ public:
      */
     bool enablePrinter(const QString& hclass, const QString& name, const QString& path, bool enable_device);
 
+    /**
+     * @brief enableKeyboard 启用/禁用键盘设备
+     * @param vid 设备VID
+     * @param pid 设备PID
+     * @param hclass 设备类型
+     * @param name 设备名称
+     * @param sPath 设备路径
+     * @param value 设备唯一标识
+     * @param enable_device 是否启用
+     * @param strDriver 驱动名称
+     * @return 操作是否成功
+     */
+    bool enableKeyboard(const QString& vid, const QString& pid, const QString& hclass, const QString& name, const QString& sPath, const QString& value, bool enable_device, const QString& strDriver);
+
 protected:
     DBusEnableInterface();
 
