@@ -1553,7 +1553,7 @@ void CmdTool::getMapInfoFromSmartctl(QMap<QString, QString> &mapInfo, const QStr
 
         indexName = "";
 
-        QRegularExpression rx("^[ ]*[0-9]+[ ]+([\\w-_]+)[ ]+0x[0-9a-fA-F-]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+([0-9\\/w-]+[ ]*[ 0-9\\/w-()]*)$");
+        QRegularExpression rx("^[ ]*[0-9]+[ ]+([\\w_-]+)[ ]+0x[0-9a-fA-F-]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[0-9]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+[\\w-]+[ ]+([0-9\\w\\/-]+[ ]*[0-9\\w\\/\\-\\(\\)]*)$");
         if (rx.match(line).hasMatch()) {
             // qCDebug(appLog) << "Matched smartctl attribute regex:" << line;
             mapInfo[rx.match(line).captured(1)] = rx.match(line).captured(2);
