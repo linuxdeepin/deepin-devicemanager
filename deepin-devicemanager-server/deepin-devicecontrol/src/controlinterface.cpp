@@ -240,8 +240,12 @@ bool ControlInterface::enableKeyboard(const QString& vid, const QString& pid, co
     QFileInfo fileInfo(rulesFile);
     QDir rulesDir = fileInfo.absoluteDir();
     if (!rulesDir.exists()) {
-        qCWarning(appLog) << "Udev rules directory does not exist:" << rulesDir.absolutePath();
-        return false;
+        qCInfo(appLog) << "Udev rules directory does not exist, creating:" << rulesDir.absolutePath();
+        if (!rulesDir.mkpath(".")) {
+            qCWarning(appLog) << "Failed to create udev rules directory:" << rulesDir.absolutePath();
+            return false;
+        }
+        qCInfo(appLog) << "Successfully created udev rules directory:" << rulesDir.absolutePath();
     }
 
     QFile file(rulesFile);
