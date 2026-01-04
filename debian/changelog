@@ -1,3 +1,14 @@
+deepin-devicemanager (6.0.55) unstable; urgency=medium
+
+  * chore: Update version to 6.0.55
+  * fix(monitor): correct platform condition logic and regex pattern
+  * fix(input): create udev rules directory when missing during keyboard enable
+  * fix(i18n): optimize CPU number translation handling
+  * feat(input): add keyboard enable/disable functionality
+  * chore: harden service security
+
+ -- re2zero <yangwu@uniontech.com>  Sun, 04 Jan 2026 10:52:55 +0800
+
 deepin-devicemanager (6.0.54) unstable; urgency=medium
 
   * chore: Update version to 6.0.54
