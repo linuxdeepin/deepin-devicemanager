@@ -124,22 +124,22 @@ QString Common::checkBoardVendorFlag()
         case NormalCom:
             boardVendorKey = "";
             break;
-        case PGUW:
+        case kSpecialType1:
             boardVendorKey = "PGUW";
             break;
-        case KLVV:
+        case kSpecialType2:
             boardVendorKey = "KLVV";
             break;
-        case KLVU:
+        case kSpecialType3:
             boardVendorKey = "KLVU";
             break;
-        case PGUV:
+        case kSpecialType4:
             boardVendorKey = "PGUV";
             break;
         case kSpecialType5:
             boardVendorKey = "PGUX";
             break;
-        case kCustomType:
+        case kSpecialType8:
             boardVendorKey = "CustomType";
             break;
         default:
@@ -209,7 +209,7 @@ void Common::tomlFilesNameSet(const QString &name)
 
 bool Common::isHwPlatform()
 {
-    if (specialComType == Unknow || specialComType == NormalCom || specialComType == kCustomType)
+    if (specialComType == Unknow || specialComType == NormalCom || specialComType == kSpecialType8)
         return false;
     return true;
 }

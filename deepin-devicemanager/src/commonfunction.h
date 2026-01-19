@@ -18,14 +18,15 @@ public:
     enum SpecialComputerType{
         Unknow = -1,
         NormalCom,
-        PGUW,
-        KLVV,
-        KLVU,
-        PGUV,
+        kSpecialType1,
+        kSpecialType2,
+        kSpecialType3,
+        kSpecialType4,
         kSpecialType5,
         kSpecialType6,
         kSpecialType7,
-        kCustomType
+        kSpecialType8,
+        kSpecialType9
     };
 
     enum SpecialCpuType {

@@ -132,7 +132,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
 
 TomlFixMethod DeviceMonitor::setInfoFromTomlOneByOne(const QMap<QString, QString> &mapInfo)
 {
-    if (Common::specialComType == 2)
+    if (Common::specialComType == Common::kSpecialType2)
         m_IsTomlSet = true;
     TomlFixMethod ret = TOML_None;
     // 添加基本信息
@@ -299,7 +299,9 @@ QString DeviceMonitor::subTitle()
 const QString DeviceMonitor::getOverviewInfo()
 {
     QString ov;
-    if (Common::specialComType == 6 || Common::specialComType == 7) {
+    if (Common::specialComType == Common::kSpecialType6 ||
+        Common::specialComType == Common::kSpecialType7 ||
+        Common::specialComType == Common::kSpecialType9) {
         ov = QString("(%1)").arg(m_ScreenSize);
     } else {
         ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
@@ -316,7 +318,10 @@ void DeviceMonitor::initFilterKey()
 void DeviceMonitor::loadBaseDeviceInfo()
 {
     // 添加基本信息
-    if (Common::specialComType != 6 && Common::specialComType != 5 && Common::specialComType != 7) {
+    if (Common::specialComType != Common::kSpecialType5 &&
+        Common::specialComType != Common::kSpecialType6 &&
+        Common::specialComType != Common::kSpecialType7 &&
+        Common::specialComType != Common::kSpecialType9) {
         addBaseDeviceInfo(("Name"), m_Name);
         addBaseDeviceInfo(("Vendor"), m_Vendor);
         addBaseDeviceInfo(("Type"), m_Model);
@@ -334,7 +339,7 @@ void DeviceMonitor::loadOtherDeviceInfo()
         addOtherDeviceInfo(("Current Resolution"), m_CurrentResolution);
         addOtherDeviceInfo(("Display Ratio"), m_AspectRatio);
 
-        if (Common::specialComType == 4) {
+        if (Common::specialComType == Common::kSpecialType4) {
             if (m_CurrentResolution.contains("@")) {
                 QStringList refreshList = m_CurrentResolution.split('@', QString::SkipEmptyParts);
                 if (refreshList.size() == 2) {
@@ -391,16 +396,23 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
             QRegExp rateStart("[a-zA-Z]");
             int pos = curRate.indexOf(rateStart);
             if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
-                if (Common::specialComType == 1) {
+                if (Common::specialComType == Common::kSpecialType1) {
                     curRate = QString::number(ceil(curRate.left(pos).toDouble())) + ".00" + curRate.right(curRate.size() - pos);
                 } else {
                     curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
                 }
             }
-            if (Common::specialComType == 1 || Common::specialComType == 5 || Common::specialComType == 6  || Common::specialComType == 7) {
+            if (Common::specialComType == Common::kSpecialType1 ||
+                    Common::specialComType == Common::kSpecialType5 ||
+                    Common::specialComType == Common::kSpecialType6  ||
+                    Common::specialComType == Common::kSpecialType7 ||
+                    Common::specialComType == Common::kSpecialType9) {
                 m_RefreshRate = QString("%1").arg(curRate);
             }
-            if (Common::specialComType == 5 || Common::specialComType == 6 || Common::specialComType == 7) {
+            if (Common::specialComType == Common::kSpecialType5 ||
+                Common::specialComType == Common::kSpecialType6 ||
+                Common::specialComType == Common::kSpecialType7 ||
+                Common::specialComType == Common::kSpecialType9) {
                 m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1)).replace("x", "×", Qt::CaseInsensitive);
             } else {
                 m_CurrentResolution = QString("%1 @%2").arg(reScreenSize.cap(1)).arg(curRate).replace("x", "×", Qt::CaseInsensitive);

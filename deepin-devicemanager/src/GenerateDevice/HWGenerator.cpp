@@ -280,7 +280,7 @@ void HWGenerator::generatorDiskDevice()
             if (name.contains("SDINFDO4-256G",Qt::CaseInsensitive))
                 tempMap["Name"] = "nouse";
 
-            if (Common::specialComType == 2) {
+            if (Common::specialComType == Common::kSpecialType2) {
                 tempMap["Interface"] = "UFS";
             }
 
