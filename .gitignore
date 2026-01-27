@@ -29,6 +29,7 @@ ui_*.h
 Makefile*
 *build-*
 build/
+.cache/
 
 # Qt unit tests
 target_wrapper.*
