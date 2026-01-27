@@ -115,13 +115,12 @@ set(QT_COMPONENTS
     Svg
     SvgWidgets
     Xml
-    OpenGL
     Core
 )
 
 # Add components only available in Qt6, remove SvgWidgets from Qt5
 if(${QT_VERSION_MAJOR} EQUAL 6)
-    list(APPEND QT_COMPONENTS OpenGLWidgets)
+    list(APPEND QT_COMPONENTS OpenGL OpenGLWidgets)
 else()
     # Remove SvgWidgets for Qt5 (not available)
     list(REMOVE_ITEM QT_COMPONENTS SvgWidgets)

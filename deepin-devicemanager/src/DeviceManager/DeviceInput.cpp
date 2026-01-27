@@ -113,7 +113,11 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         }
         if (m_VID_PID.size() == 10) {
             m_VID = m_VID_PID.mid(2, 4);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
             m_PID = m_VID_PID.last(4);
+#else
+            m_PID = m_VID_PID.right(4);
+#endif
         }
         m_Enable = false;
         // m_CanUninstall = !driverIsKernelIn(m_Driver);
