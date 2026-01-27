@@ -32,42 +32,33 @@ endforeach()
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
   
-macro(SET_QT_VERSION)
-  if(${QT_VERSION_MAJOR} EQUAL 6)
-    # Qt6 环境
-    find_package(PkgConfig REQUIRED)
-    find_package(Qt6 COMPONENTS Core DBus Network Sql REQUIRED)
-    find_package(PolkitQt6-1 REQUIRED)
-    find_package(deepin-qdbus-service REQUIRED)
-    find_package(Dtk6 COMPONENTS
-      Widget
-      Core
-      REQUIRED
-    )
-  elseif(${QT_VERSION_MAJOR} EQUAL 5)
-    # Qt5 环境
-    find_package(PkgConfig REQUIRED)
-    find_package(Qt5 COMPONENTS Core DBus Network Sql REQUIRED)
-    find_package(DtkCore REQUIRED)
-    find_package(PolkitQt5-1 REQUIRED)
-    find_package(deepin-qdbus-service REQUIRED)
-  else()
-    message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION}")
-  endif()
-endmacro()
+# Find Qt package with detected version
+find_package(PkgConfig REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core DBus Network Sql REQUIRED)
 
-# 调用宏
-SET_QT_VERSION()
+# Find Dtk package with mapped version
+find_package(Dtk${DTK_VERSION_MAJOR} COMPONENTS
+    Widget
+    Core
+    REQUIRED
+)
 
+# Define external dependency package names based on Qt version
 if(${QT_VERSION_MAJOR} EQUAL 6)
-    find_package(QApt-qt6 REQUIRED)
-    include_directories(${QApt-qt6_INCLUDE_DIRS})
-    set(QAPT_LIB QApt-qt6)
+    set(POLKITQT_NAME "PolkitQt6-1")
+    set(QAPT_NAME "QApt-qt6")
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
-    find_package(QApt REQUIRED)
-    include_directories(${QApt_INCLUDE_DIRS})
-    set(QAPT_LIB QApt)
+    set(POLKITQT_NAME "PolkitQt5-1")
+    set(QAPT_NAME "QApt")
+else()
+    message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
 endif()
+
+# Find external dependencies
+find_package(${POLKITQT_NAME} REQUIRED)
+find_package(deepin-qdbus-service REQUIRED)
+find_package(${QAPT_NAME} REQUIRED)
+include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
 
 if(NOT DISABLE_DRIVER)
     PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
@@ -82,58 +73,57 @@ include_directories("/usr/include/cups/")
 
 add_definitions(-DSERVICE_CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/deepin-service-manager/")
 
+# Include directories with dynamic Qt/DTK versions
 if(${QT_VERSION_MAJOR} EQUAL 6)
-    # Qt6 environment
     target_include_directories(${BIN_NAME} PUBLIC
-    Dtk6::Core
-    Dtk6::Widget
-    Qt6::Core
-    Qt6::DBus
-    Qt6::Network
-    Qt6::Sql
-    Qt6::Gui
-    ${deepin-qdbus-service_INCLUDE_DIR}
-    ${QAPT_LIB}
-  )
-  
-  target_link_libraries(${BIN_NAME} PRIVATE
-      Qt6::Core
-      Qt6::DBus
-      Qt6::Network
-      Qt6::Sql
-      PolkitQt6-1::Agent
-      Dtk6::Core
-      Dtk6::Widget
-      ${deepin-qdbus-service_LIBRARIES}
-      ${QAPT_LIB}
-      cups
+        Dtk${DTK_VERSION_MAJOR}::Core
+        Dtk${DTK_VERSION_MAJOR}::Widget
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Sql
+        Qt${QT_VERSION_MAJOR}::Gui
+        ${deepin-qdbus-service_INCLUDE_DIR}
+        ${QAPT_NAME}
+    )
+
+    target_link_libraries(${BIN_NAME} PRIVATE
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Sql
+        ${POLKITQT_NAME}::Agent
+        Dtk${DTK_VERSION_MAJOR}::Core
+        Dtk${DTK_VERSION_MAJOR}::Widget
+        ${deepin-qdbus-service_LIBRARIES}
+        ${QAPT_NAME}
+        cups
     )
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
-    # Qt5 environment
     target_include_directories(${BIN_NAME} PUBLIC
-    Qt5::Core
-    Qt5::DBus
-    Qt5::Network
-    Qt5::Sql
-    ${deepin-qdbus-service_INCLUDE_DIR}
-  )
-  
-  target_link_libraries(${BIN_NAME} PRIVATE
-      Qt5::Core
-      Qt5::DBus
-      Qt5::Network
-      Qt5::Sql
-      PolkitQt5-1::Agent
-      ${DtkCore_LIBRARIES}
-      ${deepin-qdbus-service_LIBRARIES}
-      cups
-      )
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Sql
+        ${deepin-qdbus-service_INCLUDE_DIR}
+    )
+
+    target_link_libraries(${BIN_NAME} PRIVATE
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Network
+        Qt${QT_VERSION_MAJOR}::Sql
+        ${POLKITQT_NAME}::Agent
+        ${DtkCore_LIBRARIES}
+        ${deepin-qdbus-service_LIBRARIES}
+        cups
+    )
 endif()
     
 if(NOT DISABLE_DRIVER)
     target_link_libraries(${BIN_NAME} PRIVATE
         kmod
-        ${QAPT_LIB}
+        ${QAPT_NAME}
         )
 endif()
 

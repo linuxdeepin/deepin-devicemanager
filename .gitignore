@@ -50,6 +50,7 @@ CMakeLists.txt.user*
 .claude_settings.json
 # Auto Claude data directory
 .auto-claude/
+.claude/
 
 # vs code
 .vscode/
