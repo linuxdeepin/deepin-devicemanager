@@ -16,20 +16,17 @@ if(CMAKE_BUILD_TYPE  STREQUAL "Debug")
     add_definitions(-DDISABLE_POLKIT)
 endif()
 
-# 自动检测系统中的Qt版本
-if(NOT DEFINED QT_VERSION_MAJOR)
-    # 首先尝试查找Qt6
-    find_package(Qt6 QUIET)
-    if(Qt6_FOUND)
-        set(QT_VERSION_MAJOR 6)
-        message("Found Qt6, using Qt version 6")
-    else()
-        set(QT_VERSION_MAJOR 5)
-        message("Found Qt5, using Qt version 5")
-    endif()
+# Auto-detect Qt version (tries Qt6 first, falls back to Qt5)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+message(STATUS "Found Qt version: ${QT_VERSION_MAJOR}")
+
+# Map to DTK version (Qt6→DTK6, Qt5→DTK5)
+if (QT_VERSION_MAJOR MATCHES 6)
+    set(DTK_VERSION_MAJOR 6)
 else()
-    message("Using manually specified QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
+    set(DTK_VERSION_MAJOR "")
 endif()
+message(STATUS "Build with DTK: ${DTK_VERSION_MAJOR}")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-z,relro -Wl,-z,now")
 

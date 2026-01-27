@@ -103,98 +103,89 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/src/DDLog/)
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h ${CMAKE_CURRENT_LIST_DIR}/3rdparty/*.h)
 
-# 定义一个宏来根据QT_VERSION_MAJOR选择性执行代码
-macro(SET_QT_VERSION)
-  if(${QT_VERSION_MAJOR} EQUAL 6)
-    # Qt6 环境
-    find_package(PkgConfig REQUIRED)
-    find_package(Qt6 COMPONENTS 
-        Gui 
-        Widgets 
-        DBus 
-        LinguistTools 
-        Network 
-        Concurrent 
-        Sql 
-        Svg 
-        SvgWidgets 
-        Xml 
-        OpenGL 
-        Core 
-        OpenGLWidgets
-        REQUIRED
-    )
+# Define Qt components
+set(QT_COMPONENTS
+    Gui
+    Widgets
+    DBus
+    LinguistTools
+    Network
+    Concurrent
+    Sql
+    Svg
+    SvgWidgets
+    Xml
+    OpenGL
+    Core
+)
 
-    find_package(PolkitQt6-1 REQUIRED)
-    find_package(Dtk6 COMPONENTS
-        Widget
-        Core
-        REQUIRED
-    )
-  elseif(${QT_VERSION_MAJOR} EQUAL 5)
-    # Qt5 环境
-    find_package(PkgConfig REQUIRED)
-    find_package(Qt5Widgets REQUIRED)
-    find_package(Qt5 COMPONENTS DBus REQUIRED)
-    find_package(Qt5Network REQUIRED)
-    find_package(Qt5Gui REQUIRED)
-    find_package(Qt5Xml REQUIRED)
-    find_package(PolkitQt5-1 REQUIRED)
-    find_package(DtkWidget REQUIRED)
-    find_package(DtkCore REQUIRED)
-  else()
-    message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
-  endif()
-endmacro()
-
-# 调用宏
-SET_QT_VERSION()
-
+# Add components only available in Qt6, remove SvgWidgets from Qt5
 if(${QT_VERSION_MAJOR} EQUAL 6)
-    find_package(QApt-qt6 REQUIRED)
-    include_directories(${QApt-qt6_INCLUDE_DIRS})    
-    include_directories(${Qt6Gui_PRIVATE_INCLUDE_DIRS})
-    set(QAPT_LIB QApt-qt6)
+    list(APPEND QT_COMPONENTS OpenGLWidgets)
+else()
+    # Remove SvgWidgets for Qt5 (not available)
+    list(REMOVE_ITEM QT_COMPONENTS SvgWidgets)
+endif()
+
+# Find Qt package with detected version
+find_package(PkgConfig REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS ${QT_COMPONENTS} REQUIRED)
+
+# Find Dtk package with mapped version
+find_package(Dtk${DTK_VERSION_MAJOR} COMPONENTS
+    Widget
+    Core
+    REQUIRED
+)
+
+# Define external dependency package names based on Qt version
+if(${QT_VERSION_MAJOR} EQUAL 6)
+    set(POLKITQT_NAME "PolkitQt6-1")
+    set(QAPT_NAME "QApt-qt6")
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
-    find_package(QApt REQUIRED)
-    include_directories(${QApt_INCLUDE_DIRS})
-    include_directories(${Qt5Gui_PRIVATE_INCLUDE_DIRS})
-    set(QAPT_LIB QApt)
+    set(POLKITQT_NAME "PolkitQt5-1")
+    set(QAPT_NAME "QApt")
 else()
     message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
 endif()
+
+# Find external dependencies
+find_package(${POLKITQT_NAME} REQUIRED)
+find_package(${QAPT_NAME} REQUIRED)
+include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
+include_directories(${Qt${QT_VERSION_MAJOR}Gui_PRIVATE_INCLUDE_DIRS})
 
 # Tell CMake to create the executable
 add_executable(${PROJECT_NAME} ${SRC_CPP} ${SRC_H} ${APP_QRC})
 target_include_directories(${APP_BIN_NAME} PUBLIC ${DtkWidget_INCLUDE_DIRS} ${OBJECT_BINARY_DIR})
 
+# Link libraries with dynamic Qt/DTK versions
 if(${QT_VERSION_MAJOR} EQUAL 6)
-    # Qt6 environment
     target_link_libraries(${APP_BIN_NAME}
-    Dtk6::Core
-    Dtk6::Widget
-    Qt6::Core
-    Qt6::Gui
-    Qt6::Widgets
-    Qt6::DBus
-    Qt6::Xml
-    Qt6::Network
-    ${QAPT_LIB}
-    PolkitQt6-1::Agent
-)
+        Dtk${DTK_VERSION_MAJOR}::Core
+        Dtk${DTK_VERSION_MAJOR}::Widget
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Gui
+        Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Xml
+        Qt${QT_VERSION_MAJOR}::Network
+        ${QAPT_NAME}
+        ${POLKITQT_NAME}::Agent
+    )
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
-    # Qt5 environment
     target_link_libraries(${APP_BIN_NAME}
-    ${DtkWidget_LIBRARIES}
-    ${DtkCore_LIBRARIES}
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Widgets
-    Qt5::DBus
-    Qt5::Xml
-    Qt5::Network
-    PolkitQt5-1::Agent
-)
+        ${DtkWidget_LIBRARIES}
+        ${DtkCore_LIBRARIES}
+        Qt${QT_VERSION_MAJOR}::Core
+        Qt${QT_VERSION_MAJOR}::Gui
+        Qt${QT_VERSION_MAJOR}::Widgets
+        Qt${QT_VERSION_MAJOR}::DBus
+        Qt${QT_VERSION_MAJOR}::Xml
+        Qt${QT_VERSION_MAJOR}::Network
+        ${QAPT_NAME}
+        ${POLKITQT_NAME}::Agent
+    )
 else()
     message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
 endif()
