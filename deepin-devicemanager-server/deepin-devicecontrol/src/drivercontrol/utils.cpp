@@ -127,18 +127,19 @@ bool Utils::getVersion(QString &major, QString &minor)
 bool Utils::addModBlackList(const QString &moduleName)
 {
     qCDebug(appLog) << "Adding module to blacklist:" << moduleName;
-    QProcess process;
-    process.start(QString("echo blacklist %1 >> %2").arg(moduleName).arg(BLACKLIST_CONF));
-    if (!process.waitForFinished())
-        return  false;
-    return  true;
+    QFile file(BLACKLIST_CONF);
+    if (!file.open(QIODevice::Append | QIODevice::Text))
+        return false;
+    file.write(QString("blacklist %1\n").arg(moduleName).toUtf8());
+    file.close();
+    return true;
 }
 
 bool Utils::unInstallPackage(const QString &packageName)
 {
     qCDebug(appLog) << "Uninstalling package:" << packageName;
     QProcess process;
-    process.start(QString("apt remove %1").arg(packageName));
+    process.start("apt", QStringList() << "remove" << packageName);
     if (!process.waitForFinished())
         return  false;
     return  true;

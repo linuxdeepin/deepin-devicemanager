@@ -242,6 +242,10 @@ void PageMultiInfo::slotActionUpdateDriver(int row)
 void PageMultiInfo::slotActionRemoveDriver(int row)
 {
     qCDebug(appLog) << "Removing driver for device at row:" << row;
+    if (row < 0 || row >= m_lstDevice.size()) {
+        qCWarning(appLog) << "Invalid row index:" << row;
+        return;
+    }
     DeviceBaseInfo *device = m_lstDevice[row];
     if (nullptr == device) {
         qCWarning(appLog) << "Null device at row:" << row;
