@@ -159,14 +159,19 @@ bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, boo
         QString cmd = QString("rfkill %1 $(rfkill list | grep -A 2 \"phy$(iw dev %2 info 2>/dev/null | awk '/wiphy/{print $2}')\" | awk 'NR==1{print $1}' | tr -d ':')")
                 .arg(enable ? "unblock" : "block")
                 .arg(logicalName);
-        int ret = system(cmd.toStdString().c_str());
-        if (ret != 0) {
-            qCritical() << "Failed to block/unblock wifi: " << " error code: " << ret ;
+        QProcess p1;
+        p1.start("sh", QStringList() << "-c" << cmd);
+        p1.waitForFinished(-1);
+        if (p1.exitCode() != 0) {
+            qCritical() << "Failed to block/unblock wifi: " << " error code: " << p1.exitCode() ;
         }
-        cmd = QString("/sbin/ifconfig %1 %2").arg(logicalName).arg(enable ? "up" : "down");
-        ret = system(cmd.toStdString().c_str());
-        if (ret != 0) {
-            qCritical() << "Failed to up/down network: " << logicalName << enable << " error code: " << ret ;
+        
+        // 使用QProcess执行ifconfig
+        QProcess ifconfigProcess;
+        ifconfigProcess.start("/sbin/ifconfig", QStringList() << logicalName << (enable ? "up" : "down"));
+        ifconfigProcess.waitForFinished(-1);
+        if (ifconfigProcess.exitCode() != 0) {
+            qCritical() << "Failed to up/down network: " << logicalName << enable << " error code: " << ifconfigProcess.exitCode();
             return false;
         }
     } else {

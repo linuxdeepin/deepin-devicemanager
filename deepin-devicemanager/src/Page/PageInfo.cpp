@@ -73,8 +73,7 @@ bool PageInfo::packageHasInstalled(const QString &packageName)
 {
     qCDebug(appLog) << "Checking if package is installed:" << packageName;
     QProcess p;
-    QString cmd = "dpkg -s " + packageName;
-    p.start(cmd);
+    p.start("dpkg", QStringList() << "-s" << packageName);
     p.waitForFinished(-1);
 
     QByteArray r = p.readAll();
