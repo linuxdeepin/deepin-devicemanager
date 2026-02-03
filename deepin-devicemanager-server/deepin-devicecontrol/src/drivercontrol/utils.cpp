@@ -84,7 +84,7 @@ bool Utils::addModBlackList(const QString &moduleName)
 bool Utils::unInstallPackage(const QString &packageName)
 {
     QProcess process;
-    process.start(QString("apt remove %1").arg(packageName));
+    process.start("apt", QStringList() << "remove" << packageName);
     if (!process.waitForFinished())
         return  false;
     return  true;
