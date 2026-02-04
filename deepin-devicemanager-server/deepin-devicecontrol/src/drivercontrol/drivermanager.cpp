@@ -610,8 +610,7 @@ QList<DriverManager::TDriverInfo> DriverManager::parsePrinterInfo(const QByteArr
 bool DriverManager::printerHasInstalled(const QString &packageName)
 {
     QProcess p;
-    QString cmd = "sudo dpkg -s " + packageName;
-    p.start(cmd);
+    p.start("dpkg", QStringList() << "-s" << packageName);
     p.waitForFinished(-1);
 
     QByteArray r = p.readAll();
@@ -626,7 +625,7 @@ bool DriverManager::printerHasInstalled(const QString &packageName)
 bool DriverManager::installPrinter(const QString &packageName)
 {
     QProcess p;
-    p.start("sudo apt install " + packageName);
+    p.start("apt", QStringList() << "install" << packageName);
     p.waitForFinished(-1);
 
     return printerHasInstalled(packageName);
@@ -640,7 +639,7 @@ bool DriverManager::installPrinter(const QString &packageName)
 bool DriverManager::unInstallPrinter(const QString &packageName)
 {
     QProcess p;
-    p.start("sudo dpkg -r " + packageName);
+    p.start("dpkg", QStringList() << "-r" << packageName);
     p.waitForFinished(-1);
 
     return !printerHasInstalled(packageName);
