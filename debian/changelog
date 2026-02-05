@@ -1,3 +1,14 @@
+deepin-devicemanager (6.0.57) unstable; urgency=medium
+
+  * fix: Improve command execution using QProcess
+  * fix: Fix Qt5 build failed issue
+  * build(cmake): refactor Qt version compatibility
+  * fix(bluetooth): remove hci version attribute setting
+  * fix: from dmidecode get cpu num error
+  * fix: disable bluetooth failed
+
+ -- dengzhongyuan <dengzhongyuan@uniontech.com>  Thu, 05 Feb 2026 19:54:14 +0800
+
 deepin-devicemanager (6.0.56) unstable; urgency=medium
 
   * chore: Update version to 6.0.56
