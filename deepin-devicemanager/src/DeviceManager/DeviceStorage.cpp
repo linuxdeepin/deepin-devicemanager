@@ -530,12 +530,16 @@ const QString DeviceStorage::getOverviewInfo()
 {
     QString overViewInfo;
 
-    if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
-        overViewInfo = QString("%1 %2").arg(m_Size).arg("UFS");
-    } else if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
-        overViewInfo = QString("%1 %2").arg(m_Size).arg("USB");
+    if (Common::isHwPlatform()) {
+        if (m_Interface.contains("UFS", Qt::CaseInsensitive)) {
+            overViewInfo = QString("%1 %2").arg(m_Size).arg("UFS");
+        } else if (m_Interface.contains("USB", Qt::CaseInsensitive)) {
+            overViewInfo = QString("%1 %2").arg(m_Size).arg("USB");
+        } else {
+            overViewInfo = QString("%1 %2").arg(m_Size).arg(m_MediaType);
+        }
     } else {
-        overViewInfo = QString("%1 %2").arg(m_Size).arg(m_MediaType);
+        overViewInfo = QString("%1 (%2)").arg(m_Name).arg(m_Size);
     }
 
     return overViewInfo;
