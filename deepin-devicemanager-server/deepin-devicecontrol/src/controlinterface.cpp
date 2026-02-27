@@ -222,7 +222,7 @@ bool ControlInterface::enableKeyboard(const QString& vid, const QString& pid, co
         return false;
     }
 
-    QString rulesFile = QString(UDEV_RULES_PATH_LOCAL "/99-keyboard-device-control-%1-%2.rules").arg(vid).arg(pid);
+    QString rulesFile = QString(UDEV_RULES_PATH_LOCAL "/99-keyboard-device-control-%1-%2.rules").arg(safeVid).arg(safePid);
     
     QString ruleContent;
     if (enable_device) {

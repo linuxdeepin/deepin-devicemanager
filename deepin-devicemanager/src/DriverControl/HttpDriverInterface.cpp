@@ -115,7 +115,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
         if (!build.isEmpty()) {
             qCDebug(appLog) << "OS build is not empty, adding to URL";
             QString system = build;
-            if (build[1] == "1") //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
+            if (build.length() > 3 && build[1] == '1') //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
                 system = QString("%1-%2").arg(build[1]).arg(build[3]);
             strUrl += "&system=" + system;
         }
@@ -127,7 +127,7 @@ QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString st
             qCDebug(appLog) << "OS build is not empty, adding to URL";
             QString system = build;
 
-            if (build[1] == "1") //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
+            if (build.length() > 3 && build[1] == '1') //专业版通过【产品线类型-产品线版本】方式进行系统构建匹配
                 system = QString("%1-%2").arg(build[1]).arg(build[3]);
 
             strUrl += "&system=" + system;
