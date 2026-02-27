@@ -153,7 +153,7 @@ bool EnableSqlManager::uniqueIDExistedEX(const QString &key, const QString path)
 bool EnableSqlManager::isUniqueIdEnabled(const QString &key)
 {
     qCDebug(appLog) << "Checking if unique ID is enabled:" << key;
-    QString sql = QString("SELECT enable FROM %1 WHERE unique_id='%2';").arg(DB_TABLE_AUTHORIZED).arg(":key");
+    QString sql = QString("SELECT enable FROM %1 WHERE unique_id=:key;").arg(DB_TABLE_AUTHORIZED);
     if(!m_sqlQuery.prepare(sql)) return false;
     m_sqlQuery.bindValue(":key", QVariant(key));
     if (m_sqlQuery.exec() && m_sqlQuery.next()) {

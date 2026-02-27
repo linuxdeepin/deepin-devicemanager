@@ -791,7 +791,7 @@ void DeviceBaseInfo::setVendorNameBylsusbLspci(const QString &vidpid, const QStr
         QProcess process;
         QString vendorId = vidpid.toLower().remove("0x").trimmed().left(4);
         QString deviceId = vidpid.toLower().remove("0x").trimmed().right(4);
-        process.start("lsusb -v -d " + vendorId + ":" + deviceId);
+        process.start("lsusb", QStringList() << "-v" << "-d" << QString("%1:%2").arg(vendorId, deviceId));
         process.waitForFinished(-1);
 
         QString output = process.readAllStandardOutput();
