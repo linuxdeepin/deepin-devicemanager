@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QProcess>
 #include <QCryptographicHash>
+#include <QRegularExpression>
 #include <QDebug>
 
 #include <net/if.h>
@@ -140,17 +141,53 @@ void EnableUtils::disableInDevice()
 bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable)
 {
     if (logicalName.startsWith("wlan") || logicalName.startsWith("wlp")) {  // Wireless LAN
-        QString cmd = QString("rfkill %1 $(rfkill list | grep -A 2 \"phy$(iw dev %2 info 2>/dev/null | awk '/wiphy/{print $2}')\" | awk 'NR==1{print $1}' | tr -d ':')")
-                .arg(enable ? "unblock" : "block")
-                .arg(logicalName);
-        int ret = system(cmd.toStdString().c_str());
-        if (ret != 0) {
-            qCritical() << "Failed to block/unblock wifi: " << " error code: " << ret ;
+        // 第一步：获取 wiphy 编号
+        QProcess iwProcess;
+        iwProcess.start("iw", QStringList() << "dev" << logicalName << "info");
+        iwProcess.waitForFinished();
+        QString iwOutput = QString::fromUtf8(iwProcess.readAllStandardOutput());
+
+        // 解析 wiphy 编号
+        QRegularExpression wiphyRe("wiphy\\s+(\\d+)");
+        QRegularExpressionMatch wiphyMatch = wiphyRe.match(iwOutput);
+        if (!wiphyMatch.hasMatch()) {
+            qCritical() << "Failed to get wiphy number for interface: " << logicalName;
+            return false;
         }
-        cmd = QString("/sbin/ifconfig %1 %2").arg(logicalName).arg(enable ? "up" : "down");
-        ret = system(cmd.toStdString().c_str());
+        QString phyNum = wiphyMatch.captured(1);
+
+        // 第二步：获取 rfkill 设备编号
+        QProcess rfkillListProcess;
+        rfkillListProcess.start("rfkill", QStringList() << "list");
+        rfkillListProcess.waitForFinished();
+        QString rfkillOutput = QString::fromUtf8(rfkillListProcess.readAllStandardOutput());
+
+        // 查找对应的 rfkill 编号
+        QRegularExpression rfkillRe("^(\\d+):.*\\n.*\\n.*phy" + phyNum);
+        QRegularExpressionMatch rfkillMatch = rfkillRe.match(rfkillOutput);
+        QString rfkillId;
+        if (rfkillMatch.hasMatch()) {
+            rfkillId = rfkillMatch.captured(1);
+        }
+
+        // 第三步：执行 rfkill block/unblock
+        if (!rfkillId.isEmpty()) {
+            QProcess rfkillBlockProcess;
+            rfkillBlockProcess.start("rfkill", QStringList() << (enable ? "unblock" : "block") << rfkillId);
+            rfkillBlockProcess.waitForFinished();
+            int ret = rfkillBlockProcess.exitCode();
+            if (ret != 0) {
+                qCritical() << "Failed to block/unblock wifi: error code: " << ret;
+            }
+        }
+
+        // 第四步：执行 ifconfig up/down
+        QProcess ifconfigProcess;
+        ifconfigProcess.start("/sbin/ifconfig", QStringList() << logicalName << (enable ? "up" : "down"));
+        ifconfigProcess.waitForFinished();
+        int ret = ifconfigProcess.exitCode();
         if (ret != 0) {
-            qCritical() << "Failed to up/down network: " << logicalName << enable << " error code: " << ret ;
+            qCritical() << "Failed to up/down network: " << logicalName << enable << " error code: " << ret;
             return false;
         }
     } else {
