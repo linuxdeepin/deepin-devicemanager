@@ -22,52 +22,11 @@
 #include <polkit-qt5-1/PolkitQt1/Authority>
 
 // 系统库文件
-#include <dirent.h>
 #include <cups.h>
 #include <string>
 
 using namespace PolkitQt1;
 using namespace DDLog;
-static int getPidByName(const QString &taskName)
-{
-    DIR *dir = opendir("/proc");
-    int pid = -1;
-    if (nullptr == dir)
-        return pid;
-
-    struct dirent *ptr = nullptr;
-    while ((ptr = readdir(dir)) != nullptr) {
-        if ((strcmp(ptr->d_name, ".") == 0) || (strcmp(ptr->d_name, "..") == 0) || DT_DIR != ptr->d_type)
-            continue;
-        char filepath[1024] = { 0 };
-        sprintf(filepath, "/proc/%s/cmdline", ptr->d_name);
-        FILE *fp = fopen(filepath, "r");
-        if (nullptr == fp)
-            continue;
-
-        char buf[1024] = { 0 };
-        if (fgets(buf, 1023, fp) == nullptr) {
-            fclose(fp);
-            continue;
-        }
-        char cur_task_name[1024] = { 0 };
-        sscanf(buf, "%s", cur_task_name);
-        fclose(fp);
-        if (QString(cur_task_name).endsWith(taskName)) {
-            bool ok = false;
-            int curPid = QString(ptr->d_name).toInt(&ok);
-            if (ok) {
-                pid = curPid;
-                break;
-            }
-        }
-    }
-    closedir(dir);
-
-    return pid;
-}
-
-
 bool ControlInterface::getUserAuthorPasswd()
 {
 #ifdef DISABLE_POLKIT
@@ -77,15 +36,10 @@ bool ControlInterface::getUserAuthorPasswd()
         return true;
     }
 
-    int pid = getPidByName("deepin-devicemanager");
-    if (pid >= 0) {
-        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                                                 UnixProcessSubject(pid),
-                                                                                 Authority::AllowUserInteraction);
-        return result == Authority::Yes;
-    }
-
-    return false;
+    Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+                                                                             SystemBusNameSubject(message().service()),
+                                                                             Authority::AllowUserInteraction);
+    return result == Authority::Yes;
 }
 ControlInterface::ControlInterface(QObject *parent)
     : QDBusService(parent)
