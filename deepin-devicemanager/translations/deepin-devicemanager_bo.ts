@@ -1481,6 +1481,21 @@
         <translation>མཐོ་ཤོག་མགྱོགས་སྐྱེད་ཀླད་ཀོར</translation>
     </message>
     <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1250"/>
+        <source>Unknown</source>
+        <translation>མི་ཤེས་པ།</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1251"/>
+        <source>SSD</source>
+        <translation>འཇགས་གཟུགས།</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1252"/>
+        <source>HDD</source>
+        <translation>འཕྲུལ་འཁོར།</translation>
+    </message>
+    <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1132"/>
         <source>Model</source>
         <translation>བཟོ་རྟགས།</translation>
@@ -1489,13 +1504,13 @@
 <context>
     <name>DeviceCpu</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="184"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="195"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="185"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="196"/>
         <source>Processor</source>
         <translation>གཏན་ཚིགས་ཐག་གཅོད་ཆས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="193"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="194"/>
         <source>Core(s)</source>
         <translation>ལྟེ་བ།</translation>
     </message>
@@ -1980,8 +1995,8 @@
 <context>
     <name>DeviceMonitor</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="550"/>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="553"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="562"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="565"/>
         <source>%1@%2Hz</source>
         <translation>%1@%2Hz</translation>
     </message>
