@@ -956,297 +956,302 @@ const  QString DeviceBaseInfo::get_string(const QString &sysPathfile)
     file.close();
     return info;
 }
-//只是为了lupdate自动增加翻译而占位
+// 只是为了 lupdate 自动增加翻译而占位
 void DeviceBaseInfo::generatorTranslate()
 {
-    QStringList translationStrings;
-    translationStrings \
-    <<  tr("Core(s)") \
-    <<  tr("Processor") \
-    <<  tr("ACL MTU") \
-    <<  tr("Address") \
-    <<  tr("Alias") \
-    <<  tr("ansiversion") \
-    <<  tr("Application") \
-    <<  tr("Architecture") \
-    <<  tr("Array Handle") \
-    <<  tr("Asset Tag") \
-    <<  tr("Auto Negotiation") \
-    <<  tr("Bank Locator") \
-    <<  tr("Base Board Information") \
-    <<  tr("BD Address") \
-    <<  tr("BIOS Information") \
-    <<  tr("BIOS Revision") \
-    <<  tr("BIOS ROMSIZE") \
-    <<  tr("Board name") \
-    <<  tr("BogoMIPS") \
-    <<  tr("Boot-up State") \
-    <<  tr("Broadcast") \
-    <<  tr("Bus") \
-    <<  tr("bus info") \
-    <<  tr("Bus Info") \
-    <<  tr("Cache Size") \
-    <<  tr("Capabilities") \
-    <<  tr("Capacity") \
-    <<  tr("Characteristics") \
-    <<  tr("Chassis Handle") \
-    <<  tr("Chassis Information") \
-    <<  tr("Chip") \
-    <<  tr("Chipset") \
-    <<  tr("Class") \
-    <<  tr("Clock") \
-    <<  tr("Config Status") \
-    <<  tr("Configured Speed") \
-    <<  tr("Configured Voltage") \
-    <<  tr("Contained Elements") \
-    <<  tr("Contained Object Handles") \
-    <<  tr("copies") \
-    <<  tr("Core ID") \
-    <<  tr("CPU architecture") \
-    <<  tr("CPU Family") \
-    <<  tr("CPU ID") \
-    <<  tr("CPU implementer") \
-    <<  tr("CPU part") \
-    <<  tr("CPU revision") \
-    <<  tr("CPU variant") \
-    <<  tr("critical-action") \
-    <<  tr("Currently Installed Language") \
-    <<  tr("Current Resolution") \
-    <<  tr("daemon-version") \
-    <<  tr("Data Width") \
-    <<  tr("Date") \
-    <<  tr("description") \
-    <<  tr("Description") \
-    <<  tr("Design Capacity") \
-    <<  tr("Design Voltage") \
-    <<  tr("Device") \
-    <<  tr("Device Class") \
-    <<  tr("Device File") \
-    <<  tr("Device Files") \
-    <<  tr("Device Name") \
-    <<  tr("Device Number") \
-    <<  tr("DigitalOutput") \
-    <<  tr("Disable") \
-    <<  tr("Discoverable") \
-    <<  tr("Discovering") \
-    <<  tr("Display Input") \
-    <<  tr("Display Output") \
-    <<  tr("Display Ratio") \
-    <<  tr("DP") \
-    <<  tr("Driver") \
-    <<  tr("Driver Activation Cmd") \
-    <<  tr("Driver Modules") \
-    <<  tr("Driver Status") \
-    <<  tr("Driver Version") \
-    <<  tr("Duplex") \
-    <<  tr("DVI") \
-    <<  tr("eDP") \
-    <<  tr("EGL client APIs") \
-    <<  tr("EGL version") \
-    <<  tr("energy") \
-    <<  tr("energy-empty") \
-    <<  tr("energy-full") \
-    <<  tr("energy-full-design") \
-    <<  tr("energy-rate") \
-    <<  tr("Error Correction Type") \
-    <<  tr("Error Information Handle") \
-    <<  tr("EV") \
-    <<  tr("Extensions") \
-    <<  tr("Family") \
-    <<  tr("Features") \
-    <<  tr("Firmware") \
-    <<  tr("Firmware Revision") \
-    <<  tr("Firmware Version") \
-    <<  tr("Flags") \
-    <<  tr("Form Factor") \
-    <<  tr("GDDR capacity") \
-    <<  tr("Geometry (Logical)") \
-    <<  tr("GLSL version") \
-    <<  tr("GL version") \
-    <<  tr("GPU type") \
-    <<  tr("GPU vendor") \
-    <<  tr("Graphics Memory") \
-    <<  tr("guid") \
-    <<  tr("Handlers") \
-    <<  tr("Hardware Class") \
-    <<  tr("has history") \
-    <<  tr("has statistics") \
-    <<  tr("HCI Version") \
-    <<  tr("HDMI") \
-    <<  tr("Height") \
-    <<  tr("icon-name") \
-    <<  tr("Input/Output") \
-    <<  tr("Installable Languages") \
-    <<  tr("Interface") \
-    <<  tr("Interface Type") \
-    <<  tr("ioport") \
-    <<  tr("IO Port") \
-    <<  tr("IP") \
-    <<  tr("IRQ") \
-    <<  tr("job-cancel-after") \
-    <<  tr("job-hold-until") \
-    <<  tr("job-priority") \
-    <<  tr("KernelModeDriver") \
-    <<  tr("KEY") \
-    <<  tr("L1d Cache") \
-    <<  tr("L1i Cache") \
-    <<  tr("L2 Cache") \
-    <<  tr("L3 Cache") \
-    <<  tr("L4 Cache") \
-    <<  tr("Language Description Format") \
-    <<  tr("latency") \
-    <<  tr("Latency") \
-    <<  tr("lid-is-closed") \
-    <<  tr("lid-is-present") \
-    <<  tr("Link") \
-    <<  tr("Link mode") \
-    <<  tr("Link policy") \
-    <<  tr("LMP Version") \
-    <<  tr("Location") \
-    <<  tr("Location In Chassis") \
-    <<  tr("Locator") \
-    <<  tr("Lock") \
-    <<  tr("logical name") \
-    <<  tr("Logical Name") \
-    <<  tr("logicalsectorsize") \
-    <<  tr("Logical Size") \
-    <<  tr("MAC Address") \
-    <<  tr("marker-change-time") \
-    <<  tr("Max Frequency") \
-    <<  tr("Maximum Capacity") \
-    <<  tr("Maximum Current") \
-    <<  tr("Maximum Power") \
-    <<  tr("Maximum Rate") \
-    <<  tr("Maximum Resolution") \
-    <<  tr("Maximum Voltage") \
-    <<  tr("Media Type") \
-    <<  tr("Memory") \
-    <<  tr("Memory Address") \
-    <<  tr("Memory Operating Mode Capability") \
-    <<  tr("Memory Subsystem Controller Manufacturer ID") \
-    <<  tr("Memory Subsystem Controller Product ID") \
-    <<  tr("Memory Technology") \
-    <<  tr("Minimum Resolution") \
-    <<  tr("Minimum Voltage") \
-    <<  tr("Modalias") \
-    <<  tr("Model") \
-    <<  tr("Module Alias") \
-    <<  tr("Module Alias") \
-    <<  tr("Module Manufacturer ID") \
-    <<  tr("Module Product ID") \
-    <<  tr("MSC") \
-    <<  tr("Multicast") \
-    <<  tr("Name") \
-    <<  tr("native-path") \
-    <<  tr("Negotiation Rate") \
-    <<  tr("network") \
-    <<  tr("Non-Volatile Size") \
-    <<  tr("Number Of Devices") \
-    <<  tr("Number Of Power Cords") \
-    <<  tr("number-up") \
-    <<  tr("OEM Information") \
-    <<  tr("on-battery") \
-    <<  tr("online") \
-    <<  tr("orientation-requested") \
-    <<  tr("Packet type") \
-    <<  tr("Pairable") \
-    <<  tr("Part Number") \
-    <<  tr("percentage") \
-    <<  tr("Phys") \
-    <<  tr("physical id") \
-    <<  tr("Physical ID") \
-    <<  tr("Physical Memory Array") \
-    <<  tr("Port") \
-    <<  tr("Powered") \
-    <<  tr("power supply") \
-    <<  tr("Power Supply State") \
-    <<  tr("Primary Monitor") \
-    <<  tr("print-color-mode") \
-    <<  tr("printer-is-accepting-jobs") \
-    <<  tr("printer-is-shared") \
-    <<  tr("printer-is-temporary") \
-    <<  tr("printer-make-and-model") \
-    <<  tr("printer-state-change-time") \
-    <<  tr("printer-state-reasons") \
-    <<  tr("printer-type") \
-    <<  tr("printer-uri-supported") \
-    <<  tr("product") \
-    <<  tr("Product Date") \
-    <<  tr("Product Name") \
-    <<  tr("PROP") \
-    <<  tr("Rank") \
-    <<  tr("rechargeable") \
-    <<  tr("Refresh Rate") \
-    <<  tr("Release date") \
-    <<  tr("Release Date") \
-    <<  tr("Revision") \
-    <<  tr("ROM Size") \
-    <<  tr("Rotation Rate") \
-    <<  tr("Runtime Size") \
-    <<  tr("SBDS Chemistry") \
-    <<  tr("SBDS Manufacture Date") \
-    <<  tr("SBDS Serial Number") \
-    <<  tr("SBDS Version") \
-    <<  tr("SCO MTU") \
-    <<  tr("sectorsize") \
-    <<  tr("Security Status") \
-    <<  tr("Serial ID") \
-    <<  tr("Serial Number") \
-    <<  tr("Service Classes") \
-    <<  tr("Set") \
-    <<  tr("Shared") \
-    <<  tr("sides") \
-    <<  tr("Size") \
-    <<  tr("SKU Number") \
-    <<  tr("Slot") \
-    <<  tr("SMBIOS Version") \
-    <<  tr("state") \
-    <<  tr("status") \
-    <<  tr("Status") \
-    <<  tr("Stepping") \
-    <<  tr("SubDevice") \
-    <<  tr("SubVendor") \
-    <<  tr("Subversion") \
-    <<  tr("Support Resolution") \
-    <<  tr("Sysfs") \
-    <<  tr("SysFS_Path") \
-    <<  tr("System Information") \
-    <<  tr("technology") \
-    <<  tr("temperature") \
-    <<  tr("Temperature") \
-    <<  tr("Thermal State") \
-    <<  tr("Threads") \
-    <<  tr("Total Width") \
-    <<  tr("Type") \
-    <<  tr("Type Detail") \
-    <<  tr("Unavailable") \
-    <<  tr("Uniq") \
-    <<  tr("updated") \
-    <<  tr("URI") \
-    <<  tr("UUID") \
-    <<  tr("Vendor") \
-    <<  tr("Version") \
-    <<  tr("VGA") \
-    <<  tr("Virtualization") \
-    <<  tr("Volatile Size") \
-    <<  tr("voltage") \
-    <<  tr("Voltage") \
-    <<  tr("Wake-up Type") \
-    <<  tr("warning-level") \
-    <<  tr("Width") \
-    <<  tr("battery") \
-    <<  tr("inch") \
-    <<  tr("Architecture") \
-    <<  tr("Frequency") \
-    <<  tr("Max Frequency") \
-    <<  tr("Media Type") \
-    <<  tr("Name") \
-    <<  tr("Size") \
-    <<  tr("Speed") \
-    <<  tr("Type") \
-    <<  tr("Vendor") \
-    <<  tr("Processor") \
-    << tr("Max Boost Clock");
+    // 使用 QT_TR_NOOP 仅作静态标记，避免运行时构造 QStringList 以及大量实际翻译函数的开销
+    static const char* const translationStrings[] = {
+        QT_TR_NOOP("Core(s)"),
+        QT_TR_NOOP("Processor"),
+        QT_TR_NOOP("ACL MTU"),
+        QT_TR_NOOP("Address"),
+        QT_TR_NOOP("Alias"),
+        QT_TR_NOOP("ansiversion"),
+        QT_TR_NOOP("Application"),
+        QT_TR_NOOP("Architecture"),
+        QT_TR_NOOP("Array Handle"),
+        QT_TR_NOOP("Asset Tag"),
+        QT_TR_NOOP("Auto Negotiation"),
+        QT_TR_NOOP("Bank Locator"),
+        QT_TR_NOOP("Base Board Information"),
+        QT_TR_NOOP("BD Address"),
+        QT_TR_NOOP("BIOS Information"),
+        QT_TR_NOOP("BIOS Revision"),
+        QT_TR_NOOP("BIOS ROMSIZE"),
+        QT_TR_NOOP("Board name"),
+        QT_TR_NOOP("BogoMIPS"),
+        QT_TR_NOOP("Boot-up State"),
+        QT_TR_NOOP("Broadcast"),
+        QT_TR_NOOP("Bus"),
+        QT_TR_NOOP("bus info"),
+        QT_TR_NOOP("Bus Info"),
+        QT_TR_NOOP("Cache Size"),
+        QT_TR_NOOP("Capabilities"),
+        QT_TR_NOOP("Capacity"),
+        QT_TR_NOOP("Characteristics"),
+        QT_TR_NOOP("Chassis Handle"),
+        QT_TR_NOOP("Chassis Information"),
+        QT_TR_NOOP("Chip"),
+        QT_TR_NOOP("Chipset"),
+        QT_TR_NOOP("Class"),
+        QT_TR_NOOP("Clock"),
+        QT_TR_NOOP("Config Status"),
+        QT_TR_NOOP("Configured Speed"),
+        QT_TR_NOOP("Configured Voltage"),
+        QT_TR_NOOP("Contained Elements"),
+        QT_TR_NOOP("Contained Object Handles"),
+        QT_TR_NOOP("copies"),
+        QT_TR_NOOP("Core ID"),
+        QT_TR_NOOP("CPU architecture"),
+        QT_TR_NOOP("CPU Family"),
+        QT_TR_NOOP("CPU ID"),
+        QT_TR_NOOP("CPU implementer"),
+        QT_TR_NOOP("CPU part"),
+        QT_TR_NOOP("CPU revision"),
+        QT_TR_NOOP("CPU variant"),
+        QT_TR_NOOP("critical-action"),
+        QT_TR_NOOP("Currently Installed Language"),
+        QT_TR_NOOP("Current Resolution"),
+        QT_TR_NOOP("daemon-version"),
+        QT_TR_NOOP("Data Width"),
+        QT_TR_NOOP("Date"),
+        QT_TR_NOOP("description"),
+        QT_TR_NOOP("Description"),
+        QT_TR_NOOP("Design Capacity"),
+        QT_TR_NOOP("Design Voltage"),
+        QT_TR_NOOP("Device"),
+        QT_TR_NOOP("Device Class"),
+        QT_TR_NOOP("Device File"),
+        QT_TR_NOOP("Device Files"),
+        QT_TR_NOOP("Device Name"),
+        QT_TR_NOOP("Device Number"),
+        QT_TR_NOOP("DigitalOutput"),
+        QT_TR_NOOP("Disable"),
+        QT_TR_NOOP("Discoverable"),
+        QT_TR_NOOP("Discovering"),
+        QT_TR_NOOP("Display Input"),
+        QT_TR_NOOP("Display Output"),
+        QT_TR_NOOP("Display Ratio"),
+        QT_TR_NOOP("DP"),
+        QT_TR_NOOP("Driver"),
+        QT_TR_NOOP("Driver Activation Cmd"),
+        QT_TR_NOOP("Driver Modules"),
+        QT_TR_NOOP("Driver Status"),
+        QT_TR_NOOP("Driver Version"),
+        QT_TR_NOOP("Duplex"),
+        QT_TR_NOOP("DVI"),
+        QT_TR_NOOP("eDP"),
+        QT_TR_NOOP("EGL client APIs"),
+        QT_TR_NOOP("EGL version"),
+        QT_TR_NOOP("energy"),
+        QT_TR_NOOP("energy-empty"),
+        QT_TR_NOOP("energy-full"),
+        QT_TR_NOOP("energy-full-design"),
+        QT_TR_NOOP("energy-rate"),
+        QT_TR_NOOP("Error Correction Type"),
+        QT_TR_NOOP("Error Information Handle"),
+        QT_TR_NOOP("EV"),
+        QT_TR_NOOP("Extensions"),
+        QT_TR_NOOP("Family"),
+        QT_TR_NOOP("Features"),
+        QT_TR_NOOP("Firmware"),
+        QT_TR_NOOP("Firmware Revision"),
+        QT_TR_NOOP("Firmware Version"),
+        QT_TR_NOOP("Flags"),
+        QT_TR_NOOP("Form Factor"),
+        QT_TR_NOOP("GDDR capacity"),
+        QT_TR_NOOP("Geometry (Logical)"),
+        QT_TR_NOOP("GLSL version"),
+        QT_TR_NOOP("GL version"),
+        QT_TR_NOOP("GPU type"),
+        QT_TR_NOOP("GPU vendor"),
+        QT_TR_NOOP("Graphics Memory"),
+        QT_TR_NOOP("guid"),
+        QT_TR_NOOP("Handlers"),
+        QT_TR_NOOP("Hardware Class"),
+        QT_TR_NOOP("has history"),
+        QT_TR_NOOP("has statistics"),
+        QT_TR_NOOP("HCI Version"),
+        QT_TR_NOOP("HDMI"),
+        QT_TR_NOOP("Height"),
+        QT_TR_NOOP("icon-name"),
+        QT_TR_NOOP("Input/Output"),
+        QT_TR_NOOP("Installable Languages"),
+        QT_TR_NOOP("Interface"),
+        QT_TR_NOOP("Interface Type"),
+        QT_TR_NOOP("ioport"),
+        QT_TR_NOOP("IO Port"),
+        QT_TR_NOOP("IP"),
+        QT_TR_NOOP("IRQ"),
+        QT_TR_NOOP("job-cancel-after"),
+        QT_TR_NOOP("job-hold-until"),
+        QT_TR_NOOP("job-priority"),
+        QT_TR_NOOP("KernelModeDriver"),
+        QT_TR_NOOP("KEY"),
+        QT_TR_NOOP("L1d Cache"),
+        QT_TR_NOOP("L1i Cache"),
+        QT_TR_NOOP("L2 Cache"),
+        QT_TR_NOOP("L3 Cache"),
+        QT_TR_NOOP("L4 Cache"),
+        QT_TR_NOOP("Language Description Format"),
+        QT_TR_NOOP("latency"),
+        QT_TR_NOOP("Latency"),
+        QT_TR_NOOP("lid-is-closed"),
+        QT_TR_NOOP("lid-is-present"),
+        QT_TR_NOOP("Link"),
+        QT_TR_NOOP("Link mode"),
+        QT_TR_NOOP("Link policy"),
+        QT_TR_NOOP("LMP Version"),
+        QT_TR_NOOP("Location"),
+        QT_TR_NOOP("Location In Chassis"),
+        QT_TR_NOOP("Locator"),
+        QT_TR_NOOP("Lock"),
+        QT_TR_NOOP("logical name"),
+        QT_TR_NOOP("Logical Name"),
+        QT_TR_NOOP("logicalsectorsize"),
+        QT_TR_NOOP("Logical Size"),
+        QT_TR_NOOP("MAC Address"),
+        QT_TR_NOOP("marker-change-time"),
+        QT_TR_NOOP("Max Frequency"),
+        QT_TR_NOOP("Maximum Capacity"),
+        QT_TR_NOOP("Maximum Current"),
+        QT_TR_NOOP("Maximum Power"),
+        QT_TR_NOOP("Maximum Rate"),
+        QT_TR_NOOP("Maximum Resolution"),
+        QT_TR_NOOP("Maximum Voltage"),
+        QT_TR_NOOP("Media Type"),
+        QT_TR_NOOP("Memory"),
+        QT_TR_NOOP("Memory Address"),
+        QT_TR_NOOP("Memory Operating Mode Capability"),
+        QT_TR_NOOP("Memory Subsystem Controller Manufacturer ID"),
+        QT_TR_NOOP("Memory Subsystem Controller Product ID"),
+        QT_TR_NOOP("Memory Technology"),
+        QT_TR_NOOP("Minimum Resolution"),
+        QT_TR_NOOP("Minimum Voltage"),
+        QT_TR_NOOP("Modalias"),
+        QT_TR_NOOP("Model"),
+        QT_TR_NOOP("Module Alias"),
+        QT_TR_NOOP("Module Alias"),
+        QT_TR_NOOP("Module Manufacturer ID"),
+        QT_TR_NOOP("Module Product ID"),
+        QT_TR_NOOP("MSC"),
+        QT_TR_NOOP("Multicast"),
+        QT_TR_NOOP("Name"),
+        QT_TR_NOOP("native-path"),
+        QT_TR_NOOP("Negotiation Rate"),
+        QT_TR_NOOP("network"),
+        QT_TR_NOOP("Non-Volatile Size"),
+        QT_TR_NOOP("Number Of Devices"),
+        QT_TR_NOOP("Number Of Power Cords"),
+        QT_TR_NOOP("number-up"),
+        QT_TR_NOOP("OEM Information"),
+        QT_TR_NOOP("on-battery"),
+        QT_TR_NOOP("online"),
+        QT_TR_NOOP("orientation-requested"),
+        QT_TR_NOOP("Packet type"),
+        QT_TR_NOOP("Pairable"),
+        QT_TR_NOOP("Part Number"),
+        QT_TR_NOOP("percentage"),
+        QT_TR_NOOP("Phys"),
+        QT_TR_NOOP("physical id"),
+        QT_TR_NOOP("Physical ID"),
+        QT_TR_NOOP("Physical Memory Array"),
+        QT_TR_NOOP("Port"),
+        QT_TR_NOOP("Powered"),
+        QT_TR_NOOP("power supply"),
+        QT_TR_NOOP("Power Supply State"),
+        QT_TR_NOOP("Primary Monitor"),
+        QT_TR_NOOP("print-color-mode"),
+        QT_TR_NOOP("printer-is-accepting-jobs"),
+        QT_TR_NOOP("printer-is-shared"),
+        QT_TR_NOOP("printer-is-temporary"),
+        QT_TR_NOOP("printer-make-and-model"),
+        QT_TR_NOOP("printer-state-change-time"),
+        QT_TR_NOOP("printer-state-reasons"),
+        QT_TR_NOOP("printer-type"),
+        QT_TR_NOOP("printer-uri-supported"),
+        QT_TR_NOOP("product"),
+        QT_TR_NOOP("Product Date"),
+        QT_TR_NOOP("Product Name"),
+        QT_TR_NOOP("PROP"),
+        QT_TR_NOOP("Rank"),
+        QT_TR_NOOP("rechargeable"),
+        QT_TR_NOOP("Refresh Rate"),
+        QT_TR_NOOP("Release date"),
+        QT_TR_NOOP("Release Date"),
+        QT_TR_NOOP("Revision"),
+        QT_TR_NOOP("ROM Size"),
+        QT_TR_NOOP("Rotation Rate"),
+        QT_TR_NOOP("Runtime Size"),
+        QT_TR_NOOP("SBDS Chemistry"),
+        QT_TR_NOOP("SBDS Manufacture Date"),
+        QT_TR_NOOP("SBDS Serial Number"),
+        QT_TR_NOOP("SBDS Version"),
+        QT_TR_NOOP("SCO MTU"),
+        QT_TR_NOOP("sectorsize"),
+        QT_TR_NOOP("Security Status"),
+        QT_TR_NOOP("Serial ID"),
+        QT_TR_NOOP("Serial Number"),
+        QT_TR_NOOP("Service Classes"),
+        QT_TR_NOOP("Set"),
+        QT_TR_NOOP("Shared"),
+        QT_TR_NOOP("sides"),
+        QT_TR_NOOP("Size"),
+        QT_TR_NOOP("SKU Number"),
+        QT_TR_NOOP("Slot"),
+        QT_TR_NOOP("SMBIOS Version"),
+        QT_TR_NOOP("state"),
+        QT_TR_NOOP("status"),
+        QT_TR_NOOP("Status"),
+        QT_TR_NOOP("Stepping"),
+        QT_TR_NOOP("SubDevice"),
+        QT_TR_NOOP("SubVendor"),
+        QT_TR_NOOP("Subversion"),
+        QT_TR_NOOP("Support Resolution"),
+        QT_TR_NOOP("Sysfs"),
+        QT_TR_NOOP("SysFS_Path"),
+        QT_TR_NOOP("System Information"),
+        QT_TR_NOOP("technology"),
+        QT_TR_NOOP("temperature"),
+        QT_TR_NOOP("Temperature"),
+        QT_TR_NOOP("Thermal State"),
+        QT_TR_NOOP("Threads"),
+        QT_TR_NOOP("Total Width"),
+        QT_TR_NOOP("Type"),
+        QT_TR_NOOP("Type Detail"),
+        QT_TR_NOOP("Unavailable"),
+        QT_TR_NOOP("Uniq"),
+        QT_TR_NOOP("updated"),
+        QT_TR_NOOP("URI"),
+        QT_TR_NOOP("UUID"),
+        QT_TR_NOOP("Vendor"),
+        QT_TR_NOOP("Version"),
+        QT_TR_NOOP("VGA"),
+        QT_TR_NOOP("Virtualization"),
+        QT_TR_NOOP("Volatile Size"),
+        QT_TR_NOOP("voltage"),
+        QT_TR_NOOP("Voltage"),
+        QT_TR_NOOP("Wake-up Type"),
+        QT_TR_NOOP("warning-level"),
+        QT_TR_NOOP("Width"),
+        QT_TR_NOOP("battery"),
+        QT_TR_NOOP("inch"),
+        QT_TR_NOOP("Architecture"),
+        QT_TR_NOOP("Frequency"),
+        QT_TR_NOOP("Max Frequency"),
+        QT_TR_NOOP("Media Type"),
+        QT_TR_NOOP("Name"),
+        QT_TR_NOOP("Size"),
+        QT_TR_NOOP("Speed"),
+        QT_TR_NOOP("Type"),
+        QT_TR_NOOP("Vendor"),
+        QT_TR_NOOP("Processor"),
+        QT_TR_NOOP("Max Boost Clock"),
+        QT_TR_NOOP("Unknow"),
+        QT_TR_NOOP("SSD"),
+        QT_TR_NOOP("HDD"),
+    };
+    Q_UNUSED(translationStrings);
 }
 
 void DeviceBaseInfo::setSysPath(const QString &newSysPath)

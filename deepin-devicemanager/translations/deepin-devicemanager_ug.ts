@@ -1481,6 +1481,21 @@
         <translation>ماكسىمۇل تېزلەشتىش ۋاقىت چاستوتىسى</translation>
     </message>
     <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1250"/>
+        <source>Unknow</source>
+        <translation>نامەلۇم</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1251"/>
+        <source>SSD</source>
+        <translation>قاسقا ھالەت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1252"/>
+        <source>HDD</source>
+        <translation>ماشىنا</translation>
+    </message>
+    <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1132"/>
         <source>Model</source>
         <translation>مودىل</translation>
@@ -1489,13 +1504,13 @@
 <context>
     <name>DeviceCpu</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="184"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="195"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="185"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="196"/>
         <source>Processor</source>
         <translation>بىر تەرەپ قىلغۇچ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="193"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="194"/>
         <source>Core(s)</source>
         <translation>يادرو</translation>
     </message>
@@ -1979,8 +1994,8 @@
 <context>
     <name>DeviceMonitor</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="550"/>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="553"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="562"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="565"/>
         <source>%1@%2Hz</source>
         <translation>%1@%2Hz</translation>
     </message>

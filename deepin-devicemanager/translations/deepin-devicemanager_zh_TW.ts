@@ -1481,6 +1481,21 @@
         <translation>最大加速频率</translation>
     </message>
     <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1250"/>
+        <source>Unknow</source>
+        <translation>未知</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1251"/>
+        <source>SSD</source>
+        <translation>固態</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1252"/>
+        <source>HDD</source>
+        <translation>機械</translation>
+    </message>
+    <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1132"/>
         <source>Model</source>
         <translation>型號</translation>
@@ -1489,13 +1504,13 @@
 <context>
     <name>DeviceCpu</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="184"/>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="195"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="185"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="196"/>
         <source>Processor</source>
         <translation>邏輯處理器</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="193"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="194"/>
         <source>Core(s)</source>
         <translation>核</translation>
     </message>
@@ -1979,8 +1994,8 @@
 <context>
     <name>DeviceMonitor</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="550"/>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="553"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="562"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="565"/>
         <source>%1@%2Hz</source>
         <translation>%1@%2Hz</translation>
     </message>
