@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
         }
 #ifndef DISABLE_POLKIT
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                                                UnixProcessSubject(getpid()),
+                                                                                SystemBusNameSubject(QDBusConnection::sessionBus().baseService()),
                                                                                 Authority::AllowUserInteraction);
         if (result != Authority::Yes)
             return 0;
