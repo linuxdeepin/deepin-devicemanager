@@ -19,3 +19,5 @@ const int contextMenuWidth_ = 150;
 
 #define GenerateTsItem 0
 const QString DEVICEINFO_PATH = "/tmp/device-info";
+
+constexpr const char* AUTH_ACTION = "com.deepin.deepin-devicemanager.checkAuthentication";

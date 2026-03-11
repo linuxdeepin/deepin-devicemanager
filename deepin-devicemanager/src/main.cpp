@@ -12,6 +12,7 @@
 #include "DDLog.h"
 #include "commontools.h"
 #include "commonfunction.h"
+#include "commondefine.h"
 
 #include <DApplication>
 #include <DWidgetUtil>
@@ -93,11 +94,13 @@ int main(int argc, char *argv[])
             exit(0);
         }
 #ifndef DISABLE_POLKIT
-        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+        Authority::Result result = Authority::instance()->checkAuthorizationSync(AUTH_ACTION,
                                                                                 SystemBusNameSubject(QDBusConnection::systemBus().baseService()),
                                                                                 Authority::AllowUserInteraction);
-        if (result != Authority::Yes)
+        if (result != Authority::Yes) {
+            qCritical() << "Check authorization failed! Error code:" << static_cast<int>(result);
             return 0;
+        }
 #endif
         DApplicationSettings settinAgs;
         Dtk::Core::DLogManager::registerFileAppender();
