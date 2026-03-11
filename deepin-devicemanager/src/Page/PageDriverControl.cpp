@@ -213,7 +213,7 @@ void PageDriverControl::installDriverLogical()
     } else if (1 == curIndex) {
         // 驱动安装之前需要先提权
         Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                                                 SystemBusNameSubject(QDBusConnection::sessionBus().baseService()),
+                                                                                 SystemBusNameSubject(QDBusConnection::systemBus().baseService()),
                                                                                  Authority::AllowUserInteraction);
         if (result != Authority::Yes) {
             return;
