@@ -12,6 +12,7 @@
 #include "DBusInterface.h"
 #include "drivericonwidget.h"
 #include "HttpDriverInterface.h"
+#include "commondefine.h"
 
 #include <DBlurEffectWidget>
 #include <DWidget>
@@ -212,10 +213,11 @@ void PageDriverControl::installDriverLogical()
         connect(this->getButton(0), &QPushButton::clicked, this, &PageDriverControl::slotBackPathPage);
     } else if (1 == curIndex) {
         // 驱动安装之前需要先提权
-        Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
+        Authority::Result result = Authority::instance()->checkAuthorizationSync(AUTH_ACTION,
                                                                                  SystemBusNameSubject(QDBusConnection::systemBus().baseService()),
                                                                                  Authority::AllowUserInteraction);
         if (result != Authority::Yes) {
+            qCritical() << "Check authorization failed! Error code:" << static_cast<int>(result);
             return;
         }
 
