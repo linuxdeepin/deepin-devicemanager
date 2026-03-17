@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -272,15 +272,6 @@ void CommonTools::parseEDID(const QStringList &allEDIDS, const QString &input, b
             DeviceManager::instance()->addMonitor(device);
         }
     }
-}
-
-QString CommonTools::getGpuInfoCommandFromDConfig()
-{
-    QString cmd;
-    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
-    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("CommandToGetGPUInfo"))
-        cmd = dconfig->value("CommandToGetGPUInfo").toString();
-    return cmd;
 }
 
 QString CommonTools::preGenerateGpuInfo()
