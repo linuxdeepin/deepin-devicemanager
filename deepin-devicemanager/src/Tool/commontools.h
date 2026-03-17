@@ -79,7 +79,6 @@ public:
     static QString getBackupPath();
 
     static void parseEDID(const QStringList &allEDIDS, const QString &input, bool isHW = true);
-    static QString getGpuInfoCommandFromDConfig();
     static QString preGenerateGpuInfo();
     static bool hasPciGraphicsCard();
 
