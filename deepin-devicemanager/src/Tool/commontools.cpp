@@ -259,15 +259,6 @@ void CommonTools::parseEDID(const QStringList &allEDIDS, const QString &input, b
     }
 }
 
-QString CommonTools::getGpuInfoCommandFromDConfig()
-{
-    QString cmd;
-    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
-    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("CommandToGetGPUInfo"))
-        cmd = dconfig->value("CommandToGetGPUInfo").toString();
-    return cmd;
-}
-
 QString CommonTools::preGenerateGpuInfo()
 {
     static QString gpuBaseInfo { "" };
