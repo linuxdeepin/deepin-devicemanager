@@ -183,12 +183,17 @@ void CommonTools::parseEDID(const QStringList &allEDIDS, const QString &input, b
         QString edidStr;
         if (isHW) {
             QProcess process;
-            process.start(QString("hexdump %1").arg(edid));
-            process.waitForFinished(-1);
-
-            QString deviceInfo = process.readAllStandardOutput();
-            if (deviceInfo.isEmpty())
+            process.start("hexdump", QStringList() << edid);
+            if (!process.waitForFinished(3000)) {
+                qCritical() << "Failed to hexdump edid file!";
                 continue;
+            }
+
+            QString deviceInfo = QString::fromLocal8Bit(process.readAllStandardOutput());
+            if (deviceInfo.isEmpty()) {
+                qWarning() << "The edid file is empty! " << edid;
+                continue;
+            }
 
             QStringList lines = deviceInfo.split("\n");
             for (auto line:lines) {
@@ -203,11 +208,17 @@ void CommonTools::parseEDID(const QStringList &allEDIDS, const QString &input, b
             }
         } else {
             QProcess process;
-            process.start(QString("hexdump -C %1").arg(edid));
-            process.waitForFinished(-1);
-            QString deviceInfo = process.readAllStandardOutput();
-            if (deviceInfo.isEmpty())
+            process.start("hexdump", QStringList() << "-C" << edid);
+            if (!process.waitForFinished(3000)) {
+                qCritical() << "Failed to hexdump edid file!";
                 continue;
+            }
+
+            QString deviceInfo = QString::fromLocal8Bit(process.readAllStandardOutput());
+            if (deviceInfo.isEmpty()) {
+                qWarning() << "The edid file is empty! " << edid;
+                continue;
+            }
 
             QStringList lines = deviceInfo.split("\n");
             for (auto line: lines) {
