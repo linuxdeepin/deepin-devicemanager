@@ -249,7 +249,10 @@ void CommonTools::parseEDID(const QStringList &allEDIDS, const QString &input, b
         if (lines.size() > 3){
             EDIDParser edidParser;
             QString errorMsg;
-            edidParser.setEdid(edidStr,errorMsg,"\n", isHW ? false : true);
+            if (!edidParser.setEdid(edidStr,errorMsg,"\n", isHW ? false : true)) {
+                qCritical() << errorMsg;
+                continue;
+            }
 
             QMap<QString, QString> mapInfo;
             mapInfo.insert("Vendor",edidParser.vendor());
