@@ -54,12 +54,12 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
     // 判断是否是合理的edid
     if (m_LittleEndianMode) {
         if (!edid.startsWith("00ffffffffffff00")) {
-            errorMsg = "Error edid info";
+            errorMsg = "Error edid info in little endian mode!";
             return false;
         }
     } else {
         if (!edid.startsWith("ff00ffffffff00ff")) {
-            errorMsg = "Error edid info";
+            errorMsg = "Error edid info in big endian mode!";
             return false;
         }
     }
@@ -180,13 +180,21 @@ void EDIDParser::parseReleaseDate()
 void EDIDParser::parseScreenSize()
 {
 
-    //Detailed Timing
-    if(m_LittleEndianMode){
-        QString tmpw = getBytes(4,2);
-        QString tmph = getBytes(4,3);
-        QString tmpshl = getBytes(4,4);
-        m_Width = hexToDec(tmpshl.mid(0,1) + tmpw).toInt();
-        m_Height = hexToDec(tmpshl.mid(1,1) + tmph).toInt();
+    //Detailed Timing: 字节66-68 (第4行字节2-4)包含详细屏幕尺寸信息
+    // 字节66: Active Image Width低8位
+    // 字节67: Active Image Height低8位
+    // 字节68: 高4位(0xF0)=宽度高4位, 低4位(0x0F)=高度高4位
+    // 注意：大端模式下，字节位置会交换：byte 2<->3, byte 4->5
+    QString s66 = getBytes(4, m_LittleEndianMode ? 2 : 3),  // 宽度低8位
+            s67 = getBytes(4, m_LittleEndianMode ? 3 : 2),  // 高度低8位
+            s68 = getBytes(4, m_LittleEndianMode ? 4 : 5);  // [宽度高4位|高度高4位]
+
+    if (!s66.isEmpty() && !s67.isEmpty() && !s68.isEmpty()) {
+        int byte68_val = hexToDec(s68).toInt();
+        // 宽度 = (byte68高4位 << 8) + s66
+        m_Width = ((byte68_val & 0xF0) << 4) + hexToDec(s66).toInt();
+        // 高度 = (byte68低4位 << 8) + s67
+        m_Height = ((byte68_val & 0x0F) << 8) + hexToDec(s67).toInt();
     }
 
     // edid中的  15H和16H就是屏幕大小 , 与Detailed Timing相差超10mm 则用15H和16H的。
@@ -195,20 +203,6 @@ void EDIDParser::parseScreenSize()
     if(m_Width+10 < width15  || m_Height+10 < height16) {
         m_Width = width15;
         m_Height = height16;
-    }
-
-    QString s66 = getBytes(4, m_LittleEndianMode ? 2 : 3),
-            s67 = getBytes(4, m_LittleEndianMode ? 3 : 2),
-            s68 = getBytes(4, m_LittleEndianMode ? 4 : 5);
-
-    if (!s66.isEmpty() && !s67.isEmpty() && !s68.isEmpty()) {
-        int width_mm = hexToDec(s66).toInt() + ((hexToDec(s68).toInt() & 0xF0) << 4);
-        int height_mm = hexToDec(s67).toInt() + ((hexToDec(s68).toInt() & 0x0F) << 8);
-
-        if (width_mm > 0 && height_mm > 0) {
-            m_Width = width_mm;
-            m_Height = height_mm;
-        }
     }
 
     if (Common::specialComType == Common::kSpecialType7){ // sepcial task:378963
