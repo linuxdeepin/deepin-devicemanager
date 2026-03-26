@@ -1,14 +1,30 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #ifndef EDIDPARSER_H
 #define EDIDPARSER_H
-#include<QString>
-#include<QStringList>
-#include<QMap>
-#include <commonfunction.h>
+
+#include "commonfunction.h"
+
+#include <QString>
+#include <QStringList>
+#include <QMap>
+#include <QVector>
+
+/**
+ * @brief DTDSizeInfo - 存储单个DTD的尺寸信息
+ */
+struct DTDSizeInfo
+{
+    int dtdIndex;       // DTD索引（从0开始）
+    int width;          // 物理宽度（毫米）
+    int height;         // 物理高度（毫米）
+    bool isBaseBlock;   // 是否来自基础块
+
+    DTDSizeInfo() : dtdIndex(0), width(0), height(0), isBaseBlock(true) {}
+};
+
 /**
  * @brief The EDIDParser class
  * 用于解析edid的类
@@ -93,6 +109,19 @@ private:
     void parseMonitorName();
 
     /**
+         * @brief parseDTDs:解析所有 DTD 的屏幕尺寸
+         */
+    void parseDTDs();
+
+    /**
+     * @brief parseOneDTD:解析单个 DTD
+     * @param startByte: DTD 起始字节位置
+     * @param dtdIndex: DTD 索引
+     * @param isBaseBlock: 是否来自基础块
+     */
+    void parseOneDTD(int startByte, int dtdIndex, bool isBaseBlock);
+
+    /**
      * @brief binToDec:将二进制转换成十进制
      * @param strBin：二进制字符串
      * @return 十进制字符串
@@ -157,8 +186,7 @@ private:
     int                    m_Height;                           // height
     QStringList            m_ListEdid;                         // edid数据
     QMap<QString, QString> m_MapCh;                            // 二进制字符串映射到字母A-Z
-
-
+    QVector<DTDSizeInfo>   m_DTDSizeInfoList;                  // 所有 DTD 的尺寸信息列表
 };
 
 #endif // EDIDPARSER_H
