@@ -204,31 +204,30 @@ void EDIDParser::parseScreenSize()
 {
     qCDebug(appLog) << "Parsing screen size from EDID";
 
-    //Detailed Timing: 字节66-68 (第4行字节2-4)包含详细屏幕尺寸信息
-    // 字节66: Active Image Width低8位
-    // 字节67: Active Image Height低8位
-    // 字节68: 高4位(0xF0)=宽度高4位, 低4位(0x0F)=高度高4位
-    // 注意：大端模式下，字节位置会交换：byte 2<->3, byte 4->5
-    QString s66 = getBytes(4, m_LittleEndianMode ? 2 : 3),  // 宽度低8位
-            s67 = getBytes(4, m_LittleEndianMode ? 3 : 2),  // 高度低8位
-            s68 = getBytes(4, m_LittleEndianMode ? 4 : 5);  // [宽度高4位|高度高4位]
-
-    if (!s66.isEmpty() && !s67.isEmpty() && !s68.isEmpty()) {
-        int byte68_val = hexToDec(s68).toInt();
-        // 宽度 = (byte68高4位 << 8) + s66
-        m_Width = ((byte68_val & 0xF0) << 4) + hexToDec(s66).toInt();
-        // 高度 = (byte68低4位 << 8) + s67
-        m_Height = ((byte68_val & 0x0F) << 8) + hexToDec(s67).toInt();
-    }
-
-    // edid中的  15H和16H就是屏幕大小 , 与Detailed Timing相差超10mm 则用15H和16H的。
-    int width15 = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt()*10;
-    int height16 = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt()*10;
-    qCDebug(appLog) << "Parsed width and height from bytes 15H/16H:" << width15 << "x" << height16;
-    if(m_Width+10 < width15  || m_Height+10 < height16) {
-        qCDebug(appLog) << "Detailed timing differs significantly, using 15H/16H values.";
+    parseDTDs();
+    // edid中的  15H和16H是基本屏幕大小(单位cm), 与 Detailed Timing 相差超10mm 则用15H和16H的。
+    int width15 = hexToDec(getBytes(1, m_LittleEndianMode ? 5 : 4)).toInt() * 10;
+    int height16 = hexToDec(getBytes(1, m_LittleEndianMode ? 6 : 7)).toInt() * 10;
+    if (width15 != 0 && height16 != 0) {
         m_Width = width15;
         m_Height = height16;
+        // 从所有的详细尺寸中寻找接近基本屏幕大小的值
+        for (int i = 0; i < m_DTDSizeInfoList.size(); ++i) {
+            if (abs(m_DTDSizeInfoList.at(i).width - width15) < 10
+                && abs(m_DTDSizeInfoList.at(i).height - height16) < 10) {
+                m_Width = m_DTDSizeInfoList.at(i).width;
+                m_Height = m_DTDSizeInfoList.at(i).height;
+                break;
+            }
+        }
+    } else {
+        if (!m_DTDSizeInfoList.isEmpty()) {
+            m_Width = m_DTDSizeInfoList.at(0).width;
+            m_Height = m_DTDSizeInfoList.at(0).height;
+        } else {
+            m_Width = 0;
+            m_Height = 0;
+        }
     }
 
     if (Common::specialComType == Common::kSpecialType7){ // sepcial task:378963
@@ -237,8 +236,8 @@ void EDIDParser::parseScreenSize()
     }
     double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;
     m_ScreenSize = QString("%1 %2(%3mm×%4mm)")
-            .arg(QString::number(inch, '0', Common::specialComType == Common::kSpecialType7 ? 0 : 1))
-            .arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
+                       .arg(QString::number(inch, '0', Common::specialComType == Common::kSpecialType7 ? 0 : 1))
+                       .arg(QObject::tr("inch")).arg(m_Width).arg(m_Height);
     qCDebug(appLog) << "Screen size parsed:" << m_ScreenSize << "Width:" << m_Width << "Height:" << m_Height;
 }
 
@@ -300,6 +299,101 @@ void EDIDParser::parseMonitorName()
     // 如果没有找到有效的监视器名称，设置默认值
     if (m_MonitorName.isEmpty())
         m_MonitorName = "Unknown Monitor";
+}
+
+void EDIDParser::parseDTDs()
+{
+    // 清空之前的 DTD 信息列表
+    m_DTDSizeInfoList.clear();
+
+    // 基础块中最多有 4 个 DTD，起始字节为 54, 72, 90, 108
+    for (int i = 0; i < 4; i++) {
+        int startByte = 54 + i * 18;
+        parseOneDTD(startByte, i, true);
+    }
+}
+
+void EDIDParser::parseOneDTD(int startByte, int dtdIndex, bool isBaseBlock)
+{
+    // 字节布局（在 DTD 内的相对位置）：
+    // 字节0-1: 像素时钟（2字节，用于验证是否为有效 DTD）
+    // 字节2-3: H Active（水平主动像素数）低字节 | H Blank
+    // 字节4-5: V Active（垂直主动像素数）低字节 | V Blank
+    // 字节12: Image Size Width（物理宽度）低8位
+    // 字节13: Image Size Height（物理高度）低8位
+    // 字节14: 高4位=宽度高4位，低4位=高度高4位
+
+    // 注意：在 EDID 的 16 进制字符串格式中
+    // 每行 16 字节 = 32 个字符
+    // 每字节 = 2 个字符
+
+    // 注意：大端模式下，字节位置会交换：
+    // - 相邻字节对会交换（如 byte12 <-> byte13）
+    // - byte14 会变成 byte15
+
+    // 计算 DTD 内的字节位置对应的 EDID 位置
+    int line = startByte / 16;
+    int byteInLine = startByte % 16;
+
+    // 获取像素时钟（字节0-1），用于验证 DTD 是否有效
+    // 大端模式下字节0和字节1交换
+    QString pixelClockByte0 = getBytes(line, m_LittleEndianMode ? byteInLine : byteInLine + 1);
+    QString pixelClockByte1 = getBytes(line, m_LittleEndianMode ? byteInLine + 1 : byteInLine);
+
+    if (pixelClockByte0.isEmpty() || pixelClockByte1.isEmpty()) {
+        return;
+    }
+
+    int pixelClockLow = hexToDec(pixelClockByte0).toInt();
+    int pixelClockHigh = hexToDec(pixelClockByte1).toInt();
+    int pixelClock = pixelClockLow + (pixelClockHigh << 8);
+
+    // 如果像素时钟为 0，说明这不是一个有效的 DTD
+    if (pixelClock == 0) {
+        return;
+    }
+
+    // 获取物理尺寸信息
+    // 字节12: 宽度低8位
+    // 字节13: 高度低8位
+    // 字节14: 高4位=宽度高位，低4位=高度高位
+    // 大端模式下：byte12 <-> byte13 交换，byte14 -> byte15
+
+    int byte12Pos = m_LittleEndianMode ? (startByte + 12) : (startByte + 13);
+    int byte13Pos = m_LittleEndianMode ? (startByte + 13) : (startByte + 12);
+    int byte14Pos = m_LittleEndianMode ? (startByte + 14) : (startByte + 15);
+
+    int lineWidthByte12 = byte12Pos / 16;
+    int byteInLineWidthByte12 = byte12Pos % 16;
+
+    int lineWidthByte13 = byte13Pos / 16;
+    int byteInLineWidthByte13 = byte13Pos % 16;
+
+    int lineWidthByte14 = byte14Pos / 16;
+    int byteInLineWidthByte14 = byte14Pos % 16;
+
+    QString s12 = getBytes(lineWidthByte12, byteInLineWidthByte12);  // 宽度低8位
+    QString s13 = getBytes(lineWidthByte13, byteInLineWidthByte13);  // 高度低8位
+    QString s14 = getBytes(lineWidthByte14, byteInLineWidthByte14);  // [宽度高4位|高度高4位]
+
+    if (s12.isEmpty() || s13.isEmpty() || s14.isEmpty()) {
+        return;
+    }
+
+    int byte14_val = hexToDec(s14).toInt();
+    // 宽度(mm) = (byte14高4位 << 8) + s12
+    int width = ((byte14_val & 0xF0) << 4) + hexToDec(s12).toInt();
+    // 高度(mm) = (byte14低4位 << 8) + s13
+    int height = ((byte14_val & 0x0F) << 8) + hexToDec(s13).toInt();
+
+    // 保存 DTD 尺寸信息
+    DTDSizeInfo info;
+    info.dtdIndex = dtdIndex;
+    info.width = width;
+    info.height = height;
+    info.isBaseBlock = isBaseBlock;
+
+    m_DTDSizeInfoList.append(info);
 }
 
 QString EDIDParser::binToDec(QString strBin)   //二进制转十进制
