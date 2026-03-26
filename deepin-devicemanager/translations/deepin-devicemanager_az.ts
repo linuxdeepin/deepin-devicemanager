@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="az">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="az">
 <context>
     <name>BtnLabel</name>
     <message>
@@ -26,13 +24,13 @@
         <location filename="../src/Widget/DetailTreeView.cpp" line="169"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="398"/>
         <source>More</source>
-        <translation type="unfinished">Daha çox</translation>
+        <translation>Daha çox</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetailTreeView.cpp" line="173"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="405"/>
         <source>Collapse</source>
-        <translation type="unfinished">Yığmaq</translation>
+        <translation>Yığmaq</translation>
     </message>
 </context>
 <context>
@@ -848,7 +846,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="227"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="277"/>
         <source>Mouse</source>
-        <translation>Siçan</translation>
+        <translation>Siçan və göstərici cihazlar</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="232"/>
@@ -1609,7 +1607,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="250"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>Cihaz məlumatı</translation>
     </message>
     <message>
