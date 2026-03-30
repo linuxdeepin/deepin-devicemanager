@@ -10,6 +10,7 @@
 #include "DDLog.h"
 
 #include <DApplication>
+#include <DConfig>
 
 // Qt库文件
 #include <QLoggingCategory>
@@ -22,6 +23,7 @@
 
 DWIDGET_USE_NAMESPACE
 using namespace DDLog;
+DCORE_USE_NAMESPACE
 
 DeviceMonitor::DeviceMonitor()
     : DeviceBaseInfo()
@@ -409,12 +411,19 @@ void DeviceMonitor::loadOtherDeviceInfo()
             }
         }
     }
-    addOtherDeviceInfo("Primary Monitor", m_MainScreen);
-    if (Common::isShowScreenSize())
-        addOtherDeviceInfo("Size", m_ScreenSize);
-    addOtherDeviceInfo("Serial Number", m_SerialNumber);
-//    addOtherDeviceInfo("Product Date", m_ProductionWeek);
-
+    addOtherDeviceInfo(("Primary Monitor"), m_MainScreen);
+    bool showScreenSize { true };
+    
+#ifdef DTKCORE_CLASS_DConfigFile
+    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
+    if(dconfig && dconfig->isValid() && dconfig->keyList().contains("showScreenSize")){
+        showScreenSize = dconfig->value("showScreenSize").toBool();
+    }
+#endif
+    if (showScreenSize)
+        addOtherDeviceInfo(("Size"), m_ScreenSize);
+    addOtherDeviceInfo(("Serial Number"), m_SerialNumber);
+//    addOtherDeviceInfo(("Product Date"), m_ProductionWeek);
     mapInfoToList();
     qCDebug(appLog) << "Other device info loaded";
 }
