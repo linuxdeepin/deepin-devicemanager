@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -403,7 +403,15 @@ void DeviceMonitor::loadOtherDeviceInfo()
         }
     }
     addOtherDeviceInfo("Primary Monitor", m_MainScreen);
-    addOtherDeviceInfo("Size", m_ScreenSize);
+    bool showScreenSize { true };
+#ifdef DTKCORE_CLASS_DConfigFile
+    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
+    if(dconfig && dconfig->isValid() && dconfig->keyList().contains("showScreenSize")){
+        showScreenSize = dconfig->value("showScreenSize").toBool();
+    }
+#endif
+    if (showScreenSize)
+        addOtherDeviceInfo("Size", m_ScreenSize);
     addOtherDeviceInfo("Serial Number", m_SerialNumber);
 //    addOtherDeviceInfo("Product Date", m_ProductionWeek);
 
