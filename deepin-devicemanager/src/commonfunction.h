@@ -47,5 +47,7 @@ public:
     static int specialComType;
 
     static QByteArray executeClientCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000, bool useEnv = true);
+
+    static bool isShowScreenSize();
 };
 #endif // COMMONFUNCTION_H
