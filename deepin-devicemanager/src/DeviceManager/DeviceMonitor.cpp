@@ -8,7 +8,6 @@
 #include "commonfunction.h"
 
 #include <DApplication>
-#include <DConfig>
 
 // Qt库文件
 #include <QLoggingCategory>
@@ -301,14 +300,23 @@ QString DeviceMonitor::subTitle()
 const QString DeviceMonitor::getOverviewInfo()
 {
     QString ov;
-    if (Common::specialComType == Common::kSpecialType6 ||
-        Common::specialComType == Common::kSpecialType7 ||
-        Common::specialComType == Common::kSpecialType9) {
-        ov = QString("(%1)").arg(m_ScreenSize);
+    if (Common::isShowScreenSize()) {
+        if (Common::specialComType == Common::kSpecialType6 ||
+            Common::specialComType == Common::kSpecialType7 ||
+            Common::specialComType == Common::kSpecialType9) {
+            ov = QString("(%1)").arg(m_ScreenSize);
+        } else {
+            ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+        }
     } else {
-        ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+        if (Common::specialComType == Common::kSpecialType6 ||
+            Common::specialComType == Common::kSpecialType7 ||
+            Common::specialComType == Common::kSpecialType9) {
+            ov = "";
+        } else {
+            ov = QString("%1").arg(m_Name);
+        }
     }
-
     return ov;
 }
 
@@ -351,14 +359,7 @@ void DeviceMonitor::loadOtherDeviceInfo()
         }
     }
     addOtherDeviceInfo(("Primary Monitor"), m_MainScreen);
-    bool showScreenSize { true };
-#ifdef DTKCORE_CLASS_DConfigFile
-    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
-    if(dconfig && dconfig->isValid() && dconfig->keyList().contains("showScreenSize")){
-        showScreenSize = dconfig->value("showScreenSize").toBool();
-    }
-#endif
-    if (showScreenSize)
+    if (Common::isShowScreenSize())
         addOtherDeviceInfo(("Size"), m_ScreenSize);
     addOtherDeviceInfo(("Serial Number"), m_SerialNumber);
 //    addOtherDeviceInfo(("Product Date"), m_ProductionWeek);

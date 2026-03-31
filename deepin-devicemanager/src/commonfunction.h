@@ -54,5 +54,7 @@ public:
     static SpecialCpuType curCpuType;
 
     static QByteArray executeClientCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
+
+    static bool isShowScreenSize();
 };
 #endif // COMMONFUNCTION_H
