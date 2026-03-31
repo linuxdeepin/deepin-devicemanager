@@ -299,3 +299,15 @@ QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args,
     }
     return outPut;
 }
+
+bool Common::isShowScreenSize()
+{
+    bool showScreenSize { true };
+#ifdef DTKCORE_CLASS_DConfigFile
+    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
+    if(dconfig && dconfig->isValid() && dconfig->keyList().contains("showScreenSize")){
+        showScreenSize = dconfig->value("showScreenSize").toBool();
+    }
+#endif
+    return showScreenSize;
+}

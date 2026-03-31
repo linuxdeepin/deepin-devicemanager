@@ -356,11 +356,18 @@ const QString DeviceMonitor::getOverviewInfo()
 {
     qCDebug(appLog) << "Getting monitor overview information";
     QString ov;
-
-    if (Common::specialComType == 6 || Common::specialComType == 7) {
-        ov = QString("(%1)").arg(m_ScreenSize);
+    if (Common::isShowScreenSize()) {
+        if (Common::specialComType == 6 || Common::specialComType == 7) {
+            ov = QString("(%1)").arg(m_ScreenSize);
+        } else {
+            ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+        }
     } else {
-        ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+        if (Common::specialComType == 6 || Common::specialComType == 7) {
+            ov = "";
+        } else {
+            ov = QString("%1").arg(m_Name);
+        }
     }
     qCDebug(appLog) << "Monitor overview:" << ov;
     return ov;
@@ -403,14 +410,7 @@ void DeviceMonitor::loadOtherDeviceInfo()
         }
     }
     addOtherDeviceInfo("Primary Monitor", m_MainScreen);
-    bool showScreenSize { true };
-#ifdef DTKCORE_CLASS_DConfigFile
-    DConfig *dconfig = DConfig::create("org.deepin.devicemanager","org.deepin.devicemanager");
-    if(dconfig && dconfig->isValid() && dconfig->keyList().contains("showScreenSize")){
-        showScreenSize = dconfig->value("showScreenSize").toBool();
-    }
-#endif
-    if (showScreenSize)
+    if (Common::isShowScreenSize())
         addOtherDeviceInfo("Size", m_ScreenSize);
     addOtherDeviceInfo("Serial Number", m_SerialNumber);
 //    addOtherDeviceInfo("Product Date", m_ProductionWeek);
