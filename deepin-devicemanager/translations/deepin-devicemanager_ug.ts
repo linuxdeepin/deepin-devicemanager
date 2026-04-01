@@ -1851,6 +1851,54 @@
     </message>
 </context>
 <context>
+    <name>DeviceGenerator</name>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1270"/>
+        <source>Model Name</source>
+        <translation>نامى</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1274"/>
+        <source>Vendor ID</source>
+        <translation>ئىشلەپچىقارغۇچى</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1278"/>
+        <source>Architecture</source>
+        <translation>قۇرۇلما</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1282"/>
+        <source>Core(s)</source>
+        <translation>مەنتىقىي پىروتسېسسور</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1284"/>
+        <source>Thread(s)</source>
+        <translation>ھەر يادرو خېتى سانى</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1291"/>
+        <source>L1d cache</source>
+        <translation>كېش (سانلىق) L1</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1299"/>
+        <source>L1i cache</source>
+        <translation>كېش (بۇيرۇق) L1</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1307"/>
+        <source>L2 cache</source>
+        <translation>كېش L2</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1315"/>
+        <source>L3 cache</source>
+        <translation>كېش L3</translation>
+    </message>
+</context>
+<context>
     <name>DeviceManager</name>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="142"/>
@@ -2236,137 +2284,137 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="97"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="230"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="98"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="232"/>
         <source>Updating</source>
         <translation>يېڭىلاۋاتىدۇ</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="102"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="124"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>بىكار قىلىش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="104"/>
         <source>Next</source>
         <translation>كىينكى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>Warning</source>
         <translation>دىققەت</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>قوزغاتقۇچ ئۆچۈرۈلگەندىن كىيىن،بۇ ئۈسكىنىنى ئىشلەتكىلى بولمايدۇ</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>چىقىرۋىتىش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="130"/>
         <source>Uninstalling</source>
         <translation>ئۆچۈرۋاتىدۇ</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Update successful</source>
         <translation>قوزغاتقۇچ يېڭىلاش تامام</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Uninstallation successful</source>
         <translation>قوزغاتقۇچ ئوڭۇشلۇق ئۆچۈرۈلدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="157"/>
         <source>Update failed</source>
         <translation>يېڭىلاش مۇۋەپپەقىيەتسىز بولدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="157"/>
         <source>Uninstallation failed</source>
         <translation>قوزغاتقۇچنى ئۆچۈرەلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="164"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>جەزىملەش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="182"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>كىينكى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="203"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="204"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>ھۆججەت قىسقۇچ مەۋجۇت ئەمەس،قايتا تاللاڭ</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="208"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="209"/>
         <source>Update</source>
         <comment>button</comment>
         <translation>يېڭىلاش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="209"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="210"/>
         <source>Previous</source>
         <comment>button</comment>
         <translation>كىينكى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="242"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
         <source>Broken package</source>
         <translation>بولاق بۇزۇلغان</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="246"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="248"/>
         <source>Unmatched package architecture</source>
         <translation>ماس كەلمەيدىغان قۇرۇلما</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="251"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="253"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
         <source>The selected file does not exist, please select again</source>
         <translation>ھۆججەت مەۋجۇت ئەمەس،قايتا تاللاڭ</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="337"/>
         <source>It is not a driver</source>
         <translation>بۇ قوزغىتىش ھۆججىتى ئەمەس</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="338"/>
         <source>Unable to install - no digital signature</source>
         <translation>قاچىلانمىدى، قاچىلاش بولىقىدا رەقەملىك ئىمزا يوقكەن</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="330"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
         <source>Unknown error</source>
         <translation>نامەلۇم خاتالىق</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="331"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
         <source>The driver module was not found</source>
         <translation>بۇ قوزغاتقۇچ مودېلى تېپىلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
         <source>Invalid module format</source>
         <translation>مودۇل فورماتى ئۈنۈمسىز</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
         <source>The driver module has dependencies</source>
         <translation>بۇ قوزغاتقۇچ مودېلى ئىشلىتىلگەن</translation>
     </message>
@@ -2537,48 +2585,48 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Storage</source>
         <translation>ساقلاش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Memory</source>
         <translation>ساقلىغۇ</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="176"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="206"/>
         <source>Failed to enable the device</source>
         <translation>ئۈسكۈنىنى قوزغىتىش مەغلۇب بولدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="179"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="209"/>
         <source>Failed to disable the device</source>
         <translation>ئۈسكۈنىنى چەكلىيەلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="184"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="214"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>ئۈسكۈنە تەرتىپ نومۇرىنى ئئالالمىدى، چەكلەش مەغلۇپ بولدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="206"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="236"/>
         <source>Update Drivers</source>
         <translation>يېڭىلاش دىرىۋېرى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="224"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="254"/>
         <source>Uninstall Drivers</source>
         <translation>قوزغاتقۇچنى چىقىرۋىتىش</translation>
     </message>
@@ -2977,7 +3025,7 @@
         <translation>باشقا ئۈسكۈنىلەر تېپىلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/Tool/EDIDParser.cpp" line="221"/>
+        <location filename="../src/Tool/EDIDParser.cpp" line="215"/>
         <source>inch</source>
         <translation>ئىنگىلىزچىسى</translation>
     </message>
@@ -2993,12 +3041,12 @@
         <translation>ئۈسكۈنە باشقۇرغۇچى قاتتىق دېتال ئۇچۇرلىرىنى كۆرۈش ۋە ئۈسكۈنىلەرنى باشقۇرۇشتىكى قۇلايلىق قورال.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="168"/>
+        <location filename="../src/main.cpp" line="170"/>
         <source>New drivers available! Install or update them now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="169"/>
+        <location filename="../src/main.cpp" line="171"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
