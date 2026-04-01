@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -631,6 +630,9 @@ public:
      */
     void setCpuFrequencyIsCur(const bool &flag);
 
+    void setCpuHeaderInfo(const QList<QList<QPair<QString, QString>>> &info);
+    void getCpuHeaderInfo(QList<QList<QPair<QString, QString>>> &info) const;
+
 protected:
     DeviceManager();
     ~DeviceManager();
@@ -669,6 +671,7 @@ private:
 
     static int m_CurrentXlsRow;       //<! xlsx表格当前行
     QStringList m_networkDriver; //网络驱动
+    QList<QList<QPair<QString, QString>>>          m_ListCpuHeaderInfo;    // 所有物理CPU个体的头部信息
 };
 
 #endif // DEVICEMANAGER_H
