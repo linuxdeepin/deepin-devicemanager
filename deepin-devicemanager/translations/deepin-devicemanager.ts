@@ -1851,6 +1851,54 @@
     </message>
 </context>
 <context>
+    <name>DeviceGenerator</name>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1270"/>
+        <source>Model Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1274"/>
+        <source>Vendor ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1278"/>
+        <source>Architecture</source>
+        <translation type="unfinished">Architecture</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1282"/>
+        <source>Core(s)</source>
+        <translation type="unfinished">Core(s)</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1284"/>
+        <source>Thread(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1291"/>
+        <source>L1d cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1299"/>
+        <source>L1i cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1307"/>
+        <source>L2 cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1315"/>
+        <source>L3 cache</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DeviceManager</name>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="142"/>
@@ -2236,137 +2284,137 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="97"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="230"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="98"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="232"/>
         <source>Updating</source>
         <translation>Updating</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="102"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="124"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="104"/>
         <source>Next</source>
         <translation>Next</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>Warning</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>The device will be unavailable after the driver uninstallation</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>Uninstall</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="130"/>
         <source>Uninstalling</source>
         <translation>Uninstalling</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Update successful</source>
         <translation>Update successful</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Uninstallation successful</source>
         <translation>Uninstallation successful</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="157"/>
         <source>Update failed</source>
         <translation>Update failed</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="157"/>
         <source>Uninstallation failed</source>
         <translation>Uninstallation failed</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="164"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="182"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>Next</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="203"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="204"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>The selected folder does not exist, please select again</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="208"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="209"/>
         <source>Update</source>
         <comment>button</comment>
         <translation>Update</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="209"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="210"/>
         <source>Previous</source>
         <comment>button</comment>
         <translation>Previous</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="242"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
         <source>Broken package</source>
         <translation>Broken package</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="246"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="248"/>
         <source>Unmatched package architecture</source>
         <translation>Unmatched package architecture</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="251"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="253"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
         <source>The selected file does not exist, please select again</source>
         <translation>The selected file does not exist, please select again</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="337"/>
         <source>It is not a driver</source>
         <translation>It is not a driver</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="338"/>
         <source>Unable to install - no digital signature</source>
         <translation>Unable to install - no digital signature</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="330"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
         <source>Unknown error</source>
         <translation>Unknown error</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="331"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
         <source>The driver module was not found</source>
         <translation>The driver module was not found</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
         <source>Invalid module format</source>
         <translation>Invalid module format</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
         <source>The driver module has dependencies</source>
         <translation>The driver module has dependencies</translation>
     </message>
@@ -2537,48 +2585,48 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Storage</source>
         <translation type="unfinished">Storage</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Memory</source>
         <translation type="unfinished">Memory</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Monitor</source>
         <translation type="unfinished">Monitor</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="176"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="206"/>
         <source>Failed to enable the device</source>
         <translation>Failed to enable the device</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="179"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="209"/>
         <source>Failed to disable the device</source>
         <translation>Failed to disable the device</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="184"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="214"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>Failed to disable it: unable to get the device SN</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="206"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="236"/>
         <source>Update Drivers</source>
         <translation>Update Drivers</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="224"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="254"/>
         <source>Uninstall Drivers</source>
         <translation>Uninstall Drivers</translation>
     </message>
@@ -2977,7 +3025,7 @@
         <translation>No other devices found</translation>
     </message>
     <message>
-        <location filename="../src/Tool/EDIDParser.cpp" line="221"/>
+        <location filename="../src/Tool/EDIDParser.cpp" line="215"/>
         <source>inch</source>
         <translation>inch</translation>
     </message>
@@ -2993,12 +3041,12 @@
         <translation>Device Manager is a handy tool for viewing hardware information and managing the devices.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="168"/>
+        <location filename="../src/main.cpp" line="170"/>
         <source>New drivers available! Install or update them now.</source>
         <translation>New drivers available! Install or update them now.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="169"/>
+        <location filename="../src/main.cpp" line="171"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>

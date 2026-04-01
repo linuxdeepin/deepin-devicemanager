@@ -1851,6 +1851,54 @@
     </message>
 </context>
 <context>
+    <name>DeviceGenerator</name>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1270"/>
+        <source>Model Name</source>
+        <translation>名稱</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1274"/>
+        <source>Vendor ID</source>
+        <translation>製造商</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1278"/>
+        <source>Architecture</source>
+        <translation>架構</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1282"/>
+        <source>Core(s)</source>
+        <translation>邏輯處理器</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1284"/>
+        <source>Thread(s)</source>
+        <translation>每核心執行緒數</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1291"/>
+        <source>L1d cache</source>
+        <translation>第一級快取（資料）</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1299"/>
+        <source>L1i cache</source>
+        <translation>第一級快取（指令）</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1307"/>
+        <source>L2 cache</source>
+        <translation>第二級快取</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1315"/>
+        <source>L3 cache</source>
+        <translation>第三級快取</translation>
+    </message>
+</context>
+<context>
     <name>DeviceManager</name>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="142"/>
@@ -2236,137 +2284,137 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="97"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="230"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="98"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="232"/>
         <source>Updating</source>
         <translation>正在更新</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="102"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="124"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>取 消</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="104"/>
         <source>Next</source>
         <translation>下一步</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>Warning</source>
         <translation>注意</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>將從系統中移除此驅動程式，移除後該裝置不可用</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>卸 載</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="130"/>
         <source>Uninstalling</source>
         <translation>正在移除</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Update successful</source>
         <translation>驅動更新成功</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Uninstallation successful</source>
         <translation>驅動移除成功</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="157"/>
         <source>Update failed</source>
         <translation>驅動更新失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="157"/>
         <source>Uninstallation failed</source>
         <translation>驅動移除失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="164"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>確 定</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="182"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>下一步</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="203"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="204"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>所選資料夾不存在，請重新選擇</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="208"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="209"/>
         <source>Update</source>
         <comment>button</comment>
         <translation>更 新</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="209"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="210"/>
         <source>Previous</source>
         <comment>button</comment>
         <translation>上一步</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="242"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
         <source>Broken package</source>
         <translation>包文件損壞</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="246"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="248"/>
         <source>Unmatched package architecture</source>
         <translation>包文件與系統架構不匹配</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="251"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="253"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
         <source>The selected file does not exist, please select again</source>
         <translation>所選文件不存在，請重新選擇</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="337"/>
         <source>It is not a driver</source>
         <translation>該文件不是驅動文件</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="338"/>
         <source>Unable to install - no digital signature</source>
         <translation>無法安裝，安裝包無數位簽章</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="330"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
         <source>Unknown error</source>
         <translation>未知錯誤</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="331"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
         <source>The driver module was not found</source>
         <translation>未發現該驅動模組</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
         <source>Invalid module format</source>
         <translation>模塊格式無效</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
         <source>The driver module has dependencies</source>
         <translation>驅動模組被依賴</translation>
     </message>
@@ -2537,48 +2585,48 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Storage</source>
         <translation>儲存裝置</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Memory</source>
         <translation>記憶體</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Monitor</source>
         <translation>顯示裝置</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="176"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="206"/>
         <source>Failed to enable the device</source>
         <translation>啟用失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="179"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="209"/>
         <source>Failed to disable the device</source>
         <translation>禁用失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="184"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="214"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>無法獲取裝置序號，禁用失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="206"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="236"/>
         <source>Update Drivers</source>
         <translation>更新驅動</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="224"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="254"/>
         <source>Uninstall Drivers</source>
         <translation>移除驅動</translation>
     </message>
@@ -2977,7 +3025,7 @@
         <translation>未發現其他裝置</translation>
     </message>
     <message>
-        <location filename="../src/Tool/EDIDParser.cpp" line="221"/>
+        <location filename="../src/Tool/EDIDParser.cpp" line="215"/>
         <source>inch</source>
         <translation>英寸</translation>
     </message>
@@ -2993,12 +3041,12 @@
         <translation>裝置管理器是查看、管理硬體裝置的工具軟體。</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="168"/>
+        <location filename="../src/main.cpp" line="170"/>
         <source>New drivers available! Install or update them now.</source>
         <translation>您有驅動可進行安裝/更新。</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="169"/>
+        <location filename="../src/main.cpp" line="171"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>

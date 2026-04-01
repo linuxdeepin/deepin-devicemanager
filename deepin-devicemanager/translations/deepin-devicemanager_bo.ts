@@ -1852,6 +1852,54 @@
     </message>
 </context>
 <context>
+    <name>DeviceGenerator</name>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1270"/>
+        <source>Model Name</source>
+        <translation>མིང་།</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1274"/>
+        <source>Vendor ID</source>
+        <translation>བཟོ་བྱེད་མཁན།</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1278"/>
+        <source>Architecture</source>
+        <translation>གཞི་སྒྲོམ།</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1282"/>
+        <source>Core(s)</source>
+        <translation>རིག་རྟགས་འཕྲུལ་འཁོར།</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1284"/>
+        <source>Thread(s)</source>
+        <translation>སྙིང་རྫས་རེའི་ཐིག་སྒྲོན་གྲངས།</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1291"/>
+        <source>L1d cache</source>
+        <translation>L1 གཏོགས་ཁང་ (གཞི་གྲངས)</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1299"/>
+        <source>L1i cache</source>
+        <translation>L1 གཏོགས་ཁང་ (བཀའ་རིན)</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1307"/>
+        <source>L2 cache</source>
+        <translation>L2 གཏོགས་ཁང་</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1315"/>
+        <source>L3 cache</source>
+        <translation>L3 གཏོགས་ཁང་</translation>
+    </message>
+</context>
+<context>
     <name>DeviceManager</name>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="142"/>
@@ -2237,137 +2285,137 @@
 <context>
     <name>PageDriverControl</name>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="97"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="230"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="98"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="232"/>
         <source>Updating</source>
         <translation>གསར་སྒྱུར་བྱེད་བཞིན་པ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="102"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="124"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>འདོར་བ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="103"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="104"/>
         <source>Next</source>
         <translation>རྗེས་མ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>Warning</source>
         <translation>དོ་སྣང་།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>The device will be unavailable after the driver uninstallation</source>
         <translation>མ་ལག་ཁྲོད་ནས་སྐུལ་བྱེད་བྱ་རིམ་འདི་བཤིག་རྒྱུ། བཤིག་རྗེས་སྒྲིག་ཆས་འདི་སྤྱོད་མི་རུང་།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="126"/>
         <source>Uninstall</source>
         <comment>button</comment>
         <translation>བཤིག་པ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="130"/>
         <source>Uninstalling</source>
         <translation>བཤིག་བཞིན་པ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Update successful</source>
         <translation>སྐུལ་བྱེད་གསར་སྒྱུར་ཐུབ་སོང་།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="155"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
         <source>Uninstallation successful</source>
         <translation>སྐུལ་བྱེད་བཤིག་ཐུབ་སོང་།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="157"/>
         <source>Update failed</source>
         <translation>སྐུལ་བྱེད་གསར་སྒྱུར་ཐུབ་མ་སོང་།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="156"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="157"/>
         <source>Uninstallation failed</source>
         <translation>སྐུལ་བྱེད་བཤིག་ཐུབ་སོང་།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="163"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="164"/>
         <source>OK</source>
         <comment>button</comment>
         <translation>གཏན་ཁེལ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="182"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Next</source>
         <comment>button</comment>
         <translation>རྗེས་མ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="203"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="204"/>
         <source>The selected folder does not exist, please select again</source>
         <translation>བདམས་པའི་ཡིག་ཁུག་མི་འདུག་པས། ཡང་བསྐྱར་འདེམས་རོགས།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="208"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="209"/>
         <source>Update</source>
         <comment>button</comment>
         <translation>གསར་སྒྱུར།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="209"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="210"/>
         <source>Previous</source>
         <comment>button</comment>
         <translation>སྔ་མ་དེ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="242"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
         <source>Broken package</source>
         <translation>ཁུག་མའི་ཡིག་ཆ་འཕྲོ་བརླག་ཕྱིན་པ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="246"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="248"/>
         <source>Unmatched package architecture</source>
         <translation>ཁུག་མའི་ཡིག་ཆ་དང་རྒྱུད་ཁོངས་ཀྱི་སྒྲོམ་གཞི་མི་མཐུན་པ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="251"/>
-        <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="253"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
         <source>The selected file does not exist, please select again</source>
         <translation>བདམས་པའི་ཡིག་ཆ་མི་འདུག་པས། ཡང་བསྐྱར་འདེམས་རོགས།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="337"/>
         <source>It is not a driver</source>
         <translation>ཡིག་ཆ་འདི་ནི་སྐུལ་བྱེད་ཡིག་ཆ་མ་རེད།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="336"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="338"/>
         <source>Unable to install - no digital signature</source>
         <translation>སྒྲིག་སྦྱོར་བྱེད་ཐབས་མེད། སྒྲིག་སྦྱོར་ཐུམ་ལ་ཨང་ཀིའི་མཚན་རྟགས་མེད།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="330"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
         <source>Unknown error</source>
         <translation>མ་ཤེས་པའི་ནོར་འཁྲུལ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="331"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
         <source>The driver module was not found</source>
         <translation>སྒུལ་བྱེད་མ་དཔེ་དེ་ཉིད་མ་རྙེད།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="332"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="334"/>
         <source>Invalid module format</source>
         <translation>དཔེ་དུམ་རྣམ་གཞག་གོ་མི་ཆོད།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverControl.cpp" line="333"/>
+        <location filename="../src/Page/PageDriverControl.cpp" line="335"/>
         <source>The driver module has dependencies</source>
         <translation>སྒུལ་བྱེད་མ་དཔེ་དེ་ཉིད་གཞན་གྱིས་བརྟེན་འདུག</translation>
     </message>
@@ -2538,48 +2586,48 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Storage</source>
         <translation>གསོག་འཇོག་སྒྲིག་ཆས།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Memory</source>
         <translation>ནང་གསོག</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="95"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="134"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="142"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="164"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="172"/>
         <source>Monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="176"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="206"/>
         <source>Failed to enable the device</source>
         <translation>འགོ་སློང་མི་ཐུབ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="179"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="209"/>
         <source>Failed to disable the device</source>
         <translation>སྤྱོད་མི་ཆོག་པ་མི་ཐུབ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="184"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="214"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>སྒྲིག་ཆས་ཀྱི་རིམ་ཨང་ཐོབ་ཐབས་མི་འདུག་པས་སྤྱོད་མི་རུང་བ་ཐུབ་མ་སོང་།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="206"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="236"/>
         <source>Update Drivers</source>
         <translation>སྐུལ་བྱེད་གསར་སྒྱུར།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="224"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="254"/>
         <source>Uninstall Drivers</source>
         <translation>སྐུལ་བྱེད་བཤིག་པ།</translation>
     </message>
@@ -2978,7 +3026,7 @@
         <translation>སྒྲིག་ཆས་གཞན་དག་རྙེད་མ་བྱུང་།</translation>
     </message>
     <message>
-        <location filename="../src/Tool/EDIDParser.cpp" line="221"/>
+        <location filename="../src/Tool/EDIDParser.cpp" line="215"/>
         <source>inch</source>
         <translation>དབྱིན་ཚུན།</translation>
     </message>
@@ -2994,12 +3042,12 @@
         <translation>སྒྲིག་ཆས་དོ་དམ་ཆས་ནི་མཁྲེགས་ཆས་ལྟ་བ་དང་དོ་དམ་བྱེད་པའི་ཡོ་བྱད་ཅིག་རེད།.</translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="168"/>
+        <location filename="../src/main.cpp" line="170"/>
         <source>New drivers available! Install or update them now.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/main.cpp" line="169"/>
+        <location filename="../src/main.cpp" line="171"/>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
