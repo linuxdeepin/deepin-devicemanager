@@ -1,9 +1,10 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 // 项目自身文件
 #include "PageMultiInfo.h"
+#include "headerinfotablewidget.h"
 #include "PageTableHeader.h"
 #include "PageDetail.h"
 #include "MacroDefinition.h"
@@ -12,6 +13,7 @@
 #include "DevicePrint.h"
 #include "DeviceInput.h"
 #include "DeviceNetwork.h"
+#include "DeviceCpu.h"
 #include "DDLog.h"
 #include "commonfunction.h"
 
@@ -22,7 +24,6 @@
 #include <DMessageManager>
 
 // Qt库文件
-#include <QVBoxLayout>
 #include <QAction>
 #include <QIcon>
 #include <QLoggingCategory>
@@ -33,10 +34,14 @@ DWIDGET_USE_NAMESPACE
 using namespace DDLog;
 
 #define LEAST_PAGE_HEIGHT 315  // PageMultiInfo最小高度 当小于这个高度时，上方的表格就要变小
+static constexpr int kHeaderInfoDefaultHeight = 362; // 滚动区域默认高度
 
 PageMultiInfo::PageMultiInfo(QWidget *parent)
     : PageInfo(parent)
     , mp_Label(new DLabel(this))
+    , mp_HeaderInfoWidget(new DScrollArea(this))
+    , mp_HeaderInfoContainer(new DWidget(mp_HeaderInfoWidget))
+    , mp_HeaderInfoWidgetLay(new QVBoxLayout(mp_HeaderInfoContainer))
     , mp_Table(new PageTableHeader(this))
     , mp_Detail(new PageDetail(this))
 {
@@ -62,6 +67,11 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
 PageMultiInfo::~PageMultiInfo()
 {
     // 清空指针
+    if (mp_HeaderInfoWidget) {
+        delete mp_HeaderInfoWidget;
+        mp_HeaderInfoWidget = nullptr;
+        mp_HeaderInfoContainer = nullptr;
+    }
     if (mp_Table) {
         delete mp_Table;
         mp_Table = nullptr;
@@ -81,6 +91,26 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
 
     if (lst.size() < 1)
         return;
+
+    // 当前为CPU页面，显示头部信息视图
+    DeviceCpu *cpuInfo = dynamic_cast<DeviceCpu *>(lst.at(0));
+    if (cpuInfo) {
+        QList<QList<QPair<QString, QString>>> headerInfo;
+        DeviceManager::instance()->getCpuHeaderInfo(headerInfo);
+        clearLayout(mp_HeaderInfoWidgetLay);
+        for (int i = 0; i < headerInfo.size(); ++i) {
+            HeaderInfoTableWidget *headerWidget = new HeaderInfoTableWidget(mp_HeaderInfoWidget);
+            headerWidget->updateData(headerInfo.at(i));
+            mp_HeaderInfoWidgetLay->addWidget(headerWidget);
+        }
+        mp_HeaderInfoWidget->setMaximumHeight(kHeaderInfoDefaultHeight);
+        mp_HeaderInfoWidget->resize(this->width(), kHeaderInfoDefaultHeight);
+        mp_HeaderInfoWidget->setVisible(true);
+    } else {
+        mp_HeaderInfoWidget->setVisible(false);
+        mp_HeaderInfoWidget->setMaximumHeight(0);
+    }
+
     m_deviceList.clear();
     m_menuControlList.clear();
 
@@ -242,23 +272,35 @@ void PageMultiInfo::slotCheckPrinterStatus(int row, bool &isPrinter, bool &isIns
 void PageMultiInfo::initWidgets()
 {
     // 初始化界面布局
-    QVBoxLayout *hLayout = new QVBoxLayout();
+    QVBoxLayout *vLayout = new QVBoxLayout();
     QHBoxLayout *labelLayout = new QHBoxLayout();
     labelLayout->addSpacing(10);
     labelLayout->addWidget(mp_Label);
 
     // Label 距离上下控件的距离LABEL_MARGIN
-    hLayout->addSpacing(LABEL_MARGIN);
-    hLayout->addLayout(labelLayout);
-    hLayout->addSpacing(LABEL_MARGIN);
+    vLayout->addSpacing(LABEL_MARGIN);
+    vLayout->addLayout(labelLayout);
+    vLayout->addSpacing(LABEL_MARGIN);
+
+    // 添加头部信息视图
+    mp_HeaderInfoWidget->setWidget(mp_HeaderInfoContainer);
+    mp_HeaderInfoWidget->setWidgetResizable(true);
+    mp_HeaderInfoWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    mp_HeaderInfoWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    mp_HeaderInfoWidget->setFrameShape(QFrame::NoFrame);
+    mp_HeaderInfoWidget->setMaximumHeight(kHeaderInfoDefaultHeight);
+    mp_HeaderInfoWidget->setMinimumHeight(0);
+    mp_HeaderInfoWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    mp_HeaderInfoWidgetLay->setContentsMargins(0, 0, 0, 0);
+    mp_HeaderInfoWidget->setVisible(false);
+    vLayout->addWidget(mp_HeaderInfoWidget, 1);  // stretch=1，允许随窗口缩放
 
     mp_Table->setFixedHeight(TABLE_HEIGHT);
+    vLayout->addWidget(mp_Table);
+    vLayout->addWidget(mp_Detail);
+    vLayout->setContentsMargins(10, 10, 10, 0);
 
-    hLayout->addWidget(mp_Table);
-    hLayout->addWidget(mp_Detail);
-    hLayout->setContentsMargins(10, 10, 10, 0);
-
-    setLayout(hLayout);
+    setLayout(vLayout);
 }
 
 void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<QStringList> &deviceList, QList<QStringList> &menuControlList)
@@ -293,5 +335,18 @@ void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<Q
         }
 
         menuControlList.append(menuControl);
+    }
+}
+
+void PageMultiInfo::clearLayout(QLayout *layout)
+{
+    QLayoutItem *item;
+    while ((item = layout->takeAt(0)) != nullptr) {
+        // 如果布局项包含控件，删除该控件
+        if (QWidget *widget = item->widget()) {
+            widget->deleteLater();   // 安全删除，避免事件冲突
+        }
+        // 删除布局项本身（注意：如果 item 是子布局，需递归处理，本例仅处理直接控件）
+        delete item;
     }
 }

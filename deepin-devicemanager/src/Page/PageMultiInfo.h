@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -7,8 +6,10 @@
 #define DEVICEPAGE_H
 
 #include <QObject>
+#include <QVBoxLayout>
 #include <DWidget>
 #include <DLabel>
+#include <DScrollArea>
 
 #include "PageInfo.h"
 
@@ -122,8 +123,14 @@ private:
      */
     void getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<QStringList>& deviceList, QList<QStringList>& menuList);
 
+    // 清空布局中的所有 Widget
+    void clearLayout(QLayout *layout);
+
 private:
     DLabel                    *mp_Label;
+    DScrollArea               *mp_HeaderInfoWidget;
+    DWidget                   *mp_HeaderInfoContainer;
+    QVBoxLayout               *mp_HeaderInfoWidgetLay;
     PageTableHeader           *mp_Table;       //<! 上面的表格
     PageDetail                *mp_Detail;      //<! 下面的详细内容
     QList<DeviceBaseInfo *>   m_lstDevice;     //<! 保存设备列表
