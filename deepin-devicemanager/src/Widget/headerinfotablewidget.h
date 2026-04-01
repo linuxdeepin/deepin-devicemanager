@@ -22,7 +22,7 @@ protected:
 
 private:
     void initUI();
-    void clear();
+    void resetTableContents();
     class HeaderInfoDelegate *m_delegate = nullptr;
 };
 

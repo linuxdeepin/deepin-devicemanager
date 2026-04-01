@@ -239,3 +239,65 @@ QByteArray Common::executeClientCmd(const QString &cmd, const QStringList &args,
     }
     return outPut;
 }
+
+QString Common::formatTotalCache(const QString &perThreadCache, int coreCount)
+{
+    // 1. 清理并分离数字与单位
+    QString s = perThreadCache.trimmed();
+    if (s.isEmpty())
+        return QString();
+
+    int i = s.length() - 1;
+    while (i >= 0 && !s[i].isDigit() && s[i] != '.')
+        --i;
+
+    QString numStr = s.left(i + 1);
+    QString unitStr = s.mid(i + 1).toUpper();
+
+    bool ok;
+    double num = numStr.toDouble(&ok);
+    if (!ok)
+        return QString();
+
+    // 2. 将单核/单线程缓存转换为 KiB
+    double perCoreKiB = 0.0;
+    if (unitStr.startsWith("K") || unitStr == "KB" || unitStr == "KIB") {
+        perCoreKiB = num;
+    } else if (unitStr.startsWith("M") || unitStr == "MB" || unitStr == "MIB") {
+        perCoreKiB = num * 1024.0;
+    } else if (unitStr.startsWith("G") || unitStr == "GB" || unitStr == "GIB") {
+        perCoreKiB = num * 1024.0 * 1024.0;
+    } else if (unitStr.startsWith("T") || unitStr == "TB" || unitStr == "TIB") {
+        perCoreKiB = num * 1024.0 * 1024.0 * 1024.0;
+    } else if (unitStr.isEmpty() || unitStr == "B") {
+        // 无单位或纯字节，视为字节并转为 KiB
+        perCoreKiB = num / 1024.0;
+    } else {
+        // 未知单位，按原数值当作 KiB 处理
+        perCoreKiB = num;
+    }
+
+    double totalKiB = perCoreKiB * coreCount;
+
+    // 3. 选择最合适的单位并格式化数值
+    double value;
+    QString unit;
+    if (totalKiB >= 1024.0 * 1024.0) {
+        value = totalKiB / (1024.0 * 1024.0);
+        unit = "GiB";
+    } else if (totalKiB >= 1024.0) {
+        value = totalKiB / 1024.0;
+        unit = "MiB";
+    } else {
+        value = totalKiB;
+        unit = "KiB";
+    }
+
+    // 4. 数值显示：若为整数则无小数位，否则保留一位小数
+    double intPart;
+    if (std::abs(std::modf(value, &intPart)) < 1e-6) {
+        return QString::number(static_cast<long long>(value)) + " " + unit;
+    } else {
+        return QString::number(value, 'f', 1) + " " + unit;
+    }
+}

@@ -25,7 +25,7 @@ HeaderInfoTableWidget::HeaderInfoTableWidget(DWidget *parent)
 
 void HeaderInfoTableWidget::updateData(const QList<QPair<QString, QString>> &data)
 {
-    clear();
+    resetTableContents();
     int nRow = data.size();
     setRowCount(nRow);
 
@@ -118,7 +118,7 @@ void HeaderInfoTableWidget::paintEvent(QPaintEvent *event)
     painter.drawLine(vline);
 }
 
-void HeaderInfoTableWidget::clear()
+void HeaderInfoTableWidget::resetTableContents()
 {
     DTableWidget::clear();
     setRowCount(0);
