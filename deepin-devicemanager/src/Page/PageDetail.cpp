@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -221,10 +221,12 @@ void PageDetail::showInfoOfNum(int index)
     }
     int value = 0;
     for (int i = 0; i <= index - 1; i++) {
-        value += m_ListTextBrowser[i]->height();
-        value += m_ListDetailButton[i]->height();
-        value += m_ListDetailSeperator[i]->height();
-        value += SPACE_HEIGHT;
+        if (m_ListTextBrowser[i]->isVisible()) value += m_ListTextBrowser[i]->height();
+        if (m_ListDetailButton[i]->isVisible()) value += m_ListDetailButton[i]->height();
+        if (m_ListDetailSeperator[i]->isVisible()) {
+            value += m_ListDetailSeperator[i]->height();
+            value += SPACE_HEIGHT;
+        }
     }
     mp_ScrollArea->verticalScrollBar()->setValue(value);
 }
