@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
+// Copyright (C) 2019 - 2026 Uniontech Software Technology Co.,Ltd.
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -7,6 +7,19 @@
 #define DEVICECPU_H
 #include "DeviceInfo.h"
 #include "commonfunction.h"
+
+// kSpecialType5/6/7
+#define CPU_FREQ_TYPE5_7_OLD "2.189"
+#define CPU_FREQ_TYPE5_7_NEW "2.188"
+#define CPU_MAXFREQ_TYPE5_7_OLD "2189"
+#define CPU_MAXFREQ_TYPE5_7_NEW "2188"
+
+// kSpecialType9
+#define CPU_FREQ_TYPE9_OLD "2.695"
+#define CPU_FREQ_TYPE9_NEW "2.7"
+#define CPU_MAXFREQ_TYPE9_OLD "2695"
+#define CPU_MAXFREQ_TYPE9_NEW "2700"
+
 /**
  * @brief The DeviceCpu class
  * 用来描述CPU的类

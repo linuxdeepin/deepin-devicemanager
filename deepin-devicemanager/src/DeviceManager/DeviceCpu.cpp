@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -118,10 +118,14 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
 
     if (Common::specialComType == Common::kSpecialType5 ||
         Common::specialComType == Common::kSpecialType6 ||
-        Common::specialComType == Common::kSpecialType7 ||
-        Common::specialComType == Common::kSpecialType9) {
-        m_Frequency = m_Frequency.replace("2.189", "2.188");
-        m_MaxFrequency = m_MaxFrequency.replace("2189", "2188");
+        Common::specialComType == Common::kSpecialType7) {
+        m_Frequency = m_Frequency.replace(CPU_FREQ_TYPE5_7_OLD, CPU_FREQ_TYPE5_7_NEW);
+        m_MaxFrequency = m_MaxFrequency.replace(CPU_MAXFREQ_TYPE5_7_OLD, CPU_MAXFREQ_TYPE5_7_NEW);
+    }
+
+    if (Common::specialComType == Common::kSpecialType9) {
+        m_Frequency = m_Frequency.replace(CPU_FREQ_TYPE9_OLD, CPU_FREQ_TYPE9_NEW);
+        m_MaxFrequency = m_MaxFrequency.replace(CPU_MAXFREQ_TYPE9_OLD, CPU_MAXFREQ_TYPE9_NEW);
     }
 
     //  获取逻辑数和core数
