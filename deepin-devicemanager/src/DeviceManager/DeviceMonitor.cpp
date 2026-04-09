@@ -265,10 +265,10 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
                     if (pos > 0 && curRate.size() > pos && !Common::boardVendorType().isEmpty()) {
                         curRate = QString::number(ceil(curRate.left(pos).toDouble())) + curRate.right(curRate.size() - pos);
                     }
-                    m_CurrentResolution = QString("%1@%2").arg(match.captured(1)).arg(curRate).replace("x", "×", Qt::CaseInsensitive);
+                    m_CurrentResolution = match.captured(1) + "@" + curRate;
                 } else {
                     qCDebug(appLog) << "Rate is empty";
-                    m_CurrentResolution = QString("%1").arg(match.captured(1)).replace("x", "×", Qt::CaseInsensitive);
+                    m_CurrentResolution = match.captured(1);
                 }
             }
         }
@@ -484,13 +484,13 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
                 m_RefreshRate = QString("%1").arg(curRate);
             }
             if (Common::specialComType == 5 || Common::specialComType == 6) {
-                m_CurrentResolution = QString("%1").arg(match.captured(1)).replace("x", "×", Qt::CaseInsensitive);
+                m_CurrentResolution = match.captured(1);
             } else {
-                m_CurrentResolution = QString("%1 @%2").arg(match.captured(1)).arg(curRate).replace("x", "×", Qt::CaseInsensitive);
+                m_CurrentResolution = match.captured(1) + "@" + curRate;
             }
         } else {
             qCDebug(appLog) << "Rate is empty, setting current resolution without rate";
-            m_CurrentResolution = QString("%1").arg(match.captured(1).replace("x", "×", Qt::CaseInsensitive));
+            m_CurrentResolution = match.captured(1);
         }
     }
 
