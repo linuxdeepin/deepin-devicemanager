@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -101,9 +101,9 @@ void ThreadExecXrandr::loadXrandrInfo(QList<QMap<QString, QString>> &lstMap, con
             QRegularExpression re(".*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*\\s([0-9]{1,5}\\sx\\s[0-9]{1,5}).*");
             QRegularExpressionMatch match = re.match(line);
             if (match.hasMatch()) {
-                lstMap[lstMap.count() - 1].insert("minResolution", match.captured(1));
-                lstMap[lstMap.count() - 1].insert("curResolution", match.captured(2).replace(" ", "").replace("x", "×", Qt::CaseInsensitive));
-                lstMap[lstMap.count() - 1].insert("maxResolution", match.captured(3));
+                lstMap[lstMap.count() - 1].insert("minResolution", match.captured(1).replace(" ", ""));
+                lstMap[lstMap.count() - 1].insert("curResolution", match.captured(2).replace(" ", ""));
+                lstMap[lstMap.count() - 1].insert("maxResolution", match.captured(3).replace(" ", ""));
                 qCDebug(appLog) << "Parsed resolutions: min" << match.captured(1) << "cur" << match.captured(2) << "max" << match.captured(3);
             }
             continue;
@@ -395,8 +395,8 @@ void ThreadExecXrandr::getResolutionFromDBus(QMap<QString, QString> &lstMap)
     }
 
     if (maxResolutionWidth != -1) {
-        lstMap.insert("maxResolution", QString("%1 x %2").arg(maxResolutionWidth).arg(maxResolutionHeight));
-        lstMap.insert("minResolution", QString("%1 x %2").arg(minResolutionWidth).arg(minResolutionHeight));
+        lstMap.insert("maxResolution", QString("%1x%2").arg(maxResolutionWidth).arg(maxResolutionHeight));
+        lstMap.insert("minResolution", QString("%1x%2").arg(minResolutionWidth).arg(minResolutionHeight));
     }
 }
 
