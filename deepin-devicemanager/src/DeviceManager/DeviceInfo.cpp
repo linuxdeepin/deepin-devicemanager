@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -48,7 +48,7 @@ DeviceBaseInfo::~DeviceBaseInfo()
 
 const QString DeviceBaseInfo::translateStr(const QString &inStr)
 {
-    return tr(inStr.toLatin1());
+    return tr(inStr.toUtf8());
 }
 
 const QString DeviceBaseInfo::nameTr()
@@ -116,7 +116,7 @@ const QStringList &DeviceBaseInfo::getTableHeader()
     }
 
     for (const auto &item : m_TableHeader) {
-        QString trKey = tr(item.toLatin1());
+        QString trKey = tr(item.toUtf8());
         if (trKey.isEmpty())
             m_TableHeaderTr.append(item);
         else
