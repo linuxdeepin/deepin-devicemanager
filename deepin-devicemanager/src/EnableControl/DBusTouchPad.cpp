@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -24,6 +24,7 @@ const QString Path_V20 = "/com/deepin/daemon/InputDevice/TouchPad";
 const QString Interface_V20 = "com.deepin.daemon.InputDevice.TouchPad";
 
 inline bool isV20() { return Dtk::Core::DSysInfo::majorVersion() == "20"; }
+inline bool isV25() { return Dtk::Core::DSysInfo::majorVersion() == "25"; }
 const QString Service = isV20() ? Service_V20 : Service_V23;
 const QString Path = isV20() ? Path_V20 : Path_V23;
 const QString Interface = isV20() ? Interface_V20 : Interface_V23;
@@ -65,7 +66,11 @@ void DBusTouchPad::setEnable(bool state)
 {
     qCDebug(appLog) << "Set touchpad enable state to:" << state;
     if (m_dbusTouchPad->isValid()) {
-        m_dbusTouchPad->setProperty("TPadEnable", state);
+        if (isV25()) {
+            m_dbusTouchPad->call("Enable", state);
+        } else {
+            m_dbusTouchPad->setProperty("TPadEnable", state);
+        }
         qCInfo(appLog) << "Touchpad state changed to:" << state;
     } else {
         qCWarning(appLog) << "Invalid DBus interface when setting touchpad state";

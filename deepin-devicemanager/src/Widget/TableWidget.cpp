@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -42,7 +42,6 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_removeDriver(new QAction(tr("Uninstall drivers"), this))
     , mp_WakeupMachine(new QAction(tr("Allow it to wake the computer"), this))
     , mp_Menu(new DMenu(this))
-    , m_Enable(false)
 
 {
     qCDebug(appLog) << "TableWidget instance created";
@@ -106,12 +105,8 @@ void TableWidget::setHeaderLabels(const QStringList &lst)
 {
     qCDebug(appLog) << "Setting header labels to:" << lst;
     QStringList headers;
-    for (int i = 0; i < lst.size(); i++) {
-        if (i < lst.size() - 1) {
-            headers.append(lst[i]);
-        } else {
-            m_Enable = lst[i] == "yes" ? true : false;
-        }
+    for (int i = 0; i < lst.size() - 1; i++) {
+        headers.append(lst[i]);
     }
 
     if (mp_Table) {
@@ -270,12 +265,8 @@ void TableWidget::slotShowMenu(const QPoint &point)
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     QModelIndexList selected = mp_Table->selectionModel()->selectedRows();
-    // 选中item状态下才有启用/禁用按钮
-    if (m_Enable && selected.size() > 0) {
-        mp_Menu->addAction(mp_Enable);
-    }
-    // 主板、内存、cpu等没有驱动，无需右键按钮
-    // 选中item状态下才有卸载、更新按钮
+
+    // 先获取当前行的设备能力
     bool canUninstall = true , canEnable = true;
     QStandardItem* item = mp_Table->item(row,0);
     if(item){ // 获取该设备是否可以更新卸载驱动
@@ -283,6 +274,13 @@ void TableWidget::slotShowMenu(const QPoint &point)
         canUninstall = item->data(Qt::UserRole).toString()=="true" ? true : false;
         canEnable = item->data(Qt::UserRole+1).toString()=="true" ? true : false;
     }
+
+    // 选中item状态下才有启用/禁用按钮
+    if (canEnable && selected.size() > 0) {
+        mp_Menu->addAction(mp_Enable);
+    }
+    // 主板、内存、cpu等没有驱动，无需右键按钮
+    // 选中item状态下才有卸载、更新按钮
     if(!canEnable){
         qCDebug(appLog) << "Device cannot be enabled/disabled, disabling action";
         mp_Enable->setEnabled(false);

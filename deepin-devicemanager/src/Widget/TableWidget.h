@@ -134,7 +134,6 @@ private:
     QAction          *mp_removeDriver;//<! 驱动卸载
     QAction          *mp_WakeupMachine;//<! 唤醒机器
     QMenu            *mp_Menu;        //<! 右键菜单
-    bool             m_Enable;
 };
 
 

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -190,10 +190,6 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     if ("PS/2" == m_Interface) {
         qCDebug(appLog) << "Interface is PS/2, getting PS2 Syspath.";
         getPS2Syspath(mapInfo["Device Files"]);
-        if (m_Model.contains("Mouse", Qt::CaseInsensitive)) {
-            qCDebug(appLog) << "Model contains Mouse, setting m_CanEnable to false.";
-            m_CanEnable = false;
-        }
     }
 
     // 获取映射到 lshw设备信息的 关键字
@@ -206,9 +202,36 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     qCDebug(appLog) << "Info set from Bluetoothctl.";
 
     getMouseInfoFromBusDevice();
+
+    // PS/2鼠标不支持启用/禁用（需在getMouseInfoFromBusDevice之后判断，
+    // 因为接口类型可能在getMouseInfoFromBusDevice中被更正，如蓝牙鼠标）
+    if ("PS/2" == m_Interface && m_Model.contains("Mouse", Qt::CaseInsensitive)) {
+        qCDebug(appLog) << "PS/2 Mouse, setting m_CanEnable to false.";
+        m_CanEnable = false;
+    }
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
     qCDebug(appLog) << "Exiting setInfoFromHwinfo.";
+}
+
+void DeviceInput::validateCanEnableForMouse()
+{
+    // 触摸板使用DBusTouchPad接口，不需要检查sysfs
+    if (m_Name.contains("Touchpad", Qt::CaseInsensitive)) {
+        return;
+    }
+    // setEnable()需要SerialID、UniqueID、SysPath，缺少则禁用操作会失败
+    if (m_SerialID.isEmpty() || m_UniqueID.isEmpty() || m_SysPath.isEmpty()) {
+        m_CanEnable = false;
+        return;
+    }
+    // 如果sysfs路径下两者都没有，则该设备无法被禁用
+    QString sysfsPath = "/sys" + m_SysPath;
+    bool hasAuthorized = QFile::exists(sysfsPath + "/authorized");
+    bool hasRemove = QFile::exists(sysfsPath + "/remove");
+    if (!hasAuthorized && !hasRemove) {
+        m_CanEnable = false;
+    }
 }
 
 void DeviceInput::setInfoFromBluetoothctl()
