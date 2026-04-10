@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -1147,6 +1147,7 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         }
 
         //过滤触摸板，如果不是触摸板再检查
+        bool isTouchpad = (*it)["Model"].contains("Touchpad", Qt::CaseInsensitive);
         if ((*it)["Hotplug"] != "PS/2") {
             // 先判断是否存在
             QString path = pciPath(*it);
@@ -1173,8 +1174,15 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         device = new DeviceInput();
         device->setInfoFromHwinfo(*it);
         device->setHardwareClass("mouse");
-        if (device->bluetoothIsConnected()) {
-            // qCDebug(appLog) << "Adding bluetooth mouse device";
+
+        // 触摸板设备或蓝牙鼠标需要添加到设备列表
+        if (device->bluetoothIsConnected() || isTouchpad) {
+            // I2C接口的非触摸板设备（如触控屏、触控笔）不支持启用/禁用
+            if (!isTouchpad && device->getInterface() == "I2C") {
+                device->setCanEnable(false);
+            }
+            // 校验禁用所需的字段（SerialID、UniqueID、SysPath），缺少则不显示禁用按钮
+            device->validateCanEnableForMouse();
             DeviceManager::instance()->addMouseDevice(device);
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
         } else {

@@ -134,6 +134,12 @@ public:
 
     QString getInterface() const;
 
+    /**
+     * @brief validateCanEnableForMouse: 校验鼠标设备是否满足禁用所需的字段
+     * setEnable()需要SerialID、UniqueID、SysPath，缺少任何一个则禁用操作会失败
+     */
+    void validateCanEnableForMouse();
+
 protected:
     /**
      * @brief initFilterKey:初始化可现实的可显示的属性,m_FilterKey
