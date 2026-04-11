@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -338,6 +337,10 @@ protected:
 
 protected:
     QStringList m_ListBusID;
+
+private:
+    void calAndSetCpuHeaderInfo(const QMap<QString, QString> &firstProcessorInfo,
+                                int coreNum, int logicalNum);
 };
 
 #endif // DEVICEGENERATOR_H

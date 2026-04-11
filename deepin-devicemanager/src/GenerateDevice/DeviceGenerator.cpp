@@ -241,6 +241,10 @@ void DeviceGenerator::generatorCpuDevice()
         device->setCpuInfo(*it, lshw, dmidecode, coreNum, logicalNum);
         DeviceManager::instance()->addCpuDevice(device);
     }
+
+    // 计算并设置CPU头部信息(当前没有多个物理CPU的环境，所以只能编码单物理CPU的逻辑)
+    if (lsCpu.size() > 0)
+        calAndSetCpuHeaderInfo(lsCpu.at(0), coreNum, logicalNum);
 }
 
 void DeviceGenerator::generatorBiosDevice()
@@ -1510,6 +1514,67 @@ QString DeviceGenerator::uniqueID(const QMap<QString, QString> &mapInfo)
     }
     qCDebug(appLog) << "No unique ID found";
     return "";
+}
+
+void DeviceGenerator::calAndSetCpuHeaderInfo(const QMap<QString, QString> &firstProcessorInfo,
+                                             int coreNum, int logicalNum)
+{
+    QList<QList<QPair<QString, QString>>> cpuHeaderInfo;
+    QList<QPair<QString, QString>> singleCpuHeaderInfo;
+
+    if (firstProcessorInfo.contains("model name")) {
+        QPair<QString, QString> modelName(tr("Model Name"), firstProcessorInfo.value("model name"));
+        singleCpuHeaderInfo.push_back(modelName);
+    }
+    if (firstProcessorInfo.contains("vendor_id")) {
+        QPair<QString, QString> vendorID(tr("Vendor ID"), firstProcessorInfo.value("vendor_id"));
+        singleCpuHeaderInfo.push_back(vendorID);
+    }
+    if (firstProcessorInfo.contains("Architecture")) {
+        QPair<QString, QString> arch(tr("Architecture"), firstProcessorInfo.value("Architecture"));
+        singleCpuHeaderInfo.push_back(arch);
+    }
+    if (coreNum > 0) {
+        QPair<QString, QString> coreCount(tr("Core(s)"), QString::number(coreNum));
+        singleCpuHeaderInfo.push_back(coreCount);
+        QPair<QString, QString> threadPerCore(tr("Thread(s)"), QString::number(logicalNum / coreNum));
+        singleCpuHeaderInfo.push_back(threadPerCore);
+    }
+    if (firstProcessorInfo.contains("L1d cache")) {
+        QString strL1dCache = firstProcessorInfo.value("L1d cache");
+        QString strTotalL1dCache = Common::formatTotalCache(strL1dCache, coreNum);
+        if (!strTotalL1dCache.isEmpty()) {
+            QPair<QString, QString> totalL1dCache(tr("L1d cache"), strTotalL1dCache);
+            singleCpuHeaderInfo.push_back(totalL1dCache);
+        }
+    }
+    if (firstProcessorInfo.contains("L1i cache")) {
+        QString strL1iCache = firstProcessorInfo.value("L1i cache");
+        QString strTotalL1iCache = Common::formatTotalCache(strL1iCache, coreNum);
+        if (!strTotalL1iCache.isEmpty()) {
+            QPair<QString, QString> totalL1iCache(tr("L1i cache"), strTotalL1iCache);
+            singleCpuHeaderInfo.push_back(totalL1iCache);
+        }
+    }
+    if (firstProcessorInfo.contains("L2 cache")) {
+        QString strL2Cache = firstProcessorInfo.value("L2 cache");
+        QString strTotalL2Cache = Common::formatTotalCache(strL2Cache, coreNum);
+        if (!strTotalL2Cache.isEmpty()) {
+            QPair<QString, QString> totalL2Cache(tr("L2 cache"), strTotalL2Cache);
+            singleCpuHeaderInfo.push_back(totalL2Cache);
+        }
+    }
+    if (firstProcessorInfo.contains("L3 cache")) {
+        QString strL3Cache = firstProcessorInfo.value("L3 cache");
+        QString strTotalL3Cache = Common::formatTotalCache(strL3Cache, 1);
+        if (!strTotalL3Cache.isEmpty()) {
+            QPair<QString, QString> totalL3Cache(tr("L3 cache"), strTotalL3Cache);
+            singleCpuHeaderInfo.push_back(totalL3Cache);
+        }
+    }
+
+    cpuHeaderInfo.push_back(singleCpuHeaderInfo);
+    DeviceManager::instance()->setCpuHeaderInfo(cpuHeaderInfo);
 }
 
 void DeviceGenerator::generatorInfoFromToml(DeviceType deviceType)
