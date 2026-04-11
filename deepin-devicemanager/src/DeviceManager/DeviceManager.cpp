@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -1935,8 +1935,6 @@ void DeviceManager::overviewToTxt(QTextStream &out)
     out << "\n";
 }
 
-
-
 void DeviceManager::overviewToHtml(QFile &html)
 {
     qCDebug(appLog) << "Exporting overview to html";
@@ -2177,6 +2175,16 @@ void DeviceManager::setCpuFrequencyIsCur(const bool &flag)
 
         device->setFrequencyIsCur(flag);
     }
+}
+
+void DeviceManager::setCpuHeaderInfo(const QList<QList<QPair<QString, QString> > > &info)
+{
+    m_ListCpuHeaderInfo = info;
+}
+
+void DeviceManager::getCpuHeaderInfo(QList<QList<QPair<QString, QString> > > &info) const
+{
+    info = m_ListCpuHeaderInfo;
 }
 
 bool DeviceManager::validateKeyboardVidPid(const QString &vid, const QString &pid, QString &normalizedVid, QString &normalizedPid)

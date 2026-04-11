@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -50,7 +50,7 @@ DWIDGET_USE_NAMESPACE
 using namespace DDLog;
 // 主界面需要的一些宏定义
 #define INIT_WIDTH  1000    // 窗口的初始化宽度
-#define INIT_HEIGHT 720     // 窗口的初始化高度
+#define INIT_HEIGHT 802     // 窗口的初始化高度
 #define MIN_WIDTH  680      // 窗口的最小宽度
 #define MIN_HEIGHT 300      // 窗口的最小高度
 

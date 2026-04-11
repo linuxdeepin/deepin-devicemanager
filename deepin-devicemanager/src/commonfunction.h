@@ -49,5 +49,7 @@ public:
     static QByteArray executeClientCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000, bool useEnv = true);
 
     static bool isShowScreenSize();
+
+    static QString formatTotalCache(const QString& perThreadCache, int coreCount);
 };
 #endif // COMMONFUNCTION_H
