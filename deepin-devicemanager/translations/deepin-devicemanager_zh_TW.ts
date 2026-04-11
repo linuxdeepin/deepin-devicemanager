@@ -1830,31 +1830,79 @@
     </message>
 </context>
 <context>
+    <name>DeviceGenerator</name>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1526"/>
+        <source>Model Name</source>
+        <translation>名稱</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1530"/>
+        <source>Vendor ID</source>
+        <translation>製造商</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1534"/>
+        <source>Architecture</source>
+        <translation>架構</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1538"/>
+        <source>Core(s)</source>
+        <translation>邏輯處理器</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1540"/>
+        <source>Thread(s)</source>
+        <translation>每核心執行緒數</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1547"/>
+        <source>L1d cache</source>
+        <translation>第一級快取（資料）</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1555"/>
+        <source>L1i cache</source>
+        <translation>第一級快取（指令）</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1563"/>
+        <source>L2 cache</source>
+        <translation>第二級快取</translation>
+    </message>
+    <message>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1571"/>
+        <source>L3 cache</source>
+        <translation>第三級快取</translation>
+    </message>
+</context>
+<context>
     <name>DeviceManager</name>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="152"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="318"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1902"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1922"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1944"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1955"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1970"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1983"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1999"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2015"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1942"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1953"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1968"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1981"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1997"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2013"/>
         <source>Overview</source>
         <translation>概況</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="159"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="295"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2103"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2101"/>
         <source>CPU</source>
         <translation>處理器</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="165"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2106"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2104"/>
         <source>CPU quantity</source>
         <translation>CPU數量</translation>
     </message>
@@ -1957,15 +2005,15 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1908"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1974"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2006"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1972"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2004"/>
         <source>Device</source>
         <translation>裝置</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1916"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1978"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2010"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1976"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2008"/>
         <source>OS</source>
         <translation>操作系統</translation>
     </message>
@@ -1973,8 +2021,8 @@
 <context>
     <name>DeviceMonitor</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="646"/>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="649"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="654"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="657"/>
         <source>%1@%2Hz</source>
         <translation></translation>
     </message>
@@ -2516,48 +2564,48 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="103"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="152"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="161"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="133"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="182"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="191"/>
         <source>Storage</source>
         <translation>儲存裝置</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="103"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="152"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="161"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="133"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="182"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="191"/>
         <source>Memory</source>
         <translation>記憶體</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="103"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="152"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="161"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="133"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="182"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="191"/>
         <source>Monitor</source>
         <translation>顯示裝置</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="201"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="231"/>
         <source>Failed to enable the device</source>
         <translation>啟用失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="204"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="234"/>
         <source>Failed to disable the device</source>
         <translation>禁用失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="210"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="240"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>無法獲取裝置序號，禁用失敗</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="237"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="267"/>
         <source>Update Drivers</source>
         <translation>更新驅動</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="258"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="292"/>
         <source>Uninstall Drivers</source>
         <translation>移除驅動</translation>
     </message>
@@ -2956,7 +3004,7 @@
         <translation>未發現其他裝置</translation>
     </message>
     <message>
-        <location filename="../src/Tool/EDIDParser.cpp" line="252"/>
+        <location filename="../src/Tool/EDIDParser.cpp" line="240"/>
         <source>inch</source>
         <translation>英寸</translation>
     </message>
@@ -3365,7 +3413,7 @@
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="38"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="237"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="232"/>
         <source>Disable</source>
         <translation>禁用</translation>
     </message>
@@ -3395,9 +3443,9 @@
         <translation>允許喚起電腦</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="243"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="381"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="389"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="238"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="379"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="387"/>
         <source>Enable</source>
         <translation>啟用</translation>
     </message>
