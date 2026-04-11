@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.59) unstable; urgency=medium
+
+  * feat: Add feature for cpu info show.
+
+ -- gongheng <gongheng@uniontech.com>  Sat, 11 Apr 2026 11:26:26 +0800
+
 deepin-devicemanager (6.0.58) unstable; urgency=medium
 
   * fix: Improve argument handling in QProcess commands
