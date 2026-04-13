@@ -92,7 +92,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1183"/>
         <source>Core(s)</source>
-        <translation>ядро(а)</translation>
+        <translation>Ядро(а)</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1184"/>
@@ -103,7 +103,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1185"/>
         <source>ACL MTU</source>
-        <translation type="unfinished"/>
+        <translation>ACL MTU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1186"/>
@@ -118,7 +118,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1188"/>
         <source>ansiversion</source>
-        <translation>антиверсия</translation>
+        <translation>версия</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1189"/>
@@ -134,7 +134,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1191"/>
         <source>Array Handle</source>
-        <translation type="unfinished"/>
+        <translation>Дескриптор массива</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1192"/>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1194"/>
         <source>Bank Locator</source>
-        <translation type="unfinished"/>
+        <translation>Локатор банка</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1195"/>
@@ -159,7 +159,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1196"/>
         <source>BD Address</source>
-        <translation type="unfinished"/>
+        <translation>BD-адрес</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1197"/>
@@ -174,7 +174,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1199"/>
         <source>BIOS ROMSIZE</source>
-        <translation type="unfinished"/>
+        <translation>РОМ BIOS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1200"/>
@@ -189,7 +189,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1202"/>
         <source>Boot-up State</source>
-        <translation type="unfinished"/>
+        <translation>Состояние загрузки</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1203"/>
@@ -204,7 +204,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1205"/>
         <source>bus info</source>
-        <translation>Информация о шине</translation>
+        <translation>информация о шине</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1206"/>
@@ -219,12 +219,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1208"/>
         <source>Capabilities</source>
-        <translation>Способность</translation>
+        <translation>Возможности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1209"/>
         <source>Capacity</source>
-        <translation>Емкость</translation>
+        <translation>Ёмкость</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1210"/>
@@ -234,17 +234,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1211"/>
         <source>Chassis Handle</source>
-        <translation type="unfinished"/>
+        <translation>Дескриптор шасси</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1212"/>
         <source>Chassis Information</source>
-        <translation>Информация о корпусе</translation>
+        <translation>Информация о шасси</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1213"/>
         <source>Chip</source>
-        <translation>Микросхема</translation>
+        <translation>Чип</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1214"/>
@@ -259,12 +259,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1216"/>
         <source>Clock</source>
-        <translation>Часы</translation>
+        <translation>Тактовая частота</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1217"/>
         <source>Config Status</source>
-        <translation type="unfinished"/>
+        <translation>Статус конфигурации</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1218"/>
@@ -274,17 +274,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1219"/>
         <source>Configured Voltage</source>
-        <translation>Текущее Напряжение</translation>
+        <translation>Настроенное напряжение</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1220"/>
         <source>Contained Elements</source>
-        <translation type="unfinished"/>
+        <translation>Содержащиеся элементы</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1221"/>
         <source>Contained Object Handles</source>
-        <translation type="unfinished"/>
+        <translation>Дескрипторы содержащихся объектов</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1222"/>
@@ -294,7 +294,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1223"/>
         <source>Core ID</source>
-        <translation>идентификатор ядра</translation>
+        <translation>ID ядра</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1224"/>
@@ -304,27 +304,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1225"/>
         <source>CPU Family</source>
-        <translation>семейство ЦП</translation>
+        <translation>Семейство ЦП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1226"/>
         <source>CPU ID</source>
-        <translation>CPU ID</translation>
+        <translation>ID ЦП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1227"/>
         <source>CPU implementer</source>
-        <translation type="unfinished"/>
+        <translation>Разработчик ЦП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1228"/>
         <source>CPU part</source>
-        <translation>Номер по каталогу</translation>
+        <translation>Часть ЦП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1229"/>
         <source>CPU revision</source>
-        <translation>Версия ЦП</translation>
+        <translation>Ревизия ЦП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1230"/>
@@ -334,7 +334,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1231"/>
         <source>critical-action</source>
-        <translation>критические действия</translation>
+        <translation>критическое действие</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1232"/>
@@ -354,12 +354,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1235"/>
         <source>Data Width</source>
-        <translation>Ширина шины данных</translation>
+        <translation>Разрядность шины данных</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1236"/>
         <source>Date</source>
-        <translation type="unfinished"/>
+        <translation>Дата</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1237"/>
@@ -374,12 +374,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1239"/>
         <source>Design Capacity</source>
-        <translation>Проектная мощность</translation>
+        <translation>Проектная ёмкость</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1240"/>
         <source>Design Voltage</source>
-        <translation>Расчетное напряжение</translation>
+        <translation>Проектное напряжение</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1241"/>
@@ -404,7 +404,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1245"/>
         <source>Device Name</source>
-        <translation>Имя Устройства</translation>
+        <translation>Имя устройства</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1246"/>
@@ -424,7 +424,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1249"/>
         <source>Discoverable</source>
-        <translation>Обнаруженный</translation>
+        <translation>Обнаруживаемый</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1250"/>
@@ -439,12 +439,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1252"/>
         <source>Display Output</source>
-        <translation>Вывод на Дисплей</translation>
+        <translation>Выход дисплея</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1253"/>
         <source>Display Ratio</source>
-        <translation>Соотношение сторон дисплея</translation>
+        <translation>Соотношение сторон</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1254"/>
@@ -459,7 +459,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1256"/>
         <source>Driver Activation Cmd</source>
-        <translation type="unfinished"/>
+        <translation>Команда активации драйвера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1257"/>
@@ -469,7 +469,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1258"/>
         <source>Driver Status</source>
-        <translation>Состояние драйвера</translation>
+        <translation>Статус драйвера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1259"/>
@@ -494,7 +494,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1263"/>
         <source>EGL client APIs</source>
-        <translation type="unfinished"/>
+        <translation>Клиентские API EGL</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1264"/>
@@ -504,27 +504,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1265"/>
         <source>energy</source>
-        <translation type="unfinished"/>
+        <translation>энергия</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1266"/>
         <source>energy-empty</source>
-        <translation type="unfinished"/>
+        <translation>энергия-пусто</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1267"/>
         <source>energy-full</source>
-        <translation type="unfinished"/>
+        <translation>энергия-полная</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1268"/>
         <source>energy-full-design</source>
-        <translation type="unfinished"/>
+        <translation>энергия-полная-проектная</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1269"/>
         <source>energy-rate</source>
-        <translation type="unfinished"/>
+        <translation>скорость-энергии</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1270"/>
@@ -534,12 +534,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1271"/>
         <source>Error Information Handle</source>
-        <translation type="unfinished"/>
+        <translation>Дескриптор информации об ошибке</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1272"/>
         <source>EV</source>
-        <translation type="unfinished"/>
+        <translation>EV</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1273"/>
@@ -564,12 +564,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1277"/>
         <source>Firmware Revision</source>
-        <translation>Версия прошивки</translation>
+        <translation>Ревизия прошивки</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1278"/>
         <source>Firmware Version</source>
-        <translation>Версия ПО</translation>
+        <translation>Версия прошивки</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1279"/>
@@ -584,7 +584,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1281"/>
         <source>GDDR capacity</source>
-        <translation type="unfinished"/>
+        <translation>Объём GDDR</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1282"/>
@@ -594,7 +594,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1283"/>
         <source>GLSL version</source>
-        <translation>версия GLSL</translation>
+        <translation>Версия GLSL</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1284"/>
@@ -604,42 +604,42 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1285"/>
         <source>GPU type</source>
-        <translation type="unfinished"/>
+        <translation>Тип GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1286"/>
         <source>GPU vendor</source>
-        <translation type="unfinished"/>
+        <translation>Производитель GPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1287"/>
         <source>Graphics Memory</source>
-        <translation>Графическая память</translation>
+        <translation>Видеопамять</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1288"/>
         <source>guid</source>
-        <translation>руководство</translation>
+        <translation>guid</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1289"/>
         <source>Handlers</source>
-        <translation type="unfinished"/>
+        <translation>Обработчики</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1290"/>
         <source>Hardware Class</source>
-        <translation type="unfinished"/>
+        <translation>Класс оборудования</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1291"/>
         <source>has history</source>
-        <translation type="unfinished"/>
+        <translation>имеет историю</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1292"/>
         <source>has statistics</source>
-        <translation type="unfinished"/>
+        <translation>имеет статистику</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1293"/>
@@ -659,7 +659,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1296"/>
         <source>icon-name</source>
-        <translation>название значка</translation>
+        <translation>имя-значка</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1297"/>
@@ -684,7 +684,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1301"/>
         <source>ioport</source>
-        <translation>интернет-порт</translation>
+        <translation>порт ввода-вывода</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1302"/>
@@ -704,72 +704,72 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1305"/>
         <source>job-cancel-after</source>
-        <translation>задание-отмена-после</translation>
+        <translation>отмена-задания-после</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1306"/>
         <source>job-hold-until</source>
-        <translation>задание-удерживать-до тех пор, пока</translation>
+        <translation>удержание-задания-до</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1307"/>
         <source>job-priority</source>
-        <translation>приоритетная работа</translation>
+        <translation>приоритет-задания</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1308"/>
         <source>KernelModeDriver</source>
-        <translation>KernelModeDriver</translation>
+        <translation>Драйвер режима ядра</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1309"/>
         <source>KEY</source>
-        <translation type="unfinished"/>
+        <translation>КЛЮЧ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1310"/>
         <source>L1d Cache</source>
-        <translation>L1d кэш</translation>
+        <translation>Кэш L1d</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1311"/>
         <source>L1i Cache</source>
-        <translation>L1i кэш</translation>
+        <translation>Кэш L1i</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1312"/>
         <source>L2 Cache</source>
-        <translation>L2 кэш</translation>
+        <translation>Кэш L2</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1313"/>
         <source>L3 Cache</source>
-        <translation>L3 кэш</translation>
+        <translation>Кэш L3</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1314"/>
         <source>L4 Cache</source>
-        <translation type="unfinished"/>
+        <translation>Кэш L4</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1315"/>
         <source>Language Description Format</source>
-        <translation>Формат Описания Языка</translation>
+        <translation>Формат описания языка</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1316"/>
         <source>latency</source>
-        <translation>задержка</translation>
+        <translation>латентность</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1317"/>
         <source>Latency</source>
-        <translation>Задержка</translation>
+        <translation>Латентность</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1318"/>
         <source>lid-is-closed</source>
-        <translation>крышка закрыта</translation>
+        <translation>крышка-закрыта</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1319"/>
@@ -784,12 +784,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1321"/>
         <source>Link mode</source>
-        <translation type="unfinished"/>
+        <translation>Режим соединения</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1322"/>
         <source>Link policy</source>
-        <translation type="unfinished"/>
+        <translation>Политика соединения</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1323"/>
@@ -804,7 +804,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1325"/>
         <source>Location In Chassis</source>
-        <translation type="unfinished"/>
+        <translation>Расположение в шасси</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1326"/>
@@ -814,22 +814,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1327"/>
         <source>Lock</source>
-        <translation type="unfinished"/>
+        <translation>Блокировка</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1328"/>
         <source>logical name</source>
-        <translation>логическое название</translation>
+        <translation>логическое имя</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1329"/>
         <source>Logical Name</source>
-        <translation>Логическое название</translation>
+        <translation>Логическое имя</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1330"/>
         <source>logicalsectorsize</source>
-        <translation>логический размер</translation>
+        <translation>логическийразмерсектора</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1331"/>
@@ -844,18 +844,18 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1333"/>
         <source>marker-change-time</source>
-        <translation>время смены маркера</translation>
+        <translation>время-смены-маркера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1334"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1460"/>
         <source>Max Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Макс. частота</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1335"/>
         <source>Maximum Capacity</source>
-        <translation>Максимальная вместимость</translation>
+        <translation>Максимальная ёмкость</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1336"/>
@@ -870,7 +870,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1338"/>
         <source>Maximum Rate</source>
-        <translation>Максимальная ставка</translation>
+        <translation>Максимальная скорость</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1339"/>
@@ -880,13 +880,13 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1340"/>
         <source>Maximum Voltage</source>
-        <translation>Максимальное Напряжение</translation>
+        <translation>Максимальное напряжение</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1341"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1461"/>
         <source>Media Type</source>
-        <translation>Тип Носителя</translation>
+        <translation>Тип носителя</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1342"/>
@@ -901,17 +901,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1344"/>
         <source>Memory Operating Mode Capability</source>
-        <translation type="unfinished"/>
+        <translation>Возможность режима работы памяти</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1345"/>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ID производителя контроллера подсистемы памяти</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1346"/>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ID продукта контроллера подсистемы памяти</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1347"/>
@@ -942,17 +942,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1354"/>
         <source>Module Manufacturer ID</source>
-        <translation type="unfinished"/>
+        <translation>ID производителя модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1355"/>
         <source>Module Product ID</source>
-        <translation type="unfinished"/>
+        <translation>ID продукта модуля</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1356"/>
         <source>MSC</source>
-        <translation type="unfinished"/>
+        <translation>MSC</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1357"/>
@@ -963,52 +963,52 @@
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1358"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1462"/>
         <source>Name</source>
-        <translation>Название</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1359"/>
         <source>native-path</source>
-        <translation>нативный-путь</translation>
+        <translation>родной-путь</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1360"/>
         <source>Negotiation Rate</source>
-        <translation>Скорость переговоров</translation>
+        <translation>Скорость согласования</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1361"/>
         <source>network</source>
-        <translation type="unfinished"/>
+        <translation>сеть</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1362"/>
         <source>Non-Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Энергонезависимый размер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1363"/>
         <source>Number Of Devices</source>
-        <translation>Число устройств</translation>
+        <translation>Количество устройств</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1364"/>
         <source>Number Of Power Cords</source>
-        <translation>Число сетевых шнуров</translation>
+        <translation>Количество шнуров питания</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1365"/>
         <source>number-up</source>
-        <translation>увеличение числа</translation>
+        <translation>число-вверх</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1366"/>
         <source>OEM Information</source>
-        <translation>OEM информация</translation>
+        <translation>Информация OEM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1367"/>
         <source>on-battery</source>
-        <translation>на батарее</translation>
+        <translation>на-батарее</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1368"/>
@@ -1018,47 +1018,47 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1369"/>
         <source>orientation-requested</source>
-        <translation>ориентация - по запросу</translation>
+        <translation>запрошенная-ориентация</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1370"/>
         <source>Packet type</source>
-        <translation>Тип пакетов</translation>
+        <translation>Тип пакета</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1371"/>
         <source>Pairable</source>
-        <translation>Парный</translation>
+        <translation>Сопрягаемый</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1372"/>
         <source>Part Number</source>
-        <translation>Номер по каталогу</translation>
+        <translation>Номер детали</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1373"/>
         <source>percentage</source>
-        <translation type="unfinished"/>
+        <translation>процент</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1374"/>
         <source>Phys</source>
-        <translation type="unfinished"/>
+        <translation>Физ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1375"/>
         <source>physical id</source>
-        <translation>физический идентификатор</translation>
+        <translation>физический id</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1376"/>
         <source>Physical ID</source>
-        <translation>Физическая идентификация</translation>
+        <translation>Физический ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1377"/>
         <source>Physical Memory Array</source>
-        <translation type="unfinished"/>
+        <translation>Массив физической памяти</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1378"/>
@@ -1068,27 +1068,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1379"/>
         <source>Powered</source>
-        <translation>Работающий</translation>
+        <translation>Питание</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1380"/>
         <source>power supply</source>
-        <translation type="unfinished"/>
+        <translation>блок питания</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1381"/>
         <source>Power Supply State</source>
-        <translation type="unfinished"/>
+        <translation>Состояние блока питания</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1382"/>
         <source>Primary Monitor</source>
-        <translation>Основной Монитор</translation>
+        <translation>Основной монитор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1383"/>
         <source>print-color-mode</source>
-        <translation>цветной режим печати</translation>
+        <translation>режим-цвета-печати</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1384"/>
@@ -1098,37 +1098,37 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1385"/>
         <source>printer-is-shared</source>
-        <translation>общий доступ к принтеру</translation>
+        <translation>принтер-является-общим</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1386"/>
         <source>printer-is-temporary</source>
-        <translation>принтер-это-временное решение</translation>
+        <translation>принтер-является-временным</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1387"/>
         <source>printer-make-and-model</source>
-        <translation>марка и модель принтера</translation>
+        <translation>марка-и-модель-принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1388"/>
         <source>printer-state-change-time</source>
-        <translation>время изменения состояния принтера</translation>
+        <translation>время-изменения-состояния-принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1389"/>
         <source>printer-state-reasons</source>
-        <translation>причины - состояние принтера</translation>
+        <translation>причины-состояния-принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1390"/>
         <source>printer-type</source>
-        <translation>тип принтера</translation>
+        <translation>тип-принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1391"/>
         <source>printer-uri-supported</source>
-        <translation type="unfinished"/>
+        <translation>поддерживаемый-uri-принтера</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1392"/>
@@ -1138,32 +1138,32 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1393"/>
         <source>Product Date</source>
-        <translation type="unfinished"/>
+        <translation>Дата продукта</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1394"/>
         <source>Product Name</source>
-        <translation>Наименование Продукта</translation>
+        <translation>Название продукта</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1395"/>
         <source>PROP</source>
-        <translation type="unfinished"/>
+        <translation>СВОЙСТВО</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1396"/>
         <source>Rank</source>
-        <translation type="unfinished"/>
+        <translation>Ранг</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1397"/>
         <source>rechargeable</source>
-        <translation type="unfinished"/>
+        <translation>перезаряжаемый</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1398"/>
         <source>Refresh Rate</source>
-        <translation type="unfinished"/>
+        <translation>Частота обновления</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1399"/>
@@ -1178,22 +1178,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1401"/>
         <source>Revision</source>
-        <translation>Пересмотр</translation>
+        <translation>Ревизия</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1402"/>
         <source>ROM Size</source>
-        <translation>Размер диска </translation>
+        <translation>Размер ПЗУ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1403"/>
         <source>Rotation Rate</source>
-        <translation>Частота вращения</translation>
+        <translation>Скорость вращения</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1404"/>
         <source>Runtime Size</source>
-        <translation>Размер Времени Выполнения</translation>
+        <translation>Размер во время выполнения</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1405"/>
@@ -1203,7 +1203,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1406"/>
         <source>SBDS Manufacture Date</source>
-        <translation>Дата изготовления SBDS</translation>
+        <translation>Дата производства SBDS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1407"/>
@@ -1218,22 +1218,22 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1409"/>
         <source>SCO MTU</source>
-        <translation type="unfinished"/>
+        <translation>SCO MTU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1410"/>
         <source>sectorsize</source>
-        <translation>размер сектора</translation>
+        <translation>размерсектора</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1411"/>
         <source>Security Status</source>
-        <translation>Состояние безопасности</translation>
+        <translation>Статус безопасности</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1412"/>
         <source>Serial ID</source>
-        <translation>Серийный номер</translation>
+        <translation>Серийный ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1413"/>
@@ -1243,12 +1243,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1414"/>
         <source>Service Classes</source>
-        <translation type="unfinished"/>
+        <translation>Классы обслуживания</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1415"/>
         <source>Set</source>
-        <translation type="unfinished"/>
+        <translation>Набор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1416"/>
@@ -1258,7 +1258,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1417"/>
         <source>sides</source>
-        <translation type="unfinished"/>
+        <translation>стороны</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1418"/>
@@ -1269,7 +1269,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1419"/>
         <source>SKU Number</source>
-        <translation>Номер SKU</translation>
+        <translation>Артикул</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1420"/>
@@ -1284,17 +1284,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1422"/>
         <source>state</source>
-        <translation type="unfinished"/>
+        <translation>состояние</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1423"/>
         <source>status</source>
-        <translation>Состояние</translation>
+        <translation>статус</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1424"/>
         <source>Status</source>
-        <translation>Состояние</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1425"/>
@@ -1304,17 +1304,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1426"/>
         <source>SubDevice</source>
-        <translation type="unfinished"/>
+        <translation>Подчиненное устройство</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1427"/>
         <source>SubVendor</source>
-        <translation type="unfinished"/>
+        <translation>Субвендор</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1428"/>
         <source>Subversion</source>
-        <translation type="unfinished"/>
+        <translation>Подверсия</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1429"/>
@@ -1329,7 +1329,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1431"/>
         <source>SysFS_Path</source>
-        <translation>SysFS_Path</translation>
+        <translation>Путь в SysFS</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1432"/>
@@ -1344,7 +1344,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1434"/>
         <source>temperature</source>
-        <translation type="unfinished"/>
+        <translation>температура</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1435"/>
@@ -1354,7 +1354,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1436"/>
         <source>Thermal State</source>
-        <translation type="unfinished"/>
+        <translation>Термическое состояние</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1437"/>
@@ -1375,7 +1375,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1440"/>
         <source>Type Detail</source>
-        <translation type="unfinished"/>
+        <translation>Детали типа</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1441"/>
@@ -1385,17 +1385,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1442"/>
         <source>Uniq</source>
-        <translation type="unfinished"/>
+        <translation>Уник</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1443"/>
         <source>updated</source>
-        <translation>обновлен</translation>
+        <translation>обновлено</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1444"/>
         <source>URI</source>
-        <translation type="unfinished"/>
+        <translation>URI</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1445"/>
@@ -1406,7 +1406,7 @@
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1446"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1466"/>
         <source>Vendor</source>
-        <translation>Поставщик</translation>
+        <translation>Производитель</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1447"/>
@@ -1426,12 +1426,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1450"/>
         <source>Volatile Size</source>
-        <translation type="unfinished"/>
+        <translation>Энергозависимый размер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1451"/>
         <source>voltage</source>
-        <translation type="unfinished"/>
+        <translation>напряжение</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1452"/>
@@ -1441,12 +1441,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1453"/>
         <source>Wake-up Type</source>
-        <translation>Тип Пробуждения</translation>
+        <translation>Тип пробуждения</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1454"/>
         <source>warning-level</source>
-        <translation type="unfinished"/>
+        <translation>уровень-предупреждения</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1455"/>
@@ -1466,7 +1466,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1459"/>
         <source>Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Частота</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1464"/>
@@ -1679,7 +1679,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
         <source>Seventy-eight</source>
-        <translation type="unfinished"/>
+        <translation>Семьдесят восемь</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
@@ -1694,17 +1694,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
         <source>Eighty-four</source>
-        <translation type="unfinished"/>
+        <translation>Восемьдесят четыре</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
         <source>Eighty-six</source>
-        <translation type="unfinished"/>
+        <translation>Восемьдесят шесть</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>Eighty-eight</source>
-        <translation type="unfinished"/>
+        <translation>Восемьдесят восемь</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
@@ -1714,17 +1714,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>Ninety-two</source>
-        <translation type="unfinished"/>
+        <translation>Девяносто два</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>Ninety-four</source>
-        <translation type="unfinished"/>
+        <translation>Девяносто четыре</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
         <source>Ninety-six</source>
-        <translation type="unfinished"/>
+        <translation>Девяносто шесть</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
@@ -1814,17 +1814,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
         <source>Two hundred and fifty-six</source>
-        <translation>Сто пятьдесят восемь</translation>
+        <translation>Двести пятьдесят шесть</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Частота</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Max Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Макс. частота</translation>
     </message>
 </context>
 <context>
@@ -1832,12 +1832,12 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1526"/>
         <source>Model Name</source>
-        <translation type="unfinished"/>
+        <translation>Название модели</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1530"/>
         <source>Vendor ID</source>
-        <translation type="unfinished"/>
+        <translation>ID производителя</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1534"/>
@@ -1847,32 +1847,32 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1538"/>
         <source>Core(s)</source>
-        <translation>ядро(а)</translation>
+        <translation>Ядро(а)</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1540"/>
         <source>Thread(s)</source>
-        <translation type="unfinished"/>
+        <translation>Поток(и)</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1547"/>
         <source>L1d cache</source>
-        <translation type="unfinished"/>
+        <translation>Кэш L1d</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1555"/>
         <source>L1i cache</source>
-        <translation type="unfinished"/>
+        <translation>Кэш L1i</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1563"/>
         <source>L2 cache</source>
-        <translation type="unfinished"/>
+        <translation>Кэш L2</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1571"/>
         <source>L3 cache</source>
-        <translation type="unfinished"/>
+        <translation>Кэш L3</translation>
     </message>
 </context>
 <context>
@@ -1896,7 +1896,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="295"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="2101"/>
         <source>CPU</source>
-        <translation>Процессор</translation>
+        <translation>ЦП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="165"/>
@@ -1920,25 +1920,25 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="190"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="298"/>
         <source>Display Adapter</source>
-        <translation>Дисплейный адаптер</translation>
+        <translation>Видеоадаптер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="196"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="299"/>
         <source>Sound Adapter</source>
-        <translation>Звуковой Адаптер</translation>
+        <translation>Звуковой адаптер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="202"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="300"/>
         <source>Storage</source>
-        <translation>Хранилище</translation>
+        <translation>Накопители</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="208"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="301"/>
         <source>Other PCI Devices</source>
-        <translation>Другие PCI Устройства</translation>
+        <translation>Другие PCI-устройства</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="214"/>
@@ -1962,7 +1962,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="246"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="305"/>
         <source>Mouse</source>
-        <translation type="unfinished"/>
+        <translation>Мышь</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="252"/>
@@ -1999,7 +1999,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="311"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Остальные устройства</translation>
+        <translation>Другие устройства</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1908"/>
@@ -2022,7 +2022,7 @@
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="654"/>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="657"/>
         <source>%1@%2Hz</source>
-        <translation type="unfinished"/>
+        <translation>%1@%2Гц</translation>
     </message>
 </context>
 <context>
@@ -2031,12 +2031,12 @@
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="61"/>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="151"/>
         <source>Select a driver for update</source>
-        <translation type="unfinished"/>
+        <translation>Выберите драйвер для обновления</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="144"/>
         <source>No drivers found in this folder</source>
-        <translation type="unfinished"/>
+        <translation>В этой папке драйверы не найдены</translation>
     </message>
 </context>
 <context>
@@ -2044,52 +2044,52 @@
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="88"/>
         <source>Loading Audio Device Info...</source>
-        <translation>Загрузка информации об аудио устройствах</translation>
+        <translation>Загрузка информации об аудиоустройствах...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="91"/>
         <source>Loading BIOS Info...</source>
-        <translation>Загрузка информации о BIOS</translation>
+        <translation>Загрузка информации о BIOS...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="101"/>
         <source>Loading CD-ROM Info...</source>
-        <translation>Загрузка информации о CD-ROM</translation>
+        <translation>Загрузка информации о CD-ROM...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="106"/>
         <source>Loading Operating System Info...</source>
-        <translation>Загрузка информации об операционной системе</translation>
+        <translation>Загрузка информации об операционной системе...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="109"/>
         <source>Loading CPU Info...</source>
-        <translation>Загрузка информации о процессоре</translation>
+        <translation>Загрузка информации о ЦП...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="110"/>
         <source>Loading Other Devices Info...</source>
-        <translation>Загружаю информацию о Других Устройствах...</translation>
+        <translation>Загрузка информации о других устройствах...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="111"/>
         <source>Loading Power Info...</source>
-        <translation>Загружаю информацию о Питании... </translation>
+        <translation>Загрузка информации о питании...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="112"/>
         <source>Loading Printer Info...</source>
-        <translation>Загрузка информации о принтере</translation>
+        <translation>Загрузка информации о принтерах...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="115"/>
         <source>Loading Mouse Info...</source>
-        <translation>Загружаю информацию о Мыши...</translation>
+        <translation>Загрузка информации о мышах...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="116"/>
         <source>Loading Network Adapter Info...</source>
-        <translation>Загружаю информацию о Сетевом Адаптере...</translation>
+        <translation>Загрузка информации о сетевых адаптерах...</translation>
     </message>
 </context>
 <context>
@@ -2131,7 +2131,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="361"/>
         <source>Display shortcuts</source>
-        <translation>Отобразить горячие клавиши</translation>
+        <translation>Показать сочетания клавиш</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="362"/>
@@ -2146,7 +2146,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="364"/>
         <source>Copy</source>
-        <translation>Скопировать</translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="368"/>
@@ -2196,7 +2196,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="628"/>
         <source>CPU</source>
-        <translation>Процессор</translation>
+        <translation>ЦП</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="632"/>
@@ -2223,7 +2223,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="100"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Name</source>
-        <translation>Название</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
@@ -2235,12 +2235,12 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>Версия платформы драйвера</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="102"/>
         <source>Status</source>
-        <translation>Состояние</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="102"/>
@@ -2250,12 +2250,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="193"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Драйверы для резервного копирования</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="194"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Скопированные драйверы</translation>
     </message>
 </context>
 <context>
@@ -2272,22 +2272,22 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="214"/>
         <source>Cancel</source>
         <comment>button</comment>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Далее</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="142"/>
         <source>Warning</source>
-        <translation>Внимание</translation>
+        <translation>Предупреждение</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="142"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>Устройство станет недоступным после удаления драйвера</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="146"/>
@@ -2303,22 +2303,22 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Update successful</source>
-        <translation>Обновление прошло успешно</translation>
+        <translation>Обновление успешно</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Uninstallation successful</source>
-        <translation>Удаление прошло успешно</translation>
+        <translation>Удаление успешно</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Update failed</source>
-        <translation>Обновление не удалось</translation>
+        <translation>Ошибка обновления</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Uninstallation failed</source>
-        <translation>Удаление не удалось</translation>
+        <translation>Ошибка удаления</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
@@ -2330,12 +2330,12 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
         <source>Next</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Далее</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="238"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>Выбранная папка не существует, выберите снова</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
@@ -2347,33 +2347,33 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
         <source>Previous</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="275"/>
         <source>Broken package</source>
-        <translation>Нарушены зависимости</translation>
+        <translation>Повреждённый пакет</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="280"/>
         <source>Unmatched package architecture</source>
-        <translation>Не совпадает архитектура пакета</translation>
+        <translation>Несоответствие архитектуры пакета</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="286"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="386"/>
         <source>The selected file does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>Выбранный файл не существует, выберите снова</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="387"/>
         <source>It is not a driver</source>
-        <translation>Не является драйвером</translation>
+        <translation>Это не драйвер</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="388"/>
         <source>Unable to install - no digital signature</source>
-        <translation>Установка невозможна: отсутствует цифровая подпись</translation>
+        <translation>Невозможно установить — отсутствует цифровая подпись</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="382"/>
@@ -2393,7 +2393,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="385"/>
         <source>The driver module has dependencies</source>
-        <translation>У модуля есть зависимости</translation>
+        <translation>Модуль драйвера имеет зависимости</translation>
     </message>
 </context>
 <context>
@@ -2403,7 +2403,7 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="123"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
         <source>Device Name</source>
-        <translation>Имя Устройства</translation>
+        <translation>Имя устройства</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="111"/>
@@ -2420,7 +2420,7 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="113"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="126"/>
         <source>Status</source>
-        <translation>Состояние</translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="114"/>
@@ -2451,7 +2451,7 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="232"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation>Обновленные драйверы (%1)</translation>
+        <translation>Актуальные драйверы (%1)</translation>
     </message>
 </context>
 <context>
@@ -2461,7 +2461,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="118"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="548"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Установка драйвера</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
@@ -2469,13 +2469,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="119"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="550"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Резервное копирование драйверов</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="120"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="552"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Восстановление драйверов</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="723"/>
@@ -2493,17 +2493,17 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="98"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>У вас нет драйверов для восстановления, сначала создайте резервную копию</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="101"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Перейти к резервному копированию драйверов</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="129"/>
         <source>Name</source>
-        <translation>Название</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="130"/>
@@ -2513,7 +2513,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>Версия резервной копии</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
@@ -2523,7 +2523,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="180"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Восстанавливаемые драйверы</translation>
     </message>
 </context>
 <context>
@@ -2546,17 +2546,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Установка драйвера</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Резервное копирование драйверов</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Восстановление драйверов</translation>
     </message>
 </context>
 <context>
@@ -2566,7 +2566,7 @@
         <location filename="../src/Page/PageMultiInfo.cpp" line="182"/>
         <location filename="../src/Page/PageMultiInfo.cpp" line="191"/>
         <source>Storage</source>
-        <translation>Хранилище</translation>
+        <translation>Накопители</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="133"/>
@@ -2595,7 +2595,7 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="240"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось отключить: не удалось получить серийный номер устройства</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="267"/>
@@ -2623,7 +2623,7 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="44"/>
         <source>Copy</source>
-        <translation>Скопировать</translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="92"/>
@@ -2646,7 +2646,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="44"/>
         <source>Copy</source>
-        <translation>Скопировать</translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="45"/>
@@ -2667,7 +2667,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="48"/>
         <source>Allow it to wake the computer</source>
-        <translation>Разрешать вывод компьютера из ждущего режима</translation>
+        <translation>Разрешить пробуждение компьютера</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="236"/>
@@ -2678,7 +2678,7 @@
         <location filename="../src/Page/PageSingleInfo.cpp" line="339"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="359"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось отключить: не удалось получить серийный номер устройства</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="344"/>
@@ -2709,7 +2709,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
         <source>CPU</source>
-        <translation>Процессор</translation>
+        <translation>ЦП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1771"/>
@@ -2717,7 +2717,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
         <source>No CPU found</source>
-        <translation>Процессор не найден</translation>
+        <translation>ЦП не найден</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1772"/>
@@ -2757,7 +2757,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1832"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1869"/>
         <source>Storage</source>
-        <translation>Хранилище</translation>
+        <translation>Накопители</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1774"/>
@@ -2770,18 +2770,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="721"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Ошибка восстановления драйвера!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="717"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Пожалуйста, попробуйте снова или оставьте отзыв</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="47"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Ошибка резервного копирования драйвера!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
@@ -2790,7 +2790,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="776"/>
         <source>Display Adapter</source>
-        <translation>Дисплейный адаптер</translation>
+        <translation>Видеоадаптер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
@@ -2798,7 +2798,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1833"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
         <source>No GPU found</source>
-        <translation>Графический процессор не найден</translation>
+        <translation>GPU не найден</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1776"/>
@@ -2815,7 +2815,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1834"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1871"/>
         <source>No monitor found</source>
-        <translation type="unfinished"/>
+        <translation>Монитор не найден</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1777"/>
@@ -2841,7 +2841,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="779"/>
         <source>Sound Adapter</source>
-        <translation>Звуковой Адаптер</translation>
+        <translation>Звуковой адаптер</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1778"/>
@@ -2849,7 +2849,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1836"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
         <source>No audio device found</source>
-        <translation>Не найдено звуковое устройство</translation>
+        <translation>Аудиоустройство не найдено</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1779"/>
@@ -2874,7 +2874,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
         <source>Other PCI Devices</source>
-        <translation>Другие PCI Устройства</translation>
+        <translation>Другие PCI-устройства</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1780"/>
@@ -2882,7 +2882,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
         <source>No other PCI devices found</source>
-        <translation>Не найдено других PCI устройств</translation>
+        <translation>Другие PCI-устройства не найдены</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
@@ -2949,7 +2949,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
         <source>No printer found</source>
-        <translation>Притер не найден</translation>
+        <translation>Принтер не найден</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
@@ -2991,7 +2991,7 @@
         <location filename="../src/Tool/commontools.cpp" line="58"/>
         <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Other Devices</source>
-        <translation>Остальные устройства</translation>
+        <translation>Другие устройства</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
@@ -2999,7 +2999,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
         <source>No other devices found</source>
-        <translation>Остальные устройства не найдены</translation>
+        <translation>Другие устройства не найдены</translation>
     </message>
     <message>
         <location filename="../src/Tool/EDIDParser.cpp" line="240"/>
@@ -3015,17 +3015,17 @@
     <message>
         <location filename="../src/main.cpp" line="101"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>Диспетчер устройств - удобный инструмент для просмотра информации об оборудовании и управления устройствами.</translation>
+        <translation>Диспетчер устройств — это удобный инструмент для просмотра информации об оборудовании и управления устройствами.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="194"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation>Доступны новые драйверы! Установите или обновите их.</translation>
+        <translation>Доступны новые драйверы! Установите или обновите их сейчас.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="195"/>
         <source>View</source>
-        <translation type="unfinished"/>
+        <translation>Просмотр</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="18"/>
@@ -3035,18 +3035,18 @@
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="64"/>
         <source>Search for drivers in this path</source>
-        <translation type="unfinished"/>
+        <translation>Поиск драйверов в этом пути</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="107"/>
         <source>%1 driver updates available</source>
-        <translation>Доступно обновленных драйверов: %1</translation>
+        <translation>Доступно %1 обновлений драйверов</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="113"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="400"/>
         <source>Time checked: %1</source>
-        <translation>Последняя проверка: %1</translation>
+        <translation>Время проверки: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="166"/>
@@ -3066,12 +3066,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="264"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>Установлено %1 драйверов, %2 драйверов с ошибкой</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="267"/>
         <source>%1 drivers installed</source>
-        <translation>Установлено драйверов: %1</translation>
+        <translation>Установлено %1 драйверов</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="309"/>
@@ -3081,7 +3081,7 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="352"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>Ошибка сети. Переподключение...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="354"/>
@@ -3091,136 +3091,136 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="397"/>
         <source>Your drivers are up to date</source>
-        <translation>Ваши драйверы обновлены</translation>
+        <translation>Ваши драйверы актуальны</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Все драйверы скопированы</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Всего %1 драйверов, из них %2 скопированы</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="546"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"/>
+        <translation>У вас есть %1 драйверов, которые можно скопировать, рекомендуется сделать это немедленно</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"/>
+        <translation>У вас есть %1 драйверов, которые можно скопировать</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="597"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>Копирование %1 драйвера, всего %2 драйверов</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"/>
+        <translation>Копирование: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="638"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>Скопировано %1 драйверов, %2 драйверов с ошибкой</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="641"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>Не удалось скопировать драйверы</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"/>
+        <translation>Скопировано %1 драйверов</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="684"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"/>
+        <translation>У вас есть %1 драйверов, которые можно восстановить</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"/>
+        <translation>Пожалуйста, выберите драйвер для восстановления</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="716"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"/>
+        <translation>Восстановление драйвера...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="717"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"/>
+        <translation>Восстановление: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="872"/>
         <source>reboot</source>
-        <translation>перезагрузите компьютер</translation>
+        <translation>перезагрузите</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="873"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation>Чтобы задействовать установленные драйвера, %1</translation>
+        <translation>Пожалуйста, %1 для вступления установленных драйверов в силу</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="881"/>
         <source>View backup path</source>
-        <translation type="unfinished"/>
+        <translation>Просмотреть путь к резервной копии</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
         <source>Backup All</source>
-        <translation>Создайте резервную копию всех</translation>
+        <translation>Скопировать всё</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="876"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="300"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>отправить отзыв</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="877"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Пожалуйста, попробуйте снова или %1 нам</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="884"/>
         <source>Install All</source>
-        <translation>Установить все</translation>
+        <translation>Установить всё</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="889"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
         <source>Scan Again</source>
-        <translation>Повторный поиск</translation>
+        <translation>Сканировать снова</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="899"/>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="75"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Сканирование драйверов оборудования, пожалуйста, подождите...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="83"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="376"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>Сканирование %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="141"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Ошибка сканирования</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="201"/>
@@ -3230,17 +3230,17 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="205"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>Пожалуйста, проверьте сетевое подключение</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="301"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Пожалуйста, отсканируйте снова или %1 нам</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="763"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation>Вы устанавливаете драйвер, работа которого будет прервана, если вы выйдете из системы.</translation>
+        <translation>Вы устанавливаете драйвер, установка будет прервана, если вы выйдете.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="764"/>
@@ -3263,17 +3263,17 @@
         <location filename="../src/Page/MainWindow.cpp" line="800"/>
         <source>Cancel</source>
         <comment>button</comment>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="779"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation>Вы создаете резервную копию драйверов, которая будет прервана, если вы выйдете из системы.</translation>
+        <translation>Вы создаёте резервную копию драйверов, процесс будет прерван, если вы выйдете.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="795"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation>Вы восстанавливаете драйверы, работа которых будет прервана, если вы выйдете из системы.</translation>
+        <translation>Вы восстанавливаете драйверы, восстановление будет прервано, если вы выйдете.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="49"/>
@@ -3284,7 +3284,7 @@
         <location filename="../src/Tool/commontools.cpp" line="50"/>
         <location filename="../src/Tool/commontools.cpp" line="57"/>
         <source>Imaging device</source>
-        <translation>Устройство для формирования изображения</translation>
+        <translation>Устройство обработки изображений</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="51"/>
@@ -3304,17 +3304,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="59"/>
         <source>Wireless network adapter</source>
-        <translation>Беспроводной адаптер</translation>
+        <translation>Беспроводной сетевой адаптер</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="79"/>
         <source>Installation successful</source>
-        <translation>Установка прошла успешно</translation>
+        <translation>Установка успешна</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="80"/>
         <source>Installation failed</source>
-        <translation>Установка не удалась</translation>
+        <translation>Ошибка установки</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
@@ -3344,22 +3344,22 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="86"/>
         <source>Not backed up</source>
-        <translation>Нет резервной копии</translation>
+        <translation>Не скопирован</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="87"/>
         <source>Backing up</source>
-        <translation>Резервное копирование</translation>
+        <translation>Копирование</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="88"/>
         <source>Backup failed</source>
-        <translation>Сбой резервного копирования</translation>
+        <translation>Ошибка копирования</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="89"/>
         <source>Backup successful</source>
-        <translation>Резервное копирование выполнено успешно</translation>
+        <translation>Копирование успешно</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="90"/>
@@ -3399,12 +3399,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="280"/>
         <source>Restore</source>
-        <translation>Восстанавливать</translation>
+        <translation>Восстановить</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="263"/>
         <source>Install</source>
-        <translation>Установка</translation>
+        <translation>Установить</translation>
     </message>
 </context>
 <context>
@@ -3438,7 +3438,7 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="43"/>
         <source>Allow it to wake the computer</source>
-        <translation>Разрешать вывод компьютера из ждущего режима</translation>
+        <translation>Разрешить пробуждение компьютера</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="238"/>
@@ -3463,7 +3463,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="35"/>
         <source>Copy</source>
-        <translation>Скопировать</translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="276"/>
@@ -3481,7 +3481,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="99"/>
         <source>Select a local folder please</source>
-        <translation>Выберите локальную папку</translation>
+        <translation>Пожалуйста, выберите локальную папку</translation>
     </message>
 </context>
 <context>
