@@ -850,7 +850,7 @@
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1334"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1460"/>
         <source>Max Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Maks. częstotliwość</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1335"/>
@@ -1163,7 +1163,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1398"/>
         <source>Refresh Rate</source>
-        <translation type="unfinished"/>
+        <translation>Częstotliwość odświeżania</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1399"/>
@@ -1344,7 +1344,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1434"/>
         <source>temperature</source>
-        <translation type="unfinished"/>
+        <translation>Temperatura</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1435"/>
@@ -1466,7 +1466,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1459"/>
         <source>Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Częstotliwość</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1464"/>
@@ -1819,12 +1819,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Częstotliwość</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Max Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Maks. częstotliwość</translation>
     </message>
 </context>
 <context>
@@ -1832,12 +1832,12 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1526"/>
         <source>Model Name</source>
-        <translation type="unfinished"/>
+        <translation>Model</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1530"/>
         <source>Vendor ID</source>
-        <translation type="unfinished"/>
+        <translation>ID producenta</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1534"/>
@@ -1852,27 +1852,27 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1540"/>
         <source>Thread(s)</source>
-        <translation type="unfinished"/>
+        <translation>Wątków</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1547"/>
         <source>L1d cache</source>
-        <translation type="unfinished"/>
+        <translation>L1d cache</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1555"/>
         <source>L1i cache</source>
-        <translation type="unfinished"/>
+        <translation>L1i cache</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1563"/>
         <source>L2 cache</source>
-        <translation type="unfinished"/>
+        <translation>L2 cache</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1571"/>
         <source>L3 cache</source>
-        <translation type="unfinished"/>
+        <translation>L3 cache</translation>
     </message>
 </context>
 <context>
@@ -2022,7 +2022,7 @@
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="654"/>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="657"/>
         <source>%1@%2Hz</source>
-        <translation type="unfinished"/>
+        <translation>%1@%2Hz</translation>
     </message>
 </context>
 <context>
