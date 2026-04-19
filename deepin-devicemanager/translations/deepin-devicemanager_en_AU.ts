@@ -1,21 +1,21 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="hu">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="en_AU">
 <context>
     <name>BtnLabel</name>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="49"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="50"/>
         <source>Feedback</source>
-        <translation>Visszajelzés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="63"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation>OK</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -23,7 +23,7 @@
     <message>
         <location filename="../src/Widget/CmdButtonWidget.cpp" line="25"/>
         <source>More</source>
-        <translation>Több</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -31,17 +31,17 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="98"/>
         <source>EC_NOTIFY_NETWORK</source>
-        <translation>EC_NOTIFY_NETWORK</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="99"/>
         <source>EC_REINSTALL</source>
-        <translation>EC_REINSTALL</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="100"/>
         <source>EC_6</source>
-        <translation>EC_6</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -50,12 +50,12 @@
         <location filename="../src/Page/PageDetail.cpp" line="49"/>
         <location filename="../src/Page/PageDetail.cpp" line="54"/>
         <source>More</source>
-        <translation>Több</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDetail.cpp" line="51"/>
         <source>Collapse</source>
-        <translation>Összecsukás</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -64,13 +64,13 @@
         <location filename="../src/Widget/DetailTreeView.cpp" line="175"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="429"/>
         <source>More</source>
-        <translation>Több</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetailTreeView.cpp" line="179"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="437"/>
         <source>Collapse</source>
-        <translation>Összecsukás</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -79,12 +79,12 @@
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="250"/>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="263"/>
         <source>Disable</source>
-        <translation>Letiltás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetailViewDelegate.cpp" line="254"/>
         <source>Unavailable</source>
-        <translation>Nem elérhető</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -92,13 +92,13 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1183"/>
         <source>Core(s)</source>
-        <translation>Mag(ok)</translation>
+        <translation>Core(s)</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1184"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1467"/>
         <source>Processor</source>
-        <translation>Processzor</translation>
+        <translation>Processor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1185"/>
@@ -108,7 +108,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1186"/>
         <source>Address</source>
-        <translation>Cím</translation>
+        <translation>Address</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1187"/>
@@ -118,68 +118,68 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1188"/>
         <source>ansiversion</source>
-        <translation>ansi verzió</translation>
+        <translation>ansiversion</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1189"/>
         <source>Application</source>
-        <translation>Alkalmazás</translation>
+        <translation>Application</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1190"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1458"/>
         <source>Architecture</source>
-        <translation>Architektúra</translation>
+        <translation>Architecture</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1191"/>
         <source>Array Handle</source>
-        <translation>Tömb kezelő</translation>
+        <translation>Array Handle</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1192"/>
         <source>Asset Tag</source>
-        <translation>Eszközcímke</translation>
+        <translation>Asset Tag</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1193"/>
         <source>Auto Negotiation</source>
-        <translation>Automatikus forgalmazás</translation>
+        <translation>Auto Negotiation</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1194"/>
         <source>Bank Locator</source>
-        <translation>Töltés kereső</translation>
+        <translation>Bank Locator</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1195"/>
         <source>Base Board Information</source>
-        <translation>Alaplapi információk</translation>
+        <translation>Base Board Information</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1196"/>
         <source>BD Address</source>
-        <translation>BD címek</translation>
+        <translation>BD Address</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1197"/>
         <source>BIOS Information</source>
-        <translation>BIOS információ</translation>
+        <translation>BIOS Information</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1198"/>
         <source>BIOS Revision</source>
-        <translation>BIOS felülvizsgálat</translation>
+        <translation>BIOS Revision</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1199"/>
         <source>BIOS ROMSIZE</source>
-        <translation>BIOS ROM-mérete</translation>
+        <translation>BIOS ROMSIZE</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1200"/>
         <source>Board name</source>
-        <translation>Tábla neve</translation>
+        <translation>Board name</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1201"/>
@@ -189,57 +189,57 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1202"/>
         <source>Boot-up State</source>
-        <translation>Bootolási állapot</translation>
+        <translation>Boot-up State</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1203"/>
         <source>Broadcast</source>
-        <translation>Adás</translation>
+        <translation>Broadcast</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1204"/>
         <source>Bus</source>
-        <translation>Busz</translation>
+        <translation>Bus</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1205"/>
         <source>bus info</source>
-        <translation>busz adatok</translation>
+        <translation>bus info</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1206"/>
         <source>Bus Info</source>
-        <translation>Busz adatok</translation>
+        <translation>Bus Info</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1207"/>
         <source>Cache Size</source>
-        <translation>Gyorsítótár méret</translation>
+        <translation>Cache Size</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1208"/>
         <source>Capabilities</source>
-        <translation>Képességek</translation>
+        <translation>Capabilities</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1209"/>
         <source>Capacity</source>
-        <translation>Kapacitás</translation>
+        <translation>Capacity</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1210"/>
         <source>Characteristics</source>
-        <translation>Karakterisztika</translation>
+        <translation>Characteristics</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1211"/>
         <source>Chassis Handle</source>
-        <translation>Alváz kezelő</translation>
+        <translation>Chassis Handle</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1212"/>
         <source>Chassis Information</source>
-        <translation>Alváz információ</translation>
+        <translation>Chassis Information</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1213"/>
@@ -249,202 +249,202 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1214"/>
         <source>Chipset</source>
-        <translation>Lapkakészlet</translation>
+        <translation>Chipset</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1215"/>
         <source>Class</source>
-        <translation>Osztály</translation>
+        <translation>Class</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1216"/>
         <source>Clock</source>
-        <translation>Óra</translation>
+        <translation>Clock</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1217"/>
         <source>Config Status</source>
-        <translation>Konfigurációs állapot</translation>
+        <translation>Config Status</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1218"/>
         <source>Configured Speed</source>
-        <translation>Beállított sebesség</translation>
+        <translation>Configured Speed</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1219"/>
         <source>Configured Voltage</source>
-        <translation>Beállított feszültség</translation>
+        <translation>Configured Voltage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1220"/>
         <source>Contained Elements</source>
-        <translation>Tartalmazott elemek</translation>
+        <translation>Contained Elements</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1221"/>
         <source>Contained Object Handles</source>
-        <translation>Tartalmazott objektum kezelők</translation>
+        <translation>Contained Object Handles</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1222"/>
         <source>copies</source>
-        <translation>másolatok</translation>
+        <translation>copies</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1223"/>
         <source>Core ID</source>
-        <translation>Mag azonosító</translation>
+        <translation>Core ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1224"/>
         <source>CPU architecture</source>
-        <translation>Processzor acrhitektúra</translation>
+        <translation>CPU architecture</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1225"/>
         <source>CPU Family</source>
-        <translation>Processzorcsalád</translation>
+        <translation>CPU Family</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1226"/>
         <source>CPU ID</source>
-        <translation>Processzor azonosító</translation>
+        <translation>CPU ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1227"/>
         <source>CPU implementer</source>
-        <translation>Processzor megvalósító</translation>
+        <translation>CPU implementer</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1228"/>
         <source>CPU part</source>
-        <translation>Processzor rész</translation>
+        <translation>CPU part</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1229"/>
         <source>CPU revision</source>
-        <translation>Processzor felülvizsgálat</translation>
+        <translation>CPU revision</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1230"/>
         <source>CPU variant</source>
-        <translation>Processzor variáció</translation>
+        <translation>CPU variant</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1231"/>
         <source>critical-action</source>
-        <translation>kritikus művelet</translation>
+        <translation>critical-action</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1232"/>
         <source>Currently Installed Language</source>
-        <translation>A jelenleg telepített nyelvek</translation>
+        <translation>Currently Installed Language</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1233"/>
         <source>Current Resolution</source>
-        <translation>Aktuális felbontás</translation>
+        <translation>Current Resolution</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1234"/>
         <source>daemon-version</source>
-        <translation>démon-verzió</translation>
+        <translation>daemon-version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1235"/>
         <source>Data Width</source>
-        <translation>Adat szélesség</translation>
+        <translation>Data Width</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1236"/>
         <source>Date</source>
-        <translation>Dátum</translation>
+        <translation>Date</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1237"/>
         <source>description</source>
-        <translation>leírás</translation>
+        <translation>description</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1238"/>
         <source>Description</source>
-        <translation>Leírás</translation>
+        <translation>Description</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1239"/>
         <source>Design Capacity</source>
-        <translation>Tervezési kapacitás</translation>
+        <translation>Design Capacity</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1240"/>
         <source>Design Voltage</source>
-        <translation>Tervezési feszültség</translation>
+        <translation>Design Voltage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1241"/>
         <source>Device</source>
-        <translation>Eszköz</translation>
+        <translation>Device</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1242"/>
         <source>Device Class</source>
-        <translation>Eszköz osztályok</translation>
+        <translation>Device Class</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1243"/>
         <source>Device File</source>
-        <translation>Eszköz fájl</translation>
+        <translation>Device File</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1244"/>
         <source>Device Files</source>
-        <translation>Eszköz fájlok</translation>
+        <translation>Device Files</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1245"/>
         <source>Device Name</source>
-        <translation>Eszköz neve</translation>
+        <translation>Device Name</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1246"/>
         <source>Device Number</source>
-        <translation>Eszköz szám</translation>
+        <translation>Device Number</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1247"/>
         <source>DigitalOutput</source>
-        <translation>Digitális Kimenet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1248"/>
         <source>Disable</source>
-        <translation>Letiltás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1249"/>
         <source>Discoverable</source>
-        <translation>Felfedezhető</translation>
+        <translation>Discoverable</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1250"/>
         <source>Discovering</source>
-        <translation>Felfedezés</translation>
+        <translation>Discovering</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1251"/>
         <source>Display Input</source>
-        <translation>Kijelző bemenete</translation>
+        <translation>Display Input</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1252"/>
         <source>Display Output</source>
-        <translation>Kijelző kimenete</translation>
+        <translation>Display Output</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1253"/>
         <source>Display Ratio</source>
-        <translation>Kijelző képarány</translation>
+        <translation>Display Ratio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1254"/>
@@ -454,27 +454,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1255"/>
         <source>Driver</source>
-        <translation>Illesztőprogram</translation>
+        <translation>Driver</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1256"/>
         <source>Driver Activation Cmd</source>
-        <translation>Illesztőprogram aktiválási parancs</translation>
+        <translation>Driver Activation Cmd</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1257"/>
         <source>Driver Modules</source>
-        <translation>Illesztőprogram modulok</translation>
+        <translation>Driver Modules</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1258"/>
         <source>Driver Status</source>
-        <translation>Illesztőprogram állapot</translation>
+        <translation>Driver Status</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1259"/>
         <source>Driver Version</source>
-        <translation>Illesztőprogram verziója</translation>
+        <translation>Driver Version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1260"/>
@@ -484,7 +484,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1261"/>
         <source>DVI</source>
-        <translation>DVI</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1262"/>
@@ -494,47 +494,47 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1263"/>
         <source>EGL client APIs</source>
-        <translation>EGL kliens API-k</translation>
+        <translation>EGL client APIs</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1264"/>
         <source>EGL version</source>
-        <translation>EGL verzió</translation>
+        <translation>EGL version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1265"/>
         <source>energy</source>
-        <translation>energia</translation>
+        <translation>energy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1266"/>
         <source>energy-empty</source>
-        <translation>energia-üres</translation>
+        <translation>energy-empty</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1267"/>
         <source>energy-full</source>
-        <translation>energia-teli</translation>
+        <translation>energy-full</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1268"/>
         <source>energy-full-design</source>
-        <translation>energia-teljes tervezése</translation>
+        <translation>energy-full-design</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1269"/>
         <source>energy-rate</source>
-        <translation>energia-arány</translation>
+        <translation>energy-rate</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1270"/>
         <source>Error Correction Type</source>
-        <translation>Hibajavítás típusa</translation>
+        <translation>Error Correction Type</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1271"/>
         <source>Error Information Handle</source>
-        <translation>Hibainformáció kezelő</translation>
+        <translation>Error Information Handle</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1272"/>
@@ -544,17 +544,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1273"/>
         <source>Extensions</source>
-        <translation>Kiterjesztések</translation>
+        <translation>Extensions</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1274"/>
         <source>Family</source>
-        <translation>Család</translation>
+        <translation>Family</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1275"/>
         <source>Features</source>
-        <translation>Jellemzők</translation>
+        <translation>Features</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1276"/>
@@ -564,57 +564,57 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1277"/>
         <source>Firmware Revision</source>
-        <translation>Firmware felülvizsgálat</translation>
+        <translation>Firmware Revision</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1278"/>
         <source>Firmware Version</source>
-        <translation>Firmware verzió</translation>
+        <translation>Firmware Version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1279"/>
         <source>Flags</source>
-        <translation>Zászlók</translation>
+        <translation>Flags</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1280"/>
         <source>Form Factor</source>
-        <translation>Űrlap tényező</translation>
+        <translation>Form Factor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1281"/>
         <source>GDDR capacity</source>
-        <translation>GDDR kapacitás</translation>
+        <translation>GDDR capacity</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1282"/>
         <source>Geometry (Logical)</source>
-        <translation>Geometria (Logikai)</translation>
+        <translation>Geometry (Logical)</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1283"/>
         <source>GLSL version</source>
-        <translation>GLSL verzió</translation>
+        <translation>GLSL version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1284"/>
         <source>GL version</source>
-        <translation>GL verzió</translation>
+        <translation>GL version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1285"/>
         <source>GPU type</source>
-        <translation>GPU típus</translation>
+        <translation>GPU type</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1286"/>
         <source>GPU vendor</source>
-        <translation>GPU szállító</translation>
+        <translation>GPU vendor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1287"/>
         <source>Graphics Memory</source>
-        <translation>Grafikus memória</translation>
+        <translation>Graphics Memory</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1288"/>
@@ -624,27 +624,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1289"/>
         <source>Handlers</source>
-        <translation>Kezelők</translation>
+        <translation>Handlers</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1290"/>
         <source>Hardware Class</source>
-        <translation>Hardver osztályok</translation>
+        <translation>Hardware Class</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1291"/>
         <source>has history</source>
-        <translation>történet</translation>
+        <translation>has history</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1292"/>
         <source>has statistics</source>
-        <translation>statisztika</translation>
+        <translation>has statistics</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1293"/>
         <source>HCI Version</source>
-        <translation>HCI Verzió</translation>
+        <translation>HCI Version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1294"/>
@@ -654,37 +654,37 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1295"/>
         <source>Height</source>
-        <translation>Magasság</translation>
+        <translation>Height</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1296"/>
         <source>icon-name</source>
-        <translation>Ikon név</translation>
+        <translation>icon-name</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1297"/>
         <source>Input/Output</source>
-        <translation>Bemenet/Kimenet</translation>
+        <translation>Input/Output</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1298"/>
         <source>Installable Languages</source>
-        <translation>Telepíthető nyelvek</translation>
+        <translation>Installable Languages</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1299"/>
         <source>Interface</source>
-        <translation>Interfész</translation>
+        <translation>Interface</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1300"/>
         <source>Interface Type</source>
-        <translation>Interfész típusa</translation>
+        <translation>Interface Type</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1301"/>
         <source>ioport</source>
-        <translation>IO port</translation>
+        <translation>ioport</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1302"/>
@@ -704,47 +704,47 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1305"/>
         <source>job-cancel-after</source>
-        <translation>munka törlése utána</translation>
+        <translation>job-cancel-after</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1306"/>
         <source>job-hold-until</source>
-        <translation>munka tartása amíg</translation>
+        <translation>job-hold-until</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1307"/>
         <source>job-priority</source>
-        <translation>munka fontossága</translation>
+        <translation>job-priority</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1308"/>
         <source>KernelModeDriver</source>
-        <translation>Kernel módú illesztőprogram</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1309"/>
         <source>KEY</source>
-        <translation>Kulcs</translation>
+        <translation>KEY</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1310"/>
         <source>L1d Cache</source>
-        <translation>L1d gyorsítótár</translation>
+        <translation>L1d Cache</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1311"/>
         <source>L1i Cache</source>
-        <translation>L1i gyorsítótár</translation>
+        <translation>L1i Cache</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1312"/>
         <source>L2 Cache</source>
-        <translation>L2 gyorsítótár</translation>
+        <translation>L2 Cache</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1313"/>
         <source>L3 Cache</source>
-        <translation>L3 gyorsítótár</translation>
+        <translation>L3 Cache</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1314"/>
@@ -754,97 +754,97 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1315"/>
         <source>Language Description Format</source>
-        <translation>Nyelvi leírás formátuma</translation>
+        <translation>Language Description Format</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1316"/>
         <source>latency</source>
-        <translation>késleltetés</translation>
+        <translation>latency</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1317"/>
         <source>Latency</source>
-        <translation>Késleltetés</translation>
+        <translation>Latency</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1318"/>
         <source>lid-is-closed</source>
-        <translation>lezárt fedélnél</translation>
+        <translation>lid-is-closed</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1319"/>
         <source>lid-is-present</source>
-        <translation>nyitott fedélnél</translation>
+        <translation>lid-is-present</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1320"/>
         <source>Link</source>
-        <translation>Hivatkozás</translation>
+        <translation>Link</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1321"/>
         <source>Link mode</source>
-        <translation>Hivatkozási mód</translation>
+        <translation>Link mode</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1322"/>
         <source>Link policy</source>
-        <translation>Hivatkozási szabályok</translation>
+        <translation>Link policy</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1323"/>
         <source>LMP Version</source>
-        <translation>LMP Verzió</translation>
+        <translation>LMP Version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1324"/>
         <source>Location</source>
-        <translation>Hely</translation>
+        <translation>Location</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1325"/>
         <source>Location In Chassis</source>
-        <translation>Elhelyezkedés az alvázon</translation>
+        <translation>Location In Chassis</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1326"/>
         <source>Locator</source>
-        <translation>Helykereső</translation>
+        <translation>Locator</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1327"/>
         <source>Lock</source>
-        <translation>Zárolás</translation>
+        <translation>Lock</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1328"/>
         <source>logical name</source>
-        <translation>logikai név</translation>
+        <translation>logical name</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1329"/>
         <source>Logical Name</source>
-        <translation>Logikai név</translation>
+        <translation>Logical Name</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1330"/>
         <source>logicalsectorsize</source>
-        <translation>logikai szektorméret</translation>
+        <translation>logicalsectorsize</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1331"/>
         <source>Logical Size</source>
-        <translation>Logikai méret</translation>
+        <translation>Logical Size</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1332"/>
         <source>MAC Address</source>
-        <translation>MAC cím</translation>
+        <translation>MAC Address</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1333"/>
         <source>marker-change-time</source>
-        <translation>jelölő váltás ideje</translation>
+        <translation>marker-change-time</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1334"/>
@@ -855,99 +855,99 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1335"/>
         <source>Maximum Capacity</source>
-        <translation>Legnagyobb kapacitás</translation>
+        <translation>Maximum Capacity</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1336"/>
         <source>Maximum Current</source>
-        <translation>Legnagyobb áram</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1337"/>
         <source>Maximum Power</source>
-        <translation>Legnagyobb teljesítmény</translation>
+        <translation>Maximum Power</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1338"/>
         <source>Maximum Rate</source>
-        <translation>Legnagyobb arány</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1339"/>
         <source>Maximum Resolution</source>
-        <translation>Legnagyobb felbontás</translation>
+        <translation>Maximum Resolution</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1340"/>
         <source>Maximum Voltage</source>
-        <translation>Legnagyobb feszültség</translation>
+        <translation>Maximum Voltage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1341"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1461"/>
         <source>Media Type</source>
-        <translation>Adathordozó típusa</translation>
+        <translation>Media Type</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1342"/>
         <source>Memory</source>
-        <translation>Memória</translation>
+        <translation>Memory</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1343"/>
         <source>Memory Address</source>
-        <translation>Memóriacím</translation>
+        <translation>Memory Address</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1344"/>
         <source>Memory Operating Mode Capability</source>
-        <translation>Memória üzemmód képesség</translation>
+        <translation>Memory Operating Mode Capability</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1345"/>
         <source>Memory Subsystem Controller Manufacturer ID</source>
-        <translation>Memória alrendszer vezérlő gyártói azonosító</translation>
+        <translation>Memory Subsystem Controller Manufacturer ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1346"/>
         <source>Memory Subsystem Controller Product ID</source>
-        <translation>Memória alrendszer vezérlő termék azonosító</translation>
+        <translation>Memory Subsystem Controller Product ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1347"/>
         <source>Memory Technology</source>
-        <translation>Memória technológia</translation>
+        <translation>Memory Technology</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1348"/>
         <source>Minimum Resolution</source>
-        <translation>Legkisebb felbontás</translation>
+        <translation>Minimum Resolution</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1349"/>
         <source>Minimum Voltage</source>
-        <translation>Legkisebb feszültség</translation>
+        <translation>Minimum Voltage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1350"/>
         <source>Modalias</source>
-        <translation>Becenév módosítása</translation>
+        <translation>Modalias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1352"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1353"/>
         <source>Module Alias</source>
-        <translation>Becenév modul</translation>
+        <translation>Module Alias</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1354"/>
         <source>Module Manufacturer ID</source>
-        <translation>Modul gyártói azonosító</translation>
+        <translation>Module Manufacturer ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1355"/>
         <source>Module Product ID</source>
-        <translation>Termék modul azonosító</translation>
+        <translation>Module Product ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1356"/>
@@ -957,58 +957,58 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1357"/>
         <source>Multicast</source>
-        <translation>Többszereplős</translation>
+        <translation>Multicast</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1358"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1462"/>
         <source>Name</source>
-        <translation>Név</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1359"/>
         <source>native-path</source>
-        <translation>natív útvonal</translation>
+        <translation>native-path</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1360"/>
         <source>Negotiation Rate</source>
-        <translation>Forgalomba hozatali arány</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1361"/>
         <source>network</source>
-        <translation>hálózat</translation>
+        <translation>network</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1362"/>
         <source>Non-Volatile Size</source>
-        <translation>Nem illékony méret</translation>
+        <translation>Non-Volatile Size</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1363"/>
         <source>Number Of Devices</source>
-        <translation>Eszközök száma</translation>
+        <translation>Number Of Devices</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1364"/>
         <source>Number Of Power Cords</source>
-        <translation>Tápkábelek száma</translation>
+        <translation>Number Of Power Cords</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1365"/>
         <source>number-up</source>
-        <translation>felszámítás</translation>
+        <translation>number-up</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1366"/>
         <source>OEM Information</source>
-        <translation>OEM információ</translation>
+        <translation>OEM Information</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1367"/>
         <source>on-battery</source>
-        <translation>Akkumulátoron</translation>
+        <translation>on-battery</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1368"/>
@@ -1018,47 +1018,47 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1369"/>
         <source>orientation-requested</source>
-        <translation>tájolást kíván</translation>
+        <translation>orientation-requested</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1370"/>
         <source>Packet type</source>
-        <translation>Csomagtípus</translation>
+        <translation>Packet type</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1371"/>
         <source>Pairable</source>
-        <translation>Párosítható</translation>
+        <translation>Pairable</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1372"/>
         <source>Part Number</source>
-        <translation>Rész szám</translation>
+        <translation>Part Number</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1373"/>
         <source>percentage</source>
-        <translation>százalék</translation>
+        <translation>percentage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1374"/>
         <source>Phys</source>
-        <translation>Fizikai</translation>
+        <translation>Phys</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1375"/>
         <source>physical id</source>
-        <translation>Fizikai azonosító</translation>
+        <translation>physical id</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1376"/>
         <source>Physical ID</source>
-        <translation>Fizikai azonosító</translation>
+        <translation>Physical ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1377"/>
         <source>Physical Memory Array</source>
-        <translation>Fizikai memória tömb</translation>
+        <translation>Physical Memory Array</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1378"/>
@@ -1068,82 +1068,82 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1379"/>
         <source>Powered</source>
-        <translation>Gyártó</translation>
+        <translation>Powered</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1380"/>
         <source>power supply</source>
-        <translation>tápellátás</translation>
+        <translation>power supply</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1381"/>
         <source>Power Supply State</source>
-        <translation>Tápellátási állapot</translation>
+        <translation>Power Supply State</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1382"/>
         <source>Primary Monitor</source>
-        <translation>Elsődleges megjelenítő</translation>
+        <translation>Primary Monitor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1383"/>
         <source>print-color-mode</source>
-        <translation>színes nyomtatási mód</translation>
+        <translation>print-color-mode</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1384"/>
         <source>printer-is-accepting-jobs</source>
-        <translation>nyomtató fogadta a feladatokat</translation>
+        <translation>printer-is-accepting-jobs</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1385"/>
         <source>printer-is-shared</source>
-        <translation>a nyomtató megosztva</translation>
+        <translation>printer-is-shared</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1386"/>
         <source>printer-is-temporary</source>
-        <translation>a nyomtató elfoglalt</translation>
+        <translation>printer-is-temporary</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1387"/>
         <source>printer-make-and-model</source>
-        <translation>nyomtató-gyártmány és modell</translation>
+        <translation>printer-make-and-model</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1388"/>
         <source>printer-state-change-time</source>
-        <translation>nyomtató-állapot-váltás ideje</translation>
+        <translation>printer-state-change-time</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1389"/>
         <source>printer-state-reasons</source>
-        <translation>nyomtató-állapot-váltás oka</translation>
+        <translation>printer-state-reasons</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1390"/>
         <source>printer-type</source>
-        <translation>nyomtató típusa</translation>
+        <translation>printer-type</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1391"/>
         <source>printer-uri-supported</source>
-        <translation>nyomtató uri-támogatott</translation>
+        <translation>printer-uri-supported</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1392"/>
         <source>product</source>
-        <translation>termék</translation>
+        <translation>product</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1393"/>
         <source>Product Date</source>
-        <translation>Termék dátuma</translation>
+        <translation>Product Date</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1394"/>
         <source>Product Name</source>
-        <translation>Terméknév</translation>
+        <translation>Product Name</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1395"/>
@@ -1153,12 +1153,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1396"/>
         <source>Rank</source>
-        <translation>Besorolás</translation>
+        <translation>Rank</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1397"/>
         <source>rechargeable</source>
-        <translation>újratölthető</translation>
+        <translation>rechargeable</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1398"/>
@@ -1168,52 +1168,52 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1399"/>
         <source>Release date</source>
-        <translation>Kiadás dátuma</translation>
+        <translation>Release date</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1400"/>
         <source>Release Date</source>
-        <translation>Megjelenési dátum</translation>
+        <translation>Release Date</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1401"/>
         <source>Revision</source>
-        <translation>Felülvizsgálat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1402"/>
         <source>ROM Size</source>
-        <translation>ROM mérete</translation>
+        <translation>ROM Size</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1403"/>
         <source>Rotation Rate</source>
-        <translation>Forgási sebesség</translation>
+        <translation>Rotation Rate</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1404"/>
         <source>Runtime Size</source>
-        <translation>Futásidő méret</translation>
+        <translation>Runtime Size</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1405"/>
         <source>SBDS Chemistry</source>
-        <translation>SBDS Kémia</translation>
+        <translation>SBDS Chemistry</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1406"/>
         <source>SBDS Manufacture Date</source>
-        <translation>SBDS Gyártási dátum</translation>
+        <translation>SBDS Manufacture Date</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1407"/>
         <source>SBDS Serial Number</source>
-        <translation>SBDS Sorozatszám</translation>
+        <translation>SBDS Serial Number</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1408"/>
         <source>SBDS Version</source>
-        <translation>SBDS Verzió</translation>
+        <translation>SBDS Version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1409"/>
@@ -1223,103 +1223,103 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1410"/>
         <source>sectorsize</source>
-        <translation>szektorméret</translation>
+        <translation>sectorsize</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1411"/>
         <source>Security Status</source>
-        <translation>Biztonsági állapot</translation>
+        <translation>Security Status</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1412"/>
         <source>Serial ID</source>
-        <translation>Sorozat azonosító</translation>
+        <translation>Serial ID</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1413"/>
         <source>Serial Number</source>
-        <translation>Sorozatszám</translation>
+        <translation>Serial Number</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1414"/>
         <source>Service Classes</source>
-        <translation>Szolgáltatási osztályok</translation>
+        <translation>Service Classes</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1415"/>
         <source>Set</source>
-        <translation>Beállít</translation>
+        <translation>Set</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1416"/>
         <source>Shared</source>
-        <translation>Megosztott</translation>
+        <translation>Shared</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1417"/>
         <source>sides</source>
-        <translation>oldalak</translation>
+        <translation>sides</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1418"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1463"/>
         <source>Size</source>
-        <translation>Méret</translation>
+        <translation>Size</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1419"/>
         <source>SKU Number</source>
-        <translation>SKU szám</translation>
+        <translation>SKU Number</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1420"/>
         <source>Slot</source>
-        <translation>Foglalat</translation>
+        <translation>Slot</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1421"/>
         <source>SMBIOS Version</source>
-        <translation>SMBIOS Verzió</translation>
+        <translation>SMBIOS Version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1422"/>
         <source>state</source>
-        <translation>állapot</translation>
+        <translation>state</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1423"/>
         <source>status</source>
-        <translation>állapot</translation>
+        <translation>status</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1424"/>
         <source>Status</source>
-        <translation>Állapot</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1425"/>
         <source>Stepping</source>
-        <translation>Lépés</translation>
+        <translation>Stepping</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1426"/>
         <source>SubDevice</source>
-        <translation>Aleszköz</translation>
+        <translation>SubDevice</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1427"/>
         <source>SubVendor</source>
-        <translation>Alszállító</translation>
+        <translation>SubVendor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1428"/>
         <source>Subversion</source>
-        <translation>Alverzió</translation>
+        <translation>Subversion</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1429"/>
         <source>Support Resolution</source>
-        <translation>Támogatott felbontás</translation>
+        <translation>Support Resolution</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1430"/>
@@ -1329,68 +1329,68 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1431"/>
         <source>SysFS_Path</source>
-        <translation>SysFS_Útvonal</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1432"/>
         <source>System Information</source>
-        <translation>Rendszerinformációk</translation>
+        <translation>System Information</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1433"/>
         <source>technology</source>
-        <translation>technológia</translation>
+        <translation>technology</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1434"/>
         <source>temperature</source>
-        <translation>hőmérséklet</translation>
+        <translation>temperature</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1435"/>
         <source>Temperature</source>
-        <translation>Hőmérséklet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1436"/>
         <source>Thermal State</source>
-        <translation>Hőmérséklet állapot</translation>
+        <translation>Thermal State</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1437"/>
         <source>Threads</source>
-        <translation>Szálak</translation>
+        <translation>Threads</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1438"/>
         <source>Total Width</source>
-        <translation>Teljes szélesség</translation>
+        <translation>Total Width</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1439"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1465"/>
         <source>Type</source>
-        <translation>Típus</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1440"/>
         <source>Type Detail</source>
-        <translation>Típus részletek</translation>
+        <translation>Type Detail</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1441"/>
         <source>Unavailable</source>
-        <translation>Nem elérhető</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1442"/>
         <source>Uniq</source>
-        <translation>Egyedi</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1443"/>
         <source>updated</source>
-        <translation>frissítve</translation>
+        <translation>updated</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1444"/>
@@ -1406,12 +1406,12 @@
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1446"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1466"/>
         <source>Vendor</source>
-        <translation>Gyártó</translation>
+        <translation>Vendor</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1447"/>
         <source>Version</source>
-        <translation>Verzió</translation>
+        <translation>Version</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1448"/>
@@ -1421,47 +1421,47 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1449"/>
         <source>Virtualization</source>
-        <translation>Virtualizáció</translation>
+        <translation>Virtualisation</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1450"/>
         <source>Volatile Size</source>
-        <translation>Illékony méret</translation>
+        <translation>Volatile Size</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1451"/>
         <source>voltage</source>
-        <translation>feszültség</translation>
+        <translation>voltage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1452"/>
         <source>Voltage</source>
-        <translation>Feszültség</translation>
+        <translation>Voltage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1453"/>
         <source>Wake-up Type</source>
-        <translation>Felébresztés típusa</translation>
+        <translation>Wake-up Type</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1454"/>
         <source>warning-level</source>
-        <translation>figyelmeztetési szint</translation>
+        <translation>warning-level</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1455"/>
         <source>Width</source>
-        <translation>Szélesség</translation>
+        <translation>Width</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1456"/>
         <source>battery</source>
-        <translation>akkumulátor</translation>
+        <translation>battery</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1457"/>
         <source>inch</source>
-        <translation>incs</translation>
+        <translation>inch</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1459"/>
@@ -1471,12 +1471,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1464"/>
         <source>Speed</source>
-        <translation>Sebesség</translation>
+        <translation>Speed</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1351"/>
         <source>Model</source>
-        <translation>Modell</translation>
+        <translation>Model</translation>
     </message>
 </context>
 <context>
@@ -1484,337 +1484,337 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="12"/>
         <source>One</source>
-        <translation>Egy</translation>
+        <translation>One</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="13"/>
         <source>Two</source>
-        <translation>Kettő</translation>
+        <translation>Two</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="14"/>
         <source>Four</source>
-        <translation>Négy</translation>
+        <translation>Four</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="15"/>
         <source>Six</source>
-        <translation>Hat</translation>
+        <translation>Six</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="16"/>
         <source>Eight</source>
-        <translation>Nyolc</translation>
+        <translation>Eight</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="17"/>
         <source>Ten</source>
-        <translation>Tíz</translation>
+        <translation>Ten</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="18"/>
         <source>Twelve</source>
-        <translation>Tizenkettő</translation>
+        <translation>Twelve</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="19"/>
         <source>Fourteen</source>
-        <translation>Tizennégy</translation>
+        <translation>Fourteen</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="20"/>
         <source>Sixteen</source>
-        <translation>Tizenhat</translation>
+        <translation>Sixteen</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="21"/>
         <source>Eighteen</source>
-        <translation>Tizennyolc</translation>
+        <translation>Eighteen</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="22"/>
         <source>Twenty</source>
-        <translation>Húsz</translation>
+        <translation>Twenty</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="23"/>
         <source>Twenty-two</source>
-        <translation>Huszonkettő</translation>
+        <translation>Twenty-two</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="24"/>
         <source>Twenty-four</source>
-        <translation>Huszonnégy</translation>
+        <translation>Twenty-four</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="25"/>
         <source>Twenty-six</source>
-        <translation>Huszonhat</translation>
+        <translation>Twenty-six</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="26"/>
         <source>Twenty-eight</source>
-        <translation>Huszonnyolc</translation>
+        <translation>Twenty-eight</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="27"/>
         <source>Thirty</source>
-        <translation>Harminc</translation>
+        <translation>Thirty</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="28"/>
         <source>Thirty-two</source>
-        <translation>Harminckettő</translation>
+        <translation>Thirty-two</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="29"/>
         <source>Thirty-four</source>
-        <translation>Harmincnégy</translation>
+        <translation>Thirty-four</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="30"/>
         <source>Thirty-six</source>
-        <translation>Harminchat</translation>
+        <translation>Thirty-six</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="31"/>
         <source>Thirty-eight</source>
-        <translation>Harmincnyolc</translation>
+        <translation>Thirty-eight</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="32"/>
         <source>Forty</source>
-        <translation>Negyven</translation>
+        <translation>Forty</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="33"/>
         <source>Forty-two</source>
-        <translation>Negyvenkettő</translation>
+        <translation>Forty-two</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="34"/>
         <source>Forty-four</source>
-        <translation>Negyvennégy</translation>
+        <translation>Forty-four</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="35"/>
         <source>Forty-six</source>
-        <translation>Negyvenhat</translation>
+        <translation>Forty-six</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="36"/>
         <source>Forty-eight</source>
-        <translation>Negyvennyolc</translation>
+        <translation>Forty-eight</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="37"/>
         <source>Fifty</source>
-        <translation>Ötven</translation>
+        <translation>Fifty</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="38"/>
         <source>Fifty-two</source>
-        <translation>Ötvenkettő</translation>
+        <translation>Fifty-two</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="39"/>
         <source>Fifty-four</source>
-        <translation>Ötvennégy</translation>
+        <translation>Fifty-four</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="40"/>
         <source>Fifty-six</source>
-        <translation>Ötvenhat</translation>
+        <translation>Fifty-six</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="41"/>
         <source>Fifty-eight</source>
-        <translation>Ötvennyolc</translation>
+        <translation>Fifty-eight</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="42"/>
         <source>Sixty</source>
-        <translation>Hatvan</translation>
+        <translation>Sixty</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="43"/>
         <source>Sixty-two</source>
-        <translation>Hatvankettő</translation>
+        <translation>Sixty-two</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="44"/>
         <source>Sixty-four</source>
-        <translation>Hatvannégy</translation>
+        <translation>Sixty-four</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="45"/>
         <source>Sixty-six</source>
-        <translation>Hatvanhat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="46"/>
         <source>Sixty-eight</source>
-        <translation>Hatvannyolc</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="47"/>
         <source>Seventy</source>
-        <translation>Hetven</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="48"/>
         <source>Seventy-two</source>
-        <translation>Hetvenkettő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="49"/>
         <source>Seventy-four</source>
-        <translation>Hetvennégy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="50"/>
         <source>Seventy-six</source>
-        <translation>Hetvenhat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
         <source>Seventy-eight</source>
-        <translation>Hetvennyolc</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
         <source>Eighty</source>
-        <translation>Nyolcvan</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="53"/>
         <source>Eighty-two</source>
-        <translation>Nyolcvankettő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
         <source>Eighty-four</source>
-        <translation>Nyolcvannégy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
         <source>Eighty-six</source>
-        <translation>Nyolcvanhat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>Eighty-eight</source>
-        <translation>Nyolcvannyolc</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
         <source>Ninety</source>
-        <translation>Kilencven</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>Ninety-two</source>
-        <translation>Kilencvenkettő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>Ninety-four</source>
-        <translation>Kilencvennégy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
         <source>Ninety-six</source>
-        <translation>Kilencvenhat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
         <source>Ninety-eight</source>
-        <translation>Kilencvennyolc</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="62"/>
         <source>One hundred</source>
-        <translation>Száz</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
         <source>One hundred and Two</source>
-        <translation>Százkettő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
         <source>One hundred and four</source>
-        <translation>Száznégy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
         <source>One hundred and Six</source>
-        <translation>Százhat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
         <source>One hundred and Eight</source>
-        <translation>Száznyolc</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
         <source>One hundred and Ten</source>
-        <translation>Száztíz</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
         <source>One hundred and Twelve</source>
-        <translation>Száztizenkettő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
         <source>One hundred and Fourteen</source>
-        <translation>Száztizennégy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>One hundred and Sixteen</source>
-        <translation>Száztizenhat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
         <source>One hundred and Eighteen</source>
-        <translation>Száztizennyolc</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
         <source>One hundred and Twenty</source>
-        <translation>Százhúsz</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
         <source>One hundred and Twenty-two</source>
-        <translation>Százhuszonkettő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
         <source>One hundred and Twenty-four</source>
-        <translation>Százhuszonnégy</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="75"/>
         <source>One hundred and Twenty-six</source>
-        <translation>Százhuszonhat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="76"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>Százhuszonnyolc</translation>
+        <translation>One hundred and Twenty-eight</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="77"/>
         <source>One hundred and Ninety-two</source>
-        <translation>Százkilencvenkettő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
         <source>Two hundred and fifty-six</source>
-        <translation>Kétszázötvenhat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
@@ -1842,12 +1842,12 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1534"/>
         <source>Architecture</source>
-        <translation>Architektúra</translation>
+        <translation>Architecture</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1538"/>
         <source>Core(s)</source>
-        <translation>Mag(ok)</translation>
+        <translation>Core(s)</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1540"/>
@@ -1889,62 +1889,62 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1997"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="2013"/>
         <source>Overview</source>
-        <translation>Áttekintés</translation>
+        <translation>Overview</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="159"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="295"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="2101"/>
         <source>CPU</source>
-        <translation>Processzor</translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="165"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="2104"/>
         <source>CPU quantity</source>
-        <translation>Processzorok száma</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="178"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="296"/>
         <source>Motherboard</source>
-        <translation>Alaplap</translation>
+        <translation>Motherboard</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="184"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="297"/>
         <source>Memory</source>
-        <translation>Memória</translation>
+        <translation>Memory</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="190"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="298"/>
         <source>Display Adapter</source>
-        <translation>Kijelző feldolgozó</translation>
+        <translation>Display Adapter</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="196"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="299"/>
         <source>Sound Adapter</source>
-        <translation>Hang feldolgozó</translation>
+        <translation>Sound Adapter</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="202"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="300"/>
         <source>Storage</source>
-        <translation>Tárhely</translation>
+        <translation>Storage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="208"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="301"/>
         <source>Other PCI Devices</source>
-        <translation>Egyéb PCI-eszközök</translation>
+        <translation>Other PCI Devices</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="214"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="302"/>
         <source>Battery</source>
-        <translation>Akkumulátor</translation>
+        <translation>Battery</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="227"/>
@@ -1956,7 +1956,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="233"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="304"/>
         <source>Network Adapter</source>
-        <translation>Hálózati feldolgozó</translation>
+        <translation>Network Adapter</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="246"/>
@@ -1968,7 +1968,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="252"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="306"/>
         <source>Keyboard</source>
-        <translation>Billentyűzet</translation>
+        <translation>Keyboard</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="264"/>
@@ -1986,34 +1986,34 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="274"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="309"/>
         <source>Printer</source>
-        <translation>Nyomtató</translation>
+        <translation>Printer</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="279"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="310"/>
         <source>Camera</source>
-        <translation>Kamera</translation>
+        <translation>Camera</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="284"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="311"/>
         <source>Other Devices</source>
         <comment>Other Input Devices</comment>
-        <translation>Egyéb eszközök</translation>
+        <translation>Other Devices</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1908"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1972"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="2004"/>
         <source>Device</source>
-        <translation>Eszköz</translation>
+        <translation>Device</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1916"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1976"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="2008"/>
         <source>OS</source>
-        <translation>Operációs rendszer</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2031,12 +2031,12 @@
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="61"/>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="151"/>
         <source>Select a driver for update</source>
-        <translation>Válasszon illesztőprogramot a frissítéshez</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverNameWidget.cpp" line="144"/>
         <source>No drivers found in this folder</source>
-        <translation>Ebben a mappában nem található illesztőprogram</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2044,52 +2044,52 @@
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="88"/>
         <source>Loading Audio Device Info...</source>
-        <translation>Hangeszköz információinak betöltése...</translation>
+        <translation>Loading Audio Device Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="91"/>
         <source>Loading BIOS Info...</source>
-        <translation>BIOS információk betöltése...</translation>
+        <translation>Loading BIOS Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="101"/>
         <source>Loading CD-ROM Info...</source>
-        <translation>CD-ROM információinak betöltése...</translation>
+        <translation>Loading CD-ROM Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="106"/>
         <source>Loading Operating System Info...</source>
-        <translation>Operációs rendszer információinak betöltése...</translation>
+        <translation>Loading Operating System Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="109"/>
         <source>Loading CPU Info...</source>
-        <translation>Processzor információinak betöltése...</translation>
+        <translation>Loading CPU Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="110"/>
         <source>Loading Other Devices Info...</source>
-        <translation>Egyéb eszközök információinak betöltése...</translation>
+        <translation>Loading Other Devices Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="111"/>
         <source>Loading Power Info...</source>
-        <translation>Tápellátás információinak betöltése...</translation>
+        <translation>Loading Power Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="112"/>
         <source>Loading Printer Info...</source>
-        <translation>Nyomtató információinak betöltése...</translation>
+        <translation>Loading Printer Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="115"/>
         <source>Loading Mouse Info...</source>
-        <translation>Egér információinak betöltése...</translation>
+        <translation>Loading Mouse Info...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="116"/>
         <source>Loading Network Adapter Info...</source>
-        <translation>Hálózati csatoló információinak betöltése...</translation>
+        <translation>Loading Network Adapter Info...</translation>
     </message>
 </context>
 <context>
@@ -2099,12 +2099,12 @@
         <location filename="../src/Widget/logtreeview.cpp" line="144"/>
         <location filename="../src/Widget/logtreeview.cpp" line="147"/>
         <source>Disable</source>
-        <translation>Letiltás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/logtreeview.cpp" line="119"/>
         <source>Unavailable</source>
-        <translation>Nem elérhető</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2112,12 +2112,12 @@
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="121"/>
         <source>Disable</source>
-        <translation>Letiltás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/logviewitemdelegate.cpp" line="124"/>
         <source>Unavailable</source>
-        <translation>Nem elérhető</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2126,57 +2126,57 @@
         <location filename="../src/Page/MainWindow.cpp" line="284"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
-        <translation>Eszköz információ</translation>
+        <translation>Device Info</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="361"/>
         <source>Display shortcuts</source>
-        <translation>Parancsikonok megjelenítése</translation>
+        <translation>Display shortcuts</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="362"/>
         <source>Close</source>
-        <translation>Bezárás</translation>
+        <translation>Close</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="363"/>
         <source>Help</source>
-        <translation>Segítség</translation>
+        <translation>Help</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="364"/>
         <source>Copy</source>
-        <translation>Másolás</translation>
+        <translation>Copy</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="368"/>
         <source>System</source>
-        <translation>Rendszer</translation>
+        <translation>System</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
         <source>Export</source>
-        <translation>Exportálás</translation>
+        <translation>Export</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="376"/>
         <source>Refresh</source>
-        <translation>Frissítés</translation>
+        <translation>Refresh</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="380"/>
         <source>Device Manager</source>
-        <translation>Eszközkezelő</translation>
+        <translation>Device Manager</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="457"/>
         <source>Hardware</source>
-        <translation>Hardver</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="457"/>
         <source>Drivers</source>
-        <translation>Illesztőprogramok</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="620"/>
@@ -2186,27 +2186,27 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="620"/>
         <source>Overview</source>
-        <translation>Áttekintés</translation>
+        <translation>Overview</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="624"/>
         <source>Display Adapter</source>
-        <translation>Kijelző feldolgozó</translation>
+        <translation>Display Adapter</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="628"/>
         <source>CPU</source>
-        <translation>Processzor</translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="632"/>
         <source>Network Adapter</source>
-        <translation>Hálózati feldolgozó</translation>
+        <translation>Network Adapter</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="638"/>
         <source>Battery</source>
-        <translation>Akkumulátor</translation>
+        <translation>Battery</translation>
     </message>
 </context>
 <context>
@@ -2214,7 +2214,7 @@
     <message>
         <location filename="../src/Page/PageDetail.cpp" line="354"/>
         <source>More</source>
-        <translation>Több</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2223,39 +2223,39 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="100"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Name</source>
-        <translation>Név</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Current Version</source>
-        <translation>Jelenlegi verzió</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Driver Platform Version</source>
-        <translation>Illesztőprogram-platform verzió</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="102"/>
         <source>Status</source>
-        <translation>Állapot</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="102"/>
         <source>Action</source>
-        <translation>Művelet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="193"/>
         <source>Backupable Drivers</source>
-        <translation>Biztonsági mentésre alkalmas illesztőprogramok</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="194"/>
         <source>Backed up Drivers</source>
-        <translation>Mentett illesztőprogramok</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2264,7 +2264,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="116"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="260"/>
         <source>Updating</source>
-        <translation>Frissítés...</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
@@ -2272,128 +2272,128 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="214"/>
         <source>Cancel</source>
         <comment>button</comment>
-        <translation>Mégsem</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>Next</source>
-        <translation>Következő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="142"/>
         <source>Warning</source>
-        <translation>Figyelmeztetés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="142"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation>Az eszköz nem lesz elérhető az illesztőprogram eltávolítása után</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="146"/>
         <source>Uninstall</source>
         <comment>button</comment>
-        <translation>Eltávolítás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="150"/>
         <source>Uninstalling</source>
-        <translation>Eltávolítás....</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Update successful</source>
-        <translation>A frissítés sikeres</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Uninstallation successful</source>
-        <translation>Az eltávolítás sikeres</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Update failed</source>
-        <translation>A frissítés sikertelen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Uninstallation failed</source>
-        <translation>Az eltávolítás sikertelen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
         <source>OK</source>
         <comment>button</comment>
-        <translation>OK</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
         <source>Next</source>
         <comment>button</comment>
-        <translation>Következő</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="238"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation>A kiválasztott mappa nem létezik, kérjük válasszon ki egy másikat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
         <source>Update</source>
         <comment>button</comment>
-        <translation>Frissítés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
         <source>Previous</source>
         <comment>button</comment>
-        <translation>Előző</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="275"/>
         <source>Broken package</source>
-        <translation>Törött csomag</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="280"/>
         <source>Unmatched package architecture</source>
-        <translation>Páratlan csomagarchitektúra </translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="286"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="386"/>
         <source>The selected file does not exist, please select again</source>
-        <translation>A kiválasztott fájl nem létezik, kérjük válasszon ki egy másikat</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="387"/>
         <source>It is not a driver</source>
-        <translation>Ez nem egy illesztőprogram</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="388"/>
         <source>Unable to install - no digital signature</source>
-        <translation>A telepítés nem lehetséges – nincs digitális aláírás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="382"/>
         <source>Unknown error</source>
-        <translation>Ismeretlen hiba</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="383"/>
         <source>The driver module was not found</source>
-        <translation>Az illesztőprogram modul nem található</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="384"/>
         <source>Invalid module format</source>
-        <translation>Érvénytelen modul formátum</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="385"/>
         <source>The driver module has dependencies</source>
-        <translation>Az illesztőprogram modulnak függőségei vannak</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2403,55 +2403,55 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="123"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
         <source>Device Name</source>
-        <translation>Eszköz neve</translation>
+        <translation>Device Name</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="111"/>
         <source>Version Available</source>
-        <translation>Elérhető verzió</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="112"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="125"/>
         <source>Size</source>
-        <translation>Méret</translation>
+        <translation>Size</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="113"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="126"/>
         <source>Status</source>
-        <translation>Állapot</translation>
+        <translation>Status</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="114"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="127"/>
         <source>Action</source>
-        <translation>Művelet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="124"/>
         <source>New Version</source>
-        <translation>Új verzió</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
         <source>Current Version</source>
-        <translation>Jelenlegi verzió</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="230"/>
         <source>Missing drivers (%1)</source>
-        <translation>Hiányzó illesztőprogramok (%1)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="231"/>
         <source>Outdated drivers (%1)</source>
-        <translation>Elavult illesztőprogramok (%1)</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="232"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation>Naprakész illesztőprogramok (%1)</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2461,7 +2461,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="118"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="548"/>
         <source>Driver Install</source>
-        <translation>Illesztőprogram telepítése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
@@ -2469,23 +2469,23 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="119"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="550"/>
         <source>Driver Backup</source>
-        <translation>Illesztőprogram biztonsági mentése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="120"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="552"/>
         <source>Driver Restore</source>
-        <translation>Illesztőprogram helyreállítása</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="723"/>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="724"/>
         <source>Feedback</source>
-        <translation>Visszajelzés</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2493,37 +2493,37 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="98"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation>Nincsenek helyreállítandó illesztőprogramjai, kérjük először készítsen biztonsági mentést</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="101"/>
         <source>Go to Backup Driver</source>
-        <translation>Ugrás az illesztőprogramok biztonsági mentéséhez</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="129"/>
         <source>Name</source>
-        <translation>Név</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="130"/>
         <source>Current Version</source>
-        <translation>Jelenlegi verzió</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
         <source>Backup Version</source>
-        <translation>Biztonsági mentés verziója</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
         <source>Action</source>
-        <translation>Művelet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="180"/>
         <source>Restorable Drivers</source>
-        <translation>Helyreállítható illesztőprogramok</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2531,32 +2531,32 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="24"/>
         <source>Refresh</source>
-        <translation>Frissítés</translation>
+        <translation>Refresh</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="25"/>
         <source>Export</source>
-        <translation>Exportálás</translation>
+        <translation>Export</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="27"/>
         <source>Overview</source>
-        <translation>Áttekintés</translation>
+        <translation>Overview</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Install</source>
-        <translation>Illesztőprogram telepítése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Backup</source>
-        <translation>Illesztőprogram biztonsági mentése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Restore</source>
-        <translation>Illesztőprogram helyreállítása</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2566,14 +2566,14 @@
         <location filename="../src/Page/PageMultiInfo.cpp" line="182"/>
         <location filename="../src/Page/PageMultiInfo.cpp" line="191"/>
         <source>Storage</source>
-        <translation>Tárhely</translation>
+        <translation>Storage</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="133"/>
         <location filename="../src/Page/PageMultiInfo.cpp" line="182"/>
         <location filename="../src/Page/PageMultiInfo.cpp" line="191"/>
         <source>Memory</source>
-        <translation>Memória</translation>
+        <translation>Memory</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="133"/>
@@ -2585,27 +2585,27 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="231"/>
         <source>Failed to enable the device</source>
-        <translation>Nem sikerült engedélyezni az eszközt</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="234"/>
         <source>Failed to disable the device</source>
-        <translation>Nem sikerült letiltani az eszközt</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="240"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation>A letiltás sikertelen: nem sikerült lekérni az eszköz sorozatszámát</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="267"/>
         <source>Update Drivers</source>
-        <translation>Illesztőprogramok frissítése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="292"/>
         <source>Uninstall Drivers</source>
-        <translation>Illesztőprogramok eltávolítása</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2613,22 +2613,22 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="42"/>
         <source>Refresh</source>
-        <translation>Frissítés</translation>
+        <translation>Refresh</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="43"/>
         <source>Export</source>
-        <translation>Exportálás</translation>
+        <translation>Export</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="44"/>
         <source>Copy</source>
-        <translation>Másolás</translation>
+        <translation>Copy</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="92"/>
         <source>Overview</source>
-        <translation>Áttekintés</translation>
+        <translation>Overview</translation>
     </message>
 </context>
 <context>
@@ -2636,69 +2636,69 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="42"/>
         <source>Refresh</source>
-        <translation>Frissítés</translation>
+        <translation>Refresh</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="43"/>
         <source>Export</source>
-        <translation>Exportálás</translation>
+        <translation>Export</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="44"/>
         <source>Copy</source>
-        <translation>Másolás</translation>
+        <translation>Copy</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="45"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="233"/>
         <source>Enable</source>
-        <translation>Engedélyezés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="46"/>
         <source>Update drivers</source>
-        <translation>Illesztőprogramok frissítése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="47"/>
         <source>Uninstall drivers</source>
-        <translation>Illesztőprogramok eltávolítása</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="48"/>
         <source>Allow it to wake the computer</source>
-        <translation>Engedélyezze számára, hogy felébressze a számítógépet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="236"/>
         <source>Disable</source>
-        <translation>Letiltás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="339"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="359"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation>A letiltás sikertelen: nem sikerült lekérni az eszköz sorozatszámát</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="344"/>
         <source>Failed to disable the device</source>
-        <translation>Nem sikerült letiltani az eszközt</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="364"/>
         <source>Failed to enable the device</source>
-        <translation>Nem sikerült engedélyezni az eszközt</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="382"/>
         <source>Update Drivers</source>
-        <translation>Illesztőprogramok frissítése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="401"/>
         <source>Uninstall Drivers</source>
-        <translation>Illesztőprogramok eltávolítása</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2709,7 +2709,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
         <source>CPU</source>
-        <translation>Processzor</translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1771"/>
@@ -2717,7 +2717,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
         <source>No CPU found</source>
-        <translation>Processzor nem található</translation>
+        <translation>No CPU found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1772"/>
@@ -2725,7 +2725,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1830"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1867"/>
         <source>Motherboard</source>
-        <translation>Alaplap</translation>
+        <translation>Motherboard</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1772"/>
@@ -2733,7 +2733,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1830"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1867"/>
         <source>No motherboard found</source>
-        <translation>Alaplap nem található</translation>
+        <translation>No motherboard found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1773"/>
@@ -2741,7 +2741,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1831"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1868"/>
         <source>Memory</source>
-        <translation>Memória</translation>
+        <translation>Memory</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1773"/>
@@ -2749,7 +2749,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1831"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1868"/>
         <source>No memory found</source>
-        <translation>Memória nem található</translation>
+        <translation>No memory found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1774"/>
@@ -2757,7 +2757,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1832"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1869"/>
         <source>Storage</source>
-        <translation>Tárhely</translation>
+        <translation>Storage</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1774"/>
@@ -2765,23 +2765,23 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1832"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1869"/>
         <source>No disk found</source>
-        <translation>Lemez nem található</translation>
+        <translation>No disk found</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="721"/>
         <source>Driver restore failed!</source>
-        <translation>Az illesztőprogram helyreállítása sikertelen!</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="717"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Please try again or give us feedback</source>
-        <translation>Kérjük próbálja újra, vagy küldjön visszajelzést felénk</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="47"/>
         <source>Driver backup failed!</source>
-        <translation>Az illesztőprogram biztonsági mentése sikertelen!</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
@@ -2790,7 +2790,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="776"/>
         <source>Display Adapter</source>
-        <translation>Kijelző feldolgozó</translation>
+        <translation>Display Adapter</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
@@ -2798,7 +2798,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1833"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
         <source>No GPU found</source>
-        <translation>Grafikus processzor nem található</translation>
+        <translation>No GPU found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1776"/>
@@ -2815,7 +2815,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1834"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1871"/>
         <source>No monitor found</source>
-        <translation>Monitor nem található</translation>
+        <translation>No monitor found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1777"/>
@@ -2824,7 +2824,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1872"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="785"/>
         <source>Network Adapter</source>
-        <translation>Hálózati feldolgozó</translation>
+        <translation>Network Adapter</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1777"/>
@@ -2832,7 +2832,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1835"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1872"/>
         <source>No network adapter found</source>
-        <translation>Hálózati feldolgozó nem található</translation>
+        <translation>No network adapter found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1778"/>
@@ -2841,7 +2841,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="779"/>
         <source>Sound Adapter</source>
-        <translation>Hang feldolgozó</translation>
+        <translation>Sound Adapter</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1778"/>
@@ -2849,7 +2849,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1836"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
         <source>No audio device found</source>
-        <translation>Hang eszköz nem található</translation>
+        <translation>No audio device found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1779"/>
@@ -2866,7 +2866,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1837"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1874"/>
         <source>No Bluetooth device found</source>
-        <translation>Bluetooth eszköz nem található</translation>
+        <translation>No Bluetooth device found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1780"/>
@@ -2874,7 +2874,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
         <source>Other PCI Devices</source>
-        <translation>Egyéb PCI-eszközök</translation>
+        <translation>Other PCI Devices</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1780"/>
@@ -2882,7 +2882,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
         <source>No other PCI devices found</source>
-        <translation>Egyéb PCI-eszközök nem találhatóak</translation>
+        <translation>No other PCI devices found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
@@ -2890,7 +2890,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
         <source>Power</source>
-        <translation>Energia</translation>
+        <translation>Power</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
@@ -2898,7 +2898,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
         <source>No battery found</source>
-        <translation>Akkumulátor nem található</translation>
+        <translation>No battery found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
@@ -2907,7 +2907,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
         <location filename="../src/Tool/commontools.cpp" line="52"/>
         <source>Keyboard</source>
-        <translation>Billentyűzet</translation>
+        <translation>Keyboard</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
@@ -2915,7 +2915,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
         <source>No keyboard found</source>
-        <translation>Billentyűzet nem található</translation>
+        <translation>No keyboard found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
@@ -2924,7 +2924,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
         <location filename="../src/Tool/commontools.cpp" line="54"/>
         <source>Mouse</source>
-        <translation>Egér</translation>
+        <translation>Mouse</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
@@ -2932,7 +2932,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
         <source>No mouse found</source>
-        <translation>Egér nem található</translation>
+        <translation>No mouse found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
@@ -2941,7 +2941,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
         <location filename="../src/Tool/commontools.cpp" line="56"/>
         <source>Printer</source>
-        <translation>Nyomtató</translation>
+        <translation>Printer</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
@@ -2949,7 +2949,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
         <source>No printer found</source>
-        <translation>Nyomtató nem található</translation>
+        <translation>No printer found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
@@ -2957,7 +2957,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
         <source>Camera</source>
-        <translation>Kamera</translation>
+        <translation>Camera</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
@@ -2965,7 +2965,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
         <source>No camera found</source>
-        <translation>Kamera nem található</translation>
+        <translation>No camera found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
@@ -2981,7 +2981,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
         <source>No CD-ROM found</source>
-        <translation>CD-ROM nem található</translation>
+        <translation>No CD-ROM found</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
@@ -2991,7 +2991,7 @@
         <location filename="../src/Tool/commontools.cpp" line="58"/>
         <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Other Devices</source>
-        <translation>Egyéb eszközök</translation>
+        <translation>Other Devices</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
@@ -2999,255 +2999,255 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
         <source>No other devices found</source>
-        <translation>Egyéb eszközök nem találhatóak</translation>
+        <translation>No other devices found</translation>
     </message>
     <message>
         <location filename="../src/Tool/EDIDParser.cpp" line="240"/>
         <source>inch</source>
-        <translation>incs</translation>
+        <translation>inch</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="98"/>
         <location filename="../src/main.cpp" line="100"/>
         <source>Device Manager</source>
-        <translation>Eszközkezelő</translation>
+        <translation>Device Manager</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="101"/>
         <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-        <translation>Az Eszközkezelő egy praktikus eszköz a hardverinformációk megtekintéséhez és az eszközök kezeléséhez.</translation>
+        <translation>Device Manager is a handy tool for viewing hardware information and managing the devices.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="194"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation>Új illesztőprogramok érhetőek el! Telepítse, vagy frissítse őket most.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/main.cpp" line="195"/>
         <source>View</source>
-        <translation>Nézet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="18"/>
         <source>Include subfolders</source>
-        <translation>Tartalmazza az almappákat is</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="64"/>
         <source>Search for drivers in this path</source>
-        <translation>Keressen illesztőprogramokat ezen az útvonalon</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="107"/>
         <source>%1 driver updates available</source>
-        <translation>%1 illesztőprogram frissítése érhető el</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="113"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="400"/>
         <source>Time checked: %1</source>
-        <translation>Ellenőrzési idő: %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="166"/>
         <source>Downloading drivers for %1...</source>
-        <translation>A %1 illesztőprogramjának letöltése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="168"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation>letöltési sebesség: %1 Letöltve %2 / %3</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="219"/>
         <source>Installing drivers for %1...</source>
-        <translation>A %1 illesztőprogramjának telepítése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="264"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation>%1 illesztőprogram telepítve, %2 illesztőprogram meghiúsult</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="267"/>
         <source>%1 drivers installed</source>
-        <translation>%1 illesztőprogram telepítve</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="309"/>
         <source>Failed to install drivers</source>
-        <translation>Az illesztőprogramok telepítése sikertelen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="352"/>
         <source>Network error. Reconnecting...</source>
-        <translation>Hálózati hiba. Újra csatlakozás...</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="354"/>
         <source>Download speed: %1</source>
-        <translation>Letöltési sebesség: %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="397"/>
         <source>Your drivers are up to date</source>
-        <translation>Az illesztőprogramok naprakészek</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
         <source>All drivers have been backed up</source>
-        <translation>Az összes illesztőprogram biztonsági mentése megtörtént</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation>Összesen %1 illesztőprogram, amelyből %2 biztonsági mentése megtörtént</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="546"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation>Önnek %1 illesztőprogramja van, amelyről biztonsági mentést készíthet, javasoljuk, hogy azonnal tegye meg </translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation>Önnek %1 illesztőprogramja van, amelyről biztonsági mentést készíthet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="597"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation>A %1 illesztőprogram biztonsági mentése, összesen %2 illesztőprogram​</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
         <source>Backing up: %1</source>
-        <translation>Biztonsági mentés: %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="638"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation>%1 illesztőprogrambiztonsági mentése megtörtént, %2 illesztőprogram mentése meghiúsult</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="641"/>
         <source>Failed to backup drivers</source>
-        <translation>Az illesztőprogramok biztonsági mentése sikertelen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
         <source>%1 drivers backed up</source>
-        <translation>%1 illesztőprogram biztonsági mentése megtörtént</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="684"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation>Önnek %1 illesztőprogramja van, amely helyreállítható</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
         <source>Please select a driver to restore</source>
-        <translation>Kérjük válassza ki a helyreállítandó illesztőprogramot</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="716"/>
         <source>Driver is restoring...</source>
-        <translation>Illesztőprogram helyreállítása...</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="717"/>
         <source>Restoring: %1</source>
-        <translation>Helyreállítás: %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="872"/>
         <source>reboot</source>
-        <translation>Újraindítás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="873"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation>Kérjük %1, hogy a telepített illesztőprogramok érvénybe lépjenek</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="881"/>
         <source>View backup path</source>
-        <translation>Biztonsági mentés elérési útvonalának megtekintése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
         <source>Backup All</source>
-        <translation>Összes biztonsági mentése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="876"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="300"/>
         <source>submit feedback</source>
-        <translation>Visszajelzés küldése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="877"/>
         <source>Please try again or %1 to us</source>
-        <translation>Kérjük próbálja újra, vagy küldje el nekünk %1-et</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="884"/>
         <source>Install All</source>
-        <translation>Összes telepítése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="889"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
         <source>Scan Again</source>
-        <translation>Újra ellenőrzés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="899"/>
         <source>Cancel</source>
-        <translation>Mégsem</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="75"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation>Hardvereszköz illesztőprogramok ellenőrzése, kérjük várjon...</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="83"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="376"/>
         <source>Scanning %1</source>
-        <translation>Ellenőrzés %1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="141"/>
         <source>Scan failed</source>
-        <translation>Az ellenőrzés sikertelen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="201"/>
         <source>Network unavailable</source>
-        <translation>A hálózat nem érhető el</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="205"/>
         <source>Please check your network connection</source>
-        <translation>Kérjük ellenőrizze a hálózati kapcsolatot</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="301"/>
         <source>Please scan again or %1 to us</source>
-        <translation>Kérjük ellenőrizze újra, vagy küldje be nekünk a %1-et</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="763"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation>Az illesztőprogramok telepítése folyamatban, kilépés esetén a folyamat megszakad.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="764"/>
         <location filename="../src/Page/MainWindow.cpp" line="780"/>
         <location filename="../src/Page/MainWindow.cpp" line="796"/>
         <source>Are you sure you want to exit?</source>
-        <translation>Valóban ki szeretne lépni? </translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="767"/>
@@ -3255,7 +3255,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="799"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation>Kilépés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="768"/>
@@ -3263,148 +3263,148 @@
         <location filename="../src/Page/MainWindow.cpp" line="800"/>
         <source>Cancel</source>
         <comment>button</comment>
-        <translation>Mégsem</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="779"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation>Az illesztőprogramok biztonsági mentése folyamatban, kilépés esetén a folyamat megszakad.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="795"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation>Az illesztőprogramok helyreállítása folyamatban, kilépés esetén a folyamat megszakad.</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="49"/>
         <source>Bluetooth adapter</source>
-        <translation>Bluetooth adapter</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="50"/>
         <location filename="../src/Tool/commontools.cpp" line="57"/>
         <source>Imaging device</source>
-        <translation>Képalkotó eszköz</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="51"/>
         <source>Display adapter</source>
-        <translation>Kijelző adapter</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Sound card</source>
-        <translation>Hangkártya</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="55"/>
         <source>Network adapter</source>
-        <translation>Hálózati adapter</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="59"/>
         <source>Wireless network adapter</source>
-        <translation>Vezeték nélküli hálózati adapter</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="79"/>
         <source>Installation successful</source>
-        <translation>A telepítés sikeres</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="80"/>
         <source>Installation failed</source>
-        <translation>A telepítés sikertelen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
         <source>Downloading</source>
-        <translation>Letöltés </translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="82"/>
         <source>Installing</source>
-        <translation>Telepítés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="83"/>
         <source>Not installed</source>
-        <translation>Nincs telepítve</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="84"/>
         <source>Out-of-date</source>
-        <translation>Lejárt</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="85"/>
         <source>Waiting</source>
-        <translation>Várakozás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="86"/>
         <source>Not backed up</source>
-        <translation>Nincs biztonsági mentés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="87"/>
         <source>Backing up</source>
-        <translation>Biztonsági mentés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="88"/>
         <source>Backup failed</source>
-        <translation>A biztonsági mentés sikertelen</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="89"/>
         <source>Backup successful</source>
-        <translation>A ibztonsági mentés sikeresen befejeződött</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="90"/>
         <source>Restoring</source>
-        <translation>Helyreállítás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="94"/>
         <source>Unknown error</source>
-        <translation>Ismeretlen hiba</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="95"/>
         <source>Network error</source>
-        <translation>Hálózati hiba</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="96"/>
         <source>Canceled</source>
-        <translation>Megszakítva</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="97"/>
         <source>Failed to get driver files</source>
-        <translation>Nem sikerült beolvasni az illesztőprogram fájljait</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="268"/>
         <source>Update</source>
-        <translation>Frissítés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="274"/>
         <source>Backup</source>
-        <translation>Biztonsági mentés</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="280"/>
         <source>Restore</source>
-        <translation>Helyreállítás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="263"/>
         <source>Install</source>
-        <translation>Telepítés</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3413,39 +3413,39 @@
         <location filename="../src/Widget/TableWidget.cpp" line="38"/>
         <location filename="../src/Widget/TableWidget.cpp" line="232"/>
         <source>Disable</source>
-        <translation>Letiltás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="39"/>
         <source>Refresh</source>
-        <translation>Frissítés</translation>
+        <translation>Refresh</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="40"/>
         <source>Export</source>
-        <translation>Exportálás</translation>
+        <translation>Export</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="41"/>
         <source>Update drivers</source>
-        <translation>Illesztőprogramok frissítése</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="42"/>
         <source>Uninstall drivers</source>
-        <translation>Illesztőprogramok eltávolítása</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="43"/>
         <source>Allow it to wake the computer</source>
-        <translation>Engedélyezze számára, hogy felébressze a számítógépet</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="238"/>
         <location filename="../src/Widget/TableWidget.cpp" line="379"/>
         <location filename="../src/Widget/TableWidget.cpp" line="387"/>
         <source>Enable</source>
-        <translation>Engedélyezés</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3453,27 +3453,27 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="33"/>
         <source>Refresh</source>
-        <translation>Frissítés</translation>
+        <translation>Refresh</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="34"/>
         <source>Export</source>
-        <translation>Exportálás</translation>
+        <translation>Export</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="35"/>
         <source>Copy</source>
-        <translation>Másolás</translation>
+        <translation>Copy</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="276"/>
         <source>Disable</source>
-        <translation>Letiltás</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="285"/>
         <source>Unavailable</source>
-        <translation>Nem elérhető</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3481,7 +3481,7 @@
     <message>
         <location filename="../src/Widget/UrlChooserEdit.cpp" line="99"/>
         <source>Select a local folder please</source>
-        <translation>Kérjük válasszon egy helyi mappát</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3489,7 +3489,7 @@
     <message>
         <location filename="../src/Page/WaitingWidget.cpp" line="23"/>
         <source>Loading...</source>
-        <translation>Betöltés...</translation>
+        <translation>Loading...</translation>
     </message>
 </context>
 </TS>

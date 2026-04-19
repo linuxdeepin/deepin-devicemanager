@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_HK">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="zh_HK">
 <context>
     <name>BtnLabel</name>
     <message>
@@ -11,7 +9,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="50"/>
         <source>Feedback</source>
-        <translation>反饋</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="63"/>
@@ -261,7 +259,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1216"/>
         <source>Clock</source>
-        <translation>時鐘</translation>
+        <translation>時鐘頻率</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1217"/>
@@ -751,7 +749,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1314"/>
         <source>L4 Cache</source>
-        <translation>L4 緩存</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1315"/>
@@ -852,7 +850,7 @@
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1334"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1460"/>
         <source>Max Frequency</source>
-        <translation></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1335"/>
@@ -1140,7 +1138,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1393"/>
         <source>Product Date</source>
-        <translation>產品日期</translation>
+        <translation>生產日期</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1394"/>
@@ -1453,7 +1451,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1455"/>
         <source>Width</source>
-        <translation>位闊</translation>
+        <translation>位寬</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1456"/>
@@ -1468,12 +1466,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1459"/>
         <source>Frequency</source>
-        <translation>頻率</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1464"/>
         <source>Speed</source>
-        <translation>速率</translation>
+        <translation>頻率</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1351"/>
@@ -1736,77 +1734,77 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="62"/>
         <source>One hundred</source>
-        <translation>一百</translation>
+        <translation>100</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
         <source>One hundred and Two</source>
-        <translation>一百零二</translation>
+        <translation>102</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
         <source>One hundred and four</source>
-        <translation>一百零四</translation>
+        <translation>104</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
         <source>One hundred and Six</source>
-        <translation>一百零六</translation>
+        <translation>106</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
         <source>One hundred and Eight</source>
-        <translation>一百零八</translation>
+        <translation>108</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
         <source>One hundred and Ten</source>
-        <translation>一百一十</translation>
+        <translation>110</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
         <source>One hundred and Twelve</source>
-        <translation>一百一十二</translation>
+        <translation>112</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
         <source>One hundred and Fourteen</source>
-        <translation>一百一十四</translation>
+        <translation>114</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>One hundred and Sixteen</source>
-        <translation>一百一十六</translation>
+        <translation>116</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
         <source>One hundred and Eighteen</source>
-        <translation>一百一十八</translation>
+        <translation>118</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
         <source>One hundred and Twenty</source>
-        <translation>一百二十</translation>
+        <translation>120</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
         <source>One hundred and Twenty-two</source>
-        <translation>一百二十二</translation>
+        <translation>122</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
         <source>One hundred and Twenty-four</source>
-        <translation>一百二十四</translation>
+        <translation>124</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="75"/>
         <source>One hundred and Twenty-six</source>
-        <translation>一百二十六</translation>
+        <translation>126</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="76"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>一百二十八</translation>
+        <translation>128</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="77"/>
@@ -1816,17 +1814,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
         <source>Two hundred and fifty-six</source>
-        <translation>二百五十六</translation>
+        <translation>256</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Frequency</source>
-        <translation>頻率</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Max Frequency</source>
-        <translation>最大頻率</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1834,7 +1832,7 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1526"/>
         <source>Model Name</source>
-        <translation>名稱</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1530"/>
@@ -1849,32 +1847,32 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1538"/>
         <source>Core(s)</source>
-        <translation>邏輯處理器</translation>
+        <translation>核</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1540"/>
         <source>Thread(s)</source>
-        <translation>每核心線程數</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1547"/>
         <source>L1d cache</source>
-        <translation>一級緩存（數據）</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1555"/>
         <source>L1i cache</source>
-        <translation>一級緩存（指令）</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1563"/>
         <source>L2 cache</source>
-        <translation>二級緩存</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1571"/>
         <source>L3 cache</source>
-        <translation>三級緩存</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1964,7 +1962,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="246"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="305"/>
         <source>Mouse</source>
-        <translation>鼠標</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="252"/>
@@ -2024,7 +2022,7 @@
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="654"/>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="657"/>
         <source>%1@%2Hz</source>
-        <translation></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2127,7 +2125,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="284"/>
         <source>Device Info</source>
-        <comment>export file&apos;s name</comment>
+        <comment>export file's name</comment>
         <translation>設備訊息</translation>
     </message>
     <message>
@@ -2237,7 +2235,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Driver Platform Version</source>
-        <translation>驅動平台版本</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="102"/>
@@ -2252,12 +2250,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="193"/>
         <source>Backupable Drivers</source>
-        <translation>可備份驅動</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="194"/>
         <source>Backed up Drivers</source>
-        <translation>已備份驅動</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2463,7 +2461,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="118"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="548"/>
         <source>Driver Install</source>
-        <translation>驅動安裝</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
@@ -2471,13 +2469,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="119"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="550"/>
         <source>Driver Backup</source>
-        <translation>驅動備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="120"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="552"/>
         <source>Driver Restore</source>
-        <translation>驅動還原</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="723"/>
@@ -2487,7 +2485,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="724"/>
         <source>Feedback</source>
-        <translation>反饋</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2495,12 +2493,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="98"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation>您沒有驅動可以還原，請先備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="101"/>
         <source>Go to Backup Driver</source>
-        <translation>前往備份驅動</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="129"/>
@@ -2515,7 +2513,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
         <source>Backup Version</source>
-        <translation>備份版本</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
@@ -2525,7 +2523,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="180"/>
         <source>Restorable Drivers</source>
-        <translation>可還原驅動</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2548,17 +2546,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Install</source>
-        <translation>驅動安裝</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Backup</source>
-        <translation>驅動備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Restore</source>
-        <translation>驅動還原</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2772,18 +2770,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="721"/>
         <source>Driver restore failed!</source>
-        <translation>驅動還原失敗！</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="717"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Please try again or give us feedback</source>
-        <translation>請重試，或反饋給我們</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="47"/>
         <source>Driver backup failed!</source>
-        <translation>驅動備份失敗！</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
@@ -3098,68 +3096,68 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
         <source>All drivers have been backed up</source>
-        <translation>驅動已全部備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation>總計%1個驅動，其中%2個已備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="546"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation>您有%1個驅動可以備份，建議立即備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation>您有%1個驅動可以備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="597"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation>正在備份第%1個驅動，共%2個</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
         <source>Backing up: %1</source>
-        <translation>正在備份：%1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="638"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation>驅動備份成功%1個，失敗%2個</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="641"/>
         <source>Failed to backup drivers</source>
-        <translation>備份失敗</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
         <source>%1 drivers backed up</source>
-        <translation>%1個驅動已備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="684"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation>您有%1個驅動可以還原</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
         <source>Please select a driver to restore</source>
-        <translation>請選擇驅動還原</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="716"/>
         <source>Driver is restoring...</source>
-        <translation>驅動還原中…</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="717"/>
         <source>Restoring: %1</source>
-        <translation>正在還原：%1</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="872"/>
@@ -3174,12 +3172,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="881"/>
         <source>View backup path</source>
-        <translation>查看備份路徑</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
         <source>Backup All</source>
-        <translation>一鍵備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="876"/>
@@ -3270,12 +3268,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="779"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation>當前正在備份驅動，退出應用後任務將會中斷</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="795"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation>當前正在還原驅動，退出應用後任務將會中斷</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="49"/>
@@ -3346,27 +3344,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="86"/>
         <source>Not backed up</source>
-        <translation>驅動未備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="87"/>
         <source>Backing up</source>
-        <translation>正在備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="88"/>
         <source>Backup failed</source>
-        <translation>備份失敗</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="89"/>
         <source>Backup successful</source>
-        <translation>備份成功</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="90"/>
         <source>Restoring</source>
-        <translation>還原中</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="94"/>
@@ -3396,12 +3394,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="274"/>
         <source>Backup</source>
-        <translation>備份</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="280"/>
         <source>Restore</source>
-        <translation>還原</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="263"/>
