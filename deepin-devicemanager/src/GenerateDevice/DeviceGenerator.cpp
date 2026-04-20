@@ -243,8 +243,13 @@ void DeviceGenerator::generatorCpuDevice()
     }
 
     // 计算并设置CPU头部信息(当前没有多个物理CPU的环境，所以只能编码单物理CPU的逻辑)
-    if (lsCpu.size() > 0)
-        calAndSetCpuHeaderInfo(lsCpu.at(0), coreNum, logicalNum);
+    if (lsCpu.size() > 0) {
+        QMap<QString, QString> baseCPUInfo = lsCpu.at(0);
+        if (dmidecode.contains("Manufacturer")) {
+            baseCPUInfo["vendor_id"] = dmidecode["Manufacturer"];
+        }
+        calAndSetCpuHeaderInfo(baseCPUInfo, coreNum, logicalNum);
+    }
 }
 
 void DeviceGenerator::generatorBiosDevice()
