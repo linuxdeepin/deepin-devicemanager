@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -235,11 +235,11 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "CPU MHz", m_CurFrequency);
     setAttribute(mapInfo, "model", m_Model);
     setAttribute(mapInfo, "stepping", m_Step);
-    setAttribute(mapInfo, "L1d cache", m_CacheL1Data);
-    setAttribute(mapInfo, "L1i cache", m_CacheL1Order);
-    setAttribute(mapInfo, "L2 cache", m_CacheL2);
-    setAttribute(mapInfo, "L3 cache", m_CacheL3);
-    setAttribute(mapInfo, "L4 cache", m_CacheL4);
+    // setAttribute(mapInfo, "L1d cache", m_CacheL1Data);
+    // setAttribute(mapInfo, "L1i cache", m_CacheL1Order);
+    // setAttribute(mapInfo, "L2 cache", m_CacheL2);
+    // setAttribute(mapInfo, "L3 cache", m_CacheL3);
+    // setAttribute(mapInfo, "L4 cache", m_CacheL4);
     setAttribute(mapInfo, "flags", m_Flags);
     setAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
 
@@ -351,11 +351,11 @@ TomlFixMethod DeviceCpu::setInfoFromTomlOneByOne(const QMap<QString, QString> &m
     setTomlAttribute(mapInfo, "Virtualization", m_HardwareVirtual);
     setTomlAttribute(mapInfo, "Flags", m_Flags);
     setTomlAttribute(mapInfo, "Extensions", m_Extensions);
-    setTomlAttribute(mapInfo, "L4 Cache", m_CacheL4);
-    setTomlAttribute(mapInfo, "L3 Cache", m_CacheL3);
-    setTomlAttribute(mapInfo, "L2 Cache", m_CacheL2);
-    setTomlAttribute(mapInfo, "L1i Cache", m_CacheL1Order);
-    setTomlAttribute(mapInfo, "L1d Cache", m_CacheL1Data);
+    // setTomlAttribute(mapInfo, "L4 Cache", m_CacheL4);
+    // setTomlAttribute(mapInfo, "L3 Cache", m_CacheL3);
+    // setTomlAttribute(mapInfo, "L2 Cache", m_CacheL2);
+    // setTomlAttribute(mapInfo, "L1i Cache", m_CacheL1Order);
+    // setTomlAttribute(mapInfo, "L1d Cache", m_CacheL1Data);
     ret = setTomlAttribute(mapInfo, "Stepping", m_Step);
 //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
@@ -402,11 +402,11 @@ void DeviceCpu::loadOtherDeviceInfo()
     addOtherDeviceInfo("Virtualization", m_HardwareVirtual);
     addOtherDeviceInfo("Flags", m_Flags);
     addOtherDeviceInfo("Extensions", m_Extensions);
-    addOtherDeviceInfo("L4 Cache", m_CacheL4);
-    addOtherDeviceInfo("L3 Cache", m_CacheL3);
-    addOtherDeviceInfo("L2 Cache", m_CacheL2);
-    addOtherDeviceInfo("L1i Cache", m_CacheL1Order);
-    addOtherDeviceInfo("L1d Cache", m_CacheL1Data);
+    // addOtherDeviceInfo("L4 Cache", m_CacheL4);
+    // addOtherDeviceInfo("L3 Cache", m_CacheL3);
+    // addOtherDeviceInfo("L2 Cache", m_CacheL2);
+    // addOtherDeviceInfo("L1i Cache", m_CacheL1Order);
+    // addOtherDeviceInfo("L1d Cache", m_CacheL1Data);
     addOtherDeviceInfo("Stepping", m_Step);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
