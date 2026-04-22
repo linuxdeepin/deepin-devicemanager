@@ -1,3 +1,11 @@
+deepin-devicemanager (6.0.60) unstable; urgency=medium
+
+  * chore: Update version to 6.0.60
+  * fix(cpu): Fix CPU vendor info from dmidecode
+  * fix(cpu): hide CPU cache information display
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Wed, 22 Apr 2026 13:31:25 +0800
+
 deepin-devicemanager (6.0.59) unstable; urgency=medium
 
   * feat: Add feature for cpu info show.
