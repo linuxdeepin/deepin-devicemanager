@@ -1,3 +1,10 @@
+deepin-devicemanager (6.0.61) unstable; urgency=medium
+
+  * chore: Update version to 6.0.61
+  * docs(device-manager): remove driver management section from documentation
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Thu, 23 Apr 2026 17:23:00 +0800
+
 deepin-devicemanager (6.0.60) unstable; urgency=medium
 
   * chore: Update version to 6.0.60
