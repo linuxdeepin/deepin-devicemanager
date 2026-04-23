@@ -114,8 +114,6 @@ Some hardware drivers support disable and enable functions. Hardware drivers are
 
 Some hardware supports updating/uninstalling drivers; check right-click menu options to determine.
 
-> ![tips](../common/tips.svg)Tips: Driver updates are supported online in the driver management interface.
-
 1. Select **Update Driver** from the right-click menu to open a window.
 2. Select the folder containing the driver and click **Next**. "Include subfolders" is checked by default to detect driver files in subfolders.
 
@@ -152,32 +150,6 @@ When the computer is in standby, it can be awakened using a mouse, keyboard, or 
 2. Right-click in the details area and check/uncheck **Allow Wake Computer**.
    - Allowed: When computer is in standby, it can be awakened by receiving special network packets (Wake On LAN commands) from other computers in the same network segment.
    - Not allowed: Network packets won't wake the computer.
-
-## Driver Management
-
-Driver management mainly includes driver update detection, driver list display, and online driver installation.
-
-### Driver Update Detection
-
-Open Device Manager, click **Driver Management**, and the system will automatically detect if there are drivers that can be updated/installed.
-
->![notes](../common/notes.svg)Note: When starting the computer, if updatable/installable drivers are detected, a prompt will appear. Click **View** to enter the driver management interface.
-
-- No updates: No updatable/installable drivers; shows device names and versions that don't need updates.
-- Updates available: Updatable/installable drivers detected; online installation is possible.
-
-![0|update_detection](fig/update_detection.png)
-
-If detection fails, fix the issue according to the prompt and click **Redetect** to try again. For unknown reasons, click **Feedback** to jump to the "Service and Support" application's message consultation interface to report related issues.
-
-### Online Driver Installation
-
-1. In the driver management interface, view the list of updatable/installable drivers and install them online.
-2. For batch installation, select corresponding drivers and click **Install All** to install them sequentially.
-3. Wait for installation results.
-   - Installation successful: Status changes to "Installation successful"; takes effect after rebooting.
-   - Installation failed: Status changes to "Installation failed"; click the operation bar button to retry. Or click "Installation failed" to view the reason. For unknown reasons, click **Feedback** to report issues.
-   - Partial success: For batch installations, some may succeed while others fail; check individual driver statuses in the list.
 
 ## Main Menu
 
