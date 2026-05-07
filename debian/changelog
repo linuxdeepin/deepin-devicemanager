@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.62) unstable; urgency=medium
+
+  * fix(security): VPLUS-2026-34718 - fix DBus permission configuration
+
+ -- xiepengfei <xiepengfei@uniontech.com>  Thu, 07 May 2026 20:50:31 +0800
+
 deepin-devicemanager (6.0.61) unstable; urgency=medium
 
   * chore: Update version to 6.0.61
