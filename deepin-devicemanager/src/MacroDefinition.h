@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -33,9 +32,22 @@
     \
     /**添加Table信息**/                                                              \
     if (deviceLst.size() > 1) {                                                     \
-        deviceLst[0]->tableHeaderToTxt(out);                                        \
+        /* 第一遍扫描：计算每列最大显示宽度 */                                       \
+        const QStringList &_hdr = deviceLst[0]->getTableHeader();                   \
+        int _colCount = _hdr.size() - 1;                                            \
+        QList<double> _colWidths;                                                   \
+        for (int _c = 0; _c < _colCount; ++_c)                                     \
+            _colWidths.append(DeviceBaseInfo::displayWidth(_hdr[_c]) + 4);          \
+        foreach (auto _dev, deviceLst) {                                            \
+            const QStringList &_dat = _dev->getTableData();                         \
+            for (int _c = 0; _c < qMin(_dat.size(), _colCount); ++_c) {            \
+                double _w = DeviceBaseInfo::displayWidth(_dat[_c]) + 4;             \
+                if (_w > _colWidths[_c]) _colWidths[_c] = _w;                      \
+            }                                                                       \
+        }                                                                           \
+        deviceLst[0]->tableHeaderToTxt(out, _colWidths);                            \
         foreach (auto device, deviceLst) {                                          \
-            device->tableInfoToTxt(out);                                            \
+            device->tableInfoToTxt(out, _colWidths);                                \
         }                                                                           \
     }                                                                               \
     \

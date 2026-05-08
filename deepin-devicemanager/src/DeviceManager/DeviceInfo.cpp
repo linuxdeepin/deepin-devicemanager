@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -330,7 +330,21 @@ void DeviceBaseInfo::baseInfoToTxt(QTextStream &out, QList<QPair<QString, QStrin
     }
 }
 
-void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
+double DeviceBaseInfo::displayWidth(const QString &str)
+{
+    double width = 0;
+    for (const QChar &ch : str) {
+        ushort code = ch.unicode();
+        // CJK字符占1.5列，其余占1列
+        if (code > 0x7E || (code >= 0xA1 && code <= 0xFF))
+            width += 1.5;
+        else
+            width += 1;
+    }
+    return width;
+}
+
+void DeviceBaseInfo::tableInfoToTxt(QTextStream &out, const QList<double> &colWidths)
 {
     // 获取表格内容
     getTableData();
@@ -339,21 +353,15 @@ void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
     if (m_TableDataTr.size() < 1)
         return;
 
-    // 设置占位宽度
-    QString text = m_TableDataTr[0];
-    out.setFieldWidth(int(text.size() * 1.5));
-    out.setFieldAlignment(QTextStream::FieldAlignment::AlignRight);
-
-    foreach (auto item, m_TableDataTr) {
-        out.setFieldWidth(28);
-        out << item;
+    for (int col = 0; col < m_TableDataTr.size(); ++col) {
+        double w = (col < colWidths.size()) ? colWidths[col] : 30;
+        int pad = qMax(0, int(w - displayWidth(m_TableDataTr[col])));
+        out << m_TableDataTr[col] << QString(pad, ' ');
     }
-
-    out.setFieldWidth(0);
     out << "\n";
 }
 
-void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
+void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out, const QList<double> &colWidths)
 {
     // 获取表头
     getTableHeader();
@@ -362,17 +370,12 @@ void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
     if (m_TableHeaderTr.size() < 1)
         return;
 
-    // 设置占位宽度
-    QString text = m_TableHeaderTr[0];
-    out.setFieldWidth(int(text.size() * 1.5));
-    out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
-
     out << "\n";
     for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col) {
-        out.setFieldWidth(30);
-        out << m_TableHeaderTr[col];
+        double w = (col < colWidths.size()) ? colWidths[col] : 30;
+        int pad = qMax(0, int(w - displayWidth(m_TableHeaderTr[col])));
+        out << m_TableHeaderTr[col] << QString(pad, ' ');
     }
-    out.setFieldWidth(0);
     out << "\n";
 }
 

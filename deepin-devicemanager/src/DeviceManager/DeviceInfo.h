@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -334,14 +333,23 @@ public:
     /**
      * @brief tableInfoToTxt:表格内容写到txt
      * @param out:txt文件流
+     * @param colWidths:每列的显示宽度列表
      */
-    void tableInfoToTxt(QTextStream &out);
+    void tableInfoToTxt(QTextStream &out, const QList<double> &colWidths);
 
     /**
      * @brief tableHeaderToTxt:表头信息写到txt
      * @param out:txt文件流
+     * @param colWidths:每列的显示宽度列表
      */
-    void tableHeaderToTxt(QTextStream &out);
+    void tableHeaderToTxt(QTextStream &out, const QList<double> &colWidths);
+
+    /**
+     * @brief displayWidth:计算字符串的显示宽度(CJK字符算1.5,其余算1)
+     * @param str:输入字符串
+     * @return 显示宽度
+     */
+    static double displayWidth(const QString &str);
 
     /**
      * @brief tableInfoToHtml:表格内容写到html
