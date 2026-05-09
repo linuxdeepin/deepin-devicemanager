@@ -1,3 +1,11 @@
+deepin-devicemanager (6.0.63) unstable; urgency=medium
+
+  * chore: Update version to 6.0.63
+  * fix(security): VPLUS-2026-34718 - fix DBus permission configuration
+  * fix(export): align table header and content in exported TXT file.
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Sat, 09 May 2026 11:34:50 +0800
+
 deepin-devicemanager (6.0.62) unstable; urgency=medium
 
   * fix(security): VPLUS-2026-34718 - fix DBus permission configuration
