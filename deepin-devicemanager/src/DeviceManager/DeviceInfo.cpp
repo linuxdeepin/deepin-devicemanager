@@ -405,7 +405,21 @@ void DeviceBaseInfo::baseInfoToTxt(QTextStream &out, QList<QPair<QString, QStrin
     qCDebug(appLog) << "Finished writing items to Txt.";
 }
 
-void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
+double DeviceBaseInfo::displayWidth(const QString &str)
+{
+    double width = 0;
+    for (const QChar &ch : str) {
+        ushort code = ch.unicode();
+        // CJK字符占4列，其余占2列
+        if (code > 0x7E || (code >= 0xA1 && code <= 0xFF))
+            width += 1.5;
+        else
+            width += 1;
+    }
+    return width;
+}
+
+void DeviceBaseInfo::tableInfoToTxt(QTextStream &out, const QList<double> &colWidths)
 {
     qCDebug(appLog) << "DeviceBaseInfo::tableInfoToTxt called.";
     // 获取表格内容
@@ -417,24 +431,16 @@ void DeviceBaseInfo::tableInfoToTxt(QTextStream &out)
         return;
     }
 
-    // 设置占位宽度
-    QString text = m_TableDataTr[0];
-    out.setFieldWidth(int(text.size() * 1.5));
-    out.setFieldAlignment(QTextStream::FieldAlignment::AlignRight);
-    qCDebug(appLog) << "Txt field width set for table info.";
-
-    foreach (auto item, m_TableDataTr) {
-        out.setFieldWidth(28);
-        out << item;
-        // qCDebug(appLog) << "Written table item to Txt: " << item;
+    for (int col = 0; col < m_TableDataTr.size(); ++col) {
+        double w = (col < colWidths.size()) ? colWidths[col] : 30;
+        int pad = qMax(0, int(w - displayWidth(m_TableDataTr[col])));
+        out << m_TableDataTr[col] << QString(pad, ' ');
     }
-
-    out.setFieldWidth(0);
     out << "\n";
     qCDebug(appLog) << "Finished writing table info to Txt.";
 }
 
-void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
+void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out, const QList<double> &colWidths)
 {
     qCDebug(appLog) << "DeviceBaseInfo::tableHeaderToTxt called.";
     // 获取表头
@@ -446,19 +452,12 @@ void DeviceBaseInfo::tableHeaderToTxt(QTextStream &out)
         return;
     }
 
-    // 设置占位宽度
-    QString text = m_TableHeaderTr[0];
-    out.setFieldWidth(int(text.size() * 1.5));
-    out.setFieldAlignment(QTextStream::FieldAlignment::AlignLeft);
-    qCDebug(appLog) << "Txt field width set for table header.";
-
     out << "\n";
     for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col) {
-        out.setFieldWidth(30);
-        out << m_TableHeaderTr[col];
-        // qCDebug(appLog) << "Written table header item to Txt: " << m_TableHeaderTr[col];
+        double w = (col < colWidths.size()) ? colWidths[col] : 30;
+        int pad = qMax(0, int(w - displayWidth(m_TableHeaderTr[col])));
+        out << m_TableHeaderTr[col] << QString(pad, ' ');
     }
-    out.setFieldWidth(0);
     out << "\n";
     qCDebug(appLog) << "Finished writing table header to Txt.";
 }
