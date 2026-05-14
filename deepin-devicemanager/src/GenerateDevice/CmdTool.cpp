@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -1316,14 +1316,12 @@ QMap<QString, QMap<QString, QString>> CmdTool::getCurPowerInfo()
     qCDebug(appLog) << "Getting current power info from upower.";
     QString powerInfo;
     QMap<QString, QMap<QString, QString>> map;
-    QProcess process;
 
     //执行"upower --dump"命令获取电池相关信息
-    QString cmd = "upower --dump";
-    process.start(cmd);
-
+    QProcess process;
+    process.start("upower", QStringList() << "--dump");
     // 获取命令执行结果
-    process.waitForFinished(-1);
+    process.waitForFinished(5000);
     powerInfo = process.readAllStandardOutput();
     qCDebug(appLog) << "upower --dump output:" << powerInfo;
     QStringList items = powerInfo.split("\n\n");
