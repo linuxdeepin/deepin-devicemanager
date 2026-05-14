@@ -1,3 +1,10 @@
+deepin-devicemanager (6.0.64) unstable; urgency=medium
+
+  * Chore: Code optimization
+  * Fix(battery): get battery info error.
+
+ -- gongheng <gongheng@uniontech.com>  Thu, 14 May 2026 15:33:02 +0800
+
 deepin-devicemanager (6.0.63) unstable; urgency=medium
 
   * chore: Update version to 6.0.63
