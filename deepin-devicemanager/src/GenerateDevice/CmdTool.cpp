@@ -552,8 +552,7 @@ void CmdTool::loadHciconfigInfo(const QString &debugfile)
         // bug 目前服务端与直接执行命令获取结果不一致
         QProcess process;
         int msecs = 10000;
-        QString cmd = "hciconfig --all";
-        process.start(cmd);
+        process.start("hciconfig", QStringList() << "--all");
 
         // 获取命令执行结果
         bool res = process.waitForFinished(msecs);
@@ -593,7 +592,7 @@ void CmdTool::loadBluetoothCtlInfo(QMap<QString, QString> &mapInfo)
         return;
     }
     QProcess process;
-    process.start("bluetoothctl show " + mapInfo["BD Address"]);
+    process.start("bluetoothctl", QStringList() << "show" << mapInfo["BD Address"]);
     process.waitForFinished(2000);
     QString deviceInfo = process.readAllStandardOutput();
     qCDebug(appLog) << "bluetoothctl output:" << deviceInfo;
@@ -736,10 +735,9 @@ void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
         return;
     }
 
-    QString cmd = QString("nvidia-settings -q GPUMemoryInterface");
     QString sInfo;
     QProcess process;
-    process.start(cmd);
+    process.start("nvidia-settings", QStringList() << "-q" << "GPUMemoryInterface");
     process.waitForFinished(-1);
     sInfo = process.readAllStandardOutput();
     QStringList lines = sInfo.split("\n");
@@ -1054,7 +1052,10 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
     // 加载nvidia-settings  -q  VideoRam 信息
     // 命令与xrandr命令一样无法在后台运行,该从前台命令直接获取信息
     QString deviceInfo;
-    if (getDeviceInfoFromCmd(deviceInfo, "nvidia-smi -L")) {
+    QString program { "nvidia-smi" };
+    QStringList arguments;
+    arguments << "-L";
+    if (getDeviceInfoFromCmd(deviceInfo, program, arguments)) {
         qCDebug(appLog) << "nvidia-smi -L output:" << deviceInfo;
         QStringList gpuList = deviceInfo.split("\n");
         for (QString item : gpuList) {
@@ -1079,7 +1080,9 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
             }
 
             QString memoryInfo;
-            if (!getDeviceInfoFromCmd(memoryInfo, QString("nvidia-smi -i %1 -q -d MEMORY").arg(gpuNumList[1])))
+            arguments.clear();
+            arguments << "-i" << gpuNumList[1] << "-q" << "-d" << "MEMORY";
+            if (!getDeviceInfoFromCmd(memoryInfo, program, arguments))
                 continue;
             qCDebug(appLog) << "nvidia-smi memory info for GPU" << gpuNumList[1] << ":" << memoryInfo;
 
@@ -1142,7 +1145,10 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
 
 
             QMap<QString, QString> mapInfo;
-            if (getDeviceInfoFromCmd(deviceInfo, "nvidia-settings  -q  VideoRam")) {
+            program = "nvidia-settings";
+            arguments.clear();
+            arguments << "-q" << "VideoRam";
+            if (getDeviceInfoFromCmd(deviceInfo, program, arguments)) {
                 qCDebug(appLog) << "nvidia-settings -q VideoRam output:" << deviceInfo;
                 QRegularExpression reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
                 QStringList list = deviceInfo.split("\n");
@@ -1736,11 +1742,13 @@ bool CmdTool::getDeviceInfo(QString &deviceInfo, const QString &debugFile)
     return true;
 }
 
-bool CmdTool::getDeviceInfoFromCmd(QString &deviceInfo, const QString &cmd)
+bool CmdTool::getDeviceInfoFromCmd(QString &deviceInfo,
+                                   const QString &program,
+                                   const QStringList &arguments)
 {
-    qCDebug(appLog) << "Getting device info from command:" << cmd;
+    qCDebug(appLog) << "Getting device info from command:" << program;
     QProcess process;
-    process.start(cmd);
+    process.start(program, arguments);
     process.waitForFinished(-1);
     deviceInfo = process.readAllStandardOutput();
     qCDebug(appLog) << "Command output:" << deviceInfo;
