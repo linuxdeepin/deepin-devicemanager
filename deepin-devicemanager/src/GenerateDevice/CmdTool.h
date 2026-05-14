@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -353,7 +352,9 @@ private:
      * @param cmd:调试文件名称
      * @return true:获取信息成功;false:获取信息失败
      */
-    bool getDeviceInfoFromCmd(QString &deviceInfo, const QString &cmd);
+    bool getDeviceInfoFromCmd(QString &deviceInfo,
+                              const QString &program,
+                              const QStringList &arguments);
 
     /**
      * @brief getDeviceInfo:通过文件获取设备信息字符
