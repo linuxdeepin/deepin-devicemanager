@@ -1285,7 +1285,9 @@ void DeviceGenerator::calAndSetCpuHeaderInfo(const QMap<QString, QString> &first
     }
     if (firstProcessorInfo.contains("L1d cache")) {
         QString strL1dCache = firstProcessorInfo.value("L1d cache");
-        QString strTotalL1dCache = Common::formatTotalCache(strL1dCache, coreNum);
+        int sharedCount = Common::parseSharedCpuCount(firstProcessorInfo.value("L1d shared cpu list"));
+        int groupCount = (sharedCount > 0 && logicalNum > 0) ? logicalNum / sharedCount : coreNum;
+        QString strTotalL1dCache = Common::formatTotalCache(strL1dCache, groupCount);
         if (!strTotalL1dCache.isEmpty()) {
             QPair<QString, QString> totalL1dCache(tr("L1d cache"), strTotalL1dCache);
             singleCpuHeaderInfo.push_back(totalL1dCache);
@@ -1293,7 +1295,9 @@ void DeviceGenerator::calAndSetCpuHeaderInfo(const QMap<QString, QString> &first
     }
     if (firstProcessorInfo.contains("L1i cache")) {
         QString strL1iCache = firstProcessorInfo.value("L1i cache");
-        QString strTotalL1iCache = Common::formatTotalCache(strL1iCache, coreNum);
+        int sharedCount = Common::parseSharedCpuCount(firstProcessorInfo.value("L1i shared cpu list"));
+        int groupCount = (sharedCount > 0 && logicalNum > 0) ? logicalNum / sharedCount : coreNum;
+        QString strTotalL1iCache = Common::formatTotalCache(strL1iCache, groupCount);
         if (!strTotalL1iCache.isEmpty()) {
             QPair<QString, QString> totalL1iCache(tr("L1i cache"), strTotalL1iCache);
             singleCpuHeaderInfo.push_back(totalL1iCache);
@@ -1301,7 +1305,9 @@ void DeviceGenerator::calAndSetCpuHeaderInfo(const QMap<QString, QString> &first
     }
     if (firstProcessorInfo.contains("L2 cache")) {
         QString strL2Cache = firstProcessorInfo.value("L2 cache");
-        QString strTotalL2Cache = Common::formatTotalCache(strL2Cache, coreNum);
+        int sharedCount = Common::parseSharedCpuCount(firstProcessorInfo.value("L2 shared cpu list"));
+        int groupCount = (sharedCount > 0 && logicalNum > 0) ? logicalNum / sharedCount : coreNum;
+        QString strTotalL2Cache = Common::formatTotalCache(strL2Cache, groupCount);
         if (!strTotalL2Cache.isEmpty()) {
             QPair<QString, QString> totalL2Cache(tr("L2 cache"), strTotalL2Cache);
             singleCpuHeaderInfo.push_back(totalL2Cache);
@@ -1309,7 +1315,9 @@ void DeviceGenerator::calAndSetCpuHeaderInfo(const QMap<QString, QString> &first
     }
     if (firstProcessorInfo.contains("L3 cache")) {
         QString strL3Cache = firstProcessorInfo.value("L3 cache");
-        QString strTotalL3Cache = Common::formatTotalCache(strL3Cache, 1);
+        int sharedCount = Common::parseSharedCpuCount(firstProcessorInfo.value("L3 shared cpu list"));
+        int groupCount = (sharedCount > 0 && logicalNum > 0) ? logicalNum / sharedCount : 1;
+        QString strTotalL3Cache = Common::formatTotalCache(strL3Cache, groupCount);
         if (!strTotalL3Cache.isEmpty()) {
             QPair<QString, QString> totalL3Cache(tr("L3 cache"), strTotalL3Cache);
             singleCpuHeaderInfo.push_back(totalL3Cache);
