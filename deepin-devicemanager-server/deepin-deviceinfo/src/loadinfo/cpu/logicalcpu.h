@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -60,6 +60,12 @@ public:
      * @param value cache
      */
     void setL4Cache(const QString &value);
+
+    void setL1dSharedCpuList(const QString &value);
+    void setL1iSharedCpuList(const QString &value);
+    void setL2SharedCpuList(const QString &value);
+    void setL3SharedCpuList(const QString &value);
+    void setL4SharedCpuList(const QString &value);
 
     /**
      * @brief setMinFreq : set min freq
@@ -180,6 +186,12 @@ public:
      */
     const QString &l4Cache();
 
+    const QString &l1dSharedCpuList();
+    const QString &l1iSharedCpuList();
+    const QString &l2SharedCpuList();
+    const QString &l3SharedCpuList();
+    const QString &l4SharedCpuList();
+
     /**
      * @brief minFreq
      * @return : value
@@ -266,6 +278,11 @@ public:
         , l2_cache("")
         , l3_cache("")
         , l4_cache("")
+        , l1d_shared_cpu_list("")
+        , l1i_shared_cpu_list("")
+        , l2_shared_cpu_list("")
+        , l3_shared_cpu_list("")
+        , l4_shared_cpu_list("")
         , max_freq("")
         , min_freq("")
         , cur_freq("")
@@ -289,6 +306,11 @@ public:
     QString     l2_cache;              // l2 cache
     QString     l3_cache;              // l3 cache
     QString     l4_cache;              // l4 cache
+    QString     l1d_shared_cpu_list;   // l1d shared cpu list
+    QString     l1i_shared_cpu_list;   // l1i shared cpu list
+    QString     l2_shared_cpu_list;    // l2 shared cpu list
+    QString     l3_shared_cpu_list;    // l3 shared cpu list
+    QString     l4_shared_cpu_list;    // l4 shared cpu list
     QString     max_freq;              // max freq
     QString     min_freq;              // min freq
     QString     cur_freq;              // cur freq
