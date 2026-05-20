@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -63,6 +63,11 @@ void CoreCpu::getInfo(QString &info)
         appendKeyValue(info, "L2 cache", logical.l2Cache());
         appendKeyValue(info, "L3 cache", logical.l3Cache());
         appendKeyValue(info, "L4 cache", logical.l4Cache());
+        appendKeyValue(info, "L1d shared cpu list", logical.l1dSharedCpuList());
+        appendKeyValue(info, "L1i shared cpu list", logical.l1iSharedCpuList());
+        appendKeyValue(info, "L2 shared cpu list", logical.l2SharedCpuList());
+        appendKeyValue(info, "L3 shared cpu list", logical.l3SharedCpuList());
+        appendKeyValue(info, "L4 shared cpu list", logical.l4SharedCpuList());
         appendKeyValue(info, "CPU MHz", logical.curFreq());
         appendKeyValue(info, "CPU max MHz", logical.maxFreq());
         appendKeyValue(info, "CPU min MHz", logical.minFreq());
