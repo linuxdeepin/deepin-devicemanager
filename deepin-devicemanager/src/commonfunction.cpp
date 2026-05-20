@@ -1,5 +1,5 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -7,6 +7,8 @@
 #include "commondefine.h"
 #include "DBusInterface.h"
 #include "DDLog.h"
+
+#include <QRegularExpression>
 
 // 其它头文件
 #include <QString>
@@ -372,4 +374,34 @@ QString Common::formatTotalCache(const QString &perThreadCache, int coreCount)
     } else {
         return QString::number(value, 'f', 1) + " " + unit;
     }
+}
+
+int Common::parseSharedCpuCount(const QString &sharedCpuList)
+{
+    QString s = sharedCpuList.trimmed();
+    if (s.isEmpty())
+        return 0;
+
+    int count = 0;
+    QStringList parts = s.split(',', Qt::SkipEmptyParts);
+    for (const QString &part : parts) {
+        QString trimmed = part.trimmed();
+        if (trimmed.contains('-')) {
+            QStringList range = trimmed.split('-');
+            if (range.size() == 2) {
+                bool ok1 = false, ok2 = false;
+                int start = range[0].trimmed().toInt(&ok1);
+                int end = range[1].trimmed().toInt(&ok2);
+                if (ok1 && ok2 && end >= start) {
+                    count += end - start + 1;
+                }
+            }
+        } else {
+            bool ok = false;
+            if (trimmed.toInt(&ok) || ok) {
+                count += 1;
+            }
+        }
+    }
+    return count;
 }

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -341,7 +341,7 @@ void CpuInfo::readCpuCache(const QString &path, LogicalCpu &lcpu)
 void CpuInfo::readCpuCacheIndex(const QString &path, LogicalCpu &lcpu)
 {
     int level = -1;
-    QString type, value;
+    QString type, value, sharedCpuList;
 
     // get level
     QString levelPath = path + "/level";
@@ -368,17 +368,31 @@ void CpuInfo::readCpuCacheIndex(const QString &path, LogicalCpu &lcpu)
     }
     fileV.close();
 
+    // get shared_cpu_list
+    QString sharedPath = path + "/shared_cpu_list";
+    QFile fileS(sharedPath);
+    if (fileS.open(QIODevice::ReadOnly)) {
+        sharedCpuList = fileS.readAll();
+    }
+    fileS.close();
+
     if (level == 2) {
         lcpu.setL2Cache(value);
+        lcpu.setL2SharedCpuList(sharedCpuList);
     } else if (level == 3) {
         lcpu.setL3Cache(value);
+        lcpu.setL3SharedCpuList(sharedCpuList);
     } else if (level == 4) {
         lcpu.setL4Cache(value);
+        lcpu.setL4SharedCpuList(sharedCpuList);
     } else if (level == 1) {
-        if (type.contains("Data", Qt::CaseInsensitive))
+        if (type.contains("Data", Qt::CaseInsensitive)) {
             lcpu.setL1dCache(value);
-        else
+            lcpu.setL1dSharedCpuList(sharedCpuList);
+        } else {
             lcpu.setL1iCache(value);
+            lcpu.setL1iSharedCpuList(sharedCpuList);
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -53,6 +53,31 @@ void LogicalCpu::setL4Cache(const QString &value)
 {
     Q_D(LogicalCpu);
     d->l4_cache = value;
+}
+void LogicalCpu::setL1dSharedCpuList(const QString &value)
+{
+    Q_D(LogicalCpu);
+    d->l1d_shared_cpu_list = value;
+}
+void LogicalCpu::setL1iSharedCpuList(const QString &value)
+{
+    Q_D(LogicalCpu);
+    d->l1i_shared_cpu_list = value;
+}
+void LogicalCpu::setL2SharedCpuList(const QString &value)
+{
+    Q_D(LogicalCpu);
+    d->l2_shared_cpu_list = value;
+}
+void LogicalCpu::setL3SharedCpuList(const QString &value)
+{
+    Q_D(LogicalCpu);
+    d->l3_shared_cpu_list = value;
+}
+void LogicalCpu::setL4SharedCpuList(const QString &value)
+{
+    Q_D(LogicalCpu);
+    d->l4_shared_cpu_list = value;
 }
 void LogicalCpu::setMinFreq(const QString &value)
 {
@@ -151,6 +176,31 @@ const QString &LogicalCpu::l4Cache()
     Q_D(LogicalCpu);
     return d->l4_cache;
 }
+const QString &LogicalCpu::l1dSharedCpuList()
+{
+    Q_D(LogicalCpu);
+    return d->l1d_shared_cpu_list;
+}
+const QString &LogicalCpu::l1iSharedCpuList()
+{
+    Q_D(LogicalCpu);
+    return d->l1i_shared_cpu_list;
+}
+const QString &LogicalCpu::l2SharedCpuList()
+{
+    Q_D(LogicalCpu);
+    return d->l2_shared_cpu_list;
+}
+const QString &LogicalCpu::l3SharedCpuList()
+{
+    Q_D(LogicalCpu);
+    return d->l3_shared_cpu_list;
+}
+const QString &LogicalCpu::l4SharedCpuList()
+{
+    Q_D(LogicalCpu);
+    return d->l4_shared_cpu_list;
+}
 const QString &LogicalCpu::minFreq()
 {
     Q_D(LogicalCpu);
@@ -219,6 +269,11 @@ void LogicalCpu::diagPrintInfo()
     qCInfo(appLog) << "l2_cache   : " << d->l2_cache;
     qCInfo(appLog) << "l3_cache   : " << d->l3_cache;
     qCInfo(appLog) << "l4_cache   : " << d->l4_cache;
+    qCInfo(appLog) << "l1d_shared : " << d->l1d_shared_cpu_list;
+    qCInfo(appLog) << "l1i_shared : " << d->l1i_shared_cpu_list;
+    qCInfo(appLog) << "l2_shared  : " << d->l2_shared_cpu_list;
+    qCInfo(appLog) << "l3_shared  : " << d->l3_shared_cpu_list;
+    qCInfo(appLog) << "l4_shared  : " << d->l4_shared_cpu_list;
     qCInfo(appLog) << "max_freq   : " << d->max_freq;
     qCInfo(appLog) << "min_freq   : " << d->min_freq;
     qCInfo(appLog) << "cur_freq   : " << d->cur_freq;
