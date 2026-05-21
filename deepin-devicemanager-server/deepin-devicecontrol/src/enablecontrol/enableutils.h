@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -39,6 +39,9 @@ public:
      * @return
      */
     static bool getMapInfo(const QString &item, QMap<QString, QString> &mapInfo);
+
+private:
+    static bool isWireless(const QString &logicalName);
 };
 
 #endif // ENABLEUTILS_H

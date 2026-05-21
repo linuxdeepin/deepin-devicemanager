@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -12,6 +12,8 @@
 #include <QCryptographicHash>
 #include <QRegularExpression>
 #include <QDebug>
+#include <QFileInfo>
+#include <QDir>
 
 #include <net/if.h>
 #include <sys/ioctl.h>
@@ -140,7 +142,7 @@ void EnableUtils::disableInDevice()
 
 bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable)
 {
-    if (logicalName.startsWith("wlan") || logicalName.startsWith("wlp")) {  // Wireless LAN
+    if (isWireless(logicalName)) {  // Wireless LAN
         // 第一步：获取 wiphy 编号
         QProcess iwProcess;
         iwProcess.start("iw", QStringList() << "dev" << logicalName << "info");
@@ -157,17 +159,30 @@ bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, boo
         QString phyNum = wiphyMatch.captured(1);
 
         // 第二步：获取 rfkill 设备编号
-        QProcess rfkillListProcess;
-        rfkillListProcess.start("rfkill", QStringList() << "list");
-        rfkillListProcess.waitForFinished();
-        QString rfkillOutput = QString::fromUtf8(rfkillListProcess.readAllStandardOutput());
-
-        // 查找对应的 rfkill 编号
-        QRegularExpression rfkillRe("^(\\d+):.*\\n.*\\n.*phy" + phyNum);
-        QRegularExpressionMatch rfkillMatch = rfkillRe.match(rfkillOutput);
         QString rfkillId;
-        if (rfkillMatch.hasMatch()) {
-            rfkillId = rfkillMatch.captured(1);
+        QString phyPath = QString("/sys/class/ieee80211/phy%1").arg(phyNum);
+        QDir phyDir(phyPath);
+        if (!phyDir.exists()) {
+            qCritical() << "Phy path does not exist:" << phyPath;
+            return false;
+        }
+
+        // 查找 rfkill 目录
+        QStringList rfkillDirs = phyDir.entryList(QStringList() << "rfkill*", QDir::Dirs);
+        if (rfkillDirs.isEmpty()) {
+            qCritical() << "No rfkill directory found unbder" << phyPath;
+            return false;
+        }
+
+        // 读取 index 文件
+        QString rfkillIndexPath = phyPath + "/" + rfkillDirs.first() + "/index";
+        QFile indexFile(rfkillIndexPath);
+        if (indexFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            rfkillId = indexFile.readLine().trimmed();
+            indexFile.close();
+        } else {
+            qCritical() << "Failded to read rfkill index from" << rfkillIndexPath;
+            return false;
         }
 
         // 第三步：执行 rfkill block/unblock
@@ -179,6 +194,8 @@ bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, boo
             if (ret != 0) {
                 qCritical() << "Failed to block/unblock wifi: error code: " << ret;
             }
+        } else {
+            qCritical() << "Empty rfkill ID";
         }
 
         // 第四步：执行 ifconfig up/down
@@ -251,4 +268,14 @@ bool EnableUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInf
     }
 
     return true;
+}
+
+bool EnableUtils::isWireless(const QString &logicalName)
+{
+    QFileInfo wirelessInfo(QString("/sys/class/net/%1/wireless").arg(logicalName));
+    QFileInfo phyInfo(QString("/sys/class/net/%1/phy80211").arg(logicalName));
+    if (wirelessInfo.exists() || phyInfo.exists())
+        return true;
+    else
+        return false;
 }
