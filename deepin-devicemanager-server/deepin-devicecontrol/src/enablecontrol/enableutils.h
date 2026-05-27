@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -25,12 +25,28 @@ public:
     static void disableInDevice();
 
     /**
-     * @brief ioctlOperateNetworkLogicalName 通过ioctl设置网卡是否可用
-     * @param logicalName
-     * @param enable
-     * @return
+     * @brief ioctlOperateNetworkLogicalName 设置网卡是否可用，优先使用D-Bus方案，失败回退到ioctl方案
+     * @param logicalName 网卡逻辑名称
+     * @param enable true启用，false禁用
+     * @return 成功返回true，失败返回false
      */
     static bool ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable);
+
+    /**
+     * @brief enableNetworkByDBus 方案一：通过NetworkManager D-Bus设置DeviceEnabled属性
+     * @param logicalName 网卡逻辑名称
+     * @param enable true启用，false禁用
+     * @return 成功返回true，失败返回false
+     */
+    static bool enableNetworkByDBus(const QString &logicalName, bool enable);
+
+    /**
+     * @brief enableNetworkByIoctl 方案二：通过ioctl控制网卡是否可用
+     * @param logicalName 网卡逻辑名称
+     * @param enable true启用，false禁用
+     * @return 成功返回true，失败返回false
+     */
+    static bool enableNetworkByIoctl(const QString &logicalName, bool enable);
 
     /**
      * @brief getMapInfo 解析usb信息
