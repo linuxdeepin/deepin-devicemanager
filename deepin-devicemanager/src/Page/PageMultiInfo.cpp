@@ -35,7 +35,7 @@ DWIDGET_USE_NAMESPACE
 using namespace DDLog;
 
 #define LEAST_PAGE_HEIGHT 315  // PageMultiInfo最小高度 当小于这个高度时，上方的表格就要变小
-static constexpr int kHeaderInfoDefaultHeight = 362; // 滚动区域默认高度
+static const int kAdjustHeight { 2 }; // 高度调节值
 
 PageMultiInfo::PageMultiInfo(QWidget *parent)
     : PageInfo(parent)
@@ -99,13 +99,17 @@ void PageMultiInfo::updateInfo(const QList<DeviceBaseInfo *> &lst)
         QList<QList<QPair<QString, QString>>> headerInfo;
         DeviceManager::instance()->getCpuHeaderInfo(headerInfo);
         clearLayout(mp_HeaderInfoWidgetLay);
+        int defaultHeight { 0 };
         for (int i = 0; i < headerInfo.size(); ++i) {
             HeaderInfoTableWidget *headerWidget = new HeaderInfoTableWidget(mp_HeaderInfoWidget);
             headerWidget->updateData(headerInfo.at(i));
             mp_HeaderInfoWidgetLay->addWidget(headerWidget);
         }
-        mp_HeaderInfoWidget->setMaximumHeight(kHeaderInfoDefaultHeight);
-        mp_HeaderInfoWidget->resize(this->width(), kHeaderInfoDefaultHeight);
+        if (headerInfo.size() > 0 && headerInfo.at(0).size() > 0) {
+            defaultHeight = headerInfo.at(0).size() * ROW_HEIGHT + kAdjustHeight;
+        }
+        mp_HeaderInfoWidget->setMaximumHeight(defaultHeight);
+        mp_HeaderInfoWidget->resize(this->width(), defaultHeight);
         mp_HeaderInfoWidget->setVisible(true);
     } else {
         mp_HeaderInfoWidget->setVisible(false);
@@ -289,7 +293,6 @@ void PageMultiInfo::initWidgets()
     mp_HeaderInfoWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     mp_HeaderInfoWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     mp_HeaderInfoWidget->setFrameShape(QFrame::NoFrame);
-    mp_HeaderInfoWidget->setMaximumHeight(kHeaderInfoDefaultHeight);
     mp_HeaderInfoWidget->setMinimumHeight(0);
     mp_HeaderInfoWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     mp_HeaderInfoWidgetLay->setContentsMargins(0, 0, 0, 0);
