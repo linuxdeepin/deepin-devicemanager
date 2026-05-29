@@ -92,1411 +92,1411 @@
 <context>
     <name>DeviceBaseInfo</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="964"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="967"/>
         <source>Core(s)</source>
         <translation>ལྟེ་བ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="965"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1248"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="968"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1251"/>
         <source>Processor</source>
         <translation>གཏན་ཚིགས་ཐག་གཅོད་ཆས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="966"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="969"/>
         <source>ACL MTU</source>
         <translation>ACL MTU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="967"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="970"/>
         <source>Address</source>
         <translation>གནས་ས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="968"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="971"/>
         <source>Alias</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="969"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="972"/>
         <source>ansiversion</source>
         <translation>ANSIཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="970"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="973"/>
         <source>Application</source>
         <translation>ཉེར་སྤྱོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="971"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1239"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="974"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1242"/>
         <source>Architecture</source>
         <translation>གཞི་སྒྲོམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="972"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="975"/>
         <source>Array Handle</source>
         <translation>གྲངས་ཚོ་བྱ་རིམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="973"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="976"/>
         <source>Asset Tag</source>
         <translation>རྒྱུ་ནོར་སྒྲིག་ཨང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="974"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="977"/>
         <source>Auto Negotiation</source>
         <translation>རང་འགུལ་གྲོས་དོན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="975"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="978"/>
         <source>Bank Locator</source>
         <translation>ནང་གསོག་རྒྱུ་ལམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="976"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="979"/>
         <source>Base Board Information</source>
         <translation>མ་པང་ཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="977"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="980"/>
         <source>BD Address</source>
         <translation>སོ་སྔོན་སྒྲིག་ཆས་སྡོད་གནས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="978"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="981"/>
         <source>BIOS Information</source>
         <translation>BIOSཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="979"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="982"/>
         <source>BIOS Revision</source>
         <translation>BIOSབཟོ་བཅོས་པར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="980"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="983"/>
         <source>BIOS ROMSIZE</source>
         <translation>BIOS ROMཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="981"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="984"/>
         <source>Board name</source>
         <translation>མ་པང་གི་མིང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="982"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="985"/>
         <source>BogoMIPS</source>
         <translation>BogoMIPS</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="983"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="986"/>
         <source>Boot-up State</source>
         <translation>འཕྲུལ་སྒོ་ཕྱེ་བའི་ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="984"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="987"/>
         <source>Broadcast</source>
         <translation>རྒྱང་བསྒྲགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="985"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="988"/>
         <source>Bus</source>
         <translation>མ་སྐུད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="986"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="989"/>
         <source>bus info</source>
         <translation>ཆ་སྐུད་ཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="987"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="990"/>
         <source>Bus Info</source>
         <translation>མ་སྐུད་ཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="988"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="991"/>
         <source>Cache Size</source>
         <translation>ཤོང་གསོག་ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="989"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="992"/>
         <source>Capabilities</source>
         <translation>བྱེད་ནུས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="990"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="993"/>
         <source>Capacity</source>
         <translation>ཤོང་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="991"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="994"/>
         <source>Characteristics</source>
         <translation>ཁྱད་གཤིས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="992"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="995"/>
         <source>Chassis Handle</source>
         <translation>འཁོར་སྒམ་བྱ་རིམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="993"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="996"/>
         <source>Chassis Information</source>
         <translation>འཁོར་སྒམ་ཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="994"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="997"/>
         <source>Chip</source>
         <translation>ཉིང་ལྷེབ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="995"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="998"/>
         <source>Chipset</source>
         <translation>ཉིང་ལྷེབ་ཙུའུ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="996"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="999"/>
         <source>Class</source>
         <translation>རིགས་དབྱེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="997"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1000"/>
         <source>Clock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="998"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1001"/>
         <source>Config Status</source>
         <translation>སྒྲིག་སྦྱོར་ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="999"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1002"/>
         <source>Configured Speed</source>
         <translation>སྒྲིག་སྦྱོར་ཟློས་ཕྱོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1000"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1003"/>
         <source>Configured Voltage</source>
         <translation>སྒྲིག་སྦྱོར་གློག་གནོན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1001"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1004"/>
         <source>Contained Elements</source>
         <translation>ཡོད་པའི་སྒྲིག་ཆས་གྲངས་ཀ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1002"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1005"/>
         <source>Contained Object Handles</source>
         <translation>བྱ་ཡུལ་བྱ་རིམ་ཚུད་ཡོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1003"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1006"/>
         <source>copies</source>
         <translation>བསྐྱར་པར་གྲངས་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1004"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1007"/>
         <source>Core ID</source>
         <translation>ལྟེ་བ། ID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1005"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1008"/>
         <source>CPU architecture</source>
         <translation>CPUགཞི་སྒྲོམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1006"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1009"/>
         <source>CPU Family</source>
         <translation>ཁྱིམ་རྒྱུད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1007"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1010"/>
         <source>CPU ID</source>
         <translation>སྒྲིག་གཅོད་ཆས།  ID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1008"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1011"/>
         <source>CPU implementer</source>
         <translation>CPUབྱ་རིམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1009"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1012"/>
         <source>CPU part</source>
         <translation>CPUལྷུ་ལག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1010"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1013"/>
         <source>CPU revision</source>
         <translation>CPUཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1011"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1014"/>
         <source>CPU variant</source>
         <translation>CPUའགྱུར་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1012"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1015"/>
         <source>critical-action</source>
         <translation>གློག་ཚད་ཆེས་ཉུང་བའི་སྐབས་ལག་བསྟར་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1013"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1016"/>
         <source>Currently Installed Language</source>
         <translation>མིག་སྔའི་སྒྲིག་སྦྱོར་སྐད་བརྡ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1014"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1017"/>
         <source>Current Resolution</source>
         <translation>མིག་སྔའི་འབྱེད་ཕྱོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1015"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1018"/>
         <source>daemon-version</source>
         <translation>Daemonཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1016"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1019"/>
         <source>Data Width</source>
         <translation>གཞི་གྲངས་ཞེང་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1017"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1020"/>
         <source>Date</source>
         <translation>དུས་ཚོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1018"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1021"/>
         <source>description</source>
         <translation>ཞིབ་བརྗོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1019"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1022"/>
         <source>Description</source>
         <translation>ཞིབ་བརྗོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1020"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1023"/>
         <source>Design Capacity</source>
         <translation>ཤོང་ཚད་ཇུས་འགོད་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1021"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1024"/>
         <source>Design Voltage</source>
         <translation>གློག་གནོན་ཇུས་འགོད་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1022"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1025"/>
         <source>Device</source>
         <translation>སྒྲིག་ཆས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1023"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1026"/>
         <source>Device Class</source>
         <translation>སྒྲིག་ཆས་རིགས་དབྱེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1024"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1027"/>
         <source>Device File</source>
         <translation>སྒྲིག་ཆས་ཡིག་ཆ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1025"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1028"/>
         <source>Device Files</source>
         <translation>སྒྲིག་ཆས་ཡིག་ཆ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1026"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1029"/>
         <source>Device Name</source>
         <translation>སྒྲིག་ཆས་མིང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1027"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1030"/>
         <source>Device Number</source>
         <translation>སྒྲིག་ཆས་ཨང་རྟགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1028"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1031"/>
         <source>DigitalOutput</source>
         <translation>DigitalOutput</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1029"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1032"/>
         <source>Disable</source>
         <translation>སྤྱོད་མི་ཆོག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1030"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1033"/>
         <source>Discoverable</source>
         <translation>ཤེས་རྟོགས་ཐུབ་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1031"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1034"/>
         <source>Discovering</source>
         <translation>འཚོལ་ཞིབ་བྱེད་བཞིན་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1032"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1035"/>
         <source>Display Input</source>
         <translation>ནང་འཇུག་འཆར་བ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1033"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1036"/>
         <source>Display Output</source>
         <translation>ཕྱིར་འདྲེན་འཆར་བ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1034"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1037"/>
         <source>Display Ratio</source>
         <translation>འཆར་བའི་བསྡུར་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1035"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1038"/>
         <source>DP</source>
         <translation>DP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1036"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1039"/>
         <source>Driver</source>
         <translation>སྒུལ་བྱེད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1037"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1040"/>
         <source>Driver Activation Cmd</source>
         <translation>སྒུལ་བྱེད་སྐུལ་སློང་བཀའ་རྒྱ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1038"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1041"/>
         <source>Driver Modules</source>
         <translation>སྒུལ་བྱེད་དཔེ་དུམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1039"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1042"/>
         <source>Driver Status</source>
         <translation>སྒུལ་བྱེད་ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1040"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1043"/>
         <source>Driver Version</source>
         <translation>སྒུལ་བྱེད་པར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1041"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1044"/>
         <source>Duplex</source>
         <translation>གོ་ཉིས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1042"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1045"/>
         <source>DVI</source>
         <translation>DVI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1043"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1046"/>
         <source>eDP</source>
         <translation>eDP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1044"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1047"/>
         <source>EGL client APIs</source>
         <translation>EGLམཐུད་སྣེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1045"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1048"/>
         <source>EGL version</source>
         <translation>EGLཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1046"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1049"/>
         <source>energy</source>
         <translation>ཤོང་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1047"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1050"/>
         <source>energy-empty</source>
         <translation>ཤོང་ཚད་ཆུང་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1048"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1051"/>
         <source>energy-full</source>
         <translation>ཤོང་ཚད་ཡོངས་རྫོགས་གསོག་ཟིན་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1049"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1052"/>
         <source>energy-full-design</source>
         <translation>ཤོང་ཚད་ཇུས་འགོད་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1050"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1053"/>
         <source>energy-rate</source>
         <translation>ནུས་ཚད་སྟུག་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1051"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1054"/>
         <source>Error Correction Type</source>
         <translation>ནོར་བཅོས་རིགས་གྲས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1052"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1055"/>
         <source>Error Information Handle</source>
         <translation>ནོར་འཁྲུལ་ཆ་འཕྲིན་གྱི་བྱ་རིམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1053"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1056"/>
         <source>EV</source>
         <translation>EV</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1054"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1057"/>
         <source>Extensions</source>
         <translation>རྒྱ་སྐྱེད་བཀའ་འདུ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1055"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1058"/>
         <source>Family</source>
         <translation>ཁྱིམ་རྒྱུད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1056"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1059"/>
         <source>Features</source>
         <translation>ཁྱད་ཆོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1057"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1060"/>
         <source>Firmware</source>
         <translation>བརྟན་ཆས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1058"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1061"/>
         <source>Firmware Revision</source>
         <translation>བརྟན་ཆས་བཟོ་བཅོས་པར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1059"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1062"/>
         <source>Firmware Version</source>
         <translation>བརྟན་ཆས་པར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1060"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1063"/>
         <source>Flags</source>
         <translation>ཁྱད་གཤིས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1061"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1064"/>
         <source>Form Factor</source>
         <translation>ཚད་གཞི་བཟོ་རྟགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1062"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1065"/>
         <source>GDDR capacity</source>
         <translation>GDDRཤོང་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1063"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1066"/>
         <source>Geometry (Logical)</source>
         <translation>དབྱིབས་རྩིས་གཞི་གྲངས།（གཏན་ཚིགས།）</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1064"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1067"/>
         <source>GLSL version</source>
         <translation>GLSLཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1065"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1068"/>
         <source>GL version</source>
         <translation>GLཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1066"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1069"/>
         <source>GPU type</source>
         <translation>GPUརིགས་གྲས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1067"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1070"/>
         <source>GPU vendor</source>
         <translation>GPUའདོན་སྤྲོད་བྱེད་མཁན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1068"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1071"/>
         <source>Graphics Memory</source>
         <translation>འཆར་གསོག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1069"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1072"/>
         <source>guid</source>
         <translation>ཁྱོན་ཡོངས་ཀྱི་མཚོན་རྟགས་གཅིག་པུ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1070"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1073"/>
         <source>Handlers</source>
         <translation>ཐག་གཅོད་བྱ་རིམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1071"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1074"/>
         <source>Hardware Class</source>
         <translation>བརྟན་ཆས་རིགས་དབྱེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1072"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1075"/>
         <source>has history</source>
         <translation>ལོ་རྒྱུས་ཟིན་ཐོ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1073"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1076"/>
         <source>has statistics</source>
         <translation>གློག་སྤྱོད་སྡོམ་རྩིས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1074"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1077"/>
         <source>HCI Version</source>
         <translation>HCIཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1075"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1078"/>
         <source>HDMI</source>
         <translation>HDMI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1076"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1079"/>
         <source>Height</source>
         <translation>མཐོ་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1077"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1080"/>
         <source>icon-name</source>
         <translation>རྟགས་རིས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1078"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1081"/>
         <source>Input/Output</source>
         <translation>ནང་འཇུག/ཕྱིར་འདྲེན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1079"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1082"/>
         <source>Installable Languages</source>
         <translation>སྒྲིག་སྦྱོར་བྱ་རུང་བའི་སྐད་བརྡའི་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1080"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1083"/>
         <source>Interface</source>
         <translation>མཐུད་སྣེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1081"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1084"/>
         <source>Interface Type</source>
         <translation>མཐུད་སྣེའི་རིགས་གྲས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1082"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1085"/>
         <source>ioport</source>
         <translation>I/Oམཐུད་སྣེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1083"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1086"/>
         <source>IO Port</source>
         <translation>I/Oམཐུད་སྣེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1084"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1087"/>
         <source>IP</source>
         <translation>IP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1085"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1088"/>
         <source>IRQ</source>
         <translation>ཆད་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1086"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1089"/>
         <source>job-cancel-after</source>
         <translation>དེའི་སྐབས་སུ་པར་འདེབས་ལས་འགན་འདོར་བ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1087"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1090"/>
         <source>job-hold-until</source>
         <translation>བར་པར་འདེབས་ལས་འགན་སོར་བཞག་བྱ་རྒྱུ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1088"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1091"/>
         <source>job-priority</source>
         <translation>ལས་འགན་གྱི་སྔོན་རིམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1089"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1092"/>
         <source>KernelModeDriver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1090"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1093"/>
         <source>KEY</source>
         <translation>KEY</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1091"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1094"/>
         <source>L1d Cache</source>
         <translation>L1ཤོང་གསོག（གཞི་གྲངས།）</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1092"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1095"/>
         <source>L1i Cache</source>
         <translation>L1ཤོང་གསོག（བཀའ།）</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1093"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1096"/>
         <source>L2 Cache</source>
         <translation>L2ཤོང་གསོག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1094"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1097"/>
         <source>L3 Cache</source>
         <translation>L3ཤོང་གསོག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1095"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1098"/>
         <source>L4 Cache</source>
         <translation>L2ཤོང་གསོག {4 ?}</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1096"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1099"/>
         <source>Language Description Format</source>
         <translation>སྐད་བརྡ་ཞིབ་བརྗོད་རྣམ་བཞག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1097"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1100"/>
         <source>latency</source>
         <translation>ནར་འགྱངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1098"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1101"/>
         <source>Latency</source>
         <translation>ནར་འགྱངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1099"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1102"/>
         <source>lid-is-closed</source>
         <translation>ལག་ཁྱེར་གློག་ཀླད་ཁ་རྒྱག་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1100"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1103"/>
         <source>lid-is-present</source>
         <translation>ལག་ཁྱེར་གློག་ཀླད་ཁ་ཕྱེ་བ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1101"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1104"/>
         <source>Link</source>
         <translation>སྦྲེལ་བ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1102"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1105"/>
         <source>Link mode</source>
         <translation>སྦྲེལ་མཐུད་དཔེ་དབྱིབས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1103"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1106"/>
         <source>Link policy</source>
         <translation>སྦྲེལ་མཐུད་དྲིད་ཇུས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1104"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1107"/>
         <source>LMP Version</source>
         <translation>LMPཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1105"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1108"/>
         <source>Location</source>
         <translation>གནས་ས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1106"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1109"/>
         <source>Location In Chassis</source>
         <translation>འཁོར་སྒམ་ནང་གི་སྡོད་གནས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1107"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1110"/>
         <source>Locator</source>
         <translation>འཇུག་ཤུར།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1108"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1111"/>
         <source>Lock</source>
         <translation>སྒོ་ལྕག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1109"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1112"/>
         <source>logical name</source>
         <translation>གཏན་ཚིགས་སྡོད་གནས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1110"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1113"/>
         <source>Logical Name</source>
         <translation>གཏན་ཚིགས་མིང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1111"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1114"/>
         <source>logicalsectorsize</source>
         <translation>གཏན་ཚིགས་ཁུལ་དབྱེའི་ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1112"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1115"/>
         <source>Logical Size</source>
         <translation>གཏན་ཚིགས་ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1113"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1116"/>
         <source>MAC Address</source>
         <translation>MACསྡོད་གནས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1114"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1117"/>
         <source>marker-change-time</source>
         <translation>མཚོན་རྟགས་བཅོས་པའི་ཐེངས་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1115"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1241"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1118"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1244"/>
         <source>Max Frequency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1116"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1119"/>
         <source>Maximum Capacity</source>
         <translation>ཤོང་ཚད་ཆེ་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1117"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1120"/>
         <source>Maximum Current</source>
         <translation>གློག་རྒྱུན་ཆེ་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1118"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1121"/>
         <source>Maximum Power</source>
         <translation>ནུས་ཆོད་ཆེ་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1119"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1122"/>
         <source>Maximum Rate</source>
         <translation>མྱུར་ཚད་ཆེ་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1120"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1123"/>
         <source>Maximum Resolution</source>
         <translation>འབྱེད་ཕྱོད་ཆེ་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1121"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1124"/>
         <source>Maximum Voltage</source>
         <translation>གློག་གནོན་ཆེ་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1122"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1242"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1125"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1245"/>
         <source>Media Type</source>
         <translation>བར་རྫས་རིགས་གྲས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1123"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1126"/>
         <source>Memory</source>
         <translation>ནང་གསོག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1124"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1127"/>
         <source>Memory Address</source>
         <translation>ནང་གསོག་བྱེད་ས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1125"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1128"/>
         <source>Memory Operating Mode Capability</source>
         <translation>ནང་གསོག་བཀོལ་སྤྱོད་དཔེ་དབྱིབས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1126"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1129"/>
         <source>Memory Subsystem Controller Manufacturer ID</source>
         <translation>ནང་གསོག་མ་ལག་ཡན་ལག་གྱི་ཚོད་འཛིན་ཆས་བཟོ་མཁན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1127"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1130"/>
         <source>Memory Subsystem Controller Product ID</source>
         <translation>ནང་གསོག་མ་ལག་ཡན་ལག་གྱི་ཚོད་འཛིན་ཆས་ཐོན་རྫས་ID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1128"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1131"/>
         <source>Memory Technology</source>
         <translation>ནང་གསོག་ལག་རྩལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1129"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1132"/>
         <source>Minimum Resolution</source>
         <translation>འབྱེད་ཕྱོད་ཆུང་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1130"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1133"/>
         <source>Minimum Voltage</source>
         <translation>གློག་གནོན་ཆུང་ཤོས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1131"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1134"/>
         <source>Modalias</source>
         <translation>བཀའི་མིང་གཞན་སྒྲིག་བཀོད་བྱེད་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1133"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1134"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1136"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1137"/>
         <source>Module Alias</source>
         <translation>དཔེ་དུམ་གྱི་མིང་གཞན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1135"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1138"/>
         <source>Module Manufacturer ID</source>
         <translation>ལྷུ་ཆས་བཟོ་མཁན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1136"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1139"/>
         <source>Module Product ID</source>
         <translation>ལྷུ་ཆས་ཐོན་རྫས་ID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1137"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1140"/>
         <source>MSC</source>
         <translation>MSC</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1138"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1141"/>
         <source>Multicast</source>
         <translation>མང་བསྒྲགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1139"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1243"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1142"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1246"/>
         <source>Name</source>
         <translation>མིང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1140"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1143"/>
         <source>native-path</source>
         <translation>སྒྲིག་སྦྱོར་ཐབས་ལམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1141"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1144"/>
         <source>Negotiation Rate</source>
         <translation>གྲོས་མཐུན་མྱུར་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1142"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1145"/>
         <source>network</source>
         <translation>དྲ་བ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1143"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1146"/>
         <source>Non-Volatile Size</source>
         <translation>བོར་མི་སླ་བའི་ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1144"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1147"/>
         <source>Number Of Devices</source>
         <translation>གཱ་འཇུག་སའི་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1145"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1148"/>
         <source>Number Of Power Cords</source>
         <translation>གློག་ཁུངས་སྐུད་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1146"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1149"/>
         <source>number-up</source>
         <translation>སྒྲིག་ཨང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1147"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1150"/>
         <source>OEM Information</source>
         <translation>OEMཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1148"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1151"/>
         <source>on-battery</source>
         <translation>གློག་རྫས་སྤྱོད་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1149"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1152"/>
         <source>online</source>
         <translation>སྐུད་ཐོག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1150"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1153"/>
         <source>orientation-requested</source>
         <translation>པར་འདེབས་ཕྱོགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1151"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1154"/>
         <source>Packet type</source>
         <translation>གཞི་གྲངས་ཁུག་གི་རིགས་གྲས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1152"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1155"/>
         <source>Pairable</source>
         <translation>ཆ་འགྲིག་ཐུབ་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1153"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1156"/>
         <source>Part Number</source>
         <translation>ལྷུ་ཆས་ཨང་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1154"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1157"/>
         <source>percentage</source>
         <translation>གློག་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1155"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1158"/>
         <source>Phys</source>
         <translation>Phys</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1156"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1159"/>
         <source>physical id</source>
         <translation>དངོས་ཁམས་ID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1157"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1160"/>
         <source>Physical ID</source>
         <translation>དངོས་ཁམས་ID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1158"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1161"/>
         <source>Physical Memory Array</source>
         <translation>ནང་གསོག་འཇུག་ཤུར་ཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1159"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1162"/>
         <source>Port</source>
         <translation>མཐུད་སྣེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1160"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1163"/>
         <source>Powered</source>
         <translation>གློག་འདོན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1161"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1164"/>
         <source>power supply</source>
         <translation>གློག་འདོན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1162"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1165"/>
         <source>Power Supply State</source>
         <translation>གློག་འདོན་པའི་ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1163"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1166"/>
         <source>Primary Monitor</source>
         <translation>འཆར་ཆས་གཙོ་བོ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1164"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1167"/>
         <source>print-color-mode</source>
         <translation>ཚོས་གཞི་དཔེ་དབྱིབས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1165"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1168"/>
         <source>printer-is-accepting-jobs</source>
         <translation>མིག་སྔར་པར་འདེབས་ཆོག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1166"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1169"/>
         <source>printer-is-shared</source>
         <translation>པར་འདེབས་ཆས་མཉམ་སྤྱོད་བྱས་ཟིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1167"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1170"/>
         <source>printer-is-temporary</source>
         <translation>གནས་སྐབས་པར་འདེབས་ཆས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1168"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1171"/>
         <source>printer-make-and-model</source>
         <translation>བཟོ་མཁན་དང་བཟོ་རྟགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1169"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1172"/>
         <source>printer-state-change-time</source>
         <translation>པར་འདེབས་ཆས་ཀྱི་ངང་ཚུལ་བཅོས་པའི་དུས་ཚོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1170"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1173"/>
         <source>printer-state-reasons</source>
         <translation>པར་འདེབས་ཆས་ཀྱི་ངང་ཚུལ་ཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1171"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1174"/>
         <source>printer-type</source>
         <translation>པར་འདེབས་ཆས་ཀྱི་རིགས་གྲས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1172"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1175"/>
         <source>printer-uri-supported</source>
         <translation>རྒྱབ་སྐྱོར་བྱེད་པའི་URI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1173"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1176"/>
         <source>product</source>
         <translation>ཐོན་རྫས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1174"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1177"/>
         <source>Product Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1175"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1178"/>
         <source>Product Name</source>
         <translation>ཐོན་རྫས་མིང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1176"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1179"/>
         <source>PROP</source>
         <translation>PROP</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1177"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1180"/>
         <source>Rank</source>
         <translation>གནས་སྟར།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1178"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1181"/>
         <source>rechargeable</source>
         <translation>གློག་བསྐྱར་གསོག་ཐུབ་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1179"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1182"/>
         <source>Refresh Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1180"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1183"/>
         <source>Release date</source>
         <translation>ཁྱབ་བསྒྲགས་བྱས་པའི་དུས་ཚོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1181"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1184"/>
         <source>Release Date</source>
         <translation>ཡོངས་བསྒྲགས་བྱེད་པའི་དུས་ཚོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1182"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1185"/>
         <source>Revision</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1183"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1186"/>
         <source>ROM Size</source>
         <translation>ROMཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1184"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1187"/>
         <source>Rotation Rate</source>
         <translation>སྐོར་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1185"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1188"/>
         <source>Runtime Size</source>
         <translation>འཁོར་རྒྱུག་ནང་གསོག་ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1186"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1189"/>
         <source>SBDS Chemistry</source>
         <translation>SBDSརྒྱུ་ཆ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1187"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1190"/>
         <source>SBDS Manufacture Date</source>
         <translation>SBDSབཟོ་བའི་དུས་ཚོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1188"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1191"/>
         <source>SBDS Serial Number</source>
         <translation>SBDSརིམ་སྟར་ཨང་རྟགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1189"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1192"/>
         <source>SBDS Version</source>
         <translation>SBDSཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1190"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1193"/>
         <source>SCO MTU</source>
         <translation>SCO MTU</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1191"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1194"/>
         <source>sectorsize</source>
         <translation>གཡབ་ཁུལ་ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1192"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1195"/>
         <source>Security Status</source>
         <translation>བདེ་འཇགས་ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1193"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1196"/>
         <source>Serial ID</source>
         <translation>རིམ་སྟར་ཨང་རྟགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1194"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1197"/>
         <source>Serial Number</source>
         <translation>རིམ་སྟར་ཨང་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1195"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1198"/>
         <source>Service Classes</source>
         <translation>ཞབས་ཞུའི་རིགས་དབྱེ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1196"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1199"/>
         <source>Set</source>
         <translation>སྒྲིག་བཀོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1197"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1200"/>
         <source>Shared</source>
         <translation>མཉམ་སྤྱོད་བྱས་ཟིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1198"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1201"/>
         <source>sides</source>
         <translation>པར་འདེབས་ངོས་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1199"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1244"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1202"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1247"/>
         <source>Size</source>
         <translation>ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1200"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1203"/>
         <source>SKU Number</source>
         <translation>SKUཨང་རྟགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1201"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1204"/>
         <source>Slot</source>
         <translation>འཇུག་ཤུར།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1202"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1205"/>
         <source>SMBIOS Version</source>
         <translation>SMBIOSཔར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1203"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1206"/>
         <source>state</source>
         <translation>ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1204"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1207"/>
         <source>status</source>
         <translation>ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1205"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1208"/>
         <source>Status</source>
         <translation>ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1206"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1209"/>
         <source>Stepping</source>
         <translation>གོམ་བགྲོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1207"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1210"/>
         <source>SubDevice</source>
         <translation>སྒྲིག་ཆས་ཡན་ལག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1208"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1211"/>
         <source>SubVendor</source>
         <translation>བཟོ་མཁན་ཡན་ལག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1209"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1212"/>
         <source>Subversion</source>
         <translation>པར་གཞི་ཡན་ལག</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1210"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1213"/>
         <source>Support Resolution</source>
         <translation>རྒྱབ་སྐྱོར་ཐུབ་པའི་འབྱེད་ཕྱོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1211"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1214"/>
         <source>Sysfs</source>
         <translation>Sysfs</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1212"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1215"/>
         <source>SysFS_Path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1213"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1216"/>
         <source>System Information</source>
         <translation>མ་ལག་ཆ་འཕྲིན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1214"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1217"/>
         <source>technology</source>
         <translation>གློག་རྫས་ལག་རྩལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1215"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1218"/>
         <source>temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1216"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1219"/>
         <source>Temperature</source>
         <translation>དྲོད་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1217"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1220"/>
         <source>Thermal State</source>
         <translation>དྲོད་འཐོར་ངང་ཚུལ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1218"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1221"/>
         <source>Threads</source>
         <translation>སྐུད་རིམ་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1219"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1222"/>
         <source>Total Width</source>
         <translation>སྤྱིའི་ཞེང་ཚད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1220"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1246"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1223"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1249"/>
         <source>Type</source>
         <translation>རིགས་གྲས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1221"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1224"/>
         <source>Type Detail</source>
         <translation>རིགས་གྲས་ཞིབ་ཆ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1222"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1225"/>
         <source>Unavailable</source>
         <translation>སྤྱོད་མི་རུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1223"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1226"/>
         <source>Uniq</source>
         <translation>Uniq</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1224"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1227"/>
         <source>updated</source>
         <translation>གསར་སྒྱུར་དུས་ཚོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1225"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1228"/>
         <source>URI</source>
         <translation>URI</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1226"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1229"/>
         <source>UUID</source>
         <translation>UUID</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1227"/>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1247"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1230"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1250"/>
         <source>Vendor</source>
         <translation>བཟོ་མཁན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1228"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1231"/>
         <source>Version</source>
         <translation>པར་གཞི།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1229"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1232"/>
         <source>VGA</source>
         <translation>VGA</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1230"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1233"/>
         <source>Virtualization</source>
         <translation>རྟོག་བཟོ་ཅན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1231"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1234"/>
         <source>Volatile Size</source>
         <translation>བོར་སླ་བའི་ཆེ་ཆུང་།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1232"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1235"/>
         <source>voltage</source>
         <translation>གློག་གནོན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1233"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1236"/>
         <source>Voltage</source>
         <translation>གློག་གནོན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1234"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1237"/>
         <source>Wake-up Type</source>
         <translation>གཉིད་སད་པའི་རིགས་གྲས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1235"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1238"/>
         <source>warning-level</source>
         <translation>ཉེན་བརྡའི་བང་རིམ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1236"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1239"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1237"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1240"/>
         <source>battery</source>
         <translation>གློག་རྫས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1238"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1241"/>
         <source>inch</source>
         <translation>དབྱིན་ཚུན།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1240"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1243"/>
         <source>Frequency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1245"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1248"/>
         <source>Speed</source>
         <translation>ཟློས་ཕྱོད།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1249"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1252"/>
         <source>Max Boost Clock</source>
         <translation>མཐོ་ཤོག་མགྱོགས་སྐྱེད་ཀླད་ཀོར</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1250"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1253"/>
         <source>Unknown</source>
         <translation>མི་ཤེས་པ།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1251"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1254"/>
         <source>SSD</source>
         <translation>འཇགས་གཟུགས།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1252"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1255"/>
         <source>HDD</source>
         <translation>འཕྲུལ་འཁོར།</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1132"/>
+        <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1135"/>
         <source>Model</source>
         <translation>བཟོ་རྟགས།</translation>
     </message>
@@ -1854,47 +1854,47 @@
 <context>
     <name>DeviceGenerator</name>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1269"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1282"/>
         <source>Model Name</source>
         <translation>མིང་།</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1273"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1286"/>
         <source>Vendor ID</source>
         <translation>བཟོ་བྱེད་མཁན།</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1277"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1290"/>
         <source>Architecture</source>
         <translation>གཞི་སྒྲོམ།</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1281"/>
-        <source>Core(s)</source>
-        <translation>རིག་རྟགས་འཕྲུལ་འཁོར།</translation>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1294"/>
+        <source>CPU(s)</source>
+        <translation>འཚར་ལོན་སྒྲིག་བྱེད།</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1283"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1296"/>
         <source>Thread(s)</source>
         <translation>སྙིང་རྫས་རེའི་ཐིག་སྒྲོན་གྲངས།</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1290"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1305"/>
         <source>L1d cache</source>
         <translation>L1 གཏོགས་ཁང་ (གཞི་གྲངས)</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1298"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1315"/>
         <source>L1i cache</source>
         <translation>L1 གཏོགས་ཁང་ (བཀའ་རིན)</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1306"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1325"/>
         <source>L2 cache</source>
         <translation>L2 གཏོགས་ཁང་</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1314"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1335"/>
         <source>L3 cache</source>
         <translation>L3 གཏོགས་ཁང་</translation>
     </message>
@@ -2586,48 +2586,48 @@
 <context>
     <name>PageMultiInfo</name>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="126"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="165"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="173"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="130"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="169"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="177"/>
         <source>Storage</source>
         <translation>གསོག་འཇོག་སྒྲིག་ཆས།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="126"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="165"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="173"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="130"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="169"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="177"/>
         <source>Memory</source>
         <translation>ནང་གསོག</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="126"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="165"/>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="173"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="130"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="169"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="177"/>
         <source>Monitor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="207"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="211"/>
         <source>Failed to enable the device</source>
         <translation>འགོ་སློང་མི་ཐུབ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="210"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="214"/>
         <source>Failed to disable the device</source>
         <translation>སྤྱོད་མི་ཆོག་པ་མི་ཐུབ།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="215"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="219"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>སྒྲིག་ཆས་ཀྱི་རིམ་ཨང་ཐོབ་ཐབས་མི་འདུག་པས་སྤྱོད་མི་རུང་བ་ཐུབ་མ་སོང་།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="237"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="241"/>
         <source>Update Drivers</source>
         <translation>སྐུལ་བྱེད་གསར་སྒྱུར།</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageMultiInfo.cpp" line="255"/>
+        <location filename="../src/Page/PageMultiInfo.cpp" line="259"/>
         <source>Uninstall Drivers</source>
         <translation>སྐུལ་བྱེད་བཤིག་པ།</translation>
     </message>
