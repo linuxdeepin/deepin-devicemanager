@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -136,7 +136,10 @@ bool DeviceNetwork::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Device File", m_LogicalName);
-    setAttribute(mapInfo, "HW Address", m_MACAddress);
+    setAttribute(mapInfo, "Permanent HW Address", m_MACAddress);
+    if (m_MACAddress == "00:00:00:00:00:00")
+        m_MACAddress.clear();
+    setAttribute(mapInfo, "HW Address", m_MACAddress, false);
     setAttribute(mapInfo, "Permanent HW Address", m_UniqueID);
     setAttribute(mapInfo, "SysFS Device Link", m_SysPath);
     setAttribute(mapInfo, "Driver", m_Driver);
