@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -82,6 +82,45 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_002)
     ut_network_sethwinfomap(mapinfo);
 
     EXPECT_TRUE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
+}
+
+TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_prefersPermanentHwAddress)
+{
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("Device", "Ethernet Controller");
+    mapinfo.insert("Device File", "enp2s0");
+    mapinfo.insert("HW Address", "11:22:33:44:55:66");
+    mapinfo.insert("Permanent HW Address", "aa:bb:cc:dd:ee:ff");
+    mapinfo.insert("SysFS ID", "/class/net/enp2s0");
+
+    EXPECT_TRUE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
+    EXPECT_STREQ("aa:bb:cc:dd:ee:ff", m_deviceNetwork->m_MACAddress.toStdString().c_str());
+    EXPECT_STREQ("aa:bb:cc:dd:ee:ff", m_deviceNetwork->m_UniqueID.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_fallsBackToHwAddress)
+{
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("Device", "Ethernet Controller");
+    mapinfo.insert("Device File", "enp2s0");
+    mapinfo.insert("HW Address", "11:22:33:44:55:66");
+    mapinfo.insert("SysFS ID", "/class/net/enp2s0");
+
+    EXPECT_TRUE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
+    EXPECT_STREQ("11:22:33:44:55:66", m_deviceNetwork->m_MACAddress.toStdString().c_str());
+}
+
+TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_fallsBackWhenPermanentHwAddressIsZero)
+{
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("Device", "Ethernet Controller");
+    mapinfo.insert("Device File", "enp2s0");
+    mapinfo.insert("HW Address", "11:22:33:44:55:66");
+    mapinfo.insert("Permanent HW Address", "00:00:00:00:00:00");
+    mapinfo.insert("SysFS ID", "/class/net/enp2s0");
+
+    EXPECT_TRUE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
+    EXPECT_STREQ("11:22:33:44:55:66", m_deviceNetwork->m_MACAddress.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromLshw)
