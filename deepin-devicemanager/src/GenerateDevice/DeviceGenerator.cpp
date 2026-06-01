@@ -35,6 +35,11 @@
 #include <QRegularExpression>
 #include <QDir>
 
+const QString kModelName { "model name" };
+const QString kVendorId { "vendor_id" };
+const QString kDmiVersion { "Version" };
+const QString kDmiManufacturer { "Manufacturer" };
+
 using namespace DDLog;
 
 DeviceGenerator::DeviceGenerator(QObject *parent)
@@ -244,11 +249,14 @@ void DeviceGenerator::generatorCpuDevice()
 
     // 计算并设置CPU头部信息(当前没有多个物理CPU的环境，所以只能编码单物理CPU的逻辑)
     if (lsCpu.size() > 0) {
-        QMap<QString, QString> baseCPUInfo = lsCpu.at(0);
-        if (dmidecode.contains("Manufacturer")) {
-            baseCPUInfo["vendor_id"] = dmidecode["Manufacturer"];
+        QMap<QString, QString> baseCpuInfo = lsCpu.at(0);
+        if (!baseCpuInfo.contains(kModelName) && dmidecode.contains(kDmiVersion)) {
+            baseCpuInfo.insert(kModelName, dmidecode[kDmiVersion]); // 适配特殊机型CPU
         }
-        calAndSetCpuHeaderInfo(baseCPUInfo, coreNum, logicalNum);
+        if (!baseCpuInfo.contains(kVendorId) && dmidecode.contains(kDmiManufacturer)) {
+            baseCpuInfo.insert(kVendorId, dmidecode[kDmiManufacturer]); // 适配特殊机型CPU
+        }
+        calAndSetCpuHeaderInfo(baseCpuInfo, coreNum, logicalNum);
     }
 }
 
@@ -1527,12 +1535,12 @@ void DeviceGenerator::calAndSetCpuHeaderInfo(const QMap<QString, QString> &first
     QList<QList<QPair<QString, QString>>> cpuHeaderInfo;
     QList<QPair<QString, QString>> singleCpuHeaderInfo;
 
-    if (firstProcessorInfo.contains("model name")) {
-        QPair<QString, QString> modelName(tr("Model Name"), firstProcessorInfo.value("model name"));
+    if (firstProcessorInfo.contains(kModelName)) {
+        QPair<QString, QString> modelName(tr("Model Name"), firstProcessorInfo.value(kModelName));
         singleCpuHeaderInfo.push_back(modelName);
     }
-    if (firstProcessorInfo.contains("vendor_id")) {
-        QPair<QString, QString> vendorID(tr("Vendor ID"), firstProcessorInfo.value("vendor_id"));
+    if (firstProcessorInfo.contains(kVendorId)) {
+        QPair<QString, QString> vendorID(tr("Vendor ID"), firstProcessorInfo.value(kVendorId));
         singleCpuHeaderInfo.push_back(vendorID);
     }
     if (firstProcessorInfo.contains("Architecture")) {
