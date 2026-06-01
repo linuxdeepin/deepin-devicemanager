@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -13,7 +13,12 @@
 #include <QCryptographicHash>
 #include <QRegularExpression>
 #include <QDebug>
+#include <QDBusInterface>
+#include <QDBusReply>
+#include <QDBusConnection>
+#include <QDBusObjectPath>
 
+#include <unistd.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -155,57 +160,101 @@ void EnableUtils::disableInDevice()
 bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable)
 {
     qCDebug(appLog) << "Performing ioctl operation on network interface:" << logicalName << "enable:" << enable;
-    if (logicalName.startsWith("wlan") || logicalName.startsWith("wlp")) {  // Wireless LAN
-        QString cmd = QString("rfkill %1 $(rfkill list | grep -A 2 \"phy$(iw dev %2 info 2>/dev/null | awk '/wiphy/{print $2}')\" | awk 'NR==1{print $1}' | tr -d ':')")
-                .arg(enable ? "unblock" : "block")
-                .arg(logicalName);
-        QProcess p1;
-        p1.start("sh", QStringList() << "-c" << cmd);
-        p1.waitForFinished(-1);
-        if (p1.exitCode() != 0) {
-            qCritical() << "Failed to block/unblock wifi: " << " error code: " << p1.exitCode() ;
-        }
-        
-        // 使用QProcess执行ifconfig
-        QProcess ifconfigProcess;
-        ifconfigProcess.start("/sbin/ifconfig", QStringList() << logicalName << (enable ? "up" : "down"));
-        ifconfigProcess.waitForFinished(-1);
-        if (ifconfigProcess.exitCode() != 0) {
-            qCritical() << "Failed to up/down network: " << logicalName << enable << " error code: " << ifconfigProcess.exitCode();
-            return false;
-        }
-    } else {
-        // 1. 通过ioctl禁用
-        int fd = socket(AF_INET, SOCK_STREAM, 0);
-        if (fd < 0)
-            return false;
+    // 方案一：通过NetworkManager D-Bus设置DeviceEnabled属性
+    if (enableNetworkByDBus(logicalName, enable))
+        return true;
 
-        struct ifreq ifr;
-        strncpy(ifr.ifr_name, logicalName.toStdString().c_str(),IFNAMSIZ);
-        ifr.ifr_name[IFNAMSIZ - 1] = '\0';
-        short flag;
-        if (enable) {
-            flag = IFF_UP | IFF_PROMISC;
-        } else {
-            flag = ~(IFF_UP | IFF_PROMISC);
-        }
-        // 先获取标识
-        if (ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) {
-            close(fd);
-            return false;
-        }
-        // 获取后重新设置标识
-        if (enable) {
-            ifr.ifr_ifru.ifru_flags |= flag;
-        } else {
-            ifr.ifr_ifru.ifru_flags &= flag;
-        }
+    // 方案二：方案一失败，回退到ioctl方式
+    qWarning() << "Fallback to ioctl method for" << logicalName;
+    return enableNetworkByIoctl(logicalName, enable);
+}
 
-        if (ioctl(fd, SIOCSIFFLAGS, &ifr) < 0) {
-            close(fd);
-            return false;
-        }
+// 方案一：通过NetworkManager D-Bus设置DeviceEnabled属性
+bool EnableUtils::enableNetworkByDBus(const QString &logicalName, bool enable)
+{
+    // 1. 通过 system dbus 获取 devicePath
+    QDBusInterface nmInterface("org.freedesktop.NetworkManager",
+                               "/org/freedesktop/NetworkManager",
+                               "org.freedesktop.NetworkManager",
+                               QDBusConnection::systemBus());
+    if (!nmInterface.isValid()) {
+        qCritical() << "Failed to connect to NetworkManager:" << nmInterface.lastError().message();
+        return false;
     }
+
+    QDBusReply<QDBusObjectPath> reply = nmInterface.call("GetDeviceByIpIface", logicalName);
+    if (!reply.isValid()) {
+        qCritical() << "Failed to GetDeviceByIpIface for" << logicalName << ":" << reply.error().message();
+        return false;
+    }
+
+    QString devicePath = reply.value().path();
+    if (devicePath.isEmpty()) {
+        qCritical() << "Got empty devicePath for interface:" << logicalName;
+        return false;
+    }
+
+    // 2. 通过 system dbus 设置 DeviceEnabled 属性
+    QDBusInterface deviceInterface("org.freedesktop.NetworkManager",
+                                   devicePath,
+                                   "org.freedesktop.DBus.Properties",
+                                   QDBusConnection::systemBus());
+    if (!deviceInterface.isValid()) {
+        qCritical() << "Failed to connect to device properties:" << deviceInterface.lastError().message();
+        return false;
+    }
+
+    QDBusReply<void> setReply = deviceInterface.call("Set",
+                                                     "org.freedesktop.NetworkManager.Device",
+                                                     "DeviceEnabled",
+                                                     QVariant::fromValue(QDBusVariant(enable)));
+    if (!setReply.isValid()) {
+        qCritical() << "Failed to set DeviceEnabled for" << logicalName << ":" << setReply.error().message();
+        return false;
+    }
+
+    return true;
+}
+
+// 方案二：通过ioctl控制网卡
+bool EnableUtils::enableNetworkByIoctl(const QString &logicalName, bool enable)
+{
+    // 安全校验：网卡名长度合法性
+    if (logicalName.isEmpty() || logicalName.length() >= IFNAMSIZ) {
+        qCritical() << "Invalid logicalName length for ioctl";
+        return false;
+    }
+
+    // 通过ioctl设置网卡启用/禁用
+    int fd = socket(AF_INET, SOCK_STREAM, 0);
+    if (fd < 0)
+        return false;
+
+    struct ifreq ifr;
+    memset(&ifr, 0, sizeof(ifr));
+
+    std::string nameStr = logicalName.toStdString();
+    strncpy(ifr.ifr_name, nameStr.c_str(),IFNAMSIZ - 1);
+    ifr.ifr_name[IFNAMSIZ - 1] = '\0';
+
+    // 先获取标识
+    if (ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) {
+        close(fd);
+        return false;
+    }
+
+    if (enable) {
+        ifr.ifr_flags |= IFF_UP;
+    } else {
+        ifr.ifr_flags &= ~IFF_UP;
+    }
+    // 设置新标识
+    if (ioctl(fd, SIOCSIFFLAGS, &ifr) < 0) {
+        close(fd);
+        return false;
+    }
+
+    close(fd);
     return true;
 }
 
