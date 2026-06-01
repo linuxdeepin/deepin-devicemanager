@@ -1548,7 +1548,7 @@ void DeviceGenerator::calAndSetCpuHeaderInfo(const QMap<QString, QString> &first
         singleCpuHeaderInfo.push_back(arch);
     }
     if (coreNum > 0) {
-        QPair<QString, QString> coreCount(tr("Core(s)"), QString::number(coreNum));
+        QPair<QString, QString> coreCount(tr("CPU(s)"), QString::number(logicalNum));
         singleCpuHeaderInfo.push_back(coreCount);
         QPair<QString, QString> threadPerCore(tr("Thread(s)"), QString::number(logicalNum / coreNum));
         singleCpuHeaderInfo.push_back(threadPerCore);
