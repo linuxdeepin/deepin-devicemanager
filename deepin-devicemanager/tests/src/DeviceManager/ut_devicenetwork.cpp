@@ -1,5 +1,5 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// Copyright (C) 2019-2026 ~ 2026 UnionTech Software Technology Co.,Ltd
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -82,6 +82,20 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_002)
     ut_network_sethwinfomap(mapinfo);
 
     EXPECT_TRUE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
+}
+
+TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromHwinfo_PreferPermanentHwAddress)
+{
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("Device", "network");
+    mapinfo.insert("Vendor", "vendor");
+    mapinfo.insert("Device File", "enp2s0");
+    mapinfo.insert("HW Address", "66:77:88:99:aa:bb");
+    mapinfo.insert("Permanent HW Address", "00:11:22:33:44:55");
+
+    EXPECT_TRUE(m_deviceNetwork->setInfoFromHwinfo(mapinfo));
+    EXPECT_STREQ("00:11:22:33:44:55", m_deviceNetwork->m_MACAddress.toStdString().c_str());
+    EXPECT_STREQ("00:11:22:33:44:55", m_deviceNetwork->m_UniqueID.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_setInfoFromLshw)
