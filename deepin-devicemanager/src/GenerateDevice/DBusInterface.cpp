@@ -1,5 +1,5 @@
 // Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -42,8 +42,12 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
     } else {
         qCInfo(appLog) << "unsucess in getting info from getInfo :"  << key;
         QProcess process;
-        QString command = "gdbus call --system --dest org.deepin.DeviceInfo --object-path /org/deepin/DeviceInfo --method org.deepin.DeviceInfo.getInfo hwinfo";
-        process.start(command);
+        process.start("gdbus", QStringList()
+            << "call" << "--system"
+            << "--dest" << "org.deepin.DeviceInfo"
+            << "--object-path" << "/org/deepin/DeviceInfo"
+            << "--method" << "org.deepin.DeviceInfo.getInfo"
+            << "hwinfo");
         process.waitForFinished();
         QByteArray output = process.readAllStandardOutput();
         QString outputStr = QString::fromLocal8Bit(output);

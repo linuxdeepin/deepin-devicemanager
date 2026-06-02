@@ -348,7 +348,7 @@ bool DeviceInput::isBluetoothDevice(const QString &dfs)
             if (match.hasMatch()) {
                 QString id = match.captured(1);
                 QProcess process;
-                process.start("hcitool con");
+                process.start("hcitool", QStringList() << "con");
                 process.waitForFinished(-1);
                 QString hciInfo = process.readAllStandardOutput();
                 if (!hciInfo.contains(id))

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -187,13 +187,7 @@ bool Utils::updateModDeps(bool bquick)
 {
     qCDebug(appLog) << "Updating module dependencies, quick mode:" << bquick;
     QProcess process;
-    QString strcomd;
-    if (bquick) {
-        strcomd = QString("depmod %1").arg("--quick");
-    } else {
-        strcomd = QString("depmod %1").arg("--all");
-    }
-    process.start(strcomd);
+    process.start("depmod", QStringList() << (bquick ? "--quick" : "--all"));
     if (!process.waitForFinished())
         return  false;
 

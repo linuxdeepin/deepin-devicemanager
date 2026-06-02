@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -89,8 +89,11 @@ void MainJob::slotWakeupHandle(bool isSleep)
             return;
 
         QProcess process; //先唤醒DBUS
-        QString command = "gdbus call --system --dest org.deepin.DeviceControl --object-path /org/deepin/DeviceControl --method org.deepin.DeviceControl.disableInDevice";
-        process.start(command);
+        process.start("gdbus", QStringList()
+            << "call" << "--system"
+            << "--dest" << "org.deepin.DeviceControl"
+            << "--object-path" << "/org/deepin/DeviceControl"
+            << "--method" << "org.deepin.DeviceControl.disableInDevice");
         process.waitForFinished(1000);
 
         //有的硬件唤醒起来也需要延时
@@ -159,9 +162,8 @@ void MainJob::initDriverRepoSource()
     }
     file.close();
 
-    QString cmd = "apt update";
     QProcess process;
-    process.start(cmd);
+    process.start("apt", QStringList() << "update");
     process.waitForFinished(-1);
 }
 

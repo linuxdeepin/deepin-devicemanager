@@ -82,7 +82,7 @@ void ThreadExecXrandr::runCmd(QString &info, const QString &cmd)
     qCDebug(appLog) << "Executing command:" << cmd;
 
     QProcess process;
-    process.start(cmd);
+    process.startCommand(cmd);
     process.waitForFinished(-1);
     info = process.readAllStandardOutput();
 }

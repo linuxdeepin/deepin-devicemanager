@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -316,13 +316,13 @@ void HWGenerator::generatorDiskDevice()
 
             // 读取interface版本
             QProcess process;
-            process.start("cat /sys/devices/platform/f8200000.ufs/host0/scsi_host/host0/wb_en");
+            process.start("cat", QStringList() << "/sys/devices/platform/f8200000.ufs/host0/scsi_host/host0/wb_en");
             process.waitForFinished(-1);
             int exitCode = process.exitCode();
             if (exitCode != 127 && exitCode != 126) {
                 QString deviceInfo = process.readAllStandardOutput();
                 if (deviceInfo.trimmed() == "true") {
-                    process.start("cat /sys/block/sdd/device/spec_version");
+                    process.start("cat", QStringList() << "/sys/block/sdd/device/spec_version");
                     process.waitForFinished(-1);
                     exitCode = process.exitCode();
                     if (exitCode != 127 && exitCode != 126) {

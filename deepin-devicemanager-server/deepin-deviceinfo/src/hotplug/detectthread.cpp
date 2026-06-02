@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -104,7 +104,7 @@ void DetectThread::curHwinfoUsbInfo(QMap<QString, QMap<QString, QString>> &usbIn
 {
     qCDebug(appLog) << "Getting current USB info from hwinfo";
     QProcess process;
-    process.start("hwinfo --usb --keyboard --mouse");
+    process.start("hwinfo", QStringList() << "--usb" << "--keyboard" << "--mouse");
     process.waitForFinished(-1);
     QString info = process.readAllStandardOutput();
     qCDebug(appLog) << "hwinfo output length:" << info.length();
