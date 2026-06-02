@@ -294,7 +294,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1222"/>
         <source>Core ID</source>
-        <translation>ID ядра</translation>
+        <translation>ИД ядра</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1223"/>
@@ -309,7 +309,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1225"/>
         <source>CPU ID</source>
-        <translation>ID ЦП</translation>
+        <translation>ИД ЦП</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1226"/>
@@ -1847,7 +1847,7 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1551"/>
         <source>CPU(s)</source>
-        <translation type="unfinished"/>
+        <translation>ЦП</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1553"/>
