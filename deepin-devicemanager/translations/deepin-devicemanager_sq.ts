@@ -204,12 +204,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1204"/>
         <source>bus info</source>
-        <translation>të dhëna busi</translation>
+        <translation>hollësi busi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1205"/>
         <source>Bus Info</source>
-        <translation>Të dhëna Busi</translation>
+        <translation>Hollësi Busi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1206"/>
@@ -434,12 +434,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1250"/>
         <source>Display Input</source>
-        <translation>Hyrje Ekrani</translation>
+        <translation>Ç’Jepet Në Ekrani</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1251"/>
         <source>Display Output</source>
-        <translation>Dalje Ekrani</translation>
+        <translation>Ç’Prodhon Ekrani</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1252"/>
@@ -574,7 +574,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1278"/>
         <source>Flags</source>
-        <translation>Flamurka</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1279"/>
@@ -1163,7 +1163,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1397"/>
         <source>Refresh Rate</source>
-        <translation type="unfinished"/>
+        <translation>Shpeshti Rifreskimi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1398"/>
@@ -1847,7 +1847,7 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1551"/>
         <source>CPU(s)</source>
-        <translation type="unfinished"/>
+        <translation>CPU()</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1553"/>
@@ -2485,7 +2485,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="724"/>
         <source>Feedback</source>
-        <translation>Mi dhe Pajisje të Ngjashme</translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
