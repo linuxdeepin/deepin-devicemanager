@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -209,7 +209,7 @@ bool DriverManager::unInstallDriver(const QString &modulename)
 static void depmod_a()
 {
     QProcess process;
-    process.start("depmod -a");
+    process.start("depmod", QStringList() << "-a");
     process.waitForFinished(-1);
 }
 
@@ -758,7 +758,7 @@ bool DriverManager::delDeb(const QString &debname)
 static void cmdAptUpdate()
 {
     QProcess process;
-    process.start("apt update");
+    process.start("apt", QStringList() << "update");
     process.waitForFinished(-1);
 }
 bool DriverManager::aptUpdate()

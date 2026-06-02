@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -92,7 +92,7 @@ void MonitorUsb::monitor()
         if ((0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) && m_workingFlag) {
             qCDebug(appLog) << "USB device " << buf << " detected";
             QProcess process;
-            process.start("hwinfo --usb");
+            process.start("hwinfo", QStringList() << "--usb");
             process.waitForFinished(-1);
             QString info = process.readAllStandardOutput();
             if (0 == strcmp("add", buf)) {

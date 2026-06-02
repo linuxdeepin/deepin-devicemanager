@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -495,7 +495,7 @@ void ModCore::updateInitramfs()
 {
     qCDebug(appLog) << "Updating initramfs";
     QProcess process;
-    process.start("update-initramfs -u");
+    process.start("update-initramfs", QStringList() << "-u");
     process.waitForFinished(-1);
 }
 

@@ -229,8 +229,11 @@ void MainWindow::refreshBatteryStatus()
     if (interfaceService.isValid()) {
         qCDebug(appLog) << "UPower interface valid";
          QProcess process;
-         QString command = "gdbus call --system --dest org.freedesktop.UPower --object-path /org/freedesktop/UPower --method org.freedesktop.UPower.EnumerateDevices";
-         process.start(command);
+         process.start("gdbus", QStringList()
+             << "call" << "--system"
+             << "--dest" << "org.freedesktop.UPower"
+             << "--object-path" << "/org/freedesktop/UPower"
+             << "--method" << "org.freedesktop.UPower.EnumerateDevices");
          process.waitForFinished();
 
          QByteArray output = process.readAllStandardOutput();

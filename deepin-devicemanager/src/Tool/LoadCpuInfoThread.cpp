@@ -1,5 +1,5 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// Copyright (C) 2019 - 2026 UnionTech Software Technology Co.,Ltd
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -30,7 +30,7 @@ void LoadCpuInfoThread::runCmd(QString &info, const QString &cmd)
     qCDebug(appLog) << "Executing command:" << cmd;
 
     QProcess process;
-    process.start(cmd);
+    process.startCommand(cmd);
     process.waitForFinished(-1);
     info = process.readAllStandardOutput();
 }
