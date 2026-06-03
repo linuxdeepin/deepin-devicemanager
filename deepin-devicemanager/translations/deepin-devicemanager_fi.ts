@@ -1847,7 +1847,7 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1551"/>
         <source>CPU(s)</source>
-        <translation type="unfinished"/>
+        <translation>Prosessorit</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1553"/>
