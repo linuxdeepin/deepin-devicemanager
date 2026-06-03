@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -150,7 +150,7 @@ TEST_F(UT_DetailTreeView, UT_DetailTreeView_resizeEvent)
 
 TEST_F(UT_DetailTreeView, UT_DetailTreeView_mouseMoveEvent)
 {
-    QMouseEvent moveEvent(QEvent::MouseMove, QPoint(1, 1), QPoint(10, 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent moveEvent(QEvent::MouseMove, QPoint(1, 1), QPoint(10, 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier, QPointingDevice::primaryPointingDevice());
     m_dTreeView->mouseMoveEvent(&moveEvent);
     EXPECT_EQ(m_dTreeView->mp_Point.x(), 1);
     EXPECT_EQ(m_dTreeView->mp_Point.y(), 1);

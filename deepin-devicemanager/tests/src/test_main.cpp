@@ -5,6 +5,7 @@
 
 #include <gtest/gtest.h>
 #include <QApplication>
+#include <DApplication>
 #if defined(CMAKE_SAFETYTEST_ARG_ON)
 #include <sanitizer/asan_interface.h>
 #endif

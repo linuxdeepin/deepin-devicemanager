@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -36,7 +36,7 @@ QRegularExpressionMatch ut_LongTextLabel_indexIn()
 TEST_F(UT_LongTextLabel, UT_LongTextLabel_paintEvent)
 {
     Stub stub;
-    stub.set(ADDR(QRegularExpression, match), ut_LongTextLabel_indexIn);
+    stub.set(static_cast<QRegularExpressionMatch (QRegularExpression::*)(const QString &, qsizetype, QRegularExpression::MatchType, QRegularExpression::MatchOptions) const>(&QRegularExpression::match), ut_LongTextLabel_indexIn);
     QPaintEvent paint(QRect(m_ltLabel->rect()));
     m_ltLabel->paintEvent(&paint);
     EXPECT_FALSE(m_ltLabel->grab().isNull());

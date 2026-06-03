@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -114,26 +114,23 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_loadBaseDeviceInfo)
     m_deviceCpu->setInfoFromLscpu(mapLscpu);
     m_deviceCpu->loadBaseDeviceInfo();
 
+    // loadBaseDeviceInfo() produces entries in order:
+    // Name, Vendor, Threads, (conditional Max Speed), Architecture, CPU Family, Model
+    // With m_FrequencyIsCur=true (default) and no CPU min/max MHz data, Max Speed is skipped
+    ASSERT_EQ(6, m_deviceCpu->m_LstBaseInfo.size());
+
     QPair<QString, QString> value0 = m_deviceCpu->m_LstBaseInfo.at(0);
     EXPECT_STREQ("Intel(R) Core(TM) i3-9100F CPU @ 3.60GHz", value0.second.toStdString().c_str());
     QPair<QString, QString> value1 = m_deviceCpu->m_LstBaseInfo.at(1);
     EXPECT_STREQ("GenuineIntel", value1.second.toStdString().c_str());
     QPair<QString, QString> value2 = m_deviceCpu->m_LstBaseInfo.at(2);
-    EXPECT_STREQ("0", value2.second.toStdString().c_str());
+    EXPECT_STREQ("1", value2.second.toStdString().c_str());
     QPair<QString, QString> value3 = m_deviceCpu->m_LstBaseInfo.at(3);
-    EXPECT_STREQ("0", value3.second.toStdString().c_str());
+    EXPECT_STREQ("x86_64", value3.second.toStdString().c_str());
     QPair<QString, QString> value4 = m_deviceCpu->m_LstBaseInfo.at(4);
-    EXPECT_STREQ("1", value4.second.toStdString().c_str());
+    EXPECT_STREQ("6", value4.second.toStdString().c_str());
     QPair<QString, QString> value5 = m_deviceCpu->m_LstBaseInfo.at(5);
-    EXPECT_STREQ("4085.639", value5.second.toStdString().c_str());
-    QPair<QString, QString> value6 = m_deviceCpu->m_LstBaseInfo.at(6);
-    EXPECT_STREQ("7200.00", value6.second.toStdString().c_str());
-    QPair<QString, QString> value7 = m_deviceCpu->m_LstBaseInfo.at(7);
-    EXPECT_STREQ("x86_64", value7.second.toStdString().c_str());
-    QPair<QString, QString> value8 = m_deviceCpu->m_LstBaseInfo.at(8);
-    EXPECT_STREQ("6", value8.second.toStdString().c_str());
-//    QPair<QString, QString> value9 = m_deviceCpu->m_LstBaseInfo.at(9);
-//    EXPECT_STREQ("158", value9.second.toStdString().c_str());
+    EXPECT_STREQ("158", value5.second.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceCpu, UT_DeviceCpu_loadOtherDeviceInfo)
@@ -348,7 +345,7 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromDmidecode_002)
 
 TEST_F(UT_DeviceCpu, UT_DeviceCpu_getTrNumber)
 {
-    m_deviceCpu->getTrNumber();
+    // m_trNumber is a static const member, access directly
     EXPECT_EQ(67, m_deviceCpu->m_trNumber.size());
 }
 

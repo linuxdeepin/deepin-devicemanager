@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -70,13 +70,13 @@ TEST_F(UT_DeviceListView, UT_DeviceListView_paintEvent)
 
 TEST_F(UT_DeviceListView, UT_DeviceListView_mousePressEvent)
 {
-    QMouseEvent mousePressEvent(QEvent::MouseButtonPress, QPoint(10, 10), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent mousePressEvent(QEvent::MouseButtonPress, QPoint(10, 10), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier, QPointingDevice::primaryPointingDevice());
     m_deviceListView->mousePressEvent(&mousePressEvent);
 }
 
 TEST_F(UT_DeviceListView, UT_DeviceListView_mouseMoveEvent)
 {
-    QMouseEvent mouseMoveEvent(QEvent::MouseMove, QPoint(10, 10), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent mouseMoveEvent(QEvent::MouseMove, QPoint(10, 10), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier, QPointingDevice::primaryPointingDevice());
     m_deviceListView->mouseMoveEvent(&mouseMoveEvent);
     EXPECT_EQ(m_deviceListView->cursor().pos().x(),10);
     EXPECT_EQ(m_deviceListView->cursor().pos().y(),10);
