@@ -66,20 +66,21 @@ configure_file(../src/config.h.in config.h @ONLY)
 
 #qt6
 find_package(PkgConfig REQUIRED)
-find_package(Qt6 COMPONENTS 
-    Gui 
-    Widgets 
-    DBus 
-    LinguistTools 
-    Network 
-    Concurrent 
-    Sql 
-    Svg 
-    SvgWidgets 
-    Xml 
-    OpenGL 
-    Core 
-    OpenGLWidgets 
+find_package(Qt6 COMPONENTS
+    Gui
+    Widgets
+    DBus
+    LinguistTools
+    Network
+    Concurrent
+    Sql
+    Svg
+    SvgWidgets
+    Xml
+    OpenGL
+    Core
+    OpenGLWidgets
+    Test
     REQUIRED
 )
 find_package(PolkitQt6-1 REQUIRED)
@@ -129,6 +130,13 @@ list(REMOVE_ITEM SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/../src/main.cpp)
 
 file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE TEST_SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
+
+# Exclude test files for removed classes (source classes no longer exist)
+list(REMOVE_ITEM TEST_SRC_CPP
+    ${CMAKE_CURRENT_LIST_DIR}/src/GenerateDevice/ut_panguvgenerator.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/GenerateDevice/ut_klugenerator.cpp
+)
+
 add_executable(${PROJECT_NAME_TEST} ${SRC_CPP} ${TEST_SRC_CPP} ${TEST_SRC_H})
 
 target_include_directories(${PROJECT_NAME_TEST}

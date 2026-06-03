@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -73,7 +73,7 @@ void ut_CmdTool_start()
 TEST_F(UT_CmdTool, UT_CmdTool_getCurNetworkLinkStatus)
 {
     Stub stub;
-    stub.set(((void (QProcess::*)(const QString &, QIODevice::OpenMode))ADDR(QProcess, start)), ut_CmdTool_start); // void start(const QString &command, OpenMode mode = ReadWrite);
+    stub.set(((void (QProcess::*)(const QString &, const QStringList &, QIODevice::OpenMode))ADDR(QProcess, start)), ut_CmdTool_start); // Qt6: void start(const QString &program, const QStringList &arguments = {}, OpenMode mode = ReadWrite);
     stub.set(ADDR(QProcess, waitForFinished), ut_waitForFinished_getCurNetworkLinkStatus);
     stub.set(ADDR(QProcess, readAllStandardOutput), ut_readAllStandardOutput_getCurNetworkLinkStatus);
     EXPECT_STREQ("yes", m_cmdTool->getCurNetworkLinkStatus("eno1").toStdString().c_str());

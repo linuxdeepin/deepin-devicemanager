@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -127,14 +127,14 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_001)
 {
     m_deviceMonitor->m_Interface = "VGA";
 
-    EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr("/", "/", "/"));
+    EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr("/", "/", "/", "/"));
 }
 
 TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_002)
 {
     m_deviceMonitor->m_Interface = "";
 
-    EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr("disconnected", "/", "/"));
+    EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr("disconnected", "/", "/", "/"));
 }
 
 bool ut_monitor_isDXcbPlatform()
@@ -151,7 +151,7 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_003)
     Stub stub;
     stub.set(ADDR(DApplication, isDXcbPlatform), ut_monitor_isDXcbPlatform);
 
-    EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr(main, edid, "/"));
+    EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr(main, edid, "/", "/"));
 }
 
 TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_004)
@@ -164,7 +164,7 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_004)
     Stub stub;
     stub.set(ADDR(DApplication, isDXcbPlatform), ut_monitor_isDXcbPlatform);
 
-    EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr(main, edid, "/"));
+    EXPECT_FALSE(m_deviceMonitor->setInfoFromXradr(main, edid, "/", "/"));
 }
 
 TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_005)
@@ -174,7 +174,7 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setInfoFromXradr_005)
     QString main = "HDMI-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 527mm x 296mm";
     QString edid = "00ffffffffffff005a63384001010101\n0d1e010380351d782ece65a657519f27\n";
     QString rate = "60.00Hz";
-    EXPECT_TRUE(m_deviceMonitor->setInfoFromXradr(main, edid, rate));
+    EXPECT_TRUE(m_deviceMonitor->setInfoFromXradr(main, edid, rate, ""));
 }
 
 TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_setMainInfoFromXrandr_001)

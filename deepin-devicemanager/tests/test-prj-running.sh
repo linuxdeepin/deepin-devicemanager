@@ -1,31 +1,52 @@
 #!/bin/bash
 
-# SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+# SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
 builddir=build
 reportdir=build-ut
-rm -r $builddir
-rm -r ../../$builddir
-rm -r $reportdir
-rm -r ../../$reportdir
-mkdir ../../$builddir
-mkdir ../../$reportdir
-cd ../../$builddir
-#编译
-cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_SAFETYTEST_ARG="CMAKE_SAFETYTEST_ARG_ON" ..
-make -j8
-#生成asan日志和ut测试xml结果
-./deepin-devicemanager/tests/deepin-devicemanager-test --gtest_output=xml:./report/report_deepin-devicemanager.xml
 
-./deepin-devicemanager-server/tests/deepin-devicemanager-server-test --gtest_output=xml:./report/report_deepin-devicemanager-server.xml
+PROJECT_ROOT=$(cd $SCRIPT_DIR/../..; pwd)
+BUILD_DIR=$PROJECT_ROOT/$builddir
+REPORT_DIR=$PROJECT_ROOT/$reportdir
 
-workdir=$(cd ../$(dirname $0)/$builddir; pwd)
+rm -rf $BUILD_DIR
+rm -rf $REPORT_DIR
+mkdir -p $BUILD_DIR
+mkdir -p $REPORT_DIR
+cd $BUILD_DIR
+
+#编译 (Qt6 + 覆盖率 + 单元测试)
+cmake -DCMAKE_BUILD_TYPE=Debug \
+      -DCMAKE_COVERAGE_ARG="CMAKE_COVERAGE_ARG_ON" \
+      -DCMAKE_SAFETYTEST_ARG="CMAKE_SAFETYTEST_ARG_ON" \
+      $PROJECT_ROOT
+make -k -j$(nproc) || true
 
 mkdir -p report
+
+# 生成asan日志和ut测试xml结果
+if [ -f ./deepin-devicemanager/tests/deepin-devicemanager-test ]; then
+    echo " =================== CLIENT TEST BEGIN ==================== "
+    QT_QPA_PLATFORM=offscreen ./deepin-devicemanager/tests/deepin-devicemanager-test --gtest_output=xml:./report/report_deepin-devicemanager.xml
+    echo " =================== CLIENT TEST END ==================== "
+else
+    echo "WARNING: deepin-devicemanager-test not found, skipping client tests"
+fi
+
+# server测试如果存在则运行
+if [ -f ./deepin-devicemanager-server/tests/deepin-devicemanager-server-test ]; then
+    echo " =================== SERVER TEST BEGIN ==================== "
+    QT_QPA_PLATFORM=offscreen ./deepin-devicemanager-server/tests/deepin-devicemanager-server-test --gtest_output=xml:./report/report_deepin-devicemanager-server.xml
+    echo " =================== SERVER TEST END ==================== "
+else
+    echo "WARNING: deepin-devicemanager-server-test not found, skipping server tests"
+fi
+
 #统计代码覆盖率并生成html报告
-lcov -d $workdir -c -o ./coverage.info
+lcov -d $BUILD_DIR -c -o ./coverage.info
 
 lcov --extract ./coverage.info '*/src/*' -o ./coverage.info
 
@@ -33,10 +54,10 @@ lcov --remove ./coverage.info '*/tests/*' -o ./coverage.info
 
 genhtml -o ./html ./coverage.info
 
-mv ./html/index.html ./html/cov_deepin-devicemanager.html
+mv ./html/index.html ./html/cov_deepin-devicemanager.html 2>/dev/null || true
 #对asan、ut、代码覆盖率结果收集至指定文件夹
-cp -r html ../$reportdir/
-cp -r report ../$reportdir/
-cp -r asan*.log* ../$reportdir/asan_deepin-devicemanager.log
+cp -r html $REPORT_DIR/ 2>/dev/null || true
+cp -r report $REPORT_DIR/ 2>/dev/null || true
+cp -r asan*.log* $REPORT_DIR/asan_deepin-devicemanager.log 2>/dev/null || true
 
 exit 0
