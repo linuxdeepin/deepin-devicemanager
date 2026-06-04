@@ -1,3 +1,16 @@
+deepin-devicemanager (6.0.66) unstable; urgency=medium
+
+  * chore: Update version to 6.0.66
+  * test: migrate unit tests from Qt5 to Qt6 environment
+  * fix(security): use safe QProcess API to prevent command injection
+  * fix(cpu-header): use CPU(s) label for core count and refresh translations
+  * fix: use NetworkManager D-Bus to enable/disable network interfaces
+  * Fix(cpu): Improve CPU header fallback and dynamic PageMultiInfo header sizing
+  * fix(network): prefer permanent MAC address from hwinfo
+  * [skip CI] Translate deepin-devicemanager.ts in ru
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Thu, 04 Jun 2026 13:08:45 +0800
+
 deepin-devicemanager (6.0.65) unstable; urgency=medium
 
   * chore: Update version to 6.0.65
