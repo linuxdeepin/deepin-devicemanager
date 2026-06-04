@@ -1,3 +1,4 @@
+// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -7,6 +8,7 @@
 #include "mainjob.h"
 
 #include <QDBusConnection>
+#include <QDBusConnectionInterface>
 #include <QDBusMessage>
 #include <QProcess>
 #include <QDebug>
@@ -23,8 +25,18 @@ bool DeviceInterface::getUserAuthorPasswd()
 #ifdef DISABLE_POLKIT
     return true;
 #endif
+    const QString service = message().service();
+    auto uidReply = connection().interface()->serviceUid(service);
+    if (uidReply.isValid()) {
+        if (uidReply.value() == 0) {
+            return true;
+        }
+    } else {
+        qWarning() << "D-Bus serviceUid query failed for" << service << ":" << uidReply.error().message();
+    }
+
     Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
-                                                                             SystemBusNameSubject(message().service()),
+                                                                             SystemBusNameSubject(service),
                                                                              Authority::AllowUserInteraction);
     return result == Authority::Yes;
 }
@@ -87,6 +99,10 @@ DeviceInterface::DeviceInterface(const char *name, QObject *parent)
 
 QString DeviceInterface::getInfo(const QString &key)
 {
+    if (!getUserAuthorPasswd()) {
+        return {};
+    }
+
     // 不能返回用常引用
     if ("is_server_running" != key) {
         return DeviceInfoManager::getInstance()->getInfo(key);
@@ -99,11 +115,19 @@ QString DeviceInterface::getInfo(const QString &key)
 
 void DeviceInterface::refreshInfo()
 {
+    if (!getUserAuthorPasswd()) {
+        return;
+    }
+
     emit sigUpdate();
 }
 
 void DeviceInterface::setMonitorDeviceFlag(bool flag)
 {
+    if (!getUserAuthorPasswd()) {
+        return;
+    }
+
     MainJob *parentMainJob = dynamic_cast<MainJob *>(parent());
     if (parentMainJob != nullptr) {
         parentMainJob->setWorkingFlag(flag);
@@ -112,6 +136,10 @@ void DeviceInterface::setMonitorDeviceFlag(bool flag)
 
 QString DeviceInterface::getGpuInfoForFTDTM()
 {
+    if (!getUserAuthorPasswd()) {
+        return {};
+    }
+
     static QString gpuMemInfo { "" };
     if (gpuMemInfo.isEmpty()) {
         QMap<QString, QString> mapInfo;
