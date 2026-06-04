@@ -1,3 +1,4 @@
+// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -32,8 +33,13 @@ bool ControlInterface::getUserAuthorPasswd()
 #ifdef DISABLE_POLKIT
     return true;
 #endif
-    if (connection().interface()->serviceUid(message().service()).value() == 0) {
-        return true;
+    auto uidReply = connection().interface()->serviceUid(message().service());
+    if (uidReply.isValid()) {
+        if (uidReply.value() == 0) {
+            return true;
+        }
+    } else {
+        qWarning() << "D-Bus serviceUid query failed for" << message().service() << ":" << uidReply.error().message();
     }
 
     Authority::Result result = Authority::instance()->checkAuthorizationSync("com.deepin.deepin-devicemanager.checkAuthentication",
