@@ -7,6 +7,7 @@
 #include "drivermanager.h"
 #include "utils.h"
 #include "modcore.h"
+#include "securityutils.h"
 #include "aptinstaller.h"
 #include "driverinstallerapt.h"
 //#include "DeviceInfoManager.h"
@@ -265,7 +266,16 @@ bool DriverManager::installDriver(const QString &filepath)
     } else {
         //已判断文件是否存在所以必然存在文件名
         QString filename = fileinfo.fileName();
-        QString installdir = QString("/lib/modules/%1/custom/%2").arg(Utils::kernelRelease()).arg(mp_modcore->modGetName(filepath));
+        QString modName = mp_modcore->modGetName(filepath);
+
+        // 安全校验：模块名合法性 + 安装路径边界检查
+        if (!validateModNameForInstall(modName, Utils::kernelRelease(), errmsg)) {
+            qCWarning(appLog) << "installDriver: security validation failed:" << errmsg;
+            sigFinished(false, errmsg);
+            return false;
+        }
+
+        QString installdir = QString("/lib/modules/%1/custom/%2").arg(Utils::kernelRelease()).arg(modName);
         QDir installDir(installdir);
         //判断安装路径是否已存在，如果不存在先创建安装目录
         if (installDir.exists() ||
