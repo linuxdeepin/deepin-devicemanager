@@ -5,6 +5,7 @@
 #ifndef DISABLE_DRIVER
 
 #include "modcore.h"
+#include "securityutils.h"
 #include "DDLog.h"
 
 #include <QFile>
@@ -501,6 +502,12 @@ void ModCore::updateInitramfs()
 
 void ModCore::rmModLoadedOnBoot(const QString &modName)
 {
+    // 输入白名单校验：防止路径穿越攻击
+    if (!isValidModName(modName)) {
+        qCWarning(appLog) << "Invalid module name rejected for load-on-boot removal:" << modName;
+        return;
+    }
+
     QString conffile = QString(LOADONBOOT_FILENAME_TEMPLETE).arg(modName);
     QDir bootloaddir(LOADONBOOT_PROBE_DIR);
     QStringList bootconfs = bootloaddir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::Readable);
@@ -598,6 +605,12 @@ bool ModCore::isModFile(const QString &filePath)
  */
 bool ModCore::addModBlackList(const QString &modName)
 {
+    // 输入白名单校验：防止路径穿越攻击
+    if (!isValidModName(modName)) {
+        qCWarning(appLog) << "Invalid module name rejected for blacklist:" << modName;
+        return false;
+    }
+
     QString blacklistdir;
     if (QFileInfo::exists(BLACKLISTT_PROBE_DIR_ETC)) {
         blacklistdir = BLACKLISTT_PROBE_DIR_ETC;
@@ -610,6 +623,13 @@ bool ModCore::addModBlackList(const QString &modName)
     //sample: /etc/modprobe.d/blacklist-bnep-drivermanager.conf
     QString basefilename = QString(BLACKLIST_FILENAME_TEMPLETE).arg(modName);
     QString filepath = QString("%1/%2").arg(blacklistdir).arg(basefilename);
+
+    // 路径边界检查：确保最终路径在预期目录内，防止符号链接穿越
+    if (!isPathWithinDirectory(filepath, blacklistdir)) {
+        qCWarning(appLog) << "Path traversal attempt detected in addModBlackList:" << filepath;
+        return false;
+    }
+
     QFile blackfile(filepath);
     if (!blackfile.open(QIODevice::ReadWrite))
         return  false;
@@ -635,6 +655,12 @@ bool ModCore::addModBlackList(const QString &modName)
  */
 void ModCore::rmFromBlackList(const QString &modName)
 {
+    // 输入白名单校验：防止路径穿越攻击
+    if (!isValidModName(modName)) {
+        qCWarning(appLog) << "Invalid module name rejected for blacklist removal:" << modName;
+        return;
+    }
+
     //移除黑名单配置，查找目录BLACKLISTT_PROBE_DIR_ETC 和BLACKLISTT_PROBE_DIR_USR_LIB
     //1.通过本应用安装可以移除文件
     //2.如果要移除其它的只能遍历其它配置文件进行删除
@@ -674,9 +700,22 @@ void ModCore::rmFromBlackList(const QString &modName)
  */
 bool ModCore::setModLoadedOnBoot(const QString &modName)
 {
+    // 输入白名单校验：防止路径穿越攻击
+    if (!isValidModName(modName)) {
+        qCWarning(appLog) << "Invalid module name rejected for load-on-boot:" << modName;
+        return false;
+    }
+
     QFileInfo fileinfo(LOADONBOOT_PROBE_DIR);
     QString strfilename = QString(LOADONBOOT_FILENAME_TEMPLETE).arg(modName);
     QString filepath = fileinfo.dir().absoluteFilePath(strfilename);
+
+    // 路径边界检查：确保最终路径在预期目录内
+    if (!isPathWithinDirectory(filepath, LOADONBOOT_PROBE_DIR)) {
+        qCWarning(appLog) << "Path traversal attempt detected in setModLoadedOnBoot:" << filepath;
+        return false;
+    }
+
     QFile bootconf(filepath);
     if (!bootconf.open(QIODevice::ReadWrite))
         return  false;
@@ -684,4 +723,5 @@ bool ModCore::setModLoadedOnBoot(const QString &modName)
 
     return  true;
 }
+
 #endif // DISABLE_DRIVER

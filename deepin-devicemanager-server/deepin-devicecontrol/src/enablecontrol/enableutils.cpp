@@ -4,6 +4,7 @@
 
 #include "enableutils.h"
 #include "enablesqlmanager.h"
+#include "securityutils.h"
 #include "DDLog.h"
 
 #include <QStringList>
@@ -113,6 +114,11 @@ void EnableUtils::disableOutDevice(const QString &info)
 
         // 先判断设备是否被记录在数据库，如果在则禁用
         if (EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID)) {
+            // 安全校验：防止 sysfs 路径穿越攻击
+            if (!isSafeSysfsPath(path)) {
+                qCWarning(appLog) << "disableOutDevice: unsafe sysfs path rejected:" << path;
+                continue;
+            }
             QFile file("/sys" + path + QString("/authorized"));
             if (!file.open(QIODevice::ReadWrite)) {
                 return;
@@ -144,6 +150,11 @@ void EnableUtils::disableInDevice()
     QList<QPair<QString, QString> > lstRemovePair;
     EnableSqlManager::getInstance()->removePathUniqueIDList(lstRemovePair);
     for (QList<QPair<QString, QString>>::iterator it = lstRemovePair.begin() ; it != lstRemovePair.end(); ++it) {
+        // 安全校验：防止 sysfs 路径穿越攻击
+        if (!isSafeSysfsPath((*it).first)) {
+            qCWarning(appLog) << "disableInDevice: unsafe sysfs path rejected:" << (*it).first;
+            continue;
+        }
         QString pathT = "/sys" + (*it).first + QString("/remove");
         if (!QFile::exists(pathT)) {
             pathT = "/sys" + (*it).first + QString("/reset");

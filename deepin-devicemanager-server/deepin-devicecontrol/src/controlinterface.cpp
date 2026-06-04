@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -10,6 +10,7 @@
 #include "enablesqlmanager.h"
 #include "enableutils.h"
 #include "wakeuputils.h"
+#include "securityutils.h"
 #include "DDLog.h"
 
 #include <QLoggingCategory>
@@ -487,6 +488,13 @@ bool ControlInterface::aptUpdate()
 bool ControlInterface::authorizedEnable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool enable_device, const QString strDriver)
 {
     qCDebug(appLog) << "Authorized enable operation:" << hclass << name << path << "enable:" << enable_device;
+
+    // 安全校验：防止 sysfs 路径穿越攻击
+    if (!isSafeSysfsPath(path)) {
+        qCWarning(appLog) << "authorizedEnable: unsafe sysfs path rejected:" << path;
+        return false;
+    }
+
     // 通过authorized文件启用禁用设备
     // 0:表示禁用 ，1:表示启用
     QFile file("/sys" + path + QString("/authorized"));
@@ -531,6 +539,13 @@ bool ControlInterface::authorizedEnable(const QString &hclass, const QString &na
 bool ControlInterface::removeEnable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool enable, const QString strDriver)
 {
     qCDebug(appLog) << "Remove enable operation:" << hclass << name << path << "enable:" << enable;
+
+    // 安全校验：防止 sysfs 路径穿越攻击
+    if (!isSafeSysfsPath(path)) {
+        qCWarning(appLog) << "removeEnable: unsafe sysfs path rejected:" << path;
+        return false;
+    }
+
     if (enable) {
         // 1. 先rescan 向rescan写入1,则重新加载
         QFile file("/sys/bus/pci/rescan");
