@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd.
+// Copyright (C) 2019 - 2026 Uniontech Software Technology Co.,Ltd.
 // SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -346,4 +346,50 @@ int Common::parseSharedCpuCount(const QString &sharedCpuList)
         }
     }
     return count;
+}
+
+QString Common::formatNetworkSpeed(const QString& speed)
+{
+    // 1. Trim whitespace; return original if empty
+    QString s = speed.trimmed();
+    if (s.isEmpty())
+        return speed;
+
+    // 2. Convert "Gbit/s" -> "Mbps" (1Gbit/s = 1000Mbps), case-sensitive
+    const QString gbitSuffix = "Gbit/s";
+    if (s.endsWith(gbitSuffix, Qt::CaseSensitive)) {
+        QString numStr = s.left(s.length() - gbitSuffix.length()).trimmed();
+        bool ok = false;
+        double num = numStr.toDouble(&ok);
+        if (ok) {
+            double mbps = num * 1000.0;
+            // Format: integer values get no decimal point, otherwise keep one decimal
+            double intPart;
+            if (std::abs(std::modf(mbps, &intPart)) < 1e-6) {
+                return QString::number(static_cast<long long>(mbps)) + "Mbps";
+            } else {
+                return QString::number(mbps, 'f', 1) + "Mbps";
+            }
+        }
+    }
+
+    // 3. Normalize "Mbit/s" -> "Mbps" (value unchanged, case-sensitive)
+    const QString mbitSuffix = "Mbit/s";
+    if (s.endsWith(mbitSuffix, Qt::CaseSensitive)) {
+        QString numStr = s.left(s.length() - mbitSuffix.length()).trimmed();
+        bool ok = false;
+        double num = numStr.toDouble(&ok);
+        if (ok) {
+            // Format: integer values get no decimal point, otherwise keep one decimal
+            double intPart;
+            if (std::abs(std::modf(num, &intPart)) < 1e-6) {
+                return QString::number(static_cast<long long>(num)) + "Mbps";
+            } else {
+                return QString::number(num, 'f', 1) + "Mbps";
+            }
+        }
+    }
+
+    // 4. Return original string if no known suffix matches
+    return speed;
 }

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -281,7 +281,7 @@ void HWGenerator::generatorDiskDevice()
                 tempMap["Name"] = "nouse";
 
             if (Common::specialComType == Common::kSpecialType2) {
-                tempMap["Interface"] = "UFS";
+                tempMap["Interface"] = "";
             }
 
             // 读取interface版本
@@ -299,7 +299,7 @@ void HWGenerator::generatorDiskDevice()
                         deviceInfo = process.readAllStandardOutput();
 
                         if (!deviceInfo.trimmed().isEmpty()) {
-                            tempMap["interface"] = "UFS";
+                            tempMap["interface"] = "";
                         }
                     }
                 }

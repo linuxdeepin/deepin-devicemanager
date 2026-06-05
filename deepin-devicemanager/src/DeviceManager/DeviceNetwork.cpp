@@ -73,6 +73,10 @@ void DeviceNetwork::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "ip", m_Ip);
     setAttribute(mapInfo, "size", m_Speed);
     setAttribute(mapInfo, "capacity", m_Capacity);
+    if (Common::isHwPlatform()) {
+        m_Speed = Common::formatNetworkSpeed(m_Speed);
+        m_Capacity = Common::formatNetworkSpeed(m_Capacity);
+    }
     setAttribute(mapInfo, "Latency", m_Latency);
     setAttribute(mapInfo, "multicast", m_Multicast);
     if (driverIsKernelIn(m_DriverModules) || driverIsKernelIn(m_Driver)) {
@@ -100,6 +104,10 @@ TomlFixMethod DeviceNetwork::setInfoFromTomlOneByOne(const QMap<QString, QString
     // 添加其他信息,成员变量
     setTomlAttribute(mapInfo, "Maximum Rate", m_Capacity);
     setTomlAttribute(mapInfo, "Negotiation Rate", m_Speed);
+    if (Common::isHwPlatform()) {
+        m_Capacity = Common::formatNetworkSpeed(m_Capacity);
+        m_Speed = Common::formatNetworkSpeed(m_Speed);
+    }
     setTomlAttribute(mapInfo, "Port", m_Port);
     setTomlAttribute(mapInfo, "Multicast", m_Multicast);
     setTomlAttribute(mapInfo, "Link", m_Link);
