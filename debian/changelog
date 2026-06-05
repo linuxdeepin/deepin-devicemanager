@@ -1,3 +1,10 @@
+deepin-devicemanager (6.0.67) unstable; urgency=medium
+
+  * chore: Update version to 6.0.67
+  * fix(security): add path traversal protection for sysfs and module operations
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Fri, 05 Jun 2026 10:43:02 +0800
+
 deepin-devicemanager (6.0.66) unstable; urgency=medium
 
   * chore: Update version to 6.0.66
