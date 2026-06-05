@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -214,7 +214,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (file.open(QIODevice::ReadOnly)) {
         QString output = file.readAll();
         if (!output.isEmpty()) {
-            m_Interface = "UFS";
+            m_Interface = "";
         }
         file.close();
     }

@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd.
+// Copyright (C) 2019 - 2026 Uniontech Software Technology Co.,Ltd.
 // SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -60,5 +60,14 @@ public:
     static QString formatTotalCache(const QString& perThreadCache, int coreCount);
 
     static int parseSharedCpuCount(const QString &sharedCpuList);
+
+    /**
+     * @brief formatNetworkSpeed: Convert network speed units to Mbps
+     * @param speed: Original speed string (e.g., "1Gbit/s", "100Mbit/s")
+     * @return Converted speed string in Mbps format (e.g., "1000Mbps", "100Mbps")
+     *         Returns the original string if no conversion is needed.
+     *         Note: Case-sensitive - "Gbit/s" -> "Mbps", "Mbit/s" -> "Mbps"
+     */
+    static QString formatNetworkSpeed(const QString& speed);
 };
 #endif // COMMONFUNCTION_H
