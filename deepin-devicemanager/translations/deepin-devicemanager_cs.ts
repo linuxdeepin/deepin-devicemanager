@@ -749,7 +749,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1313"/>
         <source>L4 Cache</source>
-        <translation type="unfinished"/>
+        <translation>L4 Cache</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1314"/>
@@ -3147,17 +3147,17 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"/>
+        <translation>Vyberte ovladač, který chcete obnovit</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="716"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"/>
+        <translation>Ovladač se obnovuje…</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="717"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"/>
+        <translation>Obnovuje se: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="872"/>
@@ -3172,12 +3172,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="881"/>
         <source>View backup path</source>
-        <translation type="unfinished"/>
+        <translation>Zobrazit cestu k záloze</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
         <source>Backup All</source>
-        <translation type="unfinished"/>
+        <translation>Zálohovat vše</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="876"/>
@@ -3268,12 +3268,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="779"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Probíhá zálohování ovladačů, po ukončení se proces přeruší.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="795"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Probíhá obnovení ovladačů, po ukončení se proces přeruší</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="49"/>
@@ -3344,27 +3344,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="86"/>
         <source>Not backed up</source>
-        <translation type="unfinished"/>
+        <translation>Nezálohováno</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="87"/>
         <source>Backing up</source>
-        <translation type="unfinished"/>
+        <translation>Probíhá zálohování</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="88"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>Záloha selhala</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="89"/>
         <source>Backup successful</source>
-        <translation type="unfinished"/>
+        <translation>Záloha byla úspěšná</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="90"/>
         <source>Restoring</source>
-        <translation type="unfinished"/>
+        <translation>Probíhá obnovení</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="94"/>
@@ -3394,12 +3394,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="274"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Záloha</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="280"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Obnovení</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="263"/>
