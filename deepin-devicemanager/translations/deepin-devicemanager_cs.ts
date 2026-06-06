@@ -9,7 +9,7 @@
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="50"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Zpětná vazba</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="63"/>
@@ -719,7 +719,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1307"/>
         <source>KernelModeDriver</source>
-        <translation type="unfinished"/>
+        <translation>KernelModeDriver</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1308"/>
@@ -1329,7 +1329,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1430"/>
         <source>SysFS_Path</source>
-        <translation type="unfinished"/>
+        <translation>SysFS_Path</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1431"/>
@@ -2235,7 +2235,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>Verze platformy ovladače</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="102"/>
@@ -2250,12 +2250,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="193"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Zálohovatelné ovladače</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="194"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Zálohované ovladače</translation>
     </message>
 </context>
 <context>
@@ -2461,7 +2461,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="118"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="548"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Instalace ovladače</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
@@ -2469,13 +2469,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="119"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="550"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Zálohované ovladače</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="120"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="552"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Obnovení ovladačů</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="723"/>
@@ -2485,7 +2485,7 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="724"/>
         <source>Feedback</source>
-        <translation type="unfinished"/>
+        <translation>Zpětná vazba</translation>
     </message>
 </context>
 <context>
@@ -2493,12 +2493,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="98"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>Nemáte žádné ovladače k obnovení, nejprve vytvořte zálohu</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="101"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Přejít na zálohování ovladačů</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="129"/>
@@ -2513,7 +2513,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>Verze zálohy</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
@@ -2523,7 +2523,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="180"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Obnovitelné ovladače</translation>
     </message>
 </context>
 <context>
@@ -2546,17 +2546,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Instalace ovladače</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Zálohované ovladače</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Obnovení ovladačů</translation>
     </message>
 </context>
 <context>
