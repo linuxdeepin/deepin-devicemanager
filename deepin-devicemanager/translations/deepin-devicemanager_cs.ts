@@ -2770,18 +2770,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="721"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Obnova ovladače selhala!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="717"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Zkuste to znovu nebo nám dejte zpětnou vazbu</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="47"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Selhalo zálohování ovladače!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
@@ -3096,53 +3096,53 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Všechny ovladače byly zálohovány</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Celkem %1 ovladačů, z toho %2 bylo zálohováno</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="546"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"/>
+        <translation>Máte %1 ovladačů, které lze zálohovat, doporučujeme to provést ihned</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"/>
+        <translation>Máte %1 ovladačů, které lze zálohovat</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="597"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>Zálohuje se ovladač %1, celkem %2 ovladačů</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"/>
+        <translation>Zálohuje se ovladač %1, celkem %2 ovladačů</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="638"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 ovladačů zálohováno, u %2 ovladačů záloha selhala</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="641"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>Nepodařilo se zálohovat ovladače</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"/>
+        <translation>%1 ovladačů zálohováno</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="684"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"/>
+        <translation>Máte %1 ovladačů, které lze obnovit</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
