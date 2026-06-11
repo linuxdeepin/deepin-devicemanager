@@ -421,7 +421,7 @@ void MainWindow::initWindowTitle()
     });
     titlebar()->addWidget(mp_ButtonBox);
     // 特殊处理
-    if (!Common::boardVendorType().isEmpty())
+    if (Common::isHwPlatform())
         mp_ButtonBox->hide();
 #ifdef DISABLE_DRIVER
     mp_ButtonBox->hide();
