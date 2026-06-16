@@ -124,6 +124,13 @@ int main(int argc, char *argv[])
         }
         if (dconfig->keyList().contains("specialCpuType"))
             Common::curCpuType = static_cast<Common::SpecialCpuType>(dconfig->value("specialCpuType").toInt());
+        if (dconfig->keyList().contains("specialVRAMType")) {
+            const int vramTypeValue = dconfig->value("specialVRAMType").toInt();
+            if (vramTypeValue >= Common::kNormalVRAMType && vramTypeValue < Common::kSpecialVRAMTypeMax)
+                Common::curVRAMType = static_cast<Common::SpecialVRAMType>(vramTypeValue);
+            else
+                Common::curVRAMType = Common::kNormalVRAMType;
+        }
     }
 
     // 特殊机型，提前缓存GPU信息

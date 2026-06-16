@@ -34,6 +34,12 @@ public:
         kSpecialCpuType1
     };
 
+    enum SpecialVRAMType {
+        kNormalVRAMType = 0,
+        kSpecialVRAMType1,
+        kSpecialVRAMTypeMax
+    };
+
     static QString getArch();
 
     static QString getArchStore();
@@ -53,6 +59,7 @@ public:
      */
     static int specialComType;
     static SpecialCpuType curCpuType;
+    static SpecialVRAMType curVRAMType;
 
     static QByteArray executeClientCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
 

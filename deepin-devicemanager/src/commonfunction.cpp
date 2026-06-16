@@ -37,6 +37,7 @@ static bool initBoardVendorFlag = false;
 static QString boardVendorKey = "";
 int Common::specialComType = -1;
 Common::SpecialCpuType Common::curCpuType = Common::SpecialCpuType::kUnknowCpuType;
+Common::SpecialVRAMType Common::curVRAMType = Common::SpecialVRAMType::kNormalVRAMType;
 static QString tomlFilesName = "tomlFilesName";
 QString Common::getArch()
 {
