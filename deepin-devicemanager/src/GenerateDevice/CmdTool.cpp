@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -425,7 +425,21 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     // 获取显存大小信息
     QMap<QString, QString> mapInfo;
     QStringList lines = deviceInfo.split("\n");
+    const bool isSpecialVRAM = Common::curVRAMType == Common::kSpecialVRAMType1;
+    bool hasCustomVRAMSize = false;
+    QRegExp regCustom(".*([0-9a-z]{4}:[0-9a-z]{2}:[0-9a-z]{2}\\.[0-9]{1}):.*Video RAM[^0-9]*([0-9]+)[\\s]{0,1}M.*");
     foreach (const QString &line, lines) {
+        if (isSpecialVRAM && regCustom.exactMatch(line)) {
+            double size = regCustom.cap(2).toDouble();
+            QString sizeS = QString("%1GB").arg(size / 1024);
+            mapInfo["Size"] = regCustom.cap(1) + "=" + sizeS;
+            hasCustomVRAMSize = true;
+            continue;
+        }
+
+        if (hasCustomVRAMSize)
+            continue;
+
         // DeviceCdrom m_HwinfoToLshw 值为0000:01:00.0 此处同步修改,否则显存大小无法显示
         QRegExp reg(".*([0-9a-z]{4}:[0-9a-z]{2}:[0-9a-z]{2}.[0-9]{1}):.*VRAM([=:]{1}) ([0-9]*)[\\s]{0,1}M.*");
         if (reg.exactMatch(line)) {

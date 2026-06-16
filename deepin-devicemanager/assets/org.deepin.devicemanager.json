@@ -35,6 +35,16 @@
             "permissions": "readwrite",
             "visibility": "private"
           },
+          "specialVRAMType": {
+            "value": 0,
+            "serial": 0,
+            "flags": ["global"],
+            "name": "Special VRAM Type",
+            "name[zh_CN]": "定制VRAM类型",
+            "description": "Special VRAM Type: VRAM type(value:0)",
+            "permissions": "readwrite",
+            "visibility": "private"
+          },
           "TomlFilesName": {
             "value": "tomlFilesName",
             "serial": 0,
