@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -12,20 +12,15 @@
 
 #include <QMutex>
 #include <QProcess>
-#include <QFile>
 #include <QLoggingCategory>
 #include <QTimer>
 #include <QDBusConnection>
-
-#include <DSysInfo>
 
 using namespace DDLog;
 
 static QMutex mainJobMutex;
 static bool s_ServerIsUpdating = false;
 static bool s_ClientIsUpdating = false;
-const QString DEVICE_REPO_PATH = "/etc/apt/sources.list.d/devicemanager.list";
-const QString DRIVER_REPO_PATH = "/etc/apt/sources.list.d/driver.list";
 
 MainJob::MainJob(const char *name, QObject *parent)
     : QObject(parent)
@@ -43,13 +38,6 @@ MainJob::MainJob(const char *name, QObject *parent)
 
     // 在驱动管理延迟加载1000ms
     QTimer::singleShot(1000, this, [ = ]() {
-#ifndef DISABLE_DRIVER
-        DTK_CORE_NAMESPACE::DSysInfo::UosEdition type = DTK_CORE_NAMESPACE::DSysInfo::uosEditionType();
-        if (DTK_CORE_NAMESPACE::DSysInfo::UosCommunity != type ) {
-            initDriverRepoSource();
-        }
-#endif
-
         sqlCopytoKernel();
 
         connect(m_deviceInterface, &DeviceInterface::sigUpdate, this, &MainJob::slotUsbChanged);
@@ -124,39 +112,6 @@ void MainJob::slotDriverControl(bool success)
 {
     if (success)
         executeClientInstruction("DETECT");
-}
-
-void MainJob::initDriverRepoSource()
-{
-    QFile fileDriver(DRIVER_REPO_PATH);
-    if (fileDriver.open(QIODevice::ReadOnly)) {
-        QString info = fileDriver.readAll();
-        QStringList lines = info.split("\n");
-        foreach (QString line, lines) {
-            if (line.contains("pro-driver-packages")) {
-                fileDriver.close();
-                return;
-            }
-        }
-        fileDriver.close();
-    }
-
-    QFile file(DEVICE_REPO_PATH);
-    if (QFile::exists(DEVICE_REPO_PATH)) {
-        return;
-    }
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qCInfo(appLog) << file.errorString();
-        return;
-    }
-
-    file.write("deb https://pro-driver-packages.uniontech.com eagle non-free\n");
-    file.close();
-
-    QString cmd = "apt update";
-    QProcess process;
-    process.start(cmd);
-    process.waitForFinished(-1);
 }
 
 void MainJob::updateAllDevice()

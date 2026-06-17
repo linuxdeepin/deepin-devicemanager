@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -53,11 +53,6 @@ private:
      * @brief sqlCopytoKernel
      */
     void sqlCopytoKernel();
-    /**
-     * @brief initDriverRepoSource : 初始化驱动仓库
-     * @return : 无
-     */
-    void initDriverRepoSource();
     /**
      * @brief updateAllDevice
      */
