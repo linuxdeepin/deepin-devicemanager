@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -97,12 +97,6 @@ private:
      * @return : 返回bool
      */
     bool initDriverDbus();
-
-    /**
-     * @brief initDriverRepoSource : 初始化驱动仓库
-     * @return : 无
-     */
-    void initDriverRepoSource();
 
 private:
     ThreadPool            *mp_Pool = nullptr;                 //<! 生成文件的线程池

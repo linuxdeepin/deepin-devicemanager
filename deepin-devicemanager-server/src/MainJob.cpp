@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -25,7 +25,6 @@
 #include <QMutexLocker>
 #include <QDBusConnection>
 #include <QDebug>
-#include <QFile>
 
 #include <unistd.h>
 
@@ -37,8 +36,6 @@ const QString ENABLE_SERVICE_PATH = "/com/deepin/enablemanager";
 const QString WAKEUP_SERVICE_PATH = "/com/deepin/wakeupmanager";
 bool  MainJob::s_ServerIsUpdating = false;
 bool  MainJob::s_ClientIsUpdating = false;
-const QString DEVICE_REPO_PATH = "/etc/apt/sources.list.d/devicemanager.list";
-const QString DRIVER_REPO_PATH = "/etc/apt/sources.list.d/driver.list";
 
 MainJob::MainJob(QObject *parent)
     : QObject(parent)
@@ -77,10 +74,6 @@ void MainJob::working()
 
     // 在驱动管理延迟加载1000ms
     QTimer::singleShot(1000, this, [ = ]() {
-        //初始化源
-#ifndef DISABLE_DRIVER
-        initDriverRepoSource();
-#endif
         // 后台加载后先禁用设备
         const QString &info = DeviceInfoManager::getInstance()->getInfo("hwinfo");
         EnableUtils::disableOutDevice(info);
@@ -246,37 +239,3 @@ bool MainJob::initDriverDbus()
 
     return true;
 }
-
-void MainJob::initDriverRepoSource()
-{
-    QFile fileDriver(DRIVER_REPO_PATH);
-    if (fileDriver.open(QIODevice::ReadOnly)) {
-        QString info = fileDriver.readAll();
-        QStringList lines = info.split("\n");
-        foreach (QString line, lines) {
-            if (line.contains("pro-driver-packages")) {
-                fileDriver.close();
-                return;
-            }
-        }
-        fileDriver.close();
-    }
-
-    QFile file(DEVICE_REPO_PATH);
-    if (QFile::exists(DEVICE_REPO_PATH)) {
-        return;
-    }
-    if (!file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qInfo() << file.errorString();
-        return;
-    }
-
-    file.write("deb https://pro-driver-packages.uniontech.com eagle non-free\n");
-    file.close();
-
-    QString cmd = "apt update";
-    QProcess process;
-    process.start(cmd);
-    process.waitForFinished(-1);
-}
-
