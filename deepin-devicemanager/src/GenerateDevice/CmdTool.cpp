@@ -425,7 +425,8 @@ void CmdTool::loadDmesgInfo(const QString &debugfile)
     // 获取显存大小信息
     QMap<QString, QString> mapInfo;
     QStringList lines = deviceInfo.split("\n");
-    const bool isSpecialVRAM = Common::curVRAMType == Common::kSpecialVRAMType1;
+    const bool isSpecialVRAM = Common::curVRAMType == Common::kSpecialVRAMType1
+            || Common::curVRAMType == Common::kSpecialVRAMType2;
     bool hasCustomVRAMSize = false;
     QRegExp regCustom(".*([0-9a-z]{4}:[0-9a-z]{2}:[0-9a-z]{2}\\.[0-9]{1}):.*Video RAM[^0-9]*([0-9]+)[\\s]{0,1}M.*");
     foreach (const QString &line, lines) {

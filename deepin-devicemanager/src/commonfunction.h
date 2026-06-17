@@ -37,6 +37,7 @@ public:
     enum SpecialVRAMType {
         kNormalVRAMType = 0,
         kSpecialVRAMType1,
+        kSpecialVRAMType2,
         kSpecialVRAMTypeMax
     };
 
