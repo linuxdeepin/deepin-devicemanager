@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -15,6 +15,8 @@
 #include <QLoggingCategory>
 #include <QProcess>
 #include <QTimer>
+#include <QFile>
+#include <QFileInfo>
 
 #include <unistd.h>
 #include <fstream>
@@ -22,6 +24,10 @@
 #include <vector>
 
 using namespace DDLog;
+
+const QString DriverInstaller::DEVICE_REPO_PATH = "/etc/apt/sources.list.d/devicemanager.list";
+const QString DriverInstaller::DRIVER_REPO_PATH = "/etc/apt/sources.list.d/driver.list";
+
 const int MAX_DPKGRUNING_TEST = 20;
 const int TEST_TIME_INTERVAL = 2000;
 
@@ -134,9 +140,13 @@ bool DriverInstaller::isNetworkOnline(uint usec)
 
 void DriverInstaller::doOperate(const QString &package, const QString &version)
 {
+    // 按需创建驱动仓库源文件，仅在 driver.list 中不存在 pro-driver-packages 时创建
+    ensureDriverRepoSource();
+
     if (!initBackend()) {
         emit errorOccurred(EC_NULL);
         qCInfo(appLog) << "DRIVER_LOG : ************************** 初始化backend失败";
+        cleanupTempSource();
         return;
     }
 
@@ -145,6 +155,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
     if (nullptr == p) {
         emit errorOccurred(EC_NOTFOUND);
         qCInfo(appLog) << "DRIVER_LOG : ************************** 安装包不存在";
+        cleanupTempSource();
         return;
     }
 
@@ -154,6 +165,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
         emit errorOccurred(EC_NOTFOUND);
         delete p;
         p = nullptr;
+        cleanupTempSource();
         return;
     }
 
@@ -164,6 +176,7 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
     if (nullptr == mp_Trans) {
         emit errorOccurred(EC_NULL);
         qCInfo(appLog) << "DRIVER_LOG : ************************** installPackages";
+        cleanupTempSource();
         return;
     }
 
@@ -191,6 +204,9 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
 
         qCInfo(appLog) << "DRIVER_LOG : ************************** 安装结束 结束状态码" << status;
         qCInfo(appLog) << "DRIVER_LOG : ************************** 安装结束 结束错误码" << code;
+
+        // 清理本次创建的临时源文件
+        cleanupTempSource();
 
         mp_Trans->disconnect();
         mp_Trans->deleteLater();
@@ -220,5 +236,60 @@ void DriverInstaller::doOperate(const QString &package, const QString &version)
     });
 
     mp_Trans->run();
+}
+
+void DriverInstaller::ensureDriverRepoSource()
+{
+    // 重置临时源标记，避免因前一次安装失败导致残留标记
+    m_tempSourceCreated = false;
+
+    // 优先检查系统自带的 driver.list 中是否已包含驱动仓库源
+    QFile fileDriver(DRIVER_REPO_PATH);
+    if (fileDriver.open(QIODevice::ReadOnly)) {
+        QString info = fileDriver.readAll();
+        QStringList lines = info.split("\n");
+        foreach (QString line, lines) {
+            if (line.contains("pro-driver-packages")) {
+                fileDriver.close();
+                return;
+            }
+        }
+        fileDriver.close();
+    }
+
+    // 使用 O_EXCL 原子创建文件，避免 TOCTOU 竞争条件（CWE-367）
+    // NewOnly 保证文件不存在时才创建，若已存在则 open 失败，无需先检查
+    QFile file(DEVICE_REPO_PATH);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QFile::NewOnly)) {
+        // 文件已存在属于正常情况（第三方创建），静默返回
+        if (!QFile::exists(DEVICE_REPO_PATH)) {
+            qCInfo(appLog) << "DRIVER_LOG : 创建驱动源文件失败:" << file.errorString();
+        }
+        return;
+    }
+
+    file.write("deb https://pro-driver-packages.uniontech.com eagle non-free\n");
+    file.close();
+    m_tempSourceCreated = true;
+    qCInfo(appLog) << "DRIVER_LOG : 创建临时驱动源文件:" << DEVICE_REPO_PATH;
+
+    // 新源创建后需执行 apt update 更新包索引，
+    // 否则 QApt::Backend 无法识别该源的软件包
+    // 使用列表传参绕过 shell 解析，避免命令注入风险
+    QProcess process;
+    process.start("apt", QStringList() << "update");
+    process.waitForFinished(50000);
+    qCInfo(appLog) << "DRIVER_LOG : 临时源 apt update 完成";
+}
+
+void DriverInstaller::cleanupTempSource()
+{
+    if (!m_tempSourceCreated) {
+        return;
+    }
+
+    QFile::remove(DEVICE_REPO_PATH);
+    m_tempSourceCreated = false;
+    qCWarning(appLog) << "DRIVER_LOG : 清理临时驱动源文件:" << DEVICE_REPO_PATH;
 }
 #endif // DISABLE_DRIVER
