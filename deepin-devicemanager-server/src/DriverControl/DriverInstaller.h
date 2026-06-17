@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -27,6 +26,10 @@ class DriverInstaller : public QObject
     Q_OBJECT
 public:
     explicit DriverInstaller(QObject *parent = nullptr);
+
+    // 驱动仓库源文件路径
+    static const QString DEVICE_REPO_PATH;
+    static const QString DRIVER_REPO_PATH;
 
 public slots:
     /**
@@ -70,11 +73,23 @@ private:
      * @param version
      */
     void doOperate(const QString &package, const QString &version);
+    /**
+     * @brief ensureDriverRepoSource 按需创建驱动仓库源文件
+     *        仅在 driver.list 中不存在 pro-driver-packages 时创建 devicemanager.list
+     */
+    void ensureDriverRepoSource();
+
+    /**
+     * @brief cleanupTempSource 清理本次创建的临时源文件
+     */
+    void cleanupTempSource();
+
 private:
     QApt::Backend *mp_Backend = nullptr;
     QApt::Transaction *mp_Trans = nullptr;
     int m_iRuningTestCount = 0;
     bool m_Cancel;
+    bool m_tempSourceCreated = false;  // 是否在本次安装中创建了临时源
 };
 
 #endif // DRIVERINSTALLER_H
