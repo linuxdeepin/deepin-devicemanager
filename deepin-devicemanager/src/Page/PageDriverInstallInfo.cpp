@@ -1,9 +1,11 @@
-// SPDX-FileCopyrightText: 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2023 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include <QBoxLayout>
 
+#include <QScroller>
+#include <QScrollerProperties>
 #include <DScrollArea>
 
 #include "PageDriverInstallInfo.h"
@@ -58,6 +60,15 @@ void PageDriverInstallInfo::initUI()
     area->setMinimumHeight(10);
     area->setFrameShape(QFrame::NoFrame);
     area->setWidgetResizable(true);
+
+    // 启用触摸屏滚动支持
+    QScroller::grabGesture(area, QScroller::LeftMouseButtonGesture);
+    QScrollerProperties sp;
+    sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, SCROLLER_OVERSHOOT_DISTANCE_FACTOR);
+    sp.setScrollMetric(QScrollerProperties::OvershootDragResistanceFactor, SCROLLER_OVERSHOOT_DRAG_RESIST_FACTOR);
+    sp.setScrollMetric(QScrollerProperties::DragVelocitySmoothingFactor, SCROLLER_DRAG_VELOCITY_SMOOTH_FACTOR);
+    QScroller::scroller(area)->setScrollerProperties(sp);
+
     DWidget *frame = new DWidget(this);
     frame->setContentsMargins(0, 0, 0, 0);
     QVBoxLayout *frameLayout = new QVBoxLayout();
