@@ -215,6 +215,11 @@
 #define   WIDGET_MARGIN      2     // 页边距
 #define   BOTTOM_MARGIN      11    // 下边距
 #define   LABEL_MARGIN       12    // 页面标签的上下边距
+
+// 触摸屏滚动参数
+#define SCROLLER_OVERSHOOT_DISTANCE_FACTOR     0.3  // 超出滚动距离系数
+#define SCROLLER_OVERSHOOT_DRAG_RESIST_FACTOR   0.3  // 超出拖拽阻力系数
+#define SCROLLER_DRAG_VELOCITY_SMOOTH_FACTOR    0.6  // 拖拽速度平滑系数
 #define   HORSCROLL_WIDTH    11    // TreeWidget 横向滚动条高度
 #define   MIN_NUM            5     // num
 
