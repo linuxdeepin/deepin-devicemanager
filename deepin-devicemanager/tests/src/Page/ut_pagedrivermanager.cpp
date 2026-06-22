@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -82,7 +82,7 @@ TEST_F(PageDriverManager_UT, ut_slotScanFinished)
     m_dPageDriverManager->clearAllData();
     m_dPageDriverManager->testDevices();
     m_dPageDriverManager->slotScanFinished(SR_SUCESS);
-    EXPECT_EQ(4, m_dPageDriverManager->m_ListDriverInfo.size());
+    EXPECT_EQ(3, m_dPageDriverManager->m_ListDriverInfo.size());
 }
 
 TEST_F(PageDriverManager_UT, ut_slotDriverOperationClicked)

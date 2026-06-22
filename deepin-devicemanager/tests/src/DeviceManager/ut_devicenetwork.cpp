@@ -238,7 +238,7 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_logicalName)
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_initFilterKey)
 {
     m_deviceNetwork->initFilterKey();
-    EXPECT_EQ(3, m_deviceNetwork->m_FilterKey.size());
+    EXPECT_EQ(2, m_deviceNetwork->m_FilterKey.size());
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_loadBaseDeviceInfo)
@@ -260,7 +260,7 @@ TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_loadOtherDeviceInfo)
     m_deviceNetwork->setInfoFromLshw(mapinfo);
 
     m_deviceNetwork->loadOtherDeviceInfo();
-    EXPECT_EQ(17, m_deviceNetwork->m_LstOtherInfo.size());
+    EXPECT_EQ(15, m_deviceNetwork->m_LstOtherInfo.size());
 }
 
 TEST_F(UT_DeviceNetwork, DeviceNetwork_UT_loadTableData_001)

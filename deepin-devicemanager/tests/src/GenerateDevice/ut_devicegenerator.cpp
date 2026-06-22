@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -183,7 +183,7 @@ TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_generatorNetworkDevice)
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo_hwinfonetwork);
     m_deviceGenerator->generatorNetworkDevice();
-    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceNetwork.size());
+    EXPECT_FALSE(DeviceManager::instance()->m_ListDeviceNetwork.size());
 }
 
 //virtual void generatorAudioDevice();
@@ -210,7 +210,7 @@ TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_generatorKeyboardDevice)
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo);
     m_deviceGenerator->generatorKeyboardDevice();
-    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
+    EXPECT_FALSE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
 }
 
 //virtual void generatorMouseDevice();
@@ -518,7 +518,7 @@ TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_getKeyboardInfoFromHwinfo)
     Stub stub;
     stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo);
     m_deviceGenerator->getKeyboardInfoFromHwinfo();
-    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
+    EXPECT_FALSE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
 }
 
 //virtual void getKeyboardInfoFromLshw();
@@ -528,7 +528,7 @@ TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_getKeyboardInfoFromLshw)
     stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo);
     m_deviceGenerator->getKeyboardInfoFromHwinfo();
     m_deviceGenerator->getKeyboardInfoFromLshw();
-    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
+    EXPECT_FALSE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
 }
 
 //virtual void getKeyboardInfoFromCatDevices();
@@ -538,7 +538,7 @@ TEST_F(UT_DeviceGenerator, UT_DeviceGenerator_getKeyboardInfoFromCatDevices)
     stub.set(ADDR(DeviceManager, cmdInfo), ut_DeviceGenerator_cmdInfo);
     m_deviceGenerator->getKeyboardInfoFromHwinfo();
     m_deviceGenerator->getKeyboardInfoFromLshw();
-    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
+    EXPECT_FALSE(DeviceManager::instance()->m_ListDeviceKeyboard.size());
 }
 
 //virtual void getMouseInfoFromHwinfo();

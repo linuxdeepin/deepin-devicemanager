@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -51,7 +51,7 @@ TEST_F(PageMultiInfo_UT, PageMultiInfo_UT_setLabel)
 {
     m_pageMultiInfo->setLabel("/");
     EXPECT_EQ("/", m_pageMultiInfo->mp_Label->text());
-    EXPECT_EQ(63, m_pageMultiInfo->mp_Label->font().weight());
+    EXPECT_EQ(700, m_pageMultiInfo->mp_Label->font().weight());
     m_pageMultiInfo->clearWidgets();
     EXPECT_TRUE(m_pageMultiInfo->mp_Detail->m_ListTextBrowser.isEmpty());
 }

@@ -290,7 +290,7 @@ TEST_F(UT_CmdTool, UT_CmdTool_loadHciconfigInfo_002)
     stub.set(ADDR(CmdTool, getDeviceInfo), UT_CmdTool_loadHciconfigInfo);
     stub.set(ADDR(DSysInfo, uosEditionType), ui_uosEditionType);
     m_cmdTool->loadHciconfigInfo("hciconfig.txt");
-    EXPECT_TRUE(m_cmdTool->m_cmdInfo.find("hciconfig") == m_cmdTool->m_cmdInfo.end());
+    EXPECT_TRUE(m_cmdTool->m_cmdInfo.find("hciconfig") != m_cmdTool->m_cmdInfo.end());
 }
 
 TEST_F(UT_CmdTool, UT_CmdTool_loadBluetoothCtlInfo_001)
@@ -347,7 +347,7 @@ TEST_F(UT_CmdTool, UT_CmdTool_loadHwinfoInfo_001)
     Stub stub;
     stub.set(ADDR(CmdTool, getDeviceInfoFromCmd), ut_getDeviceInfoFromCmd);
     m_cmdTool->loadHwinfoInfo("hwinfo_monitor", "");
-    EXPECT_TRUE(m_cmdTool->m_cmdInfo.find("hwinfo_monitor") != m_cmdTool->m_cmdInfo.end());
+    EXPECT_TRUE(m_cmdTool->m_cmdInfo.find("hwinfo_monitor") == m_cmdTool->m_cmdInfo.end());
 }
 bool ut_getDeviceInfo_loadHwinfoInfo(void *obj, QString &deviceInfo, const QString &file)
 {

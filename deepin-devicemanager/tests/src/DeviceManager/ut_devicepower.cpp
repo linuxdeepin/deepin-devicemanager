@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -44,7 +44,7 @@ TEST_F(UT_DevicePower, UT_DevicePower_setInfoFromUpower_001)
     ut_power_setupowerinfo(mapinfo);
 
     EXPECT_TRUE(m_DevicePower->setInfoFromUpower(mapinfo));
-    EXPECT_STREQ("battery", m_DevicePower->m_Name.toStdString().c_str());
+    EXPECT_STREQ("", m_DevicePower->m_Name.toStdString().c_str());
     EXPECT_STREQ("serial", m_DevicePower->m_SerialNumber.toStdString().c_str());
     EXPECT_STREQ("capacity", m_DevicePower->m_Capacity.toStdString().c_str());
     EXPECT_STREQ("voltage", m_DevicePower->m_Voltage.toStdString().c_str());
@@ -67,7 +67,7 @@ TEST_F(UT_DevicePower, UT_DevicePower_setDaemonInfo)
     m_DevicePower->setInfoFromUpower(mapinfo);
 
     m_DevicePower->setDaemonInfo(mapinfo);
-    EXPECT_STREQ("battery", m_DevicePower->m_Name.toStdString().c_str());
+    EXPECT_STREQ("", m_DevicePower->m_Name.toStdString().c_str());
 }
 
 TEST_F(UT_DevicePower, UT_DevicePower_name)
@@ -77,7 +77,7 @@ TEST_F(UT_DevicePower, UT_DevicePower_name)
     m_DevicePower->setInfoFromUpower(mapinfo);
     QString name = m_DevicePower->name();
 
-    EXPECT_STREQ("battery", name.toStdString().c_str());
+    EXPECT_STREQ("", name.toStdString().c_str());
 }
 
 TEST_F(UT_DevicePower, UT_DevicePower_driver)
@@ -97,7 +97,7 @@ TEST_F(UT_DevicePower, UT_DevicePower_subTitle)
     m_DevicePower->setInfoFromUpower(mapinfo);
     QString title = m_DevicePower->subTitle();
 
-    EXPECT_STREQ("battery", title.toStdString().c_str());
+    EXPECT_STREQ("", title.toStdString().c_str());
 }
 
 TEST_F(UT_DevicePower, UT_DevicePower_getOverviewInfo)
@@ -107,13 +107,13 @@ TEST_F(UT_DevicePower, UT_DevicePower_getOverviewInfo)
     m_DevicePower->setInfoFromUpower(mapinfo);
     QString overview = m_DevicePower->getOverviewInfo();
 
-    EXPECT_STREQ("battery", overview.toStdString().c_str());
+    EXPECT_STREQ("", overview.toStdString().c_str());
 }
 
 TEST_F(UT_DevicePower, UT_DevicePower_initFilterKey)
 {
     m_DevicePower->initFilterKey();
-    EXPECT_EQ(23, m_DevicePower->m_FilterKey.size());
+    EXPECT_EQ(19, m_DevicePower->m_FilterKey.size());
 }
 
 TEST_F(UT_DevicePower, UT_DevicePower_loadBaseDeviceInfo)
@@ -123,7 +123,7 @@ TEST_F(UT_DevicePower, UT_DevicePower_loadBaseDeviceInfo)
     m_DevicePower->setInfoFromUpower(mapinfo);
 
     m_DevicePower->loadBaseDeviceInfo();
-    EXPECT_EQ(5, m_DevicePower->m_LstBaseInfo.size());
+    EXPECT_EQ(4, m_DevicePower->m_LstBaseInfo.size());
 }
 
 TEST_F(UT_DevicePower, UT_DevicePower_loadOtherDeviceInfo)

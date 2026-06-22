@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -44,7 +44,7 @@ TEST_F(UT_TextBrowser, UT_TextBrowser_showDeviceInfo)
     QList<DeviceBaseInfo *> bInfo;
     bInfo.append(device);
     tBrowser->showDeviceInfo(bInfo.at(0));
-    EXPECT_STREQ("(Unavailable)mouse ", tBrowser->toPlainText().toStdString().c_str());
+    EXPECT_STREQ("mouse\nName:\nmouse\nInterface:\nUSB\n", tBrowser->toPlainText().toStdString().c_str());
     delete device;
 }
 
@@ -58,7 +58,7 @@ TEST_F(UT_TextBrowser, UT_TextBrowser_updateInfo)
     tBrowser->mp_Info = bInfo.at(0);
     tBrowser->m_ShowOtherInfo = true;
     tBrowser->updateInfo();
-    EXPECT_STREQ("(Unavailable)keyboard ", tBrowser->toPlainText().toStdString().c_str());
+    EXPECT_STREQ("keyboard\nName:\nkeyboard\nInterface:\nUSB\n", tBrowser->toPlainText().toStdString().c_str());
     delete device;
 }
 

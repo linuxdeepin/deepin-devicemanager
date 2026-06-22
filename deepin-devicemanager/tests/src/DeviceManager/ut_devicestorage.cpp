@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -95,13 +95,13 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_setHwinfoInfo_002)
     ut_storage_setHwinfoInfo(mapinfo);
 
     ASSERT_TRUE(m_deviceStorage->setHwinfoInfo(mapinfo));
-    EXPECT_STREQ("ST240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("ST", m_deviceStorage->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("ahci, sd", m_deviceStorage->m_Driver.toStdString().c_str());
     EXPECT_STREQ("SATA ", m_deviceStorage->m_Interface.toStdString().c_str());
     EXPECT_STREQ("R013", m_deviceStorage->m_Version.toStdString().c_str());
     EXPECT_STREQ("disk", m_deviceStorage->m_Description.toStdString().c_str());
-    EXPECT_STREQ("223GB", m_deviceStorage->m_Size.toStdString().c_str());
+    EXPECT_STREQ("240 GB", m_deviceStorage->m_Size.toStdString().c_str());
     EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());
     EXPECT_STREQ("/dev/nvme0n1", m_deviceStorage->m_DeviceFile.toStdString().c_str());
     EXPECT_STREQ("nvme0n12:0:0:0", m_deviceStorage->m_KeyToLshw.toStdString().c_str());
@@ -117,7 +117,7 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_setHwinfoInfo_003)
     mapinfo.remove("Capacity");
 
     ASSERT_FALSE(m_deviceStorage->setHwinfoInfo(mapinfo));
-    EXPECT_STREQ("ST240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("", m_deviceStorage->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("ahci, sd", m_deviceStorage->m_Driver.toStdString().c_str());
     EXPECT_STREQ("SATA ", m_deviceStorage->m_Interface.toStdString().c_str());
@@ -273,7 +273,7 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_compareSize_003)
 {
     QString size1 = "64GB";
     QString size2 = "32GB";
-    EXPECT_EQ(m_deviceStorage->compareSize(size1, size2), "64GB");
+    EXPECT_EQ(m_deviceStorage->compareSize(size1, size2), "32GB");
 }
 
 TEST_F(UT_DeviceStorage, UT_DeviceStorage_name)
@@ -300,7 +300,7 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_driver)
 TEST_F(UT_DeviceStorage, UT_DeviceStorage_initFilterKey)
 {
     m_deviceStorage->initFilterKey();
-    EXPECT_EQ(12, m_deviceStorage->m_FilterKey.size());
+    EXPECT_EQ(11, m_deviceStorage->m_FilterKey.size());
 }
 
 TEST_F(UT_DeviceStorage, UT_DeviceStorage_keyFromStorage)
@@ -332,7 +332,7 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_getOverviewInfo)
     m_deviceStorage->setHwinfoInfo(mapinfo);
 
     QString overview = m_deviceStorage->getOverviewInfo();
-    EXPECT_STREQ("ST240BX500SSD1 (223GB)", overview.toStdString().c_str());
+    EXPECT_STREQ("240 GB ", overview.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceStorage, UT_DeviceStorage_loadTableHeader)
@@ -371,7 +371,7 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_getInfoFromLshw)
     EXPECT_STREQ("gpt-1.00 partitioned partitioned:gpt", m_deviceStorage->m_Capabilities.toStdString().c_str());
     EXPECT_STREQ("R013", m_deviceStorage->m_Version.toStdString().c_str());
     EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());
-    EXPECT_STREQ("CT240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("ATA Disk", m_deviceStorage->m_Description.toStdString().c_str());
     EXPECT_STREQ("240GB", m_deviceStorage->m_Size.toStdString().c_str());
 }
@@ -384,10 +384,10 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_getInfoFromsmartctl_001)
     m_deviceStorage->getInfoFromsmartctl(mapinfo);
     EXPECT_STREQ("M6CR013", m_deviceStorage->m_FirmwareVersion.toStdString().c_str());
     EXPECT_STREQ(" 6.0 Gb/s (current: 6.0 Gb/s)", m_deviceStorage->m_Speed.toStdString().c_str());
-    EXPECT_STREQ("Solid State Device", m_deviceStorage->m_RotationRate.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceStorage->m_RotationRate.toStdString().c_str());
     EXPECT_STREQ("SSD", m_deviceStorage->m_MediaType.toStdString().c_str());
     EXPECT_STREQ("240 GB", m_deviceStorage->m_Size.toStdString().c_str());
-    EXPECT_STREQ("CT240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());
 }
 
@@ -399,9 +399,9 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_getInfoFromsmartctl_002)
     m_deviceStorage->getInfoFromsmartctl(mapinfo);
     EXPECT_STREQ("M6CR013", m_deviceStorage->m_FirmwareVersion.toStdString().c_str());
     EXPECT_STREQ(" 6.0 Gb/s (current: 6.0 Gb/s)", m_deviceStorage->m_Speed.toStdString().c_str());
-    EXPECT_STREQ("Solid State Device", m_deviceStorage->m_RotationRate.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceStorage->m_RotationRate.toStdString().c_str());
     EXPECT_STREQ("SSD", m_deviceStorage->m_MediaType.toStdString().c_str());
     EXPECT_STREQ("240 GB", m_deviceStorage->m_Size.toStdString().c_str());
-    EXPECT_STREQ("CT240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());
 }

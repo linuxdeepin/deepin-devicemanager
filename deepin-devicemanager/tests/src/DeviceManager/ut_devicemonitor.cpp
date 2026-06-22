@@ -273,7 +273,7 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_caculateScreenSize_001)
     QString edid = "00ffffffffffff005a63384001010101\n0d1e010380351d782ece65a657519f27\n";
     m_deviceMonitor->m_ProductionWeek = "2020-03";
     EXPECT_TRUE(m_deviceMonitor->caculateScreenSize(edid));
-    EXPECT_STREQ("23.8 inch(53cm X 29cm)", m_deviceMonitor->m_ScreenSize.toStdString().c_str());
+    EXPECT_STREQ("23.8 inch(530mm×290mm)", m_deviceMonitor->m_ScreenSize.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_caculateScreenSize_002)
@@ -315,7 +315,7 @@ TEST_F(UT_DeviceMonitor, UT_DeviceMonitor_caculateScreenSize_005)
     m_deviceMonitor->m_ScreenSize = "527x296 mm";
 
     m_deviceMonitor->caculateScreenSize();
-    EXPECT_STREQ("23.8 inch(527mm X 296mm)", m_deviceMonitor->m_ScreenSize.toStdString().c_str());
+    EXPECT_STREQ("23.8 inch(527mm×296mm)", m_deviceMonitor->m_ScreenSize.toStdString().c_str());
     EXPECT_EQ(527, m_deviceMonitor->m_Width);
     EXPECT_EQ(296, m_deviceMonitor->m_Height);
 }

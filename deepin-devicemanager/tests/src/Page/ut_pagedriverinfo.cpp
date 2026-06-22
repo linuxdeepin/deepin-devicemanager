@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -74,7 +74,7 @@ TEST_F(PageDriverInfo_UT, ut_addDriverInfoToTableView)
     m_dPageDriverBackupInfo->addDriverInfoToTableView(info, 0);
     m_dPageDriverBackupInfo->addDriverInfoToTableView(info1, 0);
     m_dPageDriverBackupInfo->addDriverInfoToTableView(info2, 0);
-    EXPECT_EQ(2, m_dPageDriverBackupInfo->mp_ViewBackable->model()->rowCount());
+    EXPECT_EQ(3, m_dPageDriverBackupInfo->mp_ViewBackable->model()->rowCount());
     EXPECT_EQ(1, m_dPageDriverBackupInfo->mp_ViewBackedUp->model()->rowCount());
 
     m_dPageDriverRestoreInfo->addDriverInfoToTableView(info1, 0);

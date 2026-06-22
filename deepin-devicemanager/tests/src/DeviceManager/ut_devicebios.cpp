@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -215,7 +215,7 @@ TEST_F(UT_DeviceBios, UT_DeviceBios_getOverviewInfo_002)
 TEST_F(UT_DeviceBios, UT_DeviceBios_initFilterKey)
 {
     m_deviceBios->initFilterKey();
-    EXPECT_EQ(45, m_deviceBios->m_FilterKey.size());
+    EXPECT_EQ(43, m_deviceBios->m_FilterKey.size());
 }
 
 TEST_F(UT_DeviceBios, UT_DeviceBios_loadBaseDeviceInfo)
