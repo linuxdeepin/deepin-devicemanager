@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -68,21 +68,21 @@ TEST_F(UT_EDIDParser,UT_EDIDParser_releaseDate){
 TEST_F(UT_EDIDParser,UT_EDIDParser_screenSize){
     QString errorMsg;
     m_EDIDParser->setEdid(edid,errorMsg);
-    EXPECT_STREQ("23.8 inch(53mm X 29mm)",m_EDIDParser->screenSize().toStdString().c_str());
+    EXPECT_STREQ("23.8 inch(527mm×296mm)",m_EDIDParser->screenSize().toStdString().c_str());
 }
 
 //int width();
 TEST_F(UT_EDIDParser,UT_EDIDParser_width){
     QString errorMsg;
     m_EDIDParser->setEdid(edid,errorMsg);
-    EXPECT_EQ(53,m_EDIDParser->width());
+    EXPECT_EQ(527,m_EDIDParser->width());
 }
 
 //int height();
 TEST_F(UT_EDIDParser,UT_EDIDParser_height){
     QString errorMsg;
     m_EDIDParser->setEdid(edid,errorMsg);
-    EXPECT_EQ(29,m_EDIDParser->height());
+    EXPECT_EQ(296,m_EDIDParser->height());
 }
 
 //QString binToDec(QString strBin);

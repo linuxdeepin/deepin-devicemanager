@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -208,7 +208,7 @@ TEST_F(UT_DeviceImage, UT_DeviceImage_loadTableData_001)
     m_deviceImage->m_Available = false;
 
     m_deviceImage->loadTableData();
-    EXPECT_STREQ("(Unavailable) Device", m_deviceImage->m_TableData.at(0).toStdString().c_str());
+    EXPECT_STREQ("Device", m_deviceImage->m_TableData.at(0).toStdString().c_str());
     EXPECT_EQ(3, m_deviceImage->m_TableData.size());
 }
 

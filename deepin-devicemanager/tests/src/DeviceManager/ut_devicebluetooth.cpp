@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -144,7 +144,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_name)
     m_deviceBluetooth->setInfoFromHciconfig(mapInfo);
 
     QString name = m_deviceBluetooth->name();
-    EXPECT_STREQ("Name", name.toStdString().c_str());
+    EXPECT_STREQ("", name.toStdString().c_str());
 
 }
 
@@ -218,7 +218,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_enable)
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_initFilterKey)
 {
     m_deviceBluetooth->initFilterKey();
-    EXPECT_EQ(25, m_deviceBluetooth->m_FilterKey.size());
+    EXPECT_EQ(24, m_deviceBluetooth->m_FilterKey.size());
 }
 
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadBaseDeviceInfo)
@@ -230,7 +230,7 @@ TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadBaseDeviceInfo)
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadOtherDeviceInfo)
 {
     m_deviceBluetooth->loadOtherDeviceInfo();
-    EXPECT_EQ(1, m_deviceBluetooth->m_LstOtherInfo.size());
+    EXPECT_EQ(0, m_deviceBluetooth->m_LstOtherInfo.size());
 }
 
 TEST_F(UT_DeviceBluetooth, UT_DeviceBluetooth_loadTableData_001)

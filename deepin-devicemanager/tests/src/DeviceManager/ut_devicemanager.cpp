@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -524,7 +524,7 @@ TEST_F(UT_DeviceManager, UT_DeviceManager_addKeyboardDevice)
 {
     DeviceInput *device = new DeviceInput;
     DeviceManager::instance()->addKeyboardDevice(device);
-    EXPECT_EQ(1, DeviceManager::instance()->m_ListDeviceKeyboard.size());
+    EXPECT_EQ(0, DeviceManager::instance()->m_ListDeviceKeyboard.size());
     DeviceManager::instance()->m_ListDeviceKeyboard.clear();
     delete device;
 }

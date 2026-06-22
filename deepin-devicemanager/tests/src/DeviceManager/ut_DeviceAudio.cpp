@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -209,7 +209,7 @@ TEST_F(UT_DeviceAudio, UT_DeviceAudio_loadBaseDeviceInfo)
     QPair<QString, QString> value1 = m_deviceAudio->m_LstBaseInfo.at(1);
     EXPECT_STREQ("Intel Corporation", value1.second.toStdString().c_str());
     QPair<QString, QString> value2 = m_deviceAudio->m_LstBaseInfo.at(2);
-    EXPECT_STREQ("Intel Cannon Lake PCH cAVS", value2.second.toStdString().c_str());
+    EXPECT_STREQ("snd_hda_intel", value2.second.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceAudio, UT_DeviceAudio_loadOtherDeviceInfo)

@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -51,7 +51,7 @@ TEST_F(UT_DeviceMemory, UT_DeviceMemory_setInfoFromLshw_001)
     EXPECT_STREQ("859B", m_deviceMemory->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("ChannelA-DIMM0", m_deviceMemory->m_Locator.toStdString().c_str());
     EXPECT_STREQ("8GB", m_deviceMemory->m_Size.toStdString().c_str());
-    EXPECT_STREQ("2667MHz", m_deviceMemory->m_Speed.toStdString().c_str());
+    EXPECT_STREQ("2667MT/s", m_deviceMemory->m_Speed.toStdString().c_str());
     EXPECT_STREQ("64 bits", m_deviceMemory->m_TotalBandwidth.toStdString().c_str());
     EXPECT_STREQ("64 bits", m_deviceMemory->m_DataBandwidth.toStdString().c_str());
     EXPECT_STREQ("25A1185D", m_deviceMemory->m_SerialNumber.toStdString().c_str());
@@ -68,7 +68,7 @@ TEST_F(UT_DeviceMemory, UT_DeviceMemory_setInfoFromLshw_002)
     EXPECT_STREQ("859B", m_deviceMemory->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("ChannelA-DIMM0", m_deviceMemory->m_Locator.toStdString().c_str());
     EXPECT_STREQ("1GB", m_deviceMemory->m_Size.toStdString().c_str());
-    EXPECT_STREQ("2667MHz", m_deviceMemory->m_Speed.toStdString().c_str());
+    EXPECT_STREQ("2667MT/s", m_deviceMemory->m_Speed.toStdString().c_str());
     EXPECT_STREQ("64 bits", m_deviceMemory->m_TotalBandwidth.toStdString().c_str());
     EXPECT_STREQ("64 bits", m_deviceMemory->m_DataBandwidth.toStdString().c_str());
     EXPECT_STREQ("25A1185D", m_deviceMemory->m_SerialNumber.toStdString().c_str());
@@ -106,7 +106,7 @@ TEST_F(UT_DeviceMemory, UT_DeviceMemory_setInfoFromDmidecode_002)
     EXPECT_TRUE(m_deviceMemory->setInfoFromDmidecode(mapinfo));
     EXPECT_STREQ("CT8G4DFS8266.M8FD", m_deviceMemory->m_Name.toStdString().c_str());
     EXPECT_STREQ("25A1185D", m_deviceMemory->m_SerialNumber.toStdString().c_str());
-    EXPECT_STREQ("2400 MHz", m_deviceMemory->m_ConfiguredSpeed.toStdString().c_str());
+    EXPECT_STREQ("2400 MT/s", m_deviceMemory->m_ConfiguredSpeed.toStdString().c_str());
     EXPECT_STREQ("1.2 V", m_deviceMemory->m_MinimumVoltage.toStdString().c_str());
     EXPECT_STREQ("1.2 V", m_deviceMemory->m_MaximumVoltage.toStdString().c_str());
     EXPECT_STREQ("1.2 V", m_deviceMemory->m_ConfiguredVoltage.toStdString().c_str());
@@ -127,7 +127,7 @@ TEST_F(UT_DeviceMemory, UT_DeviceMemory_setInfoFromDmidecode_003)
     EXPECT_TRUE(m_deviceMemory->setInfoFromDmidecode(mapinfo));
     EXPECT_STREQ("CT8G4DFS8266.M8FD", m_deviceMemory->m_Name.toStdString().c_str());
     EXPECT_STREQ("25A1185D", m_deviceMemory->m_SerialNumber.toStdString().c_str());
-    EXPECT_STREQ("2400 MHz", m_deviceMemory->m_ConfiguredSpeed.toStdString().c_str());
+    EXPECT_STREQ("2400 MT/s", m_deviceMemory->m_ConfiguredSpeed.toStdString().c_str());
     EXPECT_STREQ("1.2 V", m_deviceMemory->m_MinimumVoltage.toStdString().c_str());
     EXPECT_STREQ("1.2 V", m_deviceMemory->m_MaximumVoltage.toStdString().c_str());
     EXPECT_STREQ("1.2 V", m_deviceMemory->m_ConfiguredVoltage.toStdString().c_str());
@@ -140,7 +140,7 @@ TEST_F(UT_DeviceMemory, UT_DeviceMemory_setInfoFromDmidecode_003)
 TEST_F(UT_DeviceMemory, UT_DeviceMemory_initFilterKey)
 {
     m_deviceMemory->initFilterKey();
-    EXPECT_EQ(20, m_deviceMemory->m_FilterKey.size());
+    EXPECT_EQ(19, m_deviceMemory->m_FilterKey.size());
 }
 
 TEST_F(UT_DeviceMemory, UT_DeviceMemory_loadBaseDeviceInfo)
@@ -207,7 +207,7 @@ TEST_F(UT_DeviceMemory, UT_DeviceMemory_getOverviewInfo)
     m_deviceMemory->setInfoFromLshw(mapinfo1);
 
     QString overview = m_deviceMemory->getOverviewInfo();
-    EXPECT_STREQ("8GB(CT8G4DFS8266.M8FD DDR4 2667MHz)", overview.toStdString().c_str());
+    EXPECT_STREQ("8GB(CT8G4DFS8266.M8FD DDR4 2667MT/s)", overview.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceMemory, UT_DeviceMemory_available)

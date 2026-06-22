@@ -52,6 +52,10 @@ lcov --extract ./coverage.info '*/src/*' -o ./coverage.info
 
 lcov --remove ./coverage.info '*/tests/*' -o ./coverage.info
 
+# 排除第三方 vendored 代码（QtXlsxWriter/docx），其路径中的 /src/ 会被上面的
+# extract 模式误匹配，导致项目自身覆盖率被拉低
+lcov --remove ./coverage.info '*/3rdparty/*' -o ./coverage.info
+
 genhtml -o ./html ./coverage.info
 
 mv ./html/index.html ./html/cov_deepin-devicemanager.html 2>/dev/null || true

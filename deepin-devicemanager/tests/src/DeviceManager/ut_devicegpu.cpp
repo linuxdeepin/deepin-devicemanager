@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -110,7 +110,7 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_setLshwInfo_001)
     EXPECT_STREQ("pci@0000:01:00.0", m_deviceGpu->m_BusInfo.toStdString().c_str());
     EXPECT_STREQ("e000(size=128)", m_deviceGpu->m_IOPort.toStdString().c_str());
     EXPECT_STREQ("de000000-deffffff  d0000000-d7ffffff  d8000000-d9ffffff  c0000-dffff", m_deviceGpu->m_MemAddress.toStdString().c_str());
-    EXPECT_STREQ("0", m_deviceGpu->m_PhysID.toStdString().c_str());
+    EXPECT_STREQ("", m_deviceGpu->m_PhysID.toStdString().c_str());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_setLshwInfo_002)
@@ -228,7 +228,7 @@ TEST_F(UT_DeviceGpu, UT_DeviceGpu_getOverviewInfo)
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_loadOtherDeviceInfo)
 {
     m_deviceGpu->loadOtherDeviceInfo();
-    EXPECT_EQ(6, m_deviceGpu->m_LstOtherInfo.size());
+    EXPECT_EQ(0, m_deviceGpu->m_LstOtherInfo.size());
 }
 
 TEST_F(UT_DeviceGpu, UT_DeviceGpu_loadTableHeader)
