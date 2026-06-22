@@ -44,10 +44,10 @@ void EventLogUtils::writeLogs(QJsonObject &data)
 {
     qCDebug(appLog) << "Writing event log";
 
-    if (writeEventLog == nullptr)
+    if (writeEventLog == nullptr) {
         qCWarning(appLog) << "WriteEventLog function not resolved, skipping log write";
         return;
+    }
 
-    //std::string str = QJsonDocument(data).toJson(QJsonDocument::Compact).toStdString();
     writeEventLog(QJsonDocument(data).toJson(QJsonDocument::Compact).toStdString());
 }
