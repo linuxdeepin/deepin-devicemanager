@@ -17,7 +17,14 @@ if(CMAKE_BUILD_TYPE  STREQUAL "Debug")
 endif()
 
 # Auto-detect Qt version (tries Qt6 first, falls back to Qt5)
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core)
+# 注: cmake 3.31+ 的 find_package(NAMES) 在部分环境会误检为 Qt5,故改为显式探测
+find_package(Qt6 QUIET COMPONENTS Core)
+if(Qt6_FOUND)
+    set(QT_VERSION_MAJOR 6)
+else()
+    find_package(Qt5 REQUIRED COMPONENTS Core)
+    set(QT_VERSION_MAJOR 5)
+endif()
 message(STATUS "Found Qt version: ${QT_VERSION_MAJOR}")
 
 # Map to DTK version (Qt6→DTK6, Qt5→DTK5)

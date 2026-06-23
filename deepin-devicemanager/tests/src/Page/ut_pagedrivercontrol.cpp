@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 ~ 2020 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -30,8 +30,8 @@ public:
         delete m_PageDriverControlUninstall;
     }
 
-    PageDriverControl *m_PageDriverControlInstall;
-    PageDriverControl *m_PageDriverControlUninstall;
+    PageDriverControl *m_PageDriverControlInstall = nullptr;
+    PageDriverControl *m_PageDriverControlUninstall = nullptr;
 };
 
 TEST_F(UT_PageDriverControl, UT_PageDriverControl_isRunning)
