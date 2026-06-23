@@ -19,6 +19,11 @@
 
 #include <gtest/gtest.h>
 
+// 前向声明(SetUp 在桩函数定义之前使用)
+QDBusPendingCall ut_QDBusInterface_asyncCall(const QString &method,
+    const QVariant &, const QVariant &, const QVariant &, const QVariant &,
+    const QVariant &, const QVariant &, const QVariant &, const QVariant &);
+
 class UT_DBusDriverInterface : public UT_HEAD
 {
 public:
