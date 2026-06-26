@@ -984,6 +984,22 @@ bool DeviceManager::setStorageDeviceMediaType(const QString &name, const QString
     return  false;
 }
 
+bool DeviceManager::setStorageDevicePartTableType(const QString &name)
+{
+    // 设置存储设备分区表类型
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceStorage.begin();
+    for (; it != m_ListDeviceStorage.end(); ++it) {
+        DeviceStorage *device = dynamic_cast<DeviceStorage *>(*it);
+        if (!device)
+            continue;
+
+        if (device->setPartTableType(name))
+            return true;
+    }
+
+    return false;
+}
+
 void DeviceManager::addGpuDevice(DeviceGpu *const device)
 {
     // 添加显示适配器

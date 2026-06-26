@@ -1,5 +1,5 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -46,6 +46,13 @@ public:
      * @return 布尔值:true-设置成功；false--设置失败
      */
     bool setMediaType(const QString &name, const QString &value);
+
+    /**
+     * @brief setPartTableType:从 lsblk_pt 设置存储设备分区表类型
+     * @param name:存储设备逻辑名称
+     * @return 布尔值:true-设置成功;false--设置失败
+     */
+    bool setPartTableType(const QString &name);
 
     /**
      * @brief addInfoFromlshw:将lshw获取的信息与存储设备进行匹配
@@ -191,6 +198,15 @@ private:
      */
     QString getSerialID(QString &strDeviceLink);
 
+    /**
+     * @brief cleanCapabilitiesForDisplay:清洗 capabilities 用于显示
+     *        当存在 lsblk pttype 时用其修正 partitioned:<scheme>,并移除冗余裸 partitioned
+     * @param caps:hardware detection capabilities 原文
+     * @param partTableType:lsblk pttype 获取的分区表类型
+     * @return 清洗后的显示串(不改成员原值)
+     */
+    static QString cleanCapabilitiesForDisplay(const QString &caps, const QString &partTableType = QString());
+
 
 private:
     QString               m_Model;              //<! 【型号】1
@@ -202,6 +218,7 @@ private:
     QString               m_Interface;          //<! 【接口】6
     QString               m_SerialNumber;       //<! 【序列号】7
     QString               m_Capabilities;       //<! 【功能】
+    QString               m_PartTableType;      //<! 【分区表类型】(来自 lsblk pttype)
     QString               m_FirmwareVersion;    //<! 【固件版本】8
     QString               m_Speed;              //<! 【速度】5
 

@@ -649,6 +649,15 @@ void DeviceGenerator::getDiskInfoFromLsblk()
             DeviceManager::instance()->setStorageDeviceMediaType(it.key(), it.value());
         }
     }
+
+    // 同时设置分区表类型(来自 lsblk_pt)
+    const QList<QMap<QString, QString>> &lstPt = DeviceManager::instance()->cmdInfo("lsblk_pt");
+    if (!lstPt.isEmpty()) {
+        QMap<QString, QString>::const_iterator itPt = lstPt[0].begin();
+        for (; itPt != lstPt[0].end(); ++itPt) {
+            DeviceManager::instance()->setStorageDevicePartTableType(itPt.key());
+        }
+    }
 }
 
 void DeviceGenerator::getDiskInfoFromSmartCtl()

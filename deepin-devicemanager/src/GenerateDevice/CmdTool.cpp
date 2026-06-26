@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2026 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -117,6 +117,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
         loadLshwInfo(debugFile);
     else if ("lsblk_d" == key)
         loadLsblkInfo(debugFile);
+    else if ("lsblk_pt" == key)
+        loadLsblkPtInfo(debugFile);
     else if ("ls_sg" == key)
         loadLssgInfo(debugFile);
     else if ("dmesg" == key)
@@ -353,9 +355,9 @@ void CmdTool::loadLshwInfo(const QString &debugFile)
     }
 }
 
-void CmdTool::loadLsblkInfo(const QString &debugfile)
+void CmdTool::loadLsblkTwoColumn(const QString &debugfile, const QString &mapKey, bool loadSmartCtl)
 {
-    // 加载lsblk信息
+    // 解析 lsblk 两列输出(name value)的通用方法
     QString deviceInfo;
     if (!getDeviceInfo(deviceInfo, debugfile))
         return;
@@ -363,7 +365,6 @@ void CmdTool::loadLsblkInfo(const QString &debugfile)
     QStringList lines = deviceInfo.split("\n");
     QMap<QString, QString> mapInfo;
 
-    // 获取存储设备逻辑名称以及ROTA信息
     foreach (QString line, lines) {
         QStringList words = line.replace(QRegExp("[\\s]+"), " ").split(" ");
         if (words.size() != 2 || "NAME" == words[0])
@@ -371,10 +372,24 @@ void CmdTool::loadLsblkInfo(const QString &debugfile)
 
         mapInfo.insert(words[0].trimmed(), words[1].trimmed());
 
-        //sudo smartctl --all /dev/%1   文件信息
-        loadSmartCtlInfo(words[0].trimmed(), "smartctl_" + words[0].trimmed() + ".txt");
+        if (loadSmartCtl) {
+            //sudo smartctl --all /dev/%1   文件信息
+            loadSmartCtlInfo(words[0].trimmed(), "smartctl_" + words[0].trimmed() + ".txt");
+        }
     }
-    addMapInfo("lsblk_d", mapInfo);
+    addMapInfo(mapKey, mapInfo);
+}
+
+void CmdTool::loadLsblkInfo(const QString &debugfile)
+{
+    // 加载 lsblk -d -o name,rota 信息
+    loadLsblkTwoColumn(debugfile, "lsblk_d", true);
+}
+
+void CmdTool::loadLsblkPtInfo(const QString &debugfile)
+{
+    // 加载 lsblk -d -o name,pttype 信息(分区表类型)
+    loadLsblkTwoColumn(debugfile, "lsblk_pt", false);
 }
 
 void CmdTool::loadLssgInfo(const QString &debugfile)

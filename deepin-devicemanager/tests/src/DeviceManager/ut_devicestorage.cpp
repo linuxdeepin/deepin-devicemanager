@@ -1,9 +1,11 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#include "CmdTool.h"
 #include "DeviceStorage.h"
+#include "DeviceManager.h"
 
 #include "ut_Head.h"
 #include "stub.h"
@@ -404,4 +406,100 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_getInfoFromsmartctl_002)
     EXPECT_STREQ("240 GB", m_deviceStorage->m_Size.toStdString().c_str());
     EXPECT_STREQ("CT240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());
+}
+
+bool ut_getDeviceInfo_loadLsblkPtInfo(void *obj, QString &deviceInfo, const QString &file)
+{
+    Q_UNUSED(obj)
+    Q_UNUSED(file)
+
+    deviceInfo = "NAME PTTYPE\n"
+                 "sda  \n"
+                 "sdf  gpt\n"
+                 "nvme0n1 gpt\n";
+    return true;
+}
+
+TEST_F(UT_DeviceStorage, UT_DeviceStorage_loadLsblkPtInfo)
+{
+    DeviceManager::instance()->clear();
+
+    Stub stub;
+    stub.set(ADDR(CmdTool, getDeviceInfo), ut_getDeviceInfo_loadLsblkPtInfo);
+
+    CmdTool tool;
+    tool.loadCmdInfo("lsblk_pt", "lsblk_pt.txt");
+    DeviceManager::instance()->addCmdInfo(tool.cmdInfo());
+
+    const QList<QMap<QString, QString>> &lst = DeviceManager::instance()->cmdInfo("lsblk_pt");
+    ASSERT_FALSE(lst.isEmpty());
+    EXPECT_STREQ("gpt", lst[0].value("sdf").toStdString().c_str());
+    EXPECT_STREQ("gpt", lst[0].value("nvme0n1").toStdString().c_str());
+    EXPECT_TRUE(lst[0].value("sda").isEmpty());
+}
+
+TEST_F(UT_DeviceStorage, UT_DeviceStorage_cleanCapabilitiesForDisplay)
+{
+    // 存在 partitioned:<scheme> 时移除裸 partitioned
+    EXPECT_STREQ("partitioned:dos",
+                 DeviceStorage::cleanCapabilitiesForDisplay("partitioned partitioned:dos").toStdString().c_str());
+    EXPECT_STREQ("gpt-1.00 partitioned:gpt",
+                 DeviceStorage::cleanCapabilitiesForDisplay("gpt-1.00 partitioned partitioned:gpt").toStdString().c_str());
+    EXPECT_STREQ("partitioned:gpt",
+                 DeviceStorage::cleanCapabilitiesForDisplay("partitioned partitioned:dos", "gpt").toStdString().c_str());
+
+    // 仅有裸 partitioned(无 :scheme)时保留(不丢失信息),有 pttype 时补成带值能力
+    EXPECT_STREQ("partitioned",
+                 DeviceStorage::cleanCapabilitiesForDisplay("partitioned").toStdString().c_str());
+    EXPECT_STREQ("partitioned:gpt",
+                 DeviceStorage::cleanCapabilitiesForDisplay("partitioned", "gpt").toStdString().c_str());
+
+    // 无关能力 token 原样保留
+    EXPECT_STREQ("10000rotations removable",
+                 DeviceStorage::cleanCapabilitiesForDisplay("10000rotations removable").toStdString().c_str());
+
+    // 空串
+    EXPECT_STREQ("", DeviceStorage::cleanCapabilitiesForDisplay("").toStdString().c_str());
+}
+
+TEST_F(UT_DeviceStorage, UT_DeviceStorage_keepUfsInterface)
+{
+    m_deviceStorage->m_Interface = "UFS";
+    m_deviceStorage->loadOtherDeviceInfo();
+
+    bool foundInterface = false;
+    for (const auto &pair : m_deviceStorage->m_LstOtherInfo) {
+        if (pair.first == "Interface") {
+            foundInterface = true;
+            EXPECT_STREQ("UFS", pair.second.toStdString().c_str());
+        }
+    }
+    EXPECT_TRUE(foundInterface);
+}
+
+TEST_F(UT_DeviceStorage, UT_DeviceStorage_loadBaseDeviceInfo_PartTable)
+{
+    m_deviceStorage->m_Name = "CT240BX500SSD1";
+    m_deviceStorage->m_MediaType = "SSD";
+    m_deviceStorage->m_Size = "240GB";
+    m_deviceStorage->m_Version = "R013";
+    m_deviceStorage->m_Capabilities = "partitioned partitioned:dos";
+    m_deviceStorage->m_PartTableType = "gpt";
+
+    const QList<QPair<QString, QString>> &base = m_deviceStorage->getBaseAttribs();
+
+    bool foundPartTable = false;
+    QString capDisplay;
+    for (const auto &pair : base) {
+        if (pair.first == "Partition Table")
+            foundPartTable = true;
+        if (pair.first == "Capabilities")
+            capDisplay = pair.second;
+    }
+    EXPECT_FALSE(foundPartTable);
+
+    // capabilities 显示值使用 lsblk pttype 修正并去重,成员原值不变
+    EXPECT_STREQ("partitioned:gpt", capDisplay.toStdString().c_str());
+    EXPECT_STREQ("partitioned partitioned:dos",
+                 m_deviceStorage->m_Capabilities.toStdString().c_str());
 }
