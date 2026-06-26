@@ -30,6 +30,7 @@ DeviceStorage::DeviceStorage()
     , m_Interface("")
     , m_SerialNumber("")
     , m_Capabilities("")
+    , m_PartTableType("")
     , m_KeyToLshw("")
     , m_KeyFromStorage("")
 {
@@ -119,6 +120,41 @@ static quint64 convertToBytes(const QString& size, double scale)
     }
     diskBytesSize = static_cast<quint64>(diskSizeFloat * multiplier);
     return diskBytesSize;
+}
+
+QString DeviceStorage::cleanCapabilitiesForDisplay(const QString &caps, const QString &partTableType)
+{
+    if (caps.isEmpty())
+        return caps;
+
+    QStringList tokens = caps.split(" ", Qt::SkipEmptyParts);
+    bool hasPartitionedScheme = false;
+    foreach (const QString &t, tokens) {
+        if (t.startsWith("partitioned:")) {
+            hasPartitionedScheme = true;
+            break;
+        }
+    }
+
+    QStringList result;
+    foreach (const QString &t, tokens) {
+        // 当存在带值的 partitioned:<scheme> 时,跳过冗余的裸 partitioned
+        if (hasPartitionedScheme && t == "partitioned")
+            continue;
+
+        if (!partTableType.isEmpty() && t.startsWith("partitioned:")) {
+            result.append("partitioned:" + partTableType);
+            continue;
+        }
+
+        if (!partTableType.isEmpty() && !hasPartitionedScheme && t == "partitioned") {
+            result.append("partitioned:" + partTableType);
+            continue;
+        }
+
+        result.append(t);
+    }
+    return result.join(" ");
 }
 
 void DeviceStorage::unitConvertByDecimal()
@@ -214,7 +250,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (file.open(QIODevice::ReadOnly)) {
         QString output = file.readAll();
         if (!output.isEmpty()) {
-            m_Interface = "";
+            m_Interface = "UFS";
         }
         file.close();
     }
@@ -360,6 +396,21 @@ bool DeviceStorage::setMediaType(const QString &name, const QString &value)
         m_MediaType = "Unknown";
 
     return true;
+}
+
+bool DeviceStorage::setPartTableType(const QString &name)
+{
+    if (!m_DeviceFile.contains(name))
+        return false;
+
+    const QList<QMap<QString, QString>> &lstPt = DeviceManager::instance()->cmdInfo("lsblk_pt");
+    for (int i = 0; i < lstPt.size(); ++i) {
+        if (lstPt[i].contains(name)) {
+            m_PartTableType = lstPt[i].value(name);
+            return true;
+        }
+    }
+    return false;
 }
 
 bool DeviceStorage::isValid()
@@ -573,7 +624,7 @@ void DeviceStorage::loadBaseDeviceInfo()
     addBaseDeviceInfo(("Media Type"), translateStr(m_MediaType));
     addBaseDeviceInfo(("Size"), m_Size);
     addBaseDeviceInfo(("Version"), m_Version);
-    addBaseDeviceInfo(("Capabilities"), m_Capabilities);
+    addBaseDeviceInfo(("Capabilities"), cleanCapabilitiesForDisplay(m_Capabilities, m_PartTableType));
 }
 
 void DeviceStorage::loadOtherDeviceInfo()

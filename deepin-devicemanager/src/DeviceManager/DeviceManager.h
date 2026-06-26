@@ -196,6 +196,13 @@ public:
     bool setStorageDeviceMediaType(const QString &name, const QString &value);
 
     /**
+     * @brief setStorageDevicePartTableType:设置存储设备分区表类型
+     * @param name:逻辑名称
+     * @return 布尔值:true-设置成功；false-设置失败
+     */
+    bool setStorageDevicePartTableType(const QString &name);
+
+    /**
      * @brief setStorageInfoFromSmartctl:设置由smartctl获取的存储设备信息
      * @param name:逻辑名称
      * @param mapInfo:由smartctl获取的存储设备信息map

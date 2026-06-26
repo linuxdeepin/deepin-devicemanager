@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -182,7 +182,15 @@ void ThreadPool::initCmd()
     m_ListCmd.append(cmdLsblk);
     m_ListUpdate.append(cmdLsblk);
 
-    // 添加lsblk -d -o name,rota命令
+    // 添加lsblk -d -o name,pttype命令
+    Cmd cmdLsblkPt;
+    cmdLsblkPt.cmd = QString("%1 %2%3").arg("lsblk -d -o name,pttype > ").arg(PATH).arg("lsblk_pt.txt");
+    cmdLsblkPt.file = "lsblk_pt.txt";
+    cmdLsblkPt.canNotReplace = false;
+    m_ListCmd.append(cmdLsblkPt);
+    m_ListUpdate.append(cmdLsblkPt);
+
+    // 添加ls /dev/sg*命令
     Cmd cmdLssg;
     cmdLssg.cmd = QString("%1 %2%3").arg("ls /dev/sg* > ").arg(PATH).arg("ls_sg.txt");
     cmdLssg.file = "ls_sg.txt";
