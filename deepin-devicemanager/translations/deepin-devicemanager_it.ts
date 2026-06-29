@@ -749,7 +749,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1313"/>
         <source>L4 Cache</source>
-        <translation type="unfinished"/>
+        <translation>Cache L4</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1314"/>
@@ -850,7 +850,7 @@
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1333"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1459"/>
         <source>Max Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Frequenza massima</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1334"/>
@@ -1824,7 +1824,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Max Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Frequenza massima</translation>
     </message>
 </context>
 <context>
@@ -3400,7 +3400,7 @@ Localizzazione italiana a cura di Massimo A. Carofano.</translation>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="280"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Ripristina</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="263"/>
