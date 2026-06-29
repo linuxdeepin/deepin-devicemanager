@@ -1466,7 +1466,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1458"/>
         <source>Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Frequenza</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1463"/>
@@ -1819,7 +1819,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Frequency</source>
-        <translation type="unfinished"/>
+        <translation>Frequenza</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
@@ -1832,7 +1832,7 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1539"/>
         <source>Model Name</source>
-        <translation type="unfinished"/>
+        <translation>Nome modello</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1543"/>
@@ -1847,32 +1847,32 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1551"/>
         <source>CPU(s)</source>
-        <translation type="unfinished"/>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1553"/>
         <source>Thread(s)</source>
-        <translation type="unfinished"/>
+        <translation>Thread</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1562"/>
         <source>L1d cache</source>
-        <translation type="unfinished"/>
+        <translation>Cache L1d</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1572"/>
         <source>L1i cache</source>
-        <translation type="unfinished"/>
+        <translation>Cache L1i</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1582"/>
         <source>L2 cache</source>
-        <translation type="unfinished"/>
+        <translation>Cache L2</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1592"/>
         <source>L3 cache</source>
-        <translation type="unfinished"/>
+        <translation>Cache L3</translation>
     </message>
 </context>
 <context>
@@ -1962,7 +1962,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="246"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="305"/>
         <source>Mouse</source>
-        <translation type="unfinished"/>
+        <translation>Mouse</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="252"/>
@@ -2022,7 +2022,7 @@
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="654"/>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="657"/>
         <source>%1@%2Hz</source>
-        <translation type="unfinished"/>
+        <translation>%1@%2Hz</translation>
     </message>
 </context>
 <context>
