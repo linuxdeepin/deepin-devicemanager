@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -176,6 +176,12 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (match.hasMatch()) {
         qCDebug(appLog) << "DeviceStorage::setHwinfoInfo, vendor is pci";
         m_Vendor = "";
+    }
+
+    if (mapInfo.contains("Driver Modules")) {
+        if (mapInfo.value("Driver Modules").contains("usb_storage", Qt::CaseInsensitive)) {
+            m_Interface = "USB";
+        }
     }
 
     setAttribute(mapInfo, "Attached to", m_Interface);
