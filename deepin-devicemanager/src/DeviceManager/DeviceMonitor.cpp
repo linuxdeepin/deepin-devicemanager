@@ -273,7 +273,7 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
             }
         }
 
-        if (Common::specialComType <= 0) {
+        if (!Common::isHwPlatform()) {
             QMap<QString, QStringList> monitorResolutionMap = getMonitorResolutionMap(xrandr, m_RawInterface);
 
             if (monitorResolutionMap.size() == 1) {
