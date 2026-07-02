@@ -127,7 +127,7 @@ QString DeviceStorage::cleanCapabilitiesForDisplay(const QString &caps, const QS
     if (caps.isEmpty())
         return caps;
 
-    QStringList tokens = caps.split(" ", Qt::SkipEmptyParts);
+    QStringList tokens = caps.split(" ", QString::SkipEmptyParts);
     bool hasPartitionedScheme = false;
     foreach (const QString &t, tokens) {
         if (t.startsWith("partitioned:")) {
@@ -170,7 +170,7 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("SysFS BusID") == mapInfo.end())
         return false;
 
-    if (Common::specialComType <= 0) {
+    if (!Common::isHwPlatform()) {
         setAttribute(mapInfo, "Model", m_Name);
     }
     setAttribute(mapInfo, "Vendor", m_Vendor);
@@ -501,7 +501,7 @@ void DeviceStorage::appendDisk(DeviceStorage *device)
 
 void DeviceStorage::checkDiskSize()
 {
-    if (Common::specialComType <= 0) {
+    if (!Common::isHwPlatform()) {
         return; //定制机型专用，其它慎用
     }
 
@@ -618,7 +618,7 @@ void DeviceStorage::loadBaseDeviceInfo()
 {
     // 添加基本信息
     addBaseDeviceInfo(("Name"), m_Name);
-    if (Common::specialComType <= 0) {
+    if (!Common::isHwPlatform()) {
         addBaseDeviceInfo(("Vendor"), m_Vendor);
     }
     addBaseDeviceInfo(("Media Type"), translateStr(m_MediaType));
