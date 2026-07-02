@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -198,7 +198,7 @@ void DeviceComputer::loadBaseDeviceInfo()
 {
     qCDebug(appLog) << "DeviceComputer::loadBaseDeviceInfo called.";
     // 添加基本信息
-    addBaseDeviceInfo(("Name"), m_Name);
+    addBaseDeviceInfo("Name", m_Name);
 }
 
 void DeviceComputer::loadOtherDeviceInfo()
