@@ -509,7 +509,7 @@ void MainWindow::slotLoadingFinish(const QString &message)
             mp_DeviceWidget->updateDevice(mp_DeviceWidget->currentIndex(), lst);
 
             // bug-325731
-            if (Common::specialComType <= 0) {
+            if (!Common::isHwPlatform()) {
                 if (mp_DeviceWidget->currentIndex() == QObject::tr("Monitor")) {
                     QtConcurrent::run([=](){
                         QThread::msleep(700);
