@@ -187,6 +187,12 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     if (exp.indexIn(m_Vendor) != -1)
         m_Vendor = "";
 
+    if (mapInfo.contains("Driver Modules")) {
+        if (mapInfo.value("Driver Modules").contains("usb_storage", Qt::CaseInsensitive)) {
+            m_Interface = "USB";
+        }
+    }
+
     setAttribute(mapInfo, "Attached to", m_Interface);
     QRegExp re(".*\\((.*)\\).*");
     if (re.exactMatch(m_Interface)) {
