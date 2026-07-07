@@ -77,5 +77,14 @@ public:
      *         Note: Case-sensitive - "Gbit/s" -> "Mbps", "Mbit/s" -> "Mbps"
      */
     static QString formatNetworkSpeed(const QString& speed);
+
+    /**
+     * @brief safeReadSysFsFile: 安全读取 sysfs 下指定文件内容
+     * @param baseDir 根目录，如 /sys/devices/xxx/mmc0:0001
+     * @param fileName 待读取的文件名（禁止包含路径分隔符）
+     * @param errOut 错误输出参数，成功时为空
+     * @return 文件内容（去换行空格），失败返回空字符串
+     */
+    static QString safeReadSysFsFile(const QString &baseDir, const QString &fileName, QString &errOut);
 };
 #endif // COMMONFUNCTION_H

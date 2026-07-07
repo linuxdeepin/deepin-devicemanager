@@ -163,6 +163,8 @@ public:
 
     const QString &mediaType() const;
 
+    QString getManfName(const QString &rawManfId);
+    QString getOemName(const QString &rawOemId);
 protected:
 
     /**
