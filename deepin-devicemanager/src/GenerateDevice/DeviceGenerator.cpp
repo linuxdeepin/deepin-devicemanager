@@ -353,21 +353,20 @@ void DeviceGenerator::generatorNetworkDevice()
             continue;
 
         const QString &logicalNameLshw =  (*it)["logical name"];
-        for (QList<DeviceNetwork *>::iterator itDevice = lstDevice.begin(); itDevice != lstDevice.end(); ++itDevice) {
-            const QString &macAddressLshw =  (*it)["serial"];
-            if (!isValidLogicalName(logicalNameLshw))
-                continue;
-            if (!isValidMAC(macAddressLshw))
-                continue;
-            if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive) && hasWlan) //common sense: one PC only have 1 wlan device
-                continue;
+        
+        const QString &macAddressLshw =  (*it)["serial"];
+        if (!isValidLogicalName(logicalNameLshw))
+            continue;
+        if (!isValidMAC(macAddressLshw))
+            continue;
+        if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive) && hasWlan) //common sense: one PC only have 1 wlan device
+            continue;
 
-            DeviceNetwork *device = new DeviceNetwork();
-            device->setInfoFromLshw(*it);
-            lstDevice.append(device);
-            if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive))
-                hasWlan = true;
-        }
+        DeviceNetwork *device = new DeviceNetwork();
+        device->setInfoFromLshw(*it);
+        lstDevice.append(device);
+        if (logicalNameLshw.contains("wlan", Qt::CaseInsensitive))
+            hasWlan = true;
     }
 
     const QList<QMap<QString, QString>> &lstHWInfo = DeviceManager::instance()->cmdInfo("hwinfo_network");
