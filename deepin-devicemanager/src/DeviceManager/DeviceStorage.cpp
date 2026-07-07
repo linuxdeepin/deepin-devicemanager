@@ -19,6 +19,41 @@ using namespace DDLog;
 #define DISK_SCALE_1024 1024
 #define DISK_SCALE_1000 1000
 
+// MANFID: 十六进制字符串 -> 厂商名
+static const QMap<QString, QString> MANFID_TABLE = {
+    {"000001", "Panasonic"},
+    {"000002", "Toshiba"},
+    {"000003", "SanDisk"},
+    {"00001b", "Samsung"},
+    {"00001d", "ADATA"},
+    {"000027", "Phison"},
+    {"000028", "Lexar"},
+    {"000031", "Silicon Power"},
+    {"000041", "Kingston"},
+    {"000074", "Transcend Information"},
+    {"000076", "Patriot Memory"},
+    {"000082", "Sony"},
+    {"00009c", "Angelbird / Hoodman"}
+};
+
+// OEMID: 十六进制字符串 -> 厂商名
+static const QMap<QString, QString> OEMID_TABLE = {
+    {"3432", "Kingston"},
+    {"4144", "ADATA"},
+    {"4245", "Lexar / Angelbird / Hoodman"},
+    {"4a45", "Transcend Information"},
+    {"4a54", "Sony"},
+    {"4a60", "Transcend Information"},
+    {"5041", "Panasonic"},
+    {"5048", "Phison"},
+    {"5054", "SanDisk"},
+    {"5344", "SanDisk"},
+    {"534d", "Samsung"},
+    {"534f", "Angelbird / Hoodman"},
+    {"5350", "Silicon Power"},
+    {"544d", "Toshiba"}
+};
+
 DeviceStorage::DeviceStorage()
     : DeviceBaseInfo()
     , m_Model("")
@@ -267,6 +302,35 @@ bool DeviceStorage::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Module Alias", m_Modalias);
     setAttribute(mapInfo, "VID_PID", m_VID_PID);
     m_PhysID = m_VID_PID;
+
+    if (m_Driver.contains("mmcblk")) {
+        QString sysfsDeviceLink = mapInfo.value("SysFS Device Link");
+
+        if (!sysfsDeviceLink.isEmpty())
+        {
+            if (!sysfsDeviceLink.startsWith("/sys/"))
+            {
+                sysfsDeviceLink = "/sys" + sysfsDeviceLink;
+            }
+
+            QString err;
+            QString name = Common::safeReadSysFsFile(sysfsDeviceLink, "name", err);
+            if (err.isEmpty())
+                m_Name = name;
+
+            QString manfIdRaw = Common::safeReadSysFsFile(sysfsDeviceLink, "manfid", err);
+            if (err.isEmpty()) {
+                m_Vendor = getManfName(manfIdRaw);
+            }
+
+            QString oemIdRaw = Common::safeReadSysFsFile(sysfsDeviceLink, "oemid", err);
+            if (err.isEmpty()) {
+                if (m_Vendor.isEmpty()) {
+                    m_Vendor = getOemName(oemIdRaw);
+                }
+            }
+        }
+    }
 
     getOtherMapInfo(mapInfo);
     return true;
@@ -786,4 +850,20 @@ void DeviceStorage::getInfoFromsmartctl(const QMap<QString, QString> &mapInfo)
     //根据产品PN中的固定前两位 RS来匹配厂商 为Longsys 如产品PN ：RSYE3836N-480G    RSYE3836N-960G    RSYE3836N-1920     RSYE3836N-3840
     if (m_Name.startsWith("RS") && m_Vendor.isEmpty())
         m_Vendor = "Longsys";
+}
+
+// 通过manfid获取厂商名称
+QString DeviceStorage::getManfName(const QString &rawManfId)
+{
+    QString cleanId = rawManfId.trimmed().toLower();
+    cleanId.remove("0x"); // 去除0x前缀
+    return MANFID_TABLE.value(cleanId, rawManfId);
+}
+
+// 通过oemid获取厂商名称
+QString DeviceStorage::getOemName(const QString &rawOemId)
+{
+    QString cleanId = rawOemId.trimmed().toLower();
+    cleanId.remove("0x");
+    return OEMID_TABLE.value(cleanId, rawOemId);
 }
