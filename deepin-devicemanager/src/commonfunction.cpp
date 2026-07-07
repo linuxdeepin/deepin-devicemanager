@@ -15,6 +15,8 @@
 #include <QMap>
 #include <QProcess>
 #include <QFile>
+#include <QFileInfo>
+#include <QDir>
 #include <QLoggingCategory>
 #include <QRegularExpression>
 
@@ -404,4 +406,58 @@ int Common::parseSharedCpuCount(const QString &sharedCpuList)
         }
     }
     return count;
+}
+
+/**
+ * 安全读取sysfs下指定文件内容
+ * @param baseDir 根目录 /sys/xxx/mmc0:0001
+ * @param fileName 待读取的文件名
+ * @return 文件原始字符串（去换行空格）
+ */
+QString Common::safeReadSysFsFile(const QString &baseDir, const QString &fileName, QString &errOut)
+{
+    errOut.clear();
+
+    if (!baseDir.startsWith("/sys/") && baseDir != "/sys") {
+        errOut = QString("baseDir not under /sys: %1").arg(baseDir);
+        return "";
+    }
+    if (baseDir.contains("..")) {
+        errOut = QString("Path traversal detected in baseDir: %1").arg(baseDir);
+        return "";
+    }
+
+    if (fileName.contains('/') || fileName.contains("..") || fileName.contains('\\')) {
+        errOut = QString("Path traversal detected in fileName: %1").arg(fileName);
+        return "";
+    }
+
+    QFileInfo fullPathInfo(QDir(baseDir), fileName);
+    QString fullPath = fullPathInfo.canonicalFilePath();
+
+    if (!fullPath.startsWith("/sys/"))
+    {
+        errOut = QString("Path escape to non-sys dir: %1").arg(fullPath);
+        return "";
+    }
+
+    if (!fullPathInfo.isFile())
+    {
+        errOut = QString("Not a regular file: %1").arg(fullPath);
+        return "";
+    }
+
+    QFile file(fullPath);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        errOut = QString("Open failed: %1, err=%2").arg(fullPath, file.errorString());
+        return "";
+    }
+
+    const qint64 MAX_READ_LEN = 64;
+    QByteArray rawData = file.read(MAX_READ_LEN);
+    file.close();
+
+    QString content = QString::fromUtf8(rawData).trimmed();
+    return content;
 }
