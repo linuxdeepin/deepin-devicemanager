@@ -1,3 +1,16 @@
+deepin-devicemanager (6.0.68) unstable; urgency=medium
+
+  * chore: Update version to 6.0.68
+  * feat(storage): add MMC storage vendor identification via sysfs
+  * fix(device): remove redundant loop in network device generation
+  * fix(device): replace specialComType check with isHwPlatform API
+  * feat(storage): add USB interface detection
+  * test: raise unit test coverage to 75.7% and stabilize test environment
+  * test: improve unit test coverage to 70% and fix eventlogutils bug
+  * test: improve unit test coverage to 62% and fix stale expectations
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Thu, 09 Jul 2026 13:40:41 +0800
+
 deepin-devicemanager (6.0.67) unstable; urgency=medium
 
   * chore: Update version to 6.0.67
