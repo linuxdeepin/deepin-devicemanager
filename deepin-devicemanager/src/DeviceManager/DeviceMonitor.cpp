@@ -303,7 +303,8 @@ const QString DeviceMonitor::getOverviewInfo()
     if (Common::isShowScreenSize()) {
         if (Common::specialComType == Common::kSpecialType6 ||
             Common::specialComType == Common::kSpecialType7 ||
-            Common::specialComType == Common::kSpecialType9) {
+            Common::specialComType == Common::kSpecialType9 ||
+            Common::specialComType == Common::kSpecialType10) {
             ov = QString("(%1)").arg(m_ScreenSize);
         } else {
             ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
@@ -311,7 +312,8 @@ const QString DeviceMonitor::getOverviewInfo()
     } else {
         if (Common::specialComType == Common::kSpecialType6 ||
             Common::specialComType == Common::kSpecialType7 ||
-            Common::specialComType == Common::kSpecialType9) {
+            Common::specialComType == Common::kSpecialType9 ||
+            Common::specialComType == Common::kSpecialType10) {
             ov = "";
         } else {
             ov = QString("%1").arg(m_Name);
@@ -331,7 +333,8 @@ void DeviceMonitor::loadBaseDeviceInfo()
     if (Common::specialComType != Common::kSpecialType5 &&
         Common::specialComType != Common::kSpecialType6 &&
         Common::specialComType != Common::kSpecialType7 &&
-        Common::specialComType != Common::kSpecialType9) {
+        Common::specialComType != Common::kSpecialType9 &&
+        Common::specialComType != Common::kSpecialType10) {
         addBaseDeviceInfo(("Name"), m_Name);
         addBaseDeviceInfo(("Vendor"), m_Vendor);
         addBaseDeviceInfo(("Type"), m_Model);
@@ -415,15 +418,17 @@ bool DeviceMonitor::setMainInfoFromXrandr(const QString &info, const QString &ra
             }
             if (Common::specialComType == Common::kSpecialType1 ||
                     Common::specialComType == Common::kSpecialType5 ||
-                    Common::specialComType == Common::kSpecialType6  ||
+                    Common::specialComType == Common::kSpecialType6 ||
                     Common::specialComType == Common::kSpecialType7 ||
-                    Common::specialComType == Common::kSpecialType9) {
+                    Common::specialComType == Common::kSpecialType9 ||
+                    Common::specialComType == Common::kSpecialType10) {
                 m_RefreshRate = QString("%1").arg(curRate);
             }
             if (Common::specialComType == Common::kSpecialType5 ||
                 Common::specialComType == Common::kSpecialType6 ||
                 Common::specialComType == Common::kSpecialType7 ||
-                Common::specialComType == Common::kSpecialType9) {
+                Common::specialComType == Common::kSpecialType9 ||
+                Common::specialComType == Common::kSpecialType10) {
                 m_CurrentResolution = QString("%1").arg(reScreenSize.cap(1)).replace("x", "×", Qt::CaseInsensitive);
             } else {
                 m_CurrentResolution = QString("%1 @%2").arg(reScreenSize.cap(1)).arg(curRate).replace("x", "×", Qt::CaseInsensitive);

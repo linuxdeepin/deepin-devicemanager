@@ -123,7 +123,8 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
         m_MaxFrequency = m_MaxFrequency.replace(CPU_MAXFREQ_TYPE5_7_OLD, CPU_MAXFREQ_TYPE5_7_NEW);
     }
 
-    if (Common::specialComType == Common::kSpecialType9) {
+    if (Common::specialComType == Common::kSpecialType9 ||
+        Common::specialComType == Common::kSpecialType10) {
         m_Frequency = m_Frequency.replace(CPU_FREQ_TYPE9_OLD, CPU_FREQ_TYPE9_NEW);
         m_MaxFrequency = m_MaxFrequency.replace(CPU_MAXFREQ_TYPE9_OLD, CPU_MAXFREQ_TYPE9_NEW);
     }

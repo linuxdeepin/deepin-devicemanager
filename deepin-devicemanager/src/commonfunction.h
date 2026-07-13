@@ -26,7 +26,8 @@ public:
         kSpecialType6,
         kSpecialType7,
         kSpecialType8,
-        kSpecialType9
+        kSpecialType9,
+        kSpecialType10
     };
 
     enum SpecialCpuType {
