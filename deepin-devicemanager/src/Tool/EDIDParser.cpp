@@ -205,9 +205,12 @@ void EDIDParser::parseScreenSize()
         }
     }
 
-    if (Common::specialComType == Common::kSpecialType7){ // sepcial task:378963
-        m_Width = 296;
-        m_Height = 197;
+    if (Common::specialComType == Common::kSpecialType7 ||
+        Common::specialComType == Common::kSpecialType10) { // special task:378963
+        if (m_Width == 300 && m_Height == 200) {
+            m_Width = 296;
+            m_Height = 197;
+        }
     }
     double inch = sqrt((m_Width / 2.54) * (m_Width / 2.54) + (m_Height / 2.54) * (m_Height / 2.54))/10;
     m_ScreenSize = QString("%1 %2(%3mm×%4mm)")
