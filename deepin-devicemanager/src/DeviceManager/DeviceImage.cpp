@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -7,6 +7,19 @@
 #include "DeviceManager.h"
 #include "DBusEnableInterface.h"
 #include "DBusInterface.h"
+#include "commonfunction.h"
+
+namespace {
+constexpr auto kFhdCameraName = "FHD Camera";
+
+void setSpecialCameraName(QString &name)
+{
+    if (Common::specialComType == Common::kSpecialType9
+        || Common::specialComType == Common::kSpecialType10) {
+        name = kFhdCameraName;
+    }
+}
+}
 
 DeviceImage::DeviceImage()
     : DeviceBaseInfo()
@@ -27,6 +40,7 @@ void DeviceImage::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
         return;
 
     setAttribute(mapInfo, "product", m_Name, false);
+    setSpecialCameraName(m_Name);
     setAttribute(mapInfo, "vendor", m_Vendor);
     setAttribute(mapInfo, "version", m_Version);
     setAttribute(mapInfo, "bus info", m_BusInfo);
@@ -62,6 +76,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     if (mapInfo.find("unique_id") != mapInfo.end()) {
         m_UniqueID = mapInfo["unique_id"];
         m_Name = mapInfo["name"];
+        setSpecialCameraName(m_Name);
         m_SysPath = mapInfo["path"];
         m_HardwareClass = mapInfo["Hardware Class"];
         m_Enable = false;
@@ -80,6 +95,7 @@ void DeviceImage::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
         m_SerialID = m_UniqueID;
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
     setAttribute(mapInfo, "Device", m_Name);
+    setSpecialCameraName(m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
