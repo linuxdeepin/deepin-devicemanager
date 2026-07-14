@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -26,6 +26,8 @@
 #include <QAction>
 #include <QClipboard>
 #include <QPainterPath>
+#include <QScroller>
+#include <QScrollerProperties>
 
 // 宏定义
 #define SPACE_HEIGHT 0  //
@@ -201,6 +203,13 @@ PageDetail::PageDetail(QWidget *parent)
     // 设置ScrollArea里面的widget,这个widget是必须要的
     mp_ScrollWidget->setContentsMargins(15, 0, 0, 0);
     mp_ScrollArea->setWidget(mp_ScrollWidget);
+    // 启用触摸屏滚动支持
+    QScroller::grabGesture(mp_ScrollArea, QScroller::LeftMouseButtonGesture);
+    QScrollerProperties sp;
+    sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, SCROLLER_OVERSHOOT_DISTANCE_FACTOR);
+    sp.setScrollMetric(QScrollerProperties::OvershootDragResistanceFactor, SCROLLER_OVERSHOOT_DRAG_RESIST_FACTOR);
+    sp.setScrollMetric(QScrollerProperties::DragVelocitySmoothingFactor, SCROLLER_DRAG_VELOCITY_SMOOTH_FACTOR);
+    QScroller::scroller(mp_ScrollArea)->setScrollerProperties(sp);
     hLayout->addWidget(mp_ScrollArea);
     setLayout(hLayout);
 
