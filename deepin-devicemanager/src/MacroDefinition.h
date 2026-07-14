@@ -218,6 +218,11 @@
 #define   HORSCROLL_WIDTH    11    // TreeWidget 横向滚动条高度
 #define   MIN_NUM            5     // num
 
+// 触摸屏滚动参数
+#define SCROLLER_OVERSHOOT_DISTANCE_FACTOR     0.3  // 超出滚动距离系数
+#define SCROLLER_OVERSHOOT_DRAG_RESIST_FACTOR   0.3  // 超出拖拽阻力系数
+#define SCROLLER_DRAG_VELOCITY_SMOOTH_FACTOR    0.6  // 拖拽速度平滑系数
+
 const QString LINK_STR = "<a style=\"text-decoration:none\" href=https://www.chinauos.com/home>";        // uos官网链接
 const QString DEEPIN_LINK = "<a style=\"text-decoration:none\" href=https://www.deepin.org/zh>";       // 社区版链接
 const QString END_STR = " </a>";                                                                         // end html
