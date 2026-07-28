@@ -606,17 +606,26 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
     if (size1.isEmpty() || size2.isEmpty())
         return size1 + size2;
 
-    // 将字符串转为数字大小进行比较
-    float num1 = 0;
-    float num2 = 0;
-    QRegExp reg(".*\\[(\\d+\\.?\\d+).*\\]");
-    if (reg.exactMatch(size1))
-        num1 = reg.cap(1).toFloat();
-    if (reg.exactMatch(size2))
-        num2 = reg.cap(1).toFloat();
+    // 提取原始字节数（方括号前的数字，千分位逗号/点）比较
+    // zh_CN: "Total NVM Capacity:  1,024,209,543,168 [1.02 TB]"
+    // de_DE: "Total NVM Capacity:  1.024.209.543.168 [1,02 TB]"
+    // 格式2: "Total NVM Capacity:  240,057,409,536 bytes [240 GB]"
+    auto extractBytes = [](const QString &str) -> quint64 {
+        QRegExp reg("(\\d[\\d,.]*)\\s*(?:bytes\\s*)?\\[");
+        if (reg.indexIn(str) != -1) {
+            QString raw = reg.cap(1);
+            raw.remove(",");
+            raw.remove(".");
+            return raw.toULongLong();
+        }
+        return 0;
+    };
+
+    quint64 bytes1 = extractBytes(size1);
+    quint64 bytes2 = extractBytes(size2);
 
     // 返回较大值
-    if ((num1 - num2) > FLT_EPSILON * fmaxf(fabsf(num1), fabsf(num2)))
+    if (bytes1 > bytes2)
         return size1;
     else
         return size2;
