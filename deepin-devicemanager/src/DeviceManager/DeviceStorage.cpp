@@ -635,23 +635,31 @@ QString DeviceStorage::compareSize(const QString &size1, const QString &size2)
     if (size1.isEmpty() || size2.isEmpty())
         return size1 + size2;
 
-    // 将字符串转为数字大小进行比较
-    int num1 = 0;
-    int num2 = 0;
-    QRegularExpression reg(".*\\[(\\d+\\.?\\d+).*\\]");
-    QRegularExpressionMatch match1 = reg.match(size1);
-    if (match1.hasMatch())
-        num1 = match1.captured(1).toInt();
-    QRegularExpressionMatch match2 = reg.match(size2);
-    if (match2.hasMatch())
-        num2 = match2.captured(1).toInt();
+    // 提取原始字节数（方括号前的数字，千分位逗号/点）比较
+    // zh_CN: "Total NVM Capacity:  1,024,209,543,168 [1.02 TB]"
+    // de_DE: "Total NVM Capacity:  1.024.209.543.168 [1,02 TB]"
+    // 格式2: "Total NVM Capacity:  240,057,409,536 bytes [240 GB]"
+    auto extractBytes = [](const QString &str) -> quint64 {
+        QRegularExpression reg("(\\d[\\d,.]*)\\s*(?:bytes\\s*)?\\[");
+        QRegularExpressionMatch match = reg.match(str);
+        if (match.hasMatch()) {
+            QString raw = match.captured(1);
+            raw.remove(",");
+            raw.remove(".");
+            return raw.toULongLong();
+        }
+        return 0;
+    };
+
+    quint64 bytes1 = extractBytes(size1);
+    quint64 bytes2 = extractBytes(size2);
 
     // 返回较大值
-    if ((num1 - num2) > FLT_EPSILON * fmaxf(fabsf(num1), fabsf(num2))) {
-        qCDebug(appLog) << "DeviceStorage::compareSize, num1 > num2";
+    if (bytes1 > bytes2) {
+        qCDebug(appLog) << "DeviceStorage::compareSize, bytes1 > bytes2";
         return size1;
     } else {
-        qCDebug(appLog) << "DeviceStorage::compareSize, num1 <= num2";
+        qCDebug(appLog) << "DeviceStorage::compareSize, bytes1 <= bytes2";
         return size2;
     }
 }
