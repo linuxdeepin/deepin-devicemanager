@@ -1527,9 +1527,19 @@ void DeviceManager::addKeyboardDevice(DeviceInput *const device)
 
     QString vid = device->getVID();
     QString pid = device->getPID();
+    QString interface = device->getInterface();
+
+    // 仅USB键盘具备有效的VID/PID,需要通过lsusb校验以过滤无效/幽灵USB设备。
+    // PS/2、I2C、蓝牙等内置键盘没有VID/PID(hwinfo中为 "Vendor: 0xNNNN" 单段格式,
+    // 无法解析出VID/PID),应直接添加,避免被误删导致键盘无法显示。
+    if (!interface.contains("USB", Qt::CaseInsensitive)) {
+        m_ListDeviceKeyboard.append(device);
+        qCDebug(appLog) << "Non-USB keyboard added directly, interface:" << interface;
+        return;
+    }
 
     if (vid.isEmpty() || pid.isEmpty()) {
-        qCDebug(appLog) << "VID or PID is empty, adding keyboard device without verification";
+        qCDebug(appLog) << "USB keyboard VID or PID is empty, device not added";
         device->deleteLater();
         return;
     }
