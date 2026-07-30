@@ -1,3 +1,19 @@
+deepin-devicemanager (6.0.69) unstable; urgency=medium
+
+  * chore: Update version to 6.0.69
+  * fix: add non-USB keyboard directly without VID/PID check
+  * fix(storage): compare size by raw bytes instead of localized float
+  * Fix: The screen size show error. -- Add Group Policy item to control whether to display screen size.
+  * chore(ci): update actions/checkout to v7 and enable unsafe PR checkout
+  * fix: add X-Deepin-Singleton flag to desktop file
+  * fix: remove deepin prefix from Chinese translations in desktop file
+  * fix: enable touch screen scrolling for QScrollArea-based views
+  * [skip CI] Translate deepin-devicemanager.ts in it
+  * [skip CI] Translate deepin-devicemanager.ts in it
+  * [skip CI] Translate deepin-devicemanager.ts in it
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Thu, 30 Jul 2026 15:08:24 +0800
+
 deepin-devicemanager (6.0.68) unstable; urgency=medium
 
   * chore: Update version to 6.0.68
