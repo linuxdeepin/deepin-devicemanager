@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -192,14 +192,14 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         if (file.open(QIODevice::ReadOnly)) {
             qCDebug(appLog) << "gpu-info file opened successfully.";
             QString allStr(file.readAll());
-            QStringList items = allStr.split("\n\n");
+            QStringList items = allStr.split("\n");
             file.close();
             foreach (const QString &item, items) {
                 if (item.isEmpty()) {
                     // qCDebug(appLog) << "Skipping empty item in gpu-info.";
                     continue;
                 }
-                QStringList tmpItems = allStr.split(":", QT_SKIP_EMPTY_PARTS);
+                QStringList tmpItems = item.split(":", QT_SKIP_EMPTY_PARTS);
                 if (tmpItems.size() != 2) {
                     // qCDebug(appLog) << "Skipping item with incorrect size in gpu-info: " << item;
                     continue;
