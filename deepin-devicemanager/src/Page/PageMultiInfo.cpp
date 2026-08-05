@@ -46,6 +46,10 @@ PageMultiInfo::PageMultiInfo(QWidget *parent)
     , mp_Detail(new PageDetail(this))
 {
     qCDebug(appLog) << "PageMultiInfo constructor start";
+    setAccessibleName("MultiDevicePage");
+    mp_Label->setAccessibleName("DeviceCategoryLabel");
+    mp_Table->setAccessibleName("DeviceTableHeader");
+    mp_Detail->setAccessibleName("DeviceDetailPanel");
     m_deviceList.clear();
     m_menuControlList.clear();
     // 初始化界面布局

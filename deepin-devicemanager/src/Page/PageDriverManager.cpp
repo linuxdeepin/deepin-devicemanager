@@ -59,6 +59,11 @@ PageDriverManager::PageDriverManager(DWidget *parent)
     , mp_BackupThread(new DriverBackupThread(this))
 {
     qCDebug(appLog) << "PageDriverManager constructor start";
+    setAccessibleName("DriverManagerPage");
+    mp_StackWidget->setAccessibleName("DriverStackWidget");
+    mp_DriverInstallInfoPage->setAccessibleName("DriverInstallPage");
+    mp_DriverBackupInfoPage->setAccessibleName("DriverBackupPage");
+    mp_DriverRestoreInfoPage->setAccessibleName("DriverRestorePage");
     mp_ListView->setCurType(tr("Driver Install"));
 
     // 初始化界面

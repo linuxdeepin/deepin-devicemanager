@@ -29,6 +29,14 @@ PageDriverInstallInfo::PageDriverInstallInfo(QWidget *parent)
     , mp_UpdateWidget(new DWidget(this))
 {
     qCDebug(appLog) << "PageDriverInstallInfo constructor start";
+    setAccessibleName("DriverInstallPage");
+    mp_HeadWidget->setAccessibleName("DetectedStatusWidget");
+    mp_ViewNotInstall->setAccessibleName("NotInstallDriverTable");
+    mp_ViewCanUpdate->setAccessibleName("CanUpdateDriverTable");
+    mp_AllDriverIsNew->setAccessibleName("AllDriverNewTable");
+    mp_InstallLabel->setAccessibleName("MissingDriverLabel");
+    mp_UpdateLabel->setAccessibleName("OutdatedDriverLabel");
+    mp_LabelIsNew->setAccessibleName("UpToDateDriverLabel");
     initUI();
 
     connect(mp_ViewNotInstall, &PageDriverTableView::operatorClicked, this, &PageDriverInstallInfo::operatorClicked);

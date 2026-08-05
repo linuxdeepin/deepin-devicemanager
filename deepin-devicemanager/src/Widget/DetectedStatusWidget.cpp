@@ -76,6 +76,12 @@ DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
     , mp_HLayoutLabel(nullptr)
 {
     qCDebug(appLog) << "Initializing UI and connections";
+    mp_InstallButton->setAccessibleName("InstallButton");
+    mp_ReDetectedSgButton->setAccessibleName("ReDetectedButton");
+    mp_BackupSgButton->setAccessibleName("BackupButton");
+    mp_CancelButton->setAccessibleName("CancelButton");
+    mp_ReDetectedIconButton->setAccessibleName("ReDetectedIconButton");
+    mp_Progress->setAccessibleName("ScanProgressBar");
     initUI();
     initConnect();
 }

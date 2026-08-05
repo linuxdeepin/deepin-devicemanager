@@ -27,6 +27,8 @@ PageListView::PageListView(DWidget *parent)
     , m_CurType(tr("Overview"))
 {
     qCDebug(appLog) << "PageListView constructor start";
+    setAccessibleName("DeviceListPanel");
+    mp_ListView->setAccessibleName("DeviceListView");
     //初始化界面
     QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->addWidget(mp_ListView);

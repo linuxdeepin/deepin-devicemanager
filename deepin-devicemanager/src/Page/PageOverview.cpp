@@ -45,6 +45,11 @@ PageOverview::PageOverview(DWidget *parent)
     , mp_Menu(new DMenu(this))
 {
     qCDebug(appLog) << "PageOverview constructor start";
+    setAccessibleName("OverviewPage");
+    mp_PicLabel->setAccessibleName("DeviceIcon");
+    mp_DeviceLabel->setAccessibleName("DeviceNameLabel");
+    mp_OSLabel->setAccessibleName("OSLabel");
+    mp_Overview->setAccessibleName("OverviewTable");
     // 初始化界面布局
     initWidgets();
 

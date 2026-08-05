@@ -50,6 +50,13 @@ DriverScanWidget::DriverScanWidget(DWidget *parent)
     , mp_VLayout(nullptr)
 {
     qCDebug(appLog) << "DriverScanWidget instance created";
+    setAccessibleName("DriverScanPage");
+    mp_ScanningLabel->setAccessibleName("ScanningLabel");
+    mp_CheckNetworkLabel->setAccessibleName("CheckNetworkLabel");
+    mp_FeedBackLabel->setAccessibleName("FeedbackLabel");
+    mp_ScanningInfoLabel->setAccessibleName("ScanInfoLabel");
+    mp_ScanningProgress->setAccessibleName("ScanProgressBar");
+    mp_ReScanButton->setAccessibleName("RescanButton");
     initUI();
     initConnect();
 }

@@ -52,6 +52,8 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , m_ItemDelegate(new RichTextDelegate(this))
 {
     qCDebug(appLog) << "PageSingleInfo constructor start";
+    mp_Content->setAccessibleName("DeviceInfoTable");
+    mp_Label->setAccessibleName("DeviceTypeLabel");
     // 初始化页面布局
     initWidgets();
 

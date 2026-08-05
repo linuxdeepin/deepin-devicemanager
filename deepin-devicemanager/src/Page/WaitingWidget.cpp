@@ -23,6 +23,9 @@ WaitingWidget::WaitingWidget(QWidget *parent)
     , mp_Label(new DLabel(tr("Loading..."), this))
 {
     qCDebug(appLog) << "WaitingWidget constructor start";
+    setAccessibleName("LoadingPage");
+    mp_Spinner->setAccessibleName("LoadingSpinner");
+    mp_Label->setAccessibleName("LoadingLabel");
     // 设置小圈圈的参数,小圈圈的大小
     mp_Spinner->setFixedSize(SPINNER_WIDTH, SPINNER_HEIGHT);
 

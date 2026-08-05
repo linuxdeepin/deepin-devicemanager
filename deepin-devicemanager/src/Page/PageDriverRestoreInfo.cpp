@@ -26,6 +26,12 @@ PageDriverRestoreInfo::PageDriverRestoreInfo(QWidget *parent)
     , mp_GotoBackupSgButton(new DSuggestButton(this))
 {
     qCDebug(appLog) << "PageDriverRestoreInfo constructor start";
+    setAccessibleName("DriverRestorePage");
+    mp_StackWidget->setAccessibleName("DriverRestoreStack");
+    mp_HeadWidget->setAccessibleName("DetectedStatusWidget");
+    mp_ViewBackable->setAccessibleName("RestorableDriverTable");
+    mp_BackableDriverLabel->setAccessibleName("RestorableDriverLabel");
+    mp_GotoBackupSgButton->setAccessibleName("GotoBackupBtn");
     initUI();
 
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverRestoreInfo::operatorClicked);

@@ -25,6 +25,12 @@ PageDriverBackupInfo::PageDriverBackupInfo(QWidget *parent)
     , mp_BackedUpDriverLabel(new DLabel(this))
 {
     qCDebug(appLog) << "PageDriverBackupInfo constructor start";
+    setAccessibleName("DriverBackupPage");
+    mp_HeadWidget->setAccessibleName("DetectedStatusWidget");
+    mp_ViewBackable->setAccessibleName("BackableDriverTable");
+    mp_ViewBackedUp->setAccessibleName("BackedUpDriverTable");
+    mp_BackableDriverLabel->setAccessibleName("BackableDriverLabel");
+    mp_BackedUpDriverLabel->setAccessibleName("BackedUpDriverLabel");
     initUI();
 
     connect(mp_ViewBackable, &PageDriverTableView::operatorClicked, this, &PageDriverBackupInfo::operatorClicked);

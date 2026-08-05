@@ -54,6 +54,7 @@ PageDriverControl::PageDriverControl(QWidget *parent, const QString &operation, 
     qCDebug(appLog) << "PageDriverControl constructor start, operation:" << operation
                    << "device:" << deviceName << "driver:" << driverName;
     setObjectName("PageDriverControl");
+    setAccessibleName("DriverControlDialog");
     setFixedSize(480, 335);
     setOnButtonClickedClose(false);
     setWindowTitle(QString("%1-%2").arg(operation).arg(deviceName));

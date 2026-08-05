@@ -27,6 +27,7 @@ DeviceWidget::DeviceWidget(QWidget *parent)
     , m_Layout(nullptr)
 {
     qCDebug(appLog) << "DeviceWidget constructor start";
+    setAccessibleName("DeviceInfoPage");
     // 初始化界面布局
     initWidgets();
     qCDebug(appLog) << "DeviceWidget constructor end";

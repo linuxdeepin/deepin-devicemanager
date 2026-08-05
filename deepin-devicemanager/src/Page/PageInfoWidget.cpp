@@ -30,6 +30,11 @@ PageInfoWidget::PageInfoWidget(QWidget *parent)
     , mp_PageBoardInfo(new PageBoardInfo(this))
 {
     qCDebug(appLog) << "PageInfoWidget constructor start";
+    setAccessibleName("DeviceInfoPanel");
+    mp_PageSignalInfo->setAccessibleName("SingleDevicePage");
+    mp_PageMutilInfo->setAccessibleName("MultiDevicePage");
+    mp_PageOverviewInfo->setAccessibleName("OverviewPage");
+    mp_PageBoardInfo->setAccessibleName("BoardInfoPage");
     // 初始化界面布局
     initWidgets();
 

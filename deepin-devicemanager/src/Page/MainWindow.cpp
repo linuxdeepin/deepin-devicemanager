@@ -419,6 +419,10 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::initWindow()
 {
     qCDebug(appLog) << "MainWindow::initWindow start";
+    // 设置可访问名称
+    setAccessibleName("DeviceManager");
+    mp_MainStackWidget->setAccessibleName("MainContentStack");
+
     //1. 第一步初始化窗口大小
     initWindowSize();
 
@@ -457,7 +461,10 @@ void MainWindow::initWindowTitle()
     titlebar()->setIcon(appIcon);
     // 设置 DButtonBox 里面的 button
     mp_ButtonBox->setFixedWidth(242);
+    mp_ButtonBox->setAccessibleName("PageSwitcher");
     mp_ButtonBox->setButtonList({new DButtonBoxButton(tr("Hardware")), new DButtonBoxButton(tr("Drivers"))}, true);
+    mp_ButtonBox->buttonList().at(0)->setAccessibleName("HardwarePageBtn");
+    mp_ButtonBox->buttonList().at(1)->setAccessibleName("DriverPageBtn");
     mp_ButtonBox->setId(mp_ButtonBox->buttonList().at(0), 0);
     mp_ButtonBox->setId(mp_ButtonBox->buttonList().at(1), 1);
     mp_ButtonBox->buttonList().at(0)->click();
