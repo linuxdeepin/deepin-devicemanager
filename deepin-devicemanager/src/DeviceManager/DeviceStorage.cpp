@@ -577,13 +577,13 @@ void DeviceStorage::checkDiskSize()
 
     quint64 gbyte =  1000000000;
 //    if (m_Interface.contains("UFS", Qt::CaseInsensitive)) { // TODO Ignore ufs disk
-    if (m_SizeBytes > 255*gbyte && m_SizeBytes < 257*gbyte) {
+    if (m_SizeBytes > 254*gbyte && m_SizeBytes < 258*gbyte) {
         m_Size = "256 GB";
-    } else if (m_SizeBytes > 511*gbyte && m_SizeBytes < 513*gbyte) {
+    } else if (m_SizeBytes > 510*gbyte && m_SizeBytes < 514*gbyte) {
         m_Size = "512 GB";
-    } else if (m_SizeBytes > 999*gbyte && m_SizeBytes < 1025*gbyte) {
+    } else if (m_SizeBytes > 998*gbyte && m_SizeBytes < 1026*gbyte) {
         m_Size = "1 TB";
-    } else if (m_SizeBytes > 1999*gbyte && m_SizeBytes < 2049*gbyte) {
+    } else if (m_SizeBytes > 1998*gbyte && m_SizeBytes < 2050*gbyte) {
         m_Size = "2 TB";
     }
 //    }
