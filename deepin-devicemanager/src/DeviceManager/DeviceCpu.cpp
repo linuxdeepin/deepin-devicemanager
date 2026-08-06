@@ -303,9 +303,9 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         // 如果最大最小频率相等则不显示范围
         if (fabs(minHz - maxHz) < 0.001) {
             m_FrequencyIsRange = false;
-            m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(maxHz) : QString("%1 MHz").arg(maxHz * 1000);
+            m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(maxHz, 0, 'f', 2) : QString("%1 MHz").arg(maxHz * 1000, 0, 'f', 2);
         } else {
-            m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
+            m_Frequency = QString("%1-%2 GHz").arg(minHz, 0, 'f', 2).arg(maxHz, 0, 'f', 2);
         }
     } else if (mapInfo.find("CPU MHz") != mapInfo.end()) {
         QString maxS = mapInfo["CPU MHz"];
