@@ -2513,7 +2513,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>Versão da Cópia de Segurança</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
@@ -2523,7 +2523,7 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="180"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Controladores Restauráveis</translation>
     </message>
 </context>
 <context>
@@ -2770,18 +2770,18 @@
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="721"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Restauro do controlador falhou!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="717"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Por favor tente novamente ou dê-nos feedback</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="47"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Cópia de segurança do controlador falhou!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
@@ -3096,28 +3096,28 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Todos os controladores foram copiados</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Um total de %1 drivers, dos quais %2 foram salvos em cópia de seguranaç</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="546"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"/>
+        <translation>Tem %1 controladores que podem ser salvos em cópia de segurança, é recomendado que o faça imediatamente</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"/>
+        <translation>Tem %1 controladores que podem ser salvos em cópia de segurança</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="597"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>A fazer cópia de segurança de %1 controlador, um total de %2 controladores</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
