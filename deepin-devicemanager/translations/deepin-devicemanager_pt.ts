@@ -3122,42 +3122,42 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"/>
+        <translation>A fazer cópia de segurança: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="638"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 controladores salvos em cópia de segurança, %2 controladores falharam</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="641"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>Falha ao fazer cópia de segurança dos controladores</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"/>
+        <translation>%1 controladores salvos em cópia de segurança</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="684"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"/>
+        <translation>Tem %1 controlador que pode ser restaurado</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"/>
+        <translation>Por favor selecione um controlador para restaurar</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="716"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"/>
+        <translation>A restaurar controlador...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="717"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"/>
+        <translation>A restaurar: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="872"/>
@@ -3172,12 +3172,12 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="881"/>
         <source>View backup path</source>
-        <translation type="unfinished"/>
+        <translation>Ver caminho da cópia de segurança</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
         <source>Backup All</source>
-        <translation type="unfinished"/>
+        <translation>Fazer Cópia de Segurança de Tudo</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="876"/>
@@ -3268,12 +3268,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="779"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Está a fazer cópia de segurança dos controladores, que será interrompida se sair.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="795"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Está a fazer restauro de controladores, que será interrompido se sair.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="49"/>
@@ -3344,27 +3344,27 @@
     <message>
         <location filename="../src/Tool/commontools.cpp" line="86"/>
         <source>Not backed up</source>
-        <translation type="unfinished"/>
+        <translation>Sem cópia de segurança</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="87"/>
         <source>Backing up</source>
-        <translation type="unfinished"/>
+        <translation>A fazer cópia de segurança</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="88"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>Cópia de segurança falhou</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="89"/>
         <source>Backup successful</source>
-        <translation type="unfinished"/>
+        <translation>Cópia de segurança bem sucedida</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="90"/>
         <source>Restoring</source>
-        <translation type="unfinished"/>
+        <translation>A restaurar</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="94"/>
@@ -3394,12 +3394,12 @@
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="274"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Cópia de Segurança</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="280"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Restaura</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="263"/>
