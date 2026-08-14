@@ -1,3 +1,11 @@
+deepin-devicemanager (6.0.70) unstable; urgency=medium
+
+  * chore: Update version to 6.0.70
+  * fix(gpu): fix GPU VRAM size parsing failure on multi-line gpu-info
+  * [skip CI] Translate deepin-devicemanager.ts in pt_BR
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Fri, 14 Aug 2026 15:25:48 +0800
+
 deepin-devicemanager (6.0.69) unstable; urgency=medium
 
   * chore: Update version to 6.0.69
