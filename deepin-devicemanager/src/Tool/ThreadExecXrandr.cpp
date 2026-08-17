@@ -49,13 +49,23 @@ ThreadExecXrandr::ThreadExecXrandr(bool gpu, bool isDXcbPlatform)
 void ThreadExecXrandr::run()
 {
     if (m_Gpu) {
-        getGpuInfoFromXrandr();
-    } else {           
-       if(Common::boardVendorType() == "PGUV") {
-           QList<QMap<QString, QString>> lstMap;
-           getResolutionRateFromDBus(lstMap);
-       }else 
+        // X11/dxcb 环境通过 xrandr 补充显卡分辨率信息；Wayland/无 X 环境不执行 xrandr 子进程
+        if (m_isDXcbPlatform) {
+            getGpuInfoFromXrandr();
+        }
+    } else {
+        // Wayland/无 X 环境或 PGUV 机型走 DBus，避免 xrandr 子进程阻塞 UI 线程
+        if (!m_isDXcbPlatform || Common::boardVendorType() == "PGUV") {
+            QList<QMap<QString, QString>> lstMap;
+            getResolutionRateFromDBus(lstMap);
+        } else {
             getMonitorInfoFromXrandrVerbose();
+        }
+    }
+    // 显示器数量用于热插拔检测，纯 DBus 调用不启动子进程
+    if (m_monitorLst.isEmpty()) {
+        QMap<QString, QString> tmp;
+        getResolutionFromDBus(tmp);
     }
 }
 
@@ -63,7 +73,11 @@ void ThreadExecXrandr::runCmd(QString &info, const QString &cmd)
 {
     QProcess process;
     process.start(cmd);
-    process.waitForFinished(-1);
+    // 设置超时，避免 xrandr 在部分硬件/驱动或无 X 环境下挂起导致界面长时间无响应
+    if (!process.waitForFinished(5000)) {
+        process.kill();
+        process.waitForFinished(1000);
+    }
     info = process.readAllStandardOutput();
 }
 
