@@ -140,10 +140,13 @@ void MainWindow::refreshDataBaseLater()
 MainWindow::~MainWindow()
 {
     // 释放指针
-    // 释放异步 xrandr 线程（runCmd 已设超时，wait 不会长时间阻塞）
+    // 释放异步 xrandr 线程：先断开 finished 信号避免析构中途触发槽；
+    // wait() 无超时等待，因 runCmd 每子进程已限 5s+1s，双 runCmd 最长约 12s 内结束，
+    // 保证 run() 退出后再释放对象，避免 use-after-free
     if (mp_XrandrThread) {
+        mp_XrandrThread->disconnect(this);      // 避免 finished 槽在析构中途触发
         if (mp_XrandrThread->isRunning())
-            mp_XrandrThread->wait(6000);
+            mp_XrandrThread->wait();             // runCmd 每子进程已限 5s+1s，最长 ~12s 内结束
         delete mp_XrandrThread;
         mp_XrandrThread = nullptr;
     }
@@ -592,6 +595,8 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 
 void MainWindow::startAsyncXrandr(const QString &itemStr)
 {
+    // 兜底：正常路径下此分支不可达（上层 isRunning() 短路、完成槽已置空），
+    // 仅防御极端时序下残留的线程对象
     if (mp_XrandrThread) {
         mp_XrandrThread->deleteLater();
         mp_XrandrThread = nullptr;
