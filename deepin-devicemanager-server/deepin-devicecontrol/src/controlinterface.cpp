@@ -15,6 +15,7 @@
 
 #include <QLoggingCategory>
 #include <QProcess>
+#include <QThread>
 #include <QDir>
 #include <QDBusConnection>
 #include <QFile>
@@ -332,16 +333,24 @@ bool ControlInterface::authorizedEnable(const QString &hclass, const QString &na
     }
     if (enable_device) {
         /*
-         启用的流程为：以 /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0 为例
-         第一步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0/authorized 文件中写 1
-         第二步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/authorized 文件中写 0
-         第三步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/authorized 文件中写 1
+         启用流程需等价于物理拔插的「断开—重连」，使 usbhid 重新绑定、
+         输入节点重建，否则鼠标启用后仍无响应（PMS 341577）。
+         以 /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0 为例
+         （path 为接口级路径 1-5:1.0，禁用时已向其 authorized 写 0）：
+         第一步: 向父设备 1-5/authorized 写 0，整设备去授权（断开等价），
+                 解绑所有接口驱动并销毁输入节点。
+         第二步: 等待内核完成去授权清理，避免与重新授权竞态导致输入
+                 设备无法恢复。
+         第三步: 向父设备 1-5/authorized 写 1，整设备重新授权（重连等价），
+                 重新枚举并探测接口驱动。
+         第四步: 向接口 1-5:1.0/authorized 写 1（禁用的直接逆操作），确保
+                 接口已授权（sysfs 条目在设备重新枚举后已重建，需重新打开）。
+         第五步: 触发 udev 重新处理该设备及其接口的 add 事件，模拟物理
+                 拔插产生的 udev 事件，确保输入设备节点被重建。
          */
-        // 第一步
-        file.write("1");
         file.close();
 
-        // 第二步
+        // 第一步：父设备去授权
         QFileInfo fi(path);
         QString pop = fi.path();
         QFile fpop("/sys" + pop + QString("/authorized"));
@@ -350,11 +359,24 @@ bool ControlInterface::authorizedEnable(const QString &hclass, const QString &na
         fpop.write("0");
         fpop.close();
 
-        // 第三步
+        // 第二步：等待去授权清理完成，避免去授权-重新授权竞态
+        QThread::msleep(100);
+
+        // 第三步：父设备重新授权
         if (!fpop.open(QIODevice::ReadWrite))
             return false;
         fpop.write("1");
         fpop.close();
+
+        // 第四步：显式重新授权接口（禁用的直接逆操作）
+        if (file.open(QIODevice::ReadWrite)) {
+            file.write("1");
+            file.close();
+        }
+
+        // 第五步：触发 udev 重新处理设备添加事件，确保输入设备节点重建
+        QProcess::execute("udevadm", QStringList() << "trigger"
+                          << "--action=add" << ("--syspath=" + QString("/sys") + pop));
 
         EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(unique_id);
     } else {
