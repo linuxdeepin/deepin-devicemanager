@@ -38,13 +38,17 @@ public:
      * @param unique_id 设备的唯一标识
      * @param path 设备节点路径
      * @param wakeup 可唤醒 不可唤醒
+     * @param name 设备名称
+     * @param hardwareclass 硬件类型(mouse/keyboard)
+     * @param interfaceType 接口类型(PS/2/USB/Bluetooth等)
      * @return
      */
     bool setWakeupMachine(const QString &unique_id,
                           const QString &path,
                           bool wakeup,
                           const QString &name,
-                          const QString &hardwareclass);
+                          const QString &hardwareclass,
+                          const QString &interfaceType);
 
     /**
      * @brief canWakeupMachine 获取input是否支持唤醒

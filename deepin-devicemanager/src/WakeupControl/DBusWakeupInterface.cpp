@@ -39,14 +39,15 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id,
                                            const QString &path,
                                            bool wakeup,
                                            const QString &name,
-                                           const QString &hardwareclass)
+                                           const QString &hardwareclass,
+                                           const QString &interfaceType)
 {
     if (nullptr != mp_InputIface && mp_InputIface->isValid()) {
         QStringList pathList = path.split("/", QString::SkipEmptyParts);
         if (pathList.size() < 3)
             return false;
 
-        if (name.contains("PS/2")) {
+        if (name.contains("PS/2") || interfaceType.contains("PS/2")) {
             // ps2设备无法通过/sys/devices/platform/i8042/serio1/power/wakeup控制，只能通过acpi的接口进行控制
             QDBusInterface interface(INPUT_SERVICE_NAME, INPUT_WAKEUP_SERVICE_PATH, INPUT_WAKEUP_PROPERTIES_INTERFACE, QDBusConnection::systemBus());
             if (interface.isValid()) {

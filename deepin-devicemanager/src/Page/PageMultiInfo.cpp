@@ -325,7 +325,7 @@ void PageMultiInfo::getTableListInfo(const QList<DeviceBaseInfo *> &lst, QList<Q
         if (input) {
             menuControl.append(input->canWakeupMachine() ? "true" : "false");
             menuControl.append(input->wakeupPath());
-            if (info->name().contains("PS/2")) {
+            if (info->name().contains("PS/2") || input->getInterface().contains("PS/2")) {
                 menuControl.append(input->getBusInfo());
                 menuControl.append(input->name());
                 menuControl.append(input->hardwareClass());

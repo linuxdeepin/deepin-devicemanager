@@ -437,12 +437,12 @@ EnableDeviceStatus DeviceInput::setEnable(bool e)
         }
         if(e){
             //鼠标启用时，唤醒能力打开
-            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), true, name(), m_HardwareClass);
+            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), true, name(), m_HardwareClass, m_Interface);
             m_wakeupChanged = true;
 
         } else if (m_wakeupChanged) { //鼠标禁用时，唤醒能力关闭
             m_wakeupChanged = false;
-            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), false, name(), m_HardwareClass);
+            DBusWakeupInterface::getInstance()->setWakeupMachine(wakeupID(), sysPath(), false, name(), m_HardwareClass, m_Interface);
         }
         bool res  = DBusEnableInterface::getInstance()->enable(m_HardwareClass, m_Name, m_SysPath, m_UniqueID, e, m_Driver);
         if (res) {
@@ -505,7 +505,7 @@ QString DeviceInput::wakeupPath()
         return "";
     }
 
-    if (m_Name.contains("PS/2")) {
+    if (m_Name.contains("PS/2") || m_Interface.contains("PS/2")) {
         return "/proc/acpi/wakeup";
     } else {
         return QString("/sys") + m_SysPath.left(index) + QString("/power/wakeup");
