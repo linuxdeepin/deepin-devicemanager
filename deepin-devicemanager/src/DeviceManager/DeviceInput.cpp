@@ -239,6 +239,13 @@ bool DeviceInput::getPS2Syspath(const QString &dfs)
         }
     }
 
+    // 匹配失败时 m_SysPath 仍保留 hwinfo 原始 SysFS ID（含 /input/inputN 或 /inputN 后缀），
+    // 需剥离后缀得到正确设备 syspath，否则 wakeupPath() 等会拼出错误路径
+    if (m_SysPath.contains("i2c_designware"))
+        m_SysPath.remove(QRegExp("/input/input[0-9]{1,2}$"));
+    else
+        m_SysPath.remove(QRegExp("/input[0-9]{1,2}$"));
+
     return true;
 }
 
