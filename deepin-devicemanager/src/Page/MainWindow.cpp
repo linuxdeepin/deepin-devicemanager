@@ -140,6 +140,16 @@ void MainWindow::refreshDataBaseLater()
 MainWindow::~MainWindow()
 {
     // 释放指针
+    // 释放异步 xrandr 线程：先断开 finished 信号避免析构中途触发槽；
+    // wait() 无超时等待，因 runCmd 每子进程已限 5s+1s，双 runCmd 最长约 12s 内结束，
+    // 保证 run() 退出后再释放对象，避免 use-after-free
+    if (mp_XrandrThread) {
+        mp_XrandrThread->disconnect(this);      // 避免 finished 槽在析构中途触发
+        if (mp_XrandrThread->isRunning())
+            mp_XrandrThread->wait();             // runCmd 每子进程已限 5s+1s，最长 ~12s 内结束
+        delete mp_XrandrThread;
+        mp_XrandrThread = nullptr;
+    }
     if (mp_WorkingThread && mp_WorkingThread->isRunning())
         mp_WorkingThread->terminate();
     while (mp_WorkingThread && mp_WorkingThread->isRunning()) {}
@@ -548,16 +558,21 @@ void MainWindow::slotLoadingFinish(const QString &message)
 
 void MainWindow::slotListItemClicked(const QString &itemStr)
 {
-    // xrandr would be execed later
-    if (tr("Monitor") == itemStr || tr("Overview") == itemStr) { //点击显示设备，执行线程加载信息
-        ThreadExecXrandr tx(false, !checkWaylandMode());
-        tx.start();
-        tx.wait();
-    } else if (tr("Display Adapter") == itemStr) { //点击显示适配器，执行线程加载信息
-        ThreadExecXrandr tx(true, !checkWaylandMode());
-        tx.start();
-        tx.wait();
-    } else if (tr("CPU") == itemStr) { //点击处理器，执行加载处理器信息线程
+    // 显示相关模块：异步获取 xrandr 信息，避免在 UI 线程同步等待子进程阻塞事件循环
+    if (tr("Monitor") == itemStr || tr("Overview") == itemStr || tr("Display Adapter") == itemStr) {
+        m_xrandrItem = itemStr;
+        // 上一次异步 xrandr 仍在运行时，仅记录最新待刷新项，待其结束后处理
+        if (mp_XrandrThread && mp_XrandrThread->isRunning()) {
+            return;
+        }
+        startAsyncXrandr(itemStr);
+        return;
+    }
+
+    // 切换到非显示模块时，取消待完成的显示模块刷新，避免异步完成后回切界面
+    m_xrandrItem.clear();
+
+    if (tr("CPU") == itemStr) { //点击处理器，执行加载处理器信息线程
         LoadCpuInfoThread lct;
         lct.start();
         lct.wait();
@@ -572,24 +587,67 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());
     }
 
-        ThreadExecXrandr txgpu(true, !checkWaylandMode());
-        txgpu.start();
-        txgpu.wait();
-        if(monitorNumber != txgpu.getMonitorNumber()) {
+    // 数据刷新时不处理界面刷新
+    if (m_refreshing || mp_WorkingThread->isRunning()) return;
 
-            QString info;
-            DBusInterface::getInstance()->getInfo("is_server_running", info);
-            //请求后台更新信息
-            if (!info.toInt()) {
-                refreshDataBaseLater();
-            }
-            qCDebug(appLog)<< "Monitor refreshInfo" << __LINE__  << QDateTime::currentDateTime().toString("hh:mm:ss") << info << monitorNumber;
-            monitorNumber = txgpu.getMonitorNumber();
+    updateDeviceForItem(itemStr);
+}
+
+void MainWindow::startAsyncXrandr(const QString &itemStr)
+{
+    // 兜底：正常路径下此分支不可达（上层 isRunning() 短路、完成槽已置空），
+    // 仅防御极端时序下残留的线程对象
+    if (mp_XrandrThread) {
+        mp_XrandrThread->deleteLater();
+        mp_XrandrThread = nullptr;
+    }
+    bool gpu = (tr("Display Adapter") == itemStr);
+    mp_XrandrThread = new ThreadExecXrandr(gpu, !checkWaylandMode());
+    m_xrandrStartedItem = itemStr;
+    connect(mp_XrandrThread, &QThread::finished, this, &MainWindow::slotXrandrFinished);
+    mp_XrandrThread->start();
+}
+
+void MainWindow::slotXrandrFinished()
+{
+    if (!mp_XrandrThread) {
+        return;
+    }
+
+    // 显示器热插拔检测：monitorNumber 变化则请求后台刷新信息
+    if (monitorNumber != mp_XrandrThread->getMonitorNumber()) {
+        QString info;
+        DBusInterface::getInstance()->getInfo("is_server_running", info);
+        //请求后台更新信息
+        if (!info.toInt()) {
+            refreshDataBaseLater();
         }
+        qCDebug(appLog) << "Monitor refreshInfo" << __LINE__ << QDateTime::currentDateTime().toString("hh:mm:ss") << info << monitorNumber;
+        monitorNumber = mp_XrandrThread->getMonitorNumber();
+    }
+
+    QString item = m_xrandrItem;
+    mp_XrandrThread->deleteLater();
+    mp_XrandrThread = nullptr;
+
+    // 异步执行期间切换到非显示模块：不再回切显示界面
+    if (item.isEmpty()) {
+        return;
+    }
+    // 异步执行期间切换到其他显示模块：按最新项重新加载对应 xrandr 信息
+    if (item != m_xrandrStartedItem) {
+        startAsyncXrandr(item);
+        return;
+    }
 
     // 数据刷新时不处理界面刷新
     if (m_refreshing || mp_WorkingThread->isRunning()) return;
 
+    updateDeviceForItem(item);
+}
+
+void MainWindow::updateDeviceForItem(const QString &itemStr)
+{
     QList<DeviceBaseInfo *> lst;
     bool ret = DeviceManager::instance()->getDeviceList(itemStr, lst);
 

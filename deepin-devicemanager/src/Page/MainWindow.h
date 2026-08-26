@@ -23,6 +23,7 @@ class DeviceWidget;
 class LoadInfoThread;
 class PageDriverManager;
 class DriverScanWidget;
+class ThreadExecXrandr;
 
 using namespace Dtk::Widget;
 
@@ -129,6 +130,18 @@ private:
      * @brief refreshDataBaseLater:刷新设备信息
      */
     void refreshDataBaseLater();
+
+    /**
+     * @brief startAsyncXrandr:异步获取 xrandr 显示信息，避免阻塞 UI 线程
+     * @param itemStr:当前点击的设备模块名
+     */
+    void startAsyncXrandr(const QString &itemStr);
+
+    /**
+     * @brief updateDeviceForItem:根据模块名获取设备列表并刷新界面
+     * @param itemStr:设备模块名
+     */
+    void updateDeviceForItem(const QString &itemStr);
 private slots:
     /**
      * @brief slotSetPage
@@ -159,6 +172,11 @@ private slots:
     void slotExportInfo();
 
     /**
+     * @brief slotXrandrFinished:异步 xrandr 信息加载完成槽
+     */
+    void slotXrandrFinished();
+
+    /**
      * @brief changeUI:UI界面变化,BIOS界面行高
      */
     void slotChangeUI();
@@ -177,6 +195,9 @@ private:
     DriverScanWidget      *mp_DriverScanWidget;        //驱动管理扫描界面
     PageDriverManager     *mp_DriverManager;           //驱动管理主界面
     LoadInfoThread        *mp_WorkingThread;           //信息加载线程
+    ThreadExecXrandr      *mp_XrandrThread = nullptr;  //异步获取 xrandr 信息的线程
+    QString               m_xrandrItem;                //异步 xrandr 完成后待刷新的模块
+    QString               m_xrandrStartedItem;         //当前异步 xrandr 实际加载的模块
     DButtonBox            *mp_ButtonBox;               // titlebar上添加Buttonbox
     bool                  m_refreshing = false;        // 判断界面是否正在刷新
     bool                  m_IsFirstRefresh = true;
