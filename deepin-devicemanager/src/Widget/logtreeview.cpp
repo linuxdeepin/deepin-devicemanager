@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
+// Copyright (C) 2019 - 2026 Deepin Technology Co., Ltd.
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -189,6 +189,8 @@ void LogTreeView::initUI()
 
     // 表头
     mp_HeaderView = new LogViewHeaderView(Qt::Horizontal, this);
+    mp_HeaderView->setObjectName("MpHeaderView");
+    mp_HeaderView->setAccessibleName("MpHeaderView");
     setHeader(mp_HeaderView);
 
     // 设置不可编辑

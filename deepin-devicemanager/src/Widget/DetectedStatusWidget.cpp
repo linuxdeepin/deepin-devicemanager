@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -77,6 +77,16 @@ DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
 {
     qCDebug(appLog) << "Initializing UI and connections";
     initUI();
+    mp_InstallButton->setObjectName("MpInstallButton");
+    mp_InstallButton->setAccessibleName("MpInstallButton");
+    mp_ReDetectedSgButton->setObjectName("MpReDetectedSgButton");
+    mp_ReDetectedSgButton->setAccessibleName("MpReDetectedSgButton");
+    mp_BackupSgButton->setObjectName("MpBackupSgButton");
+    mp_BackupSgButton->setAccessibleName("MpBackupSgButton");
+    mp_CancelButton->setObjectName("MpCancelButton");
+    mp_CancelButton->setAccessibleName("MpCancelButton");
+    mp_ReDetectedIconButton->setObjectName("MpReDetectedIconButton");
+    mp_ReDetectedIconButton->setAccessibleName("MpReDetectedIconButton");
     initConnect();
 }
 

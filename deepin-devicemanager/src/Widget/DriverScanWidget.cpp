@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -319,6 +319,10 @@ void DriverScanWidget::initUI()
     area->setWidgetResizable(true);
     area->setWidget(mp_ScrollWidget);
     mp_ScroBar = area->verticalScrollBar();
+    mp_ScroBar->setObjectName("MpScroBar");
+    mp_ScroBar->setAccessibleName("MpScroBar");
+    mp_ReScanButton->setObjectName("MpReScanButton");
+    mp_ReScanButton->setAccessibleName("MpReScanButton");
 
     mainLayout->addWidget(area);
     this->setLayout(mainLayout);

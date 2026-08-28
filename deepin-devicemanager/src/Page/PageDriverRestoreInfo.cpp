@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2023 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -101,6 +101,8 @@ void PageDriverRestoreInfo::initUI()
     mp_GotoBackupSgButton->setText(tr("Go to Backup Driver"));
     mp_GotoBackupSgButton->setFixedWidth(310);
     mp_GotoBackupSgButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    mp_GotoBackupSgButton->setObjectName("MpGotoBackupSgButton");
+    mp_GotoBackupSgButton->setAccessibleName("MpGotoBackupSgButton");
     mp_GotoBackupSgButton->setFocusPolicy(Qt::NoFocus);
 
     noRestoreMainLayout->addStretch();

@@ -44,8 +44,16 @@ TableWidget::TableWidget(QWidget *parent)
     , mp_Menu(new DMenu(this))
 
 {
+    mp_Enable->setObjectName("MpEnable");
+    mp_Refresh->setObjectName("MpRefresh");
+    mp_Export->setObjectName("MpExport");
+    mp_updateDriver->setObjectName("MpUpdateDriver");
+    mp_removeDriver->setObjectName("MpRemoveDriver");
+    mp_WakeupMachine->setObjectName("MpWakeupMachine");
     qCDebug(appLog) << "TableWidget instance created";
     initWidget();
+    mp_Table->setObjectName("MpTable");
+    mp_Table->setAccessibleName("MpTable");
 
     // 连接信号和曹函数
     connect(mp_Table, &LogTreeView::clicked, this, &TableWidget::slotItemClicked);
@@ -263,6 +271,8 @@ void TableWidget::slotShowMenu(const QPoint &point)
 
     // 添加按钮到菜单
     mp_Menu->addAction(mp_Refresh);
+    mp_Menu->setObjectName("MpMenu");
+    mp_Menu->setAccessibleName("MpMenu");
     mp_Menu->addAction(mp_Export);
     QModelIndexList selected = mp_Table->selectionModel()->selectedRows();
 

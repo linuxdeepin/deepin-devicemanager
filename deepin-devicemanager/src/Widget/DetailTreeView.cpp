@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -173,6 +173,8 @@ void DetailTreeView::setCommanLinkButton(int row)
 
     // 设置mp_CommandBtn属性
     mp_CommandBtn = new DCommandLinkButton(tr("More"), this);
+    mp_CommandBtn->setObjectName("MpCommandBtn");
+    mp_CommandBtn->setAccessibleName("MpCommandBtn");
 
     // 当页面已展开按钮文字为收起
     if (m_IsExpand) {

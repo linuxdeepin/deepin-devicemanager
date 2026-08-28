@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019 - 2026 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -43,6 +43,10 @@ void UrlChooserEdit::initUI()
    mp_urlBtn->setFixedSize(40,36);
    mp_urlBtn->setIcon(DStyleHelper(mp_urlEdit->style()).standardIcon(DStyle::SP_SelectElement, nullptr));
    mp_urlBtn->setIconSize(QSize(24,24));
+   mp_urlBtn->setObjectName("MpUrlBtn");
+   mp_urlBtn->setAccessibleName("MpUrlBtn");
+   mp_urlEdit->setObjectName("MpUrlEdit");
+   mp_urlEdit->setAccessibleName("MpUrlEdit");
    QHBoxLayout *mainLayout = new QHBoxLayout;
    setContentsMargins(0,0,0,0);
    mainLayout->setContentsMargins(0,0,0,0);

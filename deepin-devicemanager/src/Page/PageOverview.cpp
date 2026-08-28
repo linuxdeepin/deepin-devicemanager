@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -44,6 +44,9 @@ PageOverview::PageOverview(DWidget *parent)
     , mp_Copy(new QAction(/*QIcon::fromTheme("edit-copy"), */tr("Copy"), this))
     , mp_Menu(new DMenu(this))
 {
+    mp_Refresh->setObjectName("MpRefresh");
+    mp_Export->setObjectName("MpExport");
+    mp_Copy->setObjectName("MpCopy");
     qCDebug(appLog) << "PageOverview constructor start";
     // 初始化界面布局
     initWidgets();
@@ -204,6 +207,8 @@ void PageOverview::slotShowMenu(const QPoint &)
     // 右键菜单
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
+    mp_Menu->setObjectName("MpMenu");
+    mp_Menu->setAccessibleName("MpMenu");
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());

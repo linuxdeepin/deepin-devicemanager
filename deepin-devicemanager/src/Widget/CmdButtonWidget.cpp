@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -85,6 +85,8 @@ void CmdButtonWidget::initUI()
 
     // 设置字号
     DFontSizeManager::instance()->bind(mp_cmdButton, DFontSizeManager::T8);
+    mp_cmdButton->setObjectName("MpCmdButton");
+    mp_cmdButton->setAccessibleName("MpCmdButton");
 
     // 将mp_CommandBtn放到布局中，居中
     QHBoxLayout *pHBoxLayout = new QHBoxLayout();
