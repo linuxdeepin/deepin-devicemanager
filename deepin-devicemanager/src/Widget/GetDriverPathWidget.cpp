@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -71,6 +71,8 @@ void GetDriverPathWidget::init()
     mainLayout->addWidget(mp_fileChooseEdit);
     mainLayout->addWidget(mp_includeCheckBox);
     mp_includeCheckBox->setCheckState(Qt::Checked);
+    mp_includeCheckBox->setObjectName("MpIncludeCheckBox");
+    mp_includeCheckBox->setAccessibleName("MpIncludeCheckBox");
     mainLayout->addSpacing(20);
     mainLayout->addStretch();
     mainLayout->addSpacing(20);

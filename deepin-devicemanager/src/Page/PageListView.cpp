@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -26,6 +26,8 @@ PageListView::PageListView(DWidget *parent)
     , mp_Menu(new QMenu(this))
     , m_CurType(tr("Overview"))
 {
+    mp_Refresh->setObjectName("MpRefresh");
+    mp_Export->setObjectName("MpExport");
     qCDebug(appLog) << "PageListView constructor start";
     //初始化界面
     QHBoxLayout *hLayout = new QHBoxLayout();
@@ -138,6 +140,8 @@ void PageListView::slotShowMenu(const QPoint &point)
     if (mp_ListView->indexAt(point).isValid()) {
         qCDebug(appLog) << "Show context menu";
         mp_Menu->addAction(mp_Export);
+        mp_Menu->setObjectName("MpMenu");
+        mp_Menu->setAccessibleName("MpMenu");
         mp_Menu->addAction(mp_Refresh);
 
         mp_Menu->exec(QCursor::pos());

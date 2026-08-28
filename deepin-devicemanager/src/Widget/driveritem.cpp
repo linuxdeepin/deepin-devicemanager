@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -28,6 +28,8 @@ DriverCheckItem::DriverCheckItem(DWidget *parent, bool header)
         hLayout->setContentsMargins(1, 0, 0, 0);
     }
     hLayout->addWidget(mp_cb);
+    mp_cb->setObjectName("MpCb");
+    mp_cb->setAccessibleName("MpCb");
     this->setLayout(hLayout);
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
@@ -241,6 +243,8 @@ DriverOperationItem::DriverOperationItem(DWidget *parent, Mode mode)
     mp_Btn->setIconSize(QSize(36, 36));
     m_mode = mode;
     setBtnIcon();
+    mp_Btn->setObjectName("MpBtn");
+    mp_Btn->setAccessibleName("MpBtn");
     this->setLayout(hLayout);
     // 处理信号逻辑
     connect(mp_Btn, &DIconButton::clicked, this, &DriverOperationItem::clicked);

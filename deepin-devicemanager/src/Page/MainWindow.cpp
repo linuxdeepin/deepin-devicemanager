@@ -85,6 +85,8 @@ MainWindow::MainWindow(QWidget *parent)
     qCDebug(appLog) << "MainWindow constructor start";
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
+    mp_ButtonBox->setObjectName("MpButtonBox");
+    mp_ButtonBox->setAccessibleName("MpButtonBox");
     qCDebug(appLog) << "MainWindow constructor end";
 
     // 加载设备信息

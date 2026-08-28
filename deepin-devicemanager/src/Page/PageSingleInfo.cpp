@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -51,6 +51,13 @@ PageSingleInfo::PageSingleInfo(QWidget *parent)
     , m_SameDevice(false)
     , m_ItemDelegate(new RichTextDelegate(this))
 {
+    mp_Refresh->setObjectName("MpRefresh");
+    mp_Export->setObjectName("MpExport");
+    mp_Copy->setObjectName("MpCopy");
+    mp_Enable->setObjectName("MpEnable");
+    mp_updateDriver->setObjectName("MpUpdateDriver");
+    mp_removeDriver->setObjectName("MpRemoveDriver");
+    mp_WakeupMachine->setObjectName("MpWakeupMachine");
     qCDebug(appLog) << "PageSingleInfo constructor start";
     // 初始化页面布局
     initWidgets();
@@ -252,6 +259,8 @@ void PageSingleInfo::slotShowMenu(const QPoint &)
 
     // 添加按钮到菜单
     mp_Menu->addAction(mp_Copy);
+    mp_Menu->setObjectName("MpMenu");
+    mp_Menu->setAccessibleName("MpMenu");
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     if (mp_Device->canEnable()) {

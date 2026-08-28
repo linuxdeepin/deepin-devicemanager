@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -36,6 +36,9 @@ TextBrowser::TextBrowser(QWidget *parent)
     , mp_Menu(new DMenu(this))
     , m_IsMenuShowing(false)
 {
+    mp_Refresh->setObjectName("MpRefresh");
+    mp_Export->setObjectName("MpExport");
+    mp_Copy->setObjectName("MpCopy");
     qCDebug(appLog) << "TextBrowser instance created";
     DFontSizeManager::instance()->bind(this, DFontSizeManager::SizeType(DFontSizeManager::T7));
     setFrameShape(QFrame::NoFrame);
@@ -222,6 +225,8 @@ void TextBrowser::slotShowMenu(const QPoint &)
     // 右键菜单
     mp_Menu->clear();
     mp_Menu->addAction(mp_Copy);
+    mp_Menu->setObjectName("MpMenu");
+    mp_Menu->setAccessibleName("MpMenu");
     mp_Menu->addAction(mp_Refresh);
     mp_Menu->addAction(mp_Export);
     mp_Menu->exec(QCursor::pos());
