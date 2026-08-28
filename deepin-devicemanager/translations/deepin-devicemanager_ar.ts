@@ -26,13 +26,13 @@
         <location filename="../src/Widget/DetailTreeView.cpp" line="169"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="398"/>
         <source>More</source>
-        <translation type="unfinished">المزيد</translation>
+        <translation>المزيد</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetailTreeView.cpp" line="173"/>
         <location filename="../src/Widget/DetailTreeView.cpp" line="405"/>
         <source>Collapse</source>
-        <translation type="unfinished">التجويف</translation>
+        <translation>طي</translation>
     </message>
 </context>
 <context>
