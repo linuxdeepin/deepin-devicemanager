@@ -526,6 +526,12 @@ void MainWindow::refreshDataBase()
 void MainWindow::slotSetPage(const QString &page)
 {
     qCDebug(appLog) << "MainWindow::slotSetPage page:" << page;
+#ifdef DISABLE_DRIVER
+    if ("driver" == page) {
+        qCInfo(appLog) << "Driver management is disabled";
+        return;
+    }
+#endif
     if ("driver" == page) {
         qCDebug(appLog) << "MainWindow::slotSetPage driver";
         if (m_IsFirstRefresh) {
