@@ -81,7 +81,6 @@ macro(SET_QT_VERSION)
     find_package(Qt5Network REQUIRED)
     find_package(DtkCore REQUIRED)
     find_package(PolkitQt5-1 REQUIRED)
-    find_package(QApt REQUIRED)
   else()
     message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION}")
   endif()
@@ -90,19 +89,21 @@ endmacro()
 # 调用宏
 SET_QT_VERSION()
 
-if(${QT_VERSION_MAJOR} EQUAL 6)
-    find_package(QApt-qt6 REQUIRED)
-    include_directories(${QApt-qt6_INCLUDE_DIRS})
-    set(QAPT_LIB QApt-qt6)
-elseif(${QT_VERSION_MAJOR} EQUAL 5)
-    find_package(QApt REQUIRED)
-    include_directories(${QApt_INCLUDE_DIRS})
-    set(QAPT_LIB QApt)
-else()
-    message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION_MAJOR}")
-endif()
+if(NOT DISABLE_DRIVER)
+    if(${QT_VERSION_MAJOR} EQUAL 6)
+        find_package(QApt-qt6 REQUIRED)
+        include_directories(${QApt-qt6_INCLUDE_DIRS})
+        set(QAPT_LIB QApt-qt6)
+    elseif(${QT_VERSION_MAJOR} EQUAL 5)
+        find_package(QApt REQUIRED)
+        include_directories(${QApt_INCLUDE_DIRS})
+        set(QAPT_LIB QApt)
+    else()
+        message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION_MAJOR}")
+    endif()
 
-PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+    PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
+endif()
 
 set(PROJECT_NAME_TEST
     ${PROJECT_NAME}-test)
@@ -119,6 +120,9 @@ file(GLOB_RECURSE CONTROL_SRCS
 # remove src main.cpp or will multi define
 list(REMOVE_ITEM INFO_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-deviceinfo/src/plugin.cpp)
 list(REMOVE_ITEM CONTROL_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/main.cpp)
+if(DISABLE_DRIVER)
+    list(FILTER CONTROL_SRCS EXCLUDE REGEX "/drivercontrol/")
+endif()
 
 #test src
 file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
@@ -150,8 +154,6 @@ if(${QT_VERSION_MAJOR} EQUAL 6)
     ${GTEST_MAIN_LIBRARIES}
     PolkitQt6-1::Agent
     pthread
-    kmod
-    ${QAPT_LIB}
     cups
     )
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
@@ -170,12 +172,16 @@ elseif(${QT_VERSION_MAJOR} EQUAL 5)
     ${GTEST_MAIN_LIBRARIES}
     PolkitQt5-1::Agent
     pthread
-    kmod
-    ${QAPT_LIB}
     cups
     )
 else()
     message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION_MAJOR}")
+endif()
+if(NOT DISABLE_DRIVER)
+    target_link_libraries(${PROJECT_NAME_TEST}
+        kmod
+        ${QAPT_LIB}
+    )
 endif()
 
 # 设置添加gocv相关信息的输出

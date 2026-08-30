@@ -31,6 +31,10 @@ endforeach()
 
 file(GLOB_RECURSE SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
+if(DISABLE_DRIVER)
+    list(FILTER SRC_CPP EXCLUDE REGEX "/drivercontrol/")
+    list(FILTER SRC_H EXCLUDE REGEX "/drivercontrol/")
+endif()
   
 # Find Qt package with detected version
 find_package(PkgConfig REQUIRED)
@@ -57,10 +61,9 @@ endif()
 # Find external dependencies
 find_package(${POLKITQT_NAME} REQUIRED)
 find_package(deepin-qdbus-service REQUIRED)
-find_package(${QAPT_NAME} REQUIRED)
-include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
-
 if(NOT DISABLE_DRIVER)
+    find_package(${QAPT_NAME} REQUIRED)
+    include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
     PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 endif()
 
@@ -84,7 +87,6 @@ if(${QT_VERSION_MAJOR} EQUAL 6)
         Qt${QT_VERSION_MAJOR}::Sql
         Qt${QT_VERSION_MAJOR}::Gui
         ${deepin-qdbus-service_INCLUDE_DIR}
-        ${QAPT_NAME}
     )
 
     target_link_libraries(${BIN_NAME} PRIVATE
@@ -96,7 +98,6 @@ if(${QT_VERSION_MAJOR} EQUAL 6)
         Dtk${DTK_VERSION_MAJOR}::Core
         Dtk${DTK_VERSION_MAJOR}::Widget
         ${deepin-qdbus-service_LIBRARIES}
-        ${QAPT_NAME}
         cups
     )
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
@@ -124,7 +125,7 @@ if(NOT DISABLE_DRIVER)
     target_link_libraries(${BIN_NAME} PRIVATE
         kmod
         ${QAPT_NAME}
-        )
+    )
 endif()
 
 install(TARGETS ${BIN_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})

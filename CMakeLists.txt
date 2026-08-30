@@ -6,8 +6,8 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
    set(CMAKE_INSTALL_PREFIX /usr)
 endif()
 
-set(DISABLE_DRIVER false CACHE BOOL "disable driver")
-if (DISABLE_DRIVER)
+option(DISABLE_DRIVER "Disable driver support" OFF)
+if(DISABLE_DRIVER)
     add_definitions(-DDISABLE_DRIVER)
 endif()
 

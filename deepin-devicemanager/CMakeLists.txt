@@ -43,13 +43,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--as-needed -fPIE -fstack-protector-strong -D_FORTIFY_SOURCE=2 -z noexecstack -pie -fPIC -z lazy")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pie")
 
-if(${QT_VERSION_MAJOR} EQUAL 6)
-    add_definitions(-DDISABLE_DRIVER)
-    message(STATUS "DISABLE_DRIVER macro added for Qt6 build")
-else()
-    message(STATUS "DISABLE_DRIVER macro NOT added for Qt5 build")
-endif()
-
 option (PERF_ON "Use provided math implementation" ON)
 
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "sw_64")
@@ -153,8 +146,10 @@ endif()
 
 # Find external dependencies
 find_package(${POLKITQT_NAME} REQUIRED)
-find_package(${QAPT_NAME} REQUIRED)
-include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
+if(NOT DISABLE_DRIVER)
+    find_package(${QAPT_NAME} REQUIRED)
+    include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
+endif()
 include_directories(${Qt${QT_VERSION_MAJOR}Gui_PRIVATE_INCLUDE_DIRS})
 
 # Tell CMake to create the executable
@@ -173,7 +168,6 @@ if(${QT_VERSION_MAJOR} EQUAL 6)
         Qt${QT_VERSION_MAJOR}::DBus
         Qt${QT_VERSION_MAJOR}::Xml
         Qt${QT_VERSION_MAJOR}::Network
-        ${QAPT_NAME}
         ${POLKITQT_NAME}::Agent
     )
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
@@ -186,11 +180,13 @@ elseif(${QT_VERSION_MAJOR} EQUAL 5)
         Qt${QT_VERSION_MAJOR}::DBus
         Qt${QT_VERSION_MAJOR}::Xml
         Qt${QT_VERSION_MAJOR}::Network
-        ${QAPT_NAME}
         ${POLKITQT_NAME}::Agent
     )
 else()
     message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
+endif()
+if(NOT DISABLE_DRIVER)
+    target_link_libraries(${APP_BIN_NAME} ${QAPT_NAME})
 endif()
 
 # Install files

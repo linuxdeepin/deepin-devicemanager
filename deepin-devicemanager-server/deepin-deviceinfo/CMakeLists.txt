@@ -57,8 +57,10 @@ endif()
 
 # Find external dependencies
 find_package(${POLKITQT_NAME} REQUIRED)
-find_package(${QAPT_NAME} REQUIRED)
-include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
+if(NOT DISABLE_DRIVER)
+    find_package(${QAPT_NAME} REQUIRED)
+    include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
+endif()
 
 add_library(${BIN_NAME} MODULE
     ${SRC_CPP}
@@ -70,7 +72,6 @@ if(${QT_VERSION_MAJOR} EQUAL 6)
     target_include_directories(${BIN_NAME} PUBLIC
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::DBus
-        ${QAPT_NAME}
     )
 
     target_link_libraries(${BIN_NAME} PRIVATE
@@ -80,7 +81,6 @@ if(${QT_VERSION_MAJOR} EQUAL 6)
         Qt${QT_VERSION_MAJOR}::DBus
         ${POLKITQT_NAME}::Agent
         ${Dtk6Core_LIBRARIES}
-        ${QAPT_NAME}
     )
 elseif(${QT_VERSION_MAJOR} EQUAL 5)
     target_include_directories(${BIN_NAME} PUBLIC
@@ -96,6 +96,9 @@ elseif(${QT_VERSION_MAJOR} EQUAL 5)
     )
 else()
     message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
+endif()
+if(NOT DISABLE_DRIVER AND ${QT_VERSION_MAJOR} EQUAL 6)
+    target_link_libraries(${BIN_NAME} PRIVATE ${QAPT_NAME})
 endif()
 
 
