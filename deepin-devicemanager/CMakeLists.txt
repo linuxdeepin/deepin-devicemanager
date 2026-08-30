@@ -121,6 +121,9 @@ set(QT_COMPONENTS
 # Add components only available in Qt6, remove SvgWidgets from Qt5
 if(${QT_VERSION_MAJOR} EQUAL 6)
     list(APPEND QT_COMPONENTS OpenGL OpenGLWidgets)
+    if(Qt6_VERSION VERSION_GREATER_EQUAL 6.10.0)
+        list(APPEND QT_COMPONENTS CorePrivate)
+    endif()
 else()
     # Remove SvgWidgets for Qt5 (not available)
     list(REMOVE_ITEM QT_COMPONENTS SvgWidgets)
@@ -165,6 +168,7 @@ if(${QT_VERSION_MAJOR} EQUAL 6)
         Dtk${DTK_VERSION_MAJOR}::Widget
         Qt${QT_VERSION_MAJOR}::Core
         Qt${QT_VERSION_MAJOR}::Gui
+        Qt${QT_VERSION_MAJOR}::CorePrivate
         Qt${QT_VERSION_MAJOR}::Widgets
         Qt${QT_VERSION_MAJOR}::DBus
         Qt${QT_VERSION_MAJOR}::Xml
