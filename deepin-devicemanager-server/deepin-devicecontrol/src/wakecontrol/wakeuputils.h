@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -16,6 +16,7 @@
 
 class WakeupUtils
 {
+public:
     /**
      * @brief The EthStatus enum
      * ioctl操作网络设备的返回值定义
@@ -29,7 +30,6 @@ class WakeupUtils
         ES_WAKE_ON_UNKNOW           // 位置错误
     };
 
-public:
     WakeupUtils();
 
     /**
@@ -68,6 +68,25 @@ public:
      * @return 返回设置状态
      */
     static bool setWakeOnLan(const QString &logicalName, bool open);
+
+    /**
+     * @brief writeTlpWolConfig 写入/删除 TLP 的 WoL 持久化配置文件
+     * @param wakeup true 生成配置，false 删除
+     * @return 操作是否成功
+     */
+    static bool writeTlpWolConfig(bool wakeup);
+
+    /**
+     * @brief tlpWolConfigEnabled 配置文件存在且内容与写入一致（即唤醒开启）
+     * @return 内容一致为 true
+     */
+    static bool tlpWolConfigEnabled();
+
+    /**
+     * @brief setWakeOnLanAll 对所有支持 WoL 的网卡统一设置
+     * @param open 开启或者关闭
+     */
+    static void setWakeOnLanAll(bool open);
 
 private:
     /**
