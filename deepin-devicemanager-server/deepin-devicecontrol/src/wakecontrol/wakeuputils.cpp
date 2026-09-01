@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -9,6 +9,8 @@
 #include <QStringList>
 #include <QMap>
 #include <QFile>
+#include <QSaveFile>
+#include <QDir>
 #include <QLoggingCategory>
 #include <QCryptographicHash>
 #include <QRegularExpression>
@@ -182,6 +184,74 @@ bool WakeupUtils::setWakeOnLan(const QString &logicalName, bool open)
     if (0 == ioctl(fd, SIOCETHTOOL, &ifr))
         return true;
     return false;
+}
+
+const QString TLP_WOL_CONF_DIR = "/etc/tlp.d";
+const QString TLP_WOL_CONF_PATH = TLP_WOL_CONF_DIR + "/99-device-manager-wol.conf";
+// 写入与校验共用同一内容，避免两处不一致
+const QByteArray TLP_WOL_CONF_CONTENT = "WOL_DISABLE=N\nWOL_ENABLE=g\n";
+
+bool WakeupUtils::writeTlpWolConfig(bool wakeup)
+{
+    if (wakeup) {
+        QDir dir(TLP_WOL_CONF_DIR);
+        if (!dir.exists() && !dir.mkpath(".")) {
+            qCWarning(appLog) << "Failed to create tlp config dir:" << TLP_WOL_CONF_DIR;
+            return false;
+        }
+
+        // 原子写入，不跟随符号链接
+        QSaveFile file(TLP_WOL_CONF_PATH);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
+            qCWarning(appLog) << "Failed to open tlp wol conf for writing:" << TLP_WOL_CONF_PATH;
+            return false;
+        }
+        // 权限固定 0644，不依赖进程 umask
+        file.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner
+                            | QFileDevice::ReadGroup | QFileDevice::ReadOther);
+        qint64 size = file.write(TLP_WOL_CONF_CONTENT);
+        if (size < 1 || !file.commit()) {
+            qCWarning(appLog) << "Failed to write tlp wol conf:" << TLP_WOL_CONF_PATH;
+            return false;
+        }
+        qCInfo(appLog) << "TLP wol config written:" << TLP_WOL_CONF_PATH;
+        return true;
+    } else {
+        if (!QFile::exists(TLP_WOL_CONF_PATH))
+            return true;
+        if (!QFile::remove(TLP_WOL_CONF_PATH)) {
+            qCWarning(appLog) << "Failed to remove tlp wol conf:" << TLP_WOL_CONF_PATH;
+            return false;
+        }
+        qCInfo(appLog) << "TLP wol config removed:" << TLP_WOL_CONF_PATH;
+        return true;
+    }
+}
+
+bool WakeupUtils::tlpWolConfigEnabled()
+{
+    QFile file(TLP_WOL_CONF_PATH);
+    if (!file.open(QIODevice::ReadOnly))
+        return false;
+    const QByteArray content = file.readAll();
+    file.close();
+    return content == TLP_WOL_CONF_CONTENT;
+}
+
+void WakeupUtils::setWakeOnLanAll(bool open)
+{
+    qCDebug(appLog) << "Setting Wake-on-LAN for all supported interfaces, enable:" << open;
+    QDir netDir("/sys/class/net");
+    const QStringList lstIf = netDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    foreach (const QString &name, lstIf) {
+        EthStatus st = wakeOnLanIsOpen(name);
+        // 不支持 WoL 的或已处于目标状态的跳过
+        if (ES_WAKE_ON_OPEN != st && ES_WAKE_ON_CLOSE != st)
+            continue;
+        if (open == (ES_WAKE_ON_OPEN == st))
+            continue;
+        setWakeOnLan(name, open);
+    }
 }
 
 bool WakeupUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInfo)
