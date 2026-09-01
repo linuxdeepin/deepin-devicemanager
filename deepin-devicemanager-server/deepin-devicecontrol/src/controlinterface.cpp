@@ -339,12 +339,11 @@ bool ControlInterface::setNetworkWake(const QString &logicalName, bool wakeup)
 {
     if (!getUserAuthorPasswd())
         return {};
-    bool res = WakeupUtils::setWakeOnLan(logicalName, wakeup);
-    if (res) {
-        // 将数据保存到数据库
-        EnableSqlManager::getInstance()->insertNetworkWakeup(logicalName, wakeup);
-    }
-    return res;
+    Q_UNUSED(logicalName)
+    // ioctl 立即生效，对所有支持 WoL 的网卡统一设置
+    WakeupUtils::setWakeOnLanAll(wakeup);
+    // 配置文件存在性即唤醒状态，用于持久化
+    return WakeupUtils::writeTlpWolConfig(wakeup);
 }
 
 void ControlInterface::updateWakeup(const QString &devInfo)
@@ -358,7 +357,14 @@ int ControlInterface::isNetworkWakeup(const QString &logicalName)
 {
     if (!getUserAuthorPasswd())
         return {};
-    return WakeupUtils::wakeOnLanIsOpen(logicalName);
+    // 不支持 WoL 的返回原状态码，前端置灰
+    WakeupUtils::EthStatus st = WakeupUtils::wakeOnLanIsOpen(logicalName);
+    if (WakeupUtils::ES_WAKE_ON_OPEN != st && WakeupUtils::ES_WAKE_ON_CLOSE != st)
+        return st;
+
+    // 不区分网卡，状态以配置文件存在性为准
+    return WakeupUtils::tlpWolConfigEnabled() ? WakeupUtils::ES_WAKE_ON_OPEN
+                                              : WakeupUtils::ES_WAKE_ON_CLOSE;
 }
 
 void ControlInterface::setMonitorWorkingDBFlag(bool flag)
