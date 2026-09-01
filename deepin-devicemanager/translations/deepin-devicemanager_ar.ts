@@ -850,7 +850,7 @@
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1333"/>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1459"/>
         <source>Max Frequency</source>
-        <translation type="unfinished"/>
+        <translation>أقصى تردد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1334"/>
@@ -1163,7 +1163,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1397"/>
         <source>Refresh Rate</source>
-        <translation type="unfinished"/>
+        <translation>معدل التحديث</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1398"/>
@@ -1344,7 +1344,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1433"/>
         <source>temperature</source>
-        <translation type="unfinished"/>
+        <translation>درجة الحرارة</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1434"/>
@@ -1466,7 +1466,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1458"/>
         <source>Frequency</source>
-        <translation type="unfinished"/>
+        <translation>التردد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceInfo.cpp" line="1463"/>
@@ -1819,12 +1819,12 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Frequency</source>
-        <translation type="unfinished"/>
+        <translation>التردد</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
         <source>Max Frequency</source>
-        <translation type="unfinished"/>
+        <translation>أقصى تردد</translation>
     </message>
 </context>
 <context>
@@ -1832,12 +1832,12 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1539"/>
         <source>Model Name</source>
-        <translation type="unfinished"/>
+        <translation>اسم الطراز</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1543"/>
         <source>Vendor ID</source>
-        <translation type="unfinished"/>
+        <translation>معرف البائع</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1547"/>
@@ -1847,32 +1847,32 @@
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1551"/>
         <source>CPU(s)</source>
-        <translation type="unfinished"/>
+        <translation>CPU</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1553"/>
         <source>Thread(s)</source>
-        <translation type="unfinished"/>
+        <translation>الخيوط</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1562"/>
         <source>L1d cache</source>
-        <translation type="unfinished"/>
+        <translation>ذاكرة L1d المؤقتة</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1572"/>
         <source>L1i cache</source>
-        <translation type="unfinished"/>
+        <translation>ذاكرة L1i المؤقتة</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1582"/>
         <source>L2 cache</source>
-        <translation type="unfinished"/>
+        <translation>ذاكرة L2 المؤقتة</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1592"/>
         <source>L3 cache</source>
-        <translation type="unfinished"/>
+        <translation>ذاكرة L3 المؤقتة</translation>
     </message>
 </context>
 <context>
@@ -2022,7 +2022,7 @@
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="654"/>
         <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="657"/>
         <source>%1@%2Hz</source>
-        <translation type="unfinished"/>
+        <translation>%1@%2هرتز</translation>
     </message>
 </context>
 <context>
