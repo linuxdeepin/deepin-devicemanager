@@ -2161,7 +2161,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="376"/>
         <source>Refresh</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="380"/>
@@ -2229,7 +2229,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Aktuell version</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
@@ -2245,7 +2245,7 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="102"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Åtgärd</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="193"/>
@@ -2341,7 +2341,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
         <source>Update</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
@@ -2378,7 +2378,7 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="382"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Okänt fel</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="383"/>
@@ -2426,7 +2426,7 @@
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="114"/>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="127"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Åtgärd</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="124"/>
@@ -2436,22 +2436,22 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Aktuell version</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="230"/>
         <source>Missing drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Saknade drivrutiner (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="231"/>
         <source>Outdated drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Inaktuella drivrutiner (%1)</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="232"/>
         <source>Up-to-date drivers (%1)</source>
-        <translation type="unfinished"/>
+        <translation>Aktuella drivrutiner (%1)</translation>
     </message>
 </context>
 <context>
@@ -2461,7 +2461,7 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="118"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="548"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Installera drivrutin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="102"/>
@@ -2469,13 +2469,13 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="119"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="550"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopiera drivrutin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="120"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="552"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Återställ drivrutin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="723"/>
@@ -2493,12 +2493,12 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="98"/>
         <source>You do not have any drivers to restore, please backup first</source>
-        <translation type="unfinished"/>
+        <translation>Du har inga drivrutiner att återställa. Säkerhetskopiera först.</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="101"/>
         <source>Go to Backup Driver</source>
-        <translation type="unfinished"/>
+        <translation>Gå till Säkerhetskopiera drivrutin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="129"/>
@@ -2508,22 +2508,22 @@
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="130"/>
         <source>Current Version</source>
-        <translation type="unfinished"/>
+        <translation>Aktuell version</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
         <source>Backup Version</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopierad version</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
         <source>Action</source>
-        <translation type="unfinished"/>
+        <translation>Åtgärd</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="180"/>
         <source>Restorable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Drivrutiner som kan återställas</translation>
     </message>
 </context>
 <context>
@@ -2531,7 +2531,7 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="24"/>
         <source>Refresh</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="25"/>
@@ -2546,17 +2546,17 @@
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Install</source>
-        <translation type="unfinished"/>
+        <translation>Installera drivrutin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Backup</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopiera drivrutin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageListView.cpp" line="132"/>
         <source>Driver Restore</source>
-        <translation type="unfinished"/>
+        <translation>Återställ drivrutin</translation>
     </message>
 </context>
 <context>
@@ -2595,7 +2595,7 @@
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="244"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Det gick inte att inaktivera: kunde inte hämta enhetens serienummer</translation>
     </message>
     <message>
         <location filename="../src/Page/PageMultiInfo.cpp" line="271"/>
@@ -2613,7 +2613,7 @@
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="42"/>
         <source>Refresh</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/Page/PageOverview.cpp" line="43"/>
@@ -2636,7 +2636,7 @@
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="42"/>
         <source>Refresh</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="43"/>
@@ -2652,22 +2652,22 @@
         <location filename="../src/Page/PageSingleInfo.cpp" line="45"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="233"/>
         <source>Enable</source>
-        <translation type="unfinished"/>
+        <translation>Aktivera</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="46"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera drivrutiner</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="47"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>Avinstallera drivrutiner</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="48"/>
         <source>Allow it to wake the computer</source>
-        <translation type="unfinished"/>
+        <translation>Tillåt att den väcker datorn</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="236"/>
@@ -2678,7 +2678,7 @@
         <location filename="../src/Page/PageSingleInfo.cpp" line="339"/>
         <location filename="../src/Page/PageSingleInfo.cpp" line="359"/>
         <source>Failed to disable it: unable to get the device SN</source>
-        <translation type="unfinished"/>
+        <translation>Det gick inte att inaktivera: kunde inte hämta enhetens serienummer</translation>
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="344"/>
@@ -2717,7 +2717,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
         <source>No CPU found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen CPU hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1772"/>
@@ -2733,7 +2733,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1830"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1867"/>
         <source>No motherboard found</source>
-        <translation type="unfinished"/>
+        <translation>Inget moderkort hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1773"/>
@@ -2749,7 +2749,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1831"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1868"/>
         <source>No memory found</source>
-        <translation type="unfinished"/>
+        <translation>Inget minne hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1774"/>
@@ -2765,12 +2765,12 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1832"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1869"/>
         <source>No disk found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen disk hittades</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="721"/>
         <source>Driver restore failed!</source>
-        <translation type="unfinished"/>
+        <translation>Det gick inte att återställa drivrutinen!</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverManager.cpp" line="717"/>
@@ -3193,13 +3193,13 @@
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="884"/>
         <source>Install All</source>
-        <translation type="unfinished"/>
+        <translation>Installera alla</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="889"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
         <source>Scan Again</source>
-        <translation type="unfinished"/>
+        <translation>Sök igen</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="899"/>
@@ -3209,45 +3209,45 @@
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="75"/>
         <source>Scanning hardware device drivers, please wait...</source>
-        <translation type="unfinished"/>
+        <translation>Söker efter drivrutiner för maskinvaruenheter, vänta …</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="83"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="376"/>
         <source>Scanning %1</source>
-        <translation type="unfinished"/>
+        <translation>Söker efter %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="141"/>
         <source>Scan failed</source>
-        <translation type="unfinished"/>
+        <translation>Sökningen misslyckades</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="201"/>
         <source>Network unavailable</source>
-        <translation type="unfinished"/>
+        <translation>Nätverket är inte tillgängligt</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="205"/>
         <source>Please check your network connection</source>
-        <translation type="unfinished"/>
+        <translation>Kontrollera nätverksanslutningen</translation>
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="301"/>
         <source>Please scan again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Sök igen eller %1 till oss</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="763"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Du installerar en drivrutin. Om du avslutar avbryts installationen.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="764"/>
         <location filename="../src/Page/MainWindow.cpp" line="780"/>
         <location filename="../src/Page/MainWindow.cpp" line="796"/>
         <source>Are you sure you want to exit?</source>
-        <translation type="unfinished"/>
+        <translation>Är du säker på att du vill avsluta?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="767"/>
@@ -3255,7 +3255,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="799"/>
         <source>Exit</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Avsluta</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="768"/>
@@ -3268,143 +3268,143 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="779"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Du säkerhetskopierar drivrutiner. Om du avslutar avbryts säkerhetskopieringen.</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="795"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
-        <translation type="unfinished"/>
+        <translation>Du återställer drivrutiner. Om du avslutar avbryts återställningen.</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="49"/>
         <source>Bluetooth adapter</source>
-        <translation type="unfinished"/>
+        <translation>Bluetooth-adapter</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="50"/>
         <location filename="../src/Tool/commontools.cpp" line="57"/>
         <source>Imaging device</source>
-        <translation type="unfinished"/>
+        <translation>Bildbehandlingsenhet</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="51"/>
         <source>Display adapter</source>
-        <translation type="unfinished"/>
+        <translation>Bildskärmsadapter</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="53"/>
         <source>Sound card</source>
-        <translation type="unfinished"/>
+        <translation>Ljudkort</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="55"/>
         <source>Network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Nätverksadapter</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="59"/>
         <source>Wireless network adapter</source>
-        <translation type="unfinished"/>
+        <translation>Trådlös nätverksadapter</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="79"/>
         <source>Installation successful</source>
-        <translation type="unfinished"/>
+        <translation>Installationen lyckades</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="80"/>
         <source>Installation failed</source>
-        <translation type="unfinished"/>
+        <translation>Installationen misslyckades</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="81"/>
         <source>Downloading</source>
-        <translation type="unfinished"/>
+        <translation>Hämtar</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="82"/>
         <source>Installing</source>
-        <translation type="unfinished"/>
+        <translation>Installerar</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="83"/>
         <source>Not installed</source>
-        <translation type="unfinished"/>
+        <translation>Inte installerad</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="84"/>
         <source>Out-of-date</source>
-        <translation type="unfinished"/>
+        <translation>Inaktuell</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="85"/>
         <source>Waiting</source>
-        <translation type="unfinished"/>
+        <translation>Väntar</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="86"/>
         <source>Not backed up</source>
-        <translation type="unfinished"/>
+        <translation>Inte säkerhetskopierad</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="87"/>
         <source>Backing up</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopierar</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="88"/>
         <source>Backup failed</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopieringen misslyckades</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="89"/>
         <source>Backup successful</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopieringen lyckades</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="90"/>
         <source>Restoring</source>
-        <translation type="unfinished"/>
+        <translation>Återställer</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="94"/>
         <source>Unknown error</source>
-        <translation type="unfinished"/>
+        <translation>Okänt fel</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="95"/>
         <source>Network error</source>
-        <translation type="unfinished"/>
+        <translation>Nätverksfel</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="96"/>
         <source>Canceled</source>
-        <translation type="unfinished"/>
+        <translation>Avbruten</translation>
     </message>
     <message>
         <location filename="../src/Tool/commontools.cpp" line="97"/>
         <source>Failed to get driver files</source>
-        <translation type="unfinished"/>
+        <translation>Det gick inte att hämta drivrutinsfiler</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="268"/>
         <source>Update</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="274"/>
         <source>Backup</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopiera</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="280"/>
         <source>Restore</source>
-        <translation type="unfinished"/>
+        <translation>Återställ</translation>
     </message>
     <message>
         <location filename="../src/Widget/driveritem.cpp" line="263"/>
         <source>Install</source>
-        <translation type="unfinished"/>
+        <translation>Installera</translation>
     </message>
 </context>
 <context>
@@ -3418,7 +3418,7 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="39"/>
         <source>Refresh</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="40"/>
@@ -3428,24 +3428,24 @@
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="41"/>
         <source>Update drivers</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera drivrutiner</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="42"/>
         <source>Uninstall drivers</source>
-        <translation type="unfinished"/>
+        <translation>Avinstallera drivrutiner</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="43"/>
         <source>Allow it to wake the computer</source>
-        <translation type="unfinished"/>
+        <translation>Tillåt att den väcker datorn</translation>
     </message>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="238"/>
         <location filename="../src/Widget/TableWidget.cpp" line="379"/>
         <location filename="../src/Widget/TableWidget.cpp" line="387"/>
         <source>Enable</source>
-        <translation type="unfinished"/>
+        <translation>Aktivera</translation>
     </message>
 </context>
 <context>
@@ -3453,7 +3453,7 @@
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="33"/>
         <source>Refresh</source>
-        <translation type="unfinished"/>
+        <translation>Uppdatera</translation>
     </message>
     <message>
         <location filename="../src/Widget/TextBrowser.cpp" line="34"/>
