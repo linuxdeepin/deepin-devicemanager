@@ -1574,212 +1574,212 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="30"/>
         <source>Thirty-six</source>
-        <translation type="unfinished"/>
+        <translation>Trettiosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="31"/>
         <source>Thirty-eight</source>
-        <translation type="unfinished"/>
+        <translation>Trettioåtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="32"/>
         <source>Forty</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="33"/>
         <source>Forty-two</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtiotvå</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="34"/>
         <source>Forty-four</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtiofyra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="35"/>
         <source>Forty-six</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtiosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="36"/>
         <source>Forty-eight</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtioåtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="37"/>
         <source>Fifty</source>
-        <translation type="unfinished"/>
+        <translation>Femtio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="38"/>
         <source>Fifty-two</source>
-        <translation type="unfinished"/>
+        <translation>Femtiotvå</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="39"/>
         <source>Fifty-four</source>
-        <translation type="unfinished"/>
+        <translation>Femtiofyra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="40"/>
         <source>Fifty-six</source>
-        <translation type="unfinished"/>
+        <translation>Femtiosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="41"/>
         <source>Fifty-eight</source>
-        <translation type="unfinished"/>
+        <translation>Femtioåtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="42"/>
         <source>Sixty</source>
-        <translation type="unfinished"/>
+        <translation>Sextio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="43"/>
         <source>Sixty-two</source>
-        <translation type="unfinished"/>
+        <translation>Sextiotvå</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="44"/>
         <source>Sixty-four</source>
-        <translation type="unfinished"/>
+        <translation>Sextiofyra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="45"/>
         <source>Sixty-six</source>
-        <translation type="unfinished"/>
+        <translation>Sextiosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="46"/>
         <source>Sixty-eight</source>
-        <translation type="unfinished"/>
+        <translation>Sextioåtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="47"/>
         <source>Seventy</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="48"/>
         <source>Seventy-two</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttiotvå</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="49"/>
         <source>Seventy-four</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttiofyra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="50"/>
         <source>Seventy-six</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttiosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
         <source>Seventy-eight</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttioåtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
         <source>Eighty</source>
-        <translation type="unfinished"/>
+        <translation>Åttio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="53"/>
         <source>Eighty-two</source>
-        <translation type="unfinished"/>
+        <translation>Åttiotvå</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
         <source>Eighty-four</source>
-        <translation type="unfinished"/>
+        <translation>Åttiofyra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
         <source>Eighty-six</source>
-        <translation type="unfinished"/>
+        <translation>Åttiosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>Eighty-eight</source>
-        <translation type="unfinished"/>
+        <translation>Åttioåtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
         <source>Ninety</source>
-        <translation type="unfinished"/>
+        <translation>Nittio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>Ninety-two</source>
-        <translation type="unfinished"/>
+        <translation>Nittiotvå</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>Ninety-four</source>
-        <translation type="unfinished"/>
+        <translation>Nittiofyra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
         <source>Ninety-six</source>
-        <translation type="unfinished"/>
+        <translation>Nittiosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
         <source>Ninety-eight</source>
-        <translation type="unfinished"/>
+        <translation>Nittioåtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="62"/>
         <source>One hundred</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
         <source>One hundred and Two</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra två</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
         <source>One hundred and four</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra fyra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
         <source>One hundred and Six</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra sex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
         <source>One hundred and Eight</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra åtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
         <source>One hundred and Ten</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra tio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
         <source>One hundred and Twelve</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra tolv</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
         <source>One hundred and Fourteen</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra fjorton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>One hundred and Sixteen</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra sexton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
         <source>One hundred and Eighteen</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra arton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
@@ -2064,32 +2064,32 @@
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="109"/>
         <source>Loading CPU Info...</source>
-        <translation type="unfinished"/>
+        <translation>Läser in CPU-information...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="110"/>
         <source>Loading Other Devices Info...</source>
-        <translation type="unfinished"/>
+        <translation>Läser in information om andra enheter...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="111"/>
         <source>Loading Power Info...</source>
-        <translation type="unfinished"/>
+        <translation>Läser in ströminformation...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="112"/>
         <source>Loading Printer Info...</source>
-        <translation type="unfinished"/>
+        <translation>Läser in skrivarinformation...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="115"/>
         <source>Loading Mouse Info...</source>
-        <translation type="unfinished"/>
+        <translation>Läser in musinformation...</translation>
     </message>
     <message>
         <location filename="../src/GenerateDevice/GetInfoPool.cpp" line="116"/>
         <source>Loading Network Adapter Info...</source>
-        <translation type="unfinished"/>
+        <translation>Läser in information om nätverksadaptern...</translation>
     </message>
 </context>
 <context>
@@ -2126,22 +2126,22 @@
         <location filename="../src/Page/MainWindow.cpp" line="284"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
-        <translation type="unfinished"/>
+        <translation>Enhetsinformation</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="361"/>
         <source>Display shortcuts</source>
-        <translation type="unfinished"/>
+        <translation>Visa kortkommandon</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="362"/>
         <source>Close</source>
-        <translation type="unfinished"/>
+        <translation>Stäng</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="363"/>
         <source>Help</source>
-        <translation type="unfinished"/>
+        <translation>Hjälp</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="364"/>
@@ -2151,7 +2151,7 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="368"/>
         <source>System</source>
-        <translation type="unfinished"/>
+        <translation>System</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="375"/>
@@ -2171,12 +2171,12 @@
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="457"/>
         <source>Hardware</source>
-        <translation type="unfinished"/>
+        <translation>Maskinvara</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="457"/>
         <source>Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Drivrutiner</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="620"/>
@@ -2235,7 +2235,7 @@
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="101"/>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="112"/>
         <source>Driver Platform Version</source>
-        <translation type="unfinished"/>
+        <translation>Drivrutinsplattformens version</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="102"/>
@@ -2250,12 +2250,12 @@
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="193"/>
         <source>Backupable Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Drivrutiner som kan säkerhetskopieras</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverBackupInfo.cpp" line="194"/>
         <source>Backed up Drivers</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopierade drivrutiner</translation>
     </message>
 </context>
 <context>
@@ -2264,7 +2264,7 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="116"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="260"/>
         <source>Updating</source>
-        <translation type="unfinished"/>
+        <translation>Uppdaterar</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="121"/>
@@ -2277,48 +2277,48 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="122"/>
         <source>Next</source>
-        <translation type="unfinished"/>
+        <translation>Nästa</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="142"/>
         <source>Warning</source>
-        <translation type="unfinished"/>
+        <translation>Varning</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="142"/>
         <source>The device will be unavailable after the driver uninstallation</source>
-        <translation type="unfinished"/>
+        <translation>Enheten blir otillgänglig efter att drivrutinen har avinstallerats</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="146"/>
         <source>Uninstall</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Avinstallera</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="150"/>
         <source>Uninstalling</source>
-        <translation type="unfinished"/>
+        <translation>Avinstallerar</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Update successful</source>
-        <translation type="unfinished"/>
+        <translation>Uppdateringen lyckades</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="183"/>
         <source>Uninstallation successful</source>
-        <translation type="unfinished"/>
+        <translation>Avinstallationen lyckades</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Update failed</source>
-        <translation type="unfinished"/>
+        <translation>Uppdateringen misslyckades</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="184"/>
         <source>Uninstallation failed</source>
-        <translation type="unfinished"/>
+        <translation>Avinstallationen misslyckades</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="191"/>
@@ -2330,12 +2330,12 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="213"/>
         <source>Next</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Nästa</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="238"/>
         <source>The selected folder does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>Den valda mappen finns inte. Välj igen.</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="243"/>
@@ -2347,33 +2347,33 @@
         <location filename="../src/Page/PageDriverControl.cpp" line="244"/>
         <source>Previous</source>
         <comment>button</comment>
-        <translation type="unfinished"/>
+        <translation>Föregående</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="275"/>
         <source>Broken package</source>
-        <translation type="unfinished"/>
+        <translation>Trasigt paket</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="280"/>
         <source>Unmatched package architecture</source>
-        <translation type="unfinished"/>
+        <translation>Paketarkitekturen stämmer inte överens</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="286"/>
         <location filename="../src/Page/PageDriverControl.cpp" line="386"/>
         <source>The selected file does not exist, please select again</source>
-        <translation type="unfinished"/>
+        <translation>Den valda filen finns inte. Välj igen.</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="387"/>
         <source>It is not a driver</source>
-        <translation type="unfinished"/>
+        <translation>Det är inte en drivrutin</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="388"/>
         <source>Unable to install - no digital signature</source>
-        <translation type="unfinished"/>
+        <translation>Kan inte installera – ingen digital signatur</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="382"/>
@@ -2383,17 +2383,17 @@
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="383"/>
         <source>The driver module was not found</source>
-        <translation type="unfinished"/>
+        <translation>Drivrutinsmodulen hittades inte</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="384"/>
         <source>Invalid module format</source>
-        <translation type="unfinished"/>
+        <translation>Ogiltigt modulformat</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverControl.cpp" line="385"/>
         <source>The driver module has dependencies</source>
-        <translation type="unfinished"/>
+        <translation>Drivrutinsmodulen har beroenden</translation>
     </message>
 </context>
 <context>
@@ -2408,7 +2408,7 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="111"/>
         <source>Version Available</source>
-        <translation type="unfinished"/>
+        <translation>Version tillgänglig</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="112"/>
@@ -2431,7 +2431,7 @@
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="124"/>
         <source>New Version</source>
-        <translation type="unfinished"/>
+        <translation>Ny version</translation>
     </message>
     <message>
         <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
