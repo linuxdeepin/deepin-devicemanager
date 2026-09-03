@@ -1,3 +1,24 @@
+deepin-devicemanager (6.0.71) unstable; urgency=medium
+
+  * chore: Update version to 6.0.71
+  * chore(i18n): update Arabic translations to full coverage
+  * fix(network): persist wake-on-lan setting via TLP config
+  * fix: honor DISABLE_DRIVER in CMake
+  * [skip CI] Translate deepin-devicemanager.ts in ar
+  * fix: install systemd drop-in beside unit
+  * fix: link Qt CorePrivate for Qt 6.10+ QtXlsx builds
+  * [skip CI] Translate desktop.ts in sv
+  * [skip CI] Translate policy.ts in sv
+  * [skip CI] Translate deepin-devicemanager.ts in pt
+  * [skip CI] Translate deepin-devicemanager.ts in pt
+  * [skip CI] Translate deepin-devicemanager.ts in pt
+  * [skip CI] Translate deepin-devicemanager.ts in pt
+  * fix(accessibility): add AT-SPI accessible names to interactive widgets
+  * fix: update Arabic (ar) translations
+  * chore: Sync by https://github.com/linuxdeepin/.github/commit/a300f8523d4876677112edab6a0772f7ad112976
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Thu, 03 Sep 2026 16:54:30 +0800
+
 deepin-devicemanager (6.0.70) unstable; urgency=medium
 
   * chore: Update version to 6.0.70
