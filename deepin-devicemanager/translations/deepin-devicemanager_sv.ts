@@ -1784,37 +1784,37 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
         <source>One hundred and Twenty</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra tjugo</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
         <source>One hundred and Twenty-two</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra tjugotvå</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
         <source>One hundred and Twenty-four</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra tjugofyra</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="75"/>
         <source>One hundred and Twenty-six</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra tjugosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="76"/>
         <source>One hundred and Twenty-eight</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra tjugoåtta</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="77"/>
         <source>One hundred and Ninety-two</source>
-        <translation type="unfinished"/>
+        <translation>Ett hundra nittiotvå</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
         <source>Two hundred and fifty-six</source>
-        <translation type="unfinished"/>
+        <translation>Två hundra femtiosex</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
@@ -2776,12 +2776,12 @@
         <location filename="../src/Page/PageDriverManager.cpp" line="717"/>
         <location filename="../src/Widget/BtnLabel.cpp" line="41"/>
         <source>Please try again or give us feedback</source>
-        <translation type="unfinished"/>
+        <translation>Försök igen eller skicka återkoppling till oss</translation>
     </message>
     <message>
         <location filename="../src/Widget/BtnLabel.cpp" line="47"/>
         <source>Driver backup failed!</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopieringen av drivrutiner misslyckades!</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
@@ -2798,7 +2798,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1833"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
         <source>No GPU found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen GPU hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1776"/>
@@ -2815,7 +2815,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1834"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1871"/>
         <source>No monitor found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen bildskärm hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1777"/>
@@ -2832,7 +2832,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1835"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1872"/>
         <source>No network adapter found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen nätverksadapter hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1778"/>
@@ -2849,7 +2849,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1836"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
         <source>No audio device found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen ljudenhet hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1779"/>
@@ -2866,7 +2866,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1837"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1874"/>
         <source>No Bluetooth device found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen Bluetooth-enhet hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1780"/>
@@ -2882,7 +2882,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
         <source>No other PCI devices found</source>
-        <translation type="unfinished"/>
+        <translation>Inga andra PCI-enheter hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
@@ -2890,7 +2890,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
         <source>Power</source>
-        <translation type="unfinished"/>
+        <translation>Strömförsörjning</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
@@ -2898,7 +2898,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
         <source>No battery found</source>
-        <translation type="unfinished"/>
+        <translation>Inget batteri hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
@@ -2915,7 +2915,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
         <source>No keyboard found</source>
-        <translation type="unfinished"/>
+        <translation>Inget tangentbord hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
@@ -2932,7 +2932,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
         <source>No mouse found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen mus hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
@@ -2949,7 +2949,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
         <source>No printer found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen skrivare hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
@@ -2965,7 +2965,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
         <source>No camera found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen kamera hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
@@ -2981,7 +2981,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
         <source>No CD-ROM found</source>
-        <translation type="unfinished"/>
+        <translation>Ingen CD-ROM hittades</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
@@ -2999,7 +2999,7 @@
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
         <source>No other devices found</source>
-        <translation type="unfinished"/>
+        <translation>Inga andra enheter hittades</translation>
     </message>
     <message>
         <location filename="../src/Tool/EDIDParser.cpp" line="240"/>
@@ -3020,175 +3020,175 @@
     <message>
         <location filename="../src/main.cpp" line="194"/>
         <source>New drivers available! Install or update them now.</source>
-        <translation type="unfinished"/>
+        <translation>Nya drivrutiner är tillgängliga! Installera eller uppdatera dem nu.</translation>
     </message>
     <message>
         <location filename="../src/main.cpp" line="195"/>
         <source>View</source>
-        <translation type="unfinished"/>
+        <translation>Visa</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="18"/>
         <source>Include subfolders</source>
-        <translation type="unfinished"/>
+        <translation>Inkludera undermappar</translation>
     </message>
     <message>
         <location filename="../src/Widget/GetDriverPathWidget.cpp" line="64"/>
         <source>Search for drivers in this path</source>
-        <translation type="unfinished"/>
+        <translation>Sök efter drivrutiner i denna sökväg</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="107"/>
         <source>%1 driver updates available</source>
-        <translation type="unfinished"/>
+        <translation>%1 drivrutinsuppdateringar tillgängliga</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="113"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="400"/>
         <source>Time checked: %1</source>
-        <translation type="unfinished"/>
+        <translation>Kontrollerad: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="166"/>
         <source>Downloading drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Hämtar drivrutiner för %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="168"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
-        <translation type="unfinished"/>
+        <translation>Hämtningshastighet: %1 Hämtat %2/%3</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="219"/>
         <source>Installing drivers for %1...</source>
-        <translation type="unfinished"/>
+        <translation>Installerar drivrutiner för %1...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="264"/>
         <source>%1 drivers installed, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 drivrutiner installerade, %2 drivrutiner misslyckades</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="267"/>
         <source>%1 drivers installed</source>
-        <translation type="unfinished"/>
+        <translation>%1 drivrutiner installerade</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="309"/>
         <source>Failed to install drivers</source>
-        <translation type="unfinished"/>
+        <translation>Det gick inte att installera drivrutiner</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="352"/>
         <source>Network error. Reconnecting...</source>
-        <translation type="unfinished"/>
+        <translation>Nätverksfel. Återansluter...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="354"/>
         <source>Download speed: %1</source>
-        <translation type="unfinished"/>
+        <translation>Hämtningshastighet: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="397"/>
         <source>Your drivers are up to date</source>
-        <translation type="unfinished"/>
+        <translation>Dina drivrutiner är aktuella</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
         <source>All drivers have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Alla drivrutiner har säkerhetskopierats</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
-        <translation type="unfinished"/>
+        <translation>Totalt %1 drivrutiner, varav %2 har säkerhetskopierats</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="546"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
-        <translation type="unfinished"/>
+        <translation>Du har %1 drivrutiner som kan säkerhetskopieras. Vi rekommenderar att du gör det omgående.</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
         <source>You have %1 drivers that can be backed up</source>
-        <translation type="unfinished"/>
+        <translation>Du har %1 drivrutiner som kan säkerhetskopieras</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="597"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopierar drivrutinen %1, totalt %2 drivrutiner</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
         <source>Backing up: %1</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopierar: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="638"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
-        <translation type="unfinished"/>
+        <translation>%1 drivrutiner säkerhetskopierade, %2 drivrutiner misslyckades</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="641"/>
         <source>Failed to backup drivers</source>
-        <translation type="unfinished"/>
+        <translation>Det gick inte att säkerhetskopiera drivrutiner</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
         <source>%1 drivers backed up</source>
-        <translation type="unfinished"/>
+        <translation>%1 drivrutiner säkerhetskopierade</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="684"/>
         <source>You have %1 drivers that can be restored</source>
-        <translation type="unfinished"/>
+        <translation>Du har %1 drivrutiner som kan återställas</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
         <source>Please select a driver to restore</source>
-        <translation type="unfinished"/>
+        <translation>Välj en drivrutin att återställa</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="716"/>
         <source>Driver is restoring...</source>
-        <translation type="unfinished"/>
+        <translation>Drivrutinen återställs...</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="717"/>
         <source>Restoring: %1</source>
-        <translation type="unfinished"/>
+        <translation>Återställer: %1</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="872"/>
         <source>reboot</source>
-        <translation type="unfinished"/>
+        <translation>starta om</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="873"/>
         <source>Please %1 for the installed drivers to take effect</source>
-        <translation type="unfinished"/>
+        <translation>Du behöver %1 för att de installerade drivrutinerna ska börja gälla</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="881"/>
         <source>View backup path</source>
-        <translation type="unfinished"/>
+        <translation>Visa sökväg till säkerhetskopia</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
         <source>Backup All</source>
-        <translation type="unfinished"/>
+        <translation>Säkerhetskopiera alla</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="876"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="300"/>
         <source>submit feedback</source>
-        <translation type="unfinished"/>
+        <translation>skicka återkoppling</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="877"/>
         <source>Please try again or %1 to us</source>
-        <translation type="unfinished"/>
+        <translation>Försök igen eller %1 till oss.</translation>
     </message>
     <message>
         <location filename="../src/Widget/DetectedStatusWidget.cpp" line="884"/>
