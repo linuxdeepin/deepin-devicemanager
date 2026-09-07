@@ -2004,7 +2004,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="116"/>
         <source>One hundred and five</source>
-        <translation type="unfinished"/>
+        <translation>Cento e cinco</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="117"/>
@@ -2014,7 +2014,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="118"/>
         <source>One hundred and seven</source>
-        <translation type="unfinished"/>
+        <translation>Cento e sete</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="119"/>
@@ -2024,7 +2024,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="120"/>
         <source>One hundred and nine</source>
-        <translation type="unfinished"/>
+        <translation>Cento e nove</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="121"/>
@@ -2034,7 +2034,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="122"/>
         <source>One hundred and eleven</source>
-        <translation type="unfinished"/>
+        <translation>Cento e onze</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="123"/>
@@ -2044,7 +2044,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="124"/>
         <source>One hundred and thirteen</source>
-        <translation type="unfinished"/>
+        <translation>Cento e treze</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="125"/>
@@ -2054,7 +2054,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="126"/>
         <source>One hundred and fifteen</source>
-        <translation type="unfinished"/>
+        <translation>Cento e quinze</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="127"/>
@@ -2064,7 +2064,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="128"/>
         <source>One hundred and seventeen</source>
-        <translation type="unfinished"/>
+        <translation>Cento e dezessete</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="129"/>
@@ -2074,7 +2074,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="130"/>
         <source>One hundred and nineteen</source>
-        <translation type="unfinished"/>
+        <translation>Cento e dezenove</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="131"/>
@@ -2084,7 +2084,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="132"/>
         <source>One hundred and twenty-one</source>
-        <translation type="unfinished"/>
+        <translation>Cento e vinte e um</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="133"/>
@@ -2094,7 +2094,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="134"/>
         <source>One hundred and twenty-three</source>
-        <translation type="unfinished"/>
+        <translation>Cento e vinte e três</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="135"/>
@@ -2104,7 +2104,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="136"/>
         <source>One hundred and twenty-five</source>
-        <translation type="unfinished"/>
+        <translation>Cento e vinte e cinco</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="137"/>
@@ -2114,7 +2114,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="138"/>
         <source>One hundred and twenty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Cento e vinte e sete</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="139"/>
