@@ -1624,7 +1624,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="40"/>
         <source>Twenty-nine</source>
-        <translation type="unfinished"/>
+        <translation>Vinte e nove</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="41"/>
@@ -1634,7 +1634,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="42"/>
         <source>Thirty-one</source>
-        <translation type="unfinished"/>
+        <translation>Trinta e um</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="43"/>
@@ -1644,7 +1644,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="44"/>
         <source>Thirty-three</source>
-        <translation type="unfinished"/>
+        <translation>Trinta e três</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="45"/>
@@ -1654,7 +1654,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="46"/>
         <source>Thirty-five</source>
-        <translation type="unfinished"/>
+        <translation>Trinta e cinco</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="47"/>
@@ -1664,7 +1664,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="48"/>
         <source>Thirty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Trinta e sete</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="49"/>
@@ -1674,7 +1674,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="50"/>
         <source>Thirty-nine</source>
-        <translation type="unfinished"/>
+        <translation>Trinta e nove</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
@@ -1684,7 +1684,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
         <source>Forty-one</source>
-        <translation type="unfinished"/>
+        <translation>Quarenta e um</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="53"/>
@@ -1694,7 +1694,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
         <source>Forty-three</source>
-        <translation type="unfinished"/>
+        <translation>Quarenta e três</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
@@ -1704,7 +1704,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>Forty-five</source>
-        <translation type="unfinished"/>
+        <translation>Quarenta e cinco</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
@@ -1714,7 +1714,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>Forty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Quarenta e sete</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
@@ -1724,7 +1724,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
         <source>Forty-nine</source>
-        <translation type="unfinished"/>
+        <translation>Quarenta e nove</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
@@ -1734,7 +1734,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="62"/>
         <source>Fifty-one</source>
-        <translation type="unfinished"/>
+        <translation>Cinquenta e um</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
