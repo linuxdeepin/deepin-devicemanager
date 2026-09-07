@@ -524,7 +524,7 @@ TEST_F(UT_DeviceManager, UT_DeviceManager_addKeyboardDevice)
 {
     DeviceInput *device = new DeviceInput;
     DeviceManager::instance()->addKeyboardDevice(device);
-    EXPECT_EQ(0, DeviceManager::instance()->m_ListDeviceKeyboard.size());
+    EXPECT_EQ(1, DeviceManager::instance()->m_ListDeviceKeyboard.size());
     DeviceManager::instance()->m_ListDeviceKeyboard.clear();
     delete device;
 }
