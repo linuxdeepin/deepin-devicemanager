@@ -326,10 +326,10 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         if (fabs(minHz - maxHz) < 0.001) {
             qCDebug(appLog) << "Min and max frequency are close, setting as single value.";
             m_FrequencyIsRange = false;
-            m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(maxHz) : QString("%1 MHz").arg(maxHz * 1000);
+            m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(maxHz, 0, 'f', 2) : QString("%1 MHz").arg(maxHz * 1000, 0, 'f', 2);
         } else {
             qCDebug(appLog) << "Min and max frequency differ, setting as range.";
-            m_Frequency = QString("%1-%2 GHz").arg(minHz).arg(maxHz);
+            m_Frequency = QString("%1-%2 GHz").arg(minHz, 0, 'f', 2).arg(maxHz, 0, 'f', 2);
         }
     } else if (mapInfo.find("CPU MHz") != mapInfo.end()) {
         qCDebug(appLog) << "Only CPU MHz found, setting as single value.";

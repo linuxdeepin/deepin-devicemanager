@@ -260,7 +260,7 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromLscpu_002)
     EXPECT_STREQ("VT-x", m_deviceCpu->m_HardwareVirtual.toStdString().c_str());
     EXPECT_STREQ("0", m_deviceCpu->m_PhysicalID.toStdString().c_str());
     EXPECT_STREQ("0", m_deviceCpu->m_CoreID.toStdString().c_str());
-    EXPECT_STREQ("0.8-4.2 GHz", m_deviceCpu->m_Frequency.toStdString().c_str());
+    EXPECT_STREQ("0.80-4.20 GHz", m_deviceCpu->m_Frequency.toStdString().c_str());
     EXPECT_STREQ("MMX SSE SSE2 SSE3 3D Now SSE4 SSSE3 SSE4_1 SSE4_2 AMD64 EM64T ", m_deviceCpu->m_Extensions.toStdString().c_str());
     EXPECT_TRUE(m_deviceCpu->m_FrequencyIsRange);
 }
@@ -290,7 +290,7 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromLscpu_003)
     EXPECT_STREQ("VT-x", m_deviceCpu->m_HardwareVirtual.toStdString().c_str());
     EXPECT_STREQ("0", m_deviceCpu->m_PhysicalID.toStdString().c_str());
     EXPECT_STREQ("0", m_deviceCpu->m_CoreID.toStdString().c_str());
-    EXPECT_STREQ("800 MHz", m_deviceCpu->m_Frequency.toStdString().c_str());
+    EXPECT_STREQ("800.00 MHz", m_deviceCpu->m_Frequency.toStdString().c_str());
     EXPECT_STREQ("MMX SSE SSE2 SSE3 3D Now SSE4 SSSE3 SSE4_1 SSE4_2 AMD64 EM64T ", m_deviceCpu->m_Extensions.toStdString().c_str());
     EXPECT_FALSE(m_deviceCpu->m_FrequencyIsRange);
 }
@@ -346,7 +346,7 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromDmidecode_002)
 TEST_F(UT_DeviceCpu, UT_DeviceCpu_getTrNumber)
 {
     // m_trNumber is a static const member, access directly
-    EXPECT_EQ(67, m_deviceCpu->m_trNumber.size());
+    EXPECT_EQ(130, m_deviceCpu->m_trNumber.size());
 }
 
 TEST_F(UT_DeviceCpu, UT_DeviceCpu_setCurFreq)
