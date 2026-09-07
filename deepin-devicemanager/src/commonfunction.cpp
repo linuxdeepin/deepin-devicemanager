@@ -385,7 +385,11 @@ int Common::parseSharedCpuCount(const QString &sharedCpuList)
         return 0;
 
     int count = 0;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QStringList parts = s.split(',', QString::SkipEmptyParts);
+#else
     QStringList parts = s.split(',', Qt::SkipEmptyParts);
+#endif
     for (const QString &part : parts) {
         QString trimmed = part.trimmed();
         if (trimmed.contains('-')) {
