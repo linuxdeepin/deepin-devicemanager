@@ -1889,7 +1889,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="93"/>
         <source>Eighty-two</source>
-        <translation>Osiemdziesiąt-dwa</translation>
+        <translation>Osiemdziesiąt dwa</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="94"/>
@@ -1899,7 +1899,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="95"/>
         <source>Eighty-four</source>
-        <translation>Osiemdziesiąt-cztery</translation>
+        <translation>Osiemdziesiąt cztery</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="96"/>
@@ -1909,7 +1909,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="97"/>
         <source>Eighty-six</source>
-        <translation>Osiemdziesiąt-cześć</translation>
+        <translation>Osiemdziesiąt cześć</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="98"/>
@@ -1919,7 +1919,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="99"/>
         <source>Eighty-eight</source>
-        <translation>Osiemdziesiąt-osiem</translation>
+        <translation>Osiemdziesiąt osiem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="100"/>
@@ -2089,7 +2089,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="133"/>
         <source>One hundred and Twenty-two</source>
-        <translation>Sto dwadzieścia-dwa</translation>
+        <translation>Sto dwadzieścia dwa</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="134"/>
@@ -2099,7 +2099,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="135"/>
         <source>One hundred and Twenty-four</source>
-        <translation>Sto dwadzieścia-cztery</translation>
+        <translation>Sto dwadzieścia cztery</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="136"/>
@@ -2109,7 +2109,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="137"/>
         <source>One hundred and Twenty-six</source>
-        <translation>Sto dwadzieścia-sześć</translation>
+        <translation>Sto dwadzieścia sześć</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="138"/>
@@ -2119,17 +2119,17 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="139"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>Sto dwadzieścia-osiem</translation>
+        <translation>Sto dwadzieścia osiem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="140"/>
         <source>One hundred and Ninety-two</source>
-        <translation>Sto dziewięćdziesiąt-dwa</translation>
+        <translation>Sto dziewięćdziesiąt dwa</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="141"/>
         <source>Two hundred and fifty-six</source>
-        <translation>Dwieście pięćdziesiąt-sześć</translation>
+        <translation>Dwieście pięćdziesiąt sześć</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="486"/>
