@@ -30,7 +30,7 @@ void LoadCpuInfoThread::runCmd(QString &info, const QString &cmd)
     qCDebug(appLog) << "Executing command:" << cmd;
 
     QProcess process;
-    process.startCommand(cmd);
+    process.start(cmd);
     process.waitForFinished(-1);
     info = process.readAllStandardOutput();
 }
