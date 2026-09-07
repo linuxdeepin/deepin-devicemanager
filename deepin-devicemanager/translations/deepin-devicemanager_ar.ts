@@ -47,13 +47,13 @@
 <context>
     <name>DetailButton</name>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="49"/>
-        <location filename="../src/Page/PageDetail.cpp" line="54"/>
+        <location filename="../src/Page/PageDetail.cpp" line="51"/>
+        <location filename="../src/Page/PageDetail.cpp" line="56"/>
         <source>More</source>
         <translation>المزيد</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="51"/>
+        <location filename="../src/Page/PageDetail.cpp" line="53"/>
         <source>Collapse</source>
         <translation>التجويف</translation>
     </message>
@@ -62,13 +62,13 @@
     <name>DetailTreeView</name>
     <message>
         <location filename="../src/Widget/DetailTreeView.cpp" line="175"/>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="429"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="431"/>
         <source>More</source>
         <translation>المزيد</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="179"/>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="437"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="181"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="439"/>
         <source>Collapse</source>
         <translation>التجويف</translation>
     </message>
@@ -1493,336 +1493,651 @@
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="14"/>
+        <source>Three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="15"/>
         <source>Four</source>
         <translation>أربعة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="15"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="16"/>
+        <source>Five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="17"/>
         <source>Six</source>
         <translation>ستة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="16"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="18"/>
+        <source>Seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="19"/>
         <source>Eight</source>
         <translation>ثمانية</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="17"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="20"/>
+        <source>Nine</source>
+        <translation>تسع</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="21"/>
         <source>Ten</source>
         <translation> عشرة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="18"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="22"/>
+        <source>Eleven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="23"/>
         <source>Twelve</source>
         <translation>اثنا عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="19"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="24"/>
+        <source>Thirteen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="25"/>
         <source>Fourteen</source>
         <translation>أربعة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="20"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="26"/>
+        <source>Fifteen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="27"/>
         <source>Sixteen</source>
         <translation>ستة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="21"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="28"/>
+        <source>Seventeen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="29"/>
         <source>Eighteen</source>
         <translation>ثمانية عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="22"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="30"/>
+        <source>Nineteen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="31"/>
         <source>Twenty</source>
         <translation> عشرون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="23"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="32"/>
+        <source>Twenty-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="33"/>
         <source>Twenty-two</source>
         <translation> عشرون وعشرون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="24"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="34"/>
+        <source>Twenty-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="35"/>
         <source>Twenty-four</source>
         <translation> عشرون وأربعة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="25"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="36"/>
+        <source>Twenty-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="37"/>
         <source>Twenty-six</source>
         <translation> عشرون وستة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="26"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="38"/>
+        <source>Twenty-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="39"/>
         <source>Twenty-eight</source>
         <translation> عشرون ثمانية</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="27"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="40"/>
+        <source>Twenty-nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="41"/>
         <source>Thirty</source>
         <translation> ثلاثون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="28"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="42"/>
+        <source>Thirty-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="43"/>
         <source>Thirty-two</source>
         <translation> ثلاثون واثنان</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="29"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="44"/>
+        <source>Thirty-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="45"/>
         <source>Thirty-four</source>
         <translation>ثلاثة وأربعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="30"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="46"/>
+        <source>Thirty-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="47"/>
         <source>Thirty-six</source>
         <translation>ثلاثة وستون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="31"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="48"/>
+        <source>Thirty-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="49"/>
         <source>Thirty-eight</source>
         <translation>ثلاثة وثمانون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="32"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="50"/>
+        <source>Thirty-nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
         <source>Forty</source>
         <translation>أربعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="33"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
+        <source>Forty-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="53"/>
         <source>Forty-two</source>
         <translation>أربعون وعشرون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="34"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
+        <source>Forty-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
         <source>Forty-four</source>
         <translation>أربعون وأربعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="35"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
+        <source>Forty-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
         <source>Forty-six</source>
         <translation>أربعون ستة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="36"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
+        <source>Forty-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
         <source>Forty-eight</source>
         <translation>أربعون ثمانية</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="37"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
+        <source>Forty-nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
         <source>Fifty</source>
         <translation>خمسون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="38"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="62"/>
+        <source>Fifty-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
         <source>Fifty-two</source>
         <translation>خمس وعشرون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="39"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
+        <source>Fifty-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
         <source>Fifty-four</source>
         <translation>خمس وأربعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="40"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
+        <source>Fifty-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
         <source>Fifty-six</source>
         <translation>خمسون وستون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="41"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
+        <source>Fifty-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
         <source>Fifty-eight</source>
         <translation>خمسون ثمانية</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="42"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
+        <source>Fifty-nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
         <source>Sixty</source>
         <translation>ستون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="43"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
+        <source>Sixty-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
         <source>Sixty-two</source>
         <translation>ستون وعشرون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="44"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
+        <source>Sixty-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="75"/>
         <source>Sixty-four</source>
         <translation>ستون وأربعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="45"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="76"/>
+        <source>Sixty-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="77"/>
         <source>Sixty-six</source>
         <translation>ستون وستون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="46"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
+        <source>Sixty-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="79"/>
         <source>Sixty-eight</source>
         <translation>ستون ثمانية</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="47"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="80"/>
+        <source>Sixty-nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="81"/>
         <source>Seventy</source>
         <translation>سبعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="48"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="82"/>
+        <source>Seventy-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="83"/>
         <source>Seventy-two</source>
         <translation>سبع وعشرون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="49"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="84"/>
+        <source>Seventy-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="85"/>
         <source>Seventy-four</source>
         <translation>سبع وأربعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="50"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="86"/>
+        <source>Seventy-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="87"/>
         <source>Seventy-six</source>
         <translation>سبعون وستون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="88"/>
+        <source>Seventy-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="89"/>
         <source>Seventy-eight</source>
         <translation>سبعون ثمانية</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="90"/>
+        <source>Seventy-nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="91"/>
         <source>Eighty</source>
         <translation>ثمانون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="53"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="92"/>
+        <source>Eighty-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="93"/>
         <source>Eighty-two</source>
         <translation>ثمانون وعشرون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="94"/>
+        <source>Eighty-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="95"/>
         <source>Eighty-four</source>
         <translation>ثمانية وأربعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="96"/>
+        <source>Eighty-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="97"/>
         <source>Eighty-six</source>
         <translation>ثمانية وستون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="98"/>
+        <source>Eighty-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="99"/>
         <source>Eighty-eight</source>
         <translation>ثمانية وثمانون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="100"/>
+        <source>Eighty-nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="101"/>
         <source>Ninety</source>
         <translation>تسعة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="102"/>
+        <source>Ninety-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="103"/>
         <source>Ninety-two</source>
         <translation>تسعة عشر ونصف</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="104"/>
+        <source>Ninety-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="105"/>
         <source>Ninety-four</source>
         <translation>تسعة عشر وأربعون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="106"/>
+        <source>Ninety-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="107"/>
         <source>Ninety-six</source>
         <translation>تسعة عشر وستون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="108"/>
+        <source>Ninety-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="109"/>
         <source>Ninety-eight</source>
         <translation>تسعة عشر وثمانون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="62"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="110"/>
+        <source>Ninety-nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="111"/>
         <source>One hundred</source>
         <translation>مائة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="112"/>
+        <source>One hundred and one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="113"/>
         <source>One hundred and Two</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="114"/>
+        <source>One hundred and three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="115"/>
         <source>One hundred and four</source>
         <translation>مائة وأربعة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="116"/>
+        <source>One hundred and five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="117"/>
         <source>One hundred and Six</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="118"/>
+        <source>One hundred and seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="119"/>
         <source>One hundred and Eight</source>
         <translation>مائة وأربع عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="120"/>
+        <source>One hundred and nine</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="121"/>
         <source>One hundred and Ten</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="122"/>
+        <source>One hundred and eleven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="123"/>
         <source>One hundred and Twelve</source>
         <translation>مائة وأربع عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="124"/>
+        <source>One hundred and thirteen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="125"/>
         <source>One hundred and Fourteen</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="126"/>
+        <source>One hundred and fifteen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="127"/>
         <source>One hundred and Sixteen</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="128"/>
+        <source>One hundred and seventeen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="129"/>
         <source>One hundred and Eighteen</source>
         <translation>مائة وأربع عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="130"/>
+        <source>One hundred and nineteen</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="131"/>
         <source>One hundred and Twenty</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="132"/>
+        <source>One hundred and twenty-one</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="133"/>
         <source>One hundred and Twenty-two</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="134"/>
+        <source>One hundred and twenty-three</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="135"/>
         <source>One hundred and Twenty-four</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="75"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="136"/>
+        <source>One hundred and twenty-five</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="137"/>
         <source>One hundred and Twenty-six</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="76"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="138"/>
+        <source>One hundred and twenty-seven</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="139"/>
         <source>One hundred and Twenty-eight</source>
         <translation>مائة وخمسة عشر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="77"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="140"/>
         <source>One hundred and Ninety-two</source>
         <translation>مائة وتسعة عشر وخمسون</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="141"/>
         <source>Two hundred and fifty-six</source>
         <translation>مائتان وخمسون وخمس十六条</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="486"/>
         <source>Frequency</source>
         <translation>التردد</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="486"/>
         <source>Max Frequency</source>
         <translation>أقصى تردد</translation>
     </message>
@@ -1830,47 +2145,47 @@
 <context>
     <name>DeviceGenerator</name>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1539"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1538"/>
         <source>Model Name</source>
         <translation>اسم الطراز</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1543"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1542"/>
         <source>Vendor ID</source>
         <translation>معرف البائع</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1547"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1546"/>
         <source>Architecture</source>
         <translation>الهندسة المعمارية</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1551"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1550"/>
         <source>CPU(s)</source>
         <translation>CPU</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1553"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1552"/>
         <source>Thread(s)</source>
         <translation>الخيوط</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1562"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1561"/>
         <source>L1d cache</source>
         <translation>ذاكرة L1d المؤقتة</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1572"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1571"/>
         <source>L1i cache</source>
         <translation>ذاكرة L1i المؤقتة</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1582"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1581"/>
         <source>L2 cache</source>
         <translation>ذاكرة L2 المؤقتة</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1592"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1591"/>
         <source>L3 cache</source>
         <translation>ذاكرة L3 المؤقتة</translation>
     </message>
@@ -1880,27 +2195,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="152"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="318"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1902"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1922"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1942"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1953"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1968"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1981"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1997"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2013"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1912"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1932"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1952"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1963"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1978"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1991"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2007"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2023"/>
         <source>Overview</source>
         <translation>overview</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="159"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="295"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2101"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2111"/>
         <source>CPU</source>
         <translation>CPU</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="165"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2104"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2114"/>
         <source>CPU quantity</source>
         <translation>كمية المعالجات</translation>
     </message>
@@ -2002,16 +2317,16 @@
         <translation>أجهزة إدخال أخرى</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1908"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1972"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2004"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1982"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2014"/>
         <source>Device</source>
         <translation>جهاز</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1916"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1976"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2008"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1926"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1986"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2018"/>
         <source>OS</source>
         <translation>نظام التشغيل</translation>
     </message>
@@ -2019,8 +2334,8 @@
 <context>
     <name>DeviceMonitor</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="654"/>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="657"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="663"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="666"/>
         <source>%1@%2Hz</source>
         <translation>%1@%2هرتز</translation>
     </message>
@@ -2123,88 +2438,88 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="284"/>
+        <location filename="../src/Page/MainWindow.cpp" line="289"/>
         <source>Device Info</source>
         <comment>export file's name</comment>
         <translation>معلومات الجهاز</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="361"/>
+        <location filename="../src/Page/MainWindow.cpp" line="366"/>
         <source>Display shortcuts</source>
         <translation>عرض المقتطفات</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="362"/>
+        <location filename="../src/Page/MainWindow.cpp" line="367"/>
         <source>Close</source>
         <translation>إغلاق</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="363"/>
+        <location filename="../src/Page/MainWindow.cpp" line="368"/>
         <source>Help</source>
         <translation>المساعدة</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="364"/>
+        <location filename="../src/Page/MainWindow.cpp" line="369"/>
         <source>Copy</source>
         <translation>نسخ</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="368"/>
+        <location filename="../src/Page/MainWindow.cpp" line="373"/>
         <source>System</source>
         <translation>النظام</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="375"/>
+        <location filename="../src/Page/MainWindow.cpp" line="380"/>
         <source>Export</source>
         <translation>تصدير</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="376"/>
+        <location filename="../src/Page/MainWindow.cpp" line="381"/>
         <source>Refresh</source>
         <translation>تحديث</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="380"/>
+        <location filename="../src/Page/MainWindow.cpp" line="385"/>
         <source>Device Manager</source>
         <translation>مدير الجهاز</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="457"/>
+        <location filename="../src/Page/MainWindow.cpp" line="462"/>
         <source>Hardware</source>
         <translation>الأجهزة</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="457"/>
+        <location filename="../src/Page/MainWindow.cpp" line="462"/>
         <source>Drivers</source>
         <translation>المحركات</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="620"/>
+        <location filename="../src/Page/MainWindow.cpp" line="631"/>
         <source>Monitor</source>
         <translation>المراقب</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="620"/>
+        <location filename="../src/Page/MainWindow.cpp" line="631"/>
         <source>Overview</source>
         <translation>مoverview</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="624"/>
+        <location filename="../src/Page/MainWindow.cpp" line="635"/>
         <source>Display Adapter</source>
         <translation>مثبت الشاشة</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="628"/>
+        <location filename="../src/Page/MainWindow.cpp" line="639"/>
         <source>CPU</source>
         <translation>معالج</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="632"/>
+        <location filename="../src/Page/MainWindow.cpp" line="643"/>
         <source>Network Adapter</source>
         <translation>مودم الشبكة</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="638"/>
+        <location filename="../src/Page/MainWindow.cpp" line="649"/>
         <source>Battery</source>
         <translation>بطارية</translation>
     </message>
@@ -2212,7 +2527,7 @@
 <context>
     <name>PageDetail</name>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="354"/>
+        <location filename="../src/Page/PageDetail.cpp" line="363"/>
         <source>More</source>
         <translation>المزيد</translation>
     </message>
@@ -2399,57 +2714,57 @@
 <context>
     <name>PageDriverInstallInfo</name>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="110"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="123"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="132"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="145"/>
         <source>Device Name</source>
         <translation>اسم الجهاز</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="111"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="120"/>
         <source>Version Available</source>
         <translation>النسخة المتاحة</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="112"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="134"/>
         <source>Size</source>
         <translation>الحجم</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="113"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="126"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="122"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="135"/>
         <source>Status</source>
         <translation>الحالة</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="114"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="127"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="123"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
         <source>Action</source>
         <translation>العمل</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="124"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="133"/>
         <source>New Version</source>
         <translation>الإصدار الجديد</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="145"/>
         <source>Current Version</source>
         <translation>الإصدار الحالي</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="230"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="239"/>
         <source>Missing drivers (%1)</source>
         <translation>المحركات المفقودة (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="231"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="240"/>
         <source>Outdated drivers (%1)</source>
         <translation>المحركات القديمة (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="232"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="241"/>
         <source>Up-to-date drivers (%1)</source>
         <translation>المحركات محدثة (%1)</translation>
     </message>
@@ -2501,27 +2816,27 @@
         <translation>اذهب إلى جهاز النسخ الاحتياطي للسائق</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
         <source>Name</source>
         <translation>الاسم</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="130"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
         <source>Current Version</source>
         <translation>الإصدار الحالي</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="133"/>
         <source>Backup Version</source>
         <translation>إصدار النسخ الاحتياطي</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="134"/>
         <source>Action</source>
         <translation>العمل</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="180"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="182"/>
         <source>Restorable Drivers</source>
         <translation>السائق القابل للاسترداد</translation>
     </message>
@@ -2544,17 +2859,17 @@
         <translation>مoverview</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="132"/>
+        <location filename="../src/Page/PageListView.cpp" line="134"/>
         <source>Driver Install</source>
         <translation>تثبيت السائق</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="132"/>
+        <location filename="../src/Page/PageListView.cpp" line="134"/>
         <source>Driver Backup</source>
         <translation>نسخ احتياطي السائق</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="132"/>
+        <location filename="../src/Page/PageListView.cpp" line="134"/>
         <source>Driver Restore</source>
         <translation>استعادة السائق</translation>
     </message>
@@ -2626,7 +2941,7 @@
         <translation>نسخ</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageOverview.cpp" line="92"/>
+        <location filename="../src/Page/PageOverview.cpp" line="95"/>
         <source>Overview</source>
         <translation>الإجمالي</translation>
     </message>
@@ -2650,7 +2965,7 @@
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="45"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="233"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="240"/>
         <source>Enable</source>
         <translation>تمكين</translation>
     </message>
@@ -2670,33 +2985,33 @@
         <translation>السماح لها باستيقاظ الكمبيوتر</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="236"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="243"/>
         <source>Disable</source>
         <translation>تعطيل</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="339"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="359"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="348"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="368"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>فشل تعطيله: عدم القدرة على الحصول على رقم.Serial الجهاز</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="344"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="353"/>
         <source>Failed to disable the device</source>
         <translation>فشل تعطيل الجهاز</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="364"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="373"/>
         <source>Failed to enable the device</source>
         <translation>فشل تمكين الجهاز</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="382"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="391"/>
         <source>Update Drivers</source>
         <translation>تحديث برامج التشغيل</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="401"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="410"/>
         <source>Uninstall Drivers</source>
         <translation>إزالة برامج التشغيل</translation>
     </message>
@@ -2704,66 +3019,66 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1771"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1800"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1810"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
         <source>CPU</source>
         <translation>معالج</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1771"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1800"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1810"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
         <source>No CPU found</source>
         <translation>لم يتم العثور على وحدة معالجة مركزية</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1772"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1801"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1830"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1867"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1811"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
         <source>Motherboard</source>
         <translation>لوحة الأم</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1772"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1801"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1830"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1867"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1811"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
         <source>No motherboard found</source>
         <translation>لم يتم العثور على لوحة أم</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1773"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1802"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1831"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1868"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1812"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
         <source>Memory</source>
         <translation>ذاكرة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1773"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1802"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1831"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1868"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1812"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
         <source>No memory found</source>
         <translation>لم يتم العثور على ذاكرة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1774"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1803"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1832"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1869"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1813"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
         <source>Storage</source>
         <translation>التخزين</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1774"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1803"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1832"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1869"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1813"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
         <source>No disk found</source>
         <translation>لم يتم العثور على قرص</translation>
     </message>
@@ -2784,220 +3099,220 @@
         <translation>فشل النسخ الاحتياطي لبرنامج التشغيل!</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1804"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1833"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1814"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="776"/>
         <source>Display Adapter</source>
         <translation>مثبت العرض</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1804"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1833"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1814"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
         <source>No GPU found</source>
         <translation>لم يتم العثور على معالج رسومات</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1776"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1805"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1834"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1871"/>
-        <location filename="../src/Page/MainWindow.cpp" line="579"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1815"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
+        <location filename="../src/Page/MainWindow.cpp" line="590"/>
         <source>Monitor</source>
         <translation>الشاشة</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1776"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1805"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1834"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1871"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1815"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
         <source>No monitor found</source>
         <translation>لم يتم العثور على جهاز العرض</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1777"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1806"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1835"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1872"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="785"/>
-        <source>Network Adapter</source>
-        <translation>موجه الشبكة</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1777"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1806"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1835"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1872"/>
-        <source>No network adapter found</source>
-        <translation>لم يتم العثور على جهاز التوجيه الشبكي</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1778"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1807"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1836"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="779"/>
-        <source>Sound Adapter</source>
-        <translation>مكبر الصوت</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1778"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1807"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1836"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
-        <source>No audio device found</source>
-        <translation>لم يتم العثور على جهاز صوت</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1779"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1808"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1837"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1874"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="782"/>
-        <source>Bluetooth</source>
-        <translation>بلوتوث</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1779"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1808"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1837"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1874"/>
-        <source>No Bluetooth device found</source>
-        <translation>لم يتم العثور على جهاز بلوتوث</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1780"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1809"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
-        <source>Other PCI Devices</source>
-        <translation>أجهزة PCI أخرى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1780"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1809"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
-        <source>No other PCI devices found</source>
-        <translation>لم يتم العثور على أجهزة PCI أخرى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1810"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
-        <source>Power</source>
-        <translation>الطاقة</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1810"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
-        <source>No battery found</source>
-        <translation>لم يتم العثور على بطارية</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1811"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
-        <location filename="../src/Tool/commontools.cpp" line="52"/>
-        <source>Keyboard</source>
-        <translation>الكيبورد</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1811"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
-        <source>No keyboard found</source>
-        <translation>لم يتم العثور على لوحة مفاتيح</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1812"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
-        <location filename="../src/Tool/commontools.cpp" line="54"/>
-        <source>Mouse</source>
-        <translation>الفأرة</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1812"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
-        <source>No mouse found</source>
-        <translation>لم يتم العثور على الفأرة</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1813"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
-        <location filename="../src/Tool/commontools.cpp" line="56"/>
-        <source>Printer</source>
-        <translation>الطابعة</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1813"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
-        <source>No printer found</source>
-        <translation>لم يتم العثور على الطابعة</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1814"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
-        <source>Camera</source>
-        <translation>كاميرا</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1814"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
-        <source>No camera found</source>
-        <translation>لم يتم العثور على الكاميرا</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1815"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
-        <source>CD-ROM</source>
-        <translation> قرص مضغوط-ROM</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1815"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
-        <source>No CD-ROM found</source>
-        <translation>لم يتم العثور على قرص مضغوط-ROM</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1816"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="785"/>
+        <source>Network Adapter</source>
+        <translation>موجه الشبكة</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1816"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
+        <source>No network adapter found</source>
+        <translation>لم يتم العثور على جهاز التوجيه الشبكي</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1788"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1817"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1846"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1883"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="779"/>
+        <source>Sound Adapter</source>
+        <translation>مكبر الصوت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1788"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1817"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1846"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1883"/>
+        <source>No audio device found</source>
+        <translation>لم يتم العثور على جهاز صوت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1789"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1818"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1847"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1884"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="782"/>
+        <source>Bluetooth</source>
+        <translation>بلوتوث</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1789"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1818"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1847"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1884"/>
+        <source>No Bluetooth device found</source>
+        <translation>لم يتم العثور على جهاز بلوتوث</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1790"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1819"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1848"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1885"/>
+        <source>Other PCI Devices</source>
+        <translation>أجهزة PCI أخرى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1790"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1819"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1848"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1885"/>
+        <source>No other PCI devices found</source>
+        <translation>لم يتم العثور على أجهزة PCI أخرى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1791"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1820"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1849"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1886"/>
+        <source>Power</source>
+        <translation>الطاقة</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1791"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1820"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1849"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1886"/>
+        <source>No battery found</source>
+        <translation>لم يتم العثور على بطارية</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1792"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1821"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1850"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1887"/>
+        <location filename="../src/Tool/commontools.cpp" line="52"/>
+        <source>Keyboard</source>
+        <translation>الكيبورد</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1792"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1821"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1850"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1887"/>
+        <source>No keyboard found</source>
+        <translation>لم يتم العثور على لوحة مفاتيح</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1793"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1822"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1851"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1888"/>
+        <location filename="../src/Tool/commontools.cpp" line="54"/>
+        <source>Mouse</source>
+        <translation>الفأرة</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1793"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1822"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1851"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1888"/>
+        <source>No mouse found</source>
+        <translation>لم يتم العثور على الفأرة</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1794"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1823"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1852"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1889"/>
+        <location filename="../src/Tool/commontools.cpp" line="56"/>
+        <source>Printer</source>
+        <translation>الطابعة</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1794"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1823"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1852"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1889"/>
+        <source>No printer found</source>
+        <translation>لم يتم العثور على الطابعة</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1795"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1824"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1853"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1890"/>
+        <source>Camera</source>
+        <translation>كاميرا</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1795"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1824"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1853"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1890"/>
+        <source>No camera found</source>
+        <translation>لم يتم العثور على الكاميرا</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1796"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1825"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1854"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1891"/>
+        <source>CD-ROM</source>
+        <translation> قرص مضغوط-ROM</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1796"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1825"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1854"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1891"/>
+        <source>No CD-ROM found</source>
+        <translation>لم يتم العثور على قرص مضغوط-ROM</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1797"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1826"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1855"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1892"/>
         <location filename="../src/Tool/commontools.cpp" line="58"/>
         <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Other Devices</source>
         <translation>أجهزة أخرى</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1816"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1797"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1826"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1855"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1892"/>
         <source>No other devices found</source>
         <translation>لم يتم العثور على أجهزة أخرى</translation>
     </message>
@@ -3038,171 +3353,171 @@
         <translation>ابحث عن برامج التشغيل في هذا المسار</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="107"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="117"/>
         <source>%1 driver updates available</source>
         <translation>%1 برامج تشغيل متوفرة</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="113"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="400"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="123"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="410"/>
         <source>Time checked: %1</source>
         <translation>تم التحقق من الوقت: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="166"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="176"/>
         <source>Downloading drivers for %1...</source>
         <translation>قيد تنزيل برامج تشغيل %1...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="168"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="178"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
         <translation>سرعة التنزيل: %1 تم تنزيل %2/%3</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="219"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="229"/>
         <source>Installing drivers for %1...</source>
         <translation>قيد تثبيت برامج تشغيل %1...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="264"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="274"/>
         <source>%1 drivers installed, %2 drivers failed</source>
         <translation>%1 برنامج تشغيل مثبت، %2 برنامج تشغيل فشل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="267"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="277"/>
         <source>%1 drivers installed</source>
         <translation>%1 برنامج تشغيل مثبت</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="309"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="319"/>
         <source>Failed to install drivers</source>
         <translation>فشل في تثبيت برامج التشغيل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="352"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="362"/>
         <source>Network error. Reconnecting...</source>
         <translation>خطأ في الشبكة. إعادة الاتصال...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="354"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="364"/>
         <source>Download speed: %1</source>
         <translation>سرعة التنزيل: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="397"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="407"/>
         <source>Your drivers are up to date</source>
         <translation>برامج تشغيلك محدثة</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="514"/>
         <source>All drivers have been backed up</source>
         <translation>تم عمل نسخة احتياطية لجميع برامج التشغيل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="516"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="561"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
         <translation>مجموع %1 برنامج تشغيل، من بينها %2 تم عمل نسخة احتياطية</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="546"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="556"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
         <translation>&gt;- لديك %1 برنامج تشغيل يمكن عمل نسخة احتياطية، يوصى بعمل ذلك على الفور</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="560"/>
         <source>You have %1 drivers that can be backed up</source>
         <translation>لدينا %1 برنامج تشغيل يمكن عمل نسخة احتياطية</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="597"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="607"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
         <translation>عمل نسخة احتياطية لبرنامج التشغيل %1، المجموع %2 برنامج تشغيل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="608"/>
         <source>Backing up: %1</source>
         <translation>عمل النسخة الاحتياطية: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="638"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="648"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
         <translation>%1 برنامج تشغيل عمل نسخة احتياطية، %2 برنامج تشغيل فشل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="641"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="651"/>
         <source>Failed to backup drivers</source>
         <translation>فشل في عمل نسخة احتياطية للبرامج التشغيل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="654"/>
         <source>%1 drivers backed up</source>
         <translation>%1 برنامج تشغيل عمل نسخة احتياطية</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="684"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="694"/>
         <source>You have %1 drivers that can be restored</source>
         <translation>لدينا %1 برنامج تشغيل يمكن استعادته</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="695"/>
         <source>Please select a driver to restore</source>
         <translation>يرجى اختيار برنامج تشغيل لإعادة الاسترجاع</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="716"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="726"/>
         <source>Driver is restoring...</source>
         <translation>يقوم البرنامج التشغيل بإجراء عملية الاسترجاع...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="717"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="727"/>
         <source>Restoring: %1</source>
         <translation>استعادة: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="872"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="882"/>
         <source>reboot</source>
         <translation>إعادة التشغيل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="873"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="883"/>
         <source>Please %1 for the installed drivers to take effect</source>
         <translation>يرجى %1 للتأثير على برامج التشغيل المثبتة</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="881"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="891"/>
         <source>View backup path</source>
         <translation>عرض مسار النسخ الس.Beanدة</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="904"/>
         <source>Backup All</source>
         <translation>نسخ الاحتياطي للكل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="876"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="886"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="300"/>
         <source>submit feedback</source>
         <translation>صمغ ردود الأفعال</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="877"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="887"/>
         <source>Please try again or %1 to us</source>
         <translation>يرجى المحاولة مرة أخرى أو %1 معنا</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="884"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
         <source>Install All</source>
         <translation>تثبيت الكل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="889"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="899"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
         <source>Scan Again</source>
         <translation>فحص مرة أخرى</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="899"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="909"/>
         <source>Cancel</source>
         <translation>إلغاء</translation>
     </message>
@@ -3213,7 +3528,7 @@
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="83"/>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="376"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="380"/>
         <source>Scanning %1</source>
         <translation>جاري فحص 1%</translation>
     </message>
@@ -3238,40 +3553,40 @@
         <translation>يرجى تصوير مرة أخرى أو %1 معنا</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="763"/>
+        <location filename="../src/Page/MainWindow.cpp" line="774"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
         <translation>تتم الآن عملية تثبيت برامج التشغيل (ملفات التعريف)، وستتم تعطيل العملية في حالة الخروج.</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="764"/>
-        <location filename="../src/Page/MainWindow.cpp" line="780"/>
-        <location filename="../src/Page/MainWindow.cpp" line="796"/>
+        <location filename="../src/Page/MainWindow.cpp" line="775"/>
+        <location filename="../src/Page/MainWindow.cpp" line="791"/>
+        <location filename="../src/Page/MainWindow.cpp" line="807"/>
         <source>Are you sure you want to exit?</source>
         <translation>هل أنت متأكد من أنك تريد الخروج؟</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="767"/>
-        <location filename="../src/Page/MainWindow.cpp" line="783"/>
-        <location filename="../src/Page/MainWindow.cpp" line="799"/>
+        <location filename="../src/Page/MainWindow.cpp" line="778"/>
+        <location filename="../src/Page/MainWindow.cpp" line="794"/>
+        <location filename="../src/Page/MainWindow.cpp" line="810"/>
         <source>Exit</source>
         <comment>button</comment>
         <translation>خروج</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="768"/>
-        <location filename="../src/Page/MainWindow.cpp" line="784"/>
-        <location filename="../src/Page/MainWindow.cpp" line="800"/>
+        <location filename="../src/Page/MainWindow.cpp" line="779"/>
+        <location filename="../src/Page/MainWindow.cpp" line="795"/>
+        <location filename="../src/Page/MainWindow.cpp" line="811"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>إلغاء</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="779"/>
+        <location filename="../src/Page/MainWindow.cpp" line="790"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
         <translation>تتم الآن عملية النسخ الإحتياطي لبرامج التشغيل (ملفات التعريف)، وستتم تعطيل العملية في حالة الخروج.</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="795"/>
+        <location filename="../src/Page/MainWindow.cpp" line="806"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
         <translation>تتم الآن عملية استعادة برامج التشغيل (ملفات التعريف)، وستتم تعطيل العملية في حالة الخروج.</translation>
     </message>
@@ -3387,22 +3702,22 @@
         <translation>فشل في الحصول على ملفات السائق</translation>
     </message>
     <message>
-        <location filename="../src/Widget/driveritem.cpp" line="268"/>
+        <location filename="../src/Widget/driveritem.cpp" line="272"/>
         <source>Update</source>
         <translation>التحديث</translation>
     </message>
     <message>
-        <location filename="../src/Widget/driveritem.cpp" line="274"/>
+        <location filename="../src/Widget/driveritem.cpp" line="278"/>
         <source>Backup</source>
         <translation>النسخ الاحتياطي</translation>
     </message>
     <message>
-        <location filename="../src/Widget/driveritem.cpp" line="280"/>
+        <location filename="../src/Widget/driveritem.cpp" line="284"/>
         <source>Restore</source>
         <translation>استعادة</translation>
     </message>
     <message>
-        <location filename="../src/Widget/driveritem.cpp" line="263"/>
+        <location filename="../src/Widget/driveritem.cpp" line="267"/>
         <source>Install</source>
         <translation>تثبيت</translation>
     </message>
@@ -3411,7 +3726,7 @@
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="38"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="232"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="240"/>
         <source>Disable</source>
         <translation>تعطيل</translation>
     </message>
@@ -3441,9 +3756,9 @@
         <translation>اسمح بتشغيل الكمبيوتر</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="238"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="379"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="387"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="246"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="389"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="397"/>
         <source>Enable</source>
         <translation>تمكين</translation>
     </message>
@@ -3466,12 +3781,12 @@
         <translation>نسخ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="276"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="281"/>
         <source>Disable</source>
         <translation>تعطيل</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="285"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="290"/>
         <source>Unavailable</source>
         <translation>غير متوفر</translation>
     </message>
@@ -3479,7 +3794,7 @@
 <context>
     <name>UrlChooserEdit</name>
     <message>
-        <location filename="../src/Widget/UrlChooserEdit.cpp" line="99"/>
+        <location filename="../src/Widget/UrlChooserEdit.cpp" line="103"/>
         <source>Select a local folder please</source>
         <translation>يرجى اختيار مجلد محلي</translation>
     </message>
