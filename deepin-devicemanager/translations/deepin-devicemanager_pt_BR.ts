@@ -1494,7 +1494,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="14"/>
         <source>Three</source>
-        <translation type="unfinished"/>
+        <translation>Três</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="15"/>
@@ -1504,7 +1504,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="16"/>
         <source>Five</source>
-        <translation type="unfinished"/>
+        <translation>Cinco</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="17"/>
@@ -1514,7 +1514,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="18"/>
         <source>Seven</source>
-        <translation type="unfinished"/>
+        <translation>Sete</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="19"/>
@@ -1534,7 +1534,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="22"/>
         <source>Eleven</source>
-        <translation type="unfinished"/>
+        <translation>Onze</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="23"/>
@@ -1544,7 +1544,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="24"/>
         <source>Thirteen</source>
-        <translation type="unfinished"/>
+        <translation>Treze</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="25"/>
@@ -1554,7 +1554,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="26"/>
         <source>Fifteen</source>
-        <translation type="unfinished"/>
+        <translation>Quinze</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="27"/>
@@ -1564,7 +1564,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="28"/>
         <source>Seventeen</source>
-        <translation type="unfinished"/>
+        <translation>Dezessete</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="29"/>
@@ -1574,7 +1574,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="30"/>
         <source>Nineteen</source>
-        <translation type="unfinished"/>
+        <translation>Dezenove</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="31"/>
@@ -1584,7 +1584,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="32"/>
         <source>Twenty-one</source>
-        <translation type="unfinished"/>
+        <translation>Vinte e um</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="33"/>
@@ -1594,7 +1594,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="34"/>
         <source>Twenty-three</source>
-        <translation type="unfinished"/>
+        <translation>Vinte e três</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="35"/>
@@ -1604,7 +1604,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="36"/>
         <source>Twenty-five</source>
-        <translation type="unfinished"/>
+        <translation>Vinte e cinco</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="37"/>
@@ -1614,7 +1614,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="38"/>
         <source>Twenty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Vinte e sete</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="39"/>
