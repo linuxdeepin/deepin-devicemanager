@@ -49,13 +49,13 @@
 <context>
     <name>DetailButton</name>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="49"/>
-        <location filename="../src/Page/PageDetail.cpp" line="54"/>
+        <location filename="../src/Page/PageDetail.cpp" line="51"/>
+        <location filename="../src/Page/PageDetail.cpp" line="56"/>
         <source>More</source>
         <translation>تېخىمۇ كۆپ</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="51"/>
+        <location filename="../src/Page/PageDetail.cpp" line="53"/>
         <source>Collapse</source>
         <translation>يىمىرىلىش</translation>
     </message>
@@ -64,13 +64,13 @@
     <name>DetailTreeView</name>
     <message>
         <location filename="../src/Widget/DetailTreeView.cpp" line="175"/>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="429"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="431"/>
         <source>More</source>
         <translation type="unfinished">تېخىمۇ كۆپ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="179"/>
-        <location filename="../src/Widget/DetailTreeView.cpp" line="437"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="181"/>
+        <location filename="../src/Widget/DetailTreeView.cpp" line="439"/>
         <source>Collapse</source>
         <translation type="unfinished">يىمىرىلىش</translation>
     </message>
@@ -1486,345 +1486,660 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="12"/>
         <source>One</source>
-        <translation type="unfinished">بىرى</translation>
+        <translation>بىرى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="13"/>
         <source>Two</source>
-        <translation type="unfinished">ئىككى</translation>
+        <translation>ئىككى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="14"/>
-        <source>Four</source>
-        <translation type="unfinished">تۆت</translation>
+        <source>Three</source>
+        <translation>ئۈچ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="15"/>
-        <source>Six</source>
-        <translation type="unfinished">ئالتە</translation>
+        <source>Four</source>
+        <translation>تۆت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="16"/>
-        <source>Eight</source>
-        <translation type="unfinished">سەككىز</translation>
+        <source>Five</source>
+        <translation>بەش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="17"/>
-        <source>Ten</source>
-        <translation type="unfinished">ئون</translation>
+        <source>Six</source>
+        <translation>ئالتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="18"/>
-        <source>Twelve</source>
-        <translation type="unfinished">ئون ئىككى</translation>
+        <source>Seven</source>
+        <translation>يەتتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="19"/>
-        <source>Fourteen</source>
-        <translation type="unfinished">ئون تۆت</translation>
+        <source>Eight</source>
+        <translation>سەككىز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="20"/>
-        <source>Sixteen</source>
-        <translation type="unfinished">ئون ئالتە</translation>
+        <source>Nine</source>
+        <translation>توققۇز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="21"/>
-        <source>Eighteen</source>
-        <translation type="unfinished">ئون سەككىز</translation>
+        <source>Ten</source>
+        <translation>ئون</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="22"/>
-        <source>Twenty</source>
-        <translation type="unfinished">يىگىرمە</translation>
+        <source>Eleven</source>
+        <translation>ئون بىر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="23"/>
-        <source>Twenty-two</source>
-        <translation type="unfinished">يىگىرمە ئىككى</translation>
+        <source>Twelve</source>
+        <translation>ئون ئىككى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="24"/>
-        <source>Twenty-four</source>
-        <translation type="unfinished">يىگىرمە تۆت</translation>
+        <source>Thirteen</source>
+        <translation>ئون ئۈچ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="25"/>
-        <source>Twenty-six</source>
-        <translation type="unfinished">يىگىرمە ئالتە</translation>
+        <source>Fourteen</source>
+        <translation>ئون تۆت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="26"/>
-        <source>Twenty-eight</source>
-        <translation type="unfinished">يىگىرمە سەككىز</translation>
+        <source>Fifteen</source>
+        <translation>ئون بەش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="27"/>
-        <source>Thirty</source>
-        <translation type="unfinished">ئوتتۇز</translation>
+        <source>Sixteen</source>
+        <translation>ئون ئالتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="28"/>
-        <source>Thirty-two</source>
-        <translation type="unfinished">ئوتتۇز ئىككى</translation>
+        <source>Seventeen</source>
+        <translation>ئون يەتتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="29"/>
-        <source>Thirty-four</source>
-        <translation type="unfinished">ئوتتۇز تۆت</translation>
+        <source>Eighteen</source>
+        <translation>ئون سەككىز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="30"/>
-        <source>Thirty-six</source>
-        <translation type="unfinished">ئوتتۇز ئالتە</translation>
+        <source>Nineteen</source>
+        <translation>ئون توققۇز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="31"/>
-        <source>Thirty-eight</source>
-        <translation type="unfinished">ئوتتۇز سەككىز</translation>
+        <source>Twenty</source>
+        <translation>يىگىرمە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="32"/>
-        <source>Forty</source>
-        <translation type="unfinished">قىرىق</translation>
+        <source>Twenty-one</source>
+        <translation>يىگىرمە بىر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="33"/>
-        <source>Forty-two</source>
-        <translation type="unfinished">قىرىق ئىككى</translation>
+        <source>Twenty-two</source>
+        <translation>يىگىرمە ئىككى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="34"/>
-        <source>Forty-four</source>
-        <translation type="unfinished">قىرىق تۆت</translation>
+        <source>Twenty-three</source>
+        <translation>يىگىرمە ئۈچ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="35"/>
-        <source>Forty-six</source>
-        <translation type="unfinished">قىرىق ئالتە</translation>
+        <source>Twenty-four</source>
+        <translation>يىگىرمە تۆت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="36"/>
-        <source>Forty-eight</source>
-        <translation type="unfinished">قىرىق سەككىز</translation>
+        <source>Twenty-five</source>
+        <translation>يىگىرمە بەش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="37"/>
-        <source>Fifty</source>
-        <translation type="unfinished">ئەللىك</translation>
+        <source>Twenty-six</source>
+        <translation>يىگىرمە ئالتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="38"/>
-        <source>Fifty-two</source>
-        <translation type="unfinished">ئەللىك ئىككى</translation>
+        <source>Twenty-seven</source>
+        <translation>يىگىرمە يەتتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="39"/>
-        <source>Fifty-four</source>
-        <translation type="unfinished">ئەللىك تۆت</translation>
+        <source>Twenty-eight</source>
+        <translation>يىگىرمە سەككىز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="40"/>
-        <source>Fifty-six</source>
-        <translation type="unfinished">ئەللىك ئالتە</translation>
+        <source>Twenty-nine</source>
+        <translation>يىگىرمە توققۇز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="41"/>
-        <source>Fifty-eight</source>
-        <translation type="unfinished">ئەللىك سەككىز</translation>
+        <source>Thirty</source>
+        <translation>ئوتتۇز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="42"/>
-        <source>Sixty</source>
-        <translation type="unfinished">ئاتمىش</translation>
+        <source>Thirty-one</source>
+        <translation>ئوتتۇز بىر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="43"/>
-        <source>Sixty-two</source>
-        <translation type="unfinished">ئاتمىش ئىككى</translation>
+        <source>Thirty-two</source>
+        <translation>ئوتتۇز ئىككى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="44"/>
-        <source>Sixty-four</source>
-        <translation type="unfinished">ئاتمىش تۆت</translation>
+        <source>Thirty-three</source>
+        <translation>ئوتتۇز ئۈچ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="45"/>
-        <source>Sixty-six</source>
-        <translation type="unfinished">ئاتمىش ئالتە</translation>
+        <source>Thirty-four</source>
+        <translation>ئوتتۇز تۆت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="46"/>
-        <source>Sixty-eight</source>
-        <translation type="unfinished">ئاتمىش سەككىز</translation>
+        <source>Thirty-five</source>
+        <translation>ئوتتۇز بەش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="47"/>
-        <source>Seventy</source>
-        <translation type="unfinished">يەتمىش</translation>
+        <source>Thirty-six</source>
+        <translation>ئوتتۇز ئالتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="48"/>
-        <source>Seventy-two</source>
-        <translation type="unfinished">يەتمىش ئىككى</translation>
+        <source>Thirty-seven</source>
+        <translation>ئوتتۇز يەتتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="49"/>
-        <source>Seventy-four</source>
-        <translation type="unfinished">يەتمىش تۆت</translation>
+        <source>Thirty-eight</source>
+        <translation>ئوتتۇز سەككىز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="50"/>
-        <source>Seventy-six</source>
-        <translation type="unfinished">يەتمىش ئالتە</translation>
+        <source>Thirty-nine</source>
+        <translation>ئوتتۇز توققۇز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
-        <source>Seventy-eight</source>
-        <translation type="unfinished">يەتمىش سەككىز</translation>
+        <source>Forty</source>
+        <translation>قىرىق</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
-        <source>Eighty</source>
-        <translation type="unfinished">سەكسەن</translation>
+        <source>Forty-one</source>
+        <translation>قىرىق بىر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="53"/>
-        <source>Eighty-two</source>
-        <translation type="unfinished">سەكسەن ئىككى</translation>
+        <source>Forty-two</source>
+        <translation>قىرىق ئىككى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
-        <source>Eighty-four</source>
-        <translation type="unfinished">سەكسەن تۆت</translation>
+        <source>Forty-three</source>
+        <translation>قىرىق ئۈچ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
-        <source>Eighty-six</source>
-        <translation type="unfinished">سەكسەن ئالتە</translation>
+        <source>Forty-four</source>
+        <translation>قىرىق تۆت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
-        <source>Eighty-eight</source>
-        <translation type="unfinished">سەكسەن سەككىز</translation>
+        <source>Forty-five</source>
+        <translation>قىرىق بەش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
-        <source>Ninety</source>
-        <translation type="unfinished">توقسان</translation>
+        <source>Forty-six</source>
+        <translation>قىرىق ئالتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
-        <source>Ninety-two</source>
-        <translation type="unfinished">توقسان ئىككى</translation>
+        <source>Forty-seven</source>
+        <translation>قىرىق يەتتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
-        <source>Ninety-four</source>
-        <translation type="unfinished">توقسان تۆت</translation>
+        <source>Forty-eight</source>
+        <translation>قىرىق سەككىز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
-        <source>Ninety-six</source>
-        <translation type="unfinished">توقسان ئالتە</translation>
+        <source>Forty-nine</source>
+        <translation>قىرىق توققۇز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
-        <source>Ninety-eight</source>
-        <translation type="unfinished">توقسان سەككىز</translation>
+        <source>Fifty</source>
+        <translation>ئەللىك</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="62"/>
-        <source>One hundred</source>
-        <translation type="unfinished">يۈز</translation>
+        <source>Fifty-one</source>
+        <translation>ئەللىك بىر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
-        <source>One hundred and Two</source>
-        <translation type="unfinished">يۈز ئىككى</translation>
+        <source>Fifty-two</source>
+        <translation>ئەللىك ئىككىئەللىك ئىككى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
-        <source>One hundred and four</source>
-        <translation type="unfinished">يۈز تۆت</translation>
+        <source>Fifty-three</source>
+        <translation>ئەللىك ئۈچ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
-        <source>One hundred and Six</source>
-        <translation type="unfinished">يۈز ئالتە</translation>
+        <source>Fifty-four</source>
+        <translation>ئەللىك تۆت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
-        <source>One hundred and Eight</source>
-        <translation type="unfinished">يۈز سەككىز</translation>
+        <source>Fifty-five</source>
+        <translation>ئەللىك بەش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
-        <source>One hundred and Ten</source>
-        <translation type="unfinished">يۈز ئون</translation>
+        <source>Fifty-six</source>
+        <translation>ئەللىك ئالتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
-        <source>One hundred and Twelve</source>
-        <translation type="unfinished">يۈز ئون ئىككى</translation>
+        <source>Fifty-seven</source>
+        <translation>ئەللىك يەتتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
-        <source>One hundred and Fourteen</source>
-        <translation type="unfinished">يۈز ئون تۆت</translation>
+        <source>Fifty-eight</source>
+        <translation>ئەللىك سەككىز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
-        <source>One hundred and Sixteen</source>
-        <translation type="unfinished">يۈز ئون ئالتە</translation>
+        <source>Fifty-nine</source>
+        <translation>ئەللىك توققۇز</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
-        <source>One hundred and Eighteen</source>
-        <translation type="unfinished">يۈز ئون سەككىز</translation>
+        <source>Sixty</source>
+        <translation>ئاتمىش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
-        <source>One hundred and Twenty</source>
-        <translation type="unfinished">يۈز يىگىرمە</translation>
+        <source>Sixty-one</source>
+        <translation>ئاتمىش بىر</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
-        <source>One hundred and Twenty-two</source>
-        <translation type="unfinished">بىر يۈز يىگىرمە ئىككى</translation>
+        <source>Sixty-two</source>
+        <translation>ئاتمىش ئىككى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
-        <source>One hundred and Twenty-four</source>
-        <translation type="unfinished">يۈز يىگىرمە تۆت</translation>
+        <source>Sixty-three</source>
+        <translation>ئاتمىش ئۈچ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="75"/>
-        <source>One hundred and Twenty-six</source>
-        <translation type="unfinished">يۈز يىگىرمە ئالتە</translation>
+        <source>Sixty-four</source>
+        <translation>ئاتمىش تۆت</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="76"/>
-        <source>One hundred and Twenty-eight</source>
-        <translation type="unfinished">بىر يۈز يىگىرمە سەككىز</translation>
+        <source>Sixty-five</source>
+        <translation>ئاتمىش بەش</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="77"/>
-        <source>One hundred and Ninety-two</source>
-        <translation type="unfinished">بىر يۈز توقسان ئىككى</translation>
+        <source>Sixty-six</source>
+        <translation>ئاتمىش ئالتە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
-        <source>Two hundred and fifty-six</source>
-        <translation type="unfinished">256</translation>
+        <source>Sixty-seven</source>
+        <translation>ئاتمىش يەتتە</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="79"/>
+        <source>Sixty-eight</source>
+        <translation>ئاتمىش سەككىز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="80"/>
+        <source>Sixty-nine</source>
+        <translation>ئاتمىش توققۇز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="81"/>
+        <source>Seventy</source>
+        <translation>يەتمىش</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="82"/>
+        <source>Seventy-one</source>
+        <translation>يەتمىش بىر</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="83"/>
+        <source>Seventy-two</source>
+        <translation>يەتمىش ئىككى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="84"/>
+        <source>Seventy-three</source>
+        <translation>يەتمىش ئۈچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="85"/>
+        <source>Seventy-four</source>
+        <translation>يەتمىش تۆت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="86"/>
+        <source>Seventy-five</source>
+        <translation>يەتمىش بەش</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="87"/>
+        <source>Seventy-six</source>
+        <translation>يەتمىش ئالتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="88"/>
+        <source>Seventy-seven</source>
+        <translation>يەتمىش يەتتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="89"/>
+        <source>Seventy-eight</source>
+        <translation>يەتمىش سەككىز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="90"/>
+        <source>Seventy-nine</source>
+        <translation>يەتمىش توققۇز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="91"/>
+        <source>Eighty</source>
+        <translation>سەكسەن</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="92"/>
+        <source>Eighty-one</source>
+        <translation>سەكسەن بىر</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="93"/>
+        <source>Eighty-two</source>
+        <translation>سەكسەن ئىككى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="94"/>
+        <source>Eighty-three</source>
+        <translation>سەكسەن ئۈچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="95"/>
+        <source>Eighty-four</source>
+        <translation>سەكسەن تۆت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="96"/>
+        <source>Eighty-five</source>
+        <translation>سەكسەن بەش</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="97"/>
+        <source>Eighty-six</source>
+        <translation>سەكسەن ئالتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="98"/>
+        <source>Eighty-seven</source>
+        <translation>سەكسەن يەتتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="99"/>
+        <source>Eighty-eight</source>
+        <translation>سەكسەن سەككىز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="100"/>
+        <source>Eighty-nine</source>
+        <translation>سەكسەن توققۇز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="101"/>
+        <source>Ninety</source>
+        <translation>توقسان</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="102"/>
+        <source>Ninety-one</source>
+        <translation>توقسان بىر</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="103"/>
+        <source>Ninety-two</source>
+        <translation>توقسان ئىككى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="104"/>
+        <source>Ninety-three</source>
+        <translation>توقسان ئۈچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="105"/>
+        <source>Ninety-four</source>
+        <translation>توقسان تۆت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="106"/>
+        <source>Ninety-five</source>
+        <translation>توقسان بەش</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="107"/>
+        <source>Ninety-six</source>
+        <translation>توقسان ئالتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="108"/>
+        <source>Ninety-seven</source>
+        <translation>توقسان يەتتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="109"/>
+        <source>Ninety-eight</source>
+        <translation>توقسان سەككىز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="110"/>
+        <source>Ninety-nine</source>
+        <translation>توقسان توققۇز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="111"/>
+        <source>One hundred</source>
+        <translation>يۈز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="112"/>
+        <source>One hundred and one</source>
+        <translation>يۈز بىر</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="113"/>
+        <source>One hundred and Two</source>
+        <translation>يۈز ئىككى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="114"/>
+        <source>One hundred and three</source>
+        <translation>يۈز ئۈچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="115"/>
+        <source>One hundred and four</source>
+        <translation>يۈز تۆت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="116"/>
+        <source>One hundred and five</source>
+        <translation>يۈز بەش</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="117"/>
+        <source>One hundred and Six</source>
+        <translation>يۈز ئالتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="118"/>
+        <source>One hundred and seven</source>
+        <translation>يۈز يەتتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="119"/>
+        <source>One hundred and Eight</source>
+        <translation>يۈز سەككىز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="120"/>
+        <source>One hundred and nine</source>
+        <translation>يۈز توققۇز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="121"/>
+        <source>One hundred and Ten</source>
+        <translation>يۈز ئون</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="122"/>
+        <source>One hundred and eleven</source>
+        <translation>يۈز ئون بىر</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="123"/>
+        <source>One hundred and Twelve</source>
+        <translation>يۈز ئون ئىككى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="124"/>
+        <source>One hundred and thirteen</source>
+        <translation>يۈز ئون ئۈچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="125"/>
+        <source>One hundred and Fourteen</source>
+        <translation>يۈز ئون تۆت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="126"/>
+        <source>One hundred and fifteen</source>
+        <translation>يۈز ئون بەش</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="127"/>
+        <source>One hundred and Sixteen</source>
+        <translation>يۈز ئون ئالتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="128"/>
+        <source>One hundred and seventeen</source>
+        <translation>يۈز ئون يەتتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="129"/>
+        <source>One hundred and Eighteen</source>
+        <translation>يۈز ئون سەككىز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="130"/>
+        <source>One hundred and nineteen</source>
+        <translation>يۈز ئون توققۇز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="131"/>
+        <source>One hundred and Twenty</source>
+        <translation>يۈز يىگىرمە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="132"/>
+        <source>One hundred and twenty-one</source>
+        <translation>يۈز يىگىرمە بىر</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="133"/>
+        <source>One hundred and Twenty-two</source>
+        <translation>بىر يۈز يىگىرمە ئىككى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="134"/>
+        <source>One hundred and twenty-three</source>
+        <translation>يۈز يىگىرمە ئۈچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="135"/>
+        <source>One hundred and Twenty-four</source>
+        <translation>يۈز يىگىرمە تۆت</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="136"/>
+        <source>One hundred and twenty-five</source>
+        <translation>يۈز يىگىرمە بەش</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="137"/>
+        <source>One hundred and Twenty-six</source>
+        <translation>يۈز يىگىرمە ئالتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="138"/>
+        <source>One hundred and twenty-seven</source>
+        <translation>يۈز يىگىرمە يەتتە</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="139"/>
+        <source>One hundred and Twenty-eight</source>
+        <translation>بىر يۈز يىگىرمە سەككىز</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="140"/>
+        <source>One hundred and Ninety-two</source>
+        <translation>بىر يۈز توقسان ئىككى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="141"/>
+        <source>Two hundred and fifty-six</source>
+        <translation>ئالتەئىككى يۈز ئەللىك</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="486"/>
         <source>Frequency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="423"/>
+        <location filename="../src/DeviceManager/DeviceCpu.cpp" line="486"/>
         <source>Max Frequency</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1832,47 +2147,47 @@
 <context>
     <name>DeviceGenerator</name>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1539"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1538"/>
         <source>Model Name</source>
         <translation>نامى</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1543"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1542"/>
         <source>Vendor ID</source>
         <translation>ئىشلەپچىقارغۇچى</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1547"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1546"/>
         <source>Architecture</source>
         <translation>قۇرۇلما</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1551"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1550"/>
         <source>CPU(s)</source>
         <translation>مەنتىقىي پىروتسېسور</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1553"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1552"/>
         <source>Thread(s)</source>
         <translation>ھەر يادرو خېتى سانى</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1562"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1561"/>
         <source>L1d cache</source>
         <translation>كېش (سانلىق) L1</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1572"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1571"/>
         <source>L1i cache</source>
         <translation>كېش (بۇيرۇق) L1</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1582"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1581"/>
         <source>L2 cache</source>
         <translation>كېش L2</translation>
     </message>
     <message>
-        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1592"/>
+        <location filename="../src/GenerateDevice/DeviceGenerator.cpp" line="1591"/>
         <source>L3 cache</source>
         <translation>كېش L3</translation>
     </message>
@@ -1882,27 +2197,27 @@
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="152"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="318"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1902"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1922"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1942"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1953"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1968"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1981"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1997"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2013"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1912"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1932"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1952"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1963"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1978"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1991"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2007"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2023"/>
         <source>Overview</source>
         <translation>ئومۇمىي چۈشەنچە</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="159"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="295"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2101"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2111"/>
         <source>CPU</source>
         <translation>بىر تەرەپ قىلغۇچ</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="165"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2104"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2114"/>
         <source>CPU quantity</source>
         <translation>بىر تەرەپ قىلغۇچ مىقدارى</translation>
     </message>
@@ -2004,16 +2319,16 @@
         <translation>باشقا ئۈسكۈنىلەر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1908"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1972"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2004"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1918"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1982"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2014"/>
         <source>Device</source>
         <translation>ئۈسكۈنە</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1916"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1976"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2008"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1926"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1986"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="2018"/>
         <source>OS</source>
         <translation>مەشغۇلات سىستېمىسى</translation>
     </message>
@@ -2021,8 +2336,8 @@
 <context>
     <name>DeviceMonitor</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="654"/>
-        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="657"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="663"/>
+        <location filename="../src/DeviceManager/DeviceMonitor.cpp" line="666"/>
         <source>%1@%2Hz</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2125,88 +2440,88 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="284"/>
+        <location filename="../src/Page/MainWindow.cpp" line="289"/>
         <source>Device Info</source>
         <comment>export file&apos;s name</comment>
         <translation>ئۈسكۈنە ئۇچۇرى</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="361"/>
+        <location filename="../src/Page/MainWindow.cpp" line="366"/>
         <source>Display shortcuts</source>
         <translation>تېزلەتمىلەرنى كۆرسەت</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="362"/>
+        <location filename="../src/Page/MainWindow.cpp" line="367"/>
         <source>Close</source>
         <translation>تاقاش</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="363"/>
+        <location filename="../src/Page/MainWindow.cpp" line="368"/>
         <source>Help</source>
         <translation>ياردەم</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="364"/>
+        <location filename="../src/Page/MainWindow.cpp" line="369"/>
         <source>Copy</source>
         <translation>كۆچۈرۈش</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="368"/>
+        <location filename="../src/Page/MainWindow.cpp" line="373"/>
         <source>System</source>
         <translation>سىستېما</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="375"/>
+        <location filename="../src/Page/MainWindow.cpp" line="380"/>
         <source>Export</source>
         <translation>ئېكسپورت</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="376"/>
+        <location filename="../src/Page/MainWindow.cpp" line="381"/>
         <source>Refresh</source>
         <translation>يېڭىلاش</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="380"/>
+        <location filename="../src/Page/MainWindow.cpp" line="385"/>
         <source>Device Manager</source>
         <translation>ئۈسكۈنە باشقۇرغۇچى</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="457"/>
+        <location filename="../src/Page/MainWindow.cpp" line="462"/>
         <source>Hardware</source>
         <translation>قاتتىق دېتال ئۇچۇرى</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="457"/>
+        <location filename="../src/Page/MainWindow.cpp" line="462"/>
         <source>Drivers</source>
         <translation>قوزغاتقۇچ باشقۇرۇش</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="620"/>
+        <location filename="../src/Page/MainWindow.cpp" line="631"/>
         <source>Monitor</source>
         <translation>نازارەتچى</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="620"/>
+        <location filename="../src/Page/MainWindow.cpp" line="631"/>
         <source>Overview</source>
         <translation>ئومۇمىي چۈشەنچە</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="624"/>
+        <location filename="../src/Page/MainWindow.cpp" line="635"/>
         <source>Display Adapter</source>
         <translation>ماسلاشتۇرغۇچنى كۆرسىتىش</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="628"/>
+        <location filename="../src/Page/MainWindow.cpp" line="639"/>
         <source>CPU</source>
         <translation>بىر تەرەپ قىلغۇچ</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="632"/>
+        <location filename="../src/Page/MainWindow.cpp" line="643"/>
         <source>Network Adapter</source>
         <translation>تور ماسلاشتۇرغۇچ</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="638"/>
+        <location filename="../src/Page/MainWindow.cpp" line="649"/>
         <source>Battery</source>
         <translation>باتارېيە</translation>
     </message>
@@ -2214,7 +2529,7 @@
 <context>
     <name>PageDetail</name>
     <message>
-        <location filename="../src/Page/PageDetail.cpp" line="354"/>
+        <location filename="../src/Page/PageDetail.cpp" line="363"/>
         <source>More</source>
         <translation>تېخىمۇ كۆپ</translation>
     </message>
@@ -2401,57 +2716,57 @@
 <context>
     <name>PageDriverInstallInfo</name>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="110"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="123"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="119"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="132"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="145"/>
         <source>Device Name</source>
         <translation>ئۈسكۈنىنىڭ ئىسمى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="111"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="120"/>
         <source>Version Available</source>
         <translation>قاچىلاشقا بولىدىغان نەشرى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="112"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="125"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="121"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="134"/>
         <source>Size</source>
         <translation>چوڭلۇقى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="113"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="126"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="122"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="135"/>
         <source>Status</source>
         <translation>ھالەت</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="114"/>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="127"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="123"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
         <source>Action</source>
         <translation>مەشغۇلات</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="124"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="133"/>
         <source>New Version</source>
         <translation>يېڭىلاشقا بولىدىغان نەشرى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="136"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="145"/>
         <source>Current Version</source>
         <translation>نۆۋەتتىكى نەشرى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="230"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="239"/>
         <source>Missing drivers (%1)</source>
         <translation>قاچىلاشقا بولىدىغان قوزغاتقۇچ (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="231"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="240"/>
         <source>Outdated drivers (%1)</source>
         <translation>يېڭىلاشقا بولىدىغان قوزغاتقۇچ (%1)</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="232"/>
+        <location filename="../src/Page/PageDriverInstallInfo.cpp" line="241"/>
         <source>Up-to-date drivers (%1)</source>
         <translation>يېڭىلاش ھاجەتسىز قوزغاتقۇچ (%1)</translation>
     </message>
@@ -2503,27 +2818,27 @@
         <translation>تەرجىمە قىلىش ۋەزىپىسىغا چۈش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="129"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
         <source>Name</source>
         <translation>ئىسمى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="130"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
         <source>Current Version</source>
         <translation>نۆۋەتتىكى نەشرى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="131"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="133"/>
         <source>Backup Version</source>
         <translation>تەرجىمە قىلغان نەشىرلىك</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="132"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="134"/>
         <source>Action</source>
         <translation>مەشغۇلات</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="180"/>
+        <location filename="../src/Page/PageDriverRestoreInfo.cpp" line="182"/>
         <source>Restorable Drivers</source>
         <translation>ئاپتىلەشىدۇغان سىستېم ۋەزىپىسى</translation>
     </message>
@@ -2546,17 +2861,17 @@
         <translation>ئومۇمىي چۈشەنچە</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="132"/>
+        <location filename="../src/Page/PageListView.cpp" line="134"/>
         <source>Driver Install</source>
         <translation>سىستېم ۋەزىپىسى نۇرغۇنلاشتۇرۇش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="132"/>
+        <location filename="../src/Page/PageListView.cpp" line="134"/>
         <source>Driver Backup</source>
         <translation>سىستېم ۋەزىپىسى تەرجىمە قىلىش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageListView.cpp" line="132"/>
+        <location filename="../src/Page/PageListView.cpp" line="134"/>
         <source>Driver Restore</source>
         <translation>سىستېم ۋەزىپىسى ئاپتىلەش</translation>
     </message>
@@ -2628,7 +2943,7 @@
         <translation>كۆچۈرۈش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageOverview.cpp" line="92"/>
+        <location filename="../src/Page/PageOverview.cpp" line="95"/>
         <source>Overview</source>
         <translation>ئومۇمىي چۈشەنچە</translation>
     </message>
@@ -2652,7 +2967,7 @@
     </message>
     <message>
         <location filename="../src/Page/PageSingleInfo.cpp" line="45"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="233"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="240"/>
         <source>Enable</source>
         <translation>قوزغىتىش</translation>
     </message>
@@ -2672,33 +2987,33 @@
         <translation>كومپيۇتېرنى ئويغىتىشقا رۇخسەت قىلىش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="236"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="243"/>
         <source>Disable</source>
         <translation>چەكلەش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="339"/>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="359"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="348"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="368"/>
         <source>Failed to disable it: unable to get the device SN</source>
         <translation>ئۈسكۈنە تەرتىپ نومۇرىنى ئالالمىدى، چەكلەش مەغلۇپ بولدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="344"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="353"/>
         <source>Failed to disable the device</source>
         <translation>ئۈسكۈنىنى چەكلىيەلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="364"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="373"/>
         <source>Failed to enable the device</source>
         <translation>ئۈسكۈنىنى قوزغىتىش مەغلۇب بولدى</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="382"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="391"/>
         <source>Update Drivers</source>
         <translation> قوزغاتقۇچ يېڭىلاش</translation>
     </message>
     <message>
-        <location filename="../src/Page/PageSingleInfo.cpp" line="401"/>
+        <location filename="../src/Page/PageSingleInfo.cpp" line="410"/>
         <source>Uninstall Drivers</source>
         <translation>قوزغاتقۇچنى چىقىرۋىتىش</translation>
     </message>
@@ -2706,66 +3021,66 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1771"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1800"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1810"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
         <source>CPU</source>
         <translation>بىر تەرەپ قىلغۇچ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1771"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1800"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1829"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1866"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1810"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
         <source>No CPU found</source>
         <translation>بىر تەرەپ قىلغۇچ تېپىلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1772"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1801"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1830"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1867"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1811"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
         <source>Motherboard</source>
         <translation>ئانا تاختا</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1772"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1801"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1830"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1867"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1811"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
         <source>No motherboard found</source>
         <translation>باش تاختا تېپىلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1773"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1802"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1831"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1868"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1812"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
         <source>Memory</source>
         <translation>ساقلىغۇ</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1773"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1802"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1831"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1868"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1812"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
         <source>No memory found</source>
         <translation>ئىچكى ساقلىغۇچ تېپىلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1774"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1803"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1832"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1869"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1813"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
         <source>Storage</source>
         <translation>ساقلاش</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1774"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1803"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1832"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1869"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1813"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
         <source>No disk found</source>
         <translation>دىسكا تېپىلمىدى</translation>
     </message>
@@ -2786,220 +3101,220 @@
         <translation>سىستېم ۋەزىپىسى تەرجىمە قىلىشى ئەپەت</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1804"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1833"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1814"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
         <location filename="../src/Page/PageDriverManager.cpp" line="776"/>
         <source>Display Adapter</source>
         <translation>ماسلاشتۇرغۇچنى كۆرسىتىش</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1775"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1804"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1833"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1870"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1814"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
         <source>No GPU found</source>
         <translation>GPU تېپىلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1776"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1805"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1834"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1871"/>
-        <location filename="../src/Page/MainWindow.cpp" line="579"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1815"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
+        <location filename="../src/Page/MainWindow.cpp" line="590"/>
         <source>Monitor</source>
         <translation>نازارەتچى</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1776"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1805"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1834"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1871"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1815"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
         <source>No monitor found</source>
         <translation>نازارەتچى تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1777"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1806"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1835"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1872"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="785"/>
-        <source>Network Adapter</source>
-        <translation>تور ماسلاشتۇرغۇچ</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1777"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1806"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1835"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1872"/>
-        <source>No network adapter found</source>
-        <translation>تور ماسلاشتۇرغۇچ تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1778"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1807"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1836"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="779"/>
-        <source>Sound Adapter</source>
-        <translation>ئاۋاز ماسلاشتۇرغۇچ</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1778"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1807"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1836"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1873"/>
-        <source>No audio device found</source>
-        <translation>ئاۋاز ئۈسكۈنىسى تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1779"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1808"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1837"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1874"/>
-        <location filename="../src/Page/PageDriverManager.cpp" line="782"/>
-        <source>Bluetooth</source>
-        <translation>كۆك چىش</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1779"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1808"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1837"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1874"/>
-        <source>No Bluetooth device found</source>
-        <translation>كۆك چىش ئۈسكۈنىسى تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1780"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1809"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
-        <source>Other PCI Devices</source>
-        <translation>باشقا PCI ئۈسكۈنىلىرى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1780"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1809"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1838"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1875"/>
-        <source>No other PCI devices found</source>
-        <translation>باشقا PCI ئۈسكۈنىلىرى تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1810"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
-        <source>Power</source>
-        <translation>توك</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1781"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1810"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1839"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1876"/>
-        <source>No battery found</source>
-        <translation>باتارېيە تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1811"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
-        <location filename="../src/Tool/commontools.cpp" line="52"/>
-        <source>Keyboard</source>
-        <translation>كۇنۇپكا تاختىسى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1782"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1811"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1840"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1877"/>
-        <source>No keyboard found</source>
-        <translation>ھېچقانداق كۇنۇپكا تاختىسى تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1812"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
-        <location filename="../src/Tool/commontools.cpp" line="54"/>
-        <source>Mouse</source>
-        <translation>چاشقىنەك</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1783"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1812"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1841"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1878"/>
-        <source>No mouse found</source>
-        <translation>مائۇس تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1813"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
-        <location filename="../src/Tool/commontools.cpp" line="56"/>
-        <source>Printer</source>
-        <translation>پىرىنتېر</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1784"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1813"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1842"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1879"/>
-        <source>No printer found</source>
-        <translation>پىرىنتېر تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1814"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
-        <source>Camera</source>
-        <translation>كامېرا</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1785"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1814"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1843"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1880"/>
-        <source>No camera found</source>
-        <translation>كامېرا تېپىلمىدى</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1815"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
-        <source>CD-ROM</source>
-        <translation>قوزغاتقۇچ</translation>
-    </message>
-    <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1786"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1815"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1844"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1881"/>
-        <source>No CD-ROM found</source>
-        <translation>قوزغاتقۇچ تېپىلمىدى</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1816"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
         <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="785"/>
+        <source>Network Adapter</source>
+        <translation>تور ماسلاشتۇرغۇچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1816"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
+        <source>No network adapter found</source>
+        <translation>تور ماسلاشتۇرغۇچ تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1788"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1817"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1846"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1883"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="779"/>
+        <source>Sound Adapter</source>
+        <translation>ئاۋاز ماسلاشتۇرغۇچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1788"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1817"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1846"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1883"/>
+        <source>No audio device found</source>
+        <translation>ئاۋاز ئۈسكۈنىسى تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1789"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1818"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1847"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1884"/>
+        <location filename="../src/Page/PageDriverManager.cpp" line="782"/>
+        <source>Bluetooth</source>
+        <translation>كۆك چىش</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1789"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1818"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1847"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1884"/>
+        <source>No Bluetooth device found</source>
+        <translation>كۆك چىش ئۈسكۈنىسى تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1790"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1819"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1848"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1885"/>
+        <source>Other PCI Devices</source>
+        <translation>باشقا PCI ئۈسكۈنىلىرى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1790"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1819"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1848"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1885"/>
+        <source>No other PCI devices found</source>
+        <translation>باشقا PCI ئۈسكۈنىلىرى تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1791"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1820"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1849"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1886"/>
+        <source>Power</source>
+        <translation>توك</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1791"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1820"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1849"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1886"/>
+        <source>No battery found</source>
+        <translation>باتارېيە تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1792"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1821"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1850"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1887"/>
+        <location filename="../src/Tool/commontools.cpp" line="52"/>
+        <source>Keyboard</source>
+        <translation>كۇنۇپكا تاختىسى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1792"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1821"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1850"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1887"/>
+        <source>No keyboard found</source>
+        <translation>ھېچقانداق كۇنۇپكا تاختىسى تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1793"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1822"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1851"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1888"/>
+        <location filename="../src/Tool/commontools.cpp" line="54"/>
+        <source>Mouse</source>
+        <translation>چاشقىنەك</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1793"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1822"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1851"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1888"/>
+        <source>No mouse found</source>
+        <translation>مائۇس تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1794"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1823"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1852"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1889"/>
+        <location filename="../src/Tool/commontools.cpp" line="56"/>
+        <source>Printer</source>
+        <translation>پىرىنتېر</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1794"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1823"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1852"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1889"/>
+        <source>No printer found</source>
+        <translation>پىرىنتېر تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1795"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1824"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1853"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1890"/>
+        <source>Camera</source>
+        <translation>كامېرا</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1795"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1824"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1853"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1890"/>
+        <source>No camera found</source>
+        <translation>كامېرا تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1796"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1825"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1854"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1891"/>
+        <source>CD-ROM</source>
+        <translation>قوزغاتقۇچ</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1796"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1825"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1854"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1891"/>
+        <source>No CD-ROM found</source>
+        <translation>قوزغاتقۇچ تېپىلمىدى</translation>
+    </message>
+    <message>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1797"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1826"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1855"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1892"/>
         <location filename="../src/Tool/commontools.cpp" line="58"/>
         <location filename="../src/Tool/commontools.cpp" line="60"/>
         <source>Other Devices</source>
         <translation>باشقا ئۈسكۈنىلەر</translation>
     </message>
     <message>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1787"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1816"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1845"/>
-        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1882"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1797"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1826"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1855"/>
+        <location filename="../src/DeviceManager/DeviceManager.cpp" line="1892"/>
         <source>No other devices found</source>
         <translation>باشقا ئۈسكۈنىلەر تېپىلمىدى</translation>
     </message>
@@ -3040,171 +3355,171 @@
         <translation>قۇرغاتقۇچ ئورنىنى تاللاڭ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="107"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="117"/>
         <source>%1 driver updates available</source>
         <translation>يېڭىلاپ قاچىلاشقا بولىدىغان %1 بايقالدى</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="113"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="400"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="123"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="410"/>
         <source>Time checked: %1</source>
         <translation>تەكشۈرۈش ۋاقتى: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="166"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="176"/>
         <source>Downloading drivers for %1...</source>
         <translation>%1 قوزغاتقۇچ چۈشۈۋاتىدۇ...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="168"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="178"/>
         <source>Download speed: %1 Downloaded %2/%3</source>
         <translation>چۈشۈرۈش سۈرئىتى: %1 تاماملاندى %2/%3</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="219"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="229"/>
         <source>Installing drivers for %1...</source>
         <translation>%1 قوزغاتقۇچ قاچىلىنىۋاتىدۇ...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="264"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="274"/>
         <source>%1 drivers installed, %2 drivers failed</source>
         <translation>%1 قوزغاتقۇچ قاچىلاندى، %2 قاچىلانمىدى</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="267"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="277"/>
         <source>%1 drivers installed</source>
         <translation>%1 قوزغاتقۇچ قاچىلاندى</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="309"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="319"/>
         <source>Failed to install drivers</source>
         <translation>قوزغاتقۇچ قاچىلانمىدى</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="352"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="362"/>
         <source>Network error. Reconnecting...</source>
         <translation>تور نورمالسىز، قايتا سىناڭ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="354"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="364"/>
         <source>Download speed: %1</source>
         <translation>چۈشۈرۈش سۈرئىتى: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="397"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="407"/>
         <source>Your drivers are up to date</source>
         <translation>قوزغاتقۇچ يېڭى</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="504"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="514"/>
         <source>All drivers have been backed up</source>
         <translation>ھەممە سىستېم ۋەزىپىسى تەرجىمە قىلغان</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="506"/>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="551"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="516"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="561"/>
         <source>A total of %1 drivers, of which %2 have been backed up</source>
         <translation>%1 تۆنۈك سىستېم ۋەزىپىسى، ئۇلارنىڭ %2 تۆنۈكى تەرجىمە قىلغان</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="546"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="556"/>
         <source>You have %1 drivers that can be backed up, it is recommended to do so immediately</source>
         <translation>%1 تۆنۈك سىستېم ۋەزىپىسىنى تەرجىمە قىلىشى مۇمكىن، ئۇنى ئەمەل قىلىش ئۇچۇن ئەمەل قىلىڭ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="550"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="560"/>
         <source>You have %1 drivers that can be backed up</source>
         <translation>%1 تۆنۈك سىستېم ۋەزىپىسىنى تەرجىمە قىلىشى مۇمكىن</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="597"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="607"/>
         <source>Backing up the %1 driver, a total of %2 drivers</source>
         <translation>%1 سىستېم ۋەزىپىسىنى تەرجىمە قىلىۋاتىدۇ، ھەممە %2 تۆنۈك سىستېم ۋەزىپىسى</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="598"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="608"/>
         <source>Backing up: %1</source>
         <translation>تەرجىمە قىلىۋاتىدۇ: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="638"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="648"/>
         <source>%1 drivers backed up, %2 drivers failed</source>
         <translation>%1 تۆنۈك سىستېم ۋەزىپىسى تەرجىمە قىلغان، %2 تۆنۈك سىستېم ۋەزىپىسى ئەپەت</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="641"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="651"/>
         <source>Failed to backup drivers</source>
         <translation>سىستېم ۋەزىپىسىنى تەرجىمە قىلىش ئەپەت</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="644"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="654"/>
         <source>%1 drivers backed up</source>
         <translation>%1 تۆنۈك سىستېم ۋەزىپىسى تەرجىمە قىلغان</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="684"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="694"/>
         <source>You have %1 drivers that can be restored</source>
         <translation>ئەنە %1 ۋەزىپىنى ئەپەتلىك قىلغۇچىنىڭ ئەپەتلىك قىلىنىدۇ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="685"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="695"/>
         <source>Please select a driver to restore</source>
         <translation>ئەپەتلىك قىلغۇچىنى ئەپەتلىك قىلىش چۈشىنىڭ ئىشلىتىشىڭىز ھەققىدە</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="716"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="726"/>
         <source>Driver is restoring...</source>
         <translation>ۋەزىپىنى ئەپەتلىك قىلغۇچى ئەپەتلىك قىلىدۇ...</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="717"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="727"/>
         <source>Restoring: %1</source>
         <translation>ئەپەتلىك قىلىنىدۇ: %1</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="872"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="882"/>
         <source>reboot</source>
         <translation>كومپيۇتېرنى قايتا قوزغىتىش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="873"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="883"/>
         <source>Please %1 for the installed drivers to take effect</source>
         <translation>قوزغاتقۇچ قاچىلىنىپ بولدى، سەل تۇرۇپ %1 دىن كېيىن كۈچكە ئىگە بولىدۇ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="881"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="891"/>
         <source>View backup path</source>
         <translation>ھەققىدە ئەپەتلىك قىلىنىدۇ ھەققىدە ھەققىدە</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="904"/>
         <source>Backup All</source>
         <translation>ھەممىنى ئەپەتلىك قىلىڭ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="876"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="886"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="300"/>
         <source>submit feedback</source>
         <translation>ئىنكاس</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="877"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="887"/>
         <source>Please try again or %1 to us</source>
         <translation>قوزغاتقۇچ قاچىلانمىدى، قايتا سىناڭ ياكى بىزگە %1 يوللاڭ</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="884"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="894"/>
         <source>Install All</source>
         <translation>ھەممىنى قاچىلاش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="889"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="899"/>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="304"/>
         <source>Scan Again</source>
         <translation>قايتا تەكشۈرۈش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="899"/>
+        <location filename="../src/Widget/DetectedStatusWidget.cpp" line="909"/>
         <source>Cancel</source>
         <translation>بىكار قىلىش</translation>
     </message>
@@ -3215,7 +3530,7 @@
     </message>
     <message>
         <location filename="../src/Widget/DriverScanWidget.cpp" line="83"/>
-        <location filename="../src/Widget/DriverScanWidget.cpp" line="376"/>
+        <location filename="../src/Widget/DriverScanWidget.cpp" line="380"/>
         <source>Scanning %1</source>
         <translation>تەكشۈرۈۋاتىدۇ %1</translation>
     </message>
@@ -3240,40 +3555,40 @@
         <translation>قايتا تەكشۈرۈڭ ياكى بىزگە %1 يوللاڭ</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="763"/>
+        <location filename="../src/Page/MainWindow.cpp" line="774"/>
         <source>You are installing a driver, which will be interrupted if you exit.</source>
         <translation>قوزغاتقۇچ قاچىلىنىۋاتىدۇ، چېكىنسىڭىز ۋەزىپە توختاپ قالىدۇ</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="764"/>
-        <location filename="../src/Page/MainWindow.cpp" line="780"/>
-        <location filename="../src/Page/MainWindow.cpp" line="796"/>
+        <location filename="../src/Page/MainWindow.cpp" line="775"/>
+        <location filename="../src/Page/MainWindow.cpp" line="791"/>
+        <location filename="../src/Page/MainWindow.cpp" line="807"/>
         <source>Are you sure you want to exit?</source>
         <translation>راستلا چېكىنەمسىز؟</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="767"/>
-        <location filename="../src/Page/MainWindow.cpp" line="783"/>
-        <location filename="../src/Page/MainWindow.cpp" line="799"/>
+        <location filename="../src/Page/MainWindow.cpp" line="778"/>
+        <location filename="../src/Page/MainWindow.cpp" line="794"/>
+        <location filename="../src/Page/MainWindow.cpp" line="810"/>
         <source>Exit</source>
         <comment>button</comment>
         <translation>چېكىنىش</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="768"/>
-        <location filename="../src/Page/MainWindow.cpp" line="784"/>
-        <location filename="../src/Page/MainWindow.cpp" line="800"/>
+        <location filename="../src/Page/MainWindow.cpp" line="779"/>
+        <location filename="../src/Page/MainWindow.cpp" line="795"/>
+        <location filename="../src/Page/MainWindow.cpp" line="811"/>
         <source>Cancel</source>
         <comment>button</comment>
         <translation>بىكار قىلىش</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="779"/>
+        <location filename="../src/Page/MainWindow.cpp" line="790"/>
         <source>You are backing up drivers, which will be interrupted if you exit.</source>
         <translation>سىز ۋەزىپىنى ئەپەتلىك قىلغۇچىنى ئەپەتلىك قىلىۋاتىسىز، سىز چыققاندا ئۇ چەقىرىلىدۇ.</translation>
     </message>
     <message>
-        <location filename="../src/Page/MainWindow.cpp" line="795"/>
+        <location filename="../src/Page/MainWindow.cpp" line="806"/>
         <source>You are restoring drivers, which will be interrupted if you exit.</source>
         <translation>سىز ۋەزىپىنى ئەپەتلىك قىلغۇچىنى ئەپەتلىك قىلىۋاتىسىز، سىز چыققاندا ئۇ چەقىرىلىدۇ.</translation>
     </message>
@@ -3389,22 +3704,22 @@
         <translation>قوزغاتقۇچ ھۆججىتىگە ئېرىشەلمىدى</translation>
     </message>
     <message>
-        <location filename="../src/Widget/driveritem.cpp" line="268"/>
+        <location filename="../src/Widget/driveritem.cpp" line="272"/>
         <source>Update</source>
         <translation>يېڭىلاش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/driveritem.cpp" line="274"/>
+        <location filename="../src/Widget/driveritem.cpp" line="278"/>
         <source>Backup</source>
         <translation>ئەپەتلىك قىلىش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/driveritem.cpp" line="280"/>
+        <location filename="../src/Widget/driveritem.cpp" line="284"/>
         <source>Restore</source>
         <translation>ئەپەتلىك قىلىش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/driveritem.cpp" line="263"/>
+        <location filename="../src/Widget/driveritem.cpp" line="267"/>
         <source>Install</source>
         <translation>قاچىلاش</translation>
     </message>
@@ -3413,7 +3728,7 @@
     <name>TableWidget</name>
     <message>
         <location filename="../src/Widget/TableWidget.cpp" line="38"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="232"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="240"/>
         <source>Disable</source>
         <translation>چەكلەش</translation>
     </message>
@@ -3443,9 +3758,9 @@
         <translation>كومپيۇتېرنى ئويغىتىشقا رۇخسەت قىلىش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TableWidget.cpp" line="238"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="379"/>
-        <location filename="../src/Widget/TableWidget.cpp" line="387"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="246"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="389"/>
+        <location filename="../src/Widget/TableWidget.cpp" line="397"/>
         <source>Enable</source>
         <translation>قوزغىتىش</translation>
     </message>
@@ -3468,12 +3783,12 @@
         <translation>كۆچۈرۈش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="276"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="281"/>
         <source>Disable</source>
         <translation>چەكلەش</translation>
     </message>
     <message>
-        <location filename="../src/Widget/TextBrowser.cpp" line="285"/>
+        <location filename="../src/Widget/TextBrowser.cpp" line="290"/>
         <source>Unavailable</source>
         <translation>ئىشلەتكىلى بولمايدۇ</translation>
     </message>
@@ -3481,7 +3796,7 @@
 <context>
     <name>UrlChooserEdit</name>
     <message>
-        <location filename="../src/Widget/UrlChooserEdit.cpp" line="99"/>
+        <location filename="../src/Widget/UrlChooserEdit.cpp" line="103"/>
         <source>Select a local folder please</source>
         <translation>يەرلىكتىكى ھۆججەت قىسقۇچنى تاللاڭ</translation>
     </message>
