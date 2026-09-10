@@ -427,8 +427,8 @@ bool ControlInterface::removeEnable(const QString &hclass, const QString &name, 
 
 bool ControlInterface::ioctlEnableNetwork(const QString &hclass, const QString &name, const QString &logical_name, const QString &unique_id, bool enable, const QString strDriver)
 {
-    // 1. 通过ioctl禁用
-    if (!EnableUtils::ioctlOperateNetworkLogicalName(logical_name, enable))
+    // 1. 通过ioctl禁用（链路一：UI界面用户操作）
+    if (!EnableUtils::ioctlOperateNetworkLogicalName(logical_name, enable, EnableUtils::NOS_UI_OPERATE))
         return false;
     // 2. 持久化保存
     if (enable) {

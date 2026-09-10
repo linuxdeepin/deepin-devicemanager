@@ -13,10 +13,13 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QDBusConnection>
+#include <QDBusConnectionInterface>
+#include <QDBusServiceWatcher>
 #include <QDBusObjectPath>
 #include <QCryptographicHash>
 #include <QRegularExpression>
 #include <QDebug>
+#include <QTimer>
 
 #include <unistd.h>
 #include <errno.h>
@@ -25,6 +28,35 @@
 
 #define LEAST_NUM 10
 #define REG_ADDRESS "^[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}:[0-9a-z]{2}$"
+
+// 读取sysfs文件内容，读取失败返回空字符串
+static QString readSysfsContent(const QString &path)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return QString();
+    return QString::fromLatin1(file.readAll()).trimmed();
+}
+
+// 写入sysfs文件内容
+static bool writeSysfsContent(const QString &path, const QString &content)
+{
+    QFile file(path);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return false;
+    const QByteArray data = content.toLatin1();
+    return file.write(data) == data.size();
+}
+
+// 校验网卡名格式：仅允许字母、数字、下划线、短横线、点号，长度不超过IFNAMSIZ-1，
+// 禁止路径分隔符和".."等，防止将外部可控参数拼入sysfs路径时发生路径穿越
+static bool isValidInterfaceName(const QString &name)
+{
+    if (name.isEmpty() || name.length() >= IFNAMSIZ)
+        return false;
+    static const QRegularExpression re("^[a-zA-Z0-9._-]+$");
+    return re.match(name).hasMatch() && !name.contains("..");
+}
 
 EnableUtils::EnableUtils()
 {
@@ -88,12 +120,12 @@ void EnableUtils::disableOutDevice(const QString &info)
         path.replace(QRegExp("[1-9]$"), "0");
 
 
-        // 网卡采用ioctl的方式禁用
+        // 网卡采用ioctl的方式禁用（链路二：开机/服务唤起时恢复禁用状态）
         QRegExp reg(REG_ADDRESS);
         if (reg.exactMatch(uniqueID)) {
             path = mapItem["Device File"];
             if (EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID) &&
-                    EnableUtils::ioctlOperateNetworkLogicalName(path, false))
+                    EnableUtils::ioctlOperateNetworkLogicalName(path, false, NOS_BOOT_RESTORE))
                 EnableSqlManager::getInstance()->updateDataToAuthorizedTable(uniqueID, path);
             continue;
         }
@@ -121,7 +153,8 @@ void EnableUtils::disableInDevice()
     for (QList<QPair<QString, QString>>::iterator it = lstAuthPair.begin() ; it != lstAuthPair.end(); ++it) {
         QRegExp reg(REG_ADDRESS);
         if (reg.exactMatch((*it).second)) {
-            EnableUtils::ioctlOperateNetworkLogicalName((*it).first, false);
+            // 链路二：开机/服务唤起时恢复禁用状态
+            EnableUtils::ioctlOperateNetworkLogicalName((*it).first, false, NOS_BOOT_RESTORE);
             continue;
         }
     }
@@ -144,9 +177,74 @@ void EnableUtils::disableInDevice()
     }
 }
 
-bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable)
+bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable, NetworkOperateSource source)
 {
-    qDebug() << "[ioctlOperateNetworkLogicalName] enter, logicalName:" << logicalName << "enable:" << enable;
+    const QString nmServiceName = "org.freedesktop.NetworkManager";
+
+    // 1. 首先判断NetworkManager服务是否已经启动
+    QDBusConnectionInterface *busInterface = QDBusConnection::systemBus().interface();
+    if (busInterface == nullptr) {
+        // 无法获取系统总线接口时既无法确认服务状态也无法监控，直接执行当前逻辑
+        // （其内部对NetworkManager的调用失败时会按有线网卡走ioctl方式处理）
+        qCritical() << "[ioctlOperateNetworkLogicalName] system bus interface is invalid, executing directly";
+        return ioctlOperateNetworkLogicalNameImpl(logicalName, enable, source);
+    }
+
+    // 2. 服务已启动，直接调用当前的启用/禁用逻辑
+    if (busInterface->isServiceRegistered(nmServiceName)) {
+        qDebug() << "[ioctlOperateNetworkLogicalName] NetworkManager is running, executing directly";
+        return ioctlOperateNetworkLogicalNameImpl(logicalName, enable, source);
+    }
+
+    // 3. 服务未启动：监控该服务，待其启动后再等待3秒执行当前逻辑
+    qDebug() << "[ioctlOperateNetworkLogicalName] NetworkManager is not running,"
+             << "watching for service start, will execute 3s after it starts";
+
+    // 先创建服务监控，避免"检查未启动"与"监控生效"之间服务恰好启动而错过启动信号
+    QDBusServiceWatcher *watcher = new QDBusServiceWatcher(nmServiceName,
+                                                           QDBusConnection::systemBus(),
+                                                           QDBusServiceWatcher::WatchForRegistration);
+    QObject::connect(watcher, &QDBusServiceWatcher::serviceRegistered, watcher,
+                     [watcher, logicalName, enable, source](const QString &serviceName) {
+        qDebug() << "[ioctlOperateNetworkLogicalName] NetworkManager started:" << serviceName
+                 << ", waiting 3 seconds before executing";
+
+        // 服务启动后等待3秒再执行，给NetworkManager留出枚举并初始化网卡设备信息的时间
+        QTimer::singleShot(3000, watcher, [watcher, logicalName, enable, source]() {
+            watcher->deleteLater();
+            EnableUtils::ioctlOperateNetworkLogicalNameImpl(logicalName, enable, source);
+        });
+    });
+
+    // 再次检查，防止服务在上述窗口内恰好启动：
+    // 若监控未收到启动信号，此处改为直接同步执行；
+    // 若监控的信号已在事件队列中，watcher销毁后其延迟执行会随之取消，不会重复执行
+    if (busInterface->isServiceRegistered(nmServiceName)) {
+        qDebug() << "[ioctlOperateNetworkLogicalName] second check: NetworkManager is now registered,"
+                 << "cancelling watcher and executing directly";
+        watcher->deleteLater();
+        return ioctlOperateNetworkLogicalNameImpl(logicalName, enable, source);
+    }
+
+    // 操作已转为异步挂起，无法同步返回执行结果：
+    // 返回true表示操作已被接受，将在NetworkManager服务启动后延迟3秒执行
+    qDebug() << "[ioctlOperateNetworkLogicalName] operation is pending asynchronously,"
+             << "will execute 3s after NetworkManager starts";
+    return true;
+}
+
+// 实际执行网卡启用/禁用逻辑，由ioctlOperateNetworkLogicalName在NetworkManager服务就绪后调用
+bool EnableUtils::ioctlOperateNetworkLogicalNameImpl(const QString &logicalName, bool enable, NetworkOperateSource source)
+{
+    qDebug() << "[ioctlOperateNetworkLogicalName] enter, logicalName:" << logicalName
+             << "enable:" << enable
+             << "source:" << (source == NOS_UI_OPERATE ? "UI" : "BootRestore");
+
+    // 安全校验：网卡名格式校验，防止路径穿越（logicalName来自DBus调用者，服务以root运行）
+    if (!isValidInterfaceName(logicalName)) {
+        qCritical() << "[ioctlOperateNetworkLogicalName] invalid logical name, rejecting:" << logicalName;
+        return false;
+    }
 
     // 首先判断当前网卡是有线网卡还是无线网卡
     if (isWirelessNetwork(logicalName)) {
@@ -154,9 +252,9 @@ bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, boo
         int wirelessCount = wirelessNetworkCount();
         qDebug() << "[ioctlOperateNetworkLogicalName] wireless card detected, wireless count:" << wirelessCount;
         if (wirelessCount <= 1) {
-            // 无线网卡个数为1时，通过NetworkManager的WirelessEnabled属性统一禁用/启用无线网卡
-            qDebug() << "[ioctlOperateNetworkLogicalName] wireless count <= 1, using enableWirelessByDBus";
-            return enableWirelessByDBus(enable);
+            // 无线网卡个数为1时，通过rfkill直接block/unblock当前无线网卡
+            qDebug() << "[ioctlOperateNetworkLogicalName] wireless count <= 1, using enableWirelessByRfkill";
+            return enableWirelessByRfkill(logicalName, enable);
         }
 
         // 无线网卡个数大于1时，通过ioctl方式禁用/启用指定无线网卡
@@ -174,9 +272,9 @@ bool EnableUtils::enableNetworkByIoctl(const QString &logicalName, bool enable)
 {
     qDebug() << "[enableNetworkByIoctl] enter, logicalName:" << logicalName << "enable:" << enable;
 
-    // 安全校验：网卡名长度合法性
-    if (logicalName.isEmpty() || logicalName.length() >= IFNAMSIZ) {
-        qCritical() << "[enableNetworkByIoctl] Invalid logicalName length for ioctl, length:" << logicalName.length();
+    // 安全校验：网卡名格式合法性（长度+字符集，防止ioctl注入和路径穿越）
+    if (!isValidInterfaceName(logicalName)) {
+        qCritical() << "[enableNetworkByIoctl] Invalid logicalName, rejected:" << logicalName;
         return false;
     }
 
@@ -320,29 +418,66 @@ int EnableUtils::wirelessNetworkCount()
     return count;
 }
 
-// 系统上仅有1个无线网卡时，通过NetworkManager的WirelessEnabled属性统一禁用/启用无线网卡
-bool EnableUtils::enableWirelessByDBus(bool enable)
+// 无线网卡个数为1时，通过rfkill直接block/unblock当前无线网卡
+bool EnableUtils::enableWirelessByRfkill(const QString &logicalName, bool enable)
 {
-    qDebug() << "[enableWirelessByDBus] enter, enable:" << enable;
+    qDebug() << "[enableWirelessByRfkill] enter, logicalName:" << logicalName << "enable:" << enable;
 
-    // 通过 system dbus 设置 WirelessEnabled 属性
-    QDBusInterface nmInterface("org.freedesktop.NetworkManager",
-                               "/org/freedesktop/NetworkManager",
-                               "org.freedesktop.NetworkManager",
-                               QDBusConnection::systemBus());
-    if (!nmInterface.isValid()) {
-        qCritical() << "[enableWirelessByDBus] Failed to connect to NetworkManager:" << nmInterface.lastError().message();
+    // 禁用时block当前无线网卡（射频下电），启用时unblock
+    if (!setRfkillBlocked(logicalName, !enable)) {
+        qCritical() << "[enableWirelessByRfkill] failed to" << (enable ? "unblock" : "block") << "wireless card:" << logicalName;
         return false;
     }
 
-    // WirelessEnabled属性用于整体禁用/启用系统上的无线网卡
-    if (!nmInterface.setProperty("WirelessEnabled", QVariant(enable))) {
-        qCritical() << "[enableWirelessByDBus] Failed to set WirelessEnabled:" << nmInterface.lastError().message();
-        return false;
-    }
-
-    qDebug() << "[enableWirelessByDBus] success, WirelessEnabled set to" << enable;
+    qDebug() << "[enableWirelessByRfkill] success, logicalName:" << logicalName << "enable:" << enable;
     return true;
+}
+
+// 通过rfkill block/unblock指定无线网卡
+bool EnableUtils::setRfkillBlocked(const QString &interfaceName, bool blocked)
+{
+    qDebug() << "[setRfkillBlocked] enter, interfaceName:" << interfaceName << "blocked:" << blocked;
+
+    // 安全校验：网卡名格式校验，防止路径穿越（interfaceName来自DBus调用者，服务以root运行，
+    // 若包含"../"等可逃逸/sys/class/net/读取任意文件）
+    if (!isValidInterfaceName(interfaceName)) {
+        qCritical() << "[setRfkillBlocked] invalid interface name, rejecting to prevent sysfs path traversal:" << interfaceName;
+        return false;
+    }
+
+    // 仅无线网卡支持rfkill：读取 /sys/class/net/<iface>/phy80211/name 得到phy名称
+    const QString phyName = readSysfsContent(QString("/sys/class/net/%1/phy80211/name").arg(interfaceName));
+    if (phyName.isEmpty()) {
+        // 非无线网卡或sysfs读取失败，操作失败
+        qCritical() << "[setRfkillBlocked] no phy80211 info for" << interfaceName << ", not a wireless card or sysfs read failed";
+        return false;
+    }
+    qDebug() << "[setRfkillBlocked] phy name for" << interfaceName << ":" << phyName;
+
+    // 在 /sys/class/rfkill/ 下查找 type=wlan 且 name=phy 的rfkill设备
+    const QDir rfkillDir("/sys/class/rfkill");
+    const QStringList entries = rfkillDir.entryList(QStringList() << "rfkill*", QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QString &entry : entries) {
+        const QString base = rfkillDir.absoluteFilePath(entry);
+        if (readSysfsContent(base + "/type") != "wlan")
+            continue;
+        if (readSysfsContent(base + "/name") != phyName)
+            continue;
+
+        // 找到当前网卡对应的rfkill设备，写soft文件：1表示block，0表示unblock
+        const QString softPath = base + "/soft";
+        if (!writeSysfsContent(softPath, blocked ? "1" : "0")) {
+            qCritical() << "[setRfkillBlocked] failed to write" << softPath;
+            return false;
+        }
+
+        qDebug() << "[setRfkillBlocked] success, wrote" << softPath << "with" << (blocked ? "1" : "0");
+        return true;
+    }
+
+    // 未找到对应的rfkill设备
+    qWarning() << "[setRfkillBlocked] rfkill device not found for" << interfaceName << "phy" << phyName;
+    return false;
 }
 
 bool EnableUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInfo)
