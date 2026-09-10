@@ -8,6 +8,7 @@
 #include <QStringList>
 #include <QMap>
 #include <QFile>
+#include <QDir>
 #include <QProcess>
 #include <QDBusInterface>
 #include <QDBusReply>
@@ -18,6 +19,7 @@
 #include <QDebug>
 
 #include <unistd.h>
+#include <errno.h>
 #include <net/if.h>
 #include <sys/ioctl.h>
 
@@ -144,75 +146,46 @@ void EnableUtils::disableInDevice()
 
 bool EnableUtils::ioctlOperateNetworkLogicalName(const QString &logicalName, bool enable)
 {
-    // 方案一：通过NetworkManager D-Bus设置DeviceEnabled属性
-    if (enableNetworkByDBus(logicalName, enable))
-        return true;
+    qDebug() << "[ioctlOperateNetworkLogicalName] enter, logicalName:" << logicalName << "enable:" << enable;
 
-    // 方案二：方案一失败，回退到ioctl方式
-    qWarning() << "Fallback to ioctl method for" << logicalName;
+    // 首先判断当前网卡是有线网卡还是无线网卡
+    if (isWirelessNetwork(logicalName)) {
+        // 无线网卡：需要判断当前系统上无线网卡的个数
+        int wirelessCount = wirelessNetworkCount();
+        qDebug() << "[ioctlOperateNetworkLogicalName] wireless card detected, wireless count:" << wirelessCount;
+        if (wirelessCount <= 1) {
+            // 无线网卡个数为1时，通过NetworkManager的WirelessEnabled属性统一禁用/启用无线网卡
+            qDebug() << "[ioctlOperateNetworkLogicalName] wireless count <= 1, using enableWirelessByDBus";
+            return enableWirelessByDBus(enable);
+        }
+
+        // 无线网卡个数大于1时，通过ioctl方式禁用/启用指定无线网卡
+        qDebug() << "[ioctlOperateNetworkLogicalName] wireless count > 1, using enableNetworkByIoctl";
+        return enableNetworkByIoctl(logicalName, enable);
+    }
+
+    // 有线网卡：通过ioctl方式禁用/启用指定网卡
+    qDebug() << "[ioctlOperateNetworkLogicalName] wired card detected, using enableNetworkByIoctl";
     return enableNetworkByIoctl(logicalName, enable);
 }
 
-// 方案一：通过NetworkManager D-Bus设置DeviceEnabled属性
-bool EnableUtils::enableNetworkByDBus(const QString &logicalName, bool enable)
-{
-    // 1. 通过 system dbus 获取 devicePath
-    QDBusInterface nmInterface("org.freedesktop.NetworkManager",
-                              "/org/freedesktop/NetworkManager",
-                              "org.freedesktop.NetworkManager",
-                              QDBusConnection::systemBus());
-    if (!nmInterface.isValid()) {
-        qCritical() << "Failed to connect to NetworkManager:" << nmInterface.lastError().message();
-        return false;
-    }
-
-    QDBusReply<QDBusObjectPath> reply = nmInterface.call("GetDeviceByIpIface", logicalName);
-    if (!reply.isValid()) {
-        qCritical() << "Failed to GetDeviceByIpIface for" << logicalName << ":" << reply.error().message();
-        return false;
-    }
-
-    QString devicePath = reply.value().path();
-    if (devicePath.isEmpty()) {
-        qCritical() << "Got empty devicePath for interface:" << logicalName;
-        return false;
-    }
-
-    // 2. 通过 system dbus 设置 DeviceEnabled 属性
-    QDBusInterface deviceInterface("org.freedesktop.NetworkManager",
-                                  devicePath,
-                                  "org.freedesktop.DBus.Properties",
-                                  QDBusConnection::systemBus());
-    if (!deviceInterface.isValid()) {
-        qCritical() << "Failed to connect to device properties:" << deviceInterface.lastError().message();
-        return false;
-    }
-
-    QDBusReply<void> setReply = deviceInterface.call("Set",
-                                                      "org.freedesktop.NetworkManager.Device",
-                                                      "DeviceEnabled",
-                                                      QVariant::fromValue(QDBusVariant(enable)));
-    if (!setReply.isValid()) {
-        qCritical() << "Failed to set DeviceEnabled for" << logicalName << ":" << setReply.error().message();
-        return false;
-    }
-
-    return true;
-}
-
-// 方案二：通过ioctl控制网卡
+// 通过ioctl禁用/启用指定网卡
 bool EnableUtils::enableNetworkByIoctl(const QString &logicalName, bool enable)
 {
+    qDebug() << "[enableNetworkByIoctl] enter, logicalName:" << logicalName << "enable:" << enable;
+
     // 安全校验：网卡名长度合法性
     if (logicalName.isEmpty() || logicalName.length() >= IFNAMSIZ) {
-        qCritical() << "Invalid logicalName length for ioctl";
+        qCritical() << "[enableNetworkByIoctl] Invalid logicalName length for ioctl, length:" << logicalName.length();
         return false;
     }
 
     // 通过ioctl设置网卡启用/禁用
     int fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (fd < 0)
+    if (fd < 0) {
+        qCritical() << "[enableNetworkByIoctl] Failed to create socket";
         return false;
+    }
 
     struct ifreq ifr;
     memset(&ifr, 0, sizeof(ifr));
@@ -223,9 +196,12 @@ bool EnableUtils::enableNetworkByIoctl(const QString &logicalName, bool enable)
 
     // 先获取标识
     if (ioctl(fd, SIOCGIFFLAGS, &ifr) < 0) {
+        qCritical() << "[enableNetworkByIoctl] SIOCGIFFLAGS failed for" << logicalName << "errno:" << errno;
         close(fd);
         return false;
     }
+
+    qDebug() << "[enableNetworkByIoctl] current flags for" << logicalName << ":" << QString::number(ifr.ifr_flags, 2);
 
     if (enable) {
         ifr.ifr_flags |= IFF_UP;
@@ -234,11 +210,138 @@ bool EnableUtils::enableNetworkByIoctl(const QString &logicalName, bool enable)
     }
     // 设置新标识
     if (ioctl(fd, SIOCSIFFLAGS, &ifr) < 0) {
+        qCritical() << "[enableNetworkByIoctl] SIOCSIFFLAGS failed for" << logicalName << "errno:" << errno;
         close(fd);
         return false;
     }
 
+    qDebug() << "[enableNetworkByIoctl] success, logicalName:" << logicalName << "enable:" << enable;
     close(fd);
+    return true;
+}
+
+// 判断网卡是否是无线网卡
+bool EnableUtils::isWirelessNetwork(const QString &logicalName)
+{
+    qDebug() << "[isWirelessNetwork] enter, logicalName:" << logicalName;
+
+    // 1. 通过 system dbus 获取网卡的 dbus path
+    QDBusInterface nmInterface("org.freedesktop.NetworkManager",
+                              "/org/freedesktop/NetworkManager",
+                              "org.freedesktop.NetworkManager",
+                              QDBusConnection::systemBus());
+    if (!nmInterface.isValid()) {
+        qCritical() << "[isWirelessNetwork] Failed to connect to NetworkManager:" << nmInterface.lastError().message();
+        return false;
+    }
+
+    QDBusReply<QDBusObjectPath> reply = nmInterface.call("GetDeviceByIpIface", logicalName);
+    if (!reply.isValid()) {
+        qCritical() << "[isWirelessNetwork] Failed to GetDeviceByIpIface for" << logicalName << ":" << reply.error().message();
+        return false;
+    }
+
+    QString devicePath = reply.value().path();
+    qDebug() << "[isWirelessNetwork] Got devicePath for" << logicalName << ":" << devicePath;
+    if (devicePath.isEmpty()) {
+        qCritical() << "[isWirelessNetwork] Got empty devicePath for interface:" << logicalName;
+        return false;
+    }
+
+    // 2. 通过 dbus path 构建 Properties 接口，获取 DeviceType 属性
+    QDBusInterface deviceInterface("org.freedesktop.NetworkManager",
+                                  devicePath,
+                                  "org.freedesktop.DBus.Properties",
+                                  QDBusConnection::systemBus());
+    if (!deviceInterface.isValid()) {
+        qCritical() << "[isWirelessNetwork] Failed to connect to device properties:" << deviceInterface.lastError().message();
+        return false;
+    }
+
+    QDBusReply<QVariant> typeReply = deviceInterface.call("Get",
+                                                          "org.freedesktop.NetworkManager.Device",
+                                                          "DeviceType");
+    if (!typeReply.isValid()) {
+        qCritical() << "[isWirelessNetwork] Failed to get DeviceType for" << logicalName << ":" << typeReply.error().message();
+        return false;
+    }
+
+    unsigned int deviceType = typeReply.value().toUInt();
+    qDebug() << "[isWirelessNetwork] DeviceType for" << logicalName << "=" << deviceType
+             << (deviceType == 2 ? "(wireless)" : "(not wireless)");
+
+    // DeviceType 属性值为 2 表示无线网卡
+    return deviceType == 2;
+}
+
+// 统计当前系统上无线网卡的个数
+int EnableUtils::wirelessNetworkCount()
+{
+    // 1. 通过 system dbus 获取所有网络设备的 dbus path
+    QDBusInterface nmInterface("org.freedesktop.NetworkManager",
+                              "/org/freedesktop/NetworkManager",
+                              "org.freedesktop.NetworkManager",
+                              QDBusConnection::systemBus());
+    if (!nmInterface.isValid()) {
+        qCritical() << "Failed to connect to NetworkManager:" << nmInterface.lastError().message();
+        return 0;
+    }
+
+    QDBusReply<QList<QDBusObjectPath> > reply = nmInterface.call("GetDevices");
+    if (!reply.isValid()) {
+        qCritical() << "Failed to GetDevices:" << reply.error().message();
+        return 0;
+    }
+
+    // 2. 遍历每个设备 dbus path，检查 Managed 和 DeviceType 属性
+    int count = 0;
+    foreach (const QDBusObjectPath &devicePath, reply.value()) {
+        QDBusInterface deviceInterface("org.freedesktop.NetworkManager",
+                                      devicePath.path(),
+                                      "org.freedesktop.DBus.Properties",
+                                      QDBusConnection::systemBus());
+        if (!deviceInterface.isValid())
+            continue;
+
+        // 先检查 Managed 属性，值为 false 的设备直接跳过
+        QDBusReply<QVariant> managedReply = deviceInterface.call("Get",
+                                                                  "org.freedesktop.NetworkManager.Device",
+                                                                  "Managed");
+        if (!managedReply.isValid() || !managedReply.value().toBool())
+            continue;
+
+        // Managed 为 true 时，检查 DeviceType 属性，值为 2 表示无线网卡
+        QDBusReply<QVariant> typeReply = deviceInterface.call("Get",
+                                                              "org.freedesktop.NetworkManager.Device",
+                                                              "DeviceType");
+        if (typeReply.isValid() && typeReply.value().toUInt() == 2)
+            ++count;
+    }
+    return count;
+}
+
+// 系统上仅有1个无线网卡时，通过NetworkManager的WirelessEnabled属性统一禁用/启用无线网卡
+bool EnableUtils::enableWirelessByDBus(bool enable)
+{
+    qDebug() << "[enableWirelessByDBus] enter, enable:" << enable;
+
+    // 通过 system dbus 设置 WirelessEnabled 属性
+    QDBusInterface nmInterface("org.freedesktop.NetworkManager",
+                               "/org/freedesktop/NetworkManager",
+                               "org.freedesktop.NetworkManager",
+                               QDBusConnection::systemBus());
+    if (!nmInterface.isValid()) {
+        qCritical() << "[enableWirelessByDBus] Failed to connect to NetworkManager:" << nmInterface.lastError().message();
+        return false;
+    }
+
+    // WirelessEnabled属性用于整体禁用/启用系统上的无线网卡
+    if (!nmInterface.setProperty("WirelessEnabled", QVariant(enable))) {
+        qCritical() << "[enableWirelessByDBus] Failed to set WirelessEnabled:" << nmInterface.lastError().message();
+        return false;
+    }
+
+    qDebug() << "[enableWirelessByDBus] success, WirelessEnabled set to" << enable;
     return true;
 }
 
