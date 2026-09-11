@@ -13,6 +13,7 @@
 #include <QDBusConnection>
 #include <QDBusInterface>
 #include <QDBusReply>
+#include <QDBusUnixFileDescriptor>
 #include <QLoggingCategory>
 #include <QDBusContext>
 
@@ -61,35 +62,37 @@ public:
     void installDriver(const QString &driverName, const QString &version);
 
     /**
+     * @brief installDriverFd 安装用户选择的驱动文件（fd 方式，异步）
+     * @param fileFd 前端打开的驱动文件描述符（打开后文件内容固定，不受后续改名/删除影响）
+     * @param filename 驱动文件原始文件名，仅用于生成后台桥接文件名
+     */
+    void installDriverFd(const QDBusUnixFileDescriptor &fileFd, const QString &filename);
+
+    /**
      * @brief undoInstallDriver 取消当前正在安装的驱动过程
      */
     void undoInstallDriver();
 
     /**
-     * @brief installDriver
-     * @param driver
-     */
-    bool isDriverPackage(const QString &path);
-
-    /**
-     * @brief isArchMatched
-     * @param path
+     * @brief isArchMatchedFd 判断架构是否匹配（fd 方式）
+     * @param fileFd 前端打开的驱动文件描述符
      * @return
      */
-    bool isArchMatched(const QString &path);
+    bool isArchMatchedFd(const QDBusUnixFileDescriptor &fileFd);
 
     /**
-     * @brief isDebValid
-     * @param path
+     * @brief isDebValidFd 判断 deb 包是否有效（fd 方式）
+     * @param fileFd 前端打开的驱动文件描述符
      * @return
      */
-    bool isDebValid(const QString &path);
+    bool isDebValidFd(const QDBusUnixFileDescriptor &fileFd);
 
     /**
-         * @brief backupDeb 备份驱动，通过dbus调用 com.deepin.devicemanager /com/deepin/drivermanager 里面的 backupDeb 接口
-         * @param debpath 需要备份驱动包名目录  比如 /tmp/debname/debname_version.deb    debpath= "/tmp/debname/"
+         * @brief backupDebFd 备份驱动（fd 方式），通过dbus调用 com.deepin.devicemanager 里面的 backupDebFd 接口
+         * @param dirFd 前端打开的暂存目录描述符（内含 apt download 下载的 *.deb）
+         * @param debname 驱动包名，仅作备份目录名  比如 debname= debname
          */
-    bool backupDeb(const QString &debpath);
+    bool backupDebFd(const QDBusUnixFileDescriptor &dirFd, const QString &debname);
     /**
          * @brief delDeb del驱动，通过dbus调用 com.deepin.devicemanager /com/deepin/drivermanager 里面的 delDeb 接口
          * @param debname 需要del驱动包名  比如 /tmp/debname/debname_version.deb    debname= debname

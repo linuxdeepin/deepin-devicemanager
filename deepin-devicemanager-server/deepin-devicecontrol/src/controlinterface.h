@@ -12,6 +12,7 @@
 #include <qdbusservice.h>
 #include <QObject>
 #include <QDBusContext>
+#include <QDBusUnixFileDescriptor>
 
 // Udev rules directory paths
 /*
@@ -159,12 +160,13 @@ public slots:
     Q_SCRIPTABLE void installDriver(const QString &modulename, const QString &version);
     Q_SCRIPTABLE void undoInstallDriver();
     Q_SCRIPTABLE QStringList checkModuleInUsed(const QString &modulename);
-    Q_SCRIPTABLE bool isDriverPackage(const QString &filepath);
     Q_SCRIPTABLE bool isBlackListed(const QString &modName);
-    Q_SCRIPTABLE bool isArchMatched(const QString &filePath);
-    Q_SCRIPTABLE bool isDebValid(const QString &filePath);
+    // 沙箱加固（PMS: BUG-376053）：用户文件不再传路径，改为前端 open 后传 fd
+    Q_SCRIPTABLE bool isArchMatchedFd(const QDBusUnixFileDescriptor &fileFd);
+    Q_SCRIPTABLE bool isDebValidFd(const QDBusUnixFileDescriptor &fileFd);
+    Q_SCRIPTABLE bool backupDebFd(const QDBusUnixFileDescriptor &dirFd, const QString &debname);
+    Q_SCRIPTABLE bool installDriverFd(const QDBusUnixFileDescriptor &fileFd, const QString &filename);
     Q_SCRIPTABLE bool unInstallPrinter(const QString &vendor, const QString &model);
-    Q_SCRIPTABLE bool backupDeb(const QString &debpath); //debpath格式须是： “/tmp/xx/debname
     Q_SCRIPTABLE bool delDeb(const QString &debname);
     Q_SCRIPTABLE bool aptUpdate();
 

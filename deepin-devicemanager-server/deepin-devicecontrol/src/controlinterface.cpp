@@ -425,14 +425,6 @@ QStringList ControlInterface::checkModuleInUsed(const QString &modulename)
     return mp_drivermanager->checkModuleInUsed(modulename);
 }
 
-bool ControlInterface::isDriverPackage(const QString &filepath)
-{
-    if (!getUserAuthorPasswd())
-        return false;
-    else
-        return mp_drivermanager->isDriverPackage(filepath);
-}
-
 bool ControlInterface::isBlackListed(const QString &modName)
 {
     if (!getUserAuthorPasswd())
@@ -440,18 +432,19 @@ bool ControlInterface::isBlackListed(const QString &modName)
     return mp_drivermanager->isBlackListed(modName);
 }
 
-bool ControlInterface::isArchMatched(const QString &filePath)
+// 沙箱加固（PMS: BUG-376053）：校验/备份/安装改用 fd 传参，不再接收前端文件路径
+bool ControlInterface::isArchMatchedFd(const QDBusUnixFileDescriptor &fileFd)
 {
     if (!getUserAuthorPasswd())
-        return {};
-    return mp_drivermanager->isArchMatched(filePath);
+        return false;
+    return mp_drivermanager->isArchMatchedFd(fileFd);
 }
 
-bool ControlInterface::isDebValid(const QString &filePath)
+bool ControlInterface::isDebValidFd(const QDBusUnixFileDescriptor &fileFd)
 {
     if (!getUserAuthorPasswd())
-        return {};
-    return mp_drivermanager->isDebValid(filePath);
+        return false;
+    return mp_drivermanager->isDebValidFd(fileFd);
 }
 
 bool ControlInterface::unInstallPrinter(const QString &vendor, const QString &model)
@@ -463,15 +456,37 @@ bool ControlInterface::unInstallPrinter(const QString &vendor, const QString &mo
     return mp_drivermanager->uninstallPrinter(vendor, model);
 }
 
-bool ControlInterface::backupDeb(const QString &debpath)
+/**
+ * @brief ControlInterface::backupDebFd backup 驱动（fd 方式）
+ * @param dirFd 前端打开的暂存目录描述符（内含 *.deb）
+ * @param debname 驱动包名，仅作备份目录名
+ * @return true:成功 false:失败
+ */
+bool ControlInterface::backupDebFd(const QDBusUnixFileDescriptor &dirFd, const QString &debname)
 {
     if (!getUserAuthorPasswd()) {
         emit sigBackupProgressFinished(false);
         return false;
     }
-    bool ret = mp_drivermanager->backupDeb(debpath);
+    const bool ret = mp_drivermanager->backupDebFd(dirFd, debname);
     emit sigBackupProgressFinished(ret);
     return ret;
+}
+
+/**
+ * @brief ControlInterface::installDriverFd 安装用户选择的驱动文件（fd 方式）
+ * @param fileFd 前端打开的驱动文件描述符
+ * @param filename 驱动文件原始文件名，仅用于生成桥接文件名
+ * @return true:已提交安装 false:失败
+ */
+bool ControlInterface::installDriverFd(const QDBusUnixFileDescriptor &fileFd, const QString &filename)
+{
+    if (!getUserAuthorPasswd()) {
+        emit sigFinished(false, "Cancel");
+        return false;
+    }
+    lockTimer(true);
+    return mp_drivermanager->installDriverFd(fileFd, filename);
 }
 
 bool ControlInterface::delDeb(const QString &debname)
