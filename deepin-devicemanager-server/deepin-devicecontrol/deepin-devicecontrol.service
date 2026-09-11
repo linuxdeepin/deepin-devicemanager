@@ -9,18 +9,31 @@ ExecStart=/usr/bin/deepin-devicecontrol
 StandardOutput=journal
 MemoryMax=2G
 #IOWeight=200
+
+# 沙箱加固（PMS: BUG-376053）：
+# 前端用户文件改由前端 open 后经 DBus 传递 fd（backupDebFd/installDriverFd），
+# 守护进程不再按路径访问前端提供的 /home、/tmp 文件，因此可全量启用下列隔离。
+PrivateTmp=true
+ProtectHome=true
+ProtectClock=true
+PrivateIPC=true
+NoNewPrivileges=true
+RestrictSUIDSGID=true
+
+# 以下指令与守护进程现有功能存在运行时依赖，暂不启用，启用前需专项验证：
+# ProtectSystem=full        — 需写 /lib/modules(merged-usr 即 /usr/lib/modules) 安装内核模块、写 /etc/modprobe.d 黑名单
+# ProtectKernelTunables     — 设备启用/禁用(enable 系列)需写 /sys 属性
+# ProtectProc=invisible     — subset=pid 会隐藏 /proc/locks，破坏 dpkg 锁检测(Utils::isFileLocked)
+# MemoryDenyWriteExecute    — QApt/cups 等三方库需运行时验证无 W+X 依赖
+# PrivateDevices=false      — 设备操作可能需要 /dev
+# CapabilityBoundingSet 等  — apt/dpkg/modprobe 需要完整 root 能力，白名单未经验证
+# InaccessiblePaths         — deepin-deb-verify 需读 /etc/deepin-elf-verify，勿随本项一起启用
 #ProtectSystem=full
-#ProtectHome=true
 #ProtectProc=invisible
-#PrivateTmp=true
 #PrivateDevices=false
-#PrivateIPC=true
-#ProtectClock=true
-#ProtectKernelTunables=true
 #ProtectKernelModules=false
-#NoNewPrivileges=true
+#ProtectKernelTunables=true
 #MemoryDenyWriteExecute=true
-#RestrictSUIDSGID=true
 #LimitMEMLOCK=infinity
 #CapabilityBoundingSet=CAP_SYS_ADMIN CAP_SYS_MODULE CAP_SYS_PTRACE CAP_DAC_OVERRIDE CAP_FOWNER CAP_SYS_BOOT CAP_KILL CAP_NET_BIND_SERVICE
 #AmbientCapabilities=CAP_SYS_ADMIN CAP_SYS_MODULE CAP_SYS_PTRACE CAP_DAC_OVERRIDE CAP_FOWNER CAP_SYS_BOOT CAP_KILL CAP_NET_BIND_SERVICE

@@ -10,6 +10,7 @@
 #include "commonfunction.h"
 
 #include <QObject>
+#include <QDBusUnixFileDescriptor>
 
 #include <cups.h>
 
@@ -47,11 +48,14 @@ public:
     bool isDriverPackage(const QString &filepath);
     //判断文件是否数字签名
     bool isSigned(const QString &filepath);
-    //判断架构是否匹配
-    bool isArchMatched(const QString &path);
-    //判断包是否有效
-    bool isDebValid(const QString &filePath);
-    bool backupDeb(const QString &debpath);
+    //判断架构是否匹配（fd 方式：内容桥接到守护进程私有目录后校验）
+    bool isArchMatchedFd(const QDBusUnixFileDescriptor &fileFd);
+    //判断包是否有效（fd 方式）
+    bool isDebValidFd(const QDBusUnixFileDescriptor &fileFd);
+    //备份驱动（fd 方式：dirFd 为前端打开的暂存目录描述符，debname 仅作备份目录名）
+    bool backupDebFd(const QDBusUnixFileDescriptor &dirFd, const QString &debname);
+    //安装用户选择的驱动文件（fd 方式：内容桥接到私有目录后复用 installDriver 流程）
+    bool installDriverFd(const QDBusUnixFileDescriptor &fileFd, const QString &filename);
     bool delDeb(const QString &debname);
     bool aptUpdate();
 
@@ -82,6 +86,7 @@ private:
 
     int m_installprocess = 0;
     QString errmsg;
+    QString m_fdBridgePath;   // fd 安装时桥接到守护进程私有目录的临时文件
     bool m_IsNetworkOnline = true;
     bool m_StopQueryNetwork = false;
 

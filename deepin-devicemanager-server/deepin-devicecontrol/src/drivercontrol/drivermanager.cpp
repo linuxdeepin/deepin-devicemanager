@@ -6,6 +6,7 @@
 
 #include "drivermanager.h"
 #include "utils.h"
+#include "fdutil.h"
 #include "modcore.h"
 #include "securityutils.h"
 #include "aptinstaller.h"
@@ -33,6 +34,7 @@
 #include <QJsonArray>
 #include <QThread>
 #include <QDBusInterface>
+#include <QDBusUnixFileDescriptor>
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)  
 #include <QNetworkConfigurationManager>
 #else
@@ -106,6 +108,11 @@ void DriverManager::initConnections()
             sigProgressDetail(90, tr("Install success"));
         } else {
             this->sigProgressDetail(m_installprocess, errmsg);
+        }
+        // fd 方式安装的桥接临时文件在安装结束后清理
+        if (!m_fdBridgePath.isEmpty()) {
+            FdUtil::removeBridgedTempFile(m_fdBridgePath);
+            m_fdBridgePath.clear();
         }
         sigFinished(bsuccess, errmsg);
     });
@@ -226,6 +233,20 @@ bool DriverManager::installDriver(const QString &filepath)
     sigProgressDetail(1, "start");
     if (!QFile::exists(filepath)) {
         sigProgressDetail(5, "file not exist");
+        errmsg = QString("%1").arg(E_FILE_NOT_EXISTED);
+        sigFinished(false, errmsg);
+        return  false;
+    }
+
+    // 沙箱加固（PMS: BUG-376053）：路径型接口仅服务备份还原流程，只接受守护进程
+    // 备份目录下的路径；用户选择的文件由前端 open 后经 installDriverFd 以 fd 传入，
+    // 内容桥接到守护进程私有目录后再走本流程，不再按路径访问前端目录。
+    const QString canonicalPath = QFileInfo(filepath).canonicalFilePath();
+    const QString driverRoot = QStringLiteral("%1/driver/").arg(DB_PATH);
+    const QString bridgeRoot = QDir::tempPath() + QStringLiteral("/devicemanager-fdbridge-");
+    if (!canonicalPath.startsWith(driverRoot) && !canonicalPath.startsWith(bridgeRoot)) {
+        qCWarning(appLog) << "Refuse to install driver from disallowed path:" << filepath;
+        sigProgressDetail(5, "path not allowed");
         errmsg = QString("%1").arg(E_FILE_NOT_EXISTED);
         sigFinished(false, errmsg);
         return  false;
@@ -428,22 +449,42 @@ bool DriverManager::isSigned(const QString &filepath)
     QString outInfo = Utils::executeServerCmd(program, arguments, QString(), -1, true);
     return outInfo.contains(strSignCheckString);
 }
-bool DriverManager::isArchMatched(const QString &path)
+bool DriverManager::isArchMatchedFd(const QDBusUnixFileDescriptor &fileFd)
 {
+    if (!fileFd.isValid()) {
+        qCWarning(appLog) << "isArchMatchedFd: invalid fd";
+        return false;
+    }
+    QString err;
+    const QString bridged = FdUtil::bridgeFdToTempFile(fileFd.fileDescriptor(), QStringLiteral("check.deb"), err);
+    if (bridged.isEmpty()) {
+        qCWarning(appLog) << "isArchMatchedFd: bridge failed:" << err;
+        return false;
+    }
     QMimeDatabase typedb;
-    QMimeType filetype = typedb.mimeTypeForFile(path);
-    if (filetype.filterString().contains("deb"))
-        return mp_debinstaller->isArchMatched(path);
-    return true;
+    QMimeType filetype = typedb.mimeTypeForFile(bridged);
+    const bool ret = filetype.filterString().contains("deb") ? mp_debinstaller->isArchMatched(bridged) : true;
+    FdUtil::removeBridgedTempFile(bridged);
+    return ret;
 }
 
-bool DriverManager::isDebValid(const QString &filePath)
+bool DriverManager::isDebValidFd(const QDBusUnixFileDescriptor &fileFd)
 {
+    if (!fileFd.isValid()) {
+        qCWarning(appLog) << "isDebValidFd: invalid fd";
+        return false;
+    }
+    QString err;
+    const QString bridged = FdUtil::bridgeFdToTempFile(fileFd.fileDescriptor(), QStringLiteral("check.deb"), err);
+    if (bridged.isEmpty()) {
+        qCWarning(appLog) << "isDebValidFd: bridge failed:" << err;
+        return false;
+    }
     QMimeDatabase typedb;
-    QMimeType filetype = typedb.mimeTypeForFile(filePath);
-    if (filetype.filterString().contains("deb"))
-        return mp_debinstaller->isDebValid(filePath);
-    return true;
+    QMimeType filetype = typedb.mimeTypeForFile(bridged);
+    const bool ret = filetype.filterString().contains("deb") ? mp_debinstaller->isDebValid(bridged) : true;
+    FdUtil::removeBridgedTempFile(bridged);
+    return ret;
 }
 
 /**
@@ -711,48 +752,6 @@ static bool qdelDirectory(QString toDir)
     }
     return true;
 }
-/*********************************************************************/
-/*功能：拷贝文件夹
-  qCopyDirectory -- 拷贝目录
-  fromDir : 源目录
-  toDir   : 目标目录
-  bCoverIfFileExists : ture:同名时覆盖  false:同名时返回false,终止拷贝
-  返回: ture拷贝成功 false:拷贝未完成*/
-/***********************************************************************/
-static bool qCopyDirectory(QString fromDir, QString toDir, bool bCoverIfFileExists)
-{
-    QDir formDir_(fromDir);
-    QDir toDir_(toDir);
-
-    //如果目的文件夹不存在则创建
-    if (!toDir_.exists()) {
-        if (!toDir_.mkpath(toDir))
-            return false;
-    }
-
-    //获取当前路径下的所有文件名
-    QStringList nameFiltes;
-    nameFiltes << "*.deb" ;
-    QFileInfoList fileInfoList = formDir_.entryInfoList(nameFiltes, QDir::Dirs | QDir::Files | QDir::NoSymLinks | QDir::NoDotAndDotDot);
-    foreach (const QFileInfo &fileInfo, fileInfoList) {
-        //拷贝子目录
-        if (fileInfo.isDir()) {
-            //递归调用拷贝
-            if (!qCopyDirectory(fileInfo.filePath(), toDir_.filePath(fileInfo.fileName()), true))
-                return false;
-        }
-        //拷贝子文件
-        else {
-            if (bCoverIfFileExists && toDir_.exists(fileInfo.fileName())) {
-                toDir_.remove(fileInfo.fileName());
-            }
-            if (!QFile::copy(fileInfo.filePath(), toDir_.filePath(fileInfo.fileName()))) {
-                return false;
-            }
-        }
-    }
-    return true;
-}
 
 bool DriverManager::delDeb(const QString &debname)
 {
@@ -778,26 +777,23 @@ bool DriverManager::aptUpdate()
 }
 
 /**
- * @brief DriverManager::backupDeb backup 驱动
- * @param modulename 驱动deb模块名
+ * @brief DriverManager::backupDebFd backup 驱动（fd 方式）
+ * @param dirFd 前端打开的暂存目录描述符（内含 apt download 下载的 *.deb）
+ * @param debname 驱动包名，仅作备份目录名使用
  * @return  true:成功 false:失败
  */
-
-bool DriverManager::backupDeb(const QString &debpath)
+bool DriverManager::backupDebFd(const QDBusUnixFileDescriptor &dirFd, const QString &debname)
 {
-    QDir formDir_(debpath);
-    if (!formDir_.exists()) { //检查传入路径是否存在
-        qCInfo(appLog) << "no bank up file";
+    qCDebug(appLog) << "Backup deb via dir fd, debname:" << debname;
+    // debname 仅作目录名（非路径），须通过白名单校验
+    if (!FdUtil::isValidComponentName(debname)) {
+        qCWarning(appLog) << "Invalid debname for backup:" << debname;
         return false;
     }
-
-    QString fromPath =  debpath;
-    int cnt = debpath.length();
-    int i   = debpath.lastIndexOf("/");
-    if ((1 > cnt) || (1 > i)) {   //检查传入路径是否合规 /tmp/xx/debname
+    if (!dirFd.isValid()) {
+        qCWarning(appLog) << "Invalid dir fd for backup";
         return false;
     }
-    QString debname = debpath.right(cnt - i - 1);
 
     QString backupPath =  QString("%1/driver/%2").arg(DB_PATH).arg(debname);
     QDir destdir(backupPath);
@@ -807,9 +803,49 @@ bool DriverManager::backupDeb(const QString &debpath)
             if (!destdir.mkpath(destdir.absolutePath())) // mkdir
                 return false;
         }
+    } else {
+        if (!destdir.mkpath(destdir.absolutePath())) // mkdir
+            return false;
     }
-    qCInfo(appLog) << "copy  file" << fromPath << backupPath << debname;
-    return qCopyDirectory(fromPath, backupPath, true);
+    qCInfo(appLog) << "copy debs from dir fd to" << backupPath;
+    return FdUtil::copyDebsFromDirFd(dirFd.fileDescriptor(), backupPath);
+}
+
+/**
+ * @brief DriverManager::installDriverFd 安装用户选择的驱动文件（fd 方式）
+ * @param fileFd 前端打开的驱动文件描述符
+ * @param filename 驱动文件原始文件名，仅用于生成桥接文件名
+ * @return  true:已提交安装 false:失败
+ */
+bool DriverManager::installDriverFd(const QDBusUnixFileDescriptor &fileFd, const QString &filename)
+{
+    qCDebug(appLog) << "Install driver via fd, filename:" << filename;
+    if (!fileFd.isValid()) {
+        errmsg = QString("%1").arg(E_FILE_NOT_EXISTED);
+        sigFinished(false, errmsg);
+        return  false;
+    }
+    QString err;
+    m_fdBridgePath = FdUtil::bridgeFdToTempFile(fileFd.fileDescriptor(), filename, err);
+    if (m_fdBridgePath.isEmpty()) {
+        qCWarning(appLog) << "Install driver fd: bridge failed:" << err;
+        errmsg = QString("%1").arg(E_FILE_NOT_EXISTED);
+        sigFinished(false, errmsg);
+        return  false;
+    }
+
+    QMimeDatabase typedb;
+    QMimeType filetype = typedb.mimeTypeForFile(m_fdBridgePath);
+    const bool isDeb = filetype.filterString().contains("deb");
+
+    const bool ret = installDriver(m_fdBridgePath);
+    if (!isDeb || !ret) {
+        // .ko 安装同步完成，桥接文件已无用途；deb 提交失败时同理。
+        // deb 提交成功时由 installFinished 槽清理（安装是异步的）。
+        FdUtil::removeBridgedTempFile(m_fdBridgePath);
+        m_fdBridgePath.clear();
+    }
+    return ret;
 }
 
 #endif // DISABLE_DRIVER

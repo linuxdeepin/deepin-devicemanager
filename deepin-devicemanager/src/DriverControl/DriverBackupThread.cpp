@@ -10,6 +10,13 @@
 #include <QProcess>
 #include <QLoggingCategory>
 #include <QTemporaryDir>
+#include <QDBusUnixFileDescriptor>
+
+#include <cerrno>
+#include <cstring>
+
+#include <fcntl.h>
+#include <unistd.h>
 
 static bool updateFlag = false;
 
@@ -104,6 +111,7 @@ void DriverBackupThread::run()
             qCDebug(appLog) << "Checking for downloaded .deb file in" << destdir.path();
             //获取当前路径下的所有文件名
             QFileInfoList fileInfoList = destdir.entryInfoList();
+            QString matchedDebName;
             foreach (QFileInfo fileInfo, fileInfoList) {
                 if (m_isStop) {
                     qCDebug(appLog) << "Backup stopped while iterating files";
@@ -115,26 +123,43 @@ void DriverBackupThread::run()
                     continue;
 
                 if (fileInfo.isFile() && fileInfo.fileName().contains(".deb") && fileInfo.fileName().contains(debname)) {
-                    qCDebug(appLog) << "Found .deb file:" << fileInfo.fileName();
-                    DBusDriverInterface::getInstance()->backupDeb(backupPath);
+                    matchedDebName = fileInfo.fileName();
+                    break;
+                }
+            }
 
-                    while (m_status == Waiting) {
-                        qCDebug(appLog) << "Waiting for backup status...";
-                        msleep(500);
-                    }
+            if (!matchedDebName.isEmpty()) {
+                qCDebug(appLog) << "Found .deb file:" << matchedDebName;
+                flag = 1;
+                // 沙箱加固（PMS: BUG-376053）：后台不再按路径访问前端暂存目录，
+                // 前端打开目录 fd 经 DBus 传给后台，后台用 fdopendir/openat 枚举拷贝目录内 *.deb
+                int dirFd = ::open(destdir.absolutePath().toUtf8().constData(), O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+                if (dirFd < 0) {
+                    qCWarning(appLog) << "Open staging dir fd failed:" << strerror(errno);
+                    emit backupProgressFinished(false);
+                    return;
+                }
+                {
+                    QDBusUnixFileDescriptor dirUfd(dirFd);
+                    bool replyOk = DBusDriverInterface::getInstance()->backupDebFd(dirUfd, debname);
+                    qCDebug(appLog) << "backupDebFd reply:" << replyOk;
+                }
+                ::close(dirFd);
 
-                    destdir.remove(fileInfo.fileName());
-                    if (m_status == Success) {
-                        qCDebug(appLog) << "Backup success";
-                        emit backupProgressFinished(true);
-                        return;
-                    } else if (m_status == Failed) {
-                        qCDebug(appLog) << "Backup failed";
-                        emit backupProgressFinished(false);
-                        return;
-                    }
+                while (m_status == Waiting) {
+                    qCDebug(appLog) << "Waiting for backup status...";
+                    msleep(500);
+                }
 
-                    flag = 1;
+                destdir.remove(matchedDebName);
+                if (m_status == Success) {
+                    qCDebug(appLog) << "Backup success";
+                    emit backupProgressFinished(true);
+                    return;
+                } else if (m_status == Failed) {
+                    qCDebug(appLog) << "Backup failed";
+                    emit backupProgressFinished(false);
+                    return;
                 }
             }
         }

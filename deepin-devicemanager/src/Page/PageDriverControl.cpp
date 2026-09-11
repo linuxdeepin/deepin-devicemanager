@@ -23,7 +23,15 @@
 
 #include <QVBoxLayout>
 #include <QDBusConnection>
+#include <QDBusUnixFileDescriptor>
+#include <QFileInfo>
 #include <QWindow>
+
+#include <cerrno>
+#include <cstring>
+
+#include <fcntl.h>
+#include <unistd.h>
 
 #include <QFile>
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -259,7 +267,18 @@ void PageDriverControl::installDriverLogical()
         mp_WaitDialog->setValue(0);
         mp_WaitDialog->setText(tr("Updating"));
         mp_stackWidget->setCurrentIndex(2);
-        DBusDriverInterface::getInstance()->installDriver(driveName);
+        // 沙箱加固（PMS: BUG-376053）：后台不再接收路径，前端 open 后传 fd
+        int driverFd = ::open(driveName.toUtf8().constData(), O_RDONLY | O_CLOEXEC);
+        if (driverFd < 0) {
+            qCWarning(appLog) << "Open driver file fd failed:" << strerror(errno);
+            enableCloseBtn(true);
+            return;
+        }
+        {
+            QDBusUnixFileDescriptor driverUfd(driverFd);
+            DBusDriverInterface::getInstance()->installDriverFd(driverUfd, QFileInfo(driveName).fileName());
+        }
+        ::close(driverFd);
         setProperty("DriverProcessStatus", "Doing");//卸载或者加载程序进行中
         enableCloseBtn(false);
     }
@@ -270,20 +289,37 @@ bool PageDriverControl::installErrorTips(const QString &driveName)
 {
     qCDebug(appLog) << "Validating driver package:" << driveName;
     QFile file(driveName);
-    if (!DBusDriverInterface::getInstance()->isDebValid(driveName)) {
+    if (driveName.isEmpty() || !file.exists()) {
+        qCWarning(appLog) << "Driver file not found:" << driveName;
+        mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
+        return false;
+    }
+
+    // 沙箱加固（PMS: BUG-376053）：打开文件 fd 传给后台校验，不再传路径
+    int driverFd = ::open(driveName.toUtf8().constData(), O_RDONLY | O_CLOEXEC);
+    if (driverFd < 0) {
+        qCWarning(appLog) << "Open driver file fd failed:" << strerror(errno);
+        mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
+        return false;
+    }
+    bool debValid = false;
+    bool archMatched = false;
+    {
+        QDBusUnixFileDescriptor driverUfd(driverFd);
+        debValid = DBusDriverInterface::getInstance()->isDebValidFd(driverUfd);
+        if (debValid)
+            archMatched = DBusDriverInterface::getInstance()->isArchMatchedFd(driverUfd);
+    }
+    ::close(driverFd);
+
+    if (!debValid) {
         qCWarning(appLog) << "Invalid/broken package:" << driveName;
         mp_NameDialog->updateTipLabelText(tr("Broken package"));
         return false;
     }
-    if (!DBusDriverInterface::getInstance()->isArchMatched(driveName)) {
+    if (!archMatched) {
         qCWarning(appLog) << "Architecture mismatch for package:" << driveName;
         mp_NameDialog->updateTipLabelText(tr("Unmatched package architecture"));
-        return false;
-    }
-
-    if (driveName.isEmpty() || !file.exists()) {
-        qCWarning(appLog) << "Driver file not found:" << driveName;
-        mp_NameDialog->updateTipLabelText(tr("The selected file does not exist, please select again"));
         return false;
     }
     qCDebug(appLog) << "Driver package validation passed:" << driveName;

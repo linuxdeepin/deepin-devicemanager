@@ -7,6 +7,8 @@
 #include <unistd.h>
 
 #include <QApplication>
+#include <QDBusMetaType>
+#include <QDBusUnixFileDescriptor>
 
 using namespace DDLog;
 
@@ -63,43 +65,41 @@ void DBusDriverInterface::undoInstallDriver()
     mp_Iface->call("undoInstallDriver");
 }
 
-bool DBusDriverInterface::isDriverPackage(const QString &path)
+void DBusDriverInterface::installDriverFd(const QDBusUnixFileDescriptor &fileFd, const QString &filename)
 {
-    qCDebug(appLog) << "Check if path is driver package:" << path;
+    qCDebug(appLog) << "Install driver via fd, filename:" << filename;
     mp_Iface->setTimeout(1000 * 1000);
-    QDBusReply<bool> reply = mp_Iface->call("isDriverPackage", path);
-    if (reply.isValid()) {
-        qCDebug(appLog) << "Is driver package";
-        return reply.value();
-    }
-    qCWarning(appLog) << "Invalid DBus reply when checking driver package";
-    return false;
+    QDBusPendingCall async = mp_Iface->asyncCall("installDriverFd", QVariant::fromValue(fileFd), filename);
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)),
+                     this, SLOT(slotCallFinished(QDBusPendingCallWatcher *)));
 }
 
-bool DBusDriverInterface::isArchMatched(const QString &path)
+bool DBusDriverInterface::isArchMatchedFd(const QDBusUnixFileDescriptor &fileFd)
 {
-    qCDebug(appLog) << "DBusDriverInterface::isArchMatched";
-    QDBusReply<bool> reply = mp_Iface->call("isArchMatched", path);
+    qCDebug(appLog) << "DBusDriverInterface::isArchMatchedFd";
+    QDBusReply<bool> reply = mp_Iface->call("isArchMatchedFd", QVariant::fromValue(fileFd));
     if (reply.isValid())
         return reply.value();
-    qCDebug(appLog) << "DBusDriverInterface::isArchMatched, reply is invalid";
+    qCDebug(appLog) << "DBusDriverInterface::isArchMatchedFd, reply is invalid";
     return false;
 }
 
-bool DBusDriverInterface::isDebValid(const QString &path)
+bool DBusDriverInterface::isDebValidFd(const QDBusUnixFileDescriptor &fileFd)
 {
-    qCDebug(appLog) << "DBusDriverInterface::isDebValid";
-    QDBusReply<bool> reply = mp_Iface->call("isDebValid", path);
+    qCDebug(appLog) << "DBusDriverInterface::isDebValidFd";
+    QDBusReply<bool> reply = mp_Iface->call("isDebValidFd", QVariant::fromValue(fileFd));
     if (reply.isValid())
         return reply.value();
-    qCDebug(appLog) << "DBusDriverInterface::isDebValid, reply is invalid";
+    qCDebug(appLog) << "DBusDriverInterface::isDebValidFd, reply is invalid";
     return false;
 }
 
-bool DBusDriverInterface::backupDeb(const QString &debpath)
+bool DBusDriverInterface::backupDebFd(const QDBusUnixFileDescriptor &dirFd, const QString &debname)
 {
-    qCDebug(appLog) << "DBusDriverInterface::backupDeb";
-    QDBusReply<bool> reply = mp_Iface->call("backupDeb", debpath);
+    qCDebug(appLog) << "DBusDriverInterface::backupDebFd, debname:" << debname;
+    mp_Iface->setTimeout(1000 * 1000); // 备份需拷贝整个暂存目录，放宽超时
+    QDBusReply<bool> reply = mp_Iface->call("backupDebFd", QVariant::fromValue(dirFd), debname);
 
     return reply.value();
 }
@@ -125,6 +125,8 @@ DBusDriverInterface::DBusDriverInterface(QObject *parent)
     , mp_Iface(nullptr)
 {
     qCDebug(appLog) << "DBusDriverInterface constructor";
+    // 确保 fd 类型完成元类型注册，DBus 以 'h'（unix fd）封送
+    qDBusRegisterMetaType<QDBusUnixFileDescriptor>();
     init();
 }
 
