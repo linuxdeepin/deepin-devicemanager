@@ -1494,7 +1494,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="14"/>
         <source>Three</source>
-        <translation type="unfinished"/>
+        <translation>Tre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="15"/>
@@ -1504,7 +1504,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="16"/>
         <source>Five</source>
-        <translation type="unfinished"/>
+        <translation>Fem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="17"/>
@@ -1514,7 +1514,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="18"/>
         <source>Seven</source>
-        <translation type="unfinished"/>
+        <translation>Sju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="19"/>
@@ -1524,7 +1524,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="20"/>
         <source>Nine</source>
-        <translation type="unfinished"/>
+        <translation>Nio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="21"/>
@@ -1534,7 +1534,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="22"/>
         <source>Eleven</source>
-        <translation type="unfinished"/>
+        <translation>Elva</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="23"/>
@@ -1544,7 +1544,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="24"/>
         <source>Thirteen</source>
-        <translation type="unfinished"/>
+        <translation>Tretton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="25"/>
@@ -1554,7 +1554,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="26"/>
         <source>Fifteen</source>
-        <translation type="unfinished"/>
+        <translation>Femton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="27"/>
@@ -1564,7 +1564,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="28"/>
         <source>Seventeen</source>
-        <translation type="unfinished"/>
+        <translation>Sjutton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="29"/>
@@ -1574,7 +1574,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="30"/>
         <source>Nineteen</source>
-        <translation type="unfinished"/>
+        <translation>Nitton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="31"/>
@@ -1584,7 +1584,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="32"/>
         <source>Twenty-one</source>
-        <translation type="unfinished"/>
+        <translation>Tjugoett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="33"/>
@@ -1594,7 +1594,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="34"/>
         <source>Twenty-three</source>
-        <translation type="unfinished"/>
+        <translation>Tjugotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="35"/>
@@ -1604,7 +1604,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="36"/>
         <source>Twenty-five</source>
-        <translation type="unfinished"/>
+        <translation>Tjugofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="37"/>
@@ -1614,7 +1614,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="38"/>
         <source>Twenty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Tjugosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="39"/>
@@ -1624,7 +1624,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="40"/>
         <source>Twenty-nine</source>
-        <translation type="unfinished"/>
+        <translation>Tjugonio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="41"/>
@@ -1634,7 +1634,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="42"/>
         <source>Thirty-one</source>
-        <translation type="unfinished"/>
+        <translation>Trettioett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="43"/>
@@ -1644,7 +1644,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="44"/>
         <source>Thirty-three</source>
-        <translation type="unfinished"/>
+        <translation>Trettiotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="45"/>
@@ -1654,7 +1654,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="46"/>
         <source>Thirty-five</source>
-        <translation type="unfinished"/>
+        <translation>Trettiofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="47"/>
@@ -1664,7 +1664,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="48"/>
         <source>Thirty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Trettiosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="49"/>
@@ -1674,7 +1674,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="50"/>
         <source>Thirty-nine</source>
-        <translation type="unfinished"/>
+        <translation>Trettionio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="51"/>
@@ -1684,7 +1684,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="52"/>
         <source>Forty-one</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtioett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="53"/>
@@ -1694,7 +1694,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="54"/>
         <source>Forty-three</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtiotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="55"/>
@@ -1704,7 +1704,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="56"/>
         <source>Forty-five</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtiofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="57"/>
@@ -1714,7 +1714,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="58"/>
         <source>Forty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtiosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="59"/>
@@ -1724,7 +1724,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="60"/>
         <source>Forty-nine</source>
-        <translation type="unfinished"/>
+        <translation>Fyrtionio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="61"/>
@@ -1734,7 +1734,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="62"/>
         <source>Fifty-one</source>
-        <translation type="unfinished"/>
+        <translation>Femtioett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="63"/>
@@ -1744,7 +1744,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="64"/>
         <source>Fifty-three</source>
-        <translation type="unfinished"/>
+        <translation>Femtiotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="65"/>
@@ -1754,7 +1754,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="66"/>
         <source>Fifty-five</source>
-        <translation type="unfinished"/>
+        <translation>Femtiofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="67"/>
@@ -1764,7 +1764,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="68"/>
         <source>Fifty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Femtiosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="69"/>
@@ -1774,7 +1774,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="70"/>
         <source>Fifty-nine</source>
-        <translation type="unfinished"/>
+        <translation>Femtionio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="71"/>
@@ -1784,7 +1784,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="72"/>
         <source>Sixty-one</source>
-        <translation type="unfinished"/>
+        <translation>Sextioett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="73"/>
@@ -1794,7 +1794,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="74"/>
         <source>Sixty-three</source>
-        <translation type="unfinished"/>
+        <translation>Sextiotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="75"/>
@@ -1804,7 +1804,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="76"/>
         <source>Sixty-five</source>
-        <translation type="unfinished"/>
+        <translation>Sextiofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="77"/>
@@ -1814,7 +1814,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="78"/>
         <source>Sixty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Sextiosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="79"/>
@@ -1824,7 +1824,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="80"/>
         <source>Sixty-nine</source>
-        <translation type="unfinished"/>
+        <translation>Sextionio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="81"/>
@@ -1834,7 +1834,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="82"/>
         <source>Seventy-one</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttioett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="83"/>
@@ -1844,7 +1844,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="84"/>
         <source>Seventy-three</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttiotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="85"/>
@@ -1854,7 +1854,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="86"/>
         <source>Seventy-five</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttiofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="87"/>
@@ -1864,7 +1864,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="88"/>
         <source>Seventy-seven</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttiosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="89"/>
@@ -1874,7 +1874,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="90"/>
         <source>Seventy-nine</source>
-        <translation type="unfinished"/>
+        <translation>Sjuttionio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="91"/>
@@ -1884,7 +1884,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="92"/>
         <source>Eighty-one</source>
-        <translation type="unfinished"/>
+        <translation>åttioett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="93"/>
@@ -1894,7 +1894,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="94"/>
         <source>Eighty-three</source>
-        <translation type="unfinished"/>
+        <translation>åttiotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="95"/>
@@ -1904,7 +1904,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="96"/>
         <source>Eighty-five</source>
-        <translation type="unfinished"/>
+        <translation>åttiofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="97"/>
@@ -1914,7 +1914,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="98"/>
         <source>Eighty-seven</source>
-        <translation type="unfinished"/>
+        <translation>åttiosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="99"/>
@@ -1924,7 +1924,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="100"/>
         <source>Eighty-nine</source>
-        <translation type="unfinished"/>
+        <translation>åttionio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="101"/>
@@ -1934,7 +1934,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="102"/>
         <source>Ninety-one</source>
-        <translation type="unfinished"/>
+        <translation>Nittioett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="103"/>
@@ -1944,7 +1944,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="104"/>
         <source>Ninety-three</source>
-        <translation type="unfinished"/>
+        <translation>Nittiotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="105"/>
@@ -1954,7 +1954,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="106"/>
         <source>Ninety-five</source>
-        <translation type="unfinished"/>
+        <translation>Nittiofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="107"/>
@@ -1964,7 +1964,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="108"/>
         <source>Ninety-seven</source>
-        <translation type="unfinished"/>
+        <translation>Nittiosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="109"/>
@@ -1974,7 +1974,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="110"/>
         <source>Ninety-nine</source>
-        <translation type="unfinished"/>
+        <translation>Nittionio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="111"/>
@@ -1984,7 +1984,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="112"/>
         <source>One hundred and one</source>
-        <translation type="unfinished"/>
+        <translation>Etthundraett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="113"/>
@@ -1994,7 +1994,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="114"/>
         <source>One hundred and three</source>
-        <translation type="unfinished"/>
+        <translation>Etthundratre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="115"/>
@@ -2004,7 +2004,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="116"/>
         <source>One hundred and five</source>
-        <translation type="unfinished"/>
+        <translation>Etthundrafem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="117"/>
@@ -2014,7 +2014,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="118"/>
         <source>One hundred and seven</source>
-        <translation type="unfinished"/>
+        <translation>Etthundrasju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="119"/>
@@ -2024,7 +2024,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="120"/>
         <source>One hundred and nine</source>
-        <translation type="unfinished"/>
+        <translation>Etthundranio</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="121"/>
@@ -2034,7 +2034,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="122"/>
         <source>One hundred and eleven</source>
-        <translation type="unfinished"/>
+        <translation>Etthundraelva</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="123"/>
@@ -2044,7 +2044,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="124"/>
         <source>One hundred and thirteen</source>
-        <translation type="unfinished"/>
+        <translation>Etthundratretton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="125"/>
@@ -2054,7 +2054,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="126"/>
         <source>One hundred and fifteen</source>
-        <translation type="unfinished"/>
+        <translation>Etthundrafemton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="127"/>
@@ -2064,7 +2064,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="128"/>
         <source>One hundred and seventeen</source>
-        <translation type="unfinished"/>
+        <translation>Etthundrasjutton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="129"/>
@@ -2074,7 +2074,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="130"/>
         <source>One hundred and nineteen</source>
-        <translation type="unfinished"/>
+        <translation>Etthundranitton</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="131"/>
@@ -2084,7 +2084,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="132"/>
         <source>One hundred and twenty-one</source>
-        <translation type="unfinished"/>
+        <translation>Etthundratjugoett</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="133"/>
@@ -2094,7 +2094,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="134"/>
         <source>One hundred and twenty-three</source>
-        <translation type="unfinished"/>
+        <translation>Etthundratjugotre</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="135"/>
@@ -2104,7 +2104,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="136"/>
         <source>One hundred and twenty-five</source>
-        <translation type="unfinished"/>
+        <translation>Etthundratjugofem</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="137"/>
@@ -2114,7 +2114,7 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="138"/>
         <source>One hundred and twenty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Etthundratjugosju</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="139"/>
