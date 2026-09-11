@@ -120,6 +120,10 @@ file(GLOB_RECURSE CONTROL_SRCS
 # remove src main.cpp or will multi define
 list(REMOVE_ITEM INFO_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-deviceinfo/src/plugin.cpp)
 list(REMOVE_ITEM CONTROL_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/main.cpp)
+# deepin-devicecontrol 与 deepin-deviceinfo 各有一个同名 ControlInterface（均含 Q_OBJECT），
+# 同一二进制编译会导致 moc 重定义与符号冲突；devicecontrol 侧仅被已排除的 main.cpp 使用，
+# 故测试目标仅保留 deviceinfo 侧
+list(REMOVE_ITEM CONTROL_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/controlinterface.cpp)
 if(DISABLE_DRIVER)
     list(FILTER CONTROL_SRCS EXCLUDE REGEX "/drivercontrol/")
 endif()

@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -21,8 +21,9 @@
  * 安全约定：
  * 1. 一切访问基于 fd（fstat/openat/fdopendir），不经过 /proc/self/fd 路径重构；
  * 2. openat 一律携带 O_NOFOLLOW，目录项须为普通文件/目录，拒绝符号链接；
- * 3. 前端传来的名字只作文件名（非路径）使用，须通过 isValidComponentName 白名单校验；
- * 4. 桥接文件落在守护进程私有目录，权限 0600，用完即删。
+ * 3. 前端传来的名字只作文件名（非路径）使用：备份目录名走 isValidComponentName
+ *    白名单（硬拒绝）；桥接文件名走 sanitizedFileName 净化（永不拒绝，只重命名）；
+ * 4. 桥接文件落在守护进程私有目录，权限 0600，用完即删；fd 桥接前重置读取位置。
  */
 namespace FdUtil {
 

@@ -13,6 +13,8 @@
 
 #include <QKeyEvent>
 #include <QEvent>
+#include <QDBusUnixFileDescriptor>
+#include <QTemporaryFile>
 
 #include <gtest/gtest.h>
 
@@ -89,21 +91,29 @@ TEST_F(UT_PageDriverControl, UT_PageDriverControl_installErrorTips)
     EXPECT_FALSE(ret);
 }
 
-bool ut_pagedrivercontrol_isDebValid()
+bool ut_pagedrivercontrol_isDebValidFd(const QDBusUnixFileDescriptor &)
 {
-    return true;
+    return false;
 }
 
 TEST_F(UT_PageDriverControl, UT_PageDriverControl_installErrorTips_002)
 {
     Stub stub;
-    stub.set(ADDR(DBusDriverInterface, isDebValid), ut_pagedrivercontrol_isDebValid);
+    stub.set(ADDR(DBusDriverInterface, isDebValidFd), ut_pagedrivercontrol_isDebValidFd);
 
-    bool ret = m_PageDriverControlInstall->installErrorTips("devicemanager.deb");
+    QTemporaryFile tmpFile;
+    ASSERT_TRUE(tmpFile.open());
+    tmpFile.close();
+    bool ret = m_PageDriverControlInstall->installErrorTips(tmpFile.fileName());
     EXPECT_FALSE(ret);
 }
 
-bool ut_pagedrivercontrol_isArchMatched()
+bool ut_pagedrivercontrol_isDebValidFd_true(const QDBusUnixFileDescriptor &)
+{
+    return true;
+}
+
+bool ut_pagedrivercontrol_isArchMatchedFd(const QDBusUnixFileDescriptor &)
 {
     return true;
 }
@@ -111,11 +121,14 @@ bool ut_pagedrivercontrol_isArchMatched()
 TEST_F(UT_PageDriverControl, UT_PageDriverControl_installErrorTips_003)
 {
     Stub stub;
-    stub.set(ADDR(DBusDriverInterface, isDebValid), ut_pagedrivercontrol_isDebValid);
-    stub.set(ADDR(DBusDriverInterface, isArchMatched), ut_pagedrivercontrol_isArchMatched);
+    stub.set(ADDR(DBusDriverInterface, isDebValidFd), ut_pagedrivercontrol_isDebValidFd_true);
+    stub.set(ADDR(DBusDriverInterface, isArchMatchedFd), ut_pagedrivercontrol_isArchMatchedFd);
 
-    bool ret = m_PageDriverControlInstall->installErrorTips("devicemanager.deb");
-    EXPECT_FALSE(ret);
+    QTemporaryFile tmpFile;
+    ASSERT_TRUE(tmpFile.open());
+    tmpFile.close();
+    bool ret = m_PageDriverControlInstall->installErrorTips(tmpFile.fileName());
+    EXPECT_TRUE(ret);
 }
 
 TEST_F(UT_PageDriverControl, UT_PageDriverControl_keyPressEvent)

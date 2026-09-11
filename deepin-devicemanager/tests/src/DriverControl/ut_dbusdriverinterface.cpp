@@ -16,6 +16,8 @@
 #include <QtDBus>
 #include <QtDBus/qdbusreply.h>
 #include <QtDBus/qdbuserror.h>
+#include <QDBusUnixFileDescriptor>
+#include <QTemporaryFile>
 
 #include <gtest/gtest.h>
 
@@ -79,20 +81,23 @@ TEST_F(UT_DBusDriverInterface,UT_DBusDriverInterface_installDriver){
     QDBusMessage (QDBusInterface::*p)(const QString&, const QVariant&, const QVariant&, const QVariant&, const QVariant&
                       , const QVariant&, const QVariant&, const QVariant&, const QVariant&) = &QDBusInterface::call;
     stub.set(p, ut_QDBusInterface_call);
-    bool isKo = pDriver->isDriverPackage("/home/uos/test.ko");
-    EXPECT_FALSE(isKo);
-
+    // isDriverPackage 路径版接口已移除（fd 方案），改验 installDriverFd 异步路径
     QDBusPendingCall (QDBusInterface::*pa)(const QString&, const QVariant&, const QVariant&, const QVariant&, const QVariant&
                       , const QVariant&, const QVariant&, const QVariant&, const QVariant&) = &QDBusInterface::asyncCall;
     stub.set(pa, ut_QDBusInterface_asyncCall);
-    pDriver->installDriver("/home/uos/test.ko");
-    QDBusPendingCallWatcher *cw = this->pDriver->findChild<QDBusPendingCallWatcher *>();
-    emit cw->finished(cw);
+    {
+        QTemporaryFile tmpFile;
+        ASSERT_TRUE(tmpFile.open());
+        QDBusUnixFileDescriptor ufd(tmpFile.handle());
+        pDriver->installDriverFd(ufd, "test.ko");
+        QDBusPendingCallWatcher *cw = this->pDriver->findChild<QDBusPendingCallWatcher *>();
+        emit cw->finished(cw);
+    }
 
     intCount = 0;
     stub.set(ADDR(DBusDriverInterface, slotCallFinished), ut_slotCallFinished);
     pDriver->uninstallDriver("/home/uos/test.ko");
-    cw = this->pDriver->findChild<QDBusPendingCallWatcher *>();
+    QDBusPendingCallWatcher *cw = this->pDriver->findChild<QDBusPendingCallWatcher *>();
     emit cw->finished(cw);
     EXPECT_TRUE(1 == intCount);
 }
@@ -115,11 +120,12 @@ TEST_F(UT_DBusDriverInterface,UT_DBusDriverInterface_archMatch){
     QDBusMessage (QDBusInterface::*p)(const QString&, const QVariant&, const QVariant&, const QVariant&, const QVariant&
                       , const QVariant&, const QVariant&, const QVariant&, const QVariant&) = &QDBusInterface::call;
     stub.set(p, ut_QDBusInterface_call);
-    // isArchMatched/isDebValid 的返回值依赖运行时 DBus 服务(DeviceControl)，
+    // isArchMatchedFd/isDebValidFd 的返回值依赖运行时 DBus 服务(DeviceControl)，
     // 桩函数对 QDBusInterface::call 的重载匹配不稳定，可能透传到真实调用。
     // 这里仅验证接口可正常调用、不崩溃（代码路径已覆盖）
-    bool isArch = pDriver->isArchMatched("/home/uos/e1000e.ko");
-    bool isDeb = pDriver->isDebValid("/home/uos/e1000e.deb");
+    QDBusUnixFileDescriptor ufd;
+    bool isArch = pDriver->isArchMatchedFd(ufd);
+    bool isDeb = pDriver->isDebValidFd(ufd);
     EXPECT_TRUE(isArch == true || isArch == false);
     EXPECT_TRUE(isDeb == true || isDeb == false);
 }
