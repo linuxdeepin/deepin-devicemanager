@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2025 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -203,10 +203,12 @@ QString sanitizedFileName(const QString &filename)
         return QStringLiteral("driver.bin");
     }
     if (base.size() > 200) {
-        // 截断时保留最后一个扩展名，避免影响后缀判定
+        // 截断时保留最后一个扩展名，避免影响后缀判定；
+        // 扩展名本身超长则丢弃（防止 200-ext 为负导致截断失效）
         int dot = base.lastIndexOf(QLatin1Char('.'));
         const QString ext = (dot > 0) ? base.mid(dot) : QString();
-        base = base.left(200 - ext.size()) + ext;
+        const int keepExt = qBound(0, ext.size(), 100);
+        base = base.left(200 - keepExt) + ext.right(keepExt);
     }
     return base;
 }
@@ -221,6 +223,14 @@ QString bridgeFdToTempFile(int fd, const QString &filename, QString &errOut)
     struct stat st;
     if (::fstat(fd, &st) != 0 || !S_ISREG(st.st_mode)) {
         errOut = QStringLiteral("fd is not a regular file");
+        return QString();
+    }
+    // fd 经 DBus 传递后各端共享同一 open file description（offset 共享）：
+    // 同一 fd 连续多次调用（如先 isDebValidFd 再 isArchMatchedFd）时，
+    // 前一次读取已把 offset 推到 EOF，此处必须回到开头，否则拷出空文件。
+    // fd 已保证 S_ISREG，必然可 seek
+    if (::lseek(fd, 0, SEEK_SET) < 0) {
+        errOut = QStringLiteral("seek fd to start failed");
         return QString();
     }
     // 文件名仅用于命名（非路径定位），净化后使用，永不因名字拒绝

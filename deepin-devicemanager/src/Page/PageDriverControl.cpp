@@ -270,8 +270,9 @@ void PageDriverControl::installDriverLogical()
         // 沙箱加固（PMS: BUG-376053）：后台不再接收路径，前端 open 后传 fd
         int driverFd = ::open(driveName.toUtf8().constData(), O_RDONLY | O_CLOEXEC);
         if (driverFd < 0) {
+            // 校验通过后文件被移除等极端情况：走既有失败结果页，避免卡在 Updating
             qCWarning(appLog) << "Open driver file fd failed:" << strerror(errno);
-            enableCloseBtn(true);
+            slotProcessEnd(false, QString::number(E_FILE_NOT_EXISTED));
             return;
         }
         {
