@@ -9,8 +9,6 @@ using namespace std;
 #include "gtest/gtest.h"
 #include <QApplication>
 
-DCORE_USE_NAMESPACE
-
 //  gtest的入口函数
 int main(int argc, char **argv)
 {

@@ -59,5 +59,5 @@ TEST_F(UT_DBusDriverInterfaceExtra, slotInstallProgressFinished)
     EXPECT_NO_FATAL_FAILURE(p->slotInstallProgressFinished(false, 1));
 }
 
-// ---- 业务方法(installDriver/undoInstall/backupDeb/delDeb/aptUpdate)跳过 ----
+// ---- 业务方法(installDriverFd/undoInstall/backupDebFd/delDeb/aptUpdate)跳过 ----
 // mp_Iface 连上了真实 org.deepin.DeviceControl 服务,同步 call 会阻塞等待后台,导致测试超时。
