@@ -18,6 +18,7 @@
 #include <QDir>
 #include <QDBusConnection>
 #include <QFile>
+#include <QThread>
 #include <QDBusConnectionInterface>
 
 #include <polkit-qt5-1/PolkitQt1/Authority>
@@ -357,6 +358,8 @@ bool ControlInterface::authorizedEnable(const QString &hclass, const QString &na
             return false;
         fpop.write("0");
         fpop.close();
+
+        QThread::msleep(800);
 
         // 第三步
         if (!fpop.open(QIODevice::ReadWrite))
