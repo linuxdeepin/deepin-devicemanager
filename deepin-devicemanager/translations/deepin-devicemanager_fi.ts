@@ -2039,92 +2039,92 @@
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="123"/>
         <source>One hundred and Twelve</source>
-        <translation>Sata kaksitoista</translation>
+        <translation>Satakaksitoista</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="124"/>
         <source>One hundred and thirteen</source>
-        <translation type="unfinished"/>
+        <translation>Satatoistatoista</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="125"/>
         <source>One hundred and Fourteen</source>
-        <translation>Sata neljätoista</translation>
+        <translation>Sataneljätoista</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="126"/>
         <source>One hundred and fifteen</source>
-        <translation type="unfinished"/>
+        <translation>Sataviisitoista</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="127"/>
         <source>One hundred and Sixteen</source>
-        <translation>Sata kuusitoista</translation>
+        <translation>Satakuusitoista</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="128"/>
         <source>One hundred and seventeen</source>
-        <translation type="unfinished"/>
+        <translation>Sataseitsemäntoista</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="129"/>
         <source>One hundred and Eighteen</source>
-        <translation>Sata kahdeksantoista</translation>
+        <translation>Satakahdeksantoista</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="130"/>
         <source>One hundred and nineteen</source>
-        <translation type="unfinished"/>
+        <translation>Satayhdeksäntoista</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="131"/>
         <source>One hundred and Twenty</source>
-        <translation>Sata kaksikymmentä</translation>
+        <translation>Satakaksikymmentä</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="132"/>
         <source>One hundred and twenty-one</source>
-        <translation type="unfinished"/>
+        <translation>Satakaksikymmentäyksi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="133"/>
         <source>One hundred and Twenty-two</source>
-        <translation>Sata kaksikymmentäkaksi</translation>
+        <translation>Satakaksikymmentäkaksi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="134"/>
         <source>One hundred and twenty-three</source>
-        <translation type="unfinished"/>
+        <translation>Satakaksikymmentäkolme</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="135"/>
         <source>One hundred and Twenty-four</source>
-        <translation>Sata kaksikymmentäneljä</translation>
+        <translation>Satakaksikymmentäneljä</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="136"/>
         <source>One hundred and twenty-five</source>
-        <translation type="unfinished"/>
+        <translation>Satakaksikymmentäviisi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="137"/>
         <source>One hundred and Twenty-six</source>
-        <translation>Sata kaksikymmentäkuusi</translation>
+        <translation>Satakaksikymmentäkuusi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="138"/>
         <source>One hundred and twenty-seven</source>
-        <translation type="unfinished"/>
+        <translation>Satakaksikymmentäseitsemän</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="139"/>
         <source>One hundred and Twenty-eight</source>
-        <translation>Sata kaksikymmentäkahdeksan</translation>
+        <translation>Satakaksikymmentäkahdeksan</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="140"/>
         <source>One hundred and Ninety-two</source>
-        <translation>Sata yhdeksänkymmentäkaksi</translation>
+        <translation>Satayhdeksänkymmentäkaksi</translation>
     </message>
     <message>
         <location filename="../src/DeviceManager/DeviceCpu.cpp" line="141"/>
