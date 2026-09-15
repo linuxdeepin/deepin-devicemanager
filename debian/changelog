@@ -1,3 +1,15 @@
+deepin-devicemanager (6.0.72) unstable; urgency=medium
+
+  * chore: Update version to 6.0.72
+  * test: add unit tests for fd-based driver install and backup
+  * fix: enable service sandbox by passing user fds over DBus
+  * fix(cpu): format CPU frequency range with two decimals
+  * fix: add translate
+  * fix: add missing odd numbers to CPU core/processor count mapping
+  * fix: use Qt version-compatible APIs to fix build failure
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Tue, 15 Sep 2026 09:30:34 +0800
+
 deepin-devicemanager (6.0.71) unstable; urgency=medium
 
   * chore: Update version to 6.0.71
