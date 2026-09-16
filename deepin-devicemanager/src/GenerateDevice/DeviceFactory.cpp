@@ -53,6 +53,8 @@ DeviceGenerator *DeviceFactory::getDeviceGenerator()
                 generator = new HWGenerator();
         } else
             generator = new ArmGenerator();
+    } else if (arch == "loongarch64") {
+        generator = new HWGenerator();
     } else
         generator = new X86Generator();
 
