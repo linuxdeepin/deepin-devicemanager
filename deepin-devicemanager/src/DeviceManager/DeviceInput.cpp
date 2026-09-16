@@ -505,7 +505,7 @@ QString DeviceInput::wakeupPath()
         return "";
     }
 
-    if (m_Name.contains("PS/2")) {
+    if (m_Name.contains("PS/2") || m_Interface.contains("PS/2")) {
         return "/proc/acpi/wakeup";
     } else {
         return QString("/sys") + m_SysPath.left(index) + QString("/power/wakeup");
