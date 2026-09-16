@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019-2026 ~ 2023 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -184,13 +184,6 @@ private:
      * @param value
      */
     void construct_uri(char *buffer, size_t buflen, const char *base, const char *value);
-    /**
-     * @brief modifyPath 修正路径 保证xxx.0
-     *                比如将  /devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.1
-     *                修正为  /devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0
-     * @param path 需要修正的路径 /devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0
-     */
-    void modifyPath(QString &path);
     /**
      * @brief saveWakeupInfo 保存数据到数据库
      * @param unique_id 唯一标识

@@ -4,6 +4,7 @@
 
 #include "enableutils.h"
 #include "enablesqlmanager.h"
+#include "usbauthorizationutils.h"
 
 #include <QStringList>
 #include <QMap>
@@ -117,9 +118,6 @@ void EnableUtils::disableOutDevice(const QString &info)
         } else {
             path = mapItem["SysFS ID"];
         }
-        path.replace(QRegExp("[1-9]$"), "0");
-
-
         // 网卡采用ioctl的方式禁用（链路二：开机/服务唤起时恢复禁用状态）
         QRegExp reg(REG_ADDRESS);
         if (reg.exactMatch(uniqueID)) {
@@ -133,12 +131,8 @@ void EnableUtils::disableOutDevice(const QString &info)
 
         // 先判断设备是否被记录在数据库，如果在则禁用
         if (EnableSqlManager::getInstance()->uniqueIDExisted(uniqueID)) {
-            QFile file("/sys" + path + QString("/authorized"));
-            if (!file.open(QIODevice::ReadWrite)) {
-                return;
-            }
-            file.write("0");
-            file.close();
+            if (!UsbAuthorizationUtils::setInterfacesAuthorized(path, false))
+                continue;
             // 更数据库信息，方式更换usb接口
             EnableSqlManager::getInstance()->updateDataToAuthorizedTable(uniqueID, path);
         }
