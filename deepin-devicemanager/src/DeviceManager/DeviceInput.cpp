@@ -466,6 +466,12 @@ bool DeviceInput::canWakeupMachine()
 {
     if (m_WakeupID.isEmpty())
         return false;
+    // PS/2 Touchpad 和 PS/2 Mouse 共享同一个 i8042 控制器，ACPI 唤醒键均为 "PS2M"，
+    // 两者唤醒状态无法独立控制。隐藏 Touchpad 的唤醒选项以避免联动误导用户。
+    if (m_Name.contains("Touchpad", Qt::CaseInsensitive) &&
+        (m_Name.contains("PS/2") || m_Interface.contains("PS/2"))) {
+        return false;
+    }
     QFile file(wakeupPath());
     if (!file.open(QIODevice::ReadOnly)) {
         return false;
