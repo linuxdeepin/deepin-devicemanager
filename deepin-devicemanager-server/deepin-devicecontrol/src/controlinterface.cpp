@@ -4,6 +4,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "controlinterface.h"
+#include "usbauthorizationutils.h"
 #include "drivermanager.h"
 #include "modcore.h"
 #include "utils.h"
@@ -98,15 +99,10 @@ bool ControlInterface::enable(const QString &hclass, const QString &name, const 
         return ioctlEnableNetwork(hclass, name, path, value, enable_device, strDriver);
     }
 
-    // 先从数据库中查找路径，防止设备更换usb接口
-    QString sPath = EnableSqlManager::getInstance()->authorizedPath(value);
-    sPath = path;
-
     // 判断是内置设备，还是外设，内置设备通过remove文件禁用，外设通过authorized文件禁用
     bool res = false;
-    if (QFile::exists("/sys" + sPath + QString("/authorized"))) {
-        modifyPath(sPath);
-        res = authorizedEnable(hclass, name, sPath, value, enable_device, strDriver);
+    if (QFile::exists("/sys" + path + QString("/authorized"))) {
+        res = authorizedEnable(hclass, name, path, value, enable_device, strDriver);
     } else { /* if(QFile::exists("/sys" + sPath + QString("/remove")))*/
         res = removeEnable(hclass, name, path, value, enable_device, strDriver);
     }
@@ -332,42 +328,14 @@ bool ControlInterface::aptUpdate()
 #endif
 bool ControlInterface::authorizedEnable(const QString &hclass, const QString &name, const QString &path, const QString &unique_id, bool enable_device, const QString strDriver)
 {
-    // 通过authorized文件启用禁用设备
-    // 0:表示禁用 ，1:表示启用
-    QFile file("/sys" + path + QString("/authorized"));
-    if (!file.open(QIODevice::ReadWrite)) {
+    // A composite USB device may expose keyboard, mouse and control interfaces.
+    // Keep their authorization state consistent with the selected physical device.
+    if (!UsbAuthorizationUtils::setInterfacesAuthorized(path, enable_device))
         return false;
-    }
+
     if (enable_device) {
-        /*
-         启用的流程为：以 /devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0 为例
-         第一步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/1-5:1.0/authorized 文件中写 1
-         第二步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/authorized 文件中写 0
-         第三步: 向 /sys/devices/pci0000:00/0000:00:14.0/usb1/1-5/authorized 文件中写 1
-         */
-        // 第一步
-        file.write("1");
-        file.close();
-
-        // 第二步
-        QFileInfo fi(path);
-        QString pop = fi.path();
-        QFile fpop("/sys" + pop + QString("/authorized"));
-        if (!fpop.open(QIODevice::ReadWrite))
-            return false;
-        fpop.write("0");
-        fpop.close();
-
-        // 第三步
-        if (!fpop.open(QIODevice::ReadWrite))
-            return false;
-        fpop.write("1");
-        fpop.close();
-
         EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(unique_id);
     } else {
-        file.write("0");
-        file.close();
         EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass, name, path, unique_id, true, strDriver);
     }
     return true;
@@ -471,11 +439,6 @@ void ControlInterface::construct_uri(char *buffer, size_t buflen, const char *ba
 
     if (d < buffer + buflen)
         *d = '\0';
-}
-
-void ControlInterface::modifyPath(QString &path)
-{
-    path.replace(QRegExp("[1-9]$"), "0");
 }
 
 void ControlInterface::saveWakeupInfo(const QString &unique_id, const QString &path, bool wakeup)
