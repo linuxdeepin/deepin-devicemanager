@@ -853,8 +853,70 @@ void CmdTool::loadCatInputDeviceInfo(const QString &key, const QString &debugfil
             }
         }
 
+        // I2C触摸板兜底：handlers中不含mouse的触摸板不会被hwinfo分类为mouse，
+        // 此处通过udevadm检测ID_INPUT_TOUCHPAD=1，将其注入hwinfo_mouse列表
+        if (!mapInfo["Handlers"].contains("mouse", Qt::CaseInsensitive)) {
+            addTouchpadToMouseList(mapInfo);
+        }
+
         addMapInfo(key, mapInfo);
     }
+}
+
+bool CmdTool::isTouchpadDevice(const QString &eventNode)
+{
+    if (eventNode.isEmpty())
+        return false;
+
+    QProcess process;
+    process.start("udevadm", QStringList() << "info" << "--query=property" << "--name=/dev/input/" + eventNode);
+    process.waitForFinished(5000);
+    QString output = process.readAllStandardOutput();
+
+    return output.contains("ID_INPUT_TOUCHPAD=1");
+}
+
+void CmdTool::addTouchpadToMouseList(const QMap<QString, QString> &mapInfo)
+{
+    // 从Handlers中提取event设备节点
+    QRegExp re(".*(event[0-9]{1,2}).*");
+    if (!re.exactMatch(mapInfo["Handlers"]))
+        return;
+
+    QString eventNode = re.cap(1);
+
+    // 通过udevadm检测是否为触摸板
+    if (!isTouchpadDevice(eventNode))
+        return;
+
+    // 构造兼容hwinfo_mouse格式的mapInfo
+    QMap<QString, QString> mouseMapInfo;
+    mouseMapInfo["Hardware Class"] = "mouse";
+
+    QString name = mapInfo["Name"];
+    mouseMapInfo["Device"] = name;
+    mouseMapInfo["name"] = name;
+
+    // 确保Model包含"Touchpad"，使DeviceInput能识别为触摸板
+    if (name.contains("Touchpad", Qt::CaseInsensitive) || name.contains("clickpad", Qt::CaseInsensitive)) {
+        mouseMapInfo["Model"] = name;
+    } else {
+        mouseMapInfo["Model"] = name + " Touchpad";
+    }
+
+    // 映射Sysfs路径
+    if (mapInfo.find("Sysfs") != mapInfo.end())
+        mouseMapInfo["SysFS ID"] = mapInfo["Sysfs"];
+
+    // 映射Handlers为Device Files
+    mouseMapInfo["Device Files"] = mapInfo["Handlers"];
+
+    // 设置Hotplug为PS/2以绕过getMouseInfoFromHwinfo中的authorized文件检查
+    // 实际接口类型由getMouseInfoFromBusDevice()根据Bus类型覆盖为I2C
+    mouseMapInfo["Hotplug"] = "PS/2";
+
+    // 注入hwinfo_mouse列表
+    addMouseKeyboardInfoMapInfo("hwinfo_mouse", mouseMapInfo);
 }
 
 void CmdTool::loadCatAudioInfo(const QString &key, const QString &debugfile)
