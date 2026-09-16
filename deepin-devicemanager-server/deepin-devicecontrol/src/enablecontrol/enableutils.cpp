@@ -326,11 +326,13 @@ bool EnableUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInf
 
     // hub为usb接口，可以直接过滤
     if (mapInfo["Hardware Class"] == "hub") {
+        mapInfo.clear();
         return false;
     }
 
     // 没有总线信息的设备可以过滤
     if (mapInfo.find("SysFS BusID") == mapInfo.end()) {
+        mapInfo.clear();
         return false;
     }
 
