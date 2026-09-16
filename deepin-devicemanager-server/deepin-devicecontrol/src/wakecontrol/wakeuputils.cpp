@@ -270,8 +270,10 @@ bool WakeupUtils::getMapInfo(const QString &item, QMap<QString, QString> &mapInf
         mapInfo.insert(words[0].trimmed(), words[1].replace("\"", "").trimmed());
     }
 
-    if (mapInfo["Hardware Class"] != "keyboard" && mapInfo["Hardware Class"] != "mouse")
+    if (mapInfo["Hardware Class"] != "keyboard" && mapInfo["Hardware Class"] != "mouse") {
+        mapInfo.clear();
         return false;
+    }
 
     return true;
 }

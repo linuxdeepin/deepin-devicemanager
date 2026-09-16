@@ -184,7 +184,7 @@ TEST_F(WakeupUtilsTest, getMapInfo_notKeyboardOrMouse_returnsFalse)
 
     // Assert
     EXPECT_FALSE(result);
-    EXPECT_EQ(mapInfo["Hardware Class"], "network");
+    EXPECT_TRUE(mapInfo.isEmpty());
 }
 
 TEST_F(WakeupUtilsTest, getMapInfo_validMouse_returnsTrue)
