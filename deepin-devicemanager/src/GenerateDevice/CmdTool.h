@@ -222,6 +222,19 @@ private:
     void loadCatInputDeviceInfo(const QString &key, const QString &debugfile);
 
     /**
+     * @brief isTouchpadDevice:通过udevadm检测设备是否为触摸板
+     * @param eventNode:事件设备节点名(如event1)
+     * @return true:是触摸板;false:不是触摸板
+     */
+    bool isTouchpadDevice(const QString &eventNode);
+
+    /**
+     * @brief addTouchpadToMouseList:将触摸板设备信息注入hwinfo_mouse列表
+     * @param mapInfo:从/proc/bus/input/devices解析的设备信息
+     */
+    void addTouchpadToMouseList(const QMap<QString, QString> &mapInfo);
+
+    /**
      * @brief loadCatAudioInfo:加载cat /proc/asound/card0/codec#0信息
      * @param key:cat_audio
      * @param debugfile:调试文件名
