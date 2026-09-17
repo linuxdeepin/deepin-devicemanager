@@ -254,11 +254,17 @@ bool Utils::isDpkgLocked()
 
 QString Utils::getUrl()
 {
+    // ~/url 文件用于切换驱动查询的环境地址：
+    // - 文件不存在或不可读时，默认使用生产环境 URL（安全默认）
+    // - 文件内容为 "true" 时，使用生产环境 URL
+    // - 文件内容为其他值时，使用预生产环境 URL
+    // 该设计意图与客户端 commontools.cpp 中 CommonTools::getUrl() 保持一致
     QFile file(QDir::homePath() + "/url");
     if (!file.open(QIODevice::ReadOnly)) {
         return "https://driver.uniontech.com/api/v1/drive/search";
     }
-    QString info = file.readAll();
+    // trimmed() 去除首尾空白和换行符，确保 "true\n" 等内容能正确匹配 "true"
+    QString info = file.readAll().trimmed();
     if ("true" == info) {
         return "https://driver.uniontech.com/api/v1/drive/search";
     } else {
