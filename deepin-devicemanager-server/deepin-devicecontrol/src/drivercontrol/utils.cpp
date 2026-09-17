@@ -16,6 +16,7 @@
 #include <sys/utsname.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/file.h>
 
 using namespace DDLog;
 
@@ -233,23 +234,23 @@ bool Utils::isFileLocked(const QString &filepath, bool bread)
 
 bool Utils::isDpkgLocked()
 {
-    QProcess proc;
-    proc.setProgram("ps");
-    proc.setArguments(QStringList() << "-e" << "-o" << "comm");
-    proc.start();
-    proc.waitForFinished();
-    QString info = proc.readAllStandardOutput();
-    if (!info.contains("dpkg"))
-        return false;
-
-    // Split the output  search for the 'grep dpkg ' pattern
-      foreach (QString out, info.split("\n")) {
-          if (out.contains("dpkg")) {
-            if(out.trimmed() == "dpkg-query")
-                return false;
-          }
-      }
-    return true;
+    // Check dpkg lock files using non-blocking exclusive flock.
+    const QStringList lockFiles = {
+        "/var/lib/dpkg/lock-frontend",
+        "/var/lib/dpkg/lock"
+    };
+    for (const QString &lockFile : lockFiles) {
+        int fd = open(lockFile.toLocal8Bit().constData(), O_RDONLY | O_CLOEXEC);
+        if (fd < 0) {
+            return true;
+        }
+        if (flock(fd, LOCK_EX | LOCK_NB) == -1) {
+            close(fd);
+            return true;
+        }
+        close(fd);
+    }
+    return false;
 }
 
 QString Utils::getUrl()
