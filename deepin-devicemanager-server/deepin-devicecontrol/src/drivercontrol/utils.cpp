@@ -16,6 +16,7 @@
 #include <sys/utsname.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <errno.h>
 
 using namespace DDLog;
 
@@ -214,9 +215,14 @@ bool Utils::isFileLocked(const QString &filepath, bool bread)
     fl.l_pid    = getpid(); /* PID */
 
     int fd = open(filepath.toStdString().c_str(), opentype);
-    //文件打开失败默认为被锁住
+    //文件打开失败，区分文件不存在与其他错误
     if (fd < 0) {
-        return  true;
+        if (errno == ENOENT) {
+            //文件不存在，未被锁定
+            return false;
+        }
+        //其他原因无法打开文件，保守起见视为已锁定
+        return true;
     }
 
     if (-1 == fcntl(fd, F_SETLK, &fl)) {
