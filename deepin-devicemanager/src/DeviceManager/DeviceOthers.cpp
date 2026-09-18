@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -37,6 +37,9 @@ void DeviceOthers::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "logical name", m_LogicalName);
     if (m_Driver.toLower() == "usbfs")
         m_Driver.clear();
+    if (m_Driver.isEmpty() && m_SysPath.contains("usb")) {
+    	m_Driver = "usb";
+    }
     if(m_Driver.isEmpty() && !m_Avail.compare("yes", Qt::CaseInsensitive)){
         setForcedDisplay(true);
         setCanEnable(false);
