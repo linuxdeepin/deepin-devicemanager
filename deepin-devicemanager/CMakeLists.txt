@@ -43,6 +43,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--as-needed -fPIE -fstack-protector-strong -D_FORTIFY_SOURCE=2 -z noexecstack -pie -fPIC -z lazy")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pie")
 
+if(${QT_VERSION_MAJOR} EQUAL 6)
+    add_definitions(-DDISABLE_DRIVER)
+    message(STATUS "DISABLE_DRIVER macro added for Qt6 build")
+else()
+    message(STATUS "DISABLE_DRIVER macro NOT added for Qt5 build")
+endif()
+
 option (PERF_ON "Use provided math implementation" ON)
 
 if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "sw_64")
