@@ -66,9 +66,7 @@ public:
     static QByteArray executeClientCmd(const QString& cmd, const QStringList& args = QStringList(), const QString& workPath = QString(), int msecsWaiting = 30000);
 
     static bool isShowScreenSize();
-    static QString formatTotalCache(const QString& perThreadCache, int coreCount);
-
-    static int parseSharedCpuCount(const QString &sharedCpuList);
+    static QString formatCacheSize(const QString& cacheSize);
 
     /**
      * @brief formatNetworkSpeed: Convert network speed units to Mbps
