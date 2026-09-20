@@ -291,7 +291,7 @@ void PageDriverInstallInfo::updateItemStatus(int index, Status status, QString e
 void PageDriverInstallInfo::setCheckedCBDisnable()
 {
     mp_ViewCanUpdate->setCheckedCBDisnable();
-    mp_ViewCanUpdate->setCheckedCBDisnable();
+    mp_ViewNotInstall->setCheckedCBDisnable();
 }
 
 void PageDriverInstallInfo::setHeaderCbEnable(bool enable)
