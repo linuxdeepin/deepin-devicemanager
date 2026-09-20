@@ -1,3 +1,16 @@
+deepin-devicemanager (6.0.73) unstable; urgency=medium
+
+  * chore: Update version to 6.0.73
+  * fix: trim file content before comparison in getUrl to fix string matching bug
+  * fix(build): restore DISABLE_DRIVER macro for Qt6 builds
+  * test(unittest): add unit tests for driveritem, PageDriverBackupInfo and PageDriverRestoreInfo
+  * fix: restore USB device enable/disable after driver cleared
+  * fix: clear mapInfo on getMapInfo failure
+  * test(unittest): add unit tests for MLogger and HeaderInfoTableDelegate
+  * test(unittest): add unit tests for SecurityUtils, WakeupUtils and EnableUtils modules
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Sun, 20 Sep 2026 14:55:09 +0800
+
 deepin-devicemanager (6.0.72) unstable; urgency=medium
 
   * chore: Update version to 6.0.72
