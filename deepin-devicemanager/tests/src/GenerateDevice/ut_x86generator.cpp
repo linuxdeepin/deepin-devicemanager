@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "X86Generator.h"
+#include "DeviceGenerator.h"
 #include "DeviceManager.h"
 
 #include <gtest/gtest.h>
@@ -86,4 +87,30 @@ TEST_F(UT_X86Generator, AddBusIDFromHwinfo_TrailingDotNumber_StripsSuffix)
     // Assert
     EXPECT_EQ(busIDs.size(), 1);
     EXPECT_EQ(busIDs[0], "pci:0:1:2");
+}
+
+// Inheritance: X86Generator can be used polymorphically as DeviceGenerator
+TEST_F(UT_X86Generator, Inheritance_IsDeviceGenerator_Polymorphic)
+{
+    // Arrange
+    X86Generator gen;
+
+    // Act
+    DeviceGenerator *base = &gen;
+
+    // Assert
+    EXPECT_NE(base, nullptr);
+    EXPECT_EQ(base, static_cast<DeviceGenerator *>(&gen));
+}
+
+// generatorCpuDevice: cmdInfo empty → returns early, no CPU device added
+TEST_F(UT_X86Generator, GeneratorCpuDevice_EmptyCmdInfo_AddsNoDevice)
+{
+    // Arrange
+    // Act
+    m_gen->generatorCpuDevice();
+
+    // Assert
+    EXPECT_EQ(DeviceManager::instance()->m_ListDeviceCPU.size(), 0);
+    EXPECT_TRUE(DeviceManager::instance()->m_ListDeviceCPU.isEmpty());
 }
