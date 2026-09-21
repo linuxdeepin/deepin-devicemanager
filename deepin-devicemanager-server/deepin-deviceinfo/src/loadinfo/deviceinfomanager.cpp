@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -37,7 +37,12 @@ const QString &DeviceInfoManager::getInfo(const QString &key)
 {
     qCDebug(appLog) << "Getting info for key:" << key;
     QMutexLocker locker(&mutex);
-    return m_MapInfo[key];
+    auto it = m_MapInfo.find(key);
+    if (it != m_MapInfo.end()) {
+        return it.value();
+    }
+    static const QString empty;
+    return empty;
 }
 
 bool DeviceInfoManager::isInfoExisted(const QString &key)
@@ -53,7 +58,7 @@ bool DeviceInfoManager::isPathExisted(const QString &path)
 {
     qCDebug(appLog) << "Checking if path exists:" << path;
     QMutexLocker locker(&mutex);
-    const QString &hwinfo = m_MapInfo["hwinfo"];
+    QString hwinfo = m_MapInfo.value("hwinfo");
     QString pathT = path;
     bool exists = hwinfo.contains(pathT.replace("/sys", ""));
     qCDebug(appLog) << "Path exists:" << exists;
