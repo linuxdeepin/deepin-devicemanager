@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 #include "deviceinterface.h"
@@ -12,6 +12,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QRegularExpression>
+#include <QDateTime>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <polkit-qt5-1/PolkitQt1/Authority>
@@ -143,14 +144,21 @@ void DeviceInterface::setMonitorDeviceFlag(bool flag)
 
 QString DeviceInterface::getGpuInfoForFTDTM()
 {
+    static constexpr int kGpuCacheTtlSec = 30;
     static QString gpuMemInfo { "" };
-    if (gpuMemInfo.isEmpty()) {
+    static QDateTime lastUpdate;
+
+    bool cacheExpired = !lastUpdate.isValid()
+        || lastUpdate.secsTo(QDateTime::currentDateTime()) >= kGpuCacheTtlSec;
+    if (gpuMemInfo.isEmpty() || cacheExpired) {
         QMap<QString, QString> mapInfo;
         if (getGpuMemInfoForFTDTM(mapInfo)) {
+            gpuMemInfo.clear();
             for (auto it = mapInfo.begin(); it != mapInfo.end(); ++it) {
                 QString tmpInfo = it.key() + ": " + it.value() + "\n";
                 gpuMemInfo.append(tmpInfo);
             }
+            lastUpdate = QDateTime::currentDateTime();
         }
     }
     return gpuMemInfo;
