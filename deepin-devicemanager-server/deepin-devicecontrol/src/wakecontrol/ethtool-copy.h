@@ -3,7 +3,7 @@
 // Copyright 2001 Jeff Garzik <jgarzik@pobox.com>
 // Copyright 2001 Sun Microsystems (thockin@sun.com)
 // Copyright 2002 Intel (eli.kupermann@intel.com,
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
