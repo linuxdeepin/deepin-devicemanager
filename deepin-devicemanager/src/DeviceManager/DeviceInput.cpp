@@ -207,6 +207,17 @@ bool DeviceInput::getPS2Syspath(const QString &dfs)
         }
     }
 
+    // 兜底归一化：当 event 号匹配失败时，m_SysPath 仍含 /input/inputN 或 /inputN 后缀
+    // 用与成功路径一致的正则剥离后缀，使 m_SysPath 归一化为设备父路径（幂等无副作用）
+    QRegExp regFallback;
+    if (m_SysPath.contains("i2c_designware"))
+        regFallback = QRegExp("(.*)/input/input[0-9]{1,2}");
+    else
+        regFallback = QRegExp("(.*)/input[0-9]{1,2}");
+    if (regFallback.exactMatch(m_SysPath)) {
+        m_SysPath = regFallback.cap(1);
+    }
+
     return true;
 }
 
@@ -505,7 +516,7 @@ QString DeviceInput::wakeupPath()
         return "";
     }
 
-    if (m_Name.contains("PS/2")) {
+    if (m_Name.contains("PS/2") || m_Interface.contains("PS/2")) {
         return "/proc/acpi/wakeup";
     } else {
         return QString("/sys") + m_SysPath.left(index) + QString("/power/wakeup");
