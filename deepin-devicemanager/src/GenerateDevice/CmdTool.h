@@ -78,20 +78,6 @@ private:
     void loadLsblkInfo(const QString &debugfile);
 
     /**
-     * @brief loadLsblkPtInfo:加载 lsblk -d -o name,pttype 获取的信息(分区表类型)
-     * @param debugfile:调试文件名
-     */
-    void loadLsblkPtInfo(const QString &debugfile);
-
-    /**
-     * @brief loadLsblkTwoColumn:解析 lsblk 两列输出(name,value)的通用方法
-     * @param debugfile:调试文件名
-     * @param mapKey:存入 mapInfo 的 key
-     * @param loadSmartCtl:是否需要加载 smartctl 信息
-     */
-    void loadLsblkTwoColumn(const QString &debugfile, const QString &mapKey, bool loadSmartCtl);
-
-    /**
      * @brief loadLssgInfo:加载ls /dev/sg*获取的信息
      * @param debugfile:调试文件名
      */
