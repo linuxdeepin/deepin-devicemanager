@@ -211,9 +211,10 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         connect(txtBrowser, &TextBrowser::exportInfo, this, &PageDetail::exportInfo);
         connect(txtBrowser, &TextBrowser::copyAllInfo, this, &PageDetail::slotCopyAllInfo);
         addWidgets(txtBrowser, device->enable() && device->available() && !device->getOtherTranslationAttribs().isEmpty());
-        // 当添加到最后一个设备详细信息时，隐藏分隔符
-        if (device == lstInfo.last())
-            m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
+        // 当添加到最后一个设备详细信息时，隐藏分隔符。用last()而非lstInfo.size()-1，
+        // 因为if(!device) continue会跳过空设备，使链表实际长度可能小于lstInfo.size()
+        if (device == lstInfo.last() && !m_ListDetailSeperator.isEmpty())
+            m_ListDetailSeperator.last()->setVisible(false);
     }
     // 刷新展示页面时,滚动条还原
     mp_ScrollArea->verticalScrollBar()->setValue(0);
@@ -360,8 +361,9 @@ void PageDetail::clearWidget()
 
     QList<DetailButton *> listDetailButton = m_ListDetailButton;
     m_ListDetailButton.clear();
-    // 清空DetailButton
+    // 清空DetailButton，先断开clicked信号，避免延迟销毁期间旧按钮仍派发点击到slotBtnClicked
     foreach (auto widget, listDetailButton) {
+        disconnect(widget, &DetailButton::clicked, this, &PageDetail::slotBtnClicked);
         widget->deleteLater();
         widget = nullptr;
     }
@@ -395,16 +397,14 @@ void PageDetail::slotBtnClicked()
     DetailButton *button = qobject_cast<DetailButton *>(sender());
     if (!button)
         return;
-    int index = 0;
-    foreach (DetailButton *b, m_ListDetailButton) {
-        if (button == b)
-            break;
-        index++;
-    }
+
+    // 按钮可能因刷新重建已移出列表（clearWidget先清链表后deleteLater），此时忽略过期点击
+    int index = m_ListDetailButton.indexOf(button);
+    if (index < 0 || index >= m_ListTextBrowser.size())
+        return;
 
     // 改变按钮的状态，展开和收起的切换
-    if (button)
-        button->updateText();
+    button->updateText();
 
     // 显示内容发生相应变化，也就是是否显示其它信息
     TextBrowser *browser = m_ListTextBrowser[index];
