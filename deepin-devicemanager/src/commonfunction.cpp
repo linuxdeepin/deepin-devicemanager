@@ -259,10 +259,10 @@ bool Common::isShowScreenSize()
     return showScreenSize;
 }
 
-QString Common::formatTotalCache(const QString &perThreadCache, int coreCount)
+QString Common::formatCacheSize(const QString &cacheSize)
 {
     // 1. 清理并分离数字与单位
-    QString s = perThreadCache.trimmed();
+    QString s = cacheSize.trimmed();
     if (s.isEmpty())
         return QString();
 
@@ -278,37 +278,35 @@ QString Common::formatTotalCache(const QString &perThreadCache, int coreCount)
     if (!ok)
         return QString();
 
-    // 2. 将单核/单线程缓存转换为 KiB
-    double perCoreKiB = 0.0;
+    // 2. 将缓存大小转换为 KiB（单实例大小，不再按实例数累加）
+    double cacheKiB = 0.0;
     if (unitStr.startsWith("K") || unitStr == "KB" || unitStr == "KIB") {
-        perCoreKiB = num;
+        cacheKiB = num;
     } else if (unitStr.startsWith("M") || unitStr == "MB" || unitStr == "MIB") {
-        perCoreKiB = num * 1024.0;
+        cacheKiB = num * 1024.0;
     } else if (unitStr.startsWith("G") || unitStr == "GB" || unitStr == "GIB") {
-        perCoreKiB = num * 1024.0 * 1024.0;
+        cacheKiB = num * 1024.0 * 1024.0;
     } else if (unitStr.startsWith("T") || unitStr == "TB" || unitStr == "TIB") {
-        perCoreKiB = num * 1024.0 * 1024.0 * 1024.0;
+        cacheKiB = num * 1024.0 * 1024.0 * 1024.0;
     } else if (unitStr.isEmpty() || unitStr == "B") {
         // 无单位或纯字节，视为字节并转为 KiB
-        perCoreKiB = num / 1024.0;
+        cacheKiB = num / 1024.0;
     } else {
         // 未知单位，按原数值当作 KiB 处理
-        perCoreKiB = num;
+        cacheKiB = num;
     }
-
-    double totalKiB = perCoreKiB * coreCount;
 
     // 3. 选择最合适的单位并格式化数值
     double value;
     QString unit;
-    if (totalKiB >= 1024.0 * 1024.0) {
-        value = totalKiB / (1024.0 * 1024.0);
+    if (cacheKiB >= 1024.0 * 1024.0) {
+        value = cacheKiB / (1024.0 * 1024.0);
         unit = "GiB";
-    } else if (totalKiB >= 1024.0) {
-        value = totalKiB / 1024.0;
+    } else if (cacheKiB >= 1024.0) {
+        value = cacheKiB / 1024.0;
         unit = "MiB";
     } else {
-        value = totalKiB;
+        value = cacheKiB;
         unit = "KiB";
     }
 
@@ -319,36 +317,6 @@ QString Common::formatTotalCache(const QString &perThreadCache, int coreCount)
     } else {
         return QString::number(value, 'f', 1) + " " + unit;
     }
-}
-
-int Common::parseSharedCpuCount(const QString &sharedCpuList)
-{
-    QString s = sharedCpuList.trimmed();
-    if (s.isEmpty())
-        return 0;
-
-    int count = 0;
-    QStringList parts = s.split(',', QString::SkipEmptyParts);
-    for (const QString &part : parts) {
-        QString trimmed = part.trimmed();
-        if (trimmed.contains('-')) {
-            QStringList range = trimmed.split('-');
-            if (range.size() == 2) {
-                bool ok1 = false, ok2 = false;
-                int start = range[0].trimmed().toInt(&ok1);
-                int end = range[1].trimmed().toInt(&ok2);
-                if (ok1 && ok2 && end >= start) {
-                    count += end - start + 1;
-                }
-            }
-        } else {
-            bool ok = false;
-            if (trimmed.toInt(&ok) || ok) {
-                count += 1;
-            }
-        }
-    }
-    return count;
 }
 
 QString Common::formatNetworkSpeed(const QString& speed)
