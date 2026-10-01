@@ -245,17 +245,12 @@ bool Utils::isDpkgLocked()
     proc.start();
     proc.waitForFinished();
     QString info = proc.readAllStandardOutput();
-    if (!info.contains("dpkg"))
-        return false;
 
-    // Split the output  search for the 'grep dpkg ' pattern
-      foreach (QString out, info.split("\n")) {
-          if (out.contains("dpkg")) {
-            if(out.trimmed() == "dpkg-query")
-                return false;
-          }
-      }
-    return true;
+    foreach (QString out, info.split("\n")) {
+        if (out.trimmed() == "dpkg")
+            return true;
+    }
+    return false;
 }
 
 QString Utils::getUrl()
