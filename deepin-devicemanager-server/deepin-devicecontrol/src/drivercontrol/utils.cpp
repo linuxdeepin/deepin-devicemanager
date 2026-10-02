@@ -239,23 +239,15 @@ bool Utils::isFileLocked(const QString &filepath, bool bread)
 
 bool Utils::isDpkgLocked()
 {
-    QProcess proc;
-    proc.setProgram("ps");
-    proc.setArguments(QStringList() << "-e" << "-o" << "comm");
-    proc.start();
-    proc.waitForFinished();
-    QString info = proc.readAllStandardOutput();
-    if (!info.contains("dpkg"))
-        return false;
-
-    // Split the output  search for the 'grep dpkg ' pattern
-      foreach (QString out, info.split("\n")) {
-          if (out.contains("dpkg")) {
-            if(out.trimmed() == "dpkg-query")
-                return false;
-          }
-      }
-    return true;
+    static const QStringList lockFiles = {
+        "/var/lib/dpkg/lock-frontend",
+        "/var/lib/dpkg/lock"
+    };
+    for (const QString &lockFile : lockFiles) {
+        if (isFileLocked(lockFile))
+            return true;
+    }
+    return false;
 }
 
 QString Utils::getUrl()
