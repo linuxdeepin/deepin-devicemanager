@@ -61,7 +61,8 @@ LogicalCpu &PhysicalCpu::logicalCpu(int id)
         if (m_MapCoreCpu[i].logicalIsExisted(id))
             return m_MapCoreCpu[i].logicalCpu(id);
     }
-    return m_MapCoreCpu[-1].logicalCpu(-1);
+    static LogicalCpu s_sentinel;
+    return s_sentinel;
 }
 
 void PhysicalCpu::getInfo(QString &info)
