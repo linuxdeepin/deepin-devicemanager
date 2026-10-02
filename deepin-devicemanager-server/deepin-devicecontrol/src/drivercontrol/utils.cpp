@@ -239,23 +239,21 @@ bool Utils::isFileLocked(const QString &filepath, bool bread)
 
 bool Utils::isDpkgLocked()
 {
-    QProcess proc;
-    proc.setProgram("ps");
-    proc.setArguments(QStringList() << "-e" << "-o" << "comm");
-    proc.start();
-    proc.waitForFinished();
-    QString info = proc.readAllStandardOutput();
-    if (!info.contains("dpkg"))
-        return false;
-
-    // Split the output  search for the 'grep dpkg ' pattern
-      foreach (QString out, info.split("\n")) {
-          if (out.contains("dpkg")) {
-            if(out.trimmed() == "dpkg-query")
-                return false;
-          }
-      }
-    return true;
+    // 直接检测 dpkg 锁文件状态，替代基于进程名的启发式判断。
+    // 原实现仅排除 dpkg-query 进程名，其他不持有锁的 dpkg 工具
+    // （dpkg-deb、dpkg-divert、dpkg-statoverride、dpkg-trigger 等）
+    // 会导致假阳性；同时 dpkg-query 的提前 return 在 dpkg 与 dpkg-query
+    // 并存时会产生假阴性。此处复用已有的 isFileLocked()（fcntl F_SETLK
+    // 非阻塞测试），与 uninstallPackage 路径的锁检测方式保持一致。
+    static const QStringList lockFiles = {
+        "/var/lib/dpkg/lock-frontend",
+        "/var/lib/dpkg/lock"
+    };
+    for (const QString &lockFile : lockFiles) {
+        if (isFileLocked(lockFile))
+            return true;
+    }
+    return false;
 }
 
 QString Utils::getUrl()
