@@ -7,6 +7,7 @@
 
 #include <QMutex>
 #include <QLoggingCategory>
+#include <QStringList>
 
 using namespace DDLog;
 
@@ -60,7 +61,18 @@ bool DeviceInfoManager::isPathExisted(const QString &path)
     QMutexLocker locker(&mutex);
     QString hwinfo = m_MapInfo.value("hwinfo");
     QString pathT = path;
-    bool exists = hwinfo.contains(pathT.replace("/sys", ""));
+    if (pathT.startsWith("/sys"))
+        pathT = pathT.mid(4);
+    if (pathT.isEmpty())
+        return false;
+    bool exists = false;
+    const QStringList lines = hwinfo.split('\n');
+    for (const QString &line : lines) {
+        if (line.trimmed() == pathT) {
+            exists = true;
+            break;
+        }
+    }
     qCDebug(appLog) << "Path exists:" << exists;
     return exists;
 }
