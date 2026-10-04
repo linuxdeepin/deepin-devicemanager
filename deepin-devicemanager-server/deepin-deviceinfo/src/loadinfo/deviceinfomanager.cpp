@@ -60,8 +60,10 @@ bool DeviceInfoManager::isPathExisted(const QString &path)
     QMutexLocker locker(&mutex);
     QString hwinfo = m_MapInfo.value("hwinfo");
     QString pathT = path;
-    bool exists = hwinfo.contains(pathT.replace("/sys", ""));
+    if (pathT.startsWith("/sys")) {
+        pathT.remove(0, 4);
+    }
+    bool exists = hwinfo.contains(pathT);
     qCDebug(appLog) << "Path exists:" << exists;
     return exists;
 }
-
