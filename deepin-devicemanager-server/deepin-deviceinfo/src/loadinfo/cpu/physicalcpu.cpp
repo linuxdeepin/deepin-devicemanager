@@ -37,7 +37,12 @@ bool PhysicalCpu::coreIsExisted(int id)
 
 CoreCpu &PhysicalCpu::coreCpu(int id)
 {
-    return m_MapCoreCpu[id];
+    auto it = m_MapCoreCpu.find(id);
+    if (it != m_MapCoreCpu.end()) {
+        return it.value();
+    }
+    static CoreCpu s_defaultCoreCpu;
+    return s_defaultCoreCpu;
 }
 
 bool PhysicalCpu::logicalIsExisted(int id)
@@ -61,7 +66,13 @@ LogicalCpu &PhysicalCpu::logicalCpu(int id)
         if (m_MapCoreCpu[i].logicalIsExisted(id))
             return m_MapCoreCpu[i].logicalCpu(id);
     }
-    return m_MapCoreCpu[-1].logicalCpu(-1);
+    // 使用 find 避免隐式插入污染 m_MapCoreCpu
+    auto it = m_MapCoreCpu.find(-1);
+    if (it != m_MapCoreCpu.end()) {
+        return it.value().logicalCpu(-1);
+    }
+    static LogicalCpu s_defaultLogicalCpu;
+    return s_defaultLogicalCpu;
 }
 
 void PhysicalCpu::getInfo(QString &info)
