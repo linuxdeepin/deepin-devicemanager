@@ -37,7 +37,12 @@ bool PhysicalCpu::coreIsExisted(int id)
 
 CoreCpu &PhysicalCpu::coreCpu(int id)
 {
-    return m_MapCoreCpu[id];
+    auto it = m_MapCoreCpu.find(id);
+    if (it != m_MapCoreCpu.end()) {
+        return it.value();
+    }
+    static CoreCpu s_invalidCoreCpu;
+    return s_invalidCoreCpu;
 }
 
 bool PhysicalCpu::logicalIsExisted(int id)
@@ -61,7 +66,12 @@ LogicalCpu &PhysicalCpu::logicalCpu(int id)
         if (m_MapCoreCpu[i].logicalIsExisted(id))
             return m_MapCoreCpu[i].logicalCpu(id);
     }
-    return m_MapCoreCpu[-1].logicalCpu(-1);
+    auto it = m_MapCoreCpu.find(-1);
+    if (it != m_MapCoreCpu.end()) {
+        return it.value().logicalCpu(-1);
+    }
+    static LogicalCpu s_invalidLogicalCpu;
+    return s_invalidLogicalCpu;
 }
 
 void PhysicalCpu::getInfo(QString &info)
