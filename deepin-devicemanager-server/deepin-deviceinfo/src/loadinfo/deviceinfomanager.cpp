@@ -60,8 +60,20 @@ bool DeviceInfoManager::isPathExisted(const QString &path)
     QMutexLocker locker(&mutex);
     QString hwinfo = m_MapInfo.value("hwinfo");
     QString pathT = path;
-    bool exists = hwinfo.contains(pathT.replace("/sys", ""));
-    qCDebug(appLog) << "Path exists:" << exists;
-    return exists;
+    // Only strip the "/sys" prefix, not every occurrence of the substring.
+    // QString::replace("/sys", "") would corrupt paths like "/sys/class/sys-block".
+    if (pathT.startsWith("/sys"))
+        pathT = pathT.mid(4);
+    // Match line by line to avoid false positives from bare substring matching
+    // across the entire hwinfo text (e.g. "devices/usb1" matching "devices/usb10").
+    const QStringList lines = hwinfo.split('\n');
+    for (const QString &line : lines) {
+        if (line.contains(pathT)) {
+            qCDebug(appLog) << "Path exists:" << true;
+            return true;
+        }
+    }
+    qCDebug(appLog) << "Path exists:" << false;
+    return false;
 }
 
