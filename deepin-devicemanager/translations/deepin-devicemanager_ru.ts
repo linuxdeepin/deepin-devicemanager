@@ -3562,7 +3562,7 @@
         <location filename="../src/Page/MainWindow.cpp" line="791"/>
         <location filename="../src/Page/MainWindow.cpp" line="807"/>
         <source>Are you sure you want to exit?</source>
-        <translation>Вы уверены, что хотите выйти?</translation>
+        <translation>Уверены, что хотите выйти?</translation>
     </message>
     <message>
         <location filename="../src/Page/MainWindow.cpp" line="778"/>
