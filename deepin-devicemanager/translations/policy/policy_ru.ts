@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отменить</translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Confirm</source>

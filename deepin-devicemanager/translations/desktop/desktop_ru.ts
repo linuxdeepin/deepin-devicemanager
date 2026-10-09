@@ -4,7 +4,7 @@
 <message>
 <location filename="Desktop Entry]Comment" line="0"/>
 <source>Device Manager is a handy tool for viewing hardware information and managing the devices.</source>
-<translation>Диспетчер устройств - удобный инструмент для просмотра информации об оборудовании и управления устройствами.</translation>
+<translation>Диспетчер устройств — удобный инструмент для просмотра информации об оборудовании и управления устройствами.</translation>
 </message>
 <message>
 <location filename="Desktop Entry]GenericName" line="0"/>
