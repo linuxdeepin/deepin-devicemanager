@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 ~ 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -10,7 +10,6 @@
 #include <QObjectCleanupHandler>
 #include <QProcess>
 #include <QDir>
-#include <QDateTime>
 #include <QLoggingCategory>
 
 using namespace DDLog;
@@ -40,13 +39,7 @@ void ThreadPool::loadDeviceInfo()
 
     // 当所有设备执行完毕之后，开始执行生成其它设备的任务
     // 这里是为了确保其它设备在最后一个生成
-    qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
-    while (true) {
-        qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
-        if (activeThreadCount() == 0 || curMSecond - beginMSecond > 10000) {
-            break;
-        }
-    }
+    waitForDone(10000);
 }
 
 void ThreadPool::updateDeviceInfo()
@@ -60,13 +53,7 @@ void ThreadPool::updateDeviceInfo()
     }
     // 当所有设备执行完毕之后，开始执行生成其它设备的任务
     // 这里是为了确保其它设备在最后一个生成
-    qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
-    while (true) {
-        qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
-        if (activeThreadCount() == 0 || curMSecond - beginMSecond > 10000) {
-            break;
-        }
-    }
+    waitForDone(10000);
 }
 
 void ThreadPool::runCmdToCache(const Cmd &cmd)
