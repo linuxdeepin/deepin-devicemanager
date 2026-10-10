@@ -66,3 +66,7 @@ debian/files
 
 # build
 obj-x86_64-linux-gnu/
+
+# Unit test artifacts (graph-ut-writer skill)
+.ut/
+build-ut*/
