@@ -1,0 +1,33 @@
+fix: use exact match for dpkg in isDpkgLocked
+
+1. Root cause: isDpkgLocked() used contains("dpkg") substring match
+   on ps output, causing false positives from dpkg-deb, dpkg-divert
+   and other dpkg-series tools that do not hold the dpkg lock
+2. Fix: replace substring matching with out.trimmed() == "dpkg"
+   exact match so only the dpkg process itself triggers lock detection
+3. Impact: removes unnecessary install blocking and retries when
+   non-locking dpkg tools are running, no change for valid callers
+
+Log: fix dpkg lock false positive caused by substring matching
+
+Influence:
+1. Test isDpkgLocked returns false when only dpkg-deb is running
+2. Test isDpkgLocked returns true when dpkg process is running
+3. Test isDpkgLocked returns false when no dpkg process is running
+
+fix: 修复 isDpkgLocked 中 dpkg 子串匹配假阳性
+
+1. 根因：isDpkgLocked() 使用 contains("dpkg") 子串匹配 ps 输出，
+   导致 dpkg-deb、dpkg-divert 等不持有 dpkg 锁的工具进程触发假阳性
+2. 方案：将子串匹配替换为 out.trimmed() == "dpkg" 精确匹配，
+   仅当 dpkg 进程本身运行时返回 true
+3. 影响：消除非锁持有工具运行时的安装阻塞和重试，对有效调用方无行为变化
+
+Log: 修复 dpkg 锁检测因子串匹配导致的假阳性问题
+
+Influence:
+1. 测试仅 dpkg-deb 运行时 isDpkgLocked 返回 false
+2. 测试 dpkg 进程运行时 isDpkgLocked 返回 true
+3. 测试无 dpkg 进程运行时 isDpkgLocked 返回 false
+
+PMS: BUG-5
