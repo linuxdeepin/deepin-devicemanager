@@ -207,6 +207,12 @@ bool DeviceInput::getPS2Syspath(const QString &dfs)
         }
     }
 
+    // 兜底：event 号匹配失败时 m_SysPath 仍可能带有 /input/inputN 后缀，剥离之
+    QRegExp stripReg("(.*)/input/input[0-9]{1,2}$");
+    if (stripReg.exactMatch(m_SysPath)) {
+        m_SysPath = stripReg.cap(1);
+    }
+
     return true;
 }
 
@@ -505,7 +511,7 @@ QString DeviceInput::wakeupPath()
         return "";
     }
 
-    if (m_Name.contains("PS/2")) {
+    if (m_Name.contains("PS/2") || m_Interface.contains("PS/2")) {
         return "/proc/acpi/wakeup";
     } else {
         return QString("/sys") + m_SysPath.left(index) + QString("/power/wakeup");
