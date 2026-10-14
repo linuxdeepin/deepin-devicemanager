@@ -34,13 +34,15 @@ You can run, close or create a shortcut for Device Manager as follows.
 
 ## Hardware
 
-The information displayed by Device Manager is related to the computer hardwares. If your computer is connected to a mouse, keyboard, etc., the corresponding device information is displayed. If multiple devices of the same type are detected, the device information is displayed in a list. 
+The window of Device Manager contains two tabs at the top: **Hardware** and **Drivers**. Click a tab to switch between them. The information displayed by Device Manager is related to the computer hardwares. If your computer is connected to a mouse, keyboard, etc., the corresponding device information is displayed. If multiple devices of the same type are detected, the device information is displayed in a list. 
 
 ### Device Information
 
-On the main interface, click **Hardware** to view details of each hardware running in this system.
+On the main interface, click **Hardware** to view details of each hardware running in this system. Device categories are listed on the left. Click a category to view the details of all devices in that category on the right.
 
 ![0|overview](fig/overview.png)
+
+**Overview** displays the computer model, the operating system kernel version and a summary list of all hardware devices. If there are many devices, click **More** below the list to expand it.
 
 The following table mainly introduces common hardware information and is for reference only, please refer to the actual situation.
 
@@ -53,7 +55,7 @@ The following table mainly introduces common hardware information and is for ref
         </tr>
         <tr>
             <td>Overview</td>
-            <td>Including the kernel and the hardware list.</td>
+            <td>Including the computer model, the kernel and the hardware list.</td>
         </tr>
         <tr>
             <td>CPU</td>
@@ -80,27 +82,43 @@ The following table mainly introduces common hardware information and is for ref
             <td>Including model, vendor, media type and so on.</td>
         </tr>
         <tr>
+            <td>Battery</td>
+            <td>Including name, vendor, model, capacity and so on.</td>
+        </tr>
+        <tr>
+            <td>Bluetooth</td>
+            <td>Including name, vendor, model and so on.</td>
+        </tr>
+        <tr>
             <td>Network Adapter</td>
             <td>Including name, vendor, type, driver and so on.</td>
         </tr>
          <tr>
-            <td>Mouse</td>
-            <td>Including name, vendor, model, interface and so on.</td>
+            <td>Mouse and Pointing Device</td>
+            <td>Including name, vendor, model, interface and so on of mice, touchpads and other pointing devices.</td>
         </tr>
           <tr>
             <td>Keyboard</td>
             <td>Including name, vendor, model, interface and so on.</td>
         </tr>
         <tr>
-            <td>Monitior</td>
+            <td>Monitor</td>
             <td>Including name, vendor, type, interface type and so on.</td>
+        </tr>
+        <tr>
+            <td>Imaging Device</td>
+            <td>Including name, vendor, model and so on of cameras and other imaging devices.</td>
         </tr>
    </tbody>
    </table>
 
+Click a device to view its details on the right. Taking an **Imaging Device** as an example, the detail fields include: Name, Vendor, Version, Model, Bus Info, Serial, Capabilities, Driver, Max Power, Speed, Physical ID, Module Alias and so on. The fields displayed vary with the type of device.
+
 ### Context Menu 
 
-Right-click in the details area of any device to carry out corresponding operations.
+Right-click in the details area of any device to carry out corresponding operations. The menu usually contains **Copy**, **Refresh**, **Export**, as well as **Disable/Enable**, **Update drivers** and **Uninstall drivers** if the current device supports them (**Disable** and **Update drivers** are separated by a dividing line). For a mouse, keyboard or network adapter, the checkable item **Allow it to wake the computer** may also be available.
+
+>![notes](../common/notes.svg) Notes: On the **Overview** page, right-clicking only shows **Copy**, **Refresh** and **Export**.
 
 ![0|rightclick](fig/rightclick.png)
 
@@ -133,6 +151,8 @@ Some hardware supports update/uninstall driver function, which can be judged by 
    ![0|renew](fig/renew.png)
 
 4. Authentication window pops up. Input login password to complete authentication and proceed.
+
+
 5. If the update fails, the system automatically rolls back the device's driver to the previous driver version, which does not affect the use. It is recommended to find the reason of failure according to the system prompt and update again.
 
 #### Uninstall drivers
@@ -153,7 +173,7 @@ When the computer is suspending, it supports waking up the computer and lighting
 
 **Wake up the computer by mouse and keyboard**
 
-1. Click **Mouse** or **Keyboard** in "Hardware" interface to display details.
+1. Click **Mouse and Pointing Device** or **Keyboard** in "Hardware" interface to display details.
 2. Right-click in the details area to check or uncheck **Allow it to wake the computer**.
 
    - Allow it to wake the computer: When the computer is suspending, left-click / right-click / middle-click or hit any key on keyboard to wake up the computer and light up the screen.
@@ -169,13 +189,13 @@ When the computer is suspending, it supports waking up the computer and lighting
 
 ## Drivers
 
-"Drivers" interface mainly includes features such as driver list, driver updates scan, driver online installation, etc.
+Click the **Drivers** tab to enter the drivers interface. The left side of the interface contains three entries: **Driver Install**, **Driver Backup** and **Driver Restore**, and the corresponding content is displayed on the right. The "Drivers" interface mainly includes features such as driver list, driver updates scan, driver online installation, driver backup and restore, etc.
 
 ### Scan for updates
 
-Open Device Manager, click **Drivers**. The system will detect if there is any updates available automatically.
+Open Device Manager, click **Drivers**. The system will detect if there is any updates available automatically. The detection result and the detection time are displayed at the top of the interface. Click **Scan Again** to scan again.
 
-   - Already up to date: It means that there are no drivers that can be updated/installed, and the names and versions of devices that do not require driver updates are displayed.
+   - Already up to date: It means that there are no drivers that can be updated/installed, and the names and current versions of devices that do not require driver updates are displayed in the "Up-to-date drivers" list.
    - Updates available: It means that updates are detected and can be installed online.
 
 ![0|update_detection](fig/update_detection.png)
@@ -184,7 +204,7 @@ If the detection fails, click **Scan Again** after fixing the problem according 
 
 ### Install drivers online
 
-1. In the "Drivers" interface, you can view the list of updatable/installable drivers and install them online.
+1. In the **Driver Install** page of the "Drivers" interface, you can view the list of updatable/installable drivers and install them online.
 
    - Click ![install](../common/install.svg) to install the installable drivers.
    - Click ![reinstall](../common/reinstall.svg) to update the updatable drivers.
@@ -201,7 +221,25 @@ If the detection fails, click **Scan Again** after fixing the problem according 
 
    - Installation partially  successful: For batch installation, some of the drivers may be installed successfully and some may not, you can check the status of each driver in the driver list.
 
-   
+### Back up drivers
+
+1. In the "Drivers" interface, click **Driver Backup** to view the drivers that can be backed up in the system. If all drivers have been backed up, the interface displays "All drivers have been backed up" together with the number of backed-up drivers; click **View backup path** to view where the backup files are stored.
+
+2. Check the drivers you want to back up and click **Back up** to back them up to the default location.
+
+   ![0|drivers_backup](fig/drivers_backup.png)
+
+>![notes](../common/notes.svg) Notes: Driver backup is used to restore to a previous version when a driver update or installation fails. It is recommended to back up drivers before updating them.
+
+### Restore drivers
+
+1. In the "Drivers" interface, click **Driver Restore** to view the drivers that have been backed up.
+
+2. Check the drivers you want to restore and click **Restore** to restore them to the backed-up version.
+
+   ![0|drivers_restore](fig/drivers_restore.png)
+
+If there is no driver to restore, the interface will prompt "You do not have any drivers to restore, please backup first". Click **Go to Backup Driver** to jump to the **Driver Backup** page directly.
 
 ## Main Menu
 
@@ -212,7 +250,8 @@ In the main menu, you can switch themes, view manual, and so on.
 The window theme includes Light Theme, Dark Theme and System Theme.
 
 1. Click ![icon_menu](../common/icon_menu.svg)on the interface.
-2. Click  **Theme** to select one.
+2. Click  **Theme** to select one. The shortcut key is **Ctrl+T**.
+
 
 
 ### Help
@@ -226,10 +265,10 @@ Click Help to get the manual, which will help you further know and use Device Ma
 ### About
 
 1. Click ![icon_menu](../common/icon_menu.svg)on the interface.
-2. Click **About** to view version and introduction about Device Manager.
+2. Click **About** to view the version, homepage, description and acknowledgements of Device Manager.
+
 
 ### Exit
 
 1. Click ![icon_menu](../common/icon_menu.svg)on the interface.
 2. Click  **Exit**.
-
