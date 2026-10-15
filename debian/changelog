@@ -1,3 +1,25 @@
+deepin-devicemanager (6.0.74) unstable; urgency=medium
+
+  * chore: Update version to 6.0.74
+  * fix(cpu): Fix CPU vendor info from dmidecode
+  * fix: correct SPDX copyright year separator to hyphen
+  * fix: replace busy-wait spin with waitForDone in ThreadPool
+  * fix: remove m_CoreId check in logicalIsExisted
+  * fix: use find() to avoid implicit map insert and fix SPDX copyright header
+  * fix: strip /sys prefix precisely in isPathExisted
+  * fix: use exact match for dpkg process name in isDpkgLocked
+  * test(unittest): add unit tests for deepin-devicemanager-server modules
+  * fix: distinguish ENOENT from lock in isFileLocked
+  * fix: add TTL cache invalidation for GPU info and update SPDX year
+  * fix: prevent QMap silent insert and update SPDX year
+  * test(unittest): enhance tests for ArmGenerator, X86Generator and DBusAnythingInterface
+  * test(unittest): add unit tests for ArmGenerator and X86Generator
+  * test(unittest): add unit tests for DetailButton, DetailSeperator and ScrollAreaWidget
+  * test(unittest): add unit tests for PageDriverInstallInfo and DBusAnythingInterface
+  * fix: correct target view in setCheckedCBDisnable
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Thu, 15 Oct 2026 11:43:48 +0800
+
 deepin-devicemanager (6.0.73) unstable; urgency=medium
 
   * chore: Update version to 6.0.73
