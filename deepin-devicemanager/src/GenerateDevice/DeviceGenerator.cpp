@@ -256,6 +256,11 @@ void DeviceGenerator::generatorCpuDevice()
         if (!baseCpuInfo.contains(kVendorId) && dmidecode.contains(kDmiManufacturer)) {
             baseCpuInfo.insert(kVendorId, dmidecode[kDmiManufacturer]); // 适配特殊机型CPU
         }
+        if (dmidecode.contains(kDmiManufacturer) && baseCpuInfo.contains(kVendorId)) {
+            if (dmidecode.value(kDmiManufacturer) != baseCpuInfo.value(kVendorId)) {
+                baseCpuInfo[kVendorId] = dmidecode[kDmiManufacturer];
+            }
+        }
         calAndSetCpuHeaderInfo(baseCpuInfo, coreNum, logicalNum);
     }
 }
