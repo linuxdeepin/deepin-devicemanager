@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -17,6 +17,8 @@
 #include <QLoggingCategory>
 #include <QKeyEvent>
 #include <QPainterPath>
+#include <QImageReader>
+#include <QIconEngine>
 
 // 其它头文件
 #include "MacroDefinition.h"
@@ -24,6 +26,90 @@
 DWIDGET_USE_NAMESPACE
 
 using namespace DDLog;
+
+/**
+ * @brief The CameraIconEngine class
+ * 仿 DTK 内置图标引擎（DBuiltinIconEngine）TextType 的行为：
+ * paint 时使用画笔颜色重新合成图标，从而与 QIcon::fromTheme 的图标一样
+ * 跟随窗口焦点(Inactive)/禁用(Disabled)/选中(Selected)状态变色；
+ * 图标文件按当前主题在绘制时实时解析，主题切换自动生效。
+ */
+class CameraIconEngine : public QIconEngine
+{
+public:
+    QIconEngine *clone() const override
+    {
+        return new CameraIconEngine();
+    }
+
+    QString key() const override
+    {
+        return QStringLiteral("CameraIconEngine");
+    }
+
+    void paint(QPainter *painter, const QRect &rect, QIcon::Mode mode, QIcon::State state) override
+    {
+        Q_UNUSED(mode);
+        Q_UNUSED(state);
+
+        const qreal scale = painter->device() ? painter->device()->devicePixelRatioF() : 1.0;
+        const QPixmap src = loadPixmap(rect.size() * scale);
+        if (src.isNull()) {
+            return;
+        }
+
+        // 与 DTK 内置引擎 TextType 一致：用画笔颜色重新合成图标
+        QPixmap pm = src;
+        {
+            QPainter pa(&pm);
+            pa.setCompositionMode(QPainter::CompositionMode_SourceIn);
+            pa.fillRect(pm.rect(), painter->pen().brush());
+        }
+
+        pm.setDevicePixelRatio(scale);
+        painter->drawPixmap(rect, pm);
+    }
+
+    QPixmap pixmap(const QSize &size, QIcon::Mode mode, QIcon::State state) override
+    {
+        Q_UNUSED(mode);
+        Q_UNUSED(state);
+        return loadPixmap(size);
+    }
+
+    QSize actualSize(const QSize &size, QIcon::Mode mode, QIcon::State state) override
+    {
+        Q_UNUSED(mode);
+        Q_UNUSED(state);
+        return QSize(20, 20);
+    }
+
+    QList<QSize> availableSizes(QIcon::Mode mode = QIcon::Normal,
+                                QIcon::State state = QIcon::Off) override
+    {
+        Q_UNUSED(mode);
+        Q_UNUSED(state);
+        return QList<QSize> { QSize(20, 20) };
+    }
+
+private:
+    // 按当前主题选择 light/dark 目录的内嵌图标路径
+    static QString iconPath()
+    {
+        const QString themeDir
+            = (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::DarkType)
+                  ? QStringLiteral("dark")
+                  : QStringLiteral("light");
+        return QString(":/icons/deepin/builtin/%1/texts/camera_20px.svg").arg(themeDir);
+    }
+
+    static QPixmap loadPixmap(const QSize &size)
+    {
+        QImageReader reader(iconPath());
+        reader.setScaledSize(size);
+        return QPixmap::fromImageReader(&reader);
+    }
+};
 
 DeviceListviewDelegate::DeviceListviewDelegate(QAbstractItemView *parent)
     : DStyledItemDelegate(parent)
@@ -133,7 +219,12 @@ void DeviceListView::addItem(const QString &name, const QString &iconFile)
         qCDebug(appLog) << "Item is a separator, setting flags accordingly";
         item->setFlags(Qt::ItemNeverHasChildren);
     }
-    item->setIcon(QIcon::fromTheme(lst[0]));
+    // 仅对 camera 图标使用自定义引擎：内嵌 qrc 资源 + 跟随画笔着色（与 fromTheme 行为一致）
+    if (lst[0] == QStringLiteral("camera")) {
+        item->setIcon(QIcon(new CameraIconEngine));
+    } else {
+        item->setIcon(QIcon::fromTheme(lst[0]));
+    }
     setIconSize(QSize(20, 20));
     mp_ItemModel->appendRow(item);
 }
