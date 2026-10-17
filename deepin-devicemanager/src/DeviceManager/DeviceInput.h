@@ -196,6 +196,11 @@ private:
     void getMouseInfoFromBusDevice();
 private:
 
+    /**
+     * @brief resolveVendorFromIds: 当 m_Vendor 为 hex VID 格式时，通过系统 usb.ids/pci.ids 数据库解析为厂商名称，解析失败则清空
+     */
+    void resolveVendorFromIds();
+
     QString             m_Model;                        //<! 【型号】
     QString             m_Interface;                    //<! 【接口】
     QString             m_BusInfo;                      //<! 【总线信息】

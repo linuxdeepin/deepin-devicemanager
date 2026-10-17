@@ -12,6 +12,8 @@
 // Qt库文件
 #include <QLoggingCategory>
 #include <QProcess>
+#include <QFile>
+#include <QRegularExpression>
 
 QStringList DeviceInput::m_supportInterfaces= {"PS/2", "Bluetooth", "I2C", "USB", "UINPUT"};
 
@@ -98,6 +100,7 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     setAttribute(mapInfo, "Device", m_Name);
     setAttribute(mapInfo, "name", m_Name);
     setAttribute(mapInfo, "Vendor", m_Vendor);
+    resolveVendorFromIds();
     setAttribute(mapInfo, "Model", m_Model);
     setAttribute(mapInfo, "Revision", m_Version);
     setAttribute(mapInfo, "SysFS ID", m_SysPath);
@@ -152,6 +155,61 @@ void DeviceInput::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     getMouseInfoFromBusDevice();
     // 获取其他设备信息
     getOtherMapInfo(mapInfo);
+}
+
+void DeviceInput::resolveVendorFromIds()
+{
+    // 检测 m_Vendor 是否为 hex VID 格式（如 0x14f3）
+    QRegularExpression hexRe("0x[0-9a-fA-F]+");
+    if (!hexRe.match(m_Vendor).hasMatch())
+        return;
+
+    // 提取 VID 十六进制字符串（去掉 0x 前缀，转为小写4位）
+    QString vid = m_Vendor;
+    vid.remove("0x", Qt::CaseInsensitive);
+    vid = vid.trimmed().toLower();
+    // 只取前4位（VID 标准长度）
+    if (vid.length() > 4)
+        vid = vid.left(4);
+    // 补齐到4位
+    while (vid.length() < 4)
+        vid.prepend("0");
+
+    // 尝试从 usb.ids 和 pci.ids 解析厂商名称
+    QStringList idsFiles;
+    idsFiles << "/usr/share/hwdata/usb.ids" << "/usr/share/hwdata/pci.ids";
+
+    foreach (const QString &idsPath, idsFiles) {
+        QFile file(idsPath);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+            continue;
+
+        QTextStream stream(&file);
+        while (!stream.atEnd()) {
+            QString line = stream.readLine();
+            // 厂商行格式: VVVV  Vendor Name（以4位hex开头，后接两个空格）
+            // 跳过以 tab 开头的设备/接口行和注释行
+            if (line.startsWith("\t") || line.startsWith("#") || line.isEmpty())
+                continue;
+
+            // 提取行首的 VID
+            if (line.startsWith(vid, Qt::CaseInsensitive)) {
+                // 确保是厂商行而非设备行（厂商行: vid 后跟空格而非 tab）
+                QString rest = line.mid(vid.length());
+                if (rest.startsWith(" ") || rest.startsWith("\t")) {
+                    QString vendorName = rest.trimmed();
+                    if (!vendorName.isEmpty()) {
+                        m_Vendor = vendorName;
+                        return;
+                    }
+                }
+            }
+        }
+        file.close();
+    }
+
+    // 解析失败，清空 m_Vendor，避免显示原始 hex VID
+    m_Vendor.clear();
 }
 
 void DeviceInput::setInfoFromBluetoothctl()
