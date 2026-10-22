@@ -136,6 +136,7 @@ void DeviceManager::clear()
     m_ListDeviceMemory.clear();
     m_ListDeviceCPU.clear();
     m_DeviceClassMap.clear();
+    m_BusIdList.clear();
     qCDebug(appLog) << "All device resources cleared successfully";
 }
 
