@@ -48,7 +48,9 @@ PageInfoWidget::PageInfoWidget(QWidget *parent)
 void PageInfoWidget::updateTable(const QString &itemStr, const QList<DeviceBaseInfo *> &lst)
 {
     qCDebug(appLog) << "Updating table with" << lst.size() << "devices, type:" << itemStr;
-    mp_PageInfo->clearWidgets();
+    if (mp_PageInfo) {
+        mp_PageInfo->clearWidgets();
+    }
 
     // 设备个数为0,是概况界面
     if (lst.size() == 0) {
