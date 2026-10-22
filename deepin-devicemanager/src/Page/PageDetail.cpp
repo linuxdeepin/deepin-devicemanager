@@ -238,7 +238,7 @@ void PageDetail::showDeviceInfo(const QList<DeviceBaseInfo *> &lstInfo)
         // 当添加到最后一个设备详细信息时，隐藏分隔符
         if (device == lstInfo.last()) {
             // qCDebug(appLog) << "PageDetail::showDeviceInfo is last device, hide seperator";
-            m_ListDetailSeperator[lstInfo.size() - 1]->setVisible(false);
+            m_ListDetailSeperator.last()->setVisible(false);
         }
     }
     // 刷新展示页面时,滚动条还原
