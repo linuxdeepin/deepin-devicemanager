@@ -80,6 +80,8 @@
 #include <DStyle>
 
 #include <QCoreApplication>
+#include <QEnterEvent>
+#include <QSignalSpy>
 #include <QPaintEvent>
 #include <QPainter>
 #include <QResizeEvent>
@@ -943,4 +945,22 @@ TEST_F(UT_DetailTreeViewParent, ExpandCommandLinkClicked_Expanded_CollapsesAndHi
     EXPECT_FALSE(m_tree->m_IsExpand);
     EXPECT_TRUE(m_tree->isRowHidden(15));
     EXPECT_EQ(m_tree->mp_CommandBtn->text(), QString("More"));
+}
+
+// ===================== BtnWidget::enterEvent (low) =====================
+
+TEST_F(UT_DetailTreeView, BtnWidget_EnterEvent_SendEnter_SignalEmitted)
+{
+    // Arrange: 构造按钮并监听 enter 信号
+    BtnWidget w;
+    QSignalSpy spy(&w, &BtnWidget::enter);
+    ASSERT_TRUE(spy.isValid());
+
+    // Act: 派发进入事件
+    QEnterEvent enterEv(QPointF(5, 5), QPointF(5, 5), QPointF(5, 5));
+    QCoreApplication::sendEvent(&w, &enterEv);
+
+    // Assert: enter 信号触发一次
+    EXPECT_EQ(spy.count(), 1);
+    EXPECT_GE(spy.count(), 0);
 }
