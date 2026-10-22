@@ -20,7 +20,6 @@
 
 using namespace DDLog;
 DWIDGET_USE_NAMESPACE
-static bool firstLoadFlag = true;
 
 LoadInfoThread::LoadInfoThread()
     : mp_ReadFilePool()
@@ -28,6 +27,7 @@ LoadInfoThread::LoadInfoThread()
     , m_Running(false)
     , m_FinishedReadFilePool(false)
     , m_Start(true)
+    , m_FirstLoadFlag(true)
 {
     qCDebug(appLog) << "LoadInfoThread constructor";
     connect(&mp_ReadFilePool, &GetInfoPool::finishedAll, this, &LoadInfoThread::slotFinishedReadFilePool);
@@ -134,9 +134,9 @@ void LoadInfoThread::slotFinishedReadFilePool(const QString &)
     qCDebug(appLog) << "LoadInfoThread::slotFinishedReadFilePool";
     m_FinishedReadFilePool = true;
     // 首次加载刷新
-    if (firstLoadFlag) {
+    if (m_FirstLoadFlag) {
         qCDebug(appLog) << "LoadInfoThread::slotFinishedReadFilePool first load, emit finishedReadFilePool";
-        firstLoadFlag = false;
+        m_FirstLoadFlag = false;
         emit finishedReadFilePool();
     }
 }
