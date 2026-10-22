@@ -83,7 +83,7 @@ private slots:
 
 private:
     QList<DeviceType>            m_TypeList;
-    int                          m_FinishedGenerator;
+    int                          m_FinishedGenerator = 0;
 };
 
 #endif // GENERATEDEVICEPOOL_H
