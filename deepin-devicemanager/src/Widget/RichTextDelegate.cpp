@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -248,7 +248,10 @@ void RichTextDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         // bug111063中 社区版与专业版使用同一代码，主板界面展示效果不同
         // PageBoardInfo 中计算行高方式与html中计算行高方式不同，导致每行下方出现截断或空白
         // 此处获取html整体高度后再对PageBoardInfo设置行高，则不会再出现截断或空白
-        dynamic_cast<PageSingleInfo *>(this->parent())->setRowHeight(index.row(), textDoc.size().toSize().height() + 6);
+        PageSingleInfo *pageInfo = dynamic_cast<PageSingleInfo *>(this->parent());
+        if (pageInfo) {
+            pageInfo->setRowHeight(index.row(), textDoc.size().toSize().height() + 6);
+        }
 
         QAbstractTextDocumentLayout::PaintContext   paintContext;
         paintContext.palette.setCurrentColorGroup(cg);
