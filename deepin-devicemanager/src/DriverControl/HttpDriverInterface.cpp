@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -220,6 +220,7 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
     // 找到最优选择
     int index = 0;
     int res_out = 0;
+    bool found = false;
     for (int i = 0; i < lstDriverInfo.size(); i++) {
         if (max == lstDriverInfo[i].iLevel) {
             // 选中第一个最优等级的index
@@ -227,12 +228,16 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
             if (res > 0) {
                 res_out = res;
                 index = i;
+                found = true;
+                break;
             }
         }
-        if (index == 0) {
-            int res = packageInstall(lstDriverInfo[index].strPackages, lstDriverInfo[index].strDebVersion);
-            if (res > 0) {
-                res_out = res;
+    }
+    if (!found) {
+        for (int i = 0; i < lstDriverInfo.size(); i++) {
+            if (max == lstDriverInfo[i].iLevel) {
+                index = i;
+                break;
             }
         }
     }
@@ -280,7 +285,7 @@ int HttpDriverInterface::packageInstall(const QString &package_name, const QStri
             break;
         }
     }
-    if (infoList.size() <= (2 + index) || infoList[1 + index].contains("（") || infoList[1 + index].contains("(")) {
+    if (infoList.size() <= (1 + index) || infoList[1 + index].contains("（") || infoList[1 + index].contains("(")) {
         qCDebug(appLog) << "Installed version not found or in unexpected format.";
         return 0;
     }

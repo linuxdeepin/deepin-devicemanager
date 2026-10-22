@@ -47,8 +47,11 @@ void DriverBackupThread::run()
         QDir destdir(backupPath);
         if (!destdir.exists()) {
             qCDebug(appLog) << "Backup destination directory does not exist, creating:" << backupPath;
-            if (!destdir.mkpath(destdir.absolutePath()))
-                qCInfo(appLog) << "mkpath backupDeb unsucess  :" << backupPath;
+            if (!destdir.mkpath(destdir.absolutePath())) {
+                qCWarning(appLog) << "mkpath backupDeb failed:" << backupPath;
+                emit backupProgressFinished(false);
+                return;
+            }
         }
 
         if (m_isStop) {
