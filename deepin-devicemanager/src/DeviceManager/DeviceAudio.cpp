@@ -204,14 +204,14 @@ bool DeviceAudio::setInfoFrom_sysFS(QMap<QString, QString> &mapInfo, int ii)
         m_VID_PID = DeviceBaseInfo::get_string(hwCard_path + "/vendor_id");  //没有 则取 chip vendor_id
     } else {
         qCDebug(appLog) << "VID and PID are present, concatenating for m_VID_PID.";
-        m_VID_PID = vid.trimmed() + pid.remove("0x", Qt::CaseSensitive).trimmed();
+        m_VID_PID = vid.remove("0x", Qt::CaseSensitive).trimmed() + pid.remove("0x", Qt::CaseSensitive).trimmed();
     }
 
     m_Chip = DeviceBaseInfo::get_string(hwCard_path + "/vendor_name") + " " + DeviceBaseInfo::get_string(hwCard_path + "/chip_name");
     m_Vendor = DeviceBaseInfo::get_string(hwCard_path + "/vendor_name");
     m_Name =  DeviceBaseInfo::get_string(Cardx_path + "/id") + " " + QString("/card%1").arg(ii);
     m_Model = m_VID_PID;
-    m_Driver = "driveby " + DeviceBaseInfo::get_string(hwCard_path + "/vendor_name");  //debug
+    m_Driver = DeviceBaseInfo::get_string(hwCard_path + "/vendor_name");
     qCDebug(appLog) << "Chip: " << m_Chip << ", Vendor: " << m_Vendor << ", Name: " << m_Name << ", Model: " << m_Model << ", Driver: " << m_Driver;
 
     // setAttribute(mapInfo, "SysFS ID", m_SysPath);
