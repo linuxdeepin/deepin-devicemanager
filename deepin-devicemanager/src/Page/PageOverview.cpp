@@ -85,7 +85,7 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     }
 
     // 设置表格行数
-    mp_Overview->setColumnAndRow(row - 1);
+    mp_Overview->setColumnAndRow(row + 1);
 
     int i = 0;
 
