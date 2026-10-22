@@ -85,6 +85,7 @@ void GetInfoPool::setFramework(const QString &arch)
 void GetInfoPool::initCmd()
 {
     qCDebug(appLog) << "GetInfoPool::initCmd start";
+    m_CmdList.clear();
     m_CmdList.append({ "lshw",                 "lshw.txt",               tr("Loading Audio Device Info...") });
     m_CmdList.append({ "printer",              "printer.txt",            ""});
 
