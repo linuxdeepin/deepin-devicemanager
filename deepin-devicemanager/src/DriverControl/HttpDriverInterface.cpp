@@ -220,19 +220,20 @@ void HttpDriverInterface::checkDriverInfo(QString strJson, DriverInfo *driverInf
     // 找到最优选择
     int index = 0;
     int res_out = 0;
+    bool firstMaxSet = false;
     for (int i = 0; i < lstDriverInfo.size(); i++) {
         if (max == lstDriverInfo[i].iLevel) {
-            // 选中第一个最优等级的index
+            // 记录第一个最优等级条目作为未安装时的回退
+            if (!firstMaxSet) {
+                index = i;
+                firstMaxSet = true;
+            }
+            // 选中第一个已安装的最优等级的index
             int res = packageInstall(lstDriverInfo[i].strPackages, lstDriverInfo[i].strDebVersion);
             if (res > 0) {
                 res_out = res;
                 index = i;
-            }
-        }
-        if (index == 0) {
-            int res = packageInstall(lstDriverInfo[index].strPackages, lstDriverInfo[index].strDebVersion);
-            if (res > 0) {
-                res_out = res;
+                break;
             }
         }
     }
