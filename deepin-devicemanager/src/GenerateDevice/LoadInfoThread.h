@@ -44,6 +44,7 @@ private:
     bool            m_Running;                      //<!  标识是否正在运行
     bool            m_FinishedReadFilePool;         //<!  标识生成读文件的线程池是否结束
     bool            m_Start;                        //<!  是否为启动
+    bool            m_FirstLoadFlag;                //<!  标识是否为首次加载
 
 };
 
