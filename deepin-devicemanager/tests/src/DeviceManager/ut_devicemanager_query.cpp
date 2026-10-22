@@ -43,6 +43,7 @@ class UT_DeviceManagerQuery : public ::testing::Test
 public:
     void SetUp() override
     {
+        ut_disable_system_dbus();  // 隔离真实系统服务, 避免运行期触发系统总线鉴权
         dm = DeviceManager::instance();
         dm->clear();
         dm->addMouseDevice(new DeviceInput);
@@ -146,8 +147,9 @@ TEST_F(UT_DeviceManagerQuery, UT_DeviceManagerQuery_getOthersDevice_notFound)
 // deleteDisableDuplicate_AudioDevice: 单个默认音频设备(空驱动)优先级为 2, 清理后保留
 TEST_F(UT_DeviceManagerQuery, UT_DeviceManagerQuery_deleteDisableDuplicate_keepSingle)
 {
-    // Arrange: 单个默认构造音频设备
+    // Arrange: 单个默认构造音频设备(先释放 SetUp 注入的设备避免泄漏)
     DeviceAudio *audio = new DeviceAudio;
+    qDeleteAll(dm->m_ListDeviceAudio);
     dm->m_ListDeviceAudio.clear();
     dm->m_ListDeviceAudio.append(audio);
 
@@ -162,7 +164,8 @@ TEST_F(UT_DeviceManagerQuery, UT_DeviceManagerQuery_deleteDisableDuplicate_keepS
 // deleteDisableDuplicate_AudioDevice: 空列表安全完成
 TEST_F(UT_DeviceManagerQuery, UT_DeviceManagerQuery_deleteDisableDuplicate_emptyList)
 {
-    // Arrange: 清空音频列表
+    // Arrange: 清空音频列表(先释放 SetUp 注入的设备避免泄漏)
+    qDeleteAll(dm->m_ListDeviceAudio);
     dm->m_ListDeviceAudio.clear();
 
     // Act: 执行禁用重复音频清理

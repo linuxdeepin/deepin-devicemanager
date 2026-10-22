@@ -40,6 +40,7 @@ class UT_DeviceInfo : public ::testing::Test
 public:
     void SetUp() override
     {
+        ut_disable_system_dbus();  // 隔离真实系统服务, 避免运行期触发系统总线鉴权
         audio = new DeviceAudio;
     }
     void TearDown() override
