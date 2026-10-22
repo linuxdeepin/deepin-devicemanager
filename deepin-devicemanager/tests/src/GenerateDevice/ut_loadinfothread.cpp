@@ -3,55 +3,195 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-#include "DeviceWidget.h"
+// ============================================================================
+// 分支覆盖清单（基于 worktree ut-t09 @ f2d46ee9 源码逐分支核对）
+// 被测: src/GenerateDevice/LoadInfoThread.cpp
+//
+// 构造函数: 初始化 m_Running=false/m_FinishedReadFilePool=false/m_Start=true + 连接
+//   GetInfoPool::finishedAll -> slotFinishedReadFilePool; GetInfoPool 构造即 initCmd(29 条)
+// ~LoadInfoThread: m_Running 为 true 时忙等 1s 后 _exit(0) —— 测试必须保证 run() 已结束
+//   (m_Running=false)后再析构
+// run(52-134, complexity:14/cognitive:28):
+//   B1 DBus getInfo("is_server_running") 非 0(server 运行) -> 跳过重载路径 -> emit finished;
+//   B2 非 0 为假(server 未运行) -> m_Start=false + getAllInfo(29 命令) + waitForDone;
+//   B3 重试循环: dmidecode4 为空且 finishedReadFilePool 未置位 -> 4s 超时 -> readNum>3 退出;
+//   B4 generateDevice + waitForDone -> emit finished("finish") -> m_Running=false
+// slotFinishedReadFilePool(137-148): B1 置位 m_FinishedReadFilePool;
+//   B2 firstLoadFlag 首次才 emit finishedReadFilePool(文件级 static, 仅本文件该用例触发)
+// setFramework(150-154): 转发 arch 给 mp_ReadFilePool(m_Arch)
+// Stub: DBusInterface::getInfo / CmdTool::loadCmdInfo(消除真实命令执行) /
+//   QDateTime::currentMSecsSinceEpoch(忙等立即超时)。QProcess 已由 QProcess 桩覆盖
+//   (CmdTask::run 经 loadCmdInfo 桩后不再触碰命令执行)。
+// ============================================================================
+
 #include "LoadInfoThread.h"
-#include "ThreadExecXrandr.h"
-#include "GenerateDevicePool.h"
-#include "ut_Head.h"
+#include "GetInfoPool.h"
+#include "DBusInterface.h"
+#include "DeviceManager.h"
+#include "CmdTool.h"
+#include "commonfunction.h"
 #include "stub.h"
+#include "ut_Head.h"
 
-#include <QCoreApplication>
-#include <QPaintEvent>
-#include <QPainter>
-
+#include <QDateTime>
+#include <QThreadPool>
 #include <gtest/gtest.h>
+
+// ---------- 打桩状态 ----------
+static QString s_dbusInfo;        // getInfo 注入值
+static int s_loadCmdCalls = 0;    // CmdTool::loadCmdInfo 调用计数
+static qint64 s_nowCalls = 0;     // QDateTime 打桩调用计数
+
+// 空vendor -> 生成器构造不触发 dmidecode 子进程
+static QString ut_boardVendorType(void *obj)
+{
+    Q_UNUSED(obj);
+    return QString();
+}
+
+// ---------- DBusInterface / CmdTool / QDateTime 打桩 ----------
+static bool ut_di_getInfo(void *obj, const QString &key, QString &info)
+{
+    Q_UNUSED(obj);
+    Q_UNUSED(key);
+    info = s_dbusInfo;
+    return true;
+}
+
+static void ut_ct_loadCmdInfo(void *obj, const QString &cmd, const QString &file)
+{
+    Q_UNUSED(obj);
+    Q_UNUSED(cmd);
+    Q_UNUSED(file);
+    ++s_loadCmdCalls;
+}
+
+static qint64 ut_qdt_now(void *obj)
+{
+    Q_UNUSED(obj);
+    // 单调递增: 任意 begin/end 相邻对差值恒 > 4000, 所有忙等循环立即超时
+    return (s_nowCalls += 100000);
+}
 
 class UT_LoadInfoThread : public UT_HEAD
 {
 public:
-    void SetUp()
+    Stub m_stub;
+    LoadInfoThread *m_thread = nullptr;
+    int m_finishEmits = 0;
+    QString m_finishMsg;
+    int m_readFilePoolEmits = 0;
+
+    void SetUp() override
     {
-        m_loadInfoThread = new LoadInfoThread;
+        DeviceManager::instance()->clear();
+        s_dbusInfo = "0";
+        s_loadCmdCalls = 0;
+        s_nowCalls = 0;
+        m_finishEmits = 0;
+        m_finishMsg.clear();
+        m_readFilePoolEmits = 0;
+        m_stub.set(ADDR(DBusInterface, getInfo), ut_di_getInfo);
+        m_stub.set(ADDR(CmdTool, loadCmdInfo), ut_ct_loadCmdInfo);
+        // 生成器构造走轻量路径, 不触发 dmidecode 子进程(generateDevice 会真实建生成器)
+        m_stub.set(ADDR(Common, boardVendorType), ut_boardVendorType);
+        m_thread = new LoadInfoThread;
+        QObject::connect(m_thread, &LoadInfoThread::finished, [&](const QString &msg) {
+            ++m_finishEmits;
+            m_finishMsg = msg;
+        });
+        QObject::connect(m_thread, &LoadInfoThread::finishedReadFilePool, [&]() { ++m_readFilePoolEmits; });
     }
-    void TearDown()
+
+    void TearDown() override
     {
-        delete m_loadInfoThread;
+        // run() 直接调用结束后 m_Running 已为 false, 析构不会触发 _exit(0)
+        delete m_thread;
+        m_thread = nullptr;
+        QThreadPool::globalInstance()->waitForDone();
+        DeviceManager::instance()->clear();
+        // m_stub 析构自动还原所有被替换函数
     }
-    LoadInfoThread *m_loadInfoThread;
 };
 
-class UT_ThreadExecXrandr : public UT_HEAD
+/// 构造: 状态初始化 + GetInfoPool 构造即装载 29 条命令
+TEST_F(UT_LoadInfoThread, Constructor_InitializesState)
 {
-public:
-    void SetUp()
-    {
-        m_threadExecXrandr = new ThreadExecXrandr(true, true);
-    }
-    void TearDown()
-    {
-        delete m_threadExecXrandr;
-    }
-    ThreadExecXrandr *m_threadExecXrandr;
-};
+    ASSERT_NE(m_thread, nullptr);
+    EXPECT_FALSE(m_thread->m_Running);
+    EXPECT_FALSE(m_thread->m_FinishedReadFilePool);
+    EXPECT_TRUE(m_thread->m_Start);
+    EXPECT_EQ(m_thread->mp_ReadFilePool.m_CmdList.size(), 29);
+}
 
-//TEST_F(UT_LoadInfoThread,UT_LoadInfoThread_start){
-//    m_loadInfoThread->run();
-//    EXPECT_FALSE(m_loadInfoThread->m_Running);
-//}
+/// setFramework: 转发架构名给读取池
+TEST_F(UT_LoadInfoThread, SetFramework_ForwardsToReadFilePool)
+{
+    m_thread->setFramework("mips64");
+    EXPECT_EQ(m_thread->mp_ReadFilePool.m_Arch, "mips64");
 
-//TEST_F(UT_ThreadExecXrandr,UT_ThreadExecXrandr_start){
-//    m_threadExecXrandr->run();
-//    EXPECT_TRUE(m_threadExecXrandr->m_Gpu);
-//}
+    m_thread->setFramework("x86_64");
+    EXPECT_EQ(m_thread->mp_ReadFilePool.m_Arch, "x86_64");
+}
 
+/// slotFinishedReadFilePool: 置位 + 首次触发 finishedReadFilePool, 再次不触发
+TEST_F(UT_LoadInfoThread, SlotFinishedReadFilePool_SetsFlagAndEmitsOnce)
+{
+    m_thread->slotFinishedReadFilePool("pool done");
+    EXPECT_TRUE(m_thread->m_FinishedReadFilePool);
+    EXPECT_EQ(m_readFilePoolEmits, 1); // firstLoadFlag 首次
 
+    m_thread->slotFinishedReadFilePool("pool done again");
+    EXPECT_EQ(m_readFilePoolEmits, 1); // second time no emit
+}
+
+/// B1: server 运行(info="1") -> 跳过重载路径, 直接 emit finished
+TEST_F(UT_LoadInfoThread, Run_ServerRunning_SkipsHeavyPath)
+{
+    s_dbusInfo = "1";
+    m_thread->run();
+
+    EXPECT_EQ(m_finishEmits, 1);
+    EXPECT_EQ(m_finishMsg, "finish");
+    EXPECT_TRUE(m_thread->m_Start);    // 重载路径未进入, m_Start 保持
+    EXPECT_FALSE(m_thread->m_Running); // run 末尾复位
+    EXPECT_EQ(s_loadCmdCalls, 0);      // 未执行任何命令加载
+}
+
+/// B2-B4: server 未运行 -> 完整装载流程(getAllInfo + 重试循环超时 + generateDevice)
+TEST_F(UT_LoadInfoThread, Run_ServerNotRunning_CompletesLoadCycle)
+{
+    s_dbusInfo = "0";
+    m_stub.set(ADDR(QDateTime, currentMSecsSinceEpoch), ut_qdt_now);
+
+    m_thread->run();
+
+    EXPECT_EQ(m_finishEmits, 1);
+    EXPECT_EQ(m_finishMsg, "finish");
+    EXPECT_FALSE(m_thread->m_Start);   // 重载路径已进入
+    EXPECT_FALSE(m_thread->m_Running);
+    // getAllInfo 为 29 条命令各加载一次; finishedReadFilePool 经队列连接未送达 -> 只跑一轮
+    EXPECT_EQ(s_loadCmdCalls, 29);
+}
+
+/// B1(等价类): info 含前导空格等非纯数字 -> toInt()=0 仍走重载路径
+TEST_F(UT_LoadInfoThread, Run_InfoNonNumeric_TakesHeavyPath)
+{
+    s_dbusInfo = "running";
+    m_stub.set(ADDR(QDateTime, currentMSecsSinceEpoch), ut_qdt_now);
+
+    m_thread->run();
+
+    EXPECT_FALSE(m_thread->m_Start);   // "running".toInt()=0 -> 重载路径
+    EXPECT_EQ(m_finishEmits, 1);
+}
+
+/// 析构: run 结束后析构不触发忙等/_exit
+TEST_F(UT_LoadInfoThread, Destructor_AfterRun_NoHang)
+{
+    s_dbusInfo = "1";
+    m_thread->run();
+    EXPECT_FALSE(m_thread->m_Running);
+    // TearDown 负责析构, 能走到此处且不挂起即通过
+    SUCCEED();
+}
