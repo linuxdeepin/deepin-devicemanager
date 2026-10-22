@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -94,8 +94,8 @@ void LoadInfoThread::run()
         }
 
         m_FinishedReadFilePool = false;
+        // generateDevice() 内部已等待所有设备生成任务完成，无需再次 waitForDone
         mp_GenerateDevicePool.generateDevice();
-        mp_GenerateDevicePool.waitForDone(-1);
     }
 
     emit finished("finish");
