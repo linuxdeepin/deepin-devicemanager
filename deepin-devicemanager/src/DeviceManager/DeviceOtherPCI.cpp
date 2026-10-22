@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -36,7 +36,7 @@ TomlFixMethod DeviceOtherPCI::setInfoFromTomlOneByOne(const QMap<QString, QStrin
     setTomlAttribute(mapInfo, "Memory", m_Memory);
     setTomlAttribute(mapInfo, "IRQ", m_Irq);
     setTomlAttribute(mapInfo, "Latency", m_Latency);
-    ret = setTomlAttribute(mapInfo, "Capabilities", m_Version);
+    ret = setTomlAttribute(mapInfo, "Capabilities", m_Capabilities);
     //3. 获取设备的其它信息
     getOtherMapInfo(mapInfo);
     return ret;
@@ -99,7 +99,7 @@ void DeviceOtherPCI::loadOtherDeviceInfo()
 //    addOtherDeviceInfo("Clock", m_Clock);
 //    addOtherDeviceInfo("Width", m_Width);
     addOtherDeviceInfo("Driver", m_Driver);
-    addOtherDeviceInfo("Capabilities", m_Version);
+    addOtherDeviceInfo("Capabilities", m_Capabilities);
 
     // 将QMap<QString, QString>内容转存为QList<QPair<QString, QString>>
     mapInfoToList();
