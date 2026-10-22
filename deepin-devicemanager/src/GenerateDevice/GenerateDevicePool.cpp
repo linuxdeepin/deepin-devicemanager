@@ -1,10 +1,9 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "GenerateDevicePool.h"
 
-#include <QDateTime>
 #include <QLoggingCategory>
 
 #include "DeviceGenerator.h"
@@ -116,32 +115,23 @@ GenerateDevicePool::GenerateDevicePool()
 
 void GenerateDevicePool::generateDevice()
 {
-    m_FinishedGenerator = 0;
-
     QList<DeviceType>::iterator it = m_TypeList.begin();
     for (; it != m_TypeList.end(); ++it) {
         GenerateTask *task = new GenerateTask((*it));
-        connect(task, &GenerateTask::finished, this, &GenerateDevicePool::slotFinished);
-        QThreadPool::globalInstance()->start(task);
-//        task->setAutoDelete(true);
+        connect(task, &GenerateTask::finished, this, &GenerateDevicePool::slotFinished,
+            Qt::DirectConnection);
+        start(task);
     }
 
-    // 当所有设备执行完毕之后，开始执行生成其它设备的任务
-    // 这里是为了确保其它设备在最后一个生成
-    qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
-    while (true) {
-        qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
-        if (m_FinishedGenerator == m_TypeList.size()  || curMSecond - beginMSecond > 4000) {
-            DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
-            generator->generatorOthersDevice();
-            generator->generatorInfoFromToml(DT_Others);
+    // 等待所有设备生成任务完成后，再生成其它设备，避免超时后遗漏未完成的任务。
+    waitForDone(-1);
 
-            // 指针使用结束释放
-            delete generator;
-            generator = nullptr;
+    DeviceGenerator *generator = DeviceFactory::getDeviceGenerator();
+    if (generator) {
+        generator->generatorOthersDevice();
+        generator->generatorInfoFromToml(DT_Others);
 
-            break;
-        }
+        delete generator;
     }
 }
 
@@ -168,6 +158,6 @@ void GenerateDevicePool::initType()
 
 void GenerateDevicePool::slotFinished(const QStringList &lst)
 {
+    QMutexLocker locker(&m_BusIdMutex);
     DeviceManager::instance()->addBusId(lst);
-    m_FinishedGenerator++;
 }
