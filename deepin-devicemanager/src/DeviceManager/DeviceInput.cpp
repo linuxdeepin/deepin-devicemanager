@@ -388,9 +388,9 @@ bool DeviceInput::available()
 {
     if (driver().isEmpty()) {
         m_Available = false;
+    } else {
+        m_Available = m_supportInterfaces.contains(m_Interface, Qt::CaseInsensitive);
     }
-
-    m_Available = m_supportInterfaces.contains(m_Interface, Qt::CaseInsensitive);
 
     return m_forcedDisplay ? m_forcedDisplay : m_Available;
 }

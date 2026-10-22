@@ -34,6 +34,7 @@
 #include <QLoggingCategory>
 #include <QDir>
 #include <QRegularExpression>
+#include <QThread>
 
 const QString kModelName { "model name" };
 const QString kVendorId { "vendor_id" };
@@ -975,12 +976,24 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
             continue;
 
         //过滤触摸板，如果不是触摸板再检查
+        bool authorizedMissing = false;
         if ((*it)["Hotplug"] != "PS/2") {
             // 先判断是否存在
             QString path = pciPath(*it);
-            // 判断authorized是否存在，不存在则直接返回
-            if (!QFile::exists("/sys" + path + "/authorized")) {
-                continue;
+            // 判断authorized是否存在，S4唤醒后USB重枚举竞态可能导致文件延迟创建
+            QString authorizedPath = "/sys" + path + "/authorized";
+            bool authorizedExists = false;
+            const int maxRetries = 3;
+            for (int retry = 0; retry < maxRetries; ++retry) {
+                if (QFile::exists(authorizedPath)) {
+                    authorizedExists = true;
+                    break;
+                }
+                QThread::msleep(100);
+            }
+            if (!authorizedExists) {
+                // 超时降级：不跳过设备，后续标记为不可用
+                authorizedMissing = true;
             }
         }
 
@@ -999,6 +1012,9 @@ void DeviceGenerator::getMouseInfoFromHwinfo()
         device->setInfoFromHwinfo(*it);
         device->setHardwareClass("mouse");
         if (device->bluetoothIsConnected()) {
+            if (authorizedMissing) {
+                device->setEnableValue(false);
+            }
             DeviceManager::instance()->addMouseDevice(device);
             addBusIDFromHwinfo((*it)["SysFS BusID"]);
         } else {
