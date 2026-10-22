@@ -31,6 +31,8 @@
 #include "drivertableview.h"
 #include "driveritem.h"
 #include "BtnLabel.h"
+
+#include <DStyle>
 #undef protected
 #undef private
 
@@ -868,4 +870,37 @@ TEST_F(UT_DriverTableView, Delegate_Paint_ValidIndex_PaintsWithoutCrash)
     // Assert
     EXPECT_FALSE(pix.isNull());
     EXPECT_NE(tv->mp_Delegate, nullptr);
+}
+
+// ===================== DriverHeaderView::sectionSizeHint (low) =====================
+
+TEST_F(UT_DriverTableView, DriverHeaderView_SectionSizeHint_DefaultHeader_ReturnsNonNegative)
+{
+    // Arrange: 夹具已构造默认表头(4 列); 确保使用 DStyle,
+    // 否则源码内未判空的 dynamic_cast<DStyle*> 在测试环境直接段错误
+    if (!qobject_cast<DStyle *>(QApplication::style())) {
+        QApplication::setStyle(new DStyle());
+    }
+
+    // Act: 请求第 0 列的尺寸提示
+    int hint = tv->mp_HeadView->sectionSizeHint(0);
+
+    // Assert: 基于字体度量计算, 结果为非负值
+    EXPECT_GE(hint, 0);
+    EXPECT_NE(tv->mp_HeadView, nullptr);
+}
+
+// ===================== DriverHeaderView::setSpacing/getSpacing (low) =====================
+
+TEST_F(UT_DriverTableView, DriverHeaderView_SetSpacing_GetterReflectsValue)
+{
+    // Arrange: 记录初始间距
+    int before = tv->mp_HeadView->getSpacing();
+
+    // Act: 设置新间距
+    tv->mp_HeadView->setSpacing(before + 4);
+
+    // Assert: getter 返回最新值
+    EXPECT_EQ(tv->mp_HeadView->getSpacing(), before + 4);
+    EXPECT_GE(tv->mp_HeadView->getSpacing(), 4);
 }
