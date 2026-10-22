@@ -165,6 +165,8 @@ void DetailTreeView::clear()
         delete mp_CommandBtn;
         mp_CommandBtn = nullptr;
     }
+
+    m_IsExpand = false;
 }
 
 void DetailTreeView::setCommanLinkButton(int row)
@@ -424,6 +426,11 @@ bool DetailTreeView::isExpanded()
 void DetailTreeView::expandCommandLinkClicked()
 {
     qCInfo(appLog) << "Expand/collapse button clicked. Current state:" << m_IsExpand;
+
+    if (mp_CommandBtn == nullptr) {
+        qCWarning(appLog) << "Command button is null, abort expand/collapse operation";
+        return;
+    }
 
     // 当前已展开详细信息
     if (m_IsExpand) {
