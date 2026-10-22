@@ -72,6 +72,7 @@ class UT_DeviceInfoExport : public ::testing::Test
 public:
     void SetUp() override
     {
+        ut_disable_system_dbus();  // 隔离真实系统服务, 避免运行期触发系统总线鉴权
         audio = new DeviceAudio;
         // 填充翻译后的基础/其他信息, 让导出方法覆盖写入分支(非空 value 通过 isValueValid)
         audio->m_LstBaseInfoTr.append(qMakePair(QString("Vendor"), QString("Acme")));

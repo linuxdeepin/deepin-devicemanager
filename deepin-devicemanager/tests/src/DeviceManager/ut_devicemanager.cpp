@@ -96,6 +96,7 @@ class UT_DeviceManager : public ::testing::Test
 public:
     void SetUp() override
     {
+        ut_disable_system_dbus();  // 隔离真实系统服务, 避免运行期触发系统总线鉴权
         DeviceManager::instance()->clear();
     }
     void TearDown() override
@@ -1194,7 +1195,9 @@ TEST_F(UT_DeviceManager, UT_DeviceManager_getDeviceDriverPool)
     EXPECT_EQ(1, DeviceManager::instance()->m_DeviceDriverPool.size());
     EXPECT_TRUE(DeviceManager::instance()->m_DeviceDriverPool.contains("video"));
 
-    // Cleanup
+    // Cleanup: 先释放映射内设备再清空, 避免泄漏
+    for (const auto &lst : DeviceManager::instance()->m_DeviceClassMap)
+        qDeleteAll(lst);
     DeviceManager::instance()->m_DeviceDriverPool.clear();
     DeviceManager::instance()->m_DeviceClassMap.clear();
 }
