@@ -259,9 +259,17 @@ void PageMultiInfo::slotWakeupMachine(int row, bool wakeup)
 void PageMultiInfo::slotActionUpdateDriver(int row)
 {
     qCDebug(appLog) << "Updating driver for device at row:" << row;
+    if (row < 0 || row >= m_lstDevice.size()) {
+        qCWarning(appLog) << "Invalid row index:" << row;
+        return;
+    }
     DeviceBaseInfo *device = m_lstDevice[row];
+    if (nullptr == device) {
+        qCWarning(appLog) << "Null device at row:" << row;
+        return;
+    }
     //打印设备卸载驱动时，通过dde-printer来操作
-    if (nullptr != device && device->hardwareClass() == "printer") {
+    if (device->hardwareClass() == "printer") {
         qCDebug(appLog) << "Printer device detected, launching dde-printer";
         if (!QProcess::startDetached("dde-printer"))
             qCInfo(appLog) << "dde-printer startDetached error";
