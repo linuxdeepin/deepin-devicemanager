@@ -375,13 +375,20 @@ void DeviceCpu::setInfoFromLshw(const QMap<QString, QString> &mapInfo)
         qCDebug(appLog) << "CPU name contains 'Loongson', skipping product attribute setting.";
         setAttribute(mapInfo, "version", m_Name, false);
     } else {
-        setAttribute(mapInfo, "product", m_Name, false);//这里覆盖了lscpu中的数据。主要版本中lshw中的version是CPU信息，而1050A中读取到的是版本信息。
-        qCDebug(appLog) << "Product attribute set from lshw: " << m_Name;
         // bug-108166 lshw 中 product 包含NULL信息，version 信息正确
         // bug-112403 lshw 中 product 包含ARMv信息，version 信息正确
-        if (m_Name.contains("null", Qt::CaseInsensitive) || m_Name.contains("ARMv", Qt::CaseInsensitive)) {
-            qCDebug(appLog) << "Product name contains 'null' or 'ARMv', using version for name.";
-            setAttribute(mapInfo, "version", m_Name);
+        // 检查 product 字段值是否无效，仅当 product 本身含 null 或 ARMv 时回退取 version
+        // 避免检查 m_Name 导致 lscpu 中含 ARMv 的有效名称被误覆盖
+        bool productInvalid = mapInfo.contains("product") &&
+            (mapInfo["product"].contains("null", Qt::CaseInsensitive) ||
+             mapInfo["product"].contains("ARMv", Qt::CaseInsensitive));
+
+        if (productInvalid) {
+            qCDebug(appLog) << "Product is invalid (null/ARMv), using version for name.";
+            setAttribute(mapInfo, "version", m_Name, false);
+        } else {
+            setAttribute(mapInfo, "product", m_Name, false);
+            qCDebug(appLog) << "Product attribute set from lshw: " << m_Name;
         }
     }
 
