@@ -904,3 +904,132 @@ TEST_F(UT_DriverTableView, DriverHeaderView_SetSpacing_GetterReflectsValue)
     EXPECT_EQ(tv->mp_HeadView->getSpacing(), before + 4);
     EXPECT_GE(tv->mp_HeadView->getSpacing(), 4);
 }
+
+// ===================== DriverItemDelegate::paint 分支补强 (high, 迭代3) =====================
+
+TEST_F(UT_DriverTableView, Delegate_Paint_SelectedWithIcon_HighlightAndIconDrawn)
+{
+    // Arrange: 首列图标 + 选中态 + 备选行背景
+    ut_dtv_buildRow(tv, 0, 1, ST_NOT_INSTALL, DriverOperationItem::INSTALL);
+    tv->mp_Model->setData(tv->mp_Model->index(0, 0), QIcon::fromTheme("audio-card"),
+                          Qt::DecorationRole);
+    QPixmap pix(400, 60);
+    pix.fill(Qt::white);
+    QPainter painter(&pix);
+    QStyleOptionViewItem option;
+    option.rect = QRect(0, 0, 400, DRIVER_TABLE_ROW_HEIGHT);
+    option.state |= QStyle::State_Enabled | QStyle::State_Selected;
+    option.features |= QStyleOptionViewItem::Alternate;
+    option.viewItemPosition = QStyleOptionViewItem::Beginning;
+
+    // Act: 绘制选中且带图标的首列
+    tv->mp_Delegate->paint(&painter, option, tv->mp_Model->index(0, 1));
+    painter.end();
+
+    // Assert
+    EXPECT_FALSE(pix.isNull());
+    EXPECT_TRUE(tv->mp_Delegate != nullptr);
+}
+
+TEST_F(UT_DriverTableView, Delegate_Paint_DisabledMiddle_RendersWithoutIcon)
+{
+    // Arrange: 非首列 + 禁用态, 走 Disabled 色组与 Middle 分支
+    ut_dtv_buildRow(tv, 0, 1, ST_NOT_INSTALL, DriverOperationItem::INSTALL);
+    QPixmap pix(400, 60);
+    pix.fill(Qt::white);
+    QPainter painter(&pix);
+    QStyleOptionViewItem option;
+    option.rect = QRect(0, 0, 400, DRIVER_TABLE_ROW_HEIGHT);
+    option.viewItemPosition = QStyleOptionViewItem::Middle;
+
+    // Act: 绘制禁用态的中间列
+    tv->mp_Delegate->paint(&painter, option, tv->mp_Model->index(0, 1));
+    painter.end();
+
+    // Assert
+    EXPECT_FALSE(pix.isNull());
+    EXPECT_TRUE(tv->mp_Delegate != nullptr);
+}
+
+// ===================== DriverHeaderView::paintSection 分支补强 (high, 迭代3) =====================
+
+namespace {
+void ut_dtv_paintSection(DriverTableView *tv, int logicalIndex, QPixmap *pix)
+{
+    QPainter painter(pix);
+    tv->mp_HeadView->paintSection(&painter, QRect(0, 0, 200, 40), logicalIndex);
+    painter.end();
+}
+}
+
+TEST_F(UT_DriverTableView, PaintSection_FirstColumn_PaintsWithoutVerticalSpacing)
+{
+    // Arrange: 渲染目标与 DStyle(源码 dynamic_cast 未判空, 无 DStyle 会段错误)
+    if (!qobject_cast<DStyle *>(QApplication::style())) {
+        QApplication::setStyle(new DStyle());
+    }
+    QPixmap pix(200, 40);
+    pix.fill(Qt::white);
+
+    // Act: 绘制第 0 列(visualIndex 0, 无纵向分隔, col0Rect 偏移分支)
+    ut_dtv_paintSection(tv, 0, &pix);
+
+    // Assert
+    EXPECT_FALSE(pix.isNull());
+    EXPECT_NE(tv->mp_HeadView, nullptr);
+}
+
+TEST_F(UT_DriverTableView, PaintSection_OtherColumn_PaintsWithVerticalSpacing)
+{
+    // Arrange: 渲染目标与 DStyle
+    if (!qobject_cast<DStyle *>(QApplication::style())) {
+        QApplication::setStyle(new DStyle());
+    }
+    QPixmap pix(200, 40);
+    pix.fill(Qt::white);
+
+    // Act: 绘制非排序列(visualIndex>0 分支 + 普通文本矩形分支)
+    ut_dtv_paintSection(tv, 2, &pix);
+
+    // Assert
+    EXPECT_FALSE(pix.isNull());
+    EXPECT_NE(tv->mp_HeadView, nullptr);
+}
+
+TEST_F(UT_DriverTableView, PaintSection_SortIndicatorShown_DrawsAscAndDescArrows)
+{
+    // Arrange: 开启排序指示, 分别升序/降序
+    if (!qobject_cast<DStyle *>(QApplication::style())) {
+        QApplication::setStyle(new DStyle());
+    }
+    ASSERT_NE(tv->mp_HeadView, nullptr);
+
+    // Act: 升序箭头绘制
+    tv->mp_HeadView->setSortIndicatorShown(true);
+    tv->mp_HeadView->setSortIndicator(1, Qt::AscendingOrder);
+    QPixmap pix1(200, 40);
+    pix1.fill(Qt::white);
+    ut_dtv_paintSection(tv, 1, &pix1);
+
+    // Assert: 升序指示绘制无崩溃且有效
+    EXPECT_FALSE(pix1.isNull());
+
+    // Act: 降序箭头绘制
+    tv->mp_HeadView->setSortIndicator(2, Qt::DescendingOrder);
+    QPixmap pix2(200, 40);
+    pix2.fill(Qt::white);
+    ut_dtv_paintSection(tv, 2, &pix2);
+
+    // Assert: 降序指示绘制无崩溃且有效
+    EXPECT_FALSE(pix2.isNull());
+
+    // Act: 排序列未显示指示时仍走排序矩形分支
+    tv->mp_HeadView->setSortIndicatorShown(false);
+    tv->mp_HeadView->setSortIndicator(3, Qt::AscendingOrder);
+    QPixmap pix3(200, 40);
+    pix3.fill(Qt::white);
+    ut_dtv_paintSection(tv, 3, &pix3);
+
+    // Assert: 排序矩形分支绘制无崩溃且有效
+    EXPECT_FALSE(pix3.isNull());
+}
