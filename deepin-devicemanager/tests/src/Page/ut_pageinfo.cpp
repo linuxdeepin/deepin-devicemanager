@@ -48,3 +48,27 @@ TEST_F(PageInfo_UT, PageInfo_UT_paintEvent)
     m_pageInfo->paintEvent(&paint);
     delete p;
 }
+
+struct PackageHasInstalledParam {
+    QByteArray dpkgOutput;
+    bool expectedResult;
+};
+
+class PackageHasInstalled_UT : public UT_HEAD,
+    public testing::WithParamInterface<PackageHasInstalledParam> {
+};
+
+TEST_P(PackageHasInstalled_UT, ParseDpkgOutput)
+{
+    const auto &param = GetParam();
+    bool result = param.dpkgOutput.contains("Status: install ok installed");
+    EXPECT_EQ(param.expectedResult, result);
+}
+
+INSTANTIATE_TEST_SUITE_P(DpkgOutputCases, PackageHasInstalled_UT,
+    testing::Values(
+        PackageHasInstalledParam{"Status: install ok installed\n", true},
+        PackageHasInstalledParam{"Package: dde-printer\nStatus: install ok installed\nPriority: optional\n", true},
+        PackageHasInstalledParam{"", false},
+        PackageHasInstalledParam{"package 'x' is not installed\n", false}
+    ));

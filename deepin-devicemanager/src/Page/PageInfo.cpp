@@ -77,7 +77,7 @@ bool PageInfo::packageHasInstalled(const QString &packageName)
     p.waitForFinished(-1);
 
     QByteArray r = p.readAll();
-    bool installed = r.contains("installed");
+    bool installed = r.contains("Status: install ok installed");
     qCDebug(appLog) << "Package" << packageName << "is" << (installed ? "installed" : "not installed");
     return installed;
 }
