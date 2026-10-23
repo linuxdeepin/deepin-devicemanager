@@ -7,10 +7,13 @@
 
 #include "CmdTool.h"
 #include "ut_Head.h"
+#include "stub.h"
 
 #include <QMap>
 #include <QString>
 #include <QStringList>
+#include <QProcess>
+#include <QByteArray>
 
 #include <gtest/gtest.h>
 
@@ -123,12 +126,47 @@ TEST_F(UT_CmdToolParse, getMulHwinfoInfo)
     EXPECT_NO_FATAL_FAILURE(tool->getMulHwinfoInfo("block1\nblock2\n"));
 }
 
-// addWidthToMap
-TEST_F(UT_CmdToolParse, addWidthToMap)
+// addWidthToMap: 非 NVIDIA 显卡提前返回(不进入正则解析)
+TEST_F(UT_CmdToolParse, addWidthToMap_nonNvidia)
 {
     QMap<QString, QString> m;
-    m["width"] = "64 bits";
+    m["Vendor"] = "Intel Corporation";
     EXPECT_NO_FATAL_FAILURE(tool->addWidthToMap(m));
+    EXPECT_FALSE(m.contains("Width"));
+}
+
+// QProcess 桩: 模拟 nvidia-settings 输出(256 bits,三位数位宽)
+static void ut_addWidth_start(QProcess * /*self*/, const QString & /*p*/,
+                              const QStringList & /*a*/, QIODevice::OpenMode /*m*/)
+{
+    return;
+}
+static bool ut_addWidth_wait(QProcess * /*self*/, int /*msecs*/)
+{
+    return true;
+}
+static QByteArray ut_addWidth_read(QProcess * /*self*/)
+{
+    return QByteArray(
+        "  Attribute 'GPUMemoryInterface' (host:0[gpu:0]): 256.\n");
+}
+
+// addWidthToMap: NVIDIA 显卡,正则正确捕获三位数位宽 256
+TEST_F(UT_CmdToolParse, addWidthToMap_nvidia_256bits)
+{
+    QMap<QString, QString> m;
+    m["Vendor"] = "NVIDIA Corporation";
+
+    Stub stub;
+    stub.set(((void (QProcess::*)(const QString &, const QStringList &,
+                                  QIODevice::OpenMode))ADDR(QProcess, start)),
+             ut_addWidth_start);
+    stub.set(((bool (QProcess::*)(int))ADDR(QProcess, waitForFinished)),
+             ut_addWidth_wait);
+    stub.set(ADDR(QProcess, readAllStandardOutput), ut_addWidth_read);
+
+    tool->addWidthToMap(m);
+    EXPECT_EQ(m.value("Width"), QString("256 bits"));
 }
 
 // getSMBIOSVersion
