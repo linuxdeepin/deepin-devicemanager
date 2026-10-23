@@ -63,7 +63,7 @@ bool EDIDParser::setEdid(const QString &edid, QString &errorMsg, const QString &
             return false;
         }
     } else {
-        if (!edid.startsWith("ff00ffffffff00ff")) {
+        if (!edid.startsWith("ff00ffffffff00ff") && !edid.startsWith("ff00ffffffffffff")) {
             errorMsg = "Error edid info in big endian mode!";
             return false;
         }
