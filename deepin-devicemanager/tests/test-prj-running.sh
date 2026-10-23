@@ -26,14 +26,20 @@ mkdir -p "${report_path}"
 cd "${build_path}"
 
 #编译 (Qt6 + 覆盖率 + 单元测试)
+# CMAKE_SAFETYTEST_ARG=OFF: asan 会抢占进程退出路径,与 gcov 的 atexit
+# 刷新冲突(实测客户端测试退出阶段 SEGV 时 .gcda 全部丢失/计0),
+# 采集覆盖率必须关闭 asan(与 deepin-movie-reborn 适配中的处理一致)
 cmake -DCMAKE_BUILD_TYPE=Debug \
       -DCMAKE_COVERAGE_ARG="CMAKE_COVERAGE_ARG_ON" \
-      -DCMAKE_SAFETYTEST_ARG="CMAKE_SAFETYTEST_ARG_ON" \
+      -DCMAKE_SAFETYTEST_ARG="CMAKE_SAFETYTEST_ARG_OFF" \
       "${projectdir}"
 make -k -j"$(nproc)" || true
 
 mkdir -p report
 test_exit_code=0
+
+# 重置历史覆盖率计数,避免多轮运行累加污染统计
+lcov --directory "${build_path}" --zerocounters >/dev/null 2>&1 || true
 
 # 生成asan日志和ut测试xml结果
 # NOTE: 不使用 set -e: 覆盖率采集各步骤失败只应降级(缺覆盖率数据),
