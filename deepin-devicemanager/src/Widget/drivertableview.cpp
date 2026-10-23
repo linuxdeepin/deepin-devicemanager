@@ -515,7 +515,7 @@ void DriverTableView::setAllItemCbEanble(bool enable)
 void DriverTableView::setCheckedCBDisable()
 {
     // qCDebug(appLog) << "Disabling checkboxes for checked items";
-    if (mp_HeaderCb->checked()) {
+    if (mp_HeaderCb && mp_HeaderCb->checked()) {
         qCDebug(appLog) << "Header checkbox is checked, disabling it";
         mp_HeaderCb->setCbEnable(false);
     }

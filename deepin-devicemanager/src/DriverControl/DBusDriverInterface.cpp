@@ -34,7 +34,7 @@ void DBusDriverInterface::uninstallPrinter(const QString &vendor, const QString 
     qCDebug(appLog) << "Uninstall printer - vendor:" << vendor << "model:" << model;
     //Sets the timeout in milliseconds for all future DBus calls to timeout. -1 means the default DBus timeout (usually 25 seconds).
     //超时默认是25s，打印卸载超时大概30s
-    mp_Iface->setTimeout(1000 * 1000);
+    mp_Iface->setTimeout(-1);
     QDBusPendingCall async = mp_Iface->asyncCall("unInstallPrinter", vendor, model);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
     QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)),
@@ -68,7 +68,7 @@ void DBusDriverInterface::undoInstallDriver()
 void DBusDriverInterface::installDriverFd(const QDBusUnixFileDescriptor &fileFd, const QString &filename)
 {
     qCDebug(appLog) << "Install driver via fd, filename:" << filename;
-    mp_Iface->setTimeout(1000 * 1000);
+    mp_Iface->setTimeout(-1);
     QDBusPendingCall async = mp_Iface->asyncCall("installDriverFd", QVariant::fromValue(fileFd), filename);
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(async, this);
     QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher *)),
@@ -98,7 +98,7 @@ bool DBusDriverInterface::isDebValidFd(const QDBusUnixFileDescriptor &fileFd)
 bool DBusDriverInterface::backupDebFd(const QDBusUnixFileDescriptor &dirFd, const QString &debname)
 {
     qCDebug(appLog) << "DBusDriverInterface::backupDebFd, debname:" << debname;
-    mp_Iface->setTimeout(1000 * 1000); // 备份需拷贝整个暂存目录，放宽超时
+    mp_Iface->setTimeout(-1); // 备份需拷贝整个暂存目录，放宽超时
     QDBusReply<bool> reply = mp_Iface->call("backupDebFd", QVariant::fromValue(dirFd), debname);
 
     return reply.value();

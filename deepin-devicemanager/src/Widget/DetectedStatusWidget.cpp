@@ -93,14 +93,10 @@ DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
 DetectedStatusWidget::~DetectedStatusWidget()
 {
     qCDebug(appLog) << "DetectedStatusWidget destructor called";
+    DELETE_PTR(mp_HLayoutLabel);
     DELETE_PTR(mp_HLayoutButton);
     DELETE_PTR(mp_VLayoutLabel);
     DELETE_PTR(mp_HLayoutTotal);
-
-    if (mp_HLayoutLabel) {
-        mp_HLayoutLabel->deleteLater();
-        mp_HLayoutLabel = nullptr;
-    }
 }
 
 void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString &model, bool hasInstall)
