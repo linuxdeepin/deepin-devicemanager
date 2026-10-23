@@ -181,6 +181,7 @@ QString Common::checkBoardVendorFlag()
             break;
         }
     }else{
+        boardVendorKey.clear();
         QProcess process;
         process.start("dmidecode", QStringList() << "-s" << "system-product-name");
         process.waitForFinished(-1);
