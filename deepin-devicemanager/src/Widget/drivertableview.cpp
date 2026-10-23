@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -284,6 +284,10 @@ int DriverHeaderView::sectionSizeHint(int logicalIndex) const
     QStyleOptionHeader option;
     initStyleOption(&option);
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style) {
+        qCWarning(appLog) << "Failed to get DStyle";
+        return 0;
+    }
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
 
     QFontMetrics fm(DApplication::font());
