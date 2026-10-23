@@ -743,7 +743,7 @@ void CmdTool::addWidthToMap(QMap<QString, QString> &mapInfo)
     sInfo = process.readAllStandardOutput();
     QStringList lines = sInfo.split("\n");
     foreach (const QString &line, lines) {
-        QRegularExpression reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]{2}).*");
+        QRegularExpression reg("\\s\\sAttribute\\s'GPUMemoryInterface' \\(.*\\):\\s([0-9]+).*");
         if (reg.match(line).hasMatch()) {
             mapInfo.insert("Width", reg.match(line).captured(1) + " bits");
             // qCDebug(appLog) << "Found width:" << mapInfo["Width"];
