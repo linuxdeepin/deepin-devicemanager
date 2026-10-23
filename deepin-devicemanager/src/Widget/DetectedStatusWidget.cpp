@@ -93,6 +93,7 @@ DetectedStatusWidget::DetectedStatusWidget(QWidget *parent)
 DetectedStatusWidget::~DetectedStatusWidget()
 {
     qCDebug(appLog) << "DetectedStatusWidget destructor called";
+    DELETE_PTR(mp_HLayoutLabel);
     DELETE_PTR(mp_HLayoutButton);
     DELETE_PTR(mp_HLayoutLabel);
     DELETE_PTR(mp_VLayoutLabel);
