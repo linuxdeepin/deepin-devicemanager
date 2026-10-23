@@ -328,7 +328,7 @@ QString Common::formatTotalCache(const QString &perThreadCache, int coreCount)
         --i;
 
     QString numStr = s.left(i + 1);
-    QString unitStr = s.mid(i + 1).toUpper();
+    QString unitStr = s.mid(i + 1).trimmed().toUpper();
 
     bool ok;
     double num = numStr.toDouble(&ok);
