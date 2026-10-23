@@ -327,6 +327,7 @@ bool CmdTool::parseOemTomlInfo(const QString &filename)
 
     if (!classkey.isEmpty() &&  itemMap.count()) {
         addMapInfo("toml" + classkey, itemMap);
+        tomlPars = true;
     }
 
     qCInfo(appLog) << "CmdTool::parseOemTomlInfo end, result:" << tomlPars;
