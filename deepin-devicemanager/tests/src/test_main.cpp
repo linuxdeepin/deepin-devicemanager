@@ -1,5 +1,5 @@
 // Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -32,9 +32,31 @@ static QDBusPendingCall ut_dbus_asyncCall(const QString &,
     return QDBusPendingCall::fromCompletedCall(QDBusMessage().createReply(QVariant(true)));
 }
 
+#include <signal.h>
+#include <stdio.h>
+
+// 退出阶段崩溃时强制刷新 gcov 覆盖率数据:
+// 测试进程在用例全部跑完后的 Qt 清理阶段可能 SEGV(QCoreApplication
+// teardown),没有该处理器的崩溃会跳过 gcov 的 atexit 刷新,导致整轮
+// 运行的 .gcda 全部丢失(表现为 lcov 统计出 0% 覆盖率)。
+extern "C" void __gcov_dump(void);
+static void utCrashHandler(int sig)
+{
+    fprintf(stderr, "\n=== Crash detected (signal %d), flushing coverage data ===\n", sig);
+    __gcov_dump();
+    _exit(128 + sig);
+}
+static void setupUtCrashHandler()
+{
+    signal(SIGSEGV, utCrashHandler);
+    signal(SIGABRT, utCrashHandler);
+    signal(SIGFPE, utCrashHandler);
+}
+
 //  gtest的入口函数
 int main(int argc, char **argv)
 {
+    setupUtCrashHandler();
 
     qputenv("QT_QPA_PLATFORM", "offscreen");
     QApplication a(argc, argv);
