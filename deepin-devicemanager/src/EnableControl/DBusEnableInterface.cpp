@@ -116,9 +116,9 @@ void DBusEnableInterface::init()
     // 1. 连接到dbus
     if (!QDBusConnection::systemBus().isConnected()) {
         qCCritical(appLog) << "Cannot connect to the D-Bus system bus";
-        fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
-                "To start it, run:/n"
-                "/teval `dbus-launch --auto-syntax`/n");
+        fprintf(stderr, "Cannot connect to the D-Bus session bus.\n"
+                "To start it, run:\n"
+                "\teval `dbus-launch --auto-syntax`\n");
     }
 
     // 2. create interface
