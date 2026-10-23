@@ -352,8 +352,19 @@ void DriverScanWidget::hideAll()
     mp_ScanningProgress->hide();
     mp_ReScanButton->hide();
 
-    // 清除布局
-    delete mp_ScrollWidget->layout();
+    // 清除布局：从内到外依次删除旧布局并置空，避免悬垂指针和隐式级联删除依赖
+    delete mp_HLayoutPic;
+    mp_HLayoutPic = nullptr;
+    delete mp_HLayoutscLabel;
+    mp_HLayoutscLabel = nullptr;
+    delete mp_HLayoutscProgress;
+    mp_HLayoutscProgress = nullptr;
+    delete mp_HLayoutInfoLabel;
+    mp_HLayoutInfoLabel = nullptr;
+    delete mp_VLayout;
+    mp_VLayout = nullptr;
+    delete mp_HLayout;
+    mp_HLayout = nullptr;
     mp_HLayoutPic = new QHBoxLayout();
     mp_HLayoutscLabel = new QHBoxLayout();
     mp_HLayoutscProgress = new QHBoxLayout();
