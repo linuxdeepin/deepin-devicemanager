@@ -1150,7 +1150,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
             arguments << "-q" << "VideoRam";
             if (getDeviceInfoFromCmd(deviceInfo, program, arguments)) {
                 qCDebug(appLog) << "nvidia-settings -q VideoRam output:" << deviceInfo;
-                QRegularExpression reg("[\\s\\S]*VideoRam[\\s\\S]*([0-9]{4,})[\\s\\S]*");
+                QRegularExpression reg("VideoRam.*:\\s*([0-9]+)");
                 QStringList list = deviceInfo.split("\n");
 
                 foreach (QString item, list) {
