@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -94,13 +94,9 @@ DetectedStatusWidget::~DetectedStatusWidget()
 {
     qCDebug(appLog) << "DetectedStatusWidget destructor called";
     DELETE_PTR(mp_HLayoutButton);
+    DELETE_PTR(mp_HLayoutLabel);
     DELETE_PTR(mp_VLayoutLabel);
     DELETE_PTR(mp_HLayoutTotal);
-
-    if (mp_HLayoutLabel) {
-        mp_HLayoutLabel->deleteLater();
-        mp_HLayoutLabel = nullptr;
-    }
 }
 
 void DetectedStatusWidget::setDetectFinishUI(const QString &size, const QString &model, bool hasInstall)
@@ -606,7 +602,7 @@ void DetectedStatusWidget::setBackingUpDriverUI(const QString &driverDescription
 
     mp_UpdateLabel->setText(QObject::tr("Backing up the %1 driver, a total of %2 drivers").arg(progressValue).arg(totalValue));
     mp_ModelLabel->setText(QObject::tr("Backing up: %1").arg(driverDescription));
-    mp_Progress->setValue(progressValue * 10);
+    mp_Progress->setValue(progressValue);
 
     mp_HLayoutTotal->addWidget(mp_PicLabel);
     mp_HLayoutTotal->addSpacing(SPACE_15);
@@ -966,6 +962,10 @@ void DetectedStatusWidget::hideAll()
     mp_Progress->hide();
 
     delete this->layout();
+    mp_HLayoutTotal = nullptr;
+    mp_HLayoutButton = nullptr;
+    mp_VLayoutLabel = nullptr;
+    mp_HLayoutLabel = nullptr;
     mp_HLayoutTotal = new QHBoxLayout();
     mp_HLayoutButton = new QHBoxLayout();
     mp_VLayoutLabel = new QVBoxLayout();
