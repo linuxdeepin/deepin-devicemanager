@@ -1109,7 +1109,7 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
                     QStringList strList = memoryItem.split(':', QString::SkipEmptyParts);
 #else
-                    QStringList strList = memoryItem.split(' ', Qt::SkipEmptyParts);
+                    QStringList strList = memoryItem.split(':', Qt::SkipEmptyParts);
 #endif
                     if (strList.size() != 2) {
                         break;
