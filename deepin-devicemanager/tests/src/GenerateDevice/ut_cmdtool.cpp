@@ -195,7 +195,7 @@ static void ut_ct_cupsFreeDests(int /*num_dests*/, cups_dest_t *dests)
 
 // ================================ Fixture ================================
 
-class UT_CmdTool : public UT_HEAD, public ::testing::WithParamInterface<const char *>
+class UT_CmdTool : public UT_HEAD
 {
 public:
     void SetUp()
@@ -330,19 +330,6 @@ TEST_F(UT_CmdTool, addUsbMapInfo_filterPrinterMouseKeyboardWacom)
 
 // void addMouseKeyboardInfoMapInfo(const QString &key, const QMap<QString, QString> &mapInfo);
 // 分支: Linux Foundation/Elite Remote Control Driver/serial console/Wacom 过滤；正常添加
-TEST_P(UT_CmdTool, addMouseKeyboardInfoMapInfo_filterKeywords)
-{
-    // Arrange: 参数化的过滤关键字
-    QMap<QString, QString> map;
-    map.insert("Model", GetParam());
-
-    // Act
-    m_cmdTool->addMouseKeyboardInfoMapInfo("hwinfo_mouse", map);
-
-    // Assert: 含过滤关键字的输入不产生记录
-    EXPECT_EQ(0, m_cmdTool->m_cmdInfo["hwinfo_mouse"].size());
-}
-
 TEST_F(UT_CmdTool, addMouseKeyboardInfoMapInfo_normalAdded)
 {
     // Arrange: 正常鼠标信息
@@ -356,7 +343,27 @@ TEST_F(UT_CmdTool, addMouseKeyboardInfoMapInfo_normalAdded)
     EXPECT_EQ(1, m_cmdTool->m_cmdInfo["hwinfo_mouse"].size());
 }
 
-INSTANTIATE_TEST_SUITE_P(FilterKeywords, UT_CmdTool,
+// 参数化夹具与 UT_CmdTool 分离，避免 INSTANTIATE 交叉实例化同名 TEST_P
+class UT_CmdToolFilter : public UT_CmdTool, public ::testing::WithParamInterface<const char *>
+{
+};
+
+// void addMouseKeyboardInfoMapInfo(const QString &key, const QMap<QString, QString> &mapInfo);
+// 分支: Model 含过滤关键字（hub/remote/serial console/wacom）→ 不落库
+TEST_P(UT_CmdToolFilter, addMouseKeyboardInfoMapInfo_filterKeywords)
+{
+    // Arrange: 参数化的过滤关键字
+    QMap<QString, QString> map;
+    map.insert("Model", GetParam());
+
+    // Act
+    m_cmdTool->addMouseKeyboardInfoMapInfo("hwinfo_mouse", map);
+
+    // Assert: 含过滤关键字的输入不产生记录
+    EXPECT_EQ(0, m_cmdTool->m_cmdInfo["hwinfo_mouse"].size());
+}
+
+INSTANTIATE_TEST_SUITE_P(FilterKeywords, UT_CmdToolFilter,
                          ::testing::Values("Linux Foundation HUB",
                                            "Elite Remote Control Driver",
                                            "Model: \"serial console\"",
@@ -637,7 +644,12 @@ TEST_F(UT_CmdTool, getCurPowerInfo_groupsDaemonAndBattery)
 // void loadCmdInfo(const QString &key, const QString &debugFile);
 // 分支: key 精确匹配 lshw/lsblk_d/ls_sg/dmesg/hciconfig/printer/upower/cat_devices/
 //       cat_audio/bootdevice/lscpu/dr_config/nvidia；前缀 hwinfo*/dmidecode*；其它→loadCatInfo
-TEST_P(UT_CmdTool, loadCmdInfo_dispatchExactKeys)
+// 参数化夹具与 UT_CmdTool 分离，避免 INSTANTIATE 交叉实例化同名 TEST_P
+class UT_CmdToolDispatch : public UT_CmdTool, public ::testing::WithParamInterface<const char *>
+{
+};
+
+TEST_P(UT_CmdToolDispatch, loadCmdInfo_dispatchExactKeys)
 {
     // Arrange: 按参数化 key 配置各装载器所需桩与期望落库 key
     Stub stub;
@@ -715,7 +727,7 @@ TEST_P(UT_CmdTool, loadCmdInfo_dispatchExactKeys)
     EXPECT_TRUE(m_cmdTool->m_cmdInfo.contains(expectKey)) << "key=" << key.toStdString();
 }
 
-INSTANTIATE_TEST_SUITE_P(Dispatch, UT_CmdTool,
+INSTANTIATE_TEST_SUITE_P(Dispatch, UT_CmdToolDispatch,
                          ::testing::Values("lshw", "lsblk_d", "ls_sg", "dmesg",
                                            "hciconfig", "upower", "cat_devices",
                                            "cat_audio", "bootdevice", "lscpu",
