@@ -48,7 +48,7 @@ bool DBusInterface::getInfo(const QString &key, QString &info)
             << "--object-path" << "/org/deepin/DeviceInfo"
             << "--method" << "org.deepin.DeviceInfo.getInfo"
             << "hwinfo");
-        process.waitForFinished();
+        process.waitForFinished(5000);
         QByteArray output = process.readAllStandardOutput();
         QString outputStr = QString::fromLocal8Bit(output);
         qCInfo(appLog) << "getInfo gdbus out:" << outputStr.left(10); //debug detect service work is really unstable
@@ -75,5 +75,6 @@ void DBusInterface::init()
 
     // 2. create interface
     mp_Iface = new QDBusInterface(SERVICE_NAME, DEVICE_SERVICE_PATH, DEVICE_SERVICE_INTERFACE, QDBusConnection::systemBus());
+    mp_Iface->setTimeout(5000);
     qCDebug(appLog) << "DBusInterface::init end, iface created:" << (mp_Iface != nullptr);
 }
