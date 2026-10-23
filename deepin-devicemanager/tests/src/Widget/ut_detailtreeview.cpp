@@ -964,3 +964,21 @@ TEST_F(UT_DetailTreeView, BtnWidget_EnterEvent_SendEnter_SignalEmitted)
     EXPECT_EQ(spy.count(), 1);
     EXPECT_GE(spy.count(), 0);
 }
+
+// ===================== BtnWidget::leaveEvent (low, 迭代3) =====================
+
+TEST_F(UT_DetailTreeView, BtnWidget_LeaveEvent_SendLeave_SignalEmitted)
+{
+    // Arrange: 构造按钮并监听 leave 信号
+    BtnWidget w;
+    QSignalSpy spy(&w, &BtnWidget::leave);
+    ASSERT_TRUE(spy.isValid());
+
+    // Act: 派发离开事件
+    QEvent leaveEv(QEvent::Leave);
+    QCoreApplication::sendEvent(&w, &leaveEv);
+
+    // Assert: leave 信号触发一次
+    EXPECT_EQ(spy.count(), 1);
+    EXPECT_GE(spy.count(), 0);
+}
