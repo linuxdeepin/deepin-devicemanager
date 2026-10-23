@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -88,6 +88,8 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id,
             auto metaObject = mp_InputIface->metaObject();
             for (int i = 0 ; i < metaObject->methodCount(); ++i) {
                 if (metaObject->method(i).name() == "SetWakeupDevices") {
+                    if (pathList.size() < 2)
+                        return false;
                     QString curPath = pathList[pathList.size() - 2];
                     QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
                     mp_InputIface->call("SetWakeupDevices", busPath, wakeup ? "enabled" : "disabled");
@@ -229,9 +231,9 @@ void DBusWakeupInterface::init()
     bool isConnected = QDBusConnection::systemBus().isConnected();
     qCDebug(appLog) << "DBus system bus connected:" << isConnected;
     if (!isConnected) {
-        fprintf(stderr, "Cannot connect to the D-Bus session bus./n"
-                "To start it, run:/n"
-                "/teval `dbus-launch --auto-syntax`/n");
+        fprintf(stderr, "Cannot connect to the D-Bus session bus.\n"
+                "To start it, run:\n"
+                "\teval `dbus-launch --auto-syntax`\n");
     }
 
     // 2. create interface
