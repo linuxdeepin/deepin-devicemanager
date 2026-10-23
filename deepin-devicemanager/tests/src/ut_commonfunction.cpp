@@ -70,8 +70,32 @@ TEST_F(UT_Common, UT_Common_formatTotalCache_TiB)
 
 TEST_F(UT_Common, UT_Common_formatTotalCache_unknownUnit)
 {
-    // 带空格的 "1 MB" 单位解析为 " MB"(未知) 走 else 分支按原值当 KiB
-    EXPECT_STREQ("4 KiB", Common::formatTotalCache("1 MB", 4).toStdString().c_str());
+    // 真正未知的单位 "XB" 走 else 分支按原值当 KiB
+    EXPECT_STREQ("4 KiB", Common::formatTotalCache("1 XB", 4).toStdString().c_str());
+}
+
+TEST_F(UT_Common, UT_Common_formatTotalCache_lscpu_MiB)
+{
+    // lscpu 输出格式 "1 MiB" 带空格，修复后正确识别 M 分支
+    EXPECT_STREQ("4 MiB", Common::formatTotalCache("1 MiB", 4).toStdString().c_str());
+}
+
+TEST_F(UT_Common, UT_Common_formatTotalCache_lscpu_KiB_to_MiB)
+{
+    // lscpu 输出格式 "256 KiB" 带空格，8 核 -> 2 MiB
+    EXPECT_STREQ("2 MiB", Common::formatTotalCache("256 KiB", 8).toStdString().c_str());
+}
+
+TEST_F(UT_Common, UT_Common_formatTotalCache_lscpu_GiB)
+{
+    // lscpu 输出格式 "1 GiB" 带空格，正确识别 G 分支
+    EXPECT_STREQ("1 GiB", Common::formatTotalCache("1 GiB", 1).toStdString().c_str());
+}
+
+TEST_F(UT_Common, UT_Common_formatTotalCache_lscpu_32MiB)
+{
+    // lscpu 输出格式 "32 MiB" 带空格，2 核 -> 64 MiB
+    EXPECT_STREQ("64 MiB", Common::formatTotalCache("32 MiB", 2).toStdString().c_str());
 }
 
 TEST_F(UT_Common, UT_Common_formatTotalCache_KiB_decimal)
