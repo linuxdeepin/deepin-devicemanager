@@ -368,7 +368,10 @@ void PageDriverManager::slotInstallProgressFinished(bool bsuccess, int err)
     if (bsuccess) {
         successNum += 1;
         qCDebug(appLog) << "Installation successful for" << mp_CurDriverInfo->name() << ", success count:" << successNum;
-        m_ListUpdateIndex.removeAt(m_ListUpdateIndex.indexOf(m_CurIndex));
+        int idx = m_ListUpdateIndex.indexOf(m_CurIndex);
+        if (idx != -1) {
+            m_ListUpdateIndex.removeAt(idx);
+        }
     } else { // 失败
         qCDebug(appLog) << "Installation failed for" << mp_CurDriverInfo->name() << ", error code:" << err;
         // 通知网络错误
@@ -1068,7 +1071,7 @@ bool PageDriverManager::networkIsOnline()
     if (QNetworkInformation::instance()) {
         auto interfaces = QNetworkInformation::instance()->reachability();
         qCDebug(appLog) << "Network reachability:" << interfaces;
-        networkFlag = (interfaces == QNetworkInformation::Reachability::Disconnected);
+        networkFlag = (interfaces != QNetworkInformation::Reachability::Disconnected);
     }
     return networkFlag;
 #endif
