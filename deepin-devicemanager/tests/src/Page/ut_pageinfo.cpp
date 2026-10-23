@@ -48,3 +48,50 @@ TEST_F(PageInfo_UT, PageInfo_UT_paintEvent)
     m_pageInfo->paintEvent(&paint);
     delete p;
 }
+
+// Parametrized test for PageInfo::packageHasInstalled
+// Stub readAll to inject controlled dpkg output without running dpkg
+static QByteArray g_readAllData;
+
+static QByteArray ut_QIODevice_readAll(void *self)
+{
+    Q_UNUSED(self)
+    return g_readAllData;
+}
+
+struct PackageHasInstalledParam {
+    QByteArray dpkgOutput;
+    bool expected;
+};
+
+class PackageHasInstalled_UT
+    : public UT_HEAD
+    , public testing::WithParamInterface<PackageHasInstalledParam>
+{
+public:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_P(PackageHasInstalled_UT, packageHasInstalled)
+{
+    g_readAllData = GetParam().dpkgOutput;
+
+    Stub stub;
+    stub.set(ADDR(QIODevice, readAll), ut_QIODevice_readAll);
+
+    PageMultiInfo *p = new PageMultiInfo;
+    PageInfo *pageInfo = dynamic_cast<PageInfo *>(p);
+    bool result = pageInfo->packageHasInstalled("test-package");
+    EXPECT_EQ(GetParam().expected, result);
+    delete p;
+}
+
+INSTANTIATE_TEST_SUITE_P(PackageHasInstalledCases, PackageHasInstalled_UT,
+    testing::Values(
+        PackageHasInstalledParam{"Status: install ok installed\n", true},
+        PackageHasInstalledParam{"Package: dde-printer\nStatus: install ok installed\nPriority: optional\n", true},
+        PackageHasInstalledParam{"", false},
+        PackageHasInstalledParam{"package 'x' is not installed\n", false}
+    )
+);
