@@ -161,7 +161,7 @@ TEST_F(UT_DriverCheckItem, PaintEvent_ValidRect_CompletesWithoutCrash)
     m_item->paintEvent(&event);
 
     // Assert
-    EXPECT_EQ(m_item->rect().width(), m_item->rect().width());
+    EXPECT_FALSE(m_item->grab().isNull());   // paintEvent 后可渲染
     EXPECT_GT(m_item->rect().width(), -1);
 }
 
