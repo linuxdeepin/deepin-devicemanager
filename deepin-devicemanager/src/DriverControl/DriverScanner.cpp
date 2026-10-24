@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -53,7 +53,7 @@ void DriverScanner::run()
                             break;
                         }
                     }
-                    if (infoList.size() > (2 + index) && !infoList[1 + index].contains("（") && !infoList[1 + index].contains("(")) {
+                    if (infoList.size() > (1 + index) && !infoList[1 + index].contains("（") && !infoList[1 + index].contains("(")) {
                         QRegularExpression rxlen("(\\d+\\S*)");
                         QRegularExpressionMatch match = rxlen.match(infoList[1 + index]);
                         QString curVersion;
