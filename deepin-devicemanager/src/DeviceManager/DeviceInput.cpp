@@ -291,11 +291,7 @@ bool DeviceInput::getPS2Syspath(const QString &dfs)
         if (!event.isEmpty() && !sysfs.isEmpty()) {
             // qCDebug(appLog) << "Event and sysfs are not empty. Checking for match.";
             if (event == eventdfs) {
-                QRegularExpression regfs;
-                if (sysfs.contains("i2c_designware"))
-                    regfs = QRegularExpression("S: Sysfs=(.*)/input/input[0-9]{1,2}");
-                else
-                    regfs = QRegularExpression("S: Sysfs=(.*)/input/input[0-9]{1,2}");
+                QRegularExpression regfs("S: Sysfs=(.*)/input/input[0-9]{1,2}");
                 QRegularExpressionMatch match = regfs.match(sysfs);
                 if (match.hasMatch()) {
                     m_SysPath = match.captured(1);
