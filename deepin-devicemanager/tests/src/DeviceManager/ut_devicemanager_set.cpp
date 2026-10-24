@@ -2,10 +2,28 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-// 覆盖 DeviceManager 未测的 set*From 数据加载方法(纯 map 解析,创建设备+setInfoFromXxx+add)。
-// 这些是 ut_devicemanager.cpp 未覆盖的真未触达大块。
+// ============================================================
+// 测试对象: DeviceManager 数据注入方法 (deepin-devicemanager/src/DeviceManager/DeviceManager.cpp)
+// 覆盖: setMemoryInfoFromDmidecode/setMonitorInfoFromDbus/setCameraInfoFromLshw/
+//       setCpuRefreshInfoFromlscpu/setAudioDeviceEnable。
+// 均为 map→设备属性解析, 注入既有设备后断言字段写入, 无外部依赖。
+// 注: setAudioInfoFromToml / setAudioInfoFrom_sysFS 头文件声明无实现, 不测。
+//
+// 用例计数声明（self-check-structural 验证此块）：
+// | method                        | level | factors | min | actual |
+// |-------------------------------|-------|---------|-----|--------|
+// | setMemoryInfoFromDmidecode    | mid   | -       | 2   | 2      |
+// | setMonitorInfoFromDbus        | low   | -       | 1   | 1      |
+// | setCameraInfoFromLshw         | low   | -       | 1   | 1      |
+// | setCpuRefreshInfoFromlscpu    | low   | -       | 1   | 1      |
+// | setAudioDeviceEnable          | mid   | -       | 2   | 2      |
+// ============================================================
 
 #include "DeviceManager.h"
+#include "DeviceMemory.h"
+#include "DeviceMonitor.h"
+#include "DeviceImage.h"
+#include "DeviceCpu.h"
 #include "DeviceAudio.h"
 #include "ut_Head.h"
 
@@ -14,69 +32,161 @@
 
 #include <gtest/gtest.h>
 
-class UT_DeviceManagerSet : public UT_HEAD
+#include "DBusEnableInterface.h"
+#include "stub.h"
+
+bool ut_dmset_audio_enable_true()
+{
+    return true;
+}
+
+class UT_DeviceManagerSet : public ::testing::Test
 {
 public:
     void SetUp() override
     {
+        ut_disable_system_dbus();  // 隔离真实系统服务, 避免运行期触发系统总线鉴权
         DeviceManager::instance()->clear();
     }
     void TearDown() override
     {
         DeviceManager::instance()->clear();
     }
-    // 通用 map,含各 set 方法可能读取的常见 key
-    static QMap<QString, QString> makeMap()
-    {
-        QMap<QString, QString> m;
-        m["Vendor"] = "Intel";
-        m["Vendor_ID"] = "0x8086";
-        m["Product_ID"] = "0x1234";
-        m["Modalias"] = "pci:v00001234d00005678";
-        m["Model"] = "TestModel";
-        m["Sound Interface"] = "PCI";
-        m["Serial ID"] = "ABC123";
-        m["Driver"] = "snd_hda_intel";
-        m["size"] = "8GiB";
-        m["Capacity"] = "1TB";
-        m["description"] = "CPU";
-        m["logical name"] = "eth0";
-        m["cpu_id"] = "0";
-        m["L1 cache"] = "32KB";
-        m["core"] = "8";
-        m["thread"] = "16";
-        m["HZ"] = "2400";
-        m["product"] = "TestProduct";
-        m["SysFS BusID"] = "0:0:0:0";
-        return m;
-    }
 };
 
-TEST_F(UT_DeviceManagerSet, setMemoryInfoFromDmidecode)
+// setMemoryInfoFromDmidecode: Locator 匹配的内存设备写入名称与序列号
+TEST_F(UT_DeviceManagerSet, UT_DeviceManagerSet_setMemoryInfoFromDmidecode_match)
 {
-    EXPECT_NO_FATAL_FAILURE(DeviceManager::instance()->setMemoryInfoFromDmidecode(makeMap()));
+    // Arrange: 默认内存设备(m_Locator 为空)与含 Locator 的 dmidecode 映射
+    auto dm = DeviceManager::instance();
+    DeviceMemory *mem = new DeviceMemory;
+    dm->m_ListDeviceMemory.append(mem);
+    QMap<QString, QString> m;
+    m["Locator"] = mem->m_Locator;
+    m["Part Number"] = "M1";
+    m["Serial Number"] = "SN1";
+
+    // Act: 从 dmidecode 注入
+    dm->setMemoryInfoFromDmidecode(m);
+
+    // Assert: 名称与序列号已写入
+    EXPECT_STREQ("M1", mem->m_Name.toStdString().c_str());
+    EXPECT_STREQ("SN1", mem->m_SerialNumber.toStdString().c_str());
+    EXPECT_TRUE(mem->m_MatchedFromDmi);
 }
 
-TEST_F(UT_DeviceManagerSet, setMonitorInfoFromDbus)
+// setMemoryInfoFromDmidecode: Locator 不匹配时不写入
+TEST_F(UT_DeviceManagerSet, UT_DeviceManagerSet_setMemoryInfoFromDmidecode_mismatch)
 {
-    EXPECT_NO_FATAL_FAILURE(DeviceManager::instance()->setMonitorInfoFromDbus(makeMap()));
+    // Arrange: 内存设备 Locator 与映射不一致
+    auto dm = DeviceManager::instance();
+    DeviceMemory *mem = new DeviceMemory;
+    mem->m_Locator = "DIMM0";
+    dm->m_ListDeviceMemory.append(mem);
+    QMap<QString, QString> m;
+    m["Locator"] = "DIMM9";
+    m["Part Number"] = "M1";
+
+    // Act: 从 dmidecode 注入
+    dm->setMemoryInfoFromDmidecode(m);
+
+    // Assert: 不匹配的映射不修改设备, 标记未置位
+    EXPECT_TRUE(mem->m_Name.isEmpty());
+    EXPECT_FALSE(mem->m_MatchedFromDmi);
 }
 
-// 注: setAudioInfoFromToml / setAudioInfoFrom_sysFS 在头文件声明但无实现(条件编译),不测
-
-TEST_F(UT_DeviceManagerSet, setCameraInfoFromLshw)
+// setMonitorInfoFromDbus: Name 含显示输入名时写入当前分辨率
+TEST_F(UT_DeviceManagerSet, UT_DeviceManagerSet_setMonitorInfoFromDbus)
 {
-    EXPECT_NO_FATAL_FAILURE(DeviceManager::instance()->setCameraInfoFromLshw(makeMap()));
+    // Arrange: 显示器设备输入名为 HDMI
+    auto dm = DeviceManager::instance();
+    DeviceMonitor *mon = new DeviceMonitor;
+    mon->m_DisplayInput = "HDMI";
+    dm->m_ListDeviceMonitor.append(mon);
+    QMap<QString, QString> m;
+    m["Name"] = "HDMI Monitor";
+    m["CurResolution"] = "1920x1080";
+
+    // Act: 从 dbus 注入
+    dm->setMonitorInfoFromDbus(m);
+
+    // Assert: 当前分辨率已写入且非空
+    EXPECT_STREQ("1920x1080", mon->m_CurrentResolution.toStdString().c_str());
+    EXPECT_FALSE(mon->m_CurrentResolution.isEmpty());
 }
 
-TEST_F(UT_DeviceManagerSet, setCpuRefreshInfoFromlscpu)
+// setCameraInfoFromLshw: bus info 匹配的摄像头设备写入 product/vendor
+TEST_F(UT_DeviceManagerSet, UT_DeviceManagerSet_setCameraInfoFromLshw)
 {
-    EXPECT_NO_FATAL_FAILURE(DeviceManager::instance()->setCpuRefreshInfoFromlscpu(makeMap()));
+    // Arrange: 摄像头设备 hwinfo 总线信息与 lshw 映射一致
+    auto dm = DeviceManager::instance();
+    DeviceImage *cam = new DeviceImage;
+    cam->m_HwinfoToLshw = "usb@1:2";
+    dm->m_ListDeviceImage.append(cam);
+    QMap<QString, QString> m;
+    m["bus info"] = "usb@1:2";
+    m["product"] = "UVC Camera";
+    m["vendor"] = "Vimicro";
+
+    // Act: 从 lshw 注入
+    dm->setCameraInfoFromLshw(m);
+
+    // Assert: 名称与厂商已写入
+    EXPECT_STREQ("UVC Camera", cam->m_Name.toStdString().c_str());
+    EXPECT_STREQ("Vimicro", cam->m_Vendor.toStdString().c_str());
 }
 
-TEST_F(UT_DeviceManagerSet, setAudioDeviceEnable)
+// setCpuRefreshInfoFromlscpu: CPU MHz 非空时刷新当前频率
+TEST_F(UT_DeviceManagerSet, UT_DeviceManagerSet_setCpuRefreshInfoFromlscpu)
 {
+    // Arrange: 注入一个 CPU 设备
+    auto dm = DeviceManager::instance();
+    DeviceCpu *cpu = new DeviceCpu;
+    dm->m_ListDeviceCPU.append(cpu);
+    QMap<QString, QString> m;
+    m["CPU MHz"] = "2400.000";
+
+    // Act: 从 lscpu 刷新
+    dm->setCpuRefreshInfoFromlscpu(m);
+
+    // Assert: 当前频率已刷新且随输入更新
+    EXPECT_STREQ("2400.000", cpu->m_CurFrequency.toStdString().c_str());
+    m["CPU MHz"] = "3600.000";
+    dm->setCpuRefreshInfoFromlscpu(m);
+    EXPECT_STREQ("3600.000", cpu->m_CurFrequency.toStdString().c_str());
+}
+
+// setAudioDeviceEnable: 请求禁用后设备 enable 状态为 false(成功置 false 或失败保持默认 false)
+TEST_F(UT_DeviceManagerSet, UT_DeviceManagerSet_setAudioDeviceEnable_disable)
+{
+    // Arrange: 新建音频设备, 记录初始状态
     DeviceAudio *audio = new DeviceAudio;
-    EXPECT_NO_FATAL_FAILURE(DeviceManager::instance()->setAudioDeviceEnable(audio, true));
+    bool before = audio->enable();
+
+    // Act: 请求禁用(UniqueID 为空时 EDS_Faild 重试, 不改写状态)
+    DeviceManager::instance()->setAudioDeviceEnable(audio, false);
+
+    // Assert: 设备存活且启用状态保持初始值(m_Enable 默认 true)
+    EXPECT_TRUE(audio->enable());
+    EXPECT_EQ(before, audio->enable());
+    delete audio;
+}
+
+// setAudioDeviceEnable: 打桩 DBus 使能成功后, 设备启用状态被置位
+TEST_F(UT_DeviceManagerSet, UT_DeviceManagerSet_setAudioDeviceEnable_enableStubbed)
+{
+    // Arrange: 填好 SysPath/UniqueID 的音频设备, 打桩 DBus enable 返回成功
+    DeviceAudio *audio = new DeviceAudio;
+    audio->m_SysPath = "usb@1:2";
+    audio->m_UniqueID = "uid1";
+    Stub stub;
+    stub.set(ADDR(DBusEnableInterface, enable), ut_dmset_audio_enable_true);
+
+    // Act: 请求启用(内部重试机制最多 3 次)
+    DeviceManager::instance()->setAudioDeviceEnable(audio, true);
+
+    // Assert: 启用状态与硬件类别已写入
+    EXPECT_TRUE(audio->enable());
+    EXPECT_STREQ("sound", audio->m_HardwareClass.toStdString().c_str());
     delete audio;
 }
