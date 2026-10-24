@@ -195,3 +195,12 @@ if(CMAKE_SAFETYTEST STREQUAL "CMAKE_SAFETYTEST_ARG_ON")
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fsanitize=address -O2")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=address -O2")
 endif()
+
+# ---- qt-autotest-generator APPEND: stub-ext runtime stubbing support ----
+# Only APPENDED below; existing lines untouched.
+target_sources(${PROJECT_NAME_TEST} PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub/stub-shadow.cpp
+)
+target_include_directories(${PROJECT_NAME_TEST} PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub
+)
