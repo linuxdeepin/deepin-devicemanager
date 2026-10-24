@@ -1,4 +1,4 @@
-// Copyright (C) 2019 ~ 2020 UnionTech Software Technology Co.,Ltd
+// Copyright (C) 2019-2026 UnionTech Software Technology Co.,Ltd
 // SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -12,7 +12,7 @@
 #include <QCoreApplication>
 #include <QPaintEvent>
 #include <QPainter>
-//#include <QSignalSpy>
+#include <QSignalSpy>
 
 #include <gtest/gtest.h>
 
@@ -59,10 +59,21 @@ TEST_F(UT_TableWidget, UT_TableWidget_PaintEvent)
 
 TEST_F(UT_TableWidget, UT_TableWidget_slotActionExport)
 {
+    QSignalSpy spyExport(m_tableWidget, &TableWidget::exportInfo);
+    QSignalSpy spyRefresh(m_tableWidget, &TableWidget::refreshInfo);
+    QSignalSpy spyEnable(m_tableWidget, &TableWidget::enableDevice);
+
     m_tableWidget->slotActionExport();
     m_tableWidget->slotActionRefresh();
     m_tableWidget->slotActionEnable();
     EXPECT_STREQ("Disable",m_tableWidget->mp_Enable->text().toStdString().c_str());
+
+    // 信号槽验证：三个槽各自发射对应信号，enableDevice 参数为当前行（默认 -1）与 false
+    EXPECT_EQ(spyExport.count(),1);
+    EXPECT_EQ(spyRefresh.count(),1);
+    EXPECT_EQ(spyEnable.count(),1);
+    EXPECT_EQ(spyEnable.at(0).at(0).toInt(),-1);
+    EXPECT_EQ(spyEnable.at(0).at(1).toBool(),false);
 }
 
 TEST_F(UT_TableWidget, UT_TableWidget_slotItemClicked)
@@ -72,8 +83,12 @@ TEST_F(UT_TableWidget, UT_TableWidget_slotItemClicked)
     m_tableWidget->mp_Table->mp_Model->insertColumn(0);
     m_tableWidget->setItem(0, 0, item);
     QModelIndex index = m_tableWidget->mp_Table->mp_Model->item(0)->index();
+    QSignalSpy spy(m_tableWidget, &TableWidget::itemClicked);
     m_tableWidget->slotItemClicked(index);
     EXPECT_EQ(m_tableWidget->mp_Table->mp_Model->rowCount(),1);
+    // 信号槽验证：转发模型索引行号
+    EXPECT_EQ(spy.count(),1);
+    EXPECT_EQ(spy.at(0).at(0).toInt(),0);
     delete item;
 }
 
