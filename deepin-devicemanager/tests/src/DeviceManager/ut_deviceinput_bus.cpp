@@ -94,8 +94,9 @@ TEST_F(UT_DeviceInputBus, UT_DeviceInputBus_GetPS2Syspath_EventMatch_ExtractsSys
     bool result = di->getPS2Syspath("event5");
     // Assert
     EXPECT_TRUE(result);
-    // 注: 非i2c正则为贪婪匹配, 捕获到末段 input 为止, 与 i2c 正则行为不一致(已列入缺陷候选)
-    EXPECT_EQ(di->m_SysPath, QString("/devices/platform/i8042/serio1/input"));
+    // 注: DEF-DM-001(非i2c分支贪婪正则多捕获一级 /input)已修复并合入,
+    // 统一正则 /input/input[0-9]{1,2} 后两分支行为一致, 捕获至 serio1
+    EXPECT_EQ(di->m_SysPath, QString("/devices/platform/i8042/serio1"));
     EXPECT_TRUE(di->m_SysPath.startsWith("/devices/platform/i8042"));
 }
 
