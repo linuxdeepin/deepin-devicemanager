@@ -29,13 +29,23 @@ TEST_F(UT_HttpDriverInterfaceExtra, getVersion)
     EXPECT_NO_FATAL_FAILURE(HttpDriverInterface::getInstance()->getVersion(major, minor));
 }
 
-// convertJsonToDeviceList: 再覆盖一个有效 json 解析路径(纯逻辑)
+// convertJsonToDeviceList: 有效 json 解析路径(纯逻辑)
+// 重写(Mode 6): 原用例 msg:"ok" 无法通过源码 msg=="success" 门检, 实际只走了失败早退分支;
+// 改为真实有效载荷并断言字段映射。
 TEST_F(UT_HttpDriverInterfaceExtra, convertJsonToDeviceList_valid)
 {
     QList<RepoDriverInfo> lst;
-    QString json = "{\"code\":0,\"msg\":\"ok\",\"data\":[{\"name\":\"test-driver\",\"version\":\"1.0\","
-                   "\"url\":\"http://x/deb\",\"arch\":\"x86_64\",\"os\":\"V25\",\"size\":1024}]}";
+    QString json = "{\"msg\":\"success\",\"data\":{\"list\":[{\"arch\":\"amd64\","
+                   "\"manufacturer\":\"ut-man\",\"packages\":\"ut-pkg\",\"deb_version\":\"1.0\","
+                   "\"level\":5,\"size\":2048}]}}";
     bool r = HttpDriverInterface::getInstance()->convertJsonToDeviceList(json, lst);
-    (void)r;
-    EXPECT_NO_FATAL_FAILURE(HttpDriverInterface::getInstance()->convertJsonToDeviceList(json, lst));
+    EXPECT_TRUE(r);
+    EXPECT_EQ(1, lst.size());
+    EXPECT_EQ(QStringLiteral("amd64"), lst.at(0).strArch);
+    EXPECT_EQ(QStringLiteral("ut-man"), lst.at(0).strManufacturer);
+    EXPECT_EQ(QStringLiteral("ut-pkg"), lst.at(0).strPackages);
+    EXPECT_EQ(QStringLiteral("1.0"), lst.at(0).strDebVersion);
+    EXPECT_EQ(5, lst.at(0).iLevel);
+    EXPECT_EQ(2048, lst.at(0).bytes);
+    EXPECT_EQ(QStringLiteral("2.00KB"), lst.at(0).strSize);
 }
