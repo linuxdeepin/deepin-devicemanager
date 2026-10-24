@@ -6,10 +6,9 @@
 // Mode 2 重写：DeviceOtherPCI 单元测试（旧版断言空洞/无分支映射，评级 D，整体重写）
 // 覆盖方法：ctor/setInfoFromTomlOneByOne/name/vendor/driver/subTitle/getOverviewInfo/
 //          initFilterKey/loadBaseDeviceInfo/loadOtherDeviceInfo/loadTableData
-// 已知缺陷（只标红不修码，见 defects.json）：
-//   DeviceOtherPCI.cpp:36 ret = setTomlAttribute(mapInfo, "Capabilities", m_Version)
-//   —— Capabilities 键值被写入 m_Version，m_Capabilities 永远不会被 toml 数据填充；
-//   测试按现状行为断言（m_Version 收到值、m_Capabilities 保持空）
+// 缺陷闭环：DEF-DM-OTHERPCI-CAPABILITIES-VERSION 已在上游修复
+//   （PR #848 / commit a684f10b，DeviceOtherPCI.cpp:39/102 m_Version -> m_Capabilities），
+//   本文件用例已按修复后行为断言（Capabilities 写入/展示 m_Capabilities）
 //
 // 用例计数声明（min 为分级下限，actual 为实际用例数，均 ≤ 现有用例规模）
 // | method                  | level | min | actual |
@@ -87,7 +86,7 @@ TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_ctor_default)
 
 // ===================== setInfoFromTomlOneByOne =====================
 // Branch: DeviceOtherPCI.cpp:27-44 Model/Bus Info/Input-Output/Memory/IRQ/Latency 写入;
-//         36 【缺陷】"Capabilities" 值写入 m_Version 而非 m_Capabilities（按现状断言）
+//         39 "Capabilities" 值写入 m_Capabilities（缺陷修复后行为）
 TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_setInfoFromToml_cover)
 {
     // Arrange
@@ -109,9 +108,9 @@ TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_setInfoFromToml_cover)
     EXPECT_EQ(QString("a1300000-a131ffff"), m_pPCI->m_Memory);
     EXPECT_EQ(QString("16"), m_pPCI->m_Irq);
     EXPECT_EQ(QString("32"), m_pPCI->m_Latency);
-    // Assert(缺陷现状): Capabilities 写入 m_Version，m_Capabilities 不被填充
-    EXPECT_EQ(QString("msi pm"), m_pPCI->m_Version);
-    EXPECT_EQ(QString(""), m_pPCI->m_Capabilities);
+    // Assert: Capabilities 写入 m_Capabilities；m_Version 不被 toml 数据触碰
+    EXPECT_EQ(QString("msi pm"), m_pPCI->m_Capabilities);
+    EXPECT_EQ(QString(""), m_pPCI->m_Version);
     // Assert: 过滤键为空 -> map 数据不收集；但 loadOtherDeviceInfo 的成员项仍会追加
     const QList<QPair<QString, QString>> &lst = m_pPCI->getOtherAttribs();
     EXPECT_EQ(5, lst.size());
@@ -131,9 +130,10 @@ TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_setInfoFromToml_none)
     mapNoKey.insert("Model", "PCI123");
     // Act: 缺键调用
     TomlFixMethod ret1 = m_pPCI->setInfoFromTomlOneByOne(mapNoKey);
-    // Assert: 其余属性写入，Capabilities 缺失 -> TOML_None
+    // Assert: 其余属性写入，Capabilities 缺失 -> TOML_None（m_Capabilities 保持空）
     EXPECT_EQ(TOML_None, ret1);
     EXPECT_EQ(QString("PCI123"), m_pPCI->m_Model);
+    EXPECT_EQ(QString(""), m_pPCI->m_Capabilities);
     EXPECT_EQ(QString(""), m_pPCI->m_Version);
 
     // Arrange: Capabilities 为空值
@@ -144,21 +144,24 @@ TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_setInfoFromToml_none)
     TomlFixMethod ret2 = m_pPCI->setInfoFromTomlOneByOne(mapEmpty);
     // Assert
     EXPECT_EQ(TOML_None, ret2);
+    EXPECT_EQ(QString(""), m_pPCI->m_Capabilities);
     EXPECT_EQ(QString(""), m_pPCI->m_Version);
 }
 
-// Branch: DeviceInfo.cpp:1000-1003 值含 nouse -> 清空 m_Version 返回 TOML_nouse
+// Branch: DeviceInfo.cpp:1000-1003 值含 nouse -> 清空 m_Capabilities 返回 TOML_nouse
 TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_setInfoFromToml_nouse)
 {
-    // Arrange: 预置 m_Version，Capabilities 含 nouse
-    m_pPCI->m_Version = "1.00";
+    // Arrange: 预置 m_Capabilities/m_Version，Capabilities 含 nouse
+    m_pPCI->m_Capabilities = "1.00";
+    m_pPCI->m_Version = "2.00";
     QMap<QString, QString> map;
     map.insert("Capabilities", "nouse");
     // Act
     TomlFixMethod ret = m_pPCI->setInfoFromTomlOneByOne(map);
-    // Assert
+    // Assert: nouse 只清空 m_Capabilities，不影响 m_Version
     EXPECT_EQ(TOML_nouse, ret);
-    EXPECT_EQ(QString(""), m_pPCI->m_Version);
+    EXPECT_EQ(QString(""), m_pPCI->m_Capabilities);
+    EXPECT_EQ(QString("2.00"), m_pPCI->m_Version);
 }
 
 // Branch: DeviceOtherPCI.cpp:29-38 部分键缺失 -> 各属性独立处理互不影响
@@ -252,17 +255,17 @@ TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_loadBaseDeviceInfo_nameSet)
 }
 
 // ===================== loadOtherDeviceInfo =====================
-// Branch: DeviceOtherPCI.cpp:99-113 Input-Output/Memory/IRQ/Latency/Driver/Capabilities(m_Version)
+// Branch: DeviceOtherPCI.cpp:99-113 Input-Output/Memory/IRQ/Latency/Driver/Capabilities(m_Capabilities)
 //         + mapInfoToList(); 过滤键为空 -> map 数据恒不收集
 TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_loadOtherDeviceInfo)
 {
-    // Arrange: 成员赋值（Capabilities 列实际取 m_Version）
+    // Arrange: 成员赋值（Capabilities 列取 m_Capabilities）
     m_pPCI->m_InputOutput = "4000";
     m_pPCI->m_Memory = "a1300000-a131ffff";
     m_pPCI->m_Irq = "16";
     m_pPCI->m_Latency = "32";
     m_pPCI->m_Driver = "snd_hda_intel";
-    m_pPCI->m_Version = "msi pm";
+    m_pPCI->m_Capabilities = "msi pm";
     QMap<QString, QString> map;
     map.insert("IRQ", "999");          // 过滤键为空，map 值不收集
     m_pPCI->getOtherMapInfo(map);
@@ -275,7 +278,7 @@ TEST_F(UT_DeviceOtherPCI, UT_DeviceOtherPCI_loadOtherDeviceInfo)
     EXPECT_TRUE(ut_containsPair(lst, "IRQ", "16"));
     EXPECT_TRUE(ut_containsPair(lst, "Latency", "32"));
     EXPECT_TRUE(ut_containsPair(lst, "Driver", "snd_hda_intel"));
-    // Assert(缺陷现状): Capabilities 列取的是 m_Version
+    // Assert: Capabilities 列取的是 m_Capabilities（修复后行为）
     EXPECT_TRUE(ut_containsPair(lst, "Capabilities", "msi pm"));
     // Assert: map 的 IRQ 因过滤键为空不覆盖成员值
     EXPECT_FALSE(ut_containsPair(lst, "IRQ", "999"));
