@@ -795,9 +795,9 @@ TEST_F(UT_DeviceAudio, UT_DeviceAudio_setInfoFrom_sysFS_Symlink_VidPidPresent)
     // Act
     bool ret = m_deviceAudio->setInfoFrom_sysFS(mapInfo, 0);
 
-    // Assert：返回 true，VID_PID 拼接（vid 保留 0x 前缀，pid 去 0x）
+    // Assert：返回 true，VID_PID 拼接（vid/pid 统一去 0x 前缀，bug 修复后格式）
     EXPECT_TRUE(ret);
-    EXPECT_STREQ("0x80860c0c", m_deviceAudio->m_VID_PID.toStdString().c_str());
+    EXPECT_STREQ("80860c0c", m_deviceAudio->m_VID_PID.toStdString().c_str());
     EXPECT_STREQ("Intel HDA PCH", m_deviceAudio->m_Chip.toStdString().c_str());
     EXPECT_STREQ("Intel", m_deviceAudio->m_Vendor.toStdString().c_str());
     EXPECT_STREQ("PCH /card0", m_deviceAudio->m_Name.toStdString().c_str());
@@ -875,10 +875,10 @@ TEST_F(UT_DeviceAudio, UT_DeviceAudio_setInfoFrom_sysFS_HwDirFound_BreakLoop)
     // Act
     bool ret = m_deviceAudio->setInfoFrom_sysFS(mapInfo, 0);
 
-    // Assert：返回 true，芯片取 hwC0D0 的 vendor_name+chip_name
+    // Assert：返回 true，芯片取 hwC0D0 的 vendor_name+chip_name，VID_PID 统一去 0x
     EXPECT_TRUE(ret);
     EXPECT_STREQ("NVIDIA GK208", m_deviceAudio->m_Chip.toStdString().c_str());
-    EXPECT_STREQ("0x10de0fbc", m_deviceAudio->m_VID_PID.toStdString().c_str());
+    EXPECT_STREQ("10de0fbc", m_deviceAudio->m_VID_PID.toStdString().c_str());
 }
 
 /* ===================== setInfoFromTomlOneByOne ===================== */
