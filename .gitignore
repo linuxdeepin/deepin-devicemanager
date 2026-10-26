@@ -70,3 +70,7 @@ obj-x86_64-linux-gnu/
 # Unit test artifacts (graph-ut-writer skill)
 .ut/
 build-ut*/
+
+# Python bytecode
+deepin-devicemanager-server/tests/__pycache__/
+__pycache__/
