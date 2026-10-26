@@ -204,3 +204,7 @@ target_sources(${PROJECT_NAME_TEST} PRIVATE
 target_include_directories(${PROJECT_NAME_TEST} PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub
 )
+
+# [UT-APPEND] 嵌入应用内置图标资源（appimage.qrc），供 CameraIconEngine 单测真实加载
+# qrc 资源此前仅在主程序目标内嵌，测试二进制读不到 :/icons/.../camera_20px.svg
+target_sources(${PROJECT_NAME_TEST} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../assets/appimage.qrc)
