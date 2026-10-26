@@ -358,7 +358,7 @@ INSTANTIATE_TEST_SUITE_P(
     DpkgOutputVariants, PageInfoPackageTest,
     ::testing::Values(
         DpkgOutputParam{"Status: install ok installed\n", true},              // 已安装输出
-        DpkgOutputParam{"Status: deinstall ok config-files\n", false},        // 已卸载且不含 installed 子串
+        DpkgOutputParam{"Status: deinstall ok config-files\n", false},        // 已卸载输出
         DpkgOutputParam{nullptr, false},                                      // 空输出边界（dpkg 对未安装包走 stderr）
-        DpkgOutputParam{"package 'x' is not installed\n", true}               // 缺陷钉住：contains 子串误判为已安装
+        DpkgOutputParam{"package 'x' is not installed\n", false}              // 未安装输出：随 DEF-DM-PAGE-001 修复（精确匹配状态行）翻转为 false
     ));
