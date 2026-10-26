@@ -187,7 +187,12 @@ int LogViewHeaderView::sectionSizeHint(int logicalIndex) const
     QStyleOptionHeader option;
     initStyleOption(&option);
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
-    int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
+    int margin = 10;
+    if (style) {
+        margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
+    } else {
+        qCWarning(appLog) << "Failed to get DStyle, using default margin";
+    }
 
     QFontMetrics fm(DApplication::font());
     QString buf = model()->headerData(logicalIndex, Qt::Horizontal, Qt::DisplayRole).toString();

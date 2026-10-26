@@ -109,7 +109,12 @@ void DriverListView::drawRow(QPainter *painter, const QStyleOptionViewItem &opti
 
     auto *style = dynamic_cast<DStyle *>(DApplication::style());
 
-    auto radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
+    auto radius = 8;
+    if (style) {
+        radius = style->pixelMetric(DStyle::PM_FrameRadius, &options);
+    } else {
+        qCWarning(appLog) << "Failed to get DStyle, using default radius";
+    }
     //根据实际情况设置颜色，奇数行为灰色
     auto palette = options.palette;
     QBrush background;
