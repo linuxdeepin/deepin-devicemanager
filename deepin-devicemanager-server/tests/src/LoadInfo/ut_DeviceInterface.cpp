@@ -349,6 +349,25 @@ TEST_F(DeviceInterface_UT, SetMonitorDeviceFlag_WithMainJobParent_ForwardsFlag)
     EXPECT_EQ(ut_di_ciSetFlag, true);
 }
 
+/* ================= getUserAuthorPasswd ================= */
+
+TEST_F(DeviceInterface_UT, UserAuthorPasswd_DisablePolkitBuild_ReturnsTrue)
+{
+    // Arrange: the fixture stubs getUserAuthorPasswd for every test; this
+    // target exercises the REAL body, so release the stub locally. The
+    // server build defines DISABLE_POLKIT -> body is `return true;` (no
+    // polkit Authority round-trip in unit tests).
+    DeviceInterface di("org.deepin.DeviceInfo");
+    stub.reset(ut_di_authFn);
+    // Act
+    bool ok = di.getUserAuthorPasswd();
+    // Re-arm the fixture stub for subsequent tests
+    stub.set(ut_di_authFn, ut_di_authFnImpl);
+    // Assert
+    EXPECT_TRUE(ok);   // branch: DISABLE_POLKIT -> always authorized
+    EXPECT_TRUE(di.getUserAuthorPasswd());   // stateless: repeated call identical
+}
+
 /* ================= getGpuInfoForFTDTM ================= */
 
 TEST_F(DeviceInterface_UT, GetGpuInfoForFTDTM_FillFails_ReturnsEmptyString)
@@ -517,5 +536,5 @@ TEST_F(DeviceInterface_UT, GetGpuMemInfoForFTDTM_EmptyContent_ReturnsFalse)
  * | setMonitorDeviceFlag     | mid   | in_degree:1             | 2   | 3      |
  * | getGpuInfoForFTDTM       | mid   | static cache            | 2   | 2      |
  * | getGpuMemInfoForFTDTM    | high  | complexity, loop        | 4   | 7      |
- * | getUserAuthorPasswd      | high  | polkit external         | 3   | 4      |
+ * | getUserAuthorPasswd      | high  | polkit external         | 3   | 5      |
  */

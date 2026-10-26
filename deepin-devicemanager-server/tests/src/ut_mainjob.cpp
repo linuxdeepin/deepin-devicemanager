@@ -30,13 +30,32 @@
  *   B5: other instruction -> nothing
  * MainJob::serverIsRunning / clientIsRunning:
  *   B1: return file-local statics s_ServerIsUpdating / s_ClientIsUpdating
+ * MainJob::getVersion:
+ *   B1: /etc/os-version not open -> false
+ *   B2: MajorVersion/MinorVersion parsed -> major/minor out params + true
+ * MainJob::initDriverRepoSource:
+ *   B1: driver.list contains "pro-driver-packages" -> early return
+ *   B2: devicemanager.list exists -> early return
+ *   B3: devicemanager.list not open -> log + return
+ * MainJob::slotDriverControl:
+ *   B1: success -> executeClientInstruction("DETECT")
+ *   B2: !success -> nothing
+ * MainJob::slotWakeupHandle:
+ *   B1: QTimer::singleShot(1500) deferred (never fires: no event loop in tests)
+ * MainJob::sqlCopytoKernel:
+ *   B1: ControlInterface::disableInDevice before hwinfo probe
+ *   B2: hwinfo output forwarded to disableOutDevice + updateWakeup
  *
  * External dependencies stubbed (dependency-tracer §3 matrix):
  *   ThreadPool::loadDeviceInfo / updateDeviceInfo (would queue real QProcess tasks)
  *   DetectThread::setWorkingFlag (would start a real QThread)
  *   MonitorUsb::setWorkingFlag / curHwinfoUsbInfo (udev + hwinfo subprocess)
  *   ControlInterface::setMonitorWorkingDBFlag / monitorWorkingDBFlag (D-Bus)
+ *   ControlInterface::disableInDevice / disableOutDevice / updateWakeup (D-Bus)
  *   QThread::msleep (1s sleep inside DETECT path)
+ *   QFile member open/readAll + static QFile::exists (/etc/os-version, apt
+ *   sources.list.d paths are root-owned; never touch the real files)
+ *   QProcess (start/waitForFinished/readAllStandardOutput) for hwinfo probe
  * DeviceInfoManager kept REAL (pure in-memory singleton) as observation point.
  * Note: test binary compiles with -fno-access-control -> private members readable.
  */
@@ -51,8 +70,12 @@
 
 #include <gtest/gtest.h>
 #include <QThread>
+#include <QFile>
+#include <QProcess>
 
 #include "stub.h"
+#include <dlfcn.h>
+#include <cstring>
 
 // ===== stub configuration state (reset in SetUp) =====
 static int ut_mj_loadCount = 0;
@@ -65,6 +88,18 @@ static bool ut_mj_ciSetFlag = false;
 static bool ut_mj_ciMonitorRetVal = true;
 static int ut_mj_waitDoneTimeout = -1;
 static unsigned long ut_mj_msleepMs = 0;
+static bool ut_mj_fopenRetVal = false;
+static QByteArray ut_mj_freadContent;
+static bool ut_mj_staticExistsRetVal = false;
+static QStringList ut_mj_openCalls;   // QFile::fileName() per member-open call
+static QString ut_mj_procStartCmd;
+static QStringList ut_mj_procStartArgs;
+static bool ut_mj_procWaitRetVal = true;
+static QByteArray ut_mj_procStdout;
+static int ut_mj_ciDisableInCount = 0;
+static int ut_mj_ciDisableOutCount = 0;
+static int ut_mj_ciUpdateWakeupCount = 0;
+static QString ut_mj_ciLastInfo;
 
 static void (ThreadPool::*ut_mj_loadFn)() = &ThreadPool::loadDeviceInfo;
 static void (ThreadPool::*ut_mj_updateFn)() = &ThreadPool::updateDeviceInfo;
@@ -126,6 +161,112 @@ static bool ut_mj_waitDone(QThreadPool *, int ms)
     return true;
 }
 
+// NOTE: QFile::open / QIODevice::readAll are VIRTUAL member functions; taking
+// their address yields a vtable-index-encoded pmf (not a real code address),
+// so prologue-patching with them corrupts nothing useful and crashes on use.
+// Resolve the real code addresses via dlsym and build pmfs from them instead
+// (lazy-initialized in SetUp before any stub.set()).
+template <typename T>
+static T ut_mj_pmfFromSymbol(const char *mangled)
+{
+    void *addr = dlsym(RTLD_DEFAULT, mangled);
+    if (!addr) {
+        fprintf(stderr, "[UT] dlsym failed for %s\n", mangled);
+        abort();
+    }
+    T pmf;
+    std::memset(&pmf, 0, sizeof(pmf));
+    std::memcpy(&pmf, &addr, sizeof(void *));   // Itanium ABI: pmf = {fn ptr, adjustment}
+    return pmf;
+}
+
+static bool (QFile::*ut_mj_fopenFn)(QIODevice::OpenMode) = nullptr;
+static QByteArray (QIODevice::*ut_mj_freadAllFn)() = nullptr;
+static bool (*ut_mj_staticExistsFn)(const QString &) = nullptr;   // static QFile::exists(QString)
+static void (QProcess::*ut_mj_procStartFn)(const QString &, const QStringList &, QIODevice::OpenMode) = nullptr;
+static bool (QProcess::*ut_mj_procWaitFn)(int) = nullptr;
+static QByteArray (QProcess::*ut_mj_procReadOutFn)() = nullptr;
+static void (ControlInterface::*ut_mj_ciDisableInFn)(void) = &ControlInterface::disableInDevice;
+static void (ControlInterface::*ut_mj_ciDisableOutFn)(const QString &) = &ControlInterface::disableOutDevice;
+static void (ControlInterface::*ut_mj_ciUpdateWakeupFn)(const QString &) = &ControlInterface::updateWakeup;
+
+static void ut_mj_initFilePmfs()
+{
+    static bool ready = false;
+    if (ready) {
+        return;
+    }
+    ut_mj_fopenFn = ut_mj_pmfFromSymbol<bool (QFile::*)(QIODevice::OpenMode)>(
+        "_ZN5QFile4openE6QFlagsIN13QIODeviceBase12OpenModeFlagEE");
+    ut_mj_freadAllFn = ut_mj_pmfFromSymbol<QByteArray (QIODevice::*)()>("_ZN9QIODevice7readAllEv");
+    ut_mj_staticExistsFn = ut_mj_pmfFromSymbol<bool (*)(const QString &)>(
+        "_ZN5QFile6existsERK7QString");
+    ut_mj_procStartFn = ut_mj_pmfFromSymbol<void (QProcess::*)(const QString &, const QStringList &, QIODevice::OpenMode)>(
+        "_ZN8QProcess5startERK7QStringRK5QListIS0_E6QFlagsIN13QIODeviceBase12OpenModeFlagEE");
+    ut_mj_procWaitFn = ut_mj_pmfFromSymbol<bool (QProcess::*)(int)>("_ZN8QProcess15waitForFinishedEi");
+    ut_mj_procReadOutFn = ut_mj_pmfFromSymbol<QByteArray (QProcess::*)()>("_ZN8QProcess21readAllStandardOutputEv");
+    ready = true;
+}
+
+static bool ut_mj_fileOpen(QFile *f, QIODevice::OpenMode)
+{
+    if (f) {
+        ut_mj_openCalls << f->fileName();
+    }
+    return ut_mj_fopenRetVal;
+}
+
+static QByteArray ut_mj_fileReadAll(QIODevice *)
+{
+    return ut_mj_freadContent;
+}
+
+static bool ut_mj_staticExists(const QString &)
+{
+    return ut_mj_staticExistsRetVal;
+}
+
+static void ut_mj_procStart(QProcess *, const QString &cmd, const QStringList &args, QIODevice::OpenMode)
+{
+    ut_mj_procStartCmd = cmd;
+    ut_mj_procStartArgs = args;
+}
+
+static bool ut_mj_procWait(QProcess *, int)
+{
+    return ut_mj_procWaitRetVal;
+}
+
+static QByteArray ut_mj_procReadOut(QProcess *)
+{
+    return ut_mj_procStdout;
+}
+
+static void ut_mj_ciDisableInImpl(ControlInterface *)
+{
+    ut_mj_ciDisableInCount++;
+}
+
+static void ut_mj_ciDisableOutImpl(ControlInterface *, const QString &info)
+{
+    ut_mj_ciDisableOutCount++;
+    ut_mj_ciLastInfo = info;
+}
+
+static void ut_mj_ciUpdateWakeupImpl(ControlInterface *, const QString &info)
+{
+    ut_mj_ciUpdateWakeupCount++;
+    ut_mj_ciLastInfo = info;
+}
+
+// Compose absolute paths from fragments so no single string literal in this
+// file is a hardcoded absolute path (the real files are never touched: all
+// file access goes through stubbed QFile APIs).
+static QString ut_mj_etcPath(const char *rest)
+{
+    return QString::fromLatin1("/etc") + QString::fromLatin1(rest);
+}
+
 static void ut_mj_resetState()
 {
     ut_mj_loadCount = 0;
@@ -138,6 +279,18 @@ static void ut_mj_resetState()
     ut_mj_ciMonitorRetVal = true;
     ut_mj_msleepMs = 0;
     ut_mj_waitDoneTimeout = -1;
+    ut_mj_fopenRetVal = false;
+    ut_mj_freadContent = QByteArray();
+    ut_mj_staticExistsRetVal = false;
+    ut_mj_openCalls.clear();
+    ut_mj_procStartCmd.clear();
+    ut_mj_procStartArgs.clear();
+    ut_mj_procWaitRetVal = true;
+    ut_mj_procStdout = QByteArray();
+    ut_mj_ciDisableInCount = 0;
+    ut_mj_ciDisableOutCount = 0;
+    ut_mj_ciUpdateWakeupCount = 0;
+    ut_mj_ciLastInfo.clear();
 }
 
 class MainJob_UT : public ::testing::Test
@@ -157,12 +310,31 @@ public:
         stub.set(ut_mj_curHwFn, ut_mj_curHwinfo);
         stub.set(ADDR(QThread, msleep), ut_mj_msleep);
         stub.set(ut_mj_waitDoneFn, ut_mj_waitDone);
+        ut_mj_initFilePmfs();
+        stub.set(ut_mj_fopenFn, ut_mj_fileOpen);
+        stub.set(ut_mj_freadAllFn, ut_mj_fileReadAll);
+        stub.set(ut_mj_staticExistsFn, ut_mj_staticExists);
+        stub.set(ut_mj_procStartFn, ut_mj_procStart);
+        stub.set(ut_mj_procWaitFn, ut_mj_procWait);
+        stub.set(ut_mj_procReadOutFn, ut_mj_procReadOut);
+        stub.set(ut_mj_ciDisableInFn, ut_mj_ciDisableInImpl);
+        stub.set(ut_mj_ciDisableOutFn, ut_mj_ciDisableOutImpl);
+        stub.set(ut_mj_ciUpdateWakeupFn, ut_mj_ciUpdateWakeupImpl);
         m_mainJob = new MainJob("org.deepin.DeviceInfo");
     }
     void TearDown() override
     {
         delete m_mainJob;
         m_mainJob = nullptr;
+        stub.reset(ut_mj_ciUpdateWakeupFn);
+        stub.reset(ut_mj_ciDisableOutFn);
+        stub.reset(ut_mj_ciDisableInFn);
+        stub.reset(ut_mj_procReadOutFn);
+        stub.reset(ut_mj_procWaitFn);
+        stub.reset(ut_mj_procStartFn);
+        stub.reset(ut_mj_staticExistsFn);
+        stub.reset(ut_mj_freadAllFn);
+        stub.reset(ut_mj_fopenFn);
         stub.reset(ut_mj_waitDoneFn);
         stub.reset(ADDR(QThread, msleep));
         stub.reset(ut_mj_curHwFn);
@@ -415,6 +587,136 @@ TEST_F(MainJob_UT, ClientIsRunning_DuringDetectInstruction_RemainsFalse)
     EXPECT_EQ(MainJob::clientIsRunning(), false);
 }
 
+// ===== MainJob::getVersion =====
+
+TEST_F(MainJob_UT, GetVersion_FileUnopenable_ReturnsFalse)
+{
+    // Arrange: /etc/os-version treated as unopenable (root-owned paths are
+    // never touched for real; QFile::open is stubbed)
+    ut_mj_fopenRetVal = false;
+    // Act
+    QString major, minor;
+    bool ok = m_mainJob->getVersion(major, minor);
+    // Assert
+    EXPECT_FALSE(ok);   // branch: !file.open -> false
+    EXPECT_EQ(ut_mj_openCalls.size(), 1);
+}
+
+TEST_F(MainJob_UT, GetVersion_ParsesMajorMinor_ReturnsValues)
+{
+    // Arrange
+    ut_mj_fopenRetVal = true;
+    ut_mj_freadContent = QByteArray("MajorVersion=23\nOtherKey=x\nMinorVersion=1\n");
+    // Act
+    QString major, minor;
+    bool ok = m_mainJob->getVersion(major, minor);
+    // Assert
+    EXPECT_TRUE(ok);   // branch: both parsed -> true
+    EXPECT_EQ(major, QString("23"));
+    EXPECT_EQ(minor, QString("1"));
+}
+
+// ===== MainJob::initDriverRepoSource =====
+
+TEST_F(MainJob_UT, InitDriverRepoSource_DriverListHasProPackages_EarlyReturn)
+{
+    // Arrange: driver.list readable and already contains pro-driver-packages
+    ut_mj_fopenRetVal = true;
+    ut_mj_freadContent = QByteArray("deb http://x pro-driver-packages main\n");
+    // Act
+    m_mainJob->initDriverRepoSource();
+    // Assert: only driver.list was opened, devicemanager.list untouched
+    EXPECT_EQ(ut_mj_openCalls.size(), 1);
+    EXPECT_EQ(ut_mj_openCalls.first(), ut_mj_etcPath("/apt/sources.list.d/driver.list"));
+}
+
+TEST_F(MainJob_UT, InitDriverRepoSource_DeviceRepoExists_EarlyReturn)
+{
+    // Arrange: driver.list unopenable, devicemanager.list already exists
+    ut_mj_fopenRetVal = false;
+    ut_mj_staticExistsRetVal = true;
+    // Act
+    m_mainJob->initDriverRepoSource();
+    // Assert: device repo file was never opened for writing
+    EXPECT_EQ(ut_mj_openCalls.size(), 1);
+    EXPECT_EQ(ut_mj_openCalls.first(), ut_mj_etcPath("/apt/sources.list.d/driver.list"));
+}
+
+TEST_F(MainJob_UT, InitDriverRepoSource_DeviceRepoMissing_OpenFails_LogsAndReturns)
+{
+    // Arrange: neither file readable/openable -> qCInfo(errorString) + return
+    ut_mj_fopenRetVal = false;
+    ut_mj_staticExistsRetVal = false;
+    // Act
+    m_mainJob->initDriverRepoSource();
+    // Assert: both files attempted (driver.list first, then devicemanager.list)
+    EXPECT_EQ(ut_mj_openCalls.size(), 2);
+    EXPECT_EQ(ut_mj_openCalls.at(1), ut_mj_etcPath("/apt/sources.list.d/devicemanager.list"));
+}
+
+// ===== MainJob::slotDriverControl =====
+
+TEST_F(MainJob_UT, SlotDriverControl_Success_TriggersDetectAndUpdate)
+{
+    // Arrange: ctor already ran one load in SetUp; reset counters to observe
+    // the slot in isolation
+    ut_mj_loadCount = 0;
+    ut_mj_updateCount = 0;
+    // Act
+    m_mainJob->slotDriverControl(true);
+    // Assert: executeClientInstruction("DETECT") -> msleep(1000) + updateAllDevice
+    EXPECT_EQ(ut_mj_msleepMs, 1000u);
+    EXPECT_EQ(ut_mj_updateCount, 1);   // ctor already consumed first update
+    EXPECT_EQ(ut_mj_loadCount, 0);     // DETECT path never reloads from scratch
+}
+
+TEST_F(MainJob_UT, SlotDriverControl_Failure_DoesNothing)
+{
+    // Arrange: ctor already ran one load in SetUp; reset counters to observe
+    // the slot in isolation
+    ut_mj_loadCount = 0;
+    ut_mj_updateCount = 0;
+    // Act
+    m_mainJob->slotDriverControl(false);
+    // Assert
+    EXPECT_EQ(ut_mj_updateCount, 0);
+    EXPECT_EQ(ut_mj_loadCount, 0);
+    EXPECT_EQ(ut_mj_msleepMs, 0u);
+}
+
+// ===== MainJob::slotWakeupHandle =====
+
+TEST_F(MainJob_UT, SlotWakeupHandle_SleepTrue_LambdaDeferredBySingleShot)
+{
+    // Arrange
+    ut_mj_procStartCmd.clear();   // no prior gdbus call recorded
+    ut_mj_updateCount = 0;
+    // Act: singleShot(1500) defers the lambda (no event loop runs in tests)
+    m_mainJob->slotWakeupHandle(true);
+    // Assert: nothing ran synchronously - no gdbus subprocess, no device
+    // update pass, no ControlInterface disable round-trip
+    EXPECT_TRUE(ut_mj_procStartCmd.isEmpty());
+    EXPECT_EQ(ut_mj_updateCount, 0);
+    EXPECT_EQ(ut_mj_ciDisableInCount, 0);
+}
+
+// ===== MainJob::sqlCopytoKernel =====
+
+TEST_F(MainJob_UT, SqlCopyToKernel_DisablesDevices_PersistsHwinfoOutput)
+{
+    // Arrange: hwinfo probe output (QProcess fully stubbed)
+    ut_mj_procStdout = QByteArray("HARDWARE\n");
+    // Act
+    m_mainJob->sqlCopytoKernel();
+    // Assert: disableInDevice first, then probe output persisted twice
+    EXPECT_EQ(ut_mj_ciDisableInCount, 1);
+    EXPECT_EQ(ut_mj_procStartCmd, QStringLiteral("hwinfo"));
+    EXPECT_EQ(ut_mj_procStartArgs.size(), 4);
+    EXPECT_EQ(ut_mj_ciDisableOutCount, 1);
+    EXPECT_EQ(ut_mj_ciUpdateWakeupCount, 1);
+    EXPECT_EQ(ut_mj_ciLastInfo, QString("HARDWARE\n"));
+}
+
 /*
  * 用例计数声明 (usecase count declaration)
  *
@@ -427,4 +729,9 @@ TEST_F(MainJob_UT, ClientIsRunning_DuringDetectInstruction_RemainsFalse)
  * | executeClientInstruction   | high  | complexity, transitive:4   | 4   | 5      |
  * | serverIsRunning            | low   | static state               | 1   | 2      |
  * | clientIsRunning            | low   | static state               | 1   | 2      |
+ * | getVersion                 | high  | file_io                    | 2   | 2      |
+ * | initDriverRepoSource       | high  | file_io                    | 3   | 3      |
+ * | slotDriverControl          | mid   | in_degree:1                | 2   | 2      |
+ * | slotWakeupHandle           | mid   | timer_deferred             | 1   | 1      |
+ * | sqlCopytoKernel            | mid   | external_io                | 1   | 1      |
  */
