@@ -14,7 +14,7 @@
 using namespace DDLog;
 
 CpuInfo::CpuInfo()
-    : m_Arch("unknow")
+    : m_Arch("unknown")
 {
 }
 CpuInfo::~CpuInfo()
@@ -207,7 +207,8 @@ LogicalCpu &CpuInfo::logicalCpu(int logical_id)
 
 void CpuInfo::setProcCpuinfo(LogicalCpu &logical, const QMap<QString, QString> &mapInfo)
 {
-    logical.setFlags(mapInfo["flags"]);
+    if (mapInfo.contains("flags") && !mapInfo["flags"].isEmpty())
+        logical.setFlags(mapInfo["flags"]);
     logical.setModel(mapInfo["model"]);
     logical.setModelName(mapInfo["model name"]);
     logical.setVendor(mapInfo["vendor_id"]);

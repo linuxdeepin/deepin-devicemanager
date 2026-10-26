@@ -320,8 +320,8 @@ TEST_F(CpuInfo_UT, DefaultConstructor_Counters_AllZero)
     const int phys = cpu.physicalNum();
     const int cores = cpu.coreNum();
     const int logicals = cpu.logicalNum();
-    // Assert — ctor 初始化 m_Arch 为 "unknow"（源码字面拼写）
-    EXPECT_EQ(cpu.arch(), QString("unknow"));
+    // Assert — ctor 初始化 m_Arch 为 "unknown"（源码字面拼写）
+    EXPECT_EQ(cpu.arch(), QString("unknown"));
     EXPECT_EQ(phys, 0);
     EXPECT_EQ(cores, 0);
     EXPECT_EQ(logicals, 0);
@@ -342,14 +342,14 @@ TEST_F(CpuInfo_UT, ObjectLifecycle_ConstructDestruct_Clean)
 
 // ===== arch =====
 
-TEST_F(CpuInfo_UT, Arch_Default_IsUnknow)
+TEST_F(CpuInfo_UT, Arch_Default_IsUnknown)
 {
     // Arrange
     CpuInfo cpu;
     // Act
     const QString &value = cpu.arch();
     // Assert
-    EXPECT_EQ(value, QString("unknow"));
+    EXPECT_EQ(value, QString("unknown"));
     EXPECT_FALSE(value.isEmpty());
 }
 
@@ -364,7 +364,7 @@ TEST_F(CpuInfo_UT, Arch_AfterReadCpuArchitecture_MatchesUname)
     cpu.readCpuArchitecture();
     // Assert
     EXPECT_EQ(cpu.arch(), QString("loongarch64"));
-    EXPECT_NE(cpu.arch(), QString("unknow"));
+    EXPECT_NE(cpu.arch(), QString("unknown"));
 }
 
 // ===== readCpuArchitecture =====
@@ -1395,11 +1395,10 @@ TEST_F(CpuInfo_UT, SetProcCpuinfo_Loongarch64_FeaturesFallback)
     info.insert("features", "lsx lasx");
     // Act
     cpu.setProcCpuinfo(lcpu, info);
-    // Assert — 源码先无条件 setFlags(mapInfo["flags"])（缺键→空），
-    // 预置 flags 被清空后走 isEmpty→features 兜底，最终为 features
+    // Assert — 修复后 mapInfo 无 "flags" 键时不覆盖，预置 flags 保留
     EXPECT_EQ(lcpu.curFreq(), QString("1800"));
     EXPECT_EQ(lcpu.model(), QString("3a5000"));
-    EXPECT_EQ(lcpu.flags(), QString("lsx lasx"));
+    EXPECT_EQ(lcpu.flags(), QString("pre-existing-flags"));
 }
 
 // ===== diagPrintInfo =====
