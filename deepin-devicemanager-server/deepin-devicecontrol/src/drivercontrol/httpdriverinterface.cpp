@@ -59,6 +59,7 @@ QString HttpDriverInterface::getRequestJson(QString strUrl)
 bool HttpDriverInterface::checkDriverInfo(DriverInfo &driverInfo)
 {
     qCDebug(appLog) << "Checking driver info for:" << driverInfo.vendorName << driverInfo.modelName;
+
     QString strJson;
     switch (driverInfo.type) {
     case DR_Printer:
@@ -75,7 +76,9 @@ bool HttpDriverInterface::checkDriverInfo(DriverInfo &driverInfo)
     default:
         break;
     }
-    return checkDriverInfo(strJson, driverInfo);//todo: 需要增加逻辑：判断是否已安装驱动，且驱动与推荐驱动level相同。
+    // 驱动安装状态与推荐等级判断已在 checkDriverInfo(QString, DriverInfo&) 重载中实现
+    // (L188-202: max == strDriverInfo.iLevel + isPkgInstalled(strPackages, strDebVersion))
+    return checkDriverInfo(strJson, driverInfo);
 }
 
 QString HttpDriverInterface::getRequestBoard(QString strManufacturer, QString strProducts, int iClassP, int iClass)

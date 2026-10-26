@@ -91,10 +91,11 @@ QString Utils::getOsBuild()
     QStringList lines = info.split("\n");
     foreach (const QString &line, lines) {
         if (line.startsWith("OsBuild")) {
-            QStringList words = line.split("=");
-            if (2 == words.size()) {
-                return words[1].trimmed();
+            if (!line.contains("=")) {
+                qCWarning(appLog) << "OsBuild line has no '=' separator, skipped:" << line;
+                continue;
             }
+            return line.section("=", 1).trimmed();
         }
     }
     return "";
@@ -110,16 +111,18 @@ bool Utils::getVersion(QString &major, QString &minor)
     QStringList lines = info.split("\n");
     foreach (const QString &line, lines) {
         if (line.startsWith("MajorVersion")) {
-            QStringList words = line.split("=");
-            if (2 == words.size()) {
-                major = words[1].trimmed();
+            if (!line.contains("=")) {
+                qCWarning(appLog) << "MajorVersion line has no '=' separator, skipped:" << line;
+                continue;
             }
+            major = line.section("=", 1).trimmed();
         }
         if (line.startsWith("MinorVersion")) {
-            QStringList words = line.split("=");
-            if (2 == words.size()) {
-                minor = words[1].trimmed();
+            if (!line.contains("=")) {
+                qCWarning(appLog) << "MinorVersion line has no '=' separator, skipped:" << line;
+                continue;
             }
+            minor = line.section("=", 1).trimmed();
         }
     }
     return !major.isEmpty() && !minor.isEmpty();
