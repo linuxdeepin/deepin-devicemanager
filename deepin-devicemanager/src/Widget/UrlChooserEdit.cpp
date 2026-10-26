@@ -92,10 +92,9 @@ void UrlChooserEdit::checkLocalFolder(const QString &path)
 {
     qCDebug(appLog) << "Checking if folder is local:" << path;
 
-    Q_UNUSED(path);
     bool isLocal = true;
     mp_urlEdit->setAlert(false);
-    QStorageInfo info(mp_folderPath);                               //获取路径信息
+    QStorageInfo info(path);                               //获取路径信息
     qCInfo(appLog) << __func__ <<info.device();
     if (!info.isValid() || !info.device().startsWith("/dev/")) {     //判断路径信息是不是本地路径
         qCWarning(appLog) << "Selected folder is not local";
