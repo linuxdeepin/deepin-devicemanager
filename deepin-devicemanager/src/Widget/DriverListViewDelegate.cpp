@@ -77,6 +77,11 @@ void DriverListViewDelegate::paint(QPainter *painter, const QStyleOptionViewItem
         }
     }
     DStyle *style = dynamic_cast<DStyle *>(DApplication::style());
+    if (!style) {
+        qCWarning(appLog) << "Failed to get DStyle";
+        painter->restore();
+        return;
+    }
     int margin = style->pixelMetric(DStyle::PM_ContentsMargins, &option);
     //设置高亮文字色
     DGuiApplicationHelper *dAppHelper = DGuiApplicationHelper::instance();
