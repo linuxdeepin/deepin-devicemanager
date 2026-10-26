@@ -71,7 +71,7 @@ TEST_F(UT_UrlChooserEdit, UT_UrlChooserEdit_slotChooseUrl)
 TEST_F(UT_UrlChooserEdit, UT_UrlChooserEdit_checkLocalFolder_001)
 {
     m_UrlChooserEdit->mp_folderPath = "smb://10.4.10.4";
-    m_UrlChooserEdit->checkLocalFolder("/home");
+    m_UrlChooserEdit->checkLocalFolder("smb://10.4.10.4");
     EXPECT_TRUE(m_UrlChooserEdit->mp_urlEdit->isAlert());
 }
 

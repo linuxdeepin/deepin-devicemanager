@@ -58,7 +58,6 @@ void CmdButtonWidget::paintEvent(QPaintEvent *event)
         cg = DPalette::Inactive;
     }
 
-    this->rect().setWidth(808);
     QRect rect  = this->rect();
     rect.setWidth(808);
     // 开始绘制边框 *********************************************************
