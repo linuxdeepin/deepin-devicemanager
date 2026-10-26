@@ -876,8 +876,8 @@ TEST_F(UT_DriverTableView, Delegate_Paint_ValidIndex_PaintsWithoutCrash)
 
 TEST_F(UT_DriverTableView, DriverHeaderView_SectionSizeHint_DefaultHeader_ReturnsNonNegative)
 {
-    // Arrange: 夹具已构造默认表头(4 列); 确保使用 DStyle,
-    // 否则源码内未判空的 dynamic_cast<DStyle*> 在测试环境直接段错误
+    // Arrange: 夹具已构造默认表头(4 列); 预置 DStyle 保证环境确定
+    // (源码 dynamic_cast<DStyle*> 判空已由 fix 提交加固, 此处保留防御)
     if (!qobject_cast<DStyle *>(QApplication::style())) {
         QApplication::setStyle(new DStyle());
     }
@@ -964,7 +964,7 @@ void ut_dtv_paintSection(DriverTableView *tv, int logicalIndex, QPixmap *pix)
 
 TEST_F(UT_DriverTableView, PaintSection_FirstColumn_PaintsWithoutVerticalSpacing)
 {
-    // Arrange: 渲染目标与 DStyle(源码 dynamic_cast 未判空, 无 DStyle 会段错误)
+    // Arrange: 渲染目标与 DStyle(预置保持环境确定性)
     if (!qobject_cast<DStyle *>(QApplication::style())) {
         QApplication::setStyle(new DStyle());
     }
