@@ -317,6 +317,32 @@ TEST_F(UT_DriverListViewDelegate, paint_B5_B10_BeginningPosition_DrawsIconAndOff
     delete painter;
 }
 
+// 覆盖分支 B12：Beginning 位置但 DecorationRole 无效 → 跳过图标分支，文本照常绘制
+TEST_F(UT_DriverListViewDelegate, paint_B12_BeginningPosition_NoDecorationRole_SkipsIconBranch)
+{
+    QImage image;
+    QPainter *painter = nullptr;
+    Stub stub;
+    // Arrange：无图标项（DecorationRole 无效），位置 Beginning
+    preparePaint(image, painter, stub);
+    QStandardItemModel model;
+    model.appendRow(new QStandardItem("plain_driver.ko"));
+    const int margin = g_utDStyle->pixelMetric(DStyle::PM_ContentsMargins, nullptr);
+    QStyleOptionViewItem option = makeOption(QStyleOptionViewItem::Beginning);
+
+    // Act
+    m_delegate->paint(painter, option, model.index(0, 0));
+
+    // Assert：源码图标矩形（24x24、x=margin+6）未被计算（drawControl 对空图标
+    // 的绘制仍会穿过打桩的 QIcon::paint，但其矩形不是源码计算的 24x24），
+    // 文本仍被绘制且缩进与 B5 一致
+    EXPECT_NE(24, g_utIconRect.width());
+    EXPECT_NE(margin + 6, g_utIconRect.x());
+    EXPECT_TRUE(g_utDrawTextCalled);
+    EXPECT_EQ(margin + margin - 2, g_utTextRect.x());
+    delete painter;
+}
+
 // 覆盖分支 B6：Middle 位置 rect 不做调整，文本仅左缩进 margin-2（右边缘保持 → 宽度收窄 margin-2）
 TEST_F(UT_DriverListViewDelegate, paint_B6_MiddlePosition_InsetsTextLeftOnly)
 {

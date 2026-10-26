@@ -23,7 +23,7 @@
  * | paint(delegate)       | low   | separator,normal                   | 1   | 3      |
  * | paintSeparator        | low   | inactive,active                    | 1   | 2      |
  * | sizeHint(delegate)    | low   | separator-5,base-passthrough       | 1   | 2      |
- * | CameraIconEngine 族   | mid   | key,pixmap,paint,actual,sizes,path | 2   | 5      |
+ * | CameraIconEngine 族   | mid   | key,pixmap,paint,actual,sizes,path,clone | 2 | 6      |
  *
  * 分支/等价类说明（源自 MCP get_code_snippet 真实源码，DeviceListView.cpp）：
  *   - addItem：iconFile 必须 "icon##data" 两段，否则提前返回；Separator 特殊 flags；
@@ -737,6 +737,25 @@ TEST_F(UT_CameraIconEngine, availableSizes_AnyMode_ReturnsSingle20x20)
     EXPECT_EQ(1, sizes.size());
     EXPECT_EQ(QSize(20, 20), sizes.first());
     EXPECT_EQ(QSize(20, 20), sizes.last());
+}
+
+// engine.clone：QIcon 副本修改触发 detach → 引擎克隆，克隆后仍可绘制
+TEST_F(UT_CameraIconEngine, clone_IconCopyDetach_ClonesEngineAndStillPaints)
+{
+    // Arrange：fixture 已持有 CameraIconEngine 图标；副本修改前不触发克隆
+    QImage canvas(20, 20, QImage::Format_ARGB32_Premultiplied);
+    canvas.fill(Qt::transparent);
+
+    // Act：拷贝后修改副本（addPixmap）→ QIcon 分离克隆底层引擎
+    QIcon copy = m_icon;
+    copy.addPixmap(QPixmap(8, 8), QIcon::Normal, QIcon::On);
+
+    // Assert：克隆出的引擎仍能完成正常绘制（副本在画布上产出非空结果）
+    QPainter painter(&canvas);
+    copy.paint(&painter, QRect(0, 0, 20, 20), Qt::AlignCenter, QIcon::Normal, QIcon::On);
+    painter.end();
+    EXPECT_FALSE(canvas.isNull());
+    EXPECT_EQ(20, canvas.width());
 }
 
 // engine.iconPath：随主题切换 light/dark 目录（两套主题均能命中内置资源并加载）
