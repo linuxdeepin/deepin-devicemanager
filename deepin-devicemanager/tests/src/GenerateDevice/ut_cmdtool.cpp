@@ -461,9 +461,8 @@ TEST_F(UT_CmdTool, addWidthToMap_nvidiaWidthParsed)
     // Act
     m_cmdTool->addWidthToMap(map);
 
-    // Assert: 源码正则 [0-9]{2} 仅捕获两位数字，128 位宽被记录为 "12 bits"
-    // 【疑似源码缺陷】应捕获完整位宽（已在缺陷清单标红，不修改生产代码）
-    EXPECT_EQ(QString("12 bits"), map["Width"]);
+    // Assert: 位宽正则已修复为 [0-9]+（DEF-001，上游 5c246d5f），完整捕获 128
+    EXPECT_EQ(QString("128 bits"), map["Width"]);
 }
 
 // ============================ 读取器用例 ============================
@@ -1329,11 +1328,9 @@ TEST_F(UT_CmdTool, loadNvidiaSettingInfo_vramFromSettings)
     // Act
     m_cmdTool->loadNvidiaSettingInfo("nvidia", "nvidia.txt");
 
-    // Assert: 源码 VideoRam 正则 [\s\S]*VideoRam[\s\S]*([0-9]{4,})[\s\S]* 前缀贪婪，
-    // 仅捕获数字末四位 "7152" → 7152/1024=6 → "null=6MB"（2097152 实际应为 2GB）
-    // 【疑似源码缺陷】已在缺陷清单标红，此处断言实际行为，不修改生产代码
+    // Assert: VideoRam 正则已修复（DEF-002，上游 728a9546）：2097152KB/1024=2048MB≥1024 → 2GB
     ASSERT_EQ(1, m_cmdTool->m_cmdInfo["nvidia"].size());
-    EXPECT_EQ(QString("null=6MB"), m_cmdTool->m_cmdInfo["nvidia"][0]["Size"]);
+    EXPECT_EQ(QString("null=2GB"), m_cmdTool->m_cmdInfo["nvidia"][0]["Size"]);
     EXPECT_EQ(QString("GeForce GTX 1050"), m_cmdTool->m_cmdInfo["nvidia"][0]["Device"]);
     EXPECT_EQ(QString("00000000:01:00.0"), m_cmdTool->m_cmdInfo["nvidia"][0]["BusID"]);
 }
@@ -1353,11 +1350,12 @@ TEST_F(UT_CmdTool, loadNvidiaSettingInfo_memoryFallback)
     // Act
     m_cmdTool->loadNvidiaSettingInfo("nvidia", "nvidia.txt");
 
-    // Assert: Qt6 分支按空格分割 "    Total : 800 MiB" → 4 段 ≠2 直接 break，
-    // sizeStr 始终为空 → 无 Size → 不入库
-    // 【疑似源码缺陷】Qt5→Qt6 迁移把 split(':') 改为 split(' ')，兑底分支永远失效；
-    // 已在缺陷清单标红，此处断言实际行为，不修改生产代码
-    EXPECT_FALSE(m_cmdTool->m_cmdInfo.contains("nvidia"));
+    // Assert: Qt6 分支分隔符已修复为冒号（DEF-003，上游 913361dd），FB 兜底生效：
+    // "Total : 800 MiB" → 800 MiB < 1000 → Size = "null=800MB"，设备正常入库
+    ASSERT_EQ(1, m_cmdTool->m_cmdInfo["nvidia"].size());
+    EXPECT_EQ(QString("null=800MB"), m_cmdTool->m_cmdInfo["nvidia"][0]["Size"]);
+    EXPECT_EQ(QString("GeForce GTX 1050"), m_cmdTool->m_cmdInfo["nvidia"][0]["Device"]);
+    EXPECT_EQ(QString("00000000:01:00.0"), m_cmdTool->m_cmdInfo["nvidia"][0]["BusID"]);
 }
 
 // void loadPrinterInfo();

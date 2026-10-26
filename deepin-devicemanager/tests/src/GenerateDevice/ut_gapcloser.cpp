@@ -409,9 +409,9 @@ TEST_F(UT_CmdToolGaps, loadNvidiaSettingInfo_vramGB)
     ut_gp_cmdOut3 = "  Attribute 'VideoRam' (PC:0.0): 33554432.\n";
     // Act
     m_cmdTool->loadNvidiaSettingInfo("ut_ngpu", "nvidia.txt");
-    // Assert: 记录实际（有缺陷的）行为：末 4 位 "4432"/1024=4 → 4MB
+    // Assert: VideoRam 正则已修复（DEF-002，上游 728a9546）：33554432KB/1024=32768MB≥1024 → 32GB
     ASSERT_EQ(1, m_cmdTool->m_cmdInfo["ut_ngpu"].size());
-    EXPECT_EQ(QString("null=4MB"), m_cmdTool->m_cmdInfo["ut_ngpu"][0]["Size"]);
+    EXPECT_EQ(QString("null=32GB"), m_cmdTool->m_cmdInfo["ut_ngpu"][0]["Size"]);
     EXPECT_EQ(QString("GeForce GTX 1050"), m_cmdTool->m_cmdInfo["ut_ngpu"][0]["Device"]);
     EXPECT_EQ(QString("00000000:01:00.0"), m_cmdTool->m_cmdInfo["ut_ngpu"][0]["BusID"]);
 }
@@ -720,8 +720,8 @@ TEST_F(UT_CmdToolGaps, parseOemTomlInfo_singleSectionQuirk)
                         "name = Only\n";
     // Act
     bool ok = m_cmdTool->parseOemTomlInfo("ut_oem.toml");
-    // Assert: 返回 false（缺陷行为）但数据确实已入库
-    EXPECT_FALSE(ok);
+    // Assert: 单 section 现返回 true（DEF-004 已修复，上游 ce18dbd0），数据入库
+    EXPECT_TRUE(ok);
     ASSERT_TRUE(m_cmdTool->m_cmdInfo.contains("tomlaudio"));
     EXPECT_EQ(m_cmdTool->m_cmdInfo["tomlaudio"][0]["name"], QString("Only"));
 }
@@ -809,8 +809,8 @@ TEST_F(UT_GapDG, calAndSetCpuHeaderInfo_cacheTotals)
     info.insert("L3 shared cpu list", "0-1,4,6");
     // Act
     dg->calAndSetCpuHeaderInfo(info, 4, 8);
-    // Assert: L1d 32K*2=64 KiB；L1i 64K*1=64 KiB；L2 1*4=4 KiB（缺陷：应为 4 MiB）；
-    // L3 3*2=6 KiB（缺陷：应为 6 MiB）——记录实际（有缺陷的）行为
+    // Assert: L1d 32K*2=64 KiB；L1i 64K*1=64 KiB；单位解析已修复（DEF-005，上游 6ccddaf4）：
+    // L2 1 MiB×4 核=4096 KiB → "4 MiB"；L3 3 MiB×2 组=6144 KiB → "6 MiB"
     QList<QList<QPair<QString, QString>>> header;
     DeviceManager::instance()->getCpuHeaderInfo(header);
     ASSERT_EQ(header.size(), 1);
@@ -822,8 +822,8 @@ TEST_F(UT_GapDG, calAndSetCpuHeaderInfo_cacheTotals)
     EXPECT_EQ(kv["Thread(s)"], QString("2"));
     EXPECT_EQ(kv["L1d cache"], QString("64 KiB"));
     EXPECT_EQ(kv["L1i cache"], QString("64 KiB"));
-    EXPECT_EQ(kv["L2 cache"], QString("4 KiB"));
-    EXPECT_EQ(kv["L3 cache"], QString("6 KiB"));
+    EXPECT_EQ(kv["L2 cache"], QString("4 MiB"));
+    EXPECT_EQ(kv["L3 cache"], QString("6 MiB"));
 }
 
 // generatorNetworkDevice: hwinfo wired 新增设备（uniqueID 取 Permanent HW Address）→
