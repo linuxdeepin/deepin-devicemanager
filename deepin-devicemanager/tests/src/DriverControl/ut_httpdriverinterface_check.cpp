@@ -190,7 +190,7 @@ TEST_F(UT_HttpDriverInterfaceCheck, checkDriverInfo_canUpdate)
     ut_pkgInstall_ret = 1;
     DriverInfo info;
     HttpDriverInterface::getInstance()->checkDriverInfo(
-        "{\"msg\":\"success\",\"data\":{\"list\":[{\"packages\":\"pkg-a\",\"deb_version\":\"1.0.0\"}]}}",
+        "{\"msg\":\"success\",\"data\":{\"list\":[{\"packages\":\"pkg-a\",\"deb_version\":\"1.0.0\",\"level\":5}]}}",
         &info);
     EXPECT_EQ(ST_CAN_UPDATE, info.status());
 }
@@ -202,8 +202,11 @@ TEST_F(UT_HttpDriverInterfaceCheck, checkDriverInfo_notInstall_defaultType)
     ut_pkgInstall_ret = 0;
     DriverInfo info;   // driverName 为空且非打印机
     HttpDriverInterface::getInstance()->checkDriverInfo(
-        "{\"msg\":\"success\",\"data\":{\"list\":[{\"packages\":\"pkg-a\",\"deb_version\":\"1.0.0\"}]}}",
+        "{\"msg\":\"success\",\"data\":{\"list\":[{\"packages\":\"pkg-a\",\"deb_version\":\"1.0.0\",\"level\":5}]}}",
         &info);
+    // 回退路径仍选中最高等级候选的包信息
+    EXPECT_EQ(QStringLiteral("pkg-a"), info.packages());
+    EXPECT_EQ(QStringLiteral("1.0.0"), info.debVersion());
     EXPECT_EQ(ST_NOT_INSTALL, info.status());
 }
 
@@ -215,8 +218,10 @@ TEST_F(UT_HttpDriverInterfaceCheck, checkDriverInfo_notInstall_printerType_canUp
     DriverInfo info;
     info.m_Type = DR_Printer;
     HttpDriverInterface::getInstance()->checkDriverInfo(
-        "{\"msg\":\"success\",\"data\":{\"list\":[{\"packages\":\"pkg-a\",\"deb_version\":\"1.0.0\"}]}}",
+        "{\"msg\":\"success\",\"data\":{\"list\":[{\"packages\":\"pkg-a\",\"deb_version\":\"1.0.0\",\"level\":5}]}}",
         &info);
+    // 回退路径仍选中最高等级候选的包信息，打印机类型返回可更新
+    EXPECT_EQ(QStringLiteral("pkg-a"), info.packages());
     EXPECT_EQ(ST_CAN_UPDATE, info.status());
 }
 
