@@ -1,5 +1,5 @@
-# Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-# SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+# Copyright (C) 2019-2026 Uniontech Software Technology Co.,Ltd.
+# SPDX-FileCopyrightText: 2019-2026 UnionTech Software Technology Co., Ltd.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -204,3 +204,43 @@ if(TARGET Qt6::Test)
     Qt6::Test
     )
 endif()
+
+# ===================== [ut-t30] Server 热插拔与杂项测试补充（仅追加，不改动既有行） =====================
+# 1) stub-ext 标准打桩库（tests/3rdparty/stub，支持 set_lamda）
+include_directories(${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub)
+target_sources(${PROJECT_NAME_TEST} PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub/stub-shadow.cpp
+)
+# 注：QSignalSpy 所需的 QtTest 模块已由上方 t24 补充段统一链接，此处不再重复。
+
+# 2) plugin.cpp 在上方被移出测试目标（避免 main 符号冲突），此处重新纳入以覆盖 DSMRegister/DSMUnRegister
+target_sources(${PROJECT_NAME_TEST} PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/../deepin-deviceinfo/src/plugin.cpp
+)
+
+# 3) customgpuinfo/main.cpp 自带 main() 且仅依赖 Qt Core，使用独立测试二进制
+add_executable(customgpuinfo-test
+    ${CMAKE_CURRENT_LIST_DIR}/customgpuinfo/test_customgpuinfo_main.cpp
+)
+target_include_directories(customgpuinfo-test PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub
+)
+target_sources(customgpuinfo-test PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub/stub-shadow.cpp
+)
+if(${QT_VERSION_MAJOR} EQUAL 6)
+    target_link_libraries(customgpuinfo-test
+        Qt6::Core
+        ${GTEST_LIBRARIES}
+        ${GTEST_MAIN_LIBRARIES}
+        pthread
+    )
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
+    target_link_libraries(customgpuinfo-test
+        Qt5::Core
+        ${GTEST_LIBRARIES}
+        ${GTEST_MAIN_LIBRARIES}
+        pthread
+    )
+endif()
+set_property(TARGET customgpuinfo-test PROPERTY CXX_STANDARD 17)
