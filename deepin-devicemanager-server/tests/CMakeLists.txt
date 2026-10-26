@@ -196,3 +196,11 @@ if(CMAKE_SAFETYTEST STREQUAL "CMAKE_SAFETYTEST_ARG_ON")
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -fsanitize=undefined,address -O2")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fsanitize=undefined,address -O2")
 endif()
+
+# t24 补充：QSignalSpy 需要 QtTest 库（仅当 Qt6::Test 目标存在时链接，不影响 Qt5 构建）
+find_package(Qt6 QUIET COMPONENTS Test)
+if(TARGET Qt6::Test)
+    target_link_libraries(${PROJECT_NAME_TEST}
+    Qt6::Test
+    )
+endif()
