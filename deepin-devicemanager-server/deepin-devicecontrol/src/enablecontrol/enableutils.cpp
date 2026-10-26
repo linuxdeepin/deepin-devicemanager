@@ -121,7 +121,8 @@ void EnableUtils::disableOutDevice(const QString &info)
             }
             QFile file("/sys" + path + QString("/authorized"));
             if (!file.open(QIODevice::ReadWrite)) {
-                return;
+                qCWarning(appLog) << "disableOutDevice: failed to open authorized file for path:" << path;
+                continue;
             }
             file.write("0");
             file.close();
