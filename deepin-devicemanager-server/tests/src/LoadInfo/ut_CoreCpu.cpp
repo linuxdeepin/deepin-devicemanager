@@ -26,7 +26,7 @@
  *   B7: find(-1) != end -> size - 1                       | LogicalNum_HasNegativeOneEntry_ReturnsSizeMinusOne
  */
 
-class CoreCpu_UT : public UT_HEAD
+class CoreCpu_UT : public ::testing::Test
 {
 public:
     void SetUp() override
@@ -126,10 +126,11 @@ TEST_F(CoreCpu_UT, LogicalIsExisted_NegativeCoreId_ReturnsFalse)
     CoreCpu core;
     LogicalCpu lc;
     core.addLogicalCpu(0, lc);
-    // Act
-    bool result = core.logicalIsExisted(0);
+    // Act — 用不存在的逻辑 id（-1）查询
+    bool result = core.logicalIsExisted(-1);
     // Assert
     EXPECT_FALSE(result);
+    EXPECT_TRUE(core.logicalIsExisted(0));   // 已插入的逻辑 id 应存在
     EXPECT_EQ(core.coreId(), -1);
 }
 
