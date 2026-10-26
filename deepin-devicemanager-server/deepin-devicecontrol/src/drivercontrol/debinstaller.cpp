@@ -137,6 +137,7 @@ void DebInstaller::installPackage(const QString &filepath)
         } else {
             emit errorOccurred("Dpkg locked ,time out");
             emit installFinished(false);
+            return;
         }
     }
     if (!m_bValid) {

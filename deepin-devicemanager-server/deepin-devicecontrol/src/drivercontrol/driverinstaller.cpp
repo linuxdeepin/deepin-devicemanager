@@ -60,6 +60,7 @@ void DriverInstaller::installPackage(const QString &package, const QString &vers
         } else {
             emit errorOccurred(EC_NULL);
             emit installProgressFinished(false);
+            return;
         }
     }
 

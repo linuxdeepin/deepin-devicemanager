@@ -184,7 +184,7 @@ bool DriverInstallerApt::isNetworkOnline(uint sec)
         size_t pos = data.find("received,");
         if (pos != std::string::npos) {
             data = data.substr(pos + 10, 3);
-            return atoi(data.c_str()) != 0;
+            return atoi(data.c_str()) == 0;
         }
     }
     return false;
