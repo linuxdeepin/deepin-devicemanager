@@ -330,18 +330,16 @@ TEST_F(UT_DetectedStatusWidget, SetBackableDriverUI_Called_ShowsRestorableCount)
 
 // ===================== setBackingUpDriverUI (mid) =====================
 
-TEST_F(UT_DetectedStatusWidget, SetBackingUpDriverUI_Called_ProgressScaledByTen)
+TEST_F(UT_DetectedStatusWidget, SetBackingUpDriverUI_Called_ProgressUsesValueAsIs)
 {
     // Arrange: 夹具已构造完成
     ASSERT_NE(w, nullptr);
 
-    // 进度条默认量程 0-100, 传 5*10=50 确保在量程内
-
-    // Act: 正在备份界面(进度 5/10)
+    // Act: 正在备份界面(进度 5/10, 进度条直接使用传入值)
     w->setBackingUpDriverUI("RTL8168", 10, 5);
 
-    // Assert
-    EXPECT_EQ(w->mp_Progress->value(), 50);
+    // Assert: 进度值按原样写入(源码已移除错误的 ×10 缩放)
+    EXPECT_EQ(w->mp_Progress->value(), 5);
     EXPECT_TRUE(w->mp_ModelLabel->text().contains("RTL8168"));
     EXPECT_TRUE(w->mp_UpdateLabel->text().contains("Backing up"));
 }
