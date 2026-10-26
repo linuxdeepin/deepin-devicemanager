@@ -358,21 +358,21 @@ TEST_F(EnableSqlManagerTest, clearEnableFromAuthorizedTable_keepsRows_enableColu
     EXPECT_TRUE(UTDB::tableHas(m_mgr, "authorized", "unique_id='ut-uid-a'"));
 }
 
-// 标红缺陷 pinning：isUniqueIdEnabled 查询不存在的 enable 列，恒返回 false
-TEST_F(EnableSqlManagerTest, isUniqueIdEnabled_returnsFalse_enableColumnMissing)
+// 修复验证：isUniqueIdEnabled 查询 exist 列，exist=true 时返回 true
+TEST_F(EnableSqlManagerTest, isUniqueIdEnabled_returnsTrue_existColumnFixed)
 {
     // Arrange
     m_mgr->insertDataToAuthorizedTable("USB", "devA", "/ut/a", "ut-uid-a", true, "drvA");
 
-    // Act: 查询启用状态（SELECT enable 列不存在的疑似缺陷路径）
+    // Act: 查询启用状态（SELECT exist 列，修复后正确返回）
     const bool enabled = m_mgr->isUniqueIdEnabled("ut-uid-a");
 
-    // Assert: 疑似缺陷 —— exec 失败恒返回 false；记录本身仍可按 path 查到
-    EXPECT_FALSE(enabled);
+    // Assert: exist=true → 返回 true；记录本身仍可按 path 查到
+    EXPECT_TRUE(enabled);
     EXPECT_EQ(m_mgr->authorizedPath("ut-uid-a"), QStringLiteral("/ut/a"));
 }
 
-TEST_F(EnableSqlManagerTest, isUniqueIdEnabled_multiRows_stillFalse_pinning)
+TEST_F(EnableSqlManagerTest, isUniqueIdEnabled_multiRows_bothTrue_fixed)
 {
     // Arrange
     m_mgr->insertDataToAuthorizedTable("USB", "devA", "/ut/a", "ut-uid-a", true, "drvA");
@@ -382,9 +382,9 @@ TEST_F(EnableSqlManagerTest, isUniqueIdEnabled_multiRows_stillFalse_pinning)
     const bool first = m_mgr->isUniqueIdEnabled("ut-uid-a");
     const bool second = m_mgr->isUniqueIdEnabled("ut-uid-b");
 
-    // Assert: 疑似缺陷 pinning —— enable 列缺失导致恒 false，但记录本身可查
-    EXPECT_FALSE(first);
-    EXPECT_FALSE(second);
+    // Assert: exist=true → 两条记录均返回 true
+    EXPECT_TRUE(first);
+    EXPECT_TRUE(second);
     EXPECT_EQ(m_mgr->authorizedPath("ut-uid-a"), QStringLiteral("/ut/a"));
     EXPECT_EQ(m_mgr->authorizedPath("ut-uid-b"), QStringLiteral("/ut/b"));
 }
