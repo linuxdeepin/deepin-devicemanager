@@ -172,8 +172,8 @@ TEST_F(UT_PageOverview, isOverview_returnsTrue)
 // Arrange: 表格有数据; Act: clearWidgets; Assert: toString 输出为空
 TEST_F(UT_PageOverview, clearWidgets_clearsTable)
 {
-    // map 需 ≥2 项：updateInfo 的 setColumnAndRow(row-1) 使末项越界（见缺陷清单），
-    // 单项 map 写入被 Qt 忽略，toString 恒为空
+    // updateInfo 修复后按 setColumnAndRow(row + 1) 设行（PR #862），每个条目都有可见行；
+    // 用 2 项 map 同时验证多行写入与 clear 后表格为空
     QMap<QString, QString> map;
     map.insert("Display", "UHD 630");
     map.insert("Audio", "HDMI Audio");
@@ -274,8 +274,8 @@ TEST_F(UT_PageOverview, updateInfo_largeHeight_limitRowCapped)
     EXPECT_EQ(g_limitRow, 11);   // min(11, 大值) = 11
 }
 
-// Arrange: 空 map（B5）; Act: updateInfo; Assert: setColumnAndRow 收到 row-1=-1 且无崩溃
-TEST_F(UT_PageOverview, updateInfo_emptyMap_rowMinusOne)
+// Arrange: 空 map（B5）; Act: updateInfo; Assert: setColumnAndRow 收到 row+1=1 且无崩溃
+TEST_F(UT_PageOverview, updateInfo_emptyMap_passesRowPlusOne)
 {
     Stub stub;
     stub.set(ADDR(PageTableWidget, setLimitRow), ut_ptw_setLimitRow);
@@ -283,7 +283,7 @@ TEST_F(UT_PageOverview, updateInfo_emptyMap_rowMinusOne)
 
     EXPECT_NO_FATAL_FAILURE(page->updateInfo(QMap<QString, QString>()));
 
-    EXPECT_EQ(g_colRow, -1);   // row = map.size() - 1 = -1
+    EXPECT_EQ(g_colRow, 1);   // row = 0（空 map）→ setColumnAndRow(row + 1) = 1（PR #862 修复后语义）
 }
 
 // Arrange: 桩注入类型表 [Overview, Display, Separator]，map 含 Display（B3/B4）;
@@ -293,7 +293,7 @@ TEST_F(UT_PageOverview, updateInfo_overviewSkipped_displayWritten)
     g_devTypes = {qMakePair(QObject::tr("Overview"), QString("overview##Overview")),
                   qMakePair(QString("Display"), QString("display##Display")),
                   qMakePair(QString("Separator"), QString("Separator##Separator"))};
-    // map ≥2 项：setColumnAndRow(row-1) 使末项写入越界（Qt 忽略），首项才可见
+    // setColumnAndRow(row + 1)（PR #862 修复 off-by-one）保证每个条目都有可见行
     QMap<QString, QString> map;
     map.insert("Display", "UHD 630");
     map.insert("Audio", "HDMI Audio");
