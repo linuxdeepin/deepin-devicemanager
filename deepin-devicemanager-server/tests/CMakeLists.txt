@@ -244,3 +244,72 @@ elseif(${QT_VERSION_MAJOR} EQUAL 5)
     )
 endif()
 set_property(TARGET customgpuinfo-test PROPERTY CXX_STANDARD 17)
+# ---------------- APPEND (ut-t25): ControlInterface(devicecontrol) 专用测试二进制 ----------------
+# deepin-devicecontrol 与 deepin-deviceinfo 各有一个同名 ControlInterface(均含 Q_OBJECT)，
+# 不能与主测试二进制(已编 deviceinfo 侧)同链；本目标只编 devicecontrol 侧源码 + control-ut/ 用例。
+file(GLOB_RECURSE CTRL_UT_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/*.cpp)
+list(REMOVE_ITEM CTRL_UT_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/main.cpp)
+file(GLOB CTRL_UT_TESTS ${CMAKE_CURRENT_LIST_DIR}/control-ut/*.cpp)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Test)
+# ControlInterface(devicecontrol) 构造依赖该宏(initPolicy 配置路径)，与 deepin-devicecontrol/CMakeLists.txt 一致
+add_definitions(-DSERVICE_CONFIG_DIR="${CMAKE_INSTALL_PREFIX}/share/deepin-service-manager/")
+add_executable(control-test ${CTRL_UT_SRCS} ${CTRL_UT_TESTS}
+    ${CMAKE_CURRENT_LIST_DIR}/src/test_main.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/stub.h
+)
+target_include_directories(control-test PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src
+    ${CMAKE_CURRENT_LIST_DIR}/src
+    ${CMAKE_CURRENT_LIST_DIR}/control-ut
+)
+if(${QT_VERSION_MAJOR} EQUAL 6)
+    target_link_libraries(control-test
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
+        Qt6::DBus
+        Qt6::Sql
+        Qt6::Network
+        Qt6::Test
+        Dtk6::Core
+        Dtk6::Widget
+        ${GTEST_LIBRARIES}
+        ${GTEST_MAIN_LIBRARIES}
+        PolkitQt6-1::Agent
+        deepin-qdbus-service
+        pthread
+        cups
+    )
+elseif(${QT_VERSION_MAJOR} EQUAL 5)
+    target_link_libraries(control-test
+        Qt5::Core
+        Qt5::Gui
+        Qt5::Widgets
+        Qt5::DBus
+        Qt5::Sql
+        Qt5::Network
+        Qt5::Test
+        ${DtkWidget_LIBRARIES}
+        ${DtkCore_LIBRARIES}
+        ${DtkGUI_LIBRARIES}
+        ${GTEST_LIBRARIES}
+        ${GTEST_MAIN_LIBRARIES}
+        PolkitQt5-1::Agent
+        deepin-qdbus-service
+        pthread
+        cups
+    )
+else()
+    message(FATAL_ERROR "Unsupported QT_VERSION: ${QT_VERSION_MAJOR}")
+endif()
+if(NOT DISABLE_DRIVER)
+    target_link_libraries(control-test
+        kmod
+        ${QAPT_LIB}
+    )
+endif()
+# 主测试二进制补链 Qt6::Test：DriverControl 新增用例使用 QSignalSpy
+if(NOT TARGET ${PROJECT_NAME_TEST})
+    message(FATAL_ERROR "main test target missing")
+endif()
+target_link_libraries(${PROJECT_NAME_TEST} Qt${QT_VERSION_MAJOR}::Test)
