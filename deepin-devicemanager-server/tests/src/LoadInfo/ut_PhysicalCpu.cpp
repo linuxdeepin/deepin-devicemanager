@@ -25,6 +25,8 @@
  *   B5: i < 0 -> continue                                | LogicalCpu_NotFound_FallsBackToSentinel
  *   B6: core.logicalIsExisted(id) -> return found        | LogicalCpu_ExistingId_ReturnsReference
  *   B7: fallback -> m_MapCoreCpu[-1].logicalCpu(-1)      | LogicalCpu_NotFound_FallsBackToSentinel
+ * coreCpu:
+ *   B12: find(id) != end -> ref / static default         | CoreCpu_ExistingId_ReturnsMutableRef, CoreCpu_MissingId_ReturnsDefault
  * getInfo:
  *   B8: coreId() >= 0 -> getInfo (skip sentinel)         | GetInfo_SentinelCoreOnly_ProducesEmptyString, GetInfo_PopulatedCores_ProducesExpectedOutput
  * coreNum:
@@ -34,7 +36,7 @@
  *   B11: id < 0 -> continue                              | LogicalNum_SentinelCore_SkipsInSum
  */
 
-class PhysicalCpu_UT : public UT_HEAD
+class PhysicalCpu_UT : public ::testing::Test
 {
 public:
     void SetUp() override
@@ -166,6 +168,18 @@ TEST_F(PhysicalCpu_UT, CoreCpu_ExistingId_ReturnsMutableRef)
     // Assert
     EXPECT_EQ(cpu.coreCpu(0).coreId(), 77);
     EXPECT_EQ(cpu.coreNum(), 1);
+}
+
+TEST_F(PhysicalCpu_UT, CoreCpu_MissingId_ReturnsDefault)
+{
+    // Arrange
+    PhysicalCpu cpu(0);
+    cpu.addCoreCpu(0, CoreCpu(0));
+    // Act — 查询不存在的核 id，应返回静态默认核（默认 coreId 为 -1）
+    CoreCpu &missing = cpu.coreCpu(999);
+    // Assert
+    EXPECT_EQ(missing.coreId(), -1);
+    EXPECT_EQ(cpu.coreNum(), 1);   // 原有核不受影响
 }
 
 // ===== coreNum (sentinel exclusion) =====
