@@ -20,6 +20,7 @@ import json
 import xml.etree.ElementTree as ET
 import glob
 import os
+import shutil
 import subprocess
 import re
 import sys
@@ -42,12 +43,44 @@ def parse_gtest_xml(xml_dir):
     return total, passed, failed
 
 
+def _parse_info_pure(coverage_info):
+    """Pure-python .info parser fallback (used when lcov binary is unavailable)."""
+    lh = lf = fnf = fnh = 0
+    cur_lh = cur_lf = cur_fnf = cur_fnh = 0
+    in_rec = False
+    with open(coverage_info, encoding="utf-8", errors="replace") as fp:
+        for raw in fp:
+            line = raw.strip()
+            if line == "end_of_record":
+                lh += cur_lh; lf += cur_lf; fnf += cur_fnf; fnh += cur_fnh
+                in_rec = False
+            elif line.startswith("LH:"):
+                cur_lh = int(line[3:]); in_rec = True
+            elif line.startswith("LF:"):
+                cur_lf = int(line[3:]); in_rec = True
+            elif line.startswith("FNF:"):
+                cur_fnf = int(line[4:]); in_rec = True
+            elif line.startswith("FNH:"):
+                cur_fnh = int(line[4:]); in_rec = True
+    result = {}
+    if lf:
+        result["line_coverage"] = {"total": lf, "passed": lh, "failed": lf - lh,
+                                   "coverage": f"{lh / lf * 100:.2f}%"}
+    if fnf:
+        result["function_coverage"] = {"total": fnf, "passed": fnh, "failed": fnf - fnh,
+                                       "coverage": f"{fnh / fnf * 100:.2f}%"}
+    return result
+
+
 def parse_lcov_summary(coverage_info):
     """Parse lcov --summary output, return coverage dict."""
     result = {}
     if not os.path.exists(coverage_info):
         print(f"Warning: coverage info file not found: {coverage_info}", file=sys.stderr)
         return result
+
+    if not shutil.which("lcov"):
+        return _parse_info_pure(coverage_info)
 
     lcov_out = subprocess.run(
         ["lcov", "--summary", coverage_info, "--rc", "lcov_branch_coverage=1"],
