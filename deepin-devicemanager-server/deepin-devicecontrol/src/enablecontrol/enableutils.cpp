@@ -98,7 +98,6 @@ void EnableUtils::disableOutDevice(const QString &info)
         } else {
             path = mapItem["SysFS ID"];
         }
-        path.replace(QRegularExpression("[1-9]$"), "0");
 
 
         // 网卡采用ioctl的方式禁用

@@ -640,14 +640,14 @@ TEST_F(EnableUtilsTest, disableOutDevice_usbInDb_writesAuthorizedFileAndUpdatesP
     stub.set((char *)ut_qtSym(UT_QSYM_QFILE_OPEN), ut_qfileOpen_stub);
     stub.set((char *)ut_qtSym(UT_QSYM_QIOWRITE), ut_qfileWriteData_stub);
 
-    // Act: SysFS ID 尾号 2 会被规范化替换为 0
+    // Act: SysFS ID 路径保持原值（移除错误的末位归一化）
     EnableUtils::disableOutDevice(utUsbInfo(QStringLiteral("/devices/ut_t27/usb1/1-2")));
 
     // Assert: 向 /sys<path>/authorized 写入 0，并更新库内 path
     EXPECT_GT(ut_isSafeSysfs_calls, 0);
     ASSERT_EQ(ut_qfileWrites.size(), 1);
     EXPECT_EQ(ut_qfileWrites.first(), QByteArray("0"));
-    EXPECT_EQ(mgr->authorizedPath("ut-serial-xyz"), QStringLiteral("/devices/ut_t27/usb1/1-0"));
+    EXPECT_EQ(mgr->authorizedPath("ut-serial-xyz"), QStringLiteral("/devices/ut_t27/usb1/1-2"));
 }
 
 TEST_F(EnableUtilsTest, disableOutDevice_usbUnsafePath_skippedWithoutWrite)
@@ -1032,10 +1032,10 @@ TEST_F(EnableUtilsTest, disableOutDevice_md5UidFromVendorDevice_inDb_writesAutho
     // Act: 设备信息含 Vendor/Device 行，触发 MD5 分支
     EnableUtils::disableOutDevice(utUsbInfoMd5(sysfsId));
 
-    // Assert: authorized 文件写入 "0"，库内路径更新（尾部端口号归一化为 0）
+    // Assert: authorized 文件写入 "0"，库内路径保持原值
     ASSERT_EQ(ut_qfileWrites.size(), 1);
     EXPECT_EQ(ut_qfileWrites.first(), QByteArray("0"));
-    EXPECT_EQ(mgr->authorizedPath(expectUid), QStringLiteral("/devices/ut_t27/md5/input0"));
+    EXPECT_EQ(mgr->authorizedPath(expectUid), QStringLiteral("/devices/ut_t27/md5/input6"));
 }
 
 // MD5 分支的 SysFS Device Link 变体：path 取 Device Link
@@ -1062,7 +1062,7 @@ TEST_F(EnableUtilsTest, disableOutDevice_md5UidWithDeviceLink_usesLinkAsPath)
     // Assert
     ASSERT_EQ(ut_qfileWrites.size(), 1);
     EXPECT_EQ(ut_qfileWrites.first(), QByteArray("0"));
-    EXPECT_EQ(mgr->authorizedPath(expectUid), QStringLiteral("/devices/ut_t27/link0"));
+    EXPECT_EQ(mgr->authorizedPath(expectUid), QStringLiteral("/devices/ut_t27/link6"));
 }
 
 // Module Alias 分支：无 Serial ID 时取 Module Alias 并截断尾部标识
