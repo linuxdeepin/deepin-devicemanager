@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 -2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -50,12 +50,15 @@ void ThreadExecXrandr::run()
 {
     if (m_Gpu) {
         getGpuInfoFromXrandr();
-    } else {           
-       if(Common::boardVendorType() == "PGUV") {
-           QList<QMap<QString, QString>> lstMap;
-           getResolutionRateFromDBus(lstMap);
-       }else 
+    } else {
+        if (Common::isHwPlatform()) {
+            QList<QMap<QString, QString>> lstMap;
+            getResolutionRateFromDBus(lstMap);
+            if (lstMap.isEmpty())
+                getMonitorInfoFromXrandrVerbose();
+        } else {
             getMonitorInfoFromXrandrVerbose();
+        }
     }
 }
 
