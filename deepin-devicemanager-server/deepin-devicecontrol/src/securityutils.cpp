@@ -31,6 +31,8 @@ bool isPathWithinDirectory(const QString &filePath, const QString &baseDir)
     QFileInfo fileInfo(filePath);
     QString canonicalPath = fileInfo.canonicalFilePath();
     if (canonicalPath.isEmpty())
+        canonicalPath = QDir::cleanPath(fileInfo.absoluteFilePath());
+    if (canonicalPath.isEmpty())
         return false;
 
     QFileInfo dirInfo(baseDir);
