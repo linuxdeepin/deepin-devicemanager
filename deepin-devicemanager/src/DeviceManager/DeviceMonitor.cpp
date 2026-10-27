@@ -179,7 +179,20 @@ void DeviceMonitor::setInfoFromEdidForCustom(const QMap<QString, QString> &mapIn
 void DeviceMonitor::setInfoFromDbus(const QMap<QString, QString> &mapInfo)
 {
     if (mapInfo["Name"].toLower().contains(m_DisplayInput.toLower(), Qt::CaseInsensitive)) {
+        QRegExp reInput("^([a-zA-Z]*)-[\\s\\S]*");
+        if (m_Interface.isEmpty() && reInput.exactMatch(mapInfo["Name"])) {
+            m_Interface = reInput.cap(1);
+        }
+
         setAttribute(mapInfo, "CurResolution", m_CurrentResolution);
+
+        if (Common::specialComType == Common::kSpecialType10) {
+            QRegExp reResolution("^([0-9]{1,5})×([0-9]{1,5})@([0-9.]+)Hz$");
+            if (reResolution.exactMatch(m_CurrentResolution)) {
+                m_CurrentResolution = QString("%1×%2").arg(reResolution.cap(1)).arg(reResolution.cap(2));
+                m_RefreshRate = QString::number(ceil(reResolution.cap(3).toDouble())) + "Hz";
+            }
+        }
     }
 }
 
