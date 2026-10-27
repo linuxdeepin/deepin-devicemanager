@@ -98,7 +98,7 @@ void EnableSqlManager::updateDataToAuthorizedTable(const QString &unique_id, con
 
 void EnableSqlManager::clearEnableFromAuthorizedTable()
 {
-    QString sql = QString("DELETE FROM %1 WHERE enable='%2';").arg(DB_TABLE_AUTHORIZED).arg(true);
+    QString sql = QString("DELETE FROM %1 WHERE exist=%2;").arg(DB_TABLE_AUTHORIZED).arg(1);
     if (!m_sqlQuery.exec(sql)) {
         qCInfo(appLog) << m_sqlQuery.lastError();
     }
