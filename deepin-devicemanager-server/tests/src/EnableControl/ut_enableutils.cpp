@@ -672,9 +672,9 @@ TEST_F(EnableUtilsTest, disableOutDevice_usbUnsafePath_skippedWithoutWrite)
     EXPECT_EQ(mgr->authorizedPath("ut-serial-xyz"), QStringLiteral("/ut/orig"));
 }
 
-// 标红缺陷 pinning（只标红不改源码）：USB 分支中 authorized 文件打开失败时使用
-// return 直接退出整个 disableOutDevice 循环，后续设备条目被跳过(疑似应 continue)。
-TEST_F(EnableUtilsTest, disableOutDevice_usbFileOpenFails_abortsRemainingItems)
+// 修复验证（上游 3645c986 已将打开失败分支 return 改为 continue）：USB 分支中
+// authorized 文件打开失败时仅跳过当前设备条目，循环继续处理后续设备。
+TEST_F(EnableUtilsTest, disableOutDevice_usbFileOpenFails_continuesRemainingItems)
 {
     // Arrange: 第一条为待禁用 USB 设备，第二条为库中另一条应被处理的网卡
     Stub stub;
@@ -697,9 +697,12 @@ TEST_F(EnableUtilsTest, disableOutDevice_usbFileOpenFails_abortsRemainingItems)
     EnableUtils::disableOutDevice(utUsbInfo(QStringLiteral("/devices/ut_t27/usb1/1-2"))
                                   + QStringLiteral("\n\n") + utNetworkInfo());
 
-    // Assert: 疑似缺陷 —— USB 打开失败提前 return,第二条网卡未被处理
-    EXPECT_EQ(ut_ioctlOperate_calls, 0);
-    EXPECT_EQ(mgr->authorizedPath("aa:bb:cc:dd:ee:ff"), QStringLiteral("/ut/orig-nic"));
+    // Assert: 打开失败仅跳过当前 USB 条目，后续网卡仍被处理（修复后行为）
+    ASSERT_EQ(ut_ioctlOperate_calls, 1);
+    EXPECT_EQ(ut_ioctlOperate_args.first().first, QStringLiteral("enp0s0"));
+    EXPECT_FALSE(ut_ioctlOperate_args.first().second);
+    EXPECT_EQ(mgr->authorizedPath("aa:bb:cc:dd:ee:ff"), QStringLiteral("enp0s0"));
+    // 打开失败的 USB 条目本身未被写文件、未更新库
     EXPECT_EQ(mgr->authorizedPath("ut-serial-xyz"), QStringLiteral("/ut/orig"));
 }
 
