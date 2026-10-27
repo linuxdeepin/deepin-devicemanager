@@ -245,7 +245,7 @@ const QList<QPair<QString, QString>> &DeviceManager::getDeviceTypes()
     }
 
     if (m_ListDeviceImage.size() > 0) {
-        m_ListDeviceType.append(QPair<QString, QString>(tr("Camera"), "camera##Image"));
+        m_ListDeviceType.append(QPair<QString, QString>(tr("Camera"), "image##Image"));
     }
 
     if (m_ListDeviceOthers.size() > 0) {
