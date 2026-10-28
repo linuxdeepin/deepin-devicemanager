@@ -1,3 +1,16 @@
+deepin-devicemanager (6.0.75) unstable; urgency=medium
+
+  * chore: Update version to 6.0.75
+  * docs(device-manager): add Portuguese (pt_BR) help manual
+  * fix: harden device info parsing (CPU/GPU/memory) and null/edge-case handling
+  * fix: correct SQL column, dpkg status matching and cache/ID handling
+  * fix: resolve layout deletion, QList bounds and delegate paint issues
+  * test: expand unit tests for DeviceManager, DeviceBaseInfo, Widget and LoadInfo modules
+  * test: rewrite value-driven GTest suites and align assertions with upstream fixes
+  * chore: update SPDX copyright year for CI SPDX check
+
+ -- re2zero <yangwu@uniontech.com>  Wed, 28 Oct 2026 11:06:27 +0800
+
 deepin-devicemanager (6.0.74) unstable; urgency=medium
 
   * chore: Update version to 6.0.74
