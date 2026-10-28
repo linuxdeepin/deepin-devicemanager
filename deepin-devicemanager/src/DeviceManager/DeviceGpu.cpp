@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -8,6 +8,7 @@
 
 // Qt库文件
 #include<QLoggingCategory>
+#include <QDir>
 
 DeviceGpu::DeviceGpu()
     : DeviceBaseInfo()
@@ -185,6 +186,46 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
                     }
                 }
             }
+        }
+    }
+    // Fallback: when gpu-info file does not exist (e.g. radeon driver),
+    // try DRM sysfs interface and hwinfo output to get VRAM size
+    if (m_GraphicsMemory.isEmpty()) {
+        QString pciBdf = m_SysPath.section('/', -1);
+        if (!pciBdf.isEmpty()) {
+            QDir drmDir("/sys/class/drm");
+            QStringList cards = drmDir.entryList(QStringList() << "card[0-9]*",
+                                                  QDir::Dirs | QDir::NoDotAndDotDot);
+            foreach (const QString &card, cards) {
+                if (card.contains('-'))
+                    continue;
+                QString devicePath = QFile::symLinkTarget(
+                    QString("/sys/class/drm/%1/device").arg(card));
+                if (!devicePath.contains(pciBdf))
+                    continue;
+                QFile memFile(QString("/sys/class/drm/%1/device/mem_info_visible_vram_size")
+                                  .arg(card));
+                if (memFile.open(QIODevice::ReadOnly)) {
+                    QString memStr = memFile.readAll().trimmed();
+                    memFile.close();
+                    bool ok;
+                    quint64 vramBytes = memStr.toULongLong(&ok);
+                    if (ok && vramBytes >= 1048576) {
+                        quint64 vramMB = vramBytes / 1048576;
+                        auto curSize = vramMB / 1024.0;
+                        if (curSize > 1) {
+                            m_GraphicsMemory = QString::number(curSize) + "GB";
+                        } else {
+                            m_GraphicsMemory = QString::number(vramMB) + "MB";
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        // Fallback 2: parse VRAM size from hwinfo output
+        if (m_GraphicsMemory.isEmpty() && mapInfo.contains("Memory Size")) {
+            m_GraphicsMemory = mapInfo["Memory Size"].trimmed();
         }
     }
     QString jjwFile = "/proc/gpuinfo_0";
