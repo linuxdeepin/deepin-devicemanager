@@ -148,6 +148,10 @@ QString Common::checkBoardVendorFlag()
         case kSpecialType8:
             boardVendorKey = "CustomType";
             break;
+        case kSpecialType11:
+            // 讯飞机型，非华为定制机型，保持默认(空)板卡厂商
+            boardVendorKey = "";
+            break;
         default:
             boardVendorKey = "PGUW";
             break;
