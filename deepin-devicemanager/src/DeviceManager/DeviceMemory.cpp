@@ -147,13 +147,21 @@ void DeviceMemory::loadOtherDeviceInfo()
 {
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
+    // 讯飞机型(specialComType)且为飞腾D3000/龙芯3A6000(specialCpuType)时隐藏“配置频率”
+    const bool hideConfiguredSpeed =
+        (Common::specialComType == Common::kSpecialType11) &&
+        (Common::curCpuType == Common::kSpecialCpuType2 || Common::curCpuType == Common::kSpecialCpuType3);
     if (Common::boardVendorType().isEmpty()) {
         addOtherDeviceInfo(("Configured Voltage"), m_ConfiguredVoltage);
         addOtherDeviceInfo(("Maximum Voltage"), m_MaximumVoltage);
         addOtherDeviceInfo(("Minimum Voltage"), m_MinimumVoltage);
-        addOtherDeviceInfo(("Configured Speed"), m_ConfiguredSpeed);
+        if (!hideConfiguredSpeed) {
+            addOtherDeviceInfo(("Configured Speed"), m_ConfiguredSpeed);
+        }
     } else {
-        addOtherDeviceInfo(("Configured Speed"), m_ConfiguredSpeed);
+        if (!hideConfiguredSpeed) {
+            addOtherDeviceInfo(("Configured Speed"), m_ConfiguredSpeed);
+        }
     }
     addOtherDeviceInfo(("Data Width"), m_DataBandwidth);
 

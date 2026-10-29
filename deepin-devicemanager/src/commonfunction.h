@@ -27,12 +27,15 @@ public:
         kSpecialType7,
         kSpecialType8,
         kSpecialType9,
-        kSpecialType10
+        kSpecialType10,
+        kSpecialType11
     };
 
     enum SpecialCpuType {
         kUnknowCpuType = 0,
-        kSpecialCpuType1
+        kSpecialCpuType1,
+        kSpecialCpuType2,   // 飞腾 D3000
+        kSpecialCpuType3    // 龙芯 3A6000
     };
 
     enum SpecialVRAMType {
