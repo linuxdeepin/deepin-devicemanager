@@ -242,6 +242,8 @@ public:
      */
     void setGpuSizeFromDmesg(const QMap<QString, QString> &mapInfo);
 
+    void setGpuSizeFromGlxInfo(const QMap<QString, QString> &mapInfo);
+
     // 内存设备相关 *************************************************************************************
     /**
      * @brief addMemoryDevice:添加内存设备

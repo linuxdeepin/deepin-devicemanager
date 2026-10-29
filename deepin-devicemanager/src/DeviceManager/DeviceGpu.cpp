@@ -1,10 +1,11 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 // 项目自身文件
 #include "DeviceGpu.h"
 #include "commonfunction.h"
+#include "commondefine.h"
 
 // Qt库文件
 #include<QLoggingCategory>
@@ -267,6 +268,30 @@ void DeviceGpu::setDmesgInfo(const QMap<QString, QString> &mapInfo)
         QString size = mapInfo["Size"];
         m_GraphicsMemory = size.replace(m_HwinfoToLshw + "=", "");
     }
+}
+
+void DeviceGpu::setGlxInfo(const QMap<QString, QString> &mapInfo)
+{
+    if (!mapInfo.contains(kGraphicsMemory))
+        return;
+
+    // glxinfo -B 仅反映当前 GL 渲染 GPU 的显存，且无 BusID 可用于匹配设备，
+    // 故仅在尚未获取到显存值时作为兜底，避免覆盖其他来源(如 sysfs gpu-info)已得到的正确值
+    if (!m_GraphicsMemory.isEmpty())
+        return;
+
+    QString memory = mapInfo[kGraphicsMemory].trimmed();
+    // 将 MB 转换为 GB
+    if (memory.endsWith("MB", Qt::CaseInsensitive)) {
+        QString numStr = memory.left(memory.length() - 2).trimmed();
+        bool ok = false;
+        double value = numStr.toInt(&ok);
+        if (ok && value >= 1024) {
+            m_GraphicsMemory = QString("%1GB").arg(value / 1024);
+            return;
+        }
+    }
+    m_GraphicsMemory = memory;
 }
 
 void DeviceGpu::setGpuInfo(const QMap<QString, QString> &mapInfo)
