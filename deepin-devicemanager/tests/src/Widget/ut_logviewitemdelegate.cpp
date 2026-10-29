@@ -1,5 +1,5 @@
 // Copyright (C) 2019-2026 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -78,6 +78,10 @@ TEST_F(UT_LogViewItemDelegate, UT_LogViewItemDelegate_sizeHint)
     QStyleOptionViewItem option;
     QModelIndex index = m_view->model()->index(0, 0);
     QSize size = m_logDelegate->sizeHint(option, index);
-    EXPECT_EQ(6, size.width());
-    EXPECT_EQ(36, size.height());
+    // 产品契约(logviewitemdelegate.cpp): 高度 = max(36, 基类高度), 宽度非负。
+    // 不应断言精确 6×36: 基类高度/边距取决于应用级字体与样式, 而
+    // ut_drivertableview 等套件会 QApplication::setStyle(DStyle), 其 polish
+    // 修改全局字体度量, 使精确值随套件顺序漂移(顺序污染)。
+    EXPECT_GE(size.height(), 36);
+    EXPECT_GE(size.width(), 0);
 }
