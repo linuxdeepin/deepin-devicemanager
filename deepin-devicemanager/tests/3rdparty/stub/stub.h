@@ -1,5 +1,13 @@
-#ifndef __STUB_H__
-#define __STUB_H__
+// SPDX-FileCopyrightText: 2026 UnionTech Software Technology Co., Ltd.
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+
+// NOTE: guard 不能与旧版 tests/src/stub.h 的 __STUB_H__ 重名。ut_Head.h 先包含
+// 旧版(全局命名空间 Stub, void set()),若 guard 撞名本文件会被整体跳过,
+// 导致 stubext.h 误继承旧 API(void set/无 clear)而编译失败。
+// 两版 Stub 命名空间不同(全局 vs stub_ext),guard 唯一化后可共存。
+#ifndef __STUB_EXT_STUB_H__
+#define __STUB_EXT_STUB_H__
 
 #ifdef _WIN32
 //windows

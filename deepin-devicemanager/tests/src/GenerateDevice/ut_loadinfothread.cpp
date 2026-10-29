@@ -1,5 +1,5 @@
 // Copyright (C) 2019-2026 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -70,11 +70,14 @@
 
 #include <QDateTime>
 #include <QThreadPool>
+#include <atomic>
 #include <gtest/gtest.h>
 
 // ---------- 打桩状态 ----------
 static QString s_dbusInfo;        // getInfo 注入值
-static int s_loadCmdCalls = 0;    // CmdTool::loadCmdInfo 调用计数
+static std::atomic<int> s_loadCmdCalls{0};    // CmdTool::loadCmdInfo 调用计数
+// 注意: 29 个命令任务在 QThreadPool 并发执行, 此计数必须原子化,
+// 否则非原子 ++ 在并发下丢失增量(28≠29 的偶发失败源于此)。
 static qint64 s_nowCalls = 0;     // QDateTime 打桩调用计数
 
 // 空vendor -> 生成器构造不触发 dmidecode 子进程

@@ -1,5 +1,5 @@
 // Copyright (C) 2019-2026 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -441,4 +441,6 @@ INSTANTIATE_TEST_SUITE_P(Conversion, UT_EDIDParserConv,
         UT_EDIDConvCase{"2", "0010"},
         UT_EDIDConvCase{"7", "0111"},
         UT_EDIDConvCase{"10", "1010"},
-        UT_EDIDConvCase{"1990", "11111000110"}));
+        // 1990 = 11111000110(11 位), 产品 decTobin 按半字节(4位)零填充:
+        // 11 % 4 = 3 -> 前补 1 个 0 -> 011111000110
+        UT_EDIDConvCase{"1990", "011111000110"}));
