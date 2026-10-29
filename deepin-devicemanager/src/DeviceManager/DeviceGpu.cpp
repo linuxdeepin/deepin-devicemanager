@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -7,7 +7,8 @@
 #include "commonfunction.h"
 
 // Qt库文件
-#include<QLoggingCategory>
+#include <QLoggingCategory>
+#include <QDir>
 
 DeviceGpu::DeviceGpu()
     : DeviceBaseInfo()
@@ -187,6 +188,36 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
             }
         }
     }
+
+    // 砺算显卡显存适配
+    if (m_GraphicsMemory.isEmpty()) {
+        QString pciBdf = m_SysPath.section('/', -1);
+        if (!pciBdf.isEmpty()) {
+            QDir drmDir("/sys/class/drm");
+            QStringList cards = drmDir.entryList(QStringList() << "card[0-9]*", QDir::Dirs | QDir::NoDotAndDotDot);
+            foreach (const QString &card, cards) {
+                if (card.contains('-'))
+                    continue;
+                QString devicePath = QFile::symLinkTarget(QString("/sys/class/drm/%1/device").arg(card));
+                if (!devicePath.contains(pciBdf))
+                    continue;
+                QFile memFile(QString("/sys/class/drm/%1/device/vram_size").arg(card));
+                if (memFile.open(QIODevice::ReadOnly)) {
+                    QString memStr = memFile.readAll().trimmed();
+                    memFile.close();
+                    bool ok;
+                    quint64 vramMB = memStr.toULongLong(&ok);
+                    if (ok && vramMB >= 1024) {
+                        m_GraphicsMemory = QString::number(vramMB / 1024) + "GB";
+                    } else {
+                        m_GraphicsMemory = QString::number(vramMB) + "MB";
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     QString jjwFile = "/proc/gpuinfo_0";
     if (m_VID_PID.contains("0731") && QFile::exists(jjwFile)) {
         QFile file(jjwFile);
