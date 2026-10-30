@@ -77,6 +77,20 @@ else
     echo "WARNING: deepin-devicemanager-server-test not found, skipping server tests"
 fi
 
+# control-test(ControlInterface, devicecontrol)如果存在则运行
+# 上游新增的独立测试二进制(73 用例, 避免同名 moc 冲突), 实测 <1s 跑完,
+# 无系统总线真调用, 无 polkit 弹窗风险
+if [ -f ./deepin-devicemanager-server/tests/control-test ]; then
+    echo " =================== CONTROL TEST BEGIN ==================== "
+    QT_QPA_PLATFORM=offscreen ./deepin-devicemanager-server/tests/control-test \
+        --gtest_output=xml:./report/report_deepin-devicecontrol.xml
+    rc=$?
+    test_exit_code=$((test_exit_code || rc))
+    echo " =================== CONTROL TEST END (rc=${rc}) ==================== "
+else
+    echo "WARNING: control-test not found, skipping devicecontrol tests"
+fi
+
 workdir="${build_path}"
 
 #统计代码覆盖率并生成html报告 (各步骤失败仅降级,不中断)
