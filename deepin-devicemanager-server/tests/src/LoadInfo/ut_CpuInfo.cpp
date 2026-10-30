@@ -320,8 +320,9 @@ TEST_F(CpuInfo_UT, DefaultConstructor_Counters_AllZero)
     const int phys = cpu.physicalNum();
     const int cores = cpu.coreNum();
     const int logicals = cpu.logicalNum();
-    // Assert — ctor 初始化 m_Arch 为 "unknow"（源码字面拼写）
-    EXPECT_EQ(cpu.arch(), QString("unknow"));
+    // Assert — ctor 初始化 m_Arch 为 "unknown"
+    // (上游 d614f752 修复拼写 unknow -> unknown, 测试同步对齐)
+    EXPECT_EQ(cpu.arch(), QString("unknown"));
     EXPECT_EQ(phys, 0);
     EXPECT_EQ(cores, 0);
     EXPECT_EQ(logicals, 0);
@@ -348,8 +349,8 @@ TEST_F(CpuInfo_UT, Arch_Default_IsUnknow)
     CpuInfo cpu;
     // Act
     const QString &value = cpu.arch();
-    // Assert
-    EXPECT_EQ(value, QString("unknow"));
+    // Assert — 默认值 "unknown" (上游 d614f752 修复拼写)
+    EXPECT_EQ(value, QString("unknown"));
     EXPECT_FALSE(value.isEmpty());
 }
 
@@ -364,7 +365,7 @@ TEST_F(CpuInfo_UT, Arch_AfterReadCpuArchitecture_MatchesUname)
     cpu.readCpuArchitecture();
     // Assert
     EXPECT_EQ(cpu.arch(), QString("loongarch64"));
-    EXPECT_NE(cpu.arch(), QString("unknow"));
+    EXPECT_NE(cpu.arch(), QString("unknown"));
 }
 
 // ===== readCpuArchitecture =====
@@ -1382,7 +1383,7 @@ TEST_F(CpuInfo_UT, SetProcCpuinfo_Mips64_SetsCpuMhzAndFeatures)
     EXPECT_EQ(lcpu.flags(), QString("mips-feature"));   // flags 为空 → features 兜底
 }
 
-TEST_F(CpuInfo_UT, SetProcCpuinfo_Loongarch64_FeaturesFallback)
+TEST_F(CpuInfo_UT, SetProcCpuinfo_Loongarch64_GuardKeepsPreexistingFlags)
 {
     // Arrange
     CpuInfo cpu;
@@ -1395,11 +1396,12 @@ TEST_F(CpuInfo_UT, SetProcCpuinfo_Loongarch64_FeaturesFallback)
     info.insert("features", "lsx lasx");
     // Act
     cpu.setProcCpuinfo(lcpu, info);
-    // Assert — 源码先无条件 setFlags(mapInfo["flags"])（缺键→空），
-    // 预置 flags 被清空后走 isEmpty→features 兜底，最终为 features
+    // Assert — 上游 d614f752 加守卫: 无 flags 键时不再无条件 setFlags("")
+    // 清空预置值, 预置 flags 保留; 空 flags→features 兜底路径由
+    // SetProcCpuinfo_Mips64_SetsCpuMhzAndFeatures 覆盖
     EXPECT_EQ(lcpu.curFreq(), QString("1800"));
     EXPECT_EQ(lcpu.model(), QString("3a5000"));
-    EXPECT_EQ(lcpu.flags(), QString("lsx lasx"));
+    EXPECT_EQ(lcpu.flags(), QString("pre-existing-flags"));
 }
 
 // ===== diagPrintInfo =====
