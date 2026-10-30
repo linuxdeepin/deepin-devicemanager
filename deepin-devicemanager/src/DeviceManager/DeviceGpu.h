@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -49,6 +48,8 @@ public:
      * @param mapInfo: dmesg中获取的显存信息
      */
     void setDmesgInfo(const QMap<QString, QString> &mapInfo);
+
+    void setGlxInfo(const QMap<QString, QString> &mapInfo);
 
     /**
        * @brief setGpuInfo:设置从gpuinfo命令中获取的信息，华为KLU笔记本和PanGuV机器专用

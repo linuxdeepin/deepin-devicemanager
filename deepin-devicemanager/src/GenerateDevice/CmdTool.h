@@ -1,4 +1,3 @@
-// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd.
 // SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
@@ -240,6 +239,8 @@ private:
          * @param debugfile  nvidia.txt
          */
     void loadNvidiaSettingInfo(const QString &key, const QString &debugfile);
+
+    void loadGlxInfoForVideoMemory(const QString &key, const QString &debugfile);
 
     /**
      * @brief getMapInfoFromCmd:将通过命令获取的信息字符串，转化为map形式

@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -21,3 +20,10 @@ const int contextMenuWidth_ = 150;
 const QString DEVICEINFO_PATH = "/tmp/device-info";
 
 constexpr const char* AUTH_ACTION = "com.deepin.deepin-devicemanager.checkAuthentication";
+
+//  名称("Name") 厂商("Vendor") 型号("Model") 版本(Version) 显存("Graphics Memory")
+constexpr char kName[] { "Name" };
+constexpr char kVendor[] { "Vendor" };
+constexpr char kModel[] { "Model" };
+constexpr char kVersion[] { "Version" };
+constexpr char kGraphicsMemory[] { "Graphics Memory" };

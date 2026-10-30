@@ -14,6 +14,8 @@
 #include<QDateTime>
 #include<QMutex>
 #include <QCryptographicHash>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // 其它头文件
 #include "../commondefine.h"
@@ -143,6 +145,8 @@ void CmdTool::loadCmdInfo(const QString &key, const QString &debugFile)
         loadCatConfigInfo(key, debugFile);
     else if ("nvidia" == key)
         loadNvidiaSettingInfo(key, debugFile);
+    else if ("glxinfo" == key)
+        loadGlxInfoForVideoMemory(key, debugFile);
     else
         loadCatInfo(key, debugFile);
 }
@@ -1017,6 +1021,37 @@ void CmdTool::loadNvidiaSettingInfo(const QString &key, const QString &debugfile
         }
     }
 
+}
+
+void CmdTool::loadGlxInfoForVideoMemory(const QString &key, const QString &debugfile)
+{
+    Q_UNUSED(debugfile)
+
+    QProcess process;
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    process.setProcessEnvironment(env);
+    process.start("/usr/bin/glxinfo", QStringList() << "-B");
+    if (!process.waitForFinished(3000)) {
+        qCritical() << "Error executing glxinfo:" << process.errorString();
+        return;
+    }
+
+    QString output = QString::fromLocal8Bit(process.readAllStandardOutput());
+    QStringList lines = output.split('\n');
+    QRegularExpression regex("^([^:]+):\\s*(.+)$");
+    for (const QString &line : lines) {
+        QRegularExpressionMatch match = regex.match(line);
+        if (match.hasMatch()) {
+            QString frontValue = match.captured(1).trimmed();
+            QString behindValue = match.captured(2).trimmed();
+            if (frontValue == "Video memory") {
+                QMap<QString, QString> mapInfo;
+                mapInfo.insert(kGraphicsMemory, behindValue);
+                addMapInfo(key, mapInfo);
+                break;
+            }
+        }
+    }
 }
 
 void CmdTool::getMapInfoFromCmd(const QString &info, QMap<QString, QString> &mapInfo, const QString &ch)

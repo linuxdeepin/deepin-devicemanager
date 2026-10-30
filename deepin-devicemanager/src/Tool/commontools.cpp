@@ -6,6 +6,7 @@
 #include "DDLog.h"
 #include "EDIDParser.h"
 #include "DeviceMonitor.h"
+#include "commondefine.h"
 
 #include <QLoggingCategory>
 #include <QDateTime>
@@ -24,14 +25,6 @@ DWIDGET_USE_NAMESPACE
 using namespace DDLog;
 #define ICON_SIZE_WIDTH 36
 #define ICON_SIZE_HEIGHT 36
-
-//  名称("Name") 厂商("Vendor") 型号("Model") 版本(Version) 显存("Graphics Memory")
-
-constexpr char kName[] { "Name" };
-constexpr char kVendor[] { "Vendor" };
-constexpr char kModel[] { "Model" };
-constexpr char kVersion[] { "Version" };
-constexpr char kGraphicsMemory[] { "Graphics Memory" };
 
 QMap<DriverType, QString> CommonTools::m_MapDriverIcon = {
     {DR_Bluetooth, QString(":/icons/deepin/builtin/icons/bluetooth.svg")}

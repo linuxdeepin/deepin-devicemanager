@@ -1029,6 +1029,18 @@ void DeviceManager::setGpuSizeFromDmesg(const QMap<QString, QString> &mapInfo)
     }
 }
 
+void DeviceManager::setGpuSizeFromGlxInfo(const QMap<QString, QString> &mapInfo)
+{
+    QList<DeviceBaseInfo *>::iterator it = m_ListDeviceGPU.begin();
+    for (; it != m_ListDeviceGPU.end(); ++it) {
+        DeviceGpu *device = dynamic_cast<DeviceGpu *>(*it);
+        if (!device)
+            continue;
+
+        device->setGlxInfo(mapInfo);
+    }
+}
+
 void DeviceManager::addMemoryDevice(DeviceMemory *const device)
 {
     // 添加内存

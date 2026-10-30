@@ -708,18 +708,29 @@ void DeviceGenerator::getGpuInfoFromXrandr()
 
 void DeviceGenerator::getGpuSizeFromDmesg()
 {
-    // 加载从dmesg获取的显示适配器信息，设置显存大小
+    // 加载从 dmesg 获取的显示适配器信息，设置显存大小
     const QList<QMap<QString, QString> > &lstMap = DeviceManager::instance()->cmdInfo("dmesg");
-    if (lstMap.size() > 0 && lstMap[0].size() > 0)
+    if (lstMap.size() > 0 && lstMap[0].size() > 0) {
         for (QMap<QString, QString> curMap : lstMap) {
             DeviceManager::instance()->setGpuSizeFromDmesg(curMap);
-        } else {
-        // dmesg无法获取显存信息时从nvidia-settings获取
-        const QList<QMap<QString, QString>> &nvidiaMap = DeviceManager::instance()->cmdInfo("nvidia");
-        if (nvidiaMap.size() > 0 && nvidiaMap[0].size() > 0) {
-            for (QMap<QString, QString> curMap : nvidiaMap) {
-                DeviceManager::instance()->setGpuSizeFromDmesg(curMap);
-            }
+        }
+        return;
+    }
+
+    // dmesg 无法获取显存信息时, 从 nvidia-settings 获取
+    const QList<QMap<QString, QString>> &nvidiaMap = DeviceManager::instance()->cmdInfo("nvidia");
+    if (nvidiaMap.size() > 0 && nvidiaMap[0].size() > 0) {
+        for (QMap<QString, QString> curMap : nvidiaMap) {
+            DeviceManager::instance()->setGpuSizeFromDmesg(curMap);
+        }
+        return;
+    }
+
+    // dmesg 和 nvidia-settings 无法获取显存信息时，从 glxinfo -B 获取
+    const QList<QMap<QString, QString>> &glxinfoMap = DeviceManager::instance()->cmdInfo("glxinfo");
+    if (glxinfoMap.size() > 0 && glxinfoMap[0].size() > 0) {
+        for (QMap<QString, QString> curMap : glxinfoMap) {
+            DeviceManager::instance()->setGpuSizeFromGlxInfo(curMap);
         }
     }
 }
