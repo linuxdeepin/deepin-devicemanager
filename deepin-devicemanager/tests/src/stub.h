@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -32,28 +32,30 @@
 #endif
 
 #if defined(__aarch64__) || defined(_M_ARM64)
+// NOTE: 宏名加 STUB_ 前缀，避免与 tests/3rdparty/stub/stub.h（stub-ext，x86_64
+// 上 REPLACE_FAR/REPLACE_NEAR 为静态函数）在同一编译单元内撞名，两版 stub 可共存
 #define CODESIZE 16U
 #define CODESIZE_MIN 16U
 #define CODESIZE_MAX CODESIZE
 // ldr x9, +8
 // br x9
 // addr
-#define REPLACE_FAR(t, fn, fn_stub) \
+#define STUB_REPLACE_FAR(t, fn, fn_stub) \
     ((uint32_t *)fn)[0] = 0x58000040 | 9; \
     ((uint32_t *)fn)[1] = 0xd61f0120 | (9 << 5); \
     *(long long *)(fn + 8) = (long long)fn_stub; \
     CACHEFLUSH((char *)fn, CODESIZE);
-#define REPLACE_NEAR(t, fn, fn_stub) REPLACE_FAR(t, fn, fn_stub)
+#define STUB_REPLACE_NEAR(t, fn, fn_stub) STUB_REPLACE_FAR(t, fn, fn_stub)
 #elif defined(__arm__) || defined(_M_ARM)
 #define CODESIZE 8U
 #define CODESIZE_MIN 8U
 #define CODESIZE_MAX CODESIZE
 // ldr pc, [pc, #-4]
-#define REPLACE_FAR(t, fn, fn_stub) \
+#define STUB_REPLACE_FAR(t, fn, fn_stub) \
     ((uint32_t *)fn)[0] = 0xe51ff004; \
     ((uint32_t *)fn)[1] = (uint32_t)fn_stub; \
     CACHEFLUSH((char *)fn, CODESIZE);
-#define REPLACE_NEAR(t, fn, fn_stub) REPLACE_FAR(t, fn, fn_stub)
+#define STUB_REPLACE_NEAR(t, fn, fn_stub) STUB_REPLACE_FAR(t, fn, fn_stub)
 #elif defined(__thumb__) || defined(_M_THUMB)
 #error "Thumb is not supported"
 #else //__i386__ _x86_64__
@@ -63,7 +65,7 @@
 //13 byte(jmp m16:64)
 //movabs $0x102030405060708,%r11
 //jmpq   *%r11
-#define REPLACE_FAR(t, fn, fn_stub) \
+#define STUB_REPLACE_FAR(t, fn, fn_stub) \
     *fn = 0x49; \
     *(fn + 1) = 0xbb; \
     *(long long *)(fn + 2) = (long long)fn_stub; \
@@ -73,7 +75,7 @@
     //CACHEFLUSH((char *)fn, CODESIZE);
 
 //5 byte(jmp rel32)
-#define REPLACE_NEAR(t, fn, fn_stub) \
+#define STUB_REPLACE_NEAR(t, fn, fn_stub) \
     *fn = 0xE9; \
     *(int *)(fn + 1) = (int)(fn_stub - fn - CODESIZE_MIN); \
     //CACHEFLUSH((char *)fn, CODESIZE);
@@ -166,9 +168,9 @@ public:
         }
 
         if (pstub->far_jmp) {
-            REPLACE_FAR(this, fn, fn_stub);
+            STUB_REPLACE_FAR(this, fn, fn_stub);
         } else {
-            REPLACE_NEAR(this, fn, fn_stub);
+            STUB_REPLACE_NEAR(this, fn, fn_stub);
         }
 
 #ifdef _WIN32

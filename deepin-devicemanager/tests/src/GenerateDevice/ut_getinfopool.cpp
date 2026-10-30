@@ -1,5 +1,5 @@
 // Copyright (C) 2019-2026 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022-2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -20,7 +20,7 @@
 //   B2 QMutexLocker + m_FinishedNum++;
 //   B3 m_FinishedNum == m_CmdList.size() -> emit finishedAll(info) + 归零
 // GetInfoPool::setFramework(78-83): m_Arch = arch
-// GetInfoPool::initCmd(85-123): 逐条 append 29 条命令(不先清空)
+// GetInfoPool::initCmd(85-123): 先 m_CmdList.clear() 再逐条 append 29 条命令
 // Stub: CmdTool::loadCmdInfo 打桩为空操作 —— 测试不执行真实命令(lshw/hwinfo 等),
 //       不依赖真实设备环境。原实现的 getDeviceInfo 桩保留为参考(见注释)。
 // ============================================================================
@@ -157,9 +157,9 @@ TEST_F(UT_GetInfoPool, Constructor_CmdList_Loads29Commands)
 
 
 
-/// initCmd: 清空后重新装载仍为 29(append 语义, 重复调用会累加)
+/// initCmd: 清空后重新装载仍为 29(先 clear 再 append)
 
-/// initCmd: 重复调用不清空旧表, 累计追加(源码无 clear 分支)
+/// initCmd: 重复调用先 clear 再重装, 仍为 29 条(源码 initCmd 首行 m_CmdList.clear())
 
 
 TEST_F(UT_GetInfoPool, InitCmd_RebuildAfterClear_29Entries)
@@ -175,19 +175,19 @@ TEST_F(UT_GetInfoPool, InitCmd_RebuildAfterClear_29Entries)
 }
 
 
-/// initCmd: 二次调用在 29 条基础上再追加 29 条(不清空)
+/// initCmd: 二次调用先 clear 再重装, 仍为 29 条
 
 
-TEST_F(UT_GetInfoPool, InitCmd_Rerun_AppendsWithoutClear)
+TEST_F(UT_GetInfoPool, InitCmd_Rerun_ClearsAndReloads29)
 {
     // Arrange
     ASSERT_NE(m_readFilePool, nullptr);
-    const int before = m_readFilePool->m_CmdList.size();
+    ASSERT_EQ(m_readFilePool->m_CmdList.size(), 29);   // 构造函数已装载
     // Act
-    m_readFilePool->initCmd();
+    m_readFilePool->initCmd();                          // 源码: 先 clear 再重装 29 条
     // Assert
-    EXPECT_EQ(m_readFilePool->m_CmdList.size(), before + 29); // 无 clear -> 累计
-    EXPECT_EQ(m_readFilePool->m_CmdList[29][0], "lshw");      // 追加段从 lshw 重新开始
+    EXPECT_EQ(m_readFilePool->m_CmdList.size(), 29);    // 重装后仍为 29 条
+    EXPECT_EQ(m_readFilePool->m_CmdList[0][0], "lshw"); // 首条恢复为 lshw
 }
 
 
