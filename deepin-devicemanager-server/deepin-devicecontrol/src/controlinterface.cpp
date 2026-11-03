@@ -185,6 +185,7 @@ bool ControlInterface::enablePrinter(const QString &hclass, const QString &name,
     ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_URI, "printer-uri", NULL, uri);
     const char *host = cupsServer();
     if (!host) {
+        ippDelete(request);
         return false;
     }
     int port = ippPort();
@@ -192,6 +193,7 @@ bool ControlInterface::enablePrinter(const QString &hclass, const QString &name,
     int cancel = 0;
     http_t *http = httpConnect2(host, port, nullptr, AF_UNSPEC, (http_encryption_t)encrption, 1, 30000, &cancel);
     if (!http) {
+        ippDelete(request);
         return false;
     }
     answer = cupsDoRequest(http, request, "/admin/");
@@ -643,14 +645,14 @@ void ControlInterface::construct_uri(char *buffer, size_t buflen, const char *ba
         d += buflen;
     }
 
-    while (*s && d < buffer + buflen) {
+    while (*s && d < buffer + buflen - 1) {
         if (isalpha(*s) || isdigit(*s) || *s == '-')
             *d++ = *s++;
         else if (*s == ' ') {
             *d++ = '+';
             s++;
         } else {
-            if (d + 2 < buffer + buflen) {
+            if (d + 3 < buffer + buflen) {
                 *d++ = '%';
                 *d++ = "0123456789ABCDEF"[((*s) & 0xf0) >> 4];
                 *d++ = "0123456789ABCDEF"[((*s) & 0x0f)];

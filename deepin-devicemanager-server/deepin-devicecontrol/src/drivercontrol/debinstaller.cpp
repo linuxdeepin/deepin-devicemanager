@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019-2026 ~ 2023 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -137,6 +137,7 @@ void DebInstaller::installPackage(const QString &filepath)
         } else {
             emit errorOccurred("Dpkg locked ,time out");
             emit installFinished(false);
+            return;
         }
     }
     if (!m_bValid) {
