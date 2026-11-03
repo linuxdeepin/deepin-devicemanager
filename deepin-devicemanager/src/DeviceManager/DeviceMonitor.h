@@ -99,6 +99,11 @@ public:
      * @return QString 制造商属性值
      */
     const QString &vendor()const override;
+    /**
+     * @brief displayInput:获取显示输入接口名称
+     * @return QString 显示输入，如 LVDS-0
+     */
+    const QString &displayInput() const;
 
     /**
      * @brief driver 返回驱动，重写纯虚函数

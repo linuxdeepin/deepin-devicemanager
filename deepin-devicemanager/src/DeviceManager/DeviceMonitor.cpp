@@ -318,6 +318,11 @@ const QString &DeviceMonitor::vendor() const
     return m_Vendor;
 }
 
+const QString &DeviceMonitor::displayInput() const
+{
+    return m_DisplayInput;
+}
+
 const QString &DeviceMonitor::driver() const
 {
     return m_Driver;

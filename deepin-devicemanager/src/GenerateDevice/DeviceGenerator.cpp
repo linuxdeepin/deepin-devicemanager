@@ -764,7 +764,7 @@ void DeviceGenerator::getMonitorWithoutEdidFromXrandr()
     // 有 EDID 的接口已由 getMonitorInfoFromHwinfo -> setMonitorInfoFromXrandr 处理，此处不再重复添加
     QProcess process;
     process.start("xrandr", QStringList() << "--verbose");
-    process.waitForFinished(-1);
+    process.waitForFinished(5000);
     QString output = process.readAllStandardOutput();
     if (output.isEmpty())
         return;
@@ -786,6 +786,19 @@ void DeviceGenerator::getMonitorWithoutEdidFromXrandr()
         // 仅处理已连接且无 EDID 的接口
         if (!isConnected || hasEdid || connectorName.isEmpty())
             return;
+
+        // Wayland 下 xrandr --verbose 无法获取 EDID，所有已连接显示器都会被判为"无 EDID"，
+        // 若 hwinfo 已添加同一显示器（displayInput 相同）则跳过，避免重复条目
+        QList<DeviceBaseInfo *> *monitors = DeviceManager::instance()->convertDeviceListAddr(DT_Monitor);
+        if (monitors) {
+            for (const DeviceBaseInfo *item : *monitors) {
+                const DeviceMonitor *existing = dynamic_cast<const DeviceMonitor *>(item);
+                if (existing && existing->displayInput() == connectorName) {
+                    qCInfo(appLog) << "Monitor already exists, skip:" << connectorName;
+                    return;
+                }
+            }
+        }
 
         // 接口类型：去掉末尾的 -N
         QString interfaceType = connectorName;
