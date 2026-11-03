@@ -100,7 +100,7 @@ bool PageDriverControl::isRunning()
     qCDebug(appLog) << "PageDriverControl::isRunning start";
     for (auto w : qApp->allWindows()) {
         // qCDebug(appLog) << "PageDriverControl::isRunning check window:" << w->objectName();
-        if ("PageDriverControlWindow" == w->objectName()) {
+        if ("PageDriverControl" == w->objectName()) {
             if (w->isVisible()) {
                 // qCDebug(appLog) << "PageDriverControl::isRunning is running";
                 return true;
@@ -209,7 +209,6 @@ void PageDriverControl::slotProcessEnd(bool sucess, const QString &errCode)
 void PageDriverControl::slotClose()
 {
     qCDebug(appLog) << "PageDriverControl::slotClose";
-    emit refreshInfo();
     this->close();
 }
 
@@ -386,7 +385,7 @@ void PageDriverControl::closeEvent(QCloseEvent *event)
         return;
     } else if ("Done" == property("DriverProcessStatus").toString()) {
         qCDebug(appLog) << "closeEvent: driver process done, closing";
-        slotClose();//卸载或者更新后，关闭时刷新
+        emit refreshInfo();//卸载或者更新后，关闭时刷新
     }
 }
 
