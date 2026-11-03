@@ -40,7 +40,7 @@ public:
     bool setInfoFromXradr(const QString &main, const QString &edid, const QString &rate, const QString &xrandr);
 
     /**
-     * @brief setInfoFromLvds:设置从xrandr --verbose解析的LVDS显示器信息
+     * @brief setInfoFromXrandrWithoutEdid:设置从xrandr --verbose解析的无 EDID 显示器信息
      * @param connectorName:接口名称，如 LVDS-0
      * @param interfaceType:接口类型，如 LVDS
      * @param isPrimary:是否是主显示器
@@ -48,7 +48,7 @@ public:
      * @param refreshRate:刷新率，如 60.00Hz
      * @param supportResolutions:支持的分辨率列表
      */
-    void setInfoFromLvds(const QString &connectorName, const QString &interfaceType,
+    void setInfoFromXrandrWithoutEdid(const QString &connectorName, const QString &interfaceType,
                          bool isPrimary, const QString &currentResolution,
                          const QString &refreshRate, const QStringList &supportResolutions);
 

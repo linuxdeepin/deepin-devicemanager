@@ -131,7 +131,7 @@ void DeviceMonitor::setInfoFromHwinfo(const QMap<QString, QString> &mapInfo)
     getOtherMapInfo(mapInfo);
 }
 
-void DeviceMonitor::setInfoFromLvds(const QString &connectorName, const QString &interfaceType,
+void DeviceMonitor::setInfoFromXrandrWithoutEdid(const QString &connectorName, const QString &interfaceType,
                                      bool isPrimary, const QString &currentResolution,
                                      const QString &refreshRate, const QStringList &supportResolutions)
 {

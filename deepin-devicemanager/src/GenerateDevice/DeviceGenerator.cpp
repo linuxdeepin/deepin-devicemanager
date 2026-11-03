@@ -807,7 +807,7 @@ void DeviceGenerator::getMonitorWithoutEdidFromXrandr()
             interfaceType = interfaceType.left(dashPos);
 
         DeviceMonitor *device = new DeviceMonitor();
-        device->setInfoFromLvds(connectorName, interfaceType, isPrimary,
+        device->setInfoFromXrandrWithoutEdid(connectorName, interfaceType, isPrimary,
                                 currentResolution, currentRate, supportResolutions);
         DeviceManager::instance()->addMonitor(device);
         qCInfo(appLog) << "Monitor without EDID created:" << connectorName
