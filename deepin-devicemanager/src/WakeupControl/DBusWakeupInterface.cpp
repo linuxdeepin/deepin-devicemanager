@@ -10,6 +10,21 @@
 #include <QLoggingCategory>
 #include <QFile>
 #include <QMetaMethod>
+#include <QRegularExpression>
+
+// Extract USB bus device ID (X-Y or X-Y.Z format, e.g. "1-3", "2-1.1") from a SysFS path.
+// Returns empty string if no matching segment is found.
+static QString getUsbBusDeviceId(const QString &path)
+{
+    QStringList pathList = path.split("/", QString::SkipEmptyParts);
+    QRegularExpression re("^\\d+-\\d+(\\.\\d+)?$");
+    for (const QString &segment : pathList) {
+        if (re.match(segment).hasMatch()) {
+            return segment;
+        }
+    }
+    return QString();
+}
 
 // 以下这个问题可以避免单例的内存泄露问题
 std::atomic<DBusWakeupInterface *> DBusWakeupInterface::s_Instance;
@@ -70,7 +85,10 @@ bool DBusWakeupInterface::setWakeupMachine(const QString &unique_id,
             auto metaObject = mp_InputIface->metaObject();
             for (int i = 0 ; i < metaObject->methodCount(); ++i) {
                 if (metaObject->method(i).name() == "SetWakeupDevices") {
-                    QString curPath = pathList[pathList.size() - 2];
+                    QString curPath = getUsbBusDeviceId(path);
+                    if (curPath.isEmpty()) {
+                        return false;
+                    }
                     QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
                     mp_InputIface->call("SetWakeupDevices", busPath, wakeup ? "enabled" : "disabled");
                     return true;
@@ -98,12 +116,10 @@ bool DBusWakeupInterface::canInputWakeupMachine(const QString &path)
                 QMap<QString, QString> allSupportWakeupDevices;
                 arg >> allSupportWakeupDevices;
 
-                QString curPath = path.left(path.size() - 13);
-                int index = curPath.lastIndexOf('/');
-                if (index < 1) {
+                QString curPath = getUsbBusDeviceId(path);
+                if (curPath.isEmpty()) {
                     return false;
                 }
-                curPath = curPath.right(curPath.size() - index - 1);
                 QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
                 return allSupportWakeupDevices.contains(busPath);
             }
@@ -137,11 +153,9 @@ bool DBusWakeupInterface::isInputWakeupMachine(const QString &path,
                         }
                     }
                 } else {
-                    QString curPath = path.left(path.size() - 13);
-                    int index = curPath.lastIndexOf('/');
-                    if (index < 1)
+                    QString curPath = getUsbBusDeviceId(path);
+                    if (curPath.isEmpty())
                         return false;
-                    curPath = curPath.right(curPath.size() - index - 1);
                     QString busPath = QString("/sys/bus/usb/devices/%1/power/wakeup").arg(curPath);
                     return (allSupportWakeupDevices.contains(busPath) && allSupportWakeupDevices[busPath] == "enabled");
                 }
