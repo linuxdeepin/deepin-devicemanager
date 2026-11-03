@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -39,6 +38,19 @@ public:
      * @return 布尔值，true:信息设置成功；false:信息设置失败
      */
     bool setInfoFromXradr(const QString &main, const QString &edid, const QString &rate, const QString &xrandr);
+
+    /**
+     * @brief setInfoFromXrandrWithoutEdid:设置从xrandr --verbose解析的无 EDID 显示器信息
+     * @param connectorName:接口名称，如 LVDS-0
+     * @param interfaceType:接口类型，如 LVDS
+     * @param isPrimary:是否是主显示器
+     * @param currentResolution:当前分辨率，如 1920x1080
+     * @param refreshRate:刷新率，如 60.00Hz
+     * @param supportResolutions:支持的分辨率列表
+     */
+    void setInfoFromXrandrWithoutEdid(const QString &connectorName, const QString &interfaceType,
+                         bool isPrimary, const QString &currentResolution,
+                         const QString &refreshRate, const QStringList &supportResolutions);
 
     // 将年周转化为年月
     /**
@@ -87,6 +99,11 @@ public:
      * @return QString 制造商属性值
      */
     const QString &vendor()const override;
+    /**
+     * @brief displayInput:获取显示输入接口名称
+     * @return QString 显示输入，如 LVDS-0
+     */
+    const QString &displayInput() const;
 
     /**
      * @brief driver 返回驱动，重写纯虚函数
