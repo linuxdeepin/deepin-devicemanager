@@ -9,7 +9,8 @@
 #include "DDLog.h"
 
 // Qt库文件
-#include<QLoggingCategory>
+#include <QLoggingCategory>
+#include <QDir>
 #include <QRegularExpression>
 
 using namespace DDLog;
@@ -222,6 +223,37 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
             }
         } else {
             qCDebug(appLog) << "Failed to open gpu-info file: " << pathStr;
+        }
+    }
+
+    if (m_GraphicsMemory.isEmpty()) {
+        QString pciBdf = m_SysPath.section('/', -1);
+        if (!pciBdf.isEmpty()) {
+            qCDebug(appLog) << "Graphics memory empty, trying DRM sysfs vram_size for PCI BDF:" << pciBdf;
+            QDir drmDir("/sys/class/drm");
+            QStringList cards = drmDir.entryList(QStringList() << "card[0-9]*", QDir::Dirs | QDir::NoDotAndDotDot);
+            foreach (const QString &card, cards) {
+                // skip entries like card0-HDMI-A-1; only match bare cardN
+                if (card.contains('-'))
+                    continue;
+                QString devicePath = QFile::symLinkTarget(QString("/sys/class/drm/%1/device").arg(card));
+                if (!devicePath.contains(pciBdf))
+                    continue;
+                QFile memFile(QString("/sys/class/drm/%1/device/vram_size").arg(card));
+                if (memFile.open(QIODevice::ReadOnly)) {
+                    QString memStr = memFile.readAll().trimmed();
+                    memFile.close();
+                    bool ok;
+                    quint64 vramMB = memStr.toULongLong(&ok);
+                    if (ok && vramMB >= 1024) {
+                        m_GraphicsMemory = QString::number(vramMB / 1024) + "GB";
+                    } else {
+                        m_GraphicsMemory = QString::number(vramMB) + "MB";
+                    }
+                    qCDebug(appLog) << "VRAM size from DRM sysfs:" << m_GraphicsMemory << "for card:" << card;
+                    break;
+                }
+            }
         }
     }
     QString jjwFile = "/proc/gpuinfo_0";
