@@ -189,7 +189,7 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
         }
     }
 
-    // 砺算显卡显存适配
+    // 显卡显存适配
     if (m_GraphicsMemory.isEmpty()) {
         QString pciBdf = m_SysPath.section('/', -1);
         if (!pciBdf.isEmpty()) {
