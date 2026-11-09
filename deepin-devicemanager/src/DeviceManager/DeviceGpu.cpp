@@ -247,10 +247,14 @@ bool DeviceGpu::setHwinfoInfo(const QMap<QString, QString> &mapInfo)
                     quint64 vramMB = memStr.toULongLong(&ok);
                     if (ok && vramMB >= 1024) {
                         m_GraphicsMemory = QString::number(vramMB / 1024) + "GB";
-                    } else {
+                    } else if (ok && vramMB > 0) {
                         m_GraphicsMemory = QString::number(vramMB) + "MB";
+                    } else {
+                        // 解析失败或值为 0（过小/无效）→ 忽略，保持为空，交由后续回退（jjwFile 等）处理
+                        qCDebug(appLog) << "VRAM size from DRM sysfs invalid or zero, ignored for card:" << card;
                     }
-                    qCDebug(appLog) << "VRAM size from DRM sysfs:" << m_GraphicsMemory << "for card:" << card;
+                    if (!m_GraphicsMemory.isEmpty())
+                        qCDebug(appLog) << "VRAM size from DRM sysfs:" << m_GraphicsMemory << "for card:" << card;
                     break;
                 }
             }
