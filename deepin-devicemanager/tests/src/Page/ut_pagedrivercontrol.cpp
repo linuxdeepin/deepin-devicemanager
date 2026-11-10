@@ -1,5 +1,5 @@
 // Copyright (C) 2019-2026 UnionTech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -172,10 +172,10 @@ TEST_F(UT_PageDriverControl, UT_PageDriverControl_closeEvent_Done)
     QSignalSpy spy(m_PageDriverControlInstall, &PageDriverControl::refreshInfo);
     QCloseEvent closeEvent;
     QApplication::sendEvent(m_PageDriverControlInstall, &closeEvent);
-    // Done 状态下触发 slotClose:发 refreshInfo 后 close();close 内部再次触发 closeEvent
-    // (属性仍为 Done)导致 slotClose 重入,refreshInfo 共发出 2 次
-    EXPECT_EQ(2, spy.count());
-    EXPECT_TRUE(m_PageDriverControlInstall->isHidden());
+    // Done 状态下 closeEvent 仅发一次 refreshInfo；close 重入已消除，
+    // 不再经 slotClose 二次触发，事件未被拦截可正常关闭
+    EXPECT_EQ(1, spy.count());
+    EXPECT_TRUE(closeEvent.isAccepted());
 }
 
 TEST_F(UT_PageDriverControl, UT_PageDriverControl_closeEvent_normal)
@@ -272,16 +272,17 @@ TEST_F(UT_PageDriverControl, UT_PageDriverControl_slotProcessEnd_fail_knownErr)
 
 TEST_F(UT_PageDriverControl, UT_PageDriverControl_isRunning_visible)
 {
-    // isRunning 为静态方法:遍历 qApp->allWindows() 的 QWindow 对象名
-    // (生产代码从未给任何窗口设置 "PageDriverControlWindow",此处验证可识别已标记窗口)
+    // isRunning 为静态方法：遍历 qApp->allWindows()，匹配构造函数设置的
+    // objectName "PageDriverControl" 且窗口可见才视为运行中
     PageDriverControl dlg(nullptr, "Update Drivers", true, "camera", "");
     dlg.show();
     QWindow *win = dlg.windowHandle();
     ASSERT_NE(nullptr, win);
-    win->setObjectName("PageDriverControlWindow");
+    win->setObjectName("PageDriverControl");
     EXPECT_TRUE(PageDriverControl::isRunning());
     EXPECT_TRUE(dlg.isRunning());
-    // 清理标记,避免影响其它用例的 allWindows 遍历
-    win->setObjectName("PageDriverControl");
+    // 改名后不再匹配，视为未运行；最后恢复标记，避免影响其它用例的 allWindows 遍历
+    win->setObjectName("PageDriverControlWindow");
     EXPECT_FALSE(PageDriverControl::isRunning());
+    win->setObjectName("PageDriverControl");
 }

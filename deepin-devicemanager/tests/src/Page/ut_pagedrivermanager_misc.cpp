@@ -168,23 +168,22 @@ TEST_F(UT_PageDriverManager_Misc, UT_PageDriverManager_failAllIndex)
 
 TEST_F(UT_PageDriverManager_Misc, UT_PageDriverManager_networkIsOnline)
 {
-    // Qt6 分支:单例可达性受控,验证当前行为
+    // Qt6 分支：单例可达性受控；实现为 reachability != Disconnected 即在线
     stub.set(ADDR(QNetworkInformation, instance), ut_pdmm_netInstance);
     stub.set((QNetworkInformation::Reachability (QNetworkInformation::*)() const)ADDR(QNetworkInformation, reachability),
              ut_pdmm_reachability);
 
-    // 注意:当前实现为 reachability == Disconnected 时返回 true,逻辑疑似反转(Mode 5 缺陷候选)
-    // 本用例固化当前行为:Online -> false
+    // Online -> 在线
     ut_pdmm_reach = QNetworkInformation::Reachability::Online;
-    EXPECT_FALSE(m_dPageDriverManager->networkIsOnline());
-
-    // Disconnected -> true(同样为反转后的当前行为)
-    ut_pdmm_reach = QNetworkInformation::Reachability::Disconnected;
     EXPECT_TRUE(m_dPageDriverManager->networkIsOnline());
 
-    // Unknown: != Disconnected -> false
-    ut_pdmm_reach = QNetworkInformation::Reachability::Unknown;
+    // Disconnected -> 离线
+    ut_pdmm_reach = QNetworkInformation::Reachability::Disconnected;
     EXPECT_FALSE(m_dPageDriverManager->networkIsOnline());
+
+    // Unknown：非 Disconnected，视为在线
+    ut_pdmm_reach = QNetworkInformation::Reachability::Unknown;
+    EXPECT_TRUE(m_dPageDriverManager->networkIsOnline());
 }
 
 TEST_F(UT_PageDriverManager_Misc, UT_PageDriverManager_networkIsOffline_null)
