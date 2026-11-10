@@ -37,6 +37,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QTemporaryDir>
 
 class WakeupUtilsTest : public ::testing::Test
@@ -442,6 +443,13 @@ static bool ut_qfileExists_stub(const QString &fileName)
     Q_UNUSED(fileName);
     ++ut_qfileExists_calls;
     return ut_qfileExists_ret;
+}
+// PR #967 wakeupPath 新增 canonicalFilePath 兜底校验：QFile::exists 被打桩为 true 后，
+// QFileInfo 对不存在的假路径 canonicalFilePath() 返回空串，会被误判为"逃逸出 /sys"。
+// 此处模拟真实存在的 /sys 文件：canonical 解析后仍为原路径（位于 /sys 之下）。
+static QString ut_qfileInfoCanonical_stub(QFileInfo *self)
+{
+    return self->filePath();
 }
 static bool ut_qfileRemove_ret = true;
 static QString ut_qfileRemove_arg;
@@ -992,6 +1000,7 @@ TEST_F(WakeupUtilsTest, updateWakeupDeviceInfo_uidMatch_dbWakeupTrue_writesEnabl
     ut_writeWakeup_calls.clear();
     stub.set(ADDR(WakeupUtils, writeWakeupFile), ut_writeWakeupFile_stub);
     stub.set((bool (*)(const QString &))QFile::exists, ut_qfileExists_stub);
+    stub.set(ADDR(QFileInfo, canonicalFilePath), ut_qfileInfoCanonical_stub);
     ut_qfileExists_ret = true;
 
     // Act: 携带 SysFS ID 行，走 SysFS ID 直取分支（不触发 /proc 解析）
@@ -1040,6 +1049,7 @@ TEST_F(WakeupUtilsTest, updateWakeupDeviceInfo_md5Uid_matchesDb_writesDisabledFi
     ut_writeWakeup_calls.clear();
     stub.set(ADDR(WakeupUtils, writeWakeupFile), ut_writeWakeupFile_stub);
     stub.set((bool (*)(const QString &))QFile::exists, ut_qfileExists_stub);
+    stub.set(ADDR(QFileInfo, canonicalFilePath), ut_qfileInfoCanonical_stub);
     ut_qfileExists_ret = true;
 
     // Act
@@ -1064,6 +1074,7 @@ TEST_F(WakeupUtilsTest, updateWakeupDeviceInfo_ps2Keyboard_usesProcBusParsing)
     stub.set((char *)ut_qtSym(UT_QSYM_QFILE_OPEN), ut_qfileOpen_stub);
     stub.set(ADDR(QIODevice, readAll), ut_readAll_stub);
     stub.set((bool (*)(const QString &))QFile::exists, ut_qfileExists_stub);
+    stub.set(ADDR(QFileInfo, canonicalFilePath), ut_qfileInfoCanonical_stub);
     ut_qfileOpen_ret = true;
     ut_readAll_ret = QByteArray(utProcContentStandard);
     ut_qfileOpen_calls = 0;
@@ -1191,6 +1202,7 @@ TEST_F(WakeupUtilsTest, updateWakeupDeviceInfo_md5UidWithDeviceLink_matchesDb_wr
     ut_writeWakeup_calls.clear();
     stub.set(ADDR(WakeupUtils, writeWakeupFile), ut_writeWakeupFile_stub);
     stub.set((bool (*)(const QString &))QFile::exists, ut_qfileExists_stub);
+    stub.set(ADDR(QFileInfo, canonicalFilePath), ut_qfileInfoCanonical_stub);
     stub.set((char *)ut_qtSym(UT_QSYM_QFILE_OPEN), ut_qfileOpen_stub);
     stub.set(ADDR(QIODevice, readAll), ut_readAll_stub);
     ut_qfileExists_ret = true;

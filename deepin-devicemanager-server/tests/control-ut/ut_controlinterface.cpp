@@ -890,10 +890,12 @@ TEST_F(ControlInterface_UT, ConstructUri_BaseOverflow_TruncatesBase)
     // Arrange
     char buffer[8];
     memset(buffer, 0, sizeof(buffer));
-    // Act: base longer than buflen -> strncpy without terminator
+    // Act: base longer than buflen -> strncpy fills the buffer exactly
     m_ci->construct_uri(buffer, 5, "0123456789", "abc");
-    // Assert: exactly 5 base bytes copied, byte 5 untouched (memset 0)
-    EXPECT_EQ(QByteArray::fromRawData(buffer, 5), QByteArray("01234"));
+    // Assert: base 单独填满缓冲区时，末字符被替换为 NUL 保证字符串终止
+    // （安全修复后恰好填满也强制 NUL 终止，代价是截去 1 个字符），byte 5 不越界
+    EXPECT_EQ(QString(buffer), QString("0123"));
+    EXPECT_EQ(buffer[4], '\0');
     EXPECT_EQ(buffer[5], '\0');
 }
 
@@ -904,11 +906,12 @@ TEST_F(ControlInterface_UT, ConstructUri_ValueOverflow_StopsAtBufferEnd)
     memset(buffer, 0, sizeof(buffer));
     // Act: plain bytes fill the buffer exactly -> encode loop breaks
     m_ci->construct_uri(buffer, 16, "ipp://p/", "aaaaaaaaaaaaaaaaaaaaaaaa&aaaaaaaaaaaaaaaaaaaa");
-    // Assert: exactly 16 base+value bytes copied, no write past the buffer
-    // 🔴 DEFECT(ut-t25): the exactly-full case leaves buffer unterminated
-    // (final `if (d < buffer + buflen) *d = 0` is false) - reported to defects.json
-    EXPECT_EQ(QByteArray::fromRawData(buffer, 16), QByteArray("ipp://p/aaaaaaaa"));
-    EXPECT_EQ(buffer[16], '\0');  // byte 16 untouched by the encode loop
+    // Assert: 恰好填满时截去末尾 1 字符并写入 NUL（ut-t25 缺陷已修复：
+    // 不再留下未终止字符串，后续 strlen/ippAddString 不会越界读），
+    // byte 16 及之后保持 memset 0，无越界写
+    EXPECT_EQ(QString(buffer), QString("ipp://p/aaaaaaa"));
+    EXPECT_EQ(buffer[15], '\0');
+    EXPECT_EQ(buffer[16], '\0');
 }
 
 // ---------- modifyPath ----------
