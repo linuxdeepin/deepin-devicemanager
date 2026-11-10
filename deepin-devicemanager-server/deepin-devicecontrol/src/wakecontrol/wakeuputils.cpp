@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QSaveFile>
 #include <QDir>
+#include <QFileInfo>
 #include <QLoggingCategory>
 #include <QCryptographicHash>
 #include <QRegularExpression>
@@ -85,6 +86,11 @@ void WakeupUtils::updateWakeupDeviceInfo(const QString &info)
 bool WakeupUtils::wakeupPath(const QString &syspath, QString &wakeuppath)
 {
     qCDebug(appLog) << "Finding wakeup path for syspath:" << syspath;
+    // syspath 来自外部调用，仅允许 /sys 下的真实设备路径，拒绝 ".." 路径穿越
+    if (syspath.contains(QLatin1String(".."))) {
+        qCWarning(appLog) << "Invalid syspath contains '..':" << syspath;
+        return false;
+    }
     int index = syspath.lastIndexOf('/');
     if (index < 1) {
         return false;
@@ -93,6 +99,12 @@ bool WakeupUtils::wakeupPath(const QString &syspath, QString &wakeuppath)
     wakeuppath = QString("/sys") + syspath.left(index) + QString("/power/wakeup");
     if (!QFile::exists(wakeuppath))
         return false;
+    // 兜底校验：解析符号链接后仍必须位于 /sys 之下，防止穿越到任意可写文件
+    const QString canonical = QFileInfo(wakeuppath).canonicalFilePath();
+    if (!canonical.startsWith(QStringLiteral("/sys/"))) {
+        qCWarning(appLog) << "Wakeup path escapes /sys:" << wakeuppath;
+        return false;
+    }
     return true;
 }
 

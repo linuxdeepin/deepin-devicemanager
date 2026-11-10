@@ -745,6 +745,9 @@ static bool qdelDirectory(QString toDir)
             //递归调用拷贝
             if (!qdelDirectory(toDir_.filePath(fileInfo.fileName())))
                 return false;
+            // 子目录内容已清空，删除空目录，避免残留空目录导致顶层目录无法删除
+            if (!toDir_.rmdir(fileInfo.fileName()))
+                return false;
         } else {
             toDir_.remove(fileInfo.fileName());
             qCInfo(appLog) << "del remove";
@@ -755,6 +758,11 @@ static bool qdelDirectory(QString toDir)
 
 bool DriverManager::delDeb(const QString &debname)
 {
+    // debname 仅作目录名（非路径），须通过白名单校验，防止 "../" 路径穿越删除任意目录
+    if (!FdUtil::isValidComponentName(debname)) {
+        qCWarning(appLog) << "Invalid debname for delDeb:" << debname;
+        return false;
+    }
     QString backupPath =  QString("%1/driver/%2").arg(DB_PATH).arg(debname);
     QDir destdir(backupPath);
     if (destdir.exists()) {
