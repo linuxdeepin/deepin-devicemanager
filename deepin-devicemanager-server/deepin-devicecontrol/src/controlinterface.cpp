@@ -88,7 +88,15 @@ bool ControlInterface::getUserAuthorPasswd()
     qCDebug(appLog) << "Polkit disabled, authorization granted";
     return true;
 #endif
-    if (connection().interface()->serviceUid(message().service()).value() == 0) {
+    QDBusReply<uint> reply = connection().interface()->serviceUid(message().service());
+    if (!reply.isValid()) {
+        // 查询发送方 UID 失败（如发送方已断开、唯一名已消失）时必须拒绝，
+        // QDBusReply::value() 失败时返回默认值 0（root），直接取值会把未认证调用误判为 root
+        qCWarning(appLog) << "Failed to resolve sender uid for" << message().service()
+                          << "error:" << reply.error().name() << ", rejecting";
+        return false;
+    }
+    if (reply.value() == 0) {
         return true;
     }
 
@@ -661,8 +669,13 @@ void ControlInterface::construct_uri(char *buffer, size_t buflen, const char *ba
         }
     }
 
-    if (d < buffer + buflen)
+    if (d < buffer + buflen) {
         *d = '\0';
+    } else {
+        // 缓冲区已填满：截去末尾一个字符，保证字符串始终以 NUL 终止，
+        // 避免后续 strlen()（如 ippAddString）越界读
+        buffer[buflen - 1] = '\0';
+    }
 }
 
 void ControlInterface::modifyPath(QString &path)
