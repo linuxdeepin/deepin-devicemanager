@@ -7,9 +7,7 @@
 #include "deviceinfomanager.h"
 
 #include <QObjectCleanupHandler>
-#include <QProcess>
 #include <QDir>
-#include <QDateTime>
 #include <QLoggingCategory>
 
 ThreadPool::ThreadPool(QObject *parent)
@@ -24,65 +22,34 @@ ThreadPool::ThreadPool(QObject *parent)
 void ThreadPool::loadDeviceInfo()
 {
     // 根据m_ListCmd生成所有设备信息
-    QList<Cmd>::iterator it = m_ListCmd.begin();
-    for (; it != m_ListCmd.end(); ++it) {
-        ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
-        task->setAutoDelete(true);
-        start(task);
-    }
-
-    // 当所有设备执行完毕之后，开始执行生成其它设备的任务
-    // 这里是为了确保其它设备在最后一个生成
-    qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
-    while (true) {
-        qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
-        if (activeThreadCount() == 0 || curMSecond - beginMSecond > 10000) {
-            break;
-        }
-    }
+    updateInfo(m_ListCmd);
 }
 
 void ThreadPool::updateDeviceInfo()
 {
-    // 根据m_ListCmd生成所有设备信息
-    QList<Cmd>::iterator it = m_ListUpdate.begin();
-    for (; it != m_ListUpdate.end(); ++it) {
-        ThreadPoolTask *task = new ThreadPoolTask((*it).cmd, (*it).file, (*it).canNotReplace, (*it).waitingTime);
+    // 根据m_ListUpdate生成所有设备信息
+    updateInfo(m_ListUpdate);
+}
+
+void ThreadPool::updateHotplugInfo()
+{
+    // 只刷新与 USB 插拔相关、开销可控的信息
+    updateInfo(m_ListHotplug);
+}
+
+void ThreadPool::updateInfo(const QList<Cmd> &cmds)
+{
+    for (const Cmd &cmd : cmds) {
+        ThreadPoolTask *task = new ThreadPoolTask(cmd.cmd, cmd.file, cmd.canNotReplace, cmd.waitingTime);
         task->setAutoDelete(true);
         start(task);
     }
-    // 当所有设备执行完毕之后，开始执行生成其它设备的任务
-    // 这里是为了确保其它设备在最后一个生成
-    qint64 beginMSecond = QDateTime::currentMSecsSinceEpoch();
-    while (true) {
-        qint64 curMSecond = QDateTime::currentMSecsSinceEpoch();
-        if (activeThreadCount() == 0 || curMSecond - beginMSecond > 10000) {
-            break;
-        }
-    }
-}
 
-void ThreadPool::runCmdToCache(const Cmd &cmd)
-{
-    QString key = cmd.file;
-    key.replace(".txt", "");
-
-    // 2. 执行命令获取设备信息
-    QString info;
-    QString cmdExec = cmd.cmd.left(cmd.cmd.indexOf('>')).trimmed();
-    QString cmdStr = cmdExec.split(' ').first().trimmed();
-    QString cmdArg = cmdExec.mid(cmdStr.count() + 1).trimmed();
-    QStringList args;
-    if (!cmdArg.isEmpty())
-        args = cmdArg.split(' ');
-    if (cmdStr.isEmpty())
-        return;
-
-    QProcess process;
-    process.start(cmdStr, args);
-    process.waitForFinished(-1);
-    info = process.readAllStandardOutput();
-    DeviceInfoManager::getInstance()->addInfo(key, info);
+    // 等待所有任务执行完毕，最多 10 秒。
+    // 原实现是 while (true) + activeThreadCount() 的忙等自旋，不 sleep，
+    // 会白占一个 CPU 核心最多 10 秒；音频等实时线程正好被它挤掉时间片。
+    // QThreadPool::waitForDone() 内部用条件变量等待，不消耗 CPU。
+    waitForDone(10000);
 }
 
 void ThreadPool::initCmd()
@@ -246,9 +213,22 @@ void ThreadPool::initCmd()
     m_ListUpdate.append(cmdHwinfo);
 
     Cmd cmdHwinfoMonitor;     //hwinfo --framebuffer --monitor
-    cmdHwinfoMonitor.cmd = QString("%1 %2%3").arg("hwinfo --framebuffer --monitor > ").arg(PATH).arg("hwinfo_monitor.txt");
+    cmdHwinfoMonitor.cmd = QString("%1 %2%3").arg("hwinfo --monitor > ").arg(PATH).arg("hwinfo_monitor.txt");
     cmdHwinfoMonitor.file = "hwinfo_monitor.txt";
     cmdHwinfoMonitor.canNotReplace = false;
     m_ListCmd.append(cmdHwinfoMonitor);
     m_ListUpdate.append(cmdHwinfoMonitor);
+
+    // ---------------------------------------------------------------------
+    // 热插拔(USB)刷新列表
+    //
+    // 一次插拔只需要更新"会变"的信息。lshw / upower / lscpu / lspci /
+    // lpstat / bluetoothctl / hwinfo --framebuffer 与插拔无关，却要跑数百
+    // 毫秒到数秒，并发执行时会把 CPU 占满，正在播放的音频因此丢帧（滋滋声）。
+    // 未列入的命令不执行，其缓存保持上一次的值，不会丢失数据。
+    // ---------------------------------------------------------------------
+    m_ListHotplug.append(cmdLsblk);      // 新增/移除磁盘
+    m_ListHotplug.append(cmdLssg);       // 新增/移除 SCSI 通用设备
+    m_ListHotplug.append(cmdHciconfig);  // 蓝牙适配器状态
+    m_ListHotplug.append(cmdHwinfo);     // 含 --sound：声卡拓扑也可能变化
 }

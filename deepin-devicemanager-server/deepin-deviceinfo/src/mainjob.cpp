@@ -40,8 +40,9 @@ MainJob::MainJob(const char *name, QObject *parent)
     QTimer::singleShot(1000, this, [ = ]() {
         sqlCopytoKernel();
 
-        connect(m_deviceInterface, &DeviceInterface::sigUpdate, this, &MainJob::slotUsbChanged);
-        connect(ControlInterface::getInstance(), &ControlInterface::sigUpdate, this, &MainJob::slotUsbChanged);
+        // 客户端主动请求刷新 / 驱动操作完成：需要完整设备信息，走全量刷新
+        connect(m_deviceInterface, &DeviceInterface::sigUpdate, this, &MainJob::slotRefreshRequest);
+        connect(ControlInterface::getInstance(), &ControlInterface::sigUpdate, this, &MainJob::slotRefreshRequest);
 #ifndef DISABLE_DRIVER
         connect(ControlInterface::getInstance(), &ControlInterface::sigFinished, this, &MainJob::slotDriverControl);
 #endif
@@ -105,6 +106,15 @@ void MainJob::setWorkingFlag(bool flag)
 
 void MainJob::slotUsbChanged()
 {
+    // USB 热插拔走局部刷新，省掉与插拔无关的命令（lshw / upower / lscpu /
+    // lspci / lpstat / bluetoothctl / hwinfo --framebuffer）。
+    // 客户端主动刷新与驱动操作完成走 slotRefreshRequest()，那里是全量刷新。
+    executeClientInstruction("HOTPLUG");
+}
+
+void MainJob::slotRefreshRequest()
+{
+    // 客户端点刷新、启用/禁用设备、驱动安装卸载等场景需要完整的设备信息
     executeClientInstruction("DETECT");
 }
 
@@ -132,9 +142,17 @@ void MainJob::executeClientInstruction(const QString &instructions)
     s_ServerIsUpdating = true;
 
     if (instructions.startsWith("DETECT")) {
-        this->thread()->msleep(1000);
-        // 跟新缓存信息
+        // 原实现在这里用 thread()->msleep(1000) 硬睡主线程。DetectThread 已经
+        // 轮询确认内核处理完插拔、MonitorUsb 也已等待 1s 去抖，这 1 秒纯属重复，
+        // 而且会阻塞 DeviceInterface 的 D-Bus 方法派发，直接去掉。
         updateAllDevice();
+    } else if (instructions.startsWith("HOTPLUG")) {
+        if (m_firstUpdate) {
+            updateAllDevice();
+        } else {
+            // 只刷新与 USB 插拔相关的少量信息，避免全量命令占满 CPU
+            m_pool->updateHotplugInfo();
+        }
     } else if (instructions.startsWith("START")) {
         if (m_firstUpdate) {
             updateAllDevice();

@@ -7,7 +7,6 @@
 
 #include <QObject>
 #include <QRunnable>
-#include <QFile>
 
 //#define PATH "/home/liujun/device-info/"
 #define PATH "/tmp/device-info/"  // 设备文件存放的目录
@@ -35,13 +34,7 @@ private:
     /**
      * @brief runCmd : running a command
      * @param cmd : the command
-     */
-    void runCmd(const QString &cmd);
-
-    /**
-     * @brief runCmd
-     * @param cmd
-     * @param info
+     * @param info : command output
      */
     void runCmd(const QString &cmd, QString &info);
 
@@ -94,24 +87,6 @@ private:
      * @return
      */
     int getDisplayWidthFromLspci(const QString &info);
-
-    /**
-     * @brief runCmdToTxt
-     * @param cmd
-     */
-    void runCmdToFile(const QString &cmd);
-
-    /**
-     * @brief loadSmartctlInfoToFile
-     * @param file
-     */
-    void loadSmartctlInfoToFile(QFile &file);
-
-    /**
-     * @brief loadLspciVSInfoToFile
-     * @param file
-     */
-    void loadLspciVSInfoToFile(QFile &file);
 
 private:
     QString   m_Cmd;                  //<! cmd
