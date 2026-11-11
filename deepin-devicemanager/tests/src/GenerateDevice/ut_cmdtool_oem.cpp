@@ -2,7 +2,8 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-// 覆盖 CmdTool::loadOemTomlFileName(纯逻辑构造文件名) + parseOemTomlInfo(文件不存在返回 false)。
+// 覆盖 CmdTool::loadOemTomlFileName(纯逻辑构造文件名) + parseOemTomlInfo
+// (文件不存在返回 false / 单节-多节解析 / 空文件)。
 
 #include "CmdTool.h"
 #include "ut_Head.h"
@@ -13,8 +14,7 @@
 #include <QFile>
 #include <QIODevice>
 #include <QByteArray>
-#include <QTemporaryFile>
-#include <QDir>
+#include <dlfcn.h>
 
 #include <gtest/gtest.h>
 
@@ -76,94 +76,113 @@ TEST_F(UT_CmdToolOem, parseOemTomlInfo_notExist)
 }
 
 // ---------------------------------------------------------------------------
-// parseOemTomlInfo 解析分支回归测试
+// parseOemTomlInfo 解析分支回归测试：QFile 函数入口打桩（与 ut_gapcloser.cpp 同款）
 //
-// 原 QFile/QIODevice 虚函数 vtable 桩方案会破坏 QFile 内部状态导致 SEGV，
-// 故此处改用临时文件方式：在测试 SetUp 阶段通过 sudo 将 TOML 内容写入
-// /etc/deepin/hardware/<filename>，使 QFile::exists / open / readAll 全部走
-// 真实文件路径，无需桩虚函数。测试结束后清理临时文件。
-// 若当前环境无 sudo 权限则 GTEST_SKIP 跳过。
+// 历史方案1 - vtable 虚函数桩:破坏 QFile 内部状态导致 SEGV,勿回退;
+// 历史方案2 - sudo 部署真实文件到 /etc/deepin/hardware:无 sudo 终端时
+//   std::system("sudo ...") 读密码挂起,拖死整个测试进程,勿回退。
+// 现方案:序列式 QFile::exists / QFile::open(dlsym 入口桩) + readAll 返回
+// 预置内容,无系统副作用,无 sudo 依赖。
 // ---------------------------------------------------------------------------
 
-static bool deployTomlFile(const QString &filename, const QByteArray &content)
+// QFile::exists(const QString&) 静态函数桩：按调用次序返回预置结果
+static QList<bool> ut_oem_existsSeq;
+static int         ut_oem_existsIdx = 0;
+static bool ut_oem_fileExists(const QString & /*path*/)
 {
-    const QString dir = QStringLiteral("/etc/deepin/hardware");
-    const QString dest = dir + QStringLiteral("/") + filename;
-
-    // 写入临时文件
-    QTemporaryFile tmp;
-    if (!tmp.open())
-        return false;
-    tmp.write(content);
-    tmp.close();
-
-    // 复制到目标路径（需 sudo），并设置 644 权限确保非 root 用户可读
-    QString cmd = QStringLiteral("sudo mkdir -p %1 && sudo install -m 644 %2 %3 2>/dev/null")
-                      .arg(dir, tmp.fileName(), dest);
-    int rc = std::system(cmd.toUtf8().constData());
-    (void)rc;
-    return QFile::exists(dest);
+    if (ut_oem_existsIdx < ut_oem_existsSeq.size())
+        return ut_oem_existsSeq.at(ut_oem_existsIdx++);
+    return false;
+}
+static void ut_oem_installQFileExistsStub(Stub &stub, QList<bool> seq)
+{
+    ut_oem_existsSeq = seq;
+    ut_oem_existsIdx = 0;
+    stub.set(reinterpret_cast<void *>(static_cast<bool (*)(const QString &)>(&QFile::exists)),
+             reinterpret_cast<void *>(ut_oem_fileExists));
 }
 
-static void cleanupTomlFile(const QString &filename)
+// QFile::open / QFile::readAll 桩：open 按调用次序返回预置结果，readAll 返回预置内容
+static QList<bool> ut_oem_openSeq;
+static int         ut_oem_openIdx = 0;
+static QByteArray  ut_oem_fileContent;
+static bool ut_oem_fileOpen(QFile * /*self*/, QIODevice::OpenMode /*mode*/)
 {
-    const QString dest = QStringLiteral("/etc/deepin/hardware/") + filename;
-    QString cmd = QStringLiteral("sudo rm -f %1 2>/dev/null").arg(dest);
-    std::system(cmd.toUtf8().constData());
+    if (ut_oem_openIdx < ut_oem_openSeq.size())
+        return ut_oem_openSeq.at(ut_oem_openIdx++);
+    return false;
+}
+static QByteArray ut_oem_fileReadAll(void * /*self*/)
+{
+    return ut_oem_fileContent;
+}
+static void ut_oem_installQFileStubs(Stub &stub, QList<bool> openSeq, const QByteArray &content)
+{
+    void *openFn = dlsym(RTLD_DEFAULT, "_ZN5QFile4openE6QFlagsIN13QIODeviceBase12OpenModeFlagEE");
+    if (nullptr != openFn)
+        stub.set(openFn, reinterpret_cast<void *>(ut_oem_fileOpen));
+    stub.set(ADDR(QFile, readAll), ut_oem_fileReadAll);
+    ut_oem_openSeq = openSeq;
+    ut_oem_openIdx = 0;
+    ut_oem_fileContent = content;
 }
 
 // 单 section TOML：修复前返回 false（BUG），修复后应返回 true
 TEST_F(UT_CmdToolOem, parseOemTomlInfo_singleSection)
 {
-    const QString fname = QStringLiteral("test_single_section.toml");
-    QByteArray toml =
-        "[oem.info]\n"
-        "Manufacturer = \"TestOEM\"\n"
-        "Product = \"X1\"\n";
+    // Arrange: 主路径存在且可读（调试文件/安装路径不再触达）
+    Stub stub;
+    ut_oem_installQFileExistsStub(stub, { true });
+    ut_oem_installQFileStubs(stub, { true },
+                             "[oem.info]\n"
+                             "Manufacturer = \"TestOEM\"\n"
+                             "Product = \"X1\"\n");
 
-    if (!deployTomlFile(fname, toml)) {
-        GTEST_SKIP() << "Cannot create test file at /etc/deepin/hardware/ (needs sudo)";
-    }
+    // Act
+    const bool ok = tool->parseOemTomlInfo("test_single_section.toml");
 
-    // 单 section：循环内不触发 tomlPars=true（itemMap 为空时遇到 section 头），
+    // Assert: 单 section：循环内不触发 tomlPars=true（itemMap 为空时遇到 section 头），
     // 仅靠循环后收尾块的 addMapInfo + tomlPars=true 才能返回 true。
-    EXPECT_TRUE(tool->parseOemTomlInfo(fname));
-
-    cleanupTomlFile(fname);
+    EXPECT_TRUE(ok);
+    EXPECT_TRUE(tool->m_cmdInfo.contains("tomloem"));
+    EXPECT_EQ(tool->m_cmdInfo["tomloem"].size(), 1);
+    EXPECT_EQ(tool->m_cmdInfo["tomloem"][0]["Manufacturer"], QString("TestOEM"));
+    EXPECT_EQ(tool->m_cmdInfo["tomloem"][0]["Product"], QString("X1"));
 }
 
 // 多 section TOML：修复前后均返回 true（第二个 section 头触发循环内 tomlPars=true）
 TEST_F(UT_CmdToolOem, parseOemTomlInfo_multiSection)
 {
-    const QString fname = QStringLiteral("test_multi_section.toml");
-    QByteArray toml =
-        "[oem.info]\n"
-        "Manufacturer = \"TestOEM\"\n"
-        "[oem.other]\n"
-        "Key = \"Value\"\n";
+    // Arrange
+    Stub stub;
+    ut_oem_installQFileExistsStub(stub, { true });
+    ut_oem_installQFileStubs(stub, { true },
+                             "[oem.info]\n"
+                             "Manufacturer = \"TestOEM\"\n"
+                             "[oem.other]\n"
+                             "Key = \"Value\"\n");
 
-    if (!deployTomlFile(fname, toml)) {
-        GTEST_SKIP() << "Cannot create test file at /etc/deepin/hardware/ (needs sudo)";
-    }
+    // Act
+    const bool ok = tool->parseOemTomlInfo("test_multi_section.toml");
 
-    // 多 section：第二个 section 头触发循环内 tomlPars=true，无论是否修复都应返回 true。
-    EXPECT_TRUE(tool->parseOemTomlInfo(fname));
-
-    cleanupTomlFile(fname);
+    // Assert: 第二个 section 头触发循环内 addMapInfo，循环后收尾块再入库末节。
+    // 注意 classkey 取节名首个 '.' 之前的部分（oem.info/oem.other 均为 "oem"），
+    // 故两节数据都挂在 "tomloem" 键下（列表追加 2 条）。
+    EXPECT_TRUE(ok);
+    ASSERT_EQ(tool->m_cmdInfo["tomloem"].size(), 2);
+    EXPECT_EQ(tool->m_cmdInfo["tomloem"][0]["Manufacturer"], QString("TestOEM"));
+    EXPECT_EQ(tool->m_cmdInfo["tomloem"][1]["Key"], QString("Value"));
 }
 
 // 空文件：info 为空，函数应在 info.isEmpty() 检查处返回 false
 TEST_F(UT_CmdToolOem, parseOemTomlInfo_emptyFile)
 {
-    const QString fname = QStringLiteral("test_empty_file.toml");
-    QByteArray toml = "";
+    // Arrange: 文件存在且可读，但内容为空
+    Stub stub;
+    ut_oem_installQFileExistsStub(stub, { true });
+    ut_oem_installQFileStubs(stub, { true }, QByteArray(""));
 
-    if (!deployTomlFile(fname, toml)) {
-        GTEST_SKIP() << "Cannot create test file at /etc/deepin/hardware/ (needs sudo)";
-    }
-
-    // 文件存在但内容为空：info.isEmpty() 为 true，函数返回 false。
-    EXPECT_FALSE(tool->parseOemTomlInfo(fname));
-
-    cleanupTomlFile(fname);
+    // Act / Assert: info.isEmpty() 为 true，函数返回 false，无数据入库。
+    EXPECT_FALSE(tool->parseOemTomlInfo("test_empty_file.toml"));
+    EXPECT_FALSE(tool->m_cmdInfo.contains("tomloem"));
 }
