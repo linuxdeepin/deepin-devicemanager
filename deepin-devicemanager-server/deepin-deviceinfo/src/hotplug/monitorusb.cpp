@@ -11,12 +11,19 @@
 #include <QFile>
 #include <QDateTime>
 
+// 一批 udev 事件平息多久之后才执行合并的 hwinfo --usb
+static constexpr qint64 kEventSettleMs = 500;
+
 MonitorUsb::MonitorUsb()
-    : m_Udev(nullptr)
+    : m_workingFlag(true)
+    , m_Udev(nullptr)
     , mp_Timer(new QTimer(this))
     , m_UsbChangeTime()
     , m_UsbChanged(false)
-    , m_workingFlag(true)
+    , m_NeedControl(false)
+    , m_NeedWakeup(false)
+    , m_ControlDone(true)
+    , m_LastEventTime(0)
 {
     m_Udev = udev_new();
     if (!m_Udev) {
@@ -39,59 +46,73 @@ MonitorUsb::MonitorUsb()
 
 void MonitorUsb::monitor()
 {
-    char buf[10];
     fd_set fds;
     struct timeval tv;
     while (true) {
         if (!m_workingFlag)
             break;
+
         FD_ZERO(&fds);
         FD_SET(fd, &fds);
-        tv.tv_sec = 1;
-        tv.tv_usec = 0;
+        // 超时时间取短一些，便于在事件平息后及时执行一次合并的 hwinfo --usb
+        tv.tv_sec = 0;
+        tv.tv_usec = 200 * 1000;
         int ret = select(fd + 1, &fds, nullptr, nullptr, &tv);
 
-        // 判断是否有事件产生
-        if (!ret)
-            continue;
-        if (! FD_ISSET(fd, &fds))
-            continue;
+        if (ret > 0 && FD_ISSET(fd, &fds)) {
+            // 获取产生事件的设备映射
+            struct udev_device *dev = udev_monitor_receive_device(mon);
+            if (dev) {
+                const char *action = udev_device_get_action(dev);
 
-        // 获取产生事件的设备映射
-        struct udev_device *dev = udev_monitor_receive_device(mon);
-        if (!dev)
-            continue;
+                // 监测蓝牙设备
+                const char *devtype = udev_device_get_devtype(dev);
+                if (devtype && 0 == strcmp(devtype, "link") && m_workingFlag) {
+                    emit usbChanged();
+                } else if (m_workingFlag && action
+                           && (0 == strcmp("add", action) || 0 == strcmp("remove", action))
+                           && 0 != udev_device_get_devnum(dev)) {
+                    // 只有 add/remove 事件才需要更新缓存信息
+                    if (0 == strcmp("add", action))
+                        m_NeedControl = true;
+                    m_NeedWakeup = true;
+                    m_UsbChanged = true;
+                    m_ControlDone = false;
+                    m_UsbChangeTime = QDateTime::currentMSecsSinceEpoch();
+                    m_LastEventTime = m_UsbChangeTime;
+                }
 
-        // 监测蓝牙设备
-        if (0 == strcmp(udev_device_get_devtype(dev), "link") && m_workingFlag) {
-            emit usbChanged();
-            continue;
-        }
-
-        // 获取事件并判断是否是插拔
-        unsigned long long curNum = udev_device_get_devnum(dev);
-        if (0 == curNum) {
-            udev_device_unref(dev);
-            continue;
-        }
-
-        // 只有add和remove事件才会更新缓存信息
-        strcpy(buf, udev_device_get_action(dev));
-        if ((0 == strcmp("add", buf) || 0 == strcmp("remove", buf)) && m_workingFlag) {
-            QProcess process;
-            process.start("hwinfo --usb");
-            process.waitForFinished(-1);
-            QString info = process.readAllStandardOutput();
-            if (0 == strcmp("add", buf)) {
-                ControlInterface::getInstance()->disableOutDevice(info);
+                udev_device_unref(dev);
             }
-            ControlInterface::getInstance()->updateWakeup(info);
-            m_UsbChanged = true;
-            m_UsbChangeTime = QDateTime::currentMSecsSinceEpoch();
         }
 
-        udev_device_unref(dev);
+        // 一次插拔会连续产生多个事件，等这一批平息后再执行一次
+        // hwinfo --usb，避免每个事件都 spawn 一个进程（单次约 200ms）
+        if (!m_ControlDone && (m_NeedControl || m_NeedWakeup)) {
+            if (QDateTime::currentMSecsSinceEpoch() - m_LastEventTime >= kEventSettleMs) {
+                applyUsbControl();
+                m_ControlDone = true;
+            }
+        }
     }
+}
+
+void MonitorUsb::applyUsbControl()
+{
+    const bool needControl = m_NeedControl;
+    const bool needWakeup = m_NeedWakeup;
+    m_NeedControl = false;
+    m_NeedWakeup = false;
+
+    QProcess process;
+    process.start("hwinfo --usb");
+    process.waitForFinished(-1);
+    const QString info = process.readAllStandardOutput();
+
+    if (needControl)
+        ControlInterface::getInstance()->disableOutDevice(info);
+    if (needWakeup)
+        ControlInterface::getInstance()->updateWakeup(info);
 }
 
 void MonitorUsb::setWorkingFlag(bool flag)

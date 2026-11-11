@@ -36,12 +36,22 @@ public:
 
 private slots:
     /**
-     * @brief slotUsbChanged
+     * @brief slotUsbChanged usb 热插拔事件
+     *
+     * 只刷新与插拔相关的信息，避免与插拔无关的命令占满 CPU。
      */
     void slotUsbChanged();
+
     /**
-     * @brief slotUsbChanged
-     * @param usbchanged
+     * @brief slotRefreshRequest 客户端主动请求刷新 / 驱动操作完成
+     *
+     * 这类场景需要完整的设备信息，必须走全量刷新。
+     */
+    void slotRefreshRequest();
+
+    /**
+     * @brief slotDriverControl
+     * @param success
      */
     void slotDriverControl(bool success);
     /**

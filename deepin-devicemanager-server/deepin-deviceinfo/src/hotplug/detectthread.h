@@ -6,7 +6,6 @@
 #define DETECTTHREAD_H
 
 #include <QThread>
-#include <QMap>
 #include <QDateTime>
 
 class MonitorUsb;
@@ -44,34 +43,23 @@ private slots:
 
 private:
     /**
-     * @brief isUsbDevicesChanged 判断hwinfo --usb信息是否发生变化
-     * @return
+     * @brief waitKernelUsbReady 等待内核把 USB 设备信息填充完成
+     *
+     * 原实现通过反复执行 `hwinfo --usb --keyboard --mouse`（单次 300~400ms）
+     * 并比对输出来判断"插拔是否处理完"，最多循环 10 秒，即最多 spawn 11 个
+     * hwinfo 进程。在"USB 反复上报事件、但设备列表实际没变"的场景下会跑满
+     * 10 秒，持续占满一个 CPU 核心，正在播放的音频因此丢帧（表现为"滋滋"声）。
+     *
+     * 这里改为纯 sysfs 探测：usb_device 都已有 idVendor、且 usb_interface 都已
+     * 绑定驱动，说明内核已处理完毕。全程只读文件，不产生任何子进程。
+     *
+     * @param maxWaitMs 最长等待毫秒数
+     * @return true 表示已经就绪
      */
-    bool isUsbDevicesChanged();
-
-    /**
-     * @brief updateMemUsbInfo 更新
-     * @param usbInfo
-     */
-    void updateMemUsbInfo(const QMap<QString, QMap<QString, QString>> &usbInfo);
-
-    /**
-     * @brief curHwinfoUsbInfo 获取当前的usb信息
-     * @param usbInfo
-     */
-    void curHwinfoUsbInfo(QMap<QString, QMap<QString, QString>> &usbInfo);
-
-    /**
-     * @brief getMapInfo 解析usb信息
-     * @param item
-     * @param mapInfo
-     * @return
-     */
-    bool getMapInfo(const QString &item, QMap<QString, QString> &mapInfo);
+    bool waitKernelUsbReady(int maxWaitMs);
 
 private:
     MonitorUsb *mp_MonitorUsb; //<! udev检测任务
-    QMap<QString, QMap<QString, QString>> m_MapUsbInfo; //<! usb信息
 };
 
 #endif // DETECTTHREAD_H

@@ -42,12 +42,22 @@ public:
      */
     void updateDeviceInfo();
 
+    /**
+     * @brief updateHotplugInfo 热插拔时的局部刷新
+     *
+     * USB 插拔很频繁，没有必要每次都把整机信息重新采集一遍：lshw、upower、
+     * lscpu、lspci、lpstat、bluetoothctl、hwinfo --framebuffer 等命令与插拔
+     * 无关，却会把 CPU 占满数百毫秒到数秒，正在播放的音频因此丢帧。
+     * 未列入 m_ListHotplug 的命令不会执行，其缓存保持上一次的值，不会丢失数据。
+     */
+    void updateHotplugInfo();
+
 private:
     /**
-     * @brief runCmdToCache
-     * @param cmd
+     * @brief updateInfo 并发执行一组命令并等待结束
+     * @param cmds 命令列表
      */
-    void runCmdToCache(const Cmd &cmd);
+    void updateInfo(const QList<Cmd> &cmds);
 
     /**
      * @brief initCmd init all cmd
@@ -57,6 +67,7 @@ private:
 private:
     QList<Cmd>        m_ListCmd;             // all cmd
     QList<Cmd>        m_ListUpdate;          // update cmd
+    QList<Cmd>        m_ListHotplug;         // hotplug(usb) cmd
 };
 
 #endif // THREADPOOL_H

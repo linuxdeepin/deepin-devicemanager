@@ -43,9 +43,9 @@ public:
     /**
      * @brief getInfo
      * @param key
-     * @return
+     * @return 对应信息；key 不存在时返回空字符串（不会写入缓存）
      */
-    const QString &getInfo(const QString &key);
+    const QString getInfo(const QString &key);
 
     /**
      * @brief isInfoExisted
