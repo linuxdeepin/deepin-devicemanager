@@ -11,14 +11,15 @@
 // 用例计数声明（self-check-structural 验证此块）：
 // | function              | level | factors | min | actual |
 // |-----------------------|-------|---------|-----|--------|
-// | XlsxDetail::crc32     | low   | -       | 1   | 2      |
+// | ZipDetail::crc32     | low   | -       | 1   | 2      |
 // | XlsxDetail::columnName| mid   | -       | 2   | 4      |
-// | XlsxDetail::escapeXml | mid   | -       | 2   | 2      |
+// | ZipDetail::escapeXml | mid   | -       | 2   | 2      |
 // | write                 | mid   | -       | 2   | 3      |
 // | saveAs                | mid   | -       | 2   | 6      |
 // ============================================================
 
 #include "XlsxWriter.h"
+#include "ZipWriter.h"
 #include "minizip_read_helper.h"
 
 #include <QFile>
@@ -27,18 +28,18 @@
 #include <gtest/gtest.h>
 
 // ------------------------------------------------------------
-// XlsxDetail 自由函数直测
+// ZipDetail(crc32/escapeXml) 与 XlsxDetail(columnName) 自由函数直测
 // ------------------------------------------------------------
-TEST(XlsxDetail, crc32_knownVectors)
+TEST(ZipDetail, crc32_knownVectors)
 {
     // RFC 3720 / zip 标准校验向量
-    EXPECT_EQ(XlsxDetail::crc32(QByteArray("")), 0x00000000u);
-    EXPECT_EQ(XlsxDetail::crc32(QByteArray("123456789")), 0xCBF43926u);
-    EXPECT_EQ(XlsxDetail::crc32(QByteArray("The quick brown fox jumps over the lazy dog")),
+    EXPECT_EQ(ZipDetail::crc32(QByteArray("")), 0x00000000u);
+    EXPECT_EQ(ZipDetail::crc32(QByteArray("123456789")), 0xCBF43926u);
+    EXPECT_EQ(ZipDetail::crc32(QByteArray("The quick brown fox jumps over the lazy dog")),
               0x414FA339u);
 }
 
-TEST(XlsxDetail, crc32_matchesZipHeader)
+TEST(ZipDetail, crc32_matchesZipHeader)
 {
     // crc32 结果必须与写出的 ZIP local header 中 CRC 字段一致（首条目 [Content_Types].xml）
     XlsxWriter xlsx;
@@ -54,7 +55,7 @@ TEST(XlsxDetail, crc32_matchesZipHeader)
     // local header: 签名(4) + version/flags/method/time/date(10) 后即 CRC 字段（偏移 14..17）
     const quint32 headerCrc = quint32(uchar(zip[14])) | (quint32(uchar(zip[15])) << 8)
             | (quint32(uchar(zip[16])) << 16) | (quint32(uchar(zip[17])) << 24);
-    EXPECT_EQ(headerCrc, XlsxDetail::crc32(utExtractStoredEntry(zip, "[Content_Types].xml")));
+    EXPECT_EQ(headerCrc, ZipDetail::crc32(utExtractStoredEntry(zip, "[Content_Types].xml")));
 }
 
 TEST(XlsxDetail, columnName_basic)
@@ -76,13 +77,13 @@ TEST(XlsxDetail, columnName_clampsToValid)
     EXPECT_EQ(XlsxDetail::columnName(-5), QStringLiteral("A"));
 }
 
-TEST(XlsxDetail, escapeXml_specialChars)
+TEST(ZipDetail, escapeXml_specialChars)
 {
-    EXPECT_EQ(XlsxDetail::escapeXml(QStringLiteral("a<b>&\"c\"'d'")),
+    EXPECT_EQ(ZipDetail::escapeXml(QStringLiteral("a<b>&\"c\"'d'")),
               QStringLiteral("a&lt;b&gt;&amp;&quot;c&quot;&apos;d&apos;"));
 }
 
-TEST(XlsxDetail, escapeXml_dropsControlChars)
+TEST(ZipDetail, escapeXml_dropsControlChars)
 {
     // XML 1.0 非法控制字符被丢弃，\t \n \r 保留
     QString in = QStringLiteral("a");
@@ -92,7 +93,7 @@ TEST(XlsxDetail, escapeXml_dropsControlChars)
     in.append(QChar(0x0A));
     in.append(QChar(0x0D));
     in.append(QChar('b'));
-    EXPECT_EQ(XlsxDetail::escapeXml(in), QStringLiteral("a\t\n\rb"));
+    EXPECT_EQ(ZipDetail::escapeXml(in), QStringLiteral("a\t\n\rb"));
 }
 
 // ------------------------------------------------------------
@@ -276,4 +277,40 @@ TEST_F(UT_XlsxWriter, saveAs_zipStructure_eocdConsistent)
     const quint32 cdOffset = quint32(uchar(zip[eocd + 16])) | (quint32(uchar(zip[eocd + 17])) << 8)
             | (quint32(uchar(zip[eocd + 18])) << 16) | (quint32(uchar(zip[eocd + 19])) << 24);
     EXPECT_EQ(zip.mid(int(cdOffset), 4), QByteArray("PK\x01\x02", 4));
+}
+
+// ------------------------------------------------------------
+// ZipWriter 直接测（新增共享层）
+// ------------------------------------------------------------
+// addFile: 同名条目覆盖而非追加
+TEST(ZipWriterTest, addFile_sameNameOverwrites)
+{
+    // Arrange: 写入器先写一个文件
+    ZipWriter zw;
+    zw.addFile("a.xml", "old");
+
+    // Act: 同名再写
+    zw.addFile("a.xml", "new");
+    QTemporaryDir tmpDir;
+    ASSERT_TRUE(zw.saveAs(tmpDir.filePath("z.zip")));
+
+    // Assert: 内容为新值且条目数不增
+    QFile f(tmpDir.filePath("z.zip"));
+    ASSERT_TRUE(f.open(QIODevice::ReadOnly));
+    const QByteArray zip = f.readAll();
+    EXPECT_EQ(utExtractStoredEntry(zip, "a.xml"), "new");
+    const int eocd = zip.size() - 22;
+    const quint16 entries = quint16(uchar(zip[eocd + 10])) | (quint16(uchar(zip[eocd + 11])) << 8);
+    EXPECT_EQ(entries, 1);
+}
+
+// saveAs: 空路径返回 false
+TEST(ZipWriterTest, saveAs_emptyPathFails)
+{
+    // Arrange: 写入器
+    ZipWriter zw;
+    zw.addFile("a.xml", "x");
+
+    // Act & Assert: 空路径保存失败
+    EXPECT_FALSE(zw.saveAs(QString()));
 }

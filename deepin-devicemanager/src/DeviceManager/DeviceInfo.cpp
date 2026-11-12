@@ -307,7 +307,7 @@ void DeviceBaseInfo::subTitleToHTML(QDomDocument &doc)
     }
 }
 
-void DeviceBaseInfo::toDocString(Docx::Document &doc)
+void DeviceBaseInfo::toDocString(DocxWriter &doc)
 {
     qCDebug(appLog) << "DeviceBaseInfo::toDocString called.";
     // 设备信息转为doc
@@ -316,7 +316,7 @@ void DeviceBaseInfo::toDocString(Docx::Document &doc)
     qCDebug(appLog) << "Doc string conversion finished.";
 }
 
-void DeviceBaseInfo::baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QString> > &infoLst)
+void DeviceBaseInfo::baseInfoToDoc(DocxWriter &doc, QList<QPair<QString, QString> > &infoLst)
 {
     qCDebug(appLog) << "DeviceBaseInfo::baseInfoToDoc called for info list.";
     // 设备信息保存为Doc
@@ -509,7 +509,7 @@ void DeviceBaseInfo::tableHeaderToHtml(QFile &html)
     qCDebug(appLog) << "Finished writing table header to HTML.";
 }
 
-void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
+void DeviceBaseInfo::tableInfoToDoc(DocxTable *tab, int &row)
 {
     qCDebug(appLog) << "DeviceBaseInfo::tableInfoToDoc called with row: " << row;
     // 表格信息保存为Doc
@@ -535,7 +535,7 @@ void DeviceBaseInfo::tableInfoToDoc(Docx::Table *tab, int &row)
     qCDebug(appLog) << "Finished adding table info to Doc.";
 }
 
-void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
+void DeviceBaseInfo::tableHeaderToDoc(DocxTable *tab)
 {
     qCDebug(appLog) << "DeviceBaseInfo::tableHeaderToDoc called.";
     // 表头保存为doc
