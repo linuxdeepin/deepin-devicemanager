@@ -16,7 +16,7 @@
 #include <QRegularExpression>
 
 #define main custom_gpuinfo_original_main
-#include "../../customgpuinfo/main.cpp"
+#include "../../../deepin-devicemanager-server/customgpuinfo/main.cpp"
 #undef main
 
 #include <gtest/gtest.h>

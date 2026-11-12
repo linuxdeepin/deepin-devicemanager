@@ -220,7 +220,4 @@ else()
     message(FATAL_ERROR "Unsupported QT_VERSION_MAJOR: ${QT_VERSION_MAJOR}")
 endif()
 
-# Test--------deepin-devicemanager
-if (CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")
-   add_subdirectory(./tests)
-endif()
+# 注：单元测试已外移至顶层 test/deepin-devicemanager/，由根 CMakeLists 统一挂载
