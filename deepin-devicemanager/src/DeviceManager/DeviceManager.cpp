@@ -1805,8 +1805,8 @@ bool DeviceManager::exportToXlsx(const QString &filePath)
 {
     qCDebug(appLog) << "Exporting to xlsx file";
     // 导出设备信息到xlsx表格
-    QXlsx::Document xlsx;
-    QXlsx::Format boldFont;
+    XlsxWriter xlsx;
+    XlsxFormat boldFont;
     overviewToXlsx(xlsx, boldFont);
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
@@ -1826,9 +1826,7 @@ bool DeviceManager::exportToXlsx(const QString &filePath)
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceCdrom, QObject::tr("CD-ROM"), QObject::tr("No CD-ROM found"));
     EXPORT_TO_XLSX(xlsx, boldFont, m_ListDeviceOthers, QObject::tr("Other Devices"), QObject::tr("No other devices found"));
     m_CurrentXlsRow = 1;
-    xlsx.saveAs(filePath);
-
-    return true;
+    return xlsx.saveAs(filePath);
 }
 
 bool DeviceManager::exportToDoc(const QString &filePath)
@@ -2000,7 +1998,7 @@ void DeviceManager::overviewToDoc(Docx::Document &doc)
     doc.addParagraph("\n");
 }
 
-void DeviceManager::overviewToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont)
+void DeviceManager::overviewToXlsx(XlsxWriter &xlsx, XlsxFormat &boldFont)
 {
     qCDebug(appLog) << "Exporting overview to xlsx";
     // 导出概况信息到xlsx文件

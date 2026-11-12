@@ -337,7 +337,7 @@ void DeviceBaseInfo::baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QSt
     qCDebug(appLog) << "Finished adding items to Doc.";
 }
 
-void DeviceBaseInfo::toXlsxString(QXlsx::Document &xlsx, QXlsx::Format &boldFont)
+void DeviceBaseInfo::toXlsxString(XlsxWriter &xlsx, XlsxFormat &boldFont)
 {
     qCDebug(appLog) << "DeviceBaseInfo::toXlsxString called.";
     // 设备信息转为xlxs表格
@@ -346,7 +346,7 @@ void DeviceBaseInfo::toXlsxString(QXlsx::Document &xlsx, QXlsx::Format &boldFont
     qCDebug(appLog) << "Xlsx string conversion finished.";
 }
 
-void DeviceBaseInfo::baseInfoToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont, QList<QPair<QString, QString> > &infoLst)
+void DeviceBaseInfo::baseInfoToXlsx(XlsxWriter &xlsx, XlsxFormat &boldFont, QList<QPair<QString, QString> > &infoLst)
 {
     qCDebug(appLog) << "DeviceBaseInfo::baseInfoToXlsx called for info list.";
     // 设置表格内容字体不加粗,字号10
@@ -556,7 +556,7 @@ void DeviceBaseInfo::tableHeaderToDoc(Docx::Table *tab)
     qCDebug(appLog) << "Finished adding table header to Doc.";
 }
 
-void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
+void DeviceBaseInfo::tableInfoToXlsx(XlsxWriter &xlsx)
 {
     qCDebug(appLog) << "DeviceBaseInfo::tableInfoToXlsx called.";
     // 获取表格信息
@@ -576,7 +576,7 @@ void DeviceBaseInfo::tableInfoToXlsx(QXlsx::Document &xlsx)
     qCDebug(appLog) << "Finished writing table info to Xlsx.";
 }
 
-void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
+void DeviceBaseInfo::tableHeaderToXlsx(XlsxWriter &xlsx)
 {
     qCDebug(appLog) << "DeviceBaseInfo::tableHeaderToXlsx called.";
     // 获取表头
@@ -590,7 +590,7 @@ void DeviceBaseInfo::tableHeaderToXlsx(QXlsx::Document &xlsx)
     // 添加表头信息
     int curRow = DeviceManager::instance()->currentXlsRow();
     for (int col = 0; col < m_TableHeaderTr.size() - 1; ++col) {
-        QXlsx::Format boldFont;
+        XlsxFormat boldFont;
         boldFont.setFontSize(10);
         boldFont.setFontBold(true);
         xlsx.write(curRow, col + 1, m_TableHeaderTr[col], boldFont);
