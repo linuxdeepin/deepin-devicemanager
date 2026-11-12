@@ -1,3 +1,9 @@
+deepin-devicemanager (6.0.76) unstable; urgency=medium
+
+  * chore: Update version to 6.0.76
+
+ -- dengzhongyuan <dengzhongyuan@uniontech.com>  Thu, 12 Nov 2026 19:41:19 +0800
+
 deepin-devicemanager (6.0.75) unstable; urgency=medium
 
   * chore: Update version to 6.0.75
