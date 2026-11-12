@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -14,9 +14,27 @@
 // Dtk头文件
 #include <DApplication>
 
-constexpr const char* kPowerService = "com.deepin.system.Power";
-constexpr const char* kPowerPath = "/com/deepin/system/Power";
-constexpr const char* kPowerInterface = "com.deepin.system.Power";
+constexpr const char* kPowerService = "org.deepin.dde.Power1";
+constexpr const char* kPowerPath = "/org/deepin/dde/Power1";
+constexpr const char* kPowerInterface = "org.deepin.dde.Power1";
+constexpr const char* kLegacyPowerService = "com.deepin.system.Power";
+constexpr const char* kLegacyPowerPath = "/com/deepin/system/Power";
+constexpr const char* kLegacyPowerInterface = "com.deepin.system.Power";
+
+static bool readBatteryPercentage(const char *service, const char *path,
+                                  const char *interfaceName, double &value)
+{
+    QDBusInterface interface(service, path, interfaceName, QDBusConnection::systemBus());
+    if (!interface.isValid())
+        return false;
+
+    const QVariant percentage = interface.property("BatteryPercentage");
+    if (!percentage.isValid())
+        return false;
+
+    value = percentage.toDouble();
+    return true;
+}
 
 DWIDGET_USE_NAMESPACE
 using namespace DDLog;
@@ -115,12 +133,15 @@ bool DevicePower::setInfoFromUpower(const QMap<QString, QString> &mapInfo)
     // 当前电池容量修改成通过DDE接口获得，目的是与状态栏的当前电池容量保持一致（bug#333825）
     QMap<QString, QString> tmpMapInfo = mapInfo;
     if (tmpMapInfo.contains("percentage")) {
-        QDBusInterface interface(kPowerService, kPowerPath, kPowerInterface, QDBusConnection::systemBus());
-        if (interface.isValid()) {
-            double tmpValue = interface.property("BatteryPercentage").toDouble();
+        double tmpValue = 0.0;
+        const bool hasPercentage =
+                readBatteryPercentage(kPowerService, kPowerPath, kPowerInterface, tmpValue)
+                || readBatteryPercentage(kLegacyPowerService, kLegacyPowerPath, kLegacyPowerInterface, tmpValue);
+        if (hasPercentage) {
             tmpMapInfo["percentage"] = QString("%1%").arg(static_cast<int>(tmpValue));
         } else {
-            qCritical() << QString("Dbus %1 is not valid!").arg(kPowerService);
+            qCritical() << QString("Dbus %1 and %2 are not valid!")
+                               .arg(kPowerService, kLegacyPowerService);
         }
     }
 
