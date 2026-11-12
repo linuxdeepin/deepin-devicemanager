@@ -134,7 +134,7 @@
     \
     /**添加表格信息**/\
     if (deviceLst.size() > 1) {\
-        Docx::Table *tab = doc.addTable(1,0);\
+        DocxTable *tab = doc.addTable(1,0);\
         deviceLst[0]->tableHeaderToDoc(tab);\
         for (int row = 1; row <= deviceLst.size(); ++row) {\
             tab->addRow();\

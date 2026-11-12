@@ -9,10 +9,9 @@
 #include <QString>
 
 // 内部实现辅助：独立声明便于单元测试直接验证（不属于公开 API）
+// 注：crc32/escapeXml 已上移至 ZipWriter.h 的 ZipDetail 命名空间，供 xlsx/docx 共用
 namespace XlsxDetail {
-quint32 crc32(const QByteArray &data);        // 标准 CRC-32（IEEE 802.3，多项式 0xEDB88320）
 QString columnName(int column);               // 1 基列号 -> A/.../Z/AA/... 样式
-QString escapeXml(const QString &text);       // XML 1.0 转义，非法控制字符丢弃
 }
 
 /**

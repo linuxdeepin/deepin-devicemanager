@@ -5,7 +5,7 @@
 #ifndef DEVICEMANAGER_H
 #define DEVICEMANAGER_H
 
-#include "document.h"
+#include "DocxWriter.h"
 #include "XlsxWriter.h"
 #include "GenerateDevicePool.h"
 
@@ -579,7 +579,7 @@ public:
      * @brief overviewToDoc:概况信息写到doc
      * @param doc:doc文件
      */
-    void overviewToDoc(Docx::Document &doc);
+    void overviewToDoc(DocxWriter &doc);
 
     /**
      * @brief overviewToXlsx:概况信息写到表格

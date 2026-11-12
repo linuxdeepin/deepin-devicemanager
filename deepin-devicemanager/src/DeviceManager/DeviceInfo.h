@@ -5,9 +5,8 @@
 #ifndef DEVICEINFO_H
 #define DEVICEINFO_H
 
-#include "document.h"
+#include "DocxWriter.h"
 #include "XlsxWriter.h"
-#include "table.h"
 #include "DeviceManager.h"
 
 #include <QString>
@@ -293,14 +292,14 @@ public:
      * @brief toDocString:导出信息为html格式
      * @param doc:doc文档
      */
-    void toDocString(Docx::Document &doc);
+    void toDocString(DocxWriter &doc);
 
     /**
      * @brief baseInfoToDoc:基本信息导出doc
      * @param doc:doc文档
      * @param infoLst:信息列表
      */
-    void baseInfoToDoc(Docx::Document &doc, QList<QPair<QString, QString>> &infoLst);
+    void baseInfoToDoc(DocxWriter &doc, QList<QPair<QString, QString>> &infoLst);
 
     /**
      * @brief toXlsxString:导出信息为xlsx格式
@@ -368,13 +367,13 @@ public:
      * @param tab:doc文档表格
      * @param row:表格行数，第row行
      */
-    void tableInfoToDoc(Docx::Table *tab, int &row);
+    void tableInfoToDoc(DocxTable *tab, int &row);
 
     /**
      * @brief tableHeaderToDoc:表头信息写到doc
      * @param tab doc文档的表格
      */
-    void tableHeaderToDoc(Docx::Table *tab);
+    void tableHeaderToDoc(DocxTable *tab);
 
     /**
      * @brief tableInfoToXlsx:表格信息写到xlsx

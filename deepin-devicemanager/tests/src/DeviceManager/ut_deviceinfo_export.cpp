@@ -8,7 +8,6 @@
 //       setHwinfoLshwKey/matchToLshw/PhysID 映射、getVendorOrModelId、
 //       setVendorNameBylsusbLspci(QProcess 打桩)、getDriverVersion(executeClientCmd 打桩)。
 // 注意: 测试构建开启 -fno-access-control, 可直接访问 protected/private 成员。
-// 注: Docx::Document 默认构造后 addParagraph 会 SEGV, 故 Doc 全文档导出不在测试范围。
 //
 // 用例计数声明（self-check-structural 验证此块）：
 // | method                        | level | factors | min | actual |
@@ -17,12 +16,14 @@
 // | baseInfoToHTML                | mid   | -       | 2   | 2      |
 // | subTitleToHTML                | low   | -       | 1   | 1      |
 // | toXlsxString                  | low   | -       | 1   | 1      |
+// | toDocString                   | low   | -       | 1   | 1      |
+// | baseInfoToDoc                 | mid   | -       | 2   | 2      |
 // | baseInfoToXlsx                | mid   | -       | 2   | 2      |
 // | toTxtString                   | low   | -       | 1   | 1      |
 // | baseInfoToTxt                 | mid   | -       | 2   | 2      |
 // | tableInfoToTxt/tableHeaderToTxt | low | -       | 1   | 2      |
 // | tableInfoToHtml/tableHeaderToHtml | low | -     | 1   | 2      |
-// | tableInfoToDoc(null)          | low   | -       | 1   | 1      |
+// | tableInfoToDoc/tableHeaderToDoc | mid | -     | 1   | 5      |
 // | tableInfoToXlsx/tableHeaderToXlsx | low | -     | 1   | 2      |
 // | displayWidth                  | mid   | -       | 2   | 2      |
 // | generatorTranslate            | mid   | -       | 2   | 2      |
@@ -80,6 +81,18 @@ static QByteArray utSheetOf(XlsxWriter &xlsx, QTemporaryDir &dir, const QString 
     if (!f.open(QIODevice::ReadOnly))
         return QByteArray();
     return utExtractStoredEntry(f.readAll(), "xl/worksheets/sheet1.xml");
+}
+
+// 测试辅助：将 doc 写入器落盘并提取 word/document.xml 内容
+static QByteArray utDocOf(DocxWriter &docx, QTemporaryDir &dir, const QString &name)
+{
+    const QString path = dir.filePath(name);
+    if (!docx.save(path))
+        return QByteArray();
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly))
+        return QByteArray();
+    return utExtractStoredEntry(f.readAll(), "word/document.xml");
 }
 
 class UT_DeviceInfoExport : public ::testing::Test
@@ -151,8 +164,100 @@ TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_subTitleToHTML_emptyTitle)
 }
 
 // ---------- Doc 导出 ----------
-// 注: Docx::Document 默认构造后 addParagraph 会 SEGV(lastsectPr 访问空),
-// 故 toDocString/baseInfoToDoc 不在此测试; tableInfoToDoc 的 nullptr 分支可安全覆盖。
+// toDocString: 全量写 doc 段落
+TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_toDocString_withData)
+{
+    // Arrange: doc 写入器与临时目录
+    DocxWriter docx;
+    QTemporaryDir tmpDir;
+
+    // Act: 全量写入并落盘
+    audio->toDocString(docx);
+    const QByteArray doc = utDocOf(docx, tmpDir, "todocstring.docx");
+
+    // Assert: 基本信息/其他信息均已写入
+    const QString xml = QString::fromUtf8(doc);
+    EXPECT_TRUE(xml.contains("Vendor"));
+    EXPECT_TRUE(xml.contains("Acme"));
+    EXPECT_TRUE(xml.contains("Driver"));
+}
+
+// baseInfoToDoc: 基本信息写入 doc 段落
+TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_baseInfoToDoc_withData)
+{
+    // Arrange: doc 写入器与非空基本信息
+    DocxWriter docx;
+    QList<QPair<QString, QString>> info;
+    info << qMakePair(QString("Key"), QString("Value"));
+    QTemporaryDir tmpDir;
+
+    // Act: 写基本信息并落盘
+    audio->baseInfoToDoc(docx, info);
+    const QByteArray doc = utDocOf(docx, tmpDir, "baseinfo.docx");
+
+    // Assert: 键值均已写入
+    const QString xml = QString::fromUtf8(doc);
+    EXPECT_TRUE(xml.contains("Key"));
+    EXPECT_TRUE(xml.contains("Value"));
+}
+
+// baseInfoToDoc: 无效值跳过
+TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_baseInfoToDoc_invalidSkipped)
+{
+    // Arrange: doc 写入器与含无效值的列表
+    DocxWriter docx;
+    QList<QPair<QString, QString>> info;
+    info << qMakePair(QString("Good"), QString("ok"));
+    info << qMakePair(QString("Bad"), QString(""));
+    QTemporaryDir tmpDir;
+
+    // Act: 写入并落盘
+    audio->baseInfoToDoc(docx, info);
+    const QByteArray doc = utDocOf(docx, tmpDir, "invalid.docx");
+
+    // Assert: 无效项未写入
+    const QString xml = QString::fromUtf8(doc);
+    EXPECT_TRUE(xml.contains("Good"));
+    EXPECT_FALSE(xml.contains("Bad"));
+}
+
+// tableInfoToDoc: 表数据写入单元格
+TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_tableInfoToDoc_withData)
+{
+    // Arrange: 1 行 2 列表格（与 EXPORT_TO_DOC 用法一致）
+    DocxWriter docx;
+    DocxTable *tab = docx.addTable(1, 0);
+    tab->addColumn();
+    tab->addColumn();
+    tab->addRow();
+    int row = 1;
+    QTemporaryDir tmpDir;
+
+    // Act: 写表数据并落盘
+    audio->tableInfoToDoc(tab, row);
+    const QByteArray doc = utDocOf(docx, tmpDir, "tableinfo.docx");
+
+    // Assert: 首行外新增了行, 单元格已写出
+    EXPECT_EQ(2, tab->rowCount());
+    EXPECT_TRUE(QString::fromUtf8(doc).contains("<w:tc>"));
+}
+
+// tableHeaderToDoc: 表头写入首行
+TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_tableHeaderToDoc_withData)
+{
+    // Arrange: 1 行 0 列表格
+    DocxWriter docx;
+    DocxTable *tab = docx.addTable(1, 0);
+    QTemporaryDir tmpDir;
+
+    // Act: 写表头并落盘
+    audio->tableHeaderToDoc(tab);
+    const QByteArray doc = utDocOf(docx, tmpDir, "tableheader.docx");
+
+    // Assert: 表头列已扩出且首行有文本
+    EXPECT_GT(tab->columnCount(), 0);
+    EXPECT_TRUE(QString::fromUtf8(doc).contains("<w:t"));
+}
 
 // ---------- Xlsx 导出 ----------
 // toXlsxString: 全量写 xlsx 工作表

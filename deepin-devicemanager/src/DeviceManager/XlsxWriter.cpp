@@ -3,37 +3,14 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "XlsxWriter.h"
+#include "ZipWriter.h"
 
 #include <QDateTime>
-#include <QSaveFile>
-
-#include <limits>
 
 // ============================================================
-// 内部工具：CRC-32 / 列名 / XML 转义（独立成自由函数便于单测直测）
+// 内部工具：列名（xlsx 专用，独立成自由函数便于单测直测）
 // ============================================================
 namespace XlsxDetail {
-
-quint32 crc32(const QByteArray &data)
-{
-    static quint32 table[256];
-    static bool tableReady = false;
-    if (!tableReady) {
-        for (quint32 i = 0; i < 256; ++i) {
-            quint32 c = i;
-            for (int k = 0; k < 8; ++k)
-                c = (c & 1) ? (0xEDB88320u ^ (c >> 1)) : (c >> 1);
-            table[i] = c;
-        }
-        tableReady = true;
-    }
-
-    quint32 crc = 0xFFFFFFFFu;
-    const unsigned char *p = reinterpret_cast<const unsigned char *>(data.constData());
-    for (int i = 0; i < data.size(); ++i)
-        crc = table[(crc ^ p[i]) & 0xFF] ^ (crc >> 8);
-    return crc ^ 0xFFFFFFFFu;
-}
 
 QString columnName(int column)   // 1 基列号 -> A/.../Z/AA/... 样式
 {
@@ -45,27 +22,6 @@ QString columnName(int column)   // 1 基列号 -> A/.../Z/AA/... 样式
         col = (col - 1) / 26;
     }
     return name;
-}
-
-QString escapeXml(const QString &text)
-{
-    QString out;
-    out.reserve(text.size() + 8);
-    for (const QChar &c : text) {
-        switch (c.unicode()) {
-        case u'&':  out += QLatin1String("&amp;");   break;
-        case u'<':  out += QLatin1String("&lt;");    break;
-        case u'>':  out += QLatin1String("&gt;");    break;
-        case u'"':  out += QLatin1String("&quot;");  break;
-        case u'\'': out += QLatin1String("&apos;");  break;
-        default:
-            // 丢弃 XML 1.0 非法控制字符（保留 \t \n \r）
-            if (c.unicode() >= 0x20 || c.unicode() == 0x09 || c.unicode() == 0x0A || c.unicode() == 0x0D)
-                out += c;
-            break;
-        }
-    }
-    return out;
 }
 
 }   // namespace XlsxDetail
@@ -224,7 +180,7 @@ QByteArray XlsxWriter::buildSheet() const
             if (styleIdx >= 0)
                 rowsXml += QByteArray(" s=\"") + QByteArray::number(styleIdx + 1) + "\"";
             rowsXml += " t=\"inlineStr\"><is><t xml:space=\"preserve\">"
-                   + XlsxDetail::escapeXml(cell.value).toUtf8() + "</t></is></c>";
+                   + ZipDetail::escapeXml(cell.value).toUtf8() + "</t></is></c>";
         }
         rowsXml += "</row>";
     }
@@ -242,109 +198,17 @@ bool XlsxWriter::saveAs(const QString &filePath)
     if (filePath.isEmpty())
         return false;
 
-    struct Entry {
-        const char *name;
-        QByteArray data;
-    };
-    Entry entries[] = {
-        { "[Content_Types].xml",        buildContentTypes() },
-        { "_rels/.rels",                buildRootRels() },
-        { "docProps/app.xml",           QByteArray(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-            "<Properties xmlns=\"http://schemas.openxmlformats.org/officeDocument/2006/"
-            "extended-properties\" xmlns:vt=\"http://schemas.openxmlformats.org/officeDocument/"
-            "2006/docPropsVTypes\"><Application>deepin-devicemanager</Application></Properties>") },
-        { "xl/workbook.xml",            buildWorkbook() },
-        { "xl/_rels/workbook.xml.rels", buildWorkbookRels() },
-        { "xl/styles.xml",              buildStyles() },
-        { "xl/worksheets/sheet1.xml",   buildSheet() },
-    };
-    const int entryCount = sizeof(entries) / sizeof(entries[0]);
-
-    // 时间戳（DOS 格式）
-    const QDateTime now = QDateTime::currentDateTime();
-    const QTime t = now.time();
-    const QDate d = now.date();
-    const quint16 dosTime = quint16((t.hour() << 11) | (t.minute() << 5) | (t.second() / 2));
-    const quint16 dosDate = quint16(((qMax(1980, d.year()) - 1980) << 9) | (d.month() << 5) | d.day());
-
-    QByteArray out;
-    QByteArray central;
-
-    auto appendLe16 = [](QByteArray &buf, quint16 v) {
-        buf += char(v & 0xFF);
-        buf += char((v >> 8) & 0xFF);
-    };
-    auto appendLe32 = [](QByteArray &buf, quint32 v) {
-        buf += char(v & 0xFF);
-        buf += char((v >> 8) & 0xFF);
-        buf += char((v >> 16) & 0xFF);
-        buf += char((v >> 24) & 0xFF);
-    };
-
-    for (int i = 0; i < entryCount; ++i) {
-        const QByteArray name = QByteArray(entries[i].name);
-        const QByteArray &data = entries[i].data;
-        const quint32 crc = XlsxDetail::crc32(data);
-        const quint32 offset = quint32(out.size());
-
-        // local file header（STORE：method=0，压缩前后大小一致）
-        out += QByteArray("PK\x03\x04", 4);
-        appendLe16(out, 20);                  // version needed
-        appendLe16(out, 0);                   // flags
-        appendLe16(out, 0);                   // method: STORE
-        appendLe16(out, dosTime);
-        appendLe16(out, dosDate);
-        appendLe32(out, crc);
-        appendLe32(out, quint32(data.size()));   // compressed size
-        appendLe32(out, quint32(data.size()));   // uncompressed size
-        appendLe16(out, quint16(name.size()));
-        appendLe16(out, 0);                   // extra len
-        out += name;
-        out += data;
-
-        // central directory entry
-        central += QByteArray("PK\x01\x02", 4);
-        appendLe16(central, 20);              // version made by
-        appendLe16(central, 20);              // version needed
-        appendLe16(central, 0);               // flags
-        appendLe16(central, 0);               // method: STORE
-        appendLe16(central, dosTime);
-        appendLe16(central, dosDate);
-        appendLe32(central, crc);
-        appendLe32(central, quint32(data.size()));
-        appendLe32(central, quint32(data.size()));
-        appendLe16(central, quint16(name.size()));
-        appendLe16(central, 0);               // extra len
-        appendLe16(central, 0);               // comment len
-        appendLe16(central, 0);               // disk number start
-        appendLe16(central, 0);               // internal attrs
-        appendLe32(central, 0);               // external attrs
-        appendLe32(central, offset);
-        central += name;
-    }
-
-    // end of central directory
-    const quint32 cdOffset = quint32(out.size());
-    const quint32 cdSize = quint32(central.size());
-    out += central;
-    out += QByteArray("PK\x05\x06", 4);
-    out += char(0); out += char(0);           // disk number
-    out += char(0); out += char(0);           // disk with cd
-    out += char(entryCount & 0xFF); out += char((entryCount >> 8) & 0xFF);
-    out += char(entryCount & 0xFF); out += char((entryCount >> 8) & 0xFF);
-    out += char(cdSize & 0xFF); out += char((cdSize >> 8) & 0xFF);
-    out += char((cdSize >> 16) & 0xFF); out += char((cdSize >> 24) & 0xFF);
-    out += char(cdOffset & 0xFF); out += char((cdOffset >> 8) & 0xFF);
-    out += char((cdOffset >> 16) & 0xFF); out += char((cdOffset >> 24) & 0xFF);
-    out += char(0); out += char(0);           // comment len
-
-    QSaveFile file(filePath);
-    if (!file.open(QIODevice::WriteOnly))
-        return false;
-    if (file.write(out) != out.size()) {
-        file.cancelWriting();
-        return false;
-    }
-    return file.commit();
+    ZipWriter zip;
+    zip.addFile(QLatin1String("[Content_Types].xml"), buildContentTypes());
+    zip.addFile(QLatin1String("_rels/.rels"), buildRootRels());
+    zip.addFile(QLatin1String("docProps/app.xml"), QByteArray(
+        "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+        "<Properties xmlns=\"http://schemas.openxmlformats.org/officeDocument/2006/"
+        "extended-properties\" xmlns:vt=\"http://schemas.openxmlformats.org/officeDocument/"
+        "2006/docPropsVTypes\"><Application>deepin-devicemanager</Application></Properties>"));
+    zip.addFile(QLatin1String("xl/workbook.xml"), buildWorkbook());
+    zip.addFile(QLatin1String("xl/_rels/workbook.xml.rels"), buildWorkbookRels());
+    zip.addFile(QLatin1String("xl/styles.xml"), buildStyles());
+    zip.addFile(QLatin1String("xl/worksheets/sheet1.xml"), buildSheet());
+    return zip.saveAs(filePath);
 }

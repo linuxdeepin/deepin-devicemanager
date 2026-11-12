@@ -4,16 +4,16 @@
 
 // ============================================================
 // 测试对象: DeviceManager 文件写入链 (deepin-devicemanager/src/DeviceManager/DeviceManager.cpp)
-// 覆盖: exportToTxt/exportToXlsx/exportToHtml、overviewToTxt/overviewToHtml/
+// 覆盖: exportToTxt/exportToXlsx/exportToDoc/exportToHtml、overviewToTxt/overviewToHtml/
 //       overviewToXlsx、addOthersDeviceFromHwinfo。
 // 环境隔离: 导出路径一律使用 QTemporaryDir/QTemporaryFile, 不写系统目录。
-// 注: Doc 格式因 Docx::Document 默认构造 SEGV 暂跳过。
 //
 // 用例计数声明（self-check-structural 验证此块）：
 // | method                     | level | factors | min | actual |
 // |----------------------------|-------|---------|-----|--------|
 // | exportToTxt                | mid   | -       | 2   | 2      |
 // | exportToXlsx               | low   | -       | 1   | 1      |
+// | exportToDoc                | mid   | -       | 2   | 2      |
 // | exportToHtml               | low   | -       | 1   | 1      |
 // | overviewToTxt              | low   | -       | 1   | 1      |
 // | overviewToHtml             | low   | -       | 1   | 1      |
@@ -106,6 +106,41 @@ TEST_F(UT_DeviceManagerSave, UT_DeviceManagerSave_exportToXlsx)
     const QByteArray sheet = utExtractStoredEntry(zip, "xl/worksheets/sheet1.xml");
     EXPECT_FALSE(sheet.isEmpty());
     EXPECT_TRUE(sheet.contains("Overview"));
+}
+
+// exportToDoc: 空设备列表生成有效 docx 文件
+TEST_F(UT_DeviceManagerSave, UT_DeviceManagerSave_exportToDoc)
+{
+    // Arrange: 临时目录中的输出路径
+    QString path = tmpDir->filePath("ut_dm_out.docx");
+
+    // Act: 导出 doc
+    bool ok = DeviceManager::instance()->exportToDoc(path);
+
+    // Assert: 导出成功且文件存在
+    EXPECT_TRUE(ok);
+    EXPECT_TRUE(QFile(path).exists());
+
+    // 验证为合法 ZIP 且包含 OOXML 关键部件与概览段头
+    QFile f(path);
+    ASSERT_TRUE(f.open(QIODevice::ReadOnly));
+    const QByteArray zip = f.readAll();
+    f.close();
+    EXPECT_TRUE(zip.startsWith(QByteArray("PK\x03\x04", 4)));
+    EXPECT_FALSE(utExtractStoredEntry(zip, "[Content_Types].xml").isEmpty());
+    EXPECT_FALSE(utExtractStoredEntry(zip, "word/document.xml").isEmpty());
+    const QByteArray doc = utExtractStoredEntry(zip, "word/document.xml");
+    EXPECT_TRUE(doc.contains("Overview"));
+    // 标题样式真实存在（旧实现引用不存在的样式, 标题降级为普通文本）
+    const QByteArray styles = utExtractStoredEntry(zip, "word/styles.xml");
+    EXPECT_TRUE(styles.contains("Heading1"));
+}
+
+// exportToDoc: 不可写路径返回 false
+TEST_F(UT_DeviceManagerSave, UT_DeviceManagerSave_exportToDoc_badPath)
+{
+    // Act & Assert: 不可写路径导出失败
+    EXPECT_FALSE(DeviceManager::instance()->exportToDoc("/nonexistent-dir-ut/x.docx"));
 }
 
 // exportToHtml: 空设备列表生成非空 html 文件

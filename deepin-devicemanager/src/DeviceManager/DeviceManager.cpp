@@ -1833,7 +1833,7 @@ bool DeviceManager::exportToDoc(const QString &filePath)
 {
     qCDebug(appLog) << "Exporting to doc file";
     // 导出设备信息到doc文件
-    Docx::Document doc(":/template.docx");
+    DocxWriter doc;
     overviewToDoc(doc);
     EXPORT_TO_DOC(doc, m_ListDeviceCPU, QObject::tr("CPU"), QObject::tr("No CPU found"));
     EXPORT_TO_DOC(doc, m_ListDeviceBios, QObject::tr("Motherboard"), QObject::tr("No motherboard found"));
@@ -1853,9 +1853,7 @@ bool DeviceManager::exportToDoc(const QString &filePath)
     EXPORT_TO_DOC(doc, m_ListDeviceCdrom, QObject::tr("CD-ROM"), QObject::tr("No CD-ROM found"));
     EXPORT_TO_DOC(doc, m_ListDeviceOthers, QObject::tr("Other Devices"), QObject::tr("No other devices found"));
 
-    doc.save(filePath);
-
-    return true;
+    return doc.save(filePath);
 }
 
 bool DeviceManager::exportToHtml(const QString &filePath)
@@ -1970,7 +1968,7 @@ void DeviceManager::overviewToHtml(QFile &html)
     html.write(doc.toString().toStdString().data());
 }
 
-void DeviceManager::overviewToDoc(Docx::Document &doc)
+void DeviceManager::overviewToDoc(DocxWriter &doc)
 {
     qCDebug(appLog) << "Exporting overview to doc";
     // 导出概况信息到doc文件
