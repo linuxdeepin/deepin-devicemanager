@@ -54,7 +54,7 @@ Copyright: UnionTech Software Technology Co., Ltd.
 License: GPL-3.0-or-later
 
 # tests
-Files: deepin-devicemanager/tests/* deepin-devicemanager-server/tests/*
+Files: test/*
 Copyright: UnionTech Software Technology Co., Ltd.
 License: GPL-3.0-or-later
 

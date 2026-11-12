@@ -7,13 +7,17 @@
 # 参考 deepin-reader/tests/test-prj-running.sh 风格适配:
 # 清理重建构建目录 → 编译 → 运行单测产出 gtest XML → 采集 lcov 覆盖率
 # → 生成 HTML 报告与 ut-summary.json 统计摘要
+#
+# 本脚本位于顶层 test/ 目录，统一运行仓库内全部子项目的单元测试：
+#   - test/deepin-devicemanager/          (客户端 deepin-devicemanager-test)
+#   - test/deepin-devicemanager-server/   (服务端 deepin-devicemanager-server-test / control-test / customgpuinfo-test)
 
 set -u
 
 export builddir=build
 export reportdir=build-ut
 export scriptdir="$(cd "$(dirname "$0")" && pwd)"
-export projectdir="$(cd "${scriptdir}/../.." && pwd)"
+export projectdir="$(cd "${scriptdir}/.." && pwd)"
 
 build_path="${projectdir}/${builddir}"
 report_path="${projectdir}/${reportdir}"
@@ -44,12 +48,14 @@ lcov --directory "${build_path}" --zerocounters >/dev/null 2>&1 || true
 # 生成asan日志和ut测试xml结果
 # NOTE: 不使用 set -e: 覆盖率采集各步骤失败只应降级(缺覆盖率数据),
 # 不能中断后续 gtest XML 汇总与 ut-summary.json 生成
-if [ -f ./deepin-devicemanager/tests/deepin-devicemanager-test ]; then
+
+# 客户端测试 (deepin-devicemanager)
+if [ -f ./test/deepin-devicemanager/deepin-devicemanager-test ]; then
     echo " =================== CLIENT TEST BEGIN ==================== "
     # UT_LogTreeView.UT_LogTreeView_drawRow: Qt6 下 drawRow 路径段错误(单独跑亦复现,
     # 上游缺陷); UT_SingleDeviceManager.*: 用例内重建 QApplication 导致退出阶段挂起,
     # 两者会丢失整个 XML/覆盖率, 故在脚本层排除。待上游修复后移除此过滤。
-    QT_QPA_PLATFORM=offscreen ./deepin-devicemanager/tests/deepin-devicemanager-test \
+    QT_QPA_PLATFORM=offscreen ./test/deepin-devicemanager/deepin-devicemanager-test \
         --gtest_filter='-UT_LogTreeView.UT_LogTreeView_drawRow:UT_SingleDeviceManager.*' \
         --gtest_output=xml:./report/report_deepin-devicemanager.xml
     rc=$?
@@ -61,13 +67,13 @@ else
 fi
 
 # server测试如果存在则运行
-if [ -f ./deepin-devicemanager-server/tests/deepin-devicemanager-server-test ]; then
+if [ -f ./test/deepin-devicemanager-server/deepin-devicemanager-server-test ]; then
     echo " =================== SERVER TEST BEGIN ==================== "
     # MainJob_UT 套件的用例会启动后台 QThread 且未在用例结束时停止,
     # 消费时 QThread "Destroyed while thread is still running" 触发 qFatal
     # 中止整个进程,gtest XML 无法落盘;故在脚本层排除该套件(其余 220+ 用例
     # 可完整跑完并产出 XML/覆盖率)。待上游修复线程清理后移除此过滤。
-    QT_QPA_PLATFORM=offscreen ./deepin-devicemanager-server/tests/deepin-devicemanager-server-test \
+    QT_QPA_PLATFORM=offscreen ./test/deepin-devicemanager-server/deepin-devicemanager-server-test \
         --gtest_filter='-MainJob_UT.*' \
         --gtest_output=xml:./report/report_deepin-devicemanager-server.xml
     rc=$?
@@ -80,15 +86,28 @@ fi
 # control-test(ControlInterface, devicecontrol)如果存在则运行
 # 上游新增的独立测试二进制(73 用例, 避免同名 moc 冲突), 实测 <1s 跑完,
 # 无系统总线真调用, 无 polkit 弹窗风险
-if [ -f ./deepin-devicemanager-server/tests/control-test ]; then
+if [ -f ./test/deepin-devicemanager-server/control-test ]; then
     echo " =================== CONTROL TEST BEGIN ==================== "
-    QT_QPA_PLATFORM=offscreen ./deepin-devicemanager-server/tests/control-test \
+    QT_QPA_PLATFORM=offscreen ./test/deepin-devicemanager-server/control-test \
         --gtest_output=xml:./report/report_deepin-devicecontrol.xml
     rc=$?
     test_exit_code=$((test_exit_code || rc))
     echo " =================== CONTROL TEST END (rc=${rc}) ==================== "
 else
     echo "WARNING: control-test not found, skipping devicecontrol tests"
+fi
+
+# customgpuinfo-test(独立显卡信息采集, 自带 main 的独立测试二进制)如果存在则运行
+# 仅依赖 Qt Core, QProcess 探测已统一打桩, 无外部调用
+if [ -f ./test/deepin-devicemanager-server/customgpuinfo-test ]; then
+    echo " =================== CUSTOMGPUINFO TEST BEGIN ==================== "
+    QT_QPA_PLATFORM=offscreen ./test/deepin-devicemanager-server/customgpuinfo-test \
+        --gtest_output=xml:./report/report_customgpuinfo.xml
+    rc=$?
+    test_exit_code=$((test_exit_code || rc))
+    echo " =================== CUSTOMGPUINFO TEST END (rc=${rc}) ==================== "
+else
+    echo "WARNING: customgpuinfo-test not found, skipping customgpuinfo tests"
 fi
 
 workdir="${build_path}"
@@ -98,7 +117,9 @@ lcov -d "${workdir}" -c -o ./coverage.info || true
 
 lcov --extract ./coverage.info '*/src/*' -o ./coverage.info || true
 
-lcov --remove ./coverage.info '*/tests/*' -o ./coverage.info || true
+# 测试代码已外移至顶层 test/（原为各子项目 tests/），过滤模式同步调整，
+# 避免测试源码自身(位于 test/*/src/)被计入项目覆盖率
+lcov --remove ./coverage.info '*/test/*' -o ./coverage.info || true
 
 # 排除第三方 vendored 代码（QtXlsxWriter/docx），其路径中的 /src/ 会被上面的
 # extract 模式误匹配，导致项目自身覆盖率被拉低

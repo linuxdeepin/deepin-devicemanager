@@ -74,7 +74,7 @@
 #include "../src/ut_Head.h"
 #include "../src/stub.h"
 
-#include "../deepin-devicecontrol/src/controlinterface.h"
+#include "../../../deepin-devicemanager-server/deepin-devicecontrol/src/controlinterface.h"
 #include "drivercontrol/drivermanager.h"
 #include "enablecontrol/enablesqlmanager.h"
 #include "enablecontrol/enableutils.h"

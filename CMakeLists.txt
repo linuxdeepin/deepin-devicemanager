@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 UnionTech Software Technology Co., Ltd.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 cmake_minimum_required(VERSION 3.7)
 project(deepin-devicemanager C CXX)
 
@@ -39,6 +43,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-z,relro -Wl,-z,now")
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager)
 add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager-server)
+
+# 单元测试（已从各子项目 tests/ 外移至顶层 test/，覆盖率构建时启用）
+if(CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")
+    add_subdirectory(test/deepin-devicemanager)
+    add_subdirectory(test/deepin-devicemanager-server)
+endif()
 
 #代码覆盖率开关
 if(CMAKE_COVERAGE_ARG STREQUAL "CMAKE_COVERAGE_ARG_ON")

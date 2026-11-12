@@ -1,5 +1,5 @@
 # Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-# SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+# SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -48,8 +48,8 @@ endif()
 #Generate the qm file
 #message(${CMAKE_CURRENT_SOURCE_DIR})
 execute_process(COMMAND bash ${APP_TRANS_SCRIPT} WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/")
-configure_file(../src/environments.h.in environments.h @ONLY)
-configure_file(../src/config.h.in config.h @ONLY)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/../../deepin-devicemanager/src/environments.h.in environments.h @ONLY)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/../../deepin-devicemanager/src/config.h.in config.h @ONLY)
 
 # Find the library
 #qt5
@@ -92,13 +92,53 @@ find_package(Dtk6 COMPONENTS
 )
 
 
-#add_subdirectory(${CMAKE_SOURCE_DIR}/deepin-devicemanager/tests/)
 # Test--------deepin-devicemanager
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
+# 测试目标名固定：tests 已外移至顶层 test/，由根 CMakeLists 直接挂载，
+# 不再从子项目作用域继承 PROJECT_NAME（避免与 server 测试目标重名）
 set(PROJECT_NAME_TEST
-    ${PROJECT_NAME}-test)
+    deepin-devicemanager-test)
+
+# ---- 源码树头文件检索与编译开关 ----
+# 原先由 deepin-devicemanager/CMakeLists.txt 的 include_directories /
+# add_definitions 经 add_subdirectory 继承；tests 外移后需在此显式声明
+set(CLIENT_SRC_DIR "${CMAKE_CURRENT_LIST_DIR}/../../deepin-devicemanager")
+macro(SUBDIRLIST result curdir)
+    file(GLOB children RELATIVE ${curdir} ${curdir}/*)
+    set(dirlist "")
+    foreach(child ${children})
+        if(IS_DIRECTORY ${curdir}/${child})
+            LIST(APPEND dirlist ${child})
+        endif()
+    endforeach()
+    set(${result} ${dirlist})
+endmacro()
+include_directories(${CLIENT_SRC_DIR}/src)
+SUBDIRLIST(client_src_dirs ${CLIENT_SRC_DIR}/src)
+foreach(dir ${client_src_dirs})
+    include_directories(${CLIENT_SRC_DIR}/src/${dir})
+endforeach()
+include_directories(${CLIENT_SRC_DIR}/src/DDLog/)
+include_directories(${Qt${QT_VERSION_MAJOR}Gui_PRIVATE_INCLUDE_DIRS})
+if(NOT DISABLE_DRIVER)
+    if(${QT_VERSION_MAJOR} EQUAL 6)
+        find_package(QApt-qt6 REQUIRED)
+        set(QAPT_NAME "QApt-qt6")
+    else()
+        find_package(QApt REQUIRED)
+        set(QAPT_NAME "QApt")
+    endif()
+    include_directories(${${QAPT_NAME}_INCLUDE_DIRS})
+endif()
+# 与主工程保持一致：Qt6 构建禁用驱动源码；Debug 下启用 Qt 日志上下文
+if(${QT_VERSION_MAJOR} EQUAL 6)
+    add_definitions(-DDISABLE_DRIVER)
+endif()
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    add_definitions("-DQT_MESSAGELOGCONTEXT")
+endif()
 
 ADD_COMPILE_OPTIONS(-fno-access-control)
 
@@ -120,11 +160,11 @@ link_libraries("cups")
 
 #src
 file(GLOB_RECURSE SRC_CPP
-     ${CMAKE_CURRENT_LIST_DIR}/../src/*.cpp
-     ${CMAKE_CURRENT_LIST_DIR}/../3rdparty/*.cpp
+     ${CLIENT_SRC_DIR}/src/*.cpp
+     ${CLIENT_SRC_DIR}/3rdparty/*.cpp
     )
 # remove src main.cpp or will multi define
-list(REMOVE_ITEM SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/../src/main.cpp)
+list(REMOVE_ITEM SRC_CPP ${CLIENT_SRC_DIR}/src/main.cpp)
 
 file(GLOB_RECURSE TEST_SRC_CPP ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
 file(GLOB_RECURSE TEST_SRC_H ${CMAKE_CURRENT_LIST_DIR}/src/*.h)
@@ -179,7 +219,7 @@ endif()
 
 add_custom_target(test
     COMMAND echo " =================== TEST BEGIN ==================== "
-    COMMAND ${CMAKE_BINARY_DIR}/deepin-devicemanager/tests/${PROJECT_NAME_TEST}
+    COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME_TEST}
     COMMAND echo " =================== TEST END ==================== "
 )
 #'make test'命令依赖与我们的测试程序
@@ -205,4 +245,4 @@ target_include_directories(${PROJECT_NAME_TEST} PRIVATE
 
 # [UT-APPEND] 嵌入应用内置图标资源（appimage.qrc），供 CameraIconEngine 单测真实加载
 # qrc 资源此前仅在主程序目标内嵌，测试二进制读不到 :/icons/.../camera_20px.svg
-target_sources(${PROJECT_NAME_TEST} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../assets/appimage.qrc)
+target_sources(${PROJECT_NAME_TEST} PRIVATE ${CLIENT_SRC_DIR}/assets/appimage.qrc)

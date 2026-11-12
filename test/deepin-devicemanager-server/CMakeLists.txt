@@ -5,6 +5,9 @@
 
 cmake_minimum_required(VERSION 3.7)
 
+# tests 已外移至顶层 test/，源码树仍在各子项目内，统一用变量指回
+set(SERVER_PRJ_DIR "${CMAKE_CURRENT_LIST_DIR}/../../deepin-devicemanager-server")
+
 if (NOT DEFINED VERSION)
     set(VERSION 5.5.10.1)
 endif ()
@@ -31,19 +34,19 @@ macro(SUBDIRLIST result curdir)
     endforeach()
     set(${result} ${dirlist})
 endmacro()
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../deepin-deviceinfo/src)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../deepin-devicecontrol/src)
+include_directories(${SERVER_PRJ_DIR}/deepin-deviceinfo/src)
+include_directories(${SERVER_PRJ_DIR}/deepin-devicecontrol/src)
 # DDLog header (shared from client source)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../deepin-devicemanager/src/DDLog)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/../../deepin-devicemanager/src/DDLog)
 # qdbus-qt6 service header
 include_directories(/usr/include/deepin-qdbus-service)
-SUBDIRLIST(deviceinfo_dirs ${CMAKE_CURRENT_SOURCE_DIR}/../deepin-deviceinfo/src)
-SUBDIRLIST(devicecontrol_dirs ${CMAKE_CURRENT_SOURCE_DIR}/../deepin-devicecontrol/src)
+SUBDIRLIST(deviceinfo_dirs ${SERVER_PRJ_DIR}/deepin-deviceinfo/src)
+SUBDIRLIST(devicecontrol_dirs ${SERVER_PRJ_DIR}/deepin-devicecontrol/src)
 foreach(subdir ${deviceinfo_dirs})
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../deepin-deviceinfo/src/${subdir})
+    include_directories(${SERVER_PRJ_DIR}/deepin-deviceinfo/src/${subdir})
 endforeach()
 foreach(subdir ${devicecontrol_dirs})
-    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../deepin-devicecontrol/src/${subdir})
+    include_directories(${SERVER_PRJ_DIR}/deepin-devicecontrol/src/${subdir})
 endforeach()
 # 设置包含头文件的时候不用包含路径 end ****************************************************************************************
 
@@ -105,25 +108,27 @@ if(NOT DISABLE_DRIVER)
     PKG_SEARCH_MODULE(kmod REQUIRED libkmod IMPORTED_TARGET)
 endif()
 
+# 测试目标名固定：tests 已外移至顶层 test/，由根 CMakeLists 直接挂载，
+# 不再从子项目作用域继承 PROJECT_NAME（避免与客户端测试目标重名）
 set(PROJECT_NAME_TEST
-    ${PROJECT_NAME}-test)
+    deepin-devicemanager-server-test)
 
 ADD_COMPILE_OPTIONS(-fno-access-control)
 
 #src
 file(GLOB_RECURSE INFO_SRCS
-     ${CMAKE_CURRENT_LIST_DIR}/../deepin-deviceinfo/src/*.cpp
+     ${SERVER_PRJ_DIR}/deepin-deviceinfo/src/*.cpp
     )
 file(GLOB_RECURSE CONTROL_SRCS
-     ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/*.cpp
+     ${SERVER_PRJ_DIR}/deepin-devicecontrol/src/*.cpp
     )
 # remove src main.cpp or will multi define
-list(REMOVE_ITEM INFO_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-deviceinfo/src/plugin.cpp)
-list(REMOVE_ITEM CONTROL_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/main.cpp)
+list(REMOVE_ITEM INFO_SRCS ${SERVER_PRJ_DIR}/deepin-deviceinfo/src/plugin.cpp)
+list(REMOVE_ITEM CONTROL_SRCS ${SERVER_PRJ_DIR}/deepin-devicecontrol/src/main.cpp)
 # deepin-devicecontrol 与 deepin-deviceinfo 各有一个同名 ControlInterface（均含 Q_OBJECT），
 # 同一二进制编译会导致 moc 重定义与符号冲突；devicecontrol 侧仅被已排除的 main.cpp 使用，
 # 故测试目标仅保留 deviceinfo 侧
-list(REMOVE_ITEM CONTROL_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/controlinterface.cpp)
+list(REMOVE_ITEM CONTROL_SRCS ${SERVER_PRJ_DIR}/deepin-devicecontrol/src/controlinterface.cpp)
 if(DISABLE_DRIVER)
     list(FILTER CONTROL_SRCS EXCLUDE REGEX "/drivercontrol/")
 endif()
@@ -206,7 +211,7 @@ if(TARGET Qt6::Test)
 endif()
 
 # ===================== [ut-t30] Server 热插拔与杂项测试补充（仅追加，不改动既有行） =====================
-# 1) stub-ext 标准打桩库（tests/3rdparty/stub，支持 set_lamda）
+# 1) stub-ext 标准打桩库（3rdparty/stub，支持 set_lamda）
 include_directories(${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub)
 target_sources(${PROJECT_NAME_TEST} PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}/3rdparty/stub/stub-shadow.cpp
@@ -215,7 +220,7 @@ target_sources(${PROJECT_NAME_TEST} PRIVATE
 
 # 2) plugin.cpp 在上方被移出测试目标（避免 main 符号冲突），此处重新纳入以覆盖 DSMRegister/DSMUnRegister
 target_sources(${PROJECT_NAME_TEST} PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/../deepin-deviceinfo/src/plugin.cpp
+    ${SERVER_PRJ_DIR}/deepin-deviceinfo/src/plugin.cpp
 )
 
 # 3) customgpuinfo/main.cpp 自带 main() 且仅依赖 Qt Core，使用独立测试二进制
@@ -247,8 +252,8 @@ set_property(TARGET customgpuinfo-test PROPERTY CXX_STANDARD 17)
 # ---------------- APPEND (ut-t25): ControlInterface(devicecontrol) 专用测试二进制 ----------------
 # deepin-devicecontrol 与 deepin-deviceinfo 各有一个同名 ControlInterface(均含 Q_OBJECT)，
 # 不能与主测试二进制(已编 deviceinfo 侧)同链；本目标只编 devicecontrol 侧源码 + control-ut/ 用例。
-file(GLOB_RECURSE CTRL_UT_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/*.cpp)
-list(REMOVE_ITEM CTRL_UT_SRCS ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src/main.cpp)
+file(GLOB_RECURSE CTRL_UT_SRCS ${SERVER_PRJ_DIR}/deepin-devicecontrol/src/*.cpp)
+list(REMOVE_ITEM CTRL_UT_SRCS ${SERVER_PRJ_DIR}/deepin-devicecontrol/src/main.cpp)
 file(GLOB CTRL_UT_TESTS ${CMAKE_CURRENT_LIST_DIR}/control-ut/*.cpp)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Test)
 # ControlInterface(devicecontrol) 构造依赖该宏(initPolicy 配置路径)，与 deepin-devicecontrol/CMakeLists.txt 一致
@@ -258,7 +263,7 @@ add_executable(control-test ${CTRL_UT_SRCS} ${CTRL_UT_TESTS}
     ${CMAKE_CURRENT_LIST_DIR}/src/stub.h
 )
 target_include_directories(control-test PRIVATE
-    ${CMAKE_CURRENT_LIST_DIR}/../deepin-devicecontrol/src
+    ${SERVER_PRJ_DIR}/deepin-devicecontrol/src
     ${CMAKE_CURRENT_LIST_DIR}/src
     ${CMAKE_CURRENT_LIST_DIR}/control-ut
 )
