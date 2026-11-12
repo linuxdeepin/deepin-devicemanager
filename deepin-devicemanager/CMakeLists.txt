@@ -93,7 +93,6 @@ foreach(dir ${dirs})
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/${dir})
 endforeach()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/docx)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QtXlsxWriter/include/QtXlsx)
 
 #add cups and zmq
 include_directories("/usr/include/cups/")

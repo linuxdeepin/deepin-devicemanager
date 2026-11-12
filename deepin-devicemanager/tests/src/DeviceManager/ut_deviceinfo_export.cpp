@@ -63,9 +63,24 @@
 #include <QTextStream>
 #include <QString>
 #include <QTemporaryFile>
+#include <QTemporaryDir>
+#include <QFile>
 #include <QPair>
+#include "minizip_read_helper.h"
 
 #include <gtest/gtest.h>
+
+// 测试辅助：将写入器落盘并提取 sheet1.xml 内容（验证写入结果的公共路径）
+static QByteArray utSheetOf(XlsxWriter &xlsx, QTemporaryDir &dir, const QString &name)
+{
+    const QString path = dir.filePath(name);
+    if (!xlsx.saveAs(path))
+        return QByteArray();
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly))
+        return QByteArray();
+    return utExtractStoredEntry(f.readAll(), "xl/worksheets/sheet1.xml");
+}
 
 class UT_DeviceInfoExport : public ::testing::Test
 {
@@ -143,33 +158,38 @@ TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_subTitleToHTML_emptyTitle)
 // toXlsxString: 全量写 xlsx 工作表
 TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_toXlsxString_withData)
 {
-    // Arrange: xlsx 文档
-    QXlsx::Document xlsx;
-    QXlsx::Format fmt;
+    // Arrange: xlsx 写入器与临时目录
+    XlsxWriter xlsx;
+    XlsxFormat fmt;
+    QTemporaryDir tmpDir;
 
-    // Act: 全量写入
+    // Act: 全量写入并落盘
     audio->toXlsxString(xlsx, fmt);
+    const QByteArray sheet = utSheetOf(xlsx, tmpDir, "toxlsxstring.xlsx");
 
-    // Assert: 行数据已写入
-    EXPECT_GT(xlsx.dimension().lastRow(), 0);
-    EXPECT_TRUE(xlsx.selectSheet("Sheet1"));
+    // Assert: 基本信息/其他信息均已写入
+    EXPECT_TRUE(sheet.contains("Vendor"));
+    EXPECT_TRUE(sheet.contains("Acme"));
+    EXPECT_TRUE(sheet.contains("Driver"));
 }
 
 // baseInfoToXlsx: 基本信息写入 xlsx
 TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_baseInfoToXlsx_withData)
 {
-    // Arrange: xlsx 文档与非空基本信息
-    QXlsx::Document xlsx;
-    QXlsx::Format fmt;
+    // Arrange: xlsx 写入器与非空基本信息
+    XlsxWriter xlsx;
+    XlsxFormat fmt;
     QList<QPair<QString, QString> > info;
     info << qMakePair(QString("Key"), QString("Value"));
+    QTemporaryDir tmpDir;
 
-    // Act: 写基本信息
+    // Act: 写基本信息并落盘
     audio->baseInfoToXlsx(xlsx, fmt, info);
+    const QByteArray sheet = utSheetOf(xlsx, tmpDir, "baseinfo.xlsx");
 
-    // Assert: 行数据已写入且工作表可用
-    EXPECT_GT(xlsx.dimension().lastRow(), 0);
-    EXPECT_TRUE(xlsx.selectSheet("Sheet1"));
+    // Assert: 键值均已写入
+    EXPECT_TRUE(sheet.contains("Key"));
+    EXPECT_TRUE(sheet.contains("Value"));
 }
 
 // ---------- Txt 导出 ----------
@@ -298,29 +318,31 @@ TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_tableInfoToDoc_null)
 // tableInfoToXlsx: 表数据写入
 TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_tableInfoToXlsx_withData)
 {
-    // Arrange: xlsx 文档
-    QXlsx::Document xlsx;
+    // Arrange: xlsx 写入器
+    XlsxWriter xlsx;
+    QTemporaryDir tmpDir;
 
-    // Act: 写表数据
+    // Act: 写表数据并落盘
     audio->tableInfoToXlsx(xlsx);
+    const QByteArray sheet = utSheetOf(xlsx, tmpDir, "tableinfo.xlsx");
 
-    // Assert: 行已写入且工作表可用
-    EXPECT_GT(xlsx.dimension().lastRow(), 0);
-    EXPECT_TRUE(xlsx.selectSheet("Sheet1"));
+    // Assert: 行已写入
+    EXPECT_TRUE(sheet.contains("<row r="));
 }
 
 // tableHeaderToXlsx: 表头写入
 TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_tableHeaderToXlsx_withData)
 {
-    // Arrange: xlsx 文档
-    QXlsx::Document xlsx;
+    // Arrange: xlsx 写入器
+    XlsxWriter xlsx;
+    QTemporaryDir tmpDir;
 
-    // Act: 写表头
+    // Act: 写表头并落盘
     audio->tableHeaderToXlsx(xlsx);
+    const QByteArray sheet = utSheetOf(xlsx, tmpDir, "tableheader.xlsx");
 
-    // Assert: 行已写入且工作表可用
-    EXPECT_GT(xlsx.dimension().lastRow(), 0);
-    EXPECT_TRUE(xlsx.selectSheet("Sheet1"));
+    // Assert: 表头行已写入
+    EXPECT_TRUE(sheet.contains("<row r="));
 }
 
 // ---------- displayWidth 纯算法 ----------
@@ -799,17 +821,19 @@ TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_baseInfoToHTML_twoPairs)
 TEST_F(UT_DeviceInfoExport, UT_DeviceInfoExport_baseInfoToXlsx_twoPairs)
 {
     // Arrange: 两对信息
-    QXlsx::Document xlsx;
-    QXlsx::Format fmt;
+    XlsxWriter xlsx;
+    XlsxFormat fmt;
     QList<QPair<QString, QString>> info;
     info << qMakePair(QString("K1"), QString("Val1")) << qMakePair(QString("K2"), QString("Val2"));
+    QTemporaryDir tmpDir;
 
-    // Act: 写入
+    // Act: 写入并落盘
     audio->baseInfoToXlsx(xlsx, fmt, info);
+    const QByteArray sheet = utSheetOf(xlsx, tmpDir, "twopairs.xlsx");
 
-    // Assert: 行已写入且工作表可用
-    EXPECT_GT(xlsx.dimension().lastRow(), 0);
-    EXPECT_TRUE(xlsx.selectSheet("Sheet1"));
+    // Assert: 两对键值均已写入
+    EXPECT_TRUE(sheet.contains("Val1"));
+    EXPECT_TRUE(sheet.contains("Val2"));
 }
 
 // baseInfoToTxt: 两对信息转文本

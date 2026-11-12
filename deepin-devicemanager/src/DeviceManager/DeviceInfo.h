@@ -6,7 +6,7 @@
 #define DEVICEINFO_H
 
 #include "document.h"
-#include "xlsxdocument.h"
+#include "XlsxWriter.h"
 #include "table.h"
 #include "DeviceManager.h"
 
@@ -307,7 +307,7 @@ public:
      * @param xlsx:xlsx文档
      * @param boldFontc:字体格式
      */
-    void toXlsxString(QXlsx::Document &xlsx, QXlsx::Format &boldFont);
+    void toXlsxString(XlsxWriter &xlsx, XlsxFormat &boldFont);
 
     /**
      * @brief baseInfoToXlsx:基本信息导出xlsx
@@ -315,7 +315,7 @@ public:
      * @param boldFont:字体格式
      * @param infoLst:信息列表
      */
-    void baseInfoToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont, QList<QPair<QString, QString>> &infoLst);
+    void baseInfoToXlsx(XlsxWriter &xlsx, XlsxFormat &boldFont, QList<QPair<QString, QString>> &infoLst);
 
     /**
      * @brief toTxtString:导出信息为txt格式
@@ -380,13 +380,13 @@ public:
      * @brief tableInfoToXlsx:表格信息写到xlsx
      * @param xlsx xlsx文件
      */
-    void tableInfoToXlsx(QXlsx::Document &xlsx);
+    void tableInfoToXlsx(XlsxWriter &xlsx);
 
     /**
      * @brief tableHeaderToXlsx:表头信息写到xlsx
      * @param xlsx xlsx文件
      */
-    void tableHeaderToXlsx(QXlsx::Document &xlsx);
+    void tableHeaderToXlsx(XlsxWriter &xlsx);
 
     /**
      * @brief setOtherDeviceInfo:设置其他信息信息

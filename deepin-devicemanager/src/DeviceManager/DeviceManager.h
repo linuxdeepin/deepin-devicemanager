@@ -6,7 +6,7 @@
 #define DEVICEMANAGER_H
 
 #include "document.h"
-#include "xlsxdocument.h"
+#include "XlsxWriter.h"
 #include "GenerateDevicePool.h"
 
 #include <QList>
@@ -586,7 +586,7 @@ public:
      * @param xlsx:xlsx文件
      * @param boldFont:字体格式
      */
-    void overviewToXlsx(QXlsx::Document &xlsx, QXlsx::Format &boldFont);
+    void overviewToXlsx(XlsxWriter &xlsx, XlsxFormat &boldFont);
 
     /**
      * @brief infoToHtml:将信息写到html中

@@ -23,7 +23,8 @@
 
 #include "DeviceManager.h"
 #include "DeviceOthers.h"
-#include "xlsxdocument.h"
+#include "XlsxWriter.h"
+#include "minizip_read_helper.h"
 #include "ut_Head.h"
 
 #include <QFile>
@@ -80,7 +81,7 @@ TEST_F(UT_DeviceManagerSave, UT_DeviceManagerSave_exportToTxt_badPath)
     EXPECT_FALSE(QFile(tmpDir->filePath("no_such_dir/x.txt")).exists());
 }
 
-// exportToXlsx: 空设备列表生成有效 xlsx 文件
+// exportToXlsx: 空设备列表生成有效 xlsx 文件（ZIP 结构 + 工作表内容校验）
 TEST_F(UT_DeviceManagerSave, UT_DeviceManagerSave_exportToXlsx)
 {
     // Arrange: 临时目录中的输出路径
@@ -92,6 +93,19 @@ TEST_F(UT_DeviceManagerSave, UT_DeviceManagerSave_exportToXlsx)
     // Assert: 导出成功且文件存在
     EXPECT_TRUE(ok);
     EXPECT_TRUE(QFile(path).exists());
+
+    // 验证为合法 ZIP 且包含 OOXML 关键部件与概览段头
+    QFile f(path);
+    ASSERT_TRUE(f.open(QIODevice::ReadOnly));
+    const QByteArray zip = f.readAll();
+    f.close();
+    EXPECT_TRUE(zip.startsWith(QByteArray("PK\x03\x04", 4)));
+    EXPECT_FALSE(utExtractStoredEntry(zip, "[Content_Types].xml").isEmpty());
+    EXPECT_FALSE(utExtractStoredEntry(zip, "xl/workbook.xml").isEmpty());
+    EXPECT_FALSE(utExtractStoredEntry(zip, "xl/styles.xml").isEmpty());
+    const QByteArray sheet = utExtractStoredEntry(zip, "xl/worksheets/sheet1.xml");
+    EXPECT_FALSE(sheet.isEmpty());
+    EXPECT_TRUE(sheet.contains("Overview"));
 }
 
 // exportToHtml: 空设备列表生成非空 html 文件
@@ -148,19 +162,27 @@ TEST_F(UT_DeviceManagerSave, UT_DeviceManagerSave_overviewToHtml)
     EXPECT_TRUE(html.contains("Overview"));
 }
 
-// overviewToXlsx: 概览写入 xlsx 文档对象
+// overviewToXlsx: 概览写入 xlsx 写入器，落盘后校验工作表内容
 TEST_F(UT_DeviceManagerSave, UT_DeviceManagerSave_overviewToXlsx)
 {
-    // Arrange: xlsx 文档对象
-    QXlsx::Document xlsx;
-    QXlsx::Format fmt;
+    // Arrange: xlsx 写入器与临时输出文件
+    XlsxWriter xlsx;
+    XlsxFormat fmt;
+    QString path = tmpDir->filePath("ut_dm_overview.xlsx");
 
-    // Act: 写入概览
+    // Act: 写入概览并落盘
     DeviceManager::instance()->overviewToXlsx(xlsx, fmt);
+    bool ok = xlsx.saveAs(path);
 
-    // Assert: 工作表可用且有行写入
-    EXPECT_TRUE(xlsx.selectSheet("Sheet1"));
-    EXPECT_GT(xlsx.dimension().lastRow(), 0);
+    // Assert: 导出成功且工作表含 Overview 段头
+    EXPECT_TRUE(ok);
+    ASSERT_TRUE(QFile(path).exists());
+    QFile f(path);
+    ASSERT_TRUE(f.open(QIODevice::ReadOnly));
+    const QByteArray sheet = utExtractStoredEntry(f.readAll(), "xl/worksheets/sheet1.xml");
+    f.close();
+    EXPECT_FALSE(sheet.isEmpty());
+    EXPECT_TRUE(sheet.contains("Overview"));
 }
 
 // addOthersDeviceFromHwinfo: busInfo 为空的新设备被追加; busInfo 相同的设备被去重
