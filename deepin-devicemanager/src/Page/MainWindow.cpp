@@ -136,11 +136,13 @@ MainWindow::MainWindow(QWidget *parent)
         mp_DriverScanWidget->refreshProgress(info, progress);
     });
     connect(mp_DriverScanWidget, &DriverScanWidget::redetected, mp_DriverManager, &PageDriverManager::startScanning);
-    //get monitorNumber
-    ThreadExecXrandr txgpu(true, !checkWaylandMode());
-    txgpu.start();
-    txgpu.wait();
-    monitorNumber = txgpu.getMonitorNumber();
+    // defer monitorNumber fetch — avoid blocking UI thread before window display
+    QTimer::singleShot(0, this, [ = ]() {
+        ThreadExecXrandr txgpu(true, !checkWaylandMode());
+        txgpu.start();
+        txgpu.wait();
+        monitorNumber = txgpu.getMonitorNumber();
+    });
     connect(mp_WorkingThread, &LoadInfoThread::finishedReadFilePool, this, [ = ]() {
         qCDebug(appLog) << "MainWindow finishedReadFilePool triggered";
         refreshDataBaseLater();
@@ -651,6 +653,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         DeviceManager::instance()->correctPowerInfo(tool.getCurPowerInfo());
     }
 
+    QTimer::singleShot(0, this, [ = ]() {
         ThreadExecXrandr txgpu(true, !checkWaylandMode());
         txgpu.start();
         txgpu.wait();
@@ -665,6 +668,7 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
             qCDebug(appLog)<< "Monitor refreshInfo" << __LINE__  << QDateTime::currentDateTime().toString("hh:mm:ss") << info << monitorNumber;
             monitorNumber = txgpu.getMonitorNumber();
         }
+    });
 
     // 数据刷新时不处理界面刷新
     if (m_refreshing || mp_WorkingThread->isRunning()) {
