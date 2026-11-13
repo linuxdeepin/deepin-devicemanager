@@ -330,12 +330,45 @@ bool ControlInterface::authorizedEnable(const QString &hclass, const QString &na
 {
     // A composite USB device may expose keyboard, mouse and control interfaces.
     // Keep their authorization state consistent with the selected physical device.
-    if (!UsbAuthorizationUtils::setInterfacesAuthorized(path, enable_device))
+    if (UsbAuthorizationUtils::setInterfacesAuthorized(path, enable_device)) {
+        if (enable_device) {
+            EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(unique_id);
+        } else {
+            EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass, name, path, unique_id, true, strDriver);
+        }
+        return true;
+    }
+
+    // Non-USB devices (e.g. PCI audio adapters) fall back to writing the
+    // authorized sysfs file directly, restoring pre-BUG-377327 behavior.
+    if (path.contains(".."))
         return false;
 
+    QFile file("/sys" + path + QString("/authorized"));
+    if (!file.open(QIODevice::ReadWrite)) {
+        return false;
+    }
     if (enable_device) {
+        file.write("1");
+        file.close();
+
+        QFileInfo fi(path);
+        QString pop = fi.path();
+        QFile fpop("/sys" + pop + QString("/authorized"));
+        if (!fpop.open(QIODevice::ReadWrite))
+            return false;
+        fpop.write("0");
+        fpop.close();
+
+        if (!fpop.open(QIODevice::ReadWrite))
+            return false;
+        fpop.write("1");
+        fpop.close();
+
         EnableSqlManager::getInstance()->removeDataFromAuthorizedTable(unique_id);
     } else {
+        file.write("0");
+        file.close();
         EnableSqlManager::getInstance()->insertDataToAuthorizedTable(hclass, name, path, unique_id, true, strDriver);
     }
     return true;
