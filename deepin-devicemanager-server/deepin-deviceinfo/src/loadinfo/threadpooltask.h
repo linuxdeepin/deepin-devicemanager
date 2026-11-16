@@ -33,18 +33,20 @@ protected:
 private:
     /**
      * @brief runCmd : running a command
-     * @param cmd : the command
-     * @param info : command output
+     * @param cmd : 命令行（可带 "> 文件" 重定向）
+     * @param info : 命令输出
+     * @param timeoutMs : 单条命令的等待上限；<=0 时沿用任务自己的 waitingTime
      */
-    void runCmd(const QString &cmd, QString &info);
+    void runCmd(const QString &cmd, QString &info, int timeoutMs = -1);
 
     /**
      * @brief runAsteriskCmd
      * @param cmd
      * @param arg
+     * @param timeoutMs 单条命令的等待上限，<=0 时沿用任务自己的 waitingTime
      * @return info
      */
-    QString runAsteriskCmd(const QString &cmd, const QString &arg);
+    QString runAsteriskCmd(const QString &cmd, const QString &arg, int timeoutMs = -1);
 
     /**
      * @brief runCmdToCache

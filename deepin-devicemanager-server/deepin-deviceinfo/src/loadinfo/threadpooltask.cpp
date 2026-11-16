@@ -14,6 +14,10 @@ using namespace DDLog;
 #include <QDir>
 #include <unistd.h>
 
+static constexpr int kFastCmdTimeoutMs = 5000;  // ls / cat 之类的辅助命令
+static constexpr int kLspciTimeoutMs = 5000;    // lspci -v -s <slot>
+static constexpr int kSmartctlTimeoutMs = 8000; // smartctl --all，慢盘/USB 桥接最慢
+
 ThreadPoolTask::ThreadPoolTask(QString cmd, QString file, bool replace, int waiting, QObject *parent)
     : QObject(parent),
       m_Cmd(cmd),
@@ -34,7 +38,7 @@ void ThreadPoolTask::run()
     runCmdToCache(m_Cmd);
 }
 
-void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
+void ThreadPoolTask::runCmd(const QString &cmd, QString &info, int timeoutMs)
 {
     QString cmdExec = cmd.left(cmd.indexOf('>')).trimmed();
     QString cmdStr = cmdExec.split(' ').first().trimmed();
@@ -47,13 +51,13 @@ void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
 
     // 处理包含*的命令参数
     if (cmd.startsWith("ls /dev/sg*")) {
-        info = runAsteriskCmd(cmdStr, args.first().trimmed());
+        info = runAsteriskCmd(cmdStr, args.first().trimmed(), kFastCmdTimeoutMs);
         return;
     } else if (cmdExec.startsWith("cat /boot/config*")) {
         QString filter = cmdExec.split('|').last().split(' ').last().replace('\'', "");
         if (filter.isEmpty())
             return;
-        QString outPut = runAsteriskCmd("ls", "/boot/config*");
+        QString outPut = runAsteriskCmd("ls", "/boot/config*", kFastCmdTimeoutMs);
         if (outPut.isEmpty())
             return;
         QStringList paths = outPut.split('\n');
@@ -63,7 +67,7 @@ void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
                 continue;
             QProcess proc;
             proc.start("cat", QStringList() << path);
-            proc.waitForFinished();
+            proc.waitForFinished(kFastCmdTimeoutMs);
             QString info1;
             if (proc.exitStatus() == QProcess::NormalExit && proc.exitCode() == 0)
                 info1 = proc.readAllStandardOutput();
@@ -84,13 +88,20 @@ void ThreadPoolTask::runCmd(const QString &cmd, QString &info)
 
     QProcess process;
     process.start(cmdStr, args);
-    process.waitForFinished(m_Waiting);
+    const int waitMs = timeoutMs > 0 ? timeoutMs : m_Waiting;
+    if (!process.waitForFinished(waitMs)) {
+        process.kill();
+        process.waitForFinished(1000);
+        qCWarning(appLog) << "command timeout after" << waitMs << "ms, discard output:" << cmd;
+        info.clear();
+        return;
+    }
     info = process.readAllStandardOutput();
 
     //qCInfo(deviceInfoLog) << "runcmdExec:" << cmdExec << "args:" << args << "outPut:" << info;
 }
 
-QString ThreadPoolTask::runAsteriskCmd(const QString &cmd, const QString &arg)
+QString ThreadPoolTask::runAsteriskCmd(const QString &cmd, const QString &arg, int timeoutMs)
 {
     QString info = "";
     if (cmd.isEmpty())
@@ -109,7 +120,13 @@ QString ThreadPoolTask::runAsteriskCmd(const QString &cmd, const QString &arg)
 
     QProcess process;
     process.start(cmd, args);
-    process.waitForFinished(-1);
+    // 不能永久等待：这里同样受总刷新预算约束。
+    if (!process.waitForFinished(timeoutMs > 0 ? timeoutMs : m_Waiting)) {
+        process.kill();
+        process.waitForFinished(1000);
+        qCWarning(appLog) << "command timeout:" << cmd << path;
+        return info;
+    }
 
     QString outPut = process.readAllStandardOutput();
     QStringList outPutLines = outPut.trimmed().split('\n');
@@ -193,11 +210,13 @@ void ThreadPoolTask::loadSmartCtlInfoToCache(const QString &info)
 
         QString smartCmd = QString("smartctl --all /dev/%1").arg(words[0].trimmed());
         QString sInfo;
-        runCmd(smartCmd, sInfo);
+        // 每个盘单独限时：机械盘刚唤醒、USB 桥接的盘响应很慢，个别盘甚至不响应。
+        // 不能沿用 lsblk 任务的 waitingTime，否则一块坏盘就能拖死整批刷新。
+        runCmd(smartCmd, sInfo, kSmartctlTimeoutMs);
         // 在使用smartctl的时候会出现对 /dev/sda 出现判断错误的情况，此时可以对/dev/sda1进行处理
         if (sInfo.contains("Read Device Identity failed:")) {
             smartCmd = smartCmd + "1";
-            runCmd(smartCmd, sInfo);
+            runCmd(smartCmd, sInfo, kSmartctlTimeoutMs);
         }
         DeviceInfoManager::getInstance()->addInfo(QString("smartctl_%1").arg(words[0].trimmed()), sInfo);
     }
@@ -232,7 +251,7 @@ void ThreadPoolTask::loadSgSmartCtlInfoToCache(const QString &info)
 
         QString smartCmd = QString("smartctl --all /dev/%1").arg(words[2].trimmed());
         QString sInfo;
-        runCmd(smartCmd, sInfo);
+        runCmd(smartCmd, sInfo, kSmartctlTimeoutMs);
         DeviceInfoManager::getInstance()->addInfo(QString("smartctl_%1").arg(words[2]), sInfo);
     }
 }
@@ -248,7 +267,7 @@ void ThreadPoolTask::loadLspciVSInfoToCache(const QString &info)
         if (words[1] == QString("ISA")) {
             QString cmd = QString("lspci -v -s %1").arg(words[0].trimmed()); //  > /tmp/device-info/lspci_vs.txt
             QString sInfo;
-            runCmd(cmd, sInfo);
+            runCmd(cmd, sInfo, kLspciTimeoutMs);
             DeviceInfoManager::getInstance()->addInfo("lspci_vs", sInfo);
             break;
         }
@@ -284,7 +303,7 @@ int ThreadPoolTask::getDisplayWidthFromLspci(const QString &info)
 {
     QString cmd = QString("lspci -v -s %1").arg(info);
     QString sInfo;
-    runCmd(cmd, sInfo);
+    runCmd(cmd, sInfo, kLspciTimeoutMs);
     QStringList lines = sInfo.split("\n");
     foreach (const QString &line, lines) {
         if (!line.contains("Memory at")) {

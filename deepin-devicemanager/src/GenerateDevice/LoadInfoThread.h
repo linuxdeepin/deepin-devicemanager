@@ -1,5 +1,5 @@
 // Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -8,6 +8,9 @@
 
 #include <QObject>
 #include <QThread>
+
+#include <atomic>
+
 #include "GetInfoPool.h"
 #include "GenerateDevicePool.h"
 
@@ -26,7 +29,6 @@ public:
 
 signals:
     void finished(const QString &message);
-    void finishedReadFilePool();
 
 protected:
     void run() override;
@@ -39,12 +41,16 @@ private slots:
     void slotFinishedReadFilePool(const QString &info);
 
 private:
+    /**
+     * @brief waitServerRefreshFinished 等待服务端全量刷新结束
+     */
+    void waitServerRefreshFinished();
+
+private:
     GetInfoPool mp_ReadFilePool;
     GenerateDevicePool mp_GenerateDevicePool;
-    bool            m_Running;                      //<!  标识是否正在运行
-    bool            m_FinishedReadFilePool;         //<!  标识生成读文件的线程池是否结束
-    bool            m_Start;                        //<!  是否为启动
-
+    std::atomic<bool> m_Running { false };                 //<! 标识是否正在运行
+    std::atomic<bool> m_FinishedReadFilePool { false };    //<! 标识生成读文件的线程池是否结束
 };
 
 #endif // LOADINFOTHREAD_H

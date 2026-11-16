@@ -1,5 +1,5 @@
 // Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -122,13 +122,13 @@ private:
     void initWidgets();
 
     /**
-     * @brief refreshDataBase:刷新设备信息
+     * @brief refreshDataBase:重新加载设备信息
      */
     void refreshDataBase();
     /**
-     * @brief refreshDataBaseLater:刷新设备信息
+     * @brief refreshWithServerUpdate 让服务端全量刷新后重新加载设备信息（不重建界面）
      */
-    void refreshDataBaseLater();
+    void refreshWithServerUpdate();
 private slots:
     /**
      * @brief slotSetPage
