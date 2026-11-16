@@ -54,15 +54,11 @@ bool isSafeSysfsPath(const QString &relativePath)
     if (relativePath.contains(QLatin1String("..")))
         return false;
 
-    // 第二层：构建完整路径并验证其 canonical path 以 /sys 开头
+    // 第二层：构建完整路径并规范化，验证其以 /sys/ 开头
     QString fullPath = QStringLiteral("/sys") + relativePath;
-    QFileInfo fileInfo(fullPath);
-    QString canonicalPath = fileInfo.canonicalFilePath();
+    QString canonicalPath = QDir::cleanPath(fullPath);
 
-    if (canonicalPath.isEmpty())
-        return false;
-
-    // 确保 canonical path 以 /sys/ 开头，防止符号链接穿越到 /sys 外部
+    // 确保规范化路径以 /sys/ 开头，防止路径穿越到 /sys 外部
     if (!canonicalPath.startsWith(QLatin1String("/sys/")))
         return false;
 
