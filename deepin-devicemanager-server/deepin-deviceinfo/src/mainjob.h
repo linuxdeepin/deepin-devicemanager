@@ -16,6 +16,7 @@ class MainJob : public QObject
 
 public:
     explicit MainJob(const char *name, QObject *parent = nullptr);
+    ~MainJob() override;
 
     /**
      * @brief serverIsRunning
@@ -37,8 +38,6 @@ public:
 private slots:
     /**
      * @brief slotUsbChanged usb 热插拔事件
-     *
-     * 只刷新与插拔相关的信息，避免与插拔无关的命令占满 CPU。
      */
     void slotUsbChanged();
 

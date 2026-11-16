@@ -1,5 +1,5 @@
 // Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -38,9 +38,10 @@ public:
      * @brief getInfo：获取信息
      * @param key：命令关键字
      * @param info：获取的设备信息
+     * @param timeoutMs：D-Bus 同步调用超时(ms)，<=0 表示使用 Qt 默认超时(25s)
      * @return 信息是否有效
      */
-    bool getInfo(const QString &key, QString &info);
+    bool getInfo(const QString &key, QString &info, int timeoutMs = -1);
 
     /**
      * @brief refreshInfo 用来通知后台刷新信息

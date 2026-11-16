@@ -16,10 +16,23 @@
 #include <QTimer>
 #include <QDBusConnection>
 
+#include <atomic>
+
 using namespace DDLog;
 
+// 一次全量刷新的最长等待时间（DBus 层面的"服务端忙"保底）。
+static constexpr int kFullRefreshTimeoutMs = 20000;
+
+// 启动/唤醒时同步"禁用/唤醒"策略所用的 hwinfo 等待上限。
+// 这段代码跑在主线程上（sqlCopytoKernel），一旦 hwinfo 卡住，整个进程的
+// D-Bus 派发都会停摆。实测约 400ms，这里给足余量。
+static constexpr int kPolicyHwinfoTimeoutMs = 15000;
+
 static QMutex mainJobMutex;
-static bool s_ServerIsUpdating = false;
+static std::atomic<bool> s_ServerIsUpdating { false };
+// 供静态的 serverIsRunning() 查询"是否还有任务在写缓存"，
+// 让忙状态覆盖总超时之后仍在收尾的那段时间。
+static std::atomic<ThreadPool *> s_pool { nullptr };
 static bool s_ClientIsUpdating = false;
 
 MainJob::MainJob(const char *name, QObject *parent)
@@ -28,6 +41,7 @@ MainJob::MainJob(const char *name, QObject *parent)
     , m_firstUpdate(true)
 {
     m_deviceInterface = new DeviceInterface(name, this);
+    s_pool = m_pool;
     // 守护进程启动的时候加载所有信息
     updateAllDevice();
 
@@ -53,6 +67,16 @@ MainJob::MainJob(const char *name, QObject *parent)
     );
 }
 
+MainJob::~MainJob()
+{
+    s_pool = nullptr;
+
+    if (mp_DetectThread) {
+        mp_DetectThread->setWorkingFlag(false);
+        mp_DetectThread->wait(2000);
+    }
+}
+
 void MainJob::sqlCopytoKernel()
 {
     ControlInterface::getInstance()->disableInDevice();
@@ -61,9 +85,18 @@ void MainJob::sqlCopytoKernel()
     QStringList options;
     options << "--netcard" << "--keyboard"  << "--mouse" <<  "--usb";
     process.start("hwinfo", options);
-    process.waitForFinished(-1);
+    if (!process.waitForFinished(kPolicyHwinfoTimeoutMs)) {
+        process.kill();
+        process.waitForFinished(1000);
+        qCWarning(appLog) << "hwinfo timeout in sqlCopytoKernel, skip policy sync";
+        return;
+    }
     QString info = process.readAllStandardOutput();
     process.close();
+    if (info.isEmpty()) {
+        qCWarning(appLog) << "hwinfo returned empty output in sqlCopytoKernel, skip policy sync";
+        return;
+    }
     // init from sql db
     ControlInterface::getInstance()->disableOutDevice(info);
     ControlInterface::getInstance()->updateWakeup(info);
@@ -90,7 +123,11 @@ void MainJob::slotWakeupHandle(bool isSleep)
 
 bool MainJob::serverIsRunning()
 {
-    return s_ServerIsUpdating;
+    if (s_ServerIsUpdating)
+        return true;
+
+    ThreadPool *pool = s_pool.load();
+    return pool != nullptr && pool->activeThreadCount() > 0;
 }
 
 bool MainJob::clientIsRunning()
@@ -106,10 +143,7 @@ void MainJob::setWorkingFlag(bool flag)
 
 void MainJob::slotUsbChanged()
 {
-    // USB 热插拔走局部刷新，省掉与插拔无关的命令（lshw / upower / lscpu /
-    // lspci / lpstat / bluetoothctl / hwinfo --framebuffer）。
-    // 客户端主动刷新与驱动操作完成走 slotRefreshRequest()，那里是全量刷新。
-    executeClientInstruction("HOTPLUG");
+    qCInfo(appLog) << "usb/bluetooth changed, cache refresh deferred to client request";
 }
 
 void MainJob::slotRefreshRequest()
@@ -127,11 +161,18 @@ void MainJob::slotDriverControl(bool success)
 void MainJob::updateAllDevice()
 {
     PERF_PRINT_BEGIN("POINT-01", "MainJob::updateAllDevice()");
+    s_ServerIsUpdating = true;
     if (m_firstUpdate)
         m_pool->loadDeviceInfo();
     else
         m_pool->updateDeviceInfo();
-    m_pool->waitForDone(60000);
+    // 整个刷新（命令派发 + 全部任务结束）只在这里限时一次。
+    if (!m_pool->waitForDone(kFullRefreshTimeoutMs)) {
+        qCWarning(appLog) << "device info refresh timed out after"
+                          << kFullRefreshTimeoutMs << "ms, tasks still running:"
+                          << m_pool->activeThreadCount();
+    }
+    s_ServerIsUpdating = false;
     PERF_PRINT_END("POINT-01");
     m_firstUpdate = false;
 }
@@ -139,24 +180,12 @@ void MainJob::updateAllDevice()
 void MainJob::executeClientInstruction(const QString &instructions)
 {
     QMutexLocker locker(&mainJobMutex);
-    s_ServerIsUpdating = true;
 
     if (instructions.startsWith("DETECT")) {
-        // 原实现在这里用 thread()->msleep(1000) 硬睡主线程。DetectThread 已经
-        // 轮询确认内核处理完插拔、MonitorUsb 也已等待 1s 去抖，这 1 秒纯属重复，
-        // 而且会阻塞 DeviceInterface 的 D-Bus 方法派发，直接去掉。
         updateAllDevice();
-    } else if (instructions.startsWith("HOTPLUG")) {
-        if (m_firstUpdate) {
-            updateAllDevice();
-        } else {
-            // 只刷新与 USB 插拔相关的少量信息，避免全量命令占满 CPU
-            m_pool->updateHotplugInfo();
-        }
     } else if (instructions.startsWith("START")) {
         if (m_firstUpdate) {
             updateAllDevice();
         }
     }
-    s_ServerIsUpdating = false;
 }

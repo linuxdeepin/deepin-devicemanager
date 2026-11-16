@@ -14,13 +14,15 @@
  * @brief The Cmd struct
  */
 struct Cmd {
-    Cmd(): cmd(""), file(""), canNotReplace(false), waitingTime(-1)
+    // waitingTime 不能默认 -1（QProcess 永久等待）：单条命令卡住会把整批刷新拖死。
+    // 实测常规命令均在毫秒级，5s 已足够宽松；慢命令在 initCmd() 里单独放大。
+    Cmd(): cmd(""), file(""), canNotReplace(false), waitingTime(5000)
     {}
 
     QString cmd;         //<! the cmd
     QString file;        //<! the file
     bool canNotReplace;  //<! mark can replace or not
-    int waitingTime;     //<! waiting time
+    int waitingTime;     //<! 单条命令的等待上限(ms)，必须为正数
 };
 
 /**
@@ -42,19 +44,12 @@ public:
      */
     void updateDeviceInfo();
 
-    /**
-     * @brief updateHotplugInfo 热插拔时的局部刷新
-     *
-     * USB 插拔很频繁，没有必要每次都把整机信息重新采集一遍：lshw、upower、
-     * lscpu、lspci、lpstat、bluetoothctl、hwinfo --framebuffer 等命令与插拔
-     * 无关，却会把 CPU 占满数百毫秒到数秒，正在播放的音频因此丢帧。
-     * 未列入 m_ListHotplug 的命令不会执行，其缓存保持上一次的值，不会丢失数据。
-     */
-    void updateHotplugInfo();
-
 private:
     /**
-     * @brief updateInfo 并发执行一组命令并等待结束
+     * @brief updateInfo 并发执行一组命令
+     *
+     * 只负责派发任务，不等待完成；超时由调用方通过 waitForDone(ms) 决定，
+     * 避免库和调用方各设一个超时、叠加后超出对外承诺的上限。
      * @param cmds 命令列表
      */
     void updateInfo(const QList<Cmd> &cmds);
@@ -67,7 +62,6 @@ private:
 private:
     QList<Cmd>        m_ListCmd;             // all cmd
     QList<Cmd>        m_ListUpdate;          // update cmd
-    QList<Cmd>        m_ListHotplug;         // hotplug(usb) cmd
 };
 
 #endif // THREADPOOL_H

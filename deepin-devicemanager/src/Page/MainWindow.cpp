@@ -42,7 +42,6 @@
 #include <QProcess>
 #include <QDir>
 #include <QVBoxLayout>
-#include <QTimer>
 #include <QtConcurrent/QtConcurrent>
 
 DWIDGET_USE_NAMESPACE
@@ -55,6 +54,7 @@ using namespace DDLog;
 
 static bool startScanningFlag = false;
 static int monitorNumber = 1;
+static constexpr int kUPowerCmdTimeoutMs = 3000;
 static bool checkWaylandMode()
 {
     auto e = QProcessEnvironment::systemEnvironment();
@@ -80,10 +80,6 @@ MainWindow::MainWindow(QWidget *parent)
     // 初始化窗口相关的内容，比如界面布局，控件大小
     initWindow();
 
-    // 加载设备信息
-    refreshDataBase();
-
-    // 关联信号槽
     connect(mp_WorkingThread, &LoadInfoThread::finished, this, &MainWindow::slotLoadingFinish);
     connect(mp_DeviceWidget, &DeviceWidget::itemClicked, this, &MainWindow::slotListItemClicked);
     connect(mp_DeviceWidget, &DeviceWidget::refreshInfo, this, &MainWindow::slotRefreshInfo);
@@ -119,22 +115,27 @@ MainWindow::MainWindow(QWidget *parent)
         mp_DriverScanWidget->refreshProgress(info, progress);
     });
     connect(mp_DriverScanWidget, &DriverScanWidget::redetected, mp_DriverManager, &PageDriverManager::startScanning);
+
+    // 加载设备信息。
+    refreshDataBase();
+
     //get monitorNumber
     ThreadExecXrandr txgpu(true, !checkWaylandMode());
     txgpu.start();
     txgpu.wait();
     monitorNumber = txgpu.getMonitorNumber();
-    connect(mp_WorkingThread, &LoadInfoThread::finishedReadFilePool, this, [ = ]() {
-        refreshDataBaseLater();
-    });
 }
-void MainWindow::refreshDataBaseLater()
+
+void MainWindow::refreshWithServerUpdate()
 {
-    DBusInterface::getInstance()->refreshInfo();
-    QTimer::singleShot(2000, this, [ = ]() {  //test the x86 the fast desktop PC need 2s
-        // 加载设备信息
-        refreshDataBase();
-    });
+    // 加载进行中时直接忽略本次请求。
+    if (!mp_WorkingThread || m_refreshing || mp_WorkingThread->isRunning()) {
+        qCDebug(appLog) << "refresh request ignored: load in progress";
+        return;
+    }
+
+    // 加载线程会在读缓存前发 refreshInfo() 并等刷新结束
+    refreshDataBase();
 }
 
 MainWindow::~MainWindow()
@@ -164,12 +165,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::refresh()
 {
-    //电池状态刷新
-    refreshBatteryStatus();
-
     // 正在刷新,避免重复操作
     if (m_refreshing || startScanningFlag || mp_DriverManager->isScanning() || mp_WorkingThread->isRunning())
         return;
+
+    // 电池状态刷新放在防重入判断之后：本次刷新即将被忽略时，没必要再去
+    // 访问 UPower（那是一串同步 D-Bus 调用，全跑在 GUI 线程上）。
+    refreshBatteryStatus();
 
     if (mp_ButtonBox->checkedId() == 1) {
         startScanningFlag = true;
@@ -183,7 +185,8 @@ void MainWindow::refresh()
     mp_ButtonBox->buttonList().at(0)->click();
     mp_DeviceWidget->clear();
 
-    // 加载设备信息
+    // 加载设备信息。用户主动刷新时缓存很可能已过期（期间插拔过设备），
+    // 加载线程会先请求服务端刷新、等它完成再读缓存。
     refreshDataBase();
 }
 
@@ -197,7 +200,12 @@ void MainWindow::refreshBatteryStatus()
          QProcess process;
          QString command = "gdbus call --system --dest org.freedesktop.UPower --object-path /org/freedesktop/UPower --method org.freedesktop.UPower.EnumerateDevices";
          process.start(command);
-         process.waitForFinished();
+         if (!process.waitForFinished(kUPowerCmdTimeoutMs)) {
+             process.kill();
+             process.waitForFinished(1000);
+             qWarning() << "gdbus EnumerateDevices timeout, skip battery refresh";
+             return;
+         }
 
          QByteArray output = process.readAllStandardOutput();
          QString outputStr = QString::fromLocal8Bit(output);
@@ -449,14 +457,21 @@ void MainWindow::initWidgets()
 
 void MainWindow::refreshDataBase()
 {
-    if (mp_WorkingThread) {
-        /* 一定要与 restoreOverrideCursor 成对使用*/
-        if(!m_statusCursorIsWait) {
-            DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-            m_statusCursorIsWait = true;
-        }
-        mp_WorkingThread->start();
+    if (!mp_WorkingThread)
+        return;
+
+    if (mp_WorkingThread->isRunning()) {
+        qCWarning(appLog) << "load thread still running, skip reload";
+        return;
     }
+
+    /* 一定要与 restoreOverrideCursor 成对使用*/
+    if(!m_statusCursorIsWait) {
+        DApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+        m_statusCursorIsWait = true;
+    }
+
+    mp_WorkingThread->start();
 }
 
 void MainWindow::slotSetPage(const QString &page)
@@ -576,15 +591,11 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
         txgpu.start();
         txgpu.wait();
         if(monitorNumber != txgpu.getMonitorNumber()) {
-
-            QString info;
-            DBusInterface::getInstance()->getInfo("is_server_running", info);
-            //请求后台更新信息
-            if (!info.toInt()) {
-                refreshDataBaseLater();
-            }
-            qCDebug(appLog)<< "Monitor refreshInfo" << __LINE__  << QDateTime::currentDateTime().toString("hh:mm:ss") << info << monitorNumber;
+            qCDebug(appLog) << "Monitor refreshInfo" << __LINE__
+                            << QDateTime::currentDateTime().toString("hh:mm:ss") << monitorNumber;
             monitorNumber = txgpu.getMonitorNumber();
+
+            refreshWithServerUpdate();
         }
 
     // 数据刷新时不处理界面刷新
@@ -603,8 +614,6 @@ void MainWindow::slotListItemClicked(const QString &itemStr)
 
 void MainWindow::slotRefreshInfo()
 {
-    refreshDataBaseLater();
-    // 界面刷新
     refresh();
 }
 

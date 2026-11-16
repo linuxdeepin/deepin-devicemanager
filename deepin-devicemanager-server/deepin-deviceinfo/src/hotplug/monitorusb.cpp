@@ -10,9 +10,12 @@
 #include <QProcess>
 #include <QFile>
 #include <QDateTime>
+#include <QDebug>
 
 // 一批 udev 事件平息多久之后才执行合并的 hwinfo --usb
 static constexpr qint64 kEventSettleMs = 500;
+// 单次 hwinfo --usb 的等待上限。
+static constexpr int kUsbInfoTimeoutMs = 8000;
 
 MonitorUsb::MonitorUsb()
     : m_workingFlag(true)
@@ -106,7 +109,12 @@ void MonitorUsb::applyUsbControl()
 
     QProcess process;
     process.start("hwinfo --usb");
-    process.waitForFinished(-1);
+    if (!process.waitForFinished(kUsbInfoTimeoutMs)) {
+        process.kill();
+        process.waitForFinished(1000);
+        qWarning() << "hwinfo --usb timeout, skip usb control/wakeup update";
+        return;
+    }
     const QString info = process.readAllStandardOutput();
 
     if (needControl)

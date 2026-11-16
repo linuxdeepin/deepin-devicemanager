@@ -10,6 +10,12 @@
 #include <QDir>
 #include <QLoggingCategory>
 
+static constexpr int kFastCmdTimeoutMs = 5000;   // 毫秒级完成的命令
+static constexpr int kLshwTimeoutMs = 10000;     // lshw 要遍历整机设备树
+static constexpr int kHwinfoTimeoutMs = 15000;   // 9 类探测，最容易被硬件拖慢
+static constexpr int kHwinfoMonitorTimeoutMs = 10000;
+static constexpr int kBluetoothCtlTimeoutMs = 500; // bluetoothctl 可能连不上守护进程
+
 ThreadPool::ThreadPool(QObject *parent)
     : QThreadPool(parent)
 {
@@ -31,12 +37,6 @@ void ThreadPool::updateDeviceInfo()
     updateInfo(m_ListUpdate);
 }
 
-void ThreadPool::updateHotplugInfo()
-{
-    // 只刷新与 USB 插拔相关、开销可控的信息
-    updateInfo(m_ListHotplug);
-}
-
 void ThreadPool::updateInfo(const QList<Cmd> &cmds)
 {
     for (const Cmd &cmd : cmds) {
@@ -44,12 +44,6 @@ void ThreadPool::updateInfo(const QList<Cmd> &cmds)
         task->setAutoDelete(true);
         start(task);
     }
-
-    // 等待所有任务执行完毕，最多 10 秒。
-    // 原实现是 while (true) + activeThreadCount() 的忙等自旋，不 sleep，
-    // 会白占一个 CPU 核心最多 10 秒；音频等实时线程正好被它挤掉时间片。
-    // QThreadPool::waitForDone() 内部用条件变量等待，不消耗 CPU。
-    waitForDone(10000);
 }
 
 void ThreadPool::initCmd()
@@ -59,6 +53,7 @@ void ThreadPool::initCmd()
     cmdLshw.cmd = QString("%1 %2%3").arg("lshw > ").arg(PATH).arg("lshw.txt");
     cmdLshw.file = "lshw.txt";
     cmdLshw.canNotReplace = false;
+    cmdLshw.waitingTime = kLshwTimeoutMs;
     m_ListCmd.append(cmdLshw);
     m_ListUpdate.append(cmdLshw);
 
@@ -130,6 +125,7 @@ void ThreadPool::initCmd()
     cmdUpower.cmd = QString("%1 %2%3").arg("upower --dump > ").arg(PATH).arg("upower_dump.txt");
     cmdUpower.file = "upower_dump.txt";
     cmdUpower.canNotReplace = true;
+    cmdUpower.waitingTime = kFastCmdTimeoutMs;
     m_ListCmd.append(cmdUpower);
     m_ListUpdate.append(cmdUpower);
 
@@ -146,6 +142,7 @@ void ThreadPool::initCmd()
     cmdLsblk.cmd = QString("%1 %2%3").arg("lsblk -d -o name,rota > ").arg(PATH).arg("lsblk_d.txt");
     cmdLsblk.file = "lsblk_d.txt";
     cmdLsblk.canNotReplace = false;
+    cmdLsblk.waitingTime = kFastCmdTimeoutMs;
     m_ListCmd.append(cmdLsblk);
     m_ListUpdate.append(cmdLsblk);
 
@@ -154,6 +151,7 @@ void ThreadPool::initCmd()
     cmdLssg.cmd = QString("%1 %2%3").arg("ls /dev/sg* > ").arg(PATH).arg("ls_sg.txt");
     cmdLssg.file = "ls_sg.txt";
     cmdLssg.canNotReplace = false;
+    cmdLssg.waitingTime = kFastCmdTimeoutMs;
     m_ListCmd.append(cmdLssg);
     m_ListUpdate.append(cmdLssg);
 
@@ -162,6 +160,7 @@ void ThreadPool::initCmd()
     cmdLspci.cmd = QString("%1 %2%3").arg("lspci > ").arg(PATH).arg("lspci.txt");
     cmdLspci.file = "lspci.txt";
     cmdLspci.canNotReplace = false;
+    cmdLspci.waitingTime = kFastCmdTimeoutMs;
     m_ListCmd.append(cmdLspci);
     m_ListUpdate.append(cmdLspci);
 
@@ -170,6 +169,7 @@ void ThreadPool::initCmd()
     cmdLpstate.cmd = QString("%1 %2%3").arg("lpstat -a > ").arg(PATH).arg("lpstat.txt");
     cmdLpstate.file = "lpstat.txt";
     cmdLpstate.canNotReplace = false;
+    cmdLpstate.waitingTime = kFastCmdTimeoutMs;
     m_ListCmd.append(cmdLpstate);
     m_ListUpdate.append(cmdLpstate);
 
@@ -178,6 +178,7 @@ void ThreadPool::initCmd()
     cmdDmesg.cmd = QString("%1 %2%3").arg("dmesg > ").arg(PATH).arg("dmesg.txt");
     cmdDmesg.file = "dmesg.txt";
     cmdDmesg.canNotReplace = true;
+    cmdDmesg.waitingTime = kFastCmdTimeoutMs;
     m_ListCmd.append(cmdDmesg);
     m_ListUpdate.append(cmdDmesg);
 
@@ -186,6 +187,7 @@ void ThreadPool::initCmd()
     cmdHciconfig.cmd = QString("%1 %2%3").arg("hciconfig -a > ").arg(PATH).arg("hciconfig.txt");
     cmdHciconfig.file = "hciconfig.txt";
     cmdHciconfig.canNotReplace = false;
+    cmdHciconfig.waitingTime = kFastCmdTimeoutMs;
     m_ListCmd.append(cmdHciconfig);
     m_ListUpdate.append(cmdHciconfig);
 
@@ -194,7 +196,7 @@ void ThreadPool::initCmd()
     cmdBluetooth.cmd = QString("%1 %2%3").arg("bluetoothctl paired-devices > ").arg(PATH).arg("bt_device.txt");
     cmdBluetooth.file = "bt_device.txt";
     cmdBluetooth.canNotReplace = false;
-    cmdBluetooth.waitingTime = 500;
+    cmdBluetooth.waitingTime = kBluetoothCtlTimeoutMs;
     m_ListCmd.append(cmdBluetooth);
     m_ListUpdate.append(cmdBluetooth);
 
@@ -209,6 +211,7 @@ void ThreadPool::initCmd()
     cmdHwinfo.cmd = QString("%1 %2%3").arg("hwinfo --sound --netcard --keyboard --cdrom --disk --display --mouse --usb --fingerprint > ").arg(PATH).arg("hwinfo.txt");
     cmdHwinfo.file = "hwinfo.txt";
     cmdHwinfo.canNotReplace = false;
+    cmdHwinfo.waitingTime = kHwinfoTimeoutMs;
     m_ListCmd.append(cmdHwinfo);
     m_ListUpdate.append(cmdHwinfo);
 
@@ -216,19 +219,7 @@ void ThreadPool::initCmd()
     cmdHwinfoMonitor.cmd = QString("%1 %2%3").arg("hwinfo --monitor > ").arg(PATH).arg("hwinfo_monitor.txt");
     cmdHwinfoMonitor.file = "hwinfo_monitor.txt";
     cmdHwinfoMonitor.canNotReplace = false;
+    cmdHwinfoMonitor.waitingTime = kHwinfoMonitorTimeoutMs;
     m_ListCmd.append(cmdHwinfoMonitor);
     m_ListUpdate.append(cmdHwinfoMonitor);
-
-    // ---------------------------------------------------------------------
-    // 热插拔(USB)刷新列表
-    //
-    // 一次插拔只需要更新"会变"的信息。lshw / upower / lscpu / lspci /
-    // lpstat / bluetoothctl / hwinfo --framebuffer 与插拔无关，却要跑数百
-    // 毫秒到数秒，并发执行时会把 CPU 占满，正在播放的音频因此丢帧（滋滋声）。
-    // 未列入的命令不执行，其缓存保持上一次的值，不会丢失数据。
-    // ---------------------------------------------------------------------
-    m_ListHotplug.append(cmdLsblk);      // 新增/移除磁盘
-    m_ListHotplug.append(cmdLssg);       // 新增/移除 SCSI 通用设备
-    m_ListHotplug.append(cmdHciconfig);  // 蓝牙适配器状态
-    m_ListHotplug.append(cmdHwinfo);     // 含 --sound：声卡拓扑也可能变化
 }

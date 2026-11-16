@@ -1,5 +1,5 @@
 // Copyright (C) 2019 ~ 2020 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2022 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -8,7 +8,8 @@
 
 #include <QDBusConnection>
 #include <QDBusInterface>
-#include <QDBusReply>
+#include <QDBusMessage>
+#include <QDBusPendingCall>
 #include <QLoggingCategory>
 
 using namespace DDLog;
@@ -28,15 +29,20 @@ DBusInterface::DBusInterface()
     init();
 }
 
-bool DBusInterface::getInfo(const QString &key, QString &info)
+bool DBusInterface::getInfo(const QString &key, QString &info, int timeoutMs)
 {
-    // 调用dbus接口获取设备信息
-    QDBusReply<QString> reply = mp_Iface->call("getInfo", key);
-    if (reply.isValid()) {
-        info = reply.value();
+    QDBusMessage msg = QDBusMessage::createMethodCall(SERVICE_NAME, DEVICE_SERVICE_PATH,
+                                                      DEVICE_SERVICE_INTERFACE, "getInfo");
+    msg << key;
+
+    const QDBusMessage reply = QDBusConnection::systemBus().call(
+                msg, QDBus::Block, timeoutMs > 0 ? timeoutMs : -1);
+    if (reply.type() == QDBusMessage::ReplyMessage && !reply.arguments().isEmpty()) {
+        info = reply.arguments().first().toString();
         return true;
     } else {
-        qCInfo(appLog) << "Error in getting info from getInfo .......................................";
+        qCInfo(appLog) << "Error in getting info from getInfo ......................................."
+                       << reply.errorName() << reply.errorMessage();
         return false;
     }
 }
