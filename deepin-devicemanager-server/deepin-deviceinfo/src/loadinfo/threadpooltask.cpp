@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 ~ 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -251,6 +251,10 @@ void ThreadPoolTask::loadSgSmartCtlInfoToCache(const QString &info)
         }
 
         QStringList words = line.split("/");
+
+        if (words.size() < 3) {
+            continue;
+        }
 
         QString smartCmd = QString("smartctl --all /dev/%1").arg(words[2].trimmed());
         QString sInfo;
