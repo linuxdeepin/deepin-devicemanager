@@ -489,8 +489,12 @@ QString EDIDParser::hexToDec(QString strHex)   //十六进制转十进制
 {
     // qCDebug(appLog) << "Converting hexadecimal to decimal";
     int i;
-    int v = 0;
-    for (i = 0; i < strHex.length(); i++) {
+    qint64 v = 0;
+    int len = strHex.length();
+    if (len > 15) {
+        len = 15;
+    }
+    for (i = 0; i < len; i++) {
         v *= 16;
         v += hex2(strHex[i].toLatin1());
     }
