@@ -542,6 +542,10 @@ void DeviceMonitor::caculateScreenRatio()
     if (match.hasMatch()) {
         int width = match.captured(1).toInt();
         int height = match.captured(2).toInt();
+        if (width == 0 || height == 0) {
+            qCDebug(appLog) << "Width or height is zero, skip ratio calculation";
+            return;
+        }
         int gys = gcd(width, height);
         int w = width / gys;
         int h = height / gys;
@@ -556,6 +560,9 @@ void DeviceMonitor::caculateScreenRatio()
 int DeviceMonitor::gcd(int a, int b)
 {
     qCDebug(appLog) << "Calculating GCD for" << a << "and" << b;
+    if (b == 0) {
+        return a;
+    }
     if (a < b)
         std::swap(a, b);
 
