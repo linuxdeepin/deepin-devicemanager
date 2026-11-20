@@ -228,14 +228,22 @@ TEST_F(DriverManager_UT, ParsePrinterInfo_NonObjectEntry_HandledGracefully)
 
 namespace {
 
-void ut_stubQProcessStart(QProcess *, const QString &, const QStringList &, QIODevice::OpenMode)
+QString g_stubQProcessProgram;
+
+void ut_stubQProcessStart(QProcess *, const QString &program, const QStringList &, QIODevice::OpenMode)
 {
-    // 不执行任何外部进程
+    // 记录程序名，便于断言不会执行真实的 sudo 命令。
+    g_stubQProcessProgram = program;
 }
 
 bool ut_stubQProcessWaitFinished(QProcess *, int)
 {
     return true;
+}
+
+bool ut_stubQProcessWaitTimedOut(QProcess *, int)
+{
+    return false;
 }
 
 bool g_stubInstallerCalled = false;
@@ -591,8 +599,32 @@ TEST_F(DriverManagerExtra_UT, QueryHelpers_NonexistentInputs_ReturnEmptyOrFalse)
     EXPECT_TRUE(mgr.checkModuleInUsed("ut_no_such_mod_t24xyz").isEmpty());
     EXPECT_FALSE(mgr.isBlackListed("ut_no_such_mod_t24xyz"));
     EXPECT_FALSE(mgr.isDriverPackage("/nonexistent/path/foo.ko"));
-    // sudo dpkg -s 查询不存在的包：stdout 无内容 → false（无系统副作用）
+}
+
+TEST_F(DriverManagerExtra_UT, PrinterQuery_NonexistentPackage_ReturnsFalse)
+{
+    Stub stub;
+    stub.set((void (QProcess::*)(const QString &, const QStringList &, QIODevice::OpenMode))ADDR(QProcess, start),
+             ut_stubQProcessStart);
+    stub.set(ADDR(QProcess, waitForFinished), ut_stubQProcessWaitFinished);
+
+    g_stubQProcessProgram.clear();
+    DriverManager mgr;
     EXPECT_FALSE(mgr.printerHasInstalled("ut-no-such-pkg-t24xyz"));
+    EXPECT_EQ(g_stubQProcessProgram, QStringLiteral("dpkg-query"));
+}
+
+TEST_F(DriverManagerExtra_UT, PrinterQuery_Timeout_ReturnsFalse)
+{
+    Stub stub;
+    stub.set((void (QProcess::*)(const QString &, const QStringList &, QIODevice::OpenMode))ADDR(QProcess, start),
+             ut_stubQProcessStart);
+    stub.set(ADDR(QProcess, waitForFinished), ut_stubQProcessWaitTimedOut);
+
+    g_stubQProcessProgram.clear();
+    DriverManager mgr;
+    EXPECT_FALSE(mgr.printerHasInstalled("ut-timeout-pkg-t24xyz"));
+    EXPECT_EQ(g_stubQProcessProgram, QStringLiteral("dpkg-query"));
 }
 
 TEST_F(DriverManagerExtra_UT, UndoInstallDriver_OnlineState_DelegatesSafely)
