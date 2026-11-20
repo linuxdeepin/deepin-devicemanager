@@ -34,6 +34,7 @@
 #include <QLoggingCategory>
 #include <QRegularExpression>
 #include <QDir>
+#include <QProcess>
 
 const QString kModelName { "model name" };
 const QString kVendorId { "vendor_id" };
@@ -317,6 +318,12 @@ void DeviceGenerator::generatorMonitorDevice()
     qCDebug(appLog) << "DeviceGenerator::generatorMonitorDevice start";
     // 生成显示设备
     getMonitorInfoFromHwinfo();
+    // 如果没有从 hwinfo 中拿到监视器信息（比如没有 EDID 的监视设备），
+    // 从 xrandr --verbose 获取无 EDID 的已连接显示器信息，
+    // 用来兜底，避免出现只接入无 EDID 的屏幕时，设备管理器不显示监视器的问题
+    QList<DeviceBaseInfo *> *monitors = DeviceManager::instance()->convertDeviceListAddr(DT_Monitor);
+    if (monitors && monitors->isEmpty())
+        getMonitorWithoutEdidFromXrandr();
     qCDebug(appLog) << "DeviceGenerator::generatorMonitorDevice end";
 }
 
@@ -898,6 +905,130 @@ void DeviceGenerator::getMonitorInfoFromXrandrVerbose()
 
         DeviceManager::instance()->setMonitorInfoFromXrandr((*it)["mainInfo"], (*it)["edid"]);
     }
+}
+
+void DeviceGenerator::getMonitorWithoutEdidFromXrandr()
+{
+    // 执行 xrandr --verbose 命令获取显示设备信息
+    // 解析所有已连接且无 EDID 的接口，补充 hwinfo / xrandr(EDID) 未识别的显示器
+    // 有 EDID 的接口已由 getMonitorInfoFromHwinfo -> setMonitorInfoFromXrandr 处理，此处不再重复添加
+    QProcess process;
+    process.start("xrandr", QStringList() << "--verbose");
+    process.waitForFinished(5000);
+    if (process.exitCode() != 0) {
+        qCWarning(appLog) << "xrandr --verbose failed with exit code:" << process.exitCode();
+        return;
+    }
+    QString output = process.readAllStandardOutput();
+    if (output.isEmpty())
+        return;
+    QStringList lines = output.split("\n", QT_SKIP_EMPTY_PARTS);
+
+    QString connectorName;
+    bool isPrimary = false;
+    bool isConnected = false;
+    bool hasEdid = false;
+    QString currentResolution;
+    QString currentRate;
+    QStringList supportResolutions;
+    QString lastResolution;
+    bool lastWasCurrent = false;
+
+    // 创建并添加无 EDID 的已连接显示器
+    auto createMonitor = [&]() {
+        // 仅处理已连接且无 EDID 的接口
+        if (!isConnected || hasEdid || connectorName.isEmpty())
+            return;
+
+        // 接口类型：去掉末尾的 -N
+        QString interfaceType = connectorName;
+        int dashPos = interfaceType.lastIndexOf('-');
+        if (dashPos > 0)
+            interfaceType = interfaceType.left(dashPos);
+
+        DeviceMonitor *device = new DeviceMonitor();
+        device->setInfoFromXrandrWithoutEdid(connectorName, interfaceType, isPrimary,
+                                             currentResolution, currentRate, supportResolutions);
+        DeviceManager::instance()->addMonitor(device);
+        qCInfo(appLog) << "Monitor without EDID created:" << connectorName
+                       << "primary:" << isPrimary
+                       << "current resolution:" << currentResolution;
+    };
+
+    // EDID 数据行：以两个 Tab 开头，后跟 32 位十六进制字符
+    // 与 ThreadExecXrandr::loadXrandrVerboseInfo 中的判定保持一致
+    QRegularExpression reEdid("^[\\t]{2}([0-9a-f]{32}).*");
+    for (int i = 0; i < lines.size(); i++) {
+        const QString &line = lines[i];
+
+        // 连接器行：不以空格开头，包含 connected/disconnected
+        if (!line.startsWith(" ") && (line.contains("connected") || line.contains("disconnected"))) {
+            // 先处理上一个连接器
+            createMonitor();
+
+            // 解析新的连接器
+            QStringList parts = line.split(" ", QT_SKIP_EMPTY_PARTS);
+            connectorName = parts.isEmpty() ? "" : parts[0].trimmed();
+            isPrimary = line.contains("primary");
+            // 判断是否连接：行中存在 "connected"，且不是 "disconnected"（disconnected 包含 connected 子串）
+            isConnected = line.contains("connected") && !line.contains("disconnected");
+            hasEdid = false;
+            currentResolution.clear();
+            currentRate.clear();
+            supportResolutions.clear();
+            lastResolution.clear();
+            lastWasCurrent = false;
+            continue;
+        }
+
+        // 未连接的接口无需继续解析
+        if (!isConnected)
+            continue;
+
+        // EDID 数据行：标记该接口存在 EDID，无需再由本函数补充
+        if (reEdid.match(line).hasMatch()) {
+            hasEdid = true;
+            continue;
+        }
+
+        // 分辨率行：以空格开头，不包含 ":"
+        if (line.startsWith(" ") && !line.contains(":") && !line.contains("connect")) {
+            QRegularExpression reRes("^\\s+(\\d+x\\d+\\w*)");
+            QRegularExpressionMatch matchRes = reRes.match(line);
+            if (matchRes.hasMatch()) {
+                lastResolution = matchRes.captured(1);
+                lastWasCurrent = line.contains("*current");
+                if (lastWasCurrent) {
+                    currentResolution = lastResolution;
+                }
+            }
+            continue;
+        }
+
+        // v: 行包含刷新率
+        if (line.startsWith(" ") && line.contains("v:") && line.contains("clock")) {
+            QRegularExpression reRate("clock\\s+(\\d+\\.\\d+)Hz");
+            QRegularExpressionMatch matchRate = reRate.match(line);
+            if (matchRate.hasMatch() && !lastResolution.isEmpty()) {
+                QString rate = matchRate.captured(1) + "Hz";
+
+                // 添加到支持分辨率列表
+                QString resEntry = lastResolution + "@" + rate;
+                resEntry.replace("x", "×", Qt::CaseInsensitive);
+                if (!supportResolutions.contains(resEntry)) {
+                    supportResolutions.append(resEntry);
+                }
+
+                // 记录当前分辨率的刷新率
+                if (lastWasCurrent) {
+                    currentRate = rate;
+                }
+            }
+        }
+    }
+
+    // 处理最后一个连接器
+    createMonitor();
 }
 
 void DeviceGenerator::getAudioInfoFromHwinfo()

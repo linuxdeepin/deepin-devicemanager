@@ -224,6 +224,13 @@ protected:
      */
     virtual void getMonitorInfoFromXrandrVerbose();
 
+    /**
+     * @brief getMonitorWithoutEdidFromXrandr:直接执行xrandr --verbose获取无EDID的已连接显示器信息
+     * 解析所有已连接但缺少 EDID 的显示接口（不限于 LVDS，也包括 VGA/DVI/HDMI/DP/eDP 等），
+     * 补充 hwinfo / xrandr(EDID) 未识别的显示器
+     */
+    virtual void getMonitorWithoutEdidFromXrandr();
+
     /**@brief:generator audio info*/
     /**
      * @brief getAudioInfoFromHwinfo:从hwinfo获取声卡信息

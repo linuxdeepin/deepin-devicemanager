@@ -321,6 +321,32 @@ bool DeviceMonitor::setInfoFromXradr(const QString &main, const QString &edid, c
     return true;
 }
 
+void DeviceMonitor::setInfoFromXrandrWithoutEdid(const QString &connectorName, const QString &interfaceType,
+                                                 bool isPrimary, const QString &currentResolution,
+                                                 const QString &refreshRate, const QStringList &supportResolutions)
+{
+    // 设置 LVDS 显示器信息
+    m_DisplayInput = connectorName;             // 显示输入，如 LVDS-0
+    m_Interface = interfaceType;                // 接口类型，如 LVDS
+    m_RawInterface = connectorName;             // 原始接口名
+    m_Name = connectorName;                     // 名称
+    m_Model = connectorName;                    // 型号
+    m_Vendor = "Unknown";                       // 厂商
+    m_MainScreen = isPrimary ? "Yes" : "NO";    // 是否主显示器
+
+    // 当前分辨率（先用原始格式计算比例，再转为显示格式）
+    m_CurrentResolution = currentResolution;
+    caculateScreenRatio();
+    m_CurrentResolution.replace("x", "×", Qt::CaseInsensitive);
+    if (!refreshRate.isEmpty()) {
+        m_CurrentResolution += " @" + refreshRate;
+        m_RefreshRate = refreshRate;
+    }
+
+    // 支持的分辨率
+    m_SupportResolution = supportResolutions.join(", ");
+}
+
 const QString &DeviceMonitor::name()const
 {
     // qCDebug(appLog) << "Getting monitor name:" << m_Name;
@@ -362,7 +388,8 @@ const QString DeviceMonitor::getOverviewInfo()
         if (Common::specialComType == 6 || Common::specialComType == 7) {
             ov = QString("(%1)").arg(m_ScreenSize);
         } else {
-            ov = QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
+            ov = m_ScreenSize.isEmpty() ? QString("%1").arg(m_Name)
+                                        : QString("%1(%2)").arg(m_Name).arg(m_ScreenSize);
         }
     } else {
         if (Common::specialComType == 6 || Common::specialComType == 7) {
