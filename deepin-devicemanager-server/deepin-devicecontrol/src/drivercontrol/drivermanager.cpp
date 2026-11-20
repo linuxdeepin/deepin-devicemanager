@@ -66,6 +66,8 @@
 #define E_NOT_DRIVER      101 // not driver 非驱动文件
 #define E_NOT_SIGNED      102 // not signed 没有数字签名
 
+static constexpr int PRINTER_QUERY_TIMEOUT_MS = 5000;
+
 #define RETURN_VALUE(flag) \
     {   \
         sigFinished(flag, errmsg);\
@@ -690,11 +692,18 @@ QList<DriverManager::TDriverInfo> DriverManager::parsePrinterInfo(const QByteArr
 bool DriverManager::printerHasInstalled(const QString &packageName)
 {
     QProcess p;
-    p.start("sudo", QStringList() << "dpkg" << "-s" << packageName);
-    p.waitForFinished(-1);
+    // dpkg-query 只读查询，不需要 root 权限，避免 sudo 在无终端环境中等待认证。
+    p.start("dpkg-query", QStringList() << "-s" << packageName);
+    if (!p.waitForFinished(PRINTER_QUERY_TIMEOUT_MS)) {
+        p.kill();
+        p.waitForFinished(1000);
+        return false;
+    }
 
-    QByteArray r = p.readAll();
-    return r.contains("installed");
+    const QByteArray output = p.readAllStandardOutput();
+    return p.exitStatus() == QProcess::NormalExit
+            && p.exitCode() == 0
+            && output.contains("installed");
 }
 
 /**
