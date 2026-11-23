@@ -8,7 +8,7 @@
 // |---------------|-------|--------------|-----|--------|
 // | setLabel      | high  | in_degree:9  | 3   | 3      |
 // | PageOverview  | mid   | in_degree:5  | 2   | 2      |
-// | updateInfo    | mid   | -            | 2   | 5      |
+// | updateInfo    | mid   | -            | 2   | 7      |
 // | clearWidgets  | mid   | -            | 2   | 2      |
 // | initWidgets   | mid   | -            | 2   | 1(合)  |
 // | slotShowMenu  | mid   | -            | 2   | 1(合)  |
@@ -41,6 +41,7 @@
 //   B3 类型=="Overview" → 跳过 ...................... updateInfo_overviewSkipped(桩注入)
 //   B4 map 含类型 → 写入表格两列 .................... updateInfo_overviewSkipped
 //   B5 map.find 不命中 → 不写行 ..................... updateInfo_emptyMap
+//   B6 行数=条目数+1（辅助键不占行）................ updateInfo_auxKeys_rowCountUsesFilledEntries
 // clearWidgets: mp_Overview->clear() ................. clearWidgets_clearsTable
 // slotShowMenu: clear+3 动作+exec .................... slotShowMenu_buildsMenu
 // slotActionCopy: clipboard->setText(toString()) ..... slotActionCopy_copiesTableText
@@ -172,7 +173,7 @@ TEST_F(UT_PageOverview, isOverview_returnsTrue)
 // Arrange: 表格有数据; Act: clearWidgets; Assert: toString 输出为空
 TEST_F(UT_PageOverview, clearWidgets_clearsTable)
 {
-    // updateInfo 修复后按 setColumnAndRow(row + 1) 设行（PR #862），每个条目都有可见行；
+    // updateInfo 按实际条目数+1 设行（预留行少时隐藏），每个条目都有可见行；
     // 用 2 项 map 同时验证多行写入与 clear 后表格为空
     QMap<QString, QString> map;
     map.insert("Display", "UHD 630");
@@ -274,8 +275,8 @@ TEST_F(UT_PageOverview, updateInfo_largeHeight_limitRowCapped)
     EXPECT_EQ(g_limitRow, 11);   // min(11, 大值) = 11
 }
 
-// Arrange: 空 map（B5）; Act: updateInfo; Assert: setColumnAndRow 收到 row+1=1 且无崩溃
-TEST_F(UT_PageOverview, updateInfo_emptyMap_passesRowPlusOne)
+// Arrange: 空 map（B5，0 条目）; Act: updateInfo; Assert: setColumnAndRow 收到 0+1=1 且无崩溃
+TEST_F(UT_PageOverview, updateInfo_emptyMap_reserveRowOnly)
 {
     Stub stub;
     stub.set(ADDR(PageTableWidget, setLimitRow), ut_ptw_setLimitRow);
@@ -283,7 +284,47 @@ TEST_F(UT_PageOverview, updateInfo_emptyMap_passesRowPlusOne)
 
     EXPECT_NO_FATAL_FAILURE(page->updateInfo(QMap<QString, QString>()));
 
-    EXPECT_EQ(g_colRow, 1);   // row = 0（空 map）→ setColumnAndRow(row + 1) = 1（PR #862 修复后语义）
+    EXPECT_EQ(g_colRow, 1);   // 0 条目 + 1 预留行
+}
+
+// Arrange: map 含辅助键 "Overview"/"OS" + 2 个类型条目（回归：概况尾部空行/多余"显示更多"）;
+// Act: updateInfo; Assert: setColumnAndRow 收到 条目数+1=3，而非 map.size()+1=5
+TEST_F(UT_PageOverview, updateInfo_auxKeys_rowCountUsesFilledEntries)
+{
+    Stub stub;
+    stub.set(ADDR(PageTableWidget, setLimitRow), ut_ptw_setLimitRow);
+    stub.set(ADDR(PageTableWidget, setColumnAndRow), ut_ptw_setColRow);
+    stub.set(ADDR(DeviceManager, getDeviceTypes), ut_dev_getTypes);
+    g_devTypes = {qMakePair(QString("Display"), QString("display##Display")),
+                  qMakePair(QString("Audio"), QString("audio##Audio"))};
+    QMap<QString, QString> map;
+    map.insert("Overview", "desktop");
+    map.insert("OS", "UOS 20");
+    map.insert("Display", "UHD 630");
+    map.insert("Audio", "HDMI Audio");
+
+    page->updateInfo(map);
+
+    // 旧实现 map.size()+1=5 → 尾部空行且提前弹"显示更多"；修复后仅条目数+1
+    EXPECT_EQ(g_colRow, 3);
+}
+
+// Arrange: 类型表与 map 键不一致（map 独有键不占行，B5 变体）; Act: updateInfo;
+// Assert: 仅匹配类型计数，setColumnAndRow 收到 1+1=2
+TEST_F(UT_PageOverview, updateInfo_unmatchedKeys_notCounted)
+{
+    Stub stub;
+    stub.set(ADDR(PageTableWidget, setLimitRow), ut_ptw_setLimitRow);
+    stub.set(ADDR(PageTableWidget, setColumnAndRow), ut_ptw_setColRow);
+    stub.set(ADDR(DeviceManager, getDeviceTypes), ut_dev_getTypes);
+    g_devTypes = {qMakePair(QString("Display"), QString("display##Display"))};
+    QMap<QString, QString> map;
+    map.insert("Display", "UHD 630");
+    map.insert("Ghost", "not a type");
+
+    page->updateInfo(map);
+
+    EXPECT_EQ(g_colRow, 2);   // 1 个匹配条目 + 1 预留行
 }
 
 // Arrange: 桩注入类型表 [Overview, Display, Separator]，map 含 Display（B3/B4）;
@@ -293,7 +334,7 @@ TEST_F(UT_PageOverview, updateInfo_overviewSkipped_displayWritten)
     g_devTypes = {qMakePair(QObject::tr("Overview"), QString("overview##Overview")),
                   qMakePair(QString("Display"), QString("display##Display")),
                   qMakePair(QString("Separator"), QString("Separator##Separator"))};
-    // setColumnAndRow(row + 1)（PR #862 修复 off-by-one）保证每个条目都有可见行
+    // 行数按实际条目数+1 设置，保证每个条目都有可见行
     QMap<QString, QString> map;
     map.insert("Display", "UHD 630");
     map.insert("Audio", "HDMI Audio");
