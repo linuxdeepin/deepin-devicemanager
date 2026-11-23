@@ -100,3 +100,20 @@ TEST_F(UT_EDIDParser,UT_EDIDParser_decToHex){
     EXPECT_STREQ("0000000f",m_EDIDParser->decToHex("15").toStdString().c_str());
 }
 
+//QString hexToDec(QString strHex);
+TEST_F(UT_EDIDParser,UT_EDIDParser_hexToDec){
+    EXPECT_STREQ("255",m_EDIDParser->hexToDec("FF").toStdString().c_str());
+    EXPECT_STREQ("2147483647",m_EDIDParser->hexToDec("7FFFFFFF").toStdString().c_str());
+}
+
+// PMS BUG-383515: fuzz_edidparser.cpp/edidparser_hextodec_fuzz()
+// 超过 int 范围或超长的十六进制串曾触发有符号整数溢出
+TEST_F(UT_EDIDParser,UT_EDIDParser_hexToDec_overflow_383515){
+    EXPECT_STREQ("4294967295",m_EDIDParser->hexToDec("FFFFFFFF").toStdString().c_str());
+    // 超长输入只处理前 15 个字符，结果在 qint64 范围内
+    EXPECT_STREQ("1152921504606846975",
+                 m_EDIDParser->hexToDec("FFFFFFFFFFFFFFFFFFFF").toStdString().c_str());
+    EXPECT_STREQ("0",m_EDIDParser->hexToDec("").toStdString().c_str());
+    // 非法字符不崩溃
+    EXPECT_NO_FATAL_FAILURE(m_EDIDParser->hexToDec("ZZZZZZZZZZZZZZZZZZZZ"));
+}

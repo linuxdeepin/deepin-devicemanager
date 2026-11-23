@@ -405,3 +405,30 @@ TEST_F(UT_DeviceStorage, UT_DeviceStorage_getInfoFromsmartctl_002)
     EXPECT_STREQ("CT240BX500SSD1", m_deviceStorage->m_Model.toStdString().c_str());
     EXPECT_STREQ("2002E3E0B393", m_deviceStorage->m_SerialNumber.toStdString().c_str());
 }
+
+// PMS BUG-383515: fuzz_devicestorage.cpp/devicestorage_converttobytes_fuzz()
+// diskSizeFloat * multiplier 超过 quint64 上限时强转曾产生未定义行为
+TEST_F(UT_DeviceStorage, UT_DeviceStorage_convertToBytes_overflow_383515)
+{
+    QMap<QString, QString> mapinfo;
+    mapinfo.insert("size", "1ZB (1ZB)");
+    m_deviceStorage->getInfoFromLshw(mapinfo);
+    // 超出 quint64 表示范围，钳位为 0，不再产生未定义行为
+    EXPECT_EQ(0ULL, m_deviceStorage->m_SizeBytes);
+
+    // 正常容量仍能正确换算 1TB = 1000^4
+    DeviceStorage normalStorage;
+    QMap<QString, QString> normalInfo;
+    normalInfo.insert("size", "1TB (1TB)");
+    normalStorage.getInfoFromLshw(normalInfo);
+    EXPECT_EQ(1000000000000ULL, normalStorage.m_SizeBytes);
+}
+
+// PMS BUG-383515: fuzz_devicestorage.cpp/devicestorage_checkdisksize_fuzz()
+// m_Size 中的数字部分曾被强转为 int 导致越界，当前实现只做容量区间比较
+TEST_F(UT_DeviceStorage, UT_DeviceStorage_checkDiskSize_huge_383515)
+{
+    m_deviceStorage->m_Size = "999999999999999999999999999999 GB";
+    m_deviceStorage->m_SizeBytes = 999999999999999999ULL;
+    EXPECT_NO_FATAL_FAILURE(m_deviceStorage->checkDiskSize());
+}

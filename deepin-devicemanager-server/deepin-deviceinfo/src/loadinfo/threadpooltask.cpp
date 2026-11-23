@@ -249,6 +249,10 @@ void ThreadPoolTask::loadSgSmartCtlInfoToCache(const QString &info)
 
         QStringList words = line.split("/");
 
+        if (words.size() < 3) {
+            continue;
+        }
+
         QString smartCmd = QString("smartctl --all /dev/%1").arg(words[2].trimmed());
         QString sInfo;
         runCmd(smartCmd, sInfo, kSmartctlTimeoutMs);

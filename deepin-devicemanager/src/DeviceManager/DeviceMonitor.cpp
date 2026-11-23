@@ -18,6 +18,9 @@
 #include <math.h>
 #include <QProcess>
 
+#include <algorithm>
+#include <limits>
+
 DWIDGET_USE_NAMESPACE
 DCORE_USE_NAMESPACE
 
@@ -490,6 +493,9 @@ void DeviceMonitor::caculateScreenRatio()
     if (re.exactMatch(m_CurrentResolution)) {
         int width = re.cap(1).toInt();
         int height = re.cap(2).toInt();
+        if (width == 0 || height == 0) {
+            return;
+        }
         int gys = gcd(width, height);
         int w = width / gys;
         int h = height / gys;
@@ -503,13 +509,25 @@ void DeviceMonitor::caculateScreenRatio()
 
 int DeviceMonitor::gcd(int a, int b)
 {
-    if (a < b)
-        std::swap(a, b);
+    // 防御任意输入（模糊测试会直接传入 0、负数、INT_MIN）：
+    // 1. 任一参数为 0 时直接返回另一个，避免 a % b 除零；仅判断 b == 0 不够，
+    //    a == 0 时交换后 b 也会变成 0
+    if (a == 0 || b == 0) {
+        return a == 0 ? b : a;
+    }
 
-    if (a % b == 0)
-        return b;
-    else
-        return gcd(b, a % b);
+    // 2. 先转成 64 位绝对值，避免负数输入造成的无限递归以及 a % b 溢出
+    qint64 x = qAbs(static_cast<qint64>(a));
+    qint64 y = qAbs(static_cast<qint64>(b));
+
+    while (y != 0) {
+        qint64 tmp = x % y;
+        x = y;
+        y = tmp;
+    }
+
+    // 仅 gcd(INT_MIN, INT_MIN) 会得到 2^31，超出 int 表示范围，按最大公约数语义钳位
+    return static_cast<int>(std::min<qint64>(x, std::numeric_limits<int>::max()));
 }
 
 bool DeviceMonitor::findAspectRatio(int width, int height, int &ar_w, int &ar_h)

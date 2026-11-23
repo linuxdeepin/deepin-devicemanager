@@ -13,6 +13,7 @@
 #include "DDLog.h"
 // Qt库文件
 #include<QLoggingCategory>
+#include <limits>
 
 using namespace DDLog;
 
@@ -152,7 +153,12 @@ static quint64 convertToBytes(const QString& size, double scale)
             }
         }
     }
-    diskBytesSize = static_cast<quint64>(diskSizeFloat * multiplier);
+    double result = diskSizeFloat * multiplier;
+    if (result < 0.0 || result > static_cast<double>(std::numeric_limits<quint64>::max())) {
+        qCDebug(appLog) << "convertToBytes, result out of range, clamping to 0";
+        return 0;
+    }
+    diskBytesSize = static_cast<quint64>(result);
     return diskBytesSize;
 }
 
