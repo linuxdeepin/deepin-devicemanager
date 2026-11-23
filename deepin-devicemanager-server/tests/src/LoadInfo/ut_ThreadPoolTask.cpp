@@ -72,3 +72,16 @@ TEST_F(ThreadPoolTask_UT, ThreadPoolTask_UT_lscpu)
     EXPECT_TRUE(!DeviceInfoManager::getInstance()->getInfo("lscpu").isEmpty());
     EXPECT_TRUE(!DeviceInfoManager::getInstance()->getInfo("lscpu_num").isEmpty());
 }
+
+// PMS BUG-383515: fuzz_threadpooltask.cpp/threadpooltask_loadsgsmartctlinfotocache_fuzz()
+// line.split("/") 后未检查段数时，words[2] 越界曾导致段错误
+TEST_F(ThreadPoolTask_UT, ThreadPoolTask_UT_loadSgSmartCtlInfoToCache_383515)
+{
+    ThreadPoolTask task(QString(), QString(), false, 0);
+
+    // 不含 "/" 或段数不足 3 的输入，必须直接跳过，不能访问 words[2]
+    EXPECT_NO_FATAL_FAILURE(task.loadSgSmartCtlInfoToCache("sda"));
+    EXPECT_NO_FATAL_FAILURE(task.loadSgSmartCtlInfoToCache("sda/sdb"));
+    EXPECT_NO_FATAL_FAILURE(task.loadSgSmartCtlInfoToCache(""));
+    EXPECT_NO_FATAL_FAILURE(task.loadSgSmartCtlInfoToCache("\n\n"));
+}
