@@ -72,8 +72,6 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
     qCDebug(appLog) << "Updating overview info with" << map.size() << "items";
     mp_Overview->clear();
 
-    int row = map.size();
-
     // 根据页面高度确定表格最多显示行数
     int maxRow = this->height() / ROW_HEIGHT - 4;
     if (maxRow < 1) {
@@ -84,28 +82,32 @@ void PageOverview::updateInfo(const QMap<QString, QString> &map)
         mp_Overview->setLimitRow(std::min(11, maxRow));
     }
 
-    // 设置表格行数
-    mp_Overview->setColumnAndRow(row + 1);
-
-    int i = 0;
-
     const QList<QPair<QString, QString>> types = DeviceManager::instance()->getDeviceTypes();
 
+    // 先按类型表收集实际会填充的条目：map 中除设备类型条目外还包含
+    // "Overview"、"OS" 等辅助键（供 setLabel 使用），它们不占用表格行。
+    QList<QPair<QString, QString>> entries;
     foreach (auto iter, types) {
         if (iter.first == tr("Overview")) {
             qCDebug(appLog) << "Skipping overview item";
             continue;
         }
 
-        // 按设备类型列表顺序显示概况信息
-        if (map.find(iter.first) != map.end()) {
-            qCDebug(appLog) << "Adding item:" << iter.first;
-            QTableWidgetItem *itemFirst = new QTableWidgetItem(iter.first);
-            mp_Overview->setItem(i, 0, itemFirst);
-            QTableWidgetItem *itemSecond = new QTableWidgetItem(map.find(iter.first).value());
-            mp_Overview->setItem(i, 1, itemSecond);
-            ++i;
-        }
+        auto it = map.find(iter.first);
+        if (it != map.end())
+            entries.append(qMakePair(iter.first, it.value()));
+    }
+
+    // 表格行数 = 实际条目数 + 1（预留一行给展开/收起按钮，条目较少时该行隐藏）。
+    // 不能用 map.size() 推算，否则会多出空行且提前显示"显示更多"。
+    mp_Overview->setColumnAndRow(entries.size() + 1);
+
+    int i = 0;
+    foreach (auto entry, entries) {
+        qCDebug(appLog) << "Adding item:" << entry.first;
+        mp_Overview->setItem(i, 0, new QTableWidgetItem(entry.first));
+        mp_Overview->setItem(i, 1, new QTableWidgetItem(entry.second));
+        ++i;
     }
 }
 
