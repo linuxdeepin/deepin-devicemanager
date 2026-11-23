@@ -14,6 +14,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QTemporaryDir>
 
 class SecurityUtilsTest : public ::testing::Test
@@ -224,6 +225,39 @@ TEST_F(SecurityUtilsTest, isSafeSysfsPath_emptyInput_returnsFalse)
     // Assert
     EXPECT_FALSE(result);
     EXPECT_EQ(path.isEmpty(), true);
+}
+
+/*
+ * 禁用设备会被内核从 sysfs 移除，目录不存在；
+ * 启用操作正是针对这类不存在的路径恢复设备，必须校验通过。
+ * 回归：BUG - canonicalFilePath() 对不存在的路径返回空，
+ * 导致 removeEnable 启用分支永远被 "unsafe sysfs path rejected" 拒绝。
+ */
+TEST_F(SecurityUtilsTest, isSafeSysfsPath_disabledDevicePathNotExists_returnsTrue)
+{
+    // Arrange：一个格式合法但当前不存在的 PCI 设备路径
+    QString path = "/devices/pci0000:00/0000:00:1f.99";
+
+    // Precondition：确保该路径确实不存在，测试才有意义
+    ASSERT_FALSE(QFileInfo::exists(QStringLiteral("/sys") + path));
+
+    // Act
+    bool result = isSafeSysfsPath(path);
+
+    // Assert
+    EXPECT_TRUE(result);
+}
+
+TEST_F(SecurityUtilsTest, isSafeSysfsPath_relativePath_returnsFalse)
+{
+    // Arrange：不以 / 开头的相对路径，拼接后会逃逸出 /sys 语义
+    QString path = "devices/pci0000:00/0000:00:1f.3";
+
+    // Act
+    bool result = isSafeSysfsPath(path);
+
+    // Assert
+    EXPECT_FALSE(result);
 }
 
 // validateModNameForInstall

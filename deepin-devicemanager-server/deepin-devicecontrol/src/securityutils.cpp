@@ -50,20 +50,39 @@ bool isSafeSysfsPath(const QString &relativePath)
     if (relativePath.isEmpty())
         return false;
 
+    // 必须是以 / 开头的绝对路径（相对 /sys），防止拼出 /sysdevices 之类的路径
+    if (!relativePath.startsWith(QLatin1Char('/')))
+        return false;
+
     // 第一层：拒绝包含 ".." 的路径，防止路径穿越
     if (relativePath.contains(QLatin1String("..")))
         return false;
 
-    // 第二层：构建完整路径并验证其 canonical path 以 /sys 开头
-    QString fullPath = QStringLiteral("/sys") + relativePath;
-    QFileInfo fileInfo(fullPath);
-    QString canonicalPath = fileInfo.canonicalFilePath();
+    /*
+     * 第二层：对路径中「已存在的最深祖先目录」做 canonical path 校验，
+     * 确保真实解析位置在 /sys 之下，防止符号链接穿越到 /sys 外部。
+     *
+     * 注意：不能要求完整路径本身存在——设备被禁用时会通过
+     * /sys/.../remove 从内核移除，对应的 sysfs 目录随之消失，
+     * 而「启用」操作正是针对这些不存在的路径恢复设备。
+     * 若此处要求 canonicalFilePath() 非空，启用操作将永远被拒绝。
+     */
+    QString existing = QStringLiteral("/sys") + relativePath;
+    while (!QFileInfo::exists(existing)) {
+        const QString parent = QFileInfo(existing).dir().absolutePath();
+        if (parent == QLatin1String("/") || parent == existing) {
+            existing = QStringLiteral("/");
+            break;
+        }
+        existing = parent;
+    }
 
+    QString canonicalPath = QFileInfo(existing).canonicalFilePath();
     if (canonicalPath.isEmpty())
         return false;
 
-    // 确保 canonical path 以 /sys/ 开头，防止符号链接穿越到 /sys 外部
-    if (!canonicalPath.startsWith(QLatin1String("/sys/")))
+    // 确保 canonical path 在 /sys 之内（/sys 本身也是合法祖先）
+    if (canonicalPath != QLatin1String("/sys") && !canonicalPath.startsWith(QLatin1String("/sys/")))
         return false;
 
     return true;
