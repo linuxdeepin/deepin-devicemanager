@@ -359,7 +359,7 @@ void PageSingleInfo::slotWakeupMachine()
         DBusWakeupInterface::getInstance()->setWakeupMachine(input->wakeupID(),
                                                              input->sysPath(),
                                                              mp_WakeupMachine->isChecked(),
-                                                             input->getInterface(),
+                                                             input->name(),
                                                              input->hardwareClass());
     }
 
