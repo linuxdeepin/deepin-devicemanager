@@ -464,6 +464,9 @@ void ModCore::deleteLineOfFileWithItem(const QString &filepath, const QString &i
 {
     QFile tmpfile(filepath);
 
+    if (!tmpfile.open(QIODevice::ReadWrite | QIODevice::Text))
+        return;
+
     //设置文件游标到起始位置
     tmpfile.seek(0);
     QTextStream stream(&tmpfile);
@@ -487,7 +490,9 @@ void ModCore::deleteLineOfFileWithItem(const QString &filepath, const QString &i
 #endif
     //清除原有内容
     tmpfile.resize(0);
+    tmpfile.seek(0);
     stream << newcontent;
+    stream.flush();
     tmpfile.close();
 }
 
@@ -688,7 +693,7 @@ void ModCore::rmFromBlackList(const QString &modName)
     }
     //遍历处理/usr/lib/modprobe.d目录下文件
     foreach (QString strfile, libfiles) {
-        rmModFromBlackListFile(etcdir.absoluteFilePath(strfile), modName);
+        rmModFromBlackListFile(libdir.absoluteFilePath(strfile), modName);
     }
 }
 
@@ -708,7 +713,7 @@ bool ModCore::setModLoadedOnBoot(const QString &modName)
 
     QFileInfo fileinfo(LOADONBOOT_PROBE_DIR);
     QString strfilename = QString(LOADONBOOT_FILENAME_TEMPLETE).arg(modName);
-    QString filepath = fileinfo.dir().absoluteFilePath(strfilename);
+    QString filepath = QDir(LOADONBOOT_PROBE_DIR).absoluteFilePath(strfilename);
 
     // 路径边界检查：确保最终路径在预期目录内
     if (!isPathWithinDirectory(filepath, LOADONBOOT_PROBE_DIR)) {
