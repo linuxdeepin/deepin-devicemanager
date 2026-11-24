@@ -140,6 +140,51 @@ const QMap<int, const char*> DeviceCpu::m_trNumber = {
     {256, QT_TR_NOOP("Two hundred and fifty-six")}
 };
 
+namespace {
+
+// 特殊机型 CPU 频率修正规则：将硬件上报值(旧值)修正为规格值(新值)，单位 GHz
+struct SpecialCpuFrequencyFix {
+    bool valid;
+    double oldGhz;
+    double newGhz;
+};
+
+SpecialCpuFrequencyFix specialCpuFrequencyFix()
+{
+    switch (Common::specialComType) {
+    case Common::kSpecialType5:
+    case Common::kSpecialType6:
+    case Common::kSpecialType7:
+        return {true, 2.189, 2.188};
+    case Common::kSpecialType9:
+    case Common::kSpecialType10:
+        return {true, 2.695, 2.7};
+    default:
+        return {false, 0.0, 0.0};
+    }
+}
+
+// 将 value(GHz) 命中旧值时修正为新值，返回是否发生修正；0.5MHz 容差规避浮点误差
+bool applySpecialFrequencyFix(double &value, const SpecialCpuFrequencyFix &fix)
+{
+    if (!fix.valid)
+        return false;
+
+    if (fabs(value - fix.oldGhz) < 0.0005) {
+        value = fix.newGhz;
+        return true;
+    }
+    return false;
+}
+
+// 格式化频率(GHz)：特殊机型修正后的规格值按原样显示(如 2.7)，不做两位小数强制；其余保持两位小数
+QString formatGhz(double value, bool corrected)
+{
+    return corrected ? QString::number(value, 'g', 6) : QString::number(value, 'f', 2);
+}
+
+} // namespace
+
 DeviceCpu::DeviceCpu()
     : DeviceBaseInfo()
     , m_PhysicalID("")
@@ -178,19 +223,6 @@ void DeviceCpu::setCpuInfo(const QMap<QString, QString> &mapLscpu, const QMap<QS
     // CPU 名称后面不需要加个数
     m_Name.replace(QRegExp("/[0-9]*$"), "");
     m_Name.replace(QRegExp("x [0-9]*$"), "");
-
-    if (Common::specialComType == Common::kSpecialType5 ||
-        Common::specialComType == Common::kSpecialType6 ||
-        Common::specialComType == Common::kSpecialType7) {
-        m_Frequency = m_Frequency.replace(CPU_FREQ_TYPE5_7_OLD, CPU_FREQ_TYPE5_7_NEW);
-        m_MaxFrequency = m_MaxFrequency.replace(CPU_MAXFREQ_TYPE5_7_OLD, CPU_MAXFREQ_TYPE5_7_NEW);
-    }
-
-    if (Common::specialComType == Common::kSpecialType9 ||
-        Common::specialComType == Common::kSpecialType10) {
-        m_Frequency = m_Frequency.replace(CPU_FREQ_TYPE9_OLD, CPU_FREQ_TYPE9_NEW);
-        m_MaxFrequency = m_MaxFrequency.replace(CPU_MAXFREQ_TYPE9_OLD, CPU_MAXFREQ_TYPE9_NEW);
-    }
 
     //  获取逻辑数和core数
     m_LogicalCPUNum = logicalNum;
@@ -295,17 +327,24 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
     if (min && max) {
         QString minS = mapInfo["CPU min MHz"];
         QString maxS = mapInfo["CPU max MHz"];
-        m_MaxFrequency = maxS;
         double minHz = minS.replace("MHz", "").toDouble() / 1000;
         double maxHz = maxS.replace("MHz", "").toDouble() / 1000;
+
+        // 特殊机型：在格式化前按机型修正频率数值，避免与具体格式化精度产生字符串耦合
+        const SpecialCpuFrequencyFix fix = specialCpuFrequencyFix();
+        const bool minFixed = applySpecialFrequencyFix(minHz, fix);
+        const bool maxFixed = applySpecialFrequencyFix(maxHz, fix);
+
+        // 上面 maxS 已被 replace 就地剥离了 "MHz"，不能再直接使用；统一按整数 MHz 输出并保留单位
+        m_MaxFrequency = QString("%1MHz").arg(maxHz * 1000, 0, 'f', 0);
         m_FrequencyIsRange = true;
 
         // 如果最大最小频率相等则不显示范围
         if (fabs(minHz - maxHz) < 0.001) {
             m_FrequencyIsRange = false;
-            m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(maxHz, 0, 'f', 2) : QString("%1 MHz").arg(maxHz * 1000, 0, 'f', 2);
+            m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(formatGhz(maxHz, maxFixed)) : QString("%1 MHz").arg(maxHz * 1000, 0, 'f', 2);
         } else {
-            m_Frequency = QString("%1-%2 GHz").arg(minHz, 0, 'f', 2).arg(maxHz, 0, 'f', 2);
+            m_Frequency = QString("%1-%2 GHz").arg(formatGhz(minHz, minFixed)).arg(formatGhz(maxHz, maxFixed));
         }
     } else if (mapInfo.find("CPU MHz") != mapInfo.end()) {
         QString maxS = mapInfo["CPU MHz"];
