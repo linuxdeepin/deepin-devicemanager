@@ -1,3 +1,14 @@
+deepin-devicemanager (6.0.77) unstable; urgency=medium
+
+  * chore: Update version to 6.0.77
+  * fix: fix 5 fuzz test security issues in devicemanager
+  * fix(security): allow re-enabling removed sysfs devices
+  * fix(overview): count only device-type entries for table rows
+  * feat: add fallback detection for monitors without EDID
+  * fix(storage): widen disk size matching tolerance to ±2 GB
+
+ -- zhanghongyuan <zhanghongyuan@uniontech.com>  Tue, 24 Nov 2026 19:50:51 +0800
+
 deepin-devicemanager (6.0.76) unstable; urgency=medium
 
   * chore: Update version to 6.0.76
