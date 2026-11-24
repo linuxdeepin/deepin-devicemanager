@@ -255,22 +255,23 @@ TEST_F(UT_LoadInfoThread, SlotFinishedReadFilePool_FreshInstance_FlagStillSet)
 
 
 
-/// B1: server 运行(info="1") -> 跳过重载路径, 直接 emit finished
+/// B1: server 运行(info="1") -> 轮询等待(超时)后仍执行加载路径
 
 
 TEST_F(UT_LoadInfoThread, Run_ServerRunning_SkipsHeavyPath)
 {
-    // Arrange
+    // Arrange: server 运行, 轮询超时后降级加载
     s_dbusInfo = "1";
+    m_stub.set(ADDR(QDateTime, currentMSecsSinceEpoch), ut_qdt_now);
     // Act
     m_thread->run();
 
     // Assert
     EXPECT_EQ(m_finishEmits, 1);
     EXPECT_EQ(m_finishMsg, "finish");
-    EXPECT_TRUE(m_thread->m_Start);    // 重载路径未进入, m_Start 保持
-    EXPECT_FALSE(m_thread->m_Running); // run 末尾复位
-    EXPECT_EQ(s_loadCmdCalls, 0);      // 未执行任何命令加载
+    EXPECT_FALSE(m_thread->m_Start);    // 加载路径已进入(轮询超时后降级加载)
+    EXPECT_FALSE(m_thread->m_Running);  // run 末尾复位
+    EXPECT_EQ(s_loadCmdCalls, 29);      // 执行了命令加载
 }
 
 
@@ -324,6 +325,7 @@ TEST_F(UT_LoadInfoThread, Destructor_AfterRun_NoHang)
 {
     // Arrange
     s_dbusInfo = "1";
+    m_stub.set(ADDR(QDateTime, currentMSecsSinceEpoch), ut_qdt_now);
     // Act
     m_thread->run();
     // Assert

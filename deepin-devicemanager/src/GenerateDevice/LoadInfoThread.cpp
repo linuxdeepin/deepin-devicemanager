@@ -62,8 +62,23 @@ void LoadInfoThread::run()
     qCDebug(appLog) << "LoadInfoThread::run is_server_running:" << info;
     // 请求后台更新信息
     m_Running = true;
-    if (!info.toInt()) {
-        qCDebug(appLog) << "LoadInfoThread::run server is not running, start to get info";
+    if (info.toInt()) {
+        qCDebug(appLog) << "LoadInfoThread::run server is running, waiting for it to finish";
+        long long pollBegin = QDateTime::currentMSecsSinceEpoch();
+        while (info.toInt()) {
+            if (QDateTime::currentMSecsSinceEpoch() - pollBegin > 30000) {
+                qCWarning(appLog) << "LoadInfoThread::run server still running after 30s, loading with current data as fallback";
+                break;
+            }
+            usleep(500000);
+            DBusInterface::getInstance()->getInfo("is_server_running", info);
+        }
+        if (!info.toInt()) {
+            qCDebug(appLog) << "LoadInfoThread::run server finished updating, start to get info";
+        }
+    }
+    {
+        qCDebug(appLog) << "LoadInfoThread::run start to get info";
         m_Start = false;
         mp_ReadFilePool.getAllInfo();
         mp_ReadFilePool.waitForDone(-1);
@@ -120,8 +135,6 @@ void LoadInfoThread::run()
         m_FinishedReadFilePool = false;
         mp_GenerateDevicePool.generateDevice();
         mp_GenerateDevicePool.waitForDone(-1);
-    } else {
-        qCDebug(appLog) << "LoadInfoThread::run server is running, do nothing";
     }
 
     emit finished("finish");
