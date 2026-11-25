@@ -297,6 +297,57 @@ TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromLscpu_003)
     EXPECT_FALSE(m_deviceCpu->m_FrequencyIsRange);
 }
 
+TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromLscpu_specialType9)
+{
+    int savedType = Common::specialComType;
+    Common::specialComType = Common::kSpecialType9;
+
+    QMap<QString, QString> mapLscpu;
+    setLscpuData(mapLscpu);
+    mapLscpu.insert("CPU min MHz", "418.0000");
+    mapLscpu.insert("CPU max MHz", "1720.0000");
+
+    m_deviceCpu->setInfoFromLscpu(mapLscpu);
+    EXPECT_STREQ("0.418-1.72 GHz", m_deviceCpu->m_Frequency.toStdString().c_str());
+    EXPECT_TRUE(m_deviceCpu->m_FrequencyIsRange);
+
+    Common::specialComType = savedType;
+}
+
+TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromLscpu_specialType9_corrected)
+{
+    int savedType = Common::specialComType;
+    Common::specialComType = Common::kSpecialType9;
+
+    QMap<QString, QString> mapLscpu;
+    setLscpuData(mapLscpu);
+    mapLscpu.insert("CPU min MHz", "1200.0000");
+    mapLscpu.insert("CPU max MHz", "2695.0000");
+
+    m_deviceCpu->setInfoFromLscpu(mapLscpu);
+    EXPECT_STREQ("1.2-2.7 GHz", m_deviceCpu->m_Frequency.toStdString().c_str());
+    EXPECT_TRUE(m_deviceCpu->m_FrequencyIsRange);
+
+    Common::specialComType = savedType;
+}
+
+TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromLscpu_specialType10)
+{
+    int savedType = Common::specialComType;
+    Common::specialComType = Common::kSpecialType10;
+
+    QMap<QString, QString> mapLscpu;
+    setLscpuData(mapLscpu);
+    mapLscpu.insert("CPU min MHz", "558.0000");
+    mapLscpu.insert("CPU max MHz", "2270.0000");
+
+    m_deviceCpu->setInfoFromLscpu(mapLscpu);
+    EXPECT_STREQ("0.558-2.27 GHz", m_deviceCpu->m_Frequency.toStdString().c_str());
+    EXPECT_TRUE(m_deviceCpu->m_FrequencyIsRange);
+
+    Common::specialComType = savedType;
+}
+
 TEST_F(UT_DeviceCpu, UT_DeviceCpu_setInfoFromLshw_001)
 {
     QMap<QString, QString> mapLshw;

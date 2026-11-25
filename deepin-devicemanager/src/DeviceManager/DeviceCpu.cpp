@@ -180,7 +180,10 @@ bool applySpecialFrequencyFix(double &value, const SpecialCpuFrequencyFix &fix)
 // 格式化频率(GHz)：特殊机型修正后的规格值按原样显示(如 2.7)，不做两位小数强制；其余保持两位小数
 QString formatGhz(double value, bool corrected)
 {
-    return corrected ? QString::number(value, 'g', 6) : QString::number(value, 'f', 2);
+    bool preserveSignificantDigits = corrected
+        || Common::specialComType == Common::kSpecialType9
+        || Common::specialComType == Common::kSpecialType10;
+    return preserveSignificantDigits ? QString::number(value, 'g', 6) : QString::number(value, 'f', 2);
 }
 
 } // namespace
