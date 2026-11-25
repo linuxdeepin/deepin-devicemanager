@@ -177,10 +177,19 @@ bool applySpecialFrequencyFix(double &value, const SpecialCpuFrequencyFix &fix)
     return false;
 }
 
-// 格式化频率(GHz)：特殊机型修正后的规格值按原样显示(如 2.7)，不做两位小数强制；其余保持两位小数
+// FLMZ/FLMZS(kSpecialType9/10) 整体不遵守“频率强制保留两位小数”的规则
+bool specFreqNoTwoDecimals()
+{
+    return Common::specialComType == Common::kSpecialType9
+        || Common::specialComType == Common::kSpecialType10;
+}
+
+// 频率格式化：FLMZ/FLMZS 或被修正的规格值按原样显示(如 2.7)，不做两位小数强制；其余保持两位小数
 QString formatGhz(double value, bool corrected)
 {
-    return corrected ? QString::number(value, 'g', 6) : QString::number(value, 'f', 2);
+    return (corrected || specFreqNoTwoDecimals())
+            ? QString::number(value, 'g', 6)
+            : QString::number(value, 'f', 2);
 }
 
 } // namespace
@@ -342,7 +351,7 @@ void DeviceCpu::setInfoFromLscpu(const QMap<QString, QString> &mapInfo)
         // 如果最大最小频率相等则不显示范围
         if (fabs(minHz - maxHz) < 0.001) {
             m_FrequencyIsRange = false;
-            m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(formatGhz(maxHz, maxFixed)) : QString("%1 MHz").arg(maxHz * 1000, 0, 'f', 2);
+            m_Frequency = maxHz > 1 ? QString("%1 GHz").arg(formatGhz(maxHz, maxFixed)) : QString("%1 MHz").arg(formatGhz(maxHz * 1000, maxFixed));
         } else {
             m_Frequency = QString("%1-%2 GHz").arg(formatGhz(minHz, minFixed)).arg(formatGhz(maxHz, maxFixed));
         }
