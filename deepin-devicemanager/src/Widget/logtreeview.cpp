@@ -222,6 +222,7 @@ void LogTreeView::initUI()
     // 设置无边框
     setFrameStyle(QFrame::NoFrame);
     this->viewport()->setAutoFillBackground(false);
+    connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [this]() { viewport()->update(); });
 
     setAlternatingRowColors(false);
     setAllColumnsShowFocus(false);

@@ -25,6 +25,7 @@ LogViewHeaderView::LogViewHeaderView(Qt::Orientation orientation, QWidget *paren
 {
     qCDebug(appLog) << "LogViewHeaderView instance created";
     viewport()->setAutoFillBackground(false);
+    connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [this]() { viewport()->update(); });
 }
 void LogViewHeaderView::paintSection(QPainter *painter, const QRect &rect, int logicalIndex) const
 {
