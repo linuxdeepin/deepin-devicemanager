@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2019 Deepin Technology Co., Ltd.
-// SPDX-FileCopyrightText: 2022 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -21,3 +20,7 @@ const int contextMenuWidth_ = 150;
 const QString DEVICEINFO_PATH = "/tmp/device-info";
 
 constexpr const char* AUTH_ACTION = "com.deepin.deepin-devicemanager.checkAuthentication";
+
+constexpr char kCheckAuthFailed[] { "CheckAuthFailed" };
+constexpr char kServerIsRunning[] { "1" };
+constexpr char kServerNotRunning[] { "0" };

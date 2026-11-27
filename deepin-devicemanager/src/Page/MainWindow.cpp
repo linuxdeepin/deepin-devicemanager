@@ -92,6 +92,13 @@ MainWindow::MainWindow(QWidget *parent)
             startScanningFlag = true;
             return;
         }
+        // 主动调用一次 getInfo("is_server_running") 触发授权弹框
+        QString info;
+        // 如果服务端未运行或授权失败，则不进行扫描，直接返回。
+        if (!DBusInterface::getInstance()->getInfo("is_server_running", info) || info == kCheckAuthFailed) {
+            return;
+        }
+
         // 正在刷新标志
         m_refreshing = true;
         mp_ButtonBox->setEnabled(false);

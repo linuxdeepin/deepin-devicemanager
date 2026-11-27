@@ -1,5 +1,4 @@
-// Copyright (C) 2019 ~ 2026 Uniontech Software Technology Co.,Ltd
-// SPDX-FileCopyrightText: 2019 ~ 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2019 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -18,6 +17,9 @@
 #include <polkit-qt5-1/PolkitQt1/Authority>
 
 constexpr char kGraphicsMemory[] { "Graphics Memory" };
+constexpr char kCheckAuthFailed[] { "CheckAuthFailed" };
+constexpr char kServerIsRunning[] { "1" };
+constexpr char kServerNotRunning[] { "0" };
 
 using namespace PolkitQt1;
 bool DeviceInterface::getUserAuthorPasswd()
@@ -100,7 +102,7 @@ DeviceInterface::DeviceInterface(const char *name, QObject *parent)
 QString DeviceInterface::getInfo(const QString &key)
 {
     if (!getUserAuthorPasswd()) {
-        return {};
+        return kCheckAuthFailed;
     }
 
     // 不能返回用常引用
@@ -108,9 +110,9 @@ QString DeviceInterface::getInfo(const QString &key)
         return DeviceInfoManager::getInstance()->getInfo(key);
     }
     if (MainJob::serverIsRunning()) {
-        return "1";
+        return kServerIsRunning;
     }
-    return "0";
+    return kServerNotRunning;
 }
 
 void DeviceInterface::refreshInfo()

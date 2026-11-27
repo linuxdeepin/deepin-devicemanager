@@ -8,6 +8,7 @@
 #include "DBusInterface.h"
 #include "DeviceManager.h"
 #include "DDLog.h"
+#include "commondefine.h"
 
 #include <DApplication>
 
@@ -135,8 +136,9 @@ void LoadInfoThread::waitServerRefreshFinished()
             continue;
         }
         probeFailCount = 0;
-        if (info.toInt() == 0)
+        if (info == kServerNotRunning || info == kCheckAuthFailed) {
             return;
+        }
         msleep(kServerIdlePollMs);
     }
 
