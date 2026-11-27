@@ -170,6 +170,10 @@ void DeviceMemory::loadBaseDeviceInfo()
 void DeviceMemory::loadOtherDeviceInfo()
 {
     qCDebug(appLog) << "Loading other device info for memory";
+    const bool hideConfiguredSpeed =
+        (Common::specialComType == Common::kSpecialType11) &&
+        (Common::curCpuType == Common::kSpecialCpuType2 ||
+         Common::curCpuType == Common::kSpecialCpuType3);
     // 倒序，头插，保证原来的顺序
     // 添加其他信息,成员变量
     if (Common::boardVendorType().isEmpty()) {
@@ -177,10 +181,14 @@ void DeviceMemory::loadOtherDeviceInfo()
         addOtherDeviceInfo("Configured Voltage", m_ConfiguredVoltage);
         addOtherDeviceInfo("Maximum Voltage", m_MaximumVoltage);
         addOtherDeviceInfo("Minimum Voltage", m_MinimumVoltage);
-        addOtherDeviceInfo("Configured Speed", m_ConfiguredSpeed);
+        if (!hideConfiguredSpeed) {
+            addOtherDeviceInfo("Configured Speed", m_ConfiguredSpeed);
+        }
     } else {
         qCDebug(appLog) << "Board vendor type is not empty, loading configured speed only";
-        addOtherDeviceInfo("Configured Speed", m_ConfiguredSpeed);
+        if (!hideConfiguredSpeed) {
+            addOtherDeviceInfo("Configured Speed", m_ConfiguredSpeed);
+        }
     }
     addOtherDeviceInfo("Data Width", m_DataBandwidth);
 

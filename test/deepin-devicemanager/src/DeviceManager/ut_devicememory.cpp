@@ -6,6 +6,10 @@
 #include "DeviceMemory.h"
 #include "DeviceBios.h"
 
+#define private public
+#include "commonfunction.h"
+#undef private
+
 #include "stub.h"
 #include "ut_Head.h"
 
@@ -20,13 +24,19 @@ class UT_DeviceMemory : public UT_HEAD
 public:
     void SetUp()
     {
+        m_savedSpecialComType = Common::specialComType;
+        m_savedCurCpuType = Common::curCpuType;
         m_deviceMemory = new DeviceMemory;
     }
     void TearDown()
     {
         delete m_deviceMemory;
+        Common::specialComType = m_savedSpecialComType;
+        Common::curCpuType = m_savedCurCpuType;
     }
     DeviceMemory *m_deviceMemory;
+    int m_savedSpecialComType = -1;
+    Common::SpecialCpuType m_savedCurCpuType = Common::kUnknowCpuType;
 };
 
 void ut_memory_setlshwmap(QMap<QString, QString> &mapinfo)
@@ -153,6 +163,61 @@ TEST_F(UT_DeviceMemory, UT_DeviceMemory_loadOtherDeviceInfo)
 {
     m_deviceMemory->loadOtherDeviceInfo();
     EXPECT_EQ(0, m_deviceMemory->m_LstOtherInfo.size());
+}
+
+static bool memoryListContainsKey(const QList<QPair<QString, QString>> &list, const QString &key)
+{
+    for (const auto &pair : list) {
+        if (pair.first == key) {
+            return true;
+        }
+    }
+    return false;
+}
+
+TEST_F(UT_DeviceMemory, UT_DeviceMemory_loadOtherDeviceInfo_hideConfiguredSpeed_type2)
+{
+    QMap<QString, QString> mapinfo;
+    ut_memory_setdmimap(mapinfo);
+    m_deviceMemory->m_MatchedFromDmi = false;
+    m_deviceMemory->m_Locator = "ChannelA-DIMM0";
+    m_deviceMemory->setInfoFromDmidecode(mapinfo);
+
+    Common::specialComType = Common::kSpecialType11;
+    Common::curCpuType = Common::kSpecialCpuType2;
+    m_deviceMemory->loadOtherDeviceInfo();
+
+    EXPECT_FALSE(memoryListContainsKey(m_deviceMemory->m_LstOtherInfo, "Configured Speed"));
+}
+
+TEST_F(UT_DeviceMemory, UT_DeviceMemory_loadOtherDeviceInfo_hideConfiguredSpeed_type3)
+{
+    QMap<QString, QString> mapinfo;
+    ut_memory_setdmimap(mapinfo);
+    m_deviceMemory->m_MatchedFromDmi = false;
+    m_deviceMemory->m_Locator = "ChannelA-DIMM0";
+    m_deviceMemory->setInfoFromDmidecode(mapinfo);
+
+    Common::specialComType = Common::kSpecialType11;
+    Common::curCpuType = Common::kSpecialCpuType3;
+    m_deviceMemory->loadOtherDeviceInfo();
+
+    EXPECT_FALSE(memoryListContainsKey(m_deviceMemory->m_LstOtherInfo, "Configured Speed"));
+}
+
+TEST_F(UT_DeviceMemory, UT_DeviceMemory_loadOtherDeviceInfo_showConfiguredSpeed)
+{
+    QMap<QString, QString> mapinfo;
+    ut_memory_setdmimap(mapinfo);
+    m_deviceMemory->m_MatchedFromDmi = false;
+    m_deviceMemory->m_Locator = "ChannelA-DIMM0";
+    m_deviceMemory->setInfoFromDmidecode(mapinfo);
+
+    Common::specialComType = Common::NormalCom;
+    Common::curCpuType = Common::kUnknowCpuType;
+    m_deviceMemory->loadOtherDeviceInfo();
+
+    EXPECT_TRUE(memoryListContainsKey(m_deviceMemory->m_LstOtherInfo, "Configured Speed"));
 }
 
 TEST_F(UT_DeviceMemory, UT_DeviceMemory_loadTableHeader)

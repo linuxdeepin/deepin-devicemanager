@@ -30,13 +30,16 @@ public:
     {
         // 保存静态状态，避免用例间互相干扰
         m_savedSpecialComType = Common::specialComType;
+        m_savedCurCpuType = Common::curCpuType;
     }
     void TearDown() override
     {
         // 恢复静态状态
         Common::specialComType = m_savedSpecialComType;
+        Common::curCpuType = m_savedCurCpuType;
     }
     int m_savedSpecialComType = -1;
+    Common::SpecialCpuType m_savedCurCpuType = Common::kUnknowCpuType;
     Stub stub;   // 追加用例的打桩载体(Stub 析构时自动还原补丁)
 };
 
@@ -259,6 +262,17 @@ TEST_F(UT_Common, UT_Common_checkBoardVendorFlag_default)
     // 未列出的特殊类型走 default 分支 => PGUW
     Common::specialComType = Common::kSpecialType6;
     EXPECT_STREQ("PGUW", Common::checkBoardVendorFlag().toStdString().c_str());
+}
+
+TEST_F(UT_Common, UT_Common_checkBoardVendorFlag_specialType11)
+{
+    Common::specialComType = Common::kSpecialType11;
+    EXPECT_STREQ("", Common::checkBoardVendorFlag().toStdString().c_str());
+}
+
+TEST_F(UT_Common, UT_Common_curCpuType_default)
+{
+    EXPECT_EQ(Common::kUnknowCpuType, Common::curCpuType);
 }
 
 // ===================== tomlFilesName get/set =====================
