@@ -180,7 +180,9 @@ bool applySpecialFrequencyFix(double &value, const SpecialCpuFrequencyFix &fix)
 // 特定特殊机型整体不遵守“频率强制保留两位小数”的规则
 bool specFreqNoTwoDecimals()
 {
-    return Common::specialComType == Common::kSpecialType9
+    return Common::specialComType == Common::kSpecialType6
+        || Common::specialComType == Common::kSpecialType7
+        || Common::specialComType == Common::kSpecialType9
         || Common::specialComType == Common::kSpecialType10;
 }
 
