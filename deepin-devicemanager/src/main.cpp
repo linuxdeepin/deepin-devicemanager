@@ -138,6 +138,9 @@ int main(int argc, char *argv[])
         Common::specialComType = dconfig->value("specialComType").toInt();
     }
     qCInfo(appLog) << "Common::specialComType value is:" << Common::specialComType;
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("specialCpuType")) {
+        Common::curCpuType = static_cast<Common::SpecialCpuType>(dconfig->value("specialCpuType").toInt());
+    }
 
     if (dconfig && dconfig->isValid() && dconfig->keyList().contains("TomlFilesName")) {
         QString tomlFilesName = dconfig->value("TomlFilesName").toString();
